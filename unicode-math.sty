@@ -1,0 +1,1012 @@
+%%
+%% This is file `unicode-math.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% unicode-math.dtx  (with options: `package')
+%%   Copyright © 2006-2008  Will Robertson
+%%   License information appended.
+\ProvidesPackage{unicode-math}
+  [2008/08/27 v0.3b Unicode maths in XeLaTeX]
+\RequirePackage{fontspec}
+\newcounter{um@fam}
+\newif\if@um@fontspec@feature
+\newif\if@um@ot@math@
+\newif\if@um@init
+\newif\if@um@literal
+\newif\if@um@upGreek
+\newif\if@um@upgreek
+\newif\if@um@upLatin
+\newif\if@um@uplatin
+\newif\if@um@bfliteral
+\newif\if@um@bfupGreek
+\newif\if@um@bfupgreek
+\newif\if@um@bfupLatin
+\newif\if@um@bfuplatin
+\newif\if@um@upNabla
+\newif\if@um@uppartial
+\providecommand\def@cn[2]{%
+  \expandafter\def\csname#1\endcsname{#2}}
+\def\um@Loop#1\um@Pool{#1\um@Loop#1\um@Pool}
+\def\um@Break#1\um@Pool{}
+\long\def\um@FOR#1=[#2:#3]\do#4{%
+   #1=#2\relax
+   \um@Loop #4%
+     \advance#1\@ne
+     \ifnum#1>#3\relax
+       \expandafter\um@Break
+     \fi
+   \um@Pool}
+\newcommand\um@PackageError[2]{\PackageError{unicode-math}{#1}{#2}}
+\newcommand\um@PackageWarning[1]{\PackageWarning{unicode-math}{#1}}
+\newcommand\um@PackageInfo[1]{\PackageInfo{unicode-math}{#1}}
+\def\um@usv@num{`\0}
+\def\um@usv@upLatin{`\A}
+\def\um@usv@uplatin{`\a}
+\def\um@usv@itLatin{"1D434}
+\def\um@usv@itlatin{"1D44E}
+\def\um@usv@upGreek{"391}
+\def\um@usv@upgreek{"3B1}
+\def\um@usv@itGreek{"1D6E2}
+\def\um@usv@itgreek{"1D6FC}
+\def\um@usv@bbnum{"1D7D8}
+\def\um@usv@bbLatin{"1D538}
+\def\um@usv@bblatin{"1D552}
+\def\um@usv@scrLatin{"1D49C}
+\def\um@usv@scrlatin{"1D4B6}
+\def\um@usv@frakLatin{"1D504}
+\def\um@usv@fraklatin{"1D51E}
+\def\um@usv@sfnum{"1D7E2}
+\def\um@usv@sfLatin{"1D5A0}
+\def\um@usv@sflatin{"1D5BA}
+\def\um@usv@sfitLatin{"1D608}
+\def\um@usv@sfitlatin{"1D622}
+\def\um@usv@ttnum{"1D7F6}
+\def\um@usv@ttLatin{"1D670}
+\def\um@usv@ttlatin{"1D68A}
+\def\um@usv@bfnum{"1D7CE}
+\def\um@usv@bfLatin{"1D400}
+\def\um@usv@bflatin{"1D41A}
+\def\um@usv@bfGreek{"1D6A8}
+\def\um@usv@bfgreek{"1D6C2}
+\def\um@usv@bfitLatin{"1D468}
+\def\um@usv@bfitlatin{"1D482}
+\def\um@usv@bfitGreek{"1D71C}
+\def\um@usv@bfitgreek{"1D736}
+\def\um@usv@bffrakLatin{"1D56C}
+\def\um@usv@bffraklatin{"1D586}
+\def\um@usv@bfscrLatin{"1D4D0}
+\def\um@usv@bfscrlatin{"1D4EA}
+\def\um@usv@bfsfnum{"1D7EC}
+\def\um@usv@bfsfLatin{"1D5D4}
+\def\um@usv@bfsflatin{"1D5EE}
+\def\um@usv@bfsfGreek{"1D756}
+\def\um@usv@bfsfgreek{"1D770}
+\def\um@usv@bfsfitLatin{"1D63C}
+\def\um@usv@bfsfitlatin{"1D656}
+\def\um@usv@bfsfitGreek{"1D790}
+\def\um@usv@bfsfitgreek{"1D7AA}
+\def\um@usv@varTheta{"3F4}
+\def\um@usv@Digamma{"3DC}
+\def\um@usv@varepsilon{"3F5}
+\def\um@usv@vartheta{"3D1}
+\def\um@usv@varkappa{"3F0}
+\def\um@usv@varphi{"3D5}
+\def\um@usv@varrho{"3F1}
+\def\um@usv@varpi{"3D6}
+\def\um@usv@digamma{"3DD}
+\def\um@usv@bfvarTheta{"1D6B9}
+\def\um@usv@bfDigamma{"1D7CA}
+\def\um@usv@bfvarepsilon{"1D6DC}
+\def\um@usv@bfvartheta{"1D6DD}
+\def\um@usv@bfvarkappa{"1D6DE}
+\def\um@usv@bfvarphi{"1D6DF}
+\def\um@usv@bfvarrho{"1D6E0}
+\def\um@usv@bfvarpi{"1D6E1}
+\def\um@usv@bfdigamma{"1D7CB}
+\def\um@usv@ith{"210E}
+\def\um@usv@itvarTheta{"1D6F3}
+\def\um@usv@itvarepsilon{"1D716}
+\def\um@usv@itvartheta{"1D717}
+\def\um@usv@itvarkappa{"1D718}
+\def\um@usv@itvarphi{"1D719}
+\def\um@usv@itvarrho{"1D71A}
+\def\um@usv@itvarpi{"1D71B}
+\def\um@usv@bfuph{"1D421}
+\def\um@usv@bfith{"1D489}
+\def\um@usv@bfitvarTheta{"1D72D}
+\def\um@usv@bfitvarepsilon{"1D750}
+\def\um@usv@bfitvartheta{"1D751}
+\def\um@usv@bfitvarkappa{"1D752}
+\def\um@usv@bfitvarphi{"1D753}
+\def\um@usv@bfitvarrho{"1D754}
+\def\um@usv@bfitvarpi{"1D755}
+\def\um@usv@Nabla{"2207}
+\def\um@usv@itNabla{"1D6FB}
+\def\um@usv@bfNabla{"1D6C1}
+\def\um@usv@bfitNabla{"1D735}
+\def\um@usv@bfsfNabla{"1D76F}
+\def\um@usv@bfsfitNabla{"1D7A9}
+\def\um@usv@partial{"2202}
+\def\um@usv@itpartial{"1D715}
+\def\um@usv@bfpartial{"1D6DB}
+\def\um@usv@bfitpartial{"1D74F}
+\def\um@usv@bfsfpartial{"1D789}
+\def\um@usv@bfsfitpartial{"1D7C3}
+\define@choicekey*{unicode-math.sty}
+    {math-style}[\@tempa\@tempb]{iso,tex,french,literal}{%
+  \ifcase\@tempb\relax
+    \@um@upGreekfalse
+    \@um@upgreekfalse
+    \@um@upLatinfalse
+    \@um@uplatinfalse
+    \@um@bfupGreekfalse
+    \@um@bfupgreekfalse
+    \@um@bfupLatinfalse
+    \@um@bfuplatinfalse
+    \@um@upNablafalse
+    \@um@uppartialfalse
+  \or
+    \@um@upGreektrue
+    \@um@upgreekfalse
+    \@um@upLatinfalse
+    \@um@uplatinfalse
+    \@um@bfupGreektrue
+    \@um@bfupgreekfalse
+    \@um@bfupLatintrue
+    \@um@bfuplatintrue
+    \@um@upNablatrue
+    \@um@uppartialtrue
+  \or
+    \@um@upGreektrue
+    \@um@upgreektrue
+    \@um@upLatintrue
+    \@um@uplatinfalse
+    \@um@bfupGreektrue
+    \@um@bfupgreektrue
+    \@um@bfupLatintrue
+    \@um@bfuplatintrue
+    \@um@upNablatrue
+    \@um@uppartialtrue
+  \or
+    \@um@literaltrue
+  \fi}
+\define@choicekey*{unicode-math.sty}{bold-style}[\@tempa\@tempb]{iso,tex,french,literal}{%
+  \ifcase\@tempb\relax
+    \@um@bfupGreekfalse
+    \@um@bfupgreekfalse
+    \@um@bfupLatinfalse
+    \@um@bfuplatinfalse
+  \or
+    \@um@bfupGreektrue
+    \@um@bfupgreekfalse
+    \@um@bfupLatintrue
+    \@um@bfuplatintrue
+  \or
+    \@um@bfupGreektrue
+    \@um@bfupgreektrue
+    \@um@bfupLatintrue
+    \@um@bfuplatintrue
+  \or
+    \@um@bfliteraltrue
+  \fi}
+\define@choicekey*{unicode-math.sty}{nabla}[\@tempa\@tempb]{upright,italic}{%
+  \ifcase\@tempb\relax
+    \@um@upNablatrue
+  \or
+    \@um@upNablafalse
+  \fi}
+\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic}{%
+  \ifcase\@tempb\relax
+    \@um@uppartialtrue
+  \or
+    \@um@uppartialfalse
+  \fi}
+\ExecuteOptionsX{math-style=iso}
+\ProcessOptionsX
+\def\@preamblecmds{}
+
+\newcommand\not@onlypreamble[1]{{%
+  \def\do##1{\ifx#1##1\else\noexpand\do\noexpand##1\fi}%
+  \xdef\@preamblecmds{\@preamblecmds}}}
+\def\gm@notprerr{ can be used only in preamble (\on@line)}
+\AtBeginDocument{%
+  \def\do#1{\noexpand\do\noexpand#1}%
+  \edef\@preamblecmds{%
+    \def\noexpand\do##1{%
+      \def##1{\noexpand\PackageError{gmutils/LaTeX}%
+        {\noexpand\string##1 \noexpand\gm@notprerr}\noexpand\@eha}}%
+    \@preamblecmds}}
+\def\nocite#1{%
+  \@bsphack{\setbox0=\hbox{\cite{#1}}}\@esphack}
+
+\def\um@fontdimen@percent#1#2{%
+  0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax}
+\def\um@scaled@apply#1#2#3{%
+  \ifx#1\scriptstyle
+    #2\um@fontdimen@percent{10}\um@font#3%
+  \else
+    \ifx#1\scriptscriptstyle
+      #2\um@fontdimen@percent{11}\um@font#3%
+    \else
+      #2#3%
+    \fi
+  \fi}
+\def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
+\let\newfam\new@mathgroup
+\def\um@mathsymbol#1#2#3#4{%
+  \expandafter\um@set@mathsymbol\csname sym#3\endcsname#1#2{#4}}
+\def\um@set@mathsymbol#1#2#3#4{%
+  \ifx\mathop#3\relax
+    \begingroup
+      \catcode#4=\active
+      \global\mathcode#4="8000\relax
+      \um@scanactivedef#4\@nil{\csname\string#2@op\endcsname}%
+    \endgroup
+    \expandafter\global\expandafter\XeTeXmathchardef
+      \csname\string#2@sym\endcsname
+      ="\mathchar@type#3 #1 #4\relax
+    \expandafter\gdef\csname\string#2@op\endcsname{%
+      \csname\string#2@sym\endcsname
+      \expandafter\in@\expandafter#2\expandafter{\um@nolimits}%
+      \ifin@
+        \expandafter\nolimits
+      \fi}%
+  \else
+    \expandafter\in@\expandafter#2\expandafter{\um@radicals,}%
+    \ifin@
+      \expandafter\gdef\csname
+        \expandafter\@gobble\string#2sign\endcsname
+          {\XeTeXradical#1 #4\relax}%
+    \else
+      \ifx\mathopen#3\relax
+        \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4}%
+        \global\XeTeXdelcode#4=#1 #4\relax
+        \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
+      \else
+        \ifx\mathclose#3\relax
+          \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4}%
+          \global\XeTeXdelcode#4=#1 #4\relax
+          \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
+        \else
+          \ifx\mathaccent#3\relax
+            \xdef#2{\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}%
+          \else
+            \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi}
+\newcommand\SetMathCode[4]{%
+  \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax}
+\newcommand\setmathfont[2][]{%
+  \let\glb@currsize\relax
+  \let\um@char@range\@empty
+  \let\um@char@num@range\@empty
+  \@um@initfalse
+  \@um@fontspec@featuretrue
+  \csname S@\f@size\endcsname
+  \def\um@mversion{normal}%
+  \DeclareMathVersion{\um@mversion}%
+  \def\um@ScriptFeatures{ScriptStyle}%
+  \def\um@ScriptScriptFeatures{ScriptScriptStyle}%
+  \def\um@ScriptFont{#2}%
+  \def\um@ScriptScriptFont{#2}%
+  \setkeys*[um]{options}{#1}%
+  \edef\@tempa{\noexpand\zf@fontspec{%
+    Script=Math,SizeFeatures={%
+      {Size=\tf@size-},%
+      {Size=\sf@size-\tf@size,%
+        Font=\um@ScriptFont,%
+        \um@ScriptFeatures},%
+      {Size=-\sf@size,%
+        Font=\um@ScriptScriptFont,%
+        \um@ScriptScriptFeatures}},%
+    \XKV@rm}{#2}}\@tempa
+    \font\um@font="#2"\relax
+    \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt
+      \@um@ot@math@true
+    \else
+      \um@PackageWarning{%
+        The font '#2' is not a valid OpenType maths font.
+        Some maths features will not be available or behaviour
+        in a substandard manner.}%
+    \fi
+  \ifx\um@char@range\@empty
+    \def\um@symfont{um@allsym}%
+    \um@PackageInfo{Defining the default maths font as '#2'}%
+    \let\UnicodeMathSymbol\um@mathsymbol@noparse
+  \else
+    \stepcounter{um@fam}%
+    \edef\um@symfont{um@fam\theum@fam}%
+    \let\UnicodeMathSymbol\um@mathsymbol@parse
+  \fi
+  \DeclareSymbolFont{\um@symfont}
+    {\encodingdefault}{\zf@family}{\mddefault}{\updefault}%
+  \if@um@init
+    \input unicode-math.tex\relax
+    \input unicode-math-add.tex\relax
+  \else
+    \unless\ifx\um@char@range\@empty
+      \input unicode-math.tex\relax
+      \input unicode-math-add.tex\relax
+    \fi
+  \fi
+  \ifx\um@char@range\@empty
+    \let\um@mathbb\@empty
+    \let\um@mathbf\@empty
+    \let\um@mathfrak\@empty
+    \let\um@mathup\@empty
+    \let\um@mathit\@empty
+    \let\um@mathscr\@empty
+    \let\um@mathsf\@empty
+    \let\um@mathsfit\@empty
+    \let\um@mathtt\@empty
+    \let\um@mathbf\@empty
+    \let\um@mathbfup\@empty
+    \let\um@mathbfit\@empty
+    \let\um@mathbffrak\@empty
+    \let\um@mathbfscr\@empty
+    \let\um@mathbfsf\@empty
+    \let\um@mathbfsfit\@empty
+    \let\um@setsinglemathalph\um@mathmap@noparse
+  \else
+    \let\um@setsinglemathalph\um@mathmap@parse
+  \fi
+  \ifx\um@char@range\@empty
+    \um@def@numbers
+    \if@um@literal
+      \um@setmathcode[26]{\um@usv@upLatin}{\um@usv@upLatin}%
+      \um@setmathcode[26]{\um@usv@itLatin}{\um@usv@itLatin}%
+      \um@setmathcode[26]{\um@usv@itlatin}{\um@usv@itlatin}%
+      \um@setmathcode{\um@usv@ith}{\um@usv@ith}%
+      \um@setmathcode[26]{\um@usv@uplatin}{\um@usv@uplatin}%
+      \um@setmathcode[25]{\um@usv@upGreek}{\um@usv@upGreek}%
+      \um@setmathcode{\um@usv@varTheta}{\um@usv@varTheta}%
+      \um@setmathcode[25]{\um@usv@itGreek}{\um@usv@itGreek}%
+      \um@setmathcode[25]{\um@usv@upgreek}{\um@usv@upgreek}%
+      \um@setmathcode{\um@usv@Nabla}{\um@usv@Nabla}%
+      \um@setmathcode{\um@usv@itNabla}{\um@usv@itNabla}%
+      \um@setmathcode{\um@usv@partial}{\um@usv@partial}%
+      \um@setmathcode{\um@usv@itpartial}{\um@usv@itpartial}%
+    \else
+      \if@um@upLatin\um@def@upLatin\else\um@def@itLatin\fi
+      \if@um@uplatin\um@def@uplatin\else\um@def@itlatin\fi
+      \if@um@upGreek\um@def@upGreek\else\um@def@itGreek\fi
+      \if@um@upgreek\um@def@upgreek\else\um@def@itgreek\fi
+      \if@um@upNabla
+        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}%
+      \else
+        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}%
+      \fi
+      \if@um@uppartial
+        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}%
+      \else
+        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}%
+      \fi
+    \fi
+    \if@um@bfliteral
+      \um@setmathcode[26]{\um@usv@bfLatin}{\um@usv@bfLatin}%
+      \um@setmathcode[26]{\um@usv@bflatin}{\um@usv@bflatin}%
+      \um@setmathcode[26]{\um@usv@bfitLatin}{\um@usv@bfitLatin}%
+      \um@setmathcode[26]{\um@usv@bfitlatin}{\um@usv@bfitlatin}%
+      \um@setmathcode[25]{\um@usv@bfGreek}{\um@usv@bfGreek}%
+      \um@setmathcode[25]{\um@usv@bfgreek}{\um@usv@bfgreek}%
+      \um@setmathcode[25]{\um@usv@bfitGreek}{\um@usv@bfitGreek}%
+      \um@setmathcode[25]{\um@usv@bfitgreek}{\um@usv@bfitgreek}%
+    \else
+      \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{%
+        \if@um@bfupLatin\um@usv@bfLatin\else\um@usv@bfitLatin\fi}%
+      \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{%
+        \if@um@bfuplatin\um@usv@bflatin\else\um@usv@bfitlatin\fi}%
+      \if@um@bfupGreek
+        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfGreek}%
+        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfvarTheta}%
+      \else
+        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfitGreek}%
+        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfitvarTheta}%
+      \fi
+      \if@um@bfupgreek
+        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfgreek}%
+        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfvarepsilon}%
+        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfvartheta}%
+        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfvarkappa}%
+        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfvarphi}%
+        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfvarrho}%
+        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfvarpi}%
+      \else
+        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfitgreek}%
+        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfitvarepsilon}%
+        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfitvartheta}%
+        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfitvarkappa}%
+        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfitvarphi}%
+        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfitvarrho}%
+        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}%
+      \fi
+      \if@um@upNabla
+        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfNabla}%
+        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfNabla}%
+        \um@setmathcode{\um@usv@bfsfNabla  }{\um@usv@bfsfNabla}%
+        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfNabla}%
+      \else
+        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfitNabla}%
+        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfitNabla}%
+        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}%
+        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}%
+      \fi
+      \if@um@uppartial
+        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfpartial}%
+        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfpartial}%
+        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfpartial}%
+        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfpartial}%
+      \else
+        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfitpartial}%
+        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfitpartial}%
+        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfitpartial}%
+        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}%
+      \fi
+    \fi
+  \else
+  \fi
+  \um@setup@alphabets
+}
+\newcommand\um@mathsymbol@noparse[4]{%
+  \um@mathsymbol{#2}{#3}{\um@symfont}{#1}}
+\newcommand\um@mathsymbol@parse[4]{%
+  \um@parse@term{#1}{#2}{#3}{%
+    %\um@PackageInfo{Defining \string#2 as mathchar #1}%
+    \um@mathsymbol{#2}{#3}{\um@symfont}{#1}}}
+\newcommand\um@mk@math[1]{%
+  \expandafter\def\csname math#1\endcsname##1{%
+    \begingroup
+      \csname um@math#1\endcsname
+      ##1
+    \endgroup}}
+\um@mk@math{up}
+\um@mk@math{it}
+\um@mk@math{scr}
+\um@mk@math{bb}
+\um@mk@math{frak}
+\um@mk@math{sf}
+\um@mk@math{sfit}
+\um@mk@math{tt}
+\um@mk@math{bf}
+\um@mk@math{bfup}
+\um@mk@math{bfit}
+\um@mk@math{bfscr}
+\um@mk@math{bffrak}
+\um@mk@math{bfsf}
+\um@mk@math{bfsfit}
+\let\mathcal\mathscr
+\newcommand\um@mathmap@noparse[3]{%
+  \@for\@ii:=#2\do{%
+    \expandafter\expandafter
+    \expandafter\um@addto@mathmap
+    \expandafter\expandafter
+    \expandafter{%
+    \expandafter\um@symfont
+    \expandafter}%
+    \expandafter{\@ii}{#1}{#3}%
+   }}%
+\newcommand\um@mathmap@parse[3]{%
+  \@for\@ii:=\um@char@num@range\do{%
+    \ifnum\@ii=#3\relax
+      \@for\@jj:=#2\do{%
+        \expandafter\expandafter
+        \expandafter\um@addto@mathmap
+        \expandafter\expandafter
+        \expandafter{%
+        \expandafter\um@symfont
+        \expandafter}%
+        \expandafter{\@jj}{#1}{#3}}%
+    \fi}}%
+\newcommand\um@addto@mathmap[4]{%
+  \expandafter\g@addto@macro
+    \csname um@\expandafter\@gobble\string#3\endcsname{%
+    \SetMathCode{#2}{\mathalpha}{#1}{#4}}}
+\def\um@nolimits{%
+  \@elt\int\@elt\iint\@elt\iiint\@elt\iiiint\@elt\oint\@elt\oiint\@elt\oiiint
+  \@elt\intclockwise\@elt\varointclockwise\@elt\ointctrclockwise\@elt\sumint
+  \@elt\intbar\@elt\intBar\@elt\fint\@elt\cirfnint\@elt\awint\@elt\rppolint
+  \@elt\scpolint\@elt\npolint\@elt\pointint\@elt\sqint\@elt\intlarhk\@elt\intx
+  \@elt\intcap\@elt\intcup\@elt\upint\@elt\lowint}
+\newcommand\addnolimits[1]{%
+  \expandafter\def
+  \expandafter\um@nolimits
+  \expandafter{\um@nolimits\@elt#1}}
+\def\removenolimits#1{%
+  \begingroup
+    \def\@elt##1{%
+      \ifx##1#1\else
+        \noexpand\@elt\noexpand##1
+     \fi}
+    \xdef\um@nolimits{\um@nolimits}%
+  \endgroup}
+\def\um@radicals{\sqrt}
+\def\r@@t#1#2{%
+  \setbox\z@\hbox{$\m@th #1\sqrtsign{#2}$}%
+  \um@scaled@apply{#1}{\kern}{\fontdimen63\um@font}%
+  \raise \dimexpr(
+      \um@fontdimen@percent{65}{\um@font}\ht\z@-
+      \um@fontdimen@percent{65}{\um@font}\dp\z@
+    )\relax
+    \copy \rootbox%
+  \um@scaled@apply{#1}{\kern}{\fontdimen64\um@font}%
+  \box \z@}
+\let\left@primitive\left
+\def\left{\mathopen{}\left@primitive}
+\newcommand\um@zf@feature[2]{%
+  \define@key[zf]{options}{#1}[]{%
+    \if@um@fontspec@feature
+      #2
+    \else
+      \PackageError{fontspec/unicode-math}
+        {The ‘#1’ font feature can only be used for maths fonts}
+        {The feature you tried to use can only be in commands
+          like \protect\setmathfont}%
+    \fi}}
+\um@zf@feature{ScriptStyle}{%
+  \zf@update@ff{+ssty=0}}
+\um@zf@feature{ScriptScriptStyle}{%
+  \zf@update@ff{+ssty=1}}
+\define@cmdkey[um]{options}[um@]{ScriptFeatures}{}
+\define@cmdkey[um]{options}[um@]{ScriptScriptFeatures}{}
+\define@cmdkey[um]{options}[um@]{ScriptFont}{}
+\define@cmdkey[um]{options}[um@]{ScriptScriptFont}{}
+\define@choicekey+[um]{options}{Range}[\@tempa\@tempb]{ALL}{%
+  \ifcase\@tempb\relax
+    \@um@inittrue
+  \fi}{% else:
+    \xdef\um@char@range{\zap@space#1 \@empty}}
+\newcommand\um@parse@term[4]{%
+  \@for\@ii:=\um@char@range\do{%
+    \unless\ifx\@ii\@empty
+      \@tempswafalse
+      \expandafter\um@firstchar\expandafter{\@ii}%
+      \ifx\@tempa\um@backslash
+        \expandafter\ifx\@ii#2\relax
+          \@tempswatrue
+        \else
+          \expandafter\ifx\@ii#3\relax
+            \@tempswatrue
+          \fi
+        \fi
+      \else
+        \expandafter\um@parse@range\@ii-\@marker-\@nil#1\@nil
+      \fi
+      \if@tempswa
+        \ifx\um@char@num@range\@empty
+          \g@addto@macro\um@char@num@range{#1}%
+        \else
+          \g@addto@macro\um@char@num@range{,#1}%
+        \fi
+        #4%
+      \fi
+    \fi}}
+\def\um@firstof#1#2\@nil{#1}
+\edef\um@backslash{\expandafter\um@firstof\string\string\@nil}
+\def\um@firstchar#1{\edef\@tempa{\expandafter\um@firstof\string#1\@nil}}
+\def\um@parse@range#1-#2-#3\@nil#4\@nil{%
+  \def\@tempa{#1}%
+  \def\@tempb{#2}%
+  \expandafter\ifx\expandafter\@marker\@tempb\relax
+    \ifnum#4=#1\relax
+      \@tempswatrue
+    \fi
+  \else
+    \ifx\@empty\@tempb
+      \ifnum#4>\numexpr#1-1\relax
+        \@tempswatrue
+      \fi
+    \else
+      \ifx\@empty\@tempa
+        \ifnum#4<\numexpr#2+1\relax
+          \@tempswatrue
+        \fi
+      \else
+        \ifnum#4>\numexpr#1-1\relax
+          \ifnum#4<\numexpr#2+1\relax
+            \@tempswatrue
+          \fi\fi\fi\fi\fi}
+\newcommand\um@setmathcode[3][1]{%
+  \@for\um@inp:=#2\do{%
+    \um@FOR\@tempcnta=[1:#1]\do{%
+      \SetMathCode{\numexpr\um@inp+\@tempcnta-1\relax}
+        {\mathalpha}{\um@symfont}{\numexpr#3+\@tempcnta-1\relax}}}}
+\newcommand\um@setmathalph[4][1]{%
+  \@for\um@inp:=#3\do{%
+    \um@FOR\@tempcnta=[1:#1]\do{%
+      \edef\@tempa{%
+        \noexpand\um@setsinglemathalph
+          {\noexpand#2}
+          {\number\numexpr \um@inp+\@tempcnta-1 \relax}
+          {\number\numexpr #4+\@tempcnta-1 \relax}}\@tempa}}}
+\AtBeginDocument{\um@resolve@greek}%
+\newcommand\um@resolve@greek{%
+  \def\Alpha{\mitAlpha}%
+  \def\Beta{\mitBeta}%
+  \def\Gamma{\mitGamma}%
+  \def\Delta{\mitDelta}%
+  \def\Epsilon{\mitEpsilon}%
+  \def\Zeta{\mitZeta}%
+  \def\Eta{\mitEta}%
+  \def\Theta{\mitTheta}%
+  \def\Iota{\mitIota}%
+  \def\Kappa{\mitKappa}%
+  \def\Lambda{\mitLambda}%
+  \def\Mu{\mitMu}%
+  \def\Nu{\mitNu}%
+  \def\Xi{\mitXi}%
+  \def\Omicron{\mitOmicron}%
+  \def\Pi{\mitPi}%
+  \def\Rho{\mitRho}%
+  \def\varTheta{\mitvarTheta}%
+  \def\Sigma{\mitSigma}%
+  \def\Tau{\mitTau}%
+  \def\Upsilon{\mitUpsilon}%
+  \def\Phi{\mitPhi}%
+  \def\Chi{\mitChi}%
+  \def\Psi{\mitPsi}%
+  \def\Omega{\mitOmega}%
+  \def\alpha{\mitalpha}%
+  \def\beta{\mitbeta}%
+  \def\gamma{\mitgamma}%
+  \def\delta{\mitdelta}%
+  \def\varepsilon{\mitvarepsilon}%
+  \def\zeta{\mitzeta}%
+  \def\eta{\miteta}%
+  \def\theta{\mittheta}%
+  \def\iota{\mitiota}%
+  \def\kappa{\mitkappa}%
+  \def\lambda{\mitlambda}%
+  \def\mu{\mitmu}%
+  \def\nu{\mitnu}%
+  \def\xi{\mitxi}%
+  \def\omicron{\mitomicron}%
+  \def\pi{\mitpi}%
+  \def\rho{\mitrho}%
+  \def\varsigma{\mitvarsigma}%
+  \def\sigma{\mitsigma}%
+  \def\tau{\mittau}%
+  \def\upsilon{\mitupsilon}%
+  \def\phi{\mitphi}%
+  \def\chi{\mitchi}%
+  \def\psi{\mitpsi}%
+  \def\omega{\mitomega}%
+  \def\varepsilon{\mitvarepsilon}%
+  \def\vartheta{\mitvartheta}%
+  \def\varkappa{\mitvarkappa}%
+  \def\varphi{\mitvarphi}%
+  \def\varrho{\mitvarrho}%
+  \def\varrho{\mitvarsigma}%
+  \def\varpi{\mitvarpi}}
+\newcommand\um@def@numbers{%
+  \um@setmathcode[10]{\um@usv@num}{\um@usv@num}}
+\newcommand\um@def@upLatin{%
+    \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}}
+\newcommand\um@def@itLatin{%
+    \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}}
+\newcommand\um@def@itlatin{%
+  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}%
+  \um@setmathcode{`\h,\um@usv@ith}{\um@usv@ith}%
+}
+\newcommand\um@def@uplatin{%
+  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}%
+  \um@setmathcode{\um@usv@ith}{`\h}%
+}
+\newcommand\um@def@upGreek{%
+    \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}%
+    \um@setmathcode{\um@usv@varTheta,"1D6F3}{\um@usv@varTheta}%
+}
+\newcommand\um@def@itGreek{%
+    \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}%
+    \um@setmathcode{\um@usv@varTheta}{\um@usv@itvarTheta}%
+}
+\newcommand\um@def@upgreek{%
+    \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}%
+    \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}%
+    \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}%
+    \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}%
+    \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}%
+    \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}%
+    \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}%
+}
+\newcommand\um@def@itgreek{%
+    \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}%
+    \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}%
+    \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}%
+    \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}%
+    \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}%
+    \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}%
+    \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}%
+}
+\newcommand\um@setup@alphabets{%
+  \um@setup@mathup
+  \um@setup@mathit
+  \um@setup@mathbb
+  \um@setup@mathscr
+  \um@setup@mathfrak
+  \um@setup@mathsf
+  \um@setup@mathsfit
+  \um@setup@mathtt
+  \um@setup@mathbf
+  \um@setup@mathbfup
+  \um@setup@mathbfit
+  \um@setup@mathbfscr
+  \um@setup@mathbffrak
+  \um@setup@mathbfsf
+  \um@setup@mathbfsfit
+}
+\def\um@setup@mathup{%
+  \um@setmathalph[26]{\mathup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}%
+  \um@setmathalph[26]{\mathup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}%
+  \um@setmathalph[25]{\mathup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}%
+  \um@setmathalph[25]{\mathup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}%
+  \um@setmathalph{\mathup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}%
+  \um@setmathalph{\mathup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}%
+  \um@setmathalph{\mathup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@varTheta}%
+  \um@setmathalph{\mathup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}%
+  \um@setmathalph{\mathup}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}%
+  \um@setmathalph{\mathup}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}%
+  \um@setmathalph{\mathup}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}%
+  \um@setmathalph{\mathup}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}%
+  \um@setmathalph{\mathup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}%
+}
+\def\mathrm{\mathup}
+\def\um@setup@mathit{%
+  \um@setmathalph[26]{\mathit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}%
+  \um@setmathalph[26]{\mathit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}%
+  \um@setmathalph{\mathit}{`\h,\um@usv@ith}{\um@usv@ith}%
+  \um@setmathalph[25]{\mathit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}%
+  \um@setmathalph[25]{\mathit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}%
+  \um@setmathalph{\mathit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}%
+  \um@setmathalph{\mathit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}%
+  \um@setmathalph{\mathit}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@itvarTheta}%
+  \um@setmathalph{\mathit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}%
+  \um@setmathalph{\mathit}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}%
+  \um@setmathalph{\mathit}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}%
+  \um@setmathalph{\mathit}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}%
+  \um@setmathalph{\mathit}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}%
+  \um@setmathalph{\mathit}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}%
+}
+\def\um@setup@mathbb{%
+  \um@setmathalph[10]{\mathbb}{\um@usv@num}{\um@usv@bbnum}%
+  \um@setmathalph[26]{\mathbb}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bbLatin}%
+  \um@setmathalph{\mathbb}{`\C,"1D60A}{"2102}%
+  \um@setmathalph{\mathbb}{`\H,"1D60F}{"210D}%
+  \um@setmathalph{\mathbb}{`\N,"1D60F}{"2115}%
+  \um@setmathalph{\mathbb}{`\P,"1D617}{"2119}%
+  \um@setmathalph{\mathbb}{`\Q,"1D618}{"211A}%
+  \um@setmathalph{\mathbb}{`\R,"1D619}{"211D}%
+  \um@setmathalph{\mathbb}{`\Z,"1D621} {"2124}%
+  \um@setmathalph[26]{\mathbb}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bblatin}%
+}
+\def\um@setup@mathscr{%
+  \um@setmathalph[26]{\mathscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@scrLatin}%
+  \um@setmathalph{\mathscr}{`\B,"1D435}{"212C}%
+  \um@setmathalph{\mathscr}{`\E,"1D438}{"2130}%
+  \um@setmathalph{\mathscr}{`\F,"1D439}{"2131}%
+  \um@setmathalph{\mathscr}{`\H,"1D43B}{"210B}%
+  \um@setmathalph{\mathscr}{`\I,"1D43C}{"2110}%
+  \um@setmathalph{\mathscr}{`\L,"1D43F}{"2112}%
+  \um@setmathalph{\mathscr}{`\M,"1D440}{"2133}%
+  \um@setmathalph{\mathscr}{`\R,"1D445}{"211B}%
+  \um@setmathalph[26]{\mathscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@scrlatin}%
+  \um@setmathalph{\mathscr}{`\e,"1D452}{"212F}%
+  \um@setmathalph{\mathscr}{`\g,"1D454}{"210A}%
+  \um@setmathalph{\mathscr}{`\o,"1D45C}{"2134}%
+}
+\def\um@setup@mathfrak{%
+  \um@setmathalph[26]{\mathfrak}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@frakLatin}%
+  \um@setmathalph{\mathfrak}{`\C,"1D436}{"212D}%
+  \um@setmathalph{\mathfrak}{`\H,"1D43B}{"210C}%
+  \um@setmathalph{\mathfrak}{`\I,"1D43C}{"2111}%
+  \um@setmathalph{\mathfrak}{`\R,"1D445}{"211C}%
+  \um@setmathalph{\mathfrak}{`\Z,"1D44D}{"2128}%
+  \um@setmathalph[26]{\mathfrak}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@fraklatin}%
+}
+\def\um@setup@mathsf{%
+  \um@setmathalph[10]{\mathsf}{\um@usv@num}{\um@usv@sfnum}%
+  \um@setmathalph[26]{\mathsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfLatin}%
+  \um@setmathalph[26]{\mathsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sflatin}%
+}
+\def\um@setup@mathsfit{%
+  \um@setmathalph[10]{\mathsfit}{\um@usv@num}{\um@usv@sfnum}%
+  \um@setmathalph[26]{\mathsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfitLatin}%
+  \um@setmathalph[26]{\mathsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfitlatin}%
+}
+\def\um@setup@mathtt{%
+  \um@setmathalph[10]{\mathtt}{\um@usv@num}{\um@usv@ttnum}%
+  \um@setmathalph[26]{\mathtt}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@ttLatin}%
+  \um@setmathalph[26]{\mathtt}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@ttlatin}%
+}
+\def\um@setup@mathbf{%
+  \um@setmathalph[10]{\mathbf}{\um@usv@num}{\um@usv@bfnum}%
+  \um@setmathalph{\mathbf}{\um@usv@Digamma}{"1D7CA}%
+  \um@setmathalph{\mathbf}{\um@usv@digamma}{"1D7CB}%
+  \if@um@bfliteral
+    \um@setmathalph[26]{\mathbf}{\um@usv@upLatin}{\um@usv@bfLatin}%
+    \um@setmathalph[26]{\mathbf}{\um@usv@itLatin}{\um@usv@bfitLatin}%
+    \um@setmathalph[26]{\mathbf}{\um@usv@uplatin}{\um@usv@bflatin}%
+    \um@setmathalph[26]{\mathbf}{\um@usv@itlatin}{\um@usv@bfitlatin}%
+    \um@setmathalph[25]{\mathbf}{\um@usv@upGreek}{\um@usv@bfGreek}%
+    \um@setmathalph[25]{\mathbf}{\um@usv@itGreek}{\um@usv@bfitGreek}%
+    \um@setmathalph[25]{\mathbf}{\um@usv@upgreek}{\um@usv@bfgreek}%
+    \um@setmathalph[25]{\mathbf}{\um@usv@itgreek}{\um@usv@bfitgreek}%
+    \um@setmathalph{\mathbf}{\um@usv@ith}{\um@usv@bfith}%
+    \um@setmathalph{\mathbf}{\um@usv@varTheta}{\um@usv@bfvarTheta}%
+    \um@setmathalph{\mathbf}{\um@usv@Nabla}{\um@usv@bfNabla}%
+    \um@setmathalph{\mathbf}{\um@usv@Digamma}{\um@usv@bfDigamma}%
+    \um@setmathalph{\mathbf}{\um@usv@partial}{\um@usv@bfpartial}%
+    \um@setmathalph{\mathbf}{\um@usv@varepsilon}{\um@usv@bfvarepsilon}%
+    \um@setmathalph{\mathbf}{\um@usv@vartheta}{\um@usv@bfvartheta}%
+    \um@setmathalph{\mathbf}{\um@usv@varkappa}{\um@usv@bfvarkappa}%
+    \um@setmathalph{\mathbf}{\um@usv@varphi}{\um@usv@bfvarphi}%
+    \um@setmathalph{\mathbf}{\um@usv@varrho}{\um@usv@bfvarrho}%
+    \um@setmathalph{\mathbf}{\um@usv@varpi}{\um@usv@bfvarpi}%
+    \um@setmathalph{\mathbf}{\um@usv@digamma}{\um@usv@bfdigamma}%
+    \um@setmathalph{\mathbf}{\um@usv@itvarTheta}{\um@usv@bfitvarTheta}%
+    \um@setmathalph{\mathbf}{\um@usv@itNabla}{\um@usv@bfitNabla}%
+    \um@setmathalph{\mathbf}{\um@usv@itpartial}{\um@usv@bfitpartial}%
+    \um@setmathalph{\mathbf}{\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}%
+    \um@setmathalph{\mathbf}{\um@usv@itvartheta}{\um@usv@bfitvartheta}%
+    \um@setmathalph{\mathbf}{\um@usv@itvarkappa}{\um@usv@bfitvarkappa}%
+    \um@setmathalph{\mathbf}{\um@usv@itvarphi}{\um@usv@bfitvarphi}%
+    \um@setmathalph{\mathbf}{\um@usv@itvarrho}{\um@usv@bfitvarrho}%
+    \um@setmathalph{\mathbf}{\um@usv@itvarpi}{\um@usv@bfitvarpi}%
+  \else
+    \if@um@bfupLatin
+      \um@setmathalph[26]{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}%
+    \else
+      \um@setmathalph[26]{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}%
+    \fi
+    \if@um@bfuplatin
+      \um@setmathalph[26]{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}%
+      \um@setmathalph{\mathbf}{\um@usv@ith}{\um@usv@bfuph}%
+    \else
+      \um@setmathalph[26]{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}%
+      \um@setmathalph{\mathbf}{\um@usv@ith}{\um@usv@bfith}%
+    \fi
+    \if@um@bfupGreek
+      \um@setmathalph[25]{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfGreek}%
+      \um@setmathalph{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}%
+    \else
+      \um@setmathalph[25]{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfitGreek}%
+      \um@setmathalph{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfitvarTheta}%
+    \fi
+    \if@um@bfupgreek
+      \um@setmathalph[25]{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfgreek}%
+      \um@setmathalph{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}%
+      \um@setmathalph{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}%
+      \um@setmathalph{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfvarkappa}%
+      \um@setmathalph{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}%
+      \um@setmathalph{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}%
+      \um@setmathalph{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}%
+    \else
+      \um@setmathalph[25]{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfitgreek}%
+      \um@setmathalph{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}%
+      \um@setmathalph{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfitvartheta}%
+      \um@setmathalph{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfitvarkappa}%
+      \um@setmathalph{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}%
+      \um@setmathalph{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}%
+      \um@setmathalph{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}%
+    \fi
+  \fi
+}
+\def\um@setup@mathbfit{%
+  \um@setmathalph[10]{\mathbfit}{\um@usv@num}{\um@usv@bfnum}%
+  \um@setmathalph[26]{\mathbfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}%
+  \um@setmathalph[26]{\mathbfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}%
+  \um@setmathalph[25]{\mathbfit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfitGreek}%
+  \um@setmathalph[25]{\mathbfit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfitgreek}%
+  \um@setmathalph[26]{\mathbfit}{\um@usv@bfLatin}{\um@usv@bfitLatin}%
+  \um@setmathalph[26]{\mathbfit}{\um@usv@bflatin}{\um@usv@bfitlatin}%
+  \um@setmathalph[25]{\mathbfit}{\um@usv@bfGreek}{\um@usv@bfitGreek}%
+  \um@setmathalph[25]{\mathbfit}{\um@usv@bfgreek}{\um@usv@bfitgreek}%
+  \um@setmathalph{\mathbfit}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfitvarTheta}%
+  \um@setmathalph{\mathbfit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfitNabla}%
+  \um@setmathalph{\mathbfit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfitpartial}%
+  \um@setmathalph{\mathbfit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}%
+  \um@setmathalph{\mathbfit}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfitvartheta}%
+  \um@setmathalph{\mathbfit}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfitvarkappa}%
+  \um@setmathalph{\mathbfit}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}%
+  \um@setmathalph{\mathbfit}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}%
+  \um@setmathalph{\mathbfit}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}%
+}
+\def\um@setup@mathbfup{%
+  \um@setmathalph[10]{\mathbfup}{\um@usv@num}{\um@usv@bfnum}%
+  \um@setmathalph[26]{\mathbfup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}%
+  \um@setmathalph[26]{\mathbfup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}%
+  \um@setmathalph[25]{\mathbfup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfGreek}%
+  \um@setmathalph[25]{\mathbfup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfgreek}%
+  \um@setmathalph[26]{\mathbfup}{\um@usv@bfLatin}{\um@usv@bfLatin}%
+  \um@setmathalph[26]{\mathbfup}{\um@usv@bflatin}{\um@usv@bflatin}%
+  \um@setmathalph[25]{\mathbfup}{\um@usv@bfGreek}{\um@usv@bfGreek}%
+  \um@setmathalph[25]{\mathbfup}{\um@usv@bfgreek}{\um@usv@bfgreek}%
+  \um@setmathalph{\mathbfup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}%
+  \um@setmathalph{\mathbfup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfNabla}%
+  \um@setmathalph{\mathbfup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfpartial}%
+  \um@setmathalph{\mathbfup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}%
+  \um@setmathalph{\mathbfup}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}%
+  \um@setmathalph{\mathbfup}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfvarkappa}%
+  \um@setmathalph{\mathbfup}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}%
+  \um@setmathalph{\mathbfup}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}%
+  \um@setmathalph{\mathbfup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}%
+}
+\def\um@setup@mathbffrak{%
+  \um@setmathalph[10]{\mathbffrak}{\um@usv@num}{\um@usv@bfnum}%
+  \um@setmathalph[26]{\mathbffrak}{\um@usv@upLatin, \um@usv@itLatin,\um@usv@frakLatin}{\um@usv@bffrakLatin}%
+  \um@setmathalph[26]{\mathbffrak}{\um@usv@uplatin,\um@usv@itlatin,\um@usv@fraklatin}{\um@usv@bffraklatin}%
+}
+\def\um@setup@mathbfscr{%
+  \um@setmathalph[10]{\mathbfscr}{\um@usv@num}{\um@usv@bfnum}%
+  \um@setmathalph[26]{\mathbfscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfscrLatin}%
+  \um@setmathalph[26]{\mathbfscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfscrlatin}%
+}
+\def\um@setup@mathbfsf{%
+  \um@setmathalph[10]{\mathbfsf}{\um@usv@num}{\um@usv@bfnum}%
+  \um@setmathalph[26]{\mathbfsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfLatin}%
+  \um@setmathalph[26]{\mathbfsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsflatin}%
+  \um@setmathalph[25]{\mathbfsf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfGreek}%
+  \um@setmathalph[25]{\mathbfsf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfgreek}%
+  \um@setmathalph{\mathbfsf}{\um@usv@varTheta}{"1D767}%
+  \um@setmathalph{\mathbfsf}{\um@usv@Nabla}{"1D76F}%
+  \um@setmathalph{\mathbfsf}{\um@usv@partial}{"1D789}%
+  \um@setmathalph{\mathbfsf}{\um@usv@varepsilon}{"1D78A}%
+  \um@setmathalph{\mathbfsf}{\um@usv@vartheta}{"1D78B}%
+  \um@setmathalph{\mathbfsf}{\um@usv@varkappa}{"1D78C}%
+  \um@setmathalph{\mathbfsf}{\um@usv@varphi}{"1D78D}%
+  \um@setmathalph{\mathbfsf}{\um@usv@varrho}{"1D78E}%
+  \um@setmathalph{\mathbfsf}{\um@usv@varpi}{"1D78F}%
+}
+\def\um@setup@mathbfsfit{%
+  \um@setmathalph[10]{\mathbfsfit}{\um@usv@num}{\um@usv@bfnum}%
+  \um@setmathalph[26]{\mathbfsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfitLatin}%
+  \um@setmathalph[26]{\mathbfsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfitlatin}%
+  \um@setmathalph[25]{\mathbfsfit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfitGreek}%
+  \um@setmathalph[25]{\mathbfsfit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfitgreek}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@varTheta}{"1D7A1}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@Nabla}{"1D7A9}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@partial}{"1D7C3}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@varepsilon}{"1D7C4}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@vartheta}{"1D7C5}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@varkappa}{"1D7C6}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@varphi}{"1D7C7}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@varrho}{"1D7C8}%
+  \um@setmathalph{\mathbfsfit}{\um@usv@varpi}{"1D7C9}%
+}
+\begingroup
+  \catcode`\^=12\relax
+  \gdef\um@scancharlet#1="#2\@nil{%
+    \lowercase{\scantokens{\global\let#1=^^^^^#2}}}
+  \catcode`\^=12\relax
+  \gdef\um@scanactivedef"#1\@nil#2{%
+    \lowercase{\scantokens{\global\def^^^^^#1{#2}}}}
+\endgroup
+\let\unicodemathgobble\@gobble
+\begingroup
+  \def\UnicodeMathSymbol#1#2#3#4{%
+    \um@scancharlet#2=#1\@nil}
+  \input unicode-math.tex\relax
+  \input unicode-math-add.tex\relax
+\endgroup
+\DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
+\def\operator@font{\um@mathup}
+\AtBeginDocument{\setmathfont[Range=ALL]{Cambria Math}}
+%% 
+%% Copyright © 2006-2008 by Will Robertson <wspr81@gmail.com>
+%% 
+%% Distributable under the LaTeX Project Public License,
+%% version 1.3c or higher (your choice). The latest version of
+%% this license is at: http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status)
+%% by Will Robertson.
+%% 
+%% This work consists of the files unicode-math.dtx and unicode-math.tex
+%%           and the derived files unicode-math.sty and unicode-math.pdf.
+%% 
+%%
+%% End of file `unicode-math.sty'.

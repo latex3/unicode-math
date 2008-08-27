@@ -5,7 +5,7 @@
 %<*readme>
 ___________________________________
 The unicode-math package
-v0.3
+v0.3b
 
 This package will provide a complete 
 implementation of unicode maths for XeTeX.
@@ -410,7 +410,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2008/01/21 v0.3 Unicode maths in XeLaTeX]  
+  [2008/08/27 v0.3b Unicode maths in XeLaTeX]  
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -713,6 +713,22 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % This will be refined later! Sort out which macros actually have to be removed from the \cmd\@preamblecmds\ token list.
 %    \begin{macrocode}
 \def\@preamblecmds{}
+
+% this is from gmutils.sty:
+\newcommand\not@onlypreamble[1]{{%
+  \def\do##1{\ifx#1##1\else\noexpand\do\noexpand##1\fi}%
+  \xdef\@preamblecmds{\@preamblecmds}}}
+\def\gm@notprerr{ can be used only in preamble (\on@line)}
+\AtBeginDocument{%
+  \def\do#1{\noexpand\do\noexpand#1}%
+  \edef\@preamblecmds{%
+    \def\noexpand\do##1{%
+      \def##1{\noexpand\PackageError{gmutils/LaTeX}%
+        {\noexpand\string##1 \noexpand\gm@notprerr}\noexpand\@eha}}%
+    \@preamblecmds}}
+\def\nocite#1{%
+  \@bsphack{\setbox0=\hbox{\cite{#1}}}\@esphack}
+
 %    \end{macrocode}
 %
 % \subsection{Other things}
@@ -721,10 +737,10 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \darg{Font dimen number}
 % \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|. This macro takes a font dimension number and outputs the decimal value of the associated parameter.
 % \begin{example}{}
-%   \font\1="Cambria Math"\1
-%   \um@fontdimen@percent\1{10}\par
-%   \um@fontdimen@percent\1{11}\par
-%   \um@fontdimen@percent\1{65}
+%   \font\tmpfont="Cambria Math"
+%   \um@fontdimen@percent{10}{\tmpfont}\\
+%   \um@fontdimen@percent{11}{\tmpfont}\\
+%   \um@fontdimen@percent{65}{\tmpfont}
 % \end{example}
 %    \begin{macrocode}
 \def\um@fontdimen@percent#1#2{%
@@ -732,6 +748,24 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\um@scaled@apply}
+% \darg{A math style}
+% \darg{Macro that takes a non-delimited length argument (like \cmd\kern)}
+% \darg{Length control sequence to be scaled according to the math style}
+% This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
+%    \begin{macrocode}
+\def\um@scaled@apply#1#2#3{%
+  \ifx#1\scriptstyle
+    #2\um@fontdimen@percent{10}\um@font#3%
+  \else
+    \ifx#1\scriptscriptstyle
+      #2\um@fontdimen@percent{11}\um@font#3%
+    \else
+      #2#3%
+    \fi
+  \fi}
+%    \end{macrocode}
+% \end{macro}
 %
 % \section{Fundamentals}
 %
@@ -802,13 +836,16 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
     \expandafter\gdef\csname\string#2@op\endcsname{%
       \csname\string#2@sym\endcsname
       \expandafter\in@\expandafter#2\expandafter{\um@nolimits}%
-      \ifin@\expandafter\nolimits\fi}%
+      \ifin@
+        \expandafter\nolimits
+      \fi}%
 %    \end{macrocode}  
 % Don't forget that the actual \cmd\sum\ macro is simply defined in terms of the literal unicode symbol!
 %    \begin{macrocode}
   \else
 %    \end{macrocode}
 % \paragraph{Radicals}
+% Needs to be before the delimiters because the radical is, for some reason, \cmd\mathopen.
 %    \begin{macrocode}
     \expandafter\in@\expandafter#2\expandafter{\um@radicals,}%
     \ifin@
@@ -960,8 +997,8 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %
 % Check for the correct number of \cmd{\fontdimen}s:
 %    \begin{macrocode}
-    \font\@tempfont="#2"\relax
-    \ifdim \dimexpr\fontdimen9\@tempfont*65536\relax =65pt
+    \font\um@font="#2"\relax
+    \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt
       \@um@ot@math@true
     \else
       \um@PackageWarning{%
@@ -1376,6 +1413,25 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \changes{v0.01}{2006/11/27}{Implemented for more general radicals processing.}
 % \end{macro}
 %
+% \begin{macro}{\r@@t}
+% \darg{A mathstyle (for \cmd\mathpalette)}
+% \darg{Leading superscript for the sqrt sign}
+% A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
+%    \begin{macrocode}
+\def\r@@t#1#2{%
+  \setbox\z@\hbox{$\m@th #1\sqrtsign{#2}$}%
+  \um@scaled@apply{#1}{\kern}{\fontdimen63\um@font}%    
+  \raise \dimexpr(
+      \um@fontdimen@percent{65}{\um@font}\ht\z@-
+      \um@fontdimen@percent{65}{\um@font}\dp\z@
+    )\relax
+    \copy \rootbox% 
+  \um@scaled@apply{#1}{\kern}{\fontdimen64\um@font}%    
+  \box \z@}
+%    \end{macrocode}
+% \changes{v0.3b}{2008/08/27}{Implemented.}
+% \end{macro}
+%
 % \begin{example}{}
 %   \setmathfont{Cambria Math}
 %   \[ \sqrt{1+\sqrt{1+
@@ -1386,7 +1442,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %
 % \begin{example}{}
 %   \setmathfont{Cambria Math}
-%   \[ \sqrt{1+\sqrt{1+x}} \]
+%   \[ \sqrt[2]{1+\sqrt[3]{1+x}} \]
 % \end{example}
 %
 % \subsection{Delimiters}
@@ -1895,8 +1951,6 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %
 % \subsubsection{Upright: \cmd\mathup}
 %
-% Can't call it \cmd\mathrm\ any more because it contains Greek as well!
-%
 % \begin{example}{}
 %   $\mathup{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathup{abcdefghijklmnopqrstuvwxyz}$ \\
@@ -1923,6 +1977,14 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
   \um@setmathalph{\mathup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}%
 }
 %    \end{macrocode}
+%
+% \begin{macro}{\mathrm}
+% Can't call it \cmd\mathrm\ any more because it contains Greek as well!
+% But we define \cmd\mathrm\ as an alias for backwards compatibility.
+%    \begin{macrocode}
+\def\mathrm{\mathup}
+%    \end{macrocode}
+% \end{macro}
 %
 % \subsubsection{Italic: \cmd\mathit}
 %
@@ -2375,6 +2437,11 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
   \input unicode-math.tex\relax
   \input unicode-math-add.tex\relax
 \endgroup
+%    \end{macrocode}
+%
+% Undo the damage made to \cmd\sqrt:
+%    \begin{macrocode}
+\DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
 %    \end{macrocode}
 %
 % We need to change \LaTeX's idea of the font used to typeset things like \cmd\sin\ and \cmd\cos:

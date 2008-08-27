@@ -1,6 +1,6 @@
 ___________________________________
 The unicode-math package
-v0.3
+v0.3b
 
 This package will provide a complete
 implementation of unicode maths for XeTeX.
