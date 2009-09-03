@@ -3,9 +3,9 @@
 \iffalse
 %</internal>
 %<*readme>
-___________________________________
-The unicode-math package
-v0.3b
+________________________
+The UNICODE-MATH package
+v0.3c
 
 This package will provide a complete 
 implementation of unicode maths for XeTeX.
@@ -16,10 +16,22 @@ It is currently only supported by the fonts
 Basic usage:
   \setmathfont{Cambria Math}
 
-IT IS NOT YET READY FOR DISTRIBUTION :)
-___________________
-Will Robertson 2006-2008
-Distributed under the LaTeX Project Public License
+THIS PACKAGE IS NOT YET READY FOR DISTRIBUTION!
+
+____________
+INSTALLATION
+
+There are two DTX files in this repository:
+    unicode-math.dtx
+    maths-font-mappings.dtx
+
+You can safely ignore maths-font-mappings; it contains code that
+isn't being used for unicode-math, but might otherwise be useful
+(hence it hasn't been deleted).
+
+__________________________________
+Copyright 2006-2009 Will Robertson
+Released under the LaTeX Project Public License
 %</readme>
 %<*internal>
 \fi
@@ -32,19 +44,19 @@ Distributed under the LaTeX Project Public License
 \input docstrip.tex
 \keepsilent
 \preamble
-  Copyright © 2006-2008  Will Robertson
+  Copyright © 2006-2009  Will Robertson
   License information appended.
 \endpreamble
 \postamble
 
-Copyright © 2006-2008 by Will Robertson <wspr81@gmail.com>
+Copyright © 2006-2009 by Will Robertson <wspr81@gmail.com>
 
-Distributable under the LaTeX Project Public License,
-version 1.3c or higher (your choice). The latest version of
-this license is at: http://www.latex-project.org/lppl.txt
+This package is free software and may be redistributed and/or
+modified under the conditions of the LaTeX Project Public License,
+version 1.3c or higher (your choice):
+  <http://www.latex-project.org/lppl/>
 
-This work is "maintained" (as per LPPL maintenance status) 
-by Will Robertson.
+This work is "author-maintained" by Will Robertson.
 
 This work consists of the files unicode-math.dtx and unicode-math.tex
           and the derived files unicode-math.sty and unicode-math.pdf.
@@ -62,7 +74,13 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 \generate{\file{\jobname-testbf.ltx}{\from{\jobname.dtx}{testbf}}}
 \generate{\file{dtx-style.sty}{\from{\jobname.dtx}{dtx-style}}}
 \generate{\file{stix-extract.sh}{\from{\jobname.dtx}{awk}}}
-\endgroup
+\def\tempa{plain}
+\ifx\tempa\fmtname
+  \def\next{\endgroup\end}
+\else
+  \def\next{\endgroup}
+\fi
+\next
 \immediate\write18{sh stix-extract.sh}
 \immediate\write18{makeindex -s gind.ist -o \jobname.ind  \jobname.idx}
 \immediate\write18{makeindex -s gglo.ist -o \jobname.gls  \jobname.glo}
@@ -188,9 +206,9 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %
 % \subsection{Bold switching}
 %
-% Similar as in the previous section, ISO standards differ somewhat to \TeX's conventions (and classical typesetting) for `boldness' in mathematics. In the past, it has been customary to use bold \emph{upright} letters to denote things like vectors and matrices. For example, \( \mbfM = (\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively scarcity of bold italic fonts in the pre-digital typesetting era. It has been suggested that \emph{italic} bold symbols are used nowadays instead.
+% Similar as in the previous section, ISO standards differ somewhat to \TeX's conventions (and classical typesetting) for `boldness' in mathematics. In the past, it has been customary to use bold \emph{upright} letters to denote things like vectors and matrices. For example, \( \mathbfup{M} = (\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively scarcity of bold italic fonts in the pre-digital typesetting era. It has been suggested that \emph{italic} bold symbols are used nowadays instead.
 %
-% Bold Greek letters have simply been bold variant glyphs of their regular weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta) \). Confusingly, the syntax in \LaTeX\ has been different for these two examples: \cmd\mathbf\ in the former (`$\mbfM$'), and \cmd\bm\ (or \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
+% Bold Greek letters have simply been bold variant glyphs of their regular weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta) \). Confusingly, the syntax in \LaTeX\ has been different for these two examples: \cmd\mathbf\ in the former (`$\mathbfup{M}$'), and \cmd\bm\ (or \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
 %
 % In \pkg{unicode-math}, the \cmd\mathbf\ command works directly with both Greek and Latin maths alphabet characters and depending on package option either switches to upright for Latin letters (|bold-style=TeX|) as well or keeps them italic (|bold-style=ISO|).
 %
@@ -232,15 +250,15 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %   \let \tmpshow\empty
 %   \begin{tabular}{@{}llc@{}}
 %       \toprule
-%     \multicolumn{2}{l}{Description} & Glyph
+%     \multicolumn{2}{@{}l}{Description} & Glyph
 %      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-%     Upright & Serif & $\nabla$ \\
-%     & Bold serif & $\mbfnabla$ \\
-%     & Bold sans & $\mbfsansnabla$ \\
+%     Upright & Serif & $\mathup\nabla$ \\
+%     & Bold serif & $\mathup\mbfnabla$ \\
+%     & Bold sans & $\mathbfsf\nabla$ \\
 %       \cmidrule(lr){1-2}\cmidrule(lr){3-3}
-%     Italic & Serif & $\mitnabla$ \\
-%     & Bold serif & $\mbfitnabla$ \\
-%     & Bold sans & $\mbfitsansnabla$ \\
+%     Italic & Serif & $\mathit\nabla$ \\
+%     & Bold serif & $\mathbfit\nabla$ \\
+%     & Bold sans & $\mathbfsfit\nabla$ \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -410,7 +428,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2008/08/27 v0.3b Unicode maths in XeLaTeX]  
+  [2009/09/04 v0.3c Unicode maths in XeLaTeX]  
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -425,7 +443,6 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 \newcounter{um@fam}
 \newif\if@um@fontspec@feature
 \newif\if@um@ot@math@
-\newif\if@um@init
 %    \end{macrocode} 
 % For \opt{math-style}:
 %    \begin{macrocode}
@@ -710,25 +727,9 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %
 % \subsection{Overcoming \cmd\@onlypreamble}
 %
-% This will be refined later! Sort out which macros actually have to be removed from the \cmd\@preamblecmds\ token list.
+% This will be refined later! Sort out which macros actually have to be removed from the \cmd\@preamblecmds\ token list. There is a macro to remove items from the \cs{@preamblecmds} list in |gmutils.sty|.
 %    \begin{macrocode}
 \def\@preamblecmds{}
-
-% this is from gmutils.sty:
-\newcommand\not@onlypreamble[1]{{%
-  \def\do##1{\ifx#1##1\else\noexpand\do\noexpand##1\fi}%
-  \xdef\@preamblecmds{\@preamblecmds}}}
-\def\gm@notprerr{ can be used only in preamble (\on@line)}
-\AtBeginDocument{%
-  \def\do#1{\noexpand\do\noexpand#1}%
-  \edef\@preamblecmds{%
-    \def\noexpand\do##1{%
-      \def##1{\noexpand\PackageError{gmutils/LaTeX}%
-        {\noexpand\string##1 \noexpand\gm@notprerr}\noexpand\@eha}}%
-    \@preamblecmds}}
-\def\nocite#1{%
-  \@bsphack{\setbox0=\hbox{\cite{#1}}}\@esphack}
-
 %    \end{macrocode}
 %
 % \subsection{Other things}
@@ -950,17 +951,16 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %    \begin{macrocode}
   \let\um@char@range\@empty
   \let\um@char@num@range\@empty
-  \@um@initfalse
 %    \end{macrocode}
 % \item Tell \pkg{fontspec} that maths font features are actually allowed.
 %    \begin{macrocode}
   \@um@fontspec@featuretrue
 %    \end{macrocode}
-% \item Grab the current size information (is this robust enough? Maybe it should be preceded by \cmd\normalsize\dots).
+% \item Grab the current size information (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
 %    \begin{macrocode}
   \csname S@\f@size\endcsname
 %    \end{macrocode}
-% \item Set the name of the math version being defined
+% \item Set the name of the math version being defined (obviously more needs to be done here!)
 % \end{itemize}
 %    \begin{macrocode}
   \def\um@mversion{normal}%
@@ -1003,7 +1003,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
     \else
       \um@PackageWarning{%
         The font '#2' is not a valid OpenType maths font. 
-        Some maths features will not be available or behaviour 
+        Some maths features will not be available or behave
         in a substandard manner.}%
     \fi
 %    \end{macrocode}
@@ -1023,15 +1023,8 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % And now we input every single maths char. See File~\ref{part:awk} for
 % the source to |unicode-math.tex|.
 %    \begin{macrocode}
-  \if@um@init
-    \input unicode-math.tex\relax
-    \input unicode-math-add.tex\relax
-  \else
-    \unless\ifx\um@char@range\@empty
-      \input unicode-math.tex\relax
-      \input unicode-math-add.tex\relax
-    \fi
-  \fi
+  \@input{unicode-math.tex}%
+  \@input{unicode-math-add.tex}%
 %    \end{macrocode}
 % If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we empty all of the
 % macros used to switch maths alphabets. Otherwise, the \cs{um@math..} macros are appended to.
@@ -1550,10 +1543,11 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %
 % \subsection{Range processing}\seclabel{rangeproc}
 %
+% The `ALL' branch here is deprecated and happens automatically.
 %    \begin{macrocode}
 \define@choicekey+[um]{options}{Range}[\@tempa\@tempb]{ALL}{%
   \ifcase\@tempb\relax
-    \@um@inittrue
+    \global\let\um@char@range\@empty
   \fi}{% else:
     \xdef\um@char@range{\zap@space#1 \@empty}}
 %    \end{macrocode}
@@ -1827,8 +1821,8 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
   \def\varkappa{\mitvarkappa}%
   \def\varphi{\mitvarphi}%
   \def\varrho{\mitvarrho}%
-  \def\varrho{\mitvarsigma}%
-  \def\varpi{\mitvarpi}}
+  \def\varpi{\mitvarpi}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2338,7 +2332,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 %     $\mathbfsf{ϵϑϰϕϱϖ}$ \\
 % \end{example}
 %
-% Numbers: (always upright)
+% Numbers (always upright) and letters:
 %    \begin{macrocode}
 \def\um@setup@mathbfsf{%
   \um@setmathalph[10]{\mathbfsf}{\um@usv@num}{\um@usv@bfnum}%
@@ -2347,16 +2341,10 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
   \um@setmathalph[25]{\mathbfsf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfGreek}%
   \um@setmathalph[25]{\mathbfsf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfgreek}%
 %    \end{macrocode}
-% Theta symbol:
+% Others:
 %    \begin{macrocode}
   \um@setmathalph{\mathbfsf}{\um@usv@varTheta}{"1D767}%
-%    \end{macrocode}
-% Nabla:
-%    \begin{macrocode}
   \um@setmathalph{\mathbfsf}{\um@usv@Nabla}{"1D76F}%
-%    \end{macrocode}
-% Partial, epsilon symbol, theta symbol, kappa symbol, phi symbol, rho symbol, pi symbol:
-%    \begin{macrocode}
   \um@setmathalph{\mathbfsf}{\um@usv@partial}{"1D789}%
   \um@setmathalph{\mathbfsf}{\um@usv@varepsilon}{"1D78A}%
   \um@setmathalph{\mathbfsf}{\um@usv@vartheta}{"1D78B}%
@@ -2434,8 +2422,8 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 \begingroup
   \def\UnicodeMathSymbol#1#2#3#4{%
     \um@scancharlet#2=#1\@nil}
-  \input unicode-math.tex\relax
-  \input unicode-math-add.tex\relax
+  \@input{unicode-math.tex}%
+  \@input{unicode-math-add.tex}%
 \endgroup
 %    \end{macrocode}
 %
@@ -2447,10 +2435,6 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % We need to change \LaTeX's idea of the font used to typeset things like \cmd\sin\ and \cmd\cos:
 %    \begin{macrocode}
 \def\operator@font{\um@mathup}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\AtBeginDocument{\setmathfont[Range=ALL]{Cambria Math}}
 %    \end{macrocode}
 %
 %\iffalse
@@ -2741,13 +2725,15 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \usepackage[svgnames]{xcolor}
 \usepackage{array,booktabs,calc,enumitem,fancyvrb,flafter,graphicx,ifthen,longtable,refstyle,subfig,topcapt,varioref}
 \setcounter{LTchunksize}{100}
-\usepackage{fontspec,xltxtra,xunicode,unicode-math}
+\usepackage{xltxtra}
+\usepackage[nabla=upright]{unicode-math}
 
 %\usepackage[rm,small]{titlesec}
 
 \setromanfont[Mapping=tex-text,Numbers=Lowercase]{FPL Neu}
 \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Lucida Grande}
 \setmonofont[Scale=MatchLowercase]{Monaco}
+\setmathfont{Cambria Math}
 
 \linespread{1.069}      % A bit more space between lines
 \frenchspacing         % Remove ugly extra space after punctuation

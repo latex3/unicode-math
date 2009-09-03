@@ -5,15 +5,14 @@
 %% The original source files were:
 %%
 %% unicode-math.dtx  (with options: `package')
-%%   Copyright © 2006-2008  Will Robertson
+%%   Copyright © 2006-2009  Will Robertson
 %%   License information appended.
 \ProvidesPackage{unicode-math}
-  [2008/08/27 v0.3b Unicode maths in XeLaTeX]
+  [2009/09/04 v0.3c Unicode maths in XeLaTeX]
 \RequirePackage{fontspec}
 \newcounter{um@fam}
 \newif\if@um@fontspec@feature
 \newif\if@um@ot@math@
-\newif\if@um@init
 \newif\if@um@literal
 \newif\if@um@upGreek
 \newif\if@um@upgreek
@@ -206,21 +205,6 @@
 \ExecuteOptionsX{math-style=iso}
 \ProcessOptionsX
 \def\@preamblecmds{}
-
-\newcommand\not@onlypreamble[1]{{%
-  \def\do##1{\ifx#1##1\else\noexpand\do\noexpand##1\fi}%
-  \xdef\@preamblecmds{\@preamblecmds}}}
-\def\gm@notprerr{ can be used only in preamble (\on@line)}
-\AtBeginDocument{%
-  \def\do#1{\noexpand\do\noexpand#1}%
-  \edef\@preamblecmds{%
-    \def\noexpand\do##1{%
-      \def##1{\noexpand\PackageError{gmutils/LaTeX}%
-        {\noexpand\string##1 \noexpand\gm@notprerr}\noexpand\@eha}}%
-    \@preamblecmds}}
-\def\nocite#1{%
-  \@bsphack{\setbox0=\hbox{\cite{#1}}}\@esphack}
-
 \def\um@fontdimen@percent#1#2{%
   0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax}
 \def\um@scaled@apply#1#2#3{%
@@ -285,7 +269,6 @@
   \let\glb@currsize\relax
   \let\um@char@range\@empty
   \let\um@char@num@range\@empty
-  \@um@initfalse
   \@um@fontspec@featuretrue
   \csname S@\f@size\endcsname
   \def\um@mversion{normal}%
@@ -311,7 +294,7 @@
     \else
       \um@PackageWarning{%
         The font '#2' is not a valid OpenType maths font.
-        Some maths features will not be available or behaviour
+        Some maths features will not be available or behave
         in a substandard manner.}%
     \fi
   \ifx\um@char@range\@empty
@@ -325,15 +308,8 @@
   \fi
   \DeclareSymbolFont{\um@symfont}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}%
-  \if@um@init
-    \input unicode-math.tex\relax
-    \input unicode-math-add.tex\relax
-  \else
-    \unless\ifx\um@char@range\@empty
-      \input unicode-math.tex\relax
-      \input unicode-math-add.tex\relax
-    \fi
-  \fi
+  \@input{unicode-math.tex}%
+  \@input{unicode-math-add.tex}%
   \ifx\um@char@range\@empty
     \let\um@mathbb\@empty
     \let\um@mathbf\@empty
@@ -557,7 +533,7 @@
 \define@cmdkey[um]{options}[um@]{ScriptScriptFont}{}
 \define@choicekey+[um]{options}{Range}[\@tempa\@tempb]{ALL}{%
   \ifcase\@tempb\relax
-    \@um@inittrue
+    \global\let\um@char@range\@empty
   \fi}{% else:
     \xdef\um@char@range{\zap@space#1 \@empty}}
 \newcommand\um@parse@term[4]{%
@@ -680,8 +656,8 @@
   \def\varkappa{\mitvarkappa}%
   \def\varphi{\mitvarphi}%
   \def\varrho{\mitvarrho}%
-  \def\varrho{\mitvarsigma}%
-  \def\varpi{\mitvarpi}}
+  \def\varpi{\mitvarpi}%
+}
 \newcommand\um@def@numbers{%
   \um@setmathcode[10]{\um@usv@num}{\um@usv@num}}
 \newcommand\um@def@upLatin{%
@@ -989,21 +965,20 @@
 \begingroup
   \def\UnicodeMathSymbol#1#2#3#4{%
     \um@scancharlet#2=#1\@nil}
-  \input unicode-math.tex\relax
-  \input unicode-math-add.tex\relax
+  \@input{unicode-math.tex}%
+  \@input{unicode-math-add.tex}%
 \endgroup
 \DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
 \def\operator@font{\um@mathup}
-\AtBeginDocument{\setmathfont[Range=ALL]{Cambria Math}}
 %% 
-%% Copyright © 2006-2008 by Will Robertson <wspr81@gmail.com>
+%% Copyright © 2006-2009 by Will Robertson <wspr81@gmail.com>
 %% 
-%% Distributable under the LaTeX Project Public License,
-%% version 1.3c or higher (your choice). The latest version of
-%% this license is at: http://www.latex-project.org/lppl.txt
+%% This package is free software and may be redistributed and/or
+%% modified under the conditions of the LaTeX Project Public License,
+%% version 1.3c or higher (your choice):
+%%   <http://www.latex-project.org/lppl/>
 %% 
-%% This work is "maintained" (as per LPPL maintenance status)
-%% by Will Robertson.
+%% This work is "author-maintained" by Will Robertson.
 %% 
 %% This work consists of the files unicode-math.dtx and unicode-math.tex
 %%           and the derived files unicode-math.sty and unicode-math.pdf.
