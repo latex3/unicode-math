@@ -883,12 +883,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %: TODO : sort out which of these three declarations are necessary! (Definitely the first, to work with \cmd\left/\cmd\right.)
 %    \begin{macrocode}
       \ifx\mathopen#3\relax
-        \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4}%
+        \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}%
         \global\XeTeXdelcode#4=#1 #4\relax        
         \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
       \else
         \ifx\mathclose#3\relax
-          \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4}%
+          \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}%
           \global\XeTeXdelcode#4=#1 #4\relax
           \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
         \else
