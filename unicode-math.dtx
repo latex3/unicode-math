@@ -112,7 +112,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \maketitle
 %
 % \begin{abstract}
-% \noindent\bfseries Warning! This package is experimental and subject to change without regard for backwards compatibility.
+% \noindent\bfseries Warning! This package is experimental and subject to change without regard for backwards compatibility. Performance issues may be encountered until algorithms are refined.
 % \end{abstract}
 %
 % \tableofcontents
@@ -1023,8 +1023,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % And now we input every single maths char. See File~\ref{part:awk} for
 % the source to |unicode-math.tex|.
 %    \begin{macrocode}
-  \@input{unicode-math.tex}%
-  \@input{unicode-math-add.tex}%
+  \@input{unicode-math-table.tex}%
 %    \end{macrocode}
 % If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we empty all of the
 % macros used to switch maths alphabets. Otherwise, the \cs{um@math..} macros are appended to.
@@ -1795,7 +1794,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
   \def\beta{\mitbeta}%
   \def\gamma{\mitgamma}%
   \def\delta{\mitdelta}%
-  \def\varepsilon{\mitvarepsilon}%
+  \def\epsilon{\mitepsilon}%
   \def\zeta{\mitzeta}%
   \def\eta{\miteta}%
   \def\theta{\mittheta}%
@@ -2422,8 +2421,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 \begingroup
   \def\UnicodeMathSymbol#1#2#3#4{%
     \um@scancharlet#2=#1\@nil}
-  \@input{unicode-math.tex}%
-  \@input{unicode-math-add.tex}%
+  \@input{unicode-math-table.tex}%
 \endgroup
 %    \end{macrocode}
 %
