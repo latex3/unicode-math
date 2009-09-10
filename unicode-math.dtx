@@ -29,6 +29,17 @@ You can safely ignore maths-font-mappings; it contains code that
 isn't being used for unicode-math, but might otherwise be useful
 (hence it hasn't been deleted).
 
+Run TeX on unicode-math.dtx to generate the package file unicode-math.sty:
+    tex unicode-math.dtx
+
+If you have the necessary fonts, you may compile the documentation
+with XeLaTeX:
+    xelatex -shell-escape unicode-math.dtx
+
+To install the package, place unicode-math.sty and unicode-math-table.tex
+in a place searched by XeLaTeX; for example, on Mac OS X:
+    ~/Library/texmf/tex/xelatex/
+
 __________________________________
 Copyright 2006-2009 Will Robertson
 Released under the LaTeX Project Public License
@@ -58,7 +69,7 @@ version 1.3c or higher (your choice):
 
 This work is "author-maintained" by Will Robertson.
 
-This work consists of the files unicode-math.dtx and unicode-math.tex
+This work consists of the files unicode-math.dtx and unicode-math-table.tex
           and the derived files unicode-math.sty and unicode-math.pdf.
 
 \endpostamble
@@ -73,7 +84,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 \generate{\file{\jobname-test.ltx}{\from{\jobname.dtx}{test}}}
 \generate{\file{\jobname-testbf.ltx}{\from{\jobname.dtx}{testbf}}}
 \generate{\file{dtx-style.sty}{\from{\jobname.dtx}{dtx-style}}}
-\generate{\file{stix-extract.sh}{\from{\jobname.dtx}{awk}}}
+%\generate{\file{stix-extract.sh}{\from{\jobname.dtx}{awk}}}
 \def\tempa{plain}
 \ifx\tempa\fmtname
   \def\next{\endgroup\end}
@@ -81,9 +92,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
   \def\next{\endgroup}
 \fi
 \next
-\immediate\write18{sh stix-extract.sh}
 \immediate\write18{makeindex -s gind.ist -o \jobname.ind  \jobname.idx}
-\immediate\write18{makeindex -s gglo.ist -o \jobname.gls  \jobname.glo}
 %</internalbatchfile>
 %
 %<*driver>
@@ -1036,7 +1045,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}%
 %    \end{macrocode}
 % And now we input every single maths char. See File~\ref{part:awk} for
-% the source to |unicode-math.tex|.
+% the source to |unicode-math.tex| which is used to create |unicode-math-table.tex|.
 %    \begin{macrocode}
   \@input{unicode-math-table.tex}%
 %    \end{macrocode}
@@ -1353,7 +1362,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \toprule
 % USV & Ex. & Macro & Description \\
 % \midrule
-% \catcode`\%=14\input unicode-math.tex
+% \catcode`\%=14\input unicode-math-table.tex
 % \bottomrule
 % \end{longtable}
 % \endgroup
@@ -1361,7 +1370,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \setmathfont{Cambria Math}
 %
 % \begin{macro}{\um@nolimits}
-% This macro is a commalist containing those maths operators that require a \cmd\nolimits\ suffix. This list is used when processing |unicode-math.tex| to define such commands automatically (see the macro \cmd\um@set@mathsymbol\ on page~\pageref{mac:um@set@mathsymbol}). I've chosen essentially just the operators that look like integrals; hopefully a better mathematician can help me out here. I've a feeling that it's more useful \emph{not} to include the multiple integrals such as $\iiiint$, but that might be a matter of preference.
+% This macro is a commalist containing those maths operators that require a \cmd\nolimits\ suffix. This list is used when processing |unicode-math-table.tex| to define such commands automatically (see the macro \cmd\um@set@mathsymbol\ on page~\pageref{mac:um@set@mathsymbol}). I've chosen essentially just the operators that look like integrals; hopefully a better mathematician can help me out here. I've a feeling that it's more useful \emph{not} to include the multiple integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
 \def\um@nolimits{%
   \@elt\int\@elt\iint\@elt\iiint\@elt\iiiint\@elt\oint\@elt\oiint\@elt\oiiint
@@ -1485,7 +1494,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \toprule
 % USV & Ex. & Macro & Description \\
 % \midrule
-% \catcode`\%=14\input unicode-math.tex
+% \catcode`\%=14\input unicode-math-table.tex
 % \bottomrule
 % \end{longtable}
 % \endgroup
@@ -1498,7 +1507,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \toprule
 % USV & Ex. & Macro & Description \\
 % \midrule
-% \catcode`\%=14\input unicode-math.tex
+% \catcode`\%=14\input unicode-math-table.tex
 % \bottomrule
 % \end{longtable}
 % \endgroup
@@ -1514,7 +1523,7 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \toprule
 % USV & Ex. & Macro & Description \\
 % \midrule
-% \catcode`\%=14\input unicode-math.tex
+% \catcode`\%=14\input unicode-math-table.tex
 % \bottomrule
 % \end{longtable}
 % \endgroup
@@ -2466,6 +2475,9 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % |http://www.ams.org/STIX/bnb/stix-tbl.asc|
 % but check |http://www.ams.org/STIX/| for more up-to-date info.
 %
+% This table is converted into a form suitable for reading by \XeTeX, and
+% then hand-edited by the author; the result is |unicode-math-table.tex|.
+%
 % A single file is produced containing all (more than 3298) symbols.
 % Future optimisations might include generating various (possibly overlapping) subsets
 % so not all definitions must be read just to redefine a small range of symbols.
@@ -2846,7 +2858,6 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 % \typeout{* file into a directory searched by XeTeX:}
 % \typeout{*}
 % \typeout{* \space\space\space unicode-math.sty}
-% \typeout{* \space\space\space unicode-math.tex}
 % \typeout{*}
 % \typeout{*************************************************************}
 %
