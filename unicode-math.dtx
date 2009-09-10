@@ -292,6 +292,21 @@ This work consists of the files unicode-math.dtx and unicode-math.tex
 % \label{fig:bold-style-check}
 % \end{figure}
 %
+% \paragraph{Epsilon: $\epsilon$ vs.\ $\varepsilon$}
+% \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to look like $\epsilon$.
+% The Unicode glyph directly after delta and before zeta is `epsilon' and looks like $\epsilon$;
+% there is a subsequent variant of epsilon that looks like $\varepsilon$.
+% This creates a problem.
+% People who use unicode input won't want their glyphs transforming; \TeX\ users will be confused
+% that what they think as `normal epsilon' is actual the `variant epsilon'.
+% 
+% :TODO: package option
+%
+% \paragraph{Phi: $\phi$ vs.\ $\varphi$}
+% The same problem for epsilon also exists for phi.
+%
+% :TODO: package option
+%
 % \subsection{Math font dimensions}
 %
 % \newcounter{mfdimen}
