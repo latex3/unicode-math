@@ -478,7 +478,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \newcommand\um@PackageInfo[1]{\PackageInfo{unicode-math}{#1}}
 %    \end{macrocode}
 %
-% \paragraph{Alphabet unicode positions}
+% \subsubsection{Alphabet unicode positions}
 % Before we begin, let's define the positions of the various unicode
 % alphabets so that our code is a little more readable.\footnote{`\textsc{u.s.v.}' stands
 % for `unicode scalar value'.}
@@ -513,6 +513,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfnum{"1D7CE}
 \def\um@usv@bfLatin{"1D400}
 \def\um@usv@bflatin{"1D41A}
+\let\um@usv@bfuplatin\um@usv@bflatin
 \def\um@usv@bfGreek{"1D6A8}
 \def\um@usv@bfgreek{"1D6C2}
 \def\um@usv@bfitLatin{"1D468}
@@ -641,6 +642,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uppartialtrue
   \or
     \@um@literaltrue
+    \@um@bfliteraltrue
   \fi}
 %    \end{macrocode}
 %
@@ -1033,7 +1035,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \let\um@mathbfscr\@empty
     \let\um@mathbfsf\@empty
     \let\um@mathbfsfit\@empty
-    \let\um@setsinglemathalph\um@mathmap@noparse
+    \let\um@setsinglemathalph \um@mathmap@noparse
   \else
     \let\um@setsinglemathalph\um@mathmap@parse
   \fi
@@ -1056,42 +1058,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \paragraph{Normal weight}
 %    \begin{macrocode}
     \if@um@literal
-      \um@setmathcode[26]{\um@usv@upLatin}{\um@usv@upLatin}%
-      \um@setmathcode[26]{\um@usv@itLatin}{\um@usv@itLatin}%
-      \um@setmathcode[26]{\um@usv@itlatin}{\um@usv@itlatin}%
-      \um@setmathcode{\um@usv@ith}{\um@usv@ith}%
-      \um@setmathcode[26]{\um@usv@uplatin}{\um@usv@uplatin}%
-      \um@setmathcode[25]{\um@usv@upGreek}{\um@usv@upGreek}%
-      \um@setmathcode{\um@usv@varTheta}{\um@usv@varTheta}%
-      \um@setmathcode[25]{\um@usv@itGreek}{\um@usv@itGreek}%
-      \um@setmathcode[25]{\um@usv@upgreek}{\um@usv@upgreek}%
-%    \end{macrocode}
-%: TODO : other literal symbols? or are these redundant?
-%    \begin{macrocode}
-      \um@setmathcode{\um@usv@Nabla}{\um@usv@Nabla}%
-      \um@setmathcode{\um@usv@itNabla}{\um@usv@itNabla}%
-      \um@setmathcode{\um@usv@partial}{\um@usv@partial}%
-      \um@setmathcode{\um@usv@itpartial}{\um@usv@itpartial}%
+      \um_setup_literals:
     \else
-%    \end{macrocode}
-% Latin letters:
-%    \begin{macrocode}
       \if@um@upLatin\um@def@upLatin\else\um@def@itLatin\fi
       \if@um@uplatin\um@def@uplatin\else\um@def@itlatin\fi
-%    \end{macrocode}
-% \begin{example}{}
-%   \setmathfont{Cambria Math}
-%   $0123456789$ \\
-%   $ABCDEFGHIJKLMNOPQRSTUVWXYZ$ \\
-%   $abcdefghijklmnopqrstuvwxyz$ \\
-% \end{example}
-% Normal weight Greek, italic uppercase and lowercase respectively:
-%    \begin{macrocode}
       \if@um@upGreek\um@def@upGreek\else\um@def@itGreek\fi
       \if@um@upgreek\um@def@upgreek\else\um@def@itgreek\fi
-%    \end{macrocode}
-% Nabla and partial:
-%    \begin{macrocode}
       \if@um@upNabla
         \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}%
       \else
@@ -1107,14 +1079,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \paragraph{Bold}
 %    \begin{macrocode}
     \if@um@bfliteral
-      \um@setmathcode[26]{\um@usv@bfLatin}{\um@usv@bfLatin}%
-      \um@setmathcode[26]{\um@usv@bflatin}{\um@usv@bflatin}%
-      \um@setmathcode[26]{\um@usv@bfitLatin}{\um@usv@bfitLatin}%
-      \um@setmathcode[26]{\um@usv@bfitlatin}{\um@usv@bfitlatin}%
-      \um@setmathcode[25]{\um@usv@bfGreek}{\um@usv@bfGreek}%
-      \um@setmathcode[25]{\um@usv@bfgreek}{\um@usv@bfgreek}%
-      \um@setmathcode[25]{\um@usv@bfitGreek}{\um@usv@bfitGreek}%
-      \um@setmathcode[25]{\um@usv@bfitgreek}{\um@usv@bfitgreek}%
+      \um_setup_bf_literals:
     \else
       \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{%
         \if@um@bfupLatin\um@usv@bfLatin\else\um@usv@bfitLatin\fi}%
@@ -1213,48 +1178,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@mk@alph}
-% Wrapper to define maths alphabets.
-%    \begin{macrocode}
-\newcommand\um@mk@math[1]{%
-  \expandafter\def\csname math#1\endcsname##1{%
-    \begingroup
-      \csname um@math#1\endcsname
-      ##1
-    \endgroup
-  }%
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% Maths alphabets' base definition. See \secref{mathmap} for the internal definitions.
-%    \begin{macrocode}
-\um@mk@math{up}
-\um@mk@math{it}
-\um@mk@math{scr}
-\um@mk@math{bb}
-\um@mk@math{frak}
-\um@mk@math{sf}
-\um@mk@math{sfit}
-\um@mk@math{tt}
-%    \end{macrocode}
-% And bold maths alphabets. See \secref{bfmathmap} for the internal definitions.
-%    \begin{macrocode}
-\um@mk@math{bf}
-\um@mk@math{bfup}
-\um@mk@math{bfit}
-\um@mk@math{bfscr}
-\um@mk@math{bffrak}
-\um@mk@math{bfsf}
-\um@mk@math{bfsfit}
-%    \end{macrocode}
-%
-% \begin{macro}{\mathcal}
-%    \begin{macrocode}
-\let\mathcal\mathscr
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\um@mathmap@noparse}
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
@@ -1309,10 +1232,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % This macro is used so that \cmd\um@symfont\ can be expanded before entering the \cmd\g@addto@macro\ command.
 %    \begin{macrocode}
-\newcommand\um@addto@mathmap[4]{%
+\newcommand\um@addto@mathmap[4]{
   \expandafter\g@addto@macro
-    \csname um@\expandafter\@gobble\string#3\endcsname{%
-    \SetMathCode{#2}{\mathalpha}{#1}{#4}}}
+    \csname um_setup_\cs_to_str:N #3:\endcsname{
+    \SetMathCode{#2}{\mathalpha}{#1}{#4}
+  }
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1737,7 +1662,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \clist_map_variable:nNn {#3} \um@inp {
     \prg_stepwise_inline:nnnn{1}{1}{#1}{
       \edef\@tempa{
-        \noexpand\um@setsinglemathalph
+        \noexpand \um@setsinglemathalph
           {\noexpand#2}
           {\number\numexpr \um@inp+##1-1 \relax}
           {\number\numexpr #4+##1-1 \relax}
@@ -1833,6 +1758,43 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\um_setup_literals:}
+%: TODO : other literal symbols
+%    \begin{macrocode}
+\cs_set:Nn \um_setup_literals: {
+  \um@setmathcode[26]{\um@usv@upLatin}{\um@usv@upLatin}
+  \um@setmathcode[26]{\um@usv@itLatin}{\um@usv@itLatin}
+  \um@setmathcode[26]{\um@usv@itlatin}{\um@usv@itlatin}
+  \um@setmathcode{\um@usv@ith}{\um@usv@ith}
+  \um@setmathcode[26]{\um@usv@uplatin}{\um@usv@uplatin}
+  \um@setmathcode[25]{\um@usv@upGreek}{\um@usv@upGreek}
+  \um@setmathcode{\um@usv@varTheta}{\um@usv@varTheta}
+  \um@setmathcode[25]{\um@usv@itGreek}{\um@usv@itGreek}
+  \um@setmathcode[25]{\um@usv@upgreek}{\um@usv@upgreek}
+  \um@setmathcode{\um@usv@Nabla}{\um@usv@Nabla}
+  \um@setmathcode{\um@usv@itNabla}{\um@usv@itNabla}
+  \um@setmathcode{\um@usv@partial}{\um@usv@partial}
+  \um@setmathcode{\um@usv@itpartial}{\um@usv@itpartial}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_setup_bf_literals:}
+% TODO: other literal symbols
+%    \begin{macrocode}
+\cs_set:Nn \um_setup_bf_literals: {
+  \um@setmathcode[26]{\um@usv@bfLatin}{\um@usv@bfLatin}
+  \um@setmathcode[26]{\um@usv@bflatin}{\um@usv@bflatin}
+  \um@setmathcode[26]{\um@usv@bfitLatin}{\um@usv@bfitLatin}
+  \um@setmathcode[26]{\um@usv@bfitlatin}{\um@usv@bfitlatin}
+  \um@setmathcode[25]{\um@usv@bfGreek}{\um@usv@bfGreek}
+  \um@setmathcode[25]{\um@usv@bfgreek}{\um@usv@bfgreek}
+  \um@setmathcode[25]{\um@usv@bfitGreek}{\um@usv@bfitGreek}
+  \um@setmathcode[25]{\um@usv@bfitgreek}{\um@usv@bfitgreek}
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\um@def@upLatin}
 %    \begin{macrocode}
 \newcommand\um@def@upLatin{%
@@ -1920,25 +1882,68 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \setmathfont{Cambria Math}
 %
+% Algorithm for setting alphabet fonts:
+% \begin{itemize}
+% \item By default, try and set all of them.
+% \item Check for the first glyph of each to detect if the font supports each
+%       alphabet.
+%       (This doesn't work to distinguish Latin/Greek but we hope all maths
+%       fonts will have at least them!)
+% \item For alphabets that are not supported, \emph{do nothing}.
+%       (This includes leaving the old alphabet definition in place.)
+% \item For alphabets that do exist, overwrite whatever's already there.
+% \end{itemize}
+%
 %    \begin{macrocode}
-\newcommand\um@setup@alphabets{%
-  \um@setup@mathup
-  \um@setup@mathit
-  \um@setup@mathbb
-  \um@setup@mathscr
-  \um@setup@mathfrak
-  \um@setup@mathsf
-  \um@setup@mathsfit
-  \um@setup@mathtt
-  \um@setup@mathbf
-  \um@setup@mathbfup
-  \um@setup@mathbfit
-  \um@setup@mathbfscr
-  \um@setup@mathbffrak
-  \um@setup@mathbfsf
-  \um@setup@mathbfsfit
+\cs_new:Nn \um_setup_math_alphabet:n {
+  \iffontchar\um@font \csname um@usv@#1latin \endcsname\relax
+    \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
+    \um_prepare_alph:n {#1}
+    \use:c {um_config_math#1:}
+  \fi
 }
 %    \end{macrocode}
+%
+% \begin{macro}{\um_prepare_alph:n}
+% If |\mathXY| hasn't been (re-)declared yet, then define it in terms of
+% unicode-math defintions.
+%    \begin{macrocode}
+\cs_new:Nn \um_prepare_alph:n {
+  \cs_if_exist:cF {um_math#1:n} {
+    \cs_set:cpn {um_math#1:n} ##1 {
+      \begingroup \use:c {um_setup_math#1:} ##1 \endgroup
+    }
+    \cs_set_protected:cpn {math#1} {
+      \mode_if_math:F {
+        \expandafter\non@alpherr\expandafter{\csname math#1\endcsname\space}
+      }
+      \use:c {um_math#1:n}
+    }
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\newcommand\um@setup@alphabets{%
+  \um_setup_math_alphabet:n {up    }
+  \um_setup_math_alphabet:n {it    }
+  \um_setup_math_alphabet:n {bb    }
+  \um_setup_math_alphabet:n {scr   }
+  \um_setup_math_alphabet:n {frak  }
+  \um_setup_math_alphabet:n {sf    }
+  \um_setup_math_alphabet:n {sfit  }
+  \um_setup_math_alphabet:n {tt    }
+  \um_setup_math_alphabet:n {bf    }
+  \um_setup_math_alphabet:n {bfup  }
+  \um_setup_math_alphabet:n {bfit  }
+  \um_setup_math_alphabet:n {bfscr }
+  \um_setup_math_alphabet:n {bffrak}
+  \um_setup_math_alphabet:n {bfsf  }
+  \um_setup_math_alphabet:n {bfsfit}
+}
+%    \end{macrocode}
+%
 %
 %: TODO : nested alphabets?
 %
@@ -1954,7 +1959,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Takes both upright and italic characters to be typeset as upright symbols.
 %
 %    \begin{macrocode}
-\def\um@setup@mathup{%
+\cs_new:Npn \um_config_mathup: {
   \um@setmathalph[26]{\mathup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}%
   \um@setmathalph[26]{\mathup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}%
   \um@setmathalph[25]{\mathup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}%
@@ -1971,14 +1976,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% \begin{macro}{\mathrm}
-% Can't call it \cmd\mathrm\ any more because it contains Greek as well!
-% But we define \cmd\mathrm\ as an alias for backwards compatibility.
-%    \begin{macrocode}
-\def\mathrm{\mathup}
-%    \end{macrocode}
-% \end{macro}
-%
 % \subsubsection{Italic: \cmd\mathit}
 %
 % \begin{example}{}
@@ -1990,7 +1987,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Roman:
 %    \begin{macrocode}
-\def\um@setup@mathit{%
+\cs_new:Npn \um_config_mathit: {
   \um@setmathalph[26]{\mathit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}%
   \um@setmathalph[26]{\mathit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}%
   \um@setmathalph{\mathit}{`\h,\um@usv@ith}{\um@usv@ith}%
@@ -2019,7 +2016,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 % Numbers:
 %    \begin{macrocode}
-\def\um@setup@mathbb{%
+\cs_new:Npn \um_config_mathbb: {
   \um@setmathalph[10]{\mathbb}{\um@usv@num}{\um@usv@bbnum}%
 %    \end{macrocode}
 % Roman uppercase:
@@ -2040,13 +2037,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \subsubsection{Script or caligraphic: \cmd\mathscr\ and \cmd\mathcal}
-% \cmd\mathcal\ and \cmd\mathscr\ are aliases.
 % \begin{example}{}
 %   $\mathscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathscr{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
 %    \begin{macrocode}
-\def\um@setup@mathscr{%
+\cs_new:Npn \um_config_mathscr: {
   \um@setmathalph[26]{\mathscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@scrLatin}%
   \um@setmathalph{\mathscr}{`\B,"1D435}{"212C}%
   \um@setmathalph{\mathscr}{`\E,"1D438}{"2130}%
@@ -2071,7 +2067,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Letters, with exceptions $\{\mathfrak{C,H,I,R,Z}\}$:
 %    \begin{macrocode}
-\def\um@setup@mathfrak{%
+\cs_new:Npn \um_config_mathfrak: {
   \um@setmathalph[26]{\mathfrak}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@frakLatin}%
   \um@setmathalph{\mathfrak}{`\C,"1D436}{"212D}%
   \um@setmathalph{\mathfrak}{`\H,"1D43B}{"210C}%
@@ -2089,7 +2085,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $\mathsf{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
 %    \begin{macrocode}
-\def\um@setup@mathsf{%
+\cs_new:Npn \um_config_mathsf: {
   \um@setmathalph[10]{\mathsf}{\um@usv@num}{\um@usv@sfnum}%
   \um@setmathalph[26]{\mathsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfLatin}%
   \um@setmathalph[26]{\mathsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sflatin}%
@@ -2103,7 +2099,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $\mathsfit{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
 %    \begin{macrocode}
-\def\um@setup@mathsfit{%
+\cs_new:Npn \um_config_mathsfit: {
   \um@setmathalph[10]{\mathsfit}{\um@usv@num}{\um@usv@sfnum}%
   \um@setmathalph[26]{\mathsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfitLatin}%
   \um@setmathalph[26]{\mathsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfitlatin}%
@@ -2119,7 +2115,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 % \setmathfont{Cambria Math}
 %    \begin{macrocode}
-\def\um@setup@mathtt{%
+\cs_new:Npn \um_config_mathtt: {
   \um@setmathalph[10]{\mathtt}{\um@usv@num}{\um@usv@ttnum}%
   \um@setmathalph[26]{\mathtt}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@ttLatin}%
   \um@setmathalph[26]{\mathtt}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@ttlatin}%
@@ -2139,7 +2135,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 %    \begin{macrocode}
-\def\um@setup@mathbf{%
+\cs_new:Npn \um_config_mathbf: {
   \um@setmathalph[10]{\mathbf}{\um@usv@num}{\um@usv@bfnum}%
   \um@setmathalph{\mathbf}{\um@usv@Digamma}{"1D7CA}%
   \um@setmathalph{\mathbf}{\um@usv@digamma}{"1D7CB}%
@@ -2232,7 +2228,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 %    \begin{macrocode}
-\def\um@setup@mathbfit{%
+\cs_new:Npn \um_config_mathbfit: {
   \um@setmathalph[10]{\mathbfit}{\um@usv@num}{\um@usv@bfnum}%
   \um@setmathalph[26]{\mathbfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}%
   \um@setmathalph[26]{\mathbfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}%
@@ -2267,7 +2263,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 %    \begin{macrocode}
-\def\um@setup@mathbfup{%
+\cs_new:Npn \um_config_mathbfup: {
   \um@setmathalph[10]{\mathbfup}{\um@usv@num}{\um@usv@bfnum}%
   \um@setmathalph[26]{\mathbfup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}%
   \um@setmathalph[26]{\mathbfup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}%
@@ -2298,7 +2294,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 %    \begin{macrocode}
-\def\um@setup@mathbffrak{%
+\cs_new:Npn \um_config_mathbffrak: {
   \um@setmathalph[10]{\mathbffrak}{\um@usv@num}{\um@usv@bfnum}%
   \um@setmathalph[26]{\mathbffrak}{\um@usv@upLatin, \um@usv@itLatin,\um@usv@frakLatin}{\um@usv@bffrakLatin}%
   \um@setmathalph[26]{\mathbffrak}{\um@usv@uplatin,\um@usv@itlatin,\um@usv@fraklatin}{\um@usv@bffraklatin}%
@@ -2312,7 +2308,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $\mathbfscr{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
 %    \begin{macrocode}
-\def\um@setup@mathbfscr{%
+\cs_new:Npn \um_config_mathbfscr: {
   \um@setmathalph[10]{\mathbfscr}{\um@usv@num}{\um@usv@bfnum}%
   \um@setmathalph[26]{\mathbfscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfscrLatin}%
   \um@setmathalph[26]{\mathbfscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfscrlatin}%
@@ -2333,7 +2329,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Numbers (always upright) and letters:
 %    \begin{macrocode}
-\def\um@setup@mathbfsf{%
+\cs_new:Npn \um_config_mathbfsf: {
   \um@setmathalph[10]{\mathbfsf}{\um@usv@num}{\um@usv@bfnum}%
   \um@setmathalph[26]{\mathbfsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfLatin}%
   \um@setmathalph[26]{\mathbfsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsflatin}%
@@ -2367,7 +2363,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     $\mathbfsfit{ϵϑϰϕϱϖ}$ \\
 % \end{example}
 %    \begin{macrocode}
-\def\um@setup@mathbfsfit{%
+\cs_new:Npn \um_config_mathbfsfit: {
   \um@setmathalph[10]{\mathbfsfit}{\um@usv@num}{\um@usv@bfnum}%
   \um@setmathalph[26]{\mathbfsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfitLatin}%
   \um@setmathalph[26]{\mathbfsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfitlatin}%
@@ -2388,6 +2384,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
+% \subsection{Definitions of the math symbols}
 %
 % Here we define every unicode math codepoint an equivalent macro name.
 % The two are equivalent, in a |\let\xyz=^^^^1234| kind of way.
@@ -2430,20 +2427,39 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \endgroup
 %    \end{macrocode}
 %
+% \subsection{Epilogue}
+%
+% Lots of little things to tidy up.
+%
 % Undo the damage made to \cmd\sqrt:
 %    \begin{macrocode}
 \DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
 %    \end{macrocode}
 %
-% We need to change \LaTeX's idea of the font used to typeset things like \cmd\sin\ and \cmd\cos:
+% We need to change \LaTeX's idea of the font used to typeset
+% things like \cmd\sin\ and \cmd\cos:
 %    \begin{macrocode}
-\def\operator@font{\um@mathup}
+\def\operator@font{\um_setup_mathup:}
 %    \end{macrocode}
 %
-% Create synonyms:
+% \paragraph{Synonyms}
+%
 %    \begin{macrocode}
 \def\to{\rightarrow}
 %    \end{macrocode}
+%
+% \begin{macro}{\mathcal}
+%    \begin{macrocode}
+\def\mathcal{\mathscr}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\mathrm}
+%    \begin{macrocode}
+\def\mathrm{\mathup}
+%    \end{macrocode}
+% \end{macro}
+%
 % The end.
 %    \begin{macrocode}
 \ExplSyntaxOff
