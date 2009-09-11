@@ -19,6 +19,12 @@ Basic usage:
   \setmathfont{Asana Math}
 
 ____________
+REQUIREMENTS
+
+This package requires recent versions of the expl3 and xpackages bundles.
+These form the basis of the new LaTeX3 programming layer.
+
+____________
 INSTALLATION
 
 Run TeX on unicode-math.dtx to generate the package file unicode-math.sty:

@@ -24,6 +24,12 @@ Basic usage:
   \setmathfont{Asana Math}
 
 ____________
+REQUIREMENTS
+
+This package requires recent versions of the expl3 and xpackages bundles.
+These form the basis of the new LaTeX3 programming layer.
+
+____________
 INSTALLATION
 
 Run TeX on unicode-math.dtx to generate the package file unicode-math.sty:
@@ -415,7 +421,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{Packages}
 %    \begin{macrocode}
+\RequirePackage{expl3}[2009/08/12]
+\RequirePackage{xparse}[2009/08/31]
 \RequirePackage{fontspec}
+%    \end{macrocode}
+%
+% Start using \LaTeX3 --- finally!
+%    \begin{macrocode}
+\ExplSyntaxOn
 %    \end{macrocode}
 %
 % \paragraph{Counters and conditionals}
@@ -447,12 +460,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \paragraph{Programming niceties}
-% \begin{macro}{\def@cn}
-%    \begin{macrocode}
-\providecommand\def@cn[2]{%
-  \expandafter\def\csname#1\endcsname{#2}}
-%    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\um@Loop}
 % \begin{macro}{\um@Break}
@@ -463,26 +470,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
-%
-% \begin{macro}{\um@FOR}
-% A simple `for' loop implemented with the above.
-% Takes a (predefined) counter control sequence and increments it between two integers, iterating as we go.
-%    \begin{macrocode}
-\long\def\um@FOR#1=[#2:#3]\do#4{%
-   #1=#2\relax
-   \um@Loop #4%
-     \advance#1\@ne
-     \ifnum#1>#3\relax
-       \expandafter\um@Break
-     \fi
-   \um@Pool}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{example}{}
-%   \newcount\@ii
-%   \um@FOR\@ii=[7:13]\do{\@alph\@ii/}
-% \end{example}
 %
 % \paragraph{Shortcuts}
 %    \begin{macrocode}
@@ -744,7 +731,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \else
       #2#3%
     \fi
-  \fi}
+  \fi
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -763,7 +751,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{\cmd\DeclareMathSymbol\ for unicode ranges}
 %
-% This command is a bit funny at the moment; it doesn't define the actual macro for almost all of the symbols passed to it, but it does assign the \cmd\XeTeXmathchar.
+% This command is a bit funny at the moment; it doesn't define the actual
+% macro for almost all of the symbols passed to it, but it does assign the
+% \cmd\XeTeXmathchar.
 %
 % \begin{macro}{\um@mathsymbol}
 % \darg{Symbol, \eg, \cmd\alpha}
@@ -789,11 +779,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \def\um@set@mathsymbol#1#2#3#4{%
 %    \end{macrocode}
-% \paragraph{Operators} In the examples following, say we're defining for the symbol \cmd\sum ($\sum$).
+% \paragraph{Operators}
+% In the examples following, say we're defining for the symbol \cmd\sum ($\sum$).
 %    \begin{macrocode}
   \ifx\mathop#3\relax
 %    \end{macrocode}
-% In order for literal unicode characters to be used in the source and still have the correct limits behaviour, big operators are made math-active. \cmd\unicodemathgobble\ is the same as \@gobble, but needs to not have |@| in its name because the argument goes inside a \cmd\scantokens.
+% In order for literal unicode characters to be used in the source and still
+% have the correct limits behaviour, big operators are made math-active.
+% \cmd\unicodemathgobble\ is the same as \@gobble, but needs to not have |@|
+% in its name because the argument goes inside a \cmd\scantokens.
 %
 % The active math char is \cmd\let\ to the macro \cmd\sum@op.
 %    \begin{macrocode}
@@ -803,7 +797,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um@scanactivedef#4\@nil{\csname\string#2@op\endcsname}%
     \endgroup
 %    \end{macrocode}
-% Some of these require a \cmd\nolimits\ suffix. This is controlled by the \cmd\um@nolimits\ macro, which contains a list of such characters. This list is checked dynamically because we're not interested in efficiency. Or something. This allows the list to be updated in the middle of a document.
+% Some of these require a \cmd\nolimits\ suffix. This is controlled by the
+% \cmd\um@nolimits\ macro, which contains a list of such characters.
+% This list is checked dynamically because we're not interested in efficiency.
+% Or something.
+% This allows the list to be updated in the middle of a document.
 %
 % Declare the plain old mathchardef for the control sequence \cmd\sum@sym.
 %    \begin{macrocode}
@@ -820,12 +818,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \expandafter\nolimits
       \fi}%
 %    \end{macrocode}
-% Don't forget that the actual \cmd\sum\ macro is simply defined in terms of the literal unicode symbol!
+% Don't forget that the actual \cmd\sum\ macro is simply defined in terms of
+% the literal unicode symbol!
 %    \begin{macrocode}
   \else
 %    \end{macrocode}
 % \paragraph{Radicals}
-% Needs to be before the delimiters because the radical is, for some reason, \cmd\mathopen.
+% Needs to be before the delimiters because the radical is, for some reason,
+% \cmd\mathopen.
 %    \begin{macrocode}
     \expandafter\in@\expandafter#2\expandafter{\um@radicals,}%
     \ifin@
@@ -835,7 +835,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \else
 %    \end{macrocode}
 % \paragraph{Delimiters}
-%: TODO : sort out which of these three declarations are necessary! (Definitely the first, to work with \cmd\left/\cmd\right.)
+% TODO: sort out which of these three declarations are necessary!
+% (Definitely the first, to work with \cmd\left/\cmd\right.)
 %    \begin{macrocode}
       \ifx\mathopen#3\relax
         \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}%
@@ -854,7 +855,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
             \xdef#2{\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}%
           \else
 %    \end{macrocode}
-% And finally, the general case. We define the unicode mathcode for the character.
+% And finally, the general case.
+% We define the unicode mathcode for the character.
 % The macro is defined generically in terms of the unicode character.
 %    \begin{macrocode}
             \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
@@ -934,11 +936,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \@um@fontspec@featuretrue
 %    \end{macrocode}
-% \item Grab the current size information (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
+% \item Grab the current size information
+% (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
 %    \begin{macrocode}
   \csname S@\f@size\endcsname
 %    \end{macrocode}
-% \item Set the name of the math version being defined (obviously more needs to be done here!)
+% \item Set the name of the math version being defined
+% (obviously more needs to be done here!)
 % \end{itemize}
 %    \begin{macrocode}
   \def\um@mversion{normal}%
@@ -976,19 +980,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Check for the correct number of \cmd{\fontdimen}s:
 %    \begin{macrocode}
     \font\um@font="#2"\relax
-    \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt
+    \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
       \@um@ot@math@true
     \else
-      \um@PackageWarning{%
-        The font '#2' is not a valid OpenType maths font.
-        Some maths features will not be available or behave
-        in a substandard manner.}%
+      \um@PackageWarning{
+        The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
+        Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
+        in~ a~ substandard~ manner.
+      }
     \fi
 %    \end{macrocode}
 %    \begin{macrocode}
   \ifx\um@char@range\@empty
     \def\um@symfont{um@allsym}%
-    \um@PackageInfo{Defining the default maths font as '#2'}%
+    \um@PackageInfo{Defining~ the~ default~ maths~ font~ as~ '#2'}%
     \let\UnicodeMathSymbol\um@mathsymbol@noparse
   \else
     \stepcounter{um@fam}%
@@ -999,12 +1004,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}%
 %    \end{macrocode}
 % And now we input every single maths char. See File~\ref{part:awk} for
-% the source to |unicode-math.tex| which is used to create |unicode-math-table.tex|.
+% the source to |unicode-math.tex| which is used to create
+% |unicode-math-table.tex|.
 %    \begin{macrocode}
   \@input{unicode-math-table.tex}%
 %    \end{macrocode}
-% If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we empty all of the
-% macros used to switch maths alphabets. Otherwise, the \cs{um@math..} macros are appended to.
+% If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we
+% empty all of the macros used to switch maths alphabets. Otherwise, the
+% \cs{um@math..} macros are appended to.
 %    \begin{macrocode}
   \ifx\um@char@range\@empty
     \let\um@mathbb\@empty
@@ -1028,6 +1035,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \let\um@setsinglemathalph\um@mathmap@parse
   \fi
 %    \end{macrocode}
+%
+%
 % \subsection{Maths alphabets' character mapping}
 % \seclabel{mathmap}
 %
@@ -1209,7 +1218,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \begingroup
       \csname um@math#1\endcsname
       ##1
-    \endgroup}}
+    \endgroup
+  }%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1249,15 +1260,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Uses \cmd\um@addto@mathmap\ (below) to expand the name of the current symbol font.
 %    \begin{macrocode}
 \newcommand\um@mathmap@noparse[3]{%
-  \@for\@ii:=#2\do{%
+  \clist_map_inline:nn {#2} {
     \expandafter\expandafter
     \expandafter\um@addto@mathmap
     \expandafter\expandafter
-    \expandafter{%
+    \expandafter{
     \expandafter\um@symfont
-    \expandafter}%
-    \expandafter{\@ii}{#1}{#3}%
-   }}%
+    \expandafter}
+    \expandafter{##1}{#1}{#3}
+   }
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1270,17 +1282,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % conditionally add \cmd\SetMathCode\ declaractions to the maths alphabet definition (\eg, \cmd\um@mathscr).
 %    \begin{macrocode}
 \newcommand\um@mathmap@parse[3]{%
-  \@for\@ii:=\um@char@num@range\do{%
-    \ifnum\@ii=#3\relax
-      \@for\@jj:=#2\do{%
+  \clist_map_inline:Nn \um@char@num@range {
+    \ifnum##1=#3\relax
+      \clist_map_inline:nn {#2} {
         \expandafter\expandafter
         \expandafter\um@addto@mathmap
         \expandafter\expandafter
         \expandafter{%
         \expandafter\um@symfont
         \expandafter}%
-        \expandafter{\@jj}{#1}{#3}}%
-    \fi}}%
+        \expandafter{####1}{#1}{#3}
+      }
+    \fi
+  }
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1314,7 +1329,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \def\UnicodeMathSymbol#1#2#3#4{\ifx\mathop#3\def\@tempa{\scshape\MakeLowercase{u+\@gobble#1} & $\displaystyle#2_0^1$ & \small\cmd#2 & \parbox[b]{6.1cm}{\raggedright\scshape#4} \\}\expandafter\@tempa\fi}
 % \begin{longtable}[l]{@{}lccl@{}}
 % \toprule
-% USV & Ex. & Macro & Description \\
+% \textsc{usv} & Ex. & Macro & Description \\
 % \midrule
 % \catcode`\%=14\input unicode-math-table.tex
 % \bottomrule
@@ -1517,11 +1532,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % The `ALL' branch here is deprecated and happens automatically.
 %    \begin{macrocode}
-\define@choicekey+[um]{options}{Range}[\@tempa\@tempb]{ALL}{%
+\define@choicekey+[um]{options}{Range}[\@tempa\@tempb]{ALL}{
   \ifcase\@tempb\relax
     \global\let\um@char@range\@empty
-  \fi}{% else:
-    \xdef\um@char@range{\zap@space#1 \@empty}}
+  \fi
+}{
+  \xdef\um@char@range{#1}
+}
 %    \end{macrocode}
 %
 % Pretty basic comma separated range processing.
@@ -1557,7 +1574,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Start by iterating over the commalist, ignoring empties, and initialising the scratch conditional:
 %    \begin{macrocode}
 \newcommand\um@parse@term[4]{%
-  \@for\@ii:=\um@char@range\do{%
+  \clist_map_variable:NNn \um@char@range \@ii {
     \unless\ifx\@ii\@empty
       \@tempswafalse
 %    \end{macrocode}
@@ -1592,7 +1609,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \fi
         #4%
       \fi
-    \fi}}
+    \fi
+  }
+}
 \def\um@firstof#1#2\@nil{#1}
 \edef\um@backslash{\expandafter\um@firstof\string\string\@nil}
 \def\um@firstchar#1{\edef\@tempa{\expandafter\um@firstof\string#1\@nil}}
@@ -1692,11 +1711,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Starting output char}
 % Loops through character ranges setting \cmd\mathcode.
 %    \begin{macrocode}
-\newcommand\um@setmathcode[3][1]{%
-  \@for\um@inp:=#2\do{%
-    \um@FOR\@tempcnta=[1:#1]\do{%
-      \SetMathCode{\numexpr\um@inp+\@tempcnta-1\relax}
-        {\mathalpha}{\um@symfont}{\numexpr#3+\@tempcnta-1\relax}}}}
+\newcommand\um@setmathcode[3][1]{
+  \clist_map_variable:nNn {#2} \um@inp {
+    \prg_stepwise_inline:nnnn{1}{1}{#1}{
+      \SetMathCode{\numexpr\um@inp+##1-1\relax}
+        {\mathalpha}{\um@symfont}{\numexpr#3+##1-1\relax}
+    }
+  }
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1708,14 +1730,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Starting output char}
 % Loops through character ranges setting \cmd\mathcode.
 %    \begin{macrocode}
-\newcommand\um@setmathalph[4][1]{%
-  \@for\um@inp:=#3\do{%
-    \um@FOR\@tempcnta=[1:#1]\do{%
-      \edef\@tempa{%
+\newcommand\um@setmathalph[4][1]{
+  \clist_map_variable:nNn {#3} \um@inp {
+    \prg_stepwise_inline:nnnn{1}{1}{#1}{
+      \edef\@tempa{
         \noexpand\um@setsinglemathalph
           {\noexpand#2}
-          {\number\numexpr \um@inp+\@tempcnta-1 \relax}
-          {\number\numexpr #4+\@tempcnta-1 \relax}}\@tempa}}}
+          {\number\numexpr \um@inp+##1-1 \relax}
+          {\number\numexpr #4+##1-1 \relax}
+      }
+      \@tempa
+    }
+  }
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2373,12 +2400,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % back into their original meaning after the group has ended and |^|'s catcode returns to normal.
 %    \begin{macrocode}
 \begingroup
-  \catcode`\^=12\relax
-  \gdef\um@scancharlet#1="#2\@nil{%
-    \lowercase{\scantokens{\global\let#1=^^^^^#2}}}
-  \catcode`\^=12\relax
-  \gdef\um@scanactivedef"#1\@nil#2{%
-    \lowercase{\scantokens{\global\def^^^^^#1{#2}}}}
+  \char_make_other:N \^
+  \gdef\um@scancharlet#1="#2\@nil{
+    \lowercase{
+      \scantokens{\global\let#1=^^^^^#2}
+    }
+  }
+  \gdef\um@scanactivedef"#1\@nil#2{
+    \lowercase{
+      \scantokens{\global\def^^^^^#1{#2}}
+    }
+  }
 \endgroup
 \let\unicodemathgobble\@gobble
 %    \end{macrocode}
@@ -2386,7 +2418,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % Now give \cmd\UnicodeMathSymbol\ a definition in terms of \cmd\um@scancharlet\
-% and we're good to go. 
+% and we're good to go.
 %    \begin{macrocode}
 \begingroup
   \def\UnicodeMathSymbol#1#2#3#4{%
@@ -2408,6 +2440,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Create synonyms:
 %    \begin{macrocode}
 \def\to{\rightarrow}
+%    \end{macrocode}
+% The end.
+%    \begin{macrocode}
+\ExplSyntaxOff
 %    \end{macrocode}
 %
 %\iffalse
