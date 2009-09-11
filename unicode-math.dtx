@@ -5,29 +5,26 @@
 %<*readme>
 ________________________
 The UNICODE-MATH package
-v0.3c
+v0.4
 
-This package will provide a complete 
-implementation of unicode maths for XeTeX.
+This package will provide a complete implementation of unicode maths for
+XeTeX. While I do not encourage people to use this package for production
+work, I understand that it has certain uses and am making it available for
+distribution.
 
-It is currently only supported by the fonts
-"Cambria Math" and "Asana Math".
+Please be aware that this package is undergoing (very slow) continued
+development and the interface and functionality should not be considered
+stable. Use at your own risk, in other words.
+
+Unicode maths is currently only supported by the fonts
+"Cambria Math" (Microsoft, proprietry) and
+"Asana Math" (Apostoulos Syropolous, open source).
 
 Basic usage:
-  \setmathfont{Cambria Math}
-
-THIS PACKAGE IS NOT YET READY FOR DISTRIBUTION!
+  \setmathfont{Asana Math}
 
 ____________
 INSTALLATION
-
-There are two DTX files in this repository:
-    unicode-math.dtx
-    maths-font-mappings.dtx
-
-You can safely ignore maths-font-mappings; it contains code that
-isn't being used for unicode-math, but might otherwise be useful
-(hence it hasn't been deleted).
 
 Run TeX on unicode-math.dtx to generate the package file unicode-math.sty:
     tex unicode-math.dtx
@@ -62,10 +59,9 @@ Released under the LaTeX Project Public License
 
 Copyright © 2006-2009 by Will Robertson <wspr81@gmail.com>
 
-This package is free software and may be redistributed and/or
-modified under the conditions of the LaTeX Project Public License,
-version 1.3c or higher (your choice):
-  <http://www.latex-project.org/lppl/>
+This package is free software and may be redistributed and/or modified under
+the conditions of the LaTeX Project Public License, version 1.3c or higher
+(your choice): <http://www.latex-project.org/lppl/>.
 
 This work is "author-maintained" by Will Robertson.
 
@@ -121,7 +117,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \maketitle
 %
 % \begin{abstract}
-% \noindent\bfseries Warning! This package is experimental and subject to change without regard for backwards compatibility. Performance issues may be encountered until algorithms are refined.
+% \noindent\bfseries
+% Warning! This package is experimental and subject to change without regard
+% for backwards compatibility.
+% Performance issues may be encountered until algorithms are refined.
 % \end{abstract}
 %
 % \tableofcontents
@@ -129,72 +128,121 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \section{Introduction}
 %
 % This document describes the \pkg{unicode-math} package, which is an
-% \emph{experimental} implementation of a macro to unicode glyph encoding for 
-% mathematical characters. Its intended use is for \XeTeX, although it is conjectured 
-% that small effect needs to be spent to create a cross-format package that would 
-% also work with Lua\TeX.
+% \emph{experimental} implementation of a macro to unicode glyph encoding for
+% mathematical characters. Its intended use is for \XeTeX, although it is
+% conjectured that some effect could be spent to create a cross-format
+% package that would also work with Lua\TeX.
 %
-% As of \XeTeX\ v.\,0.995, maths characters can be accessed in unicode 
-% ranges. Now, a proper method must be invented for real unicode maths support.
-% Fairly significant pieces of the NFSS may have to be re-written, and I'm a little unsure where to start.
 %
 % \section{Specification}
 %
 % This section will turn into `User Interface' in time, presumably.
 %
-% In the ideal case, a single unicode font will contain all maths glyphs we need.
-% Barbara Beeton's \STIX\ table provides the mapping between unicode maths glyphs 
-% and macro names (all 3298 — or however many — of them!).
-% A single command \codeline{\cmd\setmathfont\oarg{font features}\marg{font name}} would implement this
-% for every every symbol and alphabetic variant.
-% That means |x| to $x$, |\xi| to $\xi$, |\leq| to $\leq$, etc., 
-% |\mathcal{H}| to $\mathcal{H}$ and so on, all for unicode glyphs within a single font.
+% In the ideal case, a single unicode font will contain all maths glyphs we
+% need. Barbara Beeton's \STIX\ table provides the mapping between unicode
+% maths glyphs and macro names (all 3298 — or however many — of them!). A
+% single command \codeline{\cmd\setmathfont\oarg{font features}\marg{font
+% name}} would implement this for every every symbol and alphabetic variant.
+% That means |x| to $x$, |\xi| to $\xi$, |\leq| to $\leq$, etc., |\mathcal{H}|
+% to $\mathcal{H}$ and so on, all for unicode glyphs within a single font.
 %
-% Furthermore, this package should deal well with unicode characters for maths input, as well.
-% This includes using literal Greek letters in formulae, resolving to upright or italic depending on preference.
+% Furthermore, this package should deal well with unicode characters for maths
+% input, as well. This includes using literal Greek letters in formulae,
+% resolving to upright or italic depending on preference.
 %
-% Finally, maths versions must also be provided for. While I guess version selection in
-% \LaTeX\ will remain the same, the specification for choosing the version fonts will
-% probably be an optional argument:
+% Finally, maths versions must also be provided for. While I guess version
+% selection in \LaTeX\ will remain the same, the specification for choosing
+% the version fonts will probably be an optional argument:
 % \codeline{\cmd\setmathfont|[Version=Bold,|\meta{font features}|]|\marg{font name}}
-% 
-% Instances above of 
-% \codeline{\oarg{font features}\marg{font name}} 
+%
+% Instances above of
+% \codeline{\oarg{font features}\marg{font name}}
 % follow from my \pkg{fontspec} package, and therefore any additional \meta{font features}
 % specific to maths fonts will hook into \pkg{fontspec}'s methods.
 %
 % \subsection{Using multiple fonts}
 %
-% There will probably be few cases where a single unicode maths font suffices (simply due to glyph coverage). The upcoming \STIX\ font comes to mind as a possible exception. It will therefore be necessary to delegate specific unicode ranges of glyphs to separate fonts. This syntax will also hook into the \pkg{fontspec} font feature processing:
-%\codeline{\cmd\setmathfont|[Range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
-% where \meta{unicode range} is a comma-separated list of unicode slots and ranges such as |{27D0-27EB,27FF,295B-297F}|. Furthermore, preset names ranges could be used, such as |MiscMathSymbolsA|, with such ranges based on unicode chunks. The amount of optimisation required here to achieve acceptable performance has yet to be determined. Techniques such as saving out unicode subsets based on \meta{unicode range} data to be \cmd\input\ in the next \LaTeX\ run are a possibility, but at this stage, performance without such measures seems acceptable.
+% There will probably be few cases where a single unicode maths font suffices
+% (simply due to glyph coverage). The upcoming \STIX\ font comes to mind as a
+% possible exception. It will therefore be necessary to delegate specific
+% unicode ranges of glyphs to separate fonts. This syntax will also hook into
+% the \pkg{fontspec} font feature processing:
+%   \codeline{\cmd\setmathfont|[Range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
+% where \meta{unicode range} is a comma-separated list of unicode slots and
+% ranges such as |{27D0-27EB,27FF,295B-297F}|. Furthermore, preset names
+% ranges could be used, such as |MiscMathSymbolsA|, with such ranges based on
+% unicode chunks. The amount of optimisation required here to achieve
+% acceptable performance has yet to be determined. Techniques such as saving
+% out unicode subsets based on \meta{unicode range} data to be \cmd\input\ in
+% the next \LaTeX\ run are a possibility, but at this stage, performance
+% without such measures seems acceptable.
 %
 % \subsection{Script and scriptscript fonts/features}
-% Cambria Math uses OpenType font features to activate smaller optical sizes for scriptsize and scriptscriptsize symbols (the $B$ and $C$, respectively, in $A_{B_C}$).
 %
-% Other fonts will possibly use entirely separate fonts. Both of these options must be taken into account. I hope this will be mostly automatic from the users' points of view. The |+ssty| feature can be detected and applied automatically, and appropriate optical size information embedded in the fonts will ensure this latter case. Fine tuning should be possible automatically with \pkg{fontspec} options. We might have to wait until MnMath, for example, before we really know.
-% 
+% Cambria Math uses OpenType font features to activate smaller optical sizes
+% for scriptsize and scriptscriptsize symbols (the $B$ and $C$, respectively,
+% in $A_{B_C}$).
+%
+% Other fonts will possibly use entirely separate fonts. Both of these options
+% must be taken into account. I hope this will be mostly automatic from the
+% users' points of view. The |+ssty| feature can be detected and applied
+% automatically, and appropriate optical size information embedded in the
+% fonts will ensure this latter case. Fine tuning should be possible
+% automatically with \pkg{fontspec} options. We might have to wait until
+% MnMath, for example, before we really know.
+%
 % \section{Maths input}
 %
-% \XeTeX's unicode support allows maths input through two methods. Like classical \TeX, macros such as \cmd\alpha, \cmd\sum, \cmd\pm, \cmd\leq, and so on, provide verbose access to the entire repertoire of characters defined by unicode. The literal characters themselves may be used instead, for more readable input files.
+% \XeTeX's unicode support allows maths input through two methods. Like
+% classical \TeX, macros such as \cmd\alpha, \cmd\sum, \cmd\pm, \cmd\leq, and
+% so on, provide verbose access to the entire repertoire of characters defined
+% by unicode. The literal characters themselves may be used instead, for more
+% readable input files.
 %
 %: TODO : describe alphabet inputs
+%
 %
 % \section{Package options}
 %
 % \subsection{Math `style'}
 %
-% Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright} uppercase Greek letters for variables in mathematics. This is contrary to the ISO standards of using italic forms for both upper- and lowercase. Furthermore, the French (contrary again, \emph{quelle surprise}) have been known to use upright uppercase \emph{Latin} letters as well as upright upper- and lowercase Greek.
+% Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright}
+% uppercase Greek letters for variables in mathematics. This is contrary to
+% the ISO standards of using italic forms for both upper- and lowercase.
+% Furthermore, the French (contrary again, \emph{quelle surprise}) have been
+% known to use upright uppercase \emph{Latin} letters as well as upright
+% upper- and lowercase Greek.
 %
-% The \pkg{unicode-math} package accommodates these possibilities with an interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a package option \opt{math-style} that takes one of three arguments: \opt{TeX}, \opt{ISO}, or \opt{French} (case \emph{in}-sensitive).
+% The \pkg{unicode-math} package accommodates these possibilities with an
+% interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a
+% package option \opt{math-style} that takes one of three arguments:
+% \opt{TeX}, \opt{ISO}, or \opt{French} (case \emph{in}-sensitive).
 %
-% The philosophy behind the interface to the mathematical alphabet symbols lies in \LaTeX's attempt of separating content and formatting. Because input source text may come from a variety of places, the upright and `mathematical' italic Latin and Greek alphabets are \emph{unified} from the point of view of having a specified meaning in the source text. That is, to get a mathematical ‘$x$’, either the ascii (`keyboard') letter |x| may be typed, or the actual unicode character may be used. Similarly for Greek letters. The upright or italic forms are then chosen based on the |math-style| package option.
+% The philosophy behind the interface to the mathematical alphabet symbols
+% lies in \LaTeX's attempt of separating content and formatting. Because input
+% source text may come from a variety of places, the upright and
+% `mathematical' italic Latin and Greek alphabets are \emph{unified} from the
+% point of view of having a specified meaning in the source text. That is, to
+% get a mathematical ‘$x$’, either the ascii (`keyboard') letter |x| may
+% be typed, or the actual unicode character may be used. Similarly for Greek
+% letters. The upright or italic forms are then chosen based on the
+% |math-style| package option.
 %
-% If glyphs are desired that do not map as per the package option (for example, an upright `g' is desired but typing |$g$| yields `$g$'), \emph{markup} is required to specify this; to follow from the example: |\mathup{g}|. Maths alphabets commands such as \cmd\mathup\ are detailed later.
+% If glyphs are desired that do not map as per the package option (for
+% example, an upright `g' is desired but typing |$g$| yields `$g$'),
+% \emph{markup} is required to specify this; to follow from the example:
+% |\mathup{g}|. Maths alphabets commands such as \cmd\mathup\ are detailed
+% later.
 %
-% \paragraph{Alternative interface} However, some users may not like this convention. For them, an upright |x| is an upright `x' and that's that. (This will be the case when obtaining source text from copy/pasting PDF or Microsoft Word documents, for example.) For these users, the |literal| option to |math-style| will effect this behaviour. 
+% \paragraph{Alternative interface} However, some users may not like this
+% convention. For them, an upright |x| is an upright `x' and that's that.
+% (This will be the case when obtaining source text from copy/pasting PDF or
+% Microsoft Word documents, for example.) For these users, the |literal|
+% option to |math-style| will effect this behaviour.
 %
-% The \opt{math-style} options' effects are shown in brief in \tabref{math-style}. \Tabref[vref]{math-style-check} shows every character under the effect of this package option.
+% The \opt{math-style} options' effects are shown in brief in
+% \tabref{math-style}. \Tabref[vref]{math-style-check} shows every character
+% under the effect of this package option.
 %
 % \begin{table}
 %   \centering
@@ -202,7 +250,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \tablabel{math-style}
 %   \begin{tabular}{@{}>{\ttfamily}lcc@{}}
 %     \toprule
-%       & \multicolumn{2}{c}{Example} \\ 
+%       & \multicolumn{2}{c}{Example} \\
 %        \cmidrule(l){2-3}
 %       \rmfamily Package option & |(a,z,B,X)| & |(α,β,Γ,Ξ)| \\
 %     \midrule
@@ -215,18 +263,41 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Bold switching}
 %
-% Similar as in the previous section, ISO standards differ somewhat to \TeX's conventions (and classical typesetting) for `boldness' in mathematics. In the past, it has been customary to use bold \emph{upright} letters to denote things like vectors and matrices. For example, \( \mathbfup{M} = (\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively scarcity of bold italic fonts in the pre-digital typesetting era. It has been suggested that \emph{italic} bold symbols are used nowadays instead.
+% Similar as in the previous section, ISO standards differ somewhat to \TeX's
+% conventions (and classical typesetting) for `boldness' in mathematics. In
+% the past, it has been customary to use bold \emph{upright} letters to denote
+% things like vectors and matrices. For example, \( \mathbfup{M} =
+% (\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively
+% scarcity of bold italic fonts in the pre-digital typesetting era. It has
+% been suggested that \emph{italic} bold symbols are used nowadays instead.
 %
-% Bold Greek letters have simply been bold variant glyphs of their regular weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta) \). Confusingly, the syntax in \LaTeX\ has been different for these two examples: \cmd\mathbf\ in the former (`$\mathbfup{M}$'), and \cmd\bm\ (or \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
+% Bold Greek letters have simply been bold variant glyphs of their regular
+% weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta)
+% \). Confusingly, the syntax in \LaTeX\ has been different for these two
+% examples: \cmd\mathbf\ in the former (`$\mathbfup{M}$'), and \cmd\bm\ (or
+% \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
 %
-% In \pkg{unicode-math}, the \cmd\mathbf\ command works directly with both Greek and Latin maths alphabet characters and depending on package option either switches to upright for Latin letters (|bold-style=TeX|) as well or keeps them italic (|bold-style=ISO|).
+% In \pkg{unicode-math}, the \cmd\mathbf\ command works directly with both
+% Greek and Latin maths alphabet characters and depending on package option
+% either switches to upright for Latin letters (|bold-style=TeX|) as well or
+% keeps them italic (|bold-style=ISO|).
 %
-% To match the package options for non-bold characters, for |bold-style=French| all bold characters are upright, and |bold-style=literal| does not change the upright/italic shape of the letter.
+% To match the package options for non-bold characters, for
+% |bold-style=French| all bold characters are upright, and
+% |bold-style=literal| does not change the upright/italic shape of the letter.
 %
-% Upright and italic bold mathematical letters input as direct unicode characters are normalised with the same rules. For example, with |bold-style=TeX|, a literal bold italic latin character will be typeset upright.
+% Upright and italic bold mathematical letters input as direct unicode
+% characters are normalised with the same rules. For example, with
+% |bold-style=TeX|, a literal bold italic latin character will be typeset
+% upright.
 %
-% Note that \opt{bold-style} is independent of \opt{math-style}, although if the former is not specified then sensible defaults are chosen based on the latter. 
-% The \opt{bold-style} options' effects are shown in brief in \tabref{bold-style}. \Tabref[vref]{bold-style-check} shows every character under the effect of this package option.
+% Note that \opt{bold-style} is independent of \opt{math-style}, although if
+% the former is not specified then sensible defaults are chosen based on the
+% latter.
+%
+% The \opt{bold-style} options' effects are shown in brief in
+% \tabref{bold-style}. \Tabref[vref]{bold-style-check} shows every character
+% under the effect of this package option.
 %
 % \begin{table}
 %   \centering
@@ -234,7 +305,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \tablabel{bold-style}
 %   \begin{tabular}{@{}>{\ttfamily}lcc@{}}
 %     \toprule
-%       & \multicolumn{2}{c}{Example} \\ 
+%       & \multicolumn{2}{c}{Example} \\
 %        \cmidrule(l){2-3}
 %       \rmfamily Package option & |(a,z,B,X)| & |(α,β,Γ,Ξ)| \\
 %     \midrule
@@ -247,10 +318,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Other upright vs.\ italic symbols}
 %
-% \paragraph{Nabla} The symbol $\nabla$ comes in the six forms shown in \tabref{nabla}.
-%  We want an individual option to specify whether we want upright or italic nabla by default (when either upright or italic nabla is used in the source). \TeX\ classically uses an upright nabla, but \textsc{iso} standards differ (I think). The package options |nabla=upright| and |nabla=italic| switch between the two choices. This is then inherited through \cmd\mathbf; \cmd\mathit\ and \cmd\mathup\ can be used to force one way or the other.
+% \paragraph{Nabla} The symbol $\nabla$ comes in the six forms shown in
+%  \tabref{nabla}.
+%  We want an individual option to specify whether we want upright or italic
+%  nabla by default (when either upright or italic nabla is used in the
+%  source). \TeX\ classically uses an upright nabla, but \textsc{iso}
+%  standards differ (I think). The package options |nabla=upright| and
+%  |nabla=italic| switch between the two choices. This is then inherited
+%  through \cmd\mathbf; \cmd\mathit\ and \cmd\mathup\ can be used to force one
+%  way or the other.
 %
-% |nabla=italic| is implicit when using |math-style=ISO| and |nabla=upright| follows both |math-style=TeX| and |math-style=French|.
+% |nabla=italic| is implicit when using |math-style=ISO| and |nabla=upright|
+% follows both |math-style=TeX| and |math-style=French|.
 %
 % \begin{table}
 %   \centering
@@ -273,7 +352,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{table}
 %
 % \paragraph{Partial}
-% Ditto with $\partial$: |partial=upright| and |partial=italic| package options. Similarly with the |math-style| defaults.
+% Ditto with $\partial$: |partial=upright| and |partial=italic| package
+% options.
+% Similarly with the |math-style| defaults.
 %
 %
 % \begin{figure}
@@ -302,13 +383,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{figure}
 %
 % \paragraph{Epsilon: $\epsilon$ vs.\ $\varepsilon$}
-% \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to look like $\epsilon$.
-% The Unicode glyph directly after delta and before zeta is `epsilon' and looks like $\epsilon$;
-% there is a subsequent variant of epsilon that looks like $\varepsilon$.
-% This creates a problem.
-% People who use unicode input won't want their glyphs transforming; \TeX\ users will be confused
-% that what they think as `normal epsilon' is actual the `variant epsilon'.
-% 
+% \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to
+% look like $\epsilon$. The Unicode glyph directly after delta and before zeta
+% is `epsilon' and looks like $\epsilon$; there is a subsequent variant of
+% epsilon that looks like $\varepsilon$. This creates a problem. People who
+% use unicode input won't want their glyphs transforming; \TeX\ users will be
+% confused that what they think as `normal epsilon' is actual the `variant
+% epsilon'.
+%
 % :TODO: package option
 %
 % \paragraph{Phi: $\phi$ vs.\ $\varphi$}
@@ -316,132 +398,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % :TODO: package option
 %
-% \subsection{Math font dimensions}
-%
-% \newcounter{mfdimen}
-% \setcounter{mfdimen}{9}
-% \newcommand\mathfontdimen[2]{^^A
-%   \stepcounter{mfdimen}^^A
-%   \themfdimen & {\scshape\small #1} & #2\vspace{0.5ex} \tabularnewline}
-%
-% \begin{longtable}{%
-%   @{}c>{\raggedright\parfillskip=0pt}p{4cm}>{\raggedright}p{7cm}@{}}
-% \toprule \cmd\fontdimen & Dimension name & Description\tabularnewline\midrule \endhead
-% \bottomrule\endfoot
-% \mathfontdimen{Script\-Percent\-Scale\-Down}
-% {Percentage of scaling down for script level 1. Suggested value: 80\%.}
-% \mathfontdimen{Script\-Script\-Percent\-Scale\-Down}
-% {Percentage of scaling down for script level 2 (Script\-Script). Suggested value: 60\%.}
-% \mathfontdimen{Delimited\-Sub\-Formula\-Min\-Height}
-% {Minimum height required for a delimited expression to be treated as a subformula. Suggested value: normal line height\,×\,1.5.}
-% \mathfontdimen{Display\-Operator\-Min\-Height}
-% {Minimum height of n-ary operators (such as integral and summation) for formulas in display mode.}
-% \mathfontdimen{Math\-Leading}
-% {White space to be left between math formulas to ensure proper line spacing. For example, for applications that treat line gap as a part of line ascender, formulas with ink  going above (os2.sTypoAscender + os2.sTypoLineGap – MathLeading) or with ink going below os2.sTypoDescender will result in increasing line height.}
-% \mathfontdimen{Axis\-Height}
-% {Axis height of the font. }
-% \mathfontdimen{Accent\-Base\-Height}
-% {Maximum (ink) height of accent base that does not require raising the accents. Suggested: x-height of the font (os2.sxHeight) plus any possible overshots. }
-% \mathfontdimen{Flattened\-Accent\-Base\-Height}
-% {Maximum (ink) height of accent base that does not require flattening the accents. Suggested: cap height of the font (os2.sCapHeight).}
-% \mathfontdimen{Subscript\-Shift\-Down}
-% {The standard shift down applied to subscript elements. Positive for moving in the downward direction. Suggested: os2.ySubscriptYOffset.}
-% \mathfontdimen{Subscript\-Top\-Max}
-% {Maximum allowed height of the (ink) top of subscripts that does not require moving subscripts further down. Suggested: /5 x-height.}
-% \mathfontdimen{Subscript\-Baseline\-Drop\-Min}
-% {Minimum allowed drop of the baseline of subscripts relative to the (ink) bottom of the base. Checked for bases that are treated as a box or extended shape. Positive for subscript baseline dropped below the base bottom.}
-% \mathfontdimen{Superscript\-Shift\-Up}
-% {Standard shift up applied to superscript elements. Suggested: os2.ySuperscriptYOffset.}
-% \mathfontdimen{Superscript\-Shift\-Up\-Cramped}
-% {Standard shift of superscripts relative to the base, in cramped style.}
-% \mathfontdimen{Superscript\-Bottom\-Min}
-% {Minimum allowed height of the (ink) bottom of superscripts that does not require moving subscripts further up. Suggested: ¼ x-height.}
-% \mathfontdimen{Superscript\-Baseline\-Drop\-Max}
-% {Maximum allowed drop of the baseline of superscripts relative to the (ink) top of the base. Checked for bases that are treated as a box or extended shape. Positive for superscript baseline below the base top.}
-% \mathfontdimen{Sub\-Superscript\-Gap\-Min}
-% {Minimum gap between the superscript and subscript ink. Suggested: 4×default rule thickness.}
-% \mathfontdimen{Superscript\-Bottom\-Max\-With\-Subscript}
-% {The maximum level to which the (ink) bottom of superscript can be pushed to increase the gap between superscript and subscript, before subscript starts being moved down. 
-% Suggested: /5 x-height.}
-% \mathfontdimen{Space\-After\-Script}
-% {Extra white space to be added after each subscript and superscript. Suggested: 0.5pt for a 12 pt font.}
-% \mathfontdimen{Upper\-Limit\-Gap\-Min}
-% {Minimum gap between the (ink) bottom of the upper limit, and the (ink) top of the base operator. }
-% \mathfontdimen{Upper\-Limit\-Baseline\-Rise\-Min}
-% {Minimum distance between baseline of upper limit and (ink) top of the base operator.}
-% \mathfontdimen{Lower\-Limit\-Gap\-Min}
-% {Minimum gap between (ink) top of the lower limit, and (ink) bottom of the base operator.}
-% \mathfontdimen{Lower\-Limit\-Baseline\-Drop\-Min}
-% {Minimum distance between baseline of the lower limit and (ink) bottom of the base operator.}
-% \mathfontdimen{Stack\-Top\-Shift\-Up}
-% {Standard shift up applied to the top element of a stack.}
-% \mathfontdimen{Stack\-Top\-Display\-Style\-Shift\-Up}
-% {Standard shift up applied to the top element of a stack in display style.}
-% \mathfontdimen{Stack\-Bottom\-Shift\-Down}
-% {Standard shift down applied to the bottom element of a stack. Positive for moving in the downward direction.}
-% \mathfontdimen{Stack\-Bottom\-Display\-Style\-Shift\-Down}
-% {Standard shift down applied to the bottom element of a stack in display style. Positive for moving in the downward direction.}
-% \mathfontdimen{Stack\-Gap\-Min}
-% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element. Suggested: 3×default rule thickness.}
-% \mathfontdimen{Stack\-Display\-Style\-Gap\-Min}
-% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element in display style. Suggested: 7×default rule thickness.}
-% \mathfontdimen{Stretch\-Stack\-Top\-Shift\-Up}
-% {Standard shift up applied to the top element of the stretch stack.}
-% \mathfontdimen{Stretch\-Stack\-Bottom\-Shift\-Down}
-% {Standard shift down applied to the bottom element of the stretch stack. Positive for moving in the downward direction.}
-% \mathfontdimen{Stretch\-Stack\-Gap\-Above\-Min}
-% {Minimum gap between the ink of the stretched element, and the (ink) bottom of the element above. Suggested: Upper\-Limit\-Gap\-Min}
-% \mathfontdimen{Stretch\-Stack\-Gap\-Below\-Min}
-% {Minimum gap between the ink of the stretched element, and the (ink) top of the element below. Suggested: Lower\-Limit\-Gap\-Min.}
-% \mathfontdimen{Fraction\-Numerator\-Shift\-Up}
-% {Standard shift up applied to the numerator. }
-% \mathfontdimen{Fraction\-Numerator\-Display\-Style\-Shift\-Up}
-% {Standard shift up applied to the numerator in display style. Suggested: Stack\-Top\-Display\-Style\-Shift\-Up.}
-% \mathfontdimen{Fraction\-Denominator\-Shift\-Down}
-% {Standard shift down applied to the denominator. Positive for moving in the downward direction.}
-% \mathfontdimen{Fraction\-Denominator\-Display\-Style\-Shift\-Down}
-% {Standard shift down applied to the denominator in display style. Positive for moving in the downward direction. Suggested: Stack\-Bottom\-Display\-Style\-Shift\-Down.}
-% \mathfontdimen{Fraction\-Numerator\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar. Suggested: default rule thickness}
-% \mathfontdimen{Fraction\-Num\-Display\-Style\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
-% \mathfontdimen{Fraction\-Rule\-Thickness}
-% {Thickness of the fraction bar. Suggested: default rule thickness.}
-% \mathfontdimen{Fraction\-Denominator\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar. Suggested: default rule thickness}
-% \mathfontdimen{Fraction\-Denom\-Display\-Style\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
-% \mathfontdimen{Skewed\-Fraction\-Horizontal\-Gap}
-% {Horizontal distance between the top and bottom elements of a skewed fraction.}
-% \mathfontdimen{Skewed\-Fraction\-Vertical\-Gap}
-% {Vertical distance between the ink of the top and bottom elements of a skewed fraction.}
-% \mathfontdimen{Overbar\-Vertical\-Gap}
-% {Distance between the overbar and the (ink) top of he base. Suggested: 3×default rule thickness.}
-% \mathfontdimen{Overbar\-Rule\-Thickness}
-% {Thickness of overbar. Suggested: default rule thickness.}
-% \mathfontdimen{Overbar\-Extra\-Ascender}
-% {Extra white space reserved above the overbar. Suggested: default rule thickness.}
-% \mathfontdimen{Underbar\-Vertical\-Gap}
-% {Distance between underbar and (ink) bottom of the base. Suggested: 3×default rule thickness.}
-% \mathfontdimen{Underbar\-Rule\-Thickness}
-% {Thickness of underbar. Suggested: default rule thickness.}
-% \mathfontdimen{Underbar\-Extra\-Descender}
-% {Extra white space reserved below the underbar. Always positive. Suggested: default rule thickness.}
-% \mathfontdimen{Radical\-Vertical\-Gap}
-% {Space between the (ink) top of the expression and the bar over it. Suggested: 1¼ default rule thickness.}
-% \mathfontdimen{Radical\-Display\-Style\-Vertical\-Gap}
-% {Space between the (ink) top of the expression and the bar over it. Suggested: default rule thickness + ¼ x-height. }
-% \mathfontdimen{Radical\-Rule\-Thickness}
-% {Thickness of the radical rule. This is the thickness of the rule in designed or constructed radical signs. Suggested: default rule thickness.}
-% \mathfontdimen{Radical\-Extra\-Ascender}
-% {Extra white space reserved above the radical. Suggested: Radical\-Rule\-Thickness.}
-% \mathfontdimen{Radical\-Kern\-Before\-Degree}
-% {Extra horizontal kern before the degree of a radical, if such is present. Suggested: 5/18 of em.}
-% \mathfontdimen{Radical\-Kern\-After\-Degree} 
-% {Negative kern after the degree of a radical, if such is present. Suggested: −10/18 of em.}
-% \mathfontdimen{Radical\-Degree\-Bottom\-Raise\-Percent}
-% {Height of the bottom of the radical degree, if such is present, in proportion to the ascender of the radical sign. Suggested: 60\%.}
-% \end{longtable}
 %
 % \StopEventually{}
 %
@@ -452,7 +408,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/09/04 v0.3c Unicode maths in XeLaTeX]  
+  [2009/09/11 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -467,7 +423,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \newcounter{um@fam}
 \newif\if@um@fontspec@feature
 \newif\if@um@ot@math@
-%    \end{macrocode} 
+%    \end{macrocode}
 % For \opt{math-style}:
 %    \begin{macrocode}
 \newif\if@um@literal
@@ -502,8 +458,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um@Break}
 % See Kees van der Laan's various articles on \TeX\ programming:
 %    \begin{macrocode}
-\def\um@Loop#1\um@Pool{#1\um@Loop#1\um@Pool} 
-\def\um@Break#1\um@Pool{} 
+\def\um@Loop#1\um@Pool{#1\um@Loop#1\um@Pool}
+\def\um@Break#1\um@Pool{}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -518,7 +474,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
      \advance#1\@ne
      \ifnum#1>#3\relax
        \expandafter\um@Break
-     \fi 
+     \fi
    \um@Pool}
 %    \end{macrocode}
 % \end{macro}
@@ -688,11 +644,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \or
     \@um@upGreektrue
     \@um@upgreektrue
-    \@um@upLatintrue  
+    \@um@upLatintrue
     \@um@uplatinfalse
     \@um@bfupGreektrue
     \@um@bfupgreektrue
-    \@um@bfupLatintrue  
+    \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
     \@um@uppartialtrue
@@ -717,7 +673,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \or
     \@um@bfupGreektrue
     \@um@bfupgreektrue
-    \@um@bfupLatintrue  
+    \@um@bfupLatintrue
     \@um@bfuplatintrue
   \or
     \@um@bfliteraltrue
@@ -818,7 +774,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@mathsymbol#1#2#3#4{%
   \expandafter\um@set@mathsymbol\csname sym#3\endcsname#1#2{#4}}
 %    \end{macrocode}
-% \changes{v0.3}{2008/01/20}{Gutted and simplified. TODO: re-add robust checking.}
 % \end{macro}
 %
 % The final macros that actually define the maths symbol with \XeTeX\ primitives.
@@ -855,7 +810,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \expandafter\global\expandafter\XeTeXmathchardef
       \csname\string#2@sym\endcsname
       ="\mathchar@type#3 #1 #4\relax
-%    \end{macrocode}    
+%    \end{macrocode}
 % Now define \cmd\sum@op\ as \cmd\sum@sym, followed by \cmd\nolimits\ if necessary.
 %    \begin{macrocode}
     \expandafter\gdef\csname\string#2@op\endcsname{%
@@ -864,7 +819,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \ifin@
         \expandafter\nolimits
       \fi}%
-%    \end{macrocode}  
+%    \end{macrocode}
 % Don't forget that the actual \cmd\sum\ macro is simply defined in terms of the literal unicode symbol!
 %    \begin{macrocode}
   \else
@@ -884,7 +839,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
       \ifx\mathopen#3\relax
         \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}%
-        \global\XeTeXdelcode#4=#1 #4\relax        
+        \global\XeTeXdelcode#4=#1 #4\relax
         \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
       \else
         \ifx\mathclose#3\relax
@@ -899,7 +854,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
             \xdef#2{\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}%
           \else
 %    \end{macrocode}
-% And finally, the general case. We define the unicode mathcode for the character. 
+% And finally, the general case. We define the unicode mathcode for the character.
 % The macro is defined generically in terms of the unicode character.
 %    \begin{macrocode}
             \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
@@ -909,7 +864,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \fi
   \fi}
 %    \end{macrocode}
-% \changes{v0.3}{2008/01/20}{Added \cmd\mathaccent support.}
 % \end{macro}
 %
 % \begin{macro}{\SetMathCode}
@@ -949,10 +903,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \setmathfont[Colour=000000]{Cambria Math}
 %   \setmathfont[Range={\mathop}, Colour=FF0000]{Cambria Math}
 %   \setmathfont[Range={\equal}, Colour=009900]{Cambria Math}
-%   \setmathfont[Range={\mathopen,\mathclose}, 
+%   \setmathfont[Range={\mathopen,\mathclose},
 %             Colour=0000FF]{Cambria Math}
-%   \[ 
-%   F(s)=\mscrL\{f(t)\}=\int_0^\infty \mathup{e}^{-st}f(t)\,\mathup{d} t 
+%   \[
+%   F(s)=\mscrL\{f(t)\}=\int_0^\infty \mathup{e}^{-st}f(t)\,\mathup{d} t
 %   \]
 % \end{example}
 %
@@ -998,7 +952,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \def\um@ScriptScriptFont{#2}%
 %    \end{macrocode}
 %
-% Use \pkg{fontspec} to select a font to use. The macro \cmd\S@\meta{size} 
+% Use \pkg{fontspec} to select a font to use. The macro \cmd\S@\meta{size}
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
@@ -1026,7 +980,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \@um@ot@math@true
     \else
       \um@PackageWarning{%
-        The font '#2' is not a valid OpenType maths font. 
+        The font '#2' is not a valid OpenType maths font.
         Some maths features will not be available or behave
         in a substandard manner.}%
     \fi
@@ -1105,7 +1059,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um@setmathcode{\um@usv@Nabla}{\um@usv@Nabla}%
       \um@setmathcode{\um@usv@itNabla}{\um@usv@itNabla}%
       \um@setmathcode{\um@usv@partial}{\um@usv@partial}%
-      \um@setmathcode{\um@usv@itpartial}{\um@usv@itpartial}%      
+      \um@setmathcode{\um@usv@itpartial}{\um@usv@itpartial}%
     \else
 %    \end{macrocode}
 % Latin letters:
@@ -1125,16 +1079,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \if@um@upgreek\um@def@upgreek\else\um@def@itgreek\fi
 %    \end{macrocode}
 % Nabla and partial:
-%    \begin{macrocode}  
+%    \begin{macrocode}
       \if@um@upNabla
         \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}%
       \else
-        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}%    
+        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}%
       \fi
       \if@um@uppartial
         \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}%
       \else
-        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}%    
+        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}%
       \fi
     \fi
 %    \end{macrocode}
@@ -1168,7 +1122,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfvarkappa}%
         \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfvarphi}%
         \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfvarrho}%
-        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfvarpi}%      
+        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfvarpi}%
       \else
         \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfitgreek}%
         \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfitvarepsilon}%
@@ -1176,7 +1130,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfitvarkappa}%
         \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfitvarphi}%
         \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfitvarrho}%
-        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}%      
+        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}%
       \fi
 %    \end{macrocode}
 % Bold nabla and partial symbols:
@@ -1187,8 +1141,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um@setmathcode{\um@usv@bfsfNabla  }{\um@usv@bfsfNabla}%
         \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfNabla}%
       \else
-        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfitNabla}%    
-        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfitNabla}%    
+        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfitNabla}%
+        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfitNabla}%
         \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}%
         \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}%
       \fi
@@ -1198,10 +1152,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfpartial}%
         \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfpartial}%
       \else
-        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfitpartial}%    
-        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfitpartial}%    
-        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfitpartial}%    
-        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}%    
+        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfitpartial}%
+        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfitpartial}%
+        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfitpartial}%
+        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}%
       \fi
     \fi
   \else
@@ -1258,7 +1212,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \endgroup}}
 %    \end{macrocode}
 % \end{macro}
-%  
+%
 % Maths alphabets' base definition. See \secref{mathmap} for the internal definitions.
 %    \begin{macrocode}
 \um@mk@math{up}
@@ -1268,7 +1222,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \um@mk@math{frak}
 \um@mk@math{sf}
 \um@mk@math{sfit}
-\um@mk@math{tt}    
+\um@mk@math{tt}
 %    \end{macrocode}
 % And bold maths alphabets. See \secref{bfmathmap} for the internal definitions.
 %    \begin{macrocode}
@@ -1296,9 +1250,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \newcommand\um@mathmap@noparse[3]{%
   \@for\@ii:=#2\do{%
-    \expandafter\expandafter 
-    \expandafter\um@addto@mathmap 
-    \expandafter\expandafter 
+    \expandafter\expandafter
+    \expandafter\um@addto@mathmap
+    \expandafter\expandafter
     \expandafter{%
     \expandafter\um@symfont
     \expandafter}%
@@ -1319,9 +1273,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \@for\@ii:=\um@char@num@range\do{%
     \ifnum\@ii=#3\relax
       \@for\@jj:=#2\do{%
-        \expandafter\expandafter 
-        \expandafter\um@addto@mathmap 
-        \expandafter\expandafter 
+        \expandafter\expandafter
+        \expandafter\um@addto@mathmap
+        \expandafter\expandafter
         \expandafter{%
         \expandafter\um@symfont
         \expandafter}%
@@ -1352,7 +1306,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % However, the limits aren't set automatically; that is, we want to define, a la Plain \TeX\ \etc, |\def\int{\intop\nolimits}|, so there needs to be a transformation from \cmd\int\ to \cmd\intop\ during the expansion of \cmd\UnicodeMathSymbol\ in the appropriate contexts.
 %
 % Following is a table of every math operator (\cmd\mathop) defined in |unicode-maths.tex|, from which a subset need to be flagged for \cmd\nolimits\ adjustments. The limits behaviour as specified by \pkg{unicode-math} are shown (with grey 'scripts).
-% 
+%
 % \begingroup
 % \setmathfont[SizeFeatures={
 %     {Size=-10, Colour=888888},
@@ -1379,18 +1333,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \@elt\scpolint\@elt\npolint\@elt\pointint\@elt\sqint\@elt\intlarhk\@elt\intx
   \@elt\intcap\@elt\intcup\@elt\upint\@elt\lowint}
 %    \end{macrocode}
-% \changes{v0.01}{2006/11/26}{Implemented for \cmd\nolimits\ processing}
 % \end{macro}
 %
 % \begin{macro}{\addnolimits}
 % This macro appends material to the macro containing the list of operators that don't take limits. See example following for usage. Note at present that this command must have taken effect before \cmd\setmathfont.
 %    \begin{macrocode}
 \newcommand\addnolimits[1]{%
-  \expandafter\def 
-  \expandafter\um@nolimits 
+  \expandafter\def
+  \expandafter\um@nolimits
   \expandafter{\um@nolimits\@elt#1}}
 %    \end{macrocode}
-% \changes{v0.01}{2006/11/26}{Implemented for \cmd\nolimits\ processing}
 % \end{macro}
 %
 % \begin{macro}{\removenolimits}
@@ -1405,7 +1357,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \xdef\um@nolimits{\um@nolimits}%
   \endgroup}
 %    \end{macrocode}
-% \changes{v0.2}{2007/01/22}{Implemented for \cmd\nolimits\ processing}
 % \end{macro}
 %
 % \begin{example}{}
@@ -1426,7 +1377,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \def\um@radicals{\sqrt}
 %    \end{macrocode}
-% \changes{v0.01}{2006/11/27}{Implemented for more general radicals processing.}
 % \end{macro}
 %
 % \begin{macro}{\r@@t}
@@ -1436,16 +1386,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \def\r@@t#1#2{%
   \setbox\z@\hbox{$\m@th #1\sqrtsign{#2}$}%
-  \um@scaled@apply{#1}{\kern}{\fontdimen63\um@font}%    
+  \um@scaled@apply{#1}{\kern}{\fontdimen63\um@font}%
   \raise \dimexpr(
       \um@fontdimen@percent{65}{\um@font}\ht\z@-
       \um@fontdimen@percent{65}{\um@font}\dp\z@
     )\relax
-    \copy \rootbox% 
-  \um@scaled@apply{#1}{\kern}{\fontdimen64\um@font}%    
+    \copy \rootbox%
+  \um@scaled@apply{#1}{\kern}{\fontdimen64\um@font}%
   \box \z@}
 %    \end{macrocode}
-% \changes{v0.3b}{2008/08/27}{Implemented.}
 % \end{macro}
 %
 % \begin{example}{}
@@ -1584,9 +1533,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{control sequence (math type)}
 % \darg{code to execute}
 % This macro expands to |#4|
-% if any of its arguments are contained in the commalist \cmd\um@char@range. 
-% This list can contain either character ranges (for checking with |#1|) or control sequences. 
-% These latter can either be the command name of a specific character, \emph{or} the math 
+% if any of its arguments are contained in the commalist \cmd\um@char@range.
+% This list can contain either character ranges (for checking with |#1|) or control sequences.
+% These latter can either be the command name of a specific character, \emph{or} the math
 % type of one (\eg, \cmd\mathbin).
 %
 % Character ranges are passed to \cmd\um@parse@range, which accepts input in the form shown in \tabref{ranges}.
@@ -1637,7 +1586,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
       \if@tempswa
         \ifx\um@char@num@range\@empty
-          \g@addto@macro\um@char@num@range{#1}%        
+          \g@addto@macro\um@char@num@range{#1}%
         \else
           \g@addto@macro\um@char@num@range{,#1}%
         \fi
@@ -1661,7 +1610,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 % \begin{macro}{\um@parse@range}
-% Weird syntax. 
+% Weird syntax.
 % As shown previously in \tabref{ranges}, this macro can be passed four different input types via \cmd\um@parse@term.
 %    \begin{macrocode}
 \def\um@parse@range#1-#2-#3\@nil#4\@nil{%
@@ -1673,7 +1622,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Range & $r=x$ \\
 % C-list input & \cmd\@ii=|X| \\
 % Macro input & |\um@parse@range X-\@marker-\@nil#1\@nil| \\
-% Arguments & 
+% Arguments &
 %     \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
 %   = \texttt{\textcolor{red}{X}-\textcolor{blue}{\cmd\@marker}-\textcolor{Green}{\char`\{\char`\}}} \\
 % \hline
@@ -1690,7 +1639,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Range & $r\geq x$ \\
 % C-list input & \cmd\@ii=|X-| \\
 % Macro input & |\um@parse@range X--\@marker-\@nil#1\@nil|\\
-% Arguments & 
+% Arguments &
 %    \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
 % = \texttt{\textcolor{red}{X}-\textcolor{blue}{\char`\{\char`\}}-\textcolor{Green}{\cmd\@marker-}} \\
 % \hline
@@ -1707,7 +1656,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Range & $r\leq y$ \\
 % C-list input & \cmd\@ii=|-Y|  \\
 % Macro input & |\um@parse@range -Y-\@marker-\@nil#1\@nil|\\
-% Arguments & 
+% Arguments &
 %    \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
 % = \texttt{\textcolor{red}{\char`\{\char`\}}-\textcolor{blue}{Y}-\textcolor{Green}{\cmd\@marker-}}\\
 % \hline
@@ -1723,7 +1672,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Range & $x \leq r \leq y$  \\
 % C-list input & \cmd\@ii=|X-Y|  \\
 % Macro input & |\um@parse@range X-Y-\@marker-\@nil#1\@nil|\\
-% Arguments & 
+% Arguments &
 %     \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
 % =  \texttt{\textcolor{red}{X}-\textcolor{blue}{Y}-\textcolor{Green}{\cmd\@marker-}}\\
 % \hline
@@ -1749,7 +1698,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \SetMathCode{\numexpr\um@inp+\@tempcnta-1\relax}
         {\mathalpha}{\um@symfont}{\numexpr#3+\@tempcnta-1\relax}}}}
 %    \end{macrocode}
-% \changes{v0.2}{2007/02/25}{Beginning to sort out the input encoding.}
 % \end{macro}
 %
 %
@@ -1769,17 +1717,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
           {\number\numexpr \um@inp+\@tempcnta-1 \relax}
           {\number\numexpr #4+\@tempcnta-1 \relax}}\@tempa}}}
 %    \end{macrocode}
-% \changes{v0.2}{2007/02/25}{Beginning to sort out the input encoding.}
 % \end{macro}
 %
-% 
 % \begin{example}{}
 %   {\um@setmathcode[3]{`\A,`\D}{`\B}
 %   $ABCDEF$} $ABCDEF$
 % \end{example}
 %
 % \begin{macro}{\um@resolve@greek}
-% This macro defines \cmd\Alpha\dots\cmd\omega\ as their corresponding 
+% This macro defines \cmd\Alpha\dots\cmd\omega\ as their corresponding
 % unicode (mathematical italic) character. Remember that the mapping
 % to upright or italic happens with the mathcode definitions, whereas these macros
 % just stand for the literal unicode characters.
@@ -1894,8 +1840,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um@def@upGreek}
 %    \begin{macrocode}
 \newcommand\um@def@upGreek{%
-    \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}%
-    \um@setmathcode{\um@usv@varTheta,"1D6F3}{\um@usv@varTheta}%
+  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}%
+  \um@setmathcode{\um@usv@varTheta,"1D6F3}{\um@usv@varTheta}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1904,8 +1850,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um@def@itGreek}
 %    \begin{macrocode}
 \newcommand\um@def@itGreek{%
-    \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}%
-    \um@setmathcode{\um@usv@varTheta}{\um@usv@itvarTheta}%    
+  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}%
+  \um@setmathcode{\um@usv@varTheta}{\um@usv@itvarTheta}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1913,13 +1859,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um@def@upgreek}
 %    \begin{macrocode}
 \newcommand\um@def@upgreek{%
-    \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}%
-    \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}%
-    \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}%
-    \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}%
-    \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}%
-    \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}%
-    \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}%
+  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}%
+  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}%
+  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}%
+  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}%
+  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}%
+  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}%
+  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1927,13 +1873,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um@def@itgreek}
 %    \begin{macrocode}
 \newcommand\um@def@itgreek{%
-    \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}%
-    \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}%
-    \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}%
-    \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}%
-    \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}%
-    \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}%
-    \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}%
+  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}%
+  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}%
+  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}%
+  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}%
+  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}%
+  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}%
+  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2041,7 +1987,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $\mathbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathbb{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
-% Numbers: 
+% Numbers:
 %    \begin{macrocode}
 \def\um@setup@mathbb{%
   \um@setmathalph[10]{\mathbb}{\um@usv@num}{\um@usv@bbnum}%
@@ -2201,7 +2147,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \if@um@bfupLatin
       \um@setmathalph[26]{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}%
     \else
-      \um@setmathalph[26]{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}% 
+      \um@setmathalph[26]{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}%
     \fi
     \if@um@bfuplatin
       \um@setmathalph[26]{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}%
@@ -2209,7 +2155,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \else
       \um@setmathalph[26]{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}%
       \um@setmathalph{\mathbf}{\um@usv@ith}{\um@usv@bfith}%
-    \fi  
+    \fi
     \if@um@bfupGreek
       \um@setmathalph[25]{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfGreek}%
       \um@setmathalph{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}%
@@ -2222,7 +2168,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um@setmathalph{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}%
       \um@setmathalph{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}%
       \um@setmathalph{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfvarkappa}%
-      \um@setmathalph{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}% 
+      \um@setmathalph{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}%
       \um@setmathalph{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}%
       \um@setmathalph{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}%
     \else
@@ -2230,10 +2176,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um@setmathalph{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}%
       \um@setmathalph{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfitvartheta}%
       \um@setmathalph{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfitvarkappa}%
-      \um@setmathalph{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}% 
+      \um@setmathalph{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}%
       \um@setmathalph{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}%
       \um@setmathalph{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}%
-    \fi  
+    \fi
   \fi
 }
 %  \um@setmathalph{\mathbf}{\um@usv@Nabla}{"1D6C1}%
@@ -2345,7 +2291,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Bold sans serif: \cmd\mathbfsf}
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
+%   \setmathfont{STIXGeneral-Bold}
 %   $\mathbfsf{0123456789}$ \\
 %   $\mathbfsf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathbfsf{abcdefghijklmnopqrstuvwxyz}$ \\
@@ -2381,7 +2327,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Bold italic sans serif: \cmd\mathbfsfit}
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
+%   \setmathfont{STIXGeneral-BoldItalic}
 %   $\mathbfsfit{0123456789}$ \\
 %   $\mathbfsfit{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathbfsfit{abcdefghijklmnopqrstuvwxyz}$ \\
@@ -2495,8 +2441,6 @@ cat stix-tbl.txt |
 awk '
 %    \end{macrocode}
 % If the USV isn't repeated (TODO: check this is valid!) and the entry isn't one of the weird ones in the big block at the end of the \STIX\ table (TODO: check that out!)\dots
-% \changes{v0.1}{2007/01/21}{Ignore \cmd\text.. STIX commands.}
-% \changes{v0.3}{2008/01/20}{Ignore \cmd\ipa.. and \cmd\tone.. accents.}
 %    \begin{macrocode}
  {if (usv != substr($0,2,5) && substr($0,2,1) != " ")
     {usv = substr($0,2,5);
@@ -2543,7 +2487,6 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 %    \begin{macrocode}
     -e ' s/\^/\\string^/   ' > unicode-math.tex
 %    \end{macrocode}
-% \changes{v0.01}{2006/12/19}{Tidied up awk code}
 %\iffalse
 %</awk>
 %\fi
@@ -2600,6 +2543,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 % Accents are not included yet.
 %
 % \paragraph{Summary}
+%
 % For symbols, something like:
 % \begin{verbatim}
 % \def\DeclareMathSymbol#1#2#3#4{%
@@ -2614,6 +2558,137 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 %     \expandafter\hexnumber@\csname sym#2\endcsname
 %     {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
 % \end{verbatim}
+%
+% \section{\XeTeX\ math font dimensions}
+%
+% These are the extended \cmd\fontdimen s available for suitable fonts
+% in \XeTeX. Note that Lua\TeX\ takes an alternative route, and this package
+% will eventually provide a wrapper interface to the two (I hope).
+%
+% \newcounter{mfdimen}
+% \setcounter{mfdimen}{9}
+% \newcommand\mathfontdimen[2]{^^A
+%   \stepcounter{mfdimen}^^A
+%   \themfdimen & {\scshape\small #1} & #2\vspace{0.5ex} \tabularnewline}
+%
+% \begin{longtable}{%
+%   @{}c>{\raggedright\parfillskip=0pt}p{4cm}>{\raggedright}p{7cm}@{}}
+% \toprule \cmd\fontdimen & Dimension name & Description\tabularnewline\midrule \endhead
+% \bottomrule\endfoot
+% \mathfontdimen{Script\-Percent\-Scale\-Down}
+% {Percentage of scaling down for script level 1. Suggested value: 80\%.}
+% \mathfontdimen{Script\-Script\-Percent\-Scale\-Down}
+% {Percentage of scaling down for script level 2 (Script\-Script). Suggested value: 60\%.}
+% \mathfontdimen{Delimited\-Sub\-Formula\-Min\-Height}
+% {Minimum height required for a delimited expression to be treated as a subformula. Suggested value: normal line height\,×\,1.5.}
+% \mathfontdimen{Display\-Operator\-Min\-Height}
+% {Minimum height of n-ary operators (such as integral and summation) for formulas in display mode.}
+% \mathfontdimen{Math\-Leading}
+% {White space to be left between math formulas to ensure proper line spacing. For example, for applications that treat line gap as a part of line ascender, formulas with ink  going above (os2.sTypoAscender + os2.sTypoLineGap – MathLeading) or with ink going below os2.sTypoDescender will result in increasing line height.}
+% \mathfontdimen{Axis\-Height}
+% {Axis height of the font. }
+% \mathfontdimen{Accent\-Base\-Height}
+% {Maximum (ink) height of accent base that does not require raising the accents. Suggested: x-height of the font (os2.sxHeight) plus any possible overshots. }
+% \mathfontdimen{Flattened\-Accent\-Base\-Height}
+% {Maximum (ink) height of accent base that does not require flattening the accents. Suggested: cap height of the font (os2.sCapHeight).}
+% \mathfontdimen{Subscript\-Shift\-Down}
+% {The standard shift down applied to subscript elements. Positive for moving in the downward direction. Suggested: os2.ySubscriptYOffset.}
+% \mathfontdimen{Subscript\-Top\-Max}
+% {Maximum allowed height of the (ink) top of subscripts that does not require moving subscripts further down. Suggested: /5 x-height.}
+% \mathfontdimen{Subscript\-Baseline\-Drop\-Min}
+% {Minimum allowed drop of the baseline of subscripts relative to the (ink) bottom of the base. Checked for bases that are treated as a box or extended shape. Positive for subscript baseline dropped below the base bottom.}
+% \mathfontdimen{Superscript\-Shift\-Up}
+% {Standard shift up applied to superscript elements. Suggested: os2.ySuperscriptYOffset.}
+% \mathfontdimen{Superscript\-Shift\-Up\-Cramped}
+% {Standard shift of superscripts relative to the base, in cramped style.}
+% \mathfontdimen{Superscript\-Bottom\-Min}
+% {Minimum allowed height of the (ink) bottom of superscripts that does not require moving subscripts further up. Suggested: ¼ x-height.}
+% \mathfontdimen{Superscript\-Baseline\-Drop\-Max}
+% {Maximum allowed drop of the baseline of superscripts relative to the (ink) top of the base. Checked for bases that are treated as a box or extended shape. Positive for superscript baseline below the base top.}
+% \mathfontdimen{Sub\-Superscript\-Gap\-Min}
+% {Minimum gap between the superscript and subscript ink. Suggested: 4×default rule thickness.}
+% \mathfontdimen{Superscript\-Bottom\-Max\-With\-Subscript}
+% {The maximum level to which the (ink) bottom of superscript can be pushed to increase the gap between superscript and subscript, before subscript starts being moved down. 
+% Suggested: /5 x-height.}
+% \mathfontdimen{Space\-After\-Script}
+% {Extra white space to be added after each subscript and superscript. Suggested: 0.5pt for a 12 pt font.}
+% \mathfontdimen{Upper\-Limit\-Gap\-Min}
+% {Minimum gap between the (ink) bottom of the upper limit, and the (ink) top of the base operator. }
+% \mathfontdimen{Upper\-Limit\-Baseline\-Rise\-Min}
+% {Minimum distance between baseline of upper limit and (ink) top of the base operator.}
+% \mathfontdimen{Lower\-Limit\-Gap\-Min}
+% {Minimum gap between (ink) top of the lower limit, and (ink) bottom of the base operator.}
+% \mathfontdimen{Lower\-Limit\-Baseline\-Drop\-Min}
+% {Minimum distance between baseline of the lower limit and (ink) bottom of the base operator.}
+% \mathfontdimen{Stack\-Top\-Shift\-Up}
+% {Standard shift up applied to the top element of a stack.}
+% \mathfontdimen{Stack\-Top\-Display\-Style\-Shift\-Up}
+% {Standard shift up applied to the top element of a stack in display style.}
+% \mathfontdimen{Stack\-Bottom\-Shift\-Down}
+% {Standard shift down applied to the bottom element of a stack. Positive for moving in the downward direction.}
+% \mathfontdimen{Stack\-Bottom\-Display\-Style\-Shift\-Down}
+% {Standard shift down applied to the bottom element of a stack in display style. Positive for moving in the downward direction.}
+% \mathfontdimen{Stack\-Gap\-Min}
+% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element. Suggested: 3×default rule thickness.}
+% \mathfontdimen{Stack\-Display\-Style\-Gap\-Min}
+% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element in display style. Suggested: 7×default rule thickness.}
+% \mathfontdimen{Stretch\-Stack\-Top\-Shift\-Up}
+% {Standard shift up applied to the top element of the stretch stack.}
+% \mathfontdimen{Stretch\-Stack\-Bottom\-Shift\-Down}
+% {Standard shift down applied to the bottom element of the stretch stack. Positive for moving in the downward direction.}
+% \mathfontdimen{Stretch\-Stack\-Gap\-Above\-Min}
+% {Minimum gap between the ink of the stretched element, and the (ink) bottom of the element above. Suggested: Upper\-Limit\-Gap\-Min}
+% \mathfontdimen{Stretch\-Stack\-Gap\-Below\-Min}
+% {Minimum gap between the ink of the stretched element, and the (ink) top of the element below. Suggested: Lower\-Limit\-Gap\-Min.}
+% \mathfontdimen{Fraction\-Numerator\-Shift\-Up}
+% {Standard shift up applied to the numerator. }
+% \mathfontdimen{Fraction\-Numerator\-Display\-Style\-Shift\-Up}
+% {Standard shift up applied to the numerator in display style. Suggested: Stack\-Top\-Display\-Style\-Shift\-Up.}
+% \mathfontdimen{Fraction\-Denominator\-Shift\-Down}
+% {Standard shift down applied to the denominator. Positive for moving in the downward direction.}
+% \mathfontdimen{Fraction\-Denominator\-Display\-Style\-Shift\-Down}
+% {Standard shift down applied to the denominator in display style. Positive for moving in the downward direction. Suggested: Stack\-Bottom\-Display\-Style\-Shift\-Down.}
+% \mathfontdimen{Fraction\-Numerator\-Gap\-Min}
+% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar. Suggested: default rule thickness}
+% \mathfontdimen{Fraction\-Num\-Display\-Style\-Gap\-Min}
+% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
+% \mathfontdimen{Fraction\-Rule\-Thickness}
+% {Thickness of the fraction bar. Suggested: default rule thickness.}
+% \mathfontdimen{Fraction\-Denominator\-Gap\-Min}
+% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar. Suggested: default rule thickness}
+% \mathfontdimen{Fraction\-Denom\-Display\-Style\-Gap\-Min}
+% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
+% \mathfontdimen{Skewed\-Fraction\-Horizontal\-Gap}
+% {Horizontal distance between the top and bottom elements of a skewed fraction.}
+% \mathfontdimen{Skewed\-Fraction\-Vertical\-Gap}
+% {Vertical distance between the ink of the top and bottom elements of a skewed fraction.}
+% \mathfontdimen{Overbar\-Vertical\-Gap}
+% {Distance between the overbar and the (ink) top of he base. Suggested: 3×default rule thickness.}
+% \mathfontdimen{Overbar\-Rule\-Thickness}
+% {Thickness of overbar. Suggested: default rule thickness.}
+% \mathfontdimen{Overbar\-Extra\-Ascender}
+% {Extra white space reserved above the overbar. Suggested: default rule thickness.}
+% \mathfontdimen{Underbar\-Vertical\-Gap}
+% {Distance between underbar and (ink) bottom of the base. Suggested: 3×default rule thickness.}
+% \mathfontdimen{Underbar\-Rule\-Thickness}
+% {Thickness of underbar. Suggested: default rule thickness.}
+% \mathfontdimen{Underbar\-Extra\-Descender}
+% {Extra white space reserved below the underbar. Always positive. Suggested: default rule thickness.}
+% \mathfontdimen{Radical\-Vertical\-Gap}
+% {Space between the (ink) top of the expression and the bar over it. Suggested: 1¼ default rule thickness.}
+% \mathfontdimen{Radical\-Display\-Style\-Vertical\-Gap}
+% {Space between the (ink) top of the expression and the bar over it. Suggested: default rule thickness + ¼ x-height. }
+% \mathfontdimen{Radical\-Rule\-Thickness}
+% {Thickness of the radical rule. This is the thickness of the rule in designed or constructed radical signs. Suggested: default rule thickness.}
+% \mathfontdimen{Radical\-Extra\-Ascender}
+% {Extra white space reserved above the radical. Suggested: Radical\-Rule\-Thickness.}
+% \mathfontdimen{Radical\-Kern\-Before\-Degree}
+% {Extra horizontal kern before the degree of a radical, if such is present. Suggested: 5/18 of em.}
+% \mathfontdimen{Radical\-Kern\-After\-Degree}
+% {Negative kern after the degree of a radical, if such is present. Suggested: −10/18 of em.}
+% \mathfontdimen{Radical\-Degree\-Bottom\-Raise\-Percent}
+% {Height of the bottom of the radical degree, if such is present, in proportion to the ascender of the radical sign. Suggested: 60\%.}
+% \end{longtable}
 %
 % \part{Some manner of unit testing}
 %
