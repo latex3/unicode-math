@@ -711,8 +711,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \um@fontdimen@percent{65}{\tmpfont}
 % \end{example}
 %    \begin{macrocode}
-\def\um@fontdimen@percent#1#2{%
-  0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax}
+\def\um@fontdimen@percent#1#2{
+  0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -722,12 +723,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Length control sequence to be scaled according to the math style}
 % This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
 %    \begin{macrocode}
-\def\um@scaled@apply#1#2#3{%
+\def\um@scaled@apply#1#2#3{
   \ifx#1\scriptstyle
-    #2\um@fontdimen@percent{10}\um@font#3%
+    #2\um@fontdimen@percent{10}\um@font#3
   \else
     \ifx#1\scriptscriptstyle
-      #2\um@fontdimen@percent{11}\um@font#3%
+      #2\um@fontdimen@percent{11}\um@font#3
     \else
       #2#3%
     \fi
@@ -777,7 +778,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % If the symbol definition is for a macro.
 % There are a bunch of tests to perform to process the various characters.
 %    \begin{macrocode}
-\def\um@set@mathsymbol#1#2#3#4{%
+\def\um@set@mathsymbol#1#2#3#4{
 %    \end{macrocode}
 % \paragraph{Operators}
 % In the examples following, say we're defining for the symbol \cmd\sum ($\sum$).
@@ -792,9 +793,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % The active math char is \cmd\let\ to the macro \cmd\sum@op.
 %    \begin{macrocode}
     \begingroup
-      \catcode#4=\active
+      \char_make_active:n {#4}
       \global\mathcode#4="8000\relax
-      \um@scanactivedef#4\@nil{\csname\string#2@op\endcsname}%
+      \um@scanactivedef #4 \@nil { \csname\string#2@op\endcsname }
     \endgroup
 %    \end{macrocode}
 % Some of these require a \cmd\nolimits\ suffix. This is controlled by the
@@ -811,12 +812,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Now define \cmd\sum@op\ as \cmd\sum@sym, followed by \cmd\nolimits\ if necessary.
 %    \begin{macrocode}
-    \expandafter\gdef\csname\string#2@op\endcsname{%
+    \cs_gset:cpn { \string#2 @op } {
       \csname\string#2@sym\endcsname
       \expandafter\in@\expandafter#2\expandafter{\um@nolimits}%
       \ifin@
         \expandafter\nolimits
-      \fi}%
+      \fi}
 %    \end{macrocode}
 % Don't forget that the actual \cmd\sum\ macro is simply defined in terms of
 % the literal unicode symbol!
@@ -829,9 +830,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
     \expandafter\in@\expandafter#2\expandafter{\um@radicals,}%
     \ifin@
-      \expandafter\gdef\csname
-        \expandafter\@gobble\string#2sign\endcsname
-          {\XeTeXradical#1 #4\relax}%
+      \cs_gset:cpn {\cs_to_str:N #2 sign} { \XeTeXradical #1 #4 \relax }
     \else
 %    \end{macrocode}
 % \paragraph{Delimiters}
@@ -839,12 +838,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % (Definitely the first, to work with \cmd\left/\cmd\right.)
 %    \begin{macrocode}
       \ifx\mathopen#3\relax
-        \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}%
+        \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
         \global\XeTeXdelcode#4=#1 #4\relax
         \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
       \else
         \ifx\mathclose#3\relax
-          \gdef#2{\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}%
+          \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
           \global\XeTeXdelcode#4=#1 #4\relax
           \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
         \else
@@ -852,7 +851,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \paragraph{Accents}
 %    \begin{macrocode}
           \ifx\mathaccent#3\relax
-            \xdef#2{\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}%
+            \cs_gset:Npx #2 {\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}
           \else
 %    \end{macrocode}
 % And finally, the general case.
@@ -950,34 +949,38 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
-  \def\um@ScriptFeatures{ScriptStyle}%
-  \def\um@ScriptScriptFeatures{ScriptScriptStyle}%
-  \def\um@ScriptFont{#2}%
-  \def\um@ScriptScriptFont{#2}%
+  \tl_set:Nn \l_um_script_features_tl  {ScriptStyle}
+  \tl_set:Nn \l_um_sscript_features_tl {ScriptScriptStyle}
+  \tl_set:Nn \l_um_script_font_tl      {#2}
+  \tl_set:Nn \l_um_sscript_font_tl     {#2}
 %    \end{macrocode}
-%
 % Use \pkg{fontspec} to select a font to use. The macro \cmd\S@\meta{size}
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
   \setkeys*[um]{options}{#1}%
-%\rule{1.5ex}{1.5ex}%
-  \edef\@tempa{\noexpand\zf@fontspec{%
-    Script=Math,SizeFeatures={%
-      {Size=\tf@size-},%
-      {Size=\sf@size-\tf@size,%
-        Font=\um@ScriptFont,%
-        \um@ScriptFeatures},%
-      {Size=-\sf@size,%
-        Font=\um@ScriptScriptFont,%
-        \um@ScriptScriptFeatures}},%
-    \XKV@rm}{#2}}\@tempa
-%\rule{1.5ex}{1.5ex}%
+  \edef\@tempa{\noexpand\zf@fontspec{
+      Script = Math,
+      SizeFeatures = {
+        {Size = \tf@size-} ,
+        {Size = \sf@size-\tf@size ,
+         Font = \l_um_script_font_tl ,
+         \l_um_script_features_tl
+        } ,
+        {Size = -\sf@size ,
+         Font = \l_um_sscript_font_tl ,
+         \l_um_sscript_features_tl
+        }
+      },
+      \XKV@rm
+    }{#2}
+  }
+  \@tempa
 %    \end{macrocode}
 % Probably want to check there that we're not creating multiple symbol fonts
 % with the same NFSS declaration.
 %
-% Check for the correct number of \cmd{\fontdimen}s:
+% Check for the correct number of \cs{fontdimen}s:
 %    \begin{macrocode}
     \font\um@font="#2"\relax
     \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
@@ -1007,7 +1010,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % the source to |unicode-math.tex| which is used to create
 % |unicode-math-table.tex|.
 %    \begin{macrocode}
-  \@input{unicode-math-table.tex}%
+  \@input{unicode-math-table.tex}
 %    \end{macrocode}
 % If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we
 % empty all of the macros used to switch maths alphabets. Otherwise, the
