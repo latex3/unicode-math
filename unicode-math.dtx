@@ -1003,6 +1003,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \let\UnicodeMathSymbol\um@mathsymbol@noparse
     \let\um@setsinglemathalph \um@mathmap@noparse
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
+    \um_init_alphabets:
   \else
     \stepcounter{um@fam}%
     \edef\um@symfont{um@fam\theum@fam}%
@@ -1020,30 +1021,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \@input{unicode-math-table.tex}
   \um_remap_symbols:
 %    \end{macrocode}
-% If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we
-% empty all of the macros used to switch maths alphabets. Otherwise, the
-% \cs{um@math..} macros are appended to.
-%    \begin{macrocode}
-  \ifx\um@char@range\@empty
-    \let\um@mathbb\@empty
-    \let\um@mathbf\@empty
-    \let\um@mathfrak\@empty
-    \let\um@mathup\@empty
-    \let\um@mathit\@empty
-    \let\um@mathscr\@empty
-    \let\um@mathsf\@empty
-    \let\um@mathsfit\@empty
-    \let\um@mathtt\@empty
-    \let\um@mathbf\@empty
-    \let\um@mathbfup\@empty
-    \let\um@mathbfit\@empty
-    \let\um@mathbffrak\@empty
-    \let\um@mathbfscr\@empty
-    \let\um@mathbfsf\@empty
-    \let\um@mathbfsfit\@empty
-  \fi
-%    \end{macrocode}
-%
 %
 % \subsection{Maths alphabets' character mapping}
 % \seclabel{mathmap}
@@ -1140,20 +1117,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \fi
   \else
 %    \end{macrocode}
-% %: TODO : implement behaviour when char@range is NOT empty
+% %: TODO : what is supposed to happen here?
 %    \begin{macrocode}
   \fi
 %    \end{macrocode}
-%
-% \begin{example}{}
-%   \setmathfont{Cambria Math}
-%   $ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ$\quad$ϴ$ \\
-%   $αβγδεζηθικλμνξοπρστυφχψω$\quad$ϵϑϰϕϱϖ$ \\
-% \end{example}
-%
 % Set up the maths alphabets:
 %    \begin{macrocode}
-  \um@setup@alphabets
+  \um_setup_alphabets:
 %    \end{macrocode}
 % End of the \cmd\setmathfont\ macro.
 %    \begin{macrocode}
@@ -1954,8 +1924,32 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+% If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we
+% empty all of the macros used to switch maths alphabets. Otherwise, the
+% \cs{um@math..} macros are appended to.
 %    \begin{macrocode}
-\newcommand\um@setup@alphabets{%
+\cs_new:Nn \um_init_alphabets: {
+    \let\um@mathbb\@empty
+    \let\um@mathbf\@empty
+    \let\um@mathfrak\@empty
+    \let\um@mathup\@empty
+    \let\um@mathit\@empty
+    \let\um@mathscr\@empty
+    \let\um@mathsf\@empty
+    \let\um@mathsfit\@empty
+    \let\um@mathtt\@empty
+    \let\um@mathbf\@empty
+    \let\um@mathbfup\@empty
+    \let\um@mathbfit\@empty
+    \let\um@mathbffrak\@empty
+    \let\um@mathbfscr\@empty
+    \let\um@mathbfsf\@empty
+    \let\um@mathbfsfit\@empty
+}
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_alphabets: {
   \um_setup_math_alphabet:n {up    }
   \um_setup_math_alphabet:n {it    }
   \um_setup_math_alphabet:n {bb    }
