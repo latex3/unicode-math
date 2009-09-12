@@ -1896,13 +1896,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_math_alphabet:n {
-  \iffontchar\um@font \csname um@usv@#1latin \endcsname\relax
+  \um_glyph_if_exist:nTF {\csname um@usv@#1latin \endcsname}{
     \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
     \um_prepare_alph:n {#1}
     \use:c {um_config_math#1:}
-  \fi
+  }{
+    \um@PackageWarning{Math~ alphabet~ "#1"~ not~ found~ with~ this~ font}
+  }
 }
 %    \end{macrocode}
+%
+% \begin{macro}{\um_glyph_if_exist:nTF}
+%: TODO: Generalise for arbitrary fonts! \cs{um@font} is not always the one used for a specific glyph!!
+%    \begin{macrocode}
+\prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F} {
+  \etex_iffontchar:D \um@font #1 \scan_stop: \prg_return_true: \else: \prg_return_false: \fi:
+}
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\um_prepare_alph:n}
 % If |\mathXY| hasn't been (re-)declared yet, then define it in terms of
@@ -2431,18 +2442,125 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Lots of little things to tidy up.
 %
+% \subsubsection{Unicode radicals}
+%
 % Undo the damage made to \cmd\sqrt:
 %    \begin{macrocode}
 \DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
 %    \end{macrocode}
+%
+% \subsubsection{Primes}
+% We need a new `prime' algorithm. Unicode math has four pre-drawn prime glyphs.
+% \begin{quote}\obeylines
+% \unichar{2032}{prime} (\cs{prime}): $x\prime$
+% \unichar{2033}{double prime} (\cs{primedouble}): $x\primedouble$
+% \unichar{2034}{triple prime} (\cs{primetriple}): $x\primetriple$
+% \unichar{2057}{quadruple prime} (\cs{primequadruple}): $x\primequadruple$
+% \end{quote}
+% As you can see, they're all drawn at the correct height without being superscripted.
+% However, in a correctly behaviour OpenType font with the MATH table,
+% we also see different behaviour after the \texttt{ssty} feature is applied:
+% \begin{quote}
+% \unichar{2032}{prime} in the `scriptstyle' font:
+% \font\1="Cambria Math:script=math,+ssty=0"\1
+% $x$\char"2032
+% \end{quote}
+% The shrinking and offsetting is done as it is turned into a superscript.
+% This means, luckily, that by default things work nicely for single primes.
+% We can write \verb|x\prime| or \verb|x^\prime| and get: $x\prime$ and $x^\prime$.
+% To support single primes, then, things are easier than in \LaTeX; we can
+% just map \verb|'| to \cs{prime} and not worry about it.
+% 
+% However, it would be nice to use the pre-composed primes above if they exist
+% in the font; consider $x\prime\prime\prime$ vs.\ $x\primetriple$. Our algorithm is
+% \begin{itemize}
+% \item Prime encountered; pcount=1.
+% \item Scan ahead; if prime: pcount:=pcount+1; repeat.
+% \item If not prime, stop scanning.
+% \item If pcount=1, \cs{prime}, end.
+% \item If pcount=2, check \cs{primedouble}; if it exists, use it, end; if not, goto last step.
+% \item Ditto pcount=3 \& \cs{primetriple}.
+% \item Ditto pcount=4 \& \cs{primequadruple}.
+% \item If pcount>4 or the glyph doesn't exist, insert pcount \cs{prime}s with \cs{primekern} between each.
+% \end{itemize}
+%
+% \begin{example}{}
+%   $x\nprime$
+%   $x\nprime\nprime\nprime$
+%   $x\nprime\nprime\nprime\nprime\nprime\nprime$
+% \end{example}
+%
+%    \begin{macrocode}
+\muskip_new:N \g_um_primekern_muskip
+\muskip_gset:Nn \g_um_primekern_muskip { -\thinmuskip/2 }% arbitrary
+\num_new:N \l_um_primecount_num
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \um_nprimes:n {
+  \primesingle
+  \prg_replicate:nn {#1-1} { \mskip \g_um_primekern_muskip \primesingle }
+}
+\cs_new:Nn \um_nprimes_select:n {
+  \prg_case_int:nnn {#1}{
+    {1} { \primesingle }
+    {2} { 
+      \um_glyph_if_exist:nTF {"2033} {\primedouble} {\um_nprimes:n {#1}}
+    }
+    {3} { 
+      \um_glyph_if_exist:nTF {"2034} {\primetriple} {\um_nprimes:n {#1}}
+    }
+    {4} { 
+      \um_glyph_if_exist:nTF {"2057} {\primequadruple} {\um_nprimes:n {#1}}
+    }
+  }{ 
+    \um_nprimes:n {#1}
+  }
+}
+%    \end{macrocode}
+%
+% Scanning is more annoying than you'd think because we want to support all three of |\prime|, |'|, and the unicode prime. And |\ifx| doesn't work with mathactive chars.
+%    \begin{macrocode}
+\cs_new:Nn \um_scanprime: {
+  \num_zero:N \l_um_primecount_num
+  \um_scanprime_collect:
+}
+\cs_new:Nn \um_scanprime_collect: {
+  \num_incr:N \l_um_primecount_num
+  \peek_charcode_remove:NTF ' { 
+    \um_scanprime_collect: 
+  }{
+    \peek_meaning_remove:NTF \um_scanprime: {
+      \um_scanprime_collect:
+    }{
+      \peek_charcode_remove:NTF ^^^^2032 {
+        \um_scanprime_collect:
+      }{
+        \um_nprimes_select:n {\l_um_primecount_num}
+      }
+    }
+  }
+}
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
+\cs_set_eq:NN \prime \um_scanprime: 
+\group_begin:
+  \char_make_active:N \'
+  \char_make_active:n {"2032}
+  \cs_gset_eq:NN ' \um_scanprime:
+  \cs_gset_eq:NN ^^^^2032 \um_scanprime: % broken; still need to make prime math-active
+\group_end:
+%    \end{macrocode}
+%
+%
+% \subsubsection{Synonyms and all the rest}
 %
 % We need to change \LaTeX's idea of the font used to typeset
 % things like \cmd\sin\ and \cmd\cos:
 %    \begin{macrocode}
 \def\operator@font{\um_setup_mathup:}
 %    \end{macrocode}
-%
-% \paragraph{Synonyms}
 %
 %    \begin{macrocode}
 \def\to{\rightarrow}
