@@ -865,7 +865,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \fi
       \fi
     \fi
-  \fi}
+  \fi
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1000,10 +1001,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \def\um@symfont{um@allsym}%
     \um@PackageInfo{Defining~ the~ default~ maths~ font~ as~ '#2'}%
     \let\UnicodeMathSymbol\um@mathsymbol@noparse
+    \let\um@setsinglemathalph \um@mathmap@noparse
+    \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
   \else
     \stepcounter{um@fam}%
     \edef\um@symfont{um@fam\theum@fam}%
     \let\UnicodeMathSymbol\um@mathsymbol@parse
+    \let\um@setsinglemathalph\um@mathmap@parse
+    \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
   \fi
   \DeclareSymbolFont{\um@symfont}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}%
@@ -1013,6 +1018,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % |unicode-math-table.tex|.
 %    \begin{macrocode}
   \@input{unicode-math-table.tex}
+  \um_remap_symbols:
 %    \end{macrocode}
 % If \cmd\um@char@range\ is empty, we are defining maths from scratch. So we
 % empty all of the macros used to switch maths alphabets. Otherwise, the
@@ -1035,9 +1041,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \let\um@mathbfscr\@empty
     \let\um@mathbfsf\@empty
     \let\um@mathbfsfit\@empty
-    \let\um@setsinglemathalph \um@mathmap@noparse
-  \else
-    \let\um@setsinglemathalph\um@mathmap@parse
   \fi
 %    \end{macrocode}
 %
@@ -1158,6 +1161,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\um_remap_symbols:}
+% This function is used to define the mathcodes for those chars which should be mapped to a different glyph than themselves. The only example I have right now is ascii hyphen to real minus.
+%    \begin{macrocode}
+\cs_new:Nn \um_remap_symbols: {
+  \um_remap_symbol:nnn{"2D}{\mathbin}{"02212}% hyphen to minus
+}
+\cs_new:Nn \um_remap_symbol_parse:nnn {
+  \um@parse@term {#3} {\@nil} {#2} {
+    \um_remap_symbol_noparse:nnn {#1} {#2} {#3}
+  }
+}
+\cs_new:Nn \um_remap_symbol_noparse:nnn {
+  \SetMathCode {#1} {#2} {\um@symfont} {#3}
+}
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\um@mathsymbol@noparse}
 %    \begin{macrocode}
