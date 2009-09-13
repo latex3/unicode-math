@@ -606,7 +606,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \paragraph{math-style}
 %    \begin{macrocode}
 \define@choicekey*{unicode-math.sty}
-    {math-style}[\@tempa\@tempb]{iso,tex,french,literal}{%
+    {math-style}[\@tempa\@tempb]{iso,tex,french,literal}{
   \ifcase\@tempb\relax
     \@um@upGreekfalse
     \@um@upgreekfalse
@@ -648,7 +648,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{bold-style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{bold-style}[\@tempa\@tempb]{iso,tex,french,literal}{%
+\define@choicekey*{unicode-math.sty}{bold-style}[\@tempa\@tempb]{iso,tex,french,literal}{
   \ifcase\@tempb\relax
     \@um@bfupGreekfalse
     \@um@bfupgreekfalse
@@ -671,7 +671,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{Symbol obliqueness}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{nabla}[\@tempa\@tempb]{upright,italic}{%
+\define@choicekey*{unicode-math.sty}{nabla}[\@tempa\@tempb]{upright,italic}{
   \ifcase\@tempb\relax
     \@um@upNablatrue
   \or
@@ -680,7 +680,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic}{%
+\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic}{
   \ifcase\@tempb\relax
     \@um@uppartialtrue
   \or
@@ -764,7 +764,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Math font name, \eg, \texttt{operators}}
 % \darg{Slot, \eg, \texttt{"221E}}
 %    \begin{macrocode}
-\def\um@mathsymbol#1#2#3#4{%
+\def\um@mathsymbol#1#2#3#4{
   \expandafter\um@set@mathsymbol\csname sym#3\endcsname#1#2{#4}}
 %    \end{macrocode}
 % \end{macro}
@@ -816,7 +816,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
     \cs_gset:cpn { \string#2 @op } {
       \csname\string#2@sym\endcsname
-      \expandafter\in@\expandafter#2\expandafter{\um@nolimits}%
+      \expandafter\in@\expandafter#2\expandafter{\um@nolimits}
       \ifin@
         \expandafter\nolimits
       \fi}
@@ -830,7 +830,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Needs to be before the delimiters because the radical is, for some reason,
 % \cmd\mathopen.
 %    \begin{macrocode}
-    \expandafter\in@\expandafter#2\expandafter{\um@radicals,}%
+    \expandafter\in@\expandafter#2\expandafter{\um@radicals,}
     \ifin@
       \cs_gset:cpn {\cs_to_str:N #2 sign} { \XeTeXradical #1 #4 \relax }
     \else
@@ -874,7 +874,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % [For later] or if it's for a character code (just  a wrapper around the primitive).
 % Note that this declaration \emph{isn't} global so that it can be constrained by grouping.
 %    \begin{macrocode}
-\newcommand\SetMathCode[4]{%
+\newcommand\SetMathCode[4]{
   \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax}
 %    \end{macrocode}
 % \end{macro}
@@ -920,7 +920,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \doarg{font features}
 % \darg{font name}
 %    \begin{macrocode}
-\newcommand\setmathfont[2][]{%
+\newcommand\setmathfont[2][]{
 %    \end{macrocode}
 % \paragraph{Init}
 % \begin{itemize}
@@ -947,8 +947,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % (obviously more needs to be done here!)
 % \end{itemize}
 %    \begin{macrocode}
-  \def\um@mversion{normal}%
-  \DeclareMathVersion{\um@mversion}%
+  \def\um@mversion{normal}
+  \DeclareMathVersion{\um@mversion}
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
@@ -961,7 +961,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
-  \setkeys*[um]{options}{#1}%
+  \setkeys*[um]{options}{#1}
   \edef\@tempa{\noexpand\zf@fontspec{
       Script = Math,
       SizeFeatures = {
@@ -998,22 +998,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %    \begin{macrocode}
   \ifx\um@char@range\@empty
-    \def\um@symfont{um@allsym}%
-    \um@PackageInfo{Defining~ the~ default~ maths~ font~ as~ '#2'}%
+    \def\um@symfont{um@allsym}
+    \um@PackageInfo{Defining~ the~ default~ maths~ font~ as~ '#2'}
     \let \UnicodeMathSymbol\um@mathsymbol@noparse
     \let \um@setsinglemathalph \um@mathmap@noparse
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
   \else
-    \stepcounter{um@fam}%
-    \edef\um@symfont{um@fam\theum@fam}%
+    \stepcounter{um@fam}
+    \edef\um@symfont{um@fam\theum@fam}
     \let \UnicodeMathSymbol \um@mathsymbol@parse
     \let \um@setsinglemathalph \um@mathmap@parse
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
   \fi
   \DeclareSymbolFont{\um@symfont}
-    {\encodingdefault}{\zf@family}{\mddefault}{\updefault}%
+    {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
 %    \end{macrocode}
 % And now we input every single maths char. See File~\ref{part:awk} for
 % the source to |unicode-math.tex| which is used to create
@@ -1046,14 +1046,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \if@um@upGreek\um@def@upGreek\else\um@def@itGreek\fi
       \if@um@upgreek\um@def@upgreek\else\um@def@itgreek\fi
       \if@um@upNabla
-        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}%
+        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}
       \else
-        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}%
+        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}
       \fi
       \if@um@uppartial
-        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}%
+        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}
       \else
-        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}%
+        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}
       \fi
     \fi
 %    \end{macrocode}
@@ -1062,58 +1062,60 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \if@um@bfliteral
       \um_setup_bf_literals:
     \else
-      \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{%
-        \if@um@bfupLatin\um@usv@bfLatin\else\um@usv@bfitLatin\fi}%
-      \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{%
-        \if@um@bfuplatin\um@usv@bflatin\else\um@usv@bfitlatin\fi}%
+      \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{
+        \if@um@bfupLatin\um@usv@bfLatin\else\um@usv@bfitLatin\fi
+      }
+      \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{
+        \if@um@bfuplatin\um@usv@bflatin\else\um@usv@bfitlatin\fi
+      }
       \if@um@bfupGreek
-        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfGreek}%
-        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfvarTheta}%
+        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfGreek}
+        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfvarTheta}
       \else
-        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfitGreek}%
-        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfitvarTheta}%
+        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfitGreek}
+        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfitvarTheta}
       \fi
       \if@um@bfupgreek
-        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfgreek}%
-        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfvarepsilon}%
-        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfvartheta}%
-        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfvarkappa}%
-        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfvarphi}%
-        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfvarrho}%
-        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfvarpi}%
+        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfgreek}
+        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfvarepsilon}
+        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfvartheta}
+        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfvarkappa}
+        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfvarphi}
+        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfvarrho}
+        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfvarpi}
       \else
-        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfitgreek}%
-        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfitvarepsilon}%
-        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfitvartheta}%
-        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfitvarkappa}%
-        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfitvarphi}%
-        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfitvarrho}%
-        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}%
+        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfitgreek}
+        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfitvarepsilon}
+        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfitvartheta}
+        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfitvarkappa}
+        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfitvarphi}
+        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfitvarrho}
+        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}
       \fi
 %    \end{macrocode}
 % Bold nabla and partial symbols:
 %    \begin{macrocode}
       \if@um@upNabla
-        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfNabla}%
-        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfNabla}%
-        \um@setmathcode{\um@usv@bfsfNabla  }{\um@usv@bfsfNabla}%
-        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfNabla}%
+        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfNabla}
+        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfNabla}
+        \um@setmathcode{\um@usv@bfsfNabla  }{\um@usv@bfsfNabla}
+        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfNabla}
       \else
-        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfitNabla}%
-        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfitNabla}%
-        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}%
-        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}%
+        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfitNabla}
+        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfitNabla}
+        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}
+        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}
       \fi
       \if@um@uppartial
-        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfpartial}%
-        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfpartial}%
-        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfpartial}%
-        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfpartial}%
+        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfpartial}
+        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfpartial}
+        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfpartial}
+        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfpartial}
       \else
-        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfitpartial}%
-        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfitpartial}%
-        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfitpartial}%
-        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}%
+        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfitpartial}
+        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfitpartial}
+        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfitpartial}
+        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}
       \fi
     \fi
   \else
@@ -1151,7 +1153,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{macro}{\um@mathsymbol@noparse}
 %    \begin{macrocode}
-\newcommand\um@mathsymbol@noparse[4]{%
+\newcommand\um@mathsymbol@noparse[4]{
   \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
 }
 %    \end{macrocode}
@@ -1164,7 +1166,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \newcommand\um@mathsymbol@parse[4]{
   \um@parse@term{#1}{#2}{#3}{
-    %\um@PackageInfo{Defining \string#2 as mathchar #1}%
+    %\um@PackageInfo{Defining \string#2 as mathchar #1}
     \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
   }
 }
@@ -1248,38 +1250,39 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \setmathfont{Cambria Math}
 %
 % \begin{macro}{\um@nolimits}
-% This macro is a commalist containing those maths operators that require a \cmd\nolimits\ suffix. This list is used when processing |unicode-math-table.tex| to define such commands automatically (see the macro \cmd\um@set@mathsymbol\ on page~\pageref{mac:um@set@mathsymbol}). I've chosen essentially just the operators that look like integrals; hopefully a better mathematician can help me out here. I've a feeling that it's more useful \emph{not} to include the multiple integrals such as $\iiiint$, but that might be a matter of preference.
+% This macro is a sequence containing those maths operators that require a \cmd\nolimits\ suffix. This list is used when processing |unicode-math-table.tex| to define such commands automatically (see the macro \cmd\um@set@mathsymbol\ on page~\pageref{mac:um@set@mathsymbol}). I've chosen essentially just the operators that look like integrals; hopefully a better mathematician can help me out here. I've a feeling that it's more useful \emph{not} to include the multiple integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
-\def\um@nolimits{%
+\def\um@nolimits{
   \@elt\int\@elt\iint\@elt\iiint\@elt\iiiint\@elt\oint\@elt\oiint\@elt\oiiint
   \@elt\intclockwise\@elt\varointclockwise\@elt\ointctrclockwise\@elt\sumint
   \@elt\intbar\@elt\intBar\@elt\fint\@elt\cirfnint\@elt\awint\@elt\rppolint
   \@elt\scpolint\@elt\npolint\@elt\pointint\@elt\sqint\@elt\intlarhk\@elt\intx
-  \@elt\intcap\@elt\intcup\@elt\upint\@elt\lowint}
+  \@elt\intcap\@elt\intcup\@elt\upint\@elt\lowint
+}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\addnolimits}
 % This macro appends material to the macro containing the list of operators that don't take limits. See example following for usage. Note at present that this command must have taken effect before \cmd\setmathfont.
 %    \begin{macrocode}
-\newcommand\addnolimits[1]{%
-  \expandafter\def
-  \expandafter\um@nolimits
-  \expandafter{\um@nolimits\@elt#1}}
+\newcommand\addnolimits[1]{
+  \expandafter\def\expandafter\um@nolimits\expandafter{\um@nolimits\@elt#1}
+}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\removenolimits}
 % Can this macro be given a better name? It removes (globally) an item from the nolimits list. See example following for usage. 
 %    \begin{macrocode}
-\def\removenolimits#1{%
+\def\removenolimits#1{
   \begingroup
-    \def\@elt##1{%
+    \def\@elt##1{
       \ifx##1#1\else
         \noexpand\@elt\noexpand##1
      \fi}
-    \xdef\um@nolimits{\um@nolimits}%
-  \endgroup}
+    \xdef\um@nolimits{\um@nolimits}
+  \endgroup
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1390,24 +1393,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % (\ie, using \pkg{xkeyval}) but with a conditional to restrict
 % the scope of these features to \pkg{unicode-math} commands.
 %    \begin{macrocode}
-\newcommand\um@zf@feature[2]{%
-  \define@key[zf]{options}{#1}[]{%
+\newcommand\um@zf@feature[2]{
+  \define@key[zf]{options}{#1}[]{
     \if@um@fontspec@feature
       #2
     \else
       \PackageError{fontspec/unicode-math}
         {The ‘#1’ font feature can only be used for maths fonts}
         {The feature you tried to use can only be in commands
-          like \protect\setmathfont}%
+          like \protect\setmathfont}
     \fi}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{OpenType maths font features}
 %    \begin{macrocode}
-\um@zf@feature{ScriptStyle}{%
+\um@zf@feature{ScriptStyle}{
   \zf@update@ff{+ssty=0}}
-\um@zf@feature{ScriptScriptStyle}{%
+\um@zf@feature{ScriptScriptStyle}{
   \zf@update@ff{+ssty=1}}
 %    \end{macrocode}
 %
@@ -1464,14 +1467,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Start by iterating over the commalist, ignoring empties, and initialising the scratch conditional:
 %    \begin{macrocode}
-\newcommand\um@parse@term[4]{%
+\newcommand\um@parse@term[4]{
   \clist_map_variable:NNn \um@char@range \@ii {
     \unless\ifx\@ii\@empty
       \@tempswafalse
 %    \end{macrocode}
 % Match to either the character macro (\cmd\alpha) or the math type (\cmd\mathbin):
 %    \begin{macrocode}
-      \expandafter\um@firstchar\expandafter{\@ii}%
+      \expandafter\um@firstchar\expandafter{\@ii}
       \ifx\@tempa\um@backslash
         \expandafter\ifx\@ii#2\relax
           \@tempswatrue
@@ -1494,9 +1497,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
       \if@tempswa
         \ifx\um@char@num@range\@empty
-          \g@addto@macro\um@char@num@range{#1}%
+          \g@addto@macro\um@char@num@range{#1}
         \else
-          \g@addto@macro\um@char@num@range{,#1}%
+          \g@addto@macro\um@char@num@range{,#1}
         \fi
         #4%
       \fi
@@ -1523,9 +1526,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Weird syntax.
 % As shown previously in \tabref{ranges}, this macro can be passed four different input types via \cmd\um@parse@term.
 %    \begin{macrocode}
-\def\um@parse@range#1-#2-#3\@nil#4\@nil{%
-  \def\@tempa{#1}%
-  \def\@tempb{#2}%
+\def\um@parse@range#1-#2-#3\@nil#4\@nil{
+  \def\@tempa{#1}
+  \def\@tempb{#2}
 %    \end{macrocode}
 % \begin{tabular}{@{}ll}
 % \hline
@@ -1672,67 +1675,67 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % to upright or italic happens with the mathcode definitions, whereas these macros
 % just stand for the literal unicode characters.
 %    \begin{macrocode}
-\AtBeginDocument{\um@resolve@greek}%
-\newcommand\um@resolve@greek{%
-  \def\Alpha{\mitAlpha}%
-  \def\Beta{\mitBeta}%
-  \def\Gamma{\mitGamma}%
-  \def\Delta{\mitDelta}%
-  \def\Epsilon{\mitEpsilon}%
-  \def\Zeta{\mitZeta}%
-  \def\Eta{\mitEta}%
-  \def\Theta{\mitTheta}%
-  \def\Iota{\mitIota}%
-  \def\Kappa{\mitKappa}%
-  \def\Lambda{\mitLambda}%
-  \def\Mu{\mitMu}%
-  \def\Nu{\mitNu}%
-  \def\Xi{\mitXi}%
-  \def\Omicron{\mitOmicron}%
-  \def\Pi{\mitPi}%
-  \def\Rho{\mitRho}%
-  \def\varTheta{\mitvarTheta}%
-  \def\Sigma{\mitSigma}%
-  \def\Tau{\mitTau}%
-  \def\Upsilon{\mitUpsilon}%
-  \def\Phi{\mitPhi}%
-  \def\Chi{\mitChi}%
-  \def\Psi{\mitPsi}%
-  \def\Omega{\mitOmega}%
+\AtBeginDocument{\um@resolve@greek}
+\newcommand\um@resolve@greek{
+  \def\Alpha{\mitAlpha}
+  \def\Beta{\mitBeta}
+  \def\Gamma{\mitGamma}
+  \def\Delta{\mitDelta}
+  \def\Epsilon{\mitEpsilon}
+  \def\Zeta{\mitZeta}
+  \def\Eta{\mitEta}
+  \def\Theta{\mitTheta}
+  \def\Iota{\mitIota}
+  \def\Kappa{\mitKappa}
+  \def\Lambda{\mitLambda}
+  \def\Mu{\mitMu}
+  \def\Nu{\mitNu}
+  \def\Xi{\mitXi}
+  \def\Omicron{\mitOmicron}
+  \def\Pi{\mitPi}
+  \def\Rho{\mitRho}
+  \def\varTheta{\mitvarTheta}
+  \def\Sigma{\mitSigma}
+  \def\Tau{\mitTau}
+  \def\Upsilon{\mitUpsilon}
+  \def\Phi{\mitPhi}
+  \def\Chi{\mitChi}
+  \def\Psi{\mitPsi}
+  \def\Omega{\mitOmega}
 %    \end{macrocode}
 % Lowercase:
 %    \begin{macrocode}
-  \def\alpha{\mitalpha}%
-  \def\beta{\mitbeta}%
-  \def\gamma{\mitgamma}%
-  \def\delta{\mitdelta}%
-  \def\epsilon{\mitepsilon}%
-  \def\zeta{\mitzeta}%
-  \def\eta{\miteta}%
-  \def\theta{\mittheta}%
-  \def\iota{\mitiota}%
-  \def\kappa{\mitkappa}%
-  \def\lambda{\mitlambda}%
-  \def\mu{\mitmu}%
-  \def\nu{\mitnu}%
-  \def\xi{\mitxi}%
-  \def\omicron{\mitomicron}%
-  \def\pi{\mitpi}%
-  \def\rho{\mitrho}%
-  \def\varsigma{\mitvarsigma}%
-  \def\sigma{\mitsigma}%
-  \def\tau{\mittau}%
-  \def\upsilon{\mitupsilon}%
-  \def\phi{\mitphi}%
-  \def\chi{\mitchi}%
-  \def\psi{\mitpsi}%
-  \def\omega{\mitomega}%
-  \def\varepsilon{\mitvarepsilon}%
-  \def\vartheta{\mitvartheta}%
-  \def\varkappa{\mitvarkappa}%
-  \def\varphi{\mitvarphi}%
-  \def\varrho{\mitvarrho}%
-  \def\varpi{\mitvarpi}%
+  \def\alpha{\mitalpha}
+  \def\beta{\mitbeta}
+  \def\gamma{\mitgamma}
+  \def\delta{\mitdelta}
+  \def\epsilon{\mitepsilon}
+  \def\zeta{\mitzeta}
+  \def\eta{\miteta}
+  \def\theta{\mittheta}
+  \def\iota{\mitiota}
+  \def\kappa{\mitkappa}
+  \def\lambda{\mitlambda}
+  \def\mu{\mitmu}
+  \def\nu{\mitnu}
+  \def\xi{\mitxi}
+  \def\omicron{\mitomicron}
+  \def\pi{\mitpi}
+  \def\rho{\mitrho}
+  \def\varsigma{\mitvarsigma}
+  \def\sigma{\mitsigma}
+  \def\tau{\mittau}
+  \def\upsilon{\mitupsilon}
+  \def\phi{\mitphi}
+  \def\chi{\mitchi}
+  \def\psi{\mitpsi}
+  \def\omega{\mitomega}
+  \def\varepsilon{\mitvarepsilon}
+  \def\vartheta{\mitvartheta}
+  \def\varkappa{\mitvarkappa}
+  \def\varphi{\mitvarphi}
+  \def\varrho{\mitvarrho}
+  \def\varpi{\mitvarpi}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1740,7 +1743,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{macro}{\um@def@numbers}
 %    \begin{macrocode}
-\newcommand\um@def@numbers{%
+\newcommand\um@def@numbers{
   \um@setmathcode[10]{\um@usv@num}{\um@usv@num}}
 %    \end{macrocode}
 % \end{macro}
@@ -1784,14 +1787,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{macro}{\um@def@upLatin}
 %    \begin{macrocode}
-\newcommand\um@def@upLatin{%
+\newcommand\um@def@upLatin{
     \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\um@def@itLatin}
 %    \begin{macrocode}
-\newcommand\um@def@itLatin{%
+\newcommand\um@def@itLatin{
     \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}}
 %    \end{macrocode}
 % \end{macro}
@@ -1800,27 +1803,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Don't overlook `h', which maps to \unichar{210E}{PLANCK CONSTANT}
 % instead of the expected \unichar{1D455}{MATHEMATICAL ITALIC SMALL H}.
 %    \begin{macrocode}
-\newcommand\um@def@itlatin{%
-  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}%
-  \um@setmathcode{`\h,\um@usv@ith}{\um@usv@ith}%
+\newcommand\um@def@itlatin{
+  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}
+  \um@setmathcode{`\h,\um@usv@ith}{\um@usv@ith}
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\um@def@uplatin}
 %    \begin{macrocode}
-\newcommand\um@def@uplatin{%
-  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}%
-  \um@setmathcode{\um@usv@ith}{`\h}%
+\newcommand\um@def@uplatin{
+  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}
+  \um@setmathcode{\um@usv@ith}{`\h}
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\um@def@upGreek}
 %    \begin{macrocode}
-\newcommand\um@def@upGreek{%
-  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}%
-  \um@setmathcode{\um@usv@varTheta,"1D6F3}{\um@usv@varTheta}%
+\newcommand\um@def@upGreek{
+  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}
+  \um@setmathcode{\um@usv@varTheta,"1D6F3}{\um@usv@varTheta}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1828,37 +1831,37 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{macro}{\um@def@itGreek}
 %    \begin{macrocode}
-\newcommand\um@def@itGreek{%
-  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}%
-  \um@setmathcode{\um@usv@varTheta}{\um@usv@itvarTheta}%
+\newcommand\um@def@itGreek{
+  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}
+  \um@setmathcode{\um@usv@varTheta}{\um@usv@itvarTheta}
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\um@def@upgreek}
 %    \begin{macrocode}
-\newcommand\um@def@upgreek{%
-  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}%
-  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}%
-  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}%
-  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}%
-  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}%
-  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}%
-  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}%
+\newcommand\um@def@upgreek{
+  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}
+  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}
+  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}
+  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}
+  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}
+  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}
+  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\um@def@itgreek}
 %    \begin{macrocode}
-\newcommand\um@def@itgreek{%
-  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}%
-  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}%
-  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}%
-  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}%
-  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}%
-  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}%
-  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}%
+\newcommand\um@def@itgreek{
+  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}
+  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}
+  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}
+  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}
+  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}
+  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}
+  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1964,19 +1967,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathup: {
-  \um_set_mathalphabet_latin:Nnn{\mathup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}%
-  \um_set_mathalphabet_greek:Nnn{\mathup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@varTheta}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}%
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}%
+  \um_set_mathalphabet_latin:Nnn{\mathup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}
+  \um_set_mathalphabet_greek:Nnn{\mathup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@varTheta}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}
 }
 %    \end{macrocode}
 %
@@ -1992,23 +1995,23 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Roman:
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathit: {
-  \um_set_mathalphabet_latin:Nnn{\mathit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{`\h,\um@usv@ith}{\um@usv@ith}%
+  \um_set_mathalphabet_latin:Nnn{\mathit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}
+  \um_set_mathalphabet_char:Nnn{\mathit}{`\h,\um@usv@ith}{\um@usv@ith}
 %    \end{macrocode}
 % Greek:
 %    \begin{macrocode}
-  \um_set_mathalphabet_greek:Nnn{\mathit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@itvarTheta}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}%
-  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}%
+  \um_set_mathalphabet_greek:Nnn{\mathit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@itvarTheta}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}
+  \um_set_mathalphabet_char:Nnn{\mathit}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}
 }
 %    \end{macrocode}
 %
@@ -2025,18 +2028,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Roman uppercase:
 %    \begin{macrocode}
-  \um_set_mathalphabet_latin:Nnn{\mathbb}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bbLatin}%
-  \um_set_mathalphabet_char:Nnn{\mathbb}{`\C,"1D60A}{"2102}%
-  \um_set_mathalphabet_char:Nnn{\mathbb}{`\H,"1D60F}{"210D}%
-  \um_set_mathalphabet_char:Nnn{\mathbb}{`\N,"1D60F}{"2115}%
-  \um_set_mathalphabet_char:Nnn{\mathbb}{`\P,"1D617}{"2119}%
-  \um_set_mathalphabet_char:Nnn{\mathbb}{`\Q,"1D618}{"211A}%
-  \um_set_mathalphabet_char:Nnn{\mathbb}{`\R,"1D619}{"211D}%
-  \um_set_mathalphabet_char:Nnn{\mathbb}{`\Z,"1D621} {"2124}%
+  \um_set_mathalphabet_latin:Nnn{\mathbb}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bbLatin}
+  \um_set_mathalphabet_char:Nnn{\mathbb}{`\C,"1D60A}{"2102}
+  \um_set_mathalphabet_char:Nnn{\mathbb}{`\H,"1D60F}{"210D}
+  \um_set_mathalphabet_char:Nnn{\mathbb}{`\N,"1D60F}{"2115}
+  \um_set_mathalphabet_char:Nnn{\mathbb}{`\P,"1D617}{"2119}
+  \um_set_mathalphabet_char:Nnn{\mathbb}{`\Q,"1D618}{"211A}
+  \um_set_mathalphabet_char:Nnn{\mathbb}{`\R,"1D619}{"211D}
+  \um_set_mathalphabet_char:Nnn{\mathbb}{`\Z,"1D621} {"2124}
 %    \end{macrocode}
 % Roman lowercase:
 %    \begin{macrocode}
-  \um_set_mathalphabet_latin:Nnn{\mathbb}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bblatin}%
+  \um_set_mathalphabet_latin:Nnn{\mathbb}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bblatin}
 }
 %    \end{macrocode}
 %
@@ -2047,19 +2050,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathscr: {
-  \um_set_mathalphabet_latin:Nnn{\mathscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@scrLatin}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\B,"1D435}{"212C}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\E,"1D438}{"2130}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\F,"1D439}{"2131}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\H,"1D43B}{"210B}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\I,"1D43C}{"2110}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\L,"1D43F}{"2112}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\M,"1D440}{"2133}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\R,"1D445}{"211B}%
-  \um_set_mathalphabet_latin:Nnn{\mathscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@scrlatin}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\e,"1D452}{"212F}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\g,"1D454}{"210A}%
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\o,"1D45C}{"2134}%
+  \um_set_mathalphabet_latin:Nnn{\mathscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@scrLatin}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\B,"1D435}{"212C}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\E,"1D438}{"2130}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\F,"1D439}{"2131}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\H,"1D43B}{"210B}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\I,"1D43C}{"2110}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\L,"1D43F}{"2112}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\M,"1D440}{"2133}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\R,"1D445}{"211B}
+  \um_set_mathalphabet_latin:Nnn{\mathscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@scrlatin}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\e,"1D452}{"212F}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\g,"1D454}{"210A}
+  \um_set_mathalphabet_char:Nnn{\mathscr}{`\o,"1D45C}{"2134}
 }
 %    \end{macrocode}
 %
@@ -2072,13 +2075,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Letters, with exceptions $\{\mathfrak{C,H,I,R,Z}\}$:
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathfrak: {
-  \um_set_mathalphabet_latin:Nnn{\mathfrak}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@frakLatin}%
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\C,"1D436}{"212D}%
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\H,"1D43B}{"210C}%
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\I,"1D43C}{"2111}%
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\R,"1D445}{"211C}%
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\Z,"1D44D}{"2128}%
-  \um_set_mathalphabet_latin:Nnn{\mathfrak}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@fraklatin}%
+  \um_set_mathalphabet_latin:Nnn{\mathfrak}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@frakLatin}
+  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\C,"1D436}{"212D}
+  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\H,"1D43B}{"210C}
+  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\I,"1D43C}{"2111}
+  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\R,"1D445}{"211C}
+  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\Z,"1D44D}{"2128}
+  \um_set_mathalphabet_latin:Nnn{\mathfrak}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@fraklatin}
 }
 %    \end{macrocode}
 %
@@ -2090,9 +2093,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathsf: {
-  \um_set_mathalphabet_numbers:Nnn{\mathsf}{\um@usv@num}{\um@usv@sfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sflatin}%
+  \um_set_mathalphabet_numbers:Nnn{\mathsf}{\um@usv@num}{\um@usv@sfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sflatin}
 }
 %    \end{macrocode}
 %
@@ -2104,9 +2107,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathsfit: {
-  \um_set_mathalphabet_numbers:Nnn{\mathsfit}{\um@usv@num}{\um@usv@sfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfitLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfitlatin}%
+  \um_set_mathalphabet_numbers:Nnn{\mathsfit}{\um@usv@num}{\um@usv@sfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfitLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfitlatin}
 }
 %    \end{macrocode}
 %
@@ -2120,9 +2123,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \setmathfont{Cambria Math}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathtt: {
-  \um_set_mathalphabet_numbers:Nnn{\mathtt}{\um@usv@num}{\um@usv@ttnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathtt}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@ttLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathtt}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@ttlatin}%
+  \um_set_mathalphabet_numbers:Nnn{\mathtt}{\um@usv@num}{\um@usv@ttnum}
+  \um_set_mathalphabet_latin:Nnn{\mathtt}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@ttLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathtt}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@ttlatin}
 }
 %    \end{macrocode}
 %
@@ -2140,82 +2143,82 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbf: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbf}{\um@usv@num}{\um@usv@bfnum}%
-  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Digamma}{"1D7CA}%
-  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@digamma}{"1D7CB}%
+  \um_set_mathalphabet_numbers:Nnn{\mathbf}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Digamma}{"1D7CA}
+  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@digamma}{"1D7CB}
   \if@um@bfliteral
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin}{\um@usv@bfLatin}%
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@itLatin}{\um@usv@bfitLatin}%
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin}{\um@usv@bflatin}%
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@itlatin}{\um@usv@bfitlatin}%
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek}{\um@usv@bfGreek}%
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@itGreek}{\um@usv@bfitGreek}%
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek}{\um@usv@bfgreek}%
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@itgreek}{\um@usv@bfitgreek}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um@usv@bfith}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta}{\um@usv@bfvarTheta}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla}{\um@usv@bfNabla}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Digamma}{\um@usv@bfDigamma}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial}{\um@usv@bfpartial}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon}{\um@usv@bfvarepsilon}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@vartheta}{\um@usv@bfvartheta}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varkappa}{\um@usv@bfvarkappa}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi}{\um@usv@bfvarphi}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho}{\um@usv@bfvarrho}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi}{\um@usv@bfvarpi}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@digamma}{\um@usv@bfdigamma}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarTheta}{\um@usv@bfitvarTheta}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itNabla}{\um@usv@bfitNabla}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itpartial}{\um@usv@bfitpartial}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvartheta}{\um@usv@bfitvartheta}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarkappa}{\um@usv@bfitvarkappa}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarphi}{\um@usv@bfitvarphi}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarrho}{\um@usv@bfitvarrho}%
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarpi}{\um@usv@bfitvarpi}%
+    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin}{\um@usv@bfLatin}
+    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@itLatin}{\um@usv@bfitLatin}
+    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin}{\um@usv@bflatin}
+    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@itlatin}{\um@usv@bfitlatin}
+    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek}{\um@usv@bfGreek}
+    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@itGreek}{\um@usv@bfitGreek}
+    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek}{\um@usv@bfgreek}
+    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@itgreek}{\um@usv@bfitgreek}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um@usv@bfith}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta}{\um@usv@bfvarTheta}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla}{\um@usv@bfNabla}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Digamma}{\um@usv@bfDigamma}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial}{\um@usv@bfpartial}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon}{\um@usv@bfvarepsilon}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@vartheta}{\um@usv@bfvartheta}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varkappa}{\um@usv@bfvarkappa}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi}{\um@usv@bfvarphi}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho}{\um@usv@bfvarrho}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi}{\um@usv@bfvarpi}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@digamma}{\um@usv@bfdigamma}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarTheta}{\um@usv@bfitvarTheta}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itNabla}{\um@usv@bfitNabla}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itpartial}{\um@usv@bfitpartial}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvartheta}{\um@usv@bfitvartheta}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarkappa}{\um@usv@bfitvarkappa}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarphi}{\um@usv@bfitvarphi}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarrho}{\um@usv@bfitvarrho}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarpi}{\um@usv@bfitvarpi}
   \else
     \if@um@bfupLatin
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}%
+      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}
     \else
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}%
+      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}
     \fi
     \if@um@bfuplatin
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um@usv@bfuph}%
+      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um@usv@bfuph}
     \else
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um@usv@bfith}%
+      \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um@usv@bfith}
     \fi
     \if@um@bfupGreek
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfGreek}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}%
+      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfGreek}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}
     \else
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfitGreek}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfitvarTheta}%
+      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfitGreek}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfitvarTheta}
     \fi
     \if@um@bfupgreek
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfgreek}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfvarkappa}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}%
+      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfgreek}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfvarkappa}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}
     \else
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfitgreek}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfitvartheta}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfitvarkappa}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}%
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}%
+      \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfitgreek}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfitvartheta}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfitvarkappa}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}
     \fi
   \fi
 }
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla}{"1D6C1}%
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial}{"1D6DB}%
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itNabla}{"1D6C1}%
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itpartial}{"1D6DB}%
+%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla}{"1D6C1}
+%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial}{"1D6DB}
+%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itNabla}{"1D6C1}
+%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itpartial}{"1D6DB}
 %    \end{macrocode}
 %
 %
@@ -2233,24 +2236,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfit: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfit}{\um@usv@num}{\um@usv@bfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfitGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfitgreek}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@bfLatin}{\um@usv@bfitLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@bflatin}{\um@usv@bfitlatin}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@bfGreek}{\um@usv@bfitGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@bfgreek}{\um@usv@bfitgreek}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfitvarTheta}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfitNabla}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfitpartial}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfitvartheta}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfitvarkappa}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}%
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}%
+  \um_set_mathalphabet_numbers:Nnn{\mathbfit}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfitLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfitlatin}
+  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfitGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfitgreek}
+  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@bfLatin}{\um@usv@bfitLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\um@usv@bflatin}{\um@usv@bfitlatin}
+  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@bfGreek}{\um@usv@bfitGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\um@usv@bfgreek}{\um@usv@bfitgreek}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfitvarTheta}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfitNabla}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfitpartial}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfitvartheta}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfitvarkappa}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}
+  \um_set_mathalphabet_char:Nnn{\mathbfit}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}
 }
 %    \end{macrocode}
 %
@@ -2268,24 +2271,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfup: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfup}{\um@usv@num}{\um@usv@bfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfgreek}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@bfLatin}{\um@usv@bfLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@bflatin}{\um@usv@bflatin}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@bfGreek}{\um@usv@bfGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@bfgreek}{\um@usv@bfgreek}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfNabla}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfpartial}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfvarkappa}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}%
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}%
+  \um_set_mathalphabet_numbers:Nnn{\mathbfup}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bflatin}
+  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfgreek}
+  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@bfLatin}{\um@usv@bfLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\um@usv@bflatin}{\um@usv@bflatin}
+  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@bfGreek}{\um@usv@bfGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@bfgreek}{\um@usv@bfgreek}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfNabla}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfpartial}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@bfvarkappa}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}
+  \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}
 }
 %    \end{macrocode}
 %
@@ -2299,9 +2302,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbffrak: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbffrak}{\um@usv@num}{\um@usv@bfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathbffrak}{\um@usv@upLatin, \um@usv@itLatin,\um@usv@frakLatin}{\um@usv@bffrakLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbffrak}{\um@usv@uplatin,\um@usv@itlatin,\um@usv@fraklatin}{\um@usv@bffraklatin}%
+  \um_set_mathalphabet_numbers:Nnn{\mathbffrak}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathbffrak}{\um@usv@upLatin, \um@usv@itLatin,\um@usv@frakLatin}{\um@usv@bffrakLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbffrak}{\um@usv@uplatin,\um@usv@itlatin,\um@usv@fraklatin}{\um@usv@bffraklatin}
 }
 %    \end{macrocode}
 %
@@ -2313,9 +2316,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfscr: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfscr}{\um@usv@num}{\um@usv@bfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfscrLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfscrlatin}%
+  \um_set_mathalphabet_numbers:Nnn{\mathbfscr}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathbfscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfscrLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfscrlatin}
 }
 %    \end{macrocode}
 %
@@ -2334,23 +2337,23 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Numbers (always upright) and letters:
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsf: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfsf}{\um@usv@num}{\um@usv@bfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsflatin}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfsf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfsf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfgreek}%
+  \um_set_mathalphabet_numbers:Nnn{\mathbfsf}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathbfsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsflatin}
+  \um_set_mathalphabet_greek:Nnn{\mathbfsf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathbfsf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfgreek}
 %    \end{macrocode}
 % Others:
 %    \begin{macrocode}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@Nabla,\um@usv@itNabla}{"1D76F}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@partial,\um@usv@itpartial}{"1D789}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D78A}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@vartheta,\um@usv@itvartheta}{"1D78B}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varkappa,\um@usv@itvarkappa}{"1D78C}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varphi,\um@usv@itvarphi}{"1D78D}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varrho,\um@usv@itvarrho}{"1D78E}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varpi,\um@usv@itvarpi}{"1D78F}%
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@Nabla,\um@usv@itNabla}{"1D76F}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@partial,\um@usv@itpartial}{"1D789}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D78A}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@vartheta,\um@usv@itvartheta}{"1D78B}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varkappa,\um@usv@itvarkappa}{"1D78C}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varphi,\um@usv@itvarphi}{"1D78D}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varrho,\um@usv@itvarrho}{"1D78E}
+  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varpi,\um@usv@itvarpi}{"1D78F}
 }
 %    \end{macrocode}
 %
@@ -2368,23 +2371,23 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsfit: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfsfit}{\um@usv@num}{\um@usv@bfnum}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfitLatin}%
-  \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfitlatin}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfsfit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfitGreek}%
-  \um_set_mathalphabet_greek:Nnn{\mathbfsfit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfitgreek}%
+  \um_set_mathalphabet_numbers:Nnn{\mathbfsfit}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfitLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfitlatin}
+  \um_set_mathalphabet_greek:Nnn{\mathbfsfit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfitGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathbfsfit}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfitgreek}
 %    \end{macrocode}
 % Other symbols:
 %    \begin{macrocode}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varTheta}{"1D7A1}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfsfitNabla}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfsfitpartial}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D7C4}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@vartheta,\um@usv@itvartheta}{"1D7C5}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varkappa,\um@usv@itvarkappa}{"1D7C6}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varphi,\um@usv@itvarphi}{"1D7C7}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varrho,\um@usv@itvarrho}{"1D7C8}%
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varpi,\um@usv@itvarpi}{"1D7C9}%
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varTheta}{"1D7A1}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfsfitNabla}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfsfitpartial}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D7C4}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@vartheta,\um@usv@itvartheta}{"1D7C5}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varkappa,\um@usv@itvarkappa}{"1D7C6}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varphi,\um@usv@itvarphi}{"1D7C7}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varrho,\um@usv@itvarrho}{"1D7C8}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\um@usv@varpi,\um@usv@itvarpi}{"1D7C9}
 }
 %    \end{macrocode}
 %
@@ -2425,9 +2428,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % and we're good to go.
 %    \begin{macrocode}
 \begingroup
-  \def\UnicodeMathSymbol#1#2#3#4{%
+  \def\UnicodeMathSymbol#1#2#3#4{
     \um@scancharlet#2=#1\@nil}
-  \@input{unicode-math-table.tex}%
+  \@input{unicode-math-table.tex}
 \endgroup
 %    \end{macrocode}
 %
@@ -2556,15 +2559,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-\def\r@@t#1#2{%
-  \setbox\z@\hbox{$\m@th #1\sqrtsign{#2}$}%
-  \um@scaled@apply{#1}{\kern}{\fontdimen63\um@font}%
+\def\r@@t#1#2{
+  \setbox\z@\hbox{$\m@th #1\sqrtsign{#2}$}
+  \um@scaled@apply{#1}{\kern}{\fontdimen63\um@font}
   \raise \dimexpr(
       \um@fontdimen@percent{65}{\um@font}\ht\z@-
       \um@fontdimen@percent{65}{\um@font}\dp\z@
     )\relax
     \copy \rootbox%
-  \um@scaled@apply{#1}{\kern}{\fontdimen64\um@font}%
+  \um@scaled@apply{#1}{\kern}{\fontdimen64\um@font}
   \box \z@}
 %    \end{macrocode}
 % \end{macro}
@@ -2751,14 +2754,14 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 %
 % For symbols, something like:
 % \begin{verbatim}
-% \def\DeclareMathSymbol#1#2#3#4{%
+% \def\DeclareMathSymbol#1#2#3#4{
 %   \global\mathchardef#1"\mathchar@type#2
 %     \expandafter\hexnumber@\csname sym#2\endcsname
 %     {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
 % \end{verbatim}
 % For characters, something like:
 % \begin{verbatim}
-% \def\DeclareMathSymbol#1#2#3#4{%
+% \def\DeclareMathSymbol#1#2#3#4{
 %   \global\mathcode`#1"\mathchar@type#2
 %     \expandafter\hexnumber@\csname sym#2\endcsname
 %     {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
@@ -2776,7 +2779,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 %   \stepcounter{mfdimen}^^A
 %   \themfdimen & {\scshape\small #1} & #2\vspace{0.5ex} \tabularnewline}
 %
-% \begin{longtable}{%
+% \begin{longtable}{
 %   @{}c>{\raggedright\parfillskip=0pt}p{4cm}>{\raggedright}p{7cm}@{}}
 % \toprule \cmd\fontdimen & Dimension name & Description\tabularnewline\midrule \endhead
 % \bottomrule\endfoot
@@ -2918,16 +2921,16 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \def\itlatin{푎푏푐푑푒푓푔ℎ푖푗푘푙푚푛표푝푞푟푠푡푢푣푤푥푦푧}
 \def\itGreek{훢훣훤훥훦훧훨훩훳훪훫훬훭훮훯훰훱훲훴훵훶훷훸훹훺}
 \def\itgreek{훼훽훾훿휀휖휁휂휃휗휄휅휘휆휇휈휉휊휋휛휌휚휍휎휏휐휑휙휒휓휔}
-\def\testmath#1{%
-  \makebox[\linewidth][l]{%
-    \makebox[0pt][l]{$\csname up#1\endcsname$}%
+\def\testmath#1{
+  \makebox[\linewidth][l]{
+    \makebox[0pt][l]{$\csname up#1\endcsname$}
     \makebox[0pt][l]{$\csname it#1\endcsname$}}}
 \begin{document}
 \setmathfont[Colour=2255FF99]{Cambria Math}
 \parindent=0pt
 \voffset=-1in
 \hoffset=-1in
-\setbox0=\vbox{%
+\setbox0=\vbox{
 \testmath{Latin}\\
 \testmath{latin}\\
 \testmath{Greek}\\
@@ -2972,19 +2975,19 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \def\bfitGreek{휜휝휞휟휠휡휢휣휤휥휦휧휨휩휪휫휬휭휮휯휰휱휲휳휴}
 \def\bfitgreek{휶휷휸휹휺휻휼휽휾휿흀흁흂흃흄흅흆흇흈흉흊흋흌흍흎흐흑흒흓흔흕}
 \providecommand\mathalphabet{\mathbf}
-\def\testmath#1{%
-  \makebox[\linewidth][l]{%
-    \makebox[0pt][l]{$\mathalphabet{\csname up#1\endcsname}$}%
-    \makebox[0pt][l]{$\mathalphabet{\csname it#1\endcsname}$}%
-    \makebox[0pt][l]{$\csname bfup#1\endcsname$}%
-    \makebox[0pt][l]{$\csname bfit#1\endcsname$}%
+\def\testmath#1{
+  \makebox[\linewidth][l]{
+    \makebox[0pt][l]{$\mathalphabet{\csname up#1\endcsname}$}
+    \makebox[0pt][l]{$\mathalphabet{\csname it#1\endcsname}$}
+    \makebox[0pt][l]{$\csname bfup#1\endcsname$}
+    \makebox[0pt][l]{$\csname bfit#1\endcsname$}
     }}
 \begin{document}
 \setmathfont[Colour=2255FF55]{Cambria Math}
 \parindent=0pt
 \voffset=-1in
 \hoffset=-1in
-\setbox0=\vbox{%
+\setbox0=\vbox{
 \testmath{Latin}\\
 \testmath{latin}\\
 \testmath{Greek}\\
@@ -3051,7 +3054,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \definecolor{niceblue}{rgb}{0.2,0.4,0.8}
 \newenvironment{example}[1]
   {\VerbatimEnvironment
-   \def\Options{#1}%
+   \def\Options{#1}
    \begin{VerbatimOut}[gobble=4]{\examplefilename}}
   {\end{VerbatimOut}\relax
    \typesetexample}
@@ -3074,17 +3077,17 @@ sed -e ' s/{N}/{\\mathord}/   ' \
    \begin{minipage}{\linewidth}
    \color{niceblue}
    \hrulefill\par
-   \edef\@tempa{[gobble=0,fontsize=\noexpand\scriptsize,\Options]}%
+   \edef\@tempa{[gobble=0,fontsize=\noexpand\scriptsize,\Options]}
    \begin{lrbox}{\verbatimbox}\relax
-     \expandafter\BVerbatimInput\@tempa{\examplefilename}%
+     \expandafter\BVerbatimInput\@tempa{\examplefilename}
    \end{lrbox}
    \begin{list}{}{\setlength\itemindent{0pt}
                   \setlength\leftmargin\exoutdent
                   \setlength\rightmargin{0pt}}\item
    \ifx\auxwidth\relax
-     \setlength\verbatimwidth{\wd\verbatimbox}%
+     \setlength\verbatimwidth{\wd\verbatimbox}
    \else
-     \setlength\verbatimwidth{\auxwidth}%
+     \setlength\verbatimwidth{\auxwidth}
    \fi
    \begin{minipage}[c]{\textwidth-\exoutdent-\verbatimwidth-\exverbgap}
      \catcode`\%=14\centering\input\examplefilename\relax
@@ -3122,10 +3125,12 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \g@addto@macro\endmacro{\setcounter{argument}{0}}
 \newcommand*\darg[1]{%
   \stepcounter{argument}%
-  {\ttfamily\char`\#\theargument~:~}#1\par\noindent\ignorespaces}
+  {\ttfamily\char`\#\theargument~:~}#1\par\noindent\ignorespaces
+}
 \newcommand*\doarg[1]{%
   \stepcounter{argument}%
-  {\ttfamily\makebox[0pt][r]{[}\char`\#\theargument]:~}#1\par\noindent\ignorespaces}
+  {\ttfamily\makebox[0pt][r]{[}\char`\#\theargument]:~}#1\par\noindent\ignorespaces
+}
 \makeatother
 \newcommand\codeline[1]{\par{\hspace{2\parindent}#1\par\noindent}\ignorespaces}
 
