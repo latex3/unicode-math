@@ -2596,6 +2596,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+% Interaction with \textsf{beamer}:
+%    \begin{macrocode}
+\AtBeginDocument{
+  \@ifpackageloaded{beamer}{
+    \ifbeamer@suppressreplacements\else
+      \PackageWarningNoLine{unicode-math}{
+        Disabling~ beamer's~ math~ setup.^^J
+        Please~ load~ beamer~ with~ the~ [professionalfont]~ class~ option 
+      }
+      \beamer@suppressreplacementstrue
+    \fi
+  }{}
+}
+%    \end{macrocode}
+%
 % The end.
 %    \begin{macrocode}
 \ExplSyntaxOff
