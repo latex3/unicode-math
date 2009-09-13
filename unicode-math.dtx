@@ -2450,14 +2450,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{example}{}
 %   \setmathfont{Cambria Math}
 %   [$x\prime$] [$x\prime\prime\prime$]
-%   [$x\prime\prime\prime\prime\prime\prime$] \\
-%   [$x'$] [$x'''$] [$x''''''$] \\
+%   [$x\prime\prime\prime\prime\prime\prime$] \\~
+%   [$x'$] [$x'''$] [$x''''''$] \\~
 %   [$x′$] [$x′′′$] [$x′′′′′′$]
 % \end{example}
 %
 % We need a new `prime' algorithm. Unicode math has four pre-drawn prime glyphs.
 % \begin{quote}\obeylines
-% \unichar{2032}{prime} (\cs{prime}): $x\prime$
+% \unichar{2032}{prime} (\cs{primesingle}): $x\primesingle$
 % \unichar{2033}{double prime} (\cs{primedouble}): $x\primedouble$
 % \unichar{2034}{triple prime} (\cs{primetriple}): $x\primetriple$
 % \unichar{2057}{quadruple prime} (\cs{primequadruple}): $x\primequadruple$
@@ -2519,8 +2519,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % Scanning is more annoying than you'd think because we want to support all three of |\prime|, |'|, and the unicode prime. And |\ifx| doesn't work with mathactive chars.
+%
+% Insert a \cs{bgroup}\dots\cs{egroup} wrapper so that superscript primes work, but does this break spacing for the rest of the time?
 %    \begin{macrocode}
 \cs_new:Nn \um_scanprime: {
+  \bgroup
   \num_zero:N \l_um_primecount_num
   \um_scanprime_collect:
 }
@@ -2536,6 +2539,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um_scanprime_collect:
       }{
         \um_nprimes_select:n {\l_um_primecount_num}
+        \egroup
       }
     }
   }
