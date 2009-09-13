@@ -457,6 +457,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \newif\if@um@upNabla
 \newif\if@um@uppartial
+\bool_new:N \g_um_vargreek_bool
 %    \end{macrocode}
 %
 % \paragraph{Programming niceties}
@@ -618,6 +619,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfuplatinfalse
     \@um@upNablafalse
     \@um@uppartialfalse
+    \bool_set_false:N \g_um_vargreek_bool
   \or
     \@um@upGreektrue
     \@um@upgreekfalse
@@ -629,6 +631,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfuplatintrue
     \@um@upNablatrue
     \@um@uppartialtrue
+    \bool_set_true:N \g_um_vargreek_bool
   \or
     \@um@upGreektrue
     \@um@upgreektrue
@@ -640,10 +643,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfuplatintrue
     \@um@upNablatrue
     \@um@uppartialtrue
+    \bool_set_false:N \g_um_vargreek_bool
   \or
     \@um@literaltrue
     \@um@bfliteraltrue
-  \fi}
+    \bool_set_false:N \g_um_vargreek_bool
+  \fi
+}
 %    \end{macrocode}
 %
 % \paragraph{bold-style}
@@ -666,7 +672,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfuplatintrue
   \or
     \@um@bfliteraltrue
-  \fi}
+  \fi
+}
 %    \end{macrocode}
 %
 % \paragraph{Symbol obliqueness}
@@ -676,7 +683,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@upNablatrue
   \or
     \@um@upNablafalse
-  \fi}
+  \fi
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -685,12 +693,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uppartialtrue
   \or
     \@um@uppartialfalse
-  \fi}
+  \fi
+}
+%    \end{macrocode}
+%
+% \paragraph{Epsilon and phi shapes}
+%    \begin{macrocode}
+\define@choicekey*{unicode-math.sty}{vargreek-shape}[\@tempa\@tempb]{unicode,TeX}{
+  \ifcase\@tempb\relax
+    \bool_set_false:N \g_um_vargreek_bool
+  \or
+    \bool_set_true:N \g_um_vargreek_bool
+  \fi
+}
 %    \end{macrocode}
 %
 %
 %    \begin{macrocode}
-\ExecuteOptionsX{math-style=iso}
+\ExecuteOptionsX{math-style=TeX}
 \ProcessOptionsX
 %    \end{macrocode}
 %
@@ -819,7 +839,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \expandafter\in@\expandafter#2\expandafter{\um@nolimits}
       \ifin@
         \expandafter\nolimits
-      \fi}
+      \fi
+    }
 %    \end{macrocode}
 % Don't forget that the actual \cmd\sum\ macro is simply defined in terms of
 % the literal unicode symbol!
@@ -875,7 +896,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Note that this declaration \emph{isn't} global so that it can be constrained by grouping.
 %    \begin{macrocode}
 \newcommand\SetMathCode[4]{
-  \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax}
+  \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1402,16 +1424,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         {The ‘#1’ font feature can only be used for maths fonts}
         {The feature you tried to use can only be in commands
           like \protect\setmathfont}
-    \fi}}
+    \fi
+  }
+}
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsection{OpenType maths font features}
 %    \begin{macrocode}
 \um@zf@feature{ScriptStyle}{
-  \zf@update@ff{+ssty=0}}
+  \zf@update@ff{+ssty=0}
+}
 \um@zf@feature{ScriptScriptStyle}{
-  \zf@update@ff{+ssty=1}}
+  \zf@update@ff{+ssty=1}
+}
 %    \end{macrocode}
 %
 % \subsection{Script and scriptscript font options}
@@ -1595,7 +1621,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \ifnum#4>\numexpr#1-1\relax
           \ifnum#4<\numexpr#2+1\relax
             \@tempswatrue
-          \fi\fi\fi\fi\fi}
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1744,7 +1775,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um@def@numbers}
 %    \begin{macrocode}
 \newcommand\um@def@numbers{
-  \um@setmathcode[10]{\um@usv@num}{\um@usv@num}}
+  \um@setmathcode[10]{\um@usv@num}{\um@usv@num}
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1788,14 +1820,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um@def@upLatin}
 %    \begin{macrocode}
 \newcommand\um@def@upLatin{
-    \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}}
+  \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}
+}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\um@def@itLatin}
 %    \begin{macrocode}
 \newcommand\um@def@itLatin{
-    \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}}
+  \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2429,7 +2463,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \begingroup
   \def\UnicodeMathSymbol#1#2#3#4{
-    \um@scancharlet#2=#1\@nil}
+    \um@scancharlet#2=#1\@nil
+  }
   \@input{unicode-math-table.tex}
 \endgroup
 %    \end{macrocode}
@@ -2570,9 +2605,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um@fontdimen@percent{65}{\um@font}\ht\z@-
       \um@fontdimen@percent{65}{\um@font}\dp\z@
     )\relax
-    \copy \rootbox%
+    \copy \rootbox
   \um@scaled@apply{#1}{\kern}{\fontdimen64\um@font}
-  \box \z@}
+  \box \z@
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2609,7 +2645,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \ifbeamer@suppressreplacements\else
       \PackageWarningNoLine{unicode-math}{
         Disabling~ beamer's~ math~ setup.^^J
-        Please~ load~ beamer~ with~ the~ [professionalfont]~ class~ option 
+        Please~ load~ beamer~ with~ the~ [professionalfonts]~ class~ option 
       }
       \beamer@suppressreplacementstrue
     \fi
@@ -3043,7 +3079,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \usepackage{array,booktabs,calc,enumitem,fancyvrb,flafter,graphicx,ifthen,longtable,refstyle,subfig,topcapt,varioref}
 \setcounter{LTchunksize}{100}
 \usepackage{xltxtra}
-\usepackage[nabla=upright]{unicode-math}
+\usepackage{unicode-math}
 
 %\usepackage[rm,small]{titlesec}
 
