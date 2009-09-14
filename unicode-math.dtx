@@ -2688,6 +2688,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+% Overriding \pkg{amsmath} definitions:
+%    \begin{macrocode}
+\AtBeginDocument{
+  \def\@cdots{\mathinner{\cdots}}
+}
+%    \end{macrocode}
+%
 % Interaction with \textsf{beamer}:
 %    \begin{macrocode}
 \AtBeginDocument{
