@@ -76,7 +76,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 
 \endpostamble
 \askforoverwritefalse
-\generate{\file{\jobname.sty}{\from{\jobname.dtx}{package}}}
+\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{package}}}
 \nopreamble\nopostamble
 %</batchfile>
 %<batchfile>\endbatchfile
@@ -806,7 +806,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Math font name, \eg, \texttt{operators}}
 % \darg{Slot, \eg, \texttt{"221E}}
 %    \begin{macrocode}
-\def\um@mathsymbol#1#2#3#4{
+\def \um@mathsymbol#1#2#3#4{
   \expandafter\um@set@mathsymbol\csname sym#3\endcsname#1#2{#4}}
 %    \end{macrocode}
 % \end{macro}
@@ -932,7 +932,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $A$
 % \end{example}
 %
-% \subsection{User interface to \cmd\DeclareSymbolFont}
+% \subsection{The main \cs{setmathfont} macro}
 %
 % Here's the simplest usage:
 % \begin{example}{}
@@ -940,13 +940,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $Ax \eqdef \nabla \times \mscrZ$
 % \end{example}
 %
-% TODO And an example of the \feat{Range} feature:
-% \begin{example}{}
-%   \setmathfont{Cambria Math}
-%   $(a, \mita, \mathbf{a}, \mbfa, \alpha)$
-% \end{example}
-%
-% An interesting example of the \feat{Range} feature:
+% An interesting (perhaps useless) example of the \feat{Range} feature:
 % \begin{example}{}
 %   \setmathfont[Colour=000000]{Cambria Math}
 %   \setmathfont[Range={\mathop}, Colour=FF0000]{Cambria Math}
@@ -958,15 +952,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \]
 % \end{example}
 %
-% Using a |Range| including large character sets such as \cmd\mathrel, \cmd\mathalpha, \etc, is \emph{very slow}! I hope to improve the performance somehow.
+% Using a |Range| including large character sets such as \cmd\mathrel,
+% \cmd\mathalpha, \etc, is \emph{very slow}!
+% I hope to improve the performance somehow.
 %
 % \begin{macro}{\setmathfont}
 % \doarg{font features}
 % \darg{font name}
 %    \begin{macrocode}
-\newcommand\setmathfont[2][]{
+\DeclareDocumentCommand \setmathfont { O{} m } {
 %    \end{macrocode}
-% \paragraph{Init}
 % \begin{itemize}
 % \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
 % this allows \cmd\DeclareSymbolFont\ at any point in the document.
@@ -987,14 +982,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \csname S@\f@size\endcsname
 %    \end{macrocode}
-% \item Set the name of the math version being defined
-% (obviously more needs to be done here!)
+% \item Set the name of the math version being defined.
+%       (obviously more needs to be done here!)
 % \end{itemize}
 %    \begin{macrocode}
   \def\um@mversion{normal}
   \DeclareMathVersion{\um@mversion}
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
+%       (This needs to be generalised so users can override it.)
 %    \begin{macrocode}
   \tl_set:Nn \l_um_script_features_tl  {ScriptStyle}
   \tl_set:Nn \l_um_sscript_features_tl {ScriptScriptStyle}
@@ -1029,33 +1025,42 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Check for the correct number of \cs{fontdimen}s:
 %    \begin{macrocode}
-    \font\um@font="#2"\relax
-    \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
-      \@um@ot@math@true
-    \else
-      \um@PackageWarning{
-        The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
-        Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
-        in~ a~ substandard~ manner.
-      }
-    \fi
+  \font\um@font="#2"\relax
+  \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
+    \@um@ot@math@true
+  \else
+    \um@PackageWarning{
+      The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
+      Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
+      in~ a~ substandard~ manner.
+    }
+  \fi
 %    \end{macrocode}
+% If we're defining the full unicode math repetoire, then we skip all
+% the parsing processing needed if we're only defining a subset.
+% \begin{itemize}
+% \item Math symbols are defined with \cmd\UnicodeMathSymbol; see \secref{mathsymbol}
+% for the individual definitions
+% \end{itemize}
 %    \begin{macrocode}
   \ifx\um@char@range\@empty
     \def\um@symfont{um@allsym}
     \um@PackageInfo{Defining~ the~ default~ maths~ font~ as~ '#2'}
-    \let \UnicodeMathSymbol\um@mathsymbol@noparse
-    \let \um@setsinglemathalph \um@mathmap@noparse
+    \let \UnicodeMathSymbol \um@mathsymbol@noparse
+    \let \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
   \else
     \stepcounter{um@fam}
     \edef\um@symfont{um@fam\theum@fam}
     \let \UnicodeMathSymbol \um@mathsymbol@parse
-    \let \um@setsinglemathalph \um@mathmap@parse
+    \let \um_mathmap:Nnn \um_mathmap_parse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
   \fi
+%    \end{macrocode}
+% Now defined |\um@symfont| as the \LaTeX\ math font to access everything:
+%    \begin{macrocode}
   \DeclareSymbolFont{\um@symfont}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
 %    \end{macrocode}
@@ -1064,10 +1069,102 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % |unicode-math-table.tex|.
 %    \begin{macrocode}
   \@input{unicode-math-table.tex}
+%    \end{macrocode}
+% Finally,
+% \begin{itemize}
+% \item Remap symbols that don't take their natural mathcode
+% \item Activate any symbols that need to be math-active
+% \item Setup all symbols not covered by the table (mostly alphanumerics)
+% \item Setup the maths alphabets (\cs{mathbf} etc.)
+% \end{itemize}
+%    \begin{macrocode}
   \um_remap_symbols:
+  \um_setup_mathactives:
+  \um_setup_alphanum:
+  \um_setup_alphabets:
+%    \end{macrocode}
+% End of the \cmd\setmathfont\ macro.
+%    \begin{macrocode}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection{Functions for setting up symbols with mathcodes}
+% \seclabel{mathsymbol}
+%
+% \begin{macro}{\um@mathsymbol@noparse}
+%    \begin{macrocode}
+\newcommand\um@mathsymbol@noparse[4]{
+  \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
+}
 %    \end{macrocode}
 %
-% \subsection{Maths alphabets' character mapping}
+% \begin{macro}{\um@mathsymbol@parse}
+% If the \feat{Range} font feature has been used, then only
+% a subset of the unicode glyphs are to be defined.
+% See \secref{rangeproc} for the code that enables this.
+%    \begin{macrocode}
+\newcommand\um@mathsymbol@parse[4]{
+  \um@parse@term{#1}{#2}{#3}{
+    %\um@PackageInfo{Defining \string#2 as mathchar #1}
+    \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\um_remap_symbols:}
+% This function is used to define the mathcodes for those chars which should
+% be mapped to a different glyph than themselves.
+% The only example I have right now is ascii hyphen to real minus.
+%    \begin{macrocode}
+\cs_new:Nn \um_remap_symbols: {
+  \um_remap_symbol:nnn{"2D}{\mathbin}{"02212}% hyphen to minus
+}
+%    \end{macrocode}
+% \end{macro}
+% Where |\um_remap_symbol:nnn| is defined to be one of these two, depending
+% on the range setup:
+%    \begin{macrocode}
+\cs_new:Nn \um_remap_symbol_parse:nnn {
+  \um@parse@term {#3} {\@nil} {#2} {
+    \um_remap_symbol_noparse:nnn {#1} {#2} {#3}
+  }
+}
+\cs_new:Nn \um_remap_symbol_noparse:nnn {
+  \SetMathCode {#1} {#2} {\um@symfont} {#3}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection{Active math characters}
+%
+% \begin{macro}{\um_setup_mathactives:}
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_mathactives: {
+  \um_make_mathactive:nNN {"2032} \primesingle \mathord
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_make_mathactive:nNN}
+% Makes |#1| a mathactive char, and gives cs |#2| the meaning of mathchar |#1|
+% with class |#3|.
+% You are responsible for giving active |#1| a particular meaning!
+%    \begin{macrocode}
+\cs_new:Nn \um_make_mathactive:nNN {
+  \XeTeXmathchardef #2 = "\mathchar@type #3
+                         \csname sym\um@symfont\endcsname
+                         #1 \scan_stop:
+  \XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsubsection{Maths alphabets' character mapping}
 % \seclabel{mathmap}
 %
 % We want it to be convenient for users to actually type in maths.
@@ -1075,8 +1172,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % and the text Greek characters should be used for upright/italic
 % (depending on preference) Greek, if desired.
 %
-% Numbers:
+% \begin{macro}{\um_setup_alphanum:}
+% All symbols input that aren't defined directly in |unicode-math-table|.
 %    \begin{macrocode}
+\cs_set:Nn \um_setup_alphanum: {
   \ifx\um@char@range\@empty
     \um@def@numbers
 %    \end{macrocode}
@@ -1106,12 +1205,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \if@um@bfliteral
       \um_setup_bf_literals:
     \else
-      \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{
-        \if@um@bfupLatin\um@usv@bfLatin\else\um@usv@bfitLatin\fi
-      }
-      \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{
-        \if@um@bfuplatin\um@usv@bflatin\else\um@usv@bfitlatin\fi
-      }
+      \if@um@bfupLatin
+        \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{\um@usv@bfLatin}
+      \else
+        \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{\um@usv@bfitLatin}
+      \fi
+      \if@um@bfuplatin
+        \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{\um@usv@bflatin}
+      \else
+        \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{\um@usv@bfitlatin}
+      \fi
       \if@um@bfupGreek
         \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfGreek}
         \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfvarTheta}
@@ -1140,26 +1243,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Bold nabla and partial symbols:
 %    \begin{macrocode}
       \if@um@upNabla
-        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfNabla}
-        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfNabla}
-        \um@setmathcode{\um@usv@bfsfNabla  }{\um@usv@bfsfNabla}
-        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfNabla}
+        \um@setmathcode{\um@usv@bfNabla,\um@usv@bfitNabla}{\um@usv@bfNabla}
+        \um@setmathcode{\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\um@usv@bfsfNabla}
       \else
-        \um@setmathcode{\um@usv@bfNabla    }{\um@usv@bfitNabla}
-        \um@setmathcode{\um@usv@bfitNabla  }{\um@usv@bfitNabla}
-        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}
-        \um@setmathcode{\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}
+        \um@setmathcode{\um@usv@bfNabla,\um@usv@bfitNabla}{\um@usv@bfitNabla}
+        \um@setmathcode{\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}
       \fi
       \if@um@uppartial
-        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfpartial}
-        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfpartial}
-        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfpartial}
-        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfpartial}
+        \um@setmathcode{\um@usv@bfpartial,\um@usv@bfitpartial}{\um@usv@bfpartial}
+        \um@setmathcode{\um@usv@bfsfpartial,\um@usv@bfsfitpartial}{\um@usv@bfsfpartial}
       \else
-        \um@setmathcode{\um@usv@bfpartial    }{\um@usv@bfitpartial}
-        \um@setmathcode{\um@usv@bfitpartial  }{\um@usv@bfitpartial}
-        \um@setmathcode{\um@usv@bfsfpartial  }{\um@usv@bfsfitpartial}
-        \um@setmathcode{\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}
+        \um@setmathcode{\um@usv@bfpartial,\um@usv@bfitpartial}{\um@usv@bfitpartial}
+        \um@setmathcode{\um@usv@bfsfpartial,\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}
       \fi
     \fi
   \else
@@ -1167,92 +1262,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % %: TODO : what is supposed to happen here?
 %    \begin{macrocode}
   \fi
-%    \end{macrocode}
-% Make activechars and set up the maths alphabets:
-%    \begin{macrocode}
-  \um_setup_alphabets:
-  \um_setup_mathactives:
-%    \end{macrocode}
-% End of the \cmd\setmathfont\ macro.
-%    \begin{macrocode}
 }
 %    \end{macrocode}
 % \end{macro}
 %
 %
-% \begin{macro}{\um_setup_mathactives:}
-%    \begin{macrocode}
-\cs_new:Nn \um_setup_mathactives: {
-  \um_make_mathactive:nNN {"2032} \primesingle \mathord
-}
-%    \end{macrocode}
-% \end{macro}
+% \subsubsection{Functions for setting up the maths alphabets}
 %
-%
-% \begin{macro}{\um_make_mathactive:nNN}
-% Makes |#1| a mathactive char, and gives cs |#2| the meaning of mathchar |#1|
-% with class |#3|.
-% You are responsible for giving active |#1| a particular meaning!
-%    \begin{macrocode}
-\cs_new:Nn \um_make_mathactive:nNN {
-  \XeTeXmathchardef #2 = "\mathchar@type #3
-                         \csname sym\um@symfont\endcsname
-                         #1 \scan_stop:
-  \XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
-}
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \begin{macro}{\um_remap_symbols:}
-% This function is used to define the mathcodes for those chars which should
-% be mapped to a different glyph than themselves.
-% The only example I have right now is ascii hyphen to real minus.
-%    \begin{macrocode}
-\cs_new:Nn \um_remap_symbols: {
-  \um_remap_symbol:nnn{"2D}{\mathbin}{"02212}% hyphen to minus
-}
-\cs_new:Nn \um_remap_symbol_parse:nnn {
-  \um@parse@term {#3} {\@nil} {#2} {
-    \um_remap_symbol_noparse:nnn {#1} {#2} {#3}
-  }
-}
-\cs_new:Nn \um_remap_symbol_noparse:nnn {
-  \SetMathCode {#1} {#2} {\um@symfont} {#3}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@mathsymbol@noparse}
-%    \begin{macrocode}
-\newcommand\um@mathsymbol@noparse[4]{
-  \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@mathsymbol@parse}
-% If the \feat{Range} font feature has been used, then only
-% a subset of the unicode glyphs are to be defined.
-% See \secref{rangeproc} for the code that enables this.
-%    \begin{macrocode}
-\newcommand\um@mathsymbol@parse[4]{
-  \um@parse@term{#1}{#2}{#3}{
-    %\um@PackageInfo{Defining \string#2 as mathchar #1}
-    \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@mathmap@noparse}
+% \begin{macro}{\um_mathmap_noparse:Nnn}
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % Adds \cmd\SetMathCode\ declaractions to the specified maths alphabet's definition (\eg, \cmd\um@mathscr).
 % Uses \cmd\um@addto@mathmap\ (below) to expand the name of the current symbol font.
 %    \begin{macrocode}
-\newcommand\um@mathmap@noparse[3]{
+\cs_set:Nn \um_mathmap_noparse:Nnn {
   \clist_map_inline:nn {#2} {
     \exp_args:No \um@addto@mathmap \um@symfont {##1}{#1}{#3}
    }
@@ -1260,7 +1284,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@mathmap@parse}
+% \begin{macro}{\um_mathmap_parse:Nnn}
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
@@ -1268,7 +1292,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cmd\SetMathCode\ declaractions to the maths alphabet definition (\eg, \cmd\um@mathscr).
 %    \begin{macrocode}
-\newcommand\um@mathmap@parse[3]{
+\cs_set:Nn \um_mathmap_parse:Nnn {
   \clist_map_inline:Nn \um@char@num@range {
     \ifnum##1=#3\relax
       \clist_map_inline:nn {#2} {
@@ -1298,12 +1322,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{(Big) operators}
 %
-% Turns out that \XeTeX\ is clever enough to deal with big operators for us automatically
-% with \cmd\XeTeXmathchardef. Amazing!
+% Turns out that \XeTeX\ is clever enough to deal with big operators for us
+% automatically with \cmd\XeTeXmathchardef. Amazing!
 %
-% However, the limits aren't set automatically; that is, we want to define, a la Plain \TeX\ \etc, |\def\int{\intop\nolimits}|, so there needs to be a transformation from \cmd\int\ to \cmd\intop\ during the expansion of \cmd\UnicodeMathSymbol\ in the appropriate contexts.
+% However, the limits aren't set automatically; that is, we want to define,
+% a la Plain \TeX\ \etc, |\def\int{\intop\nolimits}|, so there needs to be a
+% transformation from \cmd\int\ to \cmd\intop\ during the expansion of
+% \cmd\UnicodeMathSymbol\ in the appropriate contexts.
 %
-% Following is a table of every math operator (\cmd\mathop) defined in |unicode-maths.tex|, from which a subset need to be flagged for \cmd\nolimits\ adjustments. The limits behaviour as specified by \pkg{unicode-math} are shown (with grey 'scripts).
+% Following is a table of every math operator (\cmd\mathop) defined in
+% |unicode-maths.tex|, from which a subset need to be flagged for
+% \cmd\nolimits\ adjustments.
+% The limits behaviour as specified by \pkg{unicode-math} are shown
+% (with grey 'scripts).
 %
 % \begingroup
 % \setmathfont[SizeFeatures={
@@ -1319,10 +1350,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{longtable}
 % \endgroup
 %
-% \setmathfont{Cambria Math}
-%
 % \begin{macro}{\um@nolimits}
-% This macro is a sequence containing those maths operators that require a \cmd\nolimits\ suffix. This list is used when processing |unicode-math-table.tex| to define such commands automatically (see the macro \cmd\um@set@mathsymbol\ on page~\pageref{mac:um@set@mathsymbol}). I've chosen essentially just the operators that look like integrals; hopefully a better mathematician can help me out here. I've a feeling that it's more useful \emph{not} to include the multiple integrals such as $\iiiint$, but that might be a matter of preference.
+% This macro is a sequence containing those maths operators that require a
+% \cmd\nolimits\ suffix.
+% This list is used when processing |unicode-math-table.tex| to define such
+% commands automatically (see the macro \cmd\um@set@mathsymbol\ on
+% page~\pageref{mac:um@set@mathsymbol}).
+% I've chosen essentially just the operators that look like integrals;
+% hopefully a better mathematician can help me out here.
+% I've a feeling that it's more useful \emph{not} to include the multiple
+% integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
 \def\um@nolimits{
   \@elt\int\@elt\iint\@elt\iiint\@elt\iiiint\@elt\oint\@elt\oiint\@elt\oiiint
@@ -1335,7 +1372,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{macro}{\addnolimits}
-% This macro appends material to the macro containing the list of operators that don't take limits. See example following for usage. Note at present that this command must have taken effect before \cmd\setmathfont.
+% This macro appends material to the macro containing the list of operators
+% that don't take limits.
+% See example following for usage.
+% Note at present that this command must have taken effect before
+% \cmd\setmathfont.
 %    \begin{macrocode}
 \newcommand\addnolimits[1]{
   \expandafter\def\expandafter\um@nolimits\expandafter{\um@nolimits\@elt#1}
@@ -1344,7 +1385,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{macro}{\removenolimits}
-% Can this macro be given a better name? It removes (globally) an item from the nolimits list. See example following for usage. 
+% Can this macro be given a better name?
+% It removes (globally) an item from the nolimits list.
+% See example following for usage.
 %    \begin{macrocode}
 \def\removenolimits#1{
   \begingroup
@@ -1369,10 +1412,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Radicals}
 %
-% The radical for square root is organised in \cmd\um@set@mathsymbol\ on page~\pageref{page:radical}. I think it's the only radical ever. But what about right-to-left square roots?
+% The radical for square root is organised in \cmd\um@set@mathsymbol\ on
+% page~\pageref{page:radical}. I think it's the only radical ever.
+% (Actually, there is also \cs{cuberoot} and \cs{fourthroot}, but they don't
+%  seem to behave as proper radicals.)
+%
+% Also, what about right-to-left square roots?
 %
 % \begin{macro}{\um@radicals}
-% We organise radicals in the same way as nolimits-operators; that is, in a comma-list.
+% We organise radicals in the same way as nolimits-operators; that is,
+% in a comma-list.
 %    \begin{macrocode}
 \def\um@radicals{\sqrt}
 %    \end{macrocode}
@@ -1392,15 +1441,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 % \subsection{Delimiters}
-% \begin{macro}{\left} We redefine the primitive to be preceded by \cmd\mathopen; this gives much better spacing in cases such as \cmd\sin\cmd\left\dots. Courtesy of Frank Mittelbach:
-%
-% {\small |http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=latex/3853&prlatex/3754|}
+% \begin{macro}{\left}
+% We redefine the primitive to be preceded by \cmd\mathopen;
+% this gives much better spacing in cases such as \cmd\sin\cmd\left\dots.
+% Courtesy of Frank Mittelbach:\par
+% {\small\url{http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=latex/3853&prlatex/3754}}
 %    \begin{macrocode}
 \let\left@primitive\left
 \def\left{\mathopen{}\left@primitive}
 %    \end{macrocode}
 % \end{macro}
-% No re-definition is made for \cmd\right\ because I don't believe it to be necessary\dots
+% No re-definition is made for \cmd\right\ because I don't believe it to be
+% necessary.
 %
 %: TODO : `fences', e.g., \cmd\vert
 %
@@ -1710,7 +1762,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_set:Npn \exp_args:Nnff {\::n\::f\::f\:::}
 \cs_new:Nn \um_set_mathalphabet_char:Nnn {
   \clist_map_variable:nNn {#2} \l_um_input_num {
-    \exp_args:Nnff \um@setsinglemathalph {#1}
+    \exp_args:Nnff \um_mathmap:Nnn {#1}
       {\number\numexpr\l_um_input_num\relax} {\number\numexpr#3\relax}
   }
 }
@@ -1727,7 +1779,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_set_mathalph_range:nNnn {
   \clist_map_variable:nNn {#3} \l_um_input_num {
     \prg_stepwise_variable:nnnNn {0}{1}{#1} \l_um_inc_num {
-      \exp_args:Nnff \um@setsinglemathalph {#2}
+      \exp_args:Nnff \um_mathmap:Nnn {#2}
         {\number\numexpr \l_um_inc_num + \l_um_input_num \relax}
         {\number\numexpr \l_um_inc_num + #4 \relax}
     }
@@ -2864,7 +2916,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 %     {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
 % \end{verbatim}
 %
-% \section{\XeTeX\ math font dimensions}
+% \part{\XeTeX\ math font dimensions}
 %
 % These are the extended \cmd\fontdimen s available for suitable fonts
 % in \XeTeX. Note that Lua\TeX\ takes an alternative route, and this package
@@ -3133,7 +3185,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
   {\endlist}
 
 \usepackage[svgnames]{xcolor}
-\usepackage{array,booktabs,calc,enumitem,fancyvrb,flafter,graphicx,ifthen,longtable,refstyle,subfig,topcapt,varioref}
+\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref}
 \setcounter{LTchunksize}{100}
 \usepackage{xltxtra}
 \usepackage{unicode-math}
