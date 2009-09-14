@@ -443,21 +443,45 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \label{fig:bold-style-check}
 % \end{figure}
 %
-% \paragraph{Epsilon: $\epsilon$ vs.\ $\varepsilon$}
+% \paragraph{Epsilon and phi: $\epsilon$ vs.\ $\varepsilon$ and $\phi$ vs.\ $\varphi$}
 % \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to
 % look like $\epsilon$. The Unicode glyph directly after delta and before zeta
 % is `epsilon' and looks like $\epsilon$; there is a subsequent variant of
 % epsilon that looks like $\varepsilon$. This creates a problem. People who
 % use unicode input won't want their glyphs transforming; \TeX\ users will be
 % confused that what they think as `normal epsilon' is actual the `variant
-% epsilon'.
+% epsilon'. And the same problem exists for `phi'.
 %
-% :TODO: package option
+% We have a package option to control this behaviour.
+% With |vargreek-shape=TeX|,
+% \cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
+% \cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
+% With |vargreek-shape=unicode|, these symbols are swapped.
 %
-% \paragraph{Phi: $\phi$ vs.\ $\varphi$}
-% The same problem for epsilon also exists for phi.
+% Unless |math-style=literal| is in effect, the default is to use |vargreek-shape=TeX|.
 %
-% :TODO: package option
+% \unichar{3B5}{greek small letter epsilon}\\
+% \unichar{3F5}{greek lunate epsilon symbol}\\
+% \unichar{3C6}{greek small letter phi}\\
+% \unichar{3D5}{greek small letter script phi}
+%
+% \paragraph{Normalising some input characters}
+%
+% I believe
+% all variant forms should be used as legal input that is normalised to
+% a consistent output glyph, because we want to be fault-tolerant in the input.
+% Here are the duplicates:
+%
+% \unichar {251} {latin small letter alpha}
+% \unichar {25B} {latin small letter epsilon}
+% \unichar {263} {latin small letter gamma}
+% \unichar {269} {latin small letter iota}
+% \unichar {278} {latin small letter phi}
+% \unichar {28A} {latin small letter upsilon}
+% \unichar {190} {latin capital letter epsilon}
+% \unichar {194} {latin capital letter gamma}
+% \unichar {196} {latin capital letter iota}
+% \unichar {1B1} {latin capital letter upsilon}
 %
 %
 % \StopEventually{}
@@ -512,7 +536,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \newif\if@um@upNabla
 \newif\if@um@bfuppartial
-\bool_new:N \g_um_vargreek_bool
+\bool_new:N \g_um_texgreek_bool
 %    \end{macrocode}
 %
 % \paragraph{Programming niceties}
@@ -601,6 +625,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@varrho{"3F1}
 \def\um@usv@varpi{"3D6}
 \def\um@usv@digamma{"3DD}
+\tl_new:Nn \g_um_up_epsilon_letter_usv {"25B}
+\tl_new:Nn \g_um_up_epsilon_symbol_usv {"3F5}
+\tl_new:Nn \g_um_up_phi_letter_usv {"3C6}
+\tl_new:Nn \g_um_up_phi_symbol_usv {"3D5}
 %    \end{macrocode}
 % Bold:
 %    \begin{macrocode}
@@ -613,6 +641,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfvarrho{"1D6E0}
 \def\um@usv@bfvarpi{"1D6E1}
 \def\um@usv@bfdigamma{"1D7CB}
+\tl_new:Nn \g_um_bfup_epsilon_letter_usv {"1D6C6}
+\tl_new:Nn \g_um_bfup_epsilon_symbol_usv {"1D6DC}
+\tl_new:Nn \g_um_bfup_phi_letter_usv {"1D6D7}
+\tl_new:Nn \g_um_bfup_phi_symbol_usv {"1D6DF}
 %    \end{macrocode}
 % Italic Greek variants:
 %    \begin{macrocode}
@@ -624,6 +656,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@itvarphi{"1D719}
 \def\um@usv@itvarrho{"1D71A}
 \def\um@usv@itvarpi{"1D71B}
+\tl_new:Nn \g_um_it_epsilon_symbol_usv {"1D716}
+\tl_new:Nn \g_um_it_epsilon_letter_usv {"1D700}
+\tl_new:Nn \g_um_it_phi_symbol_usv {"1D719}
+\tl_new:Nn \g_um_it_phi_letter_usv {"1D711}
 %    \end{macrocode}
 % Bold:
 %    \begin{macrocode}
@@ -636,6 +672,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfitvarphi{"1D753}
 \def\um@usv@bfitvarrho{"1D754}
 \def\um@usv@bfitvarpi{"1D755}
+\tl_new:Nn \g_um_bfit_epsilon_letter_usv {"1D73A}
+\tl_new:Nn \g_um_bfit_epsilon_symbol_usv {"1D750}
+\tl_new:Nn \g_um_bfit_phi_letter_usv {"1D74B}
+\tl_new:Nn \g_um_bfit_phi_symbol_usv {"1D753}
 %    \end{macrocode}
 % Nabla:
 %    \begin{macrocode}
@@ -674,7 +714,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfupLatinfalse
     \@um@bfuplatinfalse
     \@um@upNablafalse
-    \bool_set_false:N \g_um_vargreek_bool
+    \bool_set_false:N \g_um_texgreek_bool
   \or
     \@um@upGreektrue
     \@um@upgreekfalse
@@ -686,7 +726,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
-    \bool_set_true:N \g_um_vargreek_bool
+    \bool_set_true:N \g_um_texgreek_bool
   \or
     \@um@upGreektrue
     \@um@upgreektrue
@@ -698,11 +738,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
-    \bool_set_false:N \g_um_vargreek_bool
+    \bool_set_false:N \g_um_texgreek_bool
   \or
     \@um@literaltrue
     \@um@bfliteraltrue
-    \bool_set_false:N \g_um_vargreek_bool
+    \bool_set_false:N \g_um_texgreek_bool
   \fi
 }
 %    \end{macrocode}
@@ -780,10 +820,47 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \define@choicekey*{unicode-math.sty}{vargreek-shape}[\@tempa\@tempb]{unicode,TeX}{
   \ifcase\@tempb\relax
-    \bool_set_false:N \g_um_vargreek_bool
+    \bool_set_false:N \g_um_texgreek_bool
   \or
-    \bool_set_true:N \g_um_vargreek_bool
+    \bool_set_true:N \g_um_texgreek_bool
   \fi
+}
+\cs_set:Nn \um_setup_vargreek: {
+  \bool_if:NTF \g_um_texgreek_bool {
+    \num_set_eq:NN      \g_um_up_phi_usv    \g_um_up_phi_symbol_usv
+    \num_set_eq:NN   \g_um_up_varphi_usv    \g_um_up_phi_letter_usv
+    \num_set_eq:NN      \g_um_it_phi_usv    \g_um_it_phi_symbol_usv
+    \num_set_eq:NN   \g_um_it_varphi_usv    \g_um_it_phi_letter_usv
+    \num_set_eq:NN    \g_um_bfup_phi_usv  \g_um_bfup_phi_symbol_usv
+    \num_set_eq:NN \g_um_bfup_varphi_usv  \g_um_bfup_phi_letter_usv
+    \num_set_eq:NN    \g_um_bfit_phi_usv  \g_um_bfit_phi_symbol_usv
+    \num_set_eq:NN \g_um_bfit_varphi_usv  \g_um_bfit_phi_letter_usv
+    \num_set_eq:NN      \g_um_up_epsilon_usv    \g_um_up_epsilon_symbol_usv
+    \num_set_eq:NN   \g_um_up_varepsilon_usv    \g_um_up_epsilon_letter_usv
+    \num_set_eq:NN      \g_um_it_epsilon_usv    \g_um_it_epsilon_symbol_usv
+    \num_set_eq:NN   \g_um_it_varepsilon_usv    \g_um_it_epsilon_letter_usv
+    \num_set_eq:NN    \g_um_bfup_epsilon_usv  \g_um_bfup_epsilon_symbol_usv
+    \num_set_eq:NN \g_um_bfup_varepsilon_usv  \g_um_bfup_epsilon_letter_usv
+    \num_set_eq:NN    \g_um_bfit_epsilon_usv  \g_um_bfit_epsilon_symbol_usv
+    \num_set_eq:NN \g_um_bfit_varepsilon_usv  \g_um_bfit_epsilon_letter_usv
+  }{
+    \num_set_eq:NN   \g_um_up_varphi_usv    \g_um_up_phi_symbol_usv
+    \num_set_eq:NN      \g_um_up_phi_usv    \g_um_up_phi_letter_usv
+    \num_set_eq:NN   \g_um_it_varphi_usv    \g_um_it_phi_symbol_usv
+    \num_set_eq:NN      \g_um_it_phi_usv    \g_um_it_phi_letter_usv
+    \num_set_eq:NN \g_um_bfup_varphi_usv  \g_um_bfup_phi_symbol_usv
+    \num_set_eq:NN    \g_um_bfup_phi_usv  \g_um_bfup_phi_letter_usv
+    \num_set_eq:NN \g_um_bfit_varphi_usv  \g_um_bfit_phi_symbol_usv
+    \num_set_eq:NN    \g_um_bfit_phi_usv  \g_um_bfit_phi_letter_usv
+    \num_set_eq:NN   \g_um_up_varepsilon_usv    \g_um_up_epsilon_symbol_usv
+    \num_set_eq:NN      \g_um_up_epsilon_usv    \g_um_up_epsilon_letter_usv
+    \num_set_eq:NN   \g_um_it_varepsilon_usv    \g_um_it_epsilon_symbol_usv
+    \num_set_eq:NN      \g_um_it_epsilon_usv    \g_um_it_epsilon_letter_usv
+    \num_set_eq:NN \g_um_bfup_varepsilon_usv  \g_um_bfup_epsilon_symbol_usv
+    \num_set_eq:NN    \g_um_bfup_epsilon_usv  \g_um_bfup_epsilon_letter_usv
+    \num_set_eq:NN \g_um_bfit_varepsilon_usv  \g_um_bfit_epsilon_symbol_usv
+    \num_set_eq:NN    \g_um_bfit_epsilon_usv  \g_um_bfit_epsilon_letter_usv
+  }
 }
 %    \end{macrocode}
 %
@@ -1152,6 +1229,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_setup_shapes: {
   \um_setup_nabla:
   \um_setup_partial:
+  \um_setup_vargreek:
 }
 %    \end{macrocode}
 %
@@ -2114,7 +2192,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \end{macro}
-% 
+%
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_alphabets: {
   \um_setup_math_alphabet:n {up    }
