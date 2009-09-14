@@ -207,6 +207,28 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %: TODO : describe alphabet inputs
 %
+% \subsection{Miscellanea}
+%
+% \subsubsection{Primes}
+%
+% Primes ($x'$) may be input in several ways. You may use any combination
+% of ascii straight quote (\texttt{\char`\'}), unicode prime ($'$), and
+% \cs{prime}; when multiple primes occur next to each other, they chain
+% together to form double, triple, or quadruple primes if the font contains
+% pre-drawn glyphs. These may also be accessed with \cs{primedouble},
+% \cs{primetriple}, and \cs{primequadruple}.
+%
+% If the font does not contain the pre-drawn glyphs or more than four primes
+% are used, the single prime glyph is used multiple times with a negative
+% kern to get the spacing right. There is no user interface to adjust this
+% negative kern yet (because I haven't decided what it should look like);
+% if you need to, write something like this:
+% \begin{verbatim}
+% \ExplSyntaxOn
+% \muskip_gset:Nn \g_um_primekern_muskip { -\thinmuskip/2 }
+% \ExplySyntaxOff
+% \end{verbatim}
+%
 %
 % \section{Package options}
 %
@@ -1146,9 +1168,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \fi
 %    \end{macrocode}
-% Set up the maths alphabets:
+% Make activechars and set up the maths alphabets:
 %    \begin{macrocode}
   \um_setup_alphabets:
+  \um_setup_mathactives:
 %    \end{macrocode}
 % End of the \cmd\setmathfont\ macro.
 %    \begin{macrocode}
@@ -1156,8 +1179,35 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+%
+% \begin{macro}{\um_setup_mathactives:}
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_mathactives: {
+  \um_make_mathactive:nNN {"2032} \primesingle \mathord
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\um_make_mathactive:nNN}
+% Makes |#1| a mathactive char, and gives cs |#2| the meaning of mathchar |#1|
+% with class |#3|.
+% You are responsible for giving active |#1| a particular meaning!
+%    \begin{macrocode}
+\cs_new:Nn \um_make_mathactive:nNN {
+  \XeTeXmathchardef #2 = "\mathchar@type #3
+                         \csname sym\um@symfont\endcsname
+                         #1 \scan_stop:
+  \XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \begin{macro}{\um_remap_symbols:}
-% This function is used to define the mathcodes for those chars which should be mapped to a different glyph than themselves. The only example I have right now is ascii hyphen to real minus.
+% This function is used to define the mathcodes for those chars which should
+% be mapped to a different glyph than themselves.
+% The only example I have right now is ascii hyphen to real minus.
 %    \begin{macrocode}
 \cs_new:Nn \um_remap_symbols: {
   \um_remap_symbol:nnn{"2D}{\mathbin}{"02212}% hyphen to minus
@@ -2580,14 +2630,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 %    \end{macrocode}
-% 
+%
 %    \begin{macrocode}
-\cs_set_eq:NN \prime \um_scanprime: 
+\cs_set_eq:NN \prime \um_scanprime:
 \group_begin:
   \char_make_active:N \'
   \char_make_active:n {"2032}
   \cs_gset_eq:NN ' \um_scanprime:
-  \cs_gset_eq:NN ^^^^2032 \um_scanprime: % broken; still need to make prime math-active
+  \cs_gset_eq:NN ^^^^2032 \um_scanprime:
 \group_end:
 %    \end{macrocode}
 %
