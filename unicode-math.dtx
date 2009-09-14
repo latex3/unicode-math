@@ -17,8 +17,8 @@ development and the interface and functionality should not be considered
 stable. Use at your own risk, in other words.
 
 Unicode maths is currently only supported by the fonts
-"Cambria Math" (Microsoft, proprietry) and
-"Asana Math" (Apostoulos Syropolous, open source).
+ - "Cambria Math" (Microsoft, proprietry) and
+ - "Asana Math" (Apostoulos Syropolous, open source).
 
 Basic usage:
   \setmathfont{Asana Math}
@@ -160,6 +160,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % selection in \LaTeX\ will remain the same, the specification for choosing
 % the version fonts will probably be an optional argument:
 % \codeline{\cmd\setmathfont|[Version=Bold,|\meta{font features}|]|\marg{font name}}
+% This has not been implemented yet.
 %
 % Instances above of
 % \codeline{\oarg{font features}\marg{font name}}
@@ -380,9 +381,41 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{table}
 %
 % \paragraph{Partial}
-% Ditto with $\partial$: |partial=upright| and |partial=italic| package
-% options.
-% Similarly with the |math-style| defaults.
+% Partial ($\partial$) is not as complex as nabla but there is something funny
+% about it. Unicode contains both \unichar{2202}{partial differential} and
+% \unichar{1D715}{math italic partial differential}. But in all the maths
+% fonts produced until now, they are identical.
+%
+% In this package, typing either of them will give you the lower base plane
+% version (i.e., the 2202 one). If it turns out that the fonts around at the
+% moment are wrong, and 2202 is supposed to be upright, not italic, I'll add
+% a feature to switch between the two (analogous to the |nabla| feature above).
+%
+% Nonetheless, there are still upright and italic bold versions of the symbol,
+% and it's possible that the behaviour of partial inside \cs{mathbf} should be
+% be different to the behaviour of the bold greek symbols. Use the
+% |bold-partial=upright| or |bold-partial=italic| package options to specify
+% which one you would like. Ordinarily, this follows from the behaviour of
+% the lowercase greek symbols.
+%
+% See \tabref{partial} for the variations on the partial differential symbol.
+%
+% \begin{table}
+%   \centering
+%   \topcaption{The various forms of the partial differential.}
+%   \tablabel{partial}
+%   \begin{tabular}{@{}llc@{}}
+%       \toprule
+%     \multicolumn{2}{@{}l}{Description} & Glyph
+%      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
+%     Regular & Italic & $\partial$ \\
+%     Bold & Upright & $\mathbfup\partial$ \\
+%     & Italic & $\mathbfit\partial$ \\
+%     Sans bold & Upright & $\mathbfsfup\partial$ \\
+%     & Italic & $\mathbfsfup\partial$ \\
+%       \bottomrule
+%   \end{tabular}
+% \end{table}
 %
 %
 % \begin{figure}
@@ -475,10 +508,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \newif\if@um@bfupLatin
 \newif\if@um@bfuplatin
 %    \end{macrocode}
-% For \opt{nabla} and \opt{partial}:
+% For \opt{nabla}:
 %    \begin{macrocode}
 \newif\if@um@upNabla
-\newif\if@um@uppartial
+\newif\if@um@bfuppartial
 \bool_new:N \g_um_vargreek_bool
 %    \end{macrocode}
 %
@@ -637,10 +670,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uplatinfalse
     \@um@bfupGreekfalse
     \@um@bfupgreekfalse
+    \@um@bfuppartialfalse
     \@um@bfupLatinfalse
     \@um@bfuplatinfalse
     \@um@upNablafalse
-    \@um@uppartialfalse
     \bool_set_false:N \g_um_vargreek_bool
   \or
     \@um@upGreektrue
@@ -649,10 +682,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uplatinfalse
     \@um@bfupGreektrue
     \@um@bfupgreekfalse
+    \@um@bfuppartialfalse
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
-    \@um@uppartialtrue
     \bool_set_true:N \g_um_vargreek_bool
   \or
     \@um@upGreektrue
@@ -661,10 +694,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uplatinfalse
     \@um@bfupGreektrue
     \@um@bfupgreektrue
+    \@um@bfuppartialtrue
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
-    \@um@uppartialtrue
     \bool_set_false:N \g_um_vargreek_bool
   \or
     \@um@literaltrue
@@ -680,16 +713,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \ifcase\@tempb\relax
     \@um@bfupGreekfalse
     \@um@bfupgreekfalse
+    \@um@bfuppartialfalse
     \@um@bfupLatinfalse
     \@um@bfuplatinfalse
   \or
     \@um@bfupGreektrue
     \@um@bfupgreekfalse
+    \@um@bfuppartialfalse
     \@um@bfupLatintrue
     \@um@bfuplatintrue
   \or
     \@um@bfupGreektrue
     \@um@bfupgreektrue
+    \@um@bfuppartialtrue
     \@um@bfupLatintrue
     \@um@bfuplatintrue
   \or
@@ -707,14 +743,35 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@upNablafalse
   \fi
 }
+\cs_set:Nn \um_setup_nabla: {
+  \if@um@upNabla
+    \tl_set:Nn \um_Nabla_up_or_it_usv { \um@usv@Nabla }
+    \tl_set:Nn \um_bfNabla_up_or_it_usv { \um@usv@bfNabla }
+    \tl_set:Nn \um_bfsfNabla_up_or_it_usv { \um@usv@bfsfNabla }
+  \else
+    \tl_set:Nn \um_Nabla_up_or_it_usv { \um@usv@itNabla }
+    \tl_set:Nn \um_bfNabla_up_or_it_usv { \um@usv@bfitNabla }
+    \tl_set:Nn \um_bfsfNabla_up_or_it_usv { \um@usv@bfsfitNabla }
+  \fi
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic}{
+\define@choicekey*{unicode-math.sty}{bold-partial}[\@tempa\@tempb]{upright,italic}{
   \ifcase\@tempb\relax
-    \@um@uppartialtrue
+    \@um@bfuppartialtrue
   \or
-    \@um@uppartialfalse
+    \@um@bfuppartialfalse
+  \fi
+}
+\tl_set:Nn \um_partial_up_or_it_usv { \um@usv@partial }
+\cs_set:Nn \um_setup_partial: {
+  \if@um@bfuppartial
+    \tl_set:Nn \um_bfpartial_up_or_it_usv { \um@usv@bfpartial }
+    \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfpartial }
+  \else
+    \tl_set:Nn \um_bfpartial_up_or_it_usv { \um@usv@bfitpartial }
+    \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfitpartial }
   \fi
 }
 %    \end{macrocode}
@@ -1072,12 +1129,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Finally,
 % \begin{itemize}
+% \item Set up shapes for italic/upright or ordinary/var symbols as per package options.
 % \item Remap symbols that don't take their natural mathcode
 % \item Activate any symbols that need to be math-active
 % \item Setup all symbols not covered by the table (mostly alphanumerics)
 % \item Setup the maths alphabets (\cs{mathbf} etc.)
 % \end{itemize}
 %    \begin{macrocode}
+  \um_setup_shapes:
   \um_remap_symbols:
   \um_setup_mathactives:
   \um_setup_alphanum:
@@ -1089,6 +1148,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_shapes: {
+  \um_setup_nabla:
+  \um_setup_partial:
+}
+%    \end{macrocode}
 %
 % \subsubsection{Functions for setting up symbols with mathcodes}
 % \seclabel{mathsymbol}
@@ -1118,10 +1183,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_remap_symbols:}
 % This function is used to define the mathcodes for those chars which should
 % be mapped to a different glyph than themselves.
-% The only example I have right now is ascii hyphen to real minus.
 %    \begin{macrocode}
 \cs_new:Nn \um_remap_symbols: {
   \um_remap_symbol:nnn{"2D}{\mathbin}{"02212}% hyphen to minus
+  \if@um@literal
+    \um_remap_symbol:nnn {\um@usv@Nabla}{\mathord}{\um@usv@Nabla}
+    \um_remap_symbol:nnn {\um@usv@itNabla}{\mathord}{\um@usv@itNabla}
+    \um_remap_symbol:nnn {\um@usv@partial}{\mathord}{\um@usv@partial}
+    \um_remap_symbol:nnn {\um@usv@itpartial}{\mathord}{\um@usv@itpartial}
+  \else
+    \um_remap_symbol:nnn {\um@usv@Nabla,\um@usv@itNabla}{\mathord}{\um_Nabla_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@partial,\um@usv@itpartial}{\mathord}{\um_partial_up_or_it_usv}
+  \fi
+  \if@um@bfliteral\else
+    \um_remap_symbol:nnn {\um@usv@bfNabla,\um@usv@bfitNabla}{\mathord}{\um_bfNabla_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\mathord}{\um_bfsfNabla_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@bfpartial,\um@usv@bfitpartial}{\mathord}{\um_bfpartial_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@bfsfpartial,\um@usv@bfsfitpartial}{\mathord}{\um_bfsfpartial_up_or_it_usv}
+  \fi
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1134,7 +1213,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 \cs_new:Nn \um_remap_symbol_noparse:nnn {
-  \SetMathCode {#1} {#2} {\um@symfont} {#3}
+  \clist_map_inline:nn {#1} {
+    \SetMathCode {##1} {#2} {\um@symfont} {#3}
+  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1188,16 +1269,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \if@um@uplatin\um@def@uplatin\else\um@def@itlatin\fi
       \if@um@upGreek\um@def@upGreek\else\um@def@itGreek\fi
       \if@um@upgreek\um@def@upgreek\else\um@def@itgreek\fi
-      \if@um@upNabla
-        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}
-      \else
-        \um@setmathcode{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@itNabla}
-      \fi
-      \if@um@uppartial
-        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}
-      \else
-        \um@setmathcode{\um@usv@partial,\um@usv@itpartial}{\um@usv@itpartial}
-      \fi
     \fi
 %    \end{macrocode}
 % \paragraph{Bold}
@@ -1238,23 +1309,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfitvarphi}
         \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfitvarrho}
         \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}
-      \fi
-%    \end{macrocode}
-% Bold nabla and partial symbols:
-%    \begin{macrocode}
-      \if@um@upNabla
-        \um@setmathcode{\um@usv@bfNabla,\um@usv@bfitNabla}{\um@usv@bfNabla}
-        \um@setmathcode{\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\um@usv@bfsfNabla}
-      \else
-        \um@setmathcode{\um@usv@bfNabla,\um@usv@bfitNabla}{\um@usv@bfitNabla}
-        \um@setmathcode{\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\um@usv@bfsfitNabla}
-      \fi
-      \if@um@uppartial
-        \um@setmathcode{\um@usv@bfpartial,\um@usv@bfitpartial}{\um@usv@bfpartial}
-        \um@setmathcode{\um@usv@bfsfpartial,\um@usv@bfsfitpartial}{\um@usv@bfsfpartial}
-      \else
-        \um@setmathcode{\um@usv@bfpartial,\um@usv@bfitpartial}{\um@usv@bfitpartial}
-        \um@setmathcode{\um@usv@bfsfpartial,\um@usv@bfsfitpartial}{\um@usv@bfsfitpartial}
       \fi
     \fi
   \else
@@ -1895,10 +1949,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um@setmathcode{\um@usv@varTheta}{\um@usv@varTheta}
   \um@setmathcode[25]{\um@usv@itGreek}{\um@usv@itGreek}
   \um@setmathcode[25]{\um@usv@upgreek}{\um@usv@upgreek}
-  \um@setmathcode{\um@usv@Nabla}{\um@usv@Nabla}
-  \um@setmathcode{\um@usv@itNabla}{\um@usv@itNabla}
-  \um@setmathcode{\um@usv@partial}{\um@usv@partial}
-  \um@setmathcode{\um@usv@itpartial}{\um@usv@itpartial}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2004,9 +2054,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %
 %
-% \part{Maths alphabets mapping definitions}\label{part:mathmap}
-%
-% \setmathfont{Cambria Math}
+% \section{Maths alphabets mapping definitions}\label{part:mathmap}
 %
 % Algorithm for setting alphabet fonts:
 % \begin{itemize}
@@ -2340,6 +2388,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfpartial}
     \else
       \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfitgreek}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfitvarepsilon}
@@ -2348,13 +2397,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfitvarphi}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}
+      \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial,\um@usv@itpartial}{\um@usv@bfitpartial}
     \fi
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla,\um@usv@itNabla}{\um_bfNabla_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial,\um@usv@itpartial}{\um_bfpartial_up_or_it_usv}
   \fi
 }
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla}{"1D6C1}
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial}{"1D6DB}
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itNabla}{"1D6C1}
-%  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itpartial}{"1D6DB}
 %    \end{macrocode}
 %
 %
