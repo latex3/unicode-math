@@ -1502,7 +1502,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
 %   \[ \sqrt{1+\sqrt{1+
 %    \sqrt{1+ \sqrt{1+
 %    \sqrt{1+\sqrt{1+
@@ -1510,7 +1509,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
 %   \[ \sqrt[2]{1+\sqrt[3]{1+x}} \]
 % \end{example}
 %
@@ -1531,7 +1529,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %: TODO : `fences', e.g., \cmd\vert
 %
 % \begin{example}{}
-%   \setmathfont{Asana Math}
 %   \[ \left(\left(\left(\left(\left( x
 %      \right)^1\right)^2\right)^3\right)^4\right)^5 \]
 %   \[ \left[\left[\left[\left[\left[ y
@@ -2695,6 +2692,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Primes}
 %
 % \begin{example}{}
+%   \setmathfont{Cambria Math}
 %   [$x\prime$] [$x\prime\prime\prime$]
 %   [$x\prime\prime\prime\prime\prime\prime$] \\~
 %   [$x'$] [$x'''$] [$x''''''$] \\~
@@ -2723,7 +2721,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % just map \verb|'| to \cs{prime} and not worry about it.
 % 
 % However, it would be nice to use the pre-composed primes above if they exist
-% in the font; consider $x\prime\prime\prime$ vs.\ $x\primetriple$. Our algorithm is
+% in the font; consider $x\primesingle\primesingle\primesingle$ vs.\ $x\primetriple$. Our algorithm is
 % \begin{itemize}
 % \item Prime encountered; pcount=1.
 % \item Scan ahead; if prime: pcount:=pcount+1; repeat.
@@ -3309,7 +3307,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
   \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Candara}
   \setmonofont[Scale=MatchLowercase]{Consolas}
 \fi
-\setmathfont{Asana Math}
+\setmathfont{Cambria Math}
 
 \linespread{1.069}      % A bit more space between lines
 \frenchspacing         % Remove ugly extra space after punctuation
