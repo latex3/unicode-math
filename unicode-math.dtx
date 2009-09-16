@@ -1916,7 +1916,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \def\beta{\mitbeta}
   \def\gamma{\mitgamma}
   \def\delta{\mitdelta}
-  \def\epsilon{\mitepsilon}
+  \def\epsilon{
+    \bool_if:NTF \g_um_texgreek_bool {\mitvarepsilon}{\mitepsilon}
+  }
   \def\zeta{\mitzeta}
   \def\eta{\miteta}
   \def\theta{\mittheta}
@@ -1933,14 +1935,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \def\sigma{\mitsigma}
   \def\tau{\mittau}
   \def\upsilon{\mitupsilon}
-  \def\phi{\mitphi}
+  \def\phi{
+    \bool_if:NTF \g_um_texgreek_bool {\mitvarphi}{\mitphi}
+  }
   \def\chi{\mitchi}
   \def\psi{\mitpsi}
   \def\omega{\mitomega}
-  \def\varepsilon{\mitvarepsilon}
+  \def\varepsilon{
+      \bool_if:NTF \g_um_texgreek_bool {\mitepsilon}{\mitvarepsilon}
+  }
   \def\vartheta{\mitvartheta}
   \def\varkappa{\mitvarkappa}
-  \def\varphi{\mitvarphi}
+  \def\varphi{
+    \bool_if:NTF \g_um_texgreek_bool {\mitphi}{\mitvarphi}
+  }
   \def\varrho{\mitvarrho}
   \def\varpi{\mitvarpi}
 }
