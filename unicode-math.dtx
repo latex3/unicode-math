@@ -270,7 +270,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % option to |math-style| will effect this behaviour.
 %
 % The \opt{math-style} options' effects are shown in brief in
-% \tabref{math-style}. \Tabref[vref]{math-style-check} shows every character
+% \tabref{math-style}. \Figref[vref]{math-style-check} shows every character
 % under the effect of this package option.
 %
 % \begin{table}
@@ -281,11 +281,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     \toprule
 %       & \multicolumn{2}{c}{Example} \\
 %        \cmidrule(l){2-3}
-%       \rmfamily Package option & |(a,z,B,X)| & |(α,β,Γ,Ξ)| \\
+%       \rmfamily Package option & Latin & Greek \\
 %     \midrule
-%       math-style=ISO & $(a,z,B,X)$ & $(\mitalpha,\mitbeta,\mitGamma,\mitXi)$ \\
-%       math-style=TeX & $(a,z,B,X)$ & $(\mitalpha,\mitbeta,\upGamma,\upXi)$ \\
-%       math-style=French & $(a,z,\mupB,\mupX)$ & $(\upalpha,\upbeta,\upGamma,\upXi)$ \\
+%       math-style=ISO & $(a,z,B,X)$ & $\mathit{(\alpha,\beta,\Gamma,\Xi)}$ \\
+%       math-style=TeX & $(a,z,B,X)$ & $(\mathit\alpha,\mathit\beta,\mathup\Gamma,\mathup\Xi)$ \\
+%       math-style=French & $(a,z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -325,7 +325,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % latter.
 %
 % The \opt{bold-style} options' effects are shown in brief in
-% \tabref{bold-style}. \Tabref[vref]{bold-style-check} shows every character
+% \tabref{bold-style}. \Figref[vref]{bold-style-check} shows every character
 % under the effect of this package option.
 %
 % \begin{table}
@@ -336,11 +336,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     \toprule
 %       & \multicolumn{2}{c}{Example} \\
 %        \cmidrule(l){2-3}
-%       \rmfamily Package option & |(a,z,B,X)| & |(α,β,Γ,Ξ)| \\
+%       \rmfamily Package option & Latin & Greek \\
 %     \midrule
-%       bold-style=ISO & $(\mbfita,\mbfitz,\mbfitB,\mbfitX)$ & $(\mbfitalpha,\mbfitbeta,\mbfitGamma,\mbfitXi)$ \\
-%       bold-style=TeX & $(\mbfa,\mbfz,\mbfB,\mbfX)$ & $(\mbfitalpha,\mbfitbeta,\mbfGamma,\mbfXi)$ \\
-%       bold-style=French & $(\mbfa,\mbfz,\mbfB,\mbfX)$ & $(\mbfalpha,\mbfbeta,\mbfGamma,\mbfXi)$ \\
+%       bold-style=ISO & $(\mathbfit a, \mathbfit z, \mathbfit B, \mathbfit X)$ & $(\mathbfit\alpha, \mathbfit\beta, \mathbfit\Gamma, \mathbfit\Xi)$ \\
+%       bold-style=TeX & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfit\alpha, \mathbfit\beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
+%       bold-style=French & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfup \alpha,\mathbfup \beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -1062,7 +1062,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{example}{firstline=2}
 %   \Huge
-%   \zf@fontspec{}{Cambria Math}
+%   \zf@fontspec{}{Asana Math}
 %   \let\glb@currsize\relax
 %   \DeclareSymbolFont{test2}{EU1}{\zf@family}{m}{n}
 %   \SetMathCode{65}{\mathalpha}{test2}{119860}
@@ -1073,17 +1073,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Here's the simplest usage:
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
+%   \setmathfont{Asana Math}
 %   $Ax \eqdef \nabla \times \mscrZ$
 % \end{example}
 %
 % An interesting (perhaps useless) example of the \feat{Range} feature:
 % \begin{example}{}
-%   \setmathfont[Colour=000000]{Cambria Math}
-%   \setmathfont[Range={\mathop}, Colour=FF0000]{Cambria Math}
-%   \setmathfont[Range={\equal}, Colour=009900]{Cambria Math}
+%   \setmathfont[Colour=000000]{Asana Math}
+%   \setmathfont[Range={\mathop}, Colour=FF0000]{Asana Math}
+%   \setmathfont[Range={\equal}, Colour=009900]{Asana Math}
 %   \setmathfont[Range={\mathopen,\mathclose},
-%             Colour=0000FF]{Cambria Math}
+%             Colour=0000FF]{Asana Math}
 %   \[
 %   F(s)=\mscrL\{f(t)\}=\int_0^\infty \mathup{e}^{-st}f(t)\,\mathup{d} t
 %   \]
@@ -1550,11 +1550,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{example}{}
 %   \def\dmath#1{$\displaystyle #1$}
-%   \setmathfont{Cambria Math} \dmath{\iiint_V}
+%   \setmathfont{Asana Math} \dmath{\iiint_V}
 %   \removenolimits\iiint
-%   \setmathfont{Cambria Math} \dmath{\iiint_V}
+%   \setmathfont{Asana Math} \dmath{\iiint_V}
 %   \addnolimits\iiint
-%   \setmathfont{Cambria Math} \dmath{\iiint_V}
+%   \setmathfont{Asana Math} \dmath{\iiint_V}
 % \end{example}
 %
 % \subsection{Radicals}
@@ -1604,7 +1604,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %: TODO : `fences', e.g., \cmd\vert
 %
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
+%   \setmathfont{Asana Math}
 %   \[ \left(\left(\left(\left(\left( x
 %      \right)^1\right)^2\right)^3\right)^4\right)^5 \]
 %   \[ \left[\left[\left[\left[\left[ y
@@ -1646,7 +1646,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Maths accents should just work \emph{if they are available in the font}.
 % \begingroup
-% \setmathfont[Colour=FF0000]{Cambria Math}
+% \setmathfont[Colour=FF0000]{Asana Math}
 % \renewcommand\UnicodeMathSymbol[4]{\ifx\mathaccent#3\def\@tempa{\scshape\MakeLowercase{u+\@gobble#1} & $\displaystyle#2 x$ & \small\cmd#2 & \parbox[b]{6.1cm}{\raggedright\scshape#4} \\}\expandafter\@tempa\fi}
 % \begin{longtable}[l]{@{}lccl@{}}
 % \toprule
@@ -2391,13 +2391,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \subsubsection{Typewriter or monospaced: \cmd\mathtt}
-% \setmathfont{STIXGeneral}
 % \begin{example}{}
 %   $\mathtt{0123456789}$ \\
 %   $\mathtt{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathtt{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
-% \setmathfont{Cambria Math}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathtt: {
   \um_set_mathalphabet_numbers:Nnn{\mathtt}{\um@usv@num}{\um@usv@ttnum}
@@ -2572,7 +2570,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Bold fractur or fraktur or blackletter: \cmd\mathbffrak}
 %
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
 %   $\mathbffrak{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathbffrak{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
@@ -2587,7 +2584,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Bold script or calligraphic: \cmd\mathbfscr}
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
 %   $\mathbfscr{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
 %   $\mathbfscr{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
@@ -2764,7 +2760,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Primes}
 %
 % \begin{example}{}
-%   \setmathfont{Cambria Math}
 %   [$x\prime$] [$x\prime\prime\prime$]
 %   [$x\prime\prime\prime\prime\prime\prime$] \\~
 %   [$x'$] [$x'''$] [$x''''''$] \\~
@@ -3249,16 +3244,16 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \def\itlatin{𝑎𝑏𝑐𝑑𝑒𝑓𝑔ℎ𝑖𝑗𝑘𝑙𝑚𝑛𝑜𝑝𝑞𝑟𝑠𝑡𝑢𝑣𝑤𝑥𝑦𝑧}
 \def\itGreek{𝛢𝛣𝛤𝛥𝛦𝛧𝛨𝛩𝛳𝛪𝛫𝛬𝛭𝛮𝛯𝛰𝛱𝛲𝛴𝛵𝛶𝛷𝛸𝛹𝛺}
 \def\itgreek{𝛼𝛽𝛾𝛿𝜀𝜖𝜁𝜂𝜃𝜗𝜄𝜅𝜘𝜆𝜇𝜈𝜉𝜊𝜋𝜛𝜌𝜚𝜍𝜎𝜏𝜐𝜑𝜙𝜒𝜓𝜔}
-\def\testmath#1{
-  \makebox[\linewidth][l]{
-    \makebox[0pt][l]{$\csname up#1\endcsname$}
+\def\testmath#1{%
+  \makebox[\linewidth][l]{%
+    \makebox[0pt][l]{$\csname up#1\endcsname$}%
     \makebox[0pt][l]{$\csname it#1\endcsname$}}}
 \begin{document}
-\setmathfont[Colour=2255FF99]{Cambria Math}
+\setmathfont[Colour=2255FF99]{Asana Math}
 \parindent=0pt
 \voffset=-1in
 \hoffset=-1in
-\setbox0=\vbox{
+\setbox0=\vbox{%
 \testmath{Latin}\\
 \testmath{latin}\\
 \testmath{Greek}\\
@@ -3303,19 +3298,19 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \def\bfitGreek{𝜜𝜝𝜞𝜟𝜠𝜡𝜢𝜣𝜤𝜥𝜦𝜧𝜨𝜩𝜪𝜫𝜬𝜭𝜮𝜯𝜰𝜱𝜲𝜳𝜴}
 \def\bfitgreek{𝜶𝜷𝜸𝜹𝜺𝜻𝜼𝜽𝜾𝜿𝝀𝝁𝝂𝝃𝝄𝝅𝝆𝝇𝝈𝝉𝝊𝝋𝝌𝝍𝝎𝝐𝝑𝝒𝝓𝝔𝝕}
 \providecommand\mathalphabet{\mathbf}
-\def\testmath#1{
-  \makebox[\linewidth][l]{
-    \makebox[0pt][l]{$\mathalphabet{\csname up#1\endcsname}$}
-    \makebox[0pt][l]{$\mathalphabet{\csname it#1\endcsname}$}
-    \makebox[0pt][l]{$\csname bfup#1\endcsname$}
-    \makebox[0pt][l]{$\csname bfit#1\endcsname$}
+\def\testmath#1{%
+  \makebox[\linewidth][l]{%
+    \makebox[0pt][l]{$\mathalphabet{\csname up#1\endcsname}$}%
+    \makebox[0pt][l]{$\mathalphabet{\csname it#1\endcsname}$}%
+    \makebox[0pt][l]{$\csname bfup#1\endcsname$}%
+    \makebox[0pt][l]{$\csname bfit#1\endcsname$}%
     }}
 \begin{document}
-\setmathfont[Colour=2255FF55]{Cambria Math}
+\setmathfont[Colour=2255FF55]{Asana Math}
 \parindent=0pt
 \voffset=-1in
 \hoffset=-1in
-\setbox0=\vbox{
+\setbox0=\vbox{%
 \testmath{Latin}\\
 \testmath{latin}\\
 \testmath{Greek}\\
@@ -3364,17 +3359,22 @@ sed -e ' s/{N}/{\\mathord}/   ' \
   {\endlist}
 
 \usepackage[svgnames]{xcolor}
-\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref}
+\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifplatform,ifthen,longtable,refstyle,subfig,topcapt,url,varioref}
 \setcounter{LTchunksize}{100}
 \usepackage{xltxtra}
 \usepackage{unicode-math}
 
 %\usepackage[rm,small]{titlesec}
 
-\setromanfont[Mapping=tex-text,Numbers=Lowercase]{FPL Neu}
-\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Lucida Grande}
-\setmonofont[Scale=MatchLowercase]{Monaco}
-\setmathfont{Cambria Math}
+\setromanfont[Mapping=tex-text]{TeX Gyre Pagella}
+\ifwindows
+  \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Lucida Grande}
+  \setmonofont[Scale=MatchLowercase]{Andale Mono}
+\else
+  \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Candara}
+  \setmonofont[Scale=MatchLowercase]{Consolas}
+\fi
+\setmathfont{Asana Math}
 
 \linespread{1.069}      % A bit more space between lines
 \frenchspacing         % Remove ugly extra space after punctuation
