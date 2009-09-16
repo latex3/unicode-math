@@ -540,26 +540,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \bool_new:N \g_um_texgreek_bool
 %    \end{macrocode}
 %
-% \paragraph{Programming niceties}
-%
-% \begin{macro}{\um@Loop}
-% \begin{macro}{\um@Break}
-% See Kees van der Laan's various articles on \TeX\ programming:
-%    \begin{macrocode}
-\def\um@Loop#1\um@Pool{#1\um@Loop#1\um@Pool}
-\def\um@Break#1\um@Pool{}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% \paragraph{Shortcuts}
-%    \begin{macrocode}
-\newcommand\um@PackageError[2]{\PackageError{unicode-math}{#1}{#2}}
-\newcommand\um@PackageWarning[1]{\PackageWarning{unicode-math}{#1}}
-\newcommand\um@PackageInfo[1]{\PackageInfo{unicode-math}{#1}}
-%    \end{macrocode}
-%
 % \subsubsection{Alphabet unicode positions}
+%
 % Before we begin, let's define the positions of the various unicode
 % alphabets so that our code is a little more readable.\footnote{`\textsc{u.s.v.}' stands
 % for `unicode scalar value'.}
@@ -627,10 +609,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@varrho{"3F1}
 \def\um@usv@varpi{"3D6}
 \def\um@usv@digamma{"3DD}
-\tl_new:Nn \g_um_up_epsilon_letter_usv {"25B}
-\tl_new:Nn \g_um_up_epsilon_symbol_usv {"3F5}
-\tl_new:Nn \g_um_up_phi_letter_usv {"3C6}
-\tl_new:Nn \g_um_up_phi_symbol_usv {"3D5}
 %    \end{macrocode}
 % Bold:
 %    \begin{macrocode}
@@ -643,10 +621,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfvarrho{"1D6E0}
 \def\um@usv@bfvarpi{"1D6E1}
 \def\um@usv@bfdigamma{"1D7CB}
-\tl_new:Nn \g_um_bfup_epsilon_letter_usv {"1D6C6}
-\tl_new:Nn \g_um_bfup_epsilon_symbol_usv {"1D6DC}
-\tl_new:Nn \g_um_bfup_phi_letter_usv {"1D6D7}
-\tl_new:Nn \g_um_bfup_phi_symbol_usv {"1D6DF}
 %    \end{macrocode}
 % Italic Greek variants:
 %    \begin{macrocode}
@@ -658,10 +632,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@itvarphi{"1D719}
 \def\um@usv@itvarrho{"1D71A}
 \def\um@usv@itvarpi{"1D71B}
-\tl_new:Nn \g_um_it_epsilon_symbol_usv {"1D716}
-\tl_new:Nn \g_um_it_epsilon_letter_usv {"1D700}
-\tl_new:Nn \g_um_it_phi_symbol_usv {"1D719}
-\tl_new:Nn \g_um_it_phi_letter_usv {"1D711}
 %    \end{macrocode}
 % Bold:
 %    \begin{macrocode}
@@ -674,10 +644,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfitvarphi{"1D753}
 \def\um@usv@bfitvarrho{"1D754}
 \def\um@usv@bfitvarpi{"1D755}
-\tl_new:Nn \g_um_bfit_epsilon_letter_usv {"1D73A}
-\tl_new:Nn \g_um_bfit_epsilon_symbol_usv {"1D750}
-\tl_new:Nn \g_um_bfit_phi_letter_usv {"1D74B}
-\tl_new:Nn \g_um_bfit_phi_symbol_usv {"1D753}
 %    \end{macrocode}
 % Nabla:
 %    \begin{macrocode}
@@ -827,43 +793,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \or
     \bool_set_true:N \g_um_texgreek_bool
   \fi
-}
-\cs_set:Nn \um_setup_vargreek: {
-  \bool_if:NTF \g_um_texgreek_bool {
-    \num_set_eq:NN      \g_um_up_phi_usv    \g_um_up_phi_symbol_usv
-    \num_set_eq:NN   \g_um_up_varphi_usv    \g_um_up_phi_letter_usv
-    \num_set_eq:NN      \g_um_it_phi_usv    \g_um_it_phi_symbol_usv
-    \num_set_eq:NN   \g_um_it_varphi_usv    \g_um_it_phi_letter_usv
-    \num_set_eq:NN    \g_um_bfup_phi_usv  \g_um_bfup_phi_symbol_usv
-    \num_set_eq:NN \g_um_bfup_varphi_usv  \g_um_bfup_phi_letter_usv
-    \num_set_eq:NN    \g_um_bfit_phi_usv  \g_um_bfit_phi_symbol_usv
-    \num_set_eq:NN \g_um_bfit_varphi_usv  \g_um_bfit_phi_letter_usv
-    \num_set_eq:NN      \g_um_up_epsilon_usv    \g_um_up_epsilon_symbol_usv
-    \num_set_eq:NN   \g_um_up_varepsilon_usv    \g_um_up_epsilon_letter_usv
-    \num_set_eq:NN      \g_um_it_epsilon_usv    \g_um_it_epsilon_symbol_usv
-    \num_set_eq:NN   \g_um_it_varepsilon_usv    \g_um_it_epsilon_letter_usv
-    \num_set_eq:NN    \g_um_bfup_epsilon_usv  \g_um_bfup_epsilon_symbol_usv
-    \num_set_eq:NN \g_um_bfup_varepsilon_usv  \g_um_bfup_epsilon_letter_usv
-    \num_set_eq:NN    \g_um_bfit_epsilon_usv  \g_um_bfit_epsilon_symbol_usv
-    \num_set_eq:NN \g_um_bfit_varepsilon_usv  \g_um_bfit_epsilon_letter_usv
-  }{
-    \num_set_eq:NN   \g_um_up_varphi_usv    \g_um_up_phi_symbol_usv
-    \num_set_eq:NN      \g_um_up_phi_usv    \g_um_up_phi_letter_usv
-    \num_set_eq:NN   \g_um_it_varphi_usv    \g_um_it_phi_symbol_usv
-    \num_set_eq:NN      \g_um_it_phi_usv    \g_um_it_phi_letter_usv
-    \num_set_eq:NN \g_um_bfup_varphi_usv  \g_um_bfup_phi_symbol_usv
-    \num_set_eq:NN    \g_um_bfup_phi_usv  \g_um_bfup_phi_letter_usv
-    \num_set_eq:NN \g_um_bfit_varphi_usv  \g_um_bfit_phi_symbol_usv
-    \num_set_eq:NN    \g_um_bfit_phi_usv  \g_um_bfit_phi_letter_usv
-    \num_set_eq:NN   \g_um_up_varepsilon_usv    \g_um_up_epsilon_symbol_usv
-    \num_set_eq:NN      \g_um_up_epsilon_usv    \g_um_up_epsilon_letter_usv
-    \num_set_eq:NN   \g_um_it_varepsilon_usv    \g_um_it_epsilon_symbol_usv
-    \num_set_eq:NN      \g_um_it_epsilon_usv    \g_um_it_epsilon_letter_usv
-    \num_set_eq:NN \g_um_bfup_varepsilon_usv  \g_um_bfup_epsilon_symbol_usv
-    \num_set_eq:NN    \g_um_bfup_epsilon_usv  \g_um_bfup_epsilon_letter_usv
-    \num_set_eq:NN \g_um_bfit_varepsilon_usv  \g_um_bfit_epsilon_symbol_usv
-    \num_set_eq:NN    \g_um_bfit_epsilon_usv  \g_um_bfit_epsilon_letter_usv
-  }
 }
 %    \end{macrocode}
 %
@@ -1166,7 +1095,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
     \@um@ot@math@true
   \else
-    \um@PackageWarning{
+    \PackageWarning{unicode-math}{
       The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
       Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
       in~ a~ substandard~ manner.
@@ -1182,7 +1111,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \ifx\um@char@range\@empty
     \def\um@symfont{um@allsym}
-    \um@PackageInfo{Defining~ the~ default~ maths~ font~ as~ '#2'}
+    \PackageInfo{unicode-math}{Defining~ the~ default~ maths~ font~ as~ '#2'}
     \let \UnicodeMathSymbol \um@mathsymbol@noparse
     \let \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
@@ -1232,7 +1161,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_setup_shapes: {
   \um_setup_nabla:
   \um_setup_partial:
-  \um_setup_vargreek:
 }
 %    \end{macrocode}
 %
@@ -1253,7 +1181,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \newcommand\um@mathsymbol@parse[4]{
   \um@parse@term{#1}{#2}{#3}{
-    %\um@PackageInfo{Defining \string#2 as mathchar #1}
     \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
   }
 }
@@ -2168,7 +2095,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_prepare_alph:n {#1}
     \use:c {um_config_math#1:}
   }{
-    \um@PackageWarning{Math~ alphabet~ "#1"~ not~ found~ with~ this~ font}
+    \PackageWarning{unicode-math}{Math~ alphabet~ "#1"~ not~ found~ with~ this~ font}
   }
 }
 %    \end{macrocode}
