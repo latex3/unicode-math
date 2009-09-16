@@ -412,17 +412,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     Bold      & Upright & $\mathbfup\partial$ \\
 %               & Italic  & $\mathbfit\partial$ \\
 %     Sans bold & Upright & $\mathbfsfup\partial$ \\
-%               & Italic  & $\mathbfsfup\partial$ \\
+%               & Italic  & $\mathbfsfit\partial$ \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
 %
 %
 % \begin{figure}
-% \iffalse
 % \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
 % \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-test.ltx"""}\fi
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
 % \centering
 % \subfloat[Package option \texttt{[math-style=ISO]}]{\includegraphics{unicode-math-test-iso.pdf}}\\
 % \subfloat[Package option \texttt{[math-style=TeX]}]{\includegraphics{unicode-math-test-tex.pdf}}\\
@@ -432,9 +431,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{figure}
 %
 % \begin{figure}
-% \iffalse\immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
 % \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}\fi
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
 % \centering
 % \subfloat[Package option \texttt{[bold-style=ISO]}]{\includegraphics{unicode-math-testbf-iso.pdf}}\\
 % \subfloat[Package option \texttt{[bold-style=TeX]}]{\includegraphics{unicode-math-testbf-tex.pdf}}\\
@@ -609,6 +608,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfsfnum{"1D7EC}
 \def\um@usv@bfsfLatin{"1D5D4}
 \def\um@usv@bfsflatin{"1D5EE}
+\let\um@usv@bfsfuplatin\um@usv@bfsflatin
 \def\um@usv@bfsfGreek{"1D756}
 \def\um@usv@bfsfgreek{"1D770}
 \def\um@usv@bfsfitLatin{"1D63C}
@@ -2224,10 +2224,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:n {bfscr }
   \um_setup_math_alphabet:n {bffrak}
   \um_setup_math_alphabet:n {bfsf  }
+  \um_setup_math_alphabet:n {bfsfup}
   \um_setup_math_alphabet:n {bfsfit}
 }
 %    \end{macrocode}
-%
 %
 %: TODO : nested alphabets?
 %
@@ -2611,6 +2611,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     $\mathbfsf{ϵϑϰϕϱϖ}$ \\
 % \end{example}
 %
+%: TODO : These should be contextual!
+%
 % Numbers (always upright) and letters:
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsf: {
@@ -2631,6 +2633,42 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varphi,\um@usv@itvarphi}{"1D78D}
   \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varrho,\um@usv@itvarrho}{"1D78E}
   \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varpi,\um@usv@itvarpi}{"1D78F}
+}
+%    \end{macrocode}
+%
+%
+% \subsubsection{Bold upright sans serif: \cmd\mathbfsfup}
+% \begin{example}{}
+%   \setmathfont{STIXGeneral-Bold}
+%   $\mathbfsfup{0123456789}$ \\
+%   $\mathbfsfup{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
+%   $\mathbfsfup{abcdefghijklmnopqrstuvwxyz}$ \\
+%   $\mathbfsfup{ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ}$\quad
+%     $\mathbfsfup{ϴ}$ \\
+%   $\mathbfsfup{αβγδεζηθικλμνξοπρστυφχψω}$\quad
+%     $\mathbfsfup{ϵϑϰϕϱϖ}$ \\
+% \end{example}
+%
+% Numbers (always upright) and letters:
+%    \begin{macrocode}
+\cs_new:Npn \um_config_mathbfsfup: {
+  \um_set_mathalphabet_numbers:Nnn{\mathbfsfup}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathbfsfup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathbfsfup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsflatin}
+  \um_set_mathalphabet_greek:Nnn{\mathbfsfup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfGreek}
+  \um_set_mathalphabet_greek:Nnn{\mathbfsfup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfgreek}
+%    \end{macrocode}
+% Others:
+%    \begin{macrocode}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@Nabla,\um@usv@itNabla}{"1D76F}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@partial,\um@usv@itpartial}{"1D789}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D78A}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@vartheta,\um@usv@itvartheta}{"1D78B}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@varkappa,\um@usv@itvarkappa}{"1D78C}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@varphi,\um@usv@itvarphi}{"1D78D}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@varrho,\um@usv@itvarrho}{"1D78E}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\um@usv@varpi,\um@usv@itvarpi}{"1D78F}
 }
 %    \end{macrocode}
 %

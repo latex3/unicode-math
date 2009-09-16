@@ -12,8 +12,8 @@ development and the interface and functionality should not be considered
 stable. Use at your own risk, in other words.
 
 Unicode maths is currently only supported by the fonts
-"Cambria Math" (Microsoft, proprietry) and
-"Asana Math" (Apostoulos Syropolous, open source).
+ - "Cambria Math" (Microsoft, proprietry) and
+ - "Asana Math" (Apostolos Syropolous, open source).
 
 Basic usage:
   \setmathfont{Asana Math}
