@@ -18,7 +18,7 @@ stable. Use at your own risk, in other words.
 
 Unicode maths is currently only supported by the fonts
  - "Cambria Math" (Microsoft, proprietry) and
- - "Asana Math" (Apostoulos Syropolous, open source).
+ - "Asana Math" (Apostolos Syropolous, open source).
 
 Basic usage:
   \setmathfont{Asana Math}
@@ -345,7 +345,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \end{tabular}
 % \end{table}
 %
-% \subsection{Other upright vs.\ italic symbols}
+% \subsection{Symbols requiring special attention}
 %
 % \paragraph{Nabla} The symbol $\nabla$ comes in the six forms shown in
 %  \tabref{nabla}.
@@ -381,38 +381,38 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{table}
 %
 % \paragraph{Partial}
-% Partial ($\partial$) is not as complex as nabla but there is something funny
-% about it. Unicode contains both \unichar{2202}{partial differential} and
-% \unichar{1D715}{math italic partial differential}. But in all the maths
-% fonts produced until now, they are identical.
+% The same applies to the symbols \unichar{2202}{partial differential} and
+% \unichar{1D715}{math italic partial differential}.
 %
-% In this package, typing either of them will give you the lower base plane
-% version (i.e., the 2202 one). If it turns out that the fonts around at the
-% moment are wrong, and 2202 is supposed to be upright, not italic, I'll add
-% a feature to switch between the two (analogous to the |nabla| feature above).
+% At time of writing, both the Cambria Math and STIX fonts display these
+% two glyphs in the same italic style, but this is hopefully a bug that will
+% be corrected in the future~--- the `plain' partial differential should
+% really have an upright shape.
 %
-% Nonetheless, there are still upright and italic bold versions of the symbol,
-% and it's possible that the behaviour of partial inside \cs{mathbf} should be
-% be different to the behaviour of the bold greek symbols. Use the
-% |bold-partial=upright| or |bold-partial=italic| package options to specify
-% which one you would like. Ordinarily, this follows from the behaviour of
-% the lowercase greek symbols.
+% Use the |partial=upright| or |partial=italic| package options to specify
+% which one you would like. The default is (always, unless someone requests and
+% argues otherwise) |partial=italic|.\footnote{A good argument would revolve
+% around some international standards body recommending upright over italic.
+% I just don't have the time right now to look it up.}
 %
 % See \tabref{partial} for the variations on the partial differential symbol.
 %
 % \begin{table}
 %   \centering
-%   \topcaption{The various forms of the partial differential.}
+%   \topcaption{The various forms of the partial differential. Note that in
+% the fonts used to display these glyphs, the first upright partial is
+% incorrectly shown in an italic style.}
 %   \tablabel{partial}
 %   \begin{tabular}{@{}llc@{}}
 %       \toprule
 %     \multicolumn{2}{@{}l}{Description} & Glyph
 %      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-%     Regular & Italic & $\partial$ \\
-%     Bold & Upright & $\mathbfup\partial$ \\
-%     & Italic & $\mathbfit\partial$ \\
+%     Regular   & Upright & $\mathup\partial$ \\
+%               & Italic  & $\mathit\partial$ \\
+%     Bold      & Upright & $\mathbfup\partial$ \\
+%               & Italic  & $\mathbfit\partial$ \\
 %     Sans bold & Upright & $\mathbfsfup\partial$ \\
-%     & Italic & $\mathbfsfup\partial$ \\
+%               & Italic  & $\mathbfsfup\partial$ \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -457,6 +457,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
 % \cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
 % With |vargreek-shape=unicode|, these symbols are swapped.
+% Note, however, that unicode characters are not affected by this option.
+% That is, no remapping occurs of the characters/glyphs, only the control sequences.
 %
 % Unless |math-style=literal| is in effect, the default is to use |vargreek-shape=TeX|.
 %
@@ -484,7 +486,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \unichar {1B1} {latin capital letter upsilon}
 %
 %
-% \StopEventually{}
+% \StopEventually{\PrintIndex}
 %
 % \part{The \pkg{unicode-math} package}
 %\iffalse
@@ -535,7 +537,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % For \opt{nabla}:
 %    \begin{macrocode}
 \newif\if@um@upNabla
-\newif\if@um@bfuppartial
+\newif\if@um@uppartial
 \bool_new:N \g_um_texgreek_bool
 %    \end{macrocode}
 %
@@ -710,7 +712,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uplatinfalse
     \@um@bfupGreekfalse
     \@um@bfupgreekfalse
-    \@um@bfuppartialfalse
+    \@um@uppartialfalse
     \@um@bfupLatinfalse
     \@um@bfuplatinfalse
     \@um@upNablafalse
@@ -722,7 +724,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uplatinfalse
     \@um@bfupGreektrue
     \@um@bfupgreekfalse
-    \@um@bfuppartialfalse
+    \@um@uppartialfalse
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
@@ -734,7 +736,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@uplatinfalse
     \@um@bfupGreektrue
     \@um@bfupgreektrue
-    \@um@bfuppartialtrue
+    \@um@uppartialtrue
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
@@ -753,19 +755,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \ifcase\@tempb\relax
     \@um@bfupGreekfalse
     \@um@bfupgreekfalse
-    \@um@bfuppartialfalse
+    \@um@uppartialfalse
     \@um@bfupLatinfalse
     \@um@bfuplatinfalse
   \or
     \@um@bfupGreektrue
     \@um@bfupgreekfalse
-    \@um@bfuppartialfalse
+    \@um@uppartialfalse
     \@um@bfupLatintrue
     \@um@bfuplatintrue
   \or
     \@um@bfupGreektrue
     \@um@bfupgreektrue
-    \@um@bfuppartialtrue
+    \@um@uppartialtrue
     \@um@bfupLatintrue
     \@um@bfuplatintrue
   \or
@@ -797,19 +799,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{bold-partial}[\@tempa\@tempb]{upright,italic}{
+\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic}{
   \ifcase\@tempb\relax
-    \@um@bfuppartialtrue
+    \@um@uppartialtrue
   \or
-    \@um@bfuppartialfalse
+    \@um@uppartialfalse
   \fi
 }
-\tl_set:Nn \um_partial_up_or_it_usv { \um@usv@partial }
 \cs_set:Nn \um_setup_partial: {
-  \if@um@bfuppartial
+  \if@um@uppartial
+    \tl_set:Nn \um_partial_up_or_it_usv { \um@usv@partial }
     \tl_set:Nn \um_bfpartial_up_or_it_usv { \um@usv@bfpartial }
     \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfpartial }
   \else
+    \tl_set:Nn \um_partial_up_or_it_usv { \um@usv@itpartial }
     \tl_set:Nn \um_bfpartial_up_or_it_usv { \um@usv@bfitpartial }
     \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfitpartial }
   \fi
@@ -1273,7 +1276,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_remap_symbol:nnn {\um@usv@Nabla,\um@usv@itNabla}{\mathord}{\um_Nabla_up_or_it_usv}
     \um_remap_symbol:nnn {\um@usv@partial,\um@usv@itpartial}{\mathord}{\um_partial_up_or_it_usv}
   \fi
-  \if@um@bfliteral\else
+%    \end{macrocode}
+% Some of these in the |bfliteral| block may be redundant, but that's okay:
+%    \begin{macrocode}
+  \if@um@bfliteral
+    \um_remap_symbol:nnn {\um@usv@bfNabla      }{\mathord}{\um@usv@bfNabla}
+    \um_remap_symbol:nnn {\um@usv@bfitNabla    }{\mathord}{\um@usv@bfitNabla}
+    \um_remap_symbol:nnn {\um@usv@bfsfNabla    }{\mathord}{\um@usv@bfsfNabla}
+    \um_remap_symbol:nnn {\um@usv@bfsfitNabla  }{\mathord}{\um@usv@bfsfitNabla}
+    \um_remap_symbol:nnn {\um@usv@bfpartial    }{\mathord}{\um@usv@bfpartial}
+    \um_remap_symbol:nnn {\um@usv@bfitpartial  }{\mathord}{\um@usv@bfitpartial}
+    \um_remap_symbol:nnn {\um@usv@bfsfpartial  }{\mathord}{\um@usv@bfsfpartial}
+    \um_remap_symbol:nnn {\um@usv@bfsfitpartial}{\mathord}{\um@usv@bfsfitpartial}
+  \else
     \um_remap_symbol:nnn {\um@usv@bfNabla,\um@usv@bfitNabla}{\mathord}{\um_bfNabla_up_or_it_usv}
     \um_remap_symbol:nnn {\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\mathord}{\um_bfsfNabla_up_or_it_usv}
     \um_remap_symbol:nnn {\um@usv@bfpartial,\um@usv@bfitpartial}{\mathord}{\um_bfpartial_up_or_it_usv}
