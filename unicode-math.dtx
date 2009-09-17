@@ -960,8 +960,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % In order for literal unicode characters to be used in the source and still
 % have the correct limits behaviour, big operators are made math-active.
-% \cmd\unicodemathgobble\ is the same as \@gobble, but needs to not have |@|
-% in its name because the argument goes inside a \cmd\scantokens.
 %
 % The active math char is \cmd\let\ to the macro \cmd\sum@op.
 %    \begin{macrocode}
@@ -2715,18 +2713,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \begingroup
   \char_make_other:N \^
-  \gdef\um@scancharlet#1="#2\@nil{
+  \cs_gset:Npn \um@scancharlet#1="#2\@nil {
     \lowercase{
       \scantokens{\global\let#1=^^^^^#2}
     }
   }
+%    \end{macrocode}
+%    Making |^| the right catcode isn't strictly necessary right now but it helps to future proof us with, e.g., breqn.
+%    \begin{macrocode}
   \gdef\um@scanactivedef"#1\@nil#2{
     \lowercase{
-      \scantokens{\global\def^^^^^#1{#2}}
+      \tl_rescan:nn{
+        \char_make_math_superscript:N\^
+      }{
+        \global\def^^^^^#1{#2}
+      }
     }
   }
 \endgroup
-\let\unicodemathgobble\@gobble
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -3122,7 +3126,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 % \mathfontdimen{Subscript\-Shift\-Down}
 % {The standard shift down applied to subscript elements. Positive for moving in the downward direction. Suggested: os2.ySubscriptYOffset.}
 % \mathfontdimen{Subscript\-Top\-Max}
-% {Maximum allowed height of the (ink) top of subscripts that does not require moving subscripts further down. Suggested: /5 x-height.}
+% {Maximum allowed height of the (ink) top of subscripts that does not require moving subscripts further down. Suggested: /5 x-height.}
 % \mathfontdimen{Subscript\-Baseline\-Drop\-Min}
 % {Minimum allowed drop of the baseline of subscripts relative to the (ink) bottom of the base. Checked for bases that are treated as a box or extended shape. Positive for subscript baseline dropped below the base bottom.}
 % \mathfontdimen{Superscript\-Shift\-Up}
@@ -3137,7 +3141,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 % {Minimum gap between the superscript and subscript ink. Suggested: 4×default rule thickness.}
 % \mathfontdimen{Superscript\-Bottom\-Max\-With\-Subscript}
 % {The maximum level to which the (ink) bottom of superscript can be pushed to increase the gap between superscript and subscript, before subscript starts being moved down. 
-% Suggested: /5 x-height.}
+% Suggested: /5 x-height.}
 % \mathfontdimen{Space\-After\-Script}
 % {Extra white space to be added after each subscript and superscript. Suggested: 0.5pt for a 12 pt font.}
 % \mathfontdimen{Upper\-Limit\-Gap\-Min}
@@ -3157,9 +3161,9 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 % \mathfontdimen{Stack\-Bottom\-Display\-Style\-Shift\-Down}
 % {Standard shift down applied to the bottom element of a stack in display style. Positive for moving in the downward direction.}
 % \mathfontdimen{Stack\-Gap\-Min}
-% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element. Suggested: 3×default rule thickness.}
+% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element. Suggested: 3×default rule thickness.}
 % \mathfontdimen{Stack\-Display\-Style\-Gap\-Min}
-% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element in display style. Suggested: 7×default rule thickness.}
+% {Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element in display style. Suggested: 7×default rule thickness.}
 % \mathfontdimen{Stretch\-Stack\-Top\-Shift\-Up}
 % {Standard shift up applied to the top element of the stretch stack.}
 % \mathfontdimen{Stretch\-Stack\-Bottom\-Shift\-Down}
@@ -3177,43 +3181,43 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 % \mathfontdimen{Fraction\-Denominator\-Display\-Style\-Shift\-Down}
 % {Standard shift down applied to the denominator in display style. Positive for moving in the downward direction. Suggested: Stack\-Bottom\-Display\-Style\-Shift\-Down.}
 % \mathfontdimen{Fraction\-Numerator\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar. Suggested: default rule thickness}
+% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar. Suggested: default rule thickness}
 % \mathfontdimen{Fraction\-Num\-Display\-Style\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
+% {Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
 % \mathfontdimen{Fraction\-Rule\-Thickness}
-% {Thickness of the fraction bar. Suggested: default rule thickness.}
+% {Thickness of the fraction bar. Suggested: default rule thickness.}
 % \mathfontdimen{Fraction\-Denominator\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar. Suggested: default rule thickness}
+% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar. Suggested: default rule thickness}
 % \mathfontdimen{Fraction\-Denom\-Display\-Style\-Gap\-Min}
-% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
+% {Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
 % \mathfontdimen{Skewed\-Fraction\-Horizontal\-Gap}
 % {Horizontal distance between the top and bottom elements of a skewed fraction.}
 % \mathfontdimen{Skewed\-Fraction\-Vertical\-Gap}
 % {Vertical distance between the ink of the top and bottom elements of a skewed fraction.}
 % \mathfontdimen{Overbar\-Vertical\-Gap}
-% {Distance between the overbar and the (ink) top of he base. Suggested: 3×default rule thickness.}
+% {Distance between the overbar and the (ink) top of he base. Suggested: 3×default rule thickness.}
 % \mathfontdimen{Overbar\-Rule\-Thickness}
-% {Thickness of overbar. Suggested: default rule thickness.}
+% {Thickness of overbar. Suggested: default rule thickness.}
 % \mathfontdimen{Overbar\-Extra\-Ascender}
-% {Extra white space reserved above the overbar. Suggested: default rule thickness.}
+% {Extra white space reserved above the overbar. Suggested: default rule thickness.}
 % \mathfontdimen{Underbar\-Vertical\-Gap}
-% {Distance between underbar and (ink) bottom of the base. Suggested: 3×default rule thickness.}
+% {Distance between underbar and (ink) bottom of the base. Suggested: 3×default rule thickness.}
 % \mathfontdimen{Underbar\-Rule\-Thickness}
-% {Thickness of underbar. Suggested: default rule thickness.}
+% {Thickness of underbar. Suggested: default rule thickness.}
 % \mathfontdimen{Underbar\-Extra\-Descender}
-% {Extra white space reserved below the underbar. Always positive. Suggested: default rule thickness.}
+% {Extra white space reserved below the underbar. Always positive. Suggested: default rule thickness.}
 % \mathfontdimen{Radical\-Vertical\-Gap}
-% {Space between the (ink) top of the expression and the bar over it. Suggested: 1¼ default rule thickness.}
+% {Space between the (ink) top of the expression and the bar over it. Suggested: 1¼ default rule thickness.}
 % \mathfontdimen{Radical\-Display\-Style\-Vertical\-Gap}
-% {Space between the (ink) top of the expression and the bar over it. Suggested: default rule thickness + ¼ x-height. }
+% {Space between the (ink) top of the expression and the bar over it. Suggested: default rule thickness + ¼ x-height. }
 % \mathfontdimen{Radical\-Rule\-Thickness}
-% {Thickness of the radical rule. This is the thickness of the rule in designed or constructed radical signs. Suggested: default rule thickness.}
+% {Thickness of the radical rule. This is the thickness of the rule in designed or constructed radical signs. Suggested: default rule thickness.}
 % \mathfontdimen{Radical\-Extra\-Ascender}
 % {Extra white space reserved above the radical. Suggested: Radical\-Rule\-Thickness.}
 % \mathfontdimen{Radical\-Kern\-Before\-Degree}
-% {Extra horizontal kern before the degree of a radical, if such is present. Suggested: 5/18 of em.}
+% {Extra horizontal kern before the degree of a radical, if such is present. Suggested: 5/18 of em.}
 % \mathfontdimen{Radical\-Kern\-After\-Degree}
-% {Negative kern after the degree of a radical, if such is present. Suggested: −10/18 of em.}
+% {Negative kern after the degree of a radical, if such is present. Suggested: −10/18 of em.}
 % \mathfontdimen{Radical\-Degree\-Bottom\-Raise\-Percent}
 % {Height of the bottom of the radical degree, if such is present, in proportion to the ascender of the radical sign. Suggested: 60\%.}
 % \end{longtable}
