@@ -1158,10 +1158,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
     \@um@ot@math@true
   \else
-    \PackageWarning{unicode-math}{
+    \PackageWarningNoLine{unicode-math}{
       The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
       Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
-      in~ a~ substandard~ manner.
+      in~ a~ substandard~ manner
     }
   \fi
 %    \end{macrocode}
@@ -2163,7 +2163,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_prepare_alph:n {#1}
     \use:c {um_config_math#1:}
   }{
-    \PackageWarning{unicode-math}{Math~ alphabet~ "#1"~ not~ found~ with~ this~ font}
+    \PackageWarningNoLine{unicode-math}{^^J\space\space\space\space
+    Math~ alphabet~ \@backslashchar math#1~ not~ found~ in~ font~ \fontname\um@font}
   }
 }
 %    \end{macrocode}
