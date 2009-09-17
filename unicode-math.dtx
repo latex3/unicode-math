@@ -494,7 +494,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/09/11 v0.4 Unicode maths in XeLaTeX]
+  [2009/09/17 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -510,6 +510,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \ExplSyntaxOn
 %    \end{macrocode}
+%
+% Package wrangling:
+% \begin{itemize}
+% \item Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
+%    \begin{macrocode}
+\@ifpackageloaded{amsmath}{
+  \tl_remove_in:Nn \@begindocumenthook {
+    \mathchardef\std@minus\mathcode`\-\relax
+    \mathchardef\std@equal\mathcode`\=\relax
+  }
+}{}
+%    \end{macrocode}
+% \end{itemize}
 %
 % \paragraph{Counters and conditionals}
 %    \begin{macrocode}
