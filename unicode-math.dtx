@@ -1455,6 +1455,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+%
 % \subsection{(Big) operators}
 %
 % Turns out that \XeTeX\ is clever enough to deal with big operators for us
@@ -2163,7 +2164,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }{
     \PackageWarningNoLine{unicode-math}{^^J\space\space\space\space
     Math~ alphabet~ \@backslashchar math#1~ not~ found~ in~ font~ \fontname\um@font}
+    \cs_if_exist:cT {um_fix_math#1:} {
+      \use:c {um_fix_math#1:}
+    }
   }
+}
+\cs_set:Nn \um_fix_mathtt: {
+  \SetMathAlphabet\mathtt{normal}\encodingdefault\ttdefault\mddefault\updefault
 }
 %    \end{macrocode}
 %
