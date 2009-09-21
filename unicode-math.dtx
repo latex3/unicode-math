@@ -229,6 +229,100 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \muskip_gset:Nn \g_um_primekern_muskip { -\thinmuskip/2 }
 % \ExplySyntaxOff
 % \end{verbatim}
+% 
+% \subsubsection{Unicode subscripts and superscripts}
+% 
+% You may, if you wish, use unicode subscripts and superscripts in your
+% source document. For basic expressions, the use of these characters
+% can make the input more readable.
+% Adjacent sub- or super-scripts will be concatenated into a single
+% expression.
+% 
+% The range of subscripts and superscripts supported by this package
+% are shown in \figref{superscript,subscript}. Please request more if
+% you think it is appropriate.
+% 
+% \begin{figure}\centering
+% \fbox{
+% \ifwindows\fontspec{Arial Unicode}\else\fontspec{Lucida Grande}\fi
+% ^^^^2070
+% ^^^^00b9
+% ^^^^00b2
+% ^^^^00b3
+% ^^^^2074
+% ^^^^2075
+% ^^^^2076
+% ^^^^2077
+% ^^^^2078
+% ^^^^2079
+% ^^^^207a
+% ^^^^207b
+% ^^^^207c
+% ^^^^207d
+% ^^^^207e
+% ^^^^2071
+% ^^^^207f}
+% \caption{The unicode superscripts.}
+% \label{superscripts}
+% \end{figure}
+% 
+% \begin{figure}\centering
+% \fbox{
+% \ifwindows\fontspec{Arial Unicode}\else\fontspec{Lucida Grande}\fi
+% ^^^^2080
+% ^^^^2081
+% ^^^^2081
+% ^^^^2082
+% ^^^^2083
+% ^^^^2084
+% ^^^^2085
+% ^^^^2086
+% ^^^^2087
+% ^^^^2088
+% ^^^^2089
+% ^^^^208a
+% ^^^^208b
+% ^^^^208c
+% ^^^^208d
+% ^^^^208e
+% ^^^^2090
+% ^^^^2091
+% ^^^^1d62
+% ^^^^2092
+% ^^^^1d63
+% ^^^^1d64
+% ^^^^1d65
+% ^^^^2093
+% ^^^^1d66
+% ^^^^1d67
+% ^^^^1d68
+% ^^^^1d69
+% ^^^^1d6a}
+% \caption{The unicode subscripts.}
+% \label{subscripts}
+% \end{figure}
+%
+% \subsubsection{Vertical bar `\texttt{\char`\|}'}
+% 
+% \subsubsection{Colon `\texttt:'}
+%
+% \subsubsection{Normalising some input characters}
+%
+% I believe
+% all variant forms should be used as legal input that is normalised to
+% a consistent output glyph, because we want to be fault-tolerant in the input.
+% Here are the duplicates:
+%
+% \unichar {251} {latin small letter alpha}
+% \unichar {25B} {latin small letter epsilon}
+% \unichar {263} {latin small letter gamma}
+% \unichar {269} {latin small letter iota}
+% \unichar {278} {latin small letter phi}
+% \unichar {28A} {latin small letter upsilon}
+% \unichar {190} {latin capital letter epsilon}
+% \unichar {194} {latin capital letter gamma}
+% \unichar {196} {latin capital letter iota}
+% \unichar {1B1} {latin capital letter upsilon}
 %
 %
 % \section{Package options}
@@ -347,7 +441,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Symbols requiring special attention}
 %
-% \paragraph{Nabla} The symbol $\nabla$ comes in the six forms shown in
+% \subsubsection{Nabla} The symbol $\nabla$ comes in the six forms shown in
 %  \tabref{nabla}.
 %  We want an individual option to specify whether we want upright or italic
 %  nabla by default (when either upright or italic nabla is used in the
@@ -380,7 +474,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \end{tabular}
 % \end{table}
 %
-% \paragraph{Partial}
+% \subsubsection{Partial}
 % The same applies to the symbols \unichar{2202}{partial differential} and
 % \unichar{1D715}{math italic partial differential}.
 %
@@ -442,7 +536,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \label{fig:bold-style-check}
 % \end{figure}
 %
-% \paragraph{Epsilon and phi: $\epsilon$ vs.\ $\varepsilon$ and $\phi$ vs.\ $\varphi$}
+% \subsubsection{Epsilon and phi: $\epsilon$ vs.\ $\varepsilon$ and $\phi$ vs.\ $\varphi$}
 % \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to
 % look like $\epsilon$. The Unicode glyph directly after delta and before zeta
 % is `epsilon' and looks like $\epsilon$; there is a subsequent variant of
@@ -465,24 +559,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \unichar{3F5}{greek lunate epsilon symbol}\\
 % \unichar{3C6}{greek small letter phi}\\
 % \unichar{3D5}{greek small letter script phi}
-%
-% \paragraph{Normalising some input characters}
-%
-% I believe
-% all variant forms should be used as legal input that is normalised to
-% a consistent output glyph, because we want to be fault-tolerant in the input.
-% Here are the duplicates:
-%
-% \unichar {251} {latin small letter alpha}
-% \unichar {25B} {latin small letter epsilon}
-% \unichar {263} {latin small letter gamma}
-% \unichar {269} {latin small letter iota}
-% \unichar {278} {latin small letter phi}
-% \unichar {28A} {latin small letter upsilon}
-% \unichar {190} {latin capital letter epsilon}
-% \unichar {194} {latin capital letter gamma}
-% \unichar {196} {latin capital letter iota}
-% \unichar {1B1} {latin capital letter upsilon}
 %
 %
 % \StopEventually{\PrintIndex}
@@ -1040,24 +1116,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\SetMathCode}
+% \begin{macro}{\um_set_mathcode:nnnn}
 % [For later] or if it's for a character code (just  a wrapper around the primitive).
-% Note that this declaration \emph{isn't} global so that it can be constrained by grouping.
+% Note that this declaration \emph{isn't} global so that it can be constrained by grouping
+% inside math alphabet switches.
 %    \begin{macrocode}
-\newcommand\SetMathCode[4]{
+\cs_set:Nn \um_set_mathcode:nnnn {
   \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax
 }
 %    \end{macrocode}
 % \end{macro}
-%
-% \begin{example}{firstline=2}
-%   \Huge
-%   \zf@fontspec{}{Asana Math}
-%   \let\glb@currsize\relax
-%   \DeclareSymbolFont{test2}{EU1}{\zf@family}{m}{n}
-%   \SetMathCode{65}{\mathalpha}{test2}{119860}
-%   $A$
-% \end{example}
 %
 % \subsection{The main \cs{setmathfont} macro}
 %
@@ -1171,24 +1239,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{itemize}
 %    \begin{macrocode}
   \ifx\um@char@range\@empty
-    \def\um@symfont{um@allsym}
+    \tl_set:Nn \um_symfont_tl {um@allsym}
     \PackageInfo{unicode-math}{Defining~ the~ default~ maths~ font~ as~ '#2'}
-    \let \UnicodeMathSymbol \um@mathsymbol@noparse
-    \let \um_mathmap:Nnn \um_mathmap_noparse:Nnn
+    \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_noparse:nnnn
+    \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
   \else
     \stepcounter{um@fam}
-    \edef\um@symfont{um@fam\theum@fam}
-    \let \UnicodeMathSymbol \um@mathsymbol@parse
-    \let \um_mathmap:Nnn \um_mathmap_parse:Nnn
+    \tl_set:Nx \um_symfont_tl {um@fam\theum@fam}
+    \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_parse:nnnn
+    \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_parse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
   \fi
 %    \end{macrocode}
-% Now defined |\um@symfont| as the \LaTeX\ math font to access everything:
+% Now defined |\um_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
-  \DeclareSymbolFont{\um@symfont}
+  \DeclareSymbolFont{\um_symfont_tl}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
 %    \end{macrocode}
 % And now we input every single maths char. See File~\ref{part:awk} for
@@ -1228,28 +1296,30 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Functions for setting up symbols with mathcodes}
 % \seclabel{mathsymbol}
 %
-% \begin{macro}{\um@mathsymbol@noparse}
-%    \begin{macrocode}
-\newcommand\um@mathsymbol@noparse[4]{
-  \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
-}
-%    \end{macrocode}
-%
-% \begin{macro}{\um@mathsymbol@parse}
+% \begin{macro}{\um_process_symbol_noparse:nnnn}
+% \begin{macro}{\um_process_symbol_parse:nnnn}
 % If the \feat{Range} font feature has been used, then only
 % a subset of the unicode glyphs are to be defined.
 % See \secref{rangeproc} for the code that enables this.
 %    \begin{macrocode}
-\newcommand\um@mathsymbol@parse[4]{
+\cs_set:Nn \um_process_symbol_noparse:nnnn {
+  \um@mathsymbol{#2}{#3}{\um_symfont_tl}{#1}
+}
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_set:Nn \um_process_symbol_parse:nnnn {
   \um@parse@term{#1}{#2}{#3}{
-    \um@mathsymbol{#2}{#3}{\um@symfont}{#1}
+    \um_process_symbol_noparse:nnnn{#1}{#2}{#3}{#4}
   }
 }
 %    \end{macrocode}
 % \end{macro}
+% \end{macro}
 %
 %
 % \begin{macro}{\um_remap_symbols:}
+% \begin{macro}{\um_remap_symbol_noparse:nnn}
+% \begin{macro}{\um_remap_symbol_parse:nnn}
 % This function is used to define the mathcodes for those chars which should
 % be mapped to a different glyph than themselves.
 %    \begin{macrocode}
@@ -1295,19 +1365,26 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Nn \um_remap_symbol_noparse:nnn {
   \clist_map_inline:nn {#1} {
-    \SetMathCode {##1} {#2} {\um@symfont} {#3}
+    \um_set_mathcode:nnnn {##1} {#2} {\um_symfont_tl} {#3}
   }
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 %
 % \subsubsection{Active math characters}
 %
+% There are more math active chars later in the subscript/superscript section.
+% But they don't need to be able to be typeset directly.
+%
 % \begin{macro}{\um_setup_mathactives:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_mathactives: {
   \um_make_mathactive:nNN {"2032} \primesingle \mathord
+  \um_make_mathactive:nNN {"2080} \subscriptzero \mathalpha
+  \um_make_mathactive:nNN {"2081} \subscriptone \mathalpha
+  \um_make_mathactive:nNN {"2082} \subscripttwo \mathalpha
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1319,7 +1396,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Nn \um_make_mathactive:nNN {
   \XeTeXmathchardef #2 = "\mathchar@type #3
-                         \csname sym\um@symfont\endcsname
+                         \csname sym\um_symfont_tl\endcsname
                          #1 \scan_stop:
   \XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
 }
@@ -1339,17 +1416,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_alphanum: {
   \ifx\um@char@range\@empty
-    \um@def@numbers
+    \um_map_chars_numbers:nn {\um@usv@num}{\um@usv@num}
 %    \end{macrocode}
 % \paragraph{Normal weight}
 %    \begin{macrocode}
     \if@um@literal
       \um_setup_literals:
     \else
-      \if@um@upLatin\um@def@upLatin\else\um@def@itLatin\fi
-      \if@um@uplatin\um@def@uplatin\else\um@def@itlatin\fi
-      \if@um@upGreek\um@def@upGreek\else\um@def@itGreek\fi
-      \if@um@upgreek\um@def@upgreek\else\um@def@itgreek\fi
+      \um_setup_Latin:
+      \um_setup_latin:
+      \um_setup_Greek:
+      \um_setup_greek:
     \fi
 %    \end{macrocode}
 % \paragraph{Bold}
@@ -1358,38 +1435,38 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_setup_bf_literals:
     \else
       \if@um@bfupLatin
-        \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{\um@usv@bfLatin}
+        \um_map_chars_latin:nn {\um@usv@bfLatin,\um@usv@bfitLatin}{\um@usv@bfLatin}
       \else
-        \um@setmathcode[26]{\um@usv@bfLatin,\um@usv@bfitLatin}{\um@usv@bfitLatin}
+        \um_map_chars_latin:nn {\um@usv@bfLatin,\um@usv@bfitLatin}{\um@usv@bfitLatin}
       \fi
       \if@um@bfuplatin
-        \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{\um@usv@bflatin}
+        \um_map_chars_latin:nn {\um@usv@bflatin,\um@usv@bfitlatin}{\um@usv@bflatin}
       \else
-        \um@setmathcode[26]{\um@usv@bflatin,\um@usv@bfitlatin}{\um@usv@bfitlatin}
+        \um_map_chars_latin:nn {\um@usv@bflatin,\um@usv@bfitlatin}{\um@usv@bfitlatin}
       \fi
       \if@um@bfupGreek
-        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfGreek}
-        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfvarTheta}
+        \um_map_chars_greek:nn {\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfGreek}
+        \um_map_char:nn {\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfvarTheta}
       \else
-        \um@setmathcode[25]{\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfitGreek}
-        \um@setmathcode{\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfitvarTheta}
+        \um_map_chars_greek:nn {\um@usv@bfGreek,\um@usv@bfitGreek}{\um@usv@bfitGreek}
+        \um_map_char:nn {\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um@usv@bfitvarTheta}
       \fi
       \if@um@bfupgreek
-        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfgreek}
-        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfvarepsilon}
-        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfvartheta}
-        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfvarkappa}
-        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfvarphi}
-        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfvarrho}
-        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfvarpi}
+        \um_map_chars_greek:nn {\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfgreek}
+        \um_map_char:nn {\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfvarepsilon}
+        \um_map_char:nn {\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfvartheta}
+        \um_map_char:nn {\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfvarkappa}
+        \um_map_char:nn {\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfvarphi}
+        \um_map_char:nn {\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfvarrho}
+        \um_map_char:nn {\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfvarpi}
       \else
-        \um@setmathcode[25]{\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfitgreek}
-        \um@setmathcode{\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfitvarepsilon}
-        \um@setmathcode{\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfitvartheta}
-        \um@setmathcode{\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfitvarkappa}
-        \um@setmathcode{\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfitvarphi}
-        \um@setmathcode{\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfitvarrho}
-        \um@setmathcode{\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}
+        \um_map_chars_greek:nn {\um@usv@bfgreek,\um@usv@bfitgreek}{\um@usv@bfitgreek}
+        \um_map_char:nn {\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfitvarepsilon}
+        \um_map_char:nn {\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfitvartheta}
+        \um_map_char:nn {\um@usv@bfvarkappa,\um@usv@bfitvarkappa}{\um@usv@bfitvarkappa}
+        \um_map_char:nn {\um@usv@bfvarphi,\um@usv@bfitvarphi}{\um@usv@bfitvarphi}
+        \um_map_char:nn {\um@usv@bfvarrho,\um@usv@bfitvarrho}{\um@usv@bfitvarrho}
+        \um_map_char:nn {\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}
       \fi
     \fi
   \else
@@ -1408,12 +1485,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
-% Adds \cmd\SetMathCode\ declaractions to the specified maths alphabet's definition (\eg, \cmd\um@mathscr).
+% Adds \cs{um_set_mathcode:nnnn} declarations to the specified maths alphabet's definition (\eg, \cmd\um@mathscr).
 % Uses \cmd\um@addto@mathmap\ (below) to expand the name of the current symbol font.
 %    \begin{macrocode}
 \cs_set:Nn \um_mathmap_noparse:Nnn {
   \clist_map_inline:nn {#2} {
-    \exp_args:No \um@addto@mathmap \um@symfont {##1}{#1}{#3}
+    \exp_args:No \um@addto@mathmap \um_symfont_tl {##1}{#1}{#3}
    }
 }
 %    \end{macrocode}
@@ -1425,13 +1502,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % When \cmd\um@parse@term\ is executed, it populates the \cmd\um@char@num@range\
 % macro with slot numbers corresponding to the specified range. This range is used to
-% conditionally add \cmd\SetMathCode\ declaractions to the maths alphabet definition (\eg, \cmd\um@mathscr).
+% conditionally add \cs{um_set_mathcode:nnnn} declaractions to the maths alphabet definition (\eg, \cmd\um@mathscr).
 %    \begin{macrocode}
 \cs_set:Nn \um_mathmap_parse:Nnn {
   \clist_map_inline:Nn \um@char@num@range {
     \ifnum##1=#3\relax
       \clist_map_inline:nn {#2} {
-        \exp_args:No \um@addto@mathmap \um@symfont {####1}{#1}{#3}
+        \exp_args:No \um@addto@mathmap \um_symfont_tl {####1}{#1}{#3}
       }
     \fi
   }
@@ -1440,16 +1517,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{macro}{\um@addto@mathmap}
-% \darg{Math symbol font, always/usually the expansion of \cmd\um@symfont}
+% \darg{Math symbol font, always/usually the expansion of \cs{um_symfont_tl}}
 % \darg{Input slot, \eg, the slot for `A'}
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
-% This macro is used so that \cmd\um@symfont\ can be expanded before entering the \cmd\g@addto@macro\ command.
+% This macro is used so that \cs{um_symfont_tl} can be expanded before entering the \cmd\g@addto@macro\ command.
 %    \begin{macrocode}
 \newcommand\um@addto@mathmap[4]{
   \expandafter\g@addto@macro
     \csname um_setup_\cs_to_str:N #3:\endcsname{
-    \SetMathCode{#2}{\mathalpha}{#1}{#4}
+    \um_set_mathcode:nnnn{#2}{\mathalpha}{#1}{#4}
   }
 }
 %    \end{macrocode}
@@ -1467,7 +1544,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \cmd\UnicodeMathSymbol\ in the appropriate contexts.
 %
 % Following is a table of every math operator (\cmd\mathop) defined in
-% |unicode-maths.tex|, from which a subset need to be flagged for
+% |unicode-math-table.tex|, from which a subset need to be flagged for
 % \cmd\nolimits\ adjustments.
 % The limits behaviour as specified by \pkg{unicode-math} are shown
 % (with grey 'scripts).
@@ -1539,11 +1616,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{example}{}
 %   \def\dmath#1{$\displaystyle #1$}
-%   \setmathfont{Asana Math} \dmath{\iiint_V}
+%   \setmathfont{Cambria Math} \dmath{\iiint_V}
 %   \removenolimits\iiint
-%   \setmathfont{Asana Math} \dmath{\iiint_V}
+%   \setmathfont{Cambria Math} \dmath{\iiint_V}
 %   \addnolimits\iiint
-%   \setmathfont{Asana Math} \dmath{\iiint_V}
+%   \setmathfont{Cambria Math} \dmath{\iiint_V}
 % \end{example}
 %
 % \subsection{Radicals}
@@ -1564,6 +1641,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{example}{}
+%   \setmathfont{Cambria Math} 
 %   \[ \sqrt{1+\sqrt{1+
 %    \sqrt{1+ \sqrt{1+
 %    \sqrt{1+\sqrt{1+
@@ -1571,6 +1649,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %
 % \begin{example}{}
+%   \setmathfont{Cambria Math} 
 %   \[ \sqrt[2]{1+\sqrt[3]{1+x}} \]
 % \end{example}
 %
@@ -1591,6 +1670,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %: TODO : `fences', e.g., \cmd\vert
 %
 % \begin{example}{}
+%   \setmathfont{Cambria Math} 
 %   \[ \left(\left(\left(\left(\left( x
 %      \right)^1\right)^2\right)^3\right)^4\right)^5 \]
 %   \[ \left[\left[\left[\left[\left[ y
@@ -1632,7 +1712,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Maths accents should just work \emph{if they are available in the font}.
 % \begingroup
-% \setmathfont[Colour=FF0000]{Asana Math}
+% \setmathfont[Colour=FF0000]{Cambria Math}
 % \renewcommand\UnicodeMathSymbol[4]{\ifx\mathaccent#3\def\@tempa{\scshape\MakeLowercase{u+\@gobble#1} & $\displaystyle#2 x$ & \small\cmd#2 & \parbox[b]{6.1cm}{\raggedright\scshape#4} \\}\expandafter\@tempa\fi}
 % \begin{longtable}[l]{@{}lccl@{}}
 % \toprule
@@ -1865,21 +1945,33 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@setmathcode}
-% \darg{Starting input char(s)}
+% \begin{macro}{\um_map_char:nn }
 % \darg{Number of iterations}
+% \darg{Starting input char(s)}
 % \darg{Starting output char}
 % Loops through character ranges setting \cmd\mathcode.
 %    \begin{macrocode}
-\newcommand\um@setmathcode[3][1]{
+\cs_set:Nn \um_map_chars_range:nnn {
   \clist_map_variable:nNn {#2} \l_um_input_num {
-    \prg_stepwise_variable:nnnNn{1}{1}{#1} \l_um_incr_num {
-      \SetMathCode
-        {\numexpr \l_um_incr_num+ \l_um_input_num - 1\relax}
-        {\mathalpha}{\um@symfont}
-        {\numexpr \l_um_incr_num + #3 - 1\relax}
+    \prg_stepwise_variable:nnnNn{0}{1}{#1} \l_um_incr_num {
+      \um_set_mathcode:nnnn
+        {\numexpr \l_um_incr_num+ \l_um_input_num \relax}
+        {\mathalpha}{\um_symfont_tl}
+        {\numexpr \l_um_incr_num + #3 \relax}
     }
   }
+}
+\cs_set:Nn \um_map_chars_latin:nn {
+  \um_map_chars_range:nnn {25}{#1}{#2}
+}
+\cs_set:Nn \um_map_chars_greek:nn {
+  \um_map_chars_range:nnn {24}{#1}{#2}
+}
+\cs_set:Nn \um_map_chars_numbers:nn {
+  \um_map_chars_range:nnn {9}{#1}{#2}
+}
+\cs_set:Nn \um_map_char:nn {
+  \um_map_chars_range:nnn {0}{#1}{#2}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1931,8 +2023,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{example}{}
-%   {\um@setmathcode[3]{`\A,`\D}{`\B}
-%   $ABCDEF$} $ABCDEF$
+%   \ExplSyntaxOn
+%   {\um_map_chars_range:nnn{3}{`\A,`\D}{`\B}
+%   $ABCDEFG$} $ABCDEFG$
 % \end{example}
 %
 % \begin{macro}{\um@resolve@greek}
@@ -2015,27 +2108,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 %
-% \begin{macro}{\um@def@numbers}
-%    \begin{macrocode}
-\newcommand\um@def@numbers{
-  \um@setmathcode[10]{\um@usv@num}{\um@usv@num}
-}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\um_setup_literals:}
 %: TODO : other literal symbols
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_literals: {
-  \um@setmathcode[26]{\um@usv@upLatin}{\um@usv@upLatin}
-  \um@setmathcode[26]{\um@usv@itLatin}{\um@usv@itLatin}
-  \um@setmathcode[26]{\um@usv@itlatin}{\um@usv@itlatin}
-  \um@setmathcode{\um@usv@ith}{\um@usv@ith}
-  \um@setmathcode[26]{\um@usv@uplatin}{\um@usv@uplatin}
-  \um@setmathcode[25]{\um@usv@upGreek}{\um@usv@upGreek}
-  \um@setmathcode{\um@usv@varTheta}{\um@usv@varTheta}
-  \um@setmathcode[25]{\um@usv@itGreek}{\um@usv@itGreek}
-  \um@setmathcode[25]{\um@usv@upgreek}{\um@usv@upgreek}
+  \um_map_chars_latin:nn {\um@usv@upLatin}{\um@usv@upLatin}
+  \um_map_chars_latin:nn {\um@usv@itLatin}{\um@usv@itLatin}
+  \um_map_chars_latin:nn {\um@usv@itlatin}{\um@usv@itlatin}
+  \um_map_char:nn {\um@usv@ith}{\um@usv@ith}
+  \um_map_chars_latin:nn {\um@usv@uplatin}{\um@usv@uplatin}
+  \um_map_chars_greek:nn {\um@usv@upGreek}{\um@usv@upGreek}
+  \um_map_char:nn {\um@usv@varTheta}{\um@usv@varTheta}
+  \um_map_chars_greek:nn {\um@usv@itGreek}{\um@usv@itGreek}
+  \um_map_chars_greek:nn {\um@usv@upgreek}{\um@usv@upgreek}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2044,101 +2129,83 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % TODO: other literal symbols
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_bf_literals: {
-  \um@setmathcode[26]{\um@usv@bfLatin}{\um@usv@bfLatin}
-  \um@setmathcode[26]{\um@usv@bflatin}{\um@usv@bflatin}
-  \um@setmathcode[26]{\um@usv@bfitLatin}{\um@usv@bfitLatin}
-  \um@setmathcode[26]{\um@usv@bfitlatin}{\um@usv@bfitlatin}
-  \um@setmathcode[25]{\um@usv@bfGreek}{\um@usv@bfGreek}
-  \um@setmathcode[25]{\um@usv@bfgreek}{\um@usv@bfgreek}
-  \um@setmathcode[25]{\um@usv@bfitGreek}{\um@usv@bfitGreek}
-  \um@setmathcode[25]{\um@usv@bfitgreek}{\um@usv@bfitgreek}
+  \um_map_chars_latin:nn {\um@usv@bfLatin}{\um@usv@bfLatin}
+  \um_map_chars_latin:nn {\um@usv@bflatin}{\um@usv@bflatin}
+  \um_map_chars_latin:nn {\um@usv@bfitLatin}{\um@usv@bfitLatin}
+  \um_map_chars_latin:nn {\um@usv@bfitlatin}{\um@usv@bfitlatin}
+  \um_map_chars_greek:nn {\um@usv@bfGreek}{\um@usv@bfGreek}
+  \um_map_chars_greek:nn {\um@usv@bfgreek}{\um@usv@bfgreek}
+  \um_map_chars_greek:nn {\um@usv@bfitGreek}{\um@usv@bfitGreek}
+  \um_map_chars_greek:nn {\um@usv@bfitgreek}{\um@usv@bfitgreek}
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@def@upLatin}
+% \begin{macro}{\um_setup_Latin:}
 %    \begin{macrocode}
-\newcommand\um@def@upLatin{
-  \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}
+\cs_set:Nn \um_setup_Latin: {
+  \if@um@upLatin
+    \um_map_chars_latin:nn {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}  
+  \else
+    \um_map_chars_latin:nn {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}
+  \fi
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@def@itLatin}
-%    \begin{macrocode}
-\newcommand\um@def@itLatin{
-  \um@setmathcode[26]{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@itLatin}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@def@itlatin}
+% \begin{macro}{\um_setup_latin:}
 % Don't overlook `h', which maps to \unichar{210E}{PLANCK CONSTANT}
 % instead of the expected \unichar{1D455}{MATHEMATICAL ITALIC SMALL H}.
 %    \begin{macrocode}
-\newcommand\um@def@itlatin{
-  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}
-  \um@setmathcode{`\h,\um@usv@ith}{\um@usv@ith}
+\cs_set:Nn \um_setup_latin: {
+  \if@um@uplatin
+    \um_map_chars_latin:nn {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}
+    \um_map_char:nn {\um@usv@ith}{`\h}
+  \else
+    \um_map_chars_latin:nn {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@itlatin}
+    \um_map_char:nn {`\h,\um@usv@ith}{\um@usv@ith}
+  \fi
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@def@uplatin}
+% \begin{macro}{\um_setup_Greek:}
 %    \begin{macrocode}
-\newcommand\um@def@uplatin{
-  \um@setmathcode[26]{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}
-  \um@setmathcode{\um@usv@ith}{`\h}
+\cs_set:Nn \um_setup_Greek: {
+  \if@um@upGreek
+    \um_map_chars_greek:nn {\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}
+    \um_map_char:nn {\um@usv@varTheta,"1D6F3}{\um@usv@varTheta}
+  \else
+    \um_map_chars_greek:nn {\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}
+    \um_map_char:nn {\um@usv@varTheta}{\um@usv@itvarTheta}
+  \fi
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@def@upGreek}
+% \begin{macro}{\um_setup_greek:}
 %    \begin{macrocode}
-\newcommand\um@def@upGreek{
-  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}
-  \um@setmathcode{\um@usv@varTheta,"1D6F3}{\um@usv@varTheta}
+\cs_set:Nn \um_setup_greek: {
+  \if@um@upgreek
+    \um_map_chars_greek:nn {\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}
+    \um_map_char:nn {\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}
+    \um_map_char:nn {\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}
+    \um_map_char:nn {\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}
+    \um_map_char:nn {\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}
+    \um_map_char:nn {\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}
+    \um_map_char:nn {\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}
+  \else
+    \um_map_chars_greek:nn {\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}
+    \um_map_char:nn {\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}
+    \um_map_char:nn {\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}
+    \um_map_char:nn {\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}
+    \um_map_char:nn {\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}
+    \um_map_char:nn {\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}
+    \um_map_char:nn {\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}
+  \fi
 }
 %    \end{macrocode}
 % \end{macro}
-%
-%
-% \begin{macro}{\um@def@itGreek}
-%    \begin{macrocode}
-\newcommand\um@def@itGreek{
-  \um@setmathcode[25]{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@itGreek}
-  \um@setmathcode{\um@usv@varTheta}{\um@usv@itvarTheta}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@def@upgreek}
-%    \begin{macrocode}
-\newcommand\um@def@upgreek{
-  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}
-  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}
-  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}
-  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}
-  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@varphi}
-  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@varrho}
-  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@varpi}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@def@itgreek}
-%    \begin{macrocode}
-\newcommand\um@def@itgreek{
-  \um@setmathcode[25]{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@itgreek}
-  \um@setmathcode{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@itvarepsilon}
-  \um@setmathcode{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@itvartheta}
-  \um@setmathcode{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@itvarkappa}
-  \um@setmathcode{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@itvarphi}
-  \um@setmathcode{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@itvarrho}
-  \um@setmathcode{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@itvarpi}
-}
-%    \end{macrocode}
-% \end{macro}
-%
 %
 %
 % \section{Maths alphabets mapping definitions}\label{part:mathmap}
@@ -2753,16 +2820,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \endgroup
 %    \end{macrocode}
 %
-% \subsection{Epilogue}
+% \section{Epilogue}
 %
 % Lots of little things to tidy up.
-%
-% \subsubsection{Unicode radicals}
-%
-% Undo the damage made to \cmd\sqrt:
-%    \begin{macrocode}
-\DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
-%    \end{macrocode}
 %
 % \subsubsection{Primes}
 %
@@ -2875,7 +2935,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \group_end:
 %    \end{macrocode}
 %
-% \subsubsection{Radicals}
+% \subsubsection{Unicode radicals}
+%
+% Undo the damage made to \cmd\sqrt:
+%    \begin{macrocode}
+\DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
+%    \end{macrocode}
 %
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
@@ -2895,6 +2960,168 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \end{macro}
+% 
+% \subsubsection{Unicode sub- and super-scripts}
+% 
+% The idea here is to enter a scanning state after a superscript or subscript is encountered.
+% If subsequent superscripts or subscripts (resp.) are found, they are lumped together.
+% Each sub/super has a corresponding regular size glyph which is used by \XeTeX\ to typeset
+% the results; this means that the actual subscript/superscript glyphs are never seen in the
+% output document~--- they are only used as input characters.
+% 
+% Open question: should the superscript-like `modifiers' (\unichar{1D2C}{modifier capital letter a} and on)
+% be included here?
+% 
+% First, the setup of each mathactive char:
+%    \begin{macrocode}
+\prop_new:N \g_um_supers_prop
+\prop_new:N \g_um_subs_prop
+\cs_generate_variant:Nn \prop_gput:Nnn {Nxn}
+\cs_generate_variant:Nn \prop_get:NnN {cxN}
+\cs_generate_variant:Nn \prop_if_in:NnTF {cx}
+
+\group_begin:
+
+% Populate a property list with superscript characters; their meaning as their key,
+% for reasons that will become apparent soon, and their replacement as each key's value.
+% Then make the superscript active and bind it to the scanning function.
+% 
+% \cs{scantokens} makes this process much simpler since we can activate the char
+% and assign its meaning in one step.
+\cs_set:Nn \um_setup_active_superscript:nn {
+  \prop_gput:Nxn \g_um_supers_prop   {\meaning #1} {#2}
+  \char_make_active:n {`#1}
+  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+  \scantokens{
+    \cs_gset:Npn #1 {
+      \tl_set:Nn \l_um_ss_chain_tl {#2}
+      \cs_set_eq:NN \um_sub_or_super:n \sp
+      \tl_set:Nn \l_um_tmpa_tl {supers}
+      \um_scan_sscript:
+    }
+  }
+}
+
+\um_setup_active_superscript:nn {^^^^2071} {i}
+\um_setup_active_superscript:nn {^^^^207f} {n}
+\um_setup_active_superscript:nn {^^^^2070} {0}
+\um_setup_active_superscript:nn {^^^^00b9} {1}
+\um_setup_active_superscript:nn {^^^^00b2} {2}
+\um_setup_active_superscript:nn {^^^^00b3} {3}
+\um_setup_active_superscript:nn {^^^^2074} {4}
+\um_setup_active_superscript:nn {^^^^2075} {5}
+\um_setup_active_superscript:nn {^^^^2076} {6}
+\um_setup_active_superscript:nn {^^^^2077} {7}
+\um_setup_active_superscript:nn {^^^^2078} {8}
+\um_setup_active_superscript:nn {^^^^2079} {9}
+\um_setup_active_superscript:nn {^^^^207a} {+}
+\um_setup_active_superscript:nn {^^^^207b} {-}
+\um_setup_active_superscript:nn {^^^^207c} {=}
+\um_setup_active_superscript:nn {^^^^207d} {(}
+\um_setup_active_superscript:nn {^^^^207e} {)}
+
+% Ditto above.
+\cs_set:Nn \um_setup_active_subscript:nn {
+  \prop_gput:Nxn \g_um_subs_prop   {\meaning #1} {#2}
+  \char_make_active:n {`#1}
+  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+  \scantokens{
+    \cs_gset:Npn #1 {
+      \tl_set:Nn \l_um_ss_chain_tl {#2}
+      \cs_set_eq:NN \um_sub_or_super:n \sb
+      \tl_set:Nn \l_um_tmpa_tl {subs}
+      \um_scan_sscript:
+    }
+  }   
+}
+
+\um_setup_active_subscript:nn {^^^^2080} {0}
+\um_setup_active_subscript:nn {^^^^2081} {1}
+\um_setup_active_subscript:nn {^^^^2081} {1}
+\um_setup_active_subscript:nn {^^^^2082} {2}
+\um_setup_active_subscript:nn {^^^^2083} {3}
+\um_setup_active_subscript:nn {^^^^2084} {4}
+\um_setup_active_subscript:nn {^^^^2085} {5}
+\um_setup_active_subscript:nn {^^^^2086} {6}
+\um_setup_active_subscript:nn {^^^^2087} {7}
+\um_setup_active_subscript:nn {^^^^2088} {8}
+\um_setup_active_subscript:nn {^^^^2089} {9}
+\um_setup_active_subscript:nn {^^^^208a} {+}
+\um_setup_active_subscript:nn {^^^^208b} {-}
+\um_setup_active_subscript:nn {^^^^208c} {=}
+\um_setup_active_subscript:nn {^^^^208d} {(}
+\um_setup_active_subscript:nn {^^^^208e} {)}
+\um_setup_active_subscript:nn {^^^^2090} {a}
+\um_setup_active_subscript:nn {^^^^2091} {e}
+\um_setup_active_subscript:nn {^^^^1d62} {i}
+\um_setup_active_subscript:nn {^^^^2092} {o}
+\um_setup_active_subscript:nn {^^^^1d63} {r}
+\um_setup_active_subscript:nn {^^^^1d64} {u}
+\um_setup_active_subscript:nn {^^^^1d65} {v}
+\um_setup_active_subscript:nn {^^^^2093} {x}
+\um_setup_active_subscript:nn {^^^^1d66} {\beta}
+\um_setup_active_subscript:nn {^^^^1d67} {\gamma}
+\um_setup_active_subscript:nn {^^^^1d68} {\rho}
+\um_setup_active_subscript:nn {^^^^1d69} {\phi}
+\um_setup_active_subscript:nn {^^^^1d6a} {\chi}
+
+\group_end:
+
+% The scanning command, evident in its purpose:
+\cs_new:Nn \um_scan_sscript: {
+  \um_scan_sscript:TF {
+    \um_scan_sscript:
+  }{
+    \um_sub_or_super:n {\l_um_ss_chain_tl}
+  }
+}
+
+% The main theme here is stolen from the source to the various \cs{peek_} functions.
+% Consider this function as simply boilerplate:
+\cs_new:Nn \um_scan_sscript:TF {
+  \tl_set:Nx \l_peek_true_aux_tl { \exp_not:n{ #1 } }
+  \tl_set_eq:NN \l_peek_true_tl \c_peek_true_remove_next_tl
+  \tl_set:Nx \l_peek_false_tl {\exp_not:n{\group_align_safe_end: #2}}
+  \group_align_safe_begin:
+    \peek_after:NN \um_peek_execute_branches_ss:
+}
+
+% We do not skip spaces when scanning ahead, and we explicitly wish to
+% bail out on encountering a space or an opening brace.
+\cs_new:Npn \um_peek_execute_branches_ss: {
+  \bool_if:nTF {
+    \token_if_eq_catcode_p:NN \l_peek_token \c_group_begin_token ||
+    \token_if_eq_meaning_p:NN \l_peek_token \c_space_token
+  }
+  { \l_peek_false_tl  }
+  { \um_peek_execute_branches_ss_aux: }
+}
+
+% This is the actual comparison code.
+% Because the peeking has already tokenised the next token,
+% it's too late to extract its charcode directly. Instead,
+% we look at its meaning, which remains a `character' even
+% though it is itself math-active. If the character is ever
+% made fully active, this will break our assumptions!
+% 
+% If the char's meaning exists as a property list key, we
+% build up a chain of sub-/superscripts and iterate. (If not, exit and
+% typeset what we've already collected.)
+\cs_new:Nn \um_peek_execute_branches_ss_aux: {
+  \prop_if_in:cxTF
+    {g_um_\l_um_tmpa_tl _prop} 
+    {\meaning\l_peek_token} 
+    {
+      \prop_get:cxN 
+        {g_um_\l_um_tmpa_tl _prop} 
+        {\meaning\l_peek_token}
+        \l_um_tmpb_tl
+      \tl_put_right:NV \l_um_ss_chain_tl \l_um_tmpb_tl
+      \l_peek_true_tl
+    }
+    {\l_peek_false_tl}
+}
+%    \end{macrocode}
 %
 % \subsubsection{Synonyms and all the rest}
 %
@@ -3367,7 +3594,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
   {\endlist}
 
 \usepackage[svgnames]{xcolor}
-\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifplatform,ifthen,longtable,refstyle,subfig,topcapt,url,varioref}
+\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifplatform,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
 \setcounter{LTchunksize}{100}
 \usepackage{xltxtra}
 \usepackage{unicode-math}
