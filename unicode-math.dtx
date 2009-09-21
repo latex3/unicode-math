@@ -239,12 +239,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % expression.
 % 
 % The range of subscripts and superscripts supported by this package
-% are shown in \figref{superscript,subscript}. Please request more if
+% are shown in \figref{superscripts,subscripts}. Please request more if
 % you think it is appropriate.
 % 
 % \begin{figure}\centering
-% \fbox{
-% \ifwindows\fontspec{Arial Unicode}\else\fontspec{Lucida Grande}\fi
+% \fbox{\fontspec{Charis SIL}\Large
+% A
 % ^^^^2070
 % ^^^^00b9
 % ^^^^00b2
@@ -261,16 +261,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % ^^^^207d
 % ^^^^207e
 % ^^^^2071
-% ^^^^207f}
-% \caption{The unicode superscripts.}
-% \label{superscripts}
+% ^^^^207f
+% Z}
+% \caption{
+%   The unicode superscripts supported as input characters.
+%   These are the literal glyphs from Charis SIL,
+%   not the output seen when used for maths input.
+%   The `A' and `Z' are to provide context for the size and
+%   location of the superscript glyphs.
+% }
+% \figlabel{superscripts}
 % \end{figure}
 % 
 % \begin{figure}\centering
-% \fbox{
-% \ifwindows\fontspec{Arial Unicode}\else\fontspec{Lucida Grande}\fi
+% \fbox{\fontspec{Charis SIL}\Large
+% A
 % ^^^^2080
-% ^^^^2081
 % ^^^^2081
 % ^^^^2082
 % ^^^^2083
@@ -297,9 +303,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % ^^^^1d67
 % ^^^^1d68
 % ^^^^1d69
-% ^^^^1d6a}
-% \caption{The unicode subscripts.}
-% \label{subscripts}
+% ^^^^1d6a
+% Z}
+% \caption{
+%   The unicode subscripts supported as input characters.
+%   See note from \figref{superscripts}.
+% }
+% \figlabel{subscripts}
 % \end{figure}
 %
 % \subsubsection{Vertical bar `\texttt{\char`\|}'}
@@ -1382,9 +1392,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_mathactives: {
   \um_make_mathactive:nNN {"2032} \primesingle \mathord
-  \um_make_mathactive:nNN {"2080} \subscriptzero \mathalpha
-  \um_make_mathactive:nNN {"2081} \subscriptone \mathalpha
-  \um_make_mathactive:nNN {"2082} \subscripttwo \mathalpha
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3002,8 +3009,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 
-\um_setup_active_superscript:nn {^^^^2071} {i}
-\um_setup_active_superscript:nn {^^^^207f} {n}
 \um_setup_active_superscript:nn {^^^^2070} {0}
 \um_setup_active_superscript:nn {^^^^00b9} {1}
 \um_setup_active_superscript:nn {^^^^00b2} {2}
@@ -3019,6 +3024,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \um_setup_active_superscript:nn {^^^^207c} {=}
 \um_setup_active_superscript:nn {^^^^207d} {(}
 \um_setup_active_superscript:nn {^^^^207e} {)}
+\um_setup_active_superscript:nn {^^^^2071} {i}
+\um_setup_active_superscript:nn {^^^^207f} {n}
 
 % Ditto above.
 \cs_set:Nn \um_setup_active_subscript:nn {
@@ -3036,7 +3043,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 
 \um_setup_active_subscript:nn {^^^^2080} {0}
-\um_setup_active_subscript:nn {^^^^2081} {1}
 \um_setup_active_subscript:nn {^^^^2081} {1}
 \um_setup_active_subscript:nn {^^^^2082} {2}
 \um_setup_active_subscript:nn {^^^^2083} {3}
@@ -3594,7 +3600,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
   {\endlist}
 
 \usepackage[svgnames]{xcolor}
-\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifplatform,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
+\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
 \setcounter{LTchunksize}{100}
 \usepackage{xltxtra}
 \usepackage{unicode-math}
@@ -3602,13 +3608,8 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 %\usepackage[rm,small]{titlesec}
 
 \setromanfont[Mapping=tex-text]{TeX Gyre Pagella}
-\ifwindows
-  \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Lucida Grande}
-  \setmonofont[Scale=MatchLowercase]{Andale Mono}
-\else
-  \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Candara}
-  \setmonofont[Scale=MatchLowercase]{Consolas}
-\fi
+\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Linux Biolinum O}
+\setmonofont[Scale=MatchLowercase]{Inconsolata}
 \setmathfont{Cambria Math}
 
 \linespread{1.069}      % A bit more space between lines
