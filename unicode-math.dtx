@@ -664,6 +664,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@sfnum{"1D7E2}
 \def\um@usv@sfupLatin{"1D5A0}
 \def\um@usv@sfuplatin{"1D5BA}
+\def\um@usv@sflatin  {"1D5BA}
 \def\um@usv@sfitLatin{"1D608}
 \def\um@usv@sfitlatin{"1D622}
 \def\um@usv@ttnum{"1D7F6}
@@ -675,6 +676,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfnum{"1D7CE}
 \def\um@usv@bfupLatin{"1D400}
 \def\um@usv@bfuplatin{"1D41A}
+\def\um@usv@bflatin  {"1D41A}
 \def\um@usv@bfupGreek{"1D6A8}
 \def\um@usv@bfupgreek{"1D6C2}
 \def\um@usv@bfitLatin{"1D468}
@@ -688,6 +690,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfsfnum{"1D7EC}
 \def\um@usv@bfsfupLatin{"1D5D4}
 \def\um@usv@bfsfuplatin{"1D5EE}
+\def\um@usv@bfsflatin  {"1D5EE}
 \def\um@usv@bfsfupGreek{"1D756}
 \def\um@usv@bfsfupgreek{"1D770}
 \def\um@usv@bfsfitLatin{"1D63C}
@@ -2289,6 +2292,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:n {scr   }
   \um_setup_math_alphabet:n {frak  }
   \um_setup_math_alphabet:n {sf    }
+  \um_setup_math_alphabet:n {sfup  }
   \um_setup_math_alphabet:n {sfit  }
   \um_setup_math_alphabet:n {tt    }
   \um_setup_math_alphabet:n {bf    }
@@ -3125,6 +3129,25 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     }
     {\l_peek_false_tl}
 }
+%    \end{macrocode}
+%
+% \subsubsection{Compatibility}
+%
+% Just comment out the offending lines for now:
+%    \begin{macrocode}
+\@ifpackageloaded{amsopn}{
+  \cs_set:Npn \newmcodes@ {
+    \mathcode`\'39
+    \mathcode`\*42
+    \mathcode`\."613A%
+%  \ifnum\mathcode`\-=45 \else
+%    \mathchardef\std@minus\mathcode`\-\relax
+%  \fi
+    \mathcode`\-45
+    \mathcode`\/47
+    \mathcode`\:"603A\relax
+  }
+}{}
 %    \end{macrocode}
 %
 % \subsubsection{Synonyms and all the rest}
