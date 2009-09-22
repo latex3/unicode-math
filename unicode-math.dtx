@@ -663,8 +663,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@fraklatin{"1D51E}
 \def\um@usv@sfnum{"1D7E2}
 \def\um@usv@sfupLatin{"1D5A0}
+\def\um@usv@sfLatin  {"1D5A0}
 \def\um@usv@sfuplatin{"1D5BA}
-\def\um@usv@sflatin  {"1D5BA}
 \def\um@usv@sfitLatin{"1D608}
 \def\um@usv@sfitlatin{"1D622}
 \def\um@usv@ttnum{"1D7F6}
@@ -675,8 +675,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \def\um@usv@bfnum{"1D7CE}
 \def\um@usv@bfupLatin{"1D400}
+\def\um@usv@bfLatin  {"1D400}
 \def\um@usv@bfuplatin{"1D41A}
-\def\um@usv@bflatin  {"1D41A}
 \def\um@usv@bfupGreek{"1D6A8}
 \def\um@usv@bfupgreek{"1D6C2}
 \def\um@usv@bfitLatin{"1D468}
@@ -689,8 +689,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bfscrlatin{"1D4EA}
 \def\um@usv@bfsfnum{"1D7EC}
 \def\um@usv@bfsfupLatin{"1D5D4}
+\def\um@usv@bfsfLatin  {"1D5D4}
 \def\um@usv@bfsfuplatin{"1D5EE}
-\def\um@usv@bfsflatin  {"1D5EE}
 \def\um@usv@bfsfupGreek{"1D756}
 \def\um@usv@bfsfupgreek{"1D770}
 \def\um@usv@bfsfitLatin{"1D63C}
@@ -2232,7 +2232,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_math_alphabet:n {
-  \um_glyph_if_exist:nTF {\csname um@usv@#1latin \endcsname}{
+  \um_glyph_if_exist:nTF {\csname um@usv@#1Latin \endcsname}{
     \um_maybe_init_alphabet:n {#1}
     \um_prepare_alph:n {#1}
     \use:c {um_config_math#1:}
