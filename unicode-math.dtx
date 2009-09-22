@@ -2266,16 +2266,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{macro}{\um_prepare_alph:n}
 % If |\mathXY| hasn't been (re-)declared yet, then define it in terms of
-% unicode-math defintions.
+% unicode-math defintions. Use \cs{bgroup}/\cs{egroup} so s'scripts scan the whole thing.
 %    \begin{macrocode}
 \cs_new:Nn \um_prepare_alph:n {
   \cs_if_exist:cF {um_math#1:n} {
     \cs_set:cpn {um_math#1:n} ##1 {
-      \begingroup \use:c {um_setup_math#1:} ##1 \endgroup
+      \use:c {um_setup_math#1:} ##1 \egroup
     }
     \cs_set_protected:cpn {math#1} {
+      \bgroup 
       \mode_if_math:F {
-        \expandafter\non@alpherr\expandafter{\csname math#1\endcsname\space}
+        \egroup\expandafter
+        \non@alpherr\expandafter{\csname math#1\endcsname\space}
       }
       \use:c {um_math#1:n}
     }
