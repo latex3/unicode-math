@@ -2917,13 +2917,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Nn \um_scanprime_collect: {
   \num_incr:N \l_um_primecount_num
-  \peek_charcode_remove:NTF ' { 
+  \peek_meaning_remove:NTF ' { 
     \um_scanprime_collect: 
   }{
     \peek_meaning_remove:NTF \um_scanprime: {
       \um_scanprime_collect:
     }{
-      \peek_charcode_remove:NTF ^^^^2032 {
+      \peek_meaning_remove:NTF ^^^^2032 {
         \um_scanprime_collect:
       }{
         \um_nprimes_select:n {\l_um_primecount_num}
