@@ -31,9 +31,6 @@ new releases.
 [2]: http://github.com/khaledhosny/euler-otf
 [3]: http://www.aip.org/stixfonts/
 
-There is a mailing list for discussing unicode-math and unicode maths systems
-in general here: http://groups.google.com/group/unimath
-
 
 PACKAGE USAGE
 -------------
@@ -625,18 +622,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \ExplSyntaxOn
 %    \end{macrocode}
 %
-% Package wrangling:
-% \begin{itemize}
-% \item Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
-%    \begin{macrocode}
-\@ifpackageloaded{amsmath}{
-  \tl_remove_in:Nn \@begindocumenthook {
-    \mathchardef\std@minus\mathcode`\-\relax
-    \mathchardef\std@equal\mathcode`\=\relax
-  }
-}{}
-%    \end{macrocode}
-% \end{itemize}
 %
 % \paragraph{Counters and conditionals}
 %    \begin{macrocode}
@@ -3161,24 +3146,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% \subsubsection{Compatibility}
-%
-% Just comment out the offending lines for now:
-%    \begin{macrocode}
-\@ifpackageloaded{amsopn}{
-  \cs_set:Npn \newmcodes@ {
-    \mathcode`\'39
-    \mathcode`\*42
-    \mathcode`\."613A%
-%  \ifnum\mathcode`\-=45 \else
-%    \mathchardef\std@minus\mathcode`\-\relax
-%  \fi
-    \mathcode`\-45
-    \mathcode`\/47
-    \mathcode`\:"603A\relax
-  }
-}{}
-%    \end{macrocode}
 %
 % \subsubsection{Synonyms and all the rest}
 %
@@ -3206,6 +3173,41 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+%
+% \subsubsection{Compatibility}
+%
+% Note that \pkg{amsmath} will always be loaded before \pkg{unicode-math}.
+% (Conflicts occur if you try it the other way around.)
+%
+% \begin{itemize}
+% \item Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
+%    \begin{macrocode}
+\@ifpackageloaded{amsmath}{
+  \tl_remove_in:Nn \@begindocumenthook {
+    \mathchardef\std@minus\mathcode`\-\relax
+    \mathchardef\std@equal\mathcode`\=\relax
+  }
+}{}
+%    \end{macrocode}
+% \item This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
+%    \begin{macrocode}
+\@ifpackageloaded{amsopn}{
+  \cs_set:Npn \newmcodes@ {
+    \mathcode`\'39
+    \mathcode`\*42
+    \mathcode`\."613A%
+%  \ifnum\mathcode`\-=45 \else
+%    \mathchardef\std@minus\mathcode`\-\relax
+%  \fi
+    \mathcode`\-45
+    \mathcode`\/47
+    \mathcode`\:"603A\relax
+  }
+}{}
+%    \end{macrocode}
+% \end{itemize}
+%
+%
 % Overriding \pkg{amsmath} definitions:
 %    \begin{macrocode}
 \AtBeginDocument{
@@ -3213,19 +3215,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% Interaction with \textsf{beamer}:
+% Interaction with \pkg{beamer}:
 %    \begin{macrocode}
-\AtBeginDocument{
-  \@ifpackageloaded{beamer}{
-    \ifbeamer@suppressreplacements\else
-      \PackageWarningNoLine{unicode-math}{
-        Disabling~ beamer's~ math~ setup.^^J
-        Please~ load~ beamer~ with~ the~ [professionalfonts]~ class~ option 
-      }
-      \beamer@suppressreplacementstrue
-    \fi
-  }{}
-}
+\@ifclassloaded{beamer}{
+  \ifbeamer@suppressreplacements\else
+    \PackageWarningNoLine{unicode-math}{
+      Disabling~ beamer's~ math~ setup.^^J
+      Please~ load~ beamer~ with~ the~ [professionalfonts]~ class~ option 
+    }
+    \beamer@suppressreplacementstrue
+  \fi
+}{}
 %    \end{macrocode}
 %
 % The end.
