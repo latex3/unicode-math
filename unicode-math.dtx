@@ -164,21 +164,23 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % conjectured that some effect could be spent to create a cross-format
 % package that would also work with Lua\TeX.
 %
+% Users who desire to specify maths alphabets only from various fonts may
+% wish to use Andrew Moschou's \pkg{mathspec} package instead.
 %
-% \section{Specification}
-%
-% This section will turn into `User Interface' in time, presumably.
+% \section{Unicode maths font setup}
 %
 % In the ideal case, a single unicode font will contain all maths glyphs we
-% need. Barbara Beeton's \STIX\ table provides the mapping between unicode
+% need. The file |unicode-math-table.tex| (based on Barbara Beeton's \STIX\ table)
+% provides the mapping between unicode
 % maths glyphs and macro names (all 3298 — or however many — of them!). A
-% single command \codeline{\cmd\setmathfont\oarg{font features}\marg{font
-% name}} would implement this for every every symbol and alphabetic variant.
+% single command
+% \codeline{\cmd\setmathfont\oarg{font features}\marg{font name}}
+% implements this for every every symbol and alphabetic variant.
 % That means |x| to $x$, |\xi| to $\xi$, |\leq| to $\leq$, etc., |\mathcal{H}|
 % to $\mathcal{H}$ and so on, all for unicode glyphs within a single font.
 %
-% Furthermore, this package should deal well with unicode characters for maths
-% input, as well. This includes using literal Greek letters in formulae,
+% This package deals well with unicode characters for maths
+% input. This includes using literal Greek letters in formulae,
 % resolving to upright or italic depending on preference.
 %
 % Finally, maths versions must also be provided for. While I guess version
@@ -197,14 +199,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % There will probably be few cases where a single unicode maths font suffices
 % (simply due to glyph coverage). The upcoming \STIX\ font comes to mind as a
 % possible exception. It will therefore be necessary to delegate specific
-% unicode ranges of glyphs to separate fonts. This syntax will also hook into
-% the \pkg{fontspec} font feature processing:
+% unicode ranges of glyphs to separate fonts:
 %   \codeline{\cmd\setmathfont|[Range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
 % where \meta{unicode range} is a comma-separated list of unicode slots and
-% ranges such as |{27D0-27EB,27FF,295B-297F}|. Furthermore, preset names
-% ranges could be used, such as |MiscMathSymbolsA|, with such ranges based on
-% unicode chunks. The amount of optimisation required here to achieve
-% acceptable performance has yet to be determined. Techniques such as saving
+% ranges such as |{27D0-27EB,27FF,295B-297F}|. You may also use the macro
+% for accessing the glyph, such as \cs{\int}, or whole collection of symbols with
+% the same math type, such as \cs{mathopen}. (Only numerical slots, however, can
+% be used in proper ranges.)
+% This interface still requires some thought.
+% 
+% Not yet implemented: preset names
+% ranges could be used in the range spec., such as |MiscMathSymbolsA|, 
+% with such ranges based on unicode chunks.
+% The amount of optimisation required here to achieve
+% acceptable performance has yet to be determined.
+% Techniques such as saving
 % out unicode subsets based on \meta{unicode range} data to be \cmd\input\ in
 % the next \LaTeX\ run are a possibility, but at this stage, performance
 % without such measures seems acceptable.
@@ -213,9 +222,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Cambria Math uses OpenType font features to activate smaller optical sizes
 % for scriptsize and scriptscriptsize symbols (the $B$ and $C$, respectively,
-% in $A_{B_C}$).
-%
-% Other fonts will possibly use entirely separate fonts. Both of these options
+% in $A_{B_C}$). Other fonts will possibly use entirely separate fonts.
+% 
+% Not yet implemented: Both of these options
 % must be taken into account. I hope this will be mostly automatic from the
 % users' points of view. The |+ssty| feature can be detected and applied
 % automatically, and appropriate optical size information embedded in the
@@ -231,9 +240,282 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % by unicode. The literal characters themselves may be used instead, for more
 % readable input files.
 %
-%: TODO : describe alphabet inputs
+% \subsection{Math `style'}
+%
+% Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright}
+% uppercase Greek letters for variables in mathematics. This is contrary to
+% the ISO standards of using italic forms for both upper- and lowercase.
+% Furthermore, the French (contrary again, \emph{quelle surprise}) have been
+% known to use upright uppercase \emph{Latin} letters as well as upright
+% upper- and lowercase Greek.
+%
+% The \pkg{unicode-math} package accommodates these possibilities with an
+% interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a
+% package option \opt{math-style} that takes one of three arguments:
+% \opt{TeX}, \opt{ISO}, or \opt{French} (case \emph{in}-sensitive).
+%
+% The philosophy behind the interface to the mathematical alphabet symbols
+% lies in \LaTeX's attempt of separating content and formatting. Because input
+% source text may come from a variety of places, the upright and
+% `mathematical' italic Latin and Greek alphabets are \emph{unified} from the
+% point of view of having a specified meaning in the source text. That is, to
+% get a mathematical ‘$x$’, either the ascii (`keyboard') letter |x| may
+% be typed, or the actual unicode character may be used. Similarly for Greek
+% letters. The upright or italic forms are then chosen based on the
+% |math-style| package option.
+%
+% If glyphs are desired that do not map as per the package option (for
+% example, an upright `g' is desired but typing |$g$| yields `$g$'),
+% \emph{markup} is required to specify this; to follow from the example:
+% |\mathup{g}|. Maths alphabets commands such as \cmd\mathup\ are detailed
+% later.
+%
+% \paragraph{Alternative interface} However, some users may not like this
+% convention. For them, an upright |x| is an upright `x' and that's that.
+% (This will be the case when obtaining source text from copy/pasting PDF or
+% Microsoft Word documents, for example.) For these users, the |literal|
+% option to |math-style| will effect this behaviour.
+%
+% The \opt{math-style} options' effects are shown in brief in
+% \tabref{math-style}. \Figref[vref]{math-style-check} shows every character
+% under the effect of this package option.
+%
+% \begin{table}
+%   \centering
+%   \topcaption{Effects of the \opt{math-style} package option.}
+%   \tablabel{math-style}
+%   \begin{tabular}{@{}>{\ttfamily}lcc@{}}
+%     \toprule
+%       & \multicolumn{2}{c}{Example} \\
+%        \cmidrule(l){2-3}
+%       \rmfamily Package option & Latin & Greek \\
+%     \midrule
+%       math-style=ISO & $(a,z,B,X)$ & $\mathit{(\alpha,\beta,\Gamma,\Xi)}$ \\
+%       math-style=TeX & $(a,z,B,X)$ & $(\mathit\alpha,\mathit\beta,\mathup\Gamma,\mathup\Xi)$ \\
+%       math-style=French & $(a,z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+%
+% \begin{figure}
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
+% \centering
+% \subfloat[Package option \texttt{[math-style=ISO]}]{\includegraphics{unicode-math-test-iso.pdf}}\\
+% \subfloat[Package option \texttt{[math-style=TeX]}]{\includegraphics{unicode-math-test-tex.pdf}}\\
+% \subfloat[Package option \texttt{[math-style=French]}]{\includegraphics{unicode-math-test-french.pdf}}
+% \caption{Example maths output demonstrating the \texttt{math-style} package option.}
+% \label{fig:math-style-check}
+% \end{figure}
+%
+% \subsection{Bold switching}
+%
+% Similar as in the previous section, ISO standards differ somewhat to \TeX's
+% conventions (and classical typesetting) for `boldness' in mathematics. In
+% the past, it has been customary to use bold \emph{upright} letters to denote
+% things like vectors and matrices. For example, \( \mathbfup{M} =
+% (\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively
+% scarcity of bold italic fonts in the pre-digital typesetting era. It has
+% been suggested that \emph{italic} bold symbols are used nowadays instead.
+%
+% Bold Greek letters have simply been bold variant glyphs of their regular
+% weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta)
+% \). Confusingly, the syntax in \LaTeX\ has been different for these two
+% examples: \cmd\mathbf\ in the former (`$\mathbfup{M}$'), and \cmd\bm\ (or
+% \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
+%
+% In \pkg{unicode-math}, the \cmd\mathbf\ command works directly with both
+% Greek and Latin maths alphabet characters and depending on package option
+% either switches to upright for Latin letters (|bold-style=TeX|) as well or
+% keeps them italic (|bold-style=ISO|).
+%
+% To match the package options for non-bold characters, for
+% |bold-style=French| all bold characters are upright, and
+% |bold-style=literal| does not change the upright/italic shape of the letter.
+%
+% Upright and italic bold mathematical letters input as direct unicode
+% characters are normalised with the same rules. For example, with
+% |bold-style=TeX|, a literal bold italic latin character will be typeset
+% upright.
+%
+% Note that \opt{bold-style} is independent of \opt{math-style}, although if
+% the former is not specified then sensible defaults are chosen based on the
+% latter.
+%
+% The \opt{bold-style} options' effects are shown in brief in
+% \tabref{bold-style}. \Figref[vref]{bold-style-check} shows every character
+% under the effect of this package option.
+%
+% \begin{table}
+%   \centering
+%   \topcaption{Effects of the \opt{bold-style} package option.}
+%   \tablabel{bold-style}
+%   \begin{tabular}{@{}>{\ttfamily}lcc@{}}
+%     \toprule
+%       & \multicolumn{2}{c}{Example} \\
+%        \cmidrule(l){2-3}
+%       \rmfamily Package option & Latin & Greek \\
+%     \midrule
+%       bold-style=ISO & $(\mathbfit a, \mathbfit z, \mathbfit B, \mathbfit X)$ & $(\mathbfit\alpha, \mathbfit\beta, \mathbfit\Gamma, \mathbfit\Xi)$ \\
+%       bold-style=TeX & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfit\alpha, \mathbfit\beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
+%       bold-style=French & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfup \alpha,\mathbfup \beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+%
+% \begin{figure}
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
+% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
+% \centering
+% \subfloat[Package option \texttt{[bold-style=ISO]}]{\includegraphics{unicode-math-testbf-iso.pdf}}\\
+% \subfloat[Package option \texttt{[bold-style=TeX]}]{\includegraphics{unicode-math-testbf-tex.pdf}}\\
+% \subfloat[Package option \texttt{[bold-style=French]}]{\includegraphics{unicode-math-testbf-french.pdf}}
+% \caption{Example maths output demonstrating the \texttt{bold-style} package option.}
+% \label{fig:bold-style-check}
+% \end{figure}
+% 
+% \subsection{Mathematical alphabets}
+% 
+% Unicode contains separate codepoints for most if not all variations of alphabet
+% shape one may wish to use in mathematical notation. The complete list is shown
+% in \tabref{mathalphabets}.
+% 
+% At present, the math font switching commands do not nest; therefore if you want
+% sans serif bold, you must write |\mathsfbfup{...}| rather than |\mathbfup{\mathsfup{...}}|.
+% This may change in the future.
+% 
+% \begin{table}
+% \caption{Mathematical alphabets defined in unicode. Black dots indicate an alphabet exists in the font specified; grey dots indicate shapes that should always be taken from the upright font even in the italic style.}
+% \tablabel{mathalphabets}
+% \centering
+% \def\Y{\textbullet}
+% \def\M{\textcolor{gray}{\textbullet}}
+% \begin{tabular}{@{} lll l ccc @{}}
+% \toprule
+% \multicolumn{3}{c}{Font} & & \multicolumn{3}{c}{Alphabet} \\
+% \cmidrule(r){1-3}
+% \cmidrule(l){5-7}
+% Style & Shape & Series & Switch & Latin & Greek & Numerals \\
+% \midrule
+% Serif      & Upright & Normal & \cs{mathup}     & \Y & \Y & \Y  \\
+%            &         & Bold   & \cs{mathbfup}   & \Y & \Y & \Y  \\
+%            & Italic  & Normal & \cs{mathit}     & \Y & \Y & \M  \\
+%            &         & Bold   & \cs{mathbfit}   & \Y & \Y & \M  \\
+% Sans serif & Upright & Normal & \cs{mathsfup}   & \Y &    & \Y  \\
+%            & Italic  & Normal & \cs{mathsfit}   & \Y &    & \M  \\
+%            & Upright & Bold   & \cs{mathsfbfup} & \Y & \Y & \Y  \\
+%            & Italic  & Bold   & \cs{mathsfbfit} & \Y & \Y & \M  \\
+% Typewriter & Upright & Normal & \cs{mathtt}     & \Y &    & \Y  \\
+% Double-struck & Upright & Normal & \cs{mathbb}     & \Y &    & \Y  \\
+% Script     & Upright & Normal & \cs{mathscr}    & \Y &    &     \\
+%            &         & Bold   & \cs{matbfscr}   & \Y &    &     \\
+% Fraktur    & Upright & Normal & \cs{mathfrak}   & \Y &    &     \\
+%            &         & Bold   & \cs{mathbffrac} & \Y &    &     \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 %
 % \subsection{Miscellanea}
+%
+%%
+% \subsubsection{Nabla} The symbol $\nabla$ comes in the six forms shown in
+%  \tabref{nabla}.
+%  We want an individual option to specify whether we want upright or italic
+%  nabla by default (when either upright or italic nabla is used in the
+%  source). \TeX\ classically uses an upright nabla, but \textsc{iso}
+%  standards differ (I think). The package options |nabla=upright| and
+%  |nabla=italic| switch between the two choices. This is then inherited
+%  through \cmd\mathbf; \cmd\mathit\ and \cmd\mathup\ can be used to force one
+%  way or the other.
+%
+% |nabla=italic| is implicit when using |math-style=ISO| and |nabla=upright|
+% follows both |math-style=TeX| and |math-style=French|.
+%
+% \begin{table}
+%   \centering
+%   \topcaption{The various forms of nabla.}
+%   \tablabel{nabla}
+%   \let \tmpshow\empty
+%   \begin{tabular}{@{}llc@{}}
+%       \toprule
+%     \multicolumn{2}{@{}l}{Description} & Glyph
+%      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
+%     Upright & Serif & $\mathup\nabla$ \\
+%     & Bold serif & $\mathup\mbfnabla$ \\
+%     & Bold sans & $\mathbfsf\nabla$ \\
+%       \cmidrule(lr){1-2}\cmidrule(lr){3-3}
+%     Italic & Serif & $\mathit\nabla$ \\
+%     & Bold serif & $\mathbfit\nabla$ \\
+%     & Bold sans & $\mathbfsfit\nabla$ \\
+%       \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% \subsubsection{Partial}
+% The same applies to the symbols \unichar{2202}{partial differential} and
+% \unichar{1D715}{math italic partial differential}.
+%
+% At time of writing, both the Cambria Math and STIX fonts display these
+% two glyphs in the same italic style, but this is hopefully a bug that will
+% be corrected in the future~--- the `plain' partial differential should
+% really have an upright shape.
+%
+% Use the |partial=upright| or |partial=italic| package options to specify
+% which one you would like. The default is (always, unless someone requests and
+% argues otherwise) |partial=italic|.\footnote{A good argument would revolve
+% around some international standards body recommending upright over italic.
+% I just don't have the time right now to look it up.}
+%
+% See \tabref{partial} for the variations on the partial differential symbol.
+%
+% \begin{table}
+%   \centering
+%   \topcaption{The various forms of the partial differential. Note that in
+% the fonts used to display these glyphs, the first upright partial is
+% incorrectly shown in an italic style.}
+%   \tablabel{partial}
+%   \begin{tabular}{@{}llc@{}}
+%       \toprule
+%     \multicolumn{2}{@{}l}{Description} & Glyph
+%      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
+%     Regular   & Upright & $\mathup\partial$ \\
+%               & Italic  & $\mathit\partial$ \\
+%     Bold      & Upright & $\mathbfup\partial$ \\
+%               & Italic  & $\mathbfit\partial$ \\
+%     Sans bold & Upright & $\mathbfsfup\partial$ \\
+%               & Italic  & $\mathbfsfit\partial$ \\
+%       \bottomrule
+%   \end{tabular}
+% \end{table}
+%
+% \subsubsection{Epsilon and phi: $\epsilon$ vs.\ $\varepsilon$ and $\phi$ vs.\ $\varphi$}
+%
+% \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to
+% look like $\epsilon$. The Unicode glyph directly after delta and before zeta
+% is `epsilon' and looks like $\epsilon$; there is a subsequent variant of
+% epsilon that looks like $\varepsilon$. This creates a problem. People who
+% use unicode input won't want their glyphs transforming; \TeX\ users will be
+% confused that what they think as `normal epsilon' is actual the `variant
+% epsilon'. And the same problem exists for `phi'.
+%
+% We have a package option to control this behaviour.
+% With |vargreek-shape=TeX|,
+% \cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
+% \cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
+% With |vargreek-shape=unicode|, these symbols are swapped.
+% Note, however, that unicode characters are not affected by this option.
+% That is, no remapping occurs of the characters/glyphs, only the control sequences.
+%
+% Unless |math-style=literal| is in effect, the default is to use |vargreek-shape=TeX|.
+%
+% \unichar{3B5}{greek small letter epsilon}\\
+% \unichar{3F5}{greek lunate epsilon symbol}\\
+% \unichar{3C6}{greek small letter phi}\\
+% \unichar{3D5}{greek small letter script phi}
 %
 % \subsubsection{Primes}
 %
@@ -358,242 +640,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \unichar {194} {latin capital letter gamma}
 % \unichar {196} {latin capital letter iota}
 % \unichar {1B1} {latin capital letter upsilon}
-%
-%
-% \section{Package options}
-%
-% \subsection{Math `style'}
-%
-% Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright}
-% uppercase Greek letters for variables in mathematics. This is contrary to
-% the ISO standards of using italic forms for both upper- and lowercase.
-% Furthermore, the French (contrary again, \emph{quelle surprise}) have been
-% known to use upright uppercase \emph{Latin} letters as well as upright
-% upper- and lowercase Greek.
-%
-% The \pkg{unicode-math} package accommodates these possibilities with an
-% interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a
-% package option \opt{math-style} that takes one of three arguments:
-% \opt{TeX}, \opt{ISO}, or \opt{French} (case \emph{in}-sensitive).
-%
-% The philosophy behind the interface to the mathematical alphabet symbols
-% lies in \LaTeX's attempt of separating content and formatting. Because input
-% source text may come from a variety of places, the upright and
-% `mathematical' italic Latin and Greek alphabets are \emph{unified} from the
-% point of view of having a specified meaning in the source text. That is, to
-% get a mathematical ‘$x$’, either the ascii (`keyboard') letter |x| may
-% be typed, or the actual unicode character may be used. Similarly for Greek
-% letters. The upright or italic forms are then chosen based on the
-% |math-style| package option.
-%
-% If glyphs are desired that do not map as per the package option (for
-% example, an upright `g' is desired but typing |$g$| yields `$g$'),
-% \emph{markup} is required to specify this; to follow from the example:
-% |\mathup{g}|. Maths alphabets commands such as \cmd\mathup\ are detailed
-% later.
-%
-% \paragraph{Alternative interface} However, some users may not like this
-% convention. For them, an upright |x| is an upright `x' and that's that.
-% (This will be the case when obtaining source text from copy/pasting PDF or
-% Microsoft Word documents, for example.) For these users, the |literal|
-% option to |math-style| will effect this behaviour.
-%
-% The \opt{math-style} options' effects are shown in brief in
-% \tabref{math-style}. \Figref[vref]{math-style-check} shows every character
-% under the effect of this package option.
-%
-% \begin{table}
-%   \centering
-%   \topcaption{Effects of the \opt{math-style} package option.}
-%   \tablabel{math-style}
-%   \begin{tabular}{@{}>{\ttfamily}lcc@{}}
-%     \toprule
-%       & \multicolumn{2}{c}{Example} \\
-%        \cmidrule(l){2-3}
-%       \rmfamily Package option & Latin & Greek \\
-%     \midrule
-%       math-style=ISO & $(a,z,B,X)$ & $\mathit{(\alpha,\beta,\Gamma,\Xi)}$ \\
-%       math-style=TeX & $(a,z,B,X)$ & $(\mathit\alpha,\mathit\beta,\mathup\Gamma,\mathup\Xi)$ \\
-%       math-style=French & $(a,z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
-%     \bottomrule
-%   \end{tabular}
-% \end{table}
-%
-% \subsection{Bold switching}
-%
-% Similar as in the previous section, ISO standards differ somewhat to \TeX's
-% conventions (and classical typesetting) for `boldness' in mathematics. In
-% the past, it has been customary to use bold \emph{upright} letters to denote
-% things like vectors and matrices. For example, \( \mathbfup{M} =
-% (\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively
-% scarcity of bold italic fonts in the pre-digital typesetting era. It has
-% been suggested that \emph{italic} bold symbols are used nowadays instead.
-%
-% Bold Greek letters have simply been bold variant glyphs of their regular
-% weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta)
-% \). Confusingly, the syntax in \LaTeX\ has been different for these two
-% examples: \cmd\mathbf\ in the former (`$\mathbfup{M}$'), and \cmd\bm\ (or
-% \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
-%
-% In \pkg{unicode-math}, the \cmd\mathbf\ command works directly with both
-% Greek and Latin maths alphabet characters and depending on package option
-% either switches to upright for Latin letters (|bold-style=TeX|) as well or
-% keeps them italic (|bold-style=ISO|).
-%
-% To match the package options for non-bold characters, for
-% |bold-style=French| all bold characters are upright, and
-% |bold-style=literal| does not change the upright/italic shape of the letter.
-%
-% Upright and italic bold mathematical letters input as direct unicode
-% characters are normalised with the same rules. For example, with
-% |bold-style=TeX|, a literal bold italic latin character will be typeset
-% upright.
-%
-% Note that \opt{bold-style} is independent of \opt{math-style}, although if
-% the former is not specified then sensible defaults are chosen based on the
-% latter.
-%
-% The \opt{bold-style} options' effects are shown in brief in
-% \tabref{bold-style}. \Figref[vref]{bold-style-check} shows every character
-% under the effect of this package option.
-%
-% \begin{table}
-%   \centering
-%   \topcaption{Effects of the \opt{bold-style} package option.}
-%   \tablabel{bold-style}
-%   \begin{tabular}{@{}>{\ttfamily}lcc@{}}
-%     \toprule
-%       & \multicolumn{2}{c}{Example} \\
-%        \cmidrule(l){2-3}
-%       \rmfamily Package option & Latin & Greek \\
-%     \midrule
-%       bold-style=ISO & $(\mathbfit a, \mathbfit z, \mathbfit B, \mathbfit X)$ & $(\mathbfit\alpha, \mathbfit\beta, \mathbfit\Gamma, \mathbfit\Xi)$ \\
-%       bold-style=TeX & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfit\alpha, \mathbfit\beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
-%       bold-style=French & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfup \alpha,\mathbfup \beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
-%     \bottomrule
-%   \end{tabular}
-% \end{table}
-%
-% \subsection{Symbols requiring special attention}
-%
-% \subsubsection{Nabla} The symbol $\nabla$ comes in the six forms shown in
-%  \tabref{nabla}.
-%  We want an individual option to specify whether we want upright or italic
-%  nabla by default (when either upright or italic nabla is used in the
-%  source). \TeX\ classically uses an upright nabla, but \textsc{iso}
-%  standards differ (I think). The package options |nabla=upright| and
-%  |nabla=italic| switch between the two choices. This is then inherited
-%  through \cmd\mathbf; \cmd\mathit\ and \cmd\mathup\ can be used to force one
-%  way or the other.
-%
-% |nabla=italic| is implicit when using |math-style=ISO| and |nabla=upright|
-% follows both |math-style=TeX| and |math-style=French|.
-%
-% \begin{table}
-%   \centering
-%   \topcaption{The various forms of nabla.}
-%   \tablabel{nabla}
-%   \let \tmpshow\empty
-%   \begin{tabular}{@{}llc@{}}
-%       \toprule
-%     \multicolumn{2}{@{}l}{Description} & Glyph
-%      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-%     Upright & Serif & $\mathup\nabla$ \\
-%     & Bold serif & $\mathup\mbfnabla$ \\
-%     & Bold sans & $\mathbfsf\nabla$ \\
-%       \cmidrule(lr){1-2}\cmidrule(lr){3-3}
-%     Italic & Serif & $\mathit\nabla$ \\
-%     & Bold serif & $\mathbfit\nabla$ \\
-%     & Bold sans & $\mathbfsfit\nabla$ \\
-%       \bottomrule
-%   \end{tabular}
-% \end{table}
-%
-% \subsubsection{Partial}
-% The same applies to the symbols \unichar{2202}{partial differential} and
-% \unichar{1D715}{math italic partial differential}.
-%
-% At time of writing, both the Cambria Math and STIX fonts display these
-% two glyphs in the same italic style, but this is hopefully a bug that will
-% be corrected in the future~--- the `plain' partial differential should
-% really have an upright shape.
-%
-% Use the |partial=upright| or |partial=italic| package options to specify
-% which one you would like. The default is (always, unless someone requests and
-% argues otherwise) |partial=italic|.\footnote{A good argument would revolve
-% around some international standards body recommending upright over italic.
-% I just don't have the time right now to look it up.}
-%
-% See \tabref{partial} for the variations on the partial differential symbol.
-%
-% \begin{table}
-%   \centering
-%   \topcaption{The various forms of the partial differential. Note that in
-% the fonts used to display these glyphs, the first upright partial is
-% incorrectly shown in an italic style.}
-%   \tablabel{partial}
-%   \begin{tabular}{@{}llc@{}}
-%       \toprule
-%     \multicolumn{2}{@{}l}{Description} & Glyph
-%      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-%     Regular   & Upright & $\mathup\partial$ \\
-%               & Italic  & $\mathit\partial$ \\
-%     Bold      & Upright & $\mathbfup\partial$ \\
-%               & Italic  & $\mathbfit\partial$ \\
-%     Sans bold & Upright & $\mathbfsfup\partial$ \\
-%               & Italic  & $\mathbfsfit\partial$ \\
-%       \bottomrule
-%   \end{tabular}
-% \end{table}
-%
-%
-% \begin{figure}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
-% \centering
-% \subfloat[Package option \texttt{[math-style=ISO]}]{\includegraphics{unicode-math-test-iso.pdf}}\\
-% \subfloat[Package option \texttt{[math-style=TeX]}]{\includegraphics{unicode-math-test-tex.pdf}}\\
-% \subfloat[Package option \texttt{[math-style=French]}]{\includegraphics{unicode-math-test-french.pdf}}
-% \caption{Example maths output demonstrating the \texttt{math-style} package option.}
-% \label{fig:math-style-check}
-% \end{figure}
-%
-% \begin{figure}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
-% \centering
-% \subfloat[Package option \texttt{[bold-style=ISO]}]{\includegraphics{unicode-math-testbf-iso.pdf}}\\
-% \subfloat[Package option \texttt{[bold-style=TeX]}]{\includegraphics{unicode-math-testbf-tex.pdf}}\\
-% \subfloat[Package option \texttt{[bold-style=French]}]{\includegraphics{unicode-math-testbf-french.pdf}}
-% \caption{Example maths output demonstrating the \texttt{bold-style} package option.}
-% \label{fig:bold-style-check}
-% \end{figure}
-%
-% \subsubsection{Epsilon and phi: $\epsilon$ vs.\ $\varepsilon$ and $\phi$ vs.\ $\varphi$}
-% \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to
-% look like $\epsilon$. The Unicode glyph directly after delta and before zeta
-% is `epsilon' and looks like $\epsilon$; there is a subsequent variant of
-% epsilon that looks like $\varepsilon$. This creates a problem. People who
-% use unicode input won't want their glyphs transforming; \TeX\ users will be
-% confused that what they think as `normal epsilon' is actual the `variant
-% epsilon'. And the same problem exists for `phi'.
-%
-% We have a package option to control this behaviour.
-% With |vargreek-shape=TeX|,
-% \cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
-% \cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
-% With |vargreek-shape=unicode|, these symbols are swapped.
-% Note, however, that unicode characters are not affected by this option.
-% That is, no remapping occurs of the characters/glyphs, only the control sequences.
-%
-% Unless |math-style=literal| is in effect, the default is to use |vargreek-shape=TeX|.
-%
-% \unichar{3B5}{greek small letter epsilon}\\
-% \unichar{3F5}{greek lunate epsilon symbol}\\
-% \unichar{3C6}{greek small letter phi}\\
-% \unichar{3D5}{greek small letter script phi}
+% 
+% (Not yet implemented.)
 %
 %
 % \StopEventually{\PrintIndex}
@@ -2231,17 +2279,54 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \section{Maths alphabets mapping definitions}\label{part:mathmap}
 %
-% Algorithm for setting alphabet fonts:
+% Algorithm for setting alphabet fonts.
+% By default, when |Range| is empty, we are in \emph{implicit} mode.
+% If |Range| contains the name of the math alphabet, we are in \emph{explicit}
+% mode and do things slightly differently.
+% 
+% Implicit mode:
 % \begin{itemize}
-% \item By default, try and set all of them.
-% \item Check for the first glyph of each to detect if the font supports each
-%       alphabet.
+% \item Try and set all of the alphabet shapes.
+% \item Check for the first glyph of the uppercase Latin alphabet to detect if the font supports each
+%       alphabet shape.
 %       (This doesn't work to distinguish Latin/Greek but we hope all maths
 %       fonts will have at least them!)
+% \item For alphabets that do exist, overwrite whatever's already there.
 % \item For alphabets that are not supported, \emph{do nothing}.
 %       (This includes leaving the old alphabet definition in place.)
-% \item For alphabets that do exist, overwrite whatever's already there.
 % \end{itemize}
+% 
+% Explicit mode:
+% \begin{itemize}
+% \item Only set the alphabets specified.
+% \item Check for the first glyph of the uppercase Latin alphabet to detect if the font contains
+%       the alphabet shape in the unicode math plane.
+% \item For unicode math alphabets, overwrite whatever's already there.
+% \item Otherwise, use the \ascii\ letters instead.
+% \end{itemize}
+%
+%
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_alphabets: {
+  \um_setup_math_alphabet:n {up    }
+  \um_setup_math_alphabet:n {it    }
+  \um_setup_math_alphabet:n {bb    }
+  \um_setup_math_alphabet:n {scr   }
+  \um_setup_math_alphabet:n {frak  }
+  \um_setup_math_alphabet:n {sf    }
+  \um_setup_math_alphabet:n {sfup  }
+  \um_setup_math_alphabet:n {sfit  }
+  \um_setup_math_alphabet:n {tt    }
+  \um_setup_math_alphabet:n {bf    }
+  \um_setup_math_alphabet:n {bfup  }
+  \um_setup_math_alphabet:n {bfit  }
+  \um_setup_math_alphabet:n {bfscr }
+  \um_setup_math_alphabet:n {bffrak}
+  \um_setup_math_alphabet:n {bfsf  }
+  \um_setup_math_alphabet:n {bfsfup}
+  \um_setup_math_alphabet:n {bfsfit}
+}
+%    \end{macrocode}
 %
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_math_alphabet:n {
@@ -2298,28 +2383,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \end{macro}
-%
-%    \begin{macrocode}
-\cs_new:Nn \um_setup_alphabets: {
-  \um_setup_math_alphabet:n {up    }
-  \um_setup_math_alphabet:n {it    }
-  \um_setup_math_alphabet:n {bb    }
-  \um_setup_math_alphabet:n {scr   }
-  \um_setup_math_alphabet:n {frak  }
-  \um_setup_math_alphabet:n {sf    }
-  \um_setup_math_alphabet:n {sfup  }
-  \um_setup_math_alphabet:n {sfit  }
-  \um_setup_math_alphabet:n {tt    }
-  \um_setup_math_alphabet:n {bf    }
-  \um_setup_math_alphabet:n {bfup  }
-  \um_setup_math_alphabet:n {bfit  }
-  \um_setup_math_alphabet:n {bfscr }
-  \um_setup_math_alphabet:n {bffrak}
-  \um_setup_math_alphabet:n {bfsf  }
-  \um_setup_math_alphabet:n {bfsfup}
-  \um_setup_math_alphabet:n {bfsfit}
-}
-%    \end{macrocode}
 %
 %: TODO : nested alphabets?
 %
@@ -2875,7 +2938,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{quote}
 % The shrinking and offsetting is done as it is turned into a superscript.
 % This means, luckily, that by default things work nicely for single primes.
-% We can write \verb|x\prime| or \verb|x^\prime| and get: $x\prime$ and $x^\prime$.
+% We can write \verb|x\primesingle| or \verb|x^\primesingle| and get: $x\primesingle$ and $x^\primesingle$.
 % To support single primes, then, things are easier than in \LaTeX; we can
 % just map \verb|'| to \cs{prime} and not worry about it.
 % 
