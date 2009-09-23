@@ -65,4 +65,3 @@ in a place searched by XeLaTeX; for example, on Mac OS X:
 __________________________________
 Copyright 2006-2009 Will Robertson
 Released under the LaTeX Project Public License
-%%

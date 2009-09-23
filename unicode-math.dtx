@@ -310,7 +310,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \label{fig:math-style-check}
 % \end{figure}
 %
-% \subsection{Bold switching}
+% \subsection{Bold style}
 %
 % Similar as in the previous section, ISO standards differ somewhat to \TeX's
 % conventions (and classical typesetting) for `boldness' in mathematics. In
@@ -378,14 +378,44 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \label{fig:bold-style-check}
 % \end{figure}
 % 
-% \subsection{Mathematical alphabets}
+% \subsection{Sans serif style}
+% 
+% Unicode contains upright and italic, medium and bold mathematical alphabet characters.
+% These may be explicitly selected with the \cs{mathsfup}, \cs{mathsfit}, \cs{mathbfsfup}, and \cs{mathbfsfit}
+% commands discussed in \secref{all-math-alphabets}.
+% 
+% How should the generic \cs{mathsf} behave? Unlike bold, sans serif is used much more sparingly
+% in mathematics. I've seen recommendations to typeset tensors in sans serif italic
+% or sans serif italic bold (e.g., examples in the \pkg{isomath} and \pkg{mattens} packages).
+% But \LaTeX's \cs{mathsf} is \textsl{upright} sans serif.
+% 
+% Therefore I reluctantly add the package options |[sans-style=TeX]| and |[sans-style=ISO]| to control the behaviour of \cs{mathsf}.
+% The |TeX| style sets up the command to use the seemingly-useless upright sans serif, including Greek;
+% the |ISO| style switches to using italic in both Latin and Greek alphabets.
+% In other words, this option simply changes the meaning of \cs{mathsf} to either \cs{mathsfup} or \cs{mathsfit}, respectively.
+% Please let me know if more granular control is necessary here.
+% 
+% There is also a |[sans-style=literal]| setting, set automatically with |[math-style=literal]|, which retains the uprightness of the input characters used when selecting the sans serif output.
+% 
+% \subsubsection{What about bold sans serif?}
+% 
+% While you might want your bold upright and your sans serif italic, I don't believe you'd also want
+% your bold sans serif upright (or all vice versa, if that's even conceivable). Therefore, bold sans
+% serif follows from the setting for sans serif; it is completely independent of the setting for bold.
+% 
+% In other words, \cs{mathbfsf} is \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=TeX]| or |[sans-style=ISO]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
+% 
+% Note well! There is no medium-weight sans serif Greek alphabet in unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
+% 
+% \subsection{All (the rest) of the mathematical alphabets}
+% \seclabel{all-math-alphabets}
 % 
 % Unicode contains separate codepoints for most if not all variations of alphabet
 % shape one may wish to use in mathematical notation. The complete list is shown
-% in \tabref{mathalphabets}.
+% in \tabref{mathalphabets}. Some of these have been covered in the previous sections.
 % 
 % At present, the math font switching commands do not nest; therefore if you want
-% sans serif bold, you must write |\mathsfbfup{...}| rather than |\mathbfup{\mathsfup{...}}|.
+% sans serif bold, you must write |\mathsfbf{...}| rather than |\mathbf{\mathsf{...}}|.
 % This may change in the future.
 % 
 % \begin{table}
@@ -421,9 +451,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Miscellanea}
 %
-%%
-% \subsubsection{Nabla} The symbol $\nabla$ comes in the six forms shown in
-%  \tabref{nabla}.
+%
+% \subsubsection{Nabla} 
+% 
+%  The symbol $\nabla$ comes in the six forms shown in \tabref{nabla}.
 %  We want an individual option to specify whether we want upright or italic
 %  nabla by default (when either upright or italic nabla is used in the
 %  source). \TeX\ classically uses an upright nabla, but \textsc{iso}
@@ -843,6 +874,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfupLatinfalse
     \@um@bfuplatinfalse
     \@um@upNablafalse
+    \bool_set_false:N \g_um_upsans_bool
     \bool_set_false:N \g_um_texgreek_bool
   \or
     \@um@upGreektrue
@@ -855,6 +887,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
+    \bool_set_true:N \g_um_upsans_bool
     \bool_set_true:N \g_um_texgreek_bool
   \or
     \@um@upGreektrue
@@ -867,10 +900,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfupLatintrue
     \@um@bfuplatintrue
     \@um@upNablatrue
+    \bool_set_true:N \g_um_upsans_bool
     \bool_set_false:N \g_um_texgreek_bool
   \or
     \@um@literaltrue
     \@um@bfliteraltrue
+    \bool_set_true:N \g_um_sfliteral_bool
     \bool_set_false:N \g_um_texgreek_bool
   \fi
 }
@@ -899,6 +934,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfuplatintrue
   \or
     \@um@bfliteraltrue
+  \fi
+}
+%    \end{macrocode}
+%    
+% \paragraph{sans-style}
+%    \begin{macrocode}
+\bool_new:N \g_um_upsans_bool
+\bool_new:N \g_um_sfliteral_bool
+\define@choicekey*{unicode-math.sty}
+    {sans-style}[\@tempa\@tempb]{iso,tex,literal}{
+  \ifcase\@tempb\relax
+    \bool_set_false:N \g_um_upsans_bool
+  \or
+    \bool_set_true:N \g_um_upsans_bool
+  \or
+    \bool_set_true:N \g_um_sfliteral_bool
   \fi
 }
 %    \end{macrocode}
@@ -2097,6 +2148,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $ABCDEFG$} $ABCDEFG$
 % \end{example}
 %
+% \subsection{Resolving Greek symbol name control sequences}
+%
 % \begin{macro}{\um@resolve@greek}
 % This macro defines \cmd\Alpha\dots\cmd\omega\ as their corresponding
 % unicode (mathematical italic) character. Remember that the mapping
@@ -2176,6 +2229,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{Setting up the mappings}
 %
 % \begin{macro}{\um_setup_literals:}
 %: TODO : other literal symbols
@@ -2386,6 +2440,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %: TODO : nested alphabets?
 %
+% \subsection{Non-bold math alphabets}
+%
 % \subsubsection{Upright: \cmd\mathup}
 %
 % \begin{example}{}
@@ -2525,9 +2581,37 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathsf: {
-  \um_set_mathalphabet_numbers:Nnn{\mathsf}{\um@usv@num}{\um@usv@sfnum}
-  \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfupLatin}
-  \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfuplatin}
+  \bool_if:NTF \g_um_sfliteral_bool {
+    \um_set_mathalphabet_numbers:Nnn{\mathsf}{\um@usv@num}{\um@usv@sfnum}
+    \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@upLatin}{\um@usv@sfupLatin}
+    \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@uplatin}{\um@usv@sfuplatin}
+    \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@itLatin}{\um@usv@sfitLatin}
+    \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@itlatin}{\um@usv@sfitlatin}
+  }{
+    \bool_if:NTF \g_um_upsans_bool {
+      \um_set_mathalphabet_numbers:Nnn \mathsf {\um@usv@num}{\um@usv@sfnum}
+      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfupLatin}
+      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfuplatin}
+    }{
+      \um_set_mathalphabet_numbers:Nnn \mathsf {\um@usv@num}{\um@usv@sfnum}
+      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfitLatin}
+      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfitlatin}
+    }
+  }
+}
+%    \end{macrocode}
+%
+% \subsubsection{Sans serif upright: \cmd\mathsfup}
+% \begin{example}{}
+%   $\mathsfup{0123456789}$ \\
+%   $\mathsfup{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
+%   $\mathsfup{abcdefghijklmnopqrstuvwxyz}$ \\
+% \end{example}
+%    \begin{macrocode}
+\cs_new:Npn \um_config_mathsfup: {
+  \um_set_mathalphabet_numbers:Nnn{\mathsfup}{\um@usv@num}{\um@usv@sfnum}
+  \um_set_mathalphabet_latin:Nnn{\mathsfup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfupLatin}
+  \um_set_mathalphabet_latin:Nnn{\mathsfup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfuplatin}
 }
 %    \end{macrocode}
 %
@@ -2559,7 +2643,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% \subsection{Bold alphabets' character mappings}
+% \subsection{Bold math alphabets}
 % \seclabel{bfmathmap}
 %
 % \subsubsection{Bold: \cmd\mathbf}
@@ -2762,28 +2846,71 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     $\mathbfsf{ϵϑϰϕϱϖ}$ \\
 % \end{example}
 %
-%: TODO : These should be contextual!
+% These use the |sans-style| settings rather than |bold-style|.
 %
 % Numbers (always upright) and letters:
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsf: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfsf}{\um@usv@num}{\um@usv@bfnum}
-  \um_set_mathalphabet_latin:Nnn{\mathbfsf}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfupLatin}
-  \um_set_mathalphabet_latin:Nnn{\mathbfsf}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfuplatin}
-  \um_set_mathalphabet_greek:Nnn{\mathbfsf}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfupGreek}
-  \um_set_mathalphabet_greek:Nnn{\mathbfsf}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfupgreek}
-%    \end{macrocode}
-% Others:
-%    \begin{macrocode}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@Nabla,\um@usv@itNabla}{"1D76F}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@partial,\um@usv@itpartial}{"1D789}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D78A}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@vartheta,\um@usv@itvartheta}{"1D78B}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varkappa,\um@usv@itvarkappa}{"1D78C}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varphi,\um@usv@itvarphi}{"1D78D}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varrho,\um@usv@itvarrho}{"1D78E}
-  \um_set_mathalphabet_char:Nnn{\mathbfsf}{\um@usv@varpi,\um@usv@itvarpi}{"1D78F}
+  \bool_if:NTF \g_um_sfliteral_bool {
+    \um_set_mathalphabet_numbers:Nnn \mathbfsf {\um@usv@num}{\um@usv@bfsfnum}
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin}{\um@usv@bfsfupLatin}
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin}{\um@usv@bfsfuplatin}
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@itLatin}{\um@usv@bfsfitLatin}
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@itlatin}{\um@usv@bfsfitlatin}
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek}{\um@usv@bfsfupGreek}
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek}{\um@usv@bfsfupgreek}
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@itGreek}{\um@usv@bfsfitGreek}
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@itgreek}{\um@usv@bfsfitgreek}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta}{"1D767}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla}{"1D76F}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial}{"1D789}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varepsilon}{"1D78A}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@vartheta}{"1D78B}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varkappa}{"1D78C}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varphi}{"1D78D}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varrho}{"1D78E}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varpi}{"1D78F}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta}{"1D7A1}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itNabla}{\um@usv@bfsfitNabla}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itpartial}{\um@usv@bfsfitpartial}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarepsilon}{"1D7C4}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvartheta}{"1D7C5}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarkappa}{"1D7C6}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarphi}{"1D7C7}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarrho}{"1D7C8}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarpi}{"1D7C9}
+  }{
+    \bool_if:NTF \g_um_upsans_bool {
+      \um_set_mathalphabet_numbers:Nnn \mathbfsf {\um@usv@num}{\um@usv@bfsfnum}
+      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfupLatin}
+      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfuplatin}
+      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfupGreek}
+      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfupgreek}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla,\um@usv@itNabla}{"1D76F}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial,\um@usv@itpartial}{"1D789}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D78A}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@vartheta,\um@usv@itvartheta}{"1D78B}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varkappa,\um@usv@itvarkappa}{"1D78C}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varphi,\um@usv@itvarphi}{"1D78D}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varrho,\um@usv@itvarrho}{"1D78E}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varpi,\um@usv@itvarpi}{"1D78F}    
+    }{
+      \um_set_mathalphabet_numbers:Nnn \mathbfsf {\um@usv@num}{\um@usv@bfsfnum}
+      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfitLatin}
+      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfitlatin}
+      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfitGreek}
+      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfitgreek}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta}{"1D7A1}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfsfitNabla}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial,\um@usv@itpartial}{\um@usv@bfsfitpartial}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D7C4}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@vartheta,\um@usv@itvartheta}{"1D7C5}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varkappa,\um@usv@itvarkappa}{"1D7C6}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varphi,\um@usv@itvarphi}{"1D7C7}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varrho,\um@usv@itvarrho}{"1D7C8}
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varpi,\um@usv@itvarpi}{"1D7C9}    }
+  }
 }
 %    \end{macrocode}
 %
@@ -2803,7 +2930,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Numbers (always upright) and letters:
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsfup: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfsfup}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_numbers:Nnn{\mathbfsfup}{\um@usv@num}{\um@usv@bfsfnum}
   \um_set_mathalphabet_latin:Nnn{\mathbfsfup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfupLatin}
   \um_set_mathalphabet_latin:Nnn{\mathbfsfup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfuplatin}
   \um_set_mathalphabet_greek:Nnn{\mathbfsfup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfupGreek}
@@ -2837,7 +2964,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{example}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsfit: {
-  \um_set_mathalphabet_numbers:Nnn{\mathbfsfit}{\um@usv@num}{\um@usv@bfnum}
+  \um_set_mathalphabet_numbers:Nnn{\mathbfsfit}{\um@usv@num}{\um@usv@bfsfnum}
   \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfitLatin}
   \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfitlatin}
   \um_set_mathalphabet_greek:Nnn{\mathbfsfit}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfitGreek}
@@ -3589,7 +3716,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \documentclass{article}
 \usepackage[a6paper]{geometry}
 \usepackage{fontspec}
-\setmainfont{FPL Neu}
+\setmainfont{TeX Gyre Pagella}
 \usepackage{unicode-math}
 \def\upLatin{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \def\uplatin{abcdefghijklmnopqrstuvwxyz}
@@ -3604,7 +3731,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
     \makebox[0pt][l]{$\csname up#1\endcsname$}%
     \makebox[0pt][l]{$\csname it#1\endcsname$}}}
 \begin{document}
-\setmathfont[Colour=2255FF99]{Asana Math}
+\setmathfont[Colour=2255FF99]{Cambria Math}
 \parindent=0pt
 \voffset=-1in
 \hoffset=-1in
@@ -3634,7 +3761,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \documentclass{article}
 \usepackage[a6paper]{geometry}
 \usepackage{fontspec}
-\setmainfont{FPL Neu}
+\setmainfont{TeX Gyre Pagella}
 \usepackage{unicode-math}
 \def\upLatin{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \def\uplatin{abcdefghijklmnopqrstuvwxyz}
@@ -3661,7 +3788,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
     \makebox[0pt][l]{$\csname bfit#1\endcsname$}%
     }}
 \begin{document}
-\setmathfont[Colour=2255FF55]{Asana Math}
+\setmathfont[Colour=2255FF55]{Cambria Math}
 \parindent=0pt
 \voffset=-1in
 \hoffset=-1in
