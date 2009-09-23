@@ -1,4 +1,3 @@
-
 The UNICODE-MATH package
 ========================
 
@@ -26,7 +25,6 @@ new releases.
 [1]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
 [2]: http://github.com/khaledhosny/euler-otf
 [3]: http://www.aip.org/stixfonts/
-
 
 PACKAGE USAGE
 -------------
@@ -65,5 +63,5 @@ in a place searched by XeLaTeX; for example, on Mac OS X:
     ~/Library/texmf/tex/xelatex/
 
 __________________________________
-Copyright 2006-2009 Will Robertson  
+Copyright 2006-2009 Will Robertson
 Released under the LaTeX Project Public License
