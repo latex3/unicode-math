@@ -2365,8 +2365,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:nn {up    }{latin,Latin,greek,Greek}
   \um_setup_math_alphabet:n {it    }
   \um_setup_math_alphabet:n {bb    }
-  \um_setup_math_alphabet:n {scr   }
-  \um_setup_math_alphabet:n {frak  }
+  \um_setup_math_alphabet:nn {scr   }{latin,Latin}
+  \um_setup_math_alphabet:nn {frak  }{latin,Latin}
   \um_setup_math_alphabet:n {sf    }
   \um_setup_math_alphabet:n {sfup  }
   \um_setup_math_alphabet:n {sfit  }
@@ -2382,6 +2382,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
+% \begin{macro}{\um_setup_math_alphabet:nn}
+% \darg{Math font family name (e.g., `sf')}
+% \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
+% First check that at least one of the alphabets for the font shape is defined, and then
+% then loop through them defining the individual ranges.
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_math_alphabet:nn {
   \clist_map_inline:nn {#2} {
@@ -2398,18 +2403,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \PackageWarningNoLine{unicode-math}{^^J\space\space\space\space
       Math~ alphabet~
       \@backslashchar math#1~
-      (\tl_use:c{g_um_math_alphabet_name_l_##1})
+      (\tl_use:c{g_um_math_alphabet_name_##1_tl})~
       not~ found~ in~ font~
       \fontname\um@font}
     }
   }
 }
-\tl_set:Nn \g_um_math_alphabet_name_latin_tl: {Latin, lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Latin_tl: {Latin, uppercase}
-\tl_set:Nn \g_um_math_alphabet_name_greek_tl: {Greek, lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Greek_tl: {Greek, uppercase}
-\tl_set:Nn \g_um_math_alphabet_name_num_tl: {Numerals}
-
+\tl_set:Nn \g_um_math_alphabet_name_latin_tl {Latin, lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Latin_tl {Latin, uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_greek_tl {Greek, lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek, uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
 \cs_new:Nn \um_setup_math_alphabet:n {
   \um_glyph_if_exist:nTF {\csname um@usv@#1Latin \endcsname}{
     \um_maybe_init_alphabet:n {#1}
@@ -2570,20 +2577,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   $\mathscr{abcdefghijklmnopqrstuvwxyz}$ \\
 % \end{example}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathscr: {
-  \um_set_mathalphabet_latin:Nnn{\mathscr}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@scrLatin}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\B,"1D435}{"212C}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\E,"1D438}{"2130}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\F,"1D439}{"2131}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\H,"1D43B}{"210B}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\I,"1D43C}{"2110}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\L,"1D43F}{"2112}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\M,"1D440}{"2133}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\R,"1D445}{"211B}
-  \um_set_mathalphabet_latin:Nnn{\mathscr}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@scrlatin}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\e,"1D452}{"212F}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\g,"1D454}{"210A}
-  \um_set_mathalphabet_char:Nnn{\mathscr}{`\o,"1D45C}{"2134}
+\cs_new:Npn \um_config_mathscr_Latin: {
+  \um_set_mathalphabet_latin:Nnn \mathscr {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@scrLatin}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\B,"1D435}{"212C}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\E,"1D438}{"2130}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\F,"1D439}{"2131}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\H,"1D43B}{"210B}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\I,"1D43C}{"2110}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\L,"1D43F}{"2112}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\M,"1D440}{"2133}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\R,"1D445}{"211B}
+}
+\cs_new:Npn \um_config_mathscr_latin: {
+  \um_set_mathalphabet_latin:Nnn \mathscr {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@scrlatin}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\e,"1D452}{"212F}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\g,"1D454}{"210A}
+  \um_set_mathalphabet_char:Nnn  \mathscr {`\o,"1D45C}{"2134}
 }
 %    \end{macrocode}
 %
@@ -2595,14 +2604,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Letters, with exceptions $\{\mathfrak{C,H,I,R,Z}\}$:
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathfrak: {
-  \um_set_mathalphabet_latin:Nnn{\mathfrak}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@frakLatin}
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\C,"1D436}{"212D}
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\H,"1D43B}{"210C}
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\I,"1D43C}{"2111}
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\R,"1D445}{"211C}
-  \um_set_mathalphabet_char:Nnn{\mathfrak}{`\Z,"1D44D}{"2128}
-  \um_set_mathalphabet_latin:Nnn{\mathfrak}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@fraklatin}
+\cs_new:Npn \um_config_mathfrak_Latin: {
+  \um_set_mathalphabet_latin:Nnn \mathfrak {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@frakLatin}
+  \um_set_mathalphabet_char:Nnn  \mathfrak {`\C,"1D436}{"212D}
+  \um_set_mathalphabet_char:Nnn  \mathfrak {`\H,"1D43B}{"210C}
+  \um_set_mathalphabet_char:Nnn  \mathfrak {`\I,"1D43C}{"2111}
+  \um_set_mathalphabet_char:Nnn  \mathfrak {`\R,"1D445}{"211C}
+  \um_set_mathalphabet_char:Nnn  \mathfrak {`\Z,"1D44D}{"2128}
+}
+\cs_new:Npn \um_config_mathfrak_latin: {
+  \um_set_mathalphabet_latin:Nnn \mathfrak {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@fraklatin}
 }
 %    \end{macrocode}
 %
