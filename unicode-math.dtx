@@ -2362,7 +2362,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_alphabets: {
-  \um_setup_math_alphabet:n {up    }
+  \um_setup_math_alphabet:nn {up    }{latin,Latin,greek,Greek}
   \um_setup_math_alphabet:n {it    }
   \um_setup_math_alphabet:n {bb    }
   \um_setup_math_alphabet:n {scr   }
@@ -2383,6 +2383,33 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\cs_new:Nn \um_setup_math_alphabet:nn {
+  \clist_map_inline:nn {#2} {
+    \um_glyph_if_exist:nT {\csname um@usv@#1##1 \endcsname}{
+      \um_maybe_init_alphabet:n {#1}
+      \um_prepare_alph:n {#1}
+      \clist_map_break:
+    }
+  }
+  \clist_map_inline:nn {#2} {
+    \um_glyph_if_exist:nTF {\csname um@usv@#1##1 \endcsname}{
+      \use:c {um_config_math#1_##1:}
+    }{
+      \PackageWarningNoLine{unicode-math}{^^J\space\space\space\space
+      Math~ alphabet~
+      \@backslashchar math#1~
+      (\tl_use:c{g_um_math_alphabet_name_l_##1})
+      not~ found~ in~ font~
+      \fontname\um@font}
+    }
+  }
+}
+\tl_set:Nn \g_um_math_alphabet_name_latin_tl: {Latin, lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Latin_tl: {Latin, uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_greek_tl: {Greek, lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Greek_tl: {Greek, uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_num_tl: {Numerals}
+
 \cs_new:Nn \um_setup_math_alphabet:n {
   \um_glyph_if_exist:nTF {\csname um@usv@#1Latin \endcsname}{
     \um_maybe_init_alphabet:n {#1}
@@ -2454,14 +2481,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Takes both upright and italic characters to be typeset as upright symbols.
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathup: {
+\cs_new:Npn \um_config_mathup_Latin: {
   \um_set_mathalphabet_latin:Nnn{\mathup}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@upLatin}
+}
+\cs_new:Npn \um_config_mathup_latin: {
   \um_set_mathalphabet_latin:Nnn{\mathup}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@uplatin}
+}
+\cs_new:Npn \um_config_mathup_Greek: {
   \um_set_mathalphabet_greek:Nnn{\mathup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@upGreek}
-  \um_set_mathalphabet_greek:Nnn{\mathup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}
   \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@Nabla}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}
   \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@varTheta}
+}
+\cs_new:Npn \um_config_mathup_greek: {
+  \um_set_mathalphabet_greek:Nnn{\mathup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@upgreek}
+  \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@partial,\um@usv@itpartial}{\um@usv@partial}
   \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}
   \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}
   \um_set_mathalphabet_char:Nnn{\mathup}{\um@usv@varkappa,\um@usv@itvarkappa}{\um@usv@varkappa}
