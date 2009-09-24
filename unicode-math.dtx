@@ -3069,7 +3069,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % Now give \cmd\UnicodeMathSymbol\ a definition in terms of \cmd\um@scancharlet\
-% and we're good to go.
+% and we're good to go. Make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
 \begingroup
   \def\UnicodeMathSymbol#1#2#3#4{
