@@ -3299,10 +3299,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 
 % We do not skip spaces when scanning ahead, and we explicitly wish to
-% bail out on encountering a space or an opening brace.
+% bail out on encountering a space or a brace.
 \cs_new:Npn \um_peek_execute_branches_ss: {
   \bool_if:nTF {
     \token_if_eq_catcode_p:NN \l_peek_token \c_group_begin_token ||
+    \token_if_eq_catcode_p:NN \l_peek_token \c_group_end_token ||
     \token_if_eq_meaning_p:NN \l_peek_token \c_space_token
   }
   { \l_peek_false_tl  }
