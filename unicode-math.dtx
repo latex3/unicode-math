@@ -653,6 +653,37 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Vertical bar `\texttt{\char`\|}'}
 % 
 % \subsubsection{Colon `\texttt:'}
+% 
+% \subsubsection{Slashes and backslashes}
+% 
+% There are several slash-like symbols defined in unicode.
+% \begin{table}
+% \caption{Slashes and backslashes.}
+% \newfontfamily\stix{STIXGeneral}
+% \renewcommand\unichar[2]{\textsc{u+\MakeLowercase{#1}} & \small\textsc{#2} & {\stix \char"#1}}
+% \renewcommand\cs[1]{\small\texttt{\char`\\#1}}
+% \begin{tabular}{@{}clcll@{}}
+% \toprule
+% Slot & Name & Glyph & Command & Intended (?) use \\
+% \midrule
+% \unichar{002F}{solidus} && text slash, not used for maths \\
+% \unichar{2044}{fraction slash}          & \cs{fracslash} & for creating `vulgar' fractions \\
+% \unichar{2215}{division slash}          & \cs{slash} & to represent division without a built-up fraction \\
+% \unichar{29F8}{big solidus}             & \cs{xsol} & who knows \\
+% \midrule
+% \unichar{005C}{reverse solidus} & \cs{backslash} & not for maths? \\
+% \unichar{2216}{set minus}               & \cs{smallsetminus} & set operator \\
+% \unichar{29F5}{reverse solidus operator}& \cs{setminus} & inverse division? \\
+% \unichar{29F9}{big reverse solidus}     & \cs{xbsol} & no idea \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+% The last two aren't defined by Cambria Math, so let's ignore them for now.
+% I don't know what they're intended for.
+% 
+% In regular \LaTeX\ we can write \cs{left}\cs{slash}\dots\cs{right}\cs{backslash}
+% and so on and obtain extensible delimiter-like symbols. Not all of the slashes above
+% are suitable for this (and do not have the font support to do it).
 %
 % \subsubsection{Normalising some input characters}
 %
@@ -660,7 +691,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % all variant forms should be used as legal input that is normalised to
 % a consistent output glyph, because we want to be fault-tolerant in the input.
 % Here are the duplicates:
-%
+% \begin{quote}\obeylines
 % \unichar {251} {latin small letter alpha}
 % \unichar {25B} {latin small letter epsilon}
 % \unichar {263} {latin small letter gamma}
@@ -671,6 +702,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \unichar {194} {latin capital letter gamma}
 % \unichar {196} {latin capital letter iota}
 % \unichar {1B1} {latin capital letter upsilon}
+% \end{quote}
 % 
 % (Not yet implemented.)
 %
