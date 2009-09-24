@@ -1447,7 +1447,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % be mapped to a different glyph than themselves.
 %    \begin{macrocode}
 \cs_new:Nn \um_remap_symbols: {
-  \um_remap_symbol:nnn{"2D}{\mathbin}{"02212}% hyphen to minus
+  \um_remap_symbol:nnn{`\-}{\mathbin}{"02212}% hyphen to minus
+  \um_remap_symbol:nnn{`\*}{\mathbin}{"02217}% text asterisk to "centred asterisk"
   \if@um@literal
     \um_remap_symbol:nnn {\um@usv@Nabla}{\mathord}{\um@usv@Nabla}
     \um_remap_symbol:nnn {\um@usv@itNabla}{\mathord}{\um@usv@itNabla}
