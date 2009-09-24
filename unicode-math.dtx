@@ -3075,6 +3075,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \def\UnicodeMathSymbol#1#2#3#4{
     \um@scancharlet#2=#1\@nil
   }
+  \char_make_other:N \#
   \@input{unicode-math-table.tex}
 \endgroup
 %    \end{macrocode}
@@ -3443,6 +3444,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }{}
 %    \end{macrocode}
 % \end{itemize}
+%
+%
+% Octothorpe is an odd one:
+%    \begin{macrocode}
+\AtBeginDocument{
+  \def\#{\mode_if_math:TF{\mathoctothorpe}{\char`\#}}
+}
+%    \end{macrocode}
 %
 %
 % Overriding \pkg{amsmath} definitions:
