@@ -656,34 +656,89 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % 
 % \subsubsection{Slashes and backslashes}
 % 
-% There are several slash-like symbols defined in unicode.
-% \begin{table}
+% There are several slash-like symbols defined in unicode. These are shown in \tabref{slashes}.
+% The \ascii\ slashes / and \char`\\\ are useful as input characters but should not
+% be used in the rendering of mathematics. (I think.)
+% 
+% \begin{table}\centering
 % \caption{Slashes and backslashes.}
+% \tablabel{slashes}
 % \newfontfamily\stix{STIXGeneral}
-% \renewcommand\unichar[2]{\textsc{u+\MakeLowercase{#1}} & \small\textsc{#2} & {\stix \char"#1}}
-% \renewcommand\cs[1]{\small\texttt{\char`\\#1}}
-% \begin{tabular}{@{}clcll@{}}
+% \renewcommand\unichar[2]{\textsc{u+\MakeLowercase{#1}} & \textsc{#2} & {\stix \char"#1}}
+% \begin{tabular}{@{}clcl@{}}
 % \toprule
-% Slot & Name & Glyph & Command & Intended (?) use \\
+% Slot & Name & Glyph & Command  \\
 % \midrule
-% \unichar{002F}{solidus} && text slash, not used for maths \\
-% \unichar{2044}{fraction slash}          & \cs{fracslash} & for creating `vulgar' fractions \\
-% \unichar{2215}{division slash}          & \cs{slash} & to represent division without a built-up fraction \\
-% \unichar{29F8}{big solidus}             & \cs{xsol} & who knows \\
+% \unichar{002F}{solidus}                 & \cs{solidus} \\
+% \unichar{2044}{fraction slash}          & \cs{fracslash} \\
+% \unichar{2215}{division slash}          & \cs{slash} \\
+% \unichar{29F8}{big solidus}             & \cs{xsol} \\
 % \midrule
-% \unichar{005C}{reverse solidus} & \cs{backslash} & not for maths? \\
-% \unichar{2216}{set minus}               & \cs{smallsetminus} & set operator \\
-% \unichar{29F5}{reverse solidus operator}& \cs{setminus} & inverse division? \\
-% \unichar{29F9}{big reverse solidus}     & \cs{xbsol} & no idea \\
+% \unichar{005C}{reverse solidus}         & \cs{backslash} \\
+% \unichar{2216}{set minus}               & \cs{smallsetminus} \\
+% \unichar{29F5}{reverse solidus operator}& \cs{setminus} \\
+% \unichar{29F9}{big reverse solidus}     & \cs{xbsol} \\
 % \bottomrule
 % \end{tabular}
 % \end{table}
-% The last two aren't defined by Cambria Math, so let's ignore them for now.
-% I don't know what they're intended for.
 % 
 % In regular \LaTeX\ we can write \cs{left}\cs{slash}\dots\cs{right}\cs{backslash}
-% and so on and obtain extensible delimiter-like symbols. Not all of the slashes above
+% and so on and obtain extensible delimiter-like symbols. Not all of the unicode slashes
 % are suitable for this (and do not have the font support to do it).
+% 
+% \paragraph{Slash}
+% 
+% Of \unichar{2044}{fraction slash}, TR25 says that it is:
+% \begin{quote}
+% \dots used to build up simple fractions in running text\dots 
+% however parsers of mathematical texts should be prepared to handle fraction slash 
+% when it is received from other sources.
+% \end{quote}
+% If encountered in the input stream, therefore, I believe it should be mapped
+% to the meaning of \unichar{2215}{division slash}. (Alas, see the note below.)
+% 
+% \unichar{2215}{division slash} should be used when division is represented
+% without a built-up fraction; $\pi\approx22/7$, for example.
+% 
+% I do not know what \unichar{29F8}{big solidus} is intended to be used for.
+% It's a `math operator' (like $\sum$) so it falls outside the topic of discussion here.
+% 
+% \paragraph{Backslash}
+% 
+% See \url{http://www.w3.org/2003/entities/2007doc/bycodes.html}.
+% MathML uses \unichar{2216}{set minus} like this: $A\smallsetminus B$.
+% 
+% Presumably, \unichar{29F5}{reverse solidus operator} is intended to
+% be used in a similar way, but it could also (perhaps?) be used to
+% represent `inverse division': $\pi\approx7\backslash22$.^^A
+% \footnote{This is valid syntax in the Octave and Matlab programming languages,
+% in which it means matrix inverse pre-multiplication. I.e., $A\backslash B=A^{-1}B$.)
+% 
+% Again, I don't know what \unichar{29F9}{big reverse solidus} is for.
+% But it's not too important at this stage.
+% 
+% \paragraph{How to use all of these things}
+% 
+% Unfortunately, font support for the above characters/glyphs is rather spotty.
+% In Cambria Math, the only slash that grows (say when writing
+% \[
+% \left.\left[\begin{array}{cc} a & b \\ c & d\end{array}\right]\middle/
+%       \left[\begin{array}{cc} 1 & 1 \\ 1 & 0\end{array}\right] \right.\quad )
+% \]
+% is the \textsc{fraction slash}, which we just established above is
+% sort of only supposed to be used in text.
+% 
+% And none of the backslashes stretch. Which leaves me in a bit of a pickle.
+% \TeX\ has a stretchy backslash. Cambria Math does not. What will? And in which glyph slot?
+% I give up, for now. This is an impossible problem.
+% 
+% \emph{All} of the above characters are allowed to be used after
+% \cs{left}, \cs{middle}, and \cs{right}. Only the font will know
+% whether or not it will actually stretch, however. If you like
+% you may redefine \cs{slash} and \cs{backslash} to fit your needs.
+% Perhaps this will be a package option some day.
+% 
+% 
 %
 % \subsubsection{Normalising some input characters}
 %
@@ -3111,6 +3166,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \@input{unicode-math-table.tex}
 \endgroup
 %    \end{macrocode}
+% Fix \cs{backslash}:
+%    \begin{macrocode}
+\group_begin:
+  \lccode`\*=`\\
+  \char_make_escape:N \|
+  \char_make_other:N \\
+  |lowercase{
+|group_end:|let|backslash=*}
+%    \end{macrocode}
 %
 % \section{Epilogue}
 %
@@ -3445,6 +3509,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %
 % \subsubsection{Compatibility}
+%
 %
 % Note that \pkg{amsmath} will always be loaded before \pkg{unicode-math}.
 % (Conflicts occur if you try it the other way around.)
