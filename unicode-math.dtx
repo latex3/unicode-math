@@ -1430,15 +1430,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Check for the correct number of \cs{fontdimen}s:
 %    \begin{macrocode}
   \font\um@font="#2"\relax
-  \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
-    \@um@ot@math@true
-  \else
-    \PackageWarningNoLine{unicode-math}{
-      The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
-      Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
-      in~ a~ substandard~ manner
-    }
-  \fi
+%%  \ifdim \dimexpr\fontdimen9\um@font*65536\relax =65pt\relax
+%%    \@um@ot@math@true
+%%  \else
+%%    \PackageWarningNoLine{unicode-math}{
+%%      The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
+%%      Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
+%%      in~ a~ substandard~ manner
+%%    }
+%%  \fi
 %    \end{macrocode}
 % If we're defining the full unicode math repetoire, then we skip all
 % the parsing processing needed if we're only defining a subset.
