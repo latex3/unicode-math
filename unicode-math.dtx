@@ -705,14 +705,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % 
 % \paragraph{Backslash}
 % 
-% See \url{http://www.w3.org/2003/entities/2007doc/bycodes.html}.
 % MathML uses \unichar{2216}{set minus} like this: $A\smallsetminus B$.
 % 
 % Presumably, \unichar{29F5}{reverse solidus operator} is intended to
 % be used in a similar way, but it could also (perhaps?) be used to
 % represent `inverse division': $\pi\approx7\backslash22$.^^A
 % \footnote{This is valid syntax in the Octave and Matlab programming languages,
-% in which it means matrix inverse pre-multiplication. I.e., $A\backslash B=A^{-1}B$.)
+% in which it means matrix inverse pre-multiplication. I.e., $A\backslash B=A^{-1}B$.}
 % 
 % Again, I don't know what \unichar{29F9}{big reverse solidus} is for.
 % But it's not too important at this stage.
@@ -722,7 +721,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Unfortunately, font support for the above characters/glyphs is rather spotty.
 % In Cambria Math, the only slash that grows (say when writing
 % \[
-% \left.\left[\begin{array}{cc} a & b \\ c & d\end{array}\right]\middle/
+% \left.\left[\begin{array}{cc} a & b \\ c & d\end{array}\right]\middle\fracslash
 %       \left[\begin{array}{cc} 1 & 1 \\ 1 & 0\end{array}\right] \right.\quad )
 % \]
 % is the \textsc{fraction slash}, which we just established above is
@@ -1052,12 +1051,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_set:Nn \um_setup_nabla: {
   \if@um@upNabla
-    \tl_set:Nn \um_Nabla_up_or_it_usv { \um@usv@Nabla }
-    \tl_set:Nn \um_bfNabla_up_or_it_usv { \um@usv@bfNabla }
+    \tl_set:Nn \um_Nabla_up_or_it_usv     { \um@usv@Nabla }
+    \tl_set:Nn \um_bfNabla_up_or_it_usv   { \um@usv@bfNabla }
     \tl_set:Nn \um_bfsfNabla_up_or_it_usv { \um@usv@bfsfNabla }
   \else
-    \tl_set:Nn \um_Nabla_up_or_it_usv { \um@usv@itNabla }
-    \tl_set:Nn \um_bfNabla_up_or_it_usv { \um@usv@bfitNabla }
+    \tl_set:Nn \um_Nabla_up_or_it_usv     { \um@usv@itNabla }
+    \tl_set:Nn \um_bfNabla_up_or_it_usv   { \um@usv@bfitNabla }
     \tl_set:Nn \um_bfsfNabla_up_or_it_usv { \um@usv@bfsfitNabla }
   \fi
 }
@@ -1073,12 +1072,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_set:Nn \um_setup_partial: {
   \if@um@uppartial
-    \tl_set:Nn \um_partial_up_or_it_usv { \um@usv@partial }
-    \tl_set:Nn \um_bfpartial_up_or_it_usv { \um@usv@bfpartial }
+    \tl_set:Nn \um_partial_up_or_it_usv     { \um@usv@partial }
+    \tl_set:Nn \um_bfpartial_up_or_it_usv   { \um@usv@bfpartial }
     \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfpartial }
   \else
-    \tl_set:Nn \um_partial_up_or_it_usv { \um@usv@itpartial }
-    \tl_set:Nn \um_bfpartial_up_or_it_usv { \um@usv@bfitpartial }
+    \tl_set:Nn \um_partial_up_or_it_usv     { \um@usv@itpartial }
+    \tl_set:Nn \um_bfpartial_up_or_it_usv   { \um@usv@bfitpartial }
     \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfitpartial }
   \fi
 }
@@ -1103,7 +1102,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Overcoming \cmd\@onlypreamble}
 %
-% The requirement of only setting up the maths fonts is now removed. The following list might be overly ambitious.
+% The requirement of only setting up the maths fonts in the preamble is now removed. The following list might be overly ambitious.
 %    \begin{macrocode}
 \tl_map_inline:nn {
 \new@mathgroup
@@ -1874,8 +1873,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 % No re-definition is made for \cmd\right\ because I don't believe it to be
 % necessary.
-%
-%: TODO : `fences', e.g., \cmd\vert
+% 
+% Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
+% 
+% Set up delcodes so that slashes and things can grow if the font supports it.
+% This is just inserted here so the documentation works. It will be generalised soon.
+%    \begin{macrocode}
+\XeTeXdelcode"002F =4 "002F % ord
+\XeTeXdelcode"005C =4 "005C % ord
+\XeTeXdelcode"2044 =4 "2044 % bin
+\XeTeXdelcode"2215 =4 "2215 % bin
+\XeTeXdelcode"2216 =4 "2216 % bin
+\XeTeXdelcode"29F5 =4 "29F5 % bin
+%    \end{macrocode}
 %
 % \begin{example}{}
 %   \setmathfont{Cambria Math} 
