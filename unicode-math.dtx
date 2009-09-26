@@ -649,10 +649,28 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % }
 % \figlabel{subscripts}
 % \end{figure}
-%
-% \subsubsection{Vertical bar `\texttt{\char`\|}'}
 % 
 % \subsubsection{Colon `\texttt:'}
+% 
+% The colon is one of the few confusing characters of unicode maths.
+% In \TeX, \texttt{:} is defined as a colon with relation spacing: `$a:b$'.
+% While \cs{colon} is defined as a colon with punctuation spacing: `$a\colon b$'.
+% 
+% In unicode, \unichar{003A}{colon} is defined as a punctuation symbol,
+% while \unichar{2236}{ratio} is the colon-like symbol used in mathematics to denote
+% ratios and other things.
+% 
+% This breaks the usual straightforward mapping from control sequence to unicode input character
+% to (the same) unicode glyph.
+% 
+% To preserve input compatibility, we remap the \ascii\ input character `\texttt{:}' to \unichar{2236}{ratio}.
+% Typing a literal \unichar{2236}{ratio} char will result in the same output.
+% If \pkg{amsmath} is loaded, then the definition of \cs{colon} is inherited from there
+% (it looks like a punctuation colon with additional space around it).
+% Otherwise, \cs{colon} is made to output a colon with \cs{mathpunct} spacing.
+% 
+% The package option |[colon=literal]| forces \ascii\ input `|:|' to be printed as \cs{mathcolon} instead.
+%
 % 
 % \subsubsection{Slashes and backslashes}
 % 
@@ -705,7 +723,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % 
 % \paragraph{Backslash}
 % 
-% MathML uses \unichar{2216}{set minus} like this: $A\smallsetminus B$.
+% MathML uses \unichar{2216}{set minus} like this: $A\smallsetminus B$.\footnote{\S4.4.5.11 \url{http://www.w3.org/TR/MathML3/}}
+% I think the STIX name for this glyph slot should just be \cs{setminus}.
 % 
 % Presumably, \unichar{29F5}{reverse solidus operator} is intended to
 % be used in a similar way, but it could also (perhaps?) be used to
@@ -1090,6 +1109,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \bool_set_false:N \g_um_texgreek_bool
   \or
     \bool_set_true:N \g_um_texgreek_bool
+  \fi
+}
+%    \end{macrocode}
+%    
+% \paragraph{Colon style}
+%    \begin{macrocode}
+\bool_new:N \g_um_literal_colon_bool
+\define@choicekey*{unicode-math.sty}{colon}[\@tempa\@tempb]{literal,TeX}{
+  \ifcase\@tempb\relax
+    \bool_set_true:N \g_um_literal_colon_bool
+  \or
+    \bool_set_false:N \g_um_literal_colon_bool
   \fi
 }
 %    \end{macrocode}
@@ -1535,6 +1566,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_remap_symbols: {
   \um_remap_symbol:nnn{`\-}{\mathbin}{"02212}% hyphen to minus
   \um_remap_symbol:nnn{`\*}{\mathbin}{"02217}% text asterisk to "centred asterisk"
+  \bool_if:NF \g_um_literal_colon_bool {
+    \um_remap_symbol:nnn{`\:}{\mathrel}{"02236}% colon to ratio (i.e., punct to rel)
+  }
   \if@um@literal
     \um_remap_symbol:nnn {\um@usv@Nabla}{\mathord}{\um@usv@Nabla}
     \um_remap_symbol:nnn {\um@usv@itNabla}{\mathord}{\um@usv@itNabla}
@@ -3503,6 +3537,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\le{\leq}
 \def\ge{\geq}
 \def\neq{\ne}
+%    \end{macrocode}
+%
+% Define \cs{colon} as a mathpunct `|:|'. This is wrong: it should be \unichar{003A}{colon} instead!
+%    \begin{macrocode}
+\@ifpackageloaded{amsmath}{
+  % define their own colon, perhaps I should just steal it.
+}{
+  \cs_set_protected:Npn \colon {
+    \bool_if:NTF \g_um_literal_colon_bool {:} { \mathpunct{:} }
+  }
+}
 %    \end{macrocode}
 %
 % \begin{macro}{\mathcal}
