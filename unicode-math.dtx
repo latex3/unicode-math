@@ -108,8 +108,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %<*internalbatchfile>
 \generate{\file{\jobname.ins}{\from{\jobname.dtx}{batchfile}}}
 \generate{\file{README.markdown}{\from{\jobname.dtx}{readme}}}
-\generate{\file{\jobname-test.ltx}{\from{\jobname.dtx}{test}}}
-\generate{\file{\jobname-testbf.ltx}{\from{\jobname.dtx}{testbf}}}
+%\generate{\file{\jobname-test.ltx}{\from{\jobname.dtx}{test}}}
+%\generate{\file{\jobname-testbf.ltx}{\from{\jobname.dtx}{testbf}}}
 \generate{\file{dtx-style.sty}{\from{\jobname.dtx}{dtx-style}}}
 %\generate{\file{stix-extract.sh}{\from{\jobname.dtx}{awk}}}
 \def\tempa{plain}
@@ -277,8 +277,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % option to |math-style| will effect this behaviour.
 %
 % The \opt{math-style} options' effects are shown in brief in
-% \tabref{math-style}. \Figref[vref]{math-style-check} shows every character
-% under the effect of this package option.
+% \tabref{math-style}.
 %
 % \begin{table}
 %   \centering
@@ -297,18 +296,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \end{tabular}
 % \end{table}
 %
-%
-% \begin{figure}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-test-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-test.ltx"""}
-% \centering
-% \subfloat[Package option \texttt{[math-style=ISO]}]{\includegraphics{unicode-math-test-iso.pdf}}\\
-% \subfloat[Package option \texttt{[math-style=TeX]}]{\includegraphics{unicode-math-test-tex.pdf}}\\
-% \subfloat[Package option \texttt{[math-style=French]}]{\includegraphics{unicode-math-test-french.pdf}}
-% \caption{Example maths output demonstrating the \texttt{math-style} package option.}
-% \label{fig:math-style-check}
-% \end{figure}
 %
 % \subsection{Bold style}
 %
@@ -345,8 +332,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % latter.
 %
 % The \opt{bold-style} options' effects are shown in brief in
-% \tabref{bold-style}. \Figref[vref]{bold-style-check} shows every character
-% under the effect of this package option.
+% \tabref{bold-style}.
 %
 % \begin{table}
 %   \centering
@@ -365,18 +351,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \end{tabular}
 % \end{table}
 %
-%
-% \begin{figure}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-iso """\noexpand\PassOptionsToPackage{math-style=ISO}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-tex """\noexpand\PassOptionsToPackage{math-style=TeX}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
-% \immediate\write18{xelatex -interaction=batchmode -jobname=unicode-math-testbf-french """\noexpand\PassOptionsToPackage{math-style=French}{unicode-math}\noexpand\input unicode-math-testbf.ltx"""}
-% \centering
-% \subfloat[Package option \texttt{[bold-style=ISO]}]{\includegraphics{unicode-math-testbf-iso.pdf}}\\
-% \subfloat[Package option \texttt{[bold-style=TeX]}]{\includegraphics{unicode-math-testbf-tex.pdf}}\\
-% \subfloat[Package option \texttt{[bold-style=French]}]{\includegraphics{unicode-math-testbf-french.pdf}}
-% \caption{Example maths output demonstrating the \texttt{bold-style} package option.}
-% \label{fig:bold-style-check}
-% \end{figure}
 % 
 % \subsection{Sans serif style}
 % 
