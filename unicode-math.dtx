@@ -108,8 +108,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %<*internalbatchfile>
 \generate{\file{\jobname.ins}{\from{\jobname.dtx}{batchfile}}}
 \generate{\file{README.markdown}{\from{\jobname.dtx}{readme}}}
-%\generate{\file{\jobname-test.ltx}{\from{\jobname.dtx}{test}}}
-%\generate{\file{\jobname-testbf.ltx}{\from{\jobname.dtx}{testbf}}}
 \generate{\file{dtx-style.sty}{\from{\jobname.dtx}{dtx-style}}}
 %\generate{\file{stix-extract.sh}{\from{\jobname.dtx}{awk}}}
 \def\tempa{plain}
@@ -119,7 +117,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \def\next{\endgroup}
 \fi
 \next
-\immediate\write18{makeindex -s gind.ist -o \jobname.ind  \jobname.idx}
 %</internalbatchfile>
 %
 %<*driver>
@@ -130,7 +127,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %\OnlyDescription
 \usepackage{dtx-style}
 \begin{document}
-  %\nonstopmode
   \DocInput{\jobname.dtx}
 \end{document}
 %</driver>
