@@ -20,9 +20,10 @@ README: README.markdown
 #############
 
 push:
-	~/bin/dtx-update
-	make $(PKG).pdf
-	git commit -a -m "bump package date"
+	if ~/bin/dtx-update ; then \
+	  make $(PKG).pdf ; \
+	  git commit -a -m "bump package date" ; \
+	fi
 	git push origin master
 
 #############
