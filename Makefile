@@ -39,15 +39,16 @@ builddiff = $(subst $(testdir)/,$(builddir)/,$(diffpng))
 
 
 testclean:
-	cd $(builddir); \
-	rm -f *.aux *.log *.synctex* *.pdf *.test.png *.diff.png
+	rm -f $(builddir)/*
 
 $(builddir)/unicode-math.sty:
 	tex unicode-math.dtx > /dev/null ;
 	cp -f unicode-math.sty $(builddir)/ ;
 	cp -f unicode-math-table.tex $(builddir)/ ;
 
-test: testclean $(builddir)/unicode-math.sty $(buildltx) $(safepng) $(builddiff)
+test: testclean $(builddir)/unicode-math.sty $(builddir)/umtest-preamble.tex $(buildltx) $(safepng) $(builddiff)
+	cd $(testdir); \
+	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
 	if [ `ls $(builddir)/*.diff.png | wc -l` = 0 ] ; then \
 	  echo ; \
 	  echo All tests passed successfully. ; \
@@ -63,8 +64,11 @@ test: testclean $(builddir)/unicode-math.sty $(buildltx) $(safepng) $(builddiff)
 	  echo ; \
 	fi ;
 
+$(builddir)/umtest-preamble.tex:
+	cp $(testdir)/umtest-preamble.tex $(builddir)
+
 $(builddir)/%.ltx:
-	cp $(testdir)/$*.ltx      $(builddir)/
+	cp -f $(testdir)/$*.ltx      $(builddir)/
 
 $(builddir)/%.safe.png: $(testdir)/%.safe.png
 	cp $(testdir)/$*.safe.png $(builddir)/ 
