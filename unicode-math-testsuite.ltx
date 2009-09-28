@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{xltxtra,fancyvrb,geometry,calc}
+\geometry{margin=2cm,a4paper}
+\setmainfont{TeX Gyre Pagella}
+\setmonofont{Inconsolata}
+
+\newcommand\inserttest[1]{%
+  \section{Test #1}
+  \begin{minipage}{0.5\textwidth}
+  \VerbatimInput{testfiles/umtest#1.ltx}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{8cm+4pt}
+    \fboxsep=1pt
+    \fboxrule=1pt
+    \fbox{\includegraphics[width=8cm]{testfiles/umtest#1.safe.png}}
+  \end{minipage}
+}
+
+\pagestyle{empty}
+\begin{document}
+\title{The \textsf{unicode-math} test suite}
+\author{Will Robertson}
+\date{}
+\maketitle
+\thispagestyle{empty}
+
+\section*{Preamble}
+
+\begin{minipage}{0.5\textwidth}
+The following pieces of output are generated from the code shown.
+As well as being good minimal examples, these tests are useful to ensure that new bugs don't affect old behaviour.
+When the test suite is run, the new output is compared pixel by pixel with that shown here and warnings produced if the outputs are not identical.
+\end{minipage}
+
+\input{testfiles/umtest-suite.tex}
+
+\end{document}
