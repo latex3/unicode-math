@@ -17,32 +17,86 @@ help:
 	@echo 'test file against this original and warn against any changes.'
 
 
+#### SETUP ####
 
-
+testdir=testfiles
+builddir=build
 PKG = $(shell basename `pwd`)
-FILES = README $(PKG).ins $(PKG).dtx
-RESULTS = $(PKG).pdf $(PKG).sty
+
+safepng = $(shell ls $(testdir)/umtest*.safe.png)
+diffpng = $(subst .safe.png,.diff.png,$(safepng))
+testltx = $(subst .safe.png,.ltx,$(safepng))
+buildltx = $(subst $(testdir)/,$(builddir)/,$(testltx))
+builddiff = $(subst $(testdir)/,$(builddir)/,$(diffpng))
+
+buildfiles = $(BUILDSOURCE) $(builddir)/umtest-preamble.tex $(buildltx)
+
+SOURCE = $(PKG).dtx $(PKG)-table.tex
+
+SUITE = unicode-math-testsuite
+SUITESOURCE = \
+  $(SUITE).ltx \
+  testfiles/umtest-preamble.tex \
+  testfiles/umtest-suite.tex
+SWEETSAUCE = ginger and chilli
+
+DOC = $(PKG).pdf $(SUITE).pdf
+DERIVED = $(PKG).sty README $(PKG).ins
 TYPESET = xelatex -shell-escape
 
-pkg: $(FILES) $(RESULTS)
+ALLFILES = $(SOURCE) $(SUITESOURCE)
+
+BUILDFILES = $(addprefix $(builddir)/,$(ALLFILES))
+
+BUILDSOURCE = $(addprefix $(builddir)/,$(SOURCE))
+BUILDDOC = $(addprefix $(builddir)/,$(DOC))
+
+
+#### BASICS ####
+
+clean:
+	rm -f $(builddir)/*
+
+pkg: $(SOURCE) $(DERIVED) $(DOC)
 	ctanify $(PKG).ins $(PKG).pdf README
 
-doc: $(PKG).pdf unicode-math-testsuite.pdf
+doc: $(DOC)
 
-$(PKG).pdf: $(PKG).dtx
-	$(TYPESET) $<
-	makeindex -s gind.ist $(PKG)
-
-$(PKG).sty: $(FILES)
-	tex $(PKG).ins
+$(DOC): $(BUILDDOC)
+	mv $(builddir)/$@  $@
 
 README: README.markdown
 	cp -f README.markdown README
 
-unicode-math-testsuite.pdf: unicode-math-testsuite.ltx testfiles/umtest-preamble.tex testfiles/umtest-suite.tex
-	$(TYPESET) $<
+#### BUILD FILES
 
-#############
+$(builddir)/$(PKG).sty: $(PKG).dtx
+	tex $(PKG).ins > /dev/null
+	rm dtx-style.sty
+	mv $(PKG).sty $@
+
+$(builddir)/$(PKG).dtx:
+	cp -f  $(PKG).dtx  $@
+
+$(builddir)/unicode-math-table.tex: unicode-math-table.tex
+	cp -f  $<  $@
+
+$(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
+	cp -f  $<  $@
+
+$(builddir)/%.ltx: $(testdir)/%.ltx
+	cp -f  $<  $@
+
+$(builddir)/$(PKG).pdf:  $(BUILDSOURCE)
+	cd $(builddir); \
+	$(TYPESET) $(PKG).dtx; \
+	makeindex -s gind.ist $(PKG); 
+
+$(builddir)/$(SUITE).pdf:
+	$(TYPESET) -output-directory=$(builddir) $(SUITE).ltx
+
+
+##### PROBABLY ONLY USEFUL FOR WILL #####
 
 push:
 	if ~/bin/dtx-update ; then \
@@ -57,42 +111,15 @@ push:
 # TESTSUITE #
 #############
 
-testdir=testfiles
-builddir=build
-
-safepng=$(shell ls $(testdir)/umtest*.safe.png)
-diffpng:= $(subst .safe.png,.diff.png,$(safepng))
-testltx:= $(subst .safe.png,.ltx,$(safepng))
-buildltx = $(subst $(testdir)/,$(builddir)/,$(testltx))
-builddiff = $(subst $(testdir)/,$(builddir)/,$(diffpng))
-
-buildfiles = $(builddir)/unicode-math.sty $(builddir)/umtest-preamble.tex $(buildltx)
-
-
-#### Moving files around ####
-
-testclean:
-	rm -f $(builddir)/*
-
-$(builddir)/unicode-math.sty:
-	tex unicode-math.dtx > /dev/null
-	cp -f unicode-math.sty $(builddir)
-	cp -f unicode-math-table.tex $(builddir)
-
-$(builddir)/umtest-preamble.tex:
-	cp $(testdir)/umtest-preamble.tex $(builddir)
-
-$(builddir)/%.ltx: $(testdir)/%.ltx
-	cp -f  $(testdir)/$*.ltx  $(builddir)
 
 #### All tests ####
 
 test: testclean $(buildfiles) $(builddiff)
 	cd $(testdir); \
 	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
-	if [ `ls $(builddir)/*.diff.png | wc -l` = 0 ] ; then \
+	@if [ `ls $(builddir)/*.diff.png | wc -l` = 0 ] ; then \
 	  echo ; \
-	  echo All tests passed successfully: ; \
+	  echo All tests passed successfully. ; \
 	  echo ; \
 	else \
 	  echo ; \
@@ -105,9 +132,11 @@ test: testclean $(buildfiles) $(builddiff)
 	  echo ; \
 	fi ;
 
+
 #### Each step of the process ####
 
 $(builddir)/%.diff.png: $(builddir)/%.test.png
+	@echo ' '
 	cd $(builddir); \
 	rm -f /tmp/pngdiff.txt ; \
 	compare -metric RMSE $*.test.png ../$(testdir)/$*.safe.png $*.diff.png | grep 'dB' > /tmp/pngdiff.txt ; \
@@ -116,11 +145,16 @@ $(builddir)/%.diff.png: $(builddir)/%.test.png
 	fi
 
 $(builddir)/%.test.png: $(builddir)/%.pdf
-	cd $(builddir); \
-	convert -density 300x300 $*.pdf $*.test.png
+	@echo ' '
+	convert -density 300x300  $<  $(builddir)/$*.test.png
 
-$(builddir)/%.pdf: $(builddir)/unicode-math.sty $(builddir)/%.ltx
-	cd $(builddir); xelatex -interaction=batchmode $*.ltx
+$(builddir)/umtest%.pdf: $(BUILDSOURCE) $(builddir)/umtest%.ltx
+	@echo ' '
+	@echo ' '
+	@echo 'TEST $*'
+	@echo ' '
+	cd $(builddir); xelatex -interaction=batchmode umtest$*.ltx
+
 
 #### Generating new tests ####
 
@@ -131,5 +165,5 @@ lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
 testinit: $(lonelypath)
 
 $(testdir)/%.safe.png: $(builddir)/%.test.png
-	cp $(builddir)/$*.test.png $(testdir)/$*.safe.png
+	cp  $<  $@
 
