@@ -152,6 +152,6 @@ lonelytest = $(addprefix $(builddir)/,$(addsuffix .test.png,$(lonelystub)))
 
 testinit: $(lonelypath)
 
-$(testdir)/$(lonelystub).safe.png: $(lonelytest)
-	cp  $<  $@
+$(lonelypath): $(lonelytest)
+	cp  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.png/.test.png/`  $@
 
