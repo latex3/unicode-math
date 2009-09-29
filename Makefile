@@ -62,8 +62,11 @@ pkg: $(SOURCE) $(DERIVED) $(DOC)
 
 doc: $(DOC)
 
-$(DOC): $(BUILDDOC)
-	mv $(builddir)/$@  $@
+$(PKG).pdf: $(builddir)/$(PKG).pdf
+	cp $<  $@
+
+$(SUITE).pdf: $(builddir)/$(SUITE).pdf
+	cp $<  $@
 
 README: README.markdown
 	cp -f README.markdown README
@@ -75,8 +78,8 @@ $(builddir)/$(PKG).sty: $(PKG).dtx
 	rm dtx-style.sty
 	mv $(PKG).sty $@
 
-$(builddir)/$(PKG).dtx:
-	cp -f  $(PKG).dtx  $@
+$(builddir)/$(PKG).dtx: $(PKG).dtx
+	cp -f  $<  $@
 
 $(builddir)/unicode-math-table.tex: unicode-math-table.tex
 	cp -f  $<  $@
@@ -114,7 +117,7 @@ push:
 
 #### All tests ####
 
-test: testclean $(buildfiles) $(builddiff)
+test: $(buildfiles) $(builddiff)
 	cd $(testdir); \
 	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
 	@if [ `ls $(builddir)/*.diff.png | wc -l` = 0 ] ; then \
@@ -141,7 +144,8 @@ $(builddir)/%.diff.png: $(builddir)/%.test.png
 	rm -f /tmp/pngdiff.txt ; \
 	compare -metric RMSE $*.test.png ../$(testdir)/$*.safe.png $*.diff.png | grep 'dB' > /tmp/pngdiff.txt ; \
 	if [ "`cat /tmp/pngdiff.txt`" = "0 dB" ] ; then \
-	  rm $*.diff.png; \
+	  rm $*.diff.png ; \
+	  echo 'Test passed.' \
 	fi
 
 $(builddir)/%.test.png: $(builddir)/%.pdf
