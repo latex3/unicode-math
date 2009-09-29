@@ -87,7 +87,7 @@ $(builddir)/$(PKG).pdf:  $(BUILDSOURCE)
 	$(TYPESET) $(PKG).dtx;
 
 
-$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE) $(builddiff)
+$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE) test
 	$(TYPESET) -output-directory=$(builddir) $<
 
 $(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
