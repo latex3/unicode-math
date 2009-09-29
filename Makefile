@@ -19,12 +19,12 @@ help:
 
 #### SETUP ####
 
+PKG = $(shell basename `pwd`)
 testdir=testfiles
 builddir=build
-PKG = $(shell basename `pwd`)
 
 
-SOURCE = $(PKG).sty $(PKG)-table.tex
+SOURCE = $(PKG).dtx $(PKG).sty $(PKG)-table.tex
 
 SUITE = unicode-math-testsuite
 SUITESOURCE = \
@@ -53,7 +53,7 @@ clean:
 	rm -f $(builddir)/*
 
 pkg: $(SOURCE) $(DERIVED) $(DOC)
-	ctanify $(PKG).ins $(PKG).pdf README
+	ctanify $(PKG).ins $(PKG)-table.tex $(PKG).pdf README
 
 doc: $(DOC)
 
@@ -82,7 +82,8 @@ $(builddir)/unicode-math-table.tex: unicode-math-table.tex
 $(builddir)/$(PKG).pdf:  $(BUILDSOURCE)
 	cd $(builddir); \
 	$(TYPESET) $(PKG).dtx; \
-	makeindex -s gind.ist $(PKG); 
+	makeindex -s gind.ist $(PKG); \
+	$(TYPESET) $(PKG).dtx;
 
 
 $(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE) $(builddiff)
@@ -116,56 +117,39 @@ push:
 #### All tests ####
 
 test: $(BUILDFILES) $(builddiff)
-	cd $(testdir); \
+	@cd $(testdir); \
 	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
-	@if [ `ls $(builddir)/*.broken.png | wc -l` = 0 ] ; then \
-	  echo ; \
-	  echo All tests passed successfully. ; \
-	  echo ; \
-	else \
-	  echo ; \
-	  echo ==================================== ; \
-	  echo Some tests failed! ; \
-	  echo List of diffs produced during check: ; \
-	  echo ==================================== ; \
-	  echo ; \
-	  ls -1 $(builddir)/*.broken.png ; \
-	  echo ; \
-	fi ;
 
 
 #### Each step of the process ####
 
 $(builddir)/%.diff.png: $(builddir)/%.test.png
-	@echo ' '
-	cd $(builddir); \
-	rm -f  /tmp/pngdiff.txt  $*.broken.png ; \
-	compare -metric RMSE $*.test.png ../$(testdir)/$*.safe.png $*.diff.png | grep 'dB' > /tmp/pngdiff.txt ;
-	@if [ "`cat /tmp/pngdiff.txt`" = "0 dB" ] ; then \
-	  echo 'Test passed.' ; \
+	@echo 'Comparing with good PNG.'
+	@if [ "${shell compare -metric RMSE $(builddir)/$*.test.png $(testdir)/$*.safe.png $(builddir)/$*.diff.png | grep 'dB'}" = "0 dB" ] ; then \
+	  echo ' ' ; \
 	else \
-	  cp  $(builddir)/$*.diff.png  $(builddir)/$*.broken.png ; \
-	fi ;
+	  echo 'Test failed.' ; \
+	  false ; \
+	fi
 
 $(builddir)/%.test.png: $(builddir)/%.pdf
-	@echo ' '
-	convert -density 300x300  $<  $(builddir)/$*.test.png
+	@echo 'Converting PDF to PNG.'
+	@convert -density 300x300  $<  $(builddir)/$*.test.png
 
 $(builddir)/umtest%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/umtest%.ltx
-	@echo ' '
-	@echo ' '
 	@echo 'TEST $*'
-	@echo ' '
-	cd $(builddir); xelatex -interaction=batchmode umtest$*.ltx
+	@echo 'Generating PDF output.'
+	@cd $(builddir); xelatex -interaction=batchmode umtest$*.ltx > /dev/null
 
 
 #### Generating new tests ####
 
-lonelystub = $(shell cd testfiles; ls -1 | egrep 'umtest(.*\.ltx)|(.*\.safe.png)' | cut -d . -f 1 | uniq -u)
+lonelystub = $(shell cd testfiles; ls | egrep 'umtest(.*\.ltx)|(.*\.safe.png)' | cut -d . -f 1 | uniq -u)
 lonelyfile = $(addsuffix .safe.png,$(lonelystub))
 lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
 
 testinit: $(lonelypath)
+	echo $(lonelystub)
 
 $(testdir)/$(lonelystub).safe.png: $(builddir)/%.test.png
 	cp  $<  $@
