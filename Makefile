@@ -4,11 +4,11 @@
 help:
 	echo 'UNICODE-MATH makefile targets:'
 	echo '     help  -  (this message)'
-	echo '      pkg  -  generate archive for CTAN'
+	echo '      pkg  -  generate archive for CTAN (incomplete)'
 	echo '      doc  -  compile documentation'
 	echo '     push  -  push to GitHub'
 	echo '     test  -  run the test suite'
-	echo ' testinit  -  initialise new tests'
+	echo '  initest  -  initialise any new tests'
 	echo ' '
 	echo 'To add a new test, add a file called umtest****.ltx to'
 	echo 'directory testfiles/, then run `make testinit` and then'
@@ -16,6 +16,13 @@ help:
 	echo ' '
 	echo '`make test` will then compare future compilations of the'
 	echo 'test file against this original and warn against any changes.'
+	echo ' '
+	echo 'Note that the documentation contains of the complete'
+	echo 'test suite in a single document (unicode-math-testsuite.pdf);'
+	echo '`make doc` therefore will ensure that the test suite has'
+	echo 'been run before compiling the documatation. Accordingly,'
+	echo 'a *single* change in unicode-math.dtx will trigger an entire'
+	echo 'run of the test suite.'
 
 
 #### SETUP ####
@@ -150,7 +157,7 @@ lonelyfile = $(addsuffix .safe.png,$(lonelystub))
 lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
 lonelytest = $(addprefix $(builddir)/,$(addsuffix .test.png,$(lonelystub)))
 
-testinit: $(lonelypath)
+initest: $(lonelypath)
 
 $(lonelypath): $(lonelytest)
 	cp  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.png/.test.png/`  $@
