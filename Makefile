@@ -87,8 +87,8 @@ $(builddir)/$(PKG).pdf:  $(BUILDSOURCE)
 	makeindex -s gind.ist $(PKG); 
 
 
-$(builddir)/$(SUITE).pdf: $(BUILDSUITE)
-	$(TYPESET) -output-directory=$(builddir) $(SUITE).ltx
+$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE)
+	$(TYPESET) -output-directory=$(builddir) $<
 
 $(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
 	cp -f  $<  $@
