@@ -1,0 +1,14 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont[Colour=000000]{Cambria Math}
+\setmathfont[Range={\mathop}, Colour=FF0000]{Cambria Math}
+\setmathfont[Range={\equal}, Colour=009900]{Cambria Math}
+\setmathfont[Range={\mathopen,\mathclose},
+          Colour=0000FF]{Cambria Math}
+\setlength\parskip{12pt}
+\begin{document}
+\[
+  F(s)=\mathscr{L}\left\{f(t)\right\}=
+    \int_0^\infty \mathup{e}^{-st}f(t)\,\mathup{d}t
+\]
+\end{document}
