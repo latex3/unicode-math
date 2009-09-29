@@ -3782,64 +3782,6 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 % {Height of the bottom of the radical degree, if such is present, in proportion to the ascender of the radical sign. Suggested: 60\%.}
 % \end{longtable}
 %
-% \part{Some manner of unit testing}
-%
-%
-% \section{The bold alphabets}
-%
-% For bold alphabets, it's a bit more complex. We also test literal bold to the bold produced from markup. 
-% 
-%    \begin{macrocode}
-%<*testbf>
-\documentclass{article}
-\usepackage[a6paper]{geometry}
-\usepackage{fontspec}
-\setmainfont{TeX Gyre Pagella}
-\usepackage{unicode-math}
-\def\upLatin{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
-\def\uplatin{abcdefghijklmnopqrstuvwxyz}
-\def\upGreek{ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡϴΣΤΥΦΧΨΩ}
-\def\upgreek{αβγδεζηθικλμνξοπρςστυφχψωϵϑϰϕϱϖ}
-\def\itLatin{𝐴𝐵𝐶𝐷𝐸𝐹𝐺𝐻𝐼𝐽𝐾𝐿𝑀𝑁𝑂𝑃𝑄𝑅𝑆𝑇𝑈𝑉𝑊𝑋𝑌𝑍}
-\def\itlatin{𝑎𝑏𝑐𝑑𝑒𝑓𝑔ℎ𝑖𝑗𝑘𝑙𝑚𝑛𝑜𝑝𝑞𝑟𝑠𝑡𝑢𝑣𝑤𝑥𝑦𝑧}
-\def\itGreek{𝛢𝛣𝛤𝛥𝛦𝛧𝛨𝛩𝛪𝛫𝛬𝛭𝛮𝛯𝛰𝛱𝛲𝛳𝛴𝛵𝛶𝛷𝛸𝛹𝛺}
-\def\itgreek{𝛼𝛽𝛾𝛿𝜀𝜁𝜂𝜃𝜄𝜅𝜆𝜇𝜈𝜉𝜊𝜋𝜌𝜍𝜎𝜏𝜐𝜑𝜒𝜓𝜔𝜖𝜗𝜘𝜙𝜚𝜛}
-\def\bfupLatin{𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙}
-\def\bfuplatin{𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳}
-\def\bfupGreek{𝚨𝚩𝚪𝚫𝚬𝚭𝚮𝚯𝚰𝚱𝚲𝚳𝚴𝚵𝚶𝚷𝚸𝚹𝚺𝚻𝚼𝚽𝚾𝚿𝛀}
-\def\bfupgreek{𝛂𝛃𝛄𝛅𝛆𝛇𝛈𝛉𝛊𝛋𝛌𝛍𝛎𝛏𝛐𝛑𝛒𝛓𝛔𝛕𝛖𝛗𝛘𝛙𝛚𝛜𝛝𝛞𝛟𝛠𝛡}
-\def\bfitLatin{𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁}
-\def\bfitlatin{𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛}
-\def\bfitGreek{𝜜𝜝𝜞𝜟𝜠𝜡𝜢𝜣𝜤𝜥𝜦𝜧𝜨𝜩𝜪𝜫𝜬𝜭𝜮𝜯𝜰𝜱𝜲𝜳𝜴}
-\def\bfitgreek{𝜶𝜷𝜸𝜹𝜺𝜻𝜼𝜽𝜾𝜿𝝀𝝁𝝂𝝃𝝄𝝅𝝆𝝇𝝈𝝉𝝊𝝋𝝌𝝍𝝎𝝐𝝑𝝒𝝓𝝔𝝕}
-\providecommand\mathalphabet{\mathbf}
-\def\testmath#1{%
-  \makebox[\linewidth][l]{%
-    \makebox[0pt][l]{$\mathalphabet{\csname up#1\endcsname}$}%
-    \makebox[0pt][l]{$\mathalphabet{\csname it#1\endcsname}$}%
-    \makebox[0pt][l]{$\csname bfup#1\endcsname$}%
-    \makebox[0pt][l]{$\csname bfit#1\endcsname$}%
-    }}
-\begin{document}
-\setmathfont[Colour=2255FF55]{Cambria Math}
-\parindent=0pt
-\voffset=-1in
-\hoffset=-1in
-\setbox0=\vbox{%
-\testmath{Latin}\\
-\testmath{latin}\\
-\testmath{Greek}\\
-\testmath{greek}}
-\dimen0=\ht0
-\advance\dimen0\dp0
-\edef\papersize{papersize=\the\wd0,\the\dimen0}
-\setbox255=\vbox{\special{\papersize}\box0}
-\shipout\box255
-\end{document}
-%</testbf>
-%    \end{macrocode}
-%
-%
 % \clearpage
 % \PrintChanges
 %
