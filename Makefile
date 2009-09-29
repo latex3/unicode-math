@@ -35,7 +35,6 @@ SOURCE = $(PKG).dtx $(PKG)-table.tex
 
 SUITE = unicode-math-testsuite
 SUITESOURCE = \
-  $(SUITE).ltx \
   testfiles/umtest-preamble.tex \
   testfiles/umtest-suite.tex
 SWEETSAUCE = ginger and chilli
@@ -44,13 +43,10 @@ DOC = $(PKG).pdf $(SUITE).pdf
 DERIVED = $(PKG).sty README $(PKG).ins
 TYPESET = xelatex -shell-escape
 
-ALLFILES = $(SOURCE) $(SUITESOURCE)
-
-BUILDFILES = $(addprefix $(builddir)/,$(ALLFILES))
-
 BUILDSOURCE = $(addprefix $(builddir)/,$(SOURCE))
 BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
+BUILDSUITE = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
 
 #### BASICS ####
 
@@ -73,6 +69,7 @@ README: README.markdown
 
 #### BUILD FILES
 
+
 $(builddir)/$(PKG).sty: $(PKG).dtx
 	tex $(PKG).ins > /dev/null
 	rm dtx-style.sty
@@ -84,20 +81,23 @@ $(builddir)/$(PKG).dtx: $(PKG).dtx
 $(builddir)/unicode-math-table.tex: unicode-math-table.tex
 	cp -f  $<  $@
 
-$(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
-	cp -f  $<  $@
-
-$(builddir)/%.ltx: $(testdir)/%.ltx
-	cp -f  $<  $@
-
 $(builddir)/$(PKG).pdf:  $(BUILDSOURCE)
 	cd $(builddir); \
 	$(TYPESET) $(PKG).dtx; \
 	makeindex -s gind.ist $(PKG); 
 
-$(builddir)/$(SUITE).pdf:
+
+$(builddir)/$(SUITE).pdf: $(BUILDSUITE)
 	$(TYPESET) -output-directory=$(builddir) $(SUITE).ltx
 
+$(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
+	cp -f  $<  $@
+
+$(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
+	cp -f  $<  $@
+
+$(builddir)/%.ltx: $(testdir)/%.ltx
+	cp -f  $<  $@
 
 ##### PROBABLY ONLY USEFUL FOR WILL #####
 
@@ -145,14 +145,14 @@ $(builddir)/%.diff.png: $(builddir)/%.test.png
 	compare -metric RMSE $*.test.png ../$(testdir)/$*.safe.png $*.diff.png | grep 'dB' > /tmp/pngdiff.txt ; \
 	if [ "`cat /tmp/pngdiff.txt`" = "0 dB" ] ; then \
 	  rm $*.diff.png ; \
-	  echo 'Test passed.' \
+	  echo 'Test passed.' ; \
 	fi
 
 $(builddir)/%.test.png: $(builddir)/%.pdf
 	@echo ' '
 	convert -density 300x300  $<  $(builddir)/$*.test.png
 
-$(builddir)/umtest%.pdf: $(BUILDSOURCE) $(builddir)/umtest%.ltx
+$(builddir)/umtest%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/umtest%.ltx
 	@echo ' '
 	@echo ' '
 	@echo 'TEST $*'

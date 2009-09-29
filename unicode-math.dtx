@@ -2580,13 +2580,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Upright: \cmd\mathup}
 %
-% \begin{example}{}
-%   $\mathup{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
-%   $\mathup{abcdefghijklmnopqrstuvwxyz}$ \\
-%   $\mathup{ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ}$\quad$\mathup{ϴ}$ \\
-%   $\mathup{αβγδεζηθικλμνξοπρστυφχψω}$\quad$\mathup{ϵϑϰϕϱϖ}$ \\
-% \end{example}
-%
 % Takes both upright and italic characters to be typeset as upright symbols.
 %
 %    \begin{macrocode}
@@ -2615,13 +2608,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Italic: \cmd\mathit}
 %
-% \begin{example}{}
-%   $\mathit{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
-%   $\mathit{abcdefghijklmnopqrstuvwxyz}$ \\
-%   $\mathit{ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ}$\quad$\mathit{ϴ}$ \\
-%   $\mathit{αβγδεζηθικλμνξοπρστυφχψω}$\quad$\mathit{ϵϑϰϕϱϖ}$ \\
-% \end{example}
-%
 % Roman:
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathit: {
@@ -2646,18 +2632,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \subsubsection{Blackboard or double-struck: \cmd\mathbb}
-% \begin{example}{}
-%   $\mathbb{0123456789}$ \\
-%   $\mathbb{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
-%   $\mathbb{abcdefghijklmnopqrstuvwxyz}$ \\
-% \end{example}
-% Numbers:
+%
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbb: {
   \um_set_mathalphabet_numbers:Nnn{\mathbb}{\um@usv@num}{\um@usv@bbnum}
-%    \end{macrocode}
-% Roman uppercase:
-%    \begin{macrocode}
   \um_set_mathalphabet_latin:Nnn{\mathbb}{\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bbLatin}
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\C,"1D60A}{"2102}
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\H,"1D60F}{"210D}
@@ -2666,9 +2644,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\Q,"1D618}{"211A}
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\R,"1D619}{"211D}
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\Z,"1D621} {"2124}
-%    \end{macrocode}
-% Roman lowercase:
-%    \begin{macrocode}
   \um_set_mathalphabet_latin:Nnn{\mathbb}{\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bblatin}
 }
 %    \end{macrocode}
