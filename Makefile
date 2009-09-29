@@ -28,40 +28,38 @@ help:
 #### SETUP ####
 
 PKG = $(shell basename `pwd`)
+TBL = $(PKG)-table.tex
+SUITE = $(PKG)-testsuite
+
 testdir=testfiles
 builddir=build
 
+PKGSOURCE = $(PKG).dtx $(TBL)
+LTXSOURCE = $(PKG).sty $(TBL)
 
-SOURCE = $(PKG).dtx $(PKG).sty $(PKG)-table.tex
-
-SUITE = unicode-math-testsuite
 SUITESOURCE = \
   testfiles/umtest-preamble.tex \
   testfiles/umtest-suite.tex
 SWEETSAUCE = ginger and chilli
 
-DOC = $(PKG).pdf $(SUITE).pdf
-DERIVED = $(PKG).sty README $(PKG).ins
-TYPESET = xelatex -shell-escape
+DOC     = $(PKG).pdf $(SUITE).pdf
+DERIVED = $(PKG).sty $(PKG).ins README
 
-safepng = $(shell ls $(testdir)/umtest*.safe.png)
-diffpng = $(subst .safe.png,.diff.png,$(safepng))
-testltx = $(subst .safe.png,.ltx,$(safepng))
-buildltx = $(subst $(testdir)/,$(builddir)/,$(testltx))
-builddiff = $(subst $(testdir)/,$(builddir)/,$(diffpng))
+TESTOUT = $(shell ls $(testdir)/umtest*.safe.png)
+BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.png,.ltx,$(TESTOUT)))
+BUILDTESTTARGET = $(subst $(testdir)/,$(builddir)/,$(subst .safe.png,.diff.png,$(TESTOUT)))
 
-BUILDSOURCE = $(addprefix $(builddir)/,$(SOURCE))
-BUILDDOC = $(addprefix $(builddir)/,$(DOC))
-BUILDSUITE = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
-BUILDFILES = $(BUILDSOURCE) $(BUILDSUITE) $(buildltx)
+BUILDSOURCE = $(addprefix $(builddir)/,$(LTXSOURCE))
+BUILDSUITE  = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
+BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC)
 
 #### BASICS ####
 
 clean:
 	rm -f $(builddir)/*
 
-pkg: $(SOURCE) $(DERIVED) $(DOC)
-	ctanify $(PKG).ins $(PKG)-table.tex $(PKG).pdf README
+pkg: $(PKGSOURCE) $(DERIVED) $(DOC)
+	ctanify $(PKG).ins $(TBL) $(PKG).pdf README
 
 doc: $(DOC)
 
@@ -87,15 +85,15 @@ $(builddir)/$(PKG).dtx: $(PKG).dtx
 $(builddir)/unicode-math-table.tex: unicode-math-table.tex
 	cp -f  $<  $@
 
-$(builddir)/$(PKG).pdf:  $(BUILDSOURCE)
+$(builddir)/$(PKG).pdf:  $(builddir)/$(PKG).dtx $(BUILDSOURCE)
 	cd $(builddir); \
-	$(TYPESET) $(PKG).dtx; \
+	xelatex $(PKG).dtx; \
 	makeindex -s gind.ist $(PKG); \
-	$(TYPESET) $(PKG).dtx;
+	xelatex $(PKG).dtx;
 
 
 $(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE) test
-	$(TYPESET) -output-directory=$(builddir) $<
+	xelatex -output-directory=$(builddir) $<
 
 $(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
 	cp -f  $<  $@
@@ -124,7 +122,7 @@ push:
 
 #### All tests ####
 
-test: $(BUILDFILES) $(builddiff)
+test: $(BUILDFILES) $(BUILDTESTTARGET)
 	cd $(testdir); \
 	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
 
