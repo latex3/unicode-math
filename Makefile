@@ -1,20 +1,21 @@
 
+.SILENT:
 
 help:
-	@echo 'UNICODE-MATH makefile targets:'
-	@echo '     help  -  (this message)'
-	@echo '      pkg  -  generate archive for CTAN'
-	@echo '      doc  -  compile documentation'
-	@echo '     push  -  push to GitHub'
-	@echo '     test  -  run the test suite'
-	@echo ' testinit  -  initialise new tests'
-	@echo ' '
-	@echo 'To add a new test, add a file called umtest****.ltx to'
-	@echo 'directory testfiles/, then run `make testinit` and then'
-	@echo 'ensure that the output umtest****.safe.png is correct.'
-	@echo ' '
-	@echo '`make test` will then compare future compilations of the'
-	@echo 'test file against this original and warn against any changes.'
+	echo 'UNICODE-MATH makefile targets:'
+	echo '     help  -  (this message)'
+	echo '      pkg  -  generate archive for CTAN'
+	echo '      doc  -  compile documentation'
+	echo '     push  -  push to GitHub'
+	echo '     test  -  run the test suite'
+	echo ' testinit  -  initialise new tests'
+	echo ' '
+	echo 'To add a new test, add a file called umtest****.ltx to'
+	echo 'directory testfiles/, then run `make testinit` and then'
+	echo 'ensure that the output umtest****.safe.png is correct.'
+	echo ' '
+	echo '`make test` will then compare future compilations of the'
+	echo 'test file against this original and warn against any changes.'
 
 
 #### SETUP ####
@@ -117,15 +118,15 @@ push:
 #### All tests ####
 
 test: $(BUILDFILES) $(builddiff)
-	@cd $(testdir); \
+	cd $(testdir); \
 	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
 
 
 #### Each step of the process ####
 
 $(builddir)/%.diff.png: $(builddir)/%.test.png
-	@echo 'Comparing with good PNG.'
-	@if [ "${shell compare -metric RMSE $(builddir)/$*.test.png $(testdir)/$*.safe.png $(builddir)/$*.diff.png | grep 'dB'}" = "0 dB" ] ; then \
+	echo 'Comparing with good PNG.'
+	if [ "${shell compare -metric RMSE $(builddir)/$*.test.png $(testdir)/$*.safe.png $(builddir)/$*.diff.png | grep 'dB'}" = "0 dB" ] ; then \
 	  echo ' ' ; \
 	else \
 	  echo 'Test failed.' ; \
@@ -133,13 +134,13 @@ $(builddir)/%.diff.png: $(builddir)/%.test.png
 	fi
 
 $(builddir)/%.test.png: $(builddir)/%.pdf
-	@echo 'Converting PDF to PNG.'
-	@convert -density 300x300  $<  $(builddir)/$*.test.png
+	echo 'Converting PDF to PNG.'
+	convert -density 300x300  $<  $(builddir)/$*.test.png
 
 $(builddir)/umtest%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/umtest%.ltx
-	@echo 'TEST $*'
-	@echo 'Generating PDF output.'
-	@cd $(builddir); xelatex -interaction=batchmode umtest$*.ltx > /dev/null
+	echo 'TEST $*'
+	echo 'Generating PDF output.'
+	cd $(builddir); xelatex -interaction=batchmode umtest$*.ltx > /dev/null
 
 
 #### Generating new tests ####
@@ -147,10 +148,10 @@ $(builddir)/umtest%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/umtest%.ltx
 lonelystub = $(shell cd testfiles; ls | egrep 'umtest(.*\.ltx)|(.*\.safe.png)' | cut -d . -f 1 | uniq -u)
 lonelyfile = $(addsuffix .safe.png,$(lonelystub))
 lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
+lonelytest = $(addprefix $(builddir)/,$(addsuffix .test.png,$(lonelystub)))
 
 testinit: $(lonelypath)
-	echo $(lonelystub)
 
-$(testdir)/$(lonelystub).safe.png: $(builddir)/%.test.png
+$(testdir)/$(lonelystub).safe.png: $(lonelytest)
 	cp  $<  $@
 
