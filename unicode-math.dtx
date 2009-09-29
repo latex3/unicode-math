@@ -40,8 +40,8 @@ Please see the PDF documentation for full details. A simple beginning is:
     \usepackage{unicode-math}
     \setmathfont{Cambria Math}
 
-Most LaTeX math should still work after this. Furthermore, it will be in a
-different font.
+Most LaTeX math should still work after this. (Let me know if it doesn't.)
+Furthermore, it will be in a different font.
 
 REQUIREMENTS
 ------------
@@ -61,10 +61,10 @@ Run TeX on unicode-math.dtx to generate the package file unicode-math.sty:
 If you have the necessary fonts, you may compile the documentation
 with XeLaTeX:
 
-    xelatex -shell-escape unicode-math.dtx
+    xelatex unicode-math.dtx
 
 To install the package, place unicode-math.sty and unicode-math-table.tex
-in a place searched by XeLaTeX; for example, on Mac OS X:
+in a place searched by XeLaTeX; on Mac OS X, for example:
 
     ~/Library/texmf/tex/xelatex/
 
