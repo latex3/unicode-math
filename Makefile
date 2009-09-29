@@ -23,15 +23,8 @@ testdir=testfiles
 builddir=build
 PKG = $(shell basename `pwd`)
 
-safepng = $(shell ls $(testdir)/umtest*.safe.png)
-diffpng = $(subst .safe.png,.diff.png,$(safepng))
-testltx = $(subst .safe.png,.ltx,$(safepng))
-buildltx = $(subst $(testdir)/,$(builddir)/,$(testltx))
-builddiff = $(subst $(testdir)/,$(builddir)/,$(diffpng))
 
-buildfiles = $(BUILDSOURCE) $(builddir)/umtest-preamble.tex $(buildltx)
-
-SOURCE = $(PKG).dtx $(PKG)-table.tex
+SOURCE = $(PKG).sty $(PKG)-table.tex
 
 SUITE = unicode-math-testsuite
 SUITESOURCE = \
@@ -43,10 +36,16 @@ DOC = $(PKG).pdf $(SUITE).pdf
 DERIVED = $(PKG).sty README $(PKG).ins
 TYPESET = xelatex -shell-escape
 
+safepng = $(shell ls $(testdir)/umtest*.safe.png)
+diffpng = $(subst .safe.png,.diff.png,$(safepng))
+testltx = $(subst .safe.png,.ltx,$(safepng))
+buildltx = $(subst $(testdir)/,$(builddir)/,$(testltx))
+builddiff = $(subst $(testdir)/,$(builddir)/,$(diffpng))
+
 BUILDSOURCE = $(addprefix $(builddir)/,$(SOURCE))
 BUILDDOC = $(addprefix $(builddir)/,$(DOC))
-
 BUILDSUITE = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
+BUILDFILES = $(BUILDSOURCE) $(BUILDSUITE) $(buildltx)
 
 #### BASICS ####
 
@@ -70,10 +69,9 @@ README: README.markdown
 #### BUILD FILES
 
 
-$(builddir)/$(PKG).sty: $(PKG).dtx
-	tex $(PKG).ins > /dev/null
-	rm dtx-style.sty
-	mv $(PKG).sty $@
+$(builddir)/$(PKG).sty: $(builddir)/$(PKG).dtx
+	cd $(builddir); \
+	tex $(PKG).dtx > /dev/null ; \
 
 $(builddir)/$(PKG).dtx: $(PKG).dtx
 	cp -f  $<  $@
@@ -87,7 +85,7 @@ $(builddir)/$(PKG).pdf:  $(BUILDSOURCE)
 	makeindex -s gind.ist $(PKG); 
 
 
-$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE)
+$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE) $(builddiff)
 	$(TYPESET) -output-directory=$(builddir) $<
 
 $(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
@@ -117,10 +115,10 @@ push:
 
 #### All tests ####
 
-test: $(buildfiles) $(builddiff)
+test: $(BUILDFILES) $(builddiff)
 	cd $(testdir); \
 	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
-	@if [ `ls $(builddir)/*.diff.png | wc -l` = 0 ] ; then \
+	@if [ `ls $(builddir)/*.broken.png | wc -l` = 0 ] ; then \
 	  echo ; \
 	  echo All tests passed successfully. ; \
 	  echo ; \
@@ -131,7 +129,7 @@ test: $(buildfiles) $(builddiff)
 	  echo List of diffs produced during check: ; \
 	  echo ==================================== ; \
 	  echo ; \
-	  ls -1 $(builddir)/*.diff.png ; \
+	  ls -1 $(builddir)/*.broken.png ; \
 	  echo ; \
 	fi ;
 
@@ -141,12 +139,13 @@ test: $(buildfiles) $(builddiff)
 $(builddir)/%.diff.png: $(builddir)/%.test.png
 	@echo ' '
 	cd $(builddir); \
-	rm -f /tmp/pngdiff.txt ; \
-	compare -metric RMSE $*.test.png ../$(testdir)/$*.safe.png $*.diff.png | grep 'dB' > /tmp/pngdiff.txt ; \
-	if [ "`cat /tmp/pngdiff.txt`" = "0 dB" ] ; then \
-	  rm $*.diff.png ; \
+	rm -f  /tmp/pngdiff.txt  $*.broken.png ; \
+	compare -metric RMSE $*.test.png ../$(testdir)/$*.safe.png $*.diff.png | grep 'dB' > /tmp/pngdiff.txt ;
+	@if [ "`cat /tmp/pngdiff.txt`" = "0 dB" ] ; then \
 	  echo 'Test passed.' ; \
-	fi
+	else \
+	  cp  $(builddir)/$*.diff.png  $(builddir)/$*.broken.png ; \
+	fi ;
 
 $(builddir)/%.test.png: $(builddir)/%.pdf
 	@echo ' '
@@ -168,6 +167,6 @@ lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
 
 testinit: $(lonelypath)
 
-$(testdir)/%.safe.png: $(builddir)/%.test.png
+$(testdir)/$(lonelystub).safe.png: $(builddir)/%.test.png
 	cp  $<  $@
 
