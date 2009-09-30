@@ -1034,7 +1034,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \tl_set:Nn \um_sf_Latin_up_or_it_usv     { \um@usv@sfitLatin }
     \tl_set:Nn \um_sf_latin_up_or_it_usv     { \um@usv@sfitlatin }
     \tl_set:Nn \um_bfsf_Latin_up_or_it_usv     { \um@usv@bfsfitLatin }
-    \tl_set:Nn \um)bfsf_latin_up_or_it_usv     { \um@usv@bfsfitlatin }
+    \tl_set:Nn \um_bfsf_latin_up_or_it_usv     { \um@usv@bfsfitlatin }
     \tl_set:Nn \um_bfsf_Greek_up_or_it_usv     { \um@usv@bfsfitGreek }
     \tl_set:Nn \um_bfsf_greek_up_or_it_usv     { \um@usv@bfsfitgreek }
   \or
@@ -2922,44 +2922,63 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \subsubsection{Bold sans serif: \cmd\mathbfsf}
-% \begin{example}{}
-%   \setmathfont{STIXGeneral-Bold}
-%   $\mathbfsf{0123456789}$ \\
-%   $\mathbfsf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
-%   $\mathbfsf{abcdefghijklmnopqrstuvwxyz}$ \\
-%   $\mathbfsf{ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ}$\quad
-%     $\mathbfsf{ϴ}$ \\
-%   $\mathbfsf{αβγδεζηθικλμνξοπρστυφχψω}$\quad
-%     $\mathbfsf{ϵϑϰϕϱϖ}$ \\
-% \end{example}
-%
 % These use the |sans-style| settings rather than |bold-style|.
-%
 % Numbers (always upright) and letters:
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbfsf: {
+\cs_new:Npn \um_config_mathbfsf_num: {
+  \um_set_mathalphabet_numbers:Nnn \mathbfsf {\um@usv@num}{\um@usv@bfsfnum}
+}
+\cs_new:Npn \um_config_mathbfsf_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_set_mathalphabet_numbers:Nnn \mathbfsf {\um@usv@num}{\um@usv@bfsfnum}
     \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin}{\um@usv@bfsfupLatin}
-    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin}{\um@usv@bfsfuplatin}
     \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@itLatin}{\um@usv@bfsfitLatin}
+  }{
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\um_bfsf_Latin_up_or_it_usv}
+  }
+}
+\cs_new:Npn \um_config_mathbfsf_latin: {
+  \bool_if:NTF \g_um_sfliteral_bool {
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin}{\um@usv@bfsfuplatin}
     \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@itlatin}{\um@usv@bfsfitlatin}
     \um_set_mathalphabet_char:Nnn \mathbfsf{\um@usv@ith} {"1D65D}
+  }{
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\um_bfsf_latin_up_or_it_usv}
+    \bool_if:NTF \g_um_upsans_bool {
+      \um_set_mathalphabet_char:Nnn \mathbfsf{\um@usv@ith} {"1D5F5}
+    }{
+      \um_set_mathalphabet_char:Nnn \mathbfsf{\um@usv@ith} {"1D65D}
+    }
+  }
+}
+\cs_new:Npn \um_config_mathbfsf_Greek: {
+  \bool_if:NTF \g_um_sfliteral_bool {
     \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek}{\um@usv@bfsfupGreek}
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek}{\um@usv@bfsfupgreek}
     \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@itGreek}{\um@usv@bfsfitGreek}
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@itgreek}{\um@usv@bfsfitgreek}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta}{"1D767}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla}{"1D76F}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial}{"1D789}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta}{"1D7A1}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla}{\um@usv@bfsfNabla}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itNabla}{\um@usv@bfsfitNabla}
+  }{
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek,\um@usv@itGreek}{\um_bfsf_Greek_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla,\um@usv@itNabla}{\um_bfsfNabla_up_or_it_usv}
+    \bool_if:NTF \g_um_upsans_bool {
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}
+    }{
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta,\um@usv@itvarTheta}{"1D7A1}
+    }
+  }
+}
+\cs_new:Npn \um_config_mathbfsf_greek: {
+  \bool_if:NTF \g_um_sfliteral_bool {
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek}{\um@usv@bfsfupgreek}
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@itgreek}{\um@usv@bfsfitgreek}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial}{\um@usv@bfsfpartial}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varepsilon}{"1D78A}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@vartheta}{"1D78B}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varkappa}{"1D78C}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varphi}{"1D78D}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varrho}{"1D78E}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varpi}{"1D78F}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta}{"1D7A1}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itNabla}{\um@usv@bfsfitNabla}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itpartial}{\um@usv@bfsfitpartial}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarepsilon}{"1D7C4}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvartheta}{"1D7C5}
@@ -2968,16 +2987,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarrho}{"1D7C8}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarpi}{"1D7C9}
   }{
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek,\um@usv@itgreek}{\um_bfsf_greek_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial,\um@usv@itpartial}{\um_bfsfpartial_up_or_it_usv}
     \bool_if:NTF \g_um_upsans_bool {
-      \um_set_mathalphabet_numbers:Nnn \mathbfsf {\um@usv@num}{\um@usv@bfsfnum}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfupLatin}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfuplatin}
-      \um_set_mathalphabet_char:Nnn \mathbfsf{\um@usv@ith} {"1D5F5}
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfupGreek}
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfupgreek}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla,\um@usv@itNabla}{"1D76F}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial,\um@usv@itpartial}{"1D789}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D78A}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@vartheta,\um@usv@itvartheta}{"1D78B}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varkappa,\um@usv@itvarkappa}{"1D78C}
@@ -2985,21 +2997,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varrho,\um@usv@itvarrho}{"1D78E}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varpi,\um@usv@itvarpi}{"1D78F}    
     }{
-      \um_set_mathalphabet_numbers:Nnn \mathbfsf {\um@usv@num}{\um@usv@bfsfnum}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@bfsfitLatin}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@bfsfitlatin}
-      \um_set_mathalphabet_char:Nnn \mathbfsf{\um@usv@ith} {"1D65D}
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfsfitGreek}
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfsfitgreek}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta}{"1D7A1}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfsfitNabla}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial,\um@usv@itpartial}{\um@usv@bfsfitpartial}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D7C4}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@vartheta,\um@usv@itvartheta}{"1D7C5}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varkappa,\um@usv@itvarkappa}{"1D7C6}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varphi,\um@usv@itvarphi}{"1D7C7}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varrho,\um@usv@itvarrho}{"1D7C8}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varpi,\um@usv@itvarpi}{"1D7C9}    }
+      \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varpi,\um@usv@itvarpi}{"1D7C9}
+    }
   }
 }
 %    \end{macrocode}
