@@ -843,14 +843,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Bold:
 %    \begin{macrocode}
-\def\um@usv@bfnum{"1D7CE}
+\def\um@usv@bfnum  {"1D7CE}
 \def\um@usv@bfupnum{"1D7CE}
 \def\um@usv@bfitnum{"1D7CE}
 \def\um@usv@bfupLatin{"1D400}
 \def\um@usv@bfLatin  {"1D400}
 \def\um@usv@bfuplatin{"1D41A}
+\def\um@usv@bflatin  {"1D41A}
 \def\um@usv@bfupGreek{"1D6A8}
 \def\um@usv@bfupgreek{"1D6C2}
+\def\um@usv@bfGreek  {"1D6A8}
+\def\um@usv@bfgreek  {"1D6C2}
 \def\um@usv@bfitLatin{"1D468}
 \def\um@usv@bfitlatin{"1D482}
 \def\um@usv@bfitGreek{"1D71C}
@@ -859,14 +862,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@bffraklatin{"1D586}
 \def\um@usv@bfscrLatin{"1D4D0}
 \def\um@usv@bfscrlatin{"1D4EA}
-\def\um@usv@bfsfnum{"1D7EC}
+\def\um@usv@bfsfnum  {"1D7EC}
 \def\um@usv@bfsfupnum{"1D7EC}
 \def\um@usv@bfsfitnum{"1D7EC}
 \def\um@usv@bfsfupLatin{"1D5D4}
 \def\um@usv@bfsfLatin  {"1D5D4}
 \def\um@usv@bfsfuplatin{"1D5EE}
+\def\um@usv@bfsflatin  {"1D5EE}
 \def\um@usv@bfsfupGreek{"1D756}
 \def\um@usv@bfsfupgreek{"1D770}
+\def\um@usv@bfsfGreek  {"1D756}
+\def\um@usv@bfsfgreek  {"1D770}
 \def\um@usv@bfsfitLatin{"1D63C}
 \def\um@usv@bfsfitlatin{"1D656}
 \def\um@usv@bfsfitGreek{"1D790}
@@ -2459,12 +2465,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:nn {sfup  }{latin,Latin,num}
   \um_setup_math_alphabet:nn {sfit  }{latin,Latin,num}
   \um_setup_math_alphabet:nn {tt    }{latin,Latin,num}
-  \um_setup_math_alphabet:n {bf    }
+  \um_setup_math_alphabet:nn {bf    }{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfup  }{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfit  }{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfscr }{latin,Latin}
   \um_setup_math_alphabet:nn {bffrak}{latin,Latin}
-  \um_setup_math_alphabet:n {bfsf  }
+  \um_setup_math_alphabet:nn {bfsf  }{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfsfup}{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfsfit}{latin,Latin,greek,Greek,num}
 }
@@ -2504,24 +2510,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
 %    \end{macrocode}
 % \end{macro}
-%    \begin{macrocode}
-\cs_new:Nn \um_setup_math_alphabet:n {
-  \um_glyph_if_exist:nTF {\csname um@usv@#1Latin \endcsname}{
-    \um_maybe_init_alphabet:n {#1}
-    \um_prepare_alph:n {#1}
-    \use:c {um_config_math#1:}
-  }{
-    \PackageWarningNoLine{unicode-math}{^^J\space\space\space\space
-    Math~ alphabet~ \@backslashchar math#1~ not~ found~ in~ font~ \fontname\um@font}
-    \cs_if_exist:cT {um_fix_math#1:} {
-      \use:c {um_fix_math#1:}
-    }
-  }
-}
-\cs_set:Nn \um_fix_mathtt: {
-  \SetMathAlphabet\mathtt{normal}\encodingdefault\ttdefault\mddefault\updefault
-}
-%    \end{macrocode}
 %
 %    \begin{macrocode}
 \cs_set:Nn \um_init_alphabet:n {
