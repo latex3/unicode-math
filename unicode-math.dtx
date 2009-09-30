@@ -1739,8 +1739,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This macro is used so that \cs{um_symfont_tl} can be expanded before entering the \cmd\g@addto@macro\ command.
 %    \begin{macrocode}
 \newcommand\um@addto@mathmap[4]{
-  \expandafter\g@addto@macro
-    \csname um_setup_\cs_to_str:N #3:\endcsname{
+  \tl_put_right:cn {um_setup_\cs_to_str:N #3:} {
     \um_set_mathcode:nnnn{#2}{\mathalpha}{#1}{#4}
   }
 }
