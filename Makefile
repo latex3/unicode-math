@@ -92,7 +92,7 @@ $(builddir)/$(PKG).pdf:  $(builddir)/$(PKG).dtx $(BUILDSOURCE)
 	xelatex $(PKG).dtx;
 
 
-$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE) test
+$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE)
 	xelatex -output-directory=$(builddir) $<
 
 $(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
