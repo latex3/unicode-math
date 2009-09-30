@@ -906,7 +906,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@usv@itvarrho{"1D71A}
 \def\um@usv@itvarpi{"1D71B}
 %    \end{macrocode}
-% Bold:
+% Bold italic:
 %    \begin{macrocode}
 \def\um@usv@bfuph{"1D421}
 \def\um@usv@bfith{"1D489}
@@ -1027,8 +1027,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     {sans-style}[\@tempa\@tempb]{iso,tex,literal}{
   \ifcase\@tempb\relax
     \bool_set_false:N \g_um_upsans_bool
+    \tl_set:Nn \um_sf_Latin_up_or_it_usv     { \um@usv@sfitLatin }
+    \tl_set:Nn \um_sf_latin_up_or_it_usv     { \um@usv@sfitlatin }
   \or
     \bool_set_true:N \g_um_upsans_bool
+    \tl_set:Nn \um_sf_Latin_up_or_it_usv     { \um@usv@sfupLatin }
+    \tl_set:Nn \um_sf_latin_up_or_it_usv     { \um@usv@sfuplatin }
   \or
     \bool_set_true:N \g_um_sfliteral_bool
   \fi
@@ -2430,7 +2434,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:nn {bb    }{latin,Latin,num}
   \um_setup_math_alphabet:nn {scr   }{latin,Latin}
   \um_setup_math_alphabet:nn {frak  }{latin,Latin}
-  \um_setup_math_alphabet:n {sf    }
+  \um_setup_math_alphabet:nn {sf    }{latin,Latin,num}
   \um_setup_math_alphabet:nn {sfup  }{latin,Latin,num}
   \um_setup_math_alphabet:nn {sfit  }{latin,Latin,num}
   \um_setup_math_alphabet:nn {tt    }{latin,Latin,num}
@@ -2658,33 +2662,31 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \subsubsection{Sans serif: \cmd\mathsf}
-% \begin{example}{}
-%   $\mathsf{0123456789}$ \\
-%   $\mathsf{ABCDEFGHIJKLMNOPQRSTUVWXYZ}$ \\
-%   $\mathsf{abcdefghijklmnopqrstuvwxyz}$ \\
-% \end{example}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathsf: {
+\cs_new:Npn \um_config_mathsf_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_set_mathalphabet_numbers:Nnn{\mathsf}{\um@usv@num}{\um@usv@sfnum}
     \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@upLatin}{\um@usv@sfupLatin}
-    \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@uplatin}{\um@usv@sfuplatin}
     \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@itLatin}{\um@usv@sfitLatin}
+  }{
+    \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@upLatin,\um@usv@itLatin}{ \um_sf_Latin_up_or_it_usv }
+  }
+}
+\cs_new:Npn \um_config_mathsf_latin: {
+  \bool_if:NTF \g_um_sfliteral_bool {
+    \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@uplatin}{\um@usv@sfuplatin}
     \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@itlatin}{\um@usv@sfitlatin}
     \um_set_mathalphabet_char:Nnn \mathsf {\um@usv@ith} {"1D629}
   }{
+    \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@uplatin,\um@usv@itlatin}{ \um_sf_latin_up_or_it_usv }
     \bool_if:NTF \g_um_upsans_bool {
-      \um_set_mathalphabet_numbers:Nnn \mathsf {\um@usv@num}{\um@usv@sfnum}
-      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfupLatin}
-      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfuplatin}
       \um_set_mathalphabet_char:Nnn   \mathsf {\um@usv@ith} {"1D5C1}
     }{
-      \um_set_mathalphabet_numbers:Nnn \mathsf {\um@usv@num}{\um@usv@sfnum}
-      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@upLatin,\um@usv@itLatin}{\um@usv@sfitLatin}
-      \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@uplatin,\um@usv@itlatin}{\um@usv@sfitlatin}
       \um_set_mathalphabet_char:Nnn   \mathsf {\um@usv@ith} {"1D629}
     }
   }
+}
+\cs_new:Npn \um_config_mathsf_num: {
+  \um_set_mathalphabet_numbers:Nnn{\mathsf}{\um@usv@num}{\um@usv@sfnum}
 }
 %    \end{macrocode}
 %
@@ -2746,8 +2748,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbf: {
   \um_set_mathalphabet_numbers:Nnn{\mathbf}{\um@usv@num}{\um@usv@bfnum}
-  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Digamma}{"1D7CA}
-  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@digamma}{"1D7CB}
+  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Digamma}{\um@usv@bfDigamma}
+  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@digamma}{\um@usv@bfdigamma}
   \if@um@bfliteral
     \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin}{\um@usv@bfupLatin}
     \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@itLatin}{\um@usv@bfitLatin}
@@ -2872,6 +2874,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@upGreek,\um@usv@itGreek}{\um@usv@bfupGreek}
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varTheta,\um@usv@itvarTheta}{\um@usv@bfvarTheta}
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@Nabla,\um@usv@itNabla}{\um@usv@bfNabla}
+  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Digamma}{\um@usv@bfDigamma}
 }
 \cs_new:Npn \um_config_mathbfup_greek: {
   \um_set_mathalphabet_greek:Nnn{\mathbfup}{\um@usv@upgreek,\um@usv@itgreek}{\um@usv@bfupgreek}
@@ -2882,6 +2885,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varphi,\um@usv@itvarphi}{\um@usv@bfvarphi}
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfvarrho}
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfvarpi}
+  \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@digamma}{\um@usv@bfdigamma}
 }
 %    \end{macrocode}
 %
