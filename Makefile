@@ -106,7 +106,7 @@ $(builddir)/%.ltx: $(testdir)/%.ltx
 
 ##### PROBABLY ONLY USEFUL FOR WILL #####
 
-push:
+push: doc
 	if ~/bin/dtx-update ; then \
 	  make $(PKG).pdf ; \
 	  git commit -a -m "bump package date" ; \
