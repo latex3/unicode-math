@@ -724,6 +724,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \item \cs{backslash} (the only reverse slash).
 % \end{itemize}
 % 
+% However, we assume that there is only \emph{one} stretchy slash
+% in the font; this is assumed by default to be \unichar{002F}{solidus}.
+% Writing \cs{left/} or \cs{left}\cs{slash} or \cs{left}{fracslash}
+% will all result in the same stretchy delimiter being used.
+% 
+% The delimiter used can be changed with the |slash-delimiter| package option.
+% Allowed values are |ascii|, |frac|, and |div|, corresponding to the respective
+% unicode slots.
+% 
+% For example: as mentioned above, Cambria Math's stretchy slash is
+% \unichar{2044}{fraction slash}. When using Cambria Math, then
+% \pkg{unicode-math} should be loaded with the |[slash-delimiter=frac]| option.
+% (This should be a font option rather than a package option, but
+% it will change soon.)
+% 
 % 
 %
 % \subsubsection{Normalising some input characters}
@@ -1129,9 +1144,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
+% \paragraph{Slash delimiter style}
+%    \begin{macrocode}
+\define@choicekey*{unicode-math.sty}{slash-delimiter}[\@tempa\@tempb]{ascii,frac,div}{
+  \ifcase\@tempb\relax
+    \tl_set:Nn \g_um_slash_delimiter_usv {"002F}
+  \or
+    \tl_set:Nn \g_um_slash_delimiter_usv {"2044}
+  \or
+    \tl_set:Nn \g_um_slash_delimiter_usv {"2215}
+  \fi
+}
+%    \end{macrocode}
+%
 %
 %    \begin{macrocode}
-\ExecuteOptionsX{math-style=TeX}
+\ExecuteOptionsX{math-style=TeX,slash-delimiter=ascii}
 \ProcessOptionsX
 %    \end{macrocode}
 %
@@ -1635,19 +1663,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 % 
 % \subsubsection{Delimiter codes}
-% 
 % Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
-% 
-% Set up delcodes so that slashes and things can grow if the font supports it.
-% This is just inserted here so the documentation works. It will be generalised soon.
-%
+% The list of vertical arrows may be incomplete.
+% On the other hand, many fonts won't support them all being stretchy.
 % \begin{macro}{\um_setup_delcodes:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_delcodes: {
-  \um_set_delcode:n {"002F} % slash
+  \um_set_delcode:nn {`\/}   {\g_um_slash_delimiter_usv}
+  \um_set_delcode:nn {"2044} {\g_um_slash_delimiter_usv} % fracslash
+  \um_set_delcode:nn {"2215} {\g_um_slash_delimiter_usv} % divslash
   \um_set_delcode:n {"005C} % backslash
-  \um_set_delcode:n {"2044} % fracslash
-  \um_set_delcode:n {"2215} % divslash
   \um_set_delcode:nn {`\<} {"27E8} % angle brackets with ascii notation
   \um_set_delcode:nn {`\>} {"27E9} % angle brackets with ascii notation
   \um_set_delcode:n {"2191} % up arrow
