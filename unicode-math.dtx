@@ -1505,6 +1505,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_shapes:
   \um_remap_symbols:
   \um_setup_mathactives:
+  \um_setup_delcodes:
   \um_setup_alphanum:
   \um_setup_alphabets:
 %    \end{macrocode}
@@ -1621,6 +1622,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{macro}{\um_make_mathactive:nNN}
+%: TODO : hook into range feature
 % Makes |#1| a mathactive char, and gives cs |#2| the meaning of mathchar |#1|
 % with class |#3|.
 % You are responsible for giving active |#1| a particular meaning!
@@ -1633,7 +1635,41 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \end{macro}
+% 
+% \subsubsection{Delimiter codes}
+% 
+% Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
+% 
+% Set up delcodes so that slashes and things can grow if the font supports it.
+% This is just inserted here so the documentation works. It will be generalised soon.
 %
+% \begin{macro}{\um_setup_delcodes:}
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_delcodes: {
+  \um_set_delcode:n {"002F} % slash
+  \um_set_delcode:n {"005C} % backslash
+  \um_set_delcode:n {"2044} % fracslash
+  \um_set_delcode:n {"2215} % divslash
+  \um_set_delcode:n {"2216} % setminus
+  \um_set_delcode:n {"29F5} % reverse slash
+  \um_set_delcode:nn {`\<} {"27E8}
+  \um_set_delcode:nn {`\>} {"27E9}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_setup_delcodes:}
+%: TODO : hook into range feature
+%    \begin{macrocode}
+\cs_new:Nn \um_set_delcode:nn {
+  \XeTeXdelcode#1 = \csname sym\um_symfont_tl\endcsname #2
+}
+\cs_new:Nn \um_set_delcode:n {
+  \XeTeXdelcode#1 = \csname sym\um_symfont_tl\endcsname #1
+}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \subsubsection{Maths alphabets' character mapping}
 % \seclabel{mathmap}
 %
@@ -1877,21 +1913,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\left{\mathopen{}\left@primitive}
 %    \end{macrocode}
 % \end{macro}
-% No re-definition is made for \cmd\right\ because I don't believe it to be
+% No re-definition is made for \cmd\right\ because it's not
 % necessary.
 % 
-% Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
-% 
-% Set up delcodes so that slashes and things can grow if the font supports it.
-% This is just inserted here so the documentation works. It will be generalised soon.
-%    \begin{macrocode}
-\XeTeXdelcode"002F =4 "002F % ord
-\XeTeXdelcode"005C =4 "005C % ord
-\XeTeXdelcode"2044 =4 "2044 % bin
-\XeTeXdelcode"2215 =4 "2215 % bin
-\XeTeXdelcode"2216 =4 "2216 % bin
-\XeTeXdelcode"29F5 =4 "29F5 % bin
-%    \end{macrocode}
 %
 % Here are all \cmd\mathopen\ characters:
 % \begingroup
