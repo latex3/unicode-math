@@ -2528,6 +2528,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:nn {it    }{latin,Latin,greek,Greek}
   \um_setup_math_alphabet:nn {bb    }{latin,Latin,num}
   \um_setup_math_mapping:n   {bb    }
+  \um_maybe_init_alphabet:n  {bbit  }
+  \um_setup_math_mapping:n   {bbit  }
   \um_setup_math_alphabet:nn {scr   }{latin,Latin}
   \um_setup_math_alphabet:nn {frak  }{latin,Latin}
   \um_setup_math_alphabet:nn {sf    }{latin,Latin,num}
@@ -2555,7 +2557,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \clist_map_inline:nn {#2} {
     \um_glyph_if_exist:nT {\csname um@usv@#1##1 \endcsname}{
       \um_maybe_init_alphabet:n {#1}
-      \um_prepare_alph:n {#1}
       \clist_map_break:
     }
   }
@@ -2585,6 +2586,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_set:Nn \um_init_alphabet:n {
+  \um_prepare_alph:n {#1}
   \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
 }
 %    \end{macrocode}
@@ -2680,7 +2682,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% \subsubsection{Blackboard or double-struck: \cmd\mathbb}
+% \subsubsection{Blackboard or double-struck: \cmd\mathbb\ and \cmd\mathbbit}
+% 
+%: TODO : make bbit work with literal input?
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbb_latin: {
@@ -2706,6 +2710,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn \mathbb {"0393,"1D6E4}{"213E} % Gamma
   \um_set_mathalphabet_char:Nnn \mathbb {"03B3,"1D6FE}{"213D} % gamma
   \um_set_mathalphabet_char:Nnn \mathbb {"2211}{"2140} % summation
+}
+\cs_new:Npn \um_config_mathbbit_misc: {
+  \um_set_mathalphabet_char:Nnn \mathbbit {`\D,"1D437}{"2145}
+  \um_set_mathalphabet_char:Nnn \mathbbit {`\d,"1D451}{"2146}
+  \um_set_mathalphabet_char:Nnn \mathbbit {`\e,"1D452}{"2147}
+  \um_set_mathalphabet_char:Nnn \mathbbit {`\i,"1D456}{"2148}
+  \um_set_mathalphabet_char:Nnn \mathbbit {`\j,"1D457}{"2149}
 }
 %    \end{macrocode}
 %
