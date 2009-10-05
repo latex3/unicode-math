@@ -389,7 +389,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This may change in the future.
 % 
 % \begin{table}
-% \caption{Mathematical alphabets defined in unicode. Black dots indicate an alphabet exists in the font specified; grey dots indicate shapes that should always be taken from the upright font even in the italic style.}
+% \caption{Mathematical alphabets defined in unicode. Black dots indicate an alphabet exists in the font specified; grey dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
 % \tablabel{mathalphabets}
 % \centering
 % \def\Y{\textbullet}
@@ -411,6 +411,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %            & Italic  & Bold   & \cs{mathsfbfit} & \Y & \Y & \M  \\
 % Typewriter & Upright & Normal & \cs{mathtt}     & \Y &    & \Y  \\
 % Double-struck & Upright & Normal & \cs{mathbb}     & \Y &    & \Y  \\
+%               & Italic  & Normal & \cs{mathbbit}   & \Y &    &  \\
 % Script     & Upright & Normal & \cs{mathscr}    & \Y &    &     \\
 %            &         & Bold   & \cs{matbfscr}   & \Y &    &     \\
 % Fraktur    & Upright & Normal & \cs{mathfrak}   & \Y &    &     \\
@@ -418,6 +419,25 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \bottomrule
 % \end{tabular}
 % \end{table}
+% 
+% \subsubsection{Double-struck}
+% 
+% The double-struck alphabet (also known as `blackboard bold') consists of
+% upright Latin letters $\{\mathbb{a}$--$\mathbb{z}$,$\mathbb{A}$$\mathbb{Z}\}$,
+% numerals $\mathbb{0}$--$\mathbb{9}$, summation symbol $\mathbb\sum$, and four
+% Greek letters only: $\{\mathbb{\gamma\pi\Gamma\Pi}\}$.
+% 
+% While |\mathbb{\sum}| does produce a double-struck summation symbol,
+% its limits aren't properly aligned (see \secref{limits}). Therefore,
+% either the literal character or the control sequence \cs{Bbbsum} are
+% recommended instead.
+% 
+% There are also five Latin \emph{italic} double-struck letters: $\mathbbit{Ddeij}$.
+% These can be accessed (if not with their literal characters or control sequences)
+% with the \cs{mathbbit} alphabet switch, but note that only those five letters
+% will give the expected output.
+% 
+% 
 %
 % \subsection{Miscellanea}
 %
