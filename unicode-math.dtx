@@ -2515,7 +2515,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Explicit mode:
 % \begin{itemize}
 % \item Only set the alphabets specified.
-% \item Check for the first glyph of the uppercase Latin alphabet to detect if the font contains
+% \item Check for the first glyph of the alphabet to detect if the font contains
 %       the alphabet shape in the unicode math plane.
 % \item For unicode math alphabets, overwrite whatever's already there.
 % \item Otherwise, use the \ascii\ letters instead.
@@ -2527,6 +2527,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:nn {up    }{latin,Latin,greek,Greek}
   \um_setup_math_alphabet:nn {it    }{latin,Latin,greek,Greek}
   \um_setup_math_alphabet:nn {bb    }{latin,Latin,num}
+  \um_setup_math_mapping:n   {bb    }
   \um_setup_math_alphabet:nn {scr   }{latin,Latin}
   \um_setup_math_alphabet:nn {frak  }{latin,Latin}
   \um_setup_math_alphabet:nn {sf    }{latin,Latin,num}
@@ -2576,6 +2577,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \tl_set:Nn \g_um_math_alphabet_name_greek_tl {Greek, lowercase}
 \tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek, uppercase}
 \tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
+\cs_new:Nn \um_setup_math_mapping:n {
+  \use:c {um_config_math#1_misc:}
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2695,6 +2699,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbb_num: {
   \um_set_mathalphabet_numbers:Nnn{\mathbb}{\um@usv@num}{\um@usv@bbnum}
+}
+\cs_new:Npn \um_config_mathbb_misc: {
+  \um_set_mathalphabet_char:Nnn \mathbb {"03A0,"1D6F1}{"213F} % Pi
+  \um_set_mathalphabet_char:Nnn \mathbb {"03C0,"1D70B}{"213C} % pi
+  \um_set_mathalphabet_char:Nnn \mathbb {"0393,"1D6E4}{"213E} % Gamma
+  \um_set_mathalphabet_char:Nnn \mathbb {"03B3,"1D6FE}{"213D} % gamma
+  \um_set_mathalphabet_char:Nnn \mathbb {"2211}{"2140} % summation
 }
 %    \end{macrocode}
 %
