@@ -2280,7 +2280,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %
 %
-% \begin{macro}{\um_set_mathalphabet_char:Nnnn}
+% \begin{macro}{\um_set_mathalphabet_char:Nnn}
 % \darg{Maths alphabet}
 % \darg{Input char(s)}
 % \darg{Output char}
@@ -2599,7 +2599,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek, uppercase}
 \tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
 \cs_new:Nn \um_setup_math_mapping:n {
-  \use:c {um_config_math#1_misc:}
+  \cs_if_exist:cT {um_setup_math#1:} {
+    \use:c {um_config_math#1_misc:}
+  }
 }
 %    \end{macrocode}
 % \end{macro}
