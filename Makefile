@@ -108,7 +108,7 @@ $(builddir)/%.ltx: $(testdir)/%.ltx
 
 file: $(F)  $(builddir)/$(PKG).sty
 	if [ "$(F)" = "" ] ; then \
-	  echo "Need a filename!" ; \
+	  echo "Need a filename!\nE.g.  \`make file F=test.ltx\`" ; \
 	  false ; \
 	fi
 	echo Typesetting $(F):
