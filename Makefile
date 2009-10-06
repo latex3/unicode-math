@@ -104,6 +104,18 @@ $(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
 $(builddir)/%.ltx: $(testdir)/%.ltx
 	cp -f  $<  $@
 
+##### USEFUL FOR TEST FILES #####
+
+file: $(F)  $(builddir)/$(PKG).sty
+	if [ "$(F)" = "" ] ; then \
+	  echo "Need a filename!" ; \
+	  false ; \
+	fi
+	echo Typesetting $(F):
+	cp -f $(F) $(builddir)/$(F)
+	cd $(builddir); xelatex $(F)
+
+
 ##### PROBABLY ONLY USEFUL FOR WILL #####
 
 push: doc
