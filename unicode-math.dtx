@@ -149,14 +149,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \maketitle
 %
 % \begin{abstract}
-% \noindent\bfseries
+% \noindent
+% \begingroup
+% \bfseries
 % Warning! This package is experimental and subject to change without regard
 % for backwards compatibility.
 % Performance issues may be encountered until algorithms are refined.
+% \endgroup
+% 
+% This package is intended to be a complete implementation of unicode
+% maths for \LaTeX\ using the \XeTeX\ (and later, Lua\TeX) typesetting engines.
+% With this package, changing maths fonts will be as easy as changing
+% text fonts --- not that there are many unicode maths fonts yet.
+% 
+% Maths input is simplified with unicode since literal glyphs may be
+% entered instead of control sequences.
 % \end{abstract}
-%
+% 
+% \newpage
 % \tableofcontents
 %
+% \newpage
 % \section{Introduction}
 %
 % This document describes the \pkg{unicode-math} package, which is an
@@ -165,8 +178,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % conjectured that some effect could be spent to create a cross-format
 % package that would also work with Lua\TeX.
 %
-% Users who desire to specify maths alphabets only from various fonts may
-% wish to use Andrew Moschou's \pkg{mathspec} package instead.
+% Users who desire to specify maths alphabets only (Greek and Latin letters)
+% may wish to use Andrew Moschou's \pkg{mathspec} package instead.
 % 
 % \section{Acknowledgements}
 % 
@@ -195,7 +208,56 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{verbatim}
 % \end{quote}
 % 
-% Package options will be described in subsequent sections.
+% \subsection{Package options}
+% Package options may be set when the package as loaded or at any later
+% stage with the \cs{unimathsetup} command. Therefore, the following two
+% examples are equivalent:
+% \begin{quote}
+% \begin{verbatim}
+% \usepackage[math-style=TeX]{unicode-math}
+% % OR
+% \usepackage{unicode-math}
+% \unimathsetup{math-style=TeX}
+% \end{verbatim}
+% \end{quote}
+% Note, however, that some package options affects how maths is initialised
+% and changing an option such as |math-style| will not take effect until a
+% new maths font is set up.
+% 
+% Package options may \emph{also} be used when declaring new maths fonts,
+% passed via options to the \cs{setmathfont} command.
+% Therefore, the following two examples are equivalent:
+% \begin{quote}
+% \begin{verbatim}
+% \unimathsetup{math-style=TeX}
+% \setmathfont{Cambria Math}
+% % OR
+% \setmathfont[math-style=TeX]{Cambria Math}
+% \end{verbatim}
+% \end{quote}
+% 
+% A short list of package options is shown in \tabref{pkgopt}.
+% See following sections for more information.
+% 
+% \begin{table}\centering
+%   \topcaption{Package options.}
+%   \tablabel{pkgopt}
+%   \begin{tabular}{lll}
+%     \toprule
+%     Option & Description & See\dots \\
+%     \midrule
+%     |math-style| & Style of letters & \secref{math-style} \\
+%     |bold-style| & Style of bold letters & \secref{bold-style} \\
+%     |sans-style| & Style of sans serif letters & \secref{sans-style} \\
+%     |nabla|      & Style of the nabla symbol & \secref{nabla} \\
+%     |partial|    & Style of the partial symbol & \secref{partial} \\
+%     |vargreek-shape|  & Style of phi and epsilon & \secref{vargreek-shape} \\
+%     |colon| & Behaviour of \cs{colon} & \secref{colon} \\
+%     |slash-delimiter| & Glyph to use for `stretchy' slash & \secref{slash-delimiter} \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+% 
 %
 % \section{Unicode maths font setup}
 %
@@ -213,18 +275,28 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % input. This includes using literal Greek letters in formulae,
 % resolving to upright or italic depending on preference.
 %
-% Finally, maths versions must also be provided for. While I guess version
-% selection in \LaTeX\ will remain the same, the specification for choosing
-% the version fonts will probably be an optional argument:
-% \codeline{\cmd\setmathfont|[Version=Bold,|\meta{font features}|]|\marg{font name}}
-% This has not been implemented yet.
-%
-% Instances above of
-% \codeline{\oarg{font features}\marg{font name}}
-% follow from my \pkg{fontspec} package, and therefore any additional \meta{font features}
-% specific to maths fonts will hook into \pkg{fontspec}'s methods.
+% Font features specific to \pkg{unicode-math} are shown in \tabref{mathfontfeatures}.
+% Package options (see \tabref{pkgopt}) may also be used.
+% Other \pkg{fontspec} features are also valid.
+% 
+% \begin{table}\centering
+%   \topcaption{Maths font options.}
+%   \tablabel{mathfontfeatures}
+%   \begin{tabular}{lll}
+%     \toprule
+%     Option & Description & See\dots \\
+%     \midrule
+%     |range| & Style of letters & \secref{range} \\
+%     |ScriptFont| & Font to use for sub- and super-scripts & \secref{sscript} \\
+%     |ScriptFontFeatures| & Font features for sub- and super-scripts & \secref{sscript} \\
+%     |ScriptScriptFont| & Font to use for nested sub- and super-scripts & \secref{sscript} \\
+%     |ScriptScriptFontFeatures| & Font features for nested sub- and super-scripts & \secref{sscript} \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
 %
 % \subsection{Using multiple fonts}
+% \seclabel{range}
 %
 % There will probably be few cases where a single unicode maths font suffices
 % (simply due to glyph coverage). The upcoming \STIX\ font comes to mind as a
@@ -232,23 +304,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % unicode ranges of glyphs to separate fonts:
 %   \codeline{\cmd\setmathfont|[Range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
 % where \meta{unicode range} is a comma-separated list of unicode slots and
-% ranges such as |{27D0-27EB,27FF,295B-297F}|. You may also use the macro
+% ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|. You may also use the macro
 % for accessing the glyph, such as \cs{\int}, or whole collection of symbols with
 % the same math type, such as \cs{mathopen}. (Only numerical slots, however, can
 % be used in proper ranges.)
 % This interface still requires some thought.
-% 
-% Not yet implemented: preset names
-% ranges could be used in the range spec., such as |MiscMathSymbolsA|, 
-% with such ranges based on unicode chunks.
-% The amount of optimisation required here to achieve
-% acceptable performance has yet to be determined.
-% Techniques such as saving
-% out unicode subsets based on \meta{unicode range} data to be \cmd\input\ in
-% the next \LaTeX\ run are a possibility, but at this stage, performance
-% without such measures seems acceptable.
 %
 % \subsection{Script and scriptscript fonts/features}
+% \seclabel{sscript}
 %
 % Cambria Math uses OpenType font features to activate smaller optical sizes
 % for scriptsize and scriptscriptsize symbols (the $B$ and $C$, respectively,
@@ -271,6 +334,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % readable input files.
 %
 % \subsection{Math `style'}
+% \seclabel{math-style}
 %
 % Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright}
 % uppercase Greek letters for variables in mathematics. This is contrary to
@@ -328,6 +392,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %
 % \subsection{Bold style}
+% \seclabel{bold-style}
 %
 % Similar as in the previous section, ISO standards differ somewhat to \TeX's
 % conventions (and classical typesetting) for `boldness' in mathematics. In
@@ -383,6 +448,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % 
 % \subsection{Sans serif style}
+% \seclabel{sans-style}
 % 
 % Unicode contains upright and italic, medium and bold mathematical alphabet characters.
 % These may be explicitly selected with the \cs{mathsfup}, \cs{mathsfit}, \cs{mathbfsfup}, and \cs{mathbfsfit}
@@ -477,6 +543,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %
 % \subsubsection{Nabla} 
+% \seclabel{nabla}
 % 
 %  The symbol $\nabla$ comes in the six forms shown in \tabref{nabla}.
 %  We want an individual option to specify whether we want upright or italic
@@ -511,6 +578,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{table}
 %
 % \subsubsection{Partial}
+% \seclabel{partial}
+% 
 % The same applies to the symbols \unichar{2202}{partial differential} and
 % \unichar{1D715}{math italic partial differential}.
 %
@@ -548,6 +617,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{table}
 %
 % \subsubsection{Epsilon and phi: $\epsilon$ vs.\ $\varepsilon$ and $\phi$ vs.\ $\varphi$}
+% \seclabel{vargreek-shape}
 %
 % \TeX\ defines \cs{epsilon} to look like $\varepsilon$ and \cs{varepsilon} to
 % look like $\epsilon$. The Unicode glyph directly after delta and before zeta
@@ -674,7 +744,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \figlabel{subscripts}
 % \end{figure}
 % 
-% \subsubsection{Colon `\texttt:'}
+% \subsubsection{Colon}
+% \seclabel{colon}
 % 
 % The colon is one of the few confusing characters of unicode maths.
 % In \TeX, \texttt{:} is defined as a colon with relation spacing: `$a:b$'.
@@ -697,6 +768,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % 
 % \subsubsection{Slashes and backslashes}
+% \seclabel{slash-delimiter}
 % 
 % There are several slash-like symbols defined in unicode. The complete list is shown in \tabref{slashes}.
 % 
@@ -4113,7 +4185,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
   {\ttfamily\makebox[0pt][r]{[}\char`\#\theargument]:~}#1\par\noindent\ignorespaces
 }
 \makeatother
-\newcommand\codeline[1]{\par{\hspace{2\parindent}#1\par\noindent}\ignorespaces}
+\newcommand\codeline[1]{\par{\centering#1\par\noindent}\ignorespaces}
 
 \newcommand\unichar[2]{\textsc{\MakeLowercase{u+#1: #2}}}
 
