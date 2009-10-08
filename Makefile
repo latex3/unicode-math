@@ -106,7 +106,7 @@ $(builddir)/%.ltx: $(testdir)/%.ltx
 
 ##### USEFUL FOR TEST FILES #####
 
-file: $(F)  $(builddir)/$(PKG).sty
+file: $(F)  $(BUILDSOURCE)
 	if [ "$(F)" = "" ] ; then \
 	  echo "Need a filename!\nE.g.  \`make file F=test.ltx\`" ; \
 	  false ; \

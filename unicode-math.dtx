@@ -1013,6 +1013,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Package options}
 % \pkg{xkeyval}'s package support is used here.
+% I'll switch over to \pkg{l3keys2e} at some stage.
+% 
+% \begin{macro}{\unimathsetup}
+% This macro can be used in lieu of or later to override
+% options declared when the package is loaded.
+%    \begin{macrocode}
+\DeclareDocumentCommand \unimathsetup {m} {
+  \setkeys{unicode-math.sty}{#1}
+}
+%    \end{macrocode}
+% \end{macro}
+% 
 %
 % \paragraph{math-style}
 %    \begin{macrocode}
@@ -1504,7 +1516,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
-  \setkeys*[um]{options}{#1}
+  \setkeys*{unicode-math.sty}{#1}
+  \cs_set:Npx \um_tmp: {
+    \exp_not:N \setkeys*[um]{options}{\exp_not:V \XKV@rm}
+  }
+  \um_tmp:
   \edef\@tempa{\noexpand\zf@fontspec{
       Script = Math,
       SizeFeatures = {
