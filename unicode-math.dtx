@@ -43,6 +43,10 @@ Please see the PDF documentation for full details. A simple beginning is:
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
 Furthermore, it will be in a different font.
 
+Note that `amsmath` must be loaded *before* `unicode-math`, since we
+overwrite many of its definitions.
+
+
 REQUIREMENTS
 ------------
 
@@ -50,6 +54,7 @@ As well as running XeTeX, of course, this package requires recent versions
 of the expl3 and xpackages bundles.
 These form the basis of the new LaTeX3 programming layer.
 If you're using TeX Live 2009 or MiKTeX 2.8 then there'll be no problems.
+
 
 INSTALLATION
 ------------
@@ -176,6 +181,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % to extend and use \TeX\ in the future.
 % Apostolos Syropoulos, Joel Saloman, and Khaled Hosny have been fantastic
 % beta testers.
+% 
+% \section{Getting started}
+% 
+% Load \pkg{unicode-math} as a regular \LaTeX\ package. It should be loaded
+% after any other maths or font-related package in case it needs to overwrite
+% their definitions. Here's an example:
+% \begin{quote}
+% \begin{verbatim}
+% \usepackage{amsmath} % if desired
+% \usepackage{unicode-math}
+% \setmathfont{Cambria Math}
+% \end{verbatim}
+% \end{quote}
+% 
+% Package options will be described in subsequent sections.
 %
 % \section{Unicode maths font setup}
 %
