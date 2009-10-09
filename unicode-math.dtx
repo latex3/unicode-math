@@ -359,12 +359,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % the ISO standards of using italic forms for both upper- and lowercase.
 % Furthermore, the French (contrary again, \emph{quelle surprise}) have been
 % known to use upright uppercase \emph{Latin} letters as well as upright
-% upper- and lowercase Greek.
+% upper- and lowercase Greek. Finally, it is not unknown to use upright letters
+% for all characters, as seen in the Euler fonts.
 %
 % The \pkg{unicode-math} package accommodates these possibilities with an
 % interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a
-% package option \opt{math-style} that takes one of three arguments:
-% \opt{TeX}, \opt{ISO}, or \opt{French} (case \emph{in}-sensitive).
+% package option \opt{math-style} that takes one of four arguments:
+% \opt{TeX}, \opt{ISO}, \opt{French}, or \opt{upright} (case insensitive).
 %
 % The philosophy behind the interface to the mathematical alphabet symbols
 % lies in \LaTeX's attempt of separating content and formatting. Because input
@@ -382,14 +383,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % |\mathup{g}|. Maths alphabets commands such as \cmd\mathup\ are detailed
 % later.
 %
-% \paragraph{Alternative interface} However, some users may not like this
-% convention. For them, an upright |x| is an upright `x' and that's that.
+% \paragraph{Alternative interface}
+% However, some users may not like this convention of normalising their input.
+% For them, an upright |x| is an upright `x' and that's that.
 % (This will be the case when obtaining source text from copy/pasting PDF or
-% Microsoft Word documents, for example.) For these users, the |literal|
-% option to |math-style| will effect this behaviour.
+% Microsoft Word documents, for example.)
+% For these users, the |literal| option to |math-style| will effect this behaviour.
 %
-% The \opt{math-style} options' effects are shown in brief in
-% \tabref{math-style}.
+% The \opt{math-style} options' effects are shown in brief in \tabref{math-style}.
 %
 % \begin{table}
 %   \centering
@@ -404,6 +405,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %       math-style=ISO & $(a,z,B,X)$ & $\mathit{(\alpha,\beta,\Gamma,\Xi)}$ \\
 %       math-style=TeX & $(a,z,B,X)$ & $(\mathit\alpha,\mathit\beta,\mathup\Gamma,\mathup\Xi)$ \\
 %       math-style=French & $(a,z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
+%       math-style=upright & $(\mathup a,\mathup z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -432,7 +434,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % keeps them italic (|bold-style=ISO|).
 %
 % To match the package options for non-bold characters, for
-% |bold-style=French| all bold characters are upright, and
+% |bold-style=upright| all bold characters are upright, and
 % |bold-style=literal| does not change the upright/italic shape of the letter.
 %
 % Upright and italic bold mathematical letters input as direct unicode
@@ -459,7 +461,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     \midrule
 %       bold-style=ISO & $(\mathbfit a, \mathbfit z, \mathbfit B, \mathbfit X)$ & $(\mathbfit\alpha, \mathbfit\beta, \mathbfit\Gamma, \mathbfit\Xi)$ \\
 %       bold-style=TeX & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfit\alpha, \mathbfit\beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
-%       bold-style=French & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfup \alpha,\mathbfup \beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
+%       bold-style=upright & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfup \alpha,\mathbfup \beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -477,9 +479,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % or sans serif italic bold (e.g., examples in the \pkg{isomath} and \pkg{mattens} packages).
 % But \LaTeX's \cs{mathsf} is \textsl{upright} sans serif.
 % 
-% Therefore I reluctantly add the package options |[sans-style=TeX]| and |[sans-style=ISO]| to control the behaviour of \cs{mathsf}.
-% The |TeX| style sets up the command to use the seemingly-useless upright sans serif, including Greek;
-% the |ISO| style switches to using italic in both Latin and Greek alphabets.
+% Therefore I reluctantly add the package options |[sans-style=upright]| and |[sans-style=italic]| to control the behaviour of \cs{mathsf}.
+% The |upright| style sets up the command to use the seemingly-useless upright sans serif, including Greek;
+% the |italic| style switches to using italic in both Latin and Greek alphabets.
 % In other words, this option simply changes the meaning of \cs{mathsf} to either \cs{mathsfup} or \cs{mathsfit}, respectively.
 % Please let me know if more granular control is necessary here.
 % 
@@ -491,7 +493,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % your bold sans serif upright (or all vice versa, if that's even conceivable). Therefore, bold sans
 % serif follows from the setting for sans serif; it is completely independent of the setting for bold.
 % 
-% In other words, \cs{mathbfsf} is \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=TeX]| or |[sans-style=ISO]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
+% In other words, \cs{mathbfsf} is \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
 % 
 % Note well! There is no medium-weight sans serif Greek alphabet in unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
 % 
@@ -653,7 +655,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Note, however, that unicode characters are not affected by this option.
 % That is, no remapping occurs of the characters/glyphs, only the control sequences.
 %
-% Unless |math-style=literal| is in effect, the default is to use |vargreek-shape=TeX|.
+% The package default is to use |vargreek-shape=TeX|.
 %
 % \unichar{3B5}{greek small letter epsilon}\\
 % \unichar{3F5}{greek lunate epsilon symbol}\\
@@ -1120,7 +1122,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \paragraph{math-style}
 %    \begin{macrocode}
 \define@choicekey*{unicode-math.sty}
-    {math-style}[\@tempa\@tempb]{iso,tex,french,literal}{
+    {math-style}[\@tempa\@tempb]{iso,tex,french,upright,literal}{
   \ifcase\@tempb\relax
     \@um@upGreekfalse
     \@um@upgreekfalse
@@ -1146,12 +1148,25 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \@um@bfuplatintrue
     \@um@upNablatrue
     \bool_set_true:N \g_um_upsans_bool
-    \bool_set_true:N \g_um_texgreek_bool
+    \bool_set_false:N \g_um_texgreek_bool
   \or
     \@um@upGreektrue
     \@um@upgreektrue
     \@um@upLatintrue
     \@um@uplatinfalse
+    \@um@bfupGreektrue
+    \@um@bfupgreektrue
+    \@um@uppartialtrue
+    \@um@bfupLatintrue
+    \@um@bfuplatintrue
+    \@um@upNablatrue
+    \bool_set_true:N \g_um_upsans_bool
+    \bool_set_false:N \g_um_texgreek_bool
+  \or
+    \@um@upGreektrue
+    \@um@upgreektrue
+    \@um@upLatintrue
+    \@um@uplatintrue
     \@um@bfupGreektrue
     \@um@bfupgreektrue
     \@um@uppartialtrue
@@ -1171,7 +1186,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{bold-style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{bold-style}[\@tempa\@tempb]{iso,tex,french,literal}{
+\define@choicekey*{unicode-math.sty}{bold-style}[\@tempa\@tempb]{iso,tex,upright,literal}{
   \ifcase\@tempb\relax
     \@um@bfupGreekfalse
     \@um@bfupgreekfalse
@@ -1207,7 +1222,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \bool_new:N \g_um_upsans_bool
 \bool_new:N \g_um_sfliteral_bool
 \define@choicekey*{unicode-math.sty}
-    {sans-style}[\@tempa\@tempb]{iso,tex,literal}{
+    {sans-style}[\@tempa\@tempb]{italic,upright,literal}{
   \ifcase\@tempb\relax
     \bool_set_false:N \g_um_upsans_bool
   \or
@@ -2708,7 +2723,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \item Otherwise, use the \ascii\ letters instead.
 % \end{itemize}
 %
-%
+% This is every math alphabet known to \pkg{unicode-math}:
+% \begin{macro}{\g_um_mathalph_seq}
+%    \begin{macrocode}
+\seq_clear:N \g_um_mathalph_seq
+\tl_map_inline:nn {
+  \mathup\mathit
+  \mathbb\mathscr\mathfrak\mathtt
+  \mathsf\mathsfup\mathsfit
+  \mathbf\mathbfup\mathbfit
+  \mathbfscr\mathbffrak
+  \mathbfsf\mathbfsfup\mathbfsfit
+}{
+  \seq_put_right:Nn \g_um_mathalph_seq {#1}
+}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\um_setup_alphabets:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_alphabets: {
   \um_setup_math_alphabet:nn {up    }{latin,Latin,greek,Greek}
@@ -2732,18 +2764,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:nn {bfsfup}{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfsfit}{latin,Latin,greek,Greek,num}
 }
-\seq_clear:N \g_um_mathalph_seq
-\tl_map_inline:nn {
-  \mathup\mathit
-  \mathbb\mathscr\mathfrak\mathtt
-  \mathsf\mathsfup\mathsfit
-  \mathbf\mathbfup\mathbfit
-  \mathbfscr\mathbffrak
-  \mathbfsf\mathbfsfup\mathbfsfit
-}{
-  \seq_put_right:Nn \g_um_mathalph_seq {#1}
-}
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\um_setup_math_alphabet:nn}
 % \darg{Math font family name (e.g., `sf')}
