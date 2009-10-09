@@ -287,10 +287,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     Option & Description & See\dots \\
 %     \midrule
 %     |range| & Style of letters & \secref{range} \\
-%     |ScriptFont| & Font to use for sub- and super-scripts & \secref{sscript} \\
-%     |ScriptFontFeatures| & Font features for sub- and super-scripts & \secref{sscript} \\
-%     |ScriptScriptFont| & Font to use for nested sub- and super-scripts & \secref{sscript} \\
-%     |ScriptScriptFontFeatures| & Font features for nested sub- and super-scripts & \secref{sscript} \\
+%     |script-font| & Font to use for sub- and super-scripts & \secref{sscript} \\
+%     |script-features| & Font features for sub- and super-scripts & \secref{sscript} \\
+%     |sscript-font| & Font to use for nested sub- and super-scripts & \secref{sscript} \\
+%     |sscript-features| & Font features for nested sub- and super-scripts & \secref{sscript} \\
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -302,7 +302,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % (simply due to glyph coverage). The upcoming \STIX\ font comes to mind as a
 % possible exception. It will therefore be necessary to delegate specific
 % unicode ranges of glyphs to separate fonts:
-%   \codeline{\cmd\setmathfont|[Range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
+%   \codeline{\cmd\setmathfont|[range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
 % where \meta{unicode range} is a comma-separated list of unicode slots and
 % ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|. You may also use the macro
 % for accessing the glyph, such as \cs{\int}, or whole collection of symbols with
@@ -1539,7 +1539,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{The main \cs{setmathfont} macro}
 %
-% Using a |Range| including large character sets such as \cmd\mathrel,
+% Using a |range| including large character sets such as \cmd\mathrel,
 % \cmd\mathalpha, \etc, is \emph{very slow}!
 % I hope to improve the performance somehow.
 %
@@ -1697,7 +1697,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{macro}{\um_process_symbol_noparse:nnnn}
 % \begin{macro}{\um_process_symbol_parse:nnnn}
-% If the \feat{Range} font feature has been used, then only
+% If the \feat{range} font feature has been used, then only
 % a subset of the unicode glyphs are to be defined.
 % See \secref{rangeproc} for the code that enables this.
 %    \begin{macrocode}
@@ -2181,17 +2181,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Script and scriptscript font options}
 %    \begin{macrocode}
-\define@cmdkey[um]{options}[um@]{ScriptFeatures}{}
-\define@cmdkey[um]{options}[um@]{ScriptScriptFeatures}{}
-\define@cmdkey[um]{options}[um@]{ScriptFont}{}
-\define@cmdkey[um]{options}[um@]{ScriptScriptFont}{}
+\define@cmdkey[um]{options}[um@]{script-features}{}
+\define@cmdkey[um]{options}[um@]{sscript-features}{}
+\define@cmdkey[um]{options}[um@]{script-font}{}
+\define@cmdkey[um]{options}[um@]{sscript-font}{}
 %    \end{macrocode}
 %
 % \subsection{Range processing}\seclabel{rangeproc}
 %
 % The `ALL' branch here is deprecated and happens automatically.
 %    \begin{macrocode}
-\define@choicekey+[um]{options}{Range}[\@tempa\@tempb]{ALL}{
+\define@choicekey+[um]{options}{range}[\@tempa\@tempb]{ALL}{
   \ifcase\@tempb\relax
     \global\let\um@char@range\@empty
   \fi
@@ -2638,8 +2638,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \section{Maths alphabets mapping definitions}\label{part:mathmap}
 %
 % Algorithm for setting alphabet fonts.
-% By default, when |Range| is empty, we are in \emph{implicit} mode.
-% If |Range| contains the name of the math alphabet, we are in \emph{explicit}
+% By default, when |range| is empty, we are in \emph{implicit} mode.
+% If |range| contains the name of the math alphabet, we are in \emph{explicit}
 % mode and do things slightly differently.
 % 
 % Implicit mode:
