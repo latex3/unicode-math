@@ -939,6 +939,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \newcounter{um@fam}
 \newif\if@um@fontspec@feature
 \newif\if@um@ot@math@
+\bool_new:N \l_um_init_bool
 %    \end{macrocode}
 % For \opt{math-style}:
 %    \begin{macrocode}
@@ -1575,7 +1576,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \item To start with, assume we're defining the font for every math symbol character.
 %    \begin{macrocode}
-  \let\um@char@range\@empty
+  \bool_set_true:N \l_um_init_bool
+  \seq_clear:N \l_um_char_range_seq
   \let\um@char@num@range\@empty
 %    \end{macrocode}
 % \item Tell \pkg{fontspec} that maths font features are actually allowed.
@@ -1652,21 +1654,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % for the individual definitions
 % \end{itemize}
 %    \begin{macrocode}
-  \ifx\um@char@range\@empty
+  \bool_if:NTF \l_um_init_bool {
     \tl_set:Nn \um_symfont_tl {um@allsym}
     \PackageInfo{unicode-math}{Defining~ the~ default~ maths~ font~ as~ '#2'}
     \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_noparse:nnnn
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
-  \else
+  }{
     \stepcounter{um@fam}
     \tl_set:Nx \um_symfont_tl {um@fam\theum@fam}
     \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_parse:nnnn
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_parse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
-  \fi
+  }
 %    \end{macrocode}
 % Now defined |\um_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
@@ -1886,7 +1888,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % All symbols input that aren't defined directly in |unicode-math-table|.
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_alphanum: {
-  \ifx\um@char@range\@empty
+  \bool_if:NTF \l_um_init_bool {
     \um_map_chars_numbers:nn {\um@usv@num}{\um@usv@num}
 %    \end{macrocode}
 % \paragraph{Normal weight}
@@ -1940,11 +1942,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um_map_char:nn {\um@usv@bfvarpi,\um@usv@bfitvarpi}{\um@usv@bfitvarpi}
       \fi
     \fi
-  \else
+  }{
 %    \end{macrocode}
 % %: TODO : what is supposed to happen here?
 %    \begin{macrocode}
-  \fi
+  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2205,16 +2207,51 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \define@cmdkey[um]{options}[um@]{sscript-font}{}
 %    \end{macrocode}
 %
-% \subsection{Range processing}\seclabel{rangeproc}
+% \subsection{Range processing}
+% \seclabel{rangeproc}
 %
 % The `ALL' branch here is deprecated and happens automatically.
 %    \begin{macrocode}
 \define@choicekey+[um]{options}{range}[\@tempa\@tempb]{ALL}{
   \ifcase\@tempb\relax
-    \global\let\um@char@range\@empty
+    \bool_set_true:N \l_um_init_bool
   \fi
 }{
-  \xdef\um@char@range{#1}
+  \bool_set_false:N \l_um_init_bool
+  \seq_clear:N \l_um_char_range_seq
+  \seq_clear:N \l_um_mathalph_seq
+  \clist_map_inline:nn {#1} {
+    \um_if_mathalph_decl:nTF {##1} {
+      \seq_put_right:Nx \l_um_mathalph_seq { {\exp_not:V\l_um_tmpa_tl} {\exp_not:V\l_um_tmpb_tl} {\exp_not:V\l_um_tmpc_tl} }
+    }{
+      \seq_put_right:Nn \l_um_char_range_seq {##1}
+    }
+  }
+}
+\cs_generate_variant:Nn \seq_if_in:NnTF {NV}
+\prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
+  \tl_set:Nn \l_um_tmpa_tl {#1}
+  \tl_set:Nn \l_um_tmpb_tl {}
+  \tl_set:Nn \l_um_tmpc_tl {}
+  \tl_if_in:NnT \l_um_tmpa_tl {->} {
+    \exp_after:wN \um_split_arrow:w \l_um_tmpa_tl \q_nil
+  }
+  \tl_if_in:NnT \l_um_tmpa_tl {/} {
+    \exp_after:wN \um_split_slash:w \l_um_tmpa_tl \q_nil
+  }
+  \seq_if_in:NVTF \g_um_mathalph_seq \l_um_tmpa_tl {
+    \prg_return_true:
+  }{
+    \prg_return_false:
+  }
+}
+\cs_set:Npn \um_split_arrow:w #1->#2 \q_nil {
+  \tl_set:Nn \l_um_tmpa_tl {#1}
+  \tl_set:Nn \l_um_tmpc_tl {#2}
+}
+\cs_set:Npn \um_split_slash:w #1/#2 \q_nil {
+  \tl_set:Nn \l_um_tmpa_tl {#1}
+  \tl_set:Nn \l_um_tmpb_tl {#2}
 }
 %    \end{macrocode}
 %
@@ -2227,7 +2264,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{control sequence (math type)}
 % \darg{code to execute}
 % This macro expands to |#4|
-% if any of its arguments are contained in the commalist \cmd\um@char@range.
+% if any of its arguments are contained in \cmd\l_um_char_range_seq.
 % This list can contain either character ranges (for checking with |#1|) or control sequences.
 % These latter can either be the command name of a specific character, \emph{or} the math
 % type of one (\eg, \cmd\mathbin).
@@ -2251,7 +2288,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Start by iterating over the commalist, ignoring empties, and initialising the scratch conditional:
 %    \begin{macrocode}
 \newcommand\um@parse@term[4]{
-  \clist_map_variable:NNn \um@char@range \@ii {
+  \seq_map_variable:NNn \l_um_char_range_seq \@ii {
     \unless\ifx\@ii\@empty
       \@tempswafalse
 %    \end{macrocode}
@@ -2294,16 +2331,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\um@firstchar#1{\edef\@tempa{\expandafter\um@firstof\string#1\@nil}}
 %    \end{macrocode}
 % \end{macro}
-%
-% \begin{example}{}
-%   \def\um@char@range{\a,2-4,\c}
-%   \um@parse@term{1}{\a}{\b}
-%      {`1' or `\string\a' or `\string\b' is included}
-%   \um@parse@term{1}{\b}{\c}
-%      {`1' or `\string\b' or `\string\c' is included}
-%   \um@parse@term{3}{\a}{\b}
-%      {`3' or `\string\a' or `\string\b' is included}
-% \end{example}
 %
 % \begin{macro}{\um@parse@range}
 % Weird syntax.
@@ -2704,6 +2731,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_math_alphabet:nn {bfsf  }{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfsfup}{latin,Latin,greek,Greek,num}
   \um_setup_math_alphabet:nn {bfsfit}{latin,Latin,greek,Greek,num}
+}
+\seq_clear:N \g_um_mathalph_seq
+\tl_map_inline:nn {
+  \mathup\mathit
+  \mathbb\mathscr\mathfrak\mathtt
+  \mathsf\mathsfup\mathsfit
+  \mathbf\mathbfup\mathbfit
+  \mathbfscr\mathbffrak
+  \mathbfsf\mathbfsfup\mathbfsfit
+}{
+  \seq_put_right:Nn \g_um_mathalph_seq {#1}
 }
 %    \end{macrocode}
 %
