@@ -305,10 +305,28 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %   \codeline{\cmd\setmathfont|[range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
 % where \meta{unicode range} is a comma-separated list of unicode slots and
 % ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|. You may also use the macro
-% for accessing the glyph, such as \cs{\int}, or whole collection of symbols with
-% the same math type, such as \cs{mathopen}. (Only numerical slots, however, can
-% be used in proper ranges.)
-% This interface still requires some thought.
+% for accessing the glyph, such as \cs{int}, or whole collection of symbols with
+% the same math type, such as \cs{mathopen}, or complete math alphabets such as \cs{mathbb}.
+% (Only numerical slots, however, can be used in ranged declarations.)
+% 
+% \subsubsection{Control over maths alphabets}
+% 
+% Exact control over maths alphabets can be somewhat involved.
+% Here is the current plan.
+% \begin{itemize}
+% \item |[range=\mathbb]| to use the font for `bb' letters only.
+% \item |[range=\mathbfsfit/gG]| for Greek lowercase and uppercase only (with |l|, |L|, |N| as well for Latin lower-/upper-case, and numbers).
+% \item |[range=\mathsfit->\mathbfsfit]| to map to different output alphabet(s) (which is rather useless right now but will become less useless in the future).
+% \end{itemize}
+% 
+% And now the trick.
+% If a particular math alphabet is not defined in the font, fall back onto the lower-base plane (i.e., upright) glyphs.
+% Therefore, to use an \ascii-encoded fractur font, for example, write
+% \par{\centering|\setmathfont[range=\mathfrak]{SomeFracturFont}|\par}\noindent
+% and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
+% 
+% And due to this behaviour, simply loading the Euler math font as usual will cause the upright glyphs to be substituted for the missing italic ones.
+% 
 %
 % \subsection{Script and scriptscript fonts/features}
 % \seclabel{sscript}
