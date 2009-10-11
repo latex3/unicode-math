@@ -192,7 +192,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Ross Moore and Chris Rowley have provided moral and technical support
 % from the very early days with great insight into the issues we face trying
 % to extend and use \TeX\ in the future.
-% Apostolos Syropoulos, Joel Saloman, and Khaled Hosny have been fantastic
+% Apostolos Syropoulos, Joel Salomon, and Khaled Hosny have been fantastic
 % beta testers.
 % 
 % \section{Getting started}
@@ -315,7 +315,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Here is the current plan.
 % \begin{itemize}
 % \item |[range=\mathbb]| to use the font for `bb' letters only.
-% \item |[range=\mathbfsfit/gG]| for Greek lowercase and uppercase only (with |l|, |L|, |N| as well for Latin lower-/upper-case, and numbers).
+% \item |[range=\mathbfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (with |latin|, |Latin|, |num| as well for Latin lower-/upper-case and numbers).
 % \item |[range=\mathsfit->\mathbfsfit]| to map to different output alphabet(s) (which is rather useless right now but will become less useless in the future).
 % \end{itemize}
 % 
@@ -324,8 +324,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Therefore, to use an \ascii-encoded fractur font, for example, write
 % \par{\centering|\setmathfont[range=\mathfrak]{SomeFracturFont}|\par}\noindent
 % and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
-% 
-% And due to this behaviour, simply loading the Euler math font as usual will cause the upright glyphs to be substituted for the missing italic ones.
+% If necessary (but why?) this behaviour can be forced with |[range=\mathfrac->\mathup]|.
 % 
 %
 % \subsection{Script and scriptscript fonts/features}
@@ -1979,7 +1978,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_set:Nn \um_mathmap_noparse:Nnn {
   \clist_map_inline:nn {#2} {
     \exp_args:No \um@addto@mathmap \um_symfont_tl {##1}{#1}{#3}
-   }
+  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2227,6 +2226,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % The `ALL' branch here is deprecated and happens automatically.
 %    \begin{macrocode}
+\seq_new:N \g_um_mathalph_seq
+\seq_new:N \l_um_mathalph_seq
+\seq_new:N \l_um_char_range_seq
 \define@choicekey+[um]{options}{range}[\@tempa\@tempb]{ALL}{
   \ifcase\@tempb\relax
     \bool_set_true:N \l_um_init_bool
@@ -2487,6 +2489,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Nn \um_set_mathalph_range:nNnn {
   \clist_map_variable:nNn {#3} \l_um_input_num {
+    \errorcontextlines=999
     \prg_stepwise_variable:nnnNn {0}{1}{#1} \l_um_inc_num {
       \exp_args:Nnff \um_mathmap:Nnn {#2}
         {\number\numexpr \l_um_inc_num + \l_um_input_num \relax}
@@ -2743,50 +2746,55 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_alphabets:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_alphabets: {
-  \um_setup_math_alphabet:nn {up    }{latin,Latin,greek,Greek}
-  \um_setup_math_alphabet:nn {it    }{latin,Latin,greek,Greek}
-  \um_setup_math_alphabet:nn {bb    }{latin,Latin,num}
-  \um_setup_math_mapping:n   {bb    }
-  \um_maybe_init_alphabet:n  {bbit  }
-  \um_setup_math_mapping:n   {bbit  }
-  \um_setup_math_alphabet:nn {scr   }{latin,Latin}
-  \um_setup_math_alphabet:nn {frak  }{latin,Latin}
-  \um_setup_math_alphabet:nn {sf    }{latin,Latin,num}
-  \um_setup_math_alphabet:nn {sfup  }{latin,Latin,num}
-  \um_setup_math_alphabet:nn {sfit  }{latin,Latin,num}
-  \um_setup_math_alphabet:nn {tt    }{latin,Latin,num}
-  \um_setup_math_alphabet:nn {bf    }{latin,Latin,greek,Greek,num}
-  \um_setup_math_alphabet:nn {bfup  }{latin,Latin,greek,Greek,num}
-  \um_setup_math_alphabet:nn {bfit  }{latin,Latin,greek,Greek,num}
-  \um_setup_math_alphabet:nn {bfscr }{latin,Latin}
-  \um_setup_math_alphabet:nn {bffrak}{latin,Latin}
-  \um_setup_math_alphabet:nn {bfsf  }{latin,Latin,greek,Greek,num}
-  \um_setup_math_alphabet:nn {bfsfup}{latin,Latin,greek,Greek,num}
-  \um_setup_math_alphabet:nn {bfsfit}{latin,Latin,greek,Greek,num}
+  \seq_if_empty:NTF \l_um_mathalph_seq {
+    \um_setup_math_alphabet:Nn \mathup     {latin,Latin,greek,Greek}
+    \um_setup_math_alphabet:Nn \mathit     {latin,Latin,greek,Greek}
+    \um_setup_math_alphabet:Nn \mathbb     {latin,Latin,num}
+    \um_setup_math_mapping:n   {bb    }
+    \um_maybe_init_alphabet:n  {bbit  }
+    \um_setup_math_mapping:n   {bbit  }
+    \um_setup_math_alphabet:Nn \mathscr    {latin,Latin}
+    \um_setup_math_alphabet:Nn \mathfrak   {latin,Latin}
+    \um_setup_math_alphabet:Nn \mathsf     {latin,Latin,num}
+    \um_setup_math_alphabet:Nn \mathsfup   {latin,Latin,num}
+    \um_setup_math_alphabet:Nn \mathsfit   {latin,Latin,num}
+    \um_setup_math_alphabet:Nn \mathtt     {latin,Latin,num}
+    \um_setup_math_alphabet:Nn \mathbf     {latin,Latin,greek,Greek,num}
+    \um_setup_math_alphabet:Nn \mathbfup   {latin,Latin,greek,Greek,num}
+    \um_setup_math_alphabet:Nn \mathbfit   {latin,Latin,greek,Greek,num}
+    \um_setup_math_alphabet:Nn \mathbfscr  {latin,Latin}
+    \um_setup_math_alphabet:Nn \mathbffrak {latin,Latin}
+    \um_setup_math_alphabet:Nn \mathbfsf   {latin,Latin,greek,Greek,num}
+    \um_setup_math_alphabet:Nn \mathbfsfup {latin,Latin,greek,Greek,num}
+    \um_setup_math_alphabet:Nn \mathbfsfit {latin,Latin,greek,Greek,num}
+  }{
+  }
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_setup_math_alphabet:nn}
+% \begin{macro}{\um_setup_math_alphabet:Nn}
 % \darg{Math font family name (e.g., `sf')}
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
 % First check that at least one of the alphabets for the font shape is defined, and then
 % then loop through them defining the individual ranges.
 %    \begin{macrocode}
-\cs_new:Nn \um_setup_math_alphabet:nn {
+\cs_new:Nn \um_setup_math_alphabet:Nn {
+  \tl_set:Nx \l_um_tmpa_tl {\cs_to_str:N #1}
+  \tl_set:Nx \l_um_tmpb_tl {\exp_after:wN \use_none:nnnn \l_um_tmpa_tl}
   \clist_map_inline:nn {#2} {
-    \um_glyph_if_exist:nT {\csname um@usv@#1##1 \endcsname}{
-      \um_maybe_init_alphabet:n {#1}
+    \um_glyph_if_exist:cT {um@usv@ \l_um_tmpb_tl ##1}{
+      \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
       \clist_map_break:
     }
   }
   \clist_map_inline:nn {#2} {
-    \um_glyph_if_exist:nTF {\csname um@usv@#1##1 \endcsname}{
-      \use:c {um_config_math#1_##1:}
+    \um_glyph_if_exist:cTF {um@usv@ \l_um_tmpb_tl ##1}{
+      \use:c {um_config_ \l_um_tmpa_tl _##1:}
     }{
       \PackageWarningNoLine{unicode-math}{^^J\space\space\space\space
       Math~ alphabet~
-      \@backslashchar math#1~
+      \@backslashchar \l_um_tmpa_tl~
       (\tl_use:c{g_um_math_alphabet_name_##1_tl})~
       not~ found~ in~ font~
       \fontname\um@font}
@@ -2819,6 +2827,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F} {
   \etex_iffontchar:D \um@font #1 \scan_stop: \prg_return_true: \else: \prg_return_false: \fi:
 }
+\cs_generate_variant:Nn \um_glyph_if_exist_p:n {c}
+\cs_generate_variant:Nn \um_glyph_if_exist:nTF {c}
+\cs_generate_variant:Nn \um_glyph_if_exist:nT  {c}
+\cs_generate_variant:Nn \um_glyph_if_exist:nF  {c}
 %    \end{macrocode}
 % \end{macro}
 %
