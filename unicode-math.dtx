@@ -1211,20 +1211,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_shapes: {
   \bool_if:NTF \g_um_upGreek_bool {
-    \tl_set:Nx \um_Greek_up_or_it_usv    { \um@usv@upGreek }
-    \tl_set:Nx \um_varTheta_up_or_it_usv { \um@usv@varTheta }
+    \tl_set:Nx \g_um_Greek_up_or_it_usv    { \um@usv@upGreek }
+    \tl_set:Nx \g_um_varTheta_up_or_it_usv { \um@usv@varTheta }
   }{
-    \tl_set:Nx \um_Greek_up_or_it_usv    { \um@usv@itGreek }
-    \tl_set:Nx \um_varTheta_up_or_it_usv { \um@usv@itvarTheta }
+    \tl_set:Nx \g_um_Greek_up_or_it_usv    { \um@usv@itGreek }
+    \tl_set:Nx \g_um_varTheta_up_or_it_usv { \um@usv@itvarTheta }
   }
-  \tl_set:Nx \um_greek_up_or_it_usv    { \bool_if:NTF \g_um_upgreek_bool \um@usv@upgreek \um@usv@itgreek }
-  \tl_set:Nx \um_Latin_up_or_it_usv    { \bool_if:NTF \g_um_upLatin_bool \um@usv@upLatin \um@usv@itLatin }
+  \tl_set:Nx \g_um_greek_up_or_it_usv    { \bool_if:NTF \g_um_upgreek_bool \um@usv@upgreek \um@usv@itgreek }
+  \tl_set:Nx \g_um_Latin_up_or_it_usv    { \bool_if:NTF \g_um_upLatin_bool \um@usv@upLatin \um@usv@itLatin }
   \bool_if:NTF \g_um_uplatin_bool {
-    \tl_set:Nx \um_latin_up_or_it_usv    { \um@usv@uplatin }
-    \tl_set:Nx \um_latinh_up_or_it_usv   { \number`\h      }
+    \tl_set:Nx \g_um_latin_up_or_it_usv    { \um@usv@uplatin }
+    \tl_set:Nx \g_um_latinh_up_or_it_usv   { \number`\h      }
   }{
-    \tl_set:Nx \um_latin_up_or_it_usv    { \um@usv@itlatin }
-    \tl_set:Nx \um_latinh_up_or_it_usv   { \um@usv@ith     }
+    \tl_set:Nx \g_um_latin_up_or_it_usv    { \um@usv@itlatin }
+    \tl_set:Nx \g_um_latinh_up_or_it_usv   { \um@usv@ith     }
   }
 }
 %    \end{macrocode}
@@ -1260,21 +1260,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_bfshapes: {
   \bool_if:NTF \g_um_bfupGreek_bool {
-    \tl_set:Nx \um_bf_Greek_up_or_it_usv { \um@usv@bfupGreek }
-    \tl_set:Nx \um_bf_varTheta_up_or_it_usv { \um@usv@bfvarTheta }  
+    \tl_set:Nx \g_um_bf_Greek_up_or_it_usv { \um@usv@bfupGreek }
+    \tl_set:Nx \g_um_bf_varTheta_up_or_it_usv { \um@usv@bfvarTheta }  
   }{
-    \tl_set:Nx \um_bf_Greek_up_or_it_usv { \um@usv@bfitGreek }
-    \tl_set:Nx \um_bf_varTheta_up_or_it_usv { \um@usv@bfitvarTheta }  
+    \tl_set:Nx \g_um_bf_Greek_up_or_it_usv { \um@usv@bfitGreek }
+    \tl_set:Nx \g_um_bf_varTheta_up_or_it_usv { \um@usv@bfitvarTheta }  
   }
-  \tl_set:Nx \um_bf_greek_up_or_it_usv { \bool_if:NTF \g_um_bfupgreek_bool \um@usv@bfupgreek \um@usv@bfitgreek }
-  \tl_set:Nx \um_bf_Latin_up_or_it_usv { \bool_if:NTF \g_um_bfupLatin_bool \um@usv@bfupLatin \um@usv@bfitLatin }
-  \tl_set:Nx \um_bf_latin_up_or_it_usv { \bool_if:NTF \g_um_bfuplatin_bool \um@usv@bfuplatin \um@usv@bfitlatin }
+  \tl_set:Nx \g_um_bf_greek_up_or_it_usv { \bool_if:NTF \g_um_bfupgreek_bool \um@usv@bfupgreek \um@usv@bfitgreek }
+  \tl_set:Nx \g_um_bf_Latin_up_or_it_usv { \bool_if:NTF \g_um_bfupLatin_bool \um@usv@bfupLatin \um@usv@bfitLatin }
+  \tl_set:Nx \g_um_bf_latin_up_or_it_usv { \bool_if:NTF \g_um_bfuplatin_bool \um@usv@bfuplatin \um@usv@bfitlatin }
   \bool_if:NTF \g_um_bfuplatin_bool {
-    \tl_set:Nx \um_bf_latin_up_or_it_usv    { \um@usv@bfuplatin }
-    \tl_set:Nx \um_bf_latinh_up_or_it_usv   { \um@usv@bfuph     }
+    \tl_set:Nx \g_um_bf_latin_up_or_it_usv    { \um@usv@bfuplatin }
+    \tl_set:Nx \g_um_bf_latinh_up_or_it_usv   { \um@usv@bfuph     }
   }{
-    \tl_set:Nx \um_bf_latin_up_or_it_usv    { \um@usv@bfitlatin }
-    \tl_set:Nx \um_bf_latinh_up_or_it_usv   { \um@usv@bfith     }
+    \tl_set:Nx \g_um_bf_latin_up_or_it_usv    { \um@usv@bfitlatin }
+    \tl_set:Nx \g_um_bf_latinh_up_or_it_usv   { \um@usv@bfith     }
   }
 }
 %    \end{macrocode}
@@ -1299,21 +1299,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_sfshapes: {
   \bool_if:NTF \g_um_upsans_bool {
-    \tl_set:Nn \um_sf_Latin_up_or_it_usv       { \um@usv@sfLatin     }
-    \tl_set:Nn \um_sf_latin_up_or_it_usv       { \um@usv@sflatin     }
-    \tl_set:Nn \um_bfsf_Latin_up_or_it_usv     { \um@usv@bfsfupLatin }
-    \tl_set:Nn \um_bfsf_latin_up_or_it_usv     { \um@usv@bfsfuplatin }
-    \tl_set:Nn \um_bfsf_Greek_up_or_it_usv     { \um@usv@bfsfupGreek }
-    \tl_set:Nn \um_bfsf_greek_up_or_it_usv     { \um@usv@bfsfupgreek }
-    \tl_set:Nn \um_bfsf_varTheta_up_or_it_usv  { \um@usv@bfsfupvarTheta }
+    \tl_set:Nn \g_um_sf_Latin_up_or_it_usv       { \um@usv@sfLatin     }
+    \tl_set:Nn \g_um_sf_Latin_up_or_it_usv       { \um@usv@sflatin     }
+    \tl_set:Nn \g_um_bfsf_Latin_up_or_it_usv     { \um@usv@bfsfupLatin }
+    \tl_set:Nn \g_um_bfsf_latin_up_or_it_usv     { \um@usv@bfsfuplatin }
+    \tl_set:Nn \g_um_bfsf_Greek_up_or_it_usv     { \um@usv@bfsfupGreek }
+    \tl_set:Nn \g_um_bfsf_greek_up_or_it_usv     { \um@usv@bfsfupgreek }
+    \tl_set:Nn \g_um_bfsf_varTheta_up_or_it_usv  { \um@usv@bfsfupvarTheta }
   }{
-    \tl_set:Nn \um_sf_Latin_up_or_it_usv       { \um@usv@sfitLatin   }
-    \tl_set:Nn \um_sf_latin_up_or_it_usv       { \um@usv@sfitlatin   }
-    \tl_set:Nn \um_bfsf_Latin_up_or_it_usv     { \um@usv@bfsfitLatin }
-    \tl_set:Nn \um_bfsf_latin_up_or_it_usv     { \um@usv@bfsfitlatin }
-    \tl_set:Nn \um_bfsf_Greek_up_or_it_usv     { \um@usv@bfsfitGreek }
-    \tl_set:Nn \um_bfsf_greek_up_or_it_usv     { \um@usv@bfsfitgreek }
-    \tl_set:Nn \um_bfsf_varTheta_up_or_it_usv  { \um@usv@bfsfitvarTheta }
+    \tl_set:Nn \g_um_sf_Latin_up_or_it_usv       { \um@usv@sfitLatin   }
+    \tl_set:Nn \g_um_sf_Latin_up_or_it_usv       { \um@usv@sfitlatin   }
+    \tl_set:Nn \g_um_bfsf_Latin_up_or_it_usv     { \um@usv@bfsfitLatin }
+    \tl_set:Nn \g_um_bfsf_latin_up_or_it_usv     { \um@usv@bfsfitlatin }
+    \tl_set:Nn \g_um_bfsf_Greek_up_or_it_usv     { \um@usv@bfsfitGreek }
+    \tl_set:Nn \g_um_bfsf_greek_up_or_it_usv     { \um@usv@bfsfitgreek }
+    \tl_set:Nn \g_um_bfsf_varTheta_up_or_it_usv  { \um@usv@bfsfitvarTheta }
   }
 }
 %    \end{macrocode}
@@ -1330,13 +1330,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_set:Nn \um_setup_nabla: {
   \bool_if:NTF \g_um_upNabla_bool {
-    \tl_set:Nn \um_Nabla_up_or_it_usv     { \um@usv@Nabla }
-    \tl_set:Nn \um_bfNabla_up_or_it_usv   { \um@usv@bfNabla }
-    \tl_set:Nn \um_bfsfNabla_up_or_it_usv { \um@usv@bfsfNabla }
+    \tl_set:Nn \g_um_Nabla_up_or_it_usv     { \um@usv@Nabla }
+    \tl_set:Nn \g_um_bfNabla_up_or_it_usv   { \um@usv@bfNabla }
+    \tl_set:Nn \g_um_bfsfNabla_up_or_it_usv { \um@usv@bfsfNabla }
   }{
-    \tl_set:Nn \um_Nabla_up_or_it_usv     { \um@usv@itNabla }
-    \tl_set:Nn \um_bfNabla_up_or_it_usv   { \um@usv@bfitNabla }
-    \tl_set:Nn \um_bfsfNabla_up_or_it_usv { \um@usv@bfsfitNabla }
+    \tl_set:Nn \g_um_Nabla_up_or_it_usv     { \um@usv@itNabla }
+    \tl_set:Nn \g_um_bfNabla_up_or_it_usv   { \um@usv@bfitNabla }
+    \tl_set:Nn \g_um_bfsfNabla_up_or_it_usv { \um@usv@bfsfitNabla }
   }
 }
 %    \end{macrocode}
@@ -1351,13 +1351,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_set:Nn \um_setup_partial: {
   \bool_if:NTF \g_um_uppartial_bool {
-    \tl_set:Nn \um_partial_up_or_it_usv     { \um@usv@partial }
-    \tl_set:Nn \um_bfpartial_up_or_it_usv   { \um@usv@bfpartial }
-    \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfpartial }
+    \tl_set:Nn \g_um_partial_up_or_it_usv     { \um@usv@partial }
+    \tl_set:Nn \g_um_bfpartial_up_or_it_usv   { \um@usv@bfpartial }
+    \tl_set:Nn \g_um_bfsfpartial_up_or_it_usv { \um@usv@bfsfpartial }
   }{
-    \tl_set:Nn \um_partial_up_or_it_usv     { \um@usv@itpartial }
-    \tl_set:Nn \um_bfpartial_up_or_it_usv   { \um@usv@bfitpartial }
-    \tl_set:Nn \um_bfsfpartial_up_or_it_usv { \um@usv@bfsfitpartial }
+    \tl_set:Nn \g_um_partial_up_or_it_usv     { \um@usv@itpartial }
+    \tl_set:Nn \g_um_bfpartial_up_or_it_usv   { \um@usv@bfitpartial }
+    \tl_set:Nn \g_um_bfsfpartial_up_or_it_usv { \um@usv@bfsfitpartial }
   }
 }
 %    \end{macrocode}
@@ -1836,8 +1836,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_remap_symbol:nnn {\um@usv@partial}{\mathord}{\um@usv@partial}
     \um_remap_symbol:nnn {\um@usv@itpartial}{\mathord}{\um@usv@itpartial}
   }{
-    \um_remap_symbol:nnn {\um@usv@Nabla,\um@usv@itNabla}{\mathord}{\um_Nabla_up_or_it_usv}
-    \um_remap_symbol:nnn {\um@usv@partial,\um@usv@itpartial}{\mathord}{\um_partial_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@Nabla,\um@usv@itNabla}{\mathord}{\g_um_Nabla_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@partial,\um@usv@itpartial}{\mathord}{\g_um_partial_up_or_it_usv}
   }
 %    \end{macrocode}
 % Some of these in the |bfliteral| block may be redundant, but that's okay:
@@ -1852,10 +1852,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_remap_symbol:nnn {\um@usv@bfsfpartial  }{\mathord}{\um@usv@bfsfpartial}
     \um_remap_symbol:nnn {\um@usv@bfsfitpartial}{\mathord}{\um@usv@bfsfitpartial}
   }{
-    \um_remap_symbol:nnn {\um@usv@bfNabla,\um@usv@bfitNabla}{\mathord}{\um_bfNabla_up_or_it_usv}
-    \um_remap_symbol:nnn {\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\mathord}{\um_bfsfNabla_up_or_it_usv}
-    \um_remap_symbol:nnn {\um@usv@bfpartial,\um@usv@bfitpartial}{\mathord}{\um_bfpartial_up_or_it_usv}
-    \um_remap_symbol:nnn {\um@usv@bfsfpartial,\um@usv@bfsfitpartial}{\mathord}{\um_bfsfpartial_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@bfNabla,\um@usv@bfitNabla}{\mathord}{\g_um_bfNabla_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@bfsfNabla,\um@usv@bfsfitNabla}{\mathord}{\g_um_bfsfNabla_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@bfpartial,\um@usv@bfitpartial}{\mathord}{\g_um_bfpartial_up_or_it_usv}
+    \um_remap_symbol:nnn {\um@usv@bfsfpartial,\um@usv@bfsfitpartial}{\mathord}{\g_um_bfsfpartial_up_or_it_usv}
   }
 }
 %    \end{macrocode}
@@ -2850,7 +2850,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_Latin:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_Latin: {
-  \um_map_chars_latin:nn {\um@usv@upLatin,\um@usv@itLatin}{\um_Latin_up_or_it_usv}
+  \um_map_chars_latin:nn {\um@usv@upLatin,\um@usv@itLatin}{\g_um_Latin_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2858,8 +2858,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_latin:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_latin: {
-  \um_map_chars_latin:nn {\um@usv@uplatin,\um@usv@itlatin}{\um_latin_up_or_it_usv}
-  \um_map_char:nn {`\h,\um@usv@ith}{\um_latinh_up_or_it_usv}
+  \um_map_chars_latin:nn {\um@usv@uplatin,\um@usv@itlatin}{\g_um_latin_up_or_it_usv}
+  \um_map_char:nn {`\h,\um@usv@ith}{\g_um_latinh_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2867,8 +2867,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_Greek:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_Greek: {
-  \um_map_chars_greek:nn {\um@usv@upGreek,\um@usv@itGreek}{\um_Greek_up_or_it_usv}
-  \um_map_char:nn {\um@usv@varTheta,\um@usv@itvarTheta}{\um_varTheta_up_or_it_usv}
+  \um_map_chars_greek:nn {\um@usv@upGreek,\um@usv@itGreek}{\g_um_Greek_up_or_it_usv}
+  \um_map_char:nn {\um@usv@varTheta,\um@usv@itvarTheta}{\g_um_varTheta_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2876,7 +2876,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_greek:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_greek: {
-  \um_map_chars_greek:nn {\um@usv@upgreek,\um@usv@itgreek}{\um_greek_up_or_it_usv}
+  \um_map_chars_greek:nn {\um@usv@upgreek,\um@usv@itgreek}{\g_um_greek_up_or_it_usv}
   \bool_if:NTF \g_um_upgreek_bool {
     \um_map_char:nn {\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@varepsilon}
     \um_map_char:nn {\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@vartheta}
@@ -3069,8 +3069,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_sf_Latin:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_sf_Latin: {
-      \um_map_chars_latin:nn {\um@usv@sfupLatin,\um@usv@sfitLatin}{\um_sf_Latin_up_or_it_usv}
-      \um_map_chars_latin:nn {\um@usv@bfsfupLatin,\um@usv@bfsfitLatin}{\um_bfsf_Latin_up_or_it_usv}
+      \um_map_chars_latin:nn {\um@usv@sfupLatin,\um@usv@sfitLatin}{\g_um_sf_Latin_up_or_it_usv}
+      \um_map_chars_latin:nn {\um@usv@bfsfupLatin,\um@usv@bfsfitLatin}{\g_um_bfsf_Latin_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3078,8 +3078,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_sf_latin:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_sf_latin: {
-      \um_map_chars_latin:nn {\um@usv@sfuplatin,\um@usv@sfitlatin}{\um_sf_latin_up_or_it_usv}
-      \um_map_chars_latin:nn {\um@usv@bfsfuplatin,\um@usv@bfsfitlatin}{\um_bfsf_latin_up_or_it_usv}
+      \um_map_chars_latin:nn {\um@usv@sfuplatin,\um@usv@sfitlatin}{\g_um_sf_Latin_up_or_it_usv}
+      \um_map_chars_latin:nn {\um@usv@bfsfuplatin,\um@usv@bfsfitlatin}{\g_um_bfsf_latin_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3087,8 +3087,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_sf_Greek:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_sf_Greek: {
-      \um_map_chars_greek:nn {\um@usv@bfsfupGreek,\um@usv@bfsfitGreek}{\um_bfsf_Greek_up_or_it_usv}
-      \um_map_char:nn {\um@usv@bfsfupvarTheta,\um@usv@bfsfitvarTheta}{\um_bfsf_varTheta_up_or_it_usv}
+      \um_map_chars_greek:nn {\um@usv@bfsfupGreek,\um@usv@bfsfitGreek}{\g_um_bfsf_Greek_up_or_it_usv}
+      \um_map_char:nn {\um@usv@bfsfupvarTheta,\um@usv@bfsfitvarTheta}{\g_um_bfsf_varTheta_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3096,7 +3096,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_sf_greek:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_sf_greek: {
-      \um_map_chars_greek:nn {\um@usv@bfsfupgreek,\um@usv@bfsfitgreek}{\um_bfsf_greek_up_or_it_usv}
+      \um_map_chars_greek:nn {\um@usv@bfsfupgreek,\um@usv@bfsfitgreek}{\g_um_bfsf_greek_up_or_it_usv}
       \bool_if:NTF \g_um_bfupgreek_bool {
         \um_map_char:nn {\um@usv@bfsfupvarepsilon,\um@usv@bfsfitvarepsilon}{\um@usv@bfsfupvarepsilon}
         \um_map_char:nn {\um@usv@bfsfupvartheta,\um@usv@bfsfitvartheta}    {\um@usv@bfsfupvartheta}
@@ -3122,7 +3122,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@upLatin}{\um@usv@sfupLatin}
     \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@itLatin}{\um@usv@sfitLatin}
   }{
-    \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@upLatin,\um@usv@itLatin}{ \um_sf_Latin_up_or_it_usv }
+    \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@upLatin,\um@usv@itLatin}{ \g_um_sf_Latin_up_or_it_usv }
   }
 }
 \cs_new:Npn \um_config_mathsf_latin: {
@@ -3131,7 +3131,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_latin:Nnn{\mathsf}{\um@usv@itlatin}{\um@usv@sfitlatin}
     \um_set_mathalphabet_char:Nnn \mathsf {\um@usv@ith} {"1D629}
   }{
-    \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@uplatin,\um@usv@itlatin}{ \um_sf_latin_up_or_it_usv }
+    \um_set_mathalphabet_latin:Nnn   \mathsf {\um@usv@uplatin,\um@usv@itlatin}{ \g_um_sf_Latin_up_or_it_usv }
     \bool_if:NTF \g_um_upsans_bool {
       \um_set_mathalphabet_char:Nnn   \mathsf {\um@usv@ith} {"1D5C1}
     }{
@@ -3221,7 +3221,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_bf_Latin:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_bf_Latin: {
-      \um_map_chars_latin:nn {\um@usv@bfupLatin,\um@usv@bfitLatin}{\um_bf_Latin_up_or_it_usv}
+      \um_map_chars_latin:nn {\um@usv@bfupLatin,\um@usv@bfitLatin}{\g_um_bf_Latin_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3229,7 +3229,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_bf_latin:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_bf_latin: {
-      \um_map_chars_latin:nn {\um@usv@bfuplatin,\um@usv@bfitlatin}{\um_bf_latin_up_or_it_usv}
+      \um_map_chars_latin:nn {\um@usv@bfuplatin,\um@usv@bfitlatin}{\g_um_bf_latin_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3237,8 +3237,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_bf_Greek:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_bf_Greek: {
-      \um_map_chars_greek:nn {\um@usv@bfupGreek,\um@usv@bfitGreek}{\um_bf_Greek_up_or_it_usv}
-      \um_map_char:nn {\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\um_bf_varTheta_up_or_it_usv}
+      \um_map_chars_greek:nn {\um@usv@bfupGreek,\um@usv@bfitGreek}{\g_um_bf_Greek_up_or_it_usv}
+      \um_map_char:nn {\um@usv@bfvarTheta,\um@usv@bfitvarTheta}{\g_um_bf_varTheta_up_or_it_usv}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3246,7 +3246,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_bf_greek:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_bf_greek: {
-      \um_map_chars_greek:nn {\um@usv@bfupgreek,\um@usv@bfitgreek}{\um_bf_greek_up_or_it_usv}
+      \um_map_chars_greek:nn {\um@usv@bfupgreek,\um@usv@bfitgreek}{\g_um_bf_greek_up_or_it_usv}
       \bool_if:NTF \g_um_bfupgreek_bool {
         \um_map_char:nn {\um@usv@bfvarepsilon,\um@usv@bfitvarepsilon}{\um@usv@bfvarepsilon}
         \um_map_char:nn {\um@usv@bfvartheta,\um@usv@bfitvartheta}{\um@usv@bfvartheta}
@@ -3277,7 +3277,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin}{\um@usv@bfupLatin}
     \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@itLatin}{\um@usv@bfitLatin}
   }{
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\um_bf_Latin_up_or_it_usv}
+    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@upLatin,\um@usv@itLatin}{\g_um_bf_Latin_up_or_it_usv}
   }
 }
 \cs_new:Npn \um_config_mathbf_latin: {
@@ -3286,8 +3286,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@itlatin}{\um@usv@bfitlatin}
     \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um@usv@bfith}
   }{
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\um_bf_latin_up_or_it_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\um_bf_latinh_up_or_it_usv}
+    \um_set_mathalphabet_latin:Nnn{\mathbf}{\um@usv@uplatin,\um@usv@itlatin}{\g_um_bf_latin_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@ith}{\g_um_bf_latinh_up_or_it_usv}
   }
 }
 \cs_new:Npn \um_config_mathbf_Greek: {
@@ -3300,9 +3300,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla}{\um@usv@bfNabla}
     \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itNabla}{\um@usv@bfitNabla}
   }{
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\um_bf_Greek_up_or_it_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla,\um@usv@itNabla}{\um_bfNabla_up_or_it_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\um_bf_varTheta_up_or_it_usv}
+    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upGreek,\um@usv@itGreek}{\g_um_bf_Greek_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@Nabla,\um@usv@itNabla}{\g_um_bfNabla_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varTheta,\um@usv@itvarTheta}{\g_um_bf_varTheta_up_or_it_usv}
   }
 }
 \cs_new:Npn \um_config_mathbf_greek: {
@@ -3325,7 +3325,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarrho}{\um@usv@bfitvarrho}
     \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@itvarpi}{\um@usv@bfitvarpi}
   }{
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\um_bf_greek_up_or_it_usv}
+    \um_set_mathalphabet_greek:Nnn{\mathbf}{\um@usv@upgreek,\um@usv@itgreek}{\g_um_bf_greek_up_or_it_usv}
     \bool_if:NTF \g_um_bfupgreek_bool {
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varepsilon,\um@usv@itvarepsilon}{\um@usv@bfvarepsilon}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@vartheta,\um@usv@itvartheta}{\um@usv@bfvartheta}
@@ -3341,7 +3341,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varrho,\um@usv@itvarrho}{\um@usv@bfitvarrho}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@varpi,\um@usv@itvarpi}{\um@usv@bfitvarpi}
     }
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial,\um@usv@itpartial}{\um_bfpartial_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn{\mathbf}{\um@usv@partial,\um@usv@itpartial}{\g_um_bfpartial_up_or_it_usv}
   }
 }
 %    \end{macrocode}
@@ -3444,7 +3444,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin}{\um@usv@bfsfupLatin}
     \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@itLatin}{\um@usv@bfsfitLatin}
   }{
-    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\um_bfsf_Latin_up_or_it_usv}
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@upLatin,\um@usv@itLatin}{\g_um_bfsf_Latin_up_or_it_usv}
   }
 }
 \cs_new:Npn \um_config_mathbfsf_latin: {
@@ -3453,7 +3453,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@itlatin}{\um@usv@bfsfitlatin}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@ith} {"1D65D}
   }{
-    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin,\um@usv@itlatin}{\um_bfsf_latin_up_or_it_usv}
+    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\um@usv@uplatin,\um@usv@itlatin}{\g_um_bfsf_latin_up_or_it_usv}
     \bool_if:NTF \g_um_upsans_bool {
       \um_set_mathalphabet_char:Nnn \mathbfsf {\um@usv@ith} {"1D5F5}
     }{
@@ -3470,8 +3470,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla}{\um@usv@bfsfNabla}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itNabla}{\um@usv@bfsfitNabla}
   }{
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek,\um@usv@itGreek}{\um_bfsf_Greek_up_or_it_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla,\um@usv@itNabla}{\um_bfsfNabla_up_or_it_usv}
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upGreek,\um@usv@itGreek}{\g_um_bfsf_Greek_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@Nabla,\um@usv@itNabla}{\g_um_bfsfNabla_up_or_it_usv}
     \bool_if:NTF \g_um_upsans_bool {
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varTheta,\um@usv@itvarTheta}{"1D767}
     }{
@@ -3498,8 +3498,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarrho}{"1D7C8}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@itvarpi}{"1D7C9}
   }{
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek,\um@usv@itgreek}{\um_bfsf_greek_up_or_it_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial,\um@usv@itpartial}{\um_bfsfpartial_up_or_it_usv}
+    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\um@usv@upgreek,\um@usv@itgreek}{\g_um_bfsf_greek_up_or_it_usv}
+    \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@partial,\um@usv@itpartial}{\g_um_bfsfpartial_up_or_it_usv}
     \bool_if:NTF \g_um_upsans_bool {
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@varepsilon,\um@usv@itvarepsilon}{"1D78A}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\um@usv@vartheta,\um@usv@itvartheta}{"1D78B}
