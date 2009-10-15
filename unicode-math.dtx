@@ -1742,6 +1742,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
+    \cs_set_eq:NN \um_map_char_internal:nn \um_map_char_noparse:nn
   }{
     \stepcounter{um@fam}
     \tl_set:Nx \um_symfont_tl {um@fam\theum@fam}
@@ -1749,6 +1750,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_parse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
+    \cs_set_eq:NN \um_map_char_internal:nn \um_map_char_parse:nn
   }
 %    \end{macrocode}
 % Now defined |\um_symfont_tl| as the \LaTeX\ math font to access everything:
@@ -1964,7 +1966,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_alphanum:}
 %    \begin{macrocode}
 \cs_set:Nn \um_setup_alphanum: {
-  \bool_if:NTF \l_um_init_bool {
     \um_map_chars_numbers:nn {\um@usv@upnum}{\um@usv@upnum}
     \um_setup_Latin:
     \um_setup_latin:
@@ -1978,11 +1979,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_setup_sf_latin:
     \um_setup_sf_Greek:
     \um_setup_sf_greek:
-  }{
-%    \end{macrocode}
-% %: TODO : what is supposed to happen here?
-%    \begin{macrocode}
-  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2463,13 +2459,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Loops through character ranges setting \cmd\mathcode.
 %    \begin{macrocode}
 \cs_set:Nn \um_map_chars_range:nnn {
-  \clist_map_variable:nNn {#2} \l_um_input_num {
-    \prg_stepwise_variable:nnnNn{0}{1}{#1} \l_um_incr_num {
-      \um_set_mathcode:nnnn
-        {\numexpr \l_um_incr_num+ \l_um_input_num \relax}
-        {\mathalpha}{\um_symfont_tl}
-        {\numexpr \l_um_incr_num + #3 \relax}
+  \clist_map_inline:nn {#2} {
+    \prg_stepwise_inline:nnnn {0}{1}{#1} {
+      \um_map_char_internal:nn {##1+####1}{#3+####1}
     }
+  }
+}
+\cs_new:Nn \um_map_char_noparse:nn {
+  \um_set_mathcode:nnnn
+    {\numexpr #1 \relax}{\mathalpha}{\um_symfont_tl}{\numexpr #2 \relax}
+}
+\cs_new:Nn \um_map_char_parse:nn {
+  \um@parse@term {#1} {\@nil} {\mathalpha} {
+    \um_map_char_noparse:nn {#1}{#2}
   }
 }
 \cs_set:Nn \um_map_chars_latin:nn {
@@ -2719,7 +2721,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_math_alphabet:Nn}
 % \darg{Math font family name (e.g., `sf')}
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
-% First check that at least one of the alphabets for the font shape is defined, and then
+% First check that at least one of the alphabets for the font shape is defined, and
 % then loop through them defining the individual ranges.
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_math_alphabet:Nn {
