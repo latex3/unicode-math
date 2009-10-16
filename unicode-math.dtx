@@ -2560,20 +2560,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
   }
   \tl_set:Nn \epsilon {
-    \bool_if:NTF \g_um_texgreek_bool
-      \mitvarepsilon \mitepsilon
+    \bool_if:NTF \g_um_texgreek_bool \mitvarepsilon \mitepsilon
   }
   \tl_set:Nn \phi {
-    \bool_if:NTF \g_um_texgreek_bool
-      \mitvarphi \mitphi
+    \bool_if:NTF \g_um_texgreek_bool \mitvarphi \mitphi
   }
   \tl_set:Nn \varepsilon {
-    \bool_if:NTF \g_um_texgreek_bool
-      \mitepsilon \mitvarepsilon
+    \bool_if:NTF \g_um_texgreek_bool \mitepsilon \mitvarepsilon
   }
   \tl_set:Nn \varphi {
-    \bool_if:NTF \g_um_texgreek_bool
-      \mitphi \mitvarphi
+    \bool_if:NTF \g_um_texgreek_bool \mitphi \mitvarphi
   }
 }
 %    \end{macrocode}
@@ -2591,10 +2587,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Implicit mode:
 % \begin{itemize}
 % \item Try and set all of the alphabet shapes.
-% \item Check for the first glyph of the uppercase Latin alphabet to detect if the font supports each
+% \item Check for the first glyph of each alphabet to detect if the font supports each
 %       alphabet shape.
-%       (This doesn't work to distinguish Latin/Greek but we hope all maths
-%       fonts will have at least them!)
 % \item For alphabets that do exist, overwrite whatever's already there.
 % \item For alphabets that are not supported, \emph{do nothing}.
 %       (This includes leaving the old alphabet definition in place.)
