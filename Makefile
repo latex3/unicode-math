@@ -17,6 +17,9 @@ help:
 	echo '`make test` will then compare future compilations of the'
 	echo 'test file against this original and warn against any changes.'
 	echo ' '
+	echo 'I recommend `make -j4 test` or thereabouts to parallelise
+	echo 'the testing.'
+	echo ' '
 	echo 'Note that the documentation contains of the complete'
 	echo 'test suite in a single document (unicode-math-testsuite.pdf);'
 	echo '`make doc` therefore will ensure that the test suite has'
@@ -142,21 +145,20 @@ test: $(BUILDFILES) $(BUILDTESTTARGET)
 #### Each step of the process ####
 
 $(builddir)/%.diff.png: $(builddir)/%.test.png
-	echo 'Comparing with good PNG.'
+	echo '$*: Comparing with good PNG.'
 	if [ "${shell compare -metric RMSE $(builddir)/$*.test.png $(testdir)/$*.safe.png $(builddir)/$*.diff.png | grep 'dB'}" = "0 dB" ] ; then \
-	  echo ' ' ; \
+	  echo '$*: Test passed.' ; \
 	else \
-	  echo 'Test failed.' ; \
+	  echo '$*: Test failed.' ; \
 	  false ; \
 	fi
 
 $(builddir)/%.test.png: $(builddir)/%.pdf
-	echo 'Converting PDF to PNG.'
+	echo '$*: Converting PDF to PNG.'
 	convert -density 300x300  $<  $(builddir)/$*.test.png
 
 $(builddir)/umtest%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/umtest%.ltx
-	echo 'TEST $*'
-	echo 'Generating PDF output.'
+	echo 'umtest$*: Generating PDF output.'
 	cd $(builddir); xelatex -interaction=batchmode umtest$*.ltx > /dev/null
 
 
