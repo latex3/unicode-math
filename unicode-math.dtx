@@ -1870,14 +1870,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
-% Adds \cs{um_set_mathcode:nnnn} declarations to the specified maths alphabet's definition (\eg, \cmd\um@mathscr).
-% Uses \cmd\um@addto@mathmap\ (below) to expand the name of the current symbol font.
+% Adds \cs{um_set_mathcode:nnnn} declarations to the specified maths alphabet's definition.
 %    \begin{macrocode}
 \cs_set:Nn \um_mathmap_noparse:Nnn {
   \clist_map_inline:nn {#2} {
-    \exp_args:No \um@addto@mathmap \um_symfont_tl {##1}{#1}{#3}
+    \tl_put_right:cx {um_setup_\cs_to_str:N #1:} {
+      \exp_not:N\um_set_mathcode:nnnn{##1}{\exp_not:N\mathalpha}{\um_symfont_tl}{#3}
+    }
   }
 }
+\cs_generate_variant:Nn \tl_put_right:Nn {cx}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1887,30 +1889,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % When \cmd\um@parse@term\ is executed, it populates the \cmd\um@char@num@range\
 % macro with slot numbers corresponding to the specified range. This range is used to
-% conditionally add \cs{um_set_mathcode:nnnn} declaractions to the maths alphabet definition (\eg, \cmd\um@mathscr).
+% conditionally add \cs{um_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
 \cs_set:Nn \um_mathmap_parse:Nnn {
   \clist_map_inline:Nn \um@char@num@range {
     \ifnum##1=#3\relax
-      \clist_map_inline:nn {#2} {
-        \exp_args:No \um@addto@mathmap \um_symfont_tl {####1}{#1}{#3}
-      }
+      \um_mathmap_noparse:Nnn {#1}{#2}{#3}
     \fi
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@addto@mathmap}
-% \darg{Math symbol font, always/usually the expansion of \cs{um_symfont_tl}}
-% \darg{Input slot, \eg, the slot for `A'}
-% \darg{Maths alphabet, \eg, \cmd\mathbb}
-% \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
-% This macro is used so that \cs{um_symfont_tl} can be expanded before entering the \cmd\g@addto@macro\ command.
-%    \begin{macrocode}
-\newcommand\um@addto@mathmap[4]{
-  \tl_put_right:cn {um_setup_\cs_to_str:N #3:} {
-    \um_set_mathcode:nnnn{#2}{\mathalpha}{#1}{#4}
   }
 }
 %    \end{macrocode}
