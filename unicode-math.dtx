@@ -2304,7 +2304,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \begin{macro}{\um_map_char:nn }
 % \begin{macro}{\um_map_chars_latin:nn }
-% \begin{macro}{\um_map_chars_greek:nn }
+% \begin{macro}{\um_map_chars_xxiii:nn }
 % \begin{macro}{\um_map_chars_numbers:nn }
 % \darg{Number of iterations}
 % \darg{Starting input char(s)}
@@ -2330,8 +2330,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_set:Nn \um_map_chars_latin:nn {
   \um_map_chars_range:nnn {25}{#1}{#2}
 }
-\cs_set:Nn \um_map_chars_greek:nn {
+\cs_set:Nn \um_map_chars_xxiii:nn {
   \um_map_chars_range:nnn {24}{#1}{#2}
+}
+\cs_set:Nn \um_map_chars_greek:nn {
+  \clist_map_inline:nn {#1} {
+    \um_map_chars_xxiii:cc {g_um_ ##1 _greek_usv}{g_um_ #2 _greek_usv}
+    \um_map_char:cc {g_um_ ##1 _varepsilon_usv}{g_um_ #2 _varepsilon_usv}
+    \um_map_char:cc {g_um_ ##1 _vartheta_usv  }{g_um_ #2 _vartheta_usv  }
+    \um_map_char:cc {g_um_ ##1 _varkappa_usv  }{g_um_ #2 _varkappa_usv  }
+    \um_map_char:cc {g_um_ ##1 _varphi_usv    }{g_um_ #2 _varphi_usv    }
+    \um_map_char:cc {g_um_ ##1 _varrho_usv    }{g_um_ #2 _varrho_usv    }
+    \um_map_char:cc {g_um_ ##1 _varpi_usv     }{g_um_ #2 _varpi_usv     }
+  }
 }
 \cs_set:Nn \um_map_chars_numbers:nn {
   \um_map_chars_range:nnn {9}{#1}{#2}
@@ -2339,6 +2350,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_set:Nn \um_map_char:nn {
   \um_map_chars_range:nnn {0}{#1}{#2}
 }
+\cs_generate_variant:Nn \um_map_char:nn {cc}
+\cs_generate_variant:Nn \um_map_chars_xxiii:nn {cc}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2683,11 +2696,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathup_Greek: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_greek:nn {\g_um_up_Greek_usv}{\g_um_up_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_up_Greek_usv}{\g_um_up_Greek_usv}
     \um_map_char:nn {\g_um_up_varTheta_usv}{\g_um_up_varTheta_usv}
   }{
     \bool_if:NT \g_um_upGreek_bool {
-      \um_map_chars_greek:nn {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_up_Greek_usv}
+      \um_map_chars_xxiii:nn {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_up_Greek_usv}
       \um_map_char:nn {\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_up_varTheta_usv}
     }
   }
@@ -2697,22 +2710,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathup_greek: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_greek:nn {\g_um_up_greek_usv}{\g_um_up_greek_usv}
-    \um_map_char:nn {\g_um_up_varepsilon_usv}{\g_um_up_varepsilon_usv}
-    \um_map_char:nn {\g_um_up_vartheta_usv}{\g_um_up_vartheta_usv}
-    \um_map_char:nn {\g_um_up_varkappa_usv}{\g_um_up_varkappa_usv}
-    \um_map_char:nn {\g_um_up_varphi_usv}{\g_um_up_varphi_usv}
-    \um_map_char:nn {\g_um_up_varrho_usv}{\g_um_up_varrho_usv}
-    \um_map_char:nn {\g_um_up_varpi_usv}{\g_um_up_varpi_usv}
+    \um_map_chars_greek:nn {up} {up}
   }{
     \bool_if:NT \g_um_upgreek_bool {
-      \um_map_chars_greek:nn {\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_up_greek_usv}
-      \um_map_char:nn {\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_up_varepsilon_usv}
-      \um_map_char:nn {\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_up_vartheta_usv}
-      \um_map_char:nn {\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_up_varkappa_usv}
-      \um_map_char:nn {\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_up_varphi_usv}
-      \um_map_char:nn {\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_up_varrho_usv}
-      \um_map_char:nn {\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_up_varpi_usv}
+      \um_map_chars_greek:nn {up,it} {up}
     }
   }
   \um_set_mathalphabet_greek:Nnn{\mathup}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_up_greek_usv}
@@ -2754,11 +2755,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathit_Greek: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_greek:nn {\g_um_it_Greek_usv}{\g_um_it_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_it_Greek_usv}{\g_um_it_Greek_usv}
     \um_map_char:nn {\g_um_it_varTheta_usv}{\g_um_it_varTheta_usv}
   }{
     \bool_if:NF \g_um_upGreek_bool {
-      \um_map_chars_greek:nn {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_it_Greek_usv}
+      \um_map_chars_xxiii:nn {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_it_Greek_usv}
       \um_map_char:nn {\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_it_varTheta_usv}
     }
   }
@@ -2767,22 +2768,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_it_Nabla_usv}
 }
 \cs_new:Npn \um_config_mathit_greek: {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_char:nn {\g_um_it_varepsilon_usv}{\g_um_it_varepsilon_usv}
-    \um_map_char:nn {\g_um_it_vartheta_usv}{\g_um_it_vartheta_usv}
-    \um_map_char:nn {\g_um_it_varkappa_usv}{\g_um_it_varkappa_usv}
-    \um_map_char:nn {\g_um_it_varphi_usv}{\g_um_it_varphi_usv}
-    \um_map_char:nn {\g_um_it_varrho_usv}{\g_um_it_varrho_usv}
-    \um_map_char:nn {\g_um_it_varpi_usv}{\g_um_it_varpi_usv}
+  \bool_if:NTF \g_um_literal_bool { 
+    \um_map_chars_greek:nn {it} {it}
   }{
     \bool_if:NF \g_um_upgreek_bool {
-      \um_map_chars_greek:nn {\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_it_greek_usv}
-      \um_map_char:nn {\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_it_varepsilon_usv}
-      \um_map_char:nn {\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_it_vartheta_usv}
-      \um_map_char:nn {\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_it_varkappa_usv}
-      \um_map_char:nn {\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_it_varphi_usv}
-      \um_map_char:nn {\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_it_varrho_usv}
-      \um_map_char:nn {\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_it_varpi_usv}
+      \um_map_chars_greek:nn {it,up} {it}
     }
   }
   \um_set_mathalphabet_greek:Nnn{\mathit}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_it_greek_usv}
@@ -2985,8 +2975,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Npn \um_config_mathbf_Greek: {
   \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Digamma_usv}{\g_um_bfup_Digamma_usv}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_greek:nn {\g_um_bfup_Greek_usv}{\g_um_bfup_Greek_usv}
-    \um_map_chars_greek:nn {\g_um_bfit_Greek_usv}{\g_um_bfit_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_bfup_Greek_usv}{\g_um_bfup_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_bfit_Greek_usv}{\g_um_bfit_Greek_usv}
     \um_map_char:nn {\g_um_bfup_varTheta_usv}{\g_um_bfup_varTheta_usv}
     \um_map_char:nn {\g_um_bfit_varTheta_usv}{\g_um_bfit_varTheta_usv} 
     \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_Greek_usv}{\g_um_bfup_Greek_usv}
@@ -2996,7 +2986,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Nabla_usv}{\g_um_bf_Nabla_usv}
     \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
   }{
-    \um_map_chars_greek:nn {\g_um_bfup_Greek_usv,\g_um_bfit_Greek_usv}{\g_um_bfup_Greek_up_or_it_usv}
+    \um_map_chars_xxiii:nn {\g_um_bfup_Greek_usv,\g_um_bfit_Greek_usv}{\g_um_bfup_Greek_up_or_it_usv}
     \um_map_char:nn {\g_um_bfup_varTheta_usv,\g_um_bfit_varTheta_usv}{\g_um_bfup_varTheta_up_or_it_usv}
     \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfup_Greek_up_or_it_usv}
     \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfNabla_up_or_it_usv}
@@ -3006,20 +2996,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Npn \um_config_mathbf_greek: {
   \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_digamma_usv}{\g_um_bfup_digamma_usv}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_greek:nn {\g_um_bfup_greek_usv}{\g_um_bfup_greek_usv}
-    \um_map_chars_greek:nn {\g_um_bfit_greek_usv}{\g_um_bfit_greek_usv}
-    \um_map_char:nn {\g_um_bfup_varepsilon_usv}{\g_um_bfup_varepsilon_usv}
-    \um_map_char:nn {\g_um_bfup_vartheta_usv}{\g_um_bfup_vartheta_usv}
-    \um_map_char:nn {\g_um_bfup_varkappa_usv}{\g_um_bfup_varkappa_usv}
-    \um_map_char:nn {\g_um_bfup_varphi_usv}{\g_um_bfup_varphi_usv}
-    \um_map_char:nn {\g_um_bfup_varrho_usv}{\g_um_bfup_varrho_usv}
-    \um_map_char:nn {\g_um_bfup_varpi_usv}{\g_um_bfup_varpi_usv}
-    \um_map_char:nn {\g_um_bfit_varepsilon_usv}{\g_um_bfit_varepsilon_usv}
-    \um_map_char:nn {\g_um_bfit_vartheta_usv}{\g_um_bfit_vartheta_usv}
-    \um_map_char:nn {\g_um_bfit_varkappa_usv}{\g_um_bfit_varkappa_usv}
-    \um_map_char:nn {\g_um_bfit_varphi_usv}{\g_um_bfit_varphi_usv}
-    \um_map_char:nn {\g_um_bfit_varrho_usv}{\g_um_bfit_varrho_usv}
-    \um_map_char:nn {\g_um_bfit_varpi_usv}{\g_um_bfit_varpi_usv} 
+    \um_map_chars_greek:nn {bfup} {bfup}
+    \um_map_chars_greek:nn {bfit} {bfit}
     \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_greek_usv}{\g_um_bfup_greek_usv}
     \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_it_greek_usv}{\g_um_bfit_greek_usv}
     \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_partial_usv}{\g_um_bf_partial_usv}
@@ -3038,21 +3016,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varpi_usv}{\g_um_bfit_varpi_usv}
   }{
     \bool_if:NTF \g_um_bfupgreek_bool {
-      \um_map_chars_greek:nn {\g_um_bfup_greek_usv,\g_um_bfit_greek_usv}{\g_um_bfup_greek_usv}
-      \um_map_char:nn {\g_um_bfup_varepsilon_usv,\g_um_bfit_varepsilon_usv}{\g_um_bfup_varepsilon_usv}
-      \um_map_char:nn {\g_um_bfup_vartheta_usv,\g_um_bfit_vartheta_usv}{\g_um_bfup_vartheta_usv}
-      \um_map_char:nn {\g_um_bfup_varkappa_usv,\g_um_bfit_varkappa_usv}{\g_um_bfup_varkappa_usv}
-      \um_map_char:nn {\g_um_bfup_varphi_usv,\g_um_bfit_varphi_usv}{\g_um_bfup_varphi_usv}
-      \um_map_char:nn {\g_um_bfup_varrho_usv,\g_um_bfit_varrho_usv}{\g_um_bfup_varrho_usv}
-      \um_map_char:nn {\g_um_bfup_varpi_usv,\g_um_bfit_varpi_usv}{\g_um_bfup_varpi_usv}
+      \um_map_chars_greek:nn {bfup,bfit} {bfup}
     }{
-      \um_map_chars_greek:nn {\g_um_bfup_greek_usv,\g_um_bfit_greek_usv}{\g_um_bfit_greek_usv}
-      \um_map_char:nn {\g_um_bfup_varepsilon_usv,\g_um_bfit_varepsilon_usv}{\g_um_bfit_varepsilon_usv}
-      \um_map_char:nn {\g_um_bfup_vartheta_usv,\g_um_bfit_vartheta_usv}{\g_um_bfit_vartheta_usv}
-      \um_map_char:nn {\g_um_bfup_varkappa_usv,\g_um_bfit_varkappa_usv}{\g_um_bfit_varkappa_usv}
-      \um_map_char:nn {\g_um_bfup_varphi_usv,\g_um_bfit_varphi_usv}{\g_um_bfit_varphi_usv}
-      \um_map_char:nn {\g_um_bfup_varrho_usv,\g_um_bfit_varrho_usv}{\g_um_bfit_varrho_usv}
-      \um_map_char:nn {\g_um_bfup_varpi_usv,\g_um_bfit_varpi_usv}{\g_um_bfit_varpi_usv}
+      \um_map_chars_greek:nn {bfit,bfup} {bfit}
     }
     \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfup_greek_up_or_it_usv}
     \bool_if:NTF \g_um_bfupgreek_bool {
@@ -3094,7 +3060,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfit_Greek: {
   \bool_if:NF \g_um_bfupGreek_bool {
-    \um_map_chars_greek:nn {\g_um_bfup_Greek_usv,\g_um_bfit_Greek_usv}{\g_um_bfit_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_bfup_Greek_usv,\g_um_bfit_Greek_usv}{\g_um_bfit_Greek_usv}
     \um_map_char:nn {\g_um_bfup_varTheta_usv,\g_um_bfit_varTheta_usv}{\g_um_bfit_varTheta_usv}
   }
   \um_set_mathalphabet_greek:Nnn{\mathbfit}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfit_Greek_usv}
@@ -3102,16 +3068,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
 }
 \cs_new:Npn \um_config_mathbfit_greek: {
-    \bool_if:NF \g_um_bfupgreek_bool {
-      \um_map_chars_greek:nn {\g_um_bfup_greek_usv,\g_um_bfit_greek_usv}{\g_um_bfit_greek_usv}
-      \um_map_char:nn {\g_um_bfup_varepsilon_usv,\g_um_bfit_varepsilon_usv}{\g_um_bfit_varepsilon_usv}
-      \um_map_char:nn {\g_um_bfup_vartheta_usv,\g_um_bfit_vartheta_usv}{\g_um_bfit_vartheta_usv}
-      \um_map_char:nn {\g_um_bfup_varkappa_usv,\g_um_bfit_varkappa_usv}{\g_um_bfit_varkappa_usv}
-      \um_map_char:nn {\g_um_bfup_varphi_usv,\g_um_bfit_varphi_usv}{\g_um_bfit_varphi_usv}
-      \um_map_char:nn {\g_um_bfup_varrho_usv,\g_um_bfit_varrho_usv}{\g_um_bfit_varrho_usv}
-      \um_map_char:nn {\g_um_bfup_varpi_usv,\g_um_bfit_varpi_usv}{\g_um_bfit_varpi_usv}
-    }
-  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
+  \bool_if:NF \g_um_bfupgreek_bool {
+    \um_map_chars_greek:nn {bfup,bfit} {bfit}
+  }
   \um_set_mathalphabet_greek:Nnn{\mathbfit}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfit_greek_usv}
   \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfit_partial_usv}
   \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfit_varepsilon_usv}
@@ -3144,7 +3103,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfup_Greek: {
   \bool_if:NT \g_um_bfupGreek_bool {
-    \um_map_chars_greek:nn {\g_um_bfup_Greek_usv,\g_um_bfit_Greek_usv}{\g_um_bfup_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_bfup_Greek_usv,\g_um_bfit_Greek_usv}{\g_um_bfup_Greek_usv}
     \um_map_char:nn {\g_um_bfup_varTheta_usv,\g_um_bfit_varTheta_usv}{\g_um_bfup_varTheta_usv}
   }
   \um_set_mathalphabet_greek:Nnn{\mathbfup}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfup_Greek_usv}
@@ -3153,15 +3112,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_Digamma_usv}{\g_um_bfup_Digamma_usv}
 }
 \cs_new:Npn \um_config_mathbfup_greek: {
-    \bool_if:NT \g_um_bfupgreek_bool {
-      \um_map_chars_greek:nn {\g_um_bfup_greek_usv,\g_um_bfit_greek_usv}{\g_um_bfup_greek_usv}
-      \um_map_char:nn {\g_um_bfup_varepsilon_usv,\g_um_bfit_varepsilon_usv}{\g_um_bfup_varepsilon_usv}
-      \um_map_char:nn {\g_um_bfup_vartheta_usv,\g_um_bfit_vartheta_usv}{\g_um_bfup_vartheta_usv}
-      \um_map_char:nn {\g_um_bfup_varkappa_usv,\g_um_bfit_varkappa_usv}{\g_um_bfup_varkappa_usv}
-      \um_map_char:nn {\g_um_bfup_varphi_usv,\g_um_bfit_varphi_usv}{\g_um_bfup_varphi_usv}
-      \um_map_char:nn {\g_um_bfup_varrho_usv,\g_um_bfit_varrho_usv}{\g_um_bfup_varrho_usv}
-      \um_map_char:nn {\g_um_bfup_varpi_usv,\g_um_bfit_varpi_usv}{\g_um_bfup_varpi_usv}
-    }
+  \bool_if:NT \g_um_bfupgreek_bool {
+    \um_map_chars_greek:nn {bfup,bfit} {bfup}
+  }
   \um_set_mathalphabet_greek:Nnn{\mathbfup}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfup_greek_usv}
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bf_partial_usv}
   \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfup_varepsilon_usv}
@@ -3230,7 +3183,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfup_Greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_greek:nn {\g_um_bfsfup_Greek_usv}{\g_um_bfsfup_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_bfsfup_Greek_usv}{\g_um_bfsfup_Greek_usv}
     \um_map_char:nn {\g_um_bfsfup_varTheta_usv}  {\g_um_bfsfup_varTheta_usv}
     \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_Greek_usv}{\g_um_bfsfup_Greek_usv}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varTheta_usv}{\g_um_bfsfup_varTheta_usv}
@@ -3240,7 +3193,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfsfup_Greek_usv}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_bfsfup_varTheta_usv}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfNabla_up_or_it_usv}
-      \um_map_chars_greek:nn {\g_um_bfsfup_Greek_usv,\g_um_bfsfit_Greek_usv}{\g_um_bfsfup_Greek_usv}
+      \um_map_chars_xxiii:nn {\g_um_bfsfup_Greek_usv,\g_um_bfsfit_Greek_usv}{\g_um_bfsfup_Greek_usv}
       \um_map_char:nn {\g_um_bfsfup_varTheta_usv,\g_um_bfsfit_varTheta_usv}{\g_um_bfsfup_varTheta_usv}
     }
   }
@@ -3250,13 +3203,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfup_greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_greek:nn {\g_um_bfsfup_greek_usv}{\g_um_bfsfup_greek_usv}
-    \um_map_char:nn {\g_um_bfsfup_varepsilon_usv}{\g_um_bfsfup_varepsilon_usv}
-    \um_map_char:nn {\g_um_bfsfup_vartheta_usv}  {\g_um_bfsfup_vartheta_usv}
-    \um_map_char:nn {\g_um_bfsfup_varkappa_usv}  {\g_um_bfsfup_varkappa_usv}
-    \um_map_char:nn {\g_um_bfsfup_varphi_usv}    {\g_um_bfsfup_varphi_usv}
-    \um_map_char:nn {\g_um_bfsfup_varrho_usv}    {\g_um_bfsfup_varrho_usv}
-    \um_map_char:nn {\g_um_bfsfup_varpi_usv}     {\g_um_bfsfup_varpi_usv}
+    \um_map_chars_greek:nn {bfsfup} {bfsfup}
     \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_greek_usv}{\g_um_bfsfup_greek_usv}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_partial_usv}{\g_um_bfsf_partial_usv}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_partial_usv}{\g_um_bfsfit_partial_usv}
@@ -3268,13 +3215,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varpi_usv}{\g_um_bfsfup_varpi_usv}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_greek:nn {\g_um_bfsfup_greek_usv,\g_um_bfsfit_greek_usv}{\g_um_bfsfup_greek_usv}
-      \um_map_char:nn {\g_um_bfsfup_varepsilon_usv,\g_um_bfsfit_varepsilon_usv}{\g_um_bfsfup_varepsilon_usv}
-      \um_map_char:nn {\g_um_bfsfup_vartheta_usv,\g_um_bfsfit_vartheta_usv}    {\g_um_bfsfup_vartheta_usv}
-      \um_map_char:nn {\g_um_bfsfup_varkappa_usv,\g_um_bfsfit_varkappa_usv}    {\g_um_bfsfup_varkappa_usv}
-      \um_map_char:nn {\g_um_bfsfup_varphi_usv,\g_um_bfsfit_varphi_usv}        {\g_um_bfsfup_varphi_usv}
-      \um_map_char:nn {\g_um_bfsfup_varrho_usv,\g_um_bfsfit_varrho_usv}        {\g_um_bfsfup_varrho_usv}
-      \um_map_char:nn {\g_um_bfsfup_varpi_usv,\g_um_bfsfit_varpi_usv}          {\g_um_bfsfup_varpi_usv}
+      \um_map_chars_greek:nn {bfsfup,bfsfit} {bfsfup}
       \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfsfup_greek_usv}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfsf_partial_usv}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfsfup_varepsilon_usv}
@@ -3328,14 +3269,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfit_Greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_greek:nn {\g_um_bfsfit_Greek_usv}{\g_um_bfsfit_Greek_usv}
+    \um_map_chars_xxiii:nn {\g_um_bfsfit_Greek_usv}{\g_um_bfsfit_Greek_usv}
     \um_map_char:nn {\g_um_bfsfit_varTheta_usv}  {\g_um_bfsfit_varTheta_usv}
     \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_it_Greek_usv}{\g_um_bfsfit_Greek_usv}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varTheta_usv}{\g_um_bfsfit_varTheta_usv}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_Nabla_usv}{\g_um_bfsfit_Nabla_usv}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_greek:nn {\g_um_bfsfup_Greek_usv,\g_um_bfsfit_Greek_usv}{\g_um_bfsfit_Greek_usv}
+      \um_map_chars_xxiii:nn {\g_um_bfsfup_Greek_usv,\g_um_bfsfit_Greek_usv}{\g_um_bfsfit_Greek_usv}
       \um_map_char:nn {\g_um_bfsfup_varTheta_usv,\g_um_bfsfit_varTheta_usv}{\g_um_bfsfit_varTheta_usv}
       \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfsfit_Greek_usv}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfNabla_up_or_it_usv}
@@ -3348,13 +3289,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfit_greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_greek:nn {\g_um_bfsfit_greek_usv}{\g_um_bfsfit_greek_usv}
-    \um_map_char:nn {\g_um_bfsfit_varepsilon_usv}{\g_um_bfsfit_varepsilon_usv}
-    \um_map_char:nn {\g_um_bfsfit_vartheta_usv}  {\g_um_bfsfit_vartheta_usv}
-    \um_map_char:nn {\g_um_bfsfit_varkappa_usv}  {\g_um_bfsfit_varkappa_usv}
-    \um_map_char:nn {\g_um_bfsfit_varphi_usv}    {\g_um_bfsfit_varphi_usv}
-    \um_map_char:nn {\g_um_bfsfit_varrho_usv}    {\g_um_bfsfit_varrho_usv}
-    \um_map_char:nn {\g_um_bfsfit_varpi_usv}     {\g_um_bfsfit_varpi_usv}
+    \um_map_chars_greek:nn {bfsfit} {bfsfit}
     \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_it_greek_usv}{\g_um_bfsfit_greek_usv}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_partial_usv}{\g_um_bfsfit_partial_usv}
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varepsilon_usv}{\g_um_bfsfit_varepsilon_usv}
@@ -3365,13 +3300,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varpi_usv}{\g_um_bfsfit_varpi_usv}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_greek:nn {\g_um_bfsfup_greek_usv,\g_um_bfsfit_greek_usv}{\g_um_bfsfit_greek_usv}
-      \um_map_char:nn {\g_um_bfsfup_varepsilon_usv,\g_um_bfsfit_varepsilon_usv}{\g_um_bfsfit_varepsilon_usv}
-      \um_map_char:nn {\g_um_bfsfup_vartheta_usv,  \g_um_bfsfit_vartheta_usv}  {\g_um_bfsfit_vartheta_usv}
-      \um_map_char:nn {\g_um_bfsfup_varkappa_usv,  \g_um_bfsfit_varkappa_usv}  {\g_um_bfsfit_varkappa_usv}
-      \um_map_char:nn {\g_um_bfsfup_varphi_usv,    \g_um_bfsfit_varphi_usv}    {\g_um_bfsfit_varphi_usv}
-      \um_map_char:nn {\g_um_bfsfup_varrho_usv,    \g_um_bfsfit_varrho_usv}    {\g_um_bfsfit_varrho_usv}
-      \um_map_char:nn {\g_um_bfsfup_varpi_usv,     \g_um_bfsfit_varpi_usv}     {\g_um_bfsfit_varpi_usv}
+      \um_map_chars_greek:nn {bfsfup,bfsfit} {bfsfit}
       \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_greek_usv,   \g_um_it_greek_usv}     {\g_um_bfsfit_greek_usv}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_partial_usv,   \g_um_it_partial_usv}   {\g_um_bfsfit_partial_usv}
       \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfsfit_varepsilon_usv}
