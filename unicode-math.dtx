@@ -1457,12 +1457,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % In order for literal unicode characters to be used in the source and still
 % have the correct limits behaviour, big operators are made math-active.
 %
-% The active math char is defined to expand to the macro \cmd\sumop.
+% The active math char is defined to expand to the macro \cs{sum_sym}.
 %    \begin{macrocode}
     \begingroup
       \char_make_active:n {#4}
       \global\mathcode#4="8000\relax
-      \um@scanactivedef #4 \@nil { \csname\cs_to_str:N #2 op\endcsname }
+      \um@scanactivedef #4 \@nil { \csname\cs_to_str:N #2 _sym\endcsname }
     \endgroup
 %    \end{macrocode}
 % Some of these require a \cmd\nolimits\ suffix. This is controlled by the
@@ -1471,16 +1471,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Or something.
 % This allows the list to be updated in the middle of a document.
 %
-% Declare the plain old mathchardef for the control sequence \cmd\sum@sym.
+% Declare the plain old mathchardef for the control sequence \cmd\sumop.
 %    \begin{macrocode}
     \expandafter\global\expandafter\XeTeXmathchardef
-      \csname\string#2@sym\endcsname
-      ="\mathchar@type#3 #1 #4\relax
+      \csname\cs_to_str:N #2 op\endcsname ="\mathchar@type#3 #1 #4\relax
 %    \end{macrocode}
-% Now define \cmd\sumop\ as \cmd\sum@sym, followed by \cmd\nolimits\ if necessary.
+% Now define \cs{sum_sym} as \cmd\sumop, followed by \cmd\nolimits\ if necessary.
 %    \begin{macrocode}
-    \cs_gset:cpn { \cs_to_str:N #2 op } {
-      \csname\string#2@sym\endcsname
+    \cs_gset:cpn { \cs_to_str:N #2 _sym } {
+      \csname\cs_to_str:N #2 op\endcsname
       \expandafter\in@\expandafter#2\expandafter{\um@nolimits}
       \ifin@
         \expandafter\nolimits
