@@ -933,11 +933,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \ExplSyntaxOn
 %    \end{macrocode}
+% Extras we need to define:
+%    \begin{macrocode}
+\cs_generate_variant:Nn \tl_put_right:Nn {cx}
+\cs_generate_variant:Nn \seq_if_in:NnTF {NV}
+\cs_generate_variant:Nn \prop_gput:Nnn {Nxn}
+\cs_generate_variant:Nn \prop_get:NnN {cxN}
+\cs_generate_variant:Nn \prop_if_in:NnTF {cx}
+%    \end{macrocode}
 %
 %
 % \paragraph{Counters and conditionals}
 %    \begin{macrocode}
-\newcounter{um@fam}
+\int_new:N \g_um_fam_int
 \bool_new:N \l_um_fontspec_feature_bool
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
@@ -1478,12 +1486,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Now define \cs{sum_sym} as \cmd\sumop, followed by \cmd\nolimits\ if necessary.
 %    \begin{macrocode}
-    \cs_gset:cpn { \cs_to_str:N #2 _sym } {
-      \csname\cs_to_str:N #2 op\endcsname
-      \expandafter\in@\expandafter#2\expandafter{\um@nolimits}
-      \ifin@
-        \expandafter\nolimits
-      \fi
+    \cs_gset:cpx { \cs_to_str:N #2 _sym } {
+      \exp_not:c {\cs_to_str:N #2 op}
+      \exp_not:n {\tl_if_in:NnT \l_um_nolimits_tl {#2} \nolimits}
     }
 %    \end{macrocode}
 % Don't forget that the actual \cmd\sum\ macro is simply defined in terms of
@@ -1491,40 +1496,35 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \else
 %    \end{macrocode}
-% \paragraph{Radicals}
-% Needs to be before the delimiters because the radical is, for some reason,
-% \cmd\mathopen.
+% \paragraph{Delimiters and radicals}
+% Sqrt radical is defined as a cs{mathopen}.
 %    \begin{macrocode}
-    \expandafter\in@\expandafter#2\expandafter{\um@radicals,}
-    \ifin@
-      \cs_gset:cpn {\cs_to_str:N #2 sign} { \XeTeXradical #1 #4 \relax }
+    \ifx\mathopen#3\relax
+      \tl_if_in:NnTF \l_um_radicals_tl #2 {
+        \cs_gset:cpn {\cs_to_str:N #2 sign} { \XeTeXradical #1 #4 \relax }
+      }{
+        \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
+        \global\XeTeXdelcode#4=#1 #4\relax
+        \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
+      }
     \else
-%    \end{macrocode}
-% \paragraph{Delimiters}
-%    \begin{macrocode}
-      \ifx\mathopen#3\relax
+      \ifx\mathclose#3\relax
         \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
         \global\XeTeXdelcode#4=#1 #4\relax
         \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
       \else
-        \ifx\mathclose#3\relax
-          \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
-          \global\XeTeXdelcode#4=#1 #4\relax
-          \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
-        \else
 %    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-          \ifx\mathaccent#3\relax
-            \cs_gset:Npx #2 {\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}
-          \else
+        \ifx\mathaccent#3\relax
+          \cs_gset:Npx #2 {\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}
+        \else
 %    \end{macrocode}
 % And finally, the general case.
 % We define the unicode mathcode for the character.
-% The macro is defined generically in terms of the unicode character.
+% The macro is defined later on generically in terms of the unicode character.
 %    \begin{macrocode}
-            \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
-          \fi
+          \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
         \fi
       \fi
     \fi
@@ -1576,8 +1576,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %       (obviously more needs to be done here!)
 % \end{itemize}
 %    \begin{macrocode}
-  \def\um@mversion{normal}
-  \DeclareMathVersion{\um@mversion}
+  \tl_set:Nn \l_um_mversion_tf {normal}
+  \DeclareMathVersion{\l_um_mversion_tf}
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
@@ -1639,7 +1639,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{itemize}
 %    \begin{macrocode}
   \bool_if:NTF \l_um_init_bool {
-    \tl_set:Nn \um_symfont_tl {um@allsym}
+    \tl_set:Nn \um_symfont_tl {um_allsym}
     \PackageInfo{unicode-math}{Defining~ the~ default~ maths~ font~ as~ '#2'}
     \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_noparse:nnnn
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
@@ -1647,8 +1647,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
     \cs_set_eq:NN \um_map_char_internal:nn \um_map_char_noparse:nn
   }{
-    \stepcounter{um@fam}
-    \tl_set:Nx \um_symfont_tl {um@fam\theum@fam}
+    \int_incr:N \g_um_fam_int
+    \tl_set:Nx \um_symfont_tl {um_fam\int_use:N\g_um_fam_int}
     \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_parse:nnnn
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_parse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
@@ -1879,7 +1879,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     }
   }
 }
-\cs_generate_variant:Nn \tl_put_right:Nn {cx}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1932,7 +1931,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{longtable}
 % \endgroup
 %
-% \begin{macro}{\um@nolimits}
+% \begin{macro}{\l_um_nolimits_tl}
 % This macro is a sequence containing those maths operators that require a
 % \cmd\nolimits\ suffix.
 % This list is used when processing |unicode-math-table.tex| to define such
@@ -1943,12 +1942,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % I've a feeling that it's more useful \emph{not} to include the multiple
 % integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
-\def\um@nolimits{
-  \@elt\int\@elt\iint\@elt\iiint\@elt\iiiint\@elt\oint\@elt\oiint\@elt\oiiint
-  \@elt\intclockwise\@elt\varointclockwise\@elt\ointctrclockwise\@elt\sumint
-  \@elt\intbar\@elt\intBar\@elt\fint\@elt\cirfnint\@elt\awint\@elt\rppolint
-  \@elt\scpolint\@elt\npolint\@elt\pointint\@elt\sqint\@elt\intlarhk\@elt\intx
-  \@elt\intcap\@elt\intcup\@elt\upint\@elt\lowint
+\tl_new:Nn \l_um_nolimits_tl {
+  \int\iint\iiint\iiiint\oint\oiint\oiiint
+  \intclockwise\varointclockwise\ointctrclockwise\sumint
+  \intbar\intBar\fint\cirfnint\awint\rppolint
+  \scpolint\npolint\pointint\sqint\intlarhk\intx
+  \intcap\intcup\upint\lowint
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1956,29 +1955,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\addnolimits}
 % This macro appends material to the macro containing the list of operators
 % that don't take limits.
-% See example following for usage.
-% Note at present that this command must have taken effect before
-% \cmd\setmathfont.
 %    \begin{macrocode}
-\newcommand\addnolimits[1]{
-  \expandafter\def\expandafter\um@nolimits\expandafter{\um@nolimits\@elt#1}
+\DeclareDocumentCommand \addnolimits {m} {
+  \tl_put_right:Nn \l_um_nolimits_tl {#1}
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\removenolimits}
 % Can this macro be given a better name?
-% It removes (globally) an item from the nolimits list.
-% See example following for usage.
+% It removes an item from the nolimits list.
 %    \begin{macrocode}
-\def\removenolimits#1{
-  \begingroup
-    \def\@elt##1{
-      \ifx##1#1\else
-        \noexpand\@elt\noexpand##1
-     \fi}
-    \xdef\um@nolimits{\um@nolimits}
-  \endgroup
+\DeclareDocumentCommand \removenolimits {m} {
+  \tl_remove_all_in:Nn \l_um_nolimits_tl {#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1996,7 +1985,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % We organise radicals in the same way as nolimits-operators; that is,
 % in a comma-list.
 %    \begin{macrocode}
-\def\um@radicals{\sqrt}
+\tl_new:Nn \l_um_radicals_tl {\sqrt}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2128,7 +2117,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     }
   }
 }
-\cs_generate_variant:Nn \seq_if_in:NnTF {NV}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
   \tl_set:Nn \l_um_tmpa_tl {#1}
   \tl_set:Nn \l_um_tmpb_tl {}
@@ -3613,9 +3601,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \prop_new:N \g_um_supers_prop
 \prop_new:N \g_um_subs_prop
-\cs_generate_variant:Nn \prop_gput:Nnn {Nxn}
-\cs_generate_variant:Nn \prop_get:NnN {cxN}
-\cs_generate_variant:Nn \prop_if_in:NnTF {cx}
 
 \group_begin:
 
