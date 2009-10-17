@@ -1368,53 +1368,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % The requirement of only setting up the maths fonts in the preamble is now removed. The following list might be overly ambitious.
 %    \begin{macrocode}
 \tl_map_inline:nn {
-\new@mathgroup
-\cdp@list
-\cdp@elt
-\DeclareMathSizes
-\@DeclareMathSizes
-\newmathalphabet
-\newmathalphabet@@
-\newmathalphabet@@@
-\DeclareMathVersion
-\define@mathalphabet
-\define@mathgroup
-\addtoversion
-\version@list
-\version@elt
-\alpha@list
-\alpha@elt
-\restore@mathversion
-\init@restore@version
-\dorestore@version
-\process@table
-\new@mathversion
-\DeclareSymbolFont
-\group@list
-\group@elt
-\new@symbolfont
-\SetSymbolFont
-\SetSymbolFont@
-\get@cdp
-\DeclareMathAlphabet
-\new@mathalphabet
-\SetMathAlphabet
-\SetMathAlphabet@
-\DeclareMathAccent
-\set@mathaccent
-\DeclareMathSymbol
-\set@mathchar
-\set@mathsymbol
-\DeclareMathDelimiter
-\@xxDeclareMathDelimiter
-\@DeclareMathDelimiter
-\@xDeclareMathDelimiter
-\set@mathdelimiter
-\set@@mathdelimiter
-\DeclareMathRadical
-\mathchar@type
-\DeclareSymbolFontAlphabet
-\DeclareSymbolFontAlphabet@
+\new@mathgroup\cdp@list\cdp@elt\DeclareMathSizes
+\@DeclareMathSizes\newmathalphabet\newmathalphabet@@\newmathalphabet@@@
+\DeclareMathVersion\define@mathalphabet\define@mathgroup\addtoversion
+\version@list\version@elt\alpha@list\alpha@elt
+\restore@mathversion\init@restore@version\dorestore@version\process@table
+\new@mathversion\DeclareSymbolFont\group@list\group@elt
+\new@symbolfont\SetSymbolFont\SetSymbolFont@\get@cdp
+\DeclareMathAlphabet\new@mathalphabet\SetMathAlphabet\SetMathAlphabet@
+\DeclareMathAccent\set@mathaccent\DeclareMathSymbol\set@mathchar
+\set@mathsymbol\DeclareMathDelimiter\@xxDeclareMathDelimiter\@DeclareMathDelimiter
+\@xDeclareMathDelimiter\set@mathdelimiter\set@@mathdelimiter\DeclareMathRadical
+\mathchar@type\DeclareSymbolFontAlphabet\DeclareSymbolFontAlphabet@
 }{
   \tl_remove_in:Nn \@preamblecmds {\do#1}
 }
@@ -1425,12 +1390,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_fontdimen_to_percent:nn}
 % \darg{Font dimen number}
 % \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|. This macro takes a font dimension number and outputs the decimal value of the associated parameter.
-% \begin{example}{}
-%   \font\tmpfont="Cambria Math"
-%   \um_fontdimen_to_percent:nn{10}{\tmpfont}\\
-%   \um_fontdimen_to_percent:nn{11}{\tmpfont}\\
-%   \um_fontdimen_to_percent:nn{65}{\tmpfont}
-% \end{example}
 %    \begin{macrocode}
 \def\um_fontdimen_to_percent:nn#1#2{
   0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax
@@ -1543,8 +1502,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \else
 %    \end{macrocode}
 % \paragraph{Delimiters}
-% TODO: sort out which of these three declarations are necessary!
-% (Definitely the first, to work with \cmd\left/\cmd\right.)
 %    \begin{macrocode}
       \ifx\mathopen#3\relax
         \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
@@ -1578,7 +1535,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{macro}{\um_set_mathcode:nnnn}
-% [For later] or if it's for a character code (just  a wrapper around the primitive).
 % Note that this declaration \emph{isn't} global so that it can be constrained by grouping
 % inside math alphabet switches.
 %    \begin{macrocode}
