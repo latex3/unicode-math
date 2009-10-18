@@ -2545,7 +2545,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \tl_new:Nn \g_um_mathit_greek_usv {"1D6FC-"1D714,"1D716-1D71B}
 \tl_new:Nn \g_um_mathit_Greek_usv {"1D6E2-"1D6FA}
 
+\seq_new:N \l_um_missing_alph_seq
 \cs_new:Nn \um_setup_alphabets: {
+  \seq_clear:N \l_um_missing_alph_seq
   \seq_if_empty:NTF \l_um_mathalph_seq {
     \um_setup_math_alphabet:NV \mathup     \g_um_mathup_alph_clist
     \um_setup_math_alphabet:NV \mathit     \g_um_mathit_alph_clist
@@ -2573,6 +2575,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_setup_math_mapping:n   {bfit  }
     \um_setup_math_mapping:n   {bfsfup}
     \um_setup_math_mapping:n   {bfsfit}
+    \seq_if_empty:NF \l_um_missing_alph_seq {
+      \typeout{
+        Package~unicode-math~Warning:~
+        missing~math~alphabets~in~font~ \fontname\l_um_font
+      }
+      \seq_map_inline:Nn \l_um_missing_alph_seq {
+        \typeout{\space\space\space\space##1}
+      }
+    }
   }{
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \seq_map_inline:Nn \l_um_mathalph_seq {
@@ -2612,21 +2623,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_glyph_if_exist:cTF {g_um_ \l_um_tmpb_tl _##1_usv}{
       \use:c {um_config_ \l_um_tmpa_tl _##1:}
     }{
-      \PackageWarningNoLine{unicode-math}{^^J\space\space\space\space
-      Math~ alphabet~
-      \@backslashchar \l_um_tmpa_tl~
-      (\tl_use:c{g_um_math_alphabet_name_##1_tl})~
-      not~ found~ in~ font~
-      \fontname\l_um_font}
+      \seq_put_right:Nx \l_um_missing_alph_seq {
+        \@backslashchar
+        \l_um_tmpa_tl\space(\tl_use:c{g_um_math_alphabet_name_##1_tl})
+      }
     }
   }
 }
 \cs_generate_variant:Nn \um_setup_math_alphabet:Nn {NV,VV}
 
-\tl_set:Nn \g_um_math_alphabet_name_latin_tl {Latin, lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Latin_tl {Latin, uppercase}
-\tl_set:Nn \g_um_math_alphabet_name_greek_tl {Greek, lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek, uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_latin_tl {Latin,~lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Latin_tl {Latin,~uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_greek_tl {Greek,~lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek,~uppercase}
 \tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
 \cs_new:Nn \um_setup_math_mapping:n {
   \cs_if_exist:cT {um_setup_math#1:} {
