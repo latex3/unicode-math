@@ -917,7 +917,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/11 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/18 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -1433,7 +1433,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % The final macros that actually define the maths symbol with \XeTeX\ primitives.
 %
 % \begin{macro}{\um_set_mathsymbol:nNNn}
-% \label{mac:um_set_mathsymbol:nNNn}
 % \darg{Symbol font number, e.g., \cs{symoperators}}
 % \darg{Symbol macro, \eg, \cmd\alpha}
 % \darg{Type, \eg, \cmd\mathalpha}
@@ -1911,8 +1910,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This macro is a sequence containing those maths operators that require a
 % \cmd\nolimits\ suffix.
 % This list is used when processing |unicode-math-table.tex| to define such
-% commands automatically (see the macro \cs{um_set_mathsymbol:nNNn} on
-% page~\pageref{mac:um_set_mathsymbol:nNNn}).
+% commands automatically (see the macro \cs{um_set_mathsymbol:nNNn}).
 % I've chosen essentially just the operators that look like integrals;
 % hopefully a better mathematician can help me out here.
 % I've a feeling that it's more useful \emph{not} to include the multiple
