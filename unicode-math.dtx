@@ -12,7 +12,7 @@ work, I understand that it has certain uses and am making it available for
 distribution. Your testing and feedback is essential to fill in the many gaps
 that I miss!
 
-Please be aware that this package is undergoing (very slow) continued
+Please be aware that this package is undergoing (slow) continued
 development and the interface and functionality should not be considered
 stable. Use at your own risk, in other words.
 
@@ -1129,11 +1129,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Latin `h':
 %    \begin{macrocode}
-\def\g_um_up_h_usv{"0068}
-\def\g_um_it_h_usv{"210E}
+\def\g_um_up_h_usv  {"0068}
+\def\g_um_it_h_usv  {"210E}
+\def\g_um_bb_h_usv  {"1D559}
+\def\g_um_tt_h_usv  {"1D691}
+\def\g_um_scr_h_usv {"1D4BD}
+\def\g_um_frak_h_usv{"1D525}
 \def\g_um_bfup_h_usv{"1D421}
 \def\g_um_bfit_h_usv{"1D489}
 \def\g_um_sfup_h_usv{"1D5C1}
+\def\g_um_sfit_h_usv{"1D629}
+\def\g_um_bffrak_h_usv{"1D58D}
+\def\g_um_bfscr_h_usv {"1D4F1}
+\def\g_um_bfsfup_h_usv {"1D5F5}
+\def\g_um_bfsfit_h_usv {"1D65D}
 %    \end{macrocode}
 %
 % \subsection{Options}
@@ -2270,7 +2279,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{macro}{\um_map_char:nn }
-% \begin{macro}{\um_map_chars_latin:nn }
+% \begin{macro}{\um_map_chars_xxvi:nn }
 % \begin{macro}{\um_map_chars_xxiii:nn }
 % \begin{macro}{\um_map_chars_numbers:nn }
 % \darg{Number of iterations}
@@ -2294,7 +2303,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_map_char_noparse:nn {#1}{#2}
   }
 }
-\cs_set:Nn \um_map_chars_latin:nn {
+\cs_set:Nn \um_map_chars_xxvi:nn {
   \um_map_chars_range:nnn {25}{#1}{#2}
 }
 \cs_set:Nn \um_map_chars_xxiii:nn {
@@ -2369,12 +2378,39 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_set_mathalphabet_numbers:Nnn {
   \um_set_mathalph_range:nNnn {9}{#1}{#2}{#3}
 }
-\cs_new:Nn \um_set_mathalphabet_latin:Nnn {
+\cs_new:Nn \um_set_mathalphabet_xxvi:Nnn {
   \um_set_mathalph_range:nNnn {25}{#1}{#2}{#3}
 }
-\cs_new:Nn \um_set_mathalphabet_greek:Nnn {
+\cs_new:Nn \um_set_mathalphabet_xxiii:Nnn {
   \um_set_mathalph_range:nNnn {24}{#1}{#2}{#3}
 }
+
+\cs_new:Nn \um_set_mathalphabet_latin:Nnn {
+  \clist_map_inline:nn {#2} {
+    \um_set_mathalphabet_xxvi:Ncc #1 {g_um_##1_latin_usv}{g_um_#3_latin_usv}
+    \um_set_mathalphabet_char:Ncc #1 {g_um_##1_h_usv}    {g_um_#3_h_usv}
+  }
+}
+\cs_new:Nn \um_set_mathalphabet_Greek:Nnn {
+  \clist_map_inline:nn {#2} {
+    \um_set_mathalphabet_xxiii:Ncc #1 {g_um_##1_Greek_usv}   {g_um_#3_Greek_usv}
+    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varTheta_usv}{g_um_#3_varTheta_usv}
+  }
+}
+\cs_new:Nn \um_set_mathalphabet_greek:Nnn {
+  \clist_map_inline:nn {#2} {
+    \um_set_mathalphabet_xxiii:Ncc #1 {g_um_##1_greek_usv}     {g_um_#3_greek_usv}
+    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varepsilon_usv}{g_um_#3_varepsilon_usv}
+    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_vartheta_usv}  {g_um_#3_vartheta_usv}
+    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varkappa_usv}  {g_um_#3_varkappa_usv}
+    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varphi_usv}    {g_um_#3_varphi_usv}
+    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varrho_usv}    {g_um_#3_varrho_usv}
+    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varpi_usv}     {g_um_#3_varpi_usv}
+  }
+}
+\cs_generate_variant:Nn \um_set_mathalphabet_char:Nnn {Ncc}
+\cs_generate_variant:Nn \um_set_mathalphabet_xxiii:Nnn {Ncc}
+\cs_generate_variant:Nn \um_set_mathalphabet_xxvi:Nnn {Ncc}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2492,22 +2528,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \tl_new:Nn \g_um_mathit_Latin_usv {"1D434-"1D44C}
 \tl_new:Nn \g_um_mathit_greek_usv {"1D6FC-"1D714,"1D716-1D71B}
 \tl_new:Nn \g_um_mathit_Greek_usv {"1D6E2-"1D6FA}
-
-\tl_new:Nn \g_um_mathscr_usv    {latin,Latin}
-\tl_new:Nn \g_um_mathfrak_usv   {latin,Latin}
-\tl_new:Nn \g_um_mathbfscr_usv  {latin,Latin}
-\tl_new:Nn \g_um_mathbffrak_usv {latin,Latin}
-\tl_new:Nn \g_um_mathbb_usv   {latin,Latin,num}
-\tl_new:Nn \g_um_mathtt_usv   {latin,Latin,num}
-\tl_new:Nn \g_um_mathsf_usv   {latin,Latin,num}
-\tl_new:Nn \g_um_mathsfup_usv {latin,Latin,num}
-\tl_new:Nn \g_um_mathsfit_usv {latin,Latin}
-\tl_new:Nn \g_um_mathbf_usv     {latin,Latin,greek,Greek,num}
-\tl_new:Nn \g_um_mathbfup_usv   {latin,Latin,greek,Greek,num}
-\tl_new:Nn \g_um_mathbfit_usv   {latin,Latin,greek,Greek}
-\tl_new:Nn \g_um_mathbfsf_usv   {latin,Latin,greek,Greek,num}
-\tl_new:Nn \g_um_mathbfsfup_usv {latin,Latin,greek,Greek,num}
-\tl_new:Nn \g_um_mathbfsfit_usv {latin,Latin,greek,Greek}
 
 \cs_new:Nn \um_setup_alphabets: {
   \seq_if_empty:NTF \l_um_mathalph_seq {
@@ -2643,25 +2663,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathup_Latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_latin:nn {\g_um_up_Latin_usv}{\g_um_up_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_up_Latin_usv}{\g_um_up_Latin_usv}
   }{
     \bool_if:NT \g_um_upLatin_bool {
-      \um_map_chars_latin:nn {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_up_Latin_usv}
+      \um_map_chars_xxvi:nn {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_up_Latin_usv}
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_up_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_up_Latin_usv}
 }
 \cs_new:Npn \um_config_mathup_latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_latin:nn {\g_um_up_latin_usv}{\g_um_up_latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_up_latin_usv}{\g_um_up_latin_usv}
   }{
     \bool_if:NT \g_um_uplatin_bool {
-      \um_map_chars_latin:nn {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_up_latin_usv}
-      \um_map_char:nn {\g_um_up_h_usv,\g_um_it_h_usv}{\g_um_up_h_usv}
+      \um_map_chars_xxvi:nn {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_up_latin_usv}
+      \um_map_char:nn {\g_um_up_h_usv,\g_um_it_h_usv}{\g_um_up_h_usv}% KEEP
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathup}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_up_latin_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_it_h_usv} {\g_um_up_h_usv}
+  \um_set_mathalphabet_latin:Nnn \mathup {up,it}{up}
 }
 \cs_new:Npn \um_config_mathup_num: {
   \um_map_chars_numbers:nn {\g_um_up_num_usv}{\g_um_up_num_usv}
@@ -2675,8 +2694,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_map_chars_Greek:nn {up,it}{up}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathup}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_up_Greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_up_varTheta_usv}
+  \um_set_mathalphabet_Greek:Nnn \mathup {up,it}{up}
   \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_up_Nabla_usv}
 }
 \cs_new:Npn \um_config_mathup_greek: {
@@ -2687,14 +2705,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_map_chars_greek:nn {up,it} {up}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathup}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_up_greek_usv}
+  \um_set_mathalphabet_greek:Nnn \mathup {up,it} {up}
   \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_up_partial_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_up_varepsilon_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_up_vartheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_up_varkappa_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_up_varphi_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_up_varrho_usv}
-  \um_set_mathalphabet_char:Nnn{\mathup}{\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_up_varpi_usv}
 }
 %    \end{macrocode}
 %
@@ -2703,26 +2715,25 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathit_Latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_latin:nn {\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
   }{
     \bool_if:NF \g_um_upLatin_bool {
-      \um_map_chars_latin:nn {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
+      \um_map_chars_xxvi:nn {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathit}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathit}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
 }
 \cs_new:Npn \um_config_mathit_latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_latin:nn {\g_um_it_latin_usv}{\g_um_it_latin_usv}
-    \um_map_char:nn {\g_um_it_h_usv}{\g_um_it_h_usv}
+    \um_map_chars_xxvi:nn {\g_um_it_latin_usv}{\g_um_it_latin_usv}
+    \um_map_char:nn {\g_um_it_h_usv}{\g_um_it_h_usv}% KEEP
   }{
     \bool_if:NF \g_um_uplatin_bool {
-      \um_map_chars_latin:nn {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_it_latin_usv}
-      \um_map_char:nn {\g_um_up_h_usv,\g_um_it_h_usv}{\g_um_it_h_usv}
+      \um_map_chars_xxvi:nn {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_it_latin_usv}
+      \um_map_char:nn {\g_um_up_h_usv,\g_um_it_h_usv}{\g_um_it_h_usv}% KEEP
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathit}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_it_latin_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_h_usv,\g_um_it_h_usv}{\g_um_it_h_usv}
+  \um_set_mathalphabet_latin:Nnn \mathit {up,it}{it}
 }
 \cs_new:Npn \um_config_mathit_Greek: {
   \bool_if:NTF \g_um_literal_bool {
@@ -2732,26 +2743,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \um_map_chars_Greek:nn {up,it}{it}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathit}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_it_Greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_it_varTheta_usv}
+  \um_set_mathalphabet_Greek:Nnn \mathit {up,it}{it}
   \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_it_Nabla_usv}
 }
 \cs_new:Npn \um_config_mathit_greek: {
-  \bool_if:NTF \g_um_literal_bool { 
+  \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_greek:nn {it} {it}
   }{
     \bool_if:NF \g_um_upgreek_bool {
       \um_map_chars_greek:nn {it,up} {it}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathit}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_it_greek_usv}
+  \um_set_mathalphabet_greek:Nnn \mathit {up,it} {it}
   \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_it_partial_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_it_varepsilon_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_it_vartheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_it_varkappa_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_it_varphi_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_it_varrho_usv}
-  \um_set_mathalphabet_char:Nnn{\mathit}{\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_it_varpi_usv}
 }
 %    \end{macrocode}
 %
@@ -2759,11 +2763,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbb_latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathbb}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bb_latin_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbb}{\g_um_it_h_usv} {"1D559}
+  \um_set_mathalphabet_latin:Nnn \mathbb {up,it}{bb}
 }
 \cs_new:Npn \um_config_mathbb_Latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathbb}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bb_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathbb}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bb_Latin_usv}
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\C,"1D436}{"2102}
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\H,"1D43B}{"210D}
   \um_set_mathalphabet_char:Nnn{\mathbb}{`\N,"1D441}{"2115}
@@ -2795,7 +2798,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathscr_Latin: {
-  \um_set_mathalphabet_latin:Nnn  \mathscr {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_scr_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn  \mathscr {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_scr_Latin_usv}
   \um_set_mathalphabet_char:Nnn  \mathscr {`\B,"1D435}{"212C}
   \um_set_mathalphabet_char:Nnn  \mathscr {`\E,"1D438}{"2130}
   \um_set_mathalphabet_char:Nnn  \mathscr {`\F,"1D439}{"2131}
@@ -2806,11 +2809,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn  \mathscr {`\R,"1D445}{"211B}
 }
 \cs_new:Npn \um_config_mathscr_latin: {
-  \um_set_mathalphabet_latin:Nnn \mathscr {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_scr_latin_usv}
+  \um_set_mathalphabet_latin:Nnn \mathscr {up,it}{scr}
   \um_set_mathalphabet_char:Nnn \mathscr {`\e,"1D452}{"212F}
   \um_set_mathalphabet_char:Nnn \mathscr {`\g,"1D454}{"210A}
   \um_set_mathalphabet_char:Nnn \mathscr {`\o,"1D45C}{"2134}
-  \um_set_mathalphabet_char:Nnn \mathscr {\g_um_it_h_usv} {"1D4BD}
 }
 %    \end{macrocode}
 %
@@ -2818,7 +2820,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathfrak_Latin: {
-  \um_set_mathalphabet_latin:Nnn  \mathfrak {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_frak_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn  \mathfrak {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_frak_Latin_usv}
   \um_set_mathalphabet_char:Nnn  \mathfrak {`\C,"1D436}{"212D}
   \um_set_mathalphabet_char:Nnn  \mathfrak {`\H,"1D43B}{"210C}
   \um_set_mathalphabet_char:Nnn  \mathfrak {`\I,"1D43C}{"2111}
@@ -2826,8 +2828,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_char:Nnn  \mathfrak {`\Z,"1D44D}{"2128}
 }
 \cs_new:Npn \um_config_mathfrak_latin: {
-  \um_set_mathalphabet_latin:Nnn \mathfrak {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_frak_latin_usv}
-  \um_set_mathalphabet_char:Nnn \mathfrak {\g_um_it_h_usv} {"1D525}
+  \um_set_mathalphabet_latin:Nnn \mathfrak {up,it}{frak}
 }
 %    \end{macrocode}
 %
@@ -2839,29 +2840,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathsfup_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_sfup_Latin_usv}{\g_um_sfup_Latin_usv}
-    \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_up_Latin_usv}{\g_um_sfup_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_sfup_Latin_usv}{\g_um_sfup_Latin_usv}
+    \um_set_mathalphabet_xxvi:Nnn \mathsf {\g_um_up_Latin_usv}{\g_um_sfup_Latin_usv}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_sfup_Latin_usv,\g_um_sfit_Latin_usv}{\g_um_sfup_Latin_usv}
-      \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{ \g_um_sfup_Latin_usv }
+      \um_map_chars_xxvi:nn {\g_um_sfup_Latin_usv,\g_um_sfit_Latin_usv}{\g_um_sfup_Latin_usv}
+      \um_set_mathalphabet_xxvi:Nnn \mathsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{ \g_um_sfup_Latin_usv }
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathsfup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_sfup_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathsfup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_sfup_Latin_usv}
 }
 \cs_new:Npn \um_config_mathsfup_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_sfup_latin_usv}{\g_um_sfup_latin_usv}
-    \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_up_latin_usv}{\g_um_sfup_latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_sfup_latin_usv}{\g_um_sfup_latin_usv}
+    \um_set_mathalphabet_latin:Nnn \mathsf {up}{sfup}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_sfup_latin_usv,\g_um_sfit_latin_usv}{\g_um_sfup_latin_usv}
-      \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_sfup_latin_usv}
-      \um_set_mathalphabet_char:Nnn  \mathsf {\g_um_it_h_usv} {\g_um_sfup_h_usv}
+      \um_map_chars_xxvi:nn {\g_um_sfup_latin_usv,\g_um_sfit_latin_usv}{\g_um_sfup_latin_usv}
+      \um_set_mathalphabet_latin:Nnn \mathsf {up,it}{sfup}
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathsfup}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_sfup_latin_usv}
-  \um_set_mathalphabet_char:Nnn \mathsfup {\g_um_it_h_usv} {\g_um_sfup_h_usv}
+  \um_set_mathalphabet_latin:Nnn \mathsfup {up,it}{sfup}
 }
 %    \end{macrocode}
 %
@@ -2870,30 +2869,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathsfit_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_sfit_Latin_usv}{\g_um_sfit_Latin_usv}
-    \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_it_Latin_usv}{\g_um_sfit_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_sfit_Latin_usv}{\g_um_sfit_Latin_usv}
+    \um_set_mathalphabet_xxvi:Nnn \mathsf {\g_um_it_Latin_usv}{\g_um_sfit_Latin_usv}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_sfup_Latin_usv,\g_um_sfit_Latin_usv}{\g_um_sfit_Latin_usv}
-      \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_sfit_Latin_usv}
+      \um_map_chars_xxvi:nn {\g_um_sfup_Latin_usv,\g_um_sfit_Latin_usv}{\g_um_sfit_Latin_usv}
+      \um_set_mathalphabet_xxvi:Nnn \mathsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_sfit_Latin_usv}
     }
   }
-  \um_set_mathalphabet_latin:Nnn \mathsfit {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_sfit_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn \mathsfit {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_sfit_Latin_usv}
 }
 \cs_new:Npn \um_config_mathsfit_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_sfit_latin_usv}{\g_um_sfit_latin_usv}
-    \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_it_latin_usv}{\g_um_sfit_latin_usv}
-    \um_set_mathalphabet_char:Nnn  \mathsf {\g_um_it_h_usv} {"1D629}
+    \um_map_chars_xxvi:nn {\g_um_sfit_latin_usv}{\g_um_sfit_latin_usv}
+    \um_set_mathalphabet_latin:Nnn \mathsf {it}{sfit}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_sfup_latin_usv,\g_um_sfit_latin_usv}{\g_um_sfit_latin_usv}
-      \um_set_mathalphabet_latin:Nnn \mathsf {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_sfit_latin_usv}
-      \um_set_mathalphabet_char:Nnn  \mathsf {\g_um_it_h_usv} {"1D629}
+      \um_map_chars_xxvi:nn {\g_um_sfup_latin_usv,\g_um_sfit_latin_usv}{\g_um_sfit_latin_usv}
+      \um_set_mathalphabet_latin:Nnn \mathsf {up,it}{sfit}
     }
   }
-  \um_set_mathalphabet_latin:Nnn \mathsfit {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_sfit_latin_usv}
-  \um_set_mathalphabet_char:Nnn  \mathsfit {\g_um_it_h_usv} {"1D629}
+  \um_set_mathalphabet_latin:Nnn \mathsfit {up,it}{sfit}
 }
 %    \end{macrocode}
 %
@@ -2903,11 +2899,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_numbers:Nnn{\mathtt}{\g_um_up_num_usv}{\g_um_tt_num_usv}
 }
 \cs_new:Npn \um_config_mathtt_Latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathtt}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_tt_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathtt}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_tt_Latin_usv}
 }
 \cs_new:Npn \um_config_mathtt_latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathtt}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_tt_latin_usv}
-  \um_set_mathalphabet_char:Nnn \mathtt {\g_um_it_h_usv} {"1D691}
+  \um_set_mathalphabet_latin:Nnn \mathtt {up,it}{tt}
 }
 %    \end{macrocode}
 %
@@ -2916,96 +2911,61 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfit_Latin: {
   \bool_if:NF \g_um_bfupLatin_bool {
-    \um_map_chars_latin:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfup_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfup_Latin_usv}
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
-  
+  \um_set_mathalphabet_xxvi:Nnn{\mathbfit}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
+    \um_set_mathalphabet_xxvi:Nnn{\mathbf}{\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
   }{
     \bool_if:NF \g_um_bfupLatin_bool {
-      \um_map_chars_latin:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
+      \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
+      \um_set_mathalphabet_xxvi:Nnn{\mathbf}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
     }
   }
 }
 \cs_new:Npn \um_config_mathbfit_latin: {
   \bool_if:NF \g_um_bfuplatin_bool {
-    \um_map_chars_latin:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfup_latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfit}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfit_latin_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_it_h_usv} {"1D489}
-  
+  \um_set_mathalphabet_latin:Nnn \mathbfit {up,it}{bfit}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_it_latin_usv}{\g_um_bfit_latin_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_h_usv}{\g_um_bfit_h_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
+    \um_set_mathalphabet_latin:Nnn \mathbf {it}{bfit}
   }{
     \bool_if:NF \g_um_bfuplatin_bool {
-      \um_map_chars_latin:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfit_latin_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_h_usv}{\g_um_bfit_h_usv}
+      \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
+      \um_set_mathalphabet_latin:Nnn \mathbf {up,it}{bfit}
     }
   }
-  
 }
 \cs_new:Npn \um_config_mathbfit_Greek: {
-  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfit_Greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_bfit_varTheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
-  
+  \um_set_mathalphabet_Greek:Nnn \mathbfit {up,it}{bfit}
+  \um_set_mathalphabet_char:Nnn  \mathbfit {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_Greek:nn {bfup}{bfup}
     \um_map_chars_Greek:nn {bfit}{bfit}
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_Greek_usv}{\g_um_bfup_Greek_usv}
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_it_Greek_usv}{\g_um_bfit_Greek_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varTheta_usv}{\g_um_bfup_varTheta_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varTheta_usv}{\g_um_bfit_varTheta_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Nabla_usv}{\g_um_bf_Nabla_usv}
+    \um_set_mathalphabet_Greek:Nnn \mathbf {it}{bfit}
     \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
   }{
     \bool_if:NF \g_um_bfupGreek_bool {
       \um_map_chars_Greek:nn {bfup,bfit}{bfit}
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfit_Greek_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_bfit_varTheta_usv}
+      \um_set_mathalphabet_Greek:Nnn \mathbf {up,it}{bfit}
+      \um_set_mathalphabet_char:Nnn  \mathbf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
     }
   }
-  
 }
 \cs_new:Npn \um_config_mathbfit_greek: {
-  \um_set_mathalphabet_greek:Nnn{\mathbfit}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfit_greek_usv}
+  \um_set_mathalphabet_greek:Nnn \mathbfit {up,it} {bfit}
   \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfit_partial_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfit_varepsilon_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_bfit_vartheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_bfit_varkappa_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_bfit_varphi_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_bfit_varrho_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfit}{\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_bfit_varpi_usv}
-  
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_greek:nn {bfit} {bfit}
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_it_greek_usv}{\g_um_bfit_greek_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_partial_usv}{\g_um_bfit_partial_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varepsilon_usv}{\g_um_bfit_varepsilon_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_vartheta_usv}{\g_um_bfit_vartheta_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varkappa_usv}{\g_um_bfit_varkappa_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varphi_usv}{\g_um_bfit_varphi_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varrho_usv}{\g_um_bfit_varrho_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varpi_usv}{\g_um_bfit_varpi_usv}
+    \um_set_mathalphabet_greek:Nnn \mathbfit {it} {bfit}
   }{
     \bool_if:NF \g_um_bfupgreek_bool {
       \um_map_chars_greek:nn {bfit,bfup} {bfit}
     }
     \bool_if:NF \g_um_bfupgreek_bool {
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfup_greek_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfit_varepsilon_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_bfit_vartheta_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_bfit_varkappa_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_bfit_varphi_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_bfit_varrho_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_bfit_varpi_usv}
+      \um_set_mathalphabet_greek:Nnn \mathbfit {up,it} {bfit}
       \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfit_partial_usv}
     }
   }
@@ -3021,100 +2981,69 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfup_Latin: {
   \bool_if:NT \g_um_bfupLatin_bool {
-    \um_map_chars_latin:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfup_Latin_usv}
-  
+  \um_set_mathalphabet_xxvi:Nnn{\mathbfup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfup_Latin_usv}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfup_Latin_usv}{\g_um_bfup_Latin_usv}
-    \um_map_chars_latin:nn {\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_up_Latin_usv}{\g_um_bfup_Latin_usv}
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv}{\g_um_bfup_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
+    \um_set_mathalphabet_xxvi:Nnn{\mathbf}{\g_um_up_Latin_usv}{\g_um_bfup_Latin_usv}
+    \um_set_mathalphabet_xxvi:Nnn{\mathbf}{\g_um_it_Latin_usv}{\g_um_bfit_Latin_usv}
   }{
     \bool_if:NT \g_um_bfupLatin_bool {
-      \um_map_chars_latin:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfup_Latin_usv}
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfup_Latin_usv}
+      \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfup_Latin_usv}
+      \um_set_mathalphabet_xxvi:Nnn{\mathbf}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfup_Latin_usv}
     }
   }
 }
 \cs_new:Npn \um_config_mathbfup_latin: {
   \bool_if:NT \g_um_bfuplatin_bool {
-    \um_map_chars_latin:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfup_latin_usv}
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfup}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfup_latin_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_it_h_usv} {"1D421}
-  
+  \um_set_mathalphabet_latin:Nnn \mathbfup {up,it}{bfup}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfup_latin_usv}{\g_um_bfup_latin_usv}
-    \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_up_latin_usv}{\g_um_bfup_latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv}{\g_um_bfup_latin_usv}
+    \um_set_mathalphabet_latin:Nnn \mathbf {up}{bfup}
   }{
     \bool_if:NT \g_um_bfuplatin_bool {
-      \um_map_chars_latin:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfup_latin_usv}
-      \um_set_mathalphabet_latin:Nnn{\mathbf}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfup_latin_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_h_usv}{\g_um_bfup_h_usv}
+      \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfup_latin_usv}
+      \um_set_mathalphabet_latin:Nnn \mathbf {up,it}{bfup}
     }
   }
 }
 \cs_new:Npn \um_config_mathbfup_Greek: {
-  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfup_Greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_bfup_varTheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bf_Nabla_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_Digamma_usv}{\g_um_bfup_Digamma_usv}
-  
-  \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Digamma_usv}{\g_um_bfup_Digamma_usv}
+  \um_set_mathalphabet_Greek:Nnn \mathbfup {up,it}{bfup}
+  \um_set_mathalphabet_char:Nnn  \mathbfup {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bf_Nabla_usv}
+  \um_set_mathalphabet_char:Nnn  \mathbfup {\g_um_up_Digamma_usv}{\g_um_bfup_Digamma_usv}
+  \um_set_mathalphabet_char:Nnn  \mathbf   {\g_um_up_Digamma_usv}{\g_um_bfup_Digamma_usv}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_Greek:nn {bfup}{bfup}
-    \um_map_chars_Greek:nn {bfit}{bfit} 
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_Greek_usv}{\g_um_bfup_Greek_usv}
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_it_Greek_usv}{\g_um_bfit_Greek_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varTheta_usv}{\g_um_bfup_varTheta_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_varTheta_usv}{\g_um_bfit_varTheta_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Nabla_usv}{\g_um_bf_Nabla_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_it_Nabla_usv}{\g_um_bfit_Nabla_usv}
+    \um_set_mathalphabet_Greek:Nnn \mathbf {up}{bfup}
+    \um_set_mathalphabet_char:Nnn  \mathbf {\g_um_up_Nabla_usv}{\g_um_bf_Nabla_usv}
   }{
     \bool_if:NF \g_um_bfupGreek_bool {
       \um_map_chars_Greek:nn {bfup,bfit}{bfup}
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfup_Greek_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bf_Nabla_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_bfup_varTheta_usv}
+      \um_set_mathalphabet_Greek:Nnn \mathbf {up,it}{bfup}
+      \um_set_mathalphabet_char:Nnn  \mathbf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bf_Nabla_usv}
     }
   }
-  
 }
 \cs_new:Npn \um_config_mathbfup_greek: {
-  \um_set_mathalphabet_greek:Nnn{\mathbfup}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfup_greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bf_partial_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfup_varepsilon_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_bfup_vartheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_bfup_varkappa_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_bfup_varphi_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_bfup_varrho_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_bfup_varpi_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfup}{\g_um_up_digamma_usv}{\g_um_bfup_digamma_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_digamma_usv}{\g_um_bfup_digamma_usv}
+  \um_set_mathalphabet_greek:Nnn \mathbfup {up,it} {bfup}
+  \um_set_mathalphabet_char:Nnn  \mathbfup {\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bf_partial_usv}
+  \um_set_mathalphabet_char:Nnn  \mathbfup {\g_um_up_digamma_usv}{\g_um_bfup_digamma_usv}
+  \um_set_mathalphabet_char:Nnn  \mathbf   {\g_um_up_digamma_usv}{\g_um_bfup_digamma_usv}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_greek:nn {bfup} {bfup}
-    \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_greek_usv}{\g_um_bfup_greek_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_partial_usv}{\g_um_bf_partial_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varepsilon_usv}{\g_um_bfup_varepsilon_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_vartheta_usv}{\g_um_bfup_vartheta_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varkappa_usv}{\g_um_bfup_varkappa_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varphi_usv}{\g_um_bfup_varphi_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varrho_usv}{\g_um_bfup_varrho_usv}
-    \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varpi_usv}{\g_um_bfup_varpi_usv}
+    \um_set_mathalphabet_greek:Nnn \mathbf {up} {bfup}
+    \um_set_mathalphabet_char:Nnn  \mathbf {\g_um_up_partial_usv}{\g_um_bf_partial_usv}
   }{
     \bool_if:NT \g_um_bfupgreek_bool {
       \um_map_chars_greek:nn {bfup,bfit} {bfup}
     }
     \bool_if:NT \g_um_bfupgreek_bool {
-      \um_set_mathalphabet_greek:Nnn{\mathbf}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfup_greek_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfup_varepsilon_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_bfup_vartheta_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_bfup_varkappa_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_bfup_varphi_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_bfup_varrho_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_bfup_varpi_usv}
-      \um_set_mathalphabet_char:Nnn{\mathbf}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bf_partial_usv}
+      \um_set_mathalphabet_greek:Nnn \mathbf {up,it} {bfup}
+      \um_set_mathalphabet_char:Nnn  \mathbf {\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bf_partial_usv}
     }
   }
 }
@@ -3123,22 +3052,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Bold fractur or fraktur or blackletter: \cmd\mathbffrak}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbffrak_Latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathbffrak}{\g_um_up_Latin_usv, \g_um_it_Latin_usv}{\g_um_bffrak_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathbffrak}{\g_um_up_Latin_usv, \g_um_it_Latin_usv}{\g_um_bffrak_Latin_usv}
 }
 \cs_new:Npn \um_config_mathbffrak_latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathbffrak}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bffrak_latin_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbffrak}{\g_um_it_h_usv} {"1D58D}
+  \um_set_mathalphabet_latin:Nnn \mathbffrak {up,it}{bffrak}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Bold script or calligraphic: \cmd\mathbfscr}
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfscr_Latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathbfscr}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfscr_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathbfscr}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfscr_Latin_usv}
 }
 \cs_new:Npn \um_config_mathbfscr_latin: {
-  \um_set_mathalphabet_latin:Nnn{\mathbfscr}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfscr_latin_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfscr}{\g_um_it_h_usv} {"1D4F1}
+  \um_set_mathalphabet_latin:Nnn \mathbfscr {up,it}{bfscr}
 }
 %    \end{macrocode}
 %
@@ -3150,81 +3077,57 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfup_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfsfup_Latin_usv}{\g_um_bfsfup_Latin_usv}
-    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_up_Latin_usv}{\g_um_bfsfup_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfsfup_Latin_usv}{\g_um_bfsfup_Latin_usv}
+    \um_set_mathalphabet_xxvi:Nnn   \mathbfsf {\g_um_up_Latin_usv}{\g_um_bfsfup_Latin_usv}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_bfsfup_Latin_usv,\g_um_bfsfit_Latin_usv}{\g_um_bfsfup_Latin_usv}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfup_Latin_usv}
+      \um_map_chars_xxvi:nn {\g_um_bfsfup_Latin_usv,\g_um_bfsfit_Latin_usv}{\g_um_bfsfup_Latin_usv}
+      \um_set_mathalphabet_xxvi:Nnn   \mathbfsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfup_Latin_usv}
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfsfup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfup_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn{\mathbfsfup}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfup_Latin_usv}
 }
 \cs_new:Npn \um_config_mathbfsfup_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfsfup_latin_usv}{\g_um_bfsfup_latin_usv}
-    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_up_latin_usv}{\g_um_bfsfup_latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfsfup_latin_usv}{\g_um_bfsfup_latin_usv}
+    \um_set_mathalphabet_latin:Nnn \mathbfsf {up}{bfsfup}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_bfsfup_latin_usv,\g_um_bfsfit_latin_usv}{\g_um_bfsfup_latin_usv}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfsfup_latin_usv}
-      \um_set_mathalphabet_char:Nnn \mathbfsf {\g_um_it_h_usv} {"1D5F5}
+      \um_map_chars_xxvi:nn {\g_um_bfsfup_latin_usv,\g_um_bfsfit_latin_usv}{\g_um_bfsfup_latin_usv}
+      \um_set_mathalphabet_latin:Nnn \mathbfsf {up,it}{bfsfup}
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfsfup}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfsfup_latin_usv}
-  \um_set_mathalphabet_char:Nnn \mathbfsfup {\g_um_it_h_usv} {"1D5F5}
+  \um_set_mathalphabet_latin:Nnn \mathbfsfup {up,it}{bfsfup}
 }
 \cs_new:Npn \um_config_mathbfsfup_Greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Greek:nn {bfsfup}{bfsfup}
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_Greek_usv}{\g_um_bfsfup_Greek_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varTheta_usv}{\g_um_bfsfup_varTheta_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_Nabla_usv}{\g_um_bfsf_Nabla_usv}
+    \um_set_mathalphabet_Greek:Nnn \mathbfsf {up}{bfsfup}
+    \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_up_Nabla_usv}{\g_um_bfsf_Nabla_usv}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfsfup_Greek_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_bfsfup_varTheta_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfNabla_up_or_it_usv}
       \um_map_chars_Greek:nn {bfsfup,bfsfit}{bfsfup}
+      \um_set_mathalphabet_Greek:Nnn \mathbfsf {up,it}{bfsfup}
+      \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfNabla_up_or_it_usv}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathbfsfup}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfsfup_Greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{"1D767}
+  \um_set_mathalphabet_Greek:Nnn \mathbfsfup {up,it}{bfsfup}
   \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{"1D76F}
 }
 \cs_new:Npn \um_config_mathbfsfup_greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_greek:nn {bfsfup} {bfsfup}
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_greek_usv}{\g_um_bfsfup_greek_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_partial_usv}{\g_um_bfsf_partial_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_partial_usv}{\g_um_bfsfit_partial_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varepsilon_usv}{\g_um_bfsfup_varepsilon_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_vartheta_usv}{\g_um_bfsfup_vartheta_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varkappa_usv}{\g_um_bfsfup_varkappa_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varphi_usv}{\g_um_bfsfup_varphi_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varrho_usv}{\g_um_bfsfup_varrho_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varpi_usv}{\g_um_bfsfup_varpi_usv}
+    \um_set_mathalphabet_greek:Nnn \mathbfsf {up} {bfsfup}
+    \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_up_partial_usv}{\g_um_bfsf_partial_usv}
   }{
     \bool_if:NT \g_um_upsans_bool {
       \um_map_chars_greek:nn {bfsfup,bfsfit} {bfsfup}
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfsfup_greek_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfsf_partial_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfsfup_varepsilon_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_bfsfup_vartheta_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_bfsfup_varkappa_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_bfsfup_varphi_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_bfsfup_varrho_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_bfsfup_varpi_usv}
+      \um_set_mathalphabet_greek:Nnn \mathbfsf {up,it} {bfsfup}
+      \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfsf_partial_usv}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathbfsfup}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfsfup_greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_partial_usv,\g_um_it_partial_usv}{"1D789}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfsfup_varepsilon_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_vartheta_usv,\g_um_it_vartheta_usv}{\g_um_bfsfup_vartheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_varkappa_usv,\g_um_it_varkappa_usv}{\g_um_bfsfup_varkappa_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_varphi_usv,\g_um_it_varphi_usv}{\g_um_bfsfup_varphi_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_varrho_usv,\g_um_it_varrho_usv}{\g_um_bfsfup_varrho_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfup}{\g_um_up_varpi_usv,\g_um_it_varpi_usv}{\g_um_bfsfup_varpi_usv}
+  \um_set_mathalphabet_greek:Nnn \mathbfsfup {up,it} {bfsfup}
+  \um_set_mathalphabet_char:Nnn  \mathbfsfup {\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfsf_partial_usv}
 }
 %    \end{macrocode}
 %
@@ -3233,81 +3136,57 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsfit_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfsfit_Latin_usv}{\g_um_bfsfit_Latin_usv}
-    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_it_Latin_usv}{\g_um_bfsfit_Latin_usv}
+    \um_map_chars_xxvi:nn {\g_um_bfsfit_Latin_usv}{\g_um_bfsfit_Latin_usv}
+    \um_set_mathalphabet_xxvi:Nnn   \mathbfsf {\g_um_it_Latin_usv}{\g_um_bfsfit_Latin_usv}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_bfsfup_Latin_usv,\g_um_bfsfit_Latin_usv}{\g_um_bfsfit_Latin_usv}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfit_Latin_usv}
+      \um_map_chars_xxvi:nn {\g_um_bfsfup_Latin_usv,\g_um_bfsfit_Latin_usv}{\g_um_bfsfit_Latin_usv}
+      \um_set_mathalphabet_xxvi:Nnn   \mathbfsf {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfit_Latin_usv}
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfit_Latin_usv}
+  \um_set_mathalphabet_xxvi:Nnn \mathbfsfit {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_bfsfit_Latin_usv}
 }
 \cs_new:Npn \um_config_mathbfsfit_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_latin:nn {\g_um_bfsfit_latin_usv}{\g_um_bfsfit_latin_usv}
-    \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_it_latin_usv}{\g_um_bfsfit_latin_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_h_usv} {"1D65D}
+    \um_map_chars_xxvi:nn {\g_um_bfsfit_latin_usv}{\g_um_bfsfit_latin_usv}
+    \um_set_mathalphabet_latin:Nnn \mathbfsf {it}{bfsfit}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_latin:nn {\g_um_bfsfup_latin_usv,\g_um_bfsfit_latin_usv}{\g_um_bfsfit_latin_usv}
-      \um_set_mathalphabet_latin:Nnn   \mathbfsf {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfsfit_latin_usv}
-      \um_set_mathalphabet_char:Nnn \mathbfsf {\g_um_it_h_usv} {"1D65D}
+      \um_map_chars_xxvi:nn {\g_um_bfsfup_latin_usv,\g_um_bfsfit_latin_usv}{\g_um_bfsfit_latin_usv}
+      \um_set_mathalphabet_latin:Nnn \mathbfsf {up,it}{bfsfit}
     }
   }
-  \um_set_mathalphabet_latin:Nnn{\mathbfsfit}{\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_bfsfit_latin_usv}
-  \um_set_mathalphabet_char:Nnn \mathbfsfit {\g_um_it_h_usv} {"1D65D}
+  \um_set_mathalphabet_latin:Nnn \mathbfsfit {up,it}{bfsfit}
 }
 \cs_new:Npn \um_config_mathbfsfit_Greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Greek:nn {bfsfit}{bfsfit}
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_it_Greek_usv}{\g_um_bfsfit_Greek_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varTheta_usv}{\g_um_bfsfit_varTheta_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_Nabla_usv}{\g_um_bfsfit_Nabla_usv}
+    \um_set_mathalphabet_Greek:Nnn \mathbfsf {it}{bfsfit}
+    \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_it_Nabla_usv}{\g_um_bfsfit_Nabla_usv}
   }{
     \bool_if:NF \g_um_upsans_bool {
       \um_map_chars_Greek:nn {bfsfup,bfsfit}{bfsfit}
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfsfit_Greek_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varTheta_usv,\g_um_it_varTheta_usv}{\g_um_bfsfit_varTheta_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfNabla_up_or_it_usv}
+      \um_set_mathalphabet_Greek:Nnn \mathbfsf {up,it}{bfsfit}
+      \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfNabla_up_or_it_usv}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathbfsfit}{\g_um_up_Greek_usv,\g_um_it_Greek_usv}{\g_um_bfsfit_Greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_varTheta_usv}{\g_um_bfsfit_varTheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfit_Nabla_usv}
+  \um_set_mathalphabet_Greek:Nnn \mathbfsfit {up,it}{bfsfit}
+  \um_set_mathalphabet_char:Nnn  \mathbfsfit {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\g_um_bfsfit_Nabla_usv}
 }
 \cs_new:Npn \um_config_mathbfsfit_greek: {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_greek:nn {bfsfit} {bfsfit}
-    \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_it_greek_usv}{\g_um_bfsfit_greek_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_partial_usv}{\g_um_bfsfit_partial_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varepsilon_usv}{\g_um_bfsfit_varepsilon_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_vartheta_usv}{\g_um_bfsfit_vartheta_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varkappa_usv}{\g_um_bfsfit_varkappa_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varphi_usv}{\g_um_bfsfit_varphi_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varrho_usv}{\g_um_bfsfit_varrho_usv}
-    \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_it_varpi_usv}{\g_um_bfsfit_varpi_usv}
+    \um_set_mathalphabet_greek:Nnn \mathbfsf {it} {bfsfit}
+    \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_it_partial_usv}{\g_um_bfsfit_partial_usv}
   }{
     \bool_if:NF \g_um_upsans_bool {
       \um_map_chars_greek:nn {bfsfup,bfsfit} {bfsfit}
-      \um_set_mathalphabet_greek:Nnn   \mathbfsf {\g_um_up_greek_usv,   \g_um_it_greek_usv}     {\g_um_bfsfit_greek_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_partial_usv,   \g_um_it_partial_usv}   {\g_um_bfsfit_partial_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfsfit_varepsilon_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_vartheta_usv,  \g_um_it_vartheta_usv}  {\g_um_bfsfit_vartheta_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varkappa_usv,  \g_um_it_varkappa_usv}  {\g_um_bfsfit_varkappa_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varphi_usv,    \g_um_it_varphi_usv}    {\g_um_bfsfit_varphi_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varrho_usv,    \g_um_it_varrho_usv}    {\g_um_bfsfit_varrho_usv}
-      \um_set_mathalphabet_char:Nnn    \mathbfsf {\g_um_up_varpi_usv,     \g_um_it_varpi_usv}     {\g_um_bfsfit_varpi_usv}
+      \um_set_mathalphabet_greek:Nnn \mathbfsf {up,it} {bfsfit}
+      \um_set_mathalphabet_char:Nnn  \mathbfsf {\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfsfit_partial_usv}
     }
   }
-  \um_set_mathalphabet_greek:Nnn{\mathbfsfit}{\g_um_up_greek_usv,\g_um_it_greek_usv}{\g_um_bfsfit_greek_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_partial_usv,   \g_um_it_partial_usv   }{\g_um_bfsfit_partial_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_varepsilon_usv,\g_um_it_varepsilon_usv}{\g_um_bfsfit_varepsilon_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_vartheta_usv,  \g_um_it_vartheta_usv  }{\g_um_bfsfit_vartheta_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_varkappa_usv,  \g_um_it_varkappa_usv  }{\g_um_bfsfit_varkappa_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_varphi_usv,    \g_um_it_varphi_usv    }{\g_um_bfsfit_varphi_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_varrho_usv,    \g_um_it_varrho_usv    }{\g_um_bfsfit_varrho_usv}
-  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_varpi_usv,     \g_um_it_varpi_usv     }{\g_um_bfsfit_varpi_usv}
+  \um_set_mathalphabet_greek:Nnn \mathbfsfit {up,it} {bfsfit}
+  \um_set_mathalphabet_char:Nnn{\mathbfsfit}{\g_um_up_partial_usv,\g_um_it_partial_usv}{\g_um_bfsfit_partial_usv}
 }
 %    \end{macrocode}
 %
