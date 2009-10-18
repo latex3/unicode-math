@@ -2281,7 +2281,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_map_char:nn }
 % \begin{macro}{\um_map_chars_xxvi:nn }
 % \begin{macro}{\um_map_chars_xxiii:nn }
-% \begin{macro}{\um_map_chars_numbers:nn }
 % \darg{Number of iterations}
 % \darg{Starting input char(s)}
 % \darg{Starting output char}
@@ -2309,6 +2308,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_set:Nn \um_map_chars_xxiii:nn {
   \um_map_chars_range:nnn {24}{#1}{#2}
 }
+\cs_set:Nn \um_map_chars_Latin:nn {
+  \clist_map_inline:nn {#1} {
+    \um_map_chars_xxvi:cc {g_um_ ##1 _Latin_usv}{g_um_ #2 _Latin_usv}
+  }
+}
+\cs_set:Nn \um_map_chars_latin:nn {
+  \clist_map_inline:nn {#1} {
+    \um_map_chars_xxvi:cc {g_um_ ##1 _latin_usv}{g_um_ #2 _latin_usv}
+  }
+}
 \cs_set:Nn \um_map_chars_greek:nn {
   \clist_map_inline:nn {#1} {
     \um_map_chars_xxiii:cc {g_um_ ##1 _greek_usv}{g_um_ #2 _greek_usv}
@@ -2334,8 +2343,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_generate_variant:Nn \um_map_char:nn {cc}
 \cs_generate_variant:Nn \um_map_chars_xxiii:nn {cc}
+\cs_generate_variant:Nn \um_map_chars_xxvi:nn {cc}
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -2516,7 +2525,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_alphabets:}
 %    \begin{macrocode}
 
-\tl_new:Nn \g_um_mathup_alph_clist {latin,Latin,greek,Greek,num}
+\tl_new:Nn \g_um_mathup_alph_clist {latin,Latin,greek,Greek}
 \tl_new:Nn \g_um_mathit_alph_clist {latin,Latin,greek,Greek}
 \tl_new:Nn \g_um_mathscr_alph_clist    {latin,Latin}
 \tl_new:Nn \g_um_mathfrak_alph_clist   {latin,Latin}
@@ -2694,28 +2703,24 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathup_Latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_xxvi:nn {\g_um_up_Latin_usv}{\g_um_up_Latin_usv}
+    \um_map_chars_latin:nn {up} {up}
   }{
     \bool_if:NT \g_um_upLatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_up_Latin_usv}
+      \um_map_chars_Latin:nn {up,it} {up}
     }
   }
   \um_set_mathalphabet_Latin:Nnn \mathup {up,it}{up}
 }
 \cs_new:Npn \um_config_mathup_latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_xxvi:nn {\g_um_up_latin_usv}{\g_um_up_latin_usv}
+    \um_map_chars_latin:nn {up} {up}
   }{
     \bool_if:NT \g_um_uplatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_up_latin_usv}
+      \um_map_chars_latin:nn {up,it} {up}
       \um_map_char:nn {\g_um_up_h_usv,\g_um_it_h_usv}{\g_um_up_h_usv}% KEEP
     }
   }
   \um_set_mathalphabet_latin:Nnn \mathup {up,it}{up}
-}
-\cs_new:Npn \um_config_mathup_num: {
-  \um_map_chars_numbers:nn {\g_um_up_num_usv}{\g_um_up_num_usv}
-  \um_set_mathalphabet_numbers:Nnn \mathup {up}{up}
 }
 \cs_new:Npn \um_config_mathup_Greek: {
   \bool_if:NTF \g_um_literal_bool {
@@ -2748,21 +2753,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathit_Latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_xxvi:nn {\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
+    \um_map_chars_Latin:nn {it} {it}
   }{
     \bool_if:NF \g_um_upLatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_up_Latin_usv,\g_um_it_Latin_usv}{\g_um_it_Latin_usv}
+      \um_map_chars_Latin:nn {up,it} {it}
     }
   }
   \um_set_mathalphabet_Latin:Nnn \mathit {up,it}{it}
 }
 \cs_new:Npn \um_config_mathit_latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_xxvi:nn {\g_um_it_latin_usv}{\g_um_it_latin_usv}
+    \um_map_chars_latin:nn {it} {it}
     \um_map_char:nn {\g_um_it_h_usv}{\g_um_it_h_usv}% KEEP
   }{
     \bool_if:NF \g_um_uplatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_up_latin_usv,\g_um_it_latin_usv}{\g_um_it_latin_usv}
+      \um_map_chars_latin:nn {up,it} {it}
       \um_map_char:nn {\g_um_up_h_usv,\g_um_it_h_usv}{\g_um_it_h_usv}% KEEP
     }
   }
@@ -2875,11 +2880,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathsfup_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_sfup_Latin_usv}{\g_um_sfup_Latin_usv}
-    \um_set_mathalphabet_Latin \mathsf {up}{sfup}
+    \um_map_chars_Latin:nn {sfup} {sfup}
+    \um_set_mathalphabet_Latin:Nnn \mathsf {up}{sfup}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_sfup_Latin_usv,\g_um_sfit_Latin_usv}{\g_um_sfup_Latin_usv}
+      \um_map_chars_Latin:nn {sfup,sfit} {sfup}
       \um_set_mathalphabet_Latin:Nnn \mathsf {up,it}{sfup}
     }
   }
@@ -2887,11 +2892,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathsfup_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_sfup_latin_usv}{\g_um_sfup_latin_usv}
+    \um_map_chars_latin:nn {sfup} {sfup}
     \um_set_mathalphabet_latin:Nnn \mathsf {up}{sfup}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_sfup_latin_usv,\g_um_sfit_latin_usv}{\g_um_sfup_latin_usv}
+      \um_map_chars_latin:nn {sfup,sfit} {sfup}
       \um_set_mathalphabet_latin:Nnn \mathsf {up,it}{sfup}
     }
   }
@@ -2904,11 +2909,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathsfit_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_sfit_Latin_usv}{\g_um_sfit_Latin_usv}
-    \um_set_mathalphabet_Latin \mathsf {it}{sfit}
+    \um_map_chars_Latin:nn {sfit} {sfit}
+    \um_set_mathalphabet_Latin:Nnn \mathsf {it}{sfit}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_sfup_Latin_usv,\g_um_sfit_Latin_usv}{\g_um_sfit_Latin_usv}
+      \um_map_chars_Latin:nn {sfup,sfit} {sfit}
       \um_set_mathalphabet_Latin:Nnn \mathsf {up,it}{sfit}
     }
   }
@@ -2916,11 +2921,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathsfit_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_sfit_latin_usv}{\g_um_sfit_latin_usv}
+    \um_map_chars_latin:nn {sfit} {sfit}
     \um_set_mathalphabet_latin:Nnn \mathsf {it}{sfit}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_sfup_latin_usv,\g_um_sfit_latin_usv}{\g_um_sfit_latin_usv}
+      \um_map_chars_latin:nn {sfup,sfit} {sfit}
       \um_set_mathalphabet_latin:Nnn \mathsf {up,it}{sfit}
     }
   }
@@ -2946,30 +2951,30 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfit_Latin: {
   \bool_if:NF \g_um_bfupLatin_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfup_Latin_usv}
+    \um_map_chars_Latin:nn {bfup,bfit} {bfup}
   }
   \um_set_mathalphabet_Latin:Nnn \mathbfit {up,it}{bfit}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
-    \um_set_mathalphabet_Latin \mathbf {it}{bfit}
+    \um_map_chars_Latin:nn {bfit} {bfit}
+    \um_set_mathalphabet_Latin:Nnn \mathbf {it}{bfit}
   }{
     \bool_if:NF \g_um_bfupLatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
+      \um_map_chars_Latin:nn {bfup,bfit} {bfit}
       \um_set_mathalphabet_Latin:Nnn \mathbf {up,it}{bfit}
     }
   }
 }
 \cs_new:Npn \um_config_mathbfit_latin: {
   \bool_if:NF \g_um_bfuplatin_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
+    \um_map_chars_latin:nn {bfup,bfit} {bfit}
   }
   \um_set_mathalphabet_latin:Nnn \mathbfit {up,it}{bfit}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
+    \um_map_chars_latin:nn {bfit} {bfit}
     \um_set_mathalphabet_latin:Nnn \mathbf {it}{bfit}
   }{
     \bool_if:NF \g_um_bfuplatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfit_latin_usv}
+      \um_map_chars_latin:nn {bfup,bfit} {bfit}
       \um_set_mathalphabet_latin:Nnn \mathbf {up,it}{bfit}
     }
   }
@@ -3026,30 +3031,30 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfup_Latin: {
   \bool_if:NT \g_um_bfupLatin_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfit_Latin_usv}
+    \um_map_chars_Latin:nn {bfup,bfit} {bfit}
   }
   \um_set_mathalphabet_Latin:Nnn \mathbfup {up,it}{bfup}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv}{\g_um_bfup_Latin_usv}
-    \um_set_mathalphabet_Latin \mathbf {up}{bfup}
+    \um_map_chars_Latin:nn {bfup} {bfup}
+    \um_set_mathalphabet_Latin:Nnn \mathbf {up}{bfup}
   }{
     \bool_if:NT \g_um_bfupLatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfup_Latin_usv,\g_um_bfit_Latin_usv}{\g_um_bfup_Latin_usv}
+      \um_map_chars_Latin:nn {bfup,bfit} {bfup}
       \um_set_mathalphabet_Latin:Nnn \mathbf {up,it}{bfup}
     }
   }
 }
 \cs_new:Npn \um_config_mathbfup_latin: {
   \bool_if:NT \g_um_bfuplatin_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfup_latin_usv}
+    \um_map_chars_latin:nn {bfup,bfit} {bfup}
   }
   \um_set_mathalphabet_latin:Nnn \mathbfup {up,it}{bfup}
   \bool_if:NTF \g_um_bfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv}{\g_um_bfup_latin_usv}
+    \um_map_chars_latin:nn {bfup} {bfup}
     \um_set_mathalphabet_latin:Nnn \mathbf {up}{bfup}
   }{
     \bool_if:NT \g_um_bfuplatin_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfup_latin_usv,\g_um_bfit_latin_usv}{\g_um_bfup_latin_usv}
+      \um_map_chars_latin:nn {bfup,bfit} {bfup}
       \um_set_mathalphabet_latin:Nnn \mathbf {up,it}{bfup}
     }
   }
@@ -3129,11 +3134,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfup_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfsfup_Latin_usv}{\g_um_bfsfup_Latin_usv}
-    \um_set_mathalphabet_Latin \mathbfsf {up}{bfsfup}
+    \um_map_chars_Latin:nn {bfsfup} {bfsfup}
+    \um_set_mathalphabet_Latin:Nnn \mathbfsf {up}{bfsfup}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfsfup_Latin_usv,\g_um_bfsfit_Latin_usv}{\g_um_bfsfup_Latin_usv}
+      \um_map_chars_Latin:nn {bfsfup,bfsfit} {bfsfup}
       \um_set_mathalphabet_Latin:Nnn \mathbfsf {up,it}{bfsfup}
     }
   }
@@ -3141,11 +3146,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfup_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfsfup_latin_usv}{\g_um_bfsfup_latin_usv}
+    \um_map_chars_latin:nn {bfsfup} {bfsfup}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {up}{bfsfup}
   }{
     \bool_if:NT \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfsfup_latin_usv,\g_um_bfsfit_latin_usv}{\g_um_bfsfup_latin_usv}
+      \um_map_chars_latin:nn {bfsfup,bfsfit} {bfsfup}
       \um_set_mathalphabet_latin:Nnn \mathbfsf {up,it}{bfsfup}
     }
   }
@@ -3197,11 +3202,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_config_mathbfsfit_Latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfsfit_Latin_usv}{\g_um_bfsfit_Latin_usv}
-    \um_set_mathalphabet_Latin \mathbfsf {it}{bfsfit}
+    \um_map_chars_Latin:nn {bfsfit} {bfsfit}
+    \um_set_mathalphabet_Latin:Nnn \mathbfsf {it}{bfsfit}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfsfup_Latin_usv,\g_um_bfsfit_Latin_usv}{\g_um_bfsfit_Latin_usv}
+      \um_map_chars_Latin:nn {bfsfup,bfsfit} {bfsfit}
       \um_set_mathalphabet_Latin:Nnn \mathbfsf {up,it}{bfsfit}
     }
   }
@@ -3209,11 +3214,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_config_mathbfsfit_latin: {
   \bool_if:NTF \g_um_sfliteral_bool {
-    \um_map_chars_xxvi:nn {\g_um_bfsfit_latin_usv}{\g_um_bfsfit_latin_usv}
+    \um_map_chars_latin:nn {bfsfit} {bfsfit}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {it}{bfsfit}
   }{
     \bool_if:NF \g_um_upsans_bool {
-      \um_map_chars_xxvi:nn {\g_um_bfsfup_latin_usv,\g_um_bfsfit_latin_usv}{\g_um_bfsfit_latin_usv}
+      \um_map_chars_latin:nn {bfsfup,bfsfit} {bfsfit}
       \um_set_mathalphabet_latin:Nnn \mathbfsf {up,it}{bfsfit}
     }
   }
