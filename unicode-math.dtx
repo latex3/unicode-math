@@ -917,7 +917,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/18 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/19 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -3665,12 +3665,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{itemize}
 % \item Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
+\bool_new:N \g_um_amsmath_bool
 \@ifpackageloaded{amsmath}{
+  \bool_set_true:N \g_um_amsmath_bool
+}{
+  \bool_set_false:N \g_um_amsmath_bool
+}
+\bool_if:NT \g_um_amsmath_bool {
   \tl_remove_in:Nn \@begindocumenthook {
     \mathchardef\std@minus\mathcode`\-\relax
     \mathchardef\std@equal\mathcode`\=\relax
   }
-}{}
+}
 %    \end{macrocode}
 % \item This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
 %    \begin{macrocode}
@@ -3687,6 +3693,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \mathcode`\:"603A\relax
   }
 }{}
+%    \end{macrocode}
+% \item \cs{mathinner} items:
+%    \begin{macrocode}
+\cs_set:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
+\cs_set:Npn \cdots {\mathinner{\unicodecdots}}
+\bool_if:NT \g_um_amsmath_bool {
+  \cs_set_eq:NN \@cdots \cdots
+  \cs_set_eq:NN \dotsb@ \cdots
+}
 %    \end{macrocode}
 % \end{itemize}
 %
