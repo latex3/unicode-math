@@ -7,7 +7,7 @@ work, I understand that it has certain uses and am making it available for
 distribution. Your testing and feedback is essential to fill in the many gaps
 that I miss!
 
-Please be aware that this package is undergoing (very slow) continued
+Please be aware that this package is undergoing (slow) continued
 development and the interface and functionality should not be considered
 stable. Use at your own risk, in other words.
 
@@ -36,6 +36,9 @@ Please see the PDF documentation for full details. A simple beginning is:
 
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
 Furthermore, it will be in a different font.
+
+Note that `amsmath` must be loaded *before* `unicode-math`, since we
+overwrite many of its definitions.
 
 REQUIREMENTS
 ------------
