@@ -1499,17 +1499,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
       \else
 %    \end{macrocode}
+% \paragraph{Fences}
+%    \begin{macrocode}
+        \ifx\mathfence#3
+          \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
+          \global\XeTeXdelcode#4=#1 #4\relax
+          \cs_gset:cpn {l \cs_to_str:N #2} {\XeTeXdelimiter "\mathchar@type\mathopen  #1 #4\relax}
+          \cs_gset:cpn {r \cs_to_str:N #2} {\XeTeXdelimiter "\mathchar@type\mathclose #1 #4\relax}
+        \else
+%    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-        \ifx\mathaccent#3\relax
-          \cs_gset:Npx #2 {\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}
-        \else
+          \ifx\mathaccent#3\relax
+            \cs_gset:Npx #2 {\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}
+          \else
 %    \end{macrocode}
 % And finally, the general case.
 % We define the unicode mathcode for the character.
 % The macro is defined later on generically in terms of the unicode character.
 %    \begin{macrocode}
-          \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
+            \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
+          \fi
         \fi
       \fi
     \fi
