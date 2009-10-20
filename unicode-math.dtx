@@ -2530,7 +2530,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_alphabets:}
 %    \begin{macrocode}
 
-\tl_new:Nn \g_um_mathup_alph_clist {latin,Latin,greek,Greek}
+\tl_new:Nn \g_um_mathup_alph_clist {latin,Latin,greek,Greek,num}
 \tl_new:Nn \g_um_mathit_alph_clist {latin,Latin,greek,Greek}
 \tl_new:Nn \g_um_mathscr_alph_clist    {latin,Latin}
 \tl_new:Nn \g_um_mathfrak_alph_clist   {latin,Latin}
@@ -2706,9 +2706,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Upright: \cmd\mathup}
 %    \begin{macrocode}
+\cs_new:Npn \um_config_mathup_num: {
+  \um_map_chars_numbers:nn {`\0}{`\0}
+  \um_set_mathalphabet_numbers:Nnn \mathup {up}{up}
+}
 \cs_new:Npn \um_config_mathup_Latin: {
   \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_latin:nn {up} {up}
+    \um_map_chars_Latin:nn {up} {up}
   }{
     \bool_if:NT \g_um_upLatin_bool {
       \um_map_chars_Latin:nn {up,it} {up}
@@ -3664,6 +3668,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\mathrm}
 %    \begin{macrocode}
 \def\mathrm{\mathup}
+\let\mathfence\mathord
 %    \end{macrocode}
 % \end{macro}
 %
