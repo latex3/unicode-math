@@ -1787,6 +1787,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
 % The list of vertical arrows may be incomplete.
 % On the other hand, many fonts won't support them all being stretchy.
+% And some of them are probably not meant to stretch, either. But adding them here doesn't hurt.
 % \begin{macro}{\um_setup_delcodes:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_delcodes: {
@@ -1819,11 +1820,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_delcode:n {"21DF} % down arrow double stroke
   \um_set_delcode:n {"21E1} % up arrow dashed
   \um_set_delcode:n {"21E3} % down arrow dashed
+  \um_set_delcode:n {"21E7} % up white arrow
+  \um_set_delcode:n {"21E9} % down white arrow
+  \um_set_delcode:n {"21EA} % up white arrow from bar
+  \um_set_delcode:n {"21F3} % updown white arrow
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_setup_delcodes:}
+% \begin{macro}{\um_set_delcode:nn}
+% \begin{macro}{\um_set_delcode:n}
 %: TODO : hook into range feature
 %    \begin{macrocode}
 \cs_new:Nn \um_set_delcode:nn {
@@ -1833,6 +1839,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \XeTeXdelcode#1 = \csname sym\um_symfont_tl\endcsname #1
 }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % 
 % \subsubsection{Maths alphabets' character mapping}
