@@ -107,6 +107,8 @@ awk '
 	ignoreusv["02062"] = "\invisibletimes          "
 	ignoreusv["02063"] = "\invisiblesep            "
 	ignoreusv["02064"] = "\invisibleplus           "
+	ignoreusv["02329"] = "\\clangle                 "
+	ignoreusv["0232A"] = "\\crangle                 "
 	
 	# READ LINE
 	if (  \
