@@ -82,6 +82,32 @@ awk '
 	ignoreusv["0208D"] = "\\sublparen               "
 	ignoreusv["0208E"] = "\\subrparen               "
 	
+	ignoreusv["02002"] = "\enspace                 "
+	ignoreusv["02003"] = "\quad                    "
+	ignoreusv["02004"] = "\thirdemspace            "
+	ignoreusv["02005"] = "\thickspace              "
+	ignoreusv["02006"] = "\sixthemspace            "
+	ignoreusv["02007"] = "\digitspace              "
+	ignoreusv["02008"] = "\punctspace              "
+	ignoreusv["02009"] = "\thinspace               "
+	ignoreusv["0200A"] = "\hspace                  "
+	ignoreusv["0200B"] = "\zwspace                 "
+	ignoreusv["0200C"] = "\zwnonjoin               "
+	ignoreusv["0200D"] = "\zwjoin                  "
+	ignoreusv["0200E"] = "\LtoRmark                "
+	ignoreusv["0200F"] = "\RtoLmark                "
+	ignoreusv["02011"] = "\nobreakhyphen           "
+	ignoreusv["02012"] = "\figdash                 "
+	ignoreusv["02013"] = "\endash                  "
+	ignoreusv["02014"] = "\emdash                  "
+	
+	ignoreusv["0205F"] = "\medmathspace            "
+	ignoreusv["02060"] = "\wordjoin                "
+	ignoreusv["02061"] = "\functionapply           "
+	ignoreusv["02062"] = "\invisibletimes          "
+	ignoreusv["02063"] = "\invisiblesep            "
+	ignoreusv["02064"] = "\invisibleplus           "
+	
 	# READ LINE
 	if (  \
       printusv != substr($0,2,5) &&  \
@@ -140,6 +166,10 @@ awk '
 		if (texname == "\\colon                   ") { printtexname = "\\mathratio               " }
 		if (texname == "\\dots                    ") { printtexname = "\\unicodeellipsis         " }
 		if (texname == "\\cdots                   ") { printtexname = "\\unicodecdots            " }
+			
+		if (texname == "\\#                       ") { printtexname = "\\mathoctothorpe          " }
+		if (texname == "\\%                       ") { printtexname = "\\mathpercent             " }
+		if (texname == "\\&                       ") { printtexname = "\\mathampersand           " }
 
 
 	    # TRANSFORM MATH CLASSES
