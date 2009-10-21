@@ -3700,6 +3700,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \mathchardef\std@minus\mathcode`\-\relax
     \mathchardef\std@equal\mathcode`\=\relax
   }
+  \AtBeginDocument {
+    \def\std@minus{\XeTeXmathcharnum\XeTeXmathcodenum`\-\relax}
+    \def\std@equal{\XeTeXmathcharnum\XeTeXmathcodenum`\=\relax}
+  }
 }
 %    \end{macrocode}
 % \item This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
