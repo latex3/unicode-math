@@ -3303,7 +3303,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \char_make_other:N \^
   \cs_gset:Npn \um@scancharlet#1="#2\@nil {
     \lowercase{
-      \scantokens{\global\let#1=^^^^^#2}
+      \tl_rescan:nn {
+        \char_make_other:N \{
+        \char_make_other:N \}
+        \char_make_other:N \&
+        \char_make_other:N \%
+        \char_make_other:N \$
+      }{
+        \global\let#1=^^^^^#2
+      }
     }
   }
 %    \end{macrocode}
@@ -3328,8 +3336,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % and we're good to go. Make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
 \begingroup
+  \char_make_math_superscript:N\^
   \def\UnicodeMathSymbol#1#2#3#4{
-    \um@scancharlet#2=#1\@nil
+    \um@scancharlet#2=#1\@nil\ignorespaces
   }
   \char_make_other:N \#
   \@input{unicode-math-table.tex}
@@ -3737,7 +3746,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Octothorpe is an odd one:
 %    \begin{macrocode}
 \AtBeginDocument{
-  \def\#{\mode_if_math:TF{\mathoctothorpe}{\char`\#}}
   \def\widehat{\hat}
   \def\widetilde{\tilde}
 }
