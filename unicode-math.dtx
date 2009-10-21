@@ -1773,7 +1773,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_mathactives:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_mathactives: {
-  \um_make_mathactive:nNN {"2032} \primesingle \mathord
+  \um_make_mathactive:nNN {"2032} \sprime \mathord
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3353,10 +3353,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % We need a new `prime' algorithm. Unicode math has four pre-drawn prime glyphs.
 % \begin{quote}\obeylines
-% \unichar{2032}{prime} (\cs{primesingle}): $x\primesingle$
-% \unichar{2033}{double prime} (\cs{primedouble}): $x\primedouble$
-% \unichar{2034}{triple prime} (\cs{primetriple}): $x\primetriple$
-% \unichar{2057}{quadruple prime} (\cs{primequadruple}): $x\primequadruple$
+% \unichar{2032}{prime} (\cs{sprime}): $x\sprime$
+% \unichar{2033}{double prime} (\cs{dprime}): $x\dprime$
+% \unichar{2034}{triple prime} (\cs{trprime}): $x\trprime$
+% \unichar{2057}{quadruple prime} (\cs{qprime}): $x\qprime$
 % \end{quote}
 % As you can see, they're all drawn at the correct height without being superscripted.
 % However, in a correctly behaviour OpenType font with the MATH table,
@@ -3368,20 +3368,17 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{quote}
 % The shrinking and offsetting is done as it is turned into a superscript.
 % This means, luckily, that by default things work nicely for single primes.
-% We can write \verb|x\primesingle| or \verb|x^\primesingle| and get: $x\primesingle$ and $x^\primesingle$.
-% To support single primes, then, things are easier than in \LaTeX; we can
-% just map \verb|'| to \cs{prime} and not worry about it.
 % 
 % However, it would be nice to use the pre-composed primes above if they exist
-% in the font; consider $x\primesingle\primesingle\primesingle$ vs.\ $x\primetriple$. Our algorithm is
+% in the font; consider $x\sprime\sprime\sprime$ vs.\ $x\trprime$. Our algorithm is
 % \begin{itemize}
 % \item Prime encountered; pcount=1.
 % \item Scan ahead; if prime: pcount:=pcount+1; repeat.
 % \item If not prime, stop scanning.
-% \item If pcount=1, \cs{prime}, end.
-% \item If pcount=2, check \cs{primedouble}; if it exists, use it, end; if not, goto last step.
-% \item Ditto pcount=3 \& \cs{primetriple}.
-% \item Ditto pcount=4 \& \cs{primequadruple}.
+% \item If pcount=1, \cs{sprime}, end.
+% \item If pcount=2, check \cs{dprime}; if it exists, use it, end; if not, goto last step.
+% \item Ditto pcount=3 \& \cs{trprime}.
+% \item Ditto pcount=4 \& \cs{qprime}.
 % \item If pcount>4 or the glyph doesn't exist, insert pcount \cs{prime}s with \cs{primekern} between each.
 % \end{itemize}
 %
@@ -3394,21 +3391,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Nn \um_nprimes:n {
   ^{
-     \primesingle
-     \prg_replicate:nn {#1-1} { \mskip \g_um_primekern_muskip \primesingle }
+     \sprime
+     \prg_replicate:nn {#1-1} { \mskip \g_um_primekern_muskip \sprime }
    }
 }
 \cs_new:Nn \um_nprimes_select:n {
   \prg_case_int:nnn {#1}{
-    {1} { ^{\primesingle} }
+    {1} { ^{\sprime} }
     {2} { 
-      \um_glyph_if_exist:nTF {"2033} { ^{\primedouble} } {\um_nprimes:n {#1}}
+      \um_glyph_if_exist:nTF {"2033} { ^{\dprime} } {\um_nprimes:n {#1}}
     }
     {3} { 
-      \um_glyph_if_exist:nTF {"2034} {^{\primetriple} } {\um_nprimes:n {#1}}
+      \um_glyph_if_exist:nTF {"2034} {^{\trprime} } {\um_nprimes:n {#1}}
     }
     {4} { 
-      \um_glyph_if_exist:nTF {"2057} { ^{\primequadruple} } {\um_nprimes:n {#1}}
+      \um_glyph_if_exist:nTF {"2057} { ^{\qprime} } {\um_nprimes:n {#1}}
     }
   }{ 
     \um_nprimes:n {#1}
