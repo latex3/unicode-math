@@ -3138,13 +3138,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_greek:Nnn \mathbfit {up,it} {#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_greek:nn {bfit} {#1}
-    \um_set_mathalphabet_greek:Nnn \mathbfit {it} {#1}
+    \um_set_mathalphabet_greek:Nnn \mathbf {it} {#1}
   }{
     \bool_if:NF \g_um_bfupgreek_bool {
       \um_map_chars_greek:nn {bfit,bfup} {#1}
-    }
-    \bool_if:NF \g_um_bfupgreek_bool {
-      \um_set_mathalphabet_greek:Nnn \mathbfit {up,it} {#1}
+      \um_set_mathalphabet_greek:Nnn \mathbf {up,it} {#1}
     }
   }
 }
@@ -3208,7 +3206,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_map_chars_Greek:nn {bfup}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbf {up}{#1}
   }{
-    \bool_if:NF \g_um_bfupGreek_bool {
+    \bool_if:NT \g_um_bfupGreek_bool {
       \um_map_chars_Greek:nn {bfup,bfit}{#1}
       \um_set_mathalphabet_Greek:Nnn \mathbf {up,it}{#1}
     }
@@ -3222,8 +3220,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }{
     \bool_if:NT \g_um_bfupgreek_bool {
       \um_map_chars_greek:nn {bfup,bfit} {#1}
-    }
-    \bool_if:NT \g_um_bfupgreek_bool {
       \um_set_mathalphabet_greek:Nnn \mathbf {up,it} {#1}
     }
   }
