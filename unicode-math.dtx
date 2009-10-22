@@ -2695,21 +2695,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_maybe_init_alphabet:n  {sf}
     \um_maybe_init_alphabet:n  {bf}
     \um_maybe_init_alphabet:n  {bfsf}
-    \um_setup_math_alphabet:NV \mathup     \g_um_mathup_alph_clist
-    \um_setup_math_alphabet:NV \mathit     \g_um_mathit_alph_clist
-    \um_setup_math_alphabet:NV \mathbb     \g_um_mathbb_alph_clist
-    \um_setup_math_alphabet:NV \mathscr    \g_um_mathscr_alph_clist
-    \um_setup_math_alphabet:NV \mathfrak   \g_um_mathfrak_alph_clist
-    \um_setup_math_alphabet:NV \mathsfup   \g_um_mathsfup_alph_clist
-    \um_setup_math_alphabet:NV \mathsfit   \g_um_mathsfit_alph_clist
-    \um_setup_math_alphabet:NV \mathtt     \g_um_mathtt_alph_clist
-    \um_setup_math_alphabet:NV \mathbfup   \g_um_mathbfup_alph_clist
-    \um_setup_math_alphabet:NV \mathbfit   \g_um_mathbfit_alph_clist
-    \um_setup_math_alphabet:NV \mathbfscr  \g_um_mathbfscr_alph_clist
-    \um_setup_math_alphabet:NV \mathbffrak \g_um_mathbffrak_alph_clist
-    \um_setup_math_alphabet:NV \mathbfsf   \g_um_mathbfsf_alph_clist
-    \um_setup_math_alphabet:NV \mathbfsfup \g_um_mathbfsfup_alph_clist
-    \um_setup_math_alphabet:NV \mathbfsfit \g_um_mathbfsfit_alph_clist
+    \um_setup_math_alphabet:NVn \mathup     \g_um_mathup_alph_clist     {up    }
+    \um_setup_math_alphabet:NVn \mathit     \g_um_mathit_alph_clist     {it    }
+    \um_setup_math_alphabet:NVn \mathbb     \g_um_mathbb_alph_clist     {bb    }
+    \um_setup_math_alphabet:NVn \mathscr    \g_um_mathscr_alph_clist    {scr   }
+    \um_setup_math_alphabet:NVn \mathfrak   \g_um_mathfrak_alph_clist   {frak  }
+    \um_setup_math_alphabet:NVn \mathsfup   \g_um_mathsfup_alph_clist   {sfup  }
+    \um_setup_math_alphabet:NVn \mathsfit   \g_um_mathsfit_alph_clist   {sfit  }
+    \um_setup_math_alphabet:NVn \mathtt     \g_um_mathtt_alph_clist     {tt    }
+    \um_setup_math_alphabet:NVn \mathbfup   \g_um_mathbfup_alph_clist   {bfup  }
+    \um_setup_math_alphabet:NVn \mathbfit   \g_um_mathbfit_alph_clist   {bfit  }
+    \um_setup_math_alphabet:NVn \mathbfscr  \g_um_mathbfscr_alph_clist  {bfscr }
+    \um_setup_math_alphabet:NVn \mathbffrak \g_um_mathbffrak_alph_clist {bffrak}
+    \um_setup_math_alphabet:NVn \mathbfsf   \g_um_mathbfsf_alph_clist   {bfsf  }
+    \um_setup_math_alphabet:NVn \mathbfsfup \g_um_mathbfsfup_alph_clist {bfsfup}
+    \um_setup_math_alphabet:NVn \mathbfsfit \g_um_mathbfsfit_alph_clist {bfsfit}
     \um_setup_math_mapping:n   {up    }
     \um_setup_math_mapping:n   {it    }
     \um_setup_math_mapping:n   {bb    }
@@ -2733,15 +2733,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \seq_map_inline:Nn \l_um_mathalph_seq {
       \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
       \tl_set:No \l_um_tmpb_tl { \use_ii:nnn  ##1 }
-      \tl_set:No \l_um_tmpc_tl { \use_iii:nnn ##1 }
-      \tl_if_empty:NF \l_um_tmpc_tl {
-        \PackageWarning{unicode-math}{alphabet~remapping~not~yet~implemented}
+      \tl_set:No \l_um_remap_alphabet_tl { \use_iii:nnn ##1 }
+      \tl_if_empty:NTF \l_um_remap_alphabet_tl {
+        \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_tmpa_tl}
+      }{
+        \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_remap_alphabet_tl}
       }
+      \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \use_none:nnnnn \l_um_remap_alphabet_tl}
       \tl_if_empty:NT \l_um_tmpb_tl {
         \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
         \tl_set:Nv \l_um_tmpb_tl { g_um_ \exp_after:wN \cs_to_str:N \l_um_tmpa_tl _alph_clist }
       }
-      \um_setup_math_alphabet:VV \l_um_tmpa_tl \l_um_tmpb_tl
+      \um_setup_math_alphabet:VVV \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_alphabet_tl
     }
   }
 }
@@ -2751,10 +2754,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_math_alphabet:Nn}
 % \darg{Math font family name (e.g., \cs{mathbb})}
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
+% \darg{Math alphabets output string (usually same as input \texttt{bb})}
 % First check that at least one of the alphabets for the font shape is defined, and
 % then loop through them defining the individual ranges.
 %    \begin{macrocode}
-\cs_new:Nn \um_setup_math_alphabet:Nn {
+\cs_new:Nn \um_setup_math_alphabet:Nnn {
   \tl_set:Nx \l_um_tmpa_tl {\cs_to_str:N #1}
   \tl_set:Nx \l_um_tmpb_tl {\exp_after:wN \use_none:nnnn \l_um_tmpa_tl}
   \clist_map_inline:nn {#2} {
@@ -2765,7 +2769,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
   \clist_map_inline:nn {#2} {
     \um_glyph_if_exist:cTF {g_um_ \l_um_tmpb_tl _##1_usv}{
-      \cs:w um_config_ \l_um_tmpa_tl _##1:n \exp_after:wN \cs_end: \exp_after:wN {\l_um_tmpb_tl}
+      \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
     }{
       \seq_put_right:Nx \l_um_missing_alph_seq {
         \@backslashchar
@@ -2774,7 +2778,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     }
   }
 }
-\cs_generate_variant:Nn \um_setup_math_alphabet:Nn {NV,VV}
+\cs_generate_variant:Nn \um_setup_math_alphabet:Nnn {NV,VVV}
 
 \tl_set:Nn \g_um_math_alphabet_name_latin_tl {Latin,~lowercase}
 \tl_set:Nn \g_um_math_alphabet_name_Latin_tl {Latin,~uppercase}
