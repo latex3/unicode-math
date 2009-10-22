@@ -599,8 +599,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Partial}
 % \seclabel{partial}
 % 
-% The same applies to the symbols \unichar{2202}{partial differential} and
-% \unichar{1D715}{math italic partial differential}.
+% The same applies to the symbols \unichar{2202} partial differential and
+% \unichar{1D715} math italic partial differential.
 %
 % At time of writing, both the Cambria Math and STIX fonts display these
 % two glyphs in the same italic style, but this is hopefully a bug that will
@@ -656,19 +656,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % The package default is to use |vargreek-shape=TeX|.
 %
-% \unichar{3B5}{greek small letter epsilon}\\
-% \unichar{3F5}{greek lunate epsilon symbol}\\
-% \unichar{3C6}{greek small letter phi}\\
-% \unichar{3D5}{greek small letter script phi}
-%
 % \subsubsection{Primes}
 %
 % Primes ($x'$) may be input in several ways. You may use any combination
-% of ascii straight quote (\texttt{\char`\'}), unicode prime ($'$), and
-% \cs{prime}; when multiple primes occur next to each other, they chain
+% of \ascii\ straight quote (\texttt{\char`\'}), unicode prime \unichar{2032}
+% ($'$), and \cs{prime}; when multiple primes occur next to each other, they chain
 % together to form double, triple, or quadruple primes if the font contains
-% pre-drawn glyphs. These may also be accessed with \cs{primedouble},
-% \cs{primetriple}, and \cs{primequadruple}.
+% pre-drawn glyphs. These may also be accessed with \cs{dprime},
+% \cs{trprime}, and \cs{qprime}, respectively.
 %
 % If the font does not contain the pre-drawn glyphs or more than four primes
 % are used, the single prime glyph is used multiple times with a negative
@@ -680,7 +675,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \muskip_gset:Nn \g_um_primekern_muskip { -\thinmuskip/2 }
 % \ExplySyntaxOff
 % \end{verbatim}
-% 
+%
+% Backwards or reverse primes ($x`$) behave in exactly the same way; use any of \ascii\
+% back tick (\texttt{\char`\`}), unicode reverse prime \unichar{2035} ($`$), or \cs{backprime}
+% to access it. Multiple backwards primes can also be called with \cs{backdprime},
+% \cs{backtrprime}, and \cs{backqprime}.
+%
 % \subsubsection{Unicode subscripts and superscripts}
 % 
 % You may, if you wish, use unicode subscripts and superscripts in your
@@ -770,15 +770,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % In \TeX, \texttt{:} is defined as a colon with relation spacing: `$a:b$'.
 % While \cs{colon} is defined as a colon with punctuation spacing: `$a\colon b$'.
 % 
-% In unicode, \unichar{003A}{colon} is defined as a punctuation symbol,
-% while \unichar{2236}{ratio} is the colon-like symbol used in mathematics to denote
+% In unicode, \unichar{003A} {colon} is defined as a punctuation symbol,
+% while \unichar{2236} {ratio} is the colon-like symbol used in mathematics to denote
 % ratios and other things.
 % 
 % This breaks the usual straightforward mapping from control sequence to unicode input character
 % to (the same) unicode glyph.
 % 
-% To preserve input compatibility, we remap the \ascii\ input character `\texttt{:}' to \unichar{2236}{ratio}.
-% Typing a literal \unichar{2236}{ratio} char will result in the same output.
+% To preserve input compatibility, we remap the \ascii\ input character `\texttt{:}' to \unichar{2236}.
+% Typing a literal \unichar{2236} char will result in the same output.
 % If \pkg{amsmath} is loaded, then the definition of \cs{colon} is inherited from there
 % (it looks like a punctuation colon with additional space around it).
 % Otherwise, \cs{colon} is made to output a colon with \cs{mathpunct} spacing.
@@ -795,20 +795,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \caption{Slashes and backslashes.}
 % \tablabel{slashes}
 % \newfontfamily\stix{STIXGeneral}
-% \renewcommand\unichar[2]{\textsc{u+\MakeLowercase{#1}} & \textsc{#2} & {\stix \char"#1}}
 % \begin{tabular}{@{}clcl@{}}
 % \toprule
 % Slot & Name & Glyph & Command  \\
 % \midrule
-% \unichar{002F}{solidus}                 & \cs{solidus} \\
-% \unichar{2044}{fraction slash}          & \cs{fracslash} \\
-% \unichar{2215}{division slash}          & \cs{slash} \\
-% \unichar{29F8}{big solidus}             & \cs{xsol} \\
+% \unichar{002F} & \textsc{solidus}                 & \cs{solidus} \\
+% \unichar{2044} & \textsc{fraction slash}          & \cs{fracslash} \\
+% \unichar{2215} & \textsc{division slash}          & \cs{slash} \\
+% \unichar{29F8} & \textsc{big solidus}             & \cs{xsol} \\
 % \midrule
-% \unichar{005C}{reverse solidus}         & \cs{backslash} \\
-% \unichar{2216}{set minus}               & \cs{smallsetminus} \\
-% \unichar{29F5}{reverse solidus operator}& \cs{setminus} \\
-% \unichar{29F9}{big reverse solidus}     & \cs{xbsol} \\
+% \unichar{005C} & \textsc{reverse solidus}         & \cs{backslash} \\
+% \unichar{2216} & \textsc{set minus}               & \cs{smallsetminus} \\
+% \unichar{29F5} & \textsc{reverse solidus operator}& \cs{setminus} \\
+% \unichar{29F9} & \textsc{big reverse solidus}     & \cs{xbsol} \\
 % \bottomrule
 % \end{tabular}
 % \end{table}
@@ -819,35 +818,35 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % 
 % \paragraph{Slash}
 % 
-% Of \unichar{2044}{fraction slash}, TR25 says that it is:
+% Of \unichar{2044} {fraction slash}, TR25 says that it is:
 % \begin{quote}
 % \dots used to build up simple fractions in running text\dots 
 % however parsers of mathematical texts should be prepared to handle fraction slash 
 % when it is received from other sources.
 % \end{quote}
 % 
-% \unichar{2215}{division slash} should be used when division is represented
+% \unichar{2215} {division slash} should be used when division is represented
 % without a built-up fraction; $\pi\approx22/7$, for example.
 % 
-% \unichar{29F8}{big solidus} is a `big operator' (like $\sum$).
+% \unichar{29F8} {big solidus} is a `big operator' (like $\sum$).
 % 
 % \paragraph{Backslash}
 % 
-% The \unichar{005C}{reverse solidus} character \cs{backslash} is used for denoting
+% The \unichar{005C} {reverse solidus} character \cs{backslash} is used for denoting
 % double cosets: $A\backslash B$. (So I'm led to believe.) 
 % It may be used as a `stretchy' delimiter if supported by the font.
 % 
-% MathML uses \unichar{2216}{set minus} like this: $A\smallsetminus B$.\footnote{\S4.4.5.11 \url{http://www.w3.org/TR/MathML3/}}
+% MathML uses \unichar{2216} {set minus} like this: $A\smallsetminus B$.\footnote{\S4.4.5.11 \url{http://www.w3.org/TR/MathML3/}}
 % The \LaTeX\ command name \cs{smallsetminus} is used for backwards compatibility.
 % 
-% Presumably, \unichar{29F5}{reverse solidus operator} is intended to
+% Presumably, \unichar{29F5} {reverse solidus operator} is intended to
 % be used in a similar way, but it could also (perhaps?) be used to
 % represent `inverse division': $\pi\approx7\mathbin{\backslash}22$.^^A
 % \footnote{This is valid syntax in the Octave and Matlab programming languages,
 % in which it means matrix inverse pre-multiplication. I.e., $A\mathbin{\backslash} B\equiv A^{-1}B$.}
 % The \LaTeX\ name for this character is \cs{setminus}.
 % 
-% Finally, \unichar{29F9}{big reverse solidus} is a `big operator' (like $\sum$).
+% Finally, \unichar{29F9} {big reverse solidus} is a `big operator' (like $\sum$).
 % 
 % \paragraph{How to use all of these things}
 % 
@@ -870,7 +869,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{itemize}
 % 
 % However, we assume that there is only \emph{one} stretchy slash
-% in the font; this is assumed by default to be \unichar{002F}{solidus}.
+% in the font; this is assumed by default to be \unichar{002F} {solidus}.
 % Writing \cs{left/} or \cs{left}\cs{slash} or \cs{left}{fracslash}
 % will all result in the same stretchy delimiter being used.
 % 
@@ -879,7 +878,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % unicode slots.
 % 
 % For example: as mentioned above, Cambria Math's stretchy slash is
-% \unichar{2044}{fraction slash}. When using Cambria Math, then
+% \unichar{2044} {fraction slash}. When using Cambria Math, then
 % \pkg{unicode-math} should be loaded with the |[slash-delimiter=frac]| option.
 % (This should be a font option rather than a package option, but
 % it will change soon.)
@@ -1679,13 +1678,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % \begin{macro}{\um_set_mathcode:nnnn}
+% \begin{macro}{\um_set_mathchar:Nnnn}
 % Note that this declaration \emph{isn't} global so that it can be constrained by grouping
 % inside math alphabet switches.
 %    \begin{macrocode}
 \cs_set:Nn \um_set_mathcode:nnnn {
   \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax
 }
+\cs_set:Nn \um_set_mathchar:Nnnn {
+  \XeTeXmathchardef #1 = "\mathchar@type#2 \csname sym#3\endcsname #4\relax
+}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \subsection{The main \cs{setmathfont} macro}
@@ -1923,7 +1927,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_mathactives:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_mathactives: {
-  \um_make_mathactive:nNN {"2032} \sprime \mathord
+  \um_make_mathactive:nNN {"2032} \um_prime_single \mathord
+  \um_make_mathactive:nNN {"2035} \um_backprime_single \mathord
+  \XeTeXmathcodenum `\` = "1FFFFF \scan_stop:
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1935,15 +1941,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % You are responsible for giving active |#1| a particular meaning!
 %    \begin{macrocode}
 \cs_new:Nn \um_make_mathactive:nNN {
-  \XeTeXmathchardef #2 = "\mathchar@type #3
-                         \csname sym\um_symfont_tl\endcsname
-                         #1 \scan_stop:
+  \um_set_mathchar:Nnnn #2 {#3} {\um_symfont_tl} {#1}
   \XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
 }
 %    \end{macrocode}
 % \end{macro}
-% 
+%
 % \subsubsection{Delimiter codes}
+%
 % Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
 % The list of vertical arrows may be incomplete.
 % On the other hand, many fonts won't support them all being stretchy.
@@ -3526,16 +3531,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % We need a new `prime' algorithm. Unicode math has four pre-drawn prime glyphs.
 % \begin{quote}\obeylines
-% \unichar{2032}{prime} (\cs{sprime}): $x\sprime$
-% \unichar{2033}{double prime} (\cs{dprime}): $x\dprime$
-% \unichar{2034}{triple prime} (\cs{trprime}): $x\trprime$
-% \unichar{2057}{quadruple prime} (\cs{qprime}): $x\qprime$
+% \unichar{2032} {prime} (\cs{prime}): $x\prime$
+% \unichar{2033} {double prime} (\cs{dprime}): $x\dprime$
+% \unichar{2034} {triple prime} (\cs{trprime}): $x\trprime$
+% \unichar{2057} {quadruple prime} (\cs{qprime}): $x\qprime$
 % \end{quote}
 % As you can see, they're all drawn at the correct height without being superscripted.
 % However, in a correctly behaviour OpenType font with the MATH table,
 % we also see different behaviour after the \texttt{ssty} feature is applied:
 % \begin{quote}
-% \unichar{2032}{prime} in the `scriptstyle' font:
+% \unichar{2032} {prime} in the `scriptstyle' font:
 % \font\1="Cambria Math:script=math,+ssty=0"\1
 % $x$\char"2032
 % \end{quote}
@@ -3543,12 +3548,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This means, luckily, that by default things work nicely for single primes.
 % 
 % However, it would be nice to use the pre-composed primes above if they exist
-% in the font; consider $x\sprime\sprime\sprime$ vs.\ $x\trprime$. Our algorithm is
+% in the font; consider $x\prime\prime\prime$ vs.\ $x\trprime$. Our algorithm is
 % \begin{itemize}
 % \item Prime encountered; pcount=1.
 % \item Scan ahead; if prime: pcount:=pcount+1; repeat.
 % \item If not prime, stop scanning.
-% \item If pcount=1, \cs{sprime}, end.
+% \item If pcount=1, \cs{prime}, end.
 % \item If pcount=2, check \cs{dprime}; if it exists, use it, end; if not, goto last step.
 % \item Ditto pcount=3 \& \cs{trprime}.
 % \item Ditto pcount=4 \& \cs{qprime}.
@@ -3562,26 +3567,42 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_nprimes:n {
+\cs_new:Nn \um_nprimes:Nn {
   ^{
-     \sprime
-     \prg_replicate:nn {#1-1} { \mskip \g_um_primekern_muskip \sprime }
+     #1
+     \prg_replicate:nn {#2-1} { \mskip \g_um_primekern_muskip #1 }
    }
 }
-\cs_new:Nn \um_nprimes_select:n {
-  \prg_case_int:nnn {#1}{
-    {1} { ^{\sprime} }
-    {2} { 
-      \um_glyph_if_exist:nTF {"2033} { ^{\dprime} } {\um_nprimes:n {#1}}
+\cs_new:Nn \um_nprimes_select:nn {
+  \prg_case_int:nnn {#2}{
+    {1} { ^{#1} }
+    {2} {
+      \um_glyph_if_exist:nTF {"2033} { ^{\dprime} } {\um_nprimes:Nn #1 {#2}}
     }
-    {3} { 
-      \um_glyph_if_exist:nTF {"2034} {^{\trprime} } {\um_nprimes:n {#1}}
+    {3} {
+      \um_glyph_if_exist:nTF {"2034} {^{\trprime} } {\um_nprimes:Nn #1 {#2}}
     }
-    {4} { 
-      \um_glyph_if_exist:nTF {"2057} { ^{\qprime} } {\um_nprimes:n {#1}}
+    {4} {
+      \um_glyph_if_exist:nTF {"2057} { ^{\qprime} } {\um_nprimes:Nn #1 {#2}}
     }
-  }{ 
-    \um_nprimes:n {#1}
+  }{
+    \um_nprimes:Nn #1 {#2}
+  }
+}
+\cs_new:Nn \um_nbackprimes_select:nn {
+  \prg_case_int:nnn {#2}{
+    {1} { ^{#1} }
+    {2} {
+      \um_glyph_if_exist:nTF {"2033} { ^{\backdprime} } {\um_nprimes:Nn #1 {#2}}
+    }
+    {3} {
+      \um_glyph_if_exist:nTF {"2034} {^{\backtrprime} } {\um_nprimes:Nn #1 {#2}}
+    }
+    {4} {
+      \um_glyph_if_exist:nTF {"2057} { ^{\backqprime} } {\um_nprimes:Nn #1 {#2}}
+    }
+  }{
+    \um_nprimes:Nn #1 {#2}
   }
 }
 %    \end{macrocode}
@@ -3591,20 +3612,40 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Nn \um_scanprime: {
   \num_zero:N \l_um_primecount_num
-  \um_scanprime_collect:
+  \um_scanprime_collect:N \um_prime_single
 }
-\cs_new:Nn \um_scanprime_collect: {
+\cs_new:Nn \um_scanprime_collect:N {
   \num_incr:N \l_um_primecount_num
-  \peek_meaning_remove:NTF ' { 
-    \um_scanprime_collect: 
+  \peek_meaning_remove:NTF ' {
+    \um_scanprime_collect:N #1
   }{
     \peek_meaning_remove:NTF \um_scanprime: {
-      \um_scanprime_collect:
+      \um_scanprime_collect:N #1
     }{
       \peek_meaning_remove:NTF ^^^^2032 {
-        \um_scanprime_collect:
+        \um_scanprime_collect:N #1
       }{
-        \um_nprimes_select:n {\l_um_primecount_num}
+        \um_nprimes_select:nn {#1} {\l_um_primecount_num}
+      }
+    }
+  }
+}
+\cs_new:Nn \um_scanbackprime: {
+  \num_zero:N \l_um_primecount_num
+  \um_scanbackprime_collect:N \um_backprime_single
+}
+\cs_new:Nn \um_scanbackprime_collect:N {
+  \num_incr:N \l_um_primecount_num
+  \peek_meaning_remove:NTF ` {
+    \um_scanbackprime_collect:N #1
+  }{
+    \peek_meaning_remove:NTF \um_scanbackprime: {
+      \um_scanbackprime_collect:N #1
+    }{
+      \peek_meaning_remove:NTF ^^^^2035 {
+        \um_scanbackprime_collect:N #1
+      }{
+        \um_nbackprimes_select:nn {#1} {\l_um_primecount_num}
       }
     }
   }
@@ -3613,11 +3654,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_set_eq:NN \prime \um_scanprime:
+\cs_set_eq:NN \backprime \um_scanbackprime:
 \group_begin:
   \char_make_active:N \'
+  \char_make_active:N \`
   \char_make_active:n {"2032}
+  \char_make_active:n {"2035}
   \cs_gset_eq:NN ' \um_scanprime:
   \cs_gset_eq:NN ^^^^2032 \um_scanprime:
+  \cs_gset_eq:NN ` \um_scanbackprime:
+  \cs_gset_eq:NN ^^^^2035 \um_scanbackprime:
 \group_end:
 %    \end{macrocode}
 %
@@ -3655,7 +3701,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % the results; this means that the actual subscript/superscript glyphs are never seen in the
 % output document~--- they are only used as input characters.
 % 
-% Open question: should the superscript-like `modifiers' (\unichar{1D2C}{modifier capital letter a} and on)
+% Open question: should the superscript-like `modifiers' (\unichar{1D2C} {modifier capital letter a} and on)
 % be included here?
 % 
 % First, the setup of each mathactive char:
@@ -3829,7 +3875,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\mathsterling{\sterling}
 %    \end{macrocode}
 %
-% Define \cs{colon} as a mathpunct `|:|'. This is wrong: it should be \unichar{003A}{colon} instead!
+% Define \cs{colon} as a mathpunct `|:|'. This is wrong: it should be \unichar{003A} {colon} instead!
 %    \begin{macrocode}
 \@ifpackageloaded{amsmath}{
   % define their own colon, perhaps I should just steal it.
@@ -4363,7 +4409,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \makeatother
 \newcommand\codeline[1]{\par{\centering#1\par\noindent}\ignorespaces}
 
-\newcommand\unichar[2]{\textsc{\MakeLowercase{u+#1: #2}}}
+\newcommand\unichar[1]{\textsc{u}+\texttt{\small#1}}
 
 \setlength\parindent{2em}
 

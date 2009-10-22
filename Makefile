@@ -79,6 +79,7 @@ README: README.markdown
 
 
 $(builddir)/$(PKG).sty: $(builddir)/$(PKG).dtx
+	echo "Updating $@"
 	cd $(builddir); \
 	tex $(PKG).dtx > /dev/null ; \
 
@@ -86,6 +87,7 @@ $(builddir)/$(PKG).dtx: $(PKG).dtx
 	cp -f  $<  $@
 
 $(builddir)/unicode-math-table.tex: unicode-math-table.tex
+	echo "Updating $@"
 	cp -f  $<  $@
 
 $(builddir)/$(PKG).pdf:  $(builddir)/$(PKG).dtx $(BUILDSOURCE)

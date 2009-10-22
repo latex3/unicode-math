@@ -169,7 +169,6 @@ awk '
 		if (texname == "\\colon                   ") { printtexname = "\\mathratio               " }
 		if (texname == "\\dots                    ") { printtexname = "\\unicodeellipsis         " }
 		if (texname == "\\cdots                   ") { printtexname = "\\unicodecdots            " }
-		if (texname == "\\prime                   ") { printtexname = "\\sprime                  " }
 			
 		if (texname == "\\#                       ") { printtexname = "\\mathoctothorpe          " }
 		if (texname == "\\%                       ") { printtexname = "\\mathpercent             " }
