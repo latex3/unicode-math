@@ -883,8 +883,52 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \pkg{unicode-math} should be loaded with the |[slash-delimiter=frac]| option.
 % (This should be a font option rather than a package option, but
 % it will change soon.)
-% 
-% 
+%
+% \subsubsection{Circles}
+%
+% Unicode defines a large number of different types of circles for a variety
+% of mathematical purposes. There are thirteen alone just considering the
+% all white and all black ones, shown in \tabref{circles}.
+%
+% \LaTeX\ defines considerably fewer: \cs{circ} and cs{bigcirc} for white;
+% \cs{bullet} for black. This package maps those commands to \cs{\vysmwhtcircle},
+% \cs{mdlgwhtcircle}, and \cs{smblkcircle}, respectively.
+%
+% \begin{table}
+% \def\showchar#1#2#3{ \textsc{u}+{\small\ttfamily #1} & \texttt{\string#3} & $#3$ \\}
+% \setmathfont{STIXGeneral}
+% \begin{tabular}{@{}llc@{}}
+% \toprule
+% Slot & Command & Glyph \\
+% \midrule
+% \showchar{00B7}{centerdot}{\cdotp}
+% \showchar{22C5}{small middle dot}{\cdot}
+% \showchar{2219}{bullet operator}{\vysmblkcircle}
+% \showchar{2022}{round bullet, filled}{\smblkcircle}
+% \showchar{2981}{z notation spot}{\mdsmblkcircle}
+% \showchar{26AB}{medium black circle}{\mdblkcircle}
+% \showchar{25CF}{circle, filled}{\mdlgblkcircle}
+% \showchar{2B24}{black large circle}{\lgblkcircle}
+% \bottomrule
+% \end{tabular}
+% \def\showchar#1#2#3{$#3$ & \texttt{\string#3} & \textsc{u}+{\small\ttfamily #1} \\}
+% \begin{tabular}{@{}cll@{}}
+% \toprule
+% Glyph & Command & Slot \\
+% \midrule
+% \\
+% \\
+% \showchar{2218}{composite function (small circle)}{\vysmwhtcircle}
+% \showchar{25E6}{white bullet}{\smwhtcircle}
+% \showchar{26AC}{medium small white circle}{\mdsmwhtcircle}
+% \showchar{26AA}{medium white circle}{\mdwhtcircle}
+% \showchar{25CB}{large circle}{\mdlgwhtcircle}
+% \showchar{25EF}{large circle}{\lgwhtcircle}
+% \bottomrule
+% \end{tabular}
+% \caption{Filled and hollow unicode circles.}
+% \tablabel{circles}
+% \end{table}
 %
 % \subsubsection{Normalising some input characters}
 %
@@ -3780,6 +3824,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\triangle{\mathord{\bigtriangleup}}
 \def\bigcirc{\mdlgwhtcircle}
 \def\circ{\vysmwhtcircle}
+\def\bullet{\smblkcircle}
 \def\mathyen{\yen}
 \def\mathsterling{\sterling}
 %    \end{macrocode}
