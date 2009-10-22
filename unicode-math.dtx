@@ -598,7 +598,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Partial}
 % \seclabel{partial}
-% 
+%
 % The same applies to the symbols \unichar{2202} partial differential and
 % \unichar{1D715} math italic partial differential.
 %
@@ -1927,8 +1927,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_setup_mathactives:}
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_mathactives: {
-  \um_make_mathactive:nNN {"2032} \um_prime_single \mathord
-  \um_make_mathactive:nNN {"2035} \um_backprime_single \mathord
+  \um_make_mathactive:nNN {"2032} \um_prime_single_mchar \mathord
+  \um_make_mathactive:nNN {"2033} \um_prime_double_mchar \mathord
+  \um_make_mathactive:nNN {"2034} \um_prime_triple_mchar \mathord
+  \um_make_mathactive:nNN {"2057} \um_prime_quad_mchar \mathord
+  \um_make_mathactive:nNN {"2035} \um_backprime_single_mchar \mathord
+  \um_make_mathactive:nNN {"2036} \um_backprime_double_mchar \mathord
+  \um_make_mathactive:nNN {"2037} \um_backprime_triple_mchar \mathord
   \XeTeXmathcodenum `\` = "1FFFFF \scan_stop:
 }
 %    \end{macrocode}
@@ -3577,13 +3582,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \prg_case_int:nnn {#2}{
     {1} { ^{#1} }
     {2} {
-      \um_glyph_if_exist:nTF {"2033} { ^{\dprime} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2033} { ^{\um_prime_double_mchar} } {\um_nprimes:Nn #1 {#2}}
     }
     {3} {
-      \um_glyph_if_exist:nTF {"2034} {^{\trprime} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2034} {^{\um_prime_triple_mchar} } {\um_nprimes:Nn #1 {#2}}
     }
     {4} {
-      \um_glyph_if_exist:nTF {"2057} { ^{\qprime} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2057} { ^{\um_prime_quad_mchar} } {\um_nprimes:Nn #1 {#2}}
     }
   }{
     \um_nprimes:Nn #1 {#2}
@@ -3593,13 +3598,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \prg_case_int:nnn {#2}{
     {1} { ^{#1} }
     {2} {
-      \um_glyph_if_exist:nTF {"2033} { ^{\backdprime} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2033} { ^{\um_backprime_double_mchar} } {\um_nprimes:Nn #1 {#2}}
     }
     {3} {
-      \um_glyph_if_exist:nTF {"2034} {^{\backtrprime} } {\um_nprimes:Nn #1 {#2}}
-    }
-    {4} {
-      \um_glyph_if_exist:nTF {"2057} { ^{\backqprime} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2034} {^{\um_backprime_triple_mchar} } {\um_nprimes:Nn #1 {#2}}
     }
   }{
     \um_nprimes:Nn #1 {#2}
@@ -3607,45 +3609,115 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% Scanning is more annoying than you'd think because we want to support all three of |\prime|, |'|, and the unicode prime. And |\ifx| doesn't work with mathactive chars.
+% Scanning is annoying because I'm too lazy to do it for the general case.
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_scanprime: {
+\cs_new:Nn \um_scan_prime: {
   \num_zero:N \l_um_primecount_num
-  \um_scanprime_collect:N \um_prime_single
+  \um_scanprime_collect:N \um_prime_single_mchar
+}
+\cs_new:Nn \um_scan_dprime: {
+  \num_set:Nn \l_um_primecount_num {1}
+  \um_scanprime_collect:N \um_prime_single_mchar
+}
+\cs_new:Nn \um_scan_trprime: {
+  \num_set:Nn \l_um_primecount_num {2}
+  \um_scanprime_collect:N \um_prime_single_mchar
+}
+\cs_new:Nn \um_scan_qprime: {
+  \num_set:Nn \l_um_primecount_num {3}
+  \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Nn \um_scanprime_collect:N {
   \num_incr:N \l_um_primecount_num
   \peek_meaning_remove:NTF ' {
     \um_scanprime_collect:N #1
   }{
-    \peek_meaning_remove:NTF \um_scanprime: {
+    \peek_meaning_remove:NTF \um_scan_prime: {
       \um_scanprime_collect:N #1
     }{
       \peek_meaning_remove:NTF ^^^^2032 {
         \um_scanprime_collect:N #1
       }{
-        \um_nprimes_select:nn {#1} {\l_um_primecount_num}
+        \peek_meaning_remove:NTF \um_scan_dprime: {
+          \num_incr:N \l_um_primecount_num
+          \um_scanprime_collect:N #1
+        }{
+          \peek_meaning_remove:NTF ^^^^2033 {
+            \num_incr:N \l_um_primecount_num
+            \um_scanprime_collect:N #1
+          }{
+            \peek_meaning_remove:NTF \um_scan_trprime: {
+              \num_add:Nn \l_um_primecount_num {2}
+              \um_scanprime_collect:N #1
+            }{
+              \peek_meaning_remove:NTF ^^^^2034 {
+                \num_add:Nn \l_um_primecount_num {2}
+                \um_scanprime_collect:N #1
+              }{
+                \peek_meaning_remove:NTF \um_scan_qprime: {
+                  \num_add:Nn \l_um_primecount_num {3}
+                  \um_scanprime_collect:N #1
+                }{
+                  \peek_meaning_remove:NTF ^^^^2057 {
+                    \num_add:Nn \l_um_primecount_num {3}
+                    \um_scanprime_collect:N #1
+                  }{
+                    \um_nprimes_select:nn {#1} {\l_um_primecount_num}
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 }
-\cs_new:Nn \um_scanbackprime: {
+\cs_new:Nn \um_scan_backprime: {
   \num_zero:N \l_um_primecount_num
-  \um_scanbackprime_collect:N \um_backprime_single
+  \um_scanbackprime_collect:N \um_backprime_single_mchar
+}
+\cs_new:Nn \um_scan_backdprime: {
+  \num_set:Nn \l_um_primecount_num {1}
+  \um_scanbackprime_collect:N \um_backprime_single_mchar
+}
+\cs_new:Nn \um_scan_backtrprime: {
+  \num_set:Nn \l_um_primecount_num {2}
+  \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Nn \um_scanbackprime_collect:N {
   \num_incr:N \l_um_primecount_num
   \peek_meaning_remove:NTF ` {
     \um_scanbackprime_collect:N #1
   }{
-    \peek_meaning_remove:NTF \um_scanbackprime: {
+    \peek_meaning_remove:NTF \um_scan_backprime: {
       \um_scanbackprime_collect:N #1
     }{
       \peek_meaning_remove:NTF ^^^^2035 {
         \um_scanbackprime_collect:N #1
       }{
-        \um_nbackprimes_select:nn {#1} {\l_um_primecount_num}
+        \peek_meaning_remove:NTF \um_scan_backdprime: {
+          \num_incr:N \l_um_primecount_num
+          \um_scanbackprime_collect:N #1
+        }{
+          \peek_meaning_remove:NTF ^^^^2036 {
+            \num_incr:N \l_um_primecount_num
+            \um_scanbackprime_collect:N #1
+          }{
+            \peek_meaning_remove:NTF \um_scan_backtrprime: {
+              \num_add:Nn \l_um_primecount_num {2}
+              \um_scanbackprime_collect:N #1
+            }{
+              \peek_meaning_remove:NTF ^^^^2037 {
+                \num_add:Nn \l_um_primecount_num {2}
+                \um_scanbackprime_collect:N #1
+              }{
+                \um_nbackprimes_select:nn {#1} {\l_um_primecount_num}
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -3653,17 +3725,32 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_set_eq:NN \prime \um_scanprime:
-\cs_set_eq:NN \backprime \um_scanbackprime:
+\cs_set_eq:NN \prime \um_scan_prime:
+\cs_set_eq:NN \drime \um_scan_dprime:
+\cs_set_eq:NN \trprime \um_scan_trprime:
+\cs_set_eq:NN \qprime \um_scan_qprime:
+\cs_set_eq:NN \backprime \um_scan_backprime:
+\cs_set_eq:NN \backdprime \um_scan_backdprime:
+\cs_set_eq:NN \backtrprime \um_scan_backtrprime:
 \group_begin:
   \char_make_active:N \'
   \char_make_active:N \`
   \char_make_active:n {"2032}
+  \char_make_active:n {"2033}
+  \char_make_active:n {"2034}
+  \char_make_active:n {"2057}
   \char_make_active:n {"2035}
-  \cs_gset_eq:NN ' \um_scanprime:
-  \cs_gset_eq:NN ^^^^2032 \um_scanprime:
-  \cs_gset_eq:NN ` \um_scanbackprime:
-  \cs_gset_eq:NN ^^^^2035 \um_scanbackprime:
+  \char_make_active:n {"2036}
+  \char_make_active:n {"2037}
+  \cs_gset_eq:NN ' \um_scan_prime:
+  \cs_gset_eq:NN ^^^^2032 \um_scan_prime:
+  \cs_gset_eq:NN ^^^^2033 \um_scan_dprime:
+  \cs_gset_eq:NN ^^^^2034 \um_scan_trprime:
+  \cs_gset_eq:NN ^^^^2057 \um_scan_qprime:
+  \cs_gset_eq:NN ` \um_scan_backprime:
+  \cs_gset_eq:NN ^^^^2035 \um_scan_backprime:
+  \cs_gset_eq:NN ^^^^2036 \um_scan_backdprime:
+  \cs_gset_eq:NN ^^^^2037 \um_scan_backtrprime:
 \group_end:
 %    \end{macrocode}
 %
