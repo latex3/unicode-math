@@ -587,11 +587,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
 %     Upright & Serif & $\mathup\nabla$ \\
 %     & Bold serif & $\mathup\mbfnabla$ \\
-%     & Bold sans & $\mathbfsf\nabla$ \\
+%     & Bold sans & \fontspec{STIXGeneral-BoldItalic}\char"1D76F \\
 %       \cmidrule(lr){1-2}\cmidrule(lr){3-3}
 %     Italic & Serif & $\mathit\nabla$ \\
 %     & Bold serif & $\mathbfit\nabla$ \\
-%     & Bold sans & $\mathbfsfit\nabla$ \\
+%     & Bold sans  & \fontspec{STIXGeneral-Bold}\char"1D7A9 \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -629,8 +629,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %               & Italic  & $\mathit\partial$ \\
 %     Bold      & Upright & $\mathbfup\partial$ \\
 %               & Italic  & $\mathbfit\partial$ \\
-%     Sans bold & Upright & $\mathbfsfup\partial$ \\
-%               & Italic  & $\mathbfsfit\partial$ \\
+%     Sans bold & Upright & \umfont\char"1D789 \\
+%               & Italic  & \umfont\char"1D7C3 \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -676,9 +676,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \ExplySyntaxOff
 % \end{verbatim}
 %
-% Backwards or reverse primes ($x`$) behave in exactly the same way; use any of \ascii\
-% back tick (\texttt{\char`\`}), unicode reverse prime \unichar{2035} ($`$), or \cs{backprime}
-% to access it. Multiple backwards primes can also be called with \cs{backdprime},
+% Backwards or reverse primes behave in exactly the same way; use any of \ascii\
+% back tick (\texttt{\char`\`}), unicode reverse prime \unichar{2035}
+% ({\umfont\char"2035}), or \cs{backprime} to access it.
+% Multiple backwards primes can also be called with \cs{backdprime},
 % \cs{backtrprime}, and \cs{backqprime}.
 %
 % \subsubsection{Unicode subscripts and superscripts}
@@ -794,20 +795,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{table}\centering
 % \caption{Slashes and backslashes.}
 % \tablabel{slashes}
-% \newfontfamily\stix{STIXGeneral}
 % \begin{tabular}{@{}clcl@{}}
 % \toprule
 % Slot & Name & Glyph & Command  \\
 % \midrule
-% \unichar{002F} & \textsc{solidus}                 & \cs{solidus} \\
-% \unichar{2044} & \textsc{fraction slash}          & \cs{fracslash} \\
-% \unichar{2215} & \textsc{division slash}          & \cs{slash} \\
-% \unichar{29F8} & \textsc{big solidus}             & \cs{xsol} \\
+% \unichar{002F} & \textsc{solidus}                 & \umfont \char"002F & \cs{solidus} \\
+% \unichar{2044} & \textsc{fraction slash}          & \umfont \char"2044 & \cs{fracslash} \\
+% \unichar{2215} & \textsc{division slash}          & \umfont \char"2215 & \cs{slash} \\
+% \unichar{29F8} & \textsc{big solidus}             & \umfont \char"29F8 & \cs{xsol} \\
 % \midrule
-% \unichar{005C} & \textsc{reverse solidus}         & \cs{backslash} \\
-% \unichar{2216} & \textsc{set minus}               & \cs{smallsetminus} \\
-% \unichar{29F5} & \textsc{reverse solidus operator}& \cs{setminus} \\
-% \unichar{29F9} & \textsc{big reverse solidus}     & \cs{xbsol} \\
+% \unichar{005C} & \textsc{reverse solidus}         & \umfont \char"005C & \cs{backslash} \\
+% \unichar{2216} & \textsc{set minus}               & \umfont \char"2216 & \cs{smallsetminus} \\
+% \unichar{29F5} & \textsc{reverse solidus operator}& \umfont \char"29F5 & \cs{setminus} \\
+% \unichar{29F9} & \textsc{big reverse solidus}     & \umfont \char"29F9 & \cs{xbsol} \\
 % \bottomrule
 % \end{tabular}
 % \end{table}
@@ -890,12 +890,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % all white and all black ones, shown in \tabref{circles}.
 %
 % \LaTeX\ defines considerably fewer: \cs{circ} and cs{bigcirc} for white;
-% \cs{bullet} for black. This package maps those commands to \cs{\vysmwhtcircle},
+% \cs{bullet} for black. This package maps those commands to \cs{vysmwhtcircle},
 % \cs{mdlgwhtcircle}, and \cs{smblkcircle}, respectively.
 %
 % \begin{table}
-% \def\showchar#1#2#3{ \textsc{u}+{\small\ttfamily #1} & \texttt{\string#3} & $#3$ \\}
-% \setmathfont{STIXGeneral}
+% \def\showchar#1#2#3{ \textsc{u}+{\small\ttfamily #1} & \texttt{\string#3} & \umfont \char"#1 \\}
 % \begin{tabular}{@{}llc@{}}
 % \toprule
 % Slot & Command & Glyph \\
@@ -910,7 +909,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \showchar{2B24}{black large circle}{\lgblkcircle}
 % \bottomrule
 % \end{tabular}
-% \def\showchar#1#2#3{$#3$ & \texttt{\string#3} & \textsc{u}+{\small\ttfamily #1} \\}
+% \def\showchar#1#2#3{ \umfont \char"#1 & \texttt{\string#3} & \textsc{u}+{\small\ttfamily #1} \\}
 % \begin{tabular}{@{}cll@{}}
 % \toprule
 % Glyph & Command & Slot \\
@@ -927,6 +926,41 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{tabular}
 % \caption{Filled and hollow unicode circles.}
 % \tablabel{circles}
+% \end{table}
+%
+% \subsubsection{Triangles}
+%
+% While there aren't as many different sizes of triangle as there are circle,
+% there's some important distinctions to make between a few similar characters.
+% Namely, $\triangle$ and $\vartriangle$ and $\increment$ and $\mathup\Delta$.
+% See \tabref{uptriangles} for the full summary.
+%
+% These triangles all have different intended meanings. Note for backwards
+% compatibility with \TeX, \unichar{25B3} has \emph{two} different mappings
+% in \pkg{unicode-math}. \cs{bigtriangleup} is intended as a binary operator
+% whereas \cs{triangle} is intended to be used as a letter-like symbol.
+%
+% But you're better off if you're using the latter form to indicate an
+% increment to use the glyph intended for this purpose: $\increment x$.
+%
+% Finally, given that $\triangle$ and $\increment$ are provided for you
+% already, it is better off to only use upright Greek Delta $\Delta$ if you're
+% actually using it as a symbolic entity such as a variable on its own.
+%
+% \begin{table}
+% \begin{tabular}{@{}llcl@{}}
+% \toprule
+% Slot & Command & Glyph & Class \\
+% \midrule
+% \unichar{25B5} & \cs{vartriangle}      & \umfont \char"25B5 & binary \\
+% \unichar{25B3} & \cs{bigtriangleup}    & \umfont \char"25B3 & binary \\
+% \unichar{25B3} & \cs{triangle}         & \umfont \char"25B3 & ordinary \\
+% \unichar{2206} & \cs{increment}        & \umfont \char"2206 & ordinary \\
+% \unichar{0394} & \cs{mathup}\cs{Delta} & \umfont \char"0394 & ordinary \\
+% \bottomrule
+% \end{tabular}
+% \caption{Different upwards pointing triangles.}
+% \tablabel{uptriangles}
 % \end{table}
 %
 % \subsubsection{Normalising some input characters}
@@ -4409,6 +4443,7 @@ sed -e ' s/{N}/{\\mathord}/   ' \
 \setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Linux Biolinum O}
 \setmonofont[Scale=MatchLowercase]{Consolas}
 \setmathfont{Cambria Math}
+\newfontface\umfont{STIXGeneral}
 
 \linespread{1.069}      % A bit more space between lines
 \frenchspacing         % Remove ugly extra space after punctuation
