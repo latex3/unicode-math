@@ -784,7 +784,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % (it looks like a punctuation colon with additional space around it).
 % Otherwise, \cs{colon} is made to output a colon with \cs{mathpunct} spacing.
 % 
-% The package option |[colon=literal]| forces \ascii\ input `|:|' to be printed as \cs{mathcolon} instead.
+% The package option |colon=literal| forces \ascii\ input `|:|' to be printed as \cs{mathcolon} instead.
 %
 % 
 % \subsubsection{Slashes and backslashes}
@@ -879,9 +879,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % 
 % For example: as mentioned above, Cambria Math's stretchy slash is
 % \unichar{2044} {fraction slash}. When using Cambria Math, then
-% \pkg{unicode-math} should be loaded with the |[slash-delimiter=frac]| option.
+% \pkg{unicode-math} should be loaded with the |slash-delimiter=frac| option.
 % (This should be a font option rather than a package option, but
 % it will change soon.)
+%
+% \subsubsection{Pre-drawn fraction characters}
+%
+% Pre-drawn fractions \unichar{00BC}--\unichar{00BE}, \unichar{2150}--\unichar{215E}
+% are not suitable for use in mathematics output. However, they can be useful
+% as input characters to abbreviate common fractions.
+%
+% \centerline{\fontspec{Calibri}
+% ¼ ½ ¾  ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞}
+%
+% For example, instead of writing `|\tfrac12 x|', it's more readable to have
+% `|½x|' in the source instead.
+%
+% If the \cs{tfrac} command exists (i.e., if \pkg{amsmath} is loaded or
+% you have specially defined \cs{tfrac} for this purpose), it will be used
+% to typeset the fractions. If not, regular \cs{frac} will be used. The command
+% to use (\cs{tfrac} or \cs{frac}) can be forced either way with the package option |active-frac=small| or
+% |active-frac=normalsize|, respectively.
 %
 % \subsubsection{Circles}
 %
@@ -994,7 +1012,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/22 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/25 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -1043,11 +1061,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \bool_new:N \g_um_bfupGreek_bool
 \bool_new:N \g_um_bfupgreek_bool
 %    \end{macrocode}
-% For \opt{nabla}:
+% For assorted package options:
 %    \begin{macrocode}
 \bool_new:N \g_um_upNabla_bool
 \bool_new:N \g_um_uppartial_bool
 \bool_new:N \g_um_texgreek_bool
+\bool_new:N \l_um_smallfrac_bool
 %    \end{macrocode}
 %
 % \subsubsection{Alphabet unicode positions}
@@ -1062,7 +1081,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \tl_set:cn { \um_to_usv:nn {#1}{#2} } {#3}
 }
 \cs_new:Nn \um_to_usv:nn { g_um_#1_#2_usv }
-
 
 \usv_set:nnn {up}{B}{`\B}
 \usv_set:nnn {up}{C}{`\C}
@@ -1515,7 +1533,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \fi
 }
 %    \end{macrocode}
-%    
+%
 % \paragraph{Colon style}
 %    \begin{macrocode}
 \bool_new:N \g_um_literal_colon_bool
@@ -1538,6 +1556,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \or
     \tl_set:Nn \g_um_slash_delimiter_usv {"2215}
   \fi
+}
+%    \end{macrocode}
+%
+%
+% \paragraph{Active fraction style}
+%    \begin{macrocode}
+\define@choicekey*{unicode-math.sty}{active-frac}[\@tempa\@tempb]{small,normalsize}{
+  \ifcase\@tempb
+    \cs_if_exist:NTF \tfrac {
+      \bool_set_true:N \l_um_smallfrac_bool
+    }{
+      \PackageWarning{unicode-math}{Small~ fraction~ command~ \protect\tfrac\space not~ defined.~ Perhaps~ load~ amsmath?}
+      \bool_set_false:N \l_um_smallfrac_bool
+    }
+  \or
+    \bool_set_false:N \l_um_smallfrac_bool
+  \fi
+  \use:c {um_setup_active_frac:}
+}
+\cs_if_exist:NT \tfrac {
+  \ExecuteOptionsX{active-frac=small}
 }
 %    \end{macrocode}
 %
@@ -3988,6 +4027,51 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
+% \subsubsection{Active fractions}
+% Active fractions can be setup independently of any maths font definition;
+% all it requires is a mapping from the unicode input chars to the relevant
+% \LaTeX\ fraction declaration.
+%
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_active_frac: {
+  \group_begin:
+  \um_define_active_frac:Nw  ^^^^2152  1/{10}
+  \um_define_active_frac:Nw  ^^^^2151  1/9
+  \um_define_active_frac:Nw  ^^^^215b  1/8
+  \um_define_active_frac:Nw  ^^^^2150  1/7
+  \um_define_active_frac:Nw  ^^^^2159  1/6
+  \um_define_active_frac:Nw  ^^^^2155  1/5
+  \um_define_active_frac:Nw  ^^^^00bc  1/4
+  \um_define_active_frac:Nw  ^^^^2153  1/3
+  \um_define_active_frac:Nw  ^^^^215c  3/8
+  \um_define_active_frac:Nw  ^^^^2156  2/5
+  \um_define_active_frac:Nw  ^^^^00bd  1/2
+  \um_define_active_frac:Nw  ^^^^2157  3/5
+  \um_define_active_frac:Nw  ^^^^215d  5/8
+  \um_define_active_frac:Nw  ^^^^2154  2/3
+  \um_define_active_frac:Nw  ^^^^00be  3/4
+  \um_define_active_frac:Nw  ^^^^2158  4/5
+  \um_define_active_frac:Nw  ^^^^215a  5/6
+  \um_define_active_frac:Nw  ^^^^215e  7/8
+  \group_end:
+}
+\cs_new:Npn \um_define_active_frac:Nw #1 #2/#3 {
+  \char_make_active:n {`#1}
+  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+  \tl_rescan:nn {
+    \ExplSyntaxOn
+  }{
+    \cs_gset:Npx #1 {
+      \bool_if:NTF \l_um_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
+          {#2} {#3}
+    }
+  }
+}
+%    \end{macrocode}
+% Execute!
+%    \begin{macrocode}
+\um_setup_active_frac:
+%    \end{macrocode}
 %
 % \subsubsection{Synonyms and all the rest}
 %
