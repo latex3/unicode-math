@@ -1273,6 +1273,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \usv_set:nnn {bfsfup}{h}{"1D5F5}
 \usv_set:nnn {bfsfit}{h}{"1D65D}
 %    \end{macrocode}
+% Dotless `i' and `j:
+%    \begin{macrocode}
+\usv_set:nnn {up}{dotlessi}{"00131}
+\usv_set:nnn {up}{dotlessj}{"00237}
+\usv_set:nnn {it}{dotlessi}{"1D6A4}
+\usv_set:nnn {it}{dotlessj}{"1D6A5}
+%    \end{macrocode}
 % Blackboard:
 %    \begin{macrocode}
 \usv_set:nnn {bb}{C}{"2102}
@@ -2949,6 +2956,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \bool_if:NT \g_um_uplatin_bool {
       \um_map_chars_latin:nn {up,it} {#1}
       \um_map_single:nnn {h}{up,it}{#1}
+      \um_map_single:nnn {dotlessi}{up,it}{#1}
+      \um_map_single:nnn {dotlessj}{up,it}{#1}
     }
   }
   \um_set_mathalphabet_latin:Nnn \mathup {up,it}{#1}
@@ -2976,6 +2985,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_config_mathup_misc:n {
   \um_set_mathalphabet_pos:Nnnn \mathup {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn \mathup {Nabla}   {up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn \mathup {dotlessi}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn \mathup {dotlessj}{up,it}{#1}
 }
 %    \end{macrocode}
 %
@@ -3000,9 +3011,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \bool_if:NF \g_um_uplatin_bool {
       \um_map_chars_latin:nn {up,it} {#1}
       \um_map_single:nnn {h}{up,it}{#1}
+      \um_map_single:nnn {dotlessi}{up,it}{#1}
+      \um_map_single:nnn {dotlessj}{up,it}{#1}
     }
   }
   \um_set_mathalphabet_latin:Nnn \mathit {up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessi}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessj}{up,it}{#1}
 }
 \cs_new:Nn \um_config_mathit_Greek:n {
   \bool_if:NTF \g_um_literal_bool {
