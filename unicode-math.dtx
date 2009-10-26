@@ -1012,7 +1012,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/25 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/26 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -2625,35 +2625,35 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_set:Nn \um_map_chars_latin:nn {
   \clist_map_inline:nn {#1} {
-    \um_map_chars_xxvi:cc {g_um_ ##1 _latin_usv}{g_um_ #2 _latin_usv}
+    \um_map_chars_xxvi:cc { \um_to_usv:nn{##1}{latin} }{ \um_to_usv:nn{#2}{latin} }
   }
 }
 \cs_set:Nn \um_map_chars_greek:nn {
   \clist_map_inline:nn {#1} {
     \um_map_chars_xxiii:cc {g_um_ ##1 _greek_usv}{g_um_ #2 _greek_usv}
-    \um_map_char:cc {g_um_ ##1 _varepsilon_usv}{g_um_ #2 _varepsilon_usv}
-    \um_map_char:cc {g_um_ ##1 _vartheta_usv  }{g_um_ #2 _vartheta_usv  }
-    \um_map_char:cc {g_um_ ##1 _varkappa_usv  }{g_um_ #2 _varkappa_usv  }
-    \um_map_char:cc {g_um_ ##1 _varphi_usv    }{g_um_ #2 _varphi_usv    }
-    \um_map_char:cc {g_um_ ##1 _varrho_usv    }{g_um_ #2 _varrho_usv    }
-    \um_map_char:cc {g_um_ ##1 _varpi_usv     }{g_um_ #2 _varpi_usv     }
+    \um_map_char:cc { \um_to_usv:nn{##1}{varepsilon} }{ \um_to_usv:nn{#2}{varepsilon}}
+    \um_map_char:cc { \um_to_usv:nn{##1}{vartheta  } }{ \um_to_usv:nn{#2}{vartheta}  }
+    \um_map_char:cc { \um_to_usv:nn{##1}{varkappa  } }{ \um_to_usv:nn{#2}{varkappa}  }
+    \um_map_char:cc { \um_to_usv:nn{##1}{varphi    } }{ \um_to_usv:nn{#2}{varphi}    }
+    \um_map_char:cc { \um_to_usv:nn{##1}{varrho    } }{ \um_to_usv:nn{#2}{varrho}    }
+    \um_map_char:cc { \um_to_usv:nn{##1}{varpi     } }{ \um_to_usv:nn{#2}{varpi}     }
   }
 }
 \cs_set:Nn \um_map_chars_Greek:nn {
   \clist_map_inline:nn {#1} {
-    \um_map_chars_xxiii:cc {g_um_ ##1 _Greek_usv}{g_um_ #2 _Greek_usv}
-    \um_map_char:cc {g_um_ ##1 _varTheta_usv}{g_um_ #2 _varTheta_usv}
+    \um_map_chars_xxiii:cc { \um_to_usv:nn{##1}{Greek} }{ \um_to_usv:nn{#2}{Greek} }
+    \um_map_char:cc { \um_to_usv:nn{##1}{varTheta} }{ \um_to_usv:nn{#2}{varTheta} }
   }
 }
 \cs_set:Nn \um_map_chars_numbers:nn {
-  \um_map_chars_x:cc {g_um_#1_num_usv}{g_um_#2_num_usv}
+  \um_map_chars_x:cc { \um_to_usv:nn{#1}{num} }{ \um_to_usv:nn{#2}{num} }
 }
 \cs_set:Nn \um_map_char:nn {
   \um_map_chars_range:nnn {0}{#1}{#2}
 }
 \cs_set:Nn \um_map_single:nnn {
   \clist_map_inline:nn {#2} {
-    \um_map_char:cc {g_um_##1_#1_usv}{g_um_#3_#1_usv}
+    \um_map_char:cc { \um_to_usv:nn{##1}{#1} }{ \um_to_usv:nn{#3}{#1} }
   }
 }
 \cs_generate_variant:Nn \um_map_char:nn {cc}
@@ -2711,43 +2711,43 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 
 \cs_new:Nn \um_set_mathalphabet_pos:Nnnn {
-  \cs_if_exist:cT {g_um_#4_#2_usv} {
+  \cs_if_exist:cT { \um_to_usv:nn {#4}{#2} } {
     \clist_map_inline:nn {#3} {
-      \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_#2_usv}{g_um_#4_#2_usv}
+      \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{#2} }{ \um_to_usv:nn {#4}{#2} }
     }
   }
 }
 \cs_new:Nn \um_set_mathalphabet_numbers:Nnn {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalphabet_x:Ncc  #1 {g_um_##1_num_usv}{g_um_#3_num_usv}
+    \um_set_mathalphabet_x:Ncc  #1 { \um_to_usv:nn {##1}{num} }{ \um_to_usv:nn {#3}{num} }
   }
 }
 \cs_new:Nn \um_set_mathalphabet_Latin:Nnn {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalphabet_xxvi:Ncc #1 {g_um_##1_Latin_usv}{g_um_#3_Latin_usv}
+    \um_set_mathalphabet_xxvi:Ncc #1 { \um_to_usv:nn {##1}{Latin} }{ \um_to_usv:nn {#3}{Latin} }
   }
 }
 \cs_new:Nn \um_set_mathalphabet_latin:Nnn {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalphabet_xxvi:Ncc #1 {g_um_##1_latin_usv}{g_um_#3_latin_usv}
-    \um_set_mathalphabet_char:Ncc #1 {g_um_##1_h_usv}    {g_um_#3_h_usv}
+    \um_set_mathalphabet_xxvi:Ncc #1 { \um_to_usv:nn {##1}{latin} }{ \um_to_usv:nn {#3}{latin} }
+    \um_set_mathalphabet_char:Ncc #1 { \um_to_usv:nn {##1}{h} }    { \um_to_usv:nn {#3}{h} }
   }
 }
 \cs_new:Nn \um_set_mathalphabet_Greek:Nnn {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalphabet_xxiii:Ncc #1 {g_um_##1_Greek_usv}   {g_um_#3_Greek_usv}
-    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varTheta_usv}{g_um_#3_varTheta_usv}
+    \um_set_mathalphabet_xxiii:Ncc #1 { \um_to_usv:nn {##1}{Greek} }   { \um_to_usv:nn {#3}{Greek} }
+    \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{varTheta} }{ \um_to_usv:nn {#3}{varTheta} }
   }
 }
 \cs_new:Nn \um_set_mathalphabet_greek:Nnn {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalphabet_xxiii:Ncc #1 {g_um_##1_greek_usv}     {g_um_#3_greek_usv}
-    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varepsilon_usv}{g_um_#3_varepsilon_usv}
-    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_vartheta_usv}  {g_um_#3_vartheta_usv}
-    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varkappa_usv}  {g_um_#3_varkappa_usv}
-    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varphi_usv}    {g_um_#3_varphi_usv}
-    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varrho_usv}    {g_um_#3_varrho_usv}
-    \um_set_mathalphabet_char:Ncc  #1 {g_um_##1_varpi_usv}     {g_um_#3_varpi_usv}
+    \um_set_mathalphabet_xxiii:Ncc #1 { \um_to_usv:nn {##1}{greek} }     { \um_to_usv:nn {#3}{greek} }
+    \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{varepsilon} }{ \um_to_usv:nn {#3}{varepsilon} }
+    \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{vartheta} }  { \um_to_usv:nn {#3}{vartheta} }
+    \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{varkappa} }  { \um_to_usv:nn {#3}{varkappa} }
+    \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{varphi} }    { \um_to_usv:nn {#3}{varphi} }
+    \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{varrho} }    { \um_to_usv:nn {#3}{varrho} }
+    \um_set_mathalphabet_char:Ncc  #1 { \um_to_usv:nn {##1}{varpi} }     { \um_to_usv:nn {#3}{varpi} }
   }
 }
 \cs_generate_variant:Nn \um_set_mathalphabet_char:Nnn {Ncc}
@@ -2935,7 +2935,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
         \clist_map_break:
       }{
-        \um_glyph_if_exist:cT {g_um_#3_##1_usv}{
+        \um_glyph_if_exist:cT { \um_to_usv:nn {#3}{##1} }{
           \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
           \clist_map_break:
         }
@@ -2948,7 +2948,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %<trace>    \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
         \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
       }{
-        \um_glyph_if_exist:cTF {g_um_#3_##1_usv} {
+        \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{##1} } {
 %<trace>    \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
           \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
         }{
