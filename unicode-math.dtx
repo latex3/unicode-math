@@ -1422,67 +1422,56 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \define@choicekey*{unicode-math.sty}
     {math-style}[\@tempa\@tempb]{iso,tex,french,upright,literal}{
+  \bool_set_false:N \g_um_literal_bool
   \ifcase\@tempb\relax
     \bool_set_false:N \g_um_upGreek_bool
     \bool_set_false:N \g_um_upgreek_bool
     \bool_set_false:N \g_um_upLatin_bool
     \bool_set_false:N \g_um_uplatin_bool
-    \bool_set_false:N \g_um_bfupGreek_bool
-    \bool_set_false:N \g_um_bfupgreek_bool
-    \bool_set_false:N \g_um_bfupLatin_bool
-    \bool_set_false:N \g_um_bfuplatin_bool
-    \bool_set_false:N \g_um_upNabla_bool
-    \bool_set_false:N \g_um_uppartial_bool
-    \bool_set_false:N \g_um_upsans_bool
-    \bool_set_false:N \g_um_texgreek_bool
-    \bool_set_false:N \g_um_literal_bool
+    \setkeys{unicode-math.sty}{
+      bold-style=iso,
+      sans-style=italic,
+      nabla=italic,
+      partial=italic,
+    }
   \or
     \bool_set_true:N \g_um_upGreek_bool
     \bool_set_false:N \g_um_upgreek_bool
     \bool_set_false:N \g_um_upLatin_bool
     \bool_set_false:N \g_um_uplatin_bool
-    \bool_set_true:N \g_um_bfupGreek_bool
-    \bool_set_false:N \g_um_bfupgreek_bool
-    \bool_set_true:N \g_um_bfupLatin_bool
-    \bool_set_true:N \g_um_bfuplatin_bool
-    \bool_set_true:N \g_um_upNabla_bool
-    \bool_set_false:N \g_um_uppartial_bool
-    \bool_set_true:N \g_um_upsans_bool
-    \bool_set_false:N \g_um_texgreek_bool
-    \bool_set_false:N \g_um_literal_bool
+    \setkeys{unicode-math.sty}{
+      bold-style=tex,
+      sans-style=upright,
+      nabla=upright,
+      partial=italic,
+    }
   \or
     \bool_set_true:N \g_um_upGreek_bool
     \bool_set_true:N \g_um_upgreek_bool
     \bool_set_true:N \g_um_upLatin_bool
     \bool_set_false:N \g_um_uplatin_bool
-    \bool_set_true:N \g_um_bfupGreek_bool
-    \bool_set_true:N \g_um_bfupgreek_bool
-    \bool_set_true:N \g_um_bfupLatin_bool
-    \bool_set_true:N \g_um_bfuplatin_bool
-    \bool_set_true:N \g_um_upNabla_bool
-    \bool_set_true:N \g_um_uppartial_bool
-    \bool_set_true:N \g_um_upsans_bool
-    \bool_set_false:N \g_um_texgreek_bool
-    \bool_set_false:N \g_um_literal_bool
+    \setkeys{unicode-math.sty}{,
+      bold-style=upright,
+      sans-style=upright,
+      nabla=upright,
+      partial=upright,
+    }
   \or
     \bool_set_true:N \g_um_upGreek_bool
     \bool_set_true:N \g_um_upgreek_bool
     \bool_set_true:N \g_um_upLatin_bool
     \bool_set_true:N \g_um_uplatin_bool
-    \bool_set_true:N \g_um_bfupGreek_bool
-    \bool_set_true:N \g_um_bfupgreek_bool
-    \bool_set_true:N \g_um_bfupLatin_bool
-    \bool_set_true:N \g_um_bfuplatin_bool
-    \bool_set_true:N \g_um_upNabla_bool
-    \bool_set_true:N \g_um_uppartial_bool
-    \bool_set_true:N \g_um_upsans_bool
-    \bool_set_false:N \g_um_texgreek_bool
-    \bool_set_false:N \g_um_literal_bool
+    \setkeys{unicode-math.sty}{,
+      bold-style=upright,
+      sans-style=upright,
+      nabla=upright,
+      partial=upright,
+    }
   \or
     \bool_set_true:N \g_um_literal_bool
-    \bool_set_true:N \g_um_bfliteral_bool
-    \bool_set_true:N \g_um_sfliteral_bool
-    \bool_set_false:N \g_um_texgreek_bool
+    \setkeys{unicode-math.sty}{bold-style=literal}
+    \setkeys{unicode-math.sty}{sans-style=literal}
+    \setkeys{unicode-math.sty}{colon=literal}
   \fi
 }
 %    \end{macrocode}
@@ -1490,20 +1479,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \paragraph{bold-style}
 %    \begin{macrocode}
 \define@choicekey*{unicode-math.sty}{bold-style}[\@tempa\@tempb]{iso,tex,upright,literal}{
+  \bool_set_false:N \g_um_bfliteral_bool
   \ifcase\@tempb\relax
-    \bool_set_false:N \g_um_bfliteral_bool
     \bool_set_false:N \g_um_bfupGreek_bool
     \bool_set_false:N \g_um_bfupgreek_bool
     \bool_set_false:N \g_um_bfupLatin_bool
     \bool_set_false:N \g_um_bfuplatin_bool
   \or
-    \bool_set_false:N \g_um_bfliteral_bool
     \bool_set_true:N \g_um_bfupGreek_bool
     \bool_set_false:N \g_um_bfupgreek_bool
     \bool_set_true:N \g_um_bfupLatin_bool
     \bool_set_true:N \g_um_bfuplatin_bool
   \or
-    \bool_set_false:N \g_um_bfliteral_bool
     \bool_set_true:N \g_um_bfupGreek_bool
     \bool_set_true:N \g_um_bfupgreek_bool
     \bool_set_true:N \g_um_bfupLatin_bool
@@ -1533,20 +1520,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \define@choicekey*{unicode-math.sty}{nabla}[\@tempa\@tempb]{upright,italic}{
   \ifcase\@tempb
     \bool_set_true:N \g_um_upNabla_bool
-  \or
-    \bool_set_false:N \g_um_upNabla_bool
-  \fi
-}
-\cs_set:Nn \um_setup_nabla: {
-  \bool_if:NTF \g_um_upNabla_bool {
     \tl_set:Nn \g_um_Nabla_up_or_it_usv     { \g_um_up_Nabla_usv }
     \tl_set:Nn \g_um_bfNabla_up_or_it_usv   { \g_um_bfup_Nabla_usv }
     \tl_set:Nn \g_um_bfsfNabla_up_or_it_usv { \g_um_bfsfup_Nabla_usv }
-  }{
+  \or
+    \bool_set_false:N \g_um_upNabla_bool
     \tl_set:Nn \g_um_Nabla_up_or_it_usv     { \g_um_it_Nabla_usv }
     \tl_set:Nn \g_um_bfNabla_up_or_it_usv   { \g_um_bfit_Nabla_usv }
     \tl_set:Nn \g_um_bfsfNabla_up_or_it_usv { \g_um_bfsfit_Nabla_usv }
-  }
+  \fi
 }
 %    \end{macrocode}
 %
@@ -1554,20 +1536,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic}{
   \ifcase\@tempb
     \bool_set_true:N \g_um_uppartial_bool
-  \or
-    \bool_set_false:N \g_um_uppartial_bool
-  \fi
-}
-\cs_set:Nn \um_setup_partial: {
-  \bool_if:NTF \g_um_uppartial_bool {
     \tl_set:Nn \g_um_partial_up_or_it_usv     { \g_um_up_partial_usv }
     \tl_set:Nn \g_um_bfpartial_up_or_it_usv   { \g_um_bfup_partial_usv }
     \tl_set:Nn \g_um_bfsfpartial_up_or_it_usv { \g_um_bfsfup_partial_usv }
-  }{
+  \or
+    \bool_set_false:N \g_um_uppartial_bool
     \tl_set:Nn \g_um_partial_up_or_it_usv     { \g_um_it_partial_usv }
     \tl_set:Nn \g_um_bfpartial_up_or_it_usv   { \g_um_bfit_partial_usv }
     \tl_set:Nn \g_um_bfsfpartial_up_or_it_usv { \g_um_bfsfit_partial_usv }
-  }
+  \fi
 }
 %    \end{macrocode}
 %
@@ -1620,10 +1597,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \or
     \bool_set_false:N \l_um_smallfrac_bool
   \fi
-  \use:c {um_setup_active_frac:}
-}
-\cs_if_exist:NT \tfrac {
-  \ExecuteOptionsX{active-frac=small}
+  \um_setup_active_frac:
 }
 %    \end{macrocode}
 %
@@ -1641,6 +1615,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \ExecuteOptionsX{math-style=TeX,slash-delimiter=ascii,trace=off}
+\AtEndOfPackage{
+  \cs_if_exist:NT \tfrac {
+    \unimathsetup{active-frac=small}
+  }
+}
 \ProcessOptionsX
 %    \end{macrocode}
 %
@@ -1951,15 +1930,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Finally,
 % \begin{itemize}
-% \item Set up shapes for italic/upright or ordinary/var symbols as per package options.
 % \item Remap symbols that don't take their natural mathcode
 % \item Activate any symbols that need to be math-active
 % \item Assign delimiter codes for symbols that need to grow
 % \item Setup the maths alphabets (\cs{mathbf} etc.)
 % \end{itemize}
 %    \begin{macrocode}
-  \um_setup_nabla:
-  \um_setup_partial:
   \um_remap_symbols:
   \um_setup_mathactives:
   \um_setup_delcodes:
@@ -4109,10 +4085,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     }
   }
 }
-%    \end{macrocode}
-% Execute!
-%    \begin{macrocode}
-\um_setup_active_frac:
 %    \end{macrocode}
 %
 % \subsubsection{Synonyms and all the rest}
