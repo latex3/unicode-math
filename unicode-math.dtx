@@ -2800,84 +2800,72 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \end{macro}
-% 
+%
 % \begin{macro}{\um_setup_alphabets:}
 %    \begin{macrocode}
 
-\tl_new:Nn \g_um_mathup_alph_clist     {latin,Latin,greek,Greek,num,misc}
-\tl_new:Nn \g_um_mathit_alph_clist     {latin,Latin,greek,Greek,misc}
-\tl_new:Nn \g_um_mathscr_alph_clist    {latin,Latin}
-\tl_new:Nn \g_um_mathfrak_alph_clist   {latin,Latin}
-\tl_new:Nn \g_um_mathbfscr_alph_clist  {latin,Latin}
-\tl_new:Nn \g_um_mathbffrak_alph_clist {latin,Latin}
-\tl_new:Nn \g_um_mathbb_alph_clist     {latin,Latin,num,misc}
-\tl_new:Nn \g_um_mathbbit_alph_clist   {misc}
-\tl_new:Nn \g_um_mathtt_alph_clist     {latin,Latin,num}
-\tl_new:Nn \g_um_mathsf_alph_clist     {}
-\tl_new:Nn \g_um_mathsfup_alph_clist   {latin,Latin,num}
-\tl_new:Nn \g_um_mathsfit_alph_clist   {latin,Latin}
-\tl_new:Nn \g_um_mathbf_alph_clist     {}
-\tl_new:Nn \g_um_mathbfup_alph_clist   {latin,Latin,greek,Greek,num,misc}
-\tl_new:Nn \g_um_mathbfit_alph_clist   {latin,Latin,greek,Greek,misc}
-\tl_new:Nn \g_um_mathbfsf_alph_clist   {}
-\tl_new:Nn \g_um_mathbfsfup_alph_clist {latin,Latin,greek,Greek,num,misc}
-\tl_new:Nn \g_um_mathbfsfit_alph_clist {latin,Latin,greek,Greek,misc}
+\seq_new:N \g_um_default_mathalph_seq
+\clist_map_inline:nn {
+  {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
+  {\mathit    } {latin,Latin,greek,Greek,misc}     {\mathit    }  ,
+  {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
+  {\mathbbit  } {misc}                             {\mathbbit  }  ,
+  {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
+  {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
+  {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
+  {\mathsfup  } {latin,Latin,num}                  {\mathsfup  }  ,
+  {\mathsfit  } {latin,Latin}                      {\mathsfit  }  ,
+  {\mathbfup  } {latin,Latin,greek,Greek,num,misc} {\mathbfup  }  ,
+  {\mathbfit  } {latin,Latin,greek,Greek,misc}     {\mathbfit  }  ,
+  {\mathbfscr } {latin,Latin}                      {\mathbfscr }  ,
+  {\mathbffrak} {latin,Latin}                      {\mathbffrak}  ,
+  {\mathbfsfup} {latin,Latin,greek,Greek,num,misc} {\mathbfsfup}  ,
+  {\mathbfsfit} {latin,Latin,greek,Greek,misc}     {\mathbfsfit}
+}{
+  \seq_put_right:Nn \g_um_default_mathalph_seq {#1}
+}
 
 \tl_new:Nn \g_um_mathup_latin_usv {`\a-`\z}
 \tl_new:Nn \g_um_mathup_Latin_usv {`\A-`\Z}
 \tl_new:Nn \g_um_mathup_greek_usv {"3B1-"3C9,"3F5,"3D1,"3F0,"3D5,"3F1,"3D6,"3DD}
 \tl_new:Nn \g_um_mathup_Greek_usv {"391-"3A9,"3F4,"3DC}
 \tl_new:Nn \g_um_mathup_num_usv   {`\0-`\9}
-
 \tl_new:Nn \g_um_mathit_latin_usv {"1D44E-"1D467,\g_um_it_h_usv}
 \tl_new:Nn \g_um_mathit_Latin_usv {"1D434-"1D44C}
 \tl_new:Nn \g_um_mathit_greek_usv {"1D6FC-"1D714,"1D716-1D71B}
 \tl_new:Nn \g_um_mathit_Greek_usv {"1D6E2-"1D6FA}
 
 \seq_new:N \l_um_missing_alph_seq
+
 \cs_new:Nn \um_setup_alphabets: {
   \seq_clear:N \l_um_missing_alph_seq
   \seq_if_empty:NTF \l_um_mathalph_seq {
     \um_debug:n {Setup~ alphabets:~ implicit~ mode}
+    \seq_set_eq:NN \l_um_mathalph_seq \g_um_default_mathalph_seq
     \bool_set_true:N \l_um_implicit_alph_bool
     \um_maybe_init_alphabet:n  {sf}
     \um_maybe_init_alphabet:n  {bf}
     \um_maybe_init_alphabet:n  {bfsf}
-    \um_setup_math_alphabet:NVn \mathup     \g_um_mathup_alph_clist     {up    }
-    \um_setup_math_alphabet:NVn \mathit     \g_um_mathit_alph_clist     {it    }
-    \um_setup_math_alphabet:NVn \mathbb     \g_um_mathbb_alph_clist     {bb    }
-    \um_setup_math_alphabet:NVn \mathscr    \g_um_mathscr_alph_clist    {scr   }
-    \um_setup_math_alphabet:NVn \mathfrak   \g_um_mathfrak_alph_clist   {frak  }
-    \um_setup_math_alphabet:NVn \mathsfup   \g_um_mathsfup_alph_clist   {sfup  }
-    \um_setup_math_alphabet:NVn \mathsfit   \g_um_mathsfit_alph_clist   {sfit  }
-    \um_setup_math_alphabet:NVn \mathtt     \g_um_mathtt_alph_clist     {tt    }
-    \um_setup_math_alphabet:NVn \mathbfup   \g_um_mathbfup_alph_clist   {bfup  }
-    \um_setup_math_alphabet:NVn \mathbfit   \g_um_mathbfit_alph_clist   {bfit  }
-    \um_setup_math_alphabet:NVn \mathbfscr  \g_um_mathbfscr_alph_clist  {bfscr }
-    \um_setup_math_alphabet:NVn \mathbffrak \g_um_mathbffrak_alph_clist {bffrak}
-    \um_setup_math_alphabet:NVn \mathbfsf   \g_um_mathbfsf_alph_clist   {bfsf  }
-    \um_setup_math_alphabet:NVn \mathbfsfup \g_um_mathbfsfup_alph_clist {bfsfup}
-    \um_setup_math_alphabet:NVn \mathbfsfit \g_um_mathbfsfit_alph_clist {bfsfit}
   }{
     \um_debug:n {Setup~ alphabets:~ explicit~ mode}
     \bool_set_false:N \l_um_implicit_alph_bool
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
-    \seq_map_inline:Nn \l_um_mathalph_seq {
-      \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
-      \tl_set:No \l_um_tmpb_tl { \use_ii:nnn  ##1 }
-      \tl_set:No \l_um_remap_alphabet_tl { \use_iii:nnn ##1 }
-      \tl_if_empty:NTF \l_um_remap_alphabet_tl {
-        \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_tmpa_tl}
-      }{
-        \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_remap_alphabet_tl}
-      }
-      \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \use_none:nnnnn \l_um_remap_alphabet_tl}
-      \tl_if_empty:NT \l_um_tmpb_tl {
-        \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
-        \tl_set:Nv \l_um_tmpb_tl { g_um_ \exp_after:wN \cs_to_str:N \l_um_tmpa_tl _alph_clist }
-      }
-      \um_setup_math_alphabet:VVV \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_alphabet_tl
+  }
+  \seq_map_inline:Nn \l_um_mathalph_seq {
+    \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
+    \tl_set:No \l_um_tmpb_tl { \use_ii:nnn  ##1 }
+    \tl_set:No \l_um_remap_alphabet_tl { \use_iii:nnn ##1 }
+    \tl_if_empty:NTF \l_um_remap_alphabet_tl {
+      \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_tmpa_tl}
+    }{
+      \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_remap_alphabet_tl}
     }
+    \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \use_none:nnnnn \l_um_remap_alphabet_tl}
+    \tl_if_empty:NT \l_um_tmpb_tl {
+      \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
+      \tl_set:Nv \l_um_tmpb_tl { g_um_ \exp_after:wN \cs_to_str:N \l_um_tmpa_tl _alph_clist }
+    }
+    \um_setup_math_alphabet:VVV \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_alphabet_tl
   }
   \seq_if_empty:NF \l_um_missing_alph_seq {
     \typeout{
@@ -2907,11 +2895,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
       \clist_map_break:
     }{
-      \um_glyph_if_exist:cTF {g_um_#3_##1_usv}{
+      \um_glyph_if_exist:cT {g_um_#3_##1_usv}{
         \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
         \clist_map_break:
-      }{
-        \um_debug:n {g_um_#3_##1_usv?}
       }
     }
   }
@@ -2924,7 +2910,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
         \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
       }{
-        \um_debug:n {g_um_#3_##1_usv?}
         \bool_if:NTF \l_um_implicit_alph_bool {
           \seq_put_right:Nx \l_um_missing_alph_seq {
             \@backslashchar
