@@ -1580,9 +1580,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
+% \paragraph{Debug/tracing}
+%    \begin{macrocode}
+\define@choicekey*{unicode-math.sty}{trace}[\@tempa\@tempb]{on,off}{
+  \ifcase\@tempb
+    \cs_set:Nn \um_debug:n { \typeout{##1} }
+  \or
+    \cs_set:Nn \um_debug:n { }
+  \fi
+}
+%    \end{macrocode}
+%
 %
 %    \begin{macrocode}
-\ExecuteOptionsX{math-style=TeX,slash-delimiter=ascii}
+\ExecuteOptionsX{math-style=TeX,slash-delimiter=ascii,trace=off}
 \ProcessOptionsX
 %    \end{macrocode}
 %
@@ -2826,6 +2837,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_setup_alphabets: {
   \seq_clear:N \l_um_missing_alph_seq
   \seq_if_empty:NTF \l_um_mathalph_seq {
+    \um_debug:n {Setup~ alphabets:~ implicit~ mode}
     \um_maybe_init_alphabet:n  {sf}
     \um_maybe_init_alphabet:n  {bf}
     \um_maybe_init_alphabet:n  {bfsf}
@@ -2863,6 +2875,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       }
     }
   }{
+    \um_debug:n {Setup~ alphabets:~ explicit~ mode}
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \seq_map_inline:Nn \l_um_mathalph_seq {
       \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
@@ -2885,7 +2898,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_setup_math_alphabet:Nn}
+% \begin{macro}{\um_setup_math_alphabet:Nnn}
 % \darg{Math font family name (e.g., \cs{mathbb})}
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
 % \darg{Math alphabets output string (usually same as input \texttt{bb})}
@@ -2929,7 +2942,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_set:Nn \um_init_alphabet:n {
-  \wlog{unicode-math:~Initialiasing~\@backslashchar math#1}
+  \um_debug:n {Initialiasing~\@backslashchar math#1}
   \um_prepare_alph:n {#1}
   \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
 }
