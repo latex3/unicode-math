@@ -106,7 +106,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 
 \endpostamble
 \askforoverwritefalse
-\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{package}}}
+\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{package,trace}}}
 \nopreamble\nopostamble
 %</batchfile>
 %<batchfile>\endbatchfile
@@ -1028,7 +1028,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \ExplSyntaxOn
 %    \end{macrocode}
-% Extras we need to define:
+%
+% \paragraph{Extra \pkg{expl3} variants}
 %    \begin{macrocode}
 \cs_generate_variant:Nn \tl_put_right:Nn {cx}
 \cs_generate_variant:Nn \seq_if_in:NnTF {NV}
@@ -1038,9 +1039,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 %
-% \paragraph{Counters and conditionals}
+% \paragraph{Conditionals}
 %    \begin{macrocode}
-\int_new:N \g_um_fam_int
 \bool_new:N \l_um_fontspec_feature_bool
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
@@ -1062,12 +1062,32 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \bool_new:N \g_um_bfupGreek_bool
 \bool_new:N \g_um_bfupgreek_bool
 %    \end{macrocode}
+% For \opt{sans-style}:
+%    \begin{macrocode}
+\bool_new:N \g_um_upsans_bool
+\bool_new:N \g_um_sfliteral_bool
+%    \end{macrocode}
 % For assorted package options:
 %    \begin{macrocode}
 \bool_new:N \g_um_upNabla_bool
 \bool_new:N \g_um_uppartial_bool
 \bool_new:N \g_um_texgreek_bool
 \bool_new:N \l_um_smallfrac_bool
+\bool_new:N \g_um_literal_colon_bool
+%    \end{macrocode}
+%
+% \paragraph{Variables}
+%    \begin{macrocode}
+\int_new:N \g_um_fam_int
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\tl_set:Nn \g_um_math_alphabet_name_latin_tl {Latin,~lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Latin_tl {Latin,~uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_greek_tl {Greek,~lowercase}
+\tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek,~uppercase}
+\tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
+\tl_set:Nn \g_um_math_alphabet_name_misc_tl  {Misc.}
 %    \end{macrocode}
 %
 % \subsubsection{Alphabet unicode positions}
@@ -1082,53 +1102,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \tl_set:cn { \um_to_usv:nn {#1}{#2} } {#3}
 }
 \cs_new:Nn \um_to_usv:nn { g_um_#1_#2_usv }
-
-\usv_set:nnn {up}{B}{`\B}
-\usv_set:nnn {up}{C}{`\C}
-\usv_set:nnn {up}{D}{`\D}
-\usv_set:nnn {up}{E}{`\E}
-\usv_set:nnn {up}{F}{`\F}
-\usv_set:nnn {up}{H}{`\H}
-\usv_set:nnn {up}{I}{`\I}
-\usv_set:nnn {up}{L}{`\L}
-\usv_set:nnn {up}{M}{`\M}
-\usv_set:nnn {up}{N}{`\N}
-\usv_set:nnn {up}{P}{`\P}
-\usv_set:nnn {up}{Q}{`\Q}
-\usv_set:nnn {up}{R}{`\R}
-\usv_set:nnn {up}{Z}{`\Z}
-
-\usv_set:nnn {it}{B}{"1D435}
-\usv_set:nnn {it}{C}{"1D436}
-\usv_set:nnn {it}{D}{"1D437}
-\usv_set:nnn {it}{E}{"1D438}
-\usv_set:nnn {it}{F}{"1D439}
-\usv_set:nnn {it}{H}{"1D43B}
-\usv_set:nnn {it}{I}{"1D43C}
-\usv_set:nnn {it}{L}{"1D43F}
-\usv_set:nnn {it}{M}{"1D440}
-\usv_set:nnn {it}{N}{"1D441}
-\usv_set:nnn {it}{P}{"1D443}
-\usv_set:nnn {it}{Q}{"1D444}
-\usv_set:nnn {it}{R}{"1D445}
-\usv_set:nnn {it}{Z}{"1D44D}
-
-\usv_set:nnn {up}{d}{`\d}
-\usv_set:nnn {up}{e}{`\e}
-\usv_set:nnn {up}{g}{`\g}
-\usv_set:nnn {up}{h}{"0068}
-\usv_set:nnn {up}{i}{`\i}
-\usv_set:nnn {up}{j}{`\j}
-\usv_set:nnn {up}{o}{`\o}
-
-\usv_set:nnn {it}{d}{"1D451}
-\usv_set:nnn {it}{e}{"1D452}
-\usv_set:nnn {it}{g}{"1D454}
-\usv_set:nnn {it}{h}{"210E}
-\usv_set:nnn {it}{i}{"1D456}
-\usv_set:nnn {it}{j}{"1D457}
-\usv_set:nnn {it}{o}{"1D45C}
-
+%    \end{macrocode}
+% \paragraph{Alphabets}
+%    \begin{macrocode}
 \usv_set:nnn {up}{num}{48}
 \usv_set:nnn {up}{Latin}{65}
 \usv_set:nnn {up}{latin}{97}
@@ -1186,6 +1162,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \usv_set:nnn {bfsfit}{latin}{"1D656}
 \usv_set:nnn {bfsfit}{Greek}{"1D790}
 \usv_set:nnn {bfsfit}{greek}{"1D7AA}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \usv_set:nnn {bfsf}{Latin}{ \bool_if:NTF \g_um_upLatin_bool \g_um_bfsfup_Latin_usv \g_um_bfsfit_Latin_usv }
 \usv_set:nnn {bfsf}{latin}{ \bool_if:NTF \g_um_uplatin_bool \g_um_bfsfup_latin_usv \g_um_bfsfit_latin_usv }
 \usv_set:nnn {bfsf}{Greek}{ \bool_if:NTF \g_um_upGreek_bool \g_um_bfsfup_Greek_usv \g_um_bfsfit_Greek_usv }
@@ -1251,44 +1230,100 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % Bold sans italic:
 %    \begin{macrocode}
-\usv_set:nnn {bfsfit}{varTheta}{"1D7A1}
+\usv_set:nnn {bfsfit}{varTheta}  {"1D7A1}
 \usv_set:nnn {bfsfit}{varepsilon}{"1D7C4}
-\usv_set:nnn {bfsfit}{vartheta}{"1D7C5}
-\usv_set:nnn {bfsfit}{varkappa}{"1D7C6}
-\usv_set:nnn {bfsfit}{varphi}{"1D7C7}
-\usv_set:nnn {bfsfit}{varrho}{"1D7C8}
-\usv_set:nnn {bfsfit}{varpi}{"1D7C9}
+\usv_set:nnn {bfsfit}{vartheta}  {"1D7C5}
+\usv_set:nnn {bfsfit}{varkappa}  {"1D7C6}
+\usv_set:nnn {bfsfit}{varphi}    {"1D7C7}
+\usv_set:nnn {bfsfit}{varrho}    {"1D7C8}
+\usv_set:nnn {bfsfit}{varpi}     {"1D7C9}
 %    \end{macrocode}
 % Nabla:
 %    \begin{macrocode}
-\usv_set:nnn {up}{Nabla}{"2207}
-\usv_set:nnn {it}{Nabla}{"1D6FB}
-\usv_set:nnn {bfup}{Nabla}{"1D6C1}
-\usv_set:nnn {bfit}{Nabla}{"1D735}
+\usv_set:nnn {up}    {Nabla}{"02207}
+\usv_set:nnn {it}    {Nabla}{"1D6FB}
+\usv_set:nnn {bfup}  {Nabla}{"1D6C1}
+\usv_set:nnn {bfit}  {Nabla}{"1D735}
 \usv_set:nnn {bfsfup}{Nabla}{"1D76F}
 \usv_set:nnn {bfsfit}{Nabla}{"1D7A9}
 %    \end{macrocode}
 % Partial:
 %    \begin{macrocode}
-\usv_set:nnn {up}{partial}{"2202}
-\usv_set:nnn {it}{partial}{"1D715}
-\usv_set:nnn {bfup}{partial}{"1D6DB}
-\usv_set:nnn {bfit}{partial}{"1D74F}
+\usv_set:nnn {up}    {partial}{"02202}
+\usv_set:nnn {it}    {partial}{"1D715}
+\usv_set:nnn {bfup}  {partial}{"1D6DB}
+\usv_set:nnn {bfit}  {partial}{"1D74F}
 \usv_set:nnn {bfsfup}{partial}{"1D789}
 \usv_set:nnn {bfsfit}{partial}{"1D7C3}
 %    \end{macrocode}
+% \paragraph{Exceptions}
+% These are need for mapping with the exceptions in other alphabets:
+% (coming up)
+%    \begin{macrocode}
+\usv_set:nnn {up}{B}{`\B}
+\usv_set:nnn {up}{C}{`\C}
+\usv_set:nnn {up}{D}{`\D}
+\usv_set:nnn {up}{E}{`\E}
+\usv_set:nnn {up}{F}{`\F}
+\usv_set:nnn {up}{H}{`\H}
+\usv_set:nnn {up}{I}{`\I}
+\usv_set:nnn {up}{L}{`\L}
+\usv_set:nnn {up}{M}{`\M}
+\usv_set:nnn {up}{N}{`\N}
+\usv_set:nnn {up}{P}{`\P}
+\usv_set:nnn {up}{Q}{`\Q}
+\usv_set:nnn {up}{R}{`\R}
+\usv_set:nnn {up}{Z}{`\Z}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {it}{B}{"1D435}
+\usv_set:nnn {it}{C}{"1D436}
+\usv_set:nnn {it}{D}{"1D437}
+\usv_set:nnn {it}{E}{"1D438}
+\usv_set:nnn {it}{F}{"1D439}
+\usv_set:nnn {it}{H}{"1D43B}
+\usv_set:nnn {it}{I}{"1D43C}
+\usv_set:nnn {it}{L}{"1D43F}
+\usv_set:nnn {it}{M}{"1D440}
+\usv_set:nnn {it}{N}{"1D441}
+\usv_set:nnn {it}{P}{"1D443}
+\usv_set:nnn {it}{Q}{"1D444}
+\usv_set:nnn {it}{R}{"1D445}
+\usv_set:nnn {it}{Z}{"1D44D}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {up}{d}{`\d}
+\usv_set:nnn {up}{e}{`\e}
+\usv_set:nnn {up}{g}{`\g}
+\usv_set:nnn {up}{h}{`\h}
+\usv_set:nnn {up}{i}{`\i}
+\usv_set:nnn {up}{j}{`\j}
+\usv_set:nnn {up}{o}{`\o}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {it}{d}{"1D451}
+\usv_set:nnn {it}{e}{"1D452}
+\usv_set:nnn {it}{g}{"1D454}
+\usv_set:nnn {it}{h}{"0210E}
+\usv_set:nnn {it}{i}{"1D456}
+\usv_set:nnn {it}{j}{"1D457}
+\usv_set:nnn {it}{o}{"1D45C}
+%    \end{macrocode}
 % Latin `h':
 %    \begin{macrocode}
-\usv_set:nnn {bb}{h}{"1D559}
-\usv_set:nnn {tt}{h}{"1D691}
-\usv_set:nnn {scr}{h}{"1D4BD}
-\usv_set:nnn {frak}{h}{"1D525}
-\usv_set:nnn {bfup}{h}{"1D421}
-\usv_set:nnn {bfit}{h}{"1D489}
-\usv_set:nnn {sfup}{h}{"1D5C1}
-\usv_set:nnn {sfit}{h}{"1D629}
+\usv_set:nnn {bb}    {h}{"1D559}
+\usv_set:nnn {tt}    {h}{"1D691}
+\usv_set:nnn {scr}   {h}{"1D4BD}
+\usv_set:nnn {frak}  {h}{"1D525}
+\usv_set:nnn {bfup}  {h}{"1D421}
+\usv_set:nnn {bfit}  {h}{"1D489}
+\usv_set:nnn {sfup}  {h}{"1D5C1}
+\usv_set:nnn {sfit}  {h}{"1D629}
 \usv_set:nnn {bffrak}{h}{"1D58D}
-\usv_set:nnn {bfscr}{h}{"1D4F1}
+\usv_set:nnn {bfscr} {h}{"1D4F1}
 \usv_set:nnn {bfsfup}{h}{"1D5F5}
 \usv_set:nnn {bfsfit}{h}{"1D65D}
 %    \end{macrocode}
@@ -1308,20 +1343,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \usv_set:nnn {bb}{Q}{"211A}
 \usv_set:nnn {bb}{R}{"211D}
 \usv_set:nnn {bb}{Z}{"2124}
-\usv_set:nnn {up}{Pi}       {"03A0}
-\usv_set:nnn {up}{pi}       {"03C0}
-\usv_set:nnn {up}{Gamma}    {"0393}
-\usv_set:nnn {up}{gamma}    {"03B3}
-\usv_set:nnn {up}{summation}{"2211}
+\usv_set:nnn {up}{Pi}       {"003A0}
+\usv_set:nnn {up}{pi}       {"003C0}
+\usv_set:nnn {up}{Gamma}    {"00393}
+\usv_set:nnn {up}{gamma}    {"003B3}
+\usv_set:nnn {up}{summation}{"02211}
 \usv_set:nnn {it}{Pi}       {"1D6F1}
 \usv_set:nnn {it}{pi}       {"1D70B}
 \usv_set:nnn {it}{Gamma}    {"1D6E4}
 \usv_set:nnn {it}{gamma}    {"1D6FE}
-\usv_set:nnn {bb}{Pi}       {"213F}
-\usv_set:nnn {bb}{pi}       {"213C}
-\usv_set:nnn {bb}{Gamma}    {"213E}
-\usv_set:nnn {bb}{gamma}    {"213D}
-\usv_set:nnn {bb}{summation}{"2140}
+\usv_set:nnn {bb}{Pi}       {"0213F}
+\usv_set:nnn {bb}{pi}       {"0213C}
+\usv_set:nnn {bb}{Gamma}    {"0213E}
+\usv_set:nnn {bb}{gamma}    {"0213D}
+\usv_set:nnn {bb}{summation}{"02140}
 %    \end{macrocode}
 % Italic blackboard:
 %    \begin{macrocode}
@@ -1352,6 +1387,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \usv_set:nnn {frak}{I}{"2111}
 \usv_set:nnn {frak}{R}{"211C}
 \usv_set:nnn {frak}{Z}{"2128}
+%    \end{macrocode}
+%
+% \paragraph{Complete \textsc{u.s.v.} ranges}
+% These might be needed (with a whole bunch more) later:
+%    \begin{macrocode}
+\tl_new:Nn \g_um_mathup_latin_usv_range_tl {`\a-`\z}
+\tl_new:Nn \g_um_mathup_Latin_usv_range_tl {`\A-`\Z}
+\tl_new:Nn \g_um_mathup_greek_usv_range_tl {"3B1-"3C9,"3F5,"3D1,"3F0,"3D5,"3F1,"3D6,"3DD}
+\tl_new:Nn \g_um_mathup_Greek_usv_range_tl {"391-"3A9,"3F4,"3DC}
+\tl_new:Nn \g_um_mathup_num_usv_range_tl   {`\0-`\9}
+\tl_new:Nn \g_um_mathit_latin_usv_range_tl {"1D44E-"1D467,\g_um_it_h_usv}
+\tl_new:Nn \g_um_mathit_Latin_usv_range_tl {"1D434-"1D44C}
+\tl_new:Nn \g_um_mathit_greek_usv_range_tl {"1D6FC-"1D714,"1D716-1D71B}
+\tl_new:Nn \g_um_mathit_Greek_usv_range_tl {"1D6E2-"1D6FA}
 %    \end{macrocode}
 %
 % \subsection{Options}
@@ -1467,8 +1516,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{sans-style}
 %    \begin{macrocode}
-\bool_new:N \g_um_upsans_bool
-\bool_new:N \g_um_sfliteral_bool
 \define@choicekey*{unicode-math.sty}
     {sans-style}[\@tempa\@tempb]{italic,upright,literal}{
   \ifcase\@tempb\relax
@@ -1537,7 +1584,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{Colon style}
 %    \begin{macrocode}
-\bool_new:N \g_um_literal_colon_bool
 \define@choicekey*{unicode-math.sty}{colon}[\@tempa\@tempb]{literal,TeX}{
   \ifcase\@tempb
     \bool_set_true:N \g_um_literal_colon_bool
@@ -1603,24 +1649,25 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % The requirement of only setting up the maths fonts in the preamble is now removed. The following list might be overly ambitious.
 %    \begin{macrocode}
 \tl_map_inline:nn {
-\new@mathgroup\cdp@list\cdp@elt\DeclareMathSizes
-\@DeclareMathSizes\newmathalphabet\newmathalphabet@@\newmathalphabet@@@
-\DeclareMathVersion\define@mathalphabet\define@mathgroup\addtoversion
-\version@list\version@elt\alpha@list\alpha@elt
-\restore@mathversion\init@restore@version\dorestore@version\process@table
-\new@mathversion\DeclareSymbolFont\group@list\group@elt
-\new@symbolfont\SetSymbolFont\SetSymbolFont@\get@cdp
-\DeclareMathAlphabet\new@mathalphabet\SetMathAlphabet\SetMathAlphabet@
-\DeclareMathAccent\set@mathaccent\DeclareMathSymbol\set@mathchar
-\set@mathsymbol\DeclareMathDelimiter\@xxDeclareMathDelimiter\@DeclareMathDelimiter
-\@xDeclareMathDelimiter\set@mathdelimiter\set@@mathdelimiter\DeclareMathRadical
-\mathchar@type\DeclareSymbolFontAlphabet\DeclareSymbolFontAlphabet@
+  \new@mathgroup\cdp@list\cdp@elt\DeclareMathSizes
+  \@DeclareMathSizes\newmathalphabet\newmathalphabet@@\newmathalphabet@@@
+  \DeclareMathVersion\define@mathalphabet\define@mathgroup\addtoversion
+  \version@list\version@elt\alpha@list\alpha@elt
+  \restore@mathversion\init@restore@version\dorestore@version\process@table
+  \new@mathversion\DeclareSymbolFont\group@list\group@elt
+  \new@symbolfont\SetSymbolFont\SetSymbolFont@\get@cdp
+  \DeclareMathAlphabet\new@mathalphabet\SetMathAlphabet\SetMathAlphabet@
+  \DeclareMathAccent\set@mathaccent\DeclareMathSymbol\set@mathchar
+  \set@mathsymbol\DeclareMathDelimiter\@xxDeclareMathDelimiter
+  \@DeclareMathDelimiter\@xDeclareMathDelimiter\set@mathdelimiter
+  \set@@mathdelimiter\DeclareMathRadical\mathchar@type
+  \DeclareSymbolFontAlphabet\DeclareSymbolFontAlphabet@
 }{
   \tl_remove_in:Nn \@preamblecmds {\do#1}
 }
 %    \end{macrocode}
 %
-% \subsection{Other things}
+% \subsection{Assorted macros}
 %
 % \begin{macro}{\um_fontdimen_to_percent:nn}
 % \darg{Font dimen number}
@@ -1663,15 +1710,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % This is sufficient for \LaTeX's \cmd\DeclareSymbolFont-type commands to be able
-% to define 256 named maths fonts. Now we need a new \cmd\DeclareMathSymbol.
+% to define 256 named maths fonts.
 %
-% \subsection{\cmd\DeclareMathSymbol\ for unicode ranges}
-%
-% This command is a bit funny at the moment; it doesn't define the actual
-% macro for almost all of the symbols passed to it, but it does assign the
-% \cmd\XeTeXmathchar.
-%
-% The final macros that actually define the maths symbol with \XeTeX\ primitives.
+% \subsection{Setting math chars, math codes, etc.}
 %
 % \begin{macro}{\um_set_mathsymbol:nNNn}
 % \darg{Symbol font number, e.g., \cs{symoperators}}
@@ -2341,7 +2382,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % The `ALL' branch here is deprecated and happens automatically.
 %    \begin{macrocode}
-\seq_new:N \g_um_mathalph_seq
 \seq_new:N \l_um_mathalph_seq
 \seq_new:N \l_um_char_range_seq
 \define@choicekey+[um]{options}{range}[\@tempa\@tempb]{ALL}{
@@ -2752,16 +2792,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \end{macro}
-% 
+%
 %
 % \section{Maths alphabets mapping definitions}
-% \label{part:mathmap} 
-% 
+% \label{part:mathmap}
+%
 % Algorithm for setting alphabet fonts.
 % By default, when |range| is empty, we are in \emph{implicit} mode.
 % If |range| contains the name of the math alphabet, we are in \emph{explicit}
 % mode and do things slightly differently.
-% 
+%
 % Implicit mode:
 % \begin{itemize}
 % \item Try and set all of the alphabet shapes.
@@ -2771,7 +2811,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \item For alphabets that are not supported, \emph{do nothing}.
 %       (This includes leaving the old alphabet definition in place.)
 % \end{itemize}
-% 
+%
 % Explicit mode:
 % \begin{itemize}
 % \item Only set the alphabets specified.
@@ -2780,16 +2820,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \item For unicode math alphabets, overwrite whatever's already there.
 % \item Otherwise, use the \ascii\ letters instead.
 % \end{itemize}
-% 
+%
 % \subsubsection{Macros}
 %
 % This is every math alphabet known to \pkg{unicode-math}:
 % \begin{macro}{\g_um_mathalph_seq}
 %    \begin{macrocode}
-\seq_clear:N \g_um_mathalph_seq
+\seq_new:N \g_um_mathalph_seq
 \tl_map_inline:nn {
-  \mathup\mathit
-  \mathbb\mathbbit
+  \mathup\mathit\mathbb\mathbbit
   \mathscr\mathfrak\mathtt
   \mathsf\mathsfup\mathsfit
   \mathbf\mathbfup\mathbfit
@@ -2801,9 +2840,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_setup_alphabets:}
 %    \begin{macrocode}
-
 \seq_new:N \g_um_default_mathalph_seq
 \clist_map_inline:nn {
   {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
@@ -2824,30 +2861,26 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }{
   \seq_put_right:Nn \g_um_default_mathalph_seq {#1}
 }
-
-\tl_new:Nn \g_um_mathup_latin_usv {`\a-`\z}
-\tl_new:Nn \g_um_mathup_Latin_usv {`\A-`\Z}
-\tl_new:Nn \g_um_mathup_greek_usv {"3B1-"3C9,"3F5,"3D1,"3F0,"3D5,"3F1,"3D6,"3DD}
-\tl_new:Nn \g_um_mathup_Greek_usv {"391-"3A9,"3F4,"3DC}
-\tl_new:Nn \g_um_mathup_num_usv   {`\0-`\9}
-\tl_new:Nn \g_um_mathit_latin_usv {"1D44E-"1D467,\g_um_it_h_usv}
-\tl_new:Nn \g_um_mathit_Latin_usv {"1D434-"1D44C}
-\tl_new:Nn \g_um_mathit_greek_usv {"1D6FC-"1D714,"1D716-1D71B}
-\tl_new:Nn \g_um_mathit_Greek_usv {"1D6E2-"1D6FA}
-
+%    \end{macrocode}
+%
+% \begin{macro}{\um_setup_alphabets:}
+% Variables:
+%    \begin{macrocode}
 \seq_new:N \l_um_missing_alph_seq
-
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \cs_new:Nn \um_setup_alphabets: {
   \seq_clear:N \l_um_missing_alph_seq
   \seq_if_empty:NTF \l_um_mathalph_seq {
-    \um_debug:n {Setup~ alphabets:~ implicit~ mode}
+%<trace>    \um_debug:n {Setup~ alphabets:~ implicit~ mode}
     \seq_set_eq:NN \l_um_mathalph_seq \g_um_default_mathalph_seq
     \bool_set_true:N \l_um_implicit_alph_bool
     \um_maybe_init_alphabet:n  {sf}
     \um_maybe_init_alphabet:n  {bf}
     \um_maybe_init_alphabet:n  {bfsf}
   }{
-    \um_debug:n {Setup~ alphabets:~ explicit~ mode}
+%<trace>    \um_debug:n {Setup~ alphabets:~ explicit~ mode}
     \bool_set_false:N \l_um_implicit_alph_bool
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
   }
@@ -2863,10 +2896,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \use_none:nnnnn \l_um_remap_alphabet_tl}
     \tl_if_empty:NT \l_um_tmpb_tl {
       \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
-      \tl_set:Nv \l_um_tmpb_tl { g_um_ \exp_after:wN \cs_to_str:N \l_um_tmpa_tl _alph_clist }
+      \tl_set:Nn \l_um_tmpb_tl { latin,Latin,greek,Greek,num,misc }
     }
     \um_setup_math_alphabet:VVV \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_alphabet_tl
   }
+  \um_warn_missing_alphabets:
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \um_warn_missing_alphabets: {
   \seq_if_empty:NF \l_um_missing_alph_seq {
     \typeout{
       Package~unicode-math~Warning:~
@@ -2891,50 +2930,48 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \tl_set:Nx \l_um_tmpa_tl {\cs_to_str:N #1}
   \tl_set:Nx \l_um_tmpb_tl {\exp_after:wN \use_none:nnnn \l_um_tmpa_tl}
   \clist_map_inline:nn {#2} {
-    \tl_if_eq:nnTF {##1}{misc} {
-      \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
-      \clist_map_break:
-    }{
-      \um_glyph_if_exist:cT {g_um_#3_##1_usv}{
+    \cs_if_exist:cT {um_config_ \l_um_tmpa_tl _##1:n} {
+      \tl_if_eq:nnTF {##1}{misc} {
         \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
         \clist_map_break:
+      }{
+        \um_glyph_if_exist:cT {g_um_#3_##1_usv}{
+          \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
+          \clist_map_break:
+        }
       }
     }
   }
   \clist_map_inline:nn {#2} {
-    \tl_if_eq:nnTF {##1}{misc} {
-      \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
-      \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
-    }{
-      \um_glyph_if_exist:cTF {g_um_#3_##1_usv} {
-        \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
+    \cs_if_exist:cT {um_config_ \l_um_tmpa_tl _##1:n} {
+      \tl_if_eq:nnTF {##1}{misc} {
+%<trace>    \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
         \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
       }{
-        \bool_if:NTF \l_um_implicit_alph_bool {
-          \seq_put_right:Nx \l_um_missing_alph_seq {
-            \@backslashchar
-            \l_um_tmpa_tl\space(\tl_use:c{g_um_math_alphabet_name_##1_tl})
-          }
+        \um_glyph_if_exist:cTF {g_um_#3_##1_usv} {
+%<trace>    \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
+          \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
         }{
-          \use:c {um_config_ \l_um_tmpa_tl _##1:n} {up}
+          \bool_if:NTF \l_um_implicit_alph_bool {
+            \seq_put_right:Nx \l_um_missing_alph_seq {
+              \@backslashchar
+              \l_um_tmpa_tl\space(\tl_use:c{g_um_math_alphabet_name_##1_tl})
+            }
+          }{
+            \use:c {um_config_ \l_um_tmpa_tl _##1:n} {up}
+          }
         }
       }
     }
   }
 }
 \cs_generate_variant:Nn \um_setup_math_alphabet:Nnn {NV,VVV}
-
-\tl_set:Nn \g_um_math_alphabet_name_latin_tl {Latin,~lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Latin_tl {Latin,~uppercase}
-\tl_set:Nn \g_um_math_alphabet_name_greek_tl {Greek,~lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek,~uppercase}
-\tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
 %    \end{macrocode}
 % \end{macro}
 %
 %    \begin{macrocode}
 \cs_set:Nn \um_init_alphabet:n {
-  \um_debug:n {Initialiasing~\@backslashchar math#1}
+%<trace>    \um_debug:n {Initialiasing~\@backslashchar math#1}
   \um_prepare_alph:n {#1}
   \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
 }
