@@ -1048,7 +1048,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/27 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/28 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -2190,9 +2190,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Nn \um_mathmap_parse:Nnn {
   \clist_map_inline:Nn \um@char@num@range {
-    \ifnum##1=#3\relax
+    \intexpr_compare:nT {##1=#3} {
       \um_mathmap_noparse:Nnn {#1}{#2}{#3}
-    \fi
+    }
   }
 }
 %    \end{macrocode}
@@ -3657,7 +3657,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \group_begin:
     \char_make_math_superscript:N\^
     \def\UnicodeMathSymbol#1#2#3#4{
-      \um@scancharlet#2=#1\@nil\ignorespaces
+      \cs_if_eq:NNF #3 \mathaccent {
+        \um@scancharlet#2=#1\@nil\ignorespaces
+      }
     }
     \char_make_other:N \#
     \@input{unicode-math-table.tex}
