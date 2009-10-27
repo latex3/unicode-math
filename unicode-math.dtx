@@ -3645,7 +3645,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \group_begin:
     \char_make_math_superscript:N\^
     \def\UnicodeMathSymbol#1#2#3#4{
-      \cs_if_eq:NNF #3 \mathaccent {
+      \bool_if:nF { \cs_if_eq_p:NN #3 \mathaccent ||
+                    \cs_if_eq_p:NN #3 \mathopen   ||
+                    \cs_if_eq_p:NN #3 \mathclose } {
         \um@scancharlet#2=#1\@nil\ignorespaces
       }
     }
