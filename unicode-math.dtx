@@ -21,7 +21,7 @@ Unicode maths is currently supported to one degree or another by the fonts
  - [Cambria Math][0] (Microsoft, proprietry),
  - [Asana Math][1] (Apostolos Syropolous, open source),
  - [Neo Euler][2] (Khalid Hosny, open source), and
- - [STIX][3] (STI Pub, free but not yet publicly available).
+ - [STIX][3] (STI Pub, freely available when it's released).
 
 I'm always looking for new fonts to test with, so please let me know of any
 new releases.
@@ -42,9 +42,6 @@ Please see the PDF documentation for full details. A simple beginning is:
 
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
 Furthermore, it will be in a different font.
-
-Note that `amsmath` must be loaded *before* `unicode-math`, since we
-overwrite many of its definitions.
 
 
 REQUIREMENTS
@@ -73,9 +70,48 @@ in a place searched by XeLaTeX; on Mac OS X, for example:
 
     ~/Library/texmf/tex/xelatex/
 
+
+MAINENANCE
+----------
+
+Latest developmental and archived historical versions of this package are
+available from GitHub:
+<http://github.com/wspr/unicode-math>
+
+Not yet released on CTAN.
+
+Please file bug reports with minimal examples:
+<http://github.com/wspr/unicode-math/issues>
+
+LICENCE
+-------
+
+The unicode-math package may be modified and distributed under the terms and
+conditions of the [LaTeX Project Public License][LPPL], version 1.3c or
+greater.
+
+[LPPL]: http://www.latex-project.org/lppl/
+
+This work is author-maintained and consists of the files
+
+- unicode-math.dtx, and
+- unicode-math-table.tex;
+
+the derived files
+
+- unicode-math.sty,
+- this readme,
+- unicode-math.ins;
+
+and the test suite for this package
+
+- testfiles/umtest-preamble.tex,
+- testfiles/umtest-suite.tex,
+- testfiles/umtest*.ltx,
+- testfiles/umtest*.safe.png.
+
 __________________________________
-Copyright 2006-2009 Will Robertson  
-Released under the LaTeX Project Public License
+Copyright 2006-2009 Will Robertson
 %</readme>
 %<*internal>
 \fi
@@ -1012,7 +1048,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/26 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/27 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
