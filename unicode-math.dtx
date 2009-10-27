@@ -1048,7 +1048,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/27 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/28 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -1863,7 +1863,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \bool_set_true:N \l_um_init_bool
   \seq_clear:N \l_um_char_range_seq
-  \let\um@char@num@range\@empty
+  \clist_clear:N \um@char@num@range
 %    \end{macrocode}
 % \item Grab the current size information
 % (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
@@ -2190,9 +2190,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Nn \um_mathmap_parse:Nnn {
   \clist_map_inline:Nn \um@char@num@range {
-    \ifnum##1=#3\relax
+    \intexpr_compare:nT { ##1 = #3 } {
       \um_mathmap_noparse:Nnn {#1}{#2}{#3}
-    \fi
+    }
   }
 }
 %    \end{macrocode}
@@ -2500,11 +2500,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \cmd\mathbf\ (\etc) \cmd\mathchar\ remappings.
 %    \begin{macrocode}
       \if@tempswa
-        \ifx\um@char@num@range\@empty
-          \g@addto@macro\um@char@num@range{#1}
-        \else
-          \g@addto@macro\um@char@num@range{,#1}
-        \fi
+        \clist_put_right:Nx \um@char@num@range { \intexpr_eval:n {#1} }
         #4%
       \fi
     \fi
@@ -2536,9 +2532,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{tabular}
 %    \begin{macrocode}
   \expandafter\ifx\expandafter\@marker\@tempb\relax
-    \ifnum#4=#1\relax
-      \@tempswatrue
-    \fi
+    \intexpr_compare:nT {#4=#1} \@tempswatrue
   \else
 %    \end{macrocode}
 % \begin{tabular}{@{}ll}
@@ -2553,9 +2547,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{tabular}
 %    \begin{macrocode}
     \ifx\@empty\@tempb
-      \ifnum#4>\numexpr#1-1\relax
-        \@tempswatrue
-      \fi
+      \intexpr_compare:nT {#4>#1-1} \@tempswatrue
     \else
 %    \end{macrocode}
 % \begin{tabular}{@{}ll}
@@ -2570,9 +2562,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{tabular}
 %    \begin{macrocode}
       \ifx\@empty\@tempa
-        \ifnum#4<\numexpr#2+1\relax
-          \@tempswatrue
-        \fi
+        \intexpr_compare:nT {#4<#2+1} \@tempswatrue
 %    \end{macrocode}
 % \begin{tabular}{@{}ll}
 % \hline
@@ -2586,11 +2576,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{tabular}
 %    \begin{macrocode}
       \else
-        \ifnum#4>\numexpr#1-1\relax
-          \ifnum#4<\numexpr#2+1\relax
-            \@tempswatrue
-          \fi
-        \fi
+        \intexpr_compare:nT {#4>#1-1} {
+          \intexpr_compare:nT {#4<#2+1} \@tempswatrue
+        }
       \fi
     \fi
   \fi
@@ -3657,7 +3645,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \group_begin:
     \char_make_math_superscript:N\^
     \def\UnicodeMathSymbol#1#2#3#4{
-      \um@scancharlet#2=#1\@nil\ignorespaces
+      \cs_if_eq:NNF #3 \mathaccent {
+        \um@scancharlet#2=#1\@nil\ignorespaces
+      }
     }
     \char_make_other:N \#
     \@input{unicode-math-table.tex}
