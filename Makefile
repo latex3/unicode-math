@@ -19,13 +19,6 @@ help:
 	echo ' '
 	echo 'I recommend `make -j4 test` or thereabouts to parallelise
 	echo 'the testing.'
-	echo ' '
-	echo 'Note that the documentation contains of the complete'
-	echo 'test suite in a single document (unicode-math-testsuite.pdf);'
-	echo '`make doc` therefore will ensure that the test suite has'
-	echo 'been run before compiling the documatation. Accordingly,'
-	echo 'a *single* change in unicode-math.dtx will trigger an entire'
-	echo 'run of the test suite.'
 
 
 #### SETUP ####
@@ -84,6 +77,7 @@ $(builddir)/$(PKG).sty: $(builddir)/$(PKG).dtx
 	tex $(PKG).dtx > /dev/null ; \
 
 $(builddir)/$(PKG).dtx: $(PKG).dtx
+	~/bin/dtx-update
 	cp -f  $<  $@
 
 $(builddir)/unicode-math-table.tex: unicode-math-table.tex
@@ -124,10 +118,6 @@ file: $(F)  $(BUILDSOURCE)
 ##### PROBABLY ONLY USEFUL FOR WILL #####
 
 push: doc
-	if ~/bin/dtx-update ; then \
-	  make $(PKG).pdf ; \
-	  git commit -a -m "bump package date" ; \
-	fi
 	git push origin master
 
 

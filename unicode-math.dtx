@@ -1022,6 +1022,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \RequirePackage{expl3}[2009/08/12]
 \RequirePackage{xparse}[2009/08/31]
 \RequirePackage{fontspec}
+\RequirePackage{scrlfile}
 %    \end{macrocode}
 %
 % Start using \LaTeX3 --- finally!
@@ -3613,25 +3614,36 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 %
 % Now give \cmd\UnicodeMathSymbol\ a definition in terms of \cmd\um@scancharlet\
-% and we're good to go. Make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
+% and we're good to go.
+% Make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
-\begingroup
-  \char_make_math_superscript:N\^
-  \def\UnicodeMathSymbol#1#2#3#4{
-    \um@scancharlet#2=#1\@nil\ignorespaces
-  }
-  \char_make_other:N \#
-  \@input{unicode-math-table.tex}
-\endgroup
+\AtBeginDocument{
+  \group_begin:
+    \char_make_math_superscript:N\^
+    \def\UnicodeMathSymbol#1#2#3#4{
+      \um@scancharlet#2=#1\@nil\ignorespaces
+    }
+    \char_make_other:N \#
+    \@input{unicode-math-table.tex}
+  \group_end:
+}
 %    \end{macrocode}
-% Fix \cs{backslash}:
+% Fix \cs{backslash}, which is defined as the escape char character
+% above:
 %    \begin{macrocode}
 \group_begin:
   \lccode`\*=`\\
   \char_make_escape:N \|
   \char_make_other:N \\
   |lowercase{
-|group_end:|let|backslash=*}
+    |AtBeginDocument{
+      |let|backslash=*
+    }
+  }
+|group_end:
+%    \end{macrocode}
+% Fix \cs{backslash}:
+%    \begin{macrocode}
 %    \end{macrocode}
 %
 % \section{Epilogue}
@@ -4109,16 +4121,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \def\mathsterling{\sterling}
 %    \end{macrocode}
 %
-% Define \cs{colon} as a mathpunct `|:|'. This is wrong: it should be \unichar{003A} {colon} instead!
+% \begin{macro}{\colon}
+% Define \cs{colon} as a mathpunct `|:|'.
+% This is wrong: it should be \unichar{003A} {colon} instead!
+% We hope no-one will notice.
 %    \begin{macrocode}
 \@ifpackageloaded{amsmath}{
-  % define their own colon, perhaps I should just steal it.
+  % define their own colon, perhaps I should just steal it. (It does look much better.)
 }{
   \cs_set_protected:Npn \colon {
     \bool_if:NTF \g_um_literal_colon_bool {:} { \mathpunct{:} }
   }
 }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\mathcal}
 %    \begin{macrocode}
@@ -4133,69 +4149,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-%
-% \subsubsection{Compatibility}
-%
-%
-% Note that \pkg{amsmath} will always be loaded before \pkg{unicode-math}.
-% (Conflicts occur if you try it the other way around.)
-%
-% \begin{itemize}
-% \item Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
-%    \begin{macrocode}
-\bool_new:N \g_um_amsmath_bool
-\@ifpackageloaded{amsmath}{
-  \bool_set_true:N \g_um_amsmath_bool
-}{
-  \bool_set_false:N \g_um_amsmath_bool
-}
-\bool_if:NT \g_um_amsmath_bool {
-  \tl_remove_in:Nn \@begindocumenthook {
-    \mathchardef\std@minus\mathcode`\-\relax
-    \mathchardef\std@equal\mathcode`\=\relax
-  }
-  \AtBeginDocument {
-    \def\std@minus{\XeTeXmathcharnum\XeTeXmathcodenum`\-\relax}
-    \def\std@equal{\XeTeXmathcharnum\XeTeXmathcodenum`\=\relax}
-  }
-}
-%    \end{macrocode}
-% \item This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
-%    \begin{macrocode}
-\@ifpackageloaded{amsopn}{
-  \cs_set:Npn \newmcodes@ {
-    \mathcode`\'39
-    \mathcode`\*42
-    \mathcode`\."613A%
-%  \ifnum\mathcode`\-=45 \else
-%    \mathchardef\std@minus\mathcode`\-\relax
-%  \fi
-    \mathcode`\-45
-    \mathcode`\/47
-    \mathcode`\:"603A\relax
-  }
-}{}
-%    \end{macrocode}
-% \item \cs{mathinner} items:
-%    \begin{macrocode}
-\cs_set:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
-\cs_set:Npn \cdots {\mathinner{\unicodecdots}}
-\bool_if:NT \g_um_amsmath_bool {
-  \cs_set_eq:NN \@cdots \cdots
-  \cs_set_eq:NN \dotsb@ \cdots
-}
-%    \end{macrocode}
-% \end{itemize}
-%
-%
-% Octothorpe is an odd one:
-%    \begin{macrocode}
-\AtBeginDocument{
-  \def\widehat{\hat}
-  \def\widetilde{\tilde}
-}
-%    \end{macrocode}
-%
 % \begin{macro}{\digamma}
 % \begin{macro}{\Digamma}
 % I might end up just changing these in the table.
@@ -4206,14 +4159,69 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \end{macro}
 % \end{macro}
 %
-% Overriding \pkg{amsmath} definitions:
+%
+% \subsubsection{Compatibility}
+%
+%
+% Note that \pkg{amsmath} will always be loaded before \pkg{unicode-math}.
+% (Conflicts occur if you try it the other way around.)
+%
+% \paragraph{amsmath}
+% Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
+%    \begin{macrocode}
+\cs_new:Nn \um_fix_amsmath: {
+  \tl_remove_in:Nn \@begindocumenthook {
+    \mathchardef\std@minus\mathcode`\-\relax
+    \mathchardef\std@equal\mathcode`\=\relax
+  }
+  \def\std@minus{\XeTeXmathcharnum\XeTeXmathcodenum`\-\relax}
+  \def\std@equal{\XeTeXmathcharnum\XeTeXmathcodenum`\=\relax}
+  \def\@cdots{\mathinner{\cdots}}
+  \cs_set_eq:NN \dotsb@ \cdots
+}
+\@ifpackageloaded {amsmath} {
+  \um_fix_amsmath:
+}{
+  \AfterPackage{amsmath}{\um_fix_amsmath:}
+}
+%    \end{macrocode}
+% \paragraph{amsopn}
+% This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
+%    \begin{macrocode}
+\cs_new:Nn \um_fix_amsopn: {
+  \cs_set:Npn \newmcodes@ {
+    \mathcode`\'39
+    \mathcode`\*42
+    \mathcode`\."613A%
+%%  \ifnum\mathcode`\-=45 \else
+%%    \mathchardef\std@minus\mathcode`\-\relax
+%%  \fi
+    \mathcode`\-45
+    \mathcode`\/47
+    \mathcode`\:"603A\relax
+  }
+}
+\@ifpackageloaded {amsopn} {
+  \um_fix_amsopn:
+}{
+  \AfterPackage{amsopn}{\um_fix_amsopn:}
+}
+%    \end{macrocode}
+% \paragraph{Symbols}
+% \cs{mathinner} items:
+%    \begin{macrocode}
+\cs_set:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
+\cs_set:Npn \cdots {\mathinner{\unicodecdots}}
+%    \end{macrocode}
+% \paragraph{Accents}
 %    \begin{macrocode}
 \AtBeginDocument{
-  \def\@cdots{\mathinner{\cdots}}
+  \def\widehat{\hat}
+  \def\widetilde{\tilde}
 }
 %    \end{macrocode}
 %
-% Interaction with \pkg{beamer}:
+% \paragraph{\pkg{beamer}}
 %    \begin{macrocode}
 \@ifclassloaded{beamer}{
   \ifbeamer@suppressreplacements\else
