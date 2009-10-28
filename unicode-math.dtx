@@ -1692,38 +1692,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% \subsection{Assorted macros}
-%
-% \begin{macro}{\um_fontdimen_to_percent:nn}
-% \darg{Font dimen number}
-% \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|. This macro takes a font dimension number and outputs the decimal value of the associated parameter.
-%    \begin{macrocode}
-\def\um_fontdimen_to_percent:nn#1#2{
-  0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um@scaled@apply}
-% \darg{A math style}
-% \darg{Macro that takes a non-delimited length argument (like \cmd\kern)}
-% \darg{Length control sequence to be scaled according to the math style}
-% This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
-%    \begin{macrocode}
-\def\um@scaled@apply#1#2#3{
-  \ifx#1\scriptstyle
-    #2\um_fontdimen_to_percent:nn{10}\l_um_font#3
-  \else
-    \ifx#1\scriptscriptstyle
-      #2\um_fontdimen_to_percent:nn{11}\l_um_font#3
-    \else
-      #2#3%
-    \fi
-  \fi
-}
-%    \end{macrocode}
-% \end{macro}
-%
 % \section{Fundamentals}
 %
 % \subsection{Enlarging the number of maths families}
@@ -1740,115 +1708,146 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsection{Setting math chars, math codes, etc.}
 %
 % \begin{macro}{\um_set_mathsymbol:nNNn}
-% \darg{Symbol font number, e.g., \cs{symoperators}}
+% \darg{A \LaTeX\ symbol font, e.g., \texttt{operators}}
 % \darg{Symbol macro, \eg, \cmd\alpha}
 % \darg{Type, \eg, \cmd\mathalpha}
 % \darg{Slot, \eg, \texttt{"221E}}
-% If the symbol definition is for a macro.
 % There are a bunch of tests to perform to process the various characters.
+% The following assignments should all be fairly straightforward.
 %    \begin{macrocode}
 \cs_set:Nn \um_set_mathsymbol:nNNn {
+  \prg_case_tl:Nnn #3 {
+    \mathop {
+      \um_set_big_operator:nnn {#1} {#2} {#4}
+    }
+    \mathopen {
+      \tl_if_in:NnTF \l_um_radicals_tl {#2} {
+        \cs_gset:cpx {\cs_to_str:N #2 sign} { \um_radical:nn {#1} {#4} }
+      }{
+        \um_set_delcode:n {#4}
+        \um_set_mathcode:nnn {#4} \mathopen {#1}
+        \cs_gset:Npx #2 { \um_delimiter:Nnn \mathopen {#1} {#4} }
+      }
+    }
+    \mathclose {
+      \um_set_delcode:n {#4}
+      \um_set_mathcode:nnn {#4} \mathclose {#1}
+      \cs_gset:Npx #2 { \um_delimiter:Nnn \mathclose {#1} {#4} }
+    }
+    \mathfence {
+      \um_set_mathcode:nnn {#4} {#3} {#1}
+      \um_set_delcode:n {#4}
+      \cs_gset:cpx {l \cs_to_str:N #2} { \um_delimiter:Nnn \mathopen  {#1} {#4} }
+      \cs_gset:cpx {r \cs_to_str:N #2} { \um_delimiter:Nnn \mathclose {#1} {#4} }
+    }
+    \mathaccent {
+      \cs_gset:Npx #2 { \um_accent:Nnn #3 {#1} {#4} }
+    }
+  }{
+    \um_set_mathcode:nnn {#4} {#3} {#1}
+  }
+}
 %    \end{macrocode}
-% \paragraph{Operators}
+% \end{macro}
+%
+%
+% \begin{macro}{\um_set_big_operator:nnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Glyph slot}
 % In the examples following, say we're defining for the symbol \cmd\sum ($\sum$).
-%    \begin{macrocode}
-  \ifx\mathop#3\relax
-%    \end{macrocode}
 % In order for literal unicode characters to be used in the source and still
 % have the correct limits behaviour, big operators are made math-active.
-%
+% This involves three steps:
+% \begin{itemize}
+% \item
 % The active math char is defined to expand to the macro \cs{sum_sym}.
-%    \begin{macrocode}
-    \begingroup
-      \char_make_active:n {#4}
-      \global\mathcode#4="8000\relax
-      \um@scanactivedef #4 \@nil { \csname\cs_to_str:N #2 _sym\endcsname }
-    \endgroup
-%    \end{macrocode}
-% Some of these require a \cmd\nolimits\ suffix. This is controlled by the
-% \cmd\um@nolimits\ macro, which contains a list of such characters.
-% This list is checked dynamically because we're not interested in efficiency.
-% Or something.
-% This allows the list to be updated in the middle of a document.
-%
+% (Later, the control sequence \cs{sum} will be assigned the math char.)
+% \item
 % Declare the plain old mathchardef for the control sequence \cmd\sumop.
+% (This follows the convention of \LaTeX/\pkg{amsmath}.)
+% \item
+% Define \cs{sum_sym} as \cmd\sumop, followed by \cmd\nolimits\ if necessary.
+% \end{itemize}
+% Whether the \cmd\nolimits\ suffix is inserted is controlled by the
+% token list \cs{l_um_nolimits_tl}, which contains a list of such characters.
+% This list is checked dynamically to allow it to be updated mid-document.
+%
+% Examples of expansion, by default, for two big operators:
+% \begin{quote}
+% (~\cs{sum} $\to$~) $\sum$ $\to$ \cs{sum_sym} $\to$ \cs{sumop}\cs{nolimits}\par
+% (~\cs{int} $\to$~) $\int$ $\to$ \cs{int_sym} $\to$ \cs{intop}
+% \end{quote}
 %    \begin{macrocode}
-    \expandafter\global\expandafter\XeTeXmathchardef
-      \csname\cs_to_str:N #2 op\endcsname ="\mathchar@type#3 #1 #4\relax
-%    \end{macrocode}
-% Now define \cs{sum_sym} as \cmd\sumop, followed by \cmd\nolimits\ if necessary.
-%    \begin{macrocode}
-    \cs_gset:cpx { \cs_to_str:N #2 _sym } {
-      \exp_not:c {\cs_to_str:N #2 op}
-      \exp_not:n {\tl_if_in:NnT \l_um_nolimits_tl {#2} \nolimits}
-    }
-%    \end{macrocode}
-% Don't forget that the actual \cmd\sum\ macro is simply defined in terms of
-% the literal unicode symbol!
-%    \begin{macrocode}
-  \else
-%    \end{macrocode}
-% \paragraph{Delimiters and radicals}
-% Sqrt radical is defined as a cs{mathopen}.
-%    \begin{macrocode}
-    \ifx\mathopen#3\relax
-      \tl_if_in:NnTF \l_um_radicals_tl #2 {
-        \cs_gset:cpn {\cs_to_str:N #2 sign} { \XeTeXradical #1 #4 \relax }
-      }{
-        \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
-        \global\XeTeXdelcode#4=#1 #4\relax
-        \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
-      }
-    \else
-      \ifx\mathclose#3\relax
-        \cs_gset:Npn #2 {\XeTeXdelimiter "\mathchar@type#3 #1 #4\relax}
-        \global\XeTeXdelcode#4=#1 #4\relax
-        \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
-      \else
-%    \end{macrocode}
-% \paragraph{Fences}
-%    \begin{macrocode}
-        \ifx\mathfence#3
-          \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
-          \global\XeTeXdelcode#4=#1 #4\relax
-          \cs_gset:cpn {l \cs_to_str:N #2} {\XeTeXdelimiter "\mathchar@type\mathopen  #1 #4\relax}
-          \cs_gset:cpn {r \cs_to_str:N #2} {\XeTeXdelimiter "\mathchar@type\mathclose #1 #4\relax}
-        \else
-%    \end{macrocode}
-% \paragraph{Accents}
-%    \begin{macrocode}
-          \ifx\mathaccent#3\relax
-            \cs_gset:Npx #2 {\XeTeXmathaccent "\mathchar@type#3 #1 #4\relax}
-          \else
-%    \end{macrocode}
-% And finally, the general case.
-% We define the unicode mathcode for the character.
-% The macro is defined later on generically in terms of the unicode character.
-%    \begin{macrocode}
-            \global\XeTeXmathcode#4="\mathchar@type#3 #1 #4\relax
-          \fi
-        \fi
-      \fi
-    \fi
-  \fi
+\cs_new:Nn \um_set_big_operator:nnn {
+  \group_begin:
+    \char_make_active:n {#3}
+    \char_gmake_mathactive:n {#3}
+    \um@scanactivedef #3 \@nil { \csname\cs_to_str:N #2 _sym\endcsname }
+  \group_end:
+  \um_set_mathchar:cNnn {\cs_to_str:N #2 op} \mathop {#1} {#3}
+  \cs_gset:cpx { \cs_to_str:N #2 _sym } {
+    \exp_not:c { \cs_to_str:N #2 op   }
+    \exp_not:n { \tl_if_in:NnT \l_um_nolimits_tl {#2} \nolimits }
+  }
 }
 %    \end{macrocode}
 % \end{macro}
+%
 %
 % \begin{macro}{\um_set_mathcode:nnnn}
-% \begin{macro}{\um_set_mathchar:Nnnn}
-% Note that this declaration \emph{isn't} global so that it can be constrained by grouping
-% inside math alphabet switches.
+% \begin{macro}{\um_set_mathcode:nnn}
+% \begin{macro}{\um_set_mathchar:NNnn}
+% \begin{macro}{\um_set_mathchar:cNnn}
+% \begin{macro}{\um_radical:nn}
+% \begin{macro}{\um_delimiter:Nnn}
+% \begin{macro}{\um_accent:Nnn}
 %    \begin{macrocode}
 \cs_set:Nn \um_set_mathcode:nnnn {
-  \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax
+  \XeTeXmathcode \intexpr_eval:n {#1} =
+    \mathchar@type#2 \csname sym#3\endcsname \intexpr_eval:n {#4} \scan_stop:
+}
+\cs_set:Nn \um_set_mathcode:nnn {
+  \XeTeXmathcode \intexpr_eval:n {#1} =
+    \mathchar@type#2 \csname sym#3\endcsname \intexpr_eval:n {#1} \scan_stop:
 }
 \cs_set:Nn \um_set_mathchar:NNnn {
-  \XeTeXmathchardef #1 = "\mathchar@type#2 \csname sym#3\endcsname #4\relax
+  \XeTeXmathchardef #1 =
+    \mathchar@type#2 \csname sym#3\endcsname \intexpr_eval:n {#4} \scan_stop:
+}
+\cs_new:Nn \um_radical:nn    {
+  \XeTeXradical \csname sym#1\endcsname #2 \scan_stop:
+}
+\cs_new:Nn \um_delimiter:Nnn {
+  \XeTeXdelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+}
+\cs_new:Nn \um_accent:Nnn    {
+  \XeTeXmathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+}
+\cs_generate_variant:Nn \um_set_mathchar:NNnn {c}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%
+% \begin{macro}{\char_gmake_mathactive:N}
+% \begin{macro}{\char_gmake_mathactive:n}
+%    \begin{macrocode}
+\cs_new:Nn \char_gmake_mathactive:N {
+  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+}
+\cs_new:Nn \char_gmake_mathactive:n {
+  \global\XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
 }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+%
 %
 % \subsection{The main \cs{setmathfont} macro}
 %
@@ -1872,7 +1871,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \bool_set_true:N \l_um_init_bool
   \seq_clear:N \l_um_char_range_seq
-  \clist_clear:N \um@char@num@range
+  \clist_clear:N \l_um_char_num_range_clist
 %    \end{macrocode}
 % \item Grab the current size information
 % (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
@@ -2000,7 +1999,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % See \secref{rangeproc} for the code that enables this.
 %    \begin{macrocode}
 \cs_set:Nn \um_process_symbol_noparse:nnnn {
-  \exp_args:Nc \um_set_mathsymbol:nNNn {sym\um_symfont_tl}#2#3{#1}
+  \um_set_mathsymbol:nNNn {\um_symfont_tl} #2#3{#1}
 }
 %    \end{macrocode}
 %    \begin{macrocode}
@@ -2091,7 +2090,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_make_mathactive:nNN {"2035} \um_backprime_single_mchar \mathord
   \um_make_mathactive:nNN {"2036} \um_backprime_double_mchar \mathord
   \um_make_mathactive:nNN {"2037} \um_backprime_triple_mchar \mathord
-  \XeTeXmathcodenum `\` = "1FFFFF \scan_stop:
+  \char_gmake_mathactive:N \`
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2104,7 +2103,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Nn \um_make_mathactive:nNN {
   \um_set_mathchar:NNnn #2 #3 {\um_symfont_tl} {#1}
-  \XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
+  \char_gmake_mathactive:n {#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2168,7 +2167,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
-% 
+%
 % \subsubsection{Maths alphabets' character mapping}
 % \seclabel{mathmap}
 %
@@ -2184,7 +2183,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_set:Nn \um_mathmap_noparse:Nnn {
   \clist_map_inline:nn {#2} {
     \tl_put_right:cx {um_setup_\cs_to_str:N #1:} {
-      \exp_not:N\um_set_mathcode:nnnn{##1}{\exp_not:N\mathalpha}{\um_symfont_tl}{#3}
+      \um_set_mathcode:nnnn{##1}{\mathalpha}{\um_symfont_tl}{#3}
     }
   }
 }
@@ -2195,12 +2194,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
-% When \cmd\um@parse@term\ is executed, it populates the \cmd\um@char@num@range\
+% When \cmd\um@parse@term\ is executed, it populates the \cmd\l_um_char_num_range_clist\
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cs{um_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
 \cs_set:Nn \um_mathmap_parse:Nnn {
-  \clist_map_inline:Nn \um@char@num@range {
+  \clist_map_inline:Nn \l_um_char_num_range_clist {
     \intexpr_compare:nT { ##1 = #3 } {
       \um_mathmap_noparse:Nnn {#1}{#2}{#3}
     }
@@ -2507,11 +2506,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % If we have a match, execute the code!
 % It also populates the
-% \cmd\um@char@num@range\ macro, which is used when defining
+% \cmd\l_um_char_num_range_clist\ macro, which is used when defining
 % \cmd\mathbf\ (\etc) \cmd\mathchar\ remappings.
 %    \begin{macrocode}
       \if@tempswa
-        \clist_put_right:Nx \um@char@num@range { \intexpr_eval:n {#1} }
+        \clist_put_right:Nx \l_um_char_num_range_clist { \intexpr_eval:n {#1} }
         #4%
       \fi
     \fi
@@ -2613,8 +2612,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 \cs_new:Nn \um_map_char_noparse:nn {
-  \um_set_mathcode:nnnn
-    {\numexpr #1 \relax}{\mathalpha}{\um_symfont_tl}{\numexpr #2 \relax}
+  \um_set_mathcode:nnnn {#1}{\mathalpha}{\um_symfont_tl}{#2}
 }
 \cs_new:Nn \um_map_char_parse:nn {
   \um@parse@term {#1} {\@nil} {\mathalpha} {
@@ -2685,11 +2683,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Output char}
 % Loops through character ranges setting \cmd\mathcode.
 %    \begin{macrocode}
-\cs_set:Npn \exp_args:Nnff {\::n\::f\::f\:::}
 \cs_new:Nn \um_set_mathalphabet_char:Nnn {
   \clist_map_variable:nNn {#2} \l_um_input_num {
-    \exp_args:Nnff \um_mathmap:Nnn {#1}
-      {\number\numexpr\l_um_input_num\relax} {\number\numexpr#3\relax}
+    \um_mathmap:Nnn {#1} {\l_um_input_num} {#3}
   }
 }
 %    \end{macrocode}
@@ -2706,9 +2702,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \clist_map_variable:nNn {#3} \l_um_input_num {
     \errorcontextlines=999
     \prg_stepwise_variable:nnnNn {0}{1}{#1} \l_um_inc_num {
-      \exp_args:Nnff \um_mathmap:Nnn {#2}
-        {\number\numexpr \l_um_inc_num + \l_um_input_num \relax}
-        {\number\numexpr \l_um_inc_num + #4 \relax}
+      \um_mathmap:Nnn {#2}
+        { \l_um_inc_num + \l_um_input_num }
+        { \l_um_inc_num + #4 }
     }
   }
 }
@@ -3936,22 +3932,54 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-\def\r@@t#1#2{
+\cs_set_nopar:Npn \r@@t #1#2 {
   \setbox\z@\hbox{$\m@th #1\sqrtsign{#2}$}
-  \um@scaled@apply{#1}{\kern}{\fontdimen63\l_um_font}
+  \um_mathstyle_scale:Nnn{#1}{\kern}{\fontdimen63\l_um_font}
   \raise \dimexpr(
       \um_fontdimen_to_percent:nn{65}{\l_um_font}\ht\z@-
       \um_fontdimen_to_percent:nn{65}{\l_um_font}\dp\z@
     )\relax
     \copy \rootbox
-  \um@scaled@apply{#1}{\kern}{\fontdimen64\l_um_font}
+  \um_mathstyle_scale:Nnn{#1}{\kern}{\fontdimen64\l_um_font}
   \box \z@
 }
 %    \end{macrocode}
 % \end{macro}
-% 
+%
+%
+% \begin{macro}{\um_fontdimen_to_percent:nn}
+% \darg{Font dimen number}
+% \darg{Font `variable'}
+% \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|. This macro takes a font dimension number and outputs the decimal value of the associated parameter.
+%    \begin{macrocode}
+\cs_new:Nn \um_fontdimen_to_percent:nn {
+  0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_mathstyle_scale:Nnn}
+% \darg{A math style (\cs{scriptstyle}, say)}
+% \darg{Macro that takes a non-delimited length argument (like \cmd\kern)}
+% \darg{Length control sequence to be scaled according to the math style}
+% This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
+%    \begin{macrocode}
+\cs_new:Nn \um_mathstyle_scale:Nnn {
+  \ifx#1\scriptstyle
+    #2\um_fontdimen_to_percent:nn{10}\l_um_font#3
+  \else
+    \ifx#1\scriptscriptstyle
+      #2\um_fontdimen_to_percent:nn{11}\l_um_font#3
+    \else
+      #2#3
+    \fi
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsubsection{Unicode sub- and super-scripts}
-% 
+%
 % The idea here is to enter a scanning state after a superscript or subscript is encountered.
 % If subsequent superscripts or subscripts (resp.) are found, they are lumped together.
 % Each sub/super has a corresponding regular size glyph which is used by \XeTeX\ to typeset
@@ -3976,8 +4004,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % and assign its meaning in one step.
 \cs_set:Nn \um_setup_active_superscript:nn {
   \prop_gput:Nxn \g_um_supers_prop   {\meaning #1} {#2}
-  \char_make_active:n {`#1}
-  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+  \char_make_active:N #1
+  \char_gmake_mathactive:N #1
   \scantokens{
     \cs_gset:Npn #1 {
       \tl_set:Nn \l_um_ss_chain_tl {#2}
@@ -4009,8 +4037,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Ditto above.
 \cs_set:Nn \um_setup_active_subscript:nn {
   \prop_gput:Nxn \g_um_subs_prop   {\meaning #1} {#2}
-  \char_make_active:n {`#1}
-  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+  \char_make_active:N #1
+  \char_gmake_mathactive:N #1
   \scantokens{
     \cs_gset:Npn #1 {
       \tl_set:Nn \l_um_ss_chain_tl {#2}
@@ -4139,7 +4167,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_new:Npn \um_define_active_frac:Nw #1 #2/#3 {
   \char_make_active:n {`#1}
-  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+  \char_gmake_mathactive:N #1
   \tl_rescan:nn {
     \ExplSyntaxOn
   }{
@@ -4272,15 +4300,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \um_patch_pkg:nn {amsopn} {
   \cs_set:Npn \newmcodes@ {
-    \mathcode`\'39
-    \mathcode`\*42
-    \mathcode`\."613A%
+    \mathcode`\'39\scan_stop:
+    \mathcode`\*42\scan_stop:
+    \mathcode`\."613A\scan_stop:
 %%  \ifnum\mathcode`\-=45 \else
 %%    \mathchardef\std@minus\mathcode`\-\relax
 %%  \fi
-    \mathcode`\-45
-    \mathcode`\/47
-    \mathcode`\:"603A\relax
+    \mathcode`\-45\scan_stop:
+    \mathcode`\/47\scan_stop:
+    \mathcode`\:"603A\scan_stop:
   }
 }
 %    \end{macrocode}
