@@ -3699,19 +3699,33 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \unichar{2057} {quadruple prime} (\cs{qprime}): $x\qprime$
 % \end{quote}
 % As you can see, they're all drawn at the correct height without being superscripted.
-% However, in a correctly behaviour OpenType font with the MATH table,
+% However, in a correctly behaving OpenType font,
 % we also see different behaviour after the \texttt{ssty} feature is applied:
 % \begin{quote}
-% \unichar{2032} {prime} in the `scriptstyle' font:
 % \font\1="Cambria Math:script=math,+ssty=0"\1
-% $x$\char"2032
+% \char"1D465\char"2032\quad
+% \char"1D465\char"2033\quad
+% \char"1D465\char"2034\quad
+% \char"1D465\char"2057
 % \end{quote}
-% The shrinking and offsetting is done as it is turned into a superscript.
-% This means, luckily, that by default things work nicely for single primes.
-% 
-% However, it would be nice to use the pre-composed primes above if they exist
-% in the font; consider $x\prime\prime\prime$ vs.\ $x\trprime$. Our algorithm is
-% \begin{itemize}
+% The glyphs are now `full size' so that when placed inside a superscript,
+% their shape will match the originally sized ones. Many thanks to Ross Mills
+% of Tiro Typeworks for originally pointing out this behaviour.
+%
+% In regular \LaTeX, primes can be entered with the straight quote character
+% |'|, and multiple straight quotes chain together to produce multiple
+% primes. Better results can be achieved in \pkg{unicode-math} by chaining
+% multiple single primes into a pre-drawn multi-prime glyph; consider
+% $x\prime{}\prime{}\prime$ vs.\ $x\trprime$.
+%
+% For unicode maths, we wish to conserve this behaviour and augment it with
+% the possibility of adding any combination of unicode prime or any of the
+% $n$-prime characters. E.g., the user might copy-paste a double prime from
+% another source and then later type another single prime after it; the output
+% should be the triple prime.
+%
+% Our algorithm is:
+% \begin{itemize}[nolistsep]
 % \item Prime encountered; pcount=1.
 % \item Scan ahead; if prime: pcount:=pcount+1; repeat.
 % \item If not prime, stop scanning.
@@ -3882,13 +3896,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_set_eq:NN \prime \um_scan_prime:
-\cs_set_eq:NN \drime \um_scan_dprime:
-\cs_set_eq:NN \trprime \um_scan_trprime:
-\cs_set_eq:NN \qprime \um_scan_qprime:
-\cs_set_eq:NN \backprime \um_scan_backprime:
-\cs_set_eq:NN \backdprime \um_scan_backdprime:
-\cs_set_eq:NN \backtrprime \um_scan_backtrprime:
+\AtBeginDocument {
+  \cs_set_eq:NN \prime       \um_scan_prime:
+  \cs_set_eq:NN \drime       \um_scan_dprime:
+  \cs_set_eq:NN \trprime     \um_scan_trprime:
+  \cs_set_eq:NN \qprime      \um_scan_qprime:
+  \cs_set_eq:NN \backprime   \um_scan_backprime:
+  \cs_set_eq:NN \backdprime  \um_scan_backdprime:
+  \cs_set_eq:NN \backtrprime \um_scan_backtrprime:
+}
 \group_begin:
   \char_make_active:N \'
   \char_make_active:N \`
@@ -3899,24 +3915,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \char_make_active:n {"2035}
   \char_make_active:n {"2036}
   \char_make_active:n {"2037}
-  \cs_gset_eq:NN ' \um_scan_prime:
-  \cs_gset_eq:NN ^^^^2032 \um_scan_prime:
-  \cs_gset_eq:NN ^^^^2033 \um_scan_dprime:
-  \cs_gset_eq:NN ^^^^2034 \um_scan_trprime:
-  \cs_gset_eq:NN ^^^^2057 \um_scan_qprime:
-  \cs_gset_eq:NN ` \um_scan_backprime:
-  \cs_gset_eq:NN ^^^^2035 \um_scan_backprime:
-  \cs_gset_eq:NN ^^^^2036 \um_scan_backdprime:
-  \cs_gset_eq:NN ^^^^2037 \um_scan_backtrprime:
+  \AtBeginDocument{
+    \cs_set_eq:NN '        \um_scan_prime:
+    \cs_set_eq:NN ^^^^2032 \um_scan_prime:
+    \cs_set_eq:NN ^^^^2033 \um_scan_dprime:
+    \cs_set_eq:NN ^^^^2034 \um_scan_trprime:
+    \cs_set_eq:NN ^^^^2057 \um_scan_qprime:
+    \cs_set_eq:NN `        \um_scan_backprime:
+    \cs_set_eq:NN ^^^^2035 \um_scan_backprime:
+    \cs_set_eq:NN ^^^^2036 \um_scan_backdprime:
+    \cs_set_eq:NN ^^^^2037 \um_scan_backtrprime:
+  }
 \group_end:
 %    \end{macrocode}
 %
 % \subsubsection{Unicode radicals}
-%
-% Undo the damage made to \cmd\sqrt:
-%    \begin{macrocode}
-\DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
-%    \end{macrocode}
 %
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
