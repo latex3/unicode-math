@@ -1901,31 +1901,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \exp_not:N \setkeys*[um]{options}{\exp_not:V \XKV@rm}
   }
   \um_tmp:
-  \cs_set:Npx \um_tmp: {
-    \exp_not:N \zf@fontspec {
-      BoldFont = {}, ItalicFont = {},
-      Script = Math,
-      SizeFeatures = {
-        {Size = \tf@size-} ,
-        {Size = \sf@size-\tf@size ,
-         Font = \l_um_script_font_tl ,
-         \l_um_script_features_tl
-        } ,
-        {Size = -\sf@size ,
-         Font = \l_um_sscript_font_tl ,
-         \l_um_sscript_features_tl
-        }
-      },
-      \XKV@rm
-    }{#2}
-  }
-  \bool_set_true:N \l_um_fontspec_feature_bool
-  \um_tmp:
-  \bool_set_false:N \l_um_fontspec_feature_bool
+  \um_fontspec_select_font:n {#2}
 %    \end{macrocode}
 % Check for the correct number of \cs{fontdimen}s:
 %    \begin{macrocode}
-  \font\l_um_font="#2"\relax
 %%  \ifdim \dimexpr\fontdimen9\l_um_font*65536\relax =65pt\relax
 %%    \bool_set_true:N \l_um_ot_math_bool
 %%  \else
@@ -1972,6 +1951,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % |unicode-math-table.tex|.
 %    \begin{macrocode}
   \@input{unicode-math-table.tex}
+  \cs_set_eq:NN \UnicodeMathSymbol \use_none:nnnn
 %    \end{macrocode}
 % Finally,
 % \begin{itemize}
@@ -1988,6 +1968,40 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \end{macro}
+%
+%
+% \begin{macro}{\um_fontspec_select_font:}
+% Select the font with \cs{fontspec} and define \cs{l_um_font} from it.
+%    \begin{macrocode}
+\cs_new:Nn \um_fontspec_select_font:n {
+  \cs_set:Npx \um_tmp: {
+    \exp_not:N \fontspec [
+      BoldFont = {}, ItalicFont = {},
+      Script = Math,
+      SizeFeatures = {
+        {Size = \tf@size-} ,
+        {Size = \sf@size-\tf@size ,
+         Font = \l_um_script_font_tl ,
+         \l_um_script_features_tl
+        } ,
+        {Size = -\sf@size ,
+         Font = \l_um_sscript_font_tl ,
+         \l_um_sscript_features_tl
+        }
+      },
+      \XKV@rm
+    ]{#1}
+  }
+  \group_begin:
+    \bool_set_true:N \l_um_fontspec_feature_bool
+    \um_tmp:
+  \group_end:
+  \font\l_um_font=\fontname
+    \csname\f@encoding/\zf@family/\mddefault/\updefault/\f@size\endcsname
+}
+%    \end{macrocode}
+% \end{macro}
+%
 %
 % \subsubsection{Functions for setting up symbols with mathcodes}
 % \seclabel{mathsymbol}
