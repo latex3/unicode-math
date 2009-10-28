@@ -718,18 +718,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Multiple backwards primes can also be called with \cs{backdprime},
 % \cs{backtrprime}, and \cs{backqprime}.
 %
+% If you ever need to enter the straight quote |'| or the backtick |`| in
+% maths mode, these glyphs can be accessed with \cs{mathstraightquote} and
+% \cs{mathbacktick}.
+%
 % \subsubsection{Unicode subscripts and superscripts}
-% 
+%
 % You may, if you wish, use unicode subscripts and superscripts in your
 % source document. For basic expressions, the use of these characters
 % can make the input more readable.
 % Adjacent sub- or super-scripts will be concatenated into a single
 % expression.
-% 
+%
 % The range of subscripts and superscripts supported by this package
 % are shown in \figref{superscripts,subscripts}. Please request more if
 % you think it is appropriate.
-% 
+%
 % \begin{figure}\centering
 % \fbox{\fontspec{Charis SIL}\Large
 % A
@@ -760,7 +764,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % }
 % \figlabel{superscripts}
 % \end{figure}
-% 
+%
 % \begin{figure}\centering
 % \fbox{\fontspec{Charis SIL}\Large
 % A
@@ -799,7 +803,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % }
 % \figlabel{subscripts}
 % \end{figure}
-% 
+%
 % \subsubsection{Colon}
 % \seclabel{colon}
 % 
@@ -1834,7 +1838,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_set:Nn \um_set_mathcode:nnnn {
   \XeTeXmathcode#1="\mathchar@type#2 \csname sym#3\endcsname #4\relax
 }
-\cs_set:Nn \um_set_mathchar:Nnnn {
+\cs_set:Nn \um_set_mathchar:NNnn {
   \XeTeXmathchardef #1 = "\mathchar@type#2 \csname sym#3\endcsname #4\relax
 }
 %    \end{macrocode}
@@ -2017,6 +2021,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \bool_if:NF \g_um_literal_colon_bool {
     \um_remap_symbol:nnn{`\:}{\mathrel}{"02236}% colon to ratio (i.e., punct to rel)
   }
+  \um_set_mathchar:NNnn \mathbacktick \mathord {\um_symfont_tl} {`\`}
+  \um_set_mathchar:NNnn \mathstraightquote \mathord {\um_symfont_tl} {`\'}
   \bool_if:NTF \g_um_literal_bool {
     \um_remap_symbol:nnn {\g_um_up_Nabla_usv}{\mathord}{\g_um_up_Nabla_usv}
     \um_remap_symbol:nnn {\g_um_it_Nabla_usv}{\mathord}{\g_um_it_Nabla_usv}
@@ -2092,7 +2098,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % You are responsible for giving active |#1| a particular meaning!
 %    \begin{macrocode}
 \cs_new:Nn \um_make_mathactive:nNN {
-  \um_set_mathchar:Nnnn #2 {#3} {\um_symfont_tl} {#1}
+  \um_set_mathchar:NNnn #2 #3 {\um_symfont_tl} {#1}
   \XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
 }
 %    \end{macrocode}
@@ -3001,7 +3007,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \use:c {um_setup_math#1:} ##1 \egroup
     }
     \cs_set_protected:cpn {math#1} {
-      \bgroup 
+      \bgroup
       \mode_if_math:F {
         \egroup\expandafter
         \non@alpherr\expandafter{\csname math#1\endcsname\space}
@@ -4191,13 +4197,48 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsubsection{Compatibility}
 %
 %
-% Note that \pkg{amsmath} will always be loaded before \pkg{unicode-math}.
-% (Conflicts occur if you try it the other way around.)
+% \begin{macro}{\um_patch_pkg:nn}
+% \darg{package}
+% \darg{code}
+% If \meta{package} is loaded either already or later in the preamble, \meta{code}
+% is executed (after the package is loaded in the latter case).
+%    \begin{macrocode}
+\cs_new:Nn \um_patch_pkg:nn {
+  \@ifpackageloaded {#1} {
+    #2
+  }{
+    \AfterPackage {#1} {#2}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
 %
-% \paragraph{amsmath}
+%
+% \paragraph{\pkg{url}}
+% Simply need to get \pkg{url} in a state such that
+% when it switches to math mode and enters \ascii\ characters, the maths
+% setup (i.e., \pkg{unicode-math}) doesn't remap the symbols into Plane 1.
+% Which is, of course, what \cs{mathup} is doing.
+%
+% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\um_setup_mathup:}|
+% but activates automatically so old documents that might change the \cs{url}
+% font still work correctly.
+%    \begin{macrocode}
+\um_patch_pkg:nn {url} {
+  \tl_put_left:Nn \Url@FormatString { \um_setup_mathup: }
+  \tl_put_right:Nn \UrlSpecials {
+    \do\`{\mathchar`\`}
+    \do\'{\mathchar`\'}
+    \do\${\mathchar`\$}
+    \do\&{\mathchar`\&}
+  }
+}
+%    \end{macrocode}
+%
+% \paragraph{\pkg{amsmath}}
 % Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
-\cs_new:Nn \um_fix_amsmath: {
+\um_patch_pkg:nn {amsmath} {
   \tl_remove_in:Nn \@begindocumenthook {
     \mathchardef\std@minus\mathcode`\-\relax
     \mathchardef\std@equal\mathcode`\=\relax
@@ -4207,16 +4248,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \def\@cdots{\mathinner{\cdots}}
   \cs_set_eq:NN \dotsb@ \cdots
 }
-\@ifpackageloaded {amsmath} {
-  \um_fix_amsmath:
-}{
-  \AfterPackage{amsmath}{\um_fix_amsmath:}
-}
 %    \end{macrocode}
-% \paragraph{amsopn}
+% \paragraph{\pkg{amsopn}}
 % This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
 %    \begin{macrocode}
-\cs_new:Nn \um_fix_amsopn: {
+\um_patch_pkg:nn {amsopn} {
   \cs_set:Npn \newmcodes@ {
     \mathcode`\'39
     \mathcode`\*42
@@ -4228,11 +4264,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \mathcode`\/47
     \mathcode`\:"603A\relax
   }
-}
-\@ifpackageloaded {amsopn} {
-  \um_fix_amsopn:
-}{
-  \AfterPackage{amsopn}{\um_fix_amsopn:}
 }
 %    \end{macrocode}
 % \paragraph{Symbols}
