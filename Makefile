@@ -115,13 +115,6 @@ file: $(F)  $(BUILDSOURCE)
 	cd $(builddir); xelatex $(F)
 
 
-##### PROBABLY ONLY USEFUL FOR WILL #####
-
-push: doc
-	git push origin master
-
-
-
 #############
 # TESTSUITE #
 #############
