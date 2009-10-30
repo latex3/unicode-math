@@ -597,20 +597,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsection{Miscellanea}
 %
 %
-% \subsubsection{Nabla} 
+% \subsubsection{Nabla}
 % \seclabel{nabla}
-% 
+%
 %  The symbol $\nabla$ comes in the six forms shown in \tabref{nabla}.
 %  We want an individual option to specify whether we want upright or italic
 %  nabla by default (when either upright or italic nabla is used in the
 %  source). \TeX\ classically uses an upright nabla, but \textsc{iso}
 %  standards differ (I think). The package options |nabla=upright| and
-%  |nabla=italic| switch between the two choices. This is then inherited
+%  |nabla=italic| switch between the two choices, and |nabla=literal| respects
+%  the shape of the input character. This is then inherited
 %  through \cmd\mathbf; \cmd\mathit\ and \cmd\mathup\ can be used to force one
 %  way or the other.
 %
 % |nabla=italic| is implicit when using |math-style=ISO| and |nabla=upright|
-% follows both |math-style=TeX| and |math-style=French|.
+% follows both |math-style=TeX| and |math-style=French|. |nabla=literal| is
+% activated by default after |math-style=literal|.
 %
 % \begin{table}
 %   \centering
@@ -644,10 +646,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % really have an upright shape.
 %
 % Use the |partial=upright| or |partial=italic| package options to specify
-% which one you would like. The default is (always, unless someone requests and
+% which one you would like, or |partial=literal| to have the same character
+% used in the output as was used for the input.
+% The default is (always, unless someone requests and
 % argues otherwise) |partial=italic|.\footnote{A good argument would revolve
 % around some international standards body recommending upright over italic.
-% I just don't have the time right now to look it up.}
+% I just don't have the time right now to look it up.} |partial=literal|
+% is activated following |math-style=literal|.
 %
 % See \tabref{partial} for the variations on the partial differential symbol.
 %
@@ -1052,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/28 v0.4 Unicode maths in XeLaTeX]
+  [2009/10/30 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -1117,6 +1122,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \bool_new:N \g_um_upNabla_bool
 \bool_new:N \g_um_uppartial_bool
+\bool_new:N \g_um_literal_Nabla_bool
+\bool_new:N \g_um_literal_partial_bool
 \bool_new:N \g_um_texgreek_bool
 \bool_new:N \l_um_smallfrac_bool
 \bool_new:N \g_um_literal_colon_bool
@@ -1496,7 +1503,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \bool_set_true:N \g_um_upgreek_bool
     \bool_set_true:N \g_um_upLatin_bool
     \bool_set_false:N \g_um_uplatin_bool
-    \setkeys{unicode-math.sty}{,
+    \setkeys{unicode-math.sty}{
       bold-style=upright,
       sans-style=upright,
       nabla=upright,
@@ -1507,7 +1514,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \bool_set_true:N \g_um_upgreek_bool
     \bool_set_true:N \g_um_upLatin_bool
     \bool_set_true:N \g_um_uplatin_bool
-    \setkeys{unicode-math.sty}{,
+    \setkeys{unicode-math.sty}{
       bold-style=upright,
       sans-style=upright,
       nabla=upright,
@@ -1515,9 +1522,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     }
   \or
     \bool_set_true:N \g_um_literal_bool
-    \setkeys{unicode-math.sty}{bold-style=literal}
-    \setkeys{unicode-math.sty}{sans-style=literal}
-    \setkeys{unicode-math.sty}{colon=literal}
+    \setkeys{unicode-math.sty}{
+      bold-style=literal,
+      sans-style=literal,
+      colon=literal,
+      nabla=literal,
+      partial=literal,
+    }
   \fi
 }
 %    \end{macrocode}
@@ -1561,35 +1572,29 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 %
-% \paragraph{Symbol obliqueness}
+% \paragraph{Nabla and partial}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{nabla}[\@tempa\@tempb]{upright,italic}{
+\define@choicekey*{unicode-math.sty}{nabla}[\@tempa\@tempb]{upright,italic,literal}{
+  \bool_set_false:N \g_um_literal_Nabla_bool
   \ifcase\@tempb
     \bool_set_true:N \g_um_upNabla_bool
-    \tl_set:Nn \g_um_Nabla_up_or_it_usv     { \g_um_up_Nabla_usv }
-    \tl_set:Nn \g_um_bfNabla_up_or_it_usv   { \g_um_bfup_Nabla_usv }
-    \tl_set:Nn \g_um_bfsfNabla_up_or_it_usv { \g_um_bfsfup_Nabla_usv }
   \or
     \bool_set_false:N \g_um_upNabla_bool
-    \tl_set:Nn \g_um_Nabla_up_or_it_usv     { \g_um_it_Nabla_usv }
-    \tl_set:Nn \g_um_bfNabla_up_or_it_usv   { \g_um_bfit_Nabla_usv }
-    \tl_set:Nn \g_um_bfsfNabla_up_or_it_usv { \g_um_bfsfit_Nabla_usv }
+  \or
+    \bool_set_true:N \g_um_literal_Nabla_bool
   \fi
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic}{
+\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic,literal}{
+  \bool_set_false:N \g_um_literal_partial_bool
   \ifcase\@tempb
     \bool_set_true:N \g_um_uppartial_bool
-    \tl_set:Nn \g_um_partial_up_or_it_usv     { \g_um_up_partial_usv }
-    \tl_set:Nn \g_um_bfpartial_up_or_it_usv   { \g_um_bfup_partial_usv }
-    \tl_set:Nn \g_um_bfsfpartial_up_or_it_usv { \g_um_bfsfup_partial_usv }
   \or
     \bool_set_false:N \g_um_uppartial_bool
-    \tl_set:Nn \g_um_partial_up_or_it_usv     { \g_um_it_partial_usv }
-    \tl_set:Nn \g_um_bfpartial_up_or_it_usv   { \g_um_bfit_partial_usv }
-    \tl_set:Nn \g_um_bfsfpartial_up_or_it_usv { \g_um_bfsfit_partial_usv }
+  \or
+    \bool_set_true:N \g_um_literal_partial_bool
   \fi
 }
 %    \end{macrocode}
@@ -2039,35 +2044,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \bool_if:NF \g_um_literal_colon_bool {
     \um_remap_symbol:nnn{`\:}{\mathrel}{"02236}% colon to ratio (i.e., punct to rel)
   }
-  \um_set_mathchar:NNnn \mathbacktick \mathord {\um_symfont_tl} {`\`}
-  \um_set_mathchar:NNnn \mathstraightquote \mathord {\um_symfont_tl} {`\'}
-  \bool_if:NTF \g_um_literal_bool {
-    \um_remap_symbol:nnn {\g_um_up_Nabla_usv}{\mathord}{\g_um_up_Nabla_usv}
-    \um_remap_symbol:nnn {\g_um_it_Nabla_usv}{\mathord}{\g_um_it_Nabla_usv}
-    \um_remap_symbol:nnn {\g_um_up_partial_usv}{\mathord}{\g_um_up_partial_usv}
-    \um_remap_symbol:nnn {\g_um_it_partial_usv}{\mathord}{\g_um_it_partial_usv}
-  }{
-    \um_remap_symbol:nnn {\g_um_up_Nabla_usv,\g_um_it_Nabla_usv}{\mathord}{\g_um_Nabla_up_or_it_usv}
-    \um_remap_symbol:nnn {\g_um_up_partial_usv,\g_um_it_partial_usv}{\mathord}{\g_um_partial_up_or_it_usv}
-  }
-%    \end{macrocode}
-% Some of these in the |bfliteral| block may be redundant, but that's okay:
-%    \begin{macrocode}
-  \bool_if:NTF \g_um_bfliteral_bool {
-    \um_remap_symbol:nnn {\g_um_bfup_Nabla_usv    }{\mathord}{\g_um_bfup_Nabla_usv}
-    \um_remap_symbol:nnn {\g_um_bfit_Nabla_usv    }{\mathord}{\g_um_bfit_Nabla_usv}
-    \um_remap_symbol:nnn {\g_um_bfsfup_Nabla_usv  }{\mathord}{\g_um_bfsfup_Nabla_usv}
-    \um_remap_symbol:nnn {\g_um_bfsfit_Nabla_usv  }{\mathord}{\g_um_bfsfit_Nabla_usv}
-    \um_remap_symbol:nnn {\g_um_bfup_partial_usv  }{\mathord}{\g_um_bfup_partial_usv}
-    \um_remap_symbol:nnn {\g_um_bfit_partial_usv  }{\mathord}{\g_um_bfit_partial_usv}
-    \um_remap_symbol:nnn {\g_um_bfsfup_partial_usv}{\mathord}{\g_um_bfsfup_partial_usv}
-    \um_remap_symbol:nnn {\g_um_bfsfit_partial_usv}{\mathord}{\g_um_bfsfit_partial_usv}
-  }{
-    \um_remap_symbol:nnn {\g_um_bfup_Nabla_usv,\g_um_bfit_Nabla_usv}{\mathord}{\g_um_bfNabla_up_or_it_usv}
-    \um_remap_symbol:nnn {\g_um_bfsfup_Nabla_usv,\g_um_bfsfit_Nabla_usv}{\mathord}{\g_um_bfsfNabla_up_or_it_usv}
-    \um_remap_symbol:nnn {\g_um_bfup_partial_usv,\g_um_bfit_partial_usv}{\mathord}{\g_um_bfpartial_up_or_it_usv}
-    \um_remap_symbol:nnn {\g_um_bfsfup_partial_usv,\g_um_bfsfit_partial_usv}{\mathord}{\g_um_bfsfpartial_up_or_it_usv}
-  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2100,11 +2076,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_make_mathactive:nNN {"2032} \um_prime_single_mchar \mathord
   \um_make_mathactive:nNN {"2033} \um_prime_double_mchar \mathord
   \um_make_mathactive:nNN {"2034} \um_prime_triple_mchar \mathord
-  \um_make_mathactive:nNN {"2057} \um_prime_quad_mchar \mathord
+  \um_make_mathactive:nNN {"2057} \um_prime_quad_mchar   \mathord
   \um_make_mathactive:nNN {"2035} \um_backprime_single_mchar \mathord
   \um_make_mathactive:nNN {"2036} \um_backprime_double_mchar \mathord
   \um_make_mathactive:nNN {"2037} \um_backprime_triple_mchar \mathord
-  \char_gmake_mathactive:N \`
+  \um_make_mathactive:nNN {`\'} \mathstraightquote \mathord
+  \um_make_mathactive:nNN {`\`} \mathbacktick      \mathord
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3078,6 +3055,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_greek:Nnn \mathup {up,it} {#1}
 }
 \cs_new:Nn \um_config_mathup_misc:n {
+  \bool_if:NTF \g_um_literal_Nabla_bool {
+    \um_map_single:nnn {Nabla}{up}{up}
+  }{
+    \bool_if:NT \g_um_upNabla_bool {
+      \um_map_single:nnn {Nabla}{up,it}{up}
+    }
+  }
+  \bool_if:NTF \g_um_literal_partial_bool {
+    \um_map_single:nnn {partial}{up}{up}
+  }{
+    \bool_if:NT \g_um_uppartial_bool {
+      \um_map_single:nnn {partial}{up,it}{up}
+    }
+  }
   \um_set_mathalphabet_pos:Nnnn \mathup  {partial} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathup    {Nabla} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathup {dotlessi} {up,it} {#1}
@@ -3135,6 +3126,20 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_greek:Nnn \mathit {up,it} {#1}
 }
 \cs_new:Nn \um_config_mathit_misc:n {
+  \bool_if:NTF \g_um_literal_Nabla_bool {
+    \um_map_single:nnn {Nabla}{it}{it}
+  }{
+    \bool_if:NF \g_um_upNabla_bool {
+      \um_map_single:nnn {Nabla}{up,it}{it}
+    }
+  }
+  \bool_if:NTF \g_um_literal_partial_bool {
+    \um_map_single:nnn {partial}{it}{it}
+  }{
+    \bool_if:NF \g_um_uppartial_bool {
+      \um_map_single:nnn {partial}{up,it}{it}
+    }
+  }
   \um_set_mathalphabet_pos:Nnnn \mathit {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn \mathit {Nabla}   {up,it}{#1}
 }
@@ -3345,17 +3350,34 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 \cs_new:Nn \um_config_mathbfit_misc:n {
+  \bool_if:NTF \g_um_literal_Nabla_bool {
+    \um_map_single:nnn {Nabla}{bfit}{#1}
+  }{
+    \bool_if:NF \g_um_upNabla_bool {
+      \um_map_single:nnn {Nabla}{bfup,bfit}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_partial_bool {
+    \um_map_single:nnn {partial}{bfit}{#1}
+  }{
+    \bool_if:NF \g_um_uppartial_bool {
+      \um_map_single:nnn {partial}{bfup,bfit}{#1}
+    }
+  }
   \um_set_mathalphabet_pos:Nnnn  \mathbfit {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfit {Nabla}   {up,it}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_literal_partial_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {it}{#1}
+  }{
+    \bool_if:NF \g_um_uppartial_bool {
+      \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up,it}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {it}{#1}
   }{
     \bool_if:NF \g_um_upNabla_bool {
       \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {up,it}{#1}
-    }
-    \bool_if:NF \g_um_uppartial_bool {
-      \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up,it}{#1}
     }
   }
 }
@@ -3423,21 +3445,38 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 \cs_new:Nn \um_config_mathbfup_misc:n {
+  \bool_if:NTF \g_um_literal_Nabla_bool {
+    \um_map_single:nnn {Nabla}{bfup}{#1}
+  }{
+    \bool_if:NT \g_um_upNabla_bool {
+      \um_map_single:nnn {Nabla}{bfup,bfit}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_partial_bool {
+    \um_map_single:nnn {partial}{bfup}{#1}
+  }{
+    \bool_if:NT \g_um_uppartial_bool {
+      \um_map_single:nnn {partial}{bfup,bfit}{#1}
+    }
+  }
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {Nabla}   {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {digamma} {up}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {Digamma} {up}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbf   {digamma} {up}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbf   {Digamma} {up}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_literal_partial_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up}{#1}
+  }{
+    \bool_if:NT \g_um_uppartial_bool {
+      \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up,it}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {up}{#1}
   }{
     \bool_if:NT \g_um_upNabla_bool {
       \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {up,it}{#1}
-    }
-    \bool_if:NT \g_um_uppartial_bool {
-      \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up,it}{#1}
     }
   }
 }
@@ -3518,17 +3557,34 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_greek:Nnn \mathbfsfup {up,it} {#1}
 }
 \cs_new:Nn \um_config_mathbfsfup_misc:n {
+  \bool_if:NTF \g_um_literal_Nabla_bool {
+    \um_map_single:nnn {Nabla}{bfsfup}{#1}
+  }{
+    \bool_if:NT \g_um_upNabla_bool {
+      \um_map_single:nnn {Nabla}{bfsfup,bfsfit}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_partial_bool {
+    \um_map_single:nnn {partial}{bfsfup}{#1}
+  }{
+    \bool_if:NT \g_um_uppartial_bool {
+      \um_map_single:nnn {partial}{bfsfup,bfsfit}{#1}
+    }
+  }
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfup {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfup {Nabla}   {up,it}{#1}
-  \bool_if:NTF \g_um_sfliteral_bool {
+  \bool_if:NTF \g_um_literal_partial_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up}{#1}
+  }{
+    \bool_if:NT \g_um_uppartial_bool {
+      \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up,it}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {up}{#1}
   }{
     \bool_if:NT \g_um_upNabla_bool {
       \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {up,it}{#1}
-    }
-    \bool_if:NT \g_um_uppartial_bool {
-      \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up,it}{#1}
     }
   }
 }
@@ -3586,17 +3642,34 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_set_mathalphabet_greek:Nnn \mathbfsfit {up,it} {#1}
 }
 \cs_new:Nn \um_config_mathbfsfit_misc:n {
+  \bool_if:NTF \g_um_literal_Nabla_bool {
+    \um_map_single:nnn {Nabla}{bfsfit}{#1}
+  }{
+    \bool_if:NF \g_um_upNabla_bool {
+      \um_map_single:nnn {Nabla}{bfsfup,bfsfit}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_partial_bool {
+    \um_map_single:nnn {partial}{bfsfit}{#1}
+  }{
+    \bool_if:NF \g_um_uppartial_bool {
+      \um_map_single:nnn {partial}{bfsfup,bfsfit}{#1}
+    }
+  }
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfit {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfit {Nabla}   {up,it}{#1}
-  \bool_if:NTF \g_um_sfliteral_bool {
+  \bool_if:NTF \g_um_literal_partial_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {it}{#1}
+  }{
+    \bool_if:NF \g_um_uppartial_bool {
+      \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up,it}{#1}
+    }
+  }
+  \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {it}{#1}
   }{
     \bool_if:NF \g_um_upNabla_bool {
       \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {up,it}{#1}
-    }
-    \bool_if:NF \g_um_uppartial_bool {
-      \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up,it}{#1}
     }
   }
 }
