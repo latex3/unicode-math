@@ -142,7 +142,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 
 \endpostamble
 \askforoverwritefalse
-\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{package,trace}}}
+\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{package}}}
 \nopreamble\nopostamble
 %</batchfile>
 %<batchfile>\endbatchfile
@@ -1642,7 +1642,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \cs_if_exist:NTF \tfrac {
       \bool_set_true:N \l_um_smallfrac_bool
     }{
-      \PackageWarning{unicode-math}{Small~ fraction~ command~ \protect\tfrac\space not~ defined.~ Perhaps~ load~ amsmath?}
+      \um_warning:n {no-tfrac}
       \bool_set_false:N \l_um_smallfrac_bool
     }
   \or
@@ -1654,11 +1654,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{Debug/tracing}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{trace}[\@tempa\@tempb]{on,off}{
+\define@choicekey*{unicode-math.sty}{trace}[\@tempa\@tempb]{debug,on,off}{
   \ifcase\@tempb
-    \cs_set:Nn \um_debug:n { \typeout{##1} }
+    \msg_redirect_module:nnn { trace } { unicode-math } { warning }
   \or
-    \cs_set:Nn \um_debug:n { }
+    \msg_redirect_module:nnn { trace } { unicode-math } { trace }
+  \or
+    \msg_redirect_module:nnn { trace } { unicode-math } { none }
   \fi
 }
 %    \end{macrocode}
@@ -1930,7 +1932,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
   \bool_if:NTF \l_um_init_bool {
     \tl_set:Nn \um_symfont_tl {um_allsym}
-    \PackageInfo{unicode-math}{Defining~ the~ default~ maths~ font~ as~ '#2'}
+    \msg_trace:nnx {unicode-math} {default-math-font} {#2}
     \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_noparse:nnnn
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
@@ -2361,10 +2363,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \bool_if:NTF \l_um_fontspec_feature_bool {
       #2
     }{
-      \PackageError{fontspec/unicode-math}
-        {The ‘#1’ font feature can only be used for maths fonts}
-        {The feature you tried to use can only be in commands
-          like \protect\setmathfont}
+      \um_warning:n {maths-feature-only}
     }
   }
 }
@@ -2882,14 +2881,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_setup_alphabets: {
   \seq_clear:N \l_um_missing_alph_seq
   \seq_if_empty:NTF \l_um_mathalph_seq {
-%<trace>    \um_debug:n {Setup~ alphabets:~ implicit~ mode}
+    \um_trace:n {Setup~ alphabets:~ implicit~ mode}
     \seq_set_eq:NN \l_um_mathalph_seq \g_um_default_mathalph_seq
     \bool_set_true:N \l_um_implicit_alph_bool
     \um_maybe_init_alphabet:n  {sf}
     \um_maybe_init_alphabet:n  {bf}
     \um_maybe_init_alphabet:n  {bfsf}
   }{
-%<trace>    \um_debug:n {Setup~ alphabets:~ explicit~ mode}
+    \um_trace:n {Setup~ alphabets:~ explicit~ mode}
     \bool_set_false:N \l_um_implicit_alph_bool
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
   }
@@ -2954,11 +2953,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \clist_map_inline:nn {#2} {
     \cs_if_exist:cT {um_config_ \l_um_tmpa_tl _##1:n} {
       \tl_if_eq:nnTF {##1}{misc} {
-%<trace>    \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
+        \um_trace:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
         \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
       }{
         \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{##1} } {
-%<trace>    \um_debug:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
+          \um_trace:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
           \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
         }{
           \bool_if:NTF \l_um_implicit_alph_bool {
@@ -2980,7 +2979,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_set:Nn \um_init_alphabet:n {
-%<trace>    \um_debug:n {Initialiasing~\@backslashchar math#1}
+  \um_trace:n {Initialiasing~\@backslashchar math#1}
   \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
 }
 %    \end{macrocode}
@@ -4409,13 +4408,40 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \@ifclassloaded{beamer}{
   \ifbeamer@suppressreplacements\else
-    \PackageWarningNoLine{unicode-math}{
-      Disabling~ beamer's~ math~ setup.^^J
-      Please~ load~ beamer~ with~ the~ [professionalfonts]~ class~ option 
-    }
+    \um_warning:n {disable-beamer}
     \beamer@suppressreplacementstrue
   \fi
 }{}
+%    \end{macrocode}
+%
+% \section{Error messages}
+%
+% Wrapper functions:
+%    \begin{macrocode}
+\cs_new:Nn \um_msg_new:nn {\msg_new:nnn    {unicode-math}}
+\cs_new:Nn \um_warning:n  {\msg_warning:nn {unicode-math}}
+\cs_new:Nn \um_trace:n    {\msg_trace:nn   {unicode-math}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\um_msg_new:nn {maths-feature-only}
+{
+  The '#1' font feature can only be used for maths fonts.
+}
+\um_msg_new:nn {disable-beamer}
+{
+  Disabling beamer's math setup.\\
+  Please load beamer with the [professionalfonts] class option.
+}
+\um_msg_new:nn {no-tfrac}
+{
+  Small fraction command \protect\tfrac\ not defined.
+  Perhaps load amsmath?
+}
+\um_msg_new:nn {default-math-font}
+{
+  Defining the default maths font as '#1'.
+}
 %    \end{macrocode}
 %
 % The end.
