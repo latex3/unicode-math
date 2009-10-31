@@ -391,7 +391,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright}
 % uppercase Greek letters for variables in mathematics. This is contrary to
-% the ISO standards of using italic forms for both upper- and lowercase.
+% the \textsc{iso} standards of using italic forms for both upper- and lowercase.
 % Furthermore, the French (contrary again, \emph{quelle surprise}) have been
 % known to use upright uppercase \emph{Latin} letters as well as upright
 % upper- and lowercase Greek. Finally, it is not unknown to use upright letters
@@ -400,7 +400,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % The \pkg{unicode-math} package accommodates these possibilities with an
 % interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a
 % package option \opt{math-style} that takes one of four arguments:
-% \opt{TeX}, \opt{ISO}, \opt{French}, or \opt{upright} (case insensitive).
+% \opt{TeX}, \opt{ISO}, \opt{french}, or \opt{upright}.
 %
 % The philosophy behind the interface to the mathematical alphabet symbols
 % lies in \LaTeX's attempt of separating content and formatting. Because input
@@ -439,7 +439,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %     \midrule
 %       math-style=ISO & $(a,z,B,X)$ & $\mathit{(\alpha,\beta,\Gamma,\Xi)}$ \\
 %       math-style=TeX & $(a,z,B,X)$ & $(\mathit\alpha,\mathit\beta,\mathup\Gamma,\mathup\Xi)$ \\
-%       math-style=French & $(a,z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
+%       math-style=french & $(a,z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
 %       math-style=upright & $(\mathup a,\mathup z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
 %     \bottomrule
 %   \end{tabular}
@@ -611,7 +611,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %  way or the other.
 %
 % |nabla=italic| is implicit when using |math-style=ISO| and |nabla=upright|
-% follows both |math-style=TeX| and |math-style=French|. |nabla=literal| is
+% follows both |math-style=TeX| and |math-style=french|. |nabla=literal| is
 % activated by default after |math-style=literal|.
 %
 % \begin{table}
@@ -943,8 +943,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % If the \cs{tfrac} command exists (i.e., if \pkg{amsmath} is loaded or
 % you have specially defined \cs{tfrac} for this purpose), it will be used
 % to typeset the fractions. If not, regular \cs{frac} will be used. The command
-% to use (\cs{tfrac} or \cs{frac}) can be forced either way with the package option |active-frac=small| or
-% |active-frac=normalsize|, respectively.
+% to use (\cs{tfrac} or \cs{frac}) can be forced either way with the package
+% option |active-frac=small| or |active-frac=normalsize|, respectively.
 %
 % \subsubsection{Circles}
 %
@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/10/30 v0.4 Unicode maths in XeLaTeX]
+  [2009/11/01 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -1066,6 +1066,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \RequirePackage{expl3}[2009/08/12]
 \RequirePackage{xparse}[2009/08/31]
+\RequirePackage{l3keys2e}
 \RequirePackage{fontspec}
 %    \end{macrocode}
 %
@@ -1457,15 +1458,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \subsection{Options}
-% \pkg{xkeyval}'s package support is used here.
-% I'll switch over to \pkg{l3keys2e} at some stage.
 %
 % \begin{macro}{\unimathsetup}
 % This macro can be used in lieu of or later to override
 % options declared when the package is loaded.
 %    \begin{macrocode}
 \DeclareDocumentCommand \unimathsetup {m} {
-  \setkeys{unicode-math.sty}{#1}
+  \clist_clear:N \l_um_unknown_keys_clist
+  \keys_set:nn {unicode-math} {#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1473,207 +1473,270 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \paragraph{math-style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}
-    {math-style}[\@tempa\@tempb]{iso,tex,french,upright,literal}{
-  \bool_set_false:N \g_um_literal_bool
-  \ifcase\@tempb\relax
-    \bool_set_false:N \g_um_upGreek_bool
-    \bool_set_false:N \g_um_upgreek_bool
-    \bool_set_false:N \g_um_upLatin_bool
-    \bool_set_false:N \g_um_uplatin_bool
-    \setkeys{unicode-math.sty}{
-      bold-style=iso,
-      sans-style=italic,
-      nabla=italic,
-      partial=italic,
-    }
-  \or
-    \bool_set_true:N \g_um_upGreek_bool
-    \bool_set_false:N \g_um_upgreek_bool
-    \bool_set_false:N \g_um_upLatin_bool
-    \bool_set_false:N \g_um_uplatin_bool
-    \setkeys{unicode-math.sty}{
-      bold-style=tex,
-      sans-style=upright,
-      nabla=upright,
-      partial=italic,
-    }
-  \or
-    \bool_set_true:N \g_um_upGreek_bool
-    \bool_set_true:N \g_um_upgreek_bool
-    \bool_set_true:N \g_um_upLatin_bool
-    \bool_set_false:N \g_um_uplatin_bool
-    \setkeys{unicode-math.sty}{
-      bold-style=upright,
-      sans-style=upright,
-      nabla=upright,
-      partial=upright,
-    }
-  \or
-    \bool_set_true:N \g_um_upGreek_bool
-    \bool_set_true:N \g_um_upgreek_bool
-    \bool_set_true:N \g_um_upLatin_bool
-    \bool_set_true:N \g_um_uplatin_bool
-    \setkeys{unicode-math.sty}{
-      bold-style=upright,
-      sans-style=upright,
-      nabla=upright,
-      partial=upright,
-    }
-  \or
-    \bool_set_true:N \g_um_literal_bool
-    \setkeys{unicode-math.sty}{
-      bold-style=literal,
-      sans-style=literal,
-      colon=literal,
-      nabla=literal,
-      partial=literal,
-    }
-  \fi
+\keys_define:nn {unicode-math} {
+  normal-style .choice_code:n =
+  {
+    \bool_set_false:N \g_um_literal_bool
+    \ifcase \l_keys_choice_int
+    \or
+      \bool_set_false:N \g_um_upGreek_bool
+      \bool_set_false:N \g_um_upgreek_bool
+      \bool_set_false:N \g_um_upLatin_bool
+      \bool_set_false:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_upGreek_bool
+      \bool_set_false:N \g_um_upgreek_bool
+      \bool_set_false:N \g_um_upLatin_bool
+      \bool_set_false:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_upGreek_bool
+      \bool_set_true:N \g_um_upgreek_bool
+      \bool_set_true:N \g_um_upLatin_bool
+      \bool_set_false:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_upGreek_bool
+      \bool_set_true:N \g_um_upgreek_bool
+      \bool_set_true:N \g_um_upLatin_bool
+      \bool_set_true:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_literal_bool
+    \fi
+  } ,
+  normal-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  math-style .choice_code:n =
+  {
+    \ifcase \l_keys_choice_int
+    \or
+      \unimathsetup {
+        normal-style=ISO,
+        bold-style=ISO,
+        sans-style=italic,
+        nabla=italic,
+        partial=italic,
+      }
+    \or
+      \unimathsetup {
+        normal-style=TeX,
+        bold-style=TeX,
+        sans-style=upright,
+        nabla=upright,
+        partial=italic,
+      }
+    \or
+      \unimathsetup {
+        normal-style=french,
+        bold-style=upright,
+        sans-style=upright,
+        nabla=upright,
+        partial=upright,
+      }
+    \or
+      \unimathsetup {
+        normal-style=upright,
+        bold-style=upright,
+        sans-style=upright,
+        nabla=upright,
+        partial=upright,
+      }
+    \or
+      \unimathsetup {
+        normal-style=literal,
+        bold-style=literal,
+        sans-style=literal,
+        colon=literal,
+        nabla=literal,
+        partial=literal,
+      }
+    \fi
+  } ,
+  math-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
 }
 %    \end{macrocode}
 %
 % \paragraph{bold-style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{bold-style}[\@tempa\@tempb]{iso,tex,upright,literal}{
-  \bool_set_false:N \g_um_bfliteral_bool
-  \ifcase\@tempb\relax
-    \bool_set_false:N \g_um_bfupGreek_bool
-    \bool_set_false:N \g_um_bfupgreek_bool
-    \bool_set_false:N \g_um_bfupLatin_bool
-    \bool_set_false:N \g_um_bfuplatin_bool
-  \or
-    \bool_set_true:N \g_um_bfupGreek_bool
-    \bool_set_false:N \g_um_bfupgreek_bool
-    \bool_set_true:N \g_um_bfupLatin_bool
-    \bool_set_true:N \g_um_bfuplatin_bool
-  \or
-    \bool_set_true:N \g_um_bfupGreek_bool
-    \bool_set_true:N \g_um_bfupgreek_bool
-    \bool_set_true:N \g_um_bfupLatin_bool
-    \bool_set_true:N \g_um_bfuplatin_bool
-  \or
-    \bool_set_true:N \g_um_bfliteral_bool
-  \fi
+\keys_define:nn {unicode-math} {
+  bold-style .choice_code:n = {
+    \bool_set_false:N \g_um_bfliteral_bool
+    \ifcase \l_keys_choice_int
+    \or
+      \bool_set_false:N \g_um_bfupGreek_bool
+      \bool_set_false:N \g_um_bfupgreek_bool
+      \bool_set_false:N \g_um_bfupLatin_bool
+      \bool_set_false:N \g_um_bfuplatin_bool
+    \or
+      \bool_set_true:N \g_um_bfupGreek_bool
+      \bool_set_false:N \g_um_bfupgreek_bool
+      \bool_set_true:N \g_um_bfupLatin_bool
+      \bool_set_true:N \g_um_bfuplatin_bool
+    \or
+      \bool_set_true:N \g_um_bfupGreek_bool
+      \bool_set_true:N \g_um_bfupgreek_bool
+      \bool_set_true:N \g_um_bfupLatin_bool
+      \bool_set_true:N \g_um_bfuplatin_bool
+    \or
+      \bool_set_true:N \g_um_bfliteral_bool
+    \fi
+  } ,
+  bold-style .generate_choices:n = {ISO,TeX,upright,literal} ,
 }
 %    \end{macrocode}
 %
 % \paragraph{sans-style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}
-    {sans-style}[\@tempa\@tempb]{italic,upright,literal}{
-  \ifcase\@tempb\relax
-    \bool_set_false:N \g_um_upsans_bool
-  \or
-    \bool_set_true:N \g_um_upsans_bool
-  \or
-    \bool_set_true:N \g_um_sfliteral_bool
-  \fi
+\keys_define:nn {unicode-math} {
+  sans-style .choice_code:n = {
+    \ifcase \l_keys_choice_int
+    \or
+      \bool_set_false:N \g_um_upsans_bool
+    \or
+      \bool_set_true:N \g_um_upsans_bool
+    \or
+      \bool_set_true:N \g_um_sfliteral_bool
+    \fi
+  } ,
+  sans-style .generate_choices:n = {italic,upright,literal} ,
 }
 %    \end{macrocode}
 %
 % \paragraph{Nabla and partial}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{nabla}[\@tempa\@tempb]{upright,italic,literal}{
-  \bool_set_false:N \g_um_literal_Nabla_bool
-  \ifcase\@tempb
-    \bool_set_true:N \g_um_upNabla_bool
-  \or
-    \bool_set_false:N \g_um_upNabla_bool
-  \or
-    \bool_set_true:N \g_um_literal_Nabla_bool
-  \fi
+\keys_define:nn {unicode-math} {
+  nabla .choice_code:n = {
+    \bool_set_false:N \g_um_literal_Nabla_bool
+    \ifcase \l_keys_choice_int
+    \or
+      \bool_set_true:N \g_um_upNabla_bool
+    \or
+      \bool_set_false:N \g_um_upNabla_bool
+    \or
+      \bool_set_true:N \g_um_literal_Nabla_bool
+    \fi
+  } ,
+  nabla .generate_choices:n = {upright,italic,literal} ,
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{partial}[\@tempa\@tempb]{upright,italic,literal}{
-  \bool_set_false:N \g_um_literal_partial_bool
-  \ifcase\@tempb
-    \bool_set_true:N \g_um_uppartial_bool
-  \or
-    \bool_set_false:N \g_um_uppartial_bool
-  \or
-    \bool_set_true:N \g_um_literal_partial_bool
-  \fi
+\keys_define:nn {unicode-math} {
+  partial .choice_code:n = {
+    \bool_set_false:N \g_um_literal_partial_bool
+    \ifcase \l_keys_choice_int
+    \or
+      \bool_set_true:N \g_um_uppartial_bool
+    \or
+      \bool_set_false:N \g_um_uppartial_bool
+    \or
+      \bool_set_true:N \g_um_literal_partial_bool
+    \fi
+  } ,
+  partial .generate_choices:n = {upright,italic,literal} ,
 }
 %    \end{macrocode}
 %
 % \paragraph{Epsilon and phi shapes}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{vargreek-shape}[\@tempa\@tempb]{unicode,TeX}{
-  \ifcase\@tempb
+\keys_define:nn {unicode-math} {
+  vargreek-shape .choice: ,
+  vargreek-shape / unicode .code:n = {
     \bool_set_false:N \g_um_texgreek_bool
-  \or
+  } ,
+  vargreek-shape / TeX .code:n = {
     \bool_set_true:N \g_um_texgreek_bool
-  \fi
+  }
 }
 %    \end{macrocode}
 %
 % \paragraph{Colon style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{colon}[\@tempa\@tempb]{literal,TeX}{
-  \ifcase\@tempb
+\keys_define:nn {unicode-math} {
+  colon .choice: ,
+  colon / literal .code:n = {
     \bool_set_true:N \g_um_literal_colon_bool
-  \or
+  } ,
+  colon / TeX .code:n = {
     \bool_set_false:N \g_um_literal_colon_bool
-  \fi
+  }
 }
 %    \end{macrocode}
 %
 % \paragraph{Slash delimiter style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{slash-delimiter}[\@tempa\@tempb]{ascii,frac,div}{
-  \ifcase\@tempb
+\keys_define:nn {unicode-math} {
+  slash-delimiter .choice: ,
+  slash-delimiter / ascii .code:n = {
     \tl_set:Nn \g_um_slash_delimiter_usv {"002F}
-  \or
+  } ,
+  slash-delimiter / frac .code:n = {
     \tl_set:Nn \g_um_slash_delimiter_usv {"2044}
-  \or
+  } ,
+  slash-delimiter / div .code:n = {
     \tl_set:Nn \g_um_slash_delimiter_usv {"2215}
-  \fi
+  }
 }
 %    \end{macrocode}
 %
 %
 % \paragraph{Active fraction style}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{active-frac}[\@tempa\@tempb]{small,normalsize}{
-  \ifcase\@tempb
+\keys_define:nn {unicode-math} {
+  active-frac .choice: ,
+  active-frac / small .code:n = {
     \cs_if_exist:NTF \tfrac {
       \bool_set_true:N \l_um_smallfrac_bool
     }{
       \um_warning:n {no-tfrac}
       \bool_set_false:N \l_um_smallfrac_bool
     }
-  \or
+    \use:c{um_setup_active_frac:}
+  } ,
+  active-frac / normalsize .code:n = {
     \bool_set_false:N \l_um_smallfrac_bool
-  \fi
-  \um_setup_active_frac:
+    \use:c{um_setup_active_frac:}
+  }
 }
 %    \end{macrocode}
 %
 % \paragraph{Debug/tracing}
 %    \begin{macrocode}
-\define@choicekey*{unicode-math.sty}{trace}[\@tempa\@tempb]{debug,on,off}{
-  \ifcase\@tempb
-    \msg_redirect_module:nnn { trace } { unicode-math } { warning }
-  \or
-    \msg_redirect_module:nnn { trace } { unicode-math } { trace }
-  \or
-    \msg_redirect_module:nnn { trace } { unicode-math } { none }
-  \fi
+\keys_define:nn {unicode-math} {
+  trace .choice: ,
+  trace / debug .code:n = {
+    \msg_redirect_module:nnn { unicode-math } { trace } { warning }
+  } ,
+  trace / on .code:n = {
+    \msg_redirect_module:nnn { unicode-math } { trace } { trace }
+  } ,
+  trace / off .code:n = {
+    \msg_redirect_module:nnn { unicode-math } { trace } { none }
+  } ,
 }
 %    \end{macrocode}
 %
-%
 %    \begin{macrocode}
-\ExecuteOptionsX{math-style=TeX,slash-delimiter=ascii,trace=off}
-\AtEndOfPackage{
-  \cs_if_exist:NT \tfrac {
-    \unimathsetup{active-frac=small}
+\clist_new:N \l_um_unknown_keys_clist
+\keys_define:nn {unicode-math} {
+  unknown .code:n = {
+    \clist_put_right:No \l_um_unknown_keys_clist {
+      \l_keys_key_tl = {#1}
+    }
   }
 }
-\ProcessOptionsX
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\unimathsetup {math-style=TeX}
+\unimathsetup {slash-delimiter=ascii}
+\unimathsetup {trace=off}
+\cs_if_exist:NT \tfrac {
+  \unimathsetup {active-frac=small}
+}
+\ProcessKeysOptions {unicode-math}
 %    \end{macrocode}
 %
 % \subsection{Overcoming \cmd\@onlypreamble}
@@ -1903,11 +1966,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
-  \setkeys*{unicode-math.sty}{#1}
-  \cs_set:Npx \um_tmp: {
-    \exp_not:N \setkeys*[um]{options}{\exp_not:V \XKV@rm}
-  }
-  \um_tmp:
+  \keys_set:nn {unicode-math} {#1}
   \um_fontspec_select_font:n {#2}
 %    \end{macrocode}
 % Check for the correct number of \cs{fontdimen}s:
@@ -1996,7 +2055,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
          \l_um_sscript_features_tl
         }
       },
-      \XKV@rm
+      \l_um_unknown_keys_clist
     ]{#1}
   }
   \group_begin:
@@ -2382,10 +2441,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsection{Script and scriptscript font options}
 %    \begin{macrocode}
-\define@cmdkey[um]{options}[um@]{script-features}{}
-\define@cmdkey[um]{options}[um@]{sscript-features}{}
-\define@cmdkey[um]{options}[um@]{script-font}{}
-\define@cmdkey[um]{options}[um@]{sscript-font}{}
+\keys_define:nn {unicode-math}
+{
+  script-features  .tl_set:N =  \l_um_script_features_tl ,
+  sscript-features .tl_set:N = \l_um_sscript_features_tl ,
+       script-font .tl_set:N =      \l_um_script_font_tl ,
+      sscript-font .tl_set:N =     \l_um_sscript_font_tl ,
+}
 %    \end{macrocode}
 %
 % \subsection{Range processing}
@@ -2395,22 +2457,27 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \seq_new:N \l_um_mathalph_seq
 \seq_new:N \l_um_char_range_seq
-\define@key[um]{options}{range}{
-  \bool_set_false:N \l_um_init_bool
-  \seq_clear:N \l_um_char_range_seq
-  \seq_clear:N \l_um_mathalph_seq
-  \clist_map_inline:nn {#1} {
-    \um_if_mathalph_decl:nTF {##1} {
-      \seq_put_right:Nx \l_um_mathalph_seq {
-        { \exp_not:V \l_um_tmpa_tl }
-        { \exp_not:V \l_um_tmpb_tl }
-        { \exp_not:V \l_um_tmpc_tl }
+\keys_define:nn {unicode-math} {
+  range .code:n = {
+    \bool_set_false:N \l_um_init_bool
+    \seq_clear:N \l_um_char_range_seq
+    \seq_clear:N \l_um_mathalph_seq
+    \clist_map_inline:nn {#1} {
+      \um_if_mathalph_decl:nTF {##1} {
+        \seq_put_right:Nx \l_um_mathalph_seq {
+          { \exp_not:V \l_um_tmpa_tl }
+          { \exp_not:V \l_um_tmpb_tl }
+          { \exp_not:V \l_um_tmpc_tl }
+        }
+      }{
+        \seq_put_right:Nn \l_um_char_range_seq {##1}
       }
-    }{
-      \seq_put_right:Nn \l_um_char_range_seq {##1}
     }
   }
 }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
   \tl_set:Nn \l_um_tmpa_tl {#1}
   \tl_set:Nn \l_um_tmpb_tl {}
@@ -2881,14 +2948,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_new:Nn \um_setup_alphabets: {
   \seq_clear:N \l_um_missing_alph_seq
   \seq_if_empty:NTF \l_um_mathalph_seq {
-    \um_trace:n {Setup~ alphabets:~ implicit~ mode}
+    \um_trace:n {setup-implicit}
     \seq_set_eq:NN \l_um_mathalph_seq \g_um_default_mathalph_seq
     \bool_set_true:N \l_um_implicit_alph_bool
     \um_maybe_init_alphabet:n  {sf}
     \um_maybe_init_alphabet:n  {bf}
     \um_maybe_init_alphabet:n  {bfsf}
   }{
-    \um_trace:n {Setup~ alphabets:~ explicit~ mode}
+    \um_trace:n {setup-explicit}
     \bool_set_false:N \l_um_implicit_alph_bool
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
   }
@@ -2953,11 +3020,11 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \clist_map_inline:nn {#2} {
     \cs_if_exist:cT {um_config_ \l_um_tmpa_tl _##1:n} {
       \tl_if_eq:nnTF {##1}{misc} {
-        \um_trace:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
+        \um_trace:nx {setup-alph} {\l_um_tmpa_tl~(##1)}
         \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
       }{
         \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{##1} } {
-          \um_trace:n {Setup~ alphabet:~ \l_um_tmpa_tl\space (##1)}
+          \um_trace:nx {setup-alph} {\l_um_tmpa_tl~(##1)}
           \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
         }{
           \bool_if:NTF \l_um_implicit_alph_bool {
@@ -2979,7 +3046,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_set:Nn \um_init_alphabet:n {
-  \um_trace:n {Initialiasing~\@backslashchar math#1}
+  \um_trace:nx {alph-initialise} {#1}
   \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
 }
 %    \end{macrocode}
@@ -4255,6 +4322,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     }
   }
 }
+\um_setup_active_frac:
 %    \end{macrocode}
 %
 % \subsubsection{Synonyms and all the rest}
@@ -4418,35 +4486,52 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % Wrapper functions:
 %    \begin{macrocode}
-\cs_new:Nn \um_msg_new:nn {\msg_new:nnn    {unicode-math}}
-\cs_new:Nn \um_warning:n  {\msg_warning:nn {unicode-math}}
-\cs_new:Nn \um_trace:n    {\msg_trace:nn   {unicode-math}}
+\cs_new:Npn \um_warning:n { \msg_warning:nn {unicode-math} }
+\cs_new:Npn \um_trace:n   { \msg_trace:nn   {unicode-math} }
+\cs_new:Npn \um_trace:nx  { \msg_trace:nnx  {unicode-math} }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\um_msg_new:nn {maths-feature-only}
+\msg_new:nnn {unicode-math} {maths-feature-only}
 {
   The '#1' font feature can only be used for maths fonts.
 }
-\um_msg_new:nn {disable-beamer}
+\msg_new:nnn {unicode-math} {disable-beamer}
 {
   Disabling beamer's math setup.\\
   Please load beamer with the [professionalfonts] class option.
 }
-\um_msg_new:nn {no-tfrac}
+\msg_new:nnn {unicode-math} {no-tfrac}
 {
-  Small fraction command \protect\tfrac\ not defined.
-  Perhaps load amsmath?
+  Small fraction command \protect\tfrac\ not defined.\\
+  Load amsmath or define it manually before loading unicode-math.
 }
-\um_msg_new:nn {default-math-font}
+\msg_new:nnn {unicode-math} {default-math-font}
 {
   Defining the default maths font as '#1'.
+}
+\msg_new:nnn {unicode-math} {setup-implicit}
+{
+  Setup alphabets: implicit mode.
+}
+\msg_new:nnn {unicode-math} {setup-explicit}
+{
+  Setup alphabets: explicit mode.
+}
+\msg_new:nnn {unicode-math} {alph-initialise}
+{
+  Initialising \@backslashchar math#1.
+}
+\msg_new:nnn {unicode-math} {setup-alph}
+{
+  Setup~ alphabet:~ #1.
 }
 %    \end{macrocode}
 %
 % The end.
 %    \begin{macrocode}
 \ExplSyntaxOff
+\errorcontextlines=999
 %    \end{macrocode}
 %
 %\iffalse
