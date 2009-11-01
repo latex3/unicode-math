@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/11/01 v0.4 Unicode maths in XeLaTeX]
+  [2009/11/02 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -1142,6 +1142,28 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek,~uppercase}
 \tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
 \tl_set:Nn \g_um_math_alphabet_name_misc_tl  {Misc.}
+%    \end{macrocode}
+%
+% \subsubsection{Compatibility with Lua\TeX}
+%
+%
+%    \begin{macrocode}
+\xetex_if_engine:TF {
+  \cs_new:Nn \um_cs_compat:n {
+    \cs_set_eq:cc {U#1} {XeTeX#1}
+  }
+}{
+  \cs_new:Nn \um_cs_compat:n {
+    \cs_set_eq:cc {U#1} {luatexU#1}
+  }
+}
+\um_cs_compat:n {mathcode}
+\um_cs_compat:n {delcode}
+\um_cs_compat:n {mathcodenum}
+\um_cs_compat:n {mathchardef}
+\um_cs_compat:n {radical}
+\um_cs_compat:n {mathaccent}
+\um_cs_compat:n {delimiter}
 %    \end{macrocode}
 %
 % \subsubsection{Alphabet unicode positions}
@@ -1874,25 +1896,25 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\um_accent:Nnn}
 %    \begin{macrocode}
 \cs_set:Nn \um_set_mathcode:nnnn {
-  \XeTeXmathcode \intexpr_eval:n {#1} =
+  \Umathcode \intexpr_eval:n {#1} =
     \mathchar@type#2 \csname sym#3\endcsname \intexpr_eval:n {#4} \scan_stop:
 }
 \cs_set:Nn \um_set_mathcode:nnn {
-  \XeTeXmathcode \intexpr_eval:n {#1} =
+  \Umathcode \intexpr_eval:n {#1} =
     \mathchar@type#2 \csname sym#3\endcsname \intexpr_eval:n {#1} \scan_stop:
 }
 \cs_set:Nn \um_set_mathchar:NNnn {
-  \XeTeXmathchardef #1 =
+  \Umathchardef #1 =
     \mathchar@type#2 \csname sym#3\endcsname \intexpr_eval:n {#4} \scan_stop:
 }
 \cs_new:Nn \um_radical:nn    {
-  \XeTeXradical \csname sym#1\endcsname #2 \scan_stop:
+  \Uradical \csname sym#1\endcsname #2 \scan_stop:
 }
 \cs_new:Nn \um_delimiter:Nnn {
-  \XeTeXdelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+  \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
 \cs_new:Nn \um_accent:Nnn    {
-  \XeTeXmathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+  \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
 \cs_generate_variant:Nn \um_set_mathchar:NNnn {c}
 %    \end{macrocode}
@@ -1909,10 +1931,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\char_gmake_mathactive:n}
 %    \begin{macrocode}
 \cs_new:Nn \char_gmake_mathactive:N {
-  \global\XeTeXmathcodenum `#1 = "1FFFFF \scan_stop:
+  \global\mathcode `#1 = "8000 \scan_stop:
 }
 \cs_new:Nn \char_gmake_mathactive:n {
-  \global\XeTeXmathcodenum #1 = "1FFFFF \scan_stop:
+  \global\mathcode #1 = "8000 \scan_stop:
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2211,10 +2233,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %: TODO : hook into range feature
 %    \begin{macrocode}
 \cs_new:Nn \um_set_delcode:nn {
-  \XeTeXdelcode#1 = \csname sym\um_symfont_tl\endcsname #2
+  \Udelcode#1 = \csname sym\um_symfont_tl\endcsname #2
 }
 \cs_new:Nn \um_set_delcode:n {
-  \XeTeXdelcode#1 = \csname sym\um_symfont_tl\endcsname #1
+  \Udelcode#1 = \csname sym\um_symfont_tl\endcsname #1
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2262,7 +2284,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \subsection{(Big) operators}
 %
 % Turns out that \XeTeX\ is clever enough to deal with big operators for us
-% automatically with \cmd\XeTeXmathchardef. Amazing!
+% automatically with \cmd\Umathchardef. Amazing!
 %
 % However, the limits aren't set automatically; that is, we want to define,
 % a la Plain \TeX\ \etc, |\def\int{\intop\nolimits}|, so there needs to be a
@@ -4435,8 +4457,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \mathchardef\std@minus\mathcode`\-\relax
     \mathchardef\std@equal\mathcode`\=\relax
   }
-  \def\std@minus{\XeTeXmathcharnum\XeTeXmathcodenum`\-\relax}
-  \def\std@equal{\XeTeXmathcharnum\XeTeXmathcodenum`\=\relax}
+  \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
+  \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
   \def\@cdots{\mathinner{\cdots}}
   \cs_set_eq:NN \dotsb@ \cdots
 }
@@ -4481,6 +4503,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \fi
 }{}
 %    \end{macrocode}
+%
 %
 % \section{Error messages}
 %
@@ -4595,7 +4618,7 @@ awk '
 %    \begin{macrocode}
 sed -e ' s/{N}/{\\mathord}/   ' \
 %    \end{macrocode}
-% A `fence' defined by the \STIX\ table is something like \cmd\vert; in \XeTeX\ this is just a \cmd\mathord\ that will grow with the magic of \cmd\XeTeXmathchardef.
+% A `fence' defined by the \STIX\ table is something like \cmd\vert; in \XeTeX\ this is just a \cmd\mathord\ that will grow with the magic of \cmd\Umathchardef.
 %    \begin{macrocode}
     -e ' s/{F}/{\\mathord}/   ' \
     -e ' s/{A}/{\\mathalpha}/ ' \

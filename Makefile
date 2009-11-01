@@ -3,12 +3,14 @@
 
 help:
 	echo 'UNICODE-MATH makefile targets:'
-	echo '     help  -  (this message)'
-	echo '      pkg  -  generate archive for CTAN (incomplete)'
-	echo '      doc  -  compile documentation'
-	echo '     push  -  push to GitHub'
-	echo '     test  -  run the test suite'
-	echo '  initest  -  initialise any new tests'
+	echo '         help  -  (this message)'
+	echo '          pkg  -  generate archive for CTAN (incomplete)'
+	echo '          doc  -  compile documentation'
+	echo '         push  -  push to GitHub'
+	echo '         test  -  run the test suite'
+	echo '      initest  -  initialise any new tests'
+	echo ' xfile F=<abc> -  compile file <abc> with XeTeX'
+	echo ' lfile F=<abc> -  compile file <abc> with LuaTeX'
 	echo ' '
 	echo 'To add a new test, add a file called umtest****.ltx to'
 	echo 'directory testfiles/, then run `make testinit` and then'
@@ -31,7 +33,7 @@ testdir=testfiles
 builddir=build
 
 PKGSOURCE = $(PKG).dtx $(TBL)
-LTXSOURCE = $(PKG).sty $(TBL)
+LTXSOURCE = $(PKG).sty $(TBL) fontspec.sty
 
 SUITESOURCE = \
   testfiles/umtest-preamble.tex \
@@ -103,16 +105,32 @@ $(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
 $(builddir)/%.ltx: $(testdir)/%.ltx
 	cp -f  $<  $@
 
+$(builddir)/fontspec.sty: ../fontspec/fontspec.sty
+	echo "Updating $@"
+	cp -f  $<  $@
+
+../fontspec/fontspec.sty: ../fontspec/fontspec.dtx
+	cd ../fontspec; tex fontspec.ins > /dev/null
+
 ##### USEFUL FOR TEST FILES #####
 
-file: $(F)  $(BUILDSOURCE)
+xfile: $(F)  $(BUILDSOURCE)
 	if [ "$(F)" = "" ] ; then \
-	  echo "Need a filename!\nE.g.  \`make file F=test.ltx\`" ; \
+	  echo "Need a filename!\nE.g.  \`make xfile F=test.ltx\`" ; \
 	  false ; \
 	fi
 	echo Typesetting $(F):
 	cp -f $(F) $(builddir)/$(F)
 	cd $(builddir); xelatex $(F)
+
+lfile: $(F)  $(BUILDSOURCE)
+	if [ "$(F)" = "" ] ; then \
+	  echo "Need a filename!\nE.g.  \`make lfile F=test.ltx\`" ; \
+	  false ; \
+	fi
+	echo Typesetting $(F):
+	cp -f $(F) $(builddir)/$(F)
+	cd $(builddir); lualatex $(F)
 
 
 #############
