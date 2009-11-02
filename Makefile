@@ -105,7 +105,10 @@ $(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
 $(builddir)/%.ltx: $(testdir)/%.ltx
 	cp -f  $<  $@
 
-$(builddir)/fontspec.sty: ../fontspec/fontspec.sty
+$(builddir)/fontspec.sty: fontspec.sty
+	cp -f  $<  $@
+
+fontspec.sty: ../fontspec/fontspec.sty
 	echo "Updating $@"
 	cp -f  $<  $@
 

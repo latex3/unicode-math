@@ -1,0 +1,1460 @@
+%%
+%% This is file `fontspec.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% fontspec.dtx  (with options: `fontspec')
+%% 
+%%   ________________________________
+%%   The fontspec package for XeLaTeX
+%%   (C) 2004--2008    Will Robertson
+%% 
+%%   License information appended.
+%% 
+\ProvidesPackage{fontspec}
+  [2009/11/02 v2.0 Advanced font selection for XeLaTeX]
+\RequirePackage{ifxetex,ifluatex}
+\ifxetex\else
+  \ifluatex
+    \@input{luatex-fonts}
+  \else
+    \fontspec_error:n {not-pdftex}
+  \fi
+\fi
+\RequirePackage{expl3}
+\ExplSyntaxOn
+\newif\ifzf@firsttime
+\newif\ifzf@nobf
+\newif\ifzf@noit
+\newif\ifzf@nosc
+\newif\ifzf@tfm
+\newif\ifzf@atsui
+\newif\ifzf@icu
+\newif\ifzf@mm
+\newif\ifzf@graphite
+\newif\ifzf@math@euler
+\newif\ifzf@math@lucida
+\newif\ifzf@package@euler@loaded
+\newif\if@zf@configfile
+\newif\if@zf@euenc
+\newif\if@zf@math
+\newcount\c@zf@newff
+\newcount\c@zf@index
+\newcount\c@zf@script
+\newcount\c@zf@language
+\DeclareOption{cm-default}{\@zf@euencfalse}
+\DeclareOption{lm-default}{\@zf@euenctrue}
+\DeclareOption{math}{\@zf@mathtrue}
+\DeclareOption{no-math}{\@zf@mathfalse}
+\DeclareOption{config}{\@zf@configfiletrue}
+\DeclareOption{no-config}{\@zf@configfilefalse}
+\DeclareOption{noconfig}{\@zf@configfilefalse}
+\DeclareOption{quiet}{%
+  \msg_redirect_module:nnn { fontspec } { warning } { info }
+  \msg_redirect_module:nnn { fontspec } { info } { none }
+}
+\DeclareOption{silent}{%
+  \msg_redirect_module:nnn { fontspec } { warning } { none }
+  \msg_redirect_module:nnn { fontspec } { info } { none }
+}
+\ExecuteOptions{config,lm-default,math}
+\ProcessOptions*
+\RequirePackage{calc}
+\RequirePackage{xkeyval}[2005/05/07]
+\if@zf@euenc
+  \def\zf@enc{EU1}
+  \renewcommand{\rmdefault}{lmr}
+  \renewcommand{\sfdefault}{lmss}
+  \renewcommand{\ttdefault}{lmtt}
+  \RequirePackage[\zf@enc]{fontenc}
+\else
+  \def\zf@enc{U}
+  \let\encodingdefault\zf@enc
+\fi
+\let\UTFencname\zf@enc
+\let\cyrillicencoding\zf@enc
+\let\latinencoding\zf@enc
+\g@addto@macro\document{%
+  \let\cyrillicencoding\zf@enc
+  \let\latinencoding\zf@enc}
+\newcommand*\fontspec[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \fontfamily\zf@family\selectfont
+  \ignorespaces}
+\newcommand*\setmainfont[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \let\rmdefault\zf@family
+  \normalfont}
+\let\setromanfont\setmainfont
+\newcommand*\setsansfont[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \let\sfdefault\zf@family
+  \normalfont}
+\newcommand*\setmonofont[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \let\ttdefault\zf@family
+  \normalfont}
+\newcommand*\setmathrm[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \let\zf@rmmaths\zf@family}
+\newcommand*\setboldmathrm[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \let\zf@rmboldmaths\zf@family}
+\newcommand*\setmathsf[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \let\zf@sfmaths\zf@family}
+\newcommand*\setmathtt[2][]{%
+  \zf@fontspec{#1}{#2}%
+  \let\zf@ttmaths\zf@family}
+\@onlypreamble\setmathrm
+\@onlypreamble\setboldmathrm
+\@onlypreamble\setmathsf
+\@onlypreamble\setmathtt
+\def\zf@rmmaths{\rmdefault}
+\def\zf@sfmaths{\sfdefault}
+\def\zf@ttmaths{\ttdefault}
+\newcommand*\newfontfamily[1]{%
+  \@ifnextchar[{\newfontfamily@i#1}{\newfontfamily@i#1[]}}
+\def\newfontfamily@i#1[#2]#3{%
+  \zf@fontspec{#2}{#3}%
+  \edef\@tempa{%
+    \noexpand\DeclareRobustCommand\noexpand#1
+      {\noexpand\fontfamily{\zf@family}\noexpand\selectfont}}%
+  \@tempa}
+\newcommand*\newfontface[1]{%
+  \@ifnextchar[{\newfontface@i#1}{\newfontface@i#1[]}}
+\def\newfontface@i#1[#2]#3{%
+  \zf@fontspec{BoldFont={},ItalicFont={},SmallCapsFont={},#2}{#3}%
+  \edef\@tempa{%
+    \noexpand\DeclareRobustCommand\noexpand#1
+      {\noexpand\fontfamily{\zf@family}\noexpand\selectfont}}%
+  \@tempa}
+\newcommand*\defaultfontfeatures[1]{\def\zf@default@options{#1,}}
+\let\zf@default@options\@empty
+\newcommand*\addfontfeatures[1]{%
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \begingroup
+      \let\zf@default@options\@empty
+      \edef\@tempa{%
+        \noexpand\zf@fontspec
+          {\csname zf@family@options\f@family\endcsname,#1}%
+          {\csname zf@family@fontname\f@family\endcsname}}%
+      \@tempa
+    \endgroup
+    \fontfamily\zf@family\selectfont
+  \else
+    \fontspec_warning:n {addfontfeatures-ignored}
+  \fi
+  \ignorespaces}
+\let\addfontfeature\addfontfeatures
+\newcommand*\newfontfeature[2]{%
+  \stepcounter{zf@newff}%
+  \cs_set:cpx{+zf-#1}{+zf-\the\c@zf@newff}%
+  \define@key[zf]{options}{#1}[]{%
+    \zf@update@family{\csname+zf-#1\endcsname}%
+    \zf@update@ff{#2}}}
+\newcommand*\newAATfeature[4]{%
+  \unless\ifcsname zf@options@#1\endcsname
+    \zf@define@font@feature{#1}%
+  \fi
+  \key@ifundefined[zf]{#1}{#2}{}{%
+    \fontspec_warning:nxx {feature-option-overwrite}{#1}{#2}
+  }%
+  \zf@define@feature@option{#1}{#2}{#3}{#4}{}}
+\newcommand*\newICUfeature[3]{
+  \unless\ifcsname zf@options@#1\endcsname
+    \zf@define@font@feature{#1}
+  \fi
+  \key@ifundefined[zf]{#1}{#2}{}{
+    \fontspec_warning:nxx {feature-option-overwrite}{#1}{#2}
+  }
+  \zf@define@feature@option{#1}{#2}{}{}{#3}}
+\newcommand*\aliasfontfeature[2]{\multi@alias@key{#1}{#2}}
+\newcommand*\aliasfontfeatureoption[3]{%
+  \keyval@alias@key[zf@feat]{#1}{#2}{#3}}
+\newcommand*\newfontscript[2]{
+  \define@key[zf@feat]{Script}{#1}[]{
+    \zf@check@ot@script{#2}
+    \if@tempswa
+      \global\c@zf@script\@tempcnta\relax
+      \xdef\zf@script@name{#1}
+      \xdef\zf@family@long{\zf@family@long+script=#1}
+      \xdef\zf@pre@ff{script=#2,\zf@pre@ff}
+    \else
+      \fontspec_warning:nx {script-not-exist} {#1}
+    \fi
+  }
+}
+\newcommand*\newfontlanguage[2]{
+  \define@key[zf@feat]{Lang}{#1}[]{
+    \zf@check@ot@lang{#2}
+    \if@tempswa
+      \global\c@zf@language\@tempcnta\relax
+      \xdef\zf@language@name{#1}
+      \xdef\zf@family@long{\zf@family@long+lang=#1}
+      \xdef\zf@pre@ff{\zf@pre@ff language=#2,}
+    \else
+      \fontspec_warning:nx {lang-not-exist} {#1}
+    \fi
+  }
+}
+\newcommand*\zf@fontspec[2]{%
+  \begingroup
+  \zf@init
+  \edef\zf@fontname{#2}%
+  \let\zf@family@long\zf@fontname
+  \setkeys*[zf]{prepreparse}{#1}%
+  \let\zf@up\zf@fontname
+  \edef\@tempa{\noexpand\setkeys*[zf]{preparse}{\XKV@rm}}\@tempa
+  \let\zf@fontname\zf@up
+  \let\zf@font@feat\XKV@rm
+  \font\zf@basefont="\zf@font@wrap\zf@fontname\zf@suffix"~at~\f@size pt
+  \ifxetex
+  \unless\ifzf@icu
+    \zf@set@font@type
+  \fi
+  \ifx\zf@suffix\@empty
+    \ifzf@atsui
+      \def\zf@suffix{/AAT}%
+    \else
+      \ifzf@icu
+        \def\zf@suffix{/ICU}%
+      \fi
+    \fi
+    \font\zf@basefont="\zf@font@wrap\zf@fontname\zf@suffix"~at~ \f@size pt
+  \fi
+  \fi
+  \zf@firsttimetrue
+    \zf@get@feature@requests{\zf@font@feat}%
+  \zf@firsttimefalse
+  \unless\ifcsname zf@UID@\zf@family@long\endcsname
+    \ifcsname c@zf@famc@#2\endcsname
+      \expandafter\global\expandafter\advance
+        \csname c@zf@famc@#2\endcsname\@ne
+    \else
+      \expandafter\global\expandafter\newcount
+        \csname c@zf@famc@#2\endcsname
+    \fi
+    \edef\@tempa{#2}%
+    \cs_gset:cpx{zf@UID@\zf@family@long}{%
+      \expandafter\expandafter\expandafter
+        \zap@space\expandafter\@tempa\space\@empty
+      (\expandafter\the\csname c@zf@famc@#2\endcsname)}%
+  \fi
+  \xdef\zf@family{\@nameuse{zf@UID@\zf@family@long}}%
+  \unless\ifcsname zf@family@fontname\zf@family\endcsname
+    \fontspec_info:nxx {defining-font} {#1} {#2}
+    \cs_gset:cpx{zf@family@fontname\zf@family}{\zf@fontname}%
+    \cs_gset:cpx{zf@family@options\zf@family}{\zf@default@options #1}%
+    \cs_gset:cpx{zf@family@fontdef\zf@family}{%
+      \zf@fontname\zf@suffix
+      \ifx\zf@pre@ff\@empty\else\ifx\zf@ff\@empty\else:\fi\fi
+      \zf@pre@ff\zf@ff
+    }%
+    \DeclareFontFamily{\zf@enc}{\zf@family}{}%
+    \zf@make@font@shapes{\zf@fontname}
+      {\mddefault}{\updefault}{\zf@font@feat\zf@up@feat}%
+    \unless\ifzf@nobf
+      \ifx\zf@bf\@empty
+        \zf@make@font@shapes[\zf@fontname]{/B}
+          {\bfdefault}{\updefault}{\zf@font@feat\zf@bf@feat}%
+      \else
+        \zf@make@font@shapes{\zf@bf}
+          {\bfdefault}{\updefault}{\zf@font@feat\zf@bf@feat}%
+      \fi
+    \fi
+    \unless\ifzf@noit
+      \ifx\zf@it\@empty
+        \zf@make@font@shapes[\zf@fontname]{/I}
+          {\mddefault}{\itdefault}{\zf@font@feat\zf@it@feat}%
+      \else
+        \zf@make@font@shapes{\zf@it}
+          {\mddefault}{\itdefault}{\zf@font@feat\zf@it@feat}%
+      \fi
+    \fi
+    \@tempswatrue
+    \ifzf@nobf\@tempswafalse\fi
+    \ifzf@noit\@tempswafalse\fi
+    \if@tempswa
+      \ifx\zf@bfit\@empty
+        \ifx\zf@bf\@empty
+          \ifx\zf@it\@empty
+            \zf@make@font@shapes[\zf@fontname]{/BI}
+              {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}%
+          \else
+            \zf@make@font@shapes[\zf@it]{/B}
+              {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}%
+          \fi
+        \else
+          \zf@make@font@shapes[\zf@bf]{/I}
+            {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}%
+        \fi
+      \else
+        \zf@make@font@shapes{\zf@bfit}
+          {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}%
+      \fi
+    \fi
+  \fi
+  \endgroup}
+\newcommand*\zf@set@font@type{%
+  \zf@tfmfalse \zf@atsuifalse \zf@icufalse \zf@mmfalse \zf@graphitefalse
+  \ifcase\XeTeXfonttype\zf@basefont
+    \zf@tfmtrue
+  \or
+    \zf@atsuitrue
+    \ifnum\XeTeXcountvariations\zf@basefont > 0
+      \zf@mmtrue
+    \fi
+  \or
+    \zf@icutrue
+  \fi}
+\newcommand*\zf@make@font@shapes[5][]{%
+  \begingroup
+    \edef\@tempa{#1}%
+    \unless\ifx\@tempa\@empty
+      \font\@tempfonta="\zf@font@wrap{#1}\zf@suffix"~at~\f@size pt
+      \edef\@tempa{\fontname\@tempfonta}%
+    \fi
+    \font\@tempfontb="\zf@font@wrap{#1#2}\zf@suffix"~at~\f@size pt
+    \edef\@tempb{\fontname\@tempfontb}%
+    \ifx\@tempa\@tempb
+      \fontspec_info:nx {no-font-shape} {#1#2}
+    \else
+      \edef\zf@fontname{#1#2}%
+      \let\zf@basefont\@tempfontb
+      \zf@DeclareFontShape{#3}{#4}{#5}%
+      \ifx\zf@sc\@empty
+        \unless\ifzf@nosc
+          \zf@make@smallcaps
+          \unless\ifx\zf@smallcaps\@empty
+            \zf@DeclareFontShape[\zf@smallcaps]{#3}
+              {\ifx#4\itdefault\sidefault\else\scdefault\fi}{#5\zf@sc@feat}%
+          \fi
+        \fi
+      \else
+        \edef\zf@fontname{\zf@sc}%
+        \zf@DeclareFontShape{#3}
+          {\ifx#4\itdefault\sidefault\else\scdefault\fi}{#5\zf@sc@feat}%
+      \fi
+    \fi
+  \endgroup}
+\newcommand\zf@DeclareFontShape[4][]{%
+  \ifx\zf@size@feat\@empty
+    \zf@get@feature@requests{#4}%
+    \edef\zf@font@str{<->\zf@scale"\zf@font@wrap\zf@fontname\zf@suffix :
+      \zf@pre@ff\zf@ff#1"}%
+  \else
+    \clist_map_variable:NNn \zf@size@feat \zf@this@size {
+      \let\zf@size\@empty
+      \let\zf@size@fnt\zf@fontname
+      \edef\@tempa{\noexpand
+        \setkeys*[zf]{sizing}{\expandafter\@firstofone\zf@this@size}}%
+      \@tempa
+      \ifx\zf@size\@empty
+        \fontspec_error:n {no-size-info}
+      \fi
+      \zf@get@feature@requests{#4,\XKV@rm}%
+      \edef\zf@font@str{\zf@font@str <\zf@size>%
+        \zf@scale"\zf@size@fnt\zf@suffix :\zf@pre@ff\zf@ff#1"}
+    }
+  \fi
+  \edef\@tempa{\noexpand
+    \DeclareFontShape{\zf@enc}{\zf@family}{#2}{#3}
+      {\zf@font@str}{\zf@adjust}}%
+  \@tempa
+  \edef\@tempa{#3}%
+  \edef\@tempb{\itdefault}%
+  \ifx\@tempa\@tempb
+    \edef\@tempa{\noexpand
+      \DeclareFontShape{\zf@enc}{\zf@family}{#2}{\sldefault}
+        {<->ssub*\zf@family/#2/\itdefault}{\zf@adjust}}%
+    \@tempa
+  \fi}
+\newcommand*{\zf@update@family}[1]{%
+  \ifzf@firsttime
+    \xdef\zf@family@long{\zf@family@long#1}%
+  \fi}
+\newcommand*\zf@get@feature@requests[1]{%
+  \let\zf@ff     \@empty
+  \let\zf@scale  \@empty
+  \let\zf@adjust \@empty
+  \edef\@tempa{\noexpand\setkeys[zf]{options}{\zf@default@options#1}}%
+  \@tempa}
+\newcommand*\zf@init{%
+  \zf@icufalse
+  \let\zf@pre@ff      \@empty
+  \let\zf@font@feat   \@empty
+  \let\zf@font@str    \@empty
+  \let\zf@font@wrap   \@firstofone
+  \let\zf@suffix      \@empty
+  \let\zf@bf          \@empty
+  \let\zf@it          \@empty
+  \let\zf@bfit        \@empty
+  \let\zf@sc          \@empty
+  \let\zf@up@feat     \@empty
+  \let\zf@bf@feat     \@empty
+  \let\zf@it@feat     \@empty
+  \let\zf@bfit@feat   \@empty
+  \let\zf@sc@feat     \@empty
+  \let\zf@size        \@empty
+  \let\zf@size@feat   \@empty
+  \let\zf@size@fnt    \@empty
+  \c@zf@script 1818326126\relax
+  \def\zf@script@name{Latin}%
+  \c@zf@language 0\relax
+  \def\zf@language@name{Default}%
+}
+\newcommand*\zf@make@smallcaps{
+  \let\zf@smallcaps\@empty
+  \luatex_if_engine:TF
+  {
+    \edef\zf@smallcaps{+smcp,}
+  }
+  {
+    \ifzf@atsui
+      \zf@make@aat@feature@string{3}{3}
+      \unless\ifx\@tempa\@empty
+        \edef\zf@smallcaps{\@tempa;}
+      \fi
+    \fi
+    \ifzf@icu
+      \zf@check@ot@feat{+smcp}
+      \if@tempswa
+        \edef\zf@smallcaps{+smcp,}
+      \fi
+    \fi
+  }
+}
+\newcommand*\zf@update@ff[1]{%
+  \unless\ifzf@firsttime
+    \xdef\zf@ff{\zf@ff #1\ifzf@icu,\else;\fi}%
+  \fi}
+\newcommand*\zf@make@feature[3]{%
+  \luatex_if_engine:TF
+  {
+    \fontspec_make_LT_feature:n {#3}
+  }
+  {
+    \ifzf@atsui
+      \fontspec_make_AAT_feature:nn {#1} {#2}
+    \fi
+    \ifzf@icu
+      \fontspec_make_ICU_feature:n {#3}
+    \fi
+  }
+}
+\cs_new:Nn \fontspec_make_LT_feature:n {
+  \zf@update@family{#1}
+  \zf@update@ff{#1}
+}
+\cs_new:Nn \fontspec_make_AAT_feature:nn {
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty
+    \fontspec_warning:n {aat-feature-not-exist}
+  \else
+    \zf@make@aat@feature@string{#1}{#2}%
+    \ifx\@tempa\@empty
+      \fontspec_warning:nx {aat-feature-not-exist-in-font} {#1,#2}
+    \else
+      \zf@update@family{+#1,#2}%
+      \zf@update@ff\@tempa
+    \fi
+  \fi
+}
+\cs_new:Nn \fontspec_make_ICU_feature:n {
+  \edef\@tempa{#1}
+  \ifx\@tempa\@empty
+    \fontspec_warning:n {icu-feature-not-exist}
+  \else
+    \expandafter\zf@check@ot@feat\expandafter{\@tempa}%
+    \if@tempswa
+      \zf@update@family{#1}
+      \zf@update@ff{#1}
+    \else
+      \fontspec_warning:nx {icu-feature-not-exist-in-font} {#1}
+    \fi
+  \fi
+}
+\newcommand*\zf@define@font@feature[1]{%
+  \define@key[zf]{options}{#1}{{\setkeys[zf@feat]{#1}{##1}}}}
+\newcommand*\zf@define@feature@option[5]{%
+  \define@key[zf@feat]{#1}{#2}[]{\zf@make@feature{#3}{#4}{#5}}}
+\newcommand*\keyval@alias@key[4][KV]{%
+  \cs_set_eq:cc{#1@#2@#4}{#1@#2@#3}%
+  \cs_set_eq:cc{#1@#2@#4@default}{#1@#2@#3@default}}
+\newcommand*\multi@alias@key[2]{%
+  \key@ifundefined[zf]{preparse}{#1}
+    {\key@ifundefined[zf]{options}{#1}
+       {
+         \fontspec_warning:nx {rename-feature-not-exist} {#1}
+       }
+       {\keyval@alias@key[zf]{options}{#1}{#2}}}
+    {\keyval@alias@key[zf]{preparse}{#1}{#2}}}
+\newcommand*\zf@make@aat@feature@string[2]{%
+  \edef\@tempa{\XeTeXfeaturename\zf@basefont #1}%
+  \unless\ifx\@tempa\@empty
+    \ifnum\XeTeXisexclusivefeature\zf@basefont #1>0
+      \edef\@tempb{\XeTeXselectorname\zf@basefont #1 #2}%
+    \else
+      \unless\ifodd #2
+        \edef\@tempb{\XeTeXselectorname\zf@basefont #1 #2}%
+      \else
+        \edef\@tempb{\XeTeXselectorname\zf@basefont #1 \numexpr#2-1\relax}%
+        \unless\ifx\@tempb\@empty
+          \edef\@tempb{!\@tempb}%
+        \fi
+      \fi
+    \fi
+    \unless\ifx\@tempb\@empty
+      \edef\@tempa{\@tempa=\@tempb}%
+    \else
+      \let\@tempa\@empty
+    \fi
+  \fi}
+\newcommand\zf@iv@strnum[1]{%
+  \zf@iv@strnum@i#1 \@nil}
+\def\zf@iv@strnum@i#1 \@nil{%
+  \zf@iv@strnum@ii#1\@empty\@empty\@nil}
+\def\zf@iv@strnum@ii#1#2#3#4#5\@nil{%
+  \@tempcnta\z@
+  \@tempcntb`#1\relax
+  \multiply\@tempcntb"1000000
+  \advance\@tempcnta\@tempcntb
+  \@tempcntb`#2
+  \multiply\@tempcntb"10000
+  \advance\@tempcnta\@tempcntb
+  \expandafter\@tempcntb\ifx\@empty#332\else`#3\fi
+  \multiply\@tempcntb"100
+  \advance\@tempcnta\@tempcntb
+  \expandafter\@tempcntb\ifx\@empty#432\else`#4\fi
+  \advance\@tempcnta\@tempcntb
+}
+\newcommand\zf@v@strnum[1]{%
+  \expandafter\zf@iv@strnum@i\@gobble#1 \@nil}
+\newcommand\zf@check@ot@script[1]{%
+  \ifluatex
+    \@tempswatrue % fixme!
+  \else
+  \zf@iv@strnum{#1}%
+  \@tempcntb\XeTeXOTcountscripts\zf@basefont
+  \c@zf@index\z@ \@tempswafalse
+  \loop\ifnum\c@zf@index<\@tempcntb
+    \ifnum\XeTeXOTscripttag\zf@basefont\c@zf@index=\@tempcnta
+      \@tempswatrue
+      \c@zf@index\@tempcntb
+    \else
+      \advance\c@zf@index\@ne
+    \fi
+  \repeat
+  \fi}
+\newcommand\zf@check@ot@lang[1]{%
+  \ifluatex
+    \@tempswatrue % fixme!
+  \else
+  \zf@iv@strnum{#1}%
+  \@tempcntb\XeTeXOTcountlanguages\zf@basefont\c@zf@script
+  \c@zf@index\z@ \@tempswafalse
+  \loop\ifnum\c@zf@index<\@tempcntb
+    \ifnum\XeTeXOTlanguagetag\zf@basefont\c@zf@script\c@zf@index=\@tempcnta
+      \@tempswatrue
+      \c@zf@index\@tempcntb
+    \else
+      \advance\c@zf@index\@ne
+    \fi
+  \repeat
+  \fi
+}
+\newcommand*\zf@check@ot@feat[1]{%
+  \ifluatex
+    \@tempswatrue % fixme!
+  \else
+  \@tempcntb\XeTeXOTcountfeatures\zf@basefont\c@zf@script\c@zf@language
+  \zf@v@strnum{#1}%
+  \c@zf@index\z@ \@tempswafalse
+  \loop\ifnum\c@zf@index<\@tempcntb
+    \ifnum\XeTeXOTfeaturetag\zf@basefont\c@zf@script\c@zf@language
+          \c@zf@index=\@tempcnta
+      \@tempswatrue
+      \c@zf@index\@tempcntb
+    \else
+      \advance\c@zf@index\@ne
+    \fi
+  \repeat
+  \fi
+}
+\define@key[zf]{prepreparse}{ExternalLocation}[]{%
+  \zf@icutrue
+  \zf@nobftrue\zf@noittrue
+  \gdef\zf@font@wrap##1{[#1##1]}}
+\define@choicekey[zf]{preparse}{Renderer}{AAT,ICU,GR}{
+  \ifxetex
+    \edef\zf@suffix{\zf@suffix/#1}
+    \font\zf@basefont="\zf@font@wrap\zf@fontname\zf@suffix"~at~\f@size pt
+    \edef\zf@family@long{\zf@family@long +rend:#1}
+  \else
+    \zf_warning:nx {only-xetex-feature} {Renderer}
+  \fi
+}
+\define@key[zf]{preparse}{Script}{%
+  \zf@icutrue
+  \ifxetex
+    \edef\zf@suffix{\zf@suffix/ICU}
+  \fi
+  \font\zf@basefont="\zf@font@wrap\zf@fontname\zf@suffix"~at~\f@size pt
+  \edef\zf@family@long{\zf@family@long +script:#1}%
+  {\setkeys[zf@feat]{Script}{#1}}}
+\define@key[zf]{preparse}{Language}{%
+  \zf@icutrue
+  \ifxetex
+    \edef\zf@suffix{\zf@suffix/ICU}
+  \fi
+  \font\zf@basefont="\zf@font@wrap\zf@fontname\zf@suffix"~at~\f@size pt
+  \edef\zf@family@long{\zf@family@long +language:#1}%
+  {\setkeys[zf@feat]{Lang}{#1}}}
+\define@key[zf]{preparse}{UprightFont}{%
+  \edef\@tempa{#1}%
+  \zf@partial@fontname#1\@nil=\zf@up
+  \edef\zf@family@long{\zf@family@long up:#1}}
+\define@key[zf]{preparse}{BoldFont}{%
+  \edef\@tempa{#1}%
+  \ifx\@tempa\@empty
+    \zf@nobftrue
+    \edef\zf@family@long{\zf@family@long nobf}%
+  \else
+    \zf@nobffalse
+    \zf@partial@fontname#1\@nil=\zf@bf
+    \edef\zf@family@long{\zf@family@long bf:#1}%
+  \fi}
+\define@key[zf]{preparse}{ItalicFont}{%
+  \edef\@tempa{#1}%
+  \ifx\@tempa\@empty
+    \zf@noittrue
+    \edef\zf@family@long{\zf@family@long noit}%
+  \else
+    \zf@noitfalse
+    \zf@partial@fontname#1\@nil=\zf@it
+    \edef\zf@family@long{\zf@family@long it:#1}%
+  \fi}
+\define@key[zf]{preparse}{BoldItalicFont}{%
+  \zf@partial@fontname#1\@nil=\zf@bfit
+  \edef\zf@family@long{\zf@family@long bfit:#1}}
+\define@key[zf]{options}{SmallCapsFont}{%
+  \edef\@tempa{#1}%
+  \ifx\@tempa\@empty
+    \zf@nosctrue
+    \edef\zf@family@long{\zf@family@long nosc}%
+  \else
+    \zf@noscfalse
+    \zf@partial@fontname#1\@nil=\zf@sc
+    \zf@update@family{sc:\zap@space #1 \@empty}%
+  \fi}
+\def\zf@partial@fontname#1#2\@nil=#3{%
+  \if#1*\relax
+    \edef#3{\zf@fontname#2}%
+  \else
+    \edef#3{#1#2}%
+  \fi}
+\define@key[zf]{preparse}{UprightFeatures}{%
+  \def\zf@up@feat{,#1}%
+  \edef\zf@family@long{\zf@family@long rmfeat:#1}}
+\define@key[zf]{preparse}{BoldFeatures}{%
+  \def\zf@bf@feat{,#1}%
+  \edef\zf@family@long{\zf@family@long bffeat:#1}}
+\define@key[zf]{preparse}{ItalicFeatures}{%
+  \def\zf@it@feat{,#1}%
+  \edef\zf@family@long{\zf@family@long itfeat:#1}}
+\define@key[zf]{preparse}{BoldItalicFeatures}{%
+  \def\zf@bfit@feat{,#1}%
+  \edef\zf@family@long{\zf@family@long bfitfeat:#1}}
+\define@key[zf]{options}{SmallCapsFeatures}{%
+  \unless\ifzf@firsttime\def\zf@sc@feat{,#1}\fi
+  \zf@update@family{scfeat:\zap@space #1 \@empty}}
+\define@key[zf]{preparse}{SizeFeatures}{%
+  \unless\ifzf@firsttime\def\zf@size@feat{#1}\fi
+  \zf@update@family{sizefeat:\zap@space #1 \@empty}}
+\define@key[zf]{sizing}{Size}{\def\zf@size{#1}}
+\define@key[zf]{sizing}{Font}{\def\zf@size@fnt{#1}}
+\define@key[zf]{options}{Scale}{%
+  \edef\@tempa{#1}%
+  \edef\@tempb{MatchLowercase}%
+  \ifx\@tempa\@tempb
+    \zf@calc@scale{5}%
+  \else
+    \edef\@tempb{MatchUppercase}%
+    \ifx\@tempa\@tempb
+      \zf@calc@scale{8}%
+    \else
+      \edef\zf@scale{#1}%
+    \fi
+  \fi
+  \zf@update@family{+scale:\zf@scale}%
+  \edef\zf@scale{s*[\zf@scale]}}
+\newcommand\zf@calc@scale[1]{%
+  \begingroup
+    \rmfamily
+    \setlength\@tempdima{\fontdimen#1\font}%
+    \setlength\@tempdimb{\fontdimen#1\zf@basefont}%
+    \setlength\@tempdimc{1pt*\ratio{\@tempdima}{\@tempdimb}}%
+    \xdef\zf@scale{\strip@pt\@tempdimc}%
+    \fontspec_info:n {set-scale}
+  \endgroup}
+\define@key[zf]{options}{WordSpace}{%
+  \zf@update@family{+wordspace:#1}%
+  \unless\ifzf@firsttime
+    \zf@wordspace@parse#1,\zf@@ii,\zf@@iii,\zf@@
+  \fi}
+\def\zf@wordspace@parse#1,#2,#3,#4\zf@@{%
+  \def\@tempa{#4}%
+  \ifx\@tempa\@empty
+    \setlength\@tempdima{#1\fontdimen2\zf@basefont}%
+    \@tempdimb\@tempdima
+    \@tempdimc\@tempdima
+  \else
+    \setlength\@tempdima{#1\fontdimen2\zf@basefont}%
+    \setlength\@tempdimb{#2\fontdimen3\zf@basefont}%
+    \setlength\@tempdimc{#3\fontdimen4\zf@basefont}%
+  \fi
+  \edef\zf@adjust{\zf@adjust
+    \fontdimen2\font\the\@tempdima
+    \fontdimen3\font\the\@tempdimb
+    \fontdimen4\font\the\@tempdimc}}
+\define@key[zf]{options}{PunctuationSpace}{%
+  \zf@update@family{+punctspace:#1}%
+  \setlength\@tempdima{#1\fontdimen7\zf@basefont}%
+  \edef\zf@adjust{\zf@adjust\fontdimen7\font\the\@tempdima}}
+\define@key[zf]{options}{LetterSpace}{%
+  \zf@update@family{+tracking:#1}%
+  \zf@update@ff{letterspace=#1}}
+\define@key[zf]{options}{HyphenChar}{%
+  \zf@update@family{+hyphenchar:#1}%
+  \edef\@tempa{#1}%
+  \edef\@tempb{None}%
+  \ifx\@tempa\@tempb
+    \g@addto@macro\zf@adjust{\hyphenchar\font-1\relax}%
+  \else
+    \zf@check@one@char#1\zf@@
+    \ifx\@tempb\@empty
+      {\zf@basefont\expandafter\ifnum\expandafter\XeTeXcharglyph
+            \expandafter`#1 > \z@
+         \g@addto@macro\zf@adjust{%
+           {\expandafter\hyphenchar\expandafter
+            \font\expandafter`#1}}%
+      \else
+        \fontspec_error:nx {no-glyph}
+      \fi}%
+    \else
+      {\zf@basefont\ifnum\XeTeXcharglyph#1 > \z@
+        \g@addto@macro\zf@adjust{\hyphenchar\font#1\relax}%
+      \else
+        \fontspec_error:nx {no-glyph}
+      \fi}%
+    \fi
+  \fi}
+\def\zf@check@one@char#1#2\zf@@{\def\@tempb{#2}}
+\define@key[zf]{options}{Colour}{%
+  \zf@update@family{+col:#1}%
+  \zf@update@ff{color=#1}}
+\keyval@alias@key[zf]{options}{Colour}{Color}
+\define@key[zf]{options}{Mapping}{%
+  \zf@update@family{+map:#1}%
+  \zf@update@ff{mapping=#1}}
+\define@key[zf]{options}{Weight}{%
+  \zf@update@family{+weight:#1}%
+  \zf@update@ff{weight=#1}}
+\define@key[zf]{options}{Width}{%
+  \zf@update@family{+width:#1}%
+  \zf@update@ff{width=#1}}
+\define@key[zf]{options}{OpticalSize}{%
+  \ifzf@icu
+    \edef\zf@suffix{\zf@suffix/S=#1}%
+    \zf@update@family{+size:#1}%
+  \fi
+  \ifzf@mm
+    \zf@update@family{+size:#1}%
+    \zf@update@ff{optical size=#1}%
+  \fi
+  \ifzf@icu\else
+    \ifzf@mm\else
+      \ifzf@firsttime
+        \fontspec_warning:n {no-opticals}
+      \fi
+    \fi
+  \fi}
+\define@key[zf]{options}{FakeSlant}{%
+  \zf@update@family{+slant:#1}%
+  \zf@update@ff{slant=#1}}
+\define@key[zf]{options}{FakeStretch}{%
+  \zf@update@family{+extend:#1}%
+  \zf@update@ff{extend=#1}}
+\define@key[zf]{options}{FakeBold}{%
+  \zf@update@family{+embolden:#1}%
+  \zf@update@ff{embolden=#1}}
+\zf@define@font@feature{Ligatures}
+\zf@define@feature@option{Ligatures}{Required}       {1}{0}{+rlig}
+\zf@define@feature@option{Ligatures}{NoRequired}     {1}{1}{-rlig}
+\zf@define@feature@option{Ligatures}{Common}         {1}{2}{+liga}
+\zf@define@feature@option{Ligatures}{NoCommon}       {1}{3}{-liga}
+\zf@define@feature@option{Ligatures}{Rare}           {1}{4}{+dlig}
+\zf@define@feature@option{Ligatures}{NoRare}         {1}{5}{-dlig}
+\zf@define@feature@option{Ligatures}{Discretionary}  {1}{4}{+dlig}
+\zf@define@feature@option{Ligatures}{NoDiscretionary}{1}{5}{-dlig}
+\zf@define@feature@option{Ligatures}{Contextual}     {}{}  {+clig}
+\zf@define@feature@option{Ligatures}{NoContextual}   {}{}  {-clig}
+\zf@define@feature@option{Ligatures}{Historical}     {}{}  {+hlig}
+\zf@define@feature@option{Ligatures}{NoHistorical}   {}{}  {-hlig}
+\zf@define@feature@option{Ligatures}{Logos}          {1}{6} {}
+\zf@define@feature@option{Ligatures}{NoLogos}        {1}{7} {}
+\zf@define@feature@option{Ligatures}{Rebus}          {1}{8} {}
+\zf@define@feature@option{Ligatures}{NoRebus}        {1}{9} {}
+\zf@define@feature@option{Ligatures}{Diphthong}      {1}{10}{}
+\zf@define@feature@option{Ligatures}{NoDiphthong}    {1}{11}{}
+\zf@define@feature@option{Ligatures}{Squared}        {1}{12}{}
+\zf@define@feature@option{Ligatures}{NoSquared}      {1}{13}{}
+\zf@define@feature@option{Ligatures}{AbbrevSquared}  {1}{14}{}
+\zf@define@feature@option{Ligatures}{NoAbbrevSquared}{1}{15}{}
+\zf@define@feature@option{Ligatures}{Icelandic}      {1}{32}{}
+\zf@define@feature@option{Ligatures}{NoIcelandic}    {1}{33}{}
+\zf@define@font@feature{Letters}
+\zf@define@feature@option{Letters}{Normal}             {3}{0}{}
+\zf@define@feature@option{Letters}{Uppercase}          {3}{1}{+case}
+\zf@define@feature@option{Letters}{Lowercase}          {3}{2}{}
+\zf@define@feature@option{Letters}{SmallCaps}          {3}{3}{+smcp}
+\zf@define@feature@option{Letters}{PetiteCaps}         {} {} {+pcap}
+\zf@define@feature@option{Letters}{UppercaseSmallCaps} {} {} {+c2sc}
+\zf@define@feature@option{Letters}{UppercasePetiteCaps}{} {} {+c2pc}
+\zf@define@feature@option{Letters}{InitialCaps}        {3}{4}{}
+\zf@define@feature@option{Letters}{Unicase}            {} {} {+unic}
+\zf@define@font@feature{Numbers}
+\zf@define@feature@option{Numbers}{Monospaced}   {6} {0}{+tnum}
+\zf@define@feature@option{Numbers}{Proportional} {6} {1}{+pnum}
+\zf@define@feature@option{Numbers}{Lowercase}    {21}{0}{+onum}
+\zf@define@feature@option{Numbers}{OldStyle}     {21}{0}{+onum}
+\zf@define@feature@option{Numbers}{Uppercase}    {21}{1}{+lnum}
+\zf@define@feature@option{Numbers}{Lining}       {21}{1}{+lnum}
+\zf@define@feature@option{Numbers}{SlashedZero}  {14}{5}{+zero}
+\zf@define@feature@option{Numbers}{NoSlashedZero}{14}{4}{-zero}
+\zf@define@font@feature  {Contextuals}
+\zf@define@feature@option{Contextuals}{Swash}        {} {} {+cswh}
+\zf@define@feature@option{Contextuals}{NoSwash}      {} {} {-cswh}
+\zf@define@feature@option{Contextuals}{Alternate}    {} {} {+calt}
+\zf@define@feature@option{Contextuals}{NoAlternate}  {} {} {-calt}
+\zf@define@feature@option{Contextuals}{WordInitial}  {8}{0}{+init}
+\zf@define@feature@option{Contextuals}{NoWordInitial}{8}{1}{-init}
+\zf@define@feature@option{Contextuals}{WordFinal}    {8}{2}{+fina}
+\zf@define@feature@option{Contextuals}{NoWordFinal}  {8}{3}{-fina}
+\zf@define@feature@option{Contextuals}{LineInitial}  {8}{4}{}
+\zf@define@feature@option{Contextuals}{NoLineInitial}{8}{5}{}
+\zf@define@feature@option{Contextuals}{LineFinal}    {8}{6}{+falt}
+\zf@define@feature@option{Contextuals}{NoLineFinal}  {8}{7}{-falt}
+\zf@define@feature@option{Contextuals}{Inner}        {8}{8}{+medi}
+\zf@define@feature@option{Contextuals}{NoInner}      {8}{9}{-medi}
+\zf@define@font@feature{Diacritics}
+\zf@define@feature@option{Diacritics}{Show}     {9}{0}{}
+\zf@define@feature@option{Diacritics}{Hide}     {9}{1}{}
+\zf@define@feature@option{Diacritics}{Decompose}{9}{2}{}
+\zf@define@font@feature{Kerning}
+\zf@define@feature@option{Kerning}{Uppercase}{}{}{+cpsp}
+\zf@define@feature@option{Kerning}{On}       {}{}{+kern}
+\zf@define@feature@option{Kerning}{Off}      {}{}{-kern}
+\zf@define@font@feature{VerticalPosition}
+\zf@define@feature@option{VerticalPosition}{Normal}     {10}{0}{}
+\zf@define@feature@option{VerticalPosition}{Superior}   {10}{1}{+sups}
+\zf@define@feature@option{VerticalPosition}{Inferior}   {10}{2}{+subs}
+\zf@define@feature@option{VerticalPosition}{Ordinal}    {10}{3}{+ordn}
+\zf@define@feature@option{VerticalPosition}{Numerator}  {}  {} {+numr}
+\zf@define@feature@option{VerticalPosition}{Denominator}{}  {} {+dnom}
+\zf@define@feature@option{VerticalPosition}{ScientificInferior}{}{}{+sinf}
+\zf@define@font@feature{Fractions}
+\zf@define@feature@option{Fractions}{On}       {11}{1}{+frac}
+\zf@define@feature@option{Fractions}{Off}      {11}{0}{-frac}
+\zf@define@feature@option{Fractions}{Diagonal} {11}{2}{}
+\zf@define@feature@option{Fractions}{Alternate}{}  {} {+afrc}
+\define@key[zf]{options}{Alternate}[0]{%
+  \setkeys*[zf@feat]{Alternate}{#1}%
+  \unless\ifx\XKV@rm\@empty
+    \def\XKV@tfam{Alternate}%
+    \zf@make@feature{17}{#1}{+salt=#1}%
+  \fi}
+\define@key[zf]{options}{Variant}{%
+  \setkeys*[zf@feat]{Variant}{#1}%
+  \unless\ifx\XKV@rm\@empty
+    \def\XKV@tfam{Variant}%
+    \zf@make@feature{18}{#1}{+ss\two@digits{#1}}%
+  \fi}
+\zf@define@font@feature{Style}
+\zf@define@feature@option{Style}{Alternate}     {}  {} {+salt}
+\zf@define@feature@option{Style}{Italic}        {32}{2}{+ital}
+\zf@define@feature@option{Style}{Ruby}          {28}{2}{+ruby}
+\zf@define@feature@option{Style}{Swash}         {}  {} {+swsh}
+\zf@define@feature@option{Style}{Historic}      {}  {} {+hist}
+\zf@define@feature@option{Style}{Display}       {19}{1}{}
+\zf@define@feature@option{Style}{Engraved}      {19}{2}{}
+\zf@define@feature@option{Style}{TitlingCaps}   {19}{4}{+titl}
+\zf@define@feature@option{Style}{TallCaps}      {19}{5}{}
+\zf@define@feature@option{Style}{HorizontalKana}{}  {} {+hkna}
+\zf@define@feature@option{Style}{VerticalKana}  {}  {} {+vkna}
+\zf@define@font@feature{CJKShape}
+\zf@define@feature@option{CJKShape}{Traditional}{20}{0} {+trad}
+\zf@define@feature@option{CJKShape}{Simplified} {20}{1} {+smpl}
+\zf@define@feature@option{CJKShape}{JIS1978}    {20}{2} {+jp78}
+\zf@define@feature@option{CJKShape}{JIS1983}    {20}{3} {+jp83}
+\zf@define@feature@option{CJKShape}{JIS1990}    {20}{4} {+jp90}
+\zf@define@feature@option{CJKShape}{Expert}     {20}{10}{+expt}
+\zf@define@feature@option{CJKShape}{NLC}        {20}{13}{+nlck}
+\zf@define@font@feature{CharacterWidth}
+\zf@define@feature@option{CharacterWidth}{Proportional}{22}{0}{+pwid}
+\zf@define@feature@option{CharacterWidth}{Full}{22}{1}{+fwid}
+\zf@define@feature@option{CharacterWidth}{Half}{22}{2}{+hwid}
+\zf@define@feature@option{CharacterWidth}{Third}{22}{3}{+twid}
+\zf@define@feature@option{CharacterWidth}{Quarter}{22}{4}{+qwid}
+\zf@define@feature@option{CharacterWidth}{AlternateProportional}{22}{5}{+palt}
+\zf@define@feature@option{CharacterWidth}{AlternateHalf}{22}{6}{+halt}
+\zf@define@feature@option{CharacterWidth}{Default}{22}{7}{}
+\zf@define@font@feature{Annotation}
+\zf@define@feature@option{Annotation}{Off}{24}{0}{-nalt}
+\zf@define@feature@option{Annotation}{On}{}{}{+nalt}
+\zf@define@feature@option{Annotation}{Box}{24}{1}{}
+\zf@define@feature@option{Annotation}{RoundedBox}{24}{2}{}
+\zf@define@feature@option{Annotation}{Circle}{24}{3}{}
+\zf@define@feature@option{Annotation}{BlackCircle}{24}{4}{}
+\zf@define@feature@option{Annotation}{Parenthesis}{24}{5}{}
+\zf@define@feature@option{Annotation}{Period}{24}{6}{}
+\zf@define@feature@option{Annotation}{RomanNumerals}{24}{7}{}
+\zf@define@feature@option{Annotation}{Diamond}{24}{8}{}
+\zf@define@feature@option{Annotation}{BlackSquare}{24}{9}{}
+\zf@define@feature@option{Annotation}{BlackRoundSquare}{24}{10}{}
+\zf@define@feature@option{Annotation}{DoubleCircle}{24}{11}{}
+\zf@define@font@feature{Vertical}
+\define@key[zf@feat]{Vertical}{RotatedGlyphs}[]{%
+  \ifzf@icu
+    \zf@make@feature{}{}{+vrt2}%
+    \zf@update@family{+vert}%
+    \zf@update@ff{vertical}%
+  \else
+    \zf@update@family{+vert}%
+    \zf@update@ff{vertical}%
+  \fi}
+\newfontscript{Arabic}{arab}            \newfontscript{Armenian}{armn}
+\newfontscript{Balinese}{bali}          \newfontscript{Bengali}{beng}
+\newfontscript{Bopomofo}{bopo}          \newfontscript{Braille}{brai}
+\newfontscript{Buginese}{bugi}          \newfontscript{Buhid}{buhd}
+\newfontscript{Byzantine Music}{byzm} \newfontscript{Canadian Syllabics}{cans}
+\newfontscript{Cherokee}{cher}
+\newfontscript{CJK Ideographic}{hani}   \newfontscript{Coptic}{copt}
+\newfontscript{Cypriot Syllabary}{cprt} \newfontscript{Cyrillic}{cyrl}
+\newfontscript{Default}{DFLT}           \newfontscript{Deseret}{dsrt}
+\newfontscript{Devanagari}{deva}        \newfontscript{Ethiopic}{ethi}
+\newfontscript{Georgian}{geor}          \newfontscript{Glagolitic}{glag}
+\newfontscript{Gothic}{goth}            \newfontscript{Greek}{grek}
+\newfontscript{Gujarati}{gujr}          \newfontscript{Gurmukhi}{guru}
+\newfontscript{Hangul Jamo}{jamo}       \newfontscript{Hangul}{hang}
+\newfontscript{Hanunoo}{hano}           \newfontscript{Hebrew}{hebr}
+\newfontscript{Hiragana and Katakana}{kana}
+\newfontscript{Javanese}{java}          \newfontscript{Kannada}{knda}
+\newfontscript{Kharosthi}{khar}         \newfontscript{Khmer}{khmr}
+\newfontscript{Lao}{lao }               \newfontscript{Latin}{latn}
+\newfontscript{Limbu}{limb}             \newfontscript{Linear B}{linb}
+\newfontscript{Malayalam}{mlym}         \newfontscript{Math}{math}
+\newfontscript{Mongolian}{mong}
+\newfontscript{Musical Symbols}{musc}   \newfontscript{Myanmar}{mymr}
+\newfontscript{N'ko}{nko }              \newfontscript{Ogham}{ogam}
+\newfontscript{Old Italic}{ital}
+\newfontscript{Old Persian Cuneiform}{xpeo}
+\newfontscript{Oriya}{orya}             \newfontscript{Osmanya}{osma}
+\newfontscript{Phags-pa}{phag}          \newfontscript{Phoenician}{phnx}
+\newfontscript{Runic}{runr}             \newfontscript{Shavian}{shaw}
+\newfontscript{Sinhala}{sinh}
+\newfontscript{Sumero-Akkadian Cuneiform}{xsux}
+\newfontscript{Syloti Nagri}{sylo}      \newfontscript{Syriac}{syrc}
+\newfontscript{Tagalog}{tglg}           \newfontscript{Tagbanwa}{tagb}
+\newfontscript{Tai Le}{tale}            \newfontscript{Tai Lu}{talu}
+\newfontscript{Tamil}{taml}             \newfontscript{Telugu}{telu}
+\newfontscript{Thaana}{thaa}            \newfontscript{Thai}{thai}
+\newfontscript{Tibetan}{tibt}           \newfontscript{Tifinagh}{tfng}
+\newfontscript{Ugaritic Cuneiform}{ugar}\newfontscript{Yi}{yi  }
+\newfontlanguage{Abaza}{ABA}\newfontlanguage{Abkhazian}{ABK}
+\newfontlanguage{Adyghe}{ADY}\newfontlanguage{Afrikaans}{AFK}
+\newfontlanguage{Afar}{AFR}\newfontlanguage{Agaw}{AGW}
+\newfontlanguage{Altai}{ALT}\newfontlanguage{Amharic}{AMH}
+\newfontlanguage{Arabic}{ARA}\newfontlanguage{Aari}{ARI}
+\newfontlanguage{Arakanese}{ARK}\newfontlanguage{Assamese}{ASM}
+\newfontlanguage{Athapaskan}{ATH}\newfontlanguage{Avar}{AVR}
+\newfontlanguage{Awadhi}{AWA}\newfontlanguage{Aymara}{AYM}
+\newfontlanguage{Azeri}{AZE}\newfontlanguage{Badaga}{BAD}
+\newfontlanguage{Baghelkhandi}{BAG}\newfontlanguage{Balkar}{BAL}
+\newfontlanguage{Baule}{BAU}\newfontlanguage{Berber}{BBR}
+\newfontlanguage{Bench}{BCH}\newfontlanguage{Bible Cree}{BCR}
+\newfontlanguage{Belarussian}{BEL}\newfontlanguage{Bemba}{BEM}
+\newfontlanguage{Bengali}{BEN}\newfontlanguage{Bulgarian}{BGR}
+\newfontlanguage{Bhili}{BHI}\newfontlanguage{Bhojpuri}{BHO}
+\newfontlanguage{Bikol}{BIK}\newfontlanguage{Bilen}{BIL}
+\newfontlanguage{Blackfoot}{BKF}\newfontlanguage{Balochi}{BLI}
+\newfontlanguage{Balante}{BLN}\newfontlanguage{Balti}{BLT}
+\newfontlanguage{Bambara}{BMB}\newfontlanguage{Bamileke}{BML}
+\newfontlanguage{Breton}{BRE}\newfontlanguage{Brahui}{BRH}
+\newfontlanguage{Braj Bhasha}{BRI}\newfontlanguage{Burmese}{BRM}
+\newfontlanguage{Bashkir}{BSH}\newfontlanguage{Beti}{BTI}
+\newfontlanguage{Catalan}{CAT}\newfontlanguage{Cebuano}{CEB}
+\newfontlanguage{Chechen}{CHE}\newfontlanguage{Chaha Gurage}{CHG}
+\newfontlanguage{Chattisgarhi}{CHH}\newfontlanguage{Chichewa}{CHI}
+\newfontlanguage{Chukchi}{CHK}\newfontlanguage{Chipewyan}{CHP}
+\newfontlanguage{Cherokee}{CHR}\newfontlanguage{Chuvash}{CHU}
+\newfontlanguage{Comorian}{CMR}\newfontlanguage{Coptic}{COP}
+\newfontlanguage{Cree}{CRE}\newfontlanguage{Carrier}{CRR}
+\newfontlanguage{Crimean Tatar}{CRT}\newfontlanguage{Church Slavonic}{CSL}
+\newfontlanguage{Czech}{CSY}\newfontlanguage{Danish}{DAN}
+\newfontlanguage{Dargwa}{DAR}\newfontlanguage{Woods Cree}{DCR}
+\newfontlanguage{German}{DEU}\newfontlanguage{Default}{DFLT}
+\newfontlanguage{Dogri}{DGR}\newfontlanguage{Divehi}{DIV}
+\newfontlanguage{Djerma}{DJR}\newfontlanguage{Dangme}{DNG}
+\newfontlanguage{Dinka}{DNK}\newfontlanguage{Dungan}{DUN}
+\newfontlanguage{Dzongkha}{DZN}\newfontlanguage{Ebira}{EBI}
+\newfontlanguage{Eastern Cree}{ECR}\newfontlanguage{Edo}{EDO}
+\newfontlanguage{Efik}{EFI}\newfontlanguage{Greek}{ELL}
+\newfontlanguage{English}{ENG}\newfontlanguage{Erzya}{ERZ}
+\newfontlanguage{Spanish}{ESP}\newfontlanguage{Estonian}{ETI}
+\newfontlanguage{Basque}{EUQ}\newfontlanguage{Evenki}{EVK}
+\newfontlanguage{Even}{EVN}\newfontlanguage{Ewe}{EWE}
+\newfontlanguage{French Antillean}{FAN}\newfontlanguage{Farsi}{FAR}
+\newfontlanguage{Finnish}{FIN}\newfontlanguage{Fijian}{FJI}
+\newfontlanguage{Flemish}{FLE}\newfontlanguage{Forest Nenets}{FNE}
+\newfontlanguage{Fon}{FON}\newfontlanguage{Faroese}{FOS}
+\newfontlanguage{French}{FRA}\newfontlanguage{Frisian}{FRI}
+\newfontlanguage{Friulian}{FRL}\newfontlanguage{Futa}{FTA}
+\newfontlanguage{Fulani}{FUL}\newfontlanguage{Ga}{GAD}
+\newfontlanguage{Gaelic}{GAE}\newfontlanguage{Gagauz}{GAG}
+\newfontlanguage{Galician}{GAL}\newfontlanguage{Garshuni}{GAR}
+\newfontlanguage{Garhwali}{GAW}\newfontlanguage{Ge'ez}{GEZ}
+\newfontlanguage{Gilyak}{GIL}\newfontlanguage{Gumuz}{GMZ}
+\newfontlanguage{Gondi}{GON}\newfontlanguage{Greenlandic}{GRN}
+\newfontlanguage{Garo}{GRO}\newfontlanguage{Guarani}{GUA}
+\newfontlanguage{Gujarati}{GUJ}\newfontlanguage{Haitian}{HAI}
+\newfontlanguage{Halam}{HAL}\newfontlanguage{Harauti}{HAR}
+\newfontlanguage{Hausa}{HAU}\newfontlanguage{Hawaiin}{HAW}
+\newfontlanguage{Hammer-Banna}{HBN}\newfontlanguage{Hiligaynon}{HIL}
+\newfontlanguage{Hindi}{HIN}\newfontlanguage{High Mari}{HMA}
+\newfontlanguage{Hindko}{HND}\newfontlanguage{Ho}{HO}
+\newfontlanguage{Harari}{HRI}\newfontlanguage{Croatian}{HRV}
+\newfontlanguage{Hungarian}{HUN}\newfontlanguage{Armenian}{HYE}
+\newfontlanguage{Igbo}{IBO}\newfontlanguage{Ijo}{IJO}
+\newfontlanguage{Ilokano}{ILO}\newfontlanguage{Indonesian}{IND}
+\newfontlanguage{Ingush}{ING}\newfontlanguage{Inuktitut}{INU}
+\newfontlanguage{Irish}{IRI}\newfontlanguage{Irish Traditional}{IRT}
+\newfontlanguage{Icelandic}{ISL}\newfontlanguage{Inari Sami}{ISM}
+\newfontlanguage{Italian}{ITA}\newfontlanguage{Hebrew}{IWR}
+\newfontlanguage{Javanese}{JAV}\newfontlanguage{Yiddish}{JII}
+\newfontlanguage{Japanese}{JAN}\newfontlanguage{Judezmo}{JUD}
+\newfontlanguage{Jula}{JUL}\newfontlanguage{Kabardian}{KAB}
+\newfontlanguage{Kachchi}{KAC}\newfontlanguage{Kalenjin}{KAL}
+\newfontlanguage{Kannada}{KAN}\newfontlanguage{Karachay}{KAR}
+\newfontlanguage{Georgian}{KAT}\newfontlanguage{Kazakh}{KAZ}
+\newfontlanguage{Kebena}{KEB}\newfontlanguage{Khutsuri Georgian}{KGE}
+\newfontlanguage{Khakass}{KHA}\newfontlanguage{Khanty-Kazim}{KHK}
+\newfontlanguage{Khmer}{KHM}\newfontlanguage{Khanty-Shurishkar}{KHS}
+\newfontlanguage{Khanty-Vakhi}{KHV}\newfontlanguage{Khowar}{KHW}
+\newfontlanguage{Kikuyu}{KIK}\newfontlanguage{Kirghiz}{KIR}
+\newfontlanguage{Kisii}{KIS}\newfontlanguage{Kokni}{KKN}
+\newfontlanguage{Kalmyk}{KLM}\newfontlanguage{Kamba}{KMB}
+\newfontlanguage{Kumaoni}{KMN}\newfontlanguage{Komo}{KMO}
+\newfontlanguage{Komso}{KMS}\newfontlanguage{Kanuri}{KNR}
+\newfontlanguage{Kodagu}{KOD}\newfontlanguage{Korean Old Hangul}{KOH}
+\newfontlanguage{Konkani}{KOK}\newfontlanguage{Kikongo}{KON}
+\newfontlanguage{Komi-Permyak}{KOP}\newfontlanguage{Korean}{KOR}
+\newfontlanguage{Komi-Zyrian}{KOZ}\newfontlanguage{Kpelle}{KPL}
+\newfontlanguage{Krio}{KRI}\newfontlanguage{Karakalpak}{KRK}
+\newfontlanguage{Karelian}{KRL}\newfontlanguage{Karaim}{KRM}
+\newfontlanguage{Karen}{KRN}\newfontlanguage{Koorete}{KRT}
+\newfontlanguage{Kashmiri}{KSH}\newfontlanguage{Khasi}{KSI}
+\newfontlanguage{Kildin Sami}{KSM}\newfontlanguage{Kui}{KUI}
+\newfontlanguage{Kulvi}{KUL}\newfontlanguage{Kumyk}{KUM}
+\newfontlanguage{Kurdish}{KUR}\newfontlanguage{Kurukh}{KUU}
+\newfontlanguage{Kuy}{KUY}\newfontlanguage{Koryak}{KYK}
+\newfontlanguage{Ladin}{LAD}\newfontlanguage{Lahuli}{LAH}
+\newfontlanguage{Lak}{LAK}\newfontlanguage{Lambani}{LAM}
+\newfontlanguage{Lao}{LAO}\newfontlanguage{Latin}{LAT}
+\newfontlanguage{Laz}{LAZ}\newfontlanguage{L-Cree}{LCR}
+\newfontlanguage{Ladakhi}{LDK}\newfontlanguage{Lezgi}{LEZ}
+\newfontlanguage{Lingala}{LIN}\newfontlanguage{Low Mari}{LMA}
+\newfontlanguage{Limbu}{LMB}\newfontlanguage{Lomwe}{LMW}
+\newfontlanguage{Lower Sorbian}{LSB}\newfontlanguage{Lule Sami}{LSM}
+\newfontlanguage{Lithuanian}{LTH}\newfontlanguage{Luba}{LUB}
+\newfontlanguage{Luganda}{LUG}\newfontlanguage{Luhya}{LUH}
+\newfontlanguage{Luo}{LUO}\newfontlanguage{Latvian}{LVI}
+\newfontlanguage{Majang}{MAJ}\newfontlanguage{Makua}{MAK}
+\newfontlanguage{Malayalam Traditional}{MAL}\newfontlanguage{Mansi}{MAN}
+\newfontlanguage{Marathi}{MAR}\newfontlanguage{Marwari}{MAW}
+\newfontlanguage{Mbundu}{MBN}\newfontlanguage{Manchu}{MCH}
+\newfontlanguage{Moose Cree}{MCR}\newfontlanguage{Mende}{MDE}
+\newfontlanguage{Me'en}{MEN}\newfontlanguage{Mizo}{MIZ}
+\newfontlanguage{Macedonian}{MKD}\newfontlanguage{Male}{MLE}
+\newfontlanguage{Malagasy}{MLG}\newfontlanguage{Malinke}{MLN}
+\newfontlanguage{Malayalam Reformed}{MLR}\newfontlanguage{Malay}{MLY}
+\newfontlanguage{Mandinka}{MND}\newfontlanguage{Mongolian}{MNG}
+\newfontlanguage{Manipuri}{MNI}\newfontlanguage{Maninka}{MNK}
+\newfontlanguage{Manx Gaelic}{MNX}\newfontlanguage{Moksha}{MOK}
+\newfontlanguage{Moldavian}{MOL}\newfontlanguage{Mon}{MON}
+\newfontlanguage{Moroccan}{MOR}\newfontlanguage{Maori}{MRI}
+\newfontlanguage{Maithili}{MTH}\newfontlanguage{Maltese}{MTS}
+\newfontlanguage{Mundari}{MUN}\newfontlanguage{Naga-Assamese}{NAG}
+\newfontlanguage{Nanai}{NAN}\newfontlanguage{Naskapi}{NAS}
+\newfontlanguage{N-Cree}{NCR}\newfontlanguage{Ndebele}{NDB}
+\newfontlanguage{Ndonga}{NDG}\newfontlanguage{Nepali}{NEP}
+\newfontlanguage{Newari}{NEW}\newfontlanguage{Nagari}{NGR}
+\newfontlanguage{Norway House Cree}{NHC}\newfontlanguage{Nisi}{NIS}
+\newfontlanguage{Niuean}{NIU}\newfontlanguage{Nkole}{NKL}
+\newfontlanguage{N'ko}{NKO}\newfontlanguage{Dutch}{NLD}
+\newfontlanguage{Nogai}{NOG}\newfontlanguage{Norwegian}{NOR}
+\newfontlanguage{Northern Sami}{NSM}\newfontlanguage{Northern Tai}{NTA}
+\newfontlanguage{Esperanto}{NTO}\newfontlanguage{Nynorsk}{NYN}
+\newfontlanguage{Oji-Cree}{OCR}\newfontlanguage{Ojibway}{OJB}
+\newfontlanguage{Oriya}{ORI}\newfontlanguage{Oromo}{ORO}
+\newfontlanguage{Ossetian}{OSS}\newfontlanguage{Palestinian Aramaic}{PAA}
+\newfontlanguage{Pali}{PAL}\newfontlanguage{Punjabi}{PAN}
+\newfontlanguage{Palpa}{PAP}\newfontlanguage{Pashto}{PAS}
+\newfontlanguage{Polytonic Greek}{PGR}\newfontlanguage{Pilipino}{PIL}
+\newfontlanguage{Palaung}{PLG}\newfontlanguage{Polish}{PLK}
+\newfontlanguage{Provencal}{PRO}\newfontlanguage{Portuguese}{PTG}
+\newfontlanguage{Chin}{QIN}\newfontlanguage{Rajasthani}{RAJ}
+\newfontlanguage{R-Cree}{RCR}\newfontlanguage{Russian Buriat}{RBU}
+\newfontlanguage{Riang}{RIA}\newfontlanguage{Rhaeto-Romanic}{RMS}
+\newfontlanguage{Romanian}{ROM}\newfontlanguage{Romany}{ROY}
+\newfontlanguage{Rusyn}{RSY}\newfontlanguage{Ruanda}{RUA}
+\newfontlanguage{Russian}{RUS}\newfontlanguage{Sadri}{SAD}
+\newfontlanguage{Sanskrit}{SAN}\newfontlanguage{Santali}{SAT}
+\newfontlanguage{Sayisi}{SAY}\newfontlanguage{Sekota}{SEK}
+\newfontlanguage{Selkup}{SEL}\newfontlanguage{Sango}{SGO}
+\newfontlanguage{Shan}{SHN}\newfontlanguage{Sibe}{SIB}
+\newfontlanguage{Sidamo}{SID}\newfontlanguage{Silte Gurage}{SIG}
+\newfontlanguage{Skolt Sami}{SKS}\newfontlanguage{Slovak}{SKY}
+\newfontlanguage{Slavey}{SLA}\newfontlanguage{Slovenian}{SLV}
+\newfontlanguage{Somali}{SML}\newfontlanguage{Samoan}{SMO}
+\newfontlanguage{Sena}{SNA}\newfontlanguage{Sindhi}{SND}
+\newfontlanguage{Sinhalese}{SNH}\newfontlanguage{Soninke}{SNK}
+\newfontlanguage{Sodo Gurage}{SOG}\newfontlanguage{Sotho}{SOT}
+\newfontlanguage{Albanian}{SQI}\newfontlanguage{Serbian}{SRB}
+\newfontlanguage{Saraiki}{SRK}\newfontlanguage{Serer}{SRR}
+\newfontlanguage{South Slavey}{SSL}\newfontlanguage{Southern Sami}{SSM}
+\newfontlanguage{Suri}{SUR}\newfontlanguage{Svan}{SVA}
+\newfontlanguage{Swedish}{SVE}\newfontlanguage{Swadaya Aramaic}{SWA}
+\newfontlanguage{Swahili}{SWK}\newfontlanguage{Swazi}{SWZ}
+\newfontlanguage{Sutu}{SXT}\newfontlanguage{Syriac}{SYR}
+\newfontlanguage{Tabasaran}{TAB}\newfontlanguage{Tajiki}{TAJ}
+\newfontlanguage{Tamil}{TAM}\newfontlanguage{Tatar}{TAT}
+\newfontlanguage{TH-Cree}{TCR}\newfontlanguage{Telugu}{TEL}
+\newfontlanguage{Tongan}{TGN}\newfontlanguage{Tigre}{TGR}
+\newfontlanguage{Tigrinya}{TGY}\newfontlanguage{Thai}{THA}
+\newfontlanguage{Tahitian}{THT}\newfontlanguage{Tibetan}{TIB}
+\newfontlanguage{Turkmen}{TKM}\newfontlanguage{Temne}{TMN}
+\newfontlanguage{Tswana}{TNA}\newfontlanguage{Tundra Nenets}{TNE}
+\newfontlanguage{Tonga}{TNG}\newfontlanguage{Todo}{TOD}
+\newfontlanguage{Tsonga}{TSG}\newfontlanguage{Turoyo Aramaic}{TUA}
+\newfontlanguage{Tulu}{TUL}\newfontlanguage{Tuvin}{TUV}
+\newfontlanguage{Twi}{TWI}\newfontlanguage{Udmurt}{UDM}
+\newfontlanguage{Ukrainian}{UKR}\newfontlanguage{Urdu}{URD}
+\newfontlanguage{Upper Sorbian}{USB}\newfontlanguage{Uyghur}{UYG}
+\newfontlanguage{Uzbek}{UZB}\newfontlanguage{Venda}{VEN}
+\newfontlanguage{Vietnamese}{VIT}\newfontlanguage{Wa}{WA}
+\newfontlanguage{Wagdi}{WAG}\newfontlanguage{West-Cree}{WCR}
+\newfontlanguage{Welsh}{WEL}\newfontlanguage{Wolof}{WLF}
+\newfontlanguage{Tai Lue}{XBD}\newfontlanguage{Xhosa}{XHS}
+\newfontlanguage{Yakut}{YAK}\newfontlanguage{Yoruba}{YBA}
+\newfontlanguage{Y-Cree}{YCR}\newfontlanguage{Yi Classic}{YIC}
+\newfontlanguage{Yi Modern}{YIM}\newfontlanguage{Chinese Hong Kong}{ZHH}
+\newfontlanguage{Chinese Phonetic}{ZHP}\newfontlanguage{Chinese Simplified}{ZHS}
+\newfontlanguage{Chinese Traditional}{ZHT}\newfontlanguage{Zande}{ZND}
+\newfontlanguage{Zulu}{ZUL}
+\define@key[zf@feat]{Lang}{Turkish}[]{%
+  \zf@check@ot@lang{TRK}%
+  \if@tempswa
+    \c@zf@language\@tempcnta\relax
+    \xdef\zf@language@name{Turkish}%
+    \xdef\zf@family@long{\zf@family@long+lang=Turkish}%
+    \xdef\zf@pre@ff{\zf@pre@ff language=TRK,}%
+  \else
+    \zf@check@ot@lang{TUR}%
+    \if@tempswa
+      \c@zf@language\@tempcnta\relax
+      \xdef\zf@language@name{Turkish}%
+      \xdef\zf@family@long{\zf@family@long+lang=Turkish}%
+      \xdef\zf@pre@ff{\zf@pre@ff language=TUR,}%
+    \else
+      \fontspec_warning:nx {language-not-exist} {#1}
+    \fi
+  \fi}
+\define@key[zf]{options}{RawFeature}{%
+  \zf@update@family{+Raw:#1}%
+  \zf@update@ff{#1}}
+\providecommand*{\sidefault}{si}
+\DeclareRobustCommand{\sishape}{%
+  \not@math@alphabet\sishape\relax
+  \fontshape\sidefault\selectfont}
+\DeclareTextFontCommand{\textsi}{\sishape}
+\newcommand*{\zf@merge@shape}[3]{%
+  \edef\@tempa{#1}%
+  \edef\@tempb{#2}%
+  \ifx\f@shape\@tempb
+    \ifcsname\f@encoding/\f@family/\f@series/#3\endcsname
+      \edef\@tempa{#3}%
+    \fi
+  \fi
+  \fontshape{\@tempa}\selectfont}
+\DeclareRobustCommand{\itshape}{%
+  \not@math@alphabet\itshape\mathit
+  \zf@merge@shape\itdefault\scdefault\sidefault}
+\DeclareRobustCommand{\slshape}{%
+  \not@math@alphabet\slshape\relax
+  \zf@merge@shape\sldefault\scdefault\sidefault}
+\DeclareRobustCommand{\scshape}{%
+  \not@math@alphabet\scshape\relax
+  \zf@merge@shape\scdefault\itdefault\sidefault}
+\DeclareRobustCommand{\upshape}{%
+  \not@math@alphabet\upshape\relax
+  \zf@merge@shape\updefault\sidefault\scdefault}
+\@ifpackageloaded{euler}{\zf@package@euler@loadedtrue}
+                        {\zf@package@euler@loadedfalse}
+\def\zf@math{%
+  \let\zf@font@warning\@font@warning
+  \let\@font@warning\@font@info
+  \@ifpackageloaded{euler}{%
+    \ifzf@package@euler@loaded
+      \zf@math@eulertrue
+    \else
+      \fontspec_error:n {euler-too-late}
+    \fi
+  }{}
+  \@ifpackageloaded{lucbmath}{\zf@math@lucidatrue}{}
+  \@ifpackageloaded{lucidabr}{\zf@math@lucidatrue}{}
+  \@ifpackageloaded{lucimatx}{\zf@math@lucidatrue}{}
+  \DeclareSymbolFont{legacymaths}{OT1}{cmr}{m}{n}
+  \SetSymbolFont{legacymaths}{bold}{OT1}{cmr}{bx}{n}
+  \DeclareMathAccent{\acute}   {\mathalpha}{legacymaths}{19}
+  \DeclareMathAccent{\grave}   {\mathalpha}{legacymaths}{18}
+  \DeclareMathAccent{\ddot}    {\mathalpha}{legacymaths}{127}
+  \DeclareMathAccent{\tilde}   {\mathalpha}{legacymaths}{126}
+  \DeclareMathAccent{\bar}     {\mathalpha}{legacymaths}{22}
+  \DeclareMathAccent{\breve}   {\mathalpha}{legacymaths}{21}
+  \DeclareMathAccent{\check}   {\mathalpha}{legacymaths}{20}
+  \DeclareMathAccent{\hat}     {\mathalpha}{legacymaths}{94} % too bad, euler
+  \DeclareMathAccent{\dot}     {\mathalpha}{legacymaths}{95}
+  \DeclareMathAccent{\mathring}{\mathalpha}{legacymaths}{23}
+  \begingroup
+    \mathchardef\@tempa="603A %
+    \let\next\egroup
+    \ifx\colon\@tempa
+      \DeclareMathSymbol{\colon}{\mathpunct}{legacymaths}{58}
+    \fi
+  \endgroup
+  \ifzf@math@euler\else
+    \DeclareMathSymbol{!}{\mathclose}{legacymaths}{33}
+    \DeclareMathSymbol{:}{\mathrel}  {legacymaths}{58}
+    \DeclareMathSymbol{;}{\mathpunct}{legacymaths}{59}
+    \DeclareMathSymbol{?}{\mathclose}{legacymaths}{63}
+    \ifzf@math@lucida\else
+      \DeclareMathSymbol{0}{\mathalpha}{legacymaths}{`0}
+      \DeclareMathSymbol{1}{\mathalpha}{legacymaths}{`1}
+      \DeclareMathSymbol{2}{\mathalpha}{legacymaths}{`2}
+      \DeclareMathSymbol{3}{\mathalpha}{legacymaths}{`3}
+      \DeclareMathSymbol{4}{\mathalpha}{legacymaths}{`4}
+      \DeclareMathSymbol{5}{\mathalpha}{legacymaths}{`5}
+      \DeclareMathSymbol{6}{\mathalpha}{legacymaths}{`6}
+      \DeclareMathSymbol{7}{\mathalpha}{legacymaths}{`7}
+      \DeclareMathSymbol{8}{\mathalpha}{legacymaths}{`8}
+      \DeclareMathSymbol{9}{\mathalpha}{legacymaths}{`9}
+      \DeclareMathSymbol{\Gamma}{\mathalpha}{legacymaths}{0}
+      \DeclareMathSymbol{\Delta}{\mathalpha}{legacymaths}{1}
+      \DeclareMathSymbol{\Theta}{\mathalpha}{legacymaths}{2}
+      \DeclareMathSymbol{\Lambda}{\mathalpha}{legacymaths}{3}
+      \DeclareMathSymbol{\Xi}{\mathalpha}{legacymaths}{4}
+      \DeclareMathSymbol{\Pi}{\mathalpha}{legacymaths}{5}
+      \DeclareMathSymbol{\Sigma}{\mathalpha}{legacymaths}{6}
+      \DeclareMathSymbol{\Upsilon}{\mathalpha}{legacymaths}{7}
+      \DeclareMathSymbol{\Phi}{\mathalpha}{legacymaths}{8}
+      \DeclareMathSymbol{\Psi}{\mathalpha}{legacymaths}{9}
+      \DeclareMathSymbol{\Omega}{\mathalpha}{legacymaths}{10}
+      \DeclareMathSymbol{+}{\mathbin}{legacymaths}{43}
+      \DeclareMathSymbol{=}{\mathrel}{legacymaths}{61}
+      \DeclareMathDelimiter{(}{\mathopen} {legacymaths}{40}{largesymbols}{0}
+      \DeclareMathDelimiter{)}{\mathclose}{legacymaths}{41}{largesymbols}{1}
+      \DeclareMathDelimiter{[}{\mathopen} {legacymaths}{91}{largesymbols}{2}
+      \DeclareMathDelimiter{]}{\mathclose}{legacymaths}{93}{largesymbols}{3}
+      \DeclareMathDelimiter{/}{\mathord}{legacymaths}{47}{largesymbols}{14}
+      \DeclareMathSymbol{\mathdollar}{\mathord}{legacymaths}{36}
+    \fi
+  \fi
+  \DeclareSymbolFont{operators}\zf@enc\zf@rmmaths\mddefault\updefault
+  \SetSymbolFont{operators}{normal}\zf@enc\zf@rmmaths\mddefault\updefault
+  \SetMathAlphabet\mathrm{normal}\zf@enc\zf@rmmaths\mddefault\updefault
+  \SetMathAlphabet\mathit{normal}\zf@enc\zf@rmmaths\mddefault\itdefault
+  \SetMathAlphabet\mathbf{normal}\zf@enc\zf@rmmaths\bfdefault\updefault
+  \SetMathAlphabet\mathsf{normal}\zf@enc\zf@sfmaths\mddefault\updefault
+  \SetMathAlphabet\mathtt{normal}\zf@enc\zf@ttmaths\mddefault\updefault
+  \SetSymbolFont{operators}{bold}\zf@enc\zf@rmmaths\bfdefault\updefault
+  \ifdefined\zf@rmboldmaths
+    \SetMathAlphabet\mathrm{bold}\zf@enc\zf@rmboldmaths\mddefault\updefault
+    \SetMathAlphabet\mathbf{bold}\zf@enc\zf@rmboldmaths\bfdefault\updefault
+    \SetMathAlphabet\mathit{bold}\zf@enc\zf@rmboldmaths\mddefault\itdefault
+  \else
+    \SetMathAlphabet\mathrm{bold}\zf@enc\zf@rmmaths\bfdefault\updefault
+    \SetMathAlphabet\mathit{bold}\zf@enc\zf@rmmaths\bfdefault\itdefault
+  \fi
+  \SetMathAlphabet\mathsf{bold}\zf@enc\zf@sfmaths\bfdefault\updefault
+  \SetMathAlphabet\mathtt{bold}\zf@enc\zf@ttmaths\bfdefault\updefault
+  \let\font@warning\zf@font@warning}
+\def\zf@math@maybe{%
+  \@ifpackageloaded{anttor}{%
+    \ifx\define@antt@mathversions a\@zf@mathfalse\fi}{}
+  \@ifpackageloaded{arev}{\@zf@mathfalse}{}
+  \@ifpackageloaded{eulervm}{\@zf@mathfalse}{}
+  \@ifpackageloaded{mathdesign}{\@zf@mathfalse}{}
+  \@ifpackageloaded{concmath}{\@zf@mathfalse}{}
+  \@ifpackageloaded{cmbright}{\@zf@mathfalse}{}
+  \@ifpackageloaded{mathesf}{\@zf@mathfalse}{}
+  \@ifpackageloaded{gfsartemisia}{\@zf@mathfalse}{}
+  \@ifpackageloaded{gfsneohellenic}{\@zf@mathfalse}{}
+  \@ifpackageloaded{iwona}{%
+    \ifx\define@iwona@mathversions a\@zf@mathfalse\fi}{}
+  \@ifpackageloaded{kpfonts}{\@zf@mathfalse}{}
+  \@ifpackageloaded{kmath}{\@zf@mathfalse}{}
+  \@ifpackageloaded{kurier}{%
+    \ifx\define@kurier@mathversions a\@zf@mathfalse\fi}{}
+  \@ifpackageloaded{fouriernc}{\@zf@mathfalse}{}
+  \@ifpackageloaded{fourier}{\@zf@mathfalse}{}
+  \@ifpackageloaded{mathpazo}{\@zf@mathfalse}{}
+  \@ifpackageloaded{mathptmx}{\@zf@mathfalse}{}
+  \@ifpackageloaded{MinionPro}{\@zf@mathfalse}{}
+  \@ifpackageloaded{unicode-math}{\@zf@mathfalse}{}
+  \@ifpackageloaded{breqn}{\@zf@mathfalse}{}
+  \if@zf@math
+    \fontspec_info:n {setup-math}
+    \zf@math
+  \fi}
+\AtBeginDocument{\zf@math@maybe}
+\cs_new:Npn \fontspec_error:nn    { \msg_error:nnn  {fontspec} }
+\cs_new:Npn \fontspec_warning:n   { \msg_warning:nn   {fontspec} }
+\cs_new:Npn \fontspec_warning:nx  { \msg_warning:nnx  {fontspec} }
+\cs_new:Npn \fontspec_warning:nxx { \msg_warning:nnxx {fontspec} }
+\cs_new:Npn \fontspec_info:n      { \msg_info:nn   {fontspec} }
+\cs_new:Npn \fontspec_info:nx     { \msg_info:nnx  {fontspec} }
+\cs_new:Npn \fontspec_info:nxx    { \msg_info:nnxx {fontspec} }
+\cs_new:Npn \fontspec_trace:n     { \msg_trace:nn   {fontspec} }
+\msg_new:nnn {fontspec} {not-pdftex}
+{
+  fontspec require XeTeX or LuaTeX to function!
+}
+\msg_new:nnn {fontspec} {no-size-info}
+{
+  Size information must be supplied.\\
+  For example, SizeFeatures={Size={8-12},...}.
+}
+\msg_new:nnnn {fontspec} {rename-feature-not-exist}
+{
+  The feature #1 doesn't appear to be defined.
+}
+{
+  It looks like you're trying to rename a feature that doesn't exist.
+}
+\msg_new:nnn {fontpec} {no-glyph}
+{
+  \fontname\zf@basefont\ doesn't appear to have the glyph corresponding to #1.
+}
+\msg_new:nnnn {fontspec} {euler-too-late}
+{
+  The euler package must be loaded BEFORE fontspec.
+}
+{
+  fontspec only overwrites euler's attempt to\\
+  define the maths text fonts if fontspec is\\
+  loaded after euler. Type <return> to proceed\\
+  with incorrect \string\mathit, \string\mathbf, etc.
+}
+
+\msg_new:nnn {fontspec} {addfontfeatures-ignored}
+{
+  \string\addfontfeature (s) ignored;\\
+  it cannot be used with a font that wasn't selected by fontspec.
+}
+\msg_new:nnn {fontspec} {feature-option-overwrite}
+{
+  Option '#2' of font feature '#1' overwritten.
+}
+\msg_new:nnn {fontspec} {script-not-exist}
+{
+  Font \fontname\zf@basefont\ does not contain script '#1'.
+}
+\msg_new:nnn {fontspec} {lang-not-exist}
+{
+  Font \fontname\zf@basefont\space does not contain\\
+  language '#1' for script '\zf@script@name'.
+}
+\msg_new:nnn {fontspec} {aat-feature-not-exist}
+{
+  '\XKV@tfam=\XKV@tkey' feature not supported\\
+  for AAT font \fontname\zf@basefont.
+}
+\msg_new:nnn {fontspec} {aat-feature-not-exist-in-font}
+{
+  AAT feature '\XKV@tfam=\XKV@tkey' (#1) not available\\
+  in font \fontname\zf@basefont.
+}
+\msg_new:nnn {fontspec} {icu-feature-not-exist}
+{
+  '\XKV@tfam=\XKV@tkey' feature not supported\\
+  for ICU font \fontname\zf@basefont
+}
+\msg_new:nnn {fontspec} {icu-feature-not-exist-in-font}
+{
+  OpenType feature '\XKV@tfam=\XKV@tkey' (#1) not available\\
+  for font \fontname\zf@basefont, \\
+  with script '\zf@script@name', and language '\zf@language@name'.
+}
+\msg_new:nnn {fontspec} {no-opticals}
+{
+  \fontname\zf@basefont\ doesn't appear to have an Optical Size axis.
+}
+\msg_new:nnn {fontspec} {language-not-exist}
+{
+  Language '#1' not available\\
+  for font \fontname\zf@basefont\\
+  with script '\zf@script@name'.
+}
+\msg_new:nnn {fontspec} {defining-font}
+{
+  Defining font family for '#2' with options [\zf@default@options #1].
+}
+\msg_new:nnn {fontspec} {no-font-shape}
+{
+  Could not resolve font #1 (it probably doesn't exist).
+}
+\msg_new:nnn {fontspec} {set-scale}
+{
+  \zf@fontname\space scale = \zf@scale.
+}
+\msg_new:nnn {fontspec} {setup-math}
+{
+  Adjusting the maths setup (use [no-math] to avoid this).
+}
+\if@zf@configfile
+  \InputIfFileExists{fontspec.cfg}
+    {\typeout{fontspec.cfg loaded.}}
+    {\typeout{No fontspec.cfg file found; no configuration loaded.}}
+\fi
+%% 
+%% Copyright 2004--2008 by Will Robertson <wspr81@gmail.com>
+%% 
+%% Distributable under the LaTeX Project Public License,
+%% version 1.3c or higher (your choice). The latest version of
+%% this license is at: http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status)
+%% by Will Robertson.
+%% 
+%% This work consists of this file  fontspec.dtx
+%%           and the derived files fontspec.sty,
+%%                                 fontspec.cfg,
+%%                                 fontspec.ins,
+%%                                 fontspec-example.ltx,
+%%                             and fontspec.pdf.
+%% 
+%%
+%% End of file `fontspec.sty'.
