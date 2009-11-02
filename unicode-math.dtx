@@ -1500,7 +1500,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   {
     \bool_set_false:N \g_um_literal_bool
     \ifcase \l_keys_choice_int
-    \or
       \bool_set_false:N \g_um_upGreek_bool
       \bool_set_false:N \g_um_upgreek_bool
       \bool_set_false:N \g_um_upLatin_bool
@@ -1533,7 +1532,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   math-style .choice_code:n =
   {
     \ifcase \l_keys_choice_int
-    \or
       \unimathsetup {
         normal-style=ISO,
         bold-style=ISO,
@@ -1586,7 +1584,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   bold-style .choice_code:n = {
     \bool_set_false:N \g_um_bfliteral_bool
     \ifcase \l_keys_choice_int
-    \or
       \bool_set_false:N \g_um_bfupGreek_bool
       \bool_set_false:N \g_um_bfupgreek_bool
       \bool_set_false:N \g_um_bfupLatin_bool
@@ -1614,7 +1611,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \keys_define:nn {unicode-math} {
   sans-style .choice_code:n = {
     \ifcase \l_keys_choice_int
-    \or
       \bool_set_false:N \g_um_upsans_bool
     \or
       \bool_set_true:N \g_um_upsans_bool
@@ -1632,7 +1628,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   nabla .choice_code:n = {
     \bool_set_false:N \g_um_literal_Nabla_bool
     \ifcase \l_keys_choice_int
-    \or
       \bool_set_true:N \g_um_upNabla_bool
     \or
       \bool_set_false:N \g_um_upNabla_bool
@@ -1649,7 +1644,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   partial .choice_code:n = {
     \bool_set_false:N \g_um_literal_partial_bool
     \ifcase \l_keys_choice_int
-    \or
       \bool_set_true:N \g_um_uppartial_bool
     \or
       \bool_set_false:N \g_um_uppartial_bool
