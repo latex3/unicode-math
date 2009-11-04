@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/11/02 v0.4 Unicode maths in XeLaTeX]
+  [2009/11/04 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -2056,8 +2056,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Select the font with \cs{fontspec} and define \cs{l_um_font} from it.
 %    \begin{macrocode}
 \cs_new:Nn \um_fontspec_select_font:n {
-  \cs_set:Npx \um_tmp: {
-    \exp_not:N \fontspec [
+  \bool_set_true:N \l_um_fontspec_feature_bool
+  \exp_args:Nxx \zf@fontspec
+    {
       BoldFont = {}, ItalicFont = {},
       Script = Math,
       SizeFeatures = {
@@ -2072,14 +2073,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         }
       },
       \l_um_unknown_keys_clist
-    ]{#1}
-  }
+    }
+    {#1}
+  \bool_set_true:N \l_um_fontspec_feature_bool
   \group_begin:
-    \bool_set_true:N \l_um_fontspec_feature_bool
-    \um_tmp:
+    \fontfamily{\zf@family}\selectfont
+    \tl_set:Nx \l_tmpa_tl
+    {
+      \fontname\use:c{\f@encoding/\zf@family/\mddefault/\updefault/\f@size}
+    }
+    \luatex_if_engine:T { \tl_set:Nx \l_tmpa_tl { [\l_tmpa_tl] } }
+    \global\font\l_um_font\l_tmpa_tl\relax
   \group_end:
-  \font\l_um_font=\fontname
-    \csname\f@encoding/\zf@family/\mddefault/\updefault/\f@size\endcsname
 }
 %    \end{macrocode}
 % \end{macro}
