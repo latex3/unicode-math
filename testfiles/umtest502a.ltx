@@ -1,0 +1,21 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{STIXGeneral}
+\setmathfont
+    [range={\mathit,\mathsfit,\mathscr}]
+    {STIXGeneral-Italic}
+\setmathfont
+    [range={\mathbfup,\mathbffrak,
+         \mathbfscr,\mathbfsfup}]
+    {STIXGeneral-Bold}
+\setmathfont
+    [range={\mathbfit,\mathbfsfit}]
+    {STIXGeneral-BoldItalic}
+\begin{document}
+\[\mathit{A}\mathup{A}
+  \mathsfup{A}\mathsfit{A}\]
+\[\mathscr{A}\mathfrak{A}\mathbb{A}\]
+\[\mathbfup{A}\mathbfit{A}
+  \mathbfsfup{A}\mathbfsfit{A}\]
+\[\mathbfscr{A}\mathbffrak{A}\]
+\end{document}
