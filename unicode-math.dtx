@@ -1156,17 +1156,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Compatibility with Lua\TeX}
 %
-% \begin{macro}{\xetex_or_luatex:nn}
-% Use |#1| if \XeTeX\ or |#2| if Lua\TeX.
-%    \begin{macrocode}
-\xetex_if_engine:TF
-  { \cs_new_eq:NN \xetex_or_luatex:nn \use_i:nn }
-  { \luatex_if_engine:T
-    { \cs_new_eq:NN \xetex_or_luatex:nn \use_ii:nn }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
 %    \begin{macrocode}
 \xetex_or_luatex:nn
   { \cs_new:Nn \um_cs_compat:n { \cs_set_eq:cc {U#1} {XeTeX#1}   } }
