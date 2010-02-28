@@ -4576,66 +4576,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % |http://www.ams.org/STIX/bnb/stix-tbl.asc|
 % but check |http://www.ams.org/STIX/| for more up-to-date info.
 %
-% This table is converted into a form suitable for reading by \XeTeX, and
-% then hand-edited by the author; the result is |unicode-math-table.tex|.
-%
+% This table is converted into a form suitable for reading by \XeTeX.
 % A single file is produced containing all (more than 3298) symbols.
 % Future optimisations might include generating various (possibly overlapping) subsets
 % so not all definitions must be read just to redefine a small range of symbols.
 % Performance for now seems to be acceptable without such measures.
 %
+% This file is currently developed outside this DTX file. It will be
+% incorporated when the final version is ready. (I know this is not how
+% things are supposed to work!)
+%
 %    \begin{macrocode}
-#!/bin/sh
-
-cat stix-tbl.txt |
-awk '
-%    \end{macrocode}
-% If the USV isn't repeated (TODO: check this is valid!) and the entry isn't one of the weird ones in the big block at the end of the \STIX\ table (TODO: check that out!)\dots
-%    \begin{macrocode}
- {if (usv != substr($0,2,5) && substr($0,2,1) != " ")
-    {usv = substr($0,2,5);
-     texname = substr($0,84,25);
-     class = substr($0,57,1);
-     description = tolower(substr($0,233,350));
-%    \end{macrocode}
-% If the USV has a macro name, which isn't \cs{text...}, and isn't a single character macro (e.g., \cmd\#, \cmd\S, \dots), and has a class, and it isn't reserved (\ie, doubled up with a previously assigned glyph):
-%    \begin{macrocode}
-     if (texname      ~ /[\\]/ && 
-         substr(texname,0,5) != "\\text"    && 
-         substr(texname,0,4) != "\\ipa"    && 
-         substr(texname,0,5) != "\\tone"    && 
-         substr(texname,3,1) != " "    &&
-         class       != " "    && 
-         description !~ /<reserved>/ )
-%    \end{macrocode}
-% Print the actual entry corresponding to the unicode character:
-%    \begin{macrocode}
-     print "\\UnicodeMathSymbol{\"" \
-           usv "}{" \
-           texname "}{" \
-           class "}{" \
-           description "}%";
-    }}' - |
-%    \end{macrocode}
-% Now replace the \STIX\ class abbreviations with their \TeX\ macro names.
-%    \begin{macrocode}
-sed -e ' s/{N}/{\\mathord}/   ' \
-%    \end{macrocode}
-% A `fence' defined by the \STIX\ table is something like \cmd\vert; in \XeTeX\ this is just a \cmd\mathord\ that will grow with the magic of \cmd\Umathchardef.
-%    \begin{macrocode}
-    -e ' s/{F}/{\\mathord}/   ' \
-    -e ' s/{A}/{\\mathalpha}/ ' \
-    -e ' s/{D}/{\\mathaccent}/ ' \
-    -e ' s/{P}/{\\mathpunct}/ ' \
-    -e ' s/{B}/{\\mathbin}/   ' \
-    -e ' s/{R}/{\\mathrel}/   ' \
-    -e ' s/{L}/{\\mathop}/    ' \
-    -e ' s/{O}/{\\mathopen}/  ' \
-    -e ' s/{C}/{\\mathclose}/ ' \
-%    \end{macrocode}
-% Fixing up a couple of things in the STIX table.
-%    \begin{macrocode}
-    -e ' s/\^/\\string^/   ' > unicode-math.tex
+< See stix-extract.sh for now. >
 %    \end{macrocode}
 %\iffalse
 %</awk>
