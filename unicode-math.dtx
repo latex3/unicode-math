@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2009/12/26 v0.4 Unicode maths in XeLaTeX]
+  [2010/02/28 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -4484,6 +4484,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 %    \end{macrocode}
 % \paragraph{Symbols}
+%    \begin{macrocode}
+\cs_set:Npn \| {\Vert}
+%    \end{macrocode}
 % \cs{mathinner} items:
 %    \begin{macrocode}
 \cs_set:Npn \mathellipsis {\mathinner{\unicodeellipsis}}

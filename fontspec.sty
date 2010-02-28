@@ -13,7 +13,7 @@
 %%   License information appended.
 %% 
 \ProvidesPackage{fontspec}
-  [2010/01/07 v2.0 Advanced font selection for XeLaTeX/LuaLaTeX]
+  [2010/01/20 v2.0 Advanced font selection for XeLaTeX/LuaLaTeX]
 \RequirePackage{expl3,xparse}
 \ExplSyntaxOn
 \msg_new:nnn {fontspec} {not-pdftex}
@@ -52,13 +52,13 @@
 \newcount\c@zf@index
 \newcount\c@zf@script
 \newcount\c@zf@language
-\cs_if_free:NT \exp_arg:x
+\cs_if_free:NT \use:x
  {
-  \cs_set:Nn \exp_arg:x { \edef\@tempa{#1}\@tempa }
+  \cs_set:Nn \use:x { \edef\@tempa{#1}\@tempa }
  }
-\cs_new:Nn \setkeys:xxx
+\cs_new:Nn \fontspec_setkeys:xx
  {
-  \exp_arg:x { \noexpand\setkeys*[#1]{#2}{#3} }
+  \use:x { \noexpand\setkeys*[zf]{#1}{#2} }
  }
 \DeclareOption{cm-default}{\@zf@euencfalse}
 \DeclareOption{lm-default}{\@zf@euenctrue}
@@ -80,24 +80,25 @@
 \RequirePackage{xkeyval}[2005/05/07]
 \if@zf@euenc
   \xetex_or_luatex:nn {
-    \def\zf@enc{EU1}
+    \tl_set:Nn \zf@enc {EU1}
   }{
-    \def\zf@enc{EU2}
+    \tl_set:Nn \zf@enc {EU2}
   }
-  \renewcommand{\rmdefault}{lmr}
-  \renewcommand{\sfdefault}{lmss}
-  \renewcommand{\ttdefault}{lmtt}
+  \tl_set:Nn \rmdefault {lmr}
+  \tl_set:Nn \sfdefault {lmss}
+  \tl_set:Nn \ttdefault {lmtt}
   \RequirePackage[\zf@enc]{fontenc}
 \else
-  \def\zf@enc{U}
-  \let\encodingdefault\zf@enc
+  \tl_set:Nn \zf@enc {U}
+  \tl_set_eq:NN \encodingdefault \zf@enc
 \fi
-\let\UTFencname\zf@enc
-\let\cyrillicencoding\zf@enc
-\let\latinencoding\zf@enc
-\g@addto@macro\document{
-  \let\cyrillicencoding\zf@enc
-  \let\latinencoding\zf@enc}
+\tl_set_eq:NN \UTFencname \zf@enc % for xunicode
+\tl_set_eq:NN \cyrillicencoding \zf@enc
+\tl_set_eq:NN \latinencoding    \zf@enc
+\g@addto@macro \document {
+  \tl_set_eq:NN \cyrillicencoding \zf@enc
+  \tl_set_eq:NN \latinencoding    \zf@enc
+}
 \DeclareDocumentCommand \fontspec { O{} m } {
   \zf@fontspec{#1}{#2}
   \fontfamily\zf@family\selectfont
@@ -105,17 +106,17 @@
 }
 \DeclareDocumentCommand \setmainfont { O{} m } {
   \zf@fontspec{#1}{#2}
-  \let\rmdefault\zf@family
+  \tl_set_eq:NN \rmdefault \zf@family
   \normalfont
 }
 \DeclareDocumentCommand \setsansfont { O{} m } {
   \zf@fontspec{#1}{#2}
-  \let\sfdefault\zf@family
+  \tl_set_eq:NN \sfdefault \zf@family
   \normalfont
 }
 \DeclareDocumentCommand \setmonofont { O{} m } {
   \zf@fontspec{#1}{#2}
-  \let\ttdefault\zf@family
+  \tl_set_eq:NN \ttdefault \zf@family
   \normalfont
 }
 \DeclareDocumentCommand \setmathrm { O{} m } {
@@ -143,7 +144,7 @@
 \def\zf@ttmaths{\ttdefault}
 \DeclareDocumentCommand \newfontfamily { m O{} m } {
   \zf@fontspec{#2}{#3}
-  \exp_arg:x {
+  \use:x {
     \noexpand \DeclareRobustCommand \noexpand #1 {
       \noexpand \fontfamily {\zf@family} \noexpand \selectfont
     }
@@ -158,7 +159,7 @@
   \ifcsname zf@family@fontdef\f@family\endcsname
     \begingroup
       \let\zf@default@options\@empty
-      \exp_arg:x {
+      \use:x {
         \noexpand\zf@fontspec
           {\csname zf@family@options\f@family\endcsname,#1}
           {\csname zf@family@fontname\f@family\endcsname}
@@ -208,11 +209,7 @@
       \global\c@zf@script\@tempcnta\relax
       \xdef\zf@script@name{#1}
       \zf@update@family{+script=#1}
-      \xetex_or_luatex:nn {
-        \tl_set:Nn \l_fontspec_script_tl {#2}
-      }{
-        \luadirect{fontspec.specs.script = "#2"}
-      }
+      \tl_set:Nn \l_fontspec_script_tl {#2}
     \else
       \fontspec_warning:nx {script-not-exist} {#1}
     \fi
@@ -225,11 +222,7 @@
       \global\c@zf@language\@tempcnta\relax
       \xdef\zf@language@name{#1}
       \zf@update@family{+lang=#1}
-      \xetex_or_luatex:nn {
-        \tl_set:Nn \l_fontspec_lang_tl {#2}
-      }{
-        \luadirect{fontspec.specs.language = "#2"}
-      }
+      \tl_set:Nn \l_fontspec_lang_tl {#2}
     \else
       \fontspec_warning:nx {lang-not-exist} {#1}
     \fi
@@ -242,33 +235,18 @@
 \DeclareFontsExtensions{.otf,.ttf,.OTF,.TTF}
 \cs_set:Npn \zf@fontspec #1#2 {
   \begingroup
-  \zf@init
+  \fontspec_init:
   \edef\zf@fontname{#2}
   \let\zf@family@long\zf@fontname
   \let\zf@up\zf@fontname
-  \fontspec_parse_external_font:nn {#1} {#2}
+  \fontspec_if_detect_external:nT {#2}
+   { \setkeys[zf]{preparse-external}{ExternalLocation} }
+  \fontspec_setkeys:xx {preparse-external} {\zf@default@options #1}
   \let\zf@fontname\zf@up
-  \setkeys:xxx {zf} {preparse} {\XKV@rm}
+  \fontspec_setkeys:xx {preparse} {\XKV@rm}
   \let\zf@font@feat\XKV@rm
-  \font\zf@basefont=
-    "\zf@font@wrap{\zf@up\l_fontspec_extension_tl}\zf@suffix"~at~\f@size pt
-  \xetex_if_engine:T
-  {
-    \unless\ifzf@icu
-      \zf@set@font@type
-    \fi
-    \ifx \l_fontspec_renderer_tl \@empty
-      \ifzf@atsui
-        \tl_set:Nn \l_fontspec_renderer_tl {AAT}
-      \else
-        \ifzf@icu
-          \tl_set:Nn \l_fontspec_renderer_tl {ICU}
-        \fi
-      \fi
-      \font\zf@basefont=
-        "\zf@font@wrap{\zf@up\l_fontspec_extension_tl}\zf@suffix"~at~ \f@size pt
-    \fi
-  }
+  \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
+  \xetex_if_engine:T { \fontspec_set_font_type: }
   \zf@firsttimetrue
     \zf@get@feature@requests{\zf@font@feat}
   \zf@firsttimefalse
@@ -289,68 +267,22 @@
   \xdef\zf@family{\@nameuse{zf@UID@\zf@family@long}}
   \unless\ifcsname zf@family@fontname\zf@family\endcsname
     \fontspec_info:nxx {defining-font} {#1} {#2}
-    \cs_gset:cpx{zf@family@fontname\zf@family}{#2}
-    \cs_gset:cpx{zf@family@options\zf@family}{\zf@default@options #1}
-    \cs_gset:cpx{zf@family@fontdef\zf@family}{
-      \zf@font@wrap{\zf@fontname\l_fontspec_extension_tl}\zf@suffix
-      :\zf@pre@ff\zf@ff
+    \cs_gset:cpx {zf@family@fontname\zf@family} {#2}
+    \cs_gset:cpx {zf@family@options\zf@family} {\zf@default@options #1}
+    \cs_gset:cpx {zf@family@fontdef\zf@family} {
+      \fontspec_fullname:n {\zf@fontname} : \l_fontspec_pre_feat_tl \zf@ff
     }
     \DeclareFontFamily{\zf@enc}{\zf@family}{}
     \zf@make@font@shapes{\zf@fontname}
       {\mddefault}{\updefault}{\zf@font@feat\zf@up@feat}
-    \unless\ifzf@nobf
-      \ifx\zf@bf\@empty
-        \zf@make@font@shapes[\zf@fontname]{/B}
-          {\bfdefault}{\updefault}{\zf@font@feat\zf@bf@feat}
-      \else
-        \zf@make@font@shapes{\zf@bf}
-          {\bfdefault}{\updefault}{\zf@font@feat\zf@bf@feat}
-      \fi
-    \fi
-    \unless\ifzf@noit
-      \ifx\zf@it\@empty
-        \zf@make@font@shapes[\zf@fontname]{/I}
-          {\mddefault}{\itdefault}{\zf@font@feat\zf@it@feat}
-      \else
-        \zf@make@font@shapes{\zf@it}
-          {\mddefault}{\itdefault}{\zf@font@feat\zf@it@feat}
-      \fi
-    \fi
-    \@tempswatrue
-    \ifzf@nobf\@tempswafalse\fi
-    \ifzf@noit\@tempswafalse\fi
-    \if@tempswa
-      \ifx\zf@bfit\@empty
-        \ifx\zf@bf\@empty
-          \ifx\zf@it\@empty
-            \zf@make@font@shapes[\zf@fontname]{/BI}
-              {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
-          \else
-            \zf@make@font@shapes[\zf@it]{/B}
-              {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
-          \fi
-        \else
-          \zf@make@font@shapes[\zf@bf]{/I}
-            {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
-        \fi
-      \else
-        \zf@make@font@shapes{\zf@bfit}
-          {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
-      \fi
-    \fi
+    \fontspec_set_bold:
+    \fontspec_set_italic:
+    \fontspec_set_slanted:
+    \fontspec_set_bold_italic:
+    \fontspec_set_bold_slanted:
   \fi
   \endgroup
 }
-\cs_new:Nn \fontspec_parse_external_font:nn
- {
-  \bool_set_false:N \l_fontspec_external_bool
-  \setkeys:xxx {zf} {preparse-external} {\zf@default@options #1}
-  \bool_if:NF \l_fontspec_external_bool
-   {
-    \fontspec_if_detect_external:nT {#2}
-     { \setkeys*[zf]{preparse-external}{ExternalLocation} }
-   }
- }
 \prg_new_conditional:Nnn \fontspec_if_detect_external:n {T}
  {
   \clist_map_inline:Nn \l_fontspec_extensions_clist
@@ -361,7 +293,73 @@
    }
   \bool_if:NTF \l_tmpa_bool \prg_return_true: \prg_return_false:
  }
-\newcommand*\zf@set@font@type{
+\cs_set:Nn \fontspec_fullname:n {
+  \zf@font@wrap { #1 \l_fontspec_extension_tl } \zf@suffix
+}
+\cs_new:Nn \fontspec_set_bold: {
+  \unless\ifzf@nobf
+    \ifx\zf@bf\@empty
+      \zf@make@font@shapes[\zf@fontname]{/B}
+        {\bfdefault}{\updefault}{\zf@font@feat\zf@bf@feat}
+    \else
+      \zf@make@font@shapes{\zf@bf}
+        {\bfdefault}{\updefault}{\zf@font@feat\zf@bf@feat}
+    \fi
+  \fi
+}
+\cs_new:Nn \fontspec_set_italic: {
+  \unless\ifzf@noit
+    \ifx\zf@it\@empty
+      \zf@make@font@shapes[\zf@fontname]{/I}
+        {\mddefault}{\itdefault}{\zf@font@feat\zf@it@feat}
+    \else
+      \zf@make@font@shapes{\zf@it}
+        {\mddefault}{\itdefault}{\zf@font@feat\zf@it@feat}
+    \fi
+  \fi
+}
+\cs_new:Nn \fontspec_set_slanted: {
+  \ifx\zf@sl\@empty\else
+    \zf@make@font@shapes{\zf@sl}
+      {\mddefault}{\sldefault}{\zf@font@feat\zf@sl@feat}
+  \fi
+}
+\cs_new:Nn \fontspec_set_bold_italic: {
+  \@tempswatrue
+  \ifzf@nobf\@tempswafalse\fi
+  \ifzf@noit\@tempswafalse\fi
+  \if@tempswa
+    \ifx\zf@bfit\@empty
+      \ifx\zf@bf\@empty
+        \ifx\zf@it\@empty
+          \zf@make@font@shapes[\zf@fontname]{/BI}
+            {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
+        \else
+          \zf@make@font@shapes[\zf@it]{/B}
+            {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
+        \fi
+      \else
+        \zf@make@font@shapes[\zf@bf]{/I}
+          {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
+      \fi
+    \else
+      \zf@make@font@shapes{\zf@bfit}
+        {\bfdefault}{\itdefault}{\zf@font@feat\zf@bfit@feat}
+    \fi
+  \fi
+}
+\cs_new:Nn \fontspec_set_bold_slanted: {
+  \ifx\zf@bfsl\@empty
+    \ifx\zf@sl\@empty\else
+      \zf@make@font@shapes[\zf@sl]{/B}
+        {\bfdefault}{\sldefault}{\zf@font@feat\zf@bfsl@feat}
+    \fi
+  \else
+    \zf@make@font@shapes{\zf@bfsl}
+      {\bfdefault}{\sldefault}{\zf@font@feat\zf@bfsl@feat}
+  \fi
+}
+\cs_new:Nn \fontspec_set_font_type: {
   \zf@tfmfalse \zf@atsuifalse \zf@icufalse \zf@mmfalse \zf@graphitefalse
   \ifcase\XeTeXfonttype\zf@basefont
     \zf@tfmtrue
@@ -373,15 +371,23 @@
   \or
     \zf@icutrue
   \fi
+  \ifx \l_fontspec_renderer_tl \@empty
+    \ifzf@atsui
+      \tl_set:Nn \l_fontspec_renderer_tl {/AAT}
+    \else\ifzf@icu
+      \tl_set:Nn \l_fontspec_renderer_tl {/ICU}
+    \fi\fi
+    \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
+  \fi
 }
 \newcommand*\zf@make@font@shapes[5][]{
   \begingroup
     \edef\@tempa{#1}
     \unless\ifx\@tempa\@empty
-      \font\@tempfonta="\zf@font@wrap{#1\l_fontspec_extension_tl}\zf@suffix"~at~\f@size pt
+      \font\@tempfonta="\fontspec_fullname:n {#1}"~at~\f@size pt
       \edef\@tempa{\fontname\@tempfonta}
     \fi
-    \font\@tempfontb="\zf@font@wrap{#1#2\l_fontspec_extension_tl}\zf@suffix"~at~\f@size pt
+    \font\@tempfontb="\fontspec_fullname:n {#1#2}"~at~\f@size pt
     \edef\@tempb{\fontname\@tempfontb}
     \ifx\@tempa\@tempb
       \fontspec_info:nx {no-font-shape} {#1#2}
@@ -408,50 +414,55 @@
 \newcommand\zf@DeclareFontShape[4][]{
   \ifx\zf@size@feat\@empty
     \zf@get@feature@requests{#4}
-    \edef\zf@font@str{<->\zf@scale"\zf@font@wrap{\zf@fontname\l_fontspec_extension_tl}\zf@suffix :
-      \zf@pre@ff\zf@ff#1"}
+    \edef \zf@font@str {
+      <-> \zf@scale "
+      \fontspec_fullname:n {\zf@fontname} :
+        \l_fontspec_pre_feat_tl \zf@ff #1 "
+    }
   \else
     \clist_map_variable:NNn \zf@size@feat \zf@this@size {
       \let\zf@size\@empty
       \let\zf@size@fnt\zf@fontname
-      \setkeys:xxx {zf} {sizing} {\expandafter\@firstofone\zf@this@size}
+      \fontspec_setkeys:xx {sizing} {\expandafter\@firstofone\zf@this@size}
       \ifx\zf@size\@empty
         \fontspec_error:n {no-size-info}
       \fi
       \zf@get@feature@requests{#4,\XKV@rm}
       \edef\zf@font@str{
         \zf@font@str <\zf@size> \zf@scale "
-        \zf@font@wrap { \zf@size@fnt \l_fontspec_extension_tl }
-        \zf@suffix : \zf@pre@ff \zf@ff #1 "
+        \fontspec_fullname:n { \zf@size@fnt }
+          : \l_fontspec_pre_feat_tl \zf@ff #1 "
       }
     }
   \fi
-  \exp_arg:x{
+  \use:x{
     \noexpand\DeclareFontShape{\zf@enc}{\zf@family}{#2}{#3}
       {\zf@font@str}{\zf@adjust}
   }
   \edef\@tempa{#3}
   \edef\@tempb{\itdefault}
   \ifx\@tempa\@tempb
-    \exp_arg:x{
+    \use:x{
       \noexpand\DeclareFontShape{\zf@enc}{\zf@family}{#2}{\sldefault}
         {<->ssub*\zf@family/#2/\itdefault}{\zf@adjust}
     }
   \fi
 }
 \cs_set:Npn \zf@suffix {
-  / \l_fontspec_renderer_tl
+  \l_fontspec_renderer_tl
   \l_fontspec_optical_size_tl
 }
 \xetex_or_luatex:nn{
-  \cs_set:Npn \zf@pre@ff {
-    script=\l_fontspec_script_tl
-    \zf@feat@sepa
-    language=\l_fontspec_lang_tl
-    \zf@feat@sepa
+  \tl_set:Nn \l_fontspec_pre_feat_tl {
+    script   = \l_fontspec_script_tl ;
+    language = \l_fontspec_lang_tl   ;
   }
 }{
-  \def\zf@pre@ff{\luadirect{fontspec.specs.get()}}
+  \tl_set:Nn \l_fontspec_pre_feat_tl {
+    mode     = \l_fontspec_mode_tl   ;
+    script   = \l_fontspec_script_tl ;
+    language = \l_fontspec_lang_tl   ;
+  }
 }
 \newcommand*{\zf@update@family}[1]{
   \ifzf@firsttime
@@ -462,41 +473,41 @@
   \let\zf@ff     \@empty
   \let\zf@scale  \@empty
   \let\zf@adjust \@empty
-  \setkeys:xxx {zf} {options} { #1 }
+  \fontspec_setkeys:xx {options} { #1 }
   \ifx \XKV@rm \@empty \else
   \fi
   \PackageInfo{fontspec}{Raw~ font~ features~ "\zf@ff"}
 }
-\newcommand*\zf@init{
+\tl_clear:N \zf@bf
+\tl_clear:N \zf@it
+\tl_clear:N \zf@bfit
+\tl_clear:N \zf@sl
+\tl_clear:N \zf@bfsl
+\tl_clear:N \zf@sc
+\tl_clear:N \zf@up@feat
+\tl_clear:N \zf@bf@feat
+\tl_clear:N \zf@it@feat
+\tl_clear:N \zf@bfit@feat
+\tl_clear:N \zf@sl@feat
+\tl_clear:N \zf@bfsl@feat
+\tl_clear:N \zf@sc@feat
+\tl_clear:N \zf@size@feat
+\tl_clear:N \zf@font@str
+\newcommand*\fontspec_init:{
   \zf@icufalse
-  \let\zf@font@feat   \@empty
-  \let\zf@font@str    \@empty
   \let\zf@font@wrap   \@firstofone
   \tl_clear:N \l_fontspec_optical_size_tl
   \tl_clear:N \l_fontspec_renderer_tl
-  \let\zf@bf          \@empty
-  \let\zf@it          \@empty
-  \let\zf@bfit        \@empty
-  \let\zf@sc          \@empty
-  \let\zf@up@feat     \@empty
-  \let\zf@bf@feat     \@empty
-  \let\zf@it@feat     \@empty
-  \let\zf@bfit@feat   \@empty
-  \let\zf@sc@feat     \@empty
-  \let\zf@size        \@empty
-  \let\zf@size@feat   \@empty
-  \let\zf@size@fnt    \@empty
   \c@zf@script 1818326126\relax
   \def\zf@script@name{Latin}
   \tl_set:Nn \l_fontspec_script_tl {latn}
-  \tl_set:Nn \l_fontspec_lang_tl {DFLT}
   \c@zf@language 0\relax
   \def\zf@language@name{Default}
   \xetex_or_luatex:nn {
-    \def\zf@feat@sepa{\ifzf@icu,\else;\fi}
+    \tl_set:Nn \l_fontspec_lang_tl {DFLT}
   }{
-    \def\zf@feat@sepa{;}
-    \luadirect{fontspec.specs.init()}
+    \tl_set:Nn \l_fontspec_lang_tl {dflt}
+    \tl_set:Nn \l_fontspec_mode_tl {node}
     \luatexprehyphenchar   =`\-  % fixme
     \luatexposthyphenchar  = 0   % fixme
     \luatexpreexhyphenchar = 0   % fixme
@@ -522,14 +533,14 @@
     \ifzf@icu
       \zf@check@ot@feat{+smcp}
       \if@tempswa
-        \edef\zf@smallcaps{+smcp,}
+        \edef\zf@smallcaps{+smcp;}
       \fi
     \fi
   }
 }
 \newcommand*\zf@update@ff[1]{
   \unless\ifzf@firsttime
-    \xdef\zf@ff{\zf@ff #1\zf@feat@sepa}
+    \xdef\zf@ff{\zf@ff #1;}
   \fi
 }
 \newcommand*\zf@make@feature[3]{
@@ -543,17 +554,8 @@
     \fi
   }
   {
-    \fontspec_make_LT_feature:n {#3}
+    \fontspec_make_ICU_feature:n {#3}
   }
-}
-\cs_new:Nn \fontspec_make_LT_feature:n {
-  \zf@check@ot@feat{#1}
-  \if@tempswa
-    \zf@update@family{#1}
-    \zf@update@ff{#1}
-  \else
-    \fontspec_warning:nx {icu-feature-not-exist-in-font} {#1}
-  \fi
 }
 \cs_new:Nn \fontspec_make_AAT_feature:nn {
   \def\@tempa{#1}
@@ -680,7 +682,7 @@
     \repeat
   }
   {
-    \luadirect{fontspec.check_ot_lang("zf@basefont", "#1", fontspec.specs.script)}
+    \luadirect{fontspec.check_ot_lang("zf@basefont", "#1", "\l_fontspec_script_tl")}
   }
 }
 \newcommand*\zf@check@ot@feat[1]{
@@ -700,23 +702,26 @@
     \repeat
   }
   {
-    \luadirect{fontspec.check_ot_feat("zf@basefont", "#1", fontspec.specs.language, fontspec.specs.script)}
+    \luadirect{fontspec.check_ot_feat("zf@basefont", "#1", "\l_fontspec_lang_tl", "\l_fontspec_script_tl")}
   }
 }
 \bool_new:N \l_fontspec_external_bool
 \define@key[zf]{preparse-external}{ExternalLocation}[]{
-  \bool_set_true:N \l_fontspec_external_bool
-  \zf@icutrue
   \zf@nobftrue
   \zf@noittrue
+  \bool_set_true:N \l_fontspec_external_bool
   \gdef\zf@font@wrap##1{[#1##1]}
+  \xetex_if_engine:T { \setkeys[zf]{preparse}{Renderer=ICU} }
 }
 \define@key[zf]{preparse-external}{Extension}{
   \tl_set:Nn \l_fontspec_extension_tl {#1}
-  \setkeys*[zf]{preparse-external}{ExternalLocation}
+  \bool_if:NF \l_fontspec_external_bool {
+    \setkeys*[zf]{preparse-external}{ExternalLocation}
+  }
 }
 \tl_clear:N \l_fontspec_extension_tl
-\define@choicekey[zf]{preparse}{Renderer}[\l_tmpa_tl\l_tmpa_num]{AAT,ICU,Graphite,Full,Basic}{
+\define@choicekey[zf]{preparse-renderer}{Renderer}[\l_tmpa_tl\l_tmpa_num]
+    {AAT,ICU,Graphite,Full,Basic}{
   \zf@update@family{+rend:#1}
   \intexpr_compare:nTF {\l_tmpa_num < 3} {
     \xetex_or_luatex:nn
@@ -728,27 +733,25 @@
     }
   }{
     \xetex_or_luatex:nn
-      { \fontspec_warning:nx {only-luatex-feature} {Renderer=Full/Basic} }
-      {
-        \luadirect{fontspec.specs.mode = "\tl_use:c{g_fontspec_renderer_tag_\l_tmpa_tl}"}
-      }
+    { \fontspec_warning:nx {only-luatex-feature} {Renderer=Full/Basic} }
+    {
+      \tl_set:Nv \l_fontspec_mode_tl {g_fontspec_mode_tag_\l_tmpa_tl}
+    }
   }
-  \font\zf@basefont="\zf@font@wrap {\zf@up \l_fontspec_extension_tl} \zf@suffix"~at~\f@size pt
+  \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
 }
-\tl_set:cn {g_fontspec_renderer_tag_AAT} {AAT}
-\tl_set:cn {g_fontspec_renderer_tag_ICU} {ICU}
-\tl_set:cn {g_fontspec_renderer_tag_Graphite} {GR}
-\tl_set:cn {g_fontspec_renderer_tag_Full}  {node}
-\tl_set:cn {g_fontspec_renderer_tag_Basic} {base}
+\tl_set:cn {g_fontspec_renderer_tag_AAT} {/AAT}
+\tl_set:cn {g_fontspec_renderer_tag_ICU} {/ICU}
+\tl_set:cn {g_fontspec_renderer_tag_Graphite} {/GR}
+\tl_set:cn {g_fontspec_mode_tag_Full}  {node}
+\tl_set:cn {g_fontspec_mode_tag_Basic} {base}
 \define@key[zf]{preparse}{Script}{
-  \zf@icutrue
-  \xetex_if_engine:T { \setkeys[zf]{preparse}{Renderer=ICU} }
+  \xetex_if_engine:T { \setkeys[zf]{preparse-renderer}{Renderer=ICU} }
   \zf@update@family{+script:#1}
   {\setkeys[zf@feat]{Script}{#1}}
 }
 \define@key[zf]{preparse}{Language}{
-  \zf@icutrue
-  \xetex_if_engine:T { \setkeys[zf]{preparse}{Renderer=ICU} }
+  \xetex_if_engine:T { \setkeys[zf]{preparse-renderer}{Renderer=ICU} }
   \zf@update@family{+language:#1}
   {\setkeys[zf@feat]{Lang}{#1}}
 }
@@ -782,6 +785,14 @@
   \fontspec_complete_fontname:Nn \zf@bfit {#1}
   \zf@update@family{bfit:#1}
 }
+\define@key[zf]{preparse-external}{SlantedFont}{
+  \fontspec_complete_fontname:Nn \zf@sl {#1}
+  \zf@update@family{sl:#1}
+}
+\define@key[zf]{preparse-external}{BoldSlantedFont}{
+  \fontspec_complete_fontname:Nn \zf@bfsl {#1}
+  \zf@update@family{bfsl:#1}
+}
 \define@key[zf]{options}{SmallCapsFont}{
   \edef\@tempa{#1}
   \ifx\@tempa\@empty
@@ -799,23 +810,31 @@
 }
 \cs_generate_variant:Nn \tl_replace_all_in:Nnn {Nnx}
 \define@key[zf]{preparse}{UprightFeatures}{
-  \def\zf@up@feat{,#1}
+  \def\zf@up@feat{, #1}
   \zf@update@family{rmfeat:#1}
 }
 \define@key[zf]{preparse}{BoldFeatures}{
-  \def\zf@bf@feat{,#1}
+  \def\zf@bf@feat{, #1}
   \zf@update@family{bffeat:#1}
 }
 \define@key[zf]{preparse}{ItalicFeatures}{
-  \def\zf@it@feat{,#1}
+  \def\zf@it@feat{, #1}
   \zf@update@family{itfeat:#1}
 }
 \define@key[zf]{preparse}{BoldItalicFeatures}{
-  \def\zf@bfit@feat{,#1}
+  \def\zf@bfit@feat{, #1}
   \zf@update@family{bfitfeat:#1}
 }
+\define@key[zf]{preparse}{SlantedFeatures}{
+  \def\zf@sl@feat{, #1}
+  \zf@update@family{slfeat:#1}
+}
+\define@key[zf]{preparse}{BoldSlantedFeatures}{
+  \def\zf@bfsl@feat{, #1}
+  \zf@update@family{bfslfeat:#1}
+}
 \define@key[zf]{options}{SmallCapsFeatures}{
-  \unless\ifzf@firsttime\def\zf@sc@feat{,#1}\fi
+  \unless\ifzf@firsttime\def\zf@sc@feat{, #1}\fi
   \zf@update@family{scfeat:\zap@space #1~\@empty}
 }
 \define@key[zf]{preparse}{SizeFeatures}{
@@ -937,11 +956,11 @@
   \fi
 }
 \def\zf@check@one@char#1#2\zf@@{\def\@tempb{#2}}
-\define@key[zf]{options}{Colour}{
+\define@key[zf]{options}{Color}{
   \zf@update@family{+col:#1}
   \zf@update@ff{color=#1}
 }
-\keyval@alias@key[zf]{options}{Colour}{Color}
+\keyval@alias@key[zf]{options}{Color}{Colour}
 \define@key[zf]{options}{Mapping}{
   \zf@update@family{+map:#1}
   \zf@update@ff{mapping=#1}
@@ -955,21 +974,26 @@
   \zf@update@ff{width=#1}
 }
 \define@key[zf]{options}{OpticalSize}{
-  \ifzf@icu
-    \tl_set:Nn \l_fontspec_optical_size_tl {/ S = #1}
-    \zf@update@family{+size:#1}
-  \fi
-  \ifzf@mm
-    \zf@update@family{+size:#1}
-    \zf@update@ff{optical size=#1}
-  \fi
-  \ifzf@icu\else
-    \ifzf@mm\else
-      \ifzf@firsttime
-        \fontspec_warning:n {no-opticals}
+  \xetex_or_luatex:nn {
+    \ifzf@icu
+      \tl_set:Nn \l_fontspec_optical_size_tl {/ S = #1}
+      \zf@update@family{+size:#1}
+    \fi
+    \ifzf@mm
+      \zf@update@family{+size:#1}
+      \zf@update@ff{optical size=#1}
+    \fi
+    \ifzf@icu\else
+      \ifzf@mm\else
+        \ifzf@firsttime
+          \fontspec_warning:n {no-opticals}
+        \fi
       \fi
     \fi
-  \fi
+  }{
+    \tl_set:Nn \l_fontspec_optical_size_tl {/ S = #1}
+    \zf@update@family{+size:#1}
+  }
 }
 \define@key[zf]{options}{FakeSlant}{
   \zf@update@family{+slant:#1}
@@ -1387,22 +1411,14 @@
     \c@zf@language\@tempcnta\relax
     \xdef\zf@language@name{Turkish}
     \zf@update@family{+lang=Turkish}
-    \xetex_or_luatex:nn {
-      \tl_set:Nn \l_fontspec_lang_tl {TRK}
-    }{
-      \luadirect{fontspec.specs.language = "TRK"}
-    }
+    \tl_set:Nn \l_fontspec_lang_tl {TRK}
   \else
     \zf@check@ot@lang{TUR}
     \if@tempswa
       \c@zf@language\@tempcnta\relax
       \xdef\zf@language@name{Turkish}
       \zf@update@family{+lang=Turkish}
-      \xetex_or_luatex:nn {
-        \tl_set:Nn \l_fontspec_lang_tl {TUR}
-      }{
-        \luadirect{fontspec.specs.language = "TUR"}
-      }
+      \tl_set:Nn \l_fontspec_lang_tl {TUR}
     \else
       \fontspec_warning:nx {language-not-exist} {#1}
     \fi
