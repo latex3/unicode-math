@@ -33,6 +33,12 @@
   { \luatex_if_engine:T
     { \cs_new_eq:NN \xetex_or_luatex:nn \use_ii:nn }
   }
+\xetex_if_engine:TF
+  { \cs_new:Npn \xetex_or_luatex:nnn #1#2#3 {#1{#2}} }
+  {
+    \luatex_if_engine:T
+     { \cs_new:Npn \xetex_or_luatex:nnn #1#2#3 {#1{#3}} }
+  }
 \newif\ifzf@firsttime
 \newif\ifzf@nobf
 \newif\ifzf@noit
@@ -52,13 +58,14 @@
 \newcount\c@zf@index
 \newcount\c@zf@script
 \newcount\c@zf@language
-\cs_if_free:NT \use:x
- {
   \cs_set:Nn \use:x { \edef\@tempa{#1}\@tempa }
- }
 \cs_new:Nn \fontspec_setkeys:xx
  {
-  \use:x { \noexpand\setkeys*[zf]{#1}{#2} }
+  \use:x { \exp_not:N \setkeys*[zf]{#1}{#2} }
+ }
+\cs_new:Nn \fontspec_setkeys:xxx
+ {
+  \use:x { \exp_not:N \setkeys*[zf@#1]{#2}{#3} }
  }
 \DeclareOption{cm-default}{\@zf@euencfalse}
 \DeclareOption{lm-default}{\@zf@euenctrue}
@@ -79,11 +86,7 @@
 \RequirePackage{calc}
 \RequirePackage{xkeyval}[2005/05/07]
 \if@zf@euenc
-  \xetex_or_luatex:nn {
-    \tl_set:Nn \zf@enc {EU1}
-  }{
-    \tl_set:Nn \zf@enc {EU2}
-  }
+  \xetex_or_luatex:nnn {\tl_set:Nn \zf@enc} {EU1} {EU2}
   \tl_set:Nn \rmdefault {lmr}
   \tl_set:Nn \sfdefault {lmss}
   \tl_set:Nn \ttdefault {lmtt}
@@ -202,37 +205,172 @@
 \DeclareDocumentCommand \aliasfontfeatureoption {mmm} {
   \keyval@alias@key[zf@feat]{#1}{#2}{#3}
 }
-\DeclareDocumentCommand \newfontscript {mm} {
+\DeclareDocumentCommand \newfontscript {mm}
+{
+  \fontspec_new_script:nn {#1} {#2}
+  \fontspec_new_script:nn {#2} {#2}
+}
+\cs_new:Nn \fontspec_new_script:nn
+{
   \define@key[zf@feat]{Script}{#1}[]{
-    \zf@check@ot@script{#2}
-    \if@tempswa
-      \global\c@zf@script\@tempcnta\relax
-      \xdef\zf@script@name{#1}
+    \fontspec_check_script:nTF {#2} {
       \zf@update@family{+script=#1}
       \tl_set:Nn \l_fontspec_script_tl {#2}
-    \else
+      \c@zf@script=\@tempcnta\relax
+    }{
       \fontspec_warning:nx {script-not-exist} {#1}
-    \fi
+    }
   }
 }
-\DeclareDocumentCommand \newfontlanguage {mm} {
+\DeclareDocumentCommand \newfontlanguage {mm}
+{
+  \fontspec_new_lang:nn {#1} {#2}
+  \fontspec_new_lang:nn {#2} {#2}
+}
+\cs_new:Nn \fontspec_new_lang:nn
+{
   \define@key[zf@feat]{Lang}{#1}[]{
-    \zf@check@ot@lang{#2}
-    \if@tempswa
-      \global\c@zf@language\@tempcnta\relax
-      \xdef\zf@language@name{#1}
+    \fontspec_check_lang:nTF {#2} {
       \zf@update@family{+lang=#1}
       \tl_set:Nn \l_fontspec_lang_tl {#2}
-    \else
-      \fontspec_warning:nx {lang-not-exist} {#1}
-    \fi
+      \c@zf@language=\@tempcnta\relax
+    }{
+      \fontspec_warning:nx {language-not-exist} {#1}
+    }
   }
 }
 \DeclareDocumentCommand \DeclareFontsExtensions {m}
-  {
-    \tl_set:Nx \l_fontspec_extensions_clist { \zap@space #1~\@empty }
-  }
+{
+  \tl_set:Nx \l_fontspec_extensions_clist { \zap@space #1~\@empty }
+}
 \DeclareFontsExtensions{.otf,.ttf,.OTF,.TTF}
+\prg_new_conditional:Nnn \fontspec_if_fontspec_font: {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \prg_return_true:
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_opentype: {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \prg_return_true:
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_feature:n {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \int_set:Nn \c@zf@script
+        {\use:c {g_fontspec_script_num_(\zf@family)_tl}}
+      \int_set:Nn \c@zf@language
+        {\use:c {g_fontspec_lang_num_(\zf@family)_tl}}
+      \tl_set:Nv \l_fontspec_script_tl {g_fontspec_script_(\zf@family)_tl}
+      \tl_set:Nv \l_fontspec_lang_tl   {g_fontspec_lang_(\zf@family)_tl}
+      \fontspec_check_ot_feat:nTF {#1} \prg_return_true: \prg_return_false:
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_feature:nnn {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \zf@iv@strnum{#1} \c@zf@script   = \@tempcnta \relax
+      \zf@iv@strnum{#2} \c@zf@language = \@tempcnta \relax
+      \fontspec_check_ot_feat:nTF {#3} \prg_return_true: \prg_return_false:
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_script:n {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \fontspec_check_script:nTF {#1} \prg_return_true: \prg_return_false:
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_language:n {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \tl_set:Nv \l_fontspec_script_tl {g_fontspec_script_(\zf@family)_tl}
+      \int_set:Nn \c@zf@script
+        {\use:c {g_fontspec_script_num_(\zf@family)_tl}}
+      \fontspec_check_lang:nTF {#1} \prg_return_true: \prg_return_false:
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_language:nn {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \tl_set:Nn \l_fontspec_script_tl {#1}
+      \zf@iv@strnum{#1} \c@zf@script   = \@tempcnta \relax
+      \fontspec_check_lang:nTF {#2} \prg_return_true: \prg_return_false:
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_current_script:n {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \tl_if_eq:nvTF {#1} {g_fontspec_script_(\zf@family)_tl}
+        {\prg_return_true:} {\prg_return_false:}
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\prg_new_conditional:Nnn \fontspec_if_current_language:n {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \fontspec_set_font_type:
+    \ifzf@icu
+      \tl_if_eq:nvTF {#1} {g_fontspec_lang_(\zf@family)_tl}
+        {\prg_return_true:} {\prg_return_false:}
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
+\cs_generate_variant:Nn \tl_if_eq:nnTF {nv}
 \cs_set:Npn \zf@fontspec #1#2 {
   \begingroup
   \fontspec_init:
@@ -246,8 +384,11 @@
   \fontspec_setkeys:xx {preparse} {\XKV@rm}
   \let\zf@font@feat\XKV@rm
   \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
-  \xetex_if_engine:T { \fontspec_set_font_type: }
+  \fontspec_set_font_type:
+  \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
   \zf@firsttimetrue
+    \fontspec_setkeys:xxx {feat} {Script} {\l_fontspec_script_name_tl}
+    \fontspec_setkeys:xxx {feat} {Lang}   {\l_fontspec_lang_name_tl}
     \zf@get@feature@requests{\zf@font@feat}
   \zf@firsttimefalse
   \unless\ifcsname zf@UID@\zf@family@long\endcsname
@@ -267,11 +408,17 @@
   \xdef\zf@family{\@nameuse{zf@UID@\zf@family@long}}
   \unless\ifcsname zf@family@fontname\zf@family\endcsname
     \fontspec_info:nxx {defining-font} {#1} {#2}
-    \cs_gset:cpx {zf@family@fontname\zf@family} {#2}
-    \cs_gset:cpx {zf@family@options\zf@family} {\zf@default@options #1}
-    \cs_gset:cpx {zf@family@fontdef\zf@family} {
+    \tl_gset:cx {zf@family@fontname\zf@family} {#2}
+    \tl_gset:cx {zf@family@options\zf@family} {\zf@default@options #1}
+    \tl_gset:cx {zf@family@fontdef\zf@family} {
       \fontspec_fullname:n {\zf@fontname} : \l_fontspec_pre_feat_tl \zf@ff
     }
+    \tl_gset:cx {g_fontspec_script_num_(\zf@family)_tl}
+      { \int_use:N \c@zf@script   }
+    \tl_gset:cx {g_fontspec_lang_num_(\zf@family)_tl}
+      { \int_use:N \c@zf@language }
+    \tl_gset_eq:cN {g_fontspec_script_(\zf@family)_tl} \l_fontspec_script_tl
+    \tl_gset_eq:cN {g_fontspec_lang_(\zf@family)_tl}   \l_fontspec_lang_tl
     \DeclareFontFamily{\zf@enc}{\zf@family}{}
     \zf@make@font@shapes{\zf@fontname}
       {\mddefault}{\updefault}{\zf@font@feat\zf@up@feat}
@@ -359,27 +506,30 @@
       {\bfdefault}{\sldefault}{\zf@font@feat\zf@bfsl@feat}
   \fi
 }
-\cs_new:Nn \fontspec_set_font_type: {
-  \zf@tfmfalse \zf@atsuifalse \zf@icufalse \zf@mmfalse \zf@graphitefalse
-  \ifcase\XeTeXfonttype\zf@basefont
-    \zf@tfmtrue
-  \or
-    \zf@atsuitrue
-    \ifnum\XeTeXcountvariations\zf@basefont > 0
-      \zf@mmtrue
+\xetex_or_luatex:nnn { \cs_new:Nn \fontspec_set_font_type: }
+   {
+    \zf@tfmfalse \zf@atsuifalse \zf@icufalse \zf@mmfalse \zf@graphitefalse
+    \ifcase\XeTeXfonttype\zf@basefont
+      \zf@tfmtrue
+    \or
+      \zf@atsuitrue
+      \ifnum\XeTeXcountvariations\zf@basefont > 0
+        \zf@mmtrue
+      \fi
+    \or
+      \zf@icutrue
     \fi
-  \or
+    \ifx \l_fontspec_renderer_tl \@empty
+      \ifzf@atsui
+        \tl_set:Nn \l_fontspec_renderer_tl {/AAT}
+      \else\ifzf@icu
+        \tl_set:Nn \l_fontspec_renderer_tl {/ICU}
+      \fi\fi
+    \fi
+  }
+  {
     \zf@icutrue
-  \fi
-  \ifx \l_fontspec_renderer_tl \@empty
-    \ifzf@atsui
-      \tl_set:Nn \l_fontspec_renderer_tl {/AAT}
-    \else\ifzf@icu
-      \tl_set:Nn \l_fontspec_renderer_tl {/ICU}
-    \fi\fi
-    \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
-  \fi
-}
+  }
 \newcommand*\zf@make@font@shapes[5][]{
   \begingroup
     \edef\@tempa{#1}
@@ -452,18 +602,16 @@
   \l_fontspec_renderer_tl
   \l_fontspec_optical_size_tl
 }
-\xetex_or_luatex:nn{
-  \tl_set:Nn \l_fontspec_pre_feat_tl {
+\xetex_or_luatex:nnn { \tl_set:Nn \l_fontspec_pre_feat_tl }
+  {
     script   = \l_fontspec_script_tl ;
     language = \l_fontspec_lang_tl   ;
   }
-}{
-  \tl_set:Nn \l_fontspec_pre_feat_tl {
+  {
     mode     = \l_fontspec_mode_tl   ;
     script   = \l_fontspec_script_tl ;
     language = \l_fontspec_lang_tl   ;
   }
-}
 \newcommand*{\zf@update@family}[1]{
   \ifzf@firsttime
     \xdef\zf@family@long{\zf@family@long#1}
@@ -473,8 +621,9 @@
   \let\zf@ff     \@empty
   \let\zf@scale  \@empty
   \let\zf@adjust \@empty
-  \fontspec_setkeys:xx {options} { #1 }
+  \fontspec_setkeys:xx {options} {#1}
   \ifx \XKV@rm \@empty \else
+    \fontspec_error:nx {unknown-options} { \exp_not:V \XKV@rm }
   \fi
   \PackageInfo{fontspec}{Raw~ font~ features~ "\zf@ff"}
 }
@@ -498,15 +647,11 @@
   \let\zf@font@wrap   \@firstofone
   \tl_clear:N \l_fontspec_optical_size_tl
   \tl_clear:N \l_fontspec_renderer_tl
-  \c@zf@script 1818326126\relax
-  \def\zf@script@name{Latin}
-  \tl_set:Nn \l_fontspec_script_tl {latn}
-  \c@zf@language 0\relax
-  \def\zf@language@name{Default}
-  \xetex_or_luatex:nn {
-    \tl_set:Nn \l_fontspec_lang_tl {DFLT}
-  }{
-    \tl_set:Nn \l_fontspec_lang_tl {dflt}
+  \tl_set:Nn \l_fontspec_script_name_tl {Latin}
+  \tl_set:Nn \l_fontspec_script_tl      {latn}
+  \tl_set:Nn \l_fontspec_lang_name_tl {Default}
+  \tl_set:Nn \l_fontspec_lang_tl      {DFLT}
+  \luatex_if_engine:T {
     \tl_set:Nn \l_fontspec_mode_tl {node}
     \luatexprehyphenchar   =`\-  % fixme
     \luatexposthyphenchar  = 0   % fixme
@@ -516,13 +661,7 @@
 }
 \newcommand*\zf@make@smallcaps{
   \let\zf@smallcaps\@empty
-  \luatex_if_engine:TF
-  {
-    \zf@check@ot@feat{+smcp}
-    \if@tempswa
-      \edef\zf@smallcaps{+smcp;}
-    \fi
-  }
+  \xetex_or_luatex:nn
   {
     \ifzf@atsui
       \zf@make@aat@feature@string{3}{3}
@@ -531,11 +670,11 @@
       \fi
     \fi
     \ifzf@icu
-      \zf@check@ot@feat{+smcp}
-      \if@tempswa
-        \edef\zf@smallcaps{+smcp;}
-      \fi
+      \fontspec_check_ot_feat:nT {+smcp} {\edef\zf@smallcaps{+smcp;}}
     \fi
+  }
+  {
+    \fontspec_check_ot_feat:nT {+smcp} {\edef\zf@smallcaps{+smcp;}}
   }
 }
 \newcommand*\zf@update@ff[1]{
@@ -576,13 +715,12 @@
   \ifx\@tempa\@empty
     \fontspec_warning:n {icu-feature-not-exist}
   \else
-    \expandafter\zf@check@ot@feat\expandafter{\@tempa}
-    \if@tempswa
+    \fontspec_check_ot_feat:VTF {\@tempa} {
       \zf@update@family{#1}
       \zf@update@ff{#1}
-    \else
+    }{
       \fontspec_warning:nx {icu-feature-not-exist-in-font} {#1}
-    \fi
+    }
   \fi
 }
 \newcommand*\zf@define@font@feature[1]{
@@ -647,8 +785,7 @@
   \advance\@tempcnta\@tempcntb
 }
 \newcommand\zf@v@strnum[1]{\expandafter\zf@iv@strnum@i\@gobble#1 \@nil}
-\newcommand\zf@check@ot@script[1]{
-  \xetex_or_luatex:nn
+\xetex_or_luatex:nnn {\prg_new_conditional:Nnn \fontspec_check_script:n {TF}}
   {
     \zf@iv@strnum{#1}
     \@tempcntb\XeTeXOTcountscripts\zf@basefont
@@ -661,17 +798,18 @@
         \advance\c@zf@index\@ne
       \fi
     \repeat
+    \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
   {
     \luadirect{fontspec.check_ot_script("zf@basefont", "#1")}
+    \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
-}
-\newcommand\zf@check@ot@lang[1]{
-  \xetex_or_luatex:nn
+\xetex_or_luatex:nnn {\prg_new_conditional:Nnn \fontspec_check_lang:n {TF}}
   {
     \zf@iv@strnum{#1}
     \@tempcntb\XeTeXOTcountlanguages\zf@basefont\c@zf@script
-    \c@zf@index\z@ \@tempswafalse
+    \c@zf@index\z@
+    \@tempswafalse
     \loop\ifnum\c@zf@index<\@tempcntb
       \ifnum\XeTeXOTlanguagetag\zf@basefont\c@zf@script\c@zf@index=\@tempcnta
         \@tempswatrue
@@ -680,17 +818,25 @@
         \advance\c@zf@index\@ne
       \fi
     \repeat
+    \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
   {
-    \luadirect{fontspec.check_ot_lang("zf@basefont", "#1", "\l_fontspec_script_tl")}
+    \luadirect{
+      fontspec.check_ot_lang(
+                              "zf@basefont",
+                              "#1",
+                              "\l_fontspec_script_tl"
+                            )
+    }
+    \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
-}
-\newcommand*\zf@check@ot@feat[1]{
-  \xetex_or_luatex:nn
-  {
+\xetex_or_luatex:nnn
+   { \prg_new_conditional:Nnn \fontspec_check_ot_feat:n {TF,T} }
+   {
     \@tempcntb\XeTeXOTcountfeatures\zf@basefont\c@zf@script\c@zf@language
-    \zf@v@strnum{#1}
-    \c@zf@index\z@ \@tempswafalse
+    \zf@v@strnum {#1}
+    \c@zf@index\z@
+    \@tempswafalse
     \loop\ifnum\c@zf@index<\@tempcntb
       \ifnum\XeTeXOTfeaturetag\zf@basefont\c@zf@script\c@zf@language
             \c@zf@index=\@tempcnta
@@ -700,11 +846,21 @@
         \advance\c@zf@index\@ne
       \fi
     \repeat
+    \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
   {
-    \luadirect{fontspec.check_ot_feat("zf@basefont", "#1", "\l_fontspec_lang_tl", "\l_fontspec_script_tl")}
+    \luadirect{
+      fontspec.check_ot_feat(
+                              "zf@basefont",
+                              "#1",
+                              "\l_fontspec_lang_tl",
+                              "\l_fontspec_script_tl"
+                            )
+    }
+    \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
-}
+\cs_generate_variant:Nn \fontspec_check_ot_feat:nTF {V}
+\cs_generate_variant:Nn \fontspec_check_ot_feat:nT  {V}
 \bool_new:N \l_fontspec_external_bool
 \define@key[zf]{preparse-external}{ExternalLocation}[]{
   \zf@nobftrue
@@ -713,6 +869,7 @@
   \gdef\zf@font@wrap##1{[#1##1]}
   \xetex_if_engine:T { \setkeys[zf]{preparse}{Renderer=ICU} }
 }
+\aliasfontfeature{ExternalLocation}{Path}
 \define@key[zf]{preparse-external}{Extension}{
   \tl_set:Nn \l_fontspec_extension_tl {#1}
   \bool_if:NF \l_fontspec_external_bool {
@@ -720,7 +877,7 @@
   }
 }
 \tl_clear:N \l_fontspec_extension_tl
-\define@choicekey[zf]{preparse-renderer}{Renderer}[\l_tmpa_tl\l_tmpa_num]
+\define@choicekey[zf]{preparse}{Renderer}[\l_tmpa_tl\l_tmpa_num]
     {AAT,ICU,Graphite,Full,Basic}{
   \zf@update@family{+rend:#1}
   \intexpr_compare:nTF {\l_tmpa_num < 3} {
@@ -734,11 +891,8 @@
   }{
     \xetex_or_luatex:nn
     { \fontspec_warning:nx {only-luatex-feature} {Renderer=Full/Basic} }
-    {
-      \tl_set:Nv \l_fontspec_mode_tl {g_fontspec_mode_tag_\l_tmpa_tl}
-    }
+    { \tl_set:Nv \l_fontspec_mode_tl {g_fontspec_mode_tag_\l_tmpa_tl}  }
   }
-  \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
 }
 \tl_set:cn {g_fontspec_renderer_tag_AAT} {/AAT}
 \tl_set:cn {g_fontspec_renderer_tag_ICU} {/ICU}
@@ -746,14 +900,14 @@
 \tl_set:cn {g_fontspec_mode_tag_Full}  {node}
 \tl_set:cn {g_fontspec_mode_tag_Basic} {base}
 \define@key[zf]{preparse}{Script}{
-  \xetex_if_engine:T { \setkeys[zf]{preparse-renderer}{Renderer=ICU} }
+  \xetex_if_engine:T { \setkeys[zf]{preparse}{Renderer=ICU} }
+  \tl_set:Nn \l_fontspec_script_name_tl {#1}
   \zf@update@family{+script:#1}
-  {\setkeys[zf@feat]{Script}{#1}}
 }
 \define@key[zf]{preparse}{Language}{
-  \xetex_if_engine:T { \setkeys[zf]{preparse-renderer}{Renderer=ICU} }
+  \xetex_if_engine:T { \setkeys[zf]{preparse}{Renderer=ICU} }
+  \tl_set:Nn \l_fontspec_lang_name_tl {#1}
   \zf@update@family{+language:#1}
-  {\setkeys[zf@feat]{Lang}{#1}}
 }
 \define@key[zf]{preparse-external}{UprightFont}{
   \fontspec_complete_fontname:Nn \zf@up {#1}
@@ -914,11 +1068,9 @@
   \edef\@tempa{#1}
   \edef\@tempb{None}
   \ifx\@tempa\@tempb
-    \xetex_or_luatex:nn {
-      \g@addto@macro\zf@adjust{\hyphenchar\font-1\relax}%
-    }{
-      \g@addto@macro\zf@adjust{\luatexprehyphenchar=-1\relax}
-    }
+    \xetex_or_luatex:nnn { \g@addto@macro\zf@adjust }
+      { \hyphenchar\font-1\relax }
+      { \luatexprehyphenchar=-1\relax }
   \else
     \zf@check@one@char#1\zf@@
     \ifx\@tempb\@empty
@@ -964,6 +1116,10 @@
 \define@key[zf]{options}{Mapping}{
   \zf@update@family{+map:#1}
   \zf@update@ff{mapping=#1}
+}
+\define@key[zf]{options}{FeatureFile}{
+  \zf@update@family{+fea:#1}
+  \zf@update@ff{featurefile=#1}
 }
 \define@key[zf]{options}{Weight}{
   \zf@update@family{+weight:#1}
@@ -1246,7 +1402,7 @@
 \newfontlanguage{Crimean~Tatar}{CRT}\newfontlanguage{Church~Slavonic}{CSL}
 \newfontlanguage{Czech}{CSY}\newfontlanguage{Danish}{DAN}
 \newfontlanguage{Dargwa}{DAR}\newfontlanguage{Woods~Cree}{DCR}
-\newfontlanguage{German}{DEU}\newfontlanguage{Default}{DFLT}
+\newfontlanguage{German}{DEU}
 \newfontlanguage{Dogri}{DGR}\newfontlanguage{Divehi}{DIV}
 \newfontlanguage{Djerma}{DJR}\newfontlanguage{Dangme}{DNG}
 \newfontlanguage{Dinka}{DNK}\newfontlanguage{Dungan}{DUN}
@@ -1406,23 +1562,24 @@
 \newfontlanguage{Chinese~Traditional}{ZHT}\newfontlanguage{Zande}{ZND}
 \newfontlanguage{Zulu}{ZUL}
 \define@key[zf@feat]{Lang}{Turkish}[]{
-  \zf@check@ot@lang{TRK}
-  \if@tempswa
+  \fontspec_check_lang:nTF {TRK} {
     \c@zf@language\@tempcnta\relax
-    \xdef\zf@language@name{Turkish}
     \zf@update@family{+lang=Turkish}
     \tl_set:Nn \l_fontspec_lang_tl {TRK}
-  \else
-    \zf@check@ot@lang{TUR}
-    \if@tempswa
+  }{
+    \fontspec_check_lang:nTF {TUR} {
       \c@zf@language\@tempcnta\relax
-      \xdef\zf@language@name{Turkish}
       \zf@update@family{+lang=Turkish}
       \tl_set:Nn \l_fontspec_lang_tl {TUR}
-    \else
+    }{
       \fontspec_warning:nx {language-not-exist} {#1}
-    \fi
-  \fi
+    }
+  }
+}
+\define@key[zf@feat]{Lang}{Default}[]{
+  \zf@update@family{+lang=dflt}
+  \tl_set:Nn \l_fontspec_lang_tl {DFLT}
+  \c@zf@language=0\relax
 }
 \define@key[zf]{options}{RawFeature}{
   \zf@update@family{+Raw:#1}
@@ -1591,108 +1748,106 @@
 \cs_new:Npn \fontspec_trace:n     { \msg_trace:nn     {fontspec} }
 \msg_new:nnn {fontspec} {no-size-info}
 {
-  Size information must be supplied.\\
-  For example, SizeFeatures={Size={8-12},...}.
+  Size~ information~ must~ be~ supplied.\\
+  For~ example,~ SizeFeatures={Size={8-12},...}.
 }
 \msg_new:nnnn {fontspec} {rename-feature-not-exist}
 {
-  The feature #1 doesn't appear to be defined.
+  The~ feature~ #1~ doesn't~ appear~ to~ be~ defined.
 }
 {
-  It looks like you're trying to rename a feature that doesn't exist.
+  It~ looks~ like~ you're~ trying~ to~ rename~ a~ feature~ that~ doesn't~ exist.
 }
 \msg_new:nnn {fontspec} {no-glyph}
 {
-  '\zf@fontname' doesn't appear to have the glyph corresponding to '#1'.
+  '\zf@fontname'~ doesn't~ appear~ to~ have~ the~ glyph~ corresponding~ to~ '#1'.
 }
-\msg_new:nnn {fontspec} {unknown-options}
+\msg_new:nnnn {fontspec} {unknown-options}
 {
-  The following font options are not recognised:\\
-  \msg_four_spaces: #1
+  The~ following~ font~ options~ are~ not~ recognised:\\
+  \space\space\space\space #1
+}
+{
+  There~ is~ probably~ a~ typo~ in~ the~ font~ feature~ selection.
 }
 \msg_new:nnnn {fontspec} {euler-too-late}
 {
-  The euler package must be loaded BEFORE fontspec.
+  The~ euler~ package~ must~ be~ loaded~ BEFORE~ fontspec.
 }
 {
-  fontspec only overwrites euler's attempt to\\
-  define the maths text fonts if fontspec is\\
-  loaded after euler. Type <return> to proceed\\
-  with incorrect \string\mathit, \string\mathbf, etc.
+  fontspec~ only~ overwrites~ euler's~ attempt~ to\\
+  define~ the~ maths~ text~ fonts~ if~ fontspec~ is\\
+  loaded~ after~ euler.~ Type~ <return>~ to~ proceed\\
+  with~ incorrect~ \string\mathit,~ \string\mathbf,~ etc.
 }
 
 \msg_new:nnn {fontspec} {addfontfeatures-ignored}
 {
-  \string\addfontfeature (s) ignored;\\
-  it cannot be used with a font that wasn't selected by fontspec.
+  \string\addfontfeature (s)~ ignored;\\
+  it~ cannot~ be~ used~ with~ a~ font~ that~ wasn't~ selected~ by~ fontspec.
 }
 \msg_new:nnn {fontspec} {feature-option-overwrite}
 {
-  Option '#2' of font feature '#1' overwritten.
+  Option~ '#2'~ of~ font~ feature~ '#1'~ overwritten.
 }
 \msg_new:nnn {fontspec} {script-not-exist}
 {
-  Font '\zf@fontname' does not contain script '#1'.
-}
-\msg_new:nnn {fontspec} {lang-not-exist}
-{
-  Font '\zf@fontname' does not contain\\
-  language '#1' for script '\zf@script@name'.
+  Font~ '\zf@fontname'~ does~ not~ contain~ script~ '#1'.
 }
 \msg_new:nnn {fontspec} {aat-feature-not-exist}
 {
-  '\XKV@tfam=\XKV@tkey' feature not supported\\
-  for AAT font '\zf@fontname'.
+  '\XKV@tfam=\XKV@tkey'~ feature~ not~ supported\\
+  for~ AAT~ font~ '\zf@fontname'.
 }
 \msg_new:nnn {fontspec} {aat-feature-not-exist-in-font}
 {
-  AAT feature '\XKV@tfam=\XKV@tkey' (#1) not available\\
-  in font '\zf@fontname'.
+  AAT~ feature~ '\XKV@tfam=\XKV@tkey'~ (#1)~ not~ available\\
+  in~ font~ '\zf@fontname'.
 }
 \msg_new:nnn {fontspec} {icu-feature-not-exist}
 {
-  '\XKV@tfam=\XKV@tkey' feature not supported\\
-  for ICU font '\zf@fontname'
+  '\XKV@tfam=\XKV@tkey'~ feature~ not~ supported\\
+  for~ ICU~ font~ '\zf@fontname'
 }
 \msg_new:nnn {fontspec} {icu-feature-not-exist-in-font}
 {
-  OpenType feature '\XKV@tfam=\XKV@tkey' (#1) not available\\
-  for font '\zf@fontname', \\
-  with script '\zf@script@name', and language '\zf@language@name'.
+  OpenType~ feature~ '\XKV@tfam=\XKV@tkey'~ (#1)~ not~ available\\
+  for~ font~ '\zf@fontname', \\
+  with~ script~ '\l_fontspec_script_name_tl',~ and~ language~ '\l_fontspec_lang_name_tl'.
 }
 \msg_new:nnn {fontspec} {no-opticals}
 {
-  '\zf@fontname' doesn't appear to have an Optical Size axis.
+  '\zf@fontname'~ doesn't~ appear~ to~ have~ an~ Optical~ Size~ axis.
 }
 \msg_new:nnn {fontspec} {language-not-exist}
 {
-  Language '#1' not available\\
-  for font '\zf@fontname'\\
-  with script '\zf@script@name'.
+  Language~ '#1'~ not~ available\\
+  for~ font~ '\zf@fontname'\\
+  with~ script~ '\l_fontspec_script_name_tl'.
 }
 \msg_new:nnn {fontspec} {only-xetex-feature}
 {
-  Ignored XeTeX only feature: '#1'.
+  Ignored~ XeTeX~ only~ feature:~ '#1'.
 }
 \msg_new:nnn {fontspec} {only-luatex-feature}
 {
-  Ignored LuaTeX only feature: '#1'.
+  Ignored~ LuaTeX~ only~ feature:~ '#1'.
 }
 \msg_new:nnn {fontspec} {defining-font}
 {
-  Defining font family for '#2' with options [\zf@default@options #1].
+  Defining~ font~ family~ for~ '#2'~ with~ options~ [\zf@default@options #1].
 }
 \msg_new:nnn {fontspec} {no-font-shape}
 {
-  Could not resolve font #1 (it probably doesn't exist).
+  Could~ not~ resolve~ font~ #1~ (it~ probably~ doesn't~ exist).
 }
 \msg_new:nnn {fontspec} {set-scale}
 {
-  \zf@fontname\space scale = \zf@scale.
+  \zf@fontname\space scale ~=~ \zf@scale.
 }
 \msg_new:nnn {fontspec} {setup-math}
 {
-  Adjusting the maths setup (use [no-math] to avoid this).
+  Adjusting~ the~ maths~ setup~ (use~ [no-math]~ to~ avoid~ this).
 }
 \if@zf@configfile
   \InputIfFileExists{fontspec.cfg}
