@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2010/02/28 v0.4 Unicode maths in XeLaTeX]
+  [2010/04/03 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -3905,7 +3905,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \muskip_new:N \g_um_primekern_muskip
 \muskip_gset:Nn \g_um_primekern_muskip { -\thinmuskip/2 }% arbitrary
-\num_new:N \l_um_primecount_num
+\int_new:N \l_um_primecount_int
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -3950,23 +3950,23 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \cs_new:Nn \um_scan_prime: {
-  \num_zero:N \l_um_primecount_num
+  \int_zero:N \l_um_primecount_int
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Nn \um_scan_dprime: {
-  \num_set:Nn \l_um_primecount_num {1}
+  \int_set:Nn \l_um_primecount_int {1}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Nn \um_scan_trprime: {
-  \num_set:Nn \l_um_primecount_num {2}
+  \int_set:Nn \l_um_primecount_int {2}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Nn \um_scan_qprime: {
-  \num_set:Nn \l_um_primecount_num {3}
+  \int_set:Nn \l_um_primecount_int {3}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Nn \um_scanprime_collect:N {
-  \num_incr:N \l_um_primecount_num
+  \int_incr:N \l_um_primecount_int
   \peek_meaning_remove:NTF ' {
     \um_scanprime_collect:N #1
   }{
@@ -3977,30 +3977,30 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um_scanprime_collect:N #1
       }{
         \peek_meaning_remove:NTF \um_scan_dprime: {
-          \num_incr:N \l_um_primecount_num
+          \int_incr:N \l_um_primecount_int
           \um_scanprime_collect:N #1
         }{
           \peek_meaning_remove:NTF ^^^^2033 {
-            \num_incr:N \l_um_primecount_num
+            \int_incr:N \l_um_primecount_int
             \um_scanprime_collect:N #1
           }{
             \peek_meaning_remove:NTF \um_scan_trprime: {
-              \num_add:Nn \l_um_primecount_num {2}
+              \int_add:Nn \l_um_primecount_int {2}
               \um_scanprime_collect:N #1
             }{
               \peek_meaning_remove:NTF ^^^^2034 {
-                \num_add:Nn \l_um_primecount_num {2}
+                \int_add:Nn \l_um_primecount_int {2}
                 \um_scanprime_collect:N #1
               }{
                 \peek_meaning_remove:NTF \um_scan_qprime: {
-                  \num_add:Nn \l_um_primecount_num {3}
+                  \int_add:Nn \l_um_primecount_int {3}
                   \um_scanprime_collect:N #1
                 }{
                   \peek_meaning_remove:NTF ^^^^2057 {
-                    \num_add:Nn \l_um_primecount_num {3}
+                    \int_add:Nn \l_um_primecount_int {3}
                     \um_scanprime_collect:N #1
                   }{
-                    \um_nprimes_select:nn {#1} {\l_um_primecount_num}
+                    \um_nprimes_select:nn {#1} {\l_um_primecount_int}
                   }
                 }
               }
@@ -4012,19 +4012,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 \cs_new:Nn \um_scan_backprime: {
-  \num_zero:N \l_um_primecount_num
+  \int_zero:N \l_um_primecount_int
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Nn \um_scan_backdprime: {
-  \num_set:Nn \l_um_primecount_num {1}
+  \int_set:Nn \l_um_primecount_int {1}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Nn \um_scan_backtrprime: {
-  \num_set:Nn \l_um_primecount_num {2}
+  \int_set:Nn \l_um_primecount_int {2}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Nn \um_scanbackprime_collect:N {
-  \num_incr:N \l_um_primecount_num
+  \int_incr:N \l_um_primecount_int
   \peek_meaning_remove:NTF ` {
     \um_scanbackprime_collect:N #1
   }{
@@ -4035,22 +4035,22 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
         \um_scanbackprime_collect:N #1
       }{
         \peek_meaning_remove:NTF \um_scan_backdprime: {
-          \num_incr:N \l_um_primecount_num
+          \int_incr:N \l_um_primecount_int
           \um_scanbackprime_collect:N #1
         }{
           \peek_meaning_remove:NTF ^^^^2036 {
-            \num_incr:N \l_um_primecount_num
+            \int_incr:N \l_um_primecount_int
             \um_scanbackprime_collect:N #1
           }{
             \peek_meaning_remove:NTF \um_scan_backtrprime: {
-              \num_add:Nn \l_um_primecount_num {2}
+              \int_add:Nn \l_um_primecount_int {2}
               \um_scanbackprime_collect:N #1
             }{
               \peek_meaning_remove:NTF ^^^^2037 {
-                \num_add:Nn \l_um_primecount_num {2}
+                \int_add:Nn \l_um_primecount_int {2}
                 \um_scanbackprime_collect:N #1
               }{
-                \um_nbackprimes_select:nn {#1} {\l_um_primecount_num}
+                \um_nbackprimes_select:nn {#1} {\l_um_primecount_int}
               }
             }
           }
