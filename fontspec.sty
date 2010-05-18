@@ -8,12 +8,12 @@
 %% 
 %%   _________________________________________
 %%   The fontspec package for XeLaTeX/LuaLaTeX
-%%   (C) 2004--2009    Will Robertson and Khaled Hosny
+%%   (C) 2004--2010    Will Robertson and Khaled Hosny
 %% 
 %%   License information appended.
 %% 
 \ProvidesPackage{fontspec}
-  [2010/01/20 v2.0 Advanced font selection for XeLaTeX/LuaLaTeX]
+  [2010/05/18 v2.0 Advanced font selection for XeLaTeX/LuaLaTeX]
 \RequirePackage{expl3,xparse}
 \ExplSyntaxOn
 \msg_new:nnn {fontspec} {not-pdftex}
@@ -22,7 +22,7 @@
 }
 \xetex_if_engine:F {
   \luatex_if_engine:TF {
-    \RequirePackage{luatextra}[2009/12/16]
+    \RequirePackage{luatextra}[2010/05/10]
     \luatexRequireModule{fontspec}
   }{
     \msg_error:nn {fontspec} {not-pdftex}
@@ -52,7 +52,6 @@
 \newif\ifzf@math@lucida
 \newif\ifzf@package@euler@loaded
 \newif\if@zf@configfile
-\newif\if@zf@euenc
 \newif\if@zf@math
 \newcount\c@zf@newff
 \newcount\c@zf@index
@@ -67,8 +66,9 @@
  {
   \use:x { \exp_not:N \setkeys*[zf@#1]{#2}{#3} }
  }
-\DeclareOption{cm-default}{\@zf@euencfalse}
-\DeclareOption{lm-default}{\@zf@euenctrue}
+\DeclareOption{cm-default}{
+  \fontspec_warning:n {cm-default-obsolete}
+}
 \DeclareOption{math}{\@zf@mathtrue}
 \DeclareOption{no-math}{\@zf@mathfalse}
 \DeclareOption{config}{\@zf@configfiletrue}
@@ -81,20 +81,16 @@
   \msg_redirect_module:nnn { fontspec } { warning } { none }
   \msg_redirect_module:nnn { fontspec } { info } { none }
 }
-\ExecuteOptions{config,lm-default,math}
+\ExecuteOptions{config,math}
 \ProcessOptions*
 \RequirePackage{calc}
 \RequirePackage{xkeyval}[2005/05/07]
-\if@zf@euenc
-  \xetex_or_luatex:nnn {\tl_set:Nn \zf@enc} {EU1} {EU2}
-  \tl_set:Nn \rmdefault {lmr}
-  \tl_set:Nn \sfdefault {lmss}
-  \tl_set:Nn \ttdefault {lmtt}
-  \RequirePackage[\zf@enc]{fontenc}
-\else
-  \tl_set:Nn \zf@enc {U}
-  \tl_set_eq:NN \encodingdefault \zf@enc
-\fi
+\luatex_if_engine:T { \RequirePackage{fontspec-patches} }
+\xetex_or_luatex:nnn {\tl_set:Nn \zf@enc} {EU1} {EU2}
+\tl_set:Nn \rmdefault {lmr}
+\tl_set:Nn \sfdefault {lmss}
+\tl_set:Nn \ttdefault {lmtt}
+\RequirePackage[\zf@enc]{fontenc}
 \tl_set_eq:NN \UTFencname \zf@enc % for xunicode
 \tl_set_eq:NN \cyrillicencoding \zf@enc
 \tl_set_eq:NN \latinencoding    \zf@enc
@@ -103,39 +99,39 @@
   \tl_set_eq:NN \latinencoding    \zf@enc
 }
 \DeclareDocumentCommand \fontspec { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \fontfamily\zf@family\selectfont
   \ignorespaces
 }
 \DeclareDocumentCommand \setmainfont { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \tl_set_eq:NN \rmdefault \zf@family
   \normalfont
 }
 \DeclareDocumentCommand \setsansfont { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \tl_set_eq:NN \sfdefault \zf@family
   \normalfont
 }
 \DeclareDocumentCommand \setmonofont { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \tl_set_eq:NN \ttdefault \zf@family
   \normalfont
 }
 \DeclareDocumentCommand \setmathrm { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \let\zf@rmmaths\zf@family
 }
 \DeclareDocumentCommand \setboldmathrm { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \let\zf@rmboldmaths\zf@family
 }
 \DeclareDocumentCommand \setmathsf { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \let\zf@sfmaths\zf@family
 }
 \DeclareDocumentCommand \setmathtt { O{} m } {
-  \zf@fontspec{#1}{#2}
+  \fontspec_select:nn{#1}{#2}
   \let\zf@ttmaths\zf@family
 }
 \@onlypreamble\setmathrm
@@ -146,7 +142,7 @@
 \def\zf@sfmaths{\sfdefault}
 \def\zf@ttmaths{\ttdefault}
 \DeclareDocumentCommand \newfontfamily { m O{} m } {
-  \zf@fontspec{#2}{#3}
+  \fontspec_select:nn{#2}{#3}
   \use:x {
     \noexpand \DeclareRobustCommand \noexpand #1 {
       \noexpand \fontfamily {\zf@family} \noexpand \selectfont
@@ -154,7 +150,7 @@
   }
 }
 \DeclareDocumentCommand \newfontface { m O{} m } {
-  \newfontfamily #1 {BoldFont={},ItalicFont={},SmallCapsFont={},#2} {#3}
+  \newfontfamily #1 [ BoldFont={},ItalicFont={},SmallCapsFont={},#2 ] {#3}
 }
 \DeclareDocumentCommand \defaultfontfeatures {m} {\def\zf@default@options{#1,}}
 \let\zf@default@options\@empty
@@ -163,7 +159,7 @@
     \begingroup
       \let\zf@default@options\@empty
       \use:x {
-        \noexpand\zf@fontspec
+        \noexpand\fontspec_select:nn
           {\csname zf@family@options\f@family\endcsname,#1}
           {\csname zf@family@fontname\f@family\endcsname}
       }
@@ -243,7 +239,7 @@
 {
   \tl_set:Nx \l_fontspec_extensions_clist { \zap@space #1~\@empty }
 }
-\DeclareFontsExtensions{.otf,.ttf,.OTF,.TTF}
+\DeclareFontsExtensions{.otf,.ttf,.OTF,.TTF,.ttc,.TTC,.dfont}
 \prg_new_conditional:Nnn \fontspec_if_fontspec_font: {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
     \prg_return_true:
@@ -251,9 +247,26 @@
     \prg_return_false:
   \fi
 }
+\prg_new_conditional:Nnn \fontspec_if_aat_feature:nn {TF,T,F} {
+  \ifcsname zf@family@fontdef\f@family\endcsname
+    \font\zf@basefont="\use:c{zf@family@fontdef\f@family}"~at~\f@size pt
+    \ifzf@atsui
+      \zf@make@aat@feature@string{#1}{#2}
+      \ifx\@tempa\@empty
+        \prg_return_false:
+      \else
+        \prg_return_true:
+      \fi
+    \else
+      \prg_return_false:
+    \fi
+  \else
+    \prg_return_false:
+  \fi
+}
 \prg_new_conditional:Nnn \fontspec_if_opentype: {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \prg_return_true:
@@ -266,7 +279,7 @@
 }
 \prg_new_conditional:Nnn \fontspec_if_feature:n {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \int_set:Nn \c@zf@script
@@ -285,7 +298,7 @@
 }
 \prg_new_conditional:Nnn \fontspec_if_feature:nnn {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \zf@iv@strnum{#1} \c@zf@script   = \@tempcnta \relax
@@ -300,7 +313,7 @@
 }
 \prg_new_conditional:Nnn \fontspec_if_script:n {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \fontspec_check_script:nTF {#1} \prg_return_true: \prg_return_false:
@@ -313,7 +326,7 @@
 }
 \prg_new_conditional:Nnn \fontspec_if_language:n {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \tl_set:Nv \l_fontspec_script_tl {g_fontspec_script_(\zf@family)_tl}
@@ -329,7 +342,7 @@
 }
 \prg_new_conditional:Nnn \fontspec_if_language:nn {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \tl_set:Nn \l_fontspec_script_tl {#1}
@@ -344,7 +357,7 @@
 }
 \prg_new_conditional:Nnn \fontspec_if_current_script:n {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \tl_if_eq:nvTF {#1} {g_fontspec_script_(\zf@family)_tl}
@@ -358,7 +371,7 @@
 }
 \prg_new_conditional:Nnn \fontspec_if_current_language:n {TF,T,F} {
   \ifcsname zf@family@fontdef\f@family\endcsname
-    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname" at \f@size pt
+    \font\zf@basefont="\csname zf@family@fontdef\f@family\endcsname"~at~\f@size pt
     \fontspec_set_font_type:
     \ifzf@icu
       \tl_if_eq:nvTF {#1} {g_fontspec_lang_(\zf@family)_tl}
@@ -371,7 +384,7 @@
   \fi
 }
 \cs_generate_variant:Nn \tl_if_eq:nnTF {nv}
-\cs_set:Npn \zf@fontspec #1#2 {
+\cs_set:Npn \fontspec_select:nn #1#2 {
   \begingroup
   \fontspec_init:
   \edef\zf@fontname{#2}
@@ -383,12 +396,14 @@
   \let\zf@fontname\zf@up
   \fontspec_setkeys:xx {preparse} {\XKV@rm}
   \let\zf@font@feat\XKV@rm
-  \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
+  \global\font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
   \fontspec_set_font_type:
-  \font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
+  \global\font\zf@basefont="\fontspec_fullname:n {\zf@up}"~at~\f@size pt
   \zf@firsttimetrue
-    \fontspec_setkeys:xxx {feat} {Script} {\l_fontspec_script_name_tl}
-    \fontspec_setkeys:xxx {feat} {Lang}   {\l_fontspec_lang_name_tl}
+    \ifzf@icu
+      \fontspec_setkeys:xxx {feat} {Script} {\l_fontspec_script_name_tl}
+      \fontspec_setkeys:xxx {feat} {Lang}   {\l_fontspec_lang_name_tl}
+    \fi
     \zf@get@feature@requests{\zf@font@feat}
   \zf@firsttimefalse
   \unless\ifcsname zf@UID@\zf@family@long\endcsname
@@ -513,7 +528,7 @@
       \zf@tfmtrue
     \or
       \zf@atsuitrue
-      \ifnum\XeTeXcountvariations\zf@basefont > 0
+      \ifnum\XeTeXcountvariations\zf@basefont > \c_zero
         \zf@mmtrue
       \fi
     \or
@@ -604,8 +619,10 @@
 }
 \xetex_or_luatex:nnn { \tl_set:Nn \l_fontspec_pre_feat_tl }
   {
-    script   = \l_fontspec_script_tl ;
-    language = \l_fontspec_lang_tl   ;
+    \ifzf@icu
+      script   = \l_fontspec_script_tl ;
+      language = \l_fontspec_lang_tl   ;
+    \fi
   }
   {
     mode     = \l_fontspec_mode_tl   ;
@@ -784,7 +801,14 @@
   \expandafter\@tempcntb\ifx\@empty#432\else`#4\fi
   \advance\@tempcnta\@tempcntb
 }
-\newcommand\zf@v@strnum[1]{\expandafter\zf@iv@strnum@i\@gobble#1 \@nil}
+\newcommand\zf@v@strnum[1]{
+  \bool_if:nTF {
+    \tl_if_head_eq_charcode_p:nN {#1} {+} ||
+    \tl_if_head_eq_charcode_p:nN {#1} {-}
+  }
+  { \exp_after:wN \zf@iv@strnum@i \use_none:n #1 \@nil }
+  { \zf@iv@strnum@i #1 \@nil }
+}
 \xetex_or_luatex:nnn {\prg_new_conditional:Nnn \fontspec_check_script:n {TF}}
   {
     \zf@iv@strnum{#1}
@@ -801,7 +825,7 @@
     \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
   {
-    \luadirect{fontspec.check_ot_script("zf@basefont", "#1")}
+    \directlua{fontspec.check_ot_script("zf@basefont", "#1")}
     \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
 \xetex_or_luatex:nnn {\prg_new_conditional:Nnn \fontspec_check_lang:n {TF}}
@@ -821,7 +845,7 @@
     \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
   {
-    \luadirect{
+    \directlua{
       fontspec.check_ot_lang(
                               "zf@basefont",
                               "#1",
@@ -849,7 +873,7 @@
     \if@tempswa \prg_return_true: \else: \prg_return_false: \fi:
   }
   {
-    \luadirect{
+    \directlua{
       fontspec.check_ot_feat(
                               "zf@basefont",
                               "#1",
@@ -1022,8 +1046,8 @@
       \setlength\@tempdima{\fontdimen#1\font}%
       \setlength\@tempdimb{\fontdimen#1\zf@basefont}%
     }{
-      \setlength\@tempdima{\luadirect{fontspec.get_dimen(#1, "font")}}
-      \setlength\@tempdimb{\luadirect{fontspec.get_dimen(#1, "zf@basefont")}}
+      \setlength\@tempdima{\directlua{fontspec.get_dimen(#1, "font")}}
+      \setlength\@tempdimb{\directlua{fontspec.get_dimen(#1, "zf@basefont")}}
     }
     \setlength\@tempdimc{1pt*\ratio{\@tempdima}{\@tempdimb}}%
     \xdef\zf@scale{\strip@pt\@tempdimc}%
@@ -1084,7 +1108,7 @@
           \fontspec_error:nx {no-glyph}{#1}
         \fi}%
       }{
-        \ifnum\luadirect{fontspec.sprint(fontspec.charglyph('#1', 'zf@basefont'))} > \z@
+        \ifnum\directlua{fontspec.sprint(fontspec.charglyph('#1', 'zf@basefont'))} > \z@
           \g@addto@macro\zf@adjust{\luatexprehyphenchar=`#1\relax}
         \else
           \fontspec_error:nx {no-glyph}{#1}
@@ -1098,7 +1122,7 @@
           \fontspec_error:nx {no-glyph}{#1}
         \fi}%
       }{
-        \ifnum\luadirect{fontspec.sprint(fontspec.charglyph('#1', 'zf@basefont'))} > \z@
+        \ifnum\directlua{fontspec.sprint(fontspec.charglyph('#1', 'zf@basefont'))} > \z@
           \g@addto@macro\zf@adjust{\luatexprehyphenchar=#1\relax}
         \else
           \fontspec_error:nx {no-glyph}{#1}
@@ -1113,9 +1137,19 @@
   \zf@update@ff{color=#1}
 }
 \keyval@alias@key[zf]{options}{Color}{Colour}
-\define@key[zf]{options}{Mapping}{
+\xetex_or_luatex:nnn {
+  \define@key[zf]{options}{Mapping}
+}{
   \zf@update@family{+map:#1}
   \zf@update@ff{mapping=#1}
+}{
+  \tl_if_eq:nnTF {#1} {tex-text} {
+    \fontspec_warning:n {no-mapping-ligtex}
+    \msg_redirect_name:nnn {fontspec} {no-mapping-ligtex} {none}
+    \setkeys[zf]{options}{ Ligatures=TeX }
+  }{
+    \fontspec_warning:n {no-mapping}
+  }
 }
 \define@key[zf]{options}{FeatureFile}{
   \zf@update@family{+fea:#1}
@@ -1833,6 +1867,19 @@
 {
   Ignored~ LuaTeX~ only~ feature:~ '#1'.
 }
+\msg_new:nnn {fontspec} {no-mapping}
+{
+  Input~ mapping~ not~ (yet?)~ supported~ in~ LuaTeX.
+}
+\msg_new:nnn {fontspec} {no-mapping-ligtex}
+{
+  Input~ mapping~ not~ (yet?)~ supported~ in~ LuaTeX.\\
+  Use~ "Ligatures=TeX"~ instead~ of~ "Mapping=tex-text".
+}
+\msg_new:nnn {fontspec} {cm-default-obsolete}
+{
+  The~ "cm-default"~ package~ option~ is~ obsolete.
+}
 \msg_new:nnn {fontspec} {defining-font}
 {
   Defining~ font~ family~ for~ '#2'~ with~ options~ [\zf@default@options #1].
@@ -1855,8 +1902,8 @@
     {\typeout{No~ fontspec.cfg~ file~ found;~ no~ configuration~ loaded.}}
 \fi
 %% 
-%% Copyright 2004--2009 Will Robertson <wspr81@gmail.com>
-%% Copyright 2009 Khaled Hosny <khaledhosny@eglug.org>
+%% Copyright 2004--2010 Will Robertson <wspr81@gmail.com>
+%% Copyright 2009--2010 Khaled Hosny <khaledhosny@eglug.org>
 %% 
 %% Distributable under the LaTeX Project Public License,
 %% version 1.3c or higher (your choice). The latest version of

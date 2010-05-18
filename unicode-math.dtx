@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2010/04/03 v0.4 Unicode maths in XeLaTeX]
+  [2010/05/18 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -1077,7 +1077,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \RequirePackage{expl3}[2009/08/12]
 \RequirePackage{xparse}[2009/08/31]
 \RequirePackage{l3keys2e}
-\RequirePackage{fontspec}[2009/11/02]
+\RequirePackage{fontspec}[2010/05/18]
 %    \end{macrocode}
 %
 % Start using \LaTeX3 --- finally!
@@ -1168,6 +1168,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \um_cs_compat:n {radical}
 \um_cs_compat:n {mathaccent}
 \um_cs_compat:n {delimiter}
+%    \end{macrocode}
+%
+% \subsubsection{Function variants}
+%
+%    \begin{macrocode}
+\cs_generate_variant:Nn \fontspec_select:nn {x}
 %    \end{macrocode}
 %
 % \subsubsection{Alphabet unicode positions}
@@ -1986,6 +1992,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
+  \clist_clear:N \l_um_unknown_keys_clist
   \keys_set:nn {unicode-math} {#1}
   \um_fontspec_select_font:n {#2}
 %    \end{macrocode}
@@ -2061,7 +2068,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Nn \um_fontspec_select_font:n {
   \bool_set_true:N \l_um_fontspec_feature_bool
-  \exp_args:Nxx \zf@fontspec
+  \fontspec_select:xn
     {
       BoldFont = {}, ItalicFont = {},
       Script = Math,
@@ -2079,16 +2086,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
       \l_um_unknown_keys_clist
     }
     {#1}
-  \bool_set_true:N \l_um_fontspec_feature_bool
-  \group_begin:
-    \fontfamily{\zf@family}\selectfont
-    \tl_set:Nx \l_tmpa_tl
-    {
-      \fontname\use:c{\f@encoding/\zf@family/\mddefault/\updefault/\f@size}
-    }
-    \luatex_if_engine:T { \tl_set:Nx \l_tmpa_tl { [\l_tmpa_tl] } }
-    \global\font\l_um_font\l_tmpa_tl\relax
-  \group_end:
+  \tl_set_eq:NN \l_um_font \zf@basefont
+  \bool_set_false:N \l_um_fontspec_feature_bool
 }
 %    \end{macrocode}
 % \end{macro}
