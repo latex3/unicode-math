@@ -166,6 +166,7 @@ awk '
 		if (texname == "\\mbfsansepsilon          ") { printtexname = "\\mbfsansvarepsilon       " }
 		if (texname == "\\mbfitsansvarepsilon     ") { printtexname = "\\mbfitsansepsilon        " }
 		if (texname == "\\mbfitsansepsilon        ") { printtexname = "\\mbfitsansvarepsilon     " }
+		if (texname == "\\slash                   ") { printtexname = "\\divslash                " }
 		if (texname == "\\colon                   ") { printtexname = "\\mathratio               " }
 		if (texname == "\\dots                    ") { printtexname = "\\unicodeellipsis         " }
 		if (texname == "\\cdots                   ") { printtexname = "\\unicodecdots            " }
