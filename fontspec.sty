@@ -58,12 +58,12 @@
 \newcount\c@zf@script
 \newcount\c@zf@language
 \int_new:N \l_fontspec_strnum_int
-\cs_set:Nn \use:x { \edef\@tempa{#1}\@tempa }
-\cs_new:Nn \fontspec_setkeys:xx
+\cs_set:Npn \use:x #1 { \edef\@tempa{#1}\@tempa }
+\cs_new:Npn \fontspec_setkeys:xx #1#2
  {
   \use:x { \exp_not:N \setkeys*[zf]{#1}{#2} }
  }
-\cs_new:Nn \fontspec_setkeys:xxx
+\cs_new:Npn \fontspec_setkeys:xxx #1#2#3
  {
   \use:x { \exp_not:N \setkeys*[zf@#1]{#2}{#3} }
  }
@@ -208,7 +208,7 @@
   \fontspec_new_script:nn {#1} {#2}
   \fontspec_new_script:nn {#2} {#2}
 }
-\cs_new:Nn \fontspec_new_script:nn
+\cs_new:Npn \fontspec_new_script:nn #1#2
 {
   \define@key[zf@feat]{Script}{#1}[]{
     \fontspec_check_script:nTF {#2} {
@@ -225,7 +225,7 @@
   \fontspec_new_lang:nn {#1} {#2}
   \fontspec_new_lang:nn {#2} {#2}
 }
-\cs_new:Nn \fontspec_new_lang:nn
+\cs_new:Npn \fontspec_new_lang:nn #1#2
 {
   \define@key[zf@feat]{Lang}{#1}[]{
     \fontspec_check_lang:nTF {#2} {
@@ -462,7 +462,7 @@
   \l_fontspec_renderer_tl
   \l_fontspec_optical_size_tl
 }
-\cs_new:Nn \fontspec_set_bold: {
+\cs_new:Npn \fontspec_set_bold: {
   \unless\ifzf@nobf
     \ifx\zf@bf\@empty
       \zf@make@font@shapes[\zf@fontname]{/B}
@@ -473,7 +473,7 @@
     \fi
   \fi
 }
-\cs_new:Nn \fontspec_set_italic: {
+\cs_new:Npn \fontspec_set_italic: {
   \unless\ifzf@noit
     \ifx\zf@it\@empty
       \zf@make@font@shapes[\zf@fontname]{/I}
@@ -484,13 +484,13 @@
     \fi
   \fi
 }
-\cs_new:Nn \fontspec_set_slanted: {
+\cs_new:Npn \fontspec_set_slanted: {
   \ifx\zf@sl\@empty\else
     \zf@make@font@shapes{\zf@sl}
       {\mddefault}{\sldefault}{\zf@font@feat\zf@sl@feat}
   \fi
 }
-\cs_new:Nn \fontspec_set_bold_italic: {
+\cs_new:Npn \fontspec_set_bold_italic: {
   \@tempswatrue
   \ifzf@nobf\@tempswafalse\fi
   \ifzf@noit\@tempswafalse\fi
@@ -514,7 +514,7 @@
     \fi
   \fi
 }
-\cs_new:Nn \fontspec_set_bold_slanted: {
+\cs_new:Npn \fontspec_set_bold_slanted: {
   \ifx\zf@bfsl\@empty
     \ifx\zf@sl\@empty\else
       \zf@make@font@shapes[\zf@sl]{/B}
@@ -525,7 +525,7 @@
       {\bfdefault}{\sldefault}{\zf@font@feat\zf@bfsl@feat}
   \fi
 }
-\xetex_or_luatex:nnn { \cs_new:Nn \fontspec_set_font_type: }
+\xetex_or_luatex:nnn { \cs_new:Npn \fontspec_set_font_type: }
    {
     \zf@tfmfalse \zf@atsuifalse \zf@icufalse \zf@mmfalse \zf@graphitefalse
     \ifcase\XeTeXfonttype\zf@basefont
@@ -717,7 +717,7 @@
     \fontspec_make_ICU_feature:n {#3}
   }
 }
-\cs_new:Nn \fontspec_make_AAT_feature:nn {
+\cs_new:Npn \fontspec_make_AAT_feature:nn #1#2 {
   \tl_if_empty:nTF {#1}
   {
     \fontspec_warning:n {aat-feature-not-exist}
@@ -732,7 +732,7 @@
     \fi
   }
 }
-\cs_new:Nn \fontspec_make_ICU_feature:n {
+\cs_new:Npn \fontspec_make_ICU_feature:n #1 {
   \tl_if_empty:nTF {#1}
   {
     \fontspec_warning:n {icu-feature-not-exist}
@@ -1037,17 +1037,17 @@
     \rmfamily
     \fontspec_set_font_dimen:NnN \@tempdima {#1} \font
     \fontspec_set_font_dimen:NnN \@tempdimb {#1} \zf@basefont
-    \dim_set:N \@tempdimc { 1pt*\ratio{\@tempdima}{\@tempdimb} }
+    \dim_set:Nn \@tempdimc { 1pt*\@tempdima/\@tempdimb }
     \tl_gset:Nx \l_fontspec_scale_tl {\strip@pt\@tempdimc}
     \fontspec_info:n {set-scale}
   \group_end:
 }
-\xetex_or_luatex:nnn { \cs_new:Npn \fontspec_set_font_dimen:NnN }
+\xetex_or_luatex:nnn { \cs_new:Npn \fontspec_set_font_dimen:NnN #1#2#3 }
 {
-  \dim_set:N #1 { \fontdimen #2 #3 }
+  \dim_set:Nn #1 { \fontdimen #2 #3 }
 }
 {
-  \dim_set:N #1 { \directlua{ fontspec.get_dimen(#2, "\cs_to_str:N #3") } }
+  \dim_set:Nn #1 { \directlua{ fontspec.get_dimen(#2, "\cs_to_str:N #3") } }
 }
 \define@key[zf]{options}{WordSpace}{
   \zf@update@family{+wordspace:#1}
