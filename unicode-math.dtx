@@ -2982,6 +2982,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_trace:n {setup-explicit}
     \bool_set_false:N \l_um_implicit_alph_bool
     \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
+    \cs_set_eq:NN \um_map_char:nn \um_map_char_noparse:nn
   }
   \seq_map_inline:Nn \l_um_mathalph_seq {
     \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
