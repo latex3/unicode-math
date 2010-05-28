@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2010/05/24 v0.4 Unicode maths in XeLaTeX]
+  [2010/05/28 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -2058,6 +2058,10 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_setup_mathactives:
   \um_setup_delcodes:
   \um_setup_alphabets:
+%    \end{macrocode}
+% Prevent spaces:
+%    \begin{macrocode}
+  \ignorespaces
 }
 %    \end{macrocode}
 % \end{macro}
