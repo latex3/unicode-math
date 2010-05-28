@@ -6,7 +6,6 @@ help:
 	echo '         help  -  (this message)'
 	echo '          pkg  -  generate archive for CTAN (incomplete)'
 	echo '          doc  -  compile documentation'
-	echo '         push  -  push to GitHub'
 	echo '         test  -  run the test suite'
 	echo '      initest  -  initialise any new tests'
 	echo ' xfile F=<abc> -  compile file <abc> with XeTeX'
@@ -18,8 +17,9 @@ help:
 	echo ' '
 	echo '`make test` will then compare future compilations of the'
 	echo 'test file against this original and warn against any changes.'
+	echo '`make build/umtest****.diff.png` will check a single test.'
 	echo ' '
-	echo 'I recommend `make -j4 test` or thereabouts to parallelise
+	echo 'I recommend `make -j4 test` or thereabouts to parallelise'
 	echo 'the testing.'
 
 
