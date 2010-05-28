@@ -12,8 +12,9 @@
 %% 
 %%   License information appended.
 %% 
+%% 
 \ProvidesPackage{fontspec}
-  [2010/05/23 v2.0 Advanced font selection for XeLaTeX/LuaLaTeX]
+  [2010/05/27 v2.0b1 Advanced font selection for XeLaTeX/LuaLaTeX]
 \RequirePackage{expl3,xparse}
 \ExplSyntaxOn
 \msg_new:nnn {fontspec} {not-pdftex}
@@ -67,6 +68,131 @@
  {
   \use:x { \exp_not:N \setkeys*[zf@#1]{#2}{#3} }
  }
+\cs_new:Npn \fontspec_error:n     { \msg_error:nn     {fontspec} }
+\cs_new:Npn \fontspec_error:nx    { \msg_error:nnx    {fontspec} }
+\cs_new:Npn \fontspec_warning:n   { \msg_warning:nn   {fontspec} }
+\cs_new:Npn \fontspec_warning:nx  { \msg_warning:nnx  {fontspec} }
+\cs_new:Npn \fontspec_warning:nxx { \msg_warning:nnxx {fontspec} }
+\cs_new:Npn \fontspec_info:n      { \msg_info:nn      {fontspec} }
+\cs_new:Npn \fontspec_info:nx     { \msg_info:nnx     {fontspec} }
+\cs_new:Npn \fontspec_info:nxx    { \msg_info:nnxx    {fontspec} }
+\cs_new:Npn \fontspec_trace:n     { \msg_trace:nn     {fontspec} }
+\msg_new:nnn {fontspec} {no-size-info}
+{
+  Size~ information~ must~ be~ supplied.\\
+  For~ example,~ SizeFeatures={Size={8-12},...}.
+}
+\msg_new:nnnn {fontspec} {rename-feature-not-exist}
+{
+  The~ feature~ #1~ doesn't~ appear~ to~ be~ defined.
+}
+{
+  It~ looks~ like~ you're~ trying~ to~ rename~ a~ feature~ that~ doesn't~ exist.
+}
+\msg_new:nnn {fontspec} {no-glyph}
+{
+  '\zf@fontname'~ doesn't~ appear~ to~ have~ the~ glyph~ corresponding~ to~ '#1'.
+}
+\msg_new:nnnn {fontspec} {unknown-options}
+{
+  The~ following~ font~ options~ are~ not~ recognised:\\
+  \space\space\space\space #1
+}
+{
+  There~ is~ probably~ a~ typo~ in~ the~ font~ feature~ selection.
+}
+\msg_new:nnnn {fontspec} {euler-too-late}
+{
+  The~ euler~ package~ must~ be~ loaded~ BEFORE~ fontspec.
+}
+{
+  fontspec~ only~ overwrites~ euler's~ attempt~ to\\
+  define~ the~ maths~ text~ fonts~ if~ fontspec~ is\\
+  loaded~ after~ euler.~ Type~ <return>~ to~ proceed\\
+  with~ incorrect~ \string\mathit,~ \string\mathbf,~ etc.
+}
+
+\msg_new:nnn {fontspec} {addfontfeatures-ignored}
+{
+  \string\addfontfeature (s)~ ignored;\\
+  it~ cannot~ be~ used~ with~ a~ font~ that~ wasn't~ selected~ by~ fontspec.
+}
+\msg_new:nnn {fontspec} {feature-option-overwrite}
+{
+  Option~ '#2'~ of~ font~ feature~ '#1'~ overwritten.
+}
+\msg_new:nnn {fontspec} {script-not-exist}
+{
+  Font~ '\zf@fontname'~ does~ not~ contain~ script~ '#1'.
+}
+\msg_new:nnn {fontspec} {aat-feature-not-exist}
+{
+  '\XKV@tfam=\XKV@tkey'~ feature~ not~ supported\\
+  for~ AAT~ font~ '\zf@fontname'.
+}
+\msg_new:nnn {fontspec} {aat-feature-not-exist-in-font}
+{
+  AAT~ feature~ '\XKV@tfam=\XKV@tkey'~ (#1)~ not~ available\\
+  in~ font~ '\zf@fontname'.
+}
+\msg_new:nnn {fontspec} {icu-feature-not-exist}
+{
+  '\XKV@tfam=\XKV@tkey'~ feature~ not~ supported\\
+  for~ ICU~ font~ '\zf@fontname'
+}
+\msg_new:nnn {fontspec} {icu-feature-not-exist-in-font}
+{
+  OpenType~ feature~ '\XKV@tfam=\XKV@tkey'~ (#1)~ not~ available\\
+  for~ font~ '\zf@fontname', \\
+  with~ script~ '\l_fontspec_script_name_tl',~ and~ language~ '\l_fontspec_lang_name_tl'.
+}
+\msg_new:nnn {fontspec} {no-opticals}
+{
+  '\zf@fontname'~ doesn't~ appear~ to~ have~ an~ Optical~ Size~ axis.
+}
+\msg_new:nnn {fontspec} {language-not-exist}
+{
+  Language~ '#1'~ not~ available\\
+  for~ font~ '\zf@fontname'\\
+  with~ script~ '\l_fontspec_script_name_tl'.
+}
+\msg_new:nnn {fontspec} {only-xetex-feature}
+{
+  Ignored~ XeTeX~ only~ feature:~ '#1'.
+}
+\msg_new:nnn {fontspec} {only-luatex-feature}
+{
+  Ignored~ LuaTeX~ only~ feature:~ '#1'.
+}
+\msg_new:nnn {fontspec} {no-mapping}
+{
+  Input~ mapping~ not~ (yet?)~ supported~ in~ LuaTeX.
+}
+\msg_new:nnn {fontspec} {no-mapping-ligtex}
+{
+  Input~ mapping~ not~ (yet?)~ supported~ in~ LuaTeX.\\
+  Use~ "Ligatures=TeX"~ instead~ of~ "Mapping=tex-text".
+}
+\msg_new:nnn {fontspec} {cm-default-obsolete}
+{
+  The~ "cm-default"~ package~ option~ is~ obsolete.
+}
+\msg_new:nnn {fontspec} {defining-font}
+{
+  Defining~ font~ family~ for~ '#2'~ with~ options~ [\zf@default@options #1].
+}
+\msg_new:nnn {fontspec} {no-font-shape}
+{
+  Could~ not~ resolve~ font~ #1~ (it~ probably~ doesn't~ exist).
+}
+\msg_new:nnn {fontspec} {set-scale}
+{
+  \zf@fontname\space scale ~=~ \l_fontspec_scale_tl.
+}
+\msg_new:nnn {fontspec} {setup-math}
+{
+  Adjusting~ the~ maths~ setup~ (use~ [no-math]~ to~ avoid~ this).
+}
 \DeclareOption{cm-default}{
   \fontspec_warning:n {cm-default-obsolete}
 }
@@ -199,6 +325,7 @@
   }
   \zf@define@feature@option{#1}{#2}{}{}{#3}
 }
+\cs_set_eq:NN \newopentypefeature \newICUfeature
 \DeclareDocumentCommand \aliasfontfeature {mm} {\multi@alias@key{#1}{#2}}
 \DeclareDocumentCommand \aliasfontfeatureoption {mmm} {
   \keyval@alias@key[zf@feat]{#1}{#2}{#3}
@@ -1311,6 +1438,7 @@
     \fontspec_make_feature:nnn{18}{#1}{+ss\two@digits{#1}}
   \fi
 }
+\aliasfontfeature{Variant}{StylisticSet}
 \zf@define@font@feature{Style}
 \zf@define@feature@option{Style}{Alternate}     {}  {} {+salt}
 \zf@define@feature@option{Style}{Italic}        {32}{2}{+ital}
@@ -1403,6 +1531,9 @@
 \newfontscript{Thaana}{thaa}            \newfontscript{Thai}{thai}
 \newfontscript{Tibetan}{tibt}           \newfontscript{Tifinagh}{tfng}
 \newfontscript{Ugaritic~Cuneiform}{ugar}\newfontscript{Yi}{yi~~}
+\newfontscript{Kana}{kana}
+\newfontscript{Maths}{math}
+\newfontscript{CJK}{hani}
 \newfontlanguage{Abaza}{ABA}\newfontlanguage{Abkhazian}{ABK}
 \newfontlanguage{Adyghe}{ADY}\newfontlanguage{Afrikaans}{AFK}
 \newfontlanguage{Afar}{AFR}\newfontlanguage{Agaw}{AGW}
@@ -1770,131 +1901,6 @@
   \fi
 }
 \AtBeginDocument{\zf@math@maybe}
-\cs_new:Npn \fontspec_error:n     { \msg_error:nn     {fontspec} }
-\cs_new:Npn \fontspec_error:nx    { \msg_error:nnx    {fontspec} }
-\cs_new:Npn \fontspec_warning:n   { \msg_warning:nn   {fontspec} }
-\cs_new:Npn \fontspec_warning:nx  { \msg_warning:nnx  {fontspec} }
-\cs_new:Npn \fontspec_warning:nxx { \msg_warning:nnxx {fontspec} }
-\cs_new:Npn \fontspec_info:n      { \msg_info:nn      {fontspec} }
-\cs_new:Npn \fontspec_info:nx     { \msg_info:nnx     {fontspec} }
-\cs_new:Npn \fontspec_info:nxx    { \msg_info:nnxx    {fontspec} }
-\cs_new:Npn \fontspec_trace:n     { \msg_trace:nn     {fontspec} }
-\msg_new:nnn {fontspec} {no-size-info}
-{
-  Size~ information~ must~ be~ supplied.\\
-  For~ example,~ SizeFeatures={Size={8-12},...}.
-}
-\msg_new:nnnn {fontspec} {rename-feature-not-exist}
-{
-  The~ feature~ #1~ doesn't~ appear~ to~ be~ defined.
-}
-{
-  It~ looks~ like~ you're~ trying~ to~ rename~ a~ feature~ that~ doesn't~ exist.
-}
-\msg_new:nnn {fontspec} {no-glyph}
-{
-  '\zf@fontname'~ doesn't~ appear~ to~ have~ the~ glyph~ corresponding~ to~ '#1'.
-}
-\msg_new:nnnn {fontspec} {unknown-options}
-{
-  The~ following~ font~ options~ are~ not~ recognised:\\
-  \space\space\space\space #1
-}
-{
-  There~ is~ probably~ a~ typo~ in~ the~ font~ feature~ selection.
-}
-\msg_new:nnnn {fontspec} {euler-too-late}
-{
-  The~ euler~ package~ must~ be~ loaded~ BEFORE~ fontspec.
-}
-{
-  fontspec~ only~ overwrites~ euler's~ attempt~ to\\
-  define~ the~ maths~ text~ fonts~ if~ fontspec~ is\\
-  loaded~ after~ euler.~ Type~ <return>~ to~ proceed\\
-  with~ incorrect~ \string\mathit,~ \string\mathbf,~ etc.
-}
-
-\msg_new:nnn {fontspec} {addfontfeatures-ignored}
-{
-  \string\addfontfeature (s)~ ignored;\\
-  it~ cannot~ be~ used~ with~ a~ font~ that~ wasn't~ selected~ by~ fontspec.
-}
-\msg_new:nnn {fontspec} {feature-option-overwrite}
-{
-  Option~ '#2'~ of~ font~ feature~ '#1'~ overwritten.
-}
-\msg_new:nnn {fontspec} {script-not-exist}
-{
-  Font~ '\zf@fontname'~ does~ not~ contain~ script~ '#1'.
-}
-\msg_new:nnn {fontspec} {aat-feature-not-exist}
-{
-  '\XKV@tfam=\XKV@tkey'~ feature~ not~ supported\\
-  for~ AAT~ font~ '\zf@fontname'.
-}
-\msg_new:nnn {fontspec} {aat-feature-not-exist-in-font}
-{
-  AAT~ feature~ '\XKV@tfam=\XKV@tkey'~ (#1)~ not~ available\\
-  in~ font~ '\zf@fontname'.
-}
-\msg_new:nnn {fontspec} {icu-feature-not-exist}
-{
-  '\XKV@tfam=\XKV@tkey'~ feature~ not~ supported\\
-  for~ ICU~ font~ '\zf@fontname'
-}
-\msg_new:nnn {fontspec} {icu-feature-not-exist-in-font}
-{
-  OpenType~ feature~ '\XKV@tfam=\XKV@tkey'~ (#1)~ not~ available\\
-  for~ font~ '\zf@fontname', \\
-  with~ script~ '\l_fontspec_script_name_tl',~ and~ language~ '\l_fontspec_lang_name_tl'.
-}
-\msg_new:nnn {fontspec} {no-opticals}
-{
-  '\zf@fontname'~ doesn't~ appear~ to~ have~ an~ Optical~ Size~ axis.
-}
-\msg_new:nnn {fontspec} {language-not-exist}
-{
-  Language~ '#1'~ not~ available\\
-  for~ font~ '\zf@fontname'\\
-  with~ script~ '\l_fontspec_script_name_tl'.
-}
-\msg_new:nnn {fontspec} {only-xetex-feature}
-{
-  Ignored~ XeTeX~ only~ feature:~ '#1'.
-}
-\msg_new:nnn {fontspec} {only-luatex-feature}
-{
-  Ignored~ LuaTeX~ only~ feature:~ '#1'.
-}
-\msg_new:nnn {fontspec} {no-mapping}
-{
-  Input~ mapping~ not~ (yet?)~ supported~ in~ LuaTeX.
-}
-\msg_new:nnn {fontspec} {no-mapping-ligtex}
-{
-  Input~ mapping~ not~ (yet?)~ supported~ in~ LuaTeX.\\
-  Use~ "Ligatures=TeX"~ instead~ of~ "Mapping=tex-text".
-}
-\msg_new:nnn {fontspec} {cm-default-obsolete}
-{
-  The~ "cm-default"~ package~ option~ is~ obsolete.
-}
-\msg_new:nnn {fontspec} {defining-font}
-{
-  Defining~ font~ family~ for~ '#2'~ with~ options~ [\zf@default@options #1].
-}
-\msg_new:nnn {fontspec} {no-font-shape}
-{
-  Could~ not~ resolve~ font~ #1~ (it~ probably~ doesn't~ exist).
-}
-\msg_new:nnn {fontspec} {set-scale}
-{
-  \zf@fontname\space scale ~=~ \l_fontspec_scale_tl.
-}
-\msg_new:nnn {fontspec} {setup-math}
-{
-  Adjusting~ the~ maths~ setup~ (use~ [no-math]~ to~ avoid~ this).
-}
 \if@zf@configfile
   \InputIfFileExists{fontspec.cfg}
     {\typeout{fontspec.cfg~ loaded.}}
@@ -1915,7 +1921,8 @@
 %%                                 fontspec.lua,
 %%                                 fontspec.cfg,
 %%                                 fontspec.ins,
-%%                                 fontspec-example.ltx,
+%%                                 fontspec-xetex.ltx,
+%%                                 fontspec-luatex.ltx,
 %%                             and fontspec.pdf.
 %% 
 %%
