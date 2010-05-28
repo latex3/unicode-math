@@ -1,0 +1,19 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\begin{document}
+Default:
+\[
+(a+b)^2 = \sqrt{c+d}
+\]
+\setmathfont[range={\mathup}]{Linux Libertine}
+\setmathfont[range={\mathit}]{Linux Libertine Italic}
+Example of a non-math OpenType font:
+\[
+(a+b)^2 = \sqrt{c+d}
+\]
+With symbols:
+\setmathfont[range={`\+,`\=,`\(,`\)}]{Linux Libertine}
+\[
+(a+b)^2 = \sqrt{c+d}
+\]
+\end{document}
