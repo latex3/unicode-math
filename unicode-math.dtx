@@ -4529,13 +4529,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 %
 % \paragraph{\pkg{beamer}}
+% At end of the package so the warnings are defined.
 %    \begin{macrocode}
-\@ifclassloaded{beamer}{
-  \ifbeamer@suppressreplacements\else
-    \um_warning:n {disable-beamer}
-    \beamer@suppressreplacementstrue
-  \fi
-}{}
+\AtEndOfPackage{
+  \@ifclassloaded{beamer}{
+    \ifbeamer@suppressreplacements\else
+      \um_warning:n {disable-beamer}
+      \beamer@suppressreplacementstrue
+    \fi
+  }{}
+}
 %    \end{macrocode}
 %
 %
