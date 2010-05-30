@@ -898,7 +898,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % Unfortunately, font support for the above characters/glyphs is rather inconsistent.
 % In Cambria Math, the only slash that grows (say when writing
 % \[
-% \left.\left[\begin{array}{cc} a & b \\ c & d\end{array}\right]\middle\fracslash
+% \left.\left[\begin{array}{cc} a & b \\ c & d\end{array}\right]\middle\slash
 %       \left[\begin{array}{cc} 1 & 1 \\ 1 & 0\end{array}\right] \right.\quad )
 % \]
 % is the \textsc{fraction slash}, which we just established above is
@@ -2759,7 +2759,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_map_chars_range:nnnn {10} {#1} {#2} {num}
 }
 %    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\um_map_single:nnn}
 % \darg{char name (`dotlessi')}
@@ -2780,6 +2779,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }
 }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\um_set_mathalph_range:Nnn}
 % \oarg{Number of iterations}
@@ -4862,7 +4862,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \usepackage[svgnames]{xcolor}
 \usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
 \setcounter{LTchunksize}{100}
-\usepackage{unicode-math}
+\usepackage[slash-delimiter=frac]{unicode-math}
 \usepackage{metalogo}
 
 %\usepackage[rm,small]{titlesec}
