@@ -2020,18 +2020,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \tl_set:Nn \um_symfont_tl {um_allsym}
     \msg_trace:nnx {unicode-math} {default-math-font} {#2}
     \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_noparse:nnnn
-    \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
+    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
-    \cs_set_eq:NN \um_map_char:nn \um_map_char_noparse:nn
+    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
   }{
     \int_incr:N \g_um_fam_int
     \tl_set:Nx \um_symfont_tl {um_fam\int_use:N\g_um_fam_int}
     \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_parse:nnnn
-    \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_parse:Nnn
+    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_parse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
-    \cs_set_eq:NN \um_map_char:nn \um_map_char_parse:nn
+    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_parse:nn
   }
 %    \end{macrocode}
 % Now defined |\um_symfont_tl| as the \LaTeX\ math font to access everything:
@@ -2685,7 +2685,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Npn \um_map_chars_range:nnn #1#2#3 {
   \prg_stepwise_inline:nnnn {0}{1}{#1-1} {
-    \um_map_char:nn {#2+##1}{#3+##1}
+    \um_map_char_single:nn {#2+##1}{#3+##1}
   }
 }
 \cs_new:Npn \um_map_char_noparse:nn #1#2 {
@@ -2759,21 +2759,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_generate_variant:Nn \um_map_char_single:nn {cc}
 \cs_generate_variant:Nn \um_map_chars_range:nnn {ncc}
 %    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{macro}{\um_set_mathalphabet_char:Nnn}
-% \darg{Maths alphabet}
-% \darg{Input char (single)}
-% \darg{Output char}
-% Loops through character ranges setting \cmd\mathcode.
-%    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_char:Nnn #1#2#3 {
-  \um_mathmap:Nnn {#1} {#2} {#3}
-}
-%    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\um_set_mathalph_range:Nnn}
 % \oarg{Number of iterations}
@@ -2784,7 +2769,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_new:Npn \um_set_mathalph_range:nNnn #1#2#3#4 {
   \prg_stepwise_inline:nnnn {0}{1}{#1-1} {
-    \um_mathmap:Nnn {#2} { ##1 + #3 } { ##1 + #4 }
+    \um_set_mathalphabet_char:Nnn {#2} { ##1 + #3 } { ##1 + #4 }
   }
 }
 \cs_new:Npn \um_set_mathalphabet_pos:Nnnn #1#2#3#4 {
@@ -2999,8 +2984,8 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   }{
     \um_trace:n {setup-explicit}
     \bool_set_false:N \l_um_implicit_alph_bool
-    \cs_set_eq:NN \um_mathmap:Nnn \um_mathmap_noparse:Nnn
-    \cs_set_eq:NN \um_map_char:nn \um_map_char_noparse:nn
+    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
+    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
   }
   \seq_map_inline:Nn \l_um_mathalph_seq {
     \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
