@@ -2506,7 +2506,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
-  \tl_set:Nn \l_um_tmpa_tl {#1}
+  \KV_remove_surrounding_spaces:nw {\tl_set:Nf\l_um_tmpa_tl} #1 \q_nil
   \tl_set:Nn \l_um_tmpb_tl {}
   \tl_set:Nn \l_um_tmpc_tl {}
   \tl_if_in:NnT \l_um_tmpa_tl {->} {
