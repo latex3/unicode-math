@@ -1955,7 +1955,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \doarg{font features}
 % \darg{font name}
 %    \begin{macrocode}
-\DeclareDocumentCommand \setmathfont { O{} m } {
+\cs_new:Npn \um_init: {
 %    \end{macrocode}
 % \begin{itemize}
 % \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
@@ -1968,7 +1968,16 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \bool_set_true:N \l_um_init_bool
   \seq_clear:N \l_um_char_range_seq
   \clist_clear:N \l_um_char_num_range_clist
+  \seq_clear:N \l_um_mathalph_seq
+  \clist_clear:N \l_um_unknown_keys_clist
 %    \end{macrocode}
+% \end{itemize}
+%    \begin{macrocode}
+}
+\DeclareDocumentCommand \setmathfont { O{} m } {
+  \um_init:
+%    \end{macrocode}
+% \begin{itemize}
 % \item Grab the current size information
 % (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
 %    \begin{macrocode}
@@ -1992,7 +2001,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
-  \clist_clear:N \l_um_unknown_keys_clist
   \keys_set:nn {unicode-math} {#1}
   \um_fontspec_select_font:n {#2}
 %    \end{macrocode}
