@@ -1100,6 +1100,14 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 \cs_generate_variant:Nn \prop_if_in:NnTF {cx}
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\cs_new:Npn \exp_args:NNcc #1#2#3#4 {
+  \exp_after:wN #1 \exp_after:wN #2
+    \cs:w #3 \exp_after:wN \cs_end:
+    \cs:w #4 \cs_end:
+}
+%    \end{macrocode}
+%
 %
 % \paragraph{Conditionals}
 %    \begin{macrocode}
