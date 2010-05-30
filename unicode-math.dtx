@@ -1057,7 +1057,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % This is the package.
 %    \begin{macrocode}
 \ProvidesPackage{unicode-math}
-  [2010/05/28 v0.4 Unicode maths in XeLaTeX]
+  [2010/05/30 v0.4 Unicode maths in XeLaTeX]
 %    \end{macrocode}
 %
 % \section{Things we need}
@@ -2262,7 +2262,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Npn \um_mathmap_noparse:Nnn #1#2#3 {
   \clist_map_inline:nn {#2} {
-    \tl_put_right:cx {um_setup_\cs_to_str:N #1:} {
+    \tl_put_right:cx {um_switchto_\cs_to_str:N #1:} {
       \um_set_mathcode:nnnn{##1}{\mathalpha}{\um_symfont_tl}{#3}
     }
   }
@@ -2738,10 +2738,21 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
   \um_map_chars_range:ncc {10} { \um_to_usv:nn{#1}{num} }
                               { \um_to_usv:nn{#2}{num} }
 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_map_single:nnn}
+% \darg{char name (`dotlessi')}
+% \darg{from alphabet(s)}
+% \darg{to alphabet}
+%    \begin{macrocode}
 \cs_set:Npn \um_map_single:nnn #1#2#3 {
-  \clist_map_inline:nn {#2} {
-    \um_map_char_single:cc { \um_to_usv:nn{##1}{#1} }
-                           { \um_to_usv:nn {#3}{#1} }
+  \cs_if_exist:cT { \um_to_usv:nn {#3} {#1} }
+  {
+    \clist_map_inline:nn {#2} {
+      \um_map_char_single:cc { \um_to_usv:nn{##1}{#1} }
+                             { \um_to_usv:nn {#3}{#1} }
+    }
   }
 }
 \cs_set:Npn \um_map_char_single:nn #1#2 { \um_map_char:nn {#1}{#2} }
@@ -2901,14 +2912,15 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %
 % \subsubsection{Macros}
 %
-% \begin{macro}{\um_prepare_alph:n}
+% \begin{macro}{\um_prepare_alph:n,\um_prepare_alph:f}
 % Define the high level math alphabet macros (\cs{mathit}, etc.) in terms of
 % unicode-math defintions. Use \cs{bgroup}/\cs{egroup} so s'scripts scan the
 % whole thing.
 %    \begin{macrocode}
 \cs_new:Npn \um_prepare_alph:n #1 {
+  \um_init_alphabet:x {\use_none:nnnn #1}
   \cs_set:cpn {um_#1:n} ##1 {
-    \use:c {um_setup_#1:} ##1 \egroup
+    \use:c {um_switchto_#1:} ##1 \egroup
   }
   \cs_set_protected:cpx {#1} {
     \exp_not:n{
@@ -2921,6 +2933,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \exp_not:c {um_#1:n}
   }
 }
+\cs_generate_variant:Nn \um_prepare_alph:n {f}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2928,16 +2941,18 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \begin{macro}{\g_um_mathalph_seq}
 %    \begin{macrocode}
 \seq_new:N \g_um_mathalph_seq
-\tl_map_inline:nn {
-  \mathup\mathit\mathbb\mathbbit
-  \mathscr\mathfrak\mathtt
-  \mathsf\mathsfup\mathsfit
-  \mathbf\mathbfup\mathbfit
-  \mathbfscr\mathbffrak
-  \mathbfsf\mathbfsfup\mathbfsfit
-}{
-  \seq_put_right:Nn \g_um_mathalph_seq {#1}
-  \exp_args:Nf \um_prepare_alph:n {\cs_to_str:N #1}
+\AtEndOfPackage{
+  \tl_map_inline:nn {
+    \mathup\mathit\mathbb\mathbbit
+    \mathscr\mathfrak\mathtt
+    \mathsf\mathsfup\mathsfit
+    \mathbf\mathbfup\mathbfit
+    \mathbfscr\mathbffrak
+    \mathbfsf\mathbfsfup\mathbfsfit
+  }{
+    \seq_put_right:Nn \g_um_mathalph_seq {#1}
+    \um_prepare_alph:f {\cs_to_str:N #1}
+  }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3026,11 +3041,13 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{Math font family name (e.g., \cs{mathbb})}
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
 % \darg{Math alphabets output string (usually same as input \texttt{bb})}
-% First check that at least one of the alphabets for the font shape is defined\dots
 %    \begin{macrocode}
 \cs_new:Npn \um_setup_math_alphabet:Nnn #1#2#3 {
   \tl_set:Nx \l_um_tmpa_tl {\cs_to_str:N #1}
   \tl_set:Nx \l_um_tmpb_tl {\exp_after:wN \use_none:nnnn \l_um_tmpa_tl}
+%    \end{macrocode}
+% First check that at least one of the alphabets for the font shape is defined\dots
+%    \begin{macrocode}
   \clist_map_inline:nn {#2} {
     \cs_if_exist:cT {um_config_ \l_um_tmpa_tl _##1:n} {
       \tl_if_eq:nnTF {##1}{misc} {
@@ -3077,8 +3094,9 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \begin{macrocode}
 \cs_set:Npn \um_init_alphabet:n #1 {
   \um_trace:nx {alph-initialise} {#1}
-  \cs_set_eq:cN {um_setup_math#1:} \prg_do_nothing:
+  \cs_set_eq:cN {um_switchto_math#1:} \prg_do_nothing:
 }
+\cs_generate_variant:Nn \um_init_alphabet:n {x}
 %    \end{macrocode}
 %
 % \begin{macro}{\um_glyph_if_exist:nTF}
@@ -4360,7 +4378,7 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % We need to change \LaTeX's idea of the font used to typeset
 % things like \cmd\sin\ and \cmd\cos:
 %    \begin{macrocode}
-\def\operator@font{\um_setup_mathup:}
+\def\operator@font{\um_switchto_mathup:}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -4442,12 +4460,12 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % setup (i.e., \pkg{unicode-math}) doesn't remap the symbols into Plane 1.
 % Which is, of course, what \cs{mathup} is doing.
 %
-% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\um_setup_mathup:}|
+% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\um_switchto_mathup:}|
 % but activates automatically so old documents that might change the \cs{url}
 % font still work correctly.
 %    \begin{macrocode}
 \um_patch_pkg:nn {url} {
-  \tl_put_left:Nn \Url@FormatString { \um_setup_mathup: }
+  \tl_put_left:Nn \Url@FormatString { \um_switchto_mathup: }
   \tl_put_right:Nn \UrlSpecials {
     \do\`{\mathchar`\`}
     \do\'{\mathchar`\'}

@@ -1,0 +1,26 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont[
+    range={
+      \mathit/{latin}->\mathbfup ,
+      \mathit/{Latin}->\mathsfup
+    }
+  ]{Cambria Math}
+\setmathfont[
+    range={
+      \mathup/{Greek}->\mathbfup ,
+      \mathit/{greek}->\mathbfit
+    },
+    Colour=990000
+  ]{Cambria Math}
+\begin{document}
+\vspace*{-1cm}
+\[\LATINtext\]
+\[\latintext\]
+\[\mathit{\LATINtext}\]
+\[\mathit{\latintext}\]
+\[{\GREEKtext}\]
+\[{\greektext}\]
+\[\mathup{\GREEKtext}\]
+\[\mathit{\greektext}\]
+\end{document}
