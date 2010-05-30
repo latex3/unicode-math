@@ -2694,7 +2694,6 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_map_char:nn }
 % \darg{Starting input char (single)}
 % \darg{Starting output char}
 % Loops through character ranges setting \cmd\mathcode.
@@ -2704,6 +2703,23 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_map_char_single:nn {#2+##1}{#3+##1}
   }
 }
+\cs_generate_variant:Nn \um_map_chars_range:nnn {ncc}
+%    \end{macrocode}
+%
+% \begin{macro}{\um_map_chars_range:nnnn}
+% \darg{Number of chars (26)}
+% \darg{From style, one or more (it)}
+% \darg{To style (up)}
+% \darg{Alphabet name (Latin)}
+%    \begin{macrocode}
+\cs_new:Npn \um_map_chars_range:nnnn #1#2#3#4 {
+  \um_map_chars_range:ncc {#1} { \um_to_usv:nn {#2}{#4} }
+                               { \um_to_usv:nn {#3}{#4} }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \cs_new:Npn \um_map_char_noparse:nn #1#2 {
   \um_set_mathcode:nnnn {#1}{\mathalpha}{\um_symfont_tl}{#2}
 }
@@ -2714,45 +2730,33 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 }
 \cs_set:Npn \um_map_chars_Latin:nn #1#2 {
   \clist_map_inline:nn {#1} {
-    \um_map_chars_range:ncc {26} { \um_to_usv:nn{##1}{Latin} }
-                                 { \um_to_usv:nn {#2}{Latin} }
+    \um_map_chars_range:nnnn {26} {##1} {#2} {Latin}
   }
 }
 \cs_set:Npn \um_map_chars_latin:nn #1#2 {
   \clist_map_inline:nn {#1} {
-    \um_map_chars_range:ncc {26} { \um_to_usv:nn{##1}{latin} }
-                                 { \um_to_usv:nn {#2}{latin} }
+    \um_map_chars_range:nnnn {26} {##1} {#2} {latin}
   }
 }
 \cs_set:Npn \um_map_chars_greek:nn #1#2 {
   \clist_map_inline:nn {#1} {
-    \um_map_chars_range:ncc {25} { \um_to_usv:nn {##1} {greek} }
-                                 { \um_to_usv:nn  {#2} {greek} }
-    \um_map_char_single:cc { \um_to_usv:nn {##1} {varepsilon} }
-                           { \um_to_usv:nn  {#2} {varepsilon} }
-    \um_map_char_single:cc { \um_to_usv:nn {##1} {vartheta}   }
-                           { \um_to_usv:nn  {#2} {vartheta}   }
-    \um_map_char_single:cc { \um_to_usv:nn {##1} {varkappa}   }
-                           { \um_to_usv:nn  {#2} {varkappa}   }
-    \um_map_char_single:cc { \um_to_usv:nn {##1} {varphi}     }
-                           { \um_to_usv:nn  {#2} {varphi}     }
-    \um_map_char_single:cc { \um_to_usv:nn {##1} {varrho}     }
-                           { \um_to_usv:nn  {#2} {varrho}     }
-    \um_map_char_single:cc { \um_to_usv:nn {##1} {varpi}      }
-                           { \um_to_usv:nn  {#2} {varpi}      }
+    \um_map_chars_range:nnnn {25} {##1} {#2} {greek}
+    \um_map_char_single:nnn {##1} {#2} {varepsilon}
+    \um_map_char_single:nnn {##1} {#2} {vartheta}
+    \um_map_char_single:nnn {##1} {#2} {varkappa}
+    \um_map_char_single:nnn {##1} {#2} {varphi}
+    \um_map_char_single:nnn {##1} {#2} {varrho}
+    \um_map_char_single:nnn {##1} {#2} {varpi}
   }
 }
 \cs_set:Npn \um_map_chars_Greek:nn #1#2 {
   \clist_map_inline:nn {#1} {
-    \um_map_chars_range:ncc {25} { \um_to_usv:nn{##1}{Greek} }
-                                 { \um_to_usv:nn {#2}{Greek} }
-    \um_map_char_single:cc { \um_to_usv:nn{##1}{varTheta} }
-                           { \um_to_usv:nn {#2}{varTheta} }
+    \um_map_chars_range:nnnn {25} {##1} {#2} {Greek}
+    \um_map_char_single:nnn {##1} {#2} {varTheta}
   }
 }
 \cs_set:Npn \um_map_chars_numbers:nn #1#2 {
-  \um_map_chars_range:ncc {10} { \um_to_usv:nn{#1}{num} }
-                              { \um_to_usv:nn{#2}{num} }
+  \um_map_chars_range:nnnn {10} {#1} {#2} {num}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2762,18 +2766,19 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
 % \darg{from alphabet(s)}
 % \darg{to alphabet}
 %    \begin{macrocode}
+\cs_new:Npn \um_map_char_single:cc { \exp_args:Ncc \um_map_char_single:nn }
+\cs_new:Npn \um_map_char_single:nnn #1#2#3 {
+  \um_map_char_single:cc { \um_to_usv:nn {#1}{#3} }
+                         { \um_to_usv:nn {#2}{#3} }
+}
 \cs_set:Npn \um_map_single:nnn #1#2#3 {
   \cs_if_exist:cT { \um_to_usv:nn {#3} {#1} }
   {
     \clist_map_inline:nn {#2} {
-      \um_map_char_single:cc { \um_to_usv:nn{##1}{#1} }
-                             { \um_to_usv:nn {#3}{#1} }
+      \um_map_char_single:nnn {##1} {#3} {#1}
     }
   }
 }
-\cs_set:Npn \um_map_char_single:nn #1#2 { \um_map_char:nn {#1}{#2} }
-\cs_generate_variant:Nn \um_map_char_single:nn {cc}
-\cs_generate_variant:Nn \um_map_chars_range:nnn {ncc}
 %    \end{macrocode}
 %
 % \begin{macro}{\um_set_mathalph_range:Nnn}
@@ -2788,62 +2793,61 @@ This work consists of the files unicode-math.dtx and unicode-math-table.tex
     \um_set_mathalphabet_char:Nnn {#2} { ##1 + #3 } { ##1 + #4 }
   }
 }
+\cs_generate_variant:Nn \um_set_mathalph_range:nNnn {nNcc}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \cs_new:Npn \um_set_mathalphabet_pos:Nnnn #1#2#3#4 {
   \cs_if_exist:cT { \um_to_usv:nn {#4}{#2} } {
     \clist_map_inline:nn {#3} {
-      \um_set_mathalphabet_char:Ncc #1 { \um_to_usv:nn {##1} {#2} }
-                                       { \um_to_usv:nn  {#4} {#2} }
+      \um_set_mathalphabet_char:Nnnn #1 {##1} {#4} {#2}
     }
   }
 }
 \cs_new:Npn \um_set_mathalphabet_numbers:Nnn #1#2#3 {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalph_range:nNcc {10} #1 { \um_to_usv:nn {##1} {num} }
-                                        { \um_to_usv:nn  {#3} {num} }
+    \um_set_mathalph_range:nNnnn {10} #1  {##1} {#3} {num}
   }
 }
 \cs_new:Npn \um_set_mathalphabet_Latin:Nnn #1#2#3 {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalph_range:nNcc {26} #1 { \um_to_usv:nn {##1} {Latin} }
-                                        { \um_to_usv:nn  {#3} {Latin} }
+    \um_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {Latin}
   }
 }
 \cs_new:Npn \um_set_mathalphabet_latin:Nnn #1#2#3 {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalph_range:nNcc {26} #1 { \um_to_usv:nn {##1} {latin} }
-                                        { \um_to_usv:nn  {#3} {latin} }
-    \um_set_mathalphabet_char:Ncc #1    { \um_to_usv:nn {##1} {h}     }
-                                        { \um_to_usv:nn  {#3} {h}     }
+    \um_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {latin}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {h}
   }
 }
 \cs_new:Npn \um_set_mathalphabet_Greek:Nnn #1#2#3 {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalph_range:nNcc {25} #1 { \um_to_usv:nn {##1} {Greek}    }
-                                        { \um_to_usv:nn  {#3} {Greek}    }
-    \um_set_mathalphabet_char:Ncc #1    { \um_to_usv:nn {##1} {varTheta} }
-                                        { \um_to_usv:nn  {#3} {varTheta} }
+    \um_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {Greek}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varTheta}
   }
 }
 \cs_new:Npn \um_set_mathalphabet_greek:Nnn #1#2#3 {
   \clist_map_inline:nn {#2} {
-    \um_set_mathalph_range:nNcc {25} #1 { \um_to_usv:nn {##1} {greek}      }
-                                        { \um_to_usv:nn  {#3} {greek}      }
-    \um_set_mathalphabet_char:Ncc  #1   { \um_to_usv:nn {##1} {varepsilon} }
-                                        { \um_to_usv:nn  {#3} {varepsilon} }
-    \um_set_mathalphabet_char:Ncc  #1   { \um_to_usv:nn {##1} {vartheta}   }
-                                        { \um_to_usv:nn  {#3} {vartheta}   }
-    \um_set_mathalphabet_char:Ncc  #1   { \um_to_usv:nn {##1} {varkappa}   }
-                                        { \um_to_usv:nn  {#3} {varkappa}   }
-    \um_set_mathalphabet_char:Ncc  #1   { \um_to_usv:nn {##1} {varphi}     }
-                                        { \um_to_usv:nn  {#3} {varphi}     }
-    \um_set_mathalphabet_char:Ncc  #1   { \um_to_usv:nn {##1} {varrho}     }
-                                        { \um_to_usv:nn  {#3} {varrho}     }
-    \um_set_mathalphabet_char:Ncc  #1   { \um_to_usv:nn {##1} {varpi}      }
-                                        { \um_to_usv:nn  {#3} {varpi}      }
+    \um_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {greek}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varepsilon}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {vartheta}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varkappa}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varphi}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varrho}
+    \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varpi}
   }
 }
-\cs_generate_variant:Nn \um_set_mathalphabet_char:Nnn {Ncc}
-\cs_generate_variant:Nn \um_set_mathalph_range:nNnn {nNcc}
+\cs_new:Npn \um_set_mathalphabet_char:Ncc {
+  \exp_args:NNcc \um_set_mathalphabet_char:Nnn
+}
+\cs_new:Npn \um_set_mathalphabet_char:Nnnn #1#2#3#4 {
+  \um_set_mathalphabet_char:Ncc #1 { \um_to_usv:nn {#2} {#4} }
+                                   { \um_to_usv:nn {#3} {#4} }
+}
+\cs_new:Npn \um_set_mathalph_range:nNnnn #1#2#3#4#5 {
+  \um_set_mathalph_range:nNcc {#1} #2 { \um_to_usv:nn {#3} {#5} }
+                                      { \um_to_usv:nn {#4} {#5} }
+}
 %    \end{macrocode}
 % \end{macro}
 %
