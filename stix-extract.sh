@@ -4,6 +4,12 @@ cat stix-tbl.txt |
 awk '
   {
 	# USV characters to ignore
+	
+	#   (temporary, probably)
+	ignoreusv["023DE"] = "\\overbrace               "
+	ignoreusv["023DF"] = "\\underbrace              "
+	
+	#
 	ignoreusv["000C5"] = "\\AA                      "
 	ignoreusv["000C6"] = "\\AE                      "
 	ignoreusv["000D0"] = "\\DH                      "
