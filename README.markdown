@@ -7,16 +7,18 @@ work, I understand that it has certain uses and am making it available for
 distribution. Your testing and feedback is essential to fill in the many gaps
 that I miss!
 
-Please be aware that this package is undergoing (slow) continued
+Please be aware that this package is undergoing continued
 development and the interface and functionality should not be considered
-stable. Use at your own risk, in other words.
+completely stable. But the more the package is used the more stable it will
+become.
 
 Unicode maths is currently supported to one degree or another by the fonts
 
  - [Cambria Math][0] (Microsoft, proprietry),
  - [Asana Math][1] (Apostolos Syropolous, open source),
- - [Neo Euler][2] (Khalid Hosny, open source), and
- - [STIX][3] (STI Pub, freely available when it's released).
+ - [Neo Euler][2] (Khalid Hosny, open source),
+ - [STIX][3] (STI Pub, freely available), and
+ - [XITS Math][4] (Khalid Hosny, open source),
 
 I'm always looking for new fonts to test with, so please let me know of any
 new releases.
@@ -25,6 +27,7 @@ new releases.
 [1]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
 [2]: http://github.com/khaledhosny/euler-otf
 [3]: http://www.aip.org/stixfonts/
+[4]: http://github.com/khaledhosny/xits-math
 
 
 PACKAGE USAGE
@@ -43,9 +46,8 @@ REQUIREMENTS
 ------------
 
 As well as running XeTeX, of course, this package requires recent versions
-of the expl3 and xpackages bundles.
-These form the basis of the new LaTeX3 programming layer.
-If you're using TeX Live 2009 or MiKTeX 2.8 then there'll be no problems.
+of the fontspec, expl3 and xpackages packages. If you're using TeX Live 2010
+then there'll be no problems.
 
 
 INSTALLATION
@@ -66,17 +68,18 @@ in a place searched by XeLaTeX; on Mac OS X, for example:
     ~/Library/texmf/tex/xelatex/
 
 
-MAINENANCE
-----------
+MAINTENANCE
+-----------
 
 Latest developmental and archived historical versions of this package are
-available from GitHub:
+available from GitHub:  
 <http://github.com/wspr/unicode-math>
 
 Not yet released on CTAN.
 
-Please file bug reports with minimal examples:
+Please file bug reports with minimal examples:  
 <http://github.com/wspr/unicode-math/issues>
+
 
 LICENCE
 -------
@@ -89,14 +92,13 @@ greater.
 
 This work is author-maintained and consists of the files
 
-- unicode-math.dtx, and
+- unicode-math.dtx,
+- stix-extract.sh, and
 - unicode-math-table.tex;
 
-the derived files
+the derived file
 
-- unicode-math.sty,
-- this readme,
-- unicode-math.ins;
+- unicode-math.sty;
 
 and the test suite for this package
 
@@ -106,4 +108,4 @@ and the test suite for this package
 - testfiles/umtest*.safe.png.
 
 __________________________________
-Copyright 2006-2009 Will Robertson
+Copyright 2006-2010 Will Robertson
