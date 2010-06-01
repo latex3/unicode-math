@@ -467,16 +467,16 @@ This work is "author-maintained" by Will Robertson.
 %  The symbol $\nabla$ comes in the six forms shown in \tabref{nabla}.
 %  We want an individual option to specify whether we want upright or italic
 %  nabla by default (when either upright or italic nabla is used in the
-%  source). \TeX\ classically uses an upright nabla, but \textsc{iso}
-%  standards differ (I think). The package options |nabla=upright| and
+%  source). \TeX\ classically uses an upright nabla, and \textsc{iso}
+%  standards agree with this convention.
+%  The package options |nabla=upright| and
 %  |nabla=italic| switch between the two choices, and |nabla=literal| respects
 %  the shape of the input character. This is then inherited
 %  through \cmd\mathbf; \cmd\mathit\ and \cmd\mathup\ can be used to force one
 %  way or the other.
 %
-% |nabla=italic| is implicit when using |math-style=ISO| and |nabla=upright|
-% follows both |math-style=TeX| and |math-style=french|. |nabla=literal| is
-% activated by default after |math-style=literal|.
+% |nabla=italic| is the default. |nabla=literal| is
+% activated automatically after |math-style=literal|.
 %
 % \begin{table}
 %   \centering
@@ -1413,7 +1413,7 @@ This work is "author-maintained" by Will Robertson.
         normal-style=ISO,
         bold-style=ISO,
         sans-style=italic,
-        nabla=italic,
+        nabla=upright,
         partial=italic,
       }
     \or
