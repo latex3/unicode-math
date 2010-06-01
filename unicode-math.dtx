@@ -4037,30 +4037,34 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Unicode sub- and super-scripts}
 %
-% The idea here is to enter a scanning state after a superscript or subscript is encountered.
-% If subsequent superscripts or subscripts (resp.) are found, they are lumped together.
-% Each sub/super has a corresponding regular size glyph which is used by \XeTeX\ to typeset
-% the results; this means that the actual subscript/superscript glyphs are never seen in the
-% output document~--- they are only used as input characters.
-% 
-% Open question: should the superscript-like `modifiers' (\unichar{1D2C} {modifier capital letter a} and on)
-% be included here?
-% 
-% First, the setup of each mathactive char:
+% The idea here is to enter a scanning state after a superscript or subscript
+% is encountered.
+% If subsequent superscripts or subscripts (resp.) are found,
+% they are lumped together.
+% Each sub/super has a corresponding regular size
+% glyph which is used by \XeTeX\ to typeset the results; this means that the
+% actual subscript/superscript glyphs are never seen in the output
+% document~--- they are only used as input characters.
+%
+% Open question: should the superscript-like `modifiers' (\unichar{1D2C}
+% {modifier capital letter a} and on) be included here?
 %    \begin{macrocode}
 \prop_new:N \g_um_supers_prop
 \prop_new:N \g_um_subs_prop
-
 \group_begin:
-
-% Populate a property list with superscript characters; their meaning as their key,
-% for reasons that will become apparent soon, and their replacement as each key's value.
+%    \end{macrocode}
+% \paragraph{Superscripts}
+% Populate a property list with superscript characters; their meaning as their
+% key, for reasons that will become apparent soon, and their replacement as
+% each key's value.
 % Then make the superscript active and bind it to the scanning function.
-% 
-% \cs{scantokens} makes this process much simpler since we can activate the char
-% and assign its meaning in one step.
+%
+% \cs{scantokens} makes this process much simpler since we can activate the
+% char and assign its meaning in one step.
+%    \begin{macrocode}
 \cs_set:Npn \um_setup_active_superscript:nn #1#2 {
   \prop_gput:Nxn \g_um_supers_prop   {\meaning #1} {#2}
+  \tex_global:D \char_make_other:N #1
   \char_make_active:N #1
   \char_gmake_mathactive:N #1
   \scantokens{
@@ -4072,7 +4076,9 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-
+%    \end{macrocode}
+% Bam:
+%    \begin{macrocode}
 \um_setup_active_superscript:nn {^^^^2070} {0}
 \um_setup_active_superscript:nn {^^^^00b9} {1}
 \um_setup_active_superscript:nn {^^^^00b2} {2}
@@ -4090,10 +4096,12 @@ This work is "author-maintained" by Will Robertson.
 \um_setup_active_superscript:nn {^^^^207e} {)}
 \um_setup_active_superscript:nn {^^^^2071} {i}
 \um_setup_active_superscript:nn {^^^^207f} {n}
-
-% Ditto above.
+%    \end{macrocode}
+% \paragraph{Subscripts} Ditto above.
+%    \begin{macrocode}
 \cs_set:Npn \um_setup_active_subscript:nn #1#2 {
   \prop_gput:Nxn \g_um_subs_prop   {\meaning #1} {#2}
+  \tex_global:D \char_make_other:N #1
   \char_make_active:N #1
   \char_gmake_mathactive:N #1
   \scantokens{
@@ -4105,7 +4113,9 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-
+%    \end{macrocode}
+% A few more subscripts than superscripts:
+%    \begin{macrocode}
 \um_setup_active_subscript:nn {^^^^2080} {0}
 \um_setup_active_subscript:nn {^^^^2081} {1}
 \um_setup_active_subscript:nn {^^^^2082} {2}
@@ -4134,10 +4144,13 @@ This work is "author-maintained" by Will Robertson.
 \um_setup_active_subscript:nn {^^^^1d68} {\rho}
 \um_setup_active_subscript:nn {^^^^1d69} {\phi}
 \um_setup_active_subscript:nn {^^^^1d6a} {\chi}
-
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \group_end:
-
+%    \end{macrocode}
 % The scanning command, evident in its purpose:
+%    \begin{macrocode}
 \cs_new:Npn \um_scan_sscript: {
   \um_scan_sscript:TF {
     \um_scan_sscript:
@@ -4145,9 +4158,10 @@ This work is "author-maintained" by Will Robertson.
     \um_sub_or_super:n {\l_um_ss_chain_tl}
   }
 }
-
+%    \end{macrocode}
 % The main theme here is stolen from the source to the various \cs{peek_} functions.
 % Consider this function as simply boilerplate:
+%    \begin{macrocode}
 \cs_new:Npn \um_scan_sscript:TF #1#2 {
   \tl_set:Nx \l_peek_true_aux_tl { \exp_not:n{ #1 } }
   \tl_set_eq:NN \l_peek_true_tl \c_peek_true_remove_next_tl
@@ -4155,9 +4169,10 @@ This work is "author-maintained" by Will Robertson.
   \group_align_safe_begin:
     \peek_after:NN \um_peek_execute_branches_ss:
 }
-
+%    \end{macrocode}
 % We do not skip spaces when scanning ahead, and we explicitly wish to
 % bail out on encountering a space or a brace.
+%    \begin{macrocode}
 \cs_new:Npn \um_peek_execute_branches_ss: {
   \bool_if:nTF {
     \token_if_eq_catcode_p:NN \l_peek_token \c_group_begin_token ||
@@ -4167,17 +4182,18 @@ This work is "author-maintained" by Will Robertson.
   { \l_peek_false_tl  }
   { \um_peek_execute_branches_ss_aux: }
 }
-
+%    \end{macrocode}
 % This is the actual comparison code.
 % Because the peeking has already tokenised the next token,
 % it's too late to extract its charcode directly. Instead,
 % we look at its meaning, which remains a `character' even
 % though it is itself math-active. If the character is ever
 % made fully active, this will break our assumptions!
-% 
+%
 % If the char's meaning exists as a property list key, we
 % build up a chain of sub-/superscripts and iterate. (If not, exit and
 % typeset what we've already collected.)
+%    \begin{macrocode}
 \cs_new:Npn \um_peek_execute_branches_ss_aux: {
   \prop_if_in:cxTF
     {g_um_\l_um_tmpa_tl _prop} 
@@ -4199,6 +4215,22 @@ This work is "author-maintained" by Will Robertson.
 % all it requires is a mapping from the unicode input chars to the relevant
 % \LaTeX\ fraction declaration.
 %
+%    \begin{macrocode}
+\cs_new:Npn \um_define_active_frac:Nw #1 #2/#3 {
+  \char_make_active:N #1
+  \char_gmake_mathactive:N #1
+  \tl_rescan:nn {
+    \ExplSyntaxOn
+  }{
+    \cs_gset:Npx #1 {
+      \bool_if:NTF \l_um_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
+          {#2} {#3}
+    }
+  }
+}
+%    \end{macrocode}
+% These are redefined for each math font selection in case the |active-frac|
+% feature changes.
 %    \begin{macrocode}
 \cs_new:Npn \um_setup_active_frac: {
   \group_begin:
@@ -4222,29 +4254,13 @@ This work is "author-maintained" by Will Robertson.
   \um_define_active_frac:Nw  ^^^^215e  7/8
   \group_end:
 }
-\cs_new:Npn \um_define_active_frac:Nw #1 #2/#3 {
-  \char_make_active:n {`#1}
-  \char_gmake_mathactive:N #1
-  \tl_rescan:nn {
-    \ExplSyntaxOn
-  }{
-    \cs_gset:Npx #1 {
-      \bool_if:NTF \l_um_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
-          {#2} {#3}
-    }
-  }
-}
 \um_setup_active_frac:
 %    \end{macrocode}
 %
 % \subsubsection{Synonyms and all the rest}
 %
-% We need to change \LaTeX's idea of the font used to typeset
-% things like \cmd\sin\ and \cmd\cos:
-%    \begin{macrocode}
-\def\operator@font{\um_switchto_mathup:}
-%    \end{macrocode}
-%
+% These are symbols with multiple names. Eventually to be taken care of
+% automatically by the maths characters database.
 %    \begin{macrocode}
 \def\to{\rightarrow}
 \def\overrightarrow{\vec}
@@ -4300,6 +4316,11 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Compatibility}
 %
+% We need to change \LaTeX's idea of the font used to typeset
+% things like \cmd\sin\ and \cmd\cos:
+%    \begin{macrocode}
+\def\operator@font{\um_switchto_mathup:}
+%    \end{macrocode}
 %
 % \begin{macro}{\um_patch_pkg:nn}
 % \darg{package}
