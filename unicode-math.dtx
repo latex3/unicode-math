@@ -4340,7 +4340,6 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Npn \um_setup_active_superscript:nn #1#2 {
   \prop_gput:Nxn \g_um_supers_prop   {\meaning #1} {#2}
-  \tex_global:D \char_make_other:N #1
   \char_make_active:N #1
   \char_gmake_mathactive:N #1
   \scantokens{
@@ -4377,7 +4376,6 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Npn \um_setup_active_subscript:nn #1#2 {
   \prop_gput:Nxn \g_um_subs_prop   {\meaning #1} {#2}
-  \tex_global:D \char_make_other:N #1
   \char_make_active:N #1
   \char_gmake_mathactive:N #1
   \scantokens{
