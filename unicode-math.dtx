@@ -1021,7 +1021,26 @@ This work is "author-maintained" by Will Robertson.
 \tl_set:Nn \g_um_math_alphabet_name_misc_tl  {Misc.}
 %    \end{macrocode}
 %
-% \subsubsection{Compatibility with Lua\TeX}
+% \subsection{Extras}
+%
+% \begin{macro}{\um_glyph_if_exist:nTF}
+%: TODO: Generalise for arbitrary fonts! \cs{\l_um_font} is not always the one used for a specific glyph!!
+%    \begin{macrocode}
+\prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F} {
+  \etex_iffontchar:D \l_um_font #1 \scan_stop:
+    \prg_return_true:
+  \else:
+    \prg_return_false:
+  \fi:
+}
+\cs_generate_variant:Nn \um_glyph_if_exist_p:n {c}
+\cs_generate_variant:Nn \um_glyph_if_exist:nTF {c}
+\cs_generate_variant:Nn \um_glyph_if_exist:nT  {c}
+\cs_generate_variant:Nn \um_glyph_if_exist:nF  {c}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Compatibility with Lua\TeX}
 %
 %    \begin{macrocode}
 \xetex_or_luatex:nnn { \cs_new:Npn \um_cs_compat:n #1 }
@@ -1043,7 +1062,7 @@ This work is "author-maintained" by Will Robertson.
 \cs_generate_variant:Nn \fontspec_select:nn {x}
 %    \end{macrocode}
 %
-% \subsubsection{Alphabet unicode positions}
+% \subsection{Alphabet unicode positions}
 %
 % Before we begin, let's define the positions of the various unicode
 % alphabets so that our code is a little more readable.\footnote{`\textsc{u.s.v.}' stands
@@ -1342,8 +1361,16 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {frak}{Z}{"2128}
 %    \end{macrocode}
 %
-% \paragraph{STIX fonts}
-% Upright font:
+% \subsection{STIX fonts}
+%
+% Version 1.0.0 of the STIX fonts contains a number of
+% alphabets in the private use area of unicode; i.e.,
+% it contains many math glyphs that have not (yet or if ever)
+% been accepted into the unicode standard.
+%
+% But we still want to be able to use them if possible.
+%
+% \paragraph{Upright}
 %    \begin{macrocode}
 \usv_set:nnn {stix_sfup}{partial}{"E17C}
 \usv_set:nnn {stix_sfup}{Greek}{"E17D}
@@ -1357,8 +1384,8 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {stix_sfup}{varpi}{"E1B3}
 \usv_set:nnn {stix_upslash}{Greek}{"E2FC}
 %    \end{macrocode}
-% Italic font:
 %
+% \paragraph{Italic}
 %    \begin{macrocode}
 \usv_set:nnn {stix_bbit}{A}{"E154}
 \usv_set:nnn {stix_bbit}{B}{"E155}
@@ -1378,6 +1405,9 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {stix_bbit}{W}{"E163}
 \usv_set:nnn {stix_bbit}{X}{"E164}
 \usv_set:nnn {stix_bbit}{Y}{"E165}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \usv_set:nnn {stix_bbit}{a}{"E166}
 \usv_set:nnn {stix_bbit}{b}{"E167}
 \usv_set:nnn {stix_bbit}{c}{"E168}
@@ -1460,6 +1490,9 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {stix_bfbb}{W}{"E39A}
 \usv_set:nnn {stix_bfbb}{X}{"E39B}
 \usv_set:nnn {stix_bfbb}{Y}{"E39C}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \usv_set:nnn {stix_bfbb}{a}{"E39D}
 \usv_set:nnn {stix_bfbb}{b}{"E39E}
 \usv_set:nnn {stix_bfbb}{c}{"E39F}
@@ -1482,6 +1515,9 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {stix_bfbb}{x}{"E3B4}
 \usv_set:nnn {stix_bfbb}{y}{"E3B5}
 \usv_set:nnn {stix_bfbb}{z}{"E3B6}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \usv_set:nnn {stix_bftt}{Numerals}{"E3B7}
 %    \end{macrocode}
 %
@@ -1509,6 +1545,9 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {stix_bfbbit}{W}{"E210}
 \usv_set:nnn {stix_bfbbit}{X}{"E211}
 \usv_set:nnn {stix_bfbbit}{Y}{"E212}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \usv_set:nnn {stix_bfbbit}{a}{"E213}
 \usv_set:nnn {stix_bfbbit}{b}{"E214}
 \usv_set:nnn {stix_bfbbit}{c}{"E215}
@@ -1551,21 +1590,7 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {stix_sfitslash}{digamma}{"E36B}
 %    \end{macrocode}
 %
-% \paragraph{Complete \textsc{u.s.v.} ranges}
-% These might be needed (with a whole bunch more) later:
-%    \begin{macrocode}
-\tl_new:Nn \g_um_mathup_latin_usv_range_tl {`\a-`\z}
-\tl_new:Nn \g_um_mathup_Latin_usv_range_tl {`\A-`\Z}
-\tl_new:Nn \g_um_mathup_greek_usv_range_tl {"3B1-"3C9,"3F5,"3D1,"3F0,"3D5,"3F1,"3D6,"3DD}
-\tl_new:Nn \g_um_mathup_Greek_usv_range_tl {"391-"3A9,"3F4,"3DC}
-\tl_new:Nn \g_um_mathup_num_usv_range_tl   {`\0-`\9}
-\tl_new:Nn \g_um_mathit_latin_usv_range_tl {"1D44E-"1D467,\g_um_it_h_usv}
-\tl_new:Nn \g_um_mathit_Latin_usv_range_tl {"1D434-"1D44C}
-\tl_new:Nn \g_um_mathit_greek_usv_range_tl {"1D6FC-"1D714,"1D716-1D71B}
-\tl_new:Nn \g_um_mathit_Greek_usv_range_tl {"1D6E2-"1D6FA}
-%    \end{macrocode}
-%
-% \subsection{Options}
+% \subsection{Package options}
 %
 % \begin{macro}{\unimathsetup}
 % This macro can be used in lieu of or later to override
@@ -2046,6 +2071,7 @@ This work is "author-maintained" by Will Robertson.
   \clist_clear:N \l_um_char_num_range_clist
   \seq_clear:N \l_um_mathalph_seq
   \clist_clear:N \l_um_unknown_keys_clist
+  \seq_clear:N \l_um_missing_alph_seq
 %    \end{macrocode}
 % \end{itemize}
 %    \begin{macrocode}
@@ -2588,11 +2614,17 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
+% \begin{macro}{\um_if_mathalph_decl:nTF}
+% Takes input like |\mathscr/{Latin}->\mathup|
+% Outputs:\\
+% |tmpa|: math style (\eg, |\mathscr|)\\
+% |tmpb|: alphabets (\eg, |Latin|)\\
+% |tmpc|: remap style (\eg, |\mathup|). Defaults to |tmpa|.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
   \KV_remove_surrounding_spaces:nw {\tl_set:Nf\l_um_tmpa_tl} #1 \q_nil
   \tl_set:Nn \l_um_tmpb_tl {}
-  \tl_set:Nn \l_um_tmpc_tl {}
+  \tl_set_eq:NN \l_um_tmpc_tl \l_um_tmpa_tl
   \tl_if_in:NnT \l_um_tmpa_tl {->} {
     \exp_after:wN \um_split_arrow:w \l_um_tmpa_tl \q_nil
   }
@@ -2614,6 +2646,7 @@ This work is "author-maintained" by Will Robertson.
   \tl_set:Nn \l_um_tmpb_tl {#2}
 }
 %    \end{macrocode}
+% \end{macro}
 %
 % Pretty basic comma separated range processing.
 % Donald Arseneau's \pkg{selectp} package has a cleverer technique.
@@ -2762,6 +2795,309 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+%
+% \subsection{Resolving Greek symbol name control sequences}
+%
+% \begin{macro}{\um_resolve_greek:}
+% This macro defines \cmd\Alpha\dots\cmd\omega\ as their corresponding
+% unicode (mathematical italic) character. Remember that the mapping
+% to upright or italic happens with the mathcode definitions, whereas these macros
+% just stand for the literal unicode characters.
+%    \begin{macrocode}
+\AtBeginDocument{\um_resolve_greek:}
+\cs_new:Npn \um_resolve_greek: {
+  \clist_map_inline:nn {
+    Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,
+    alpha,beta,gamma,delta,        zeta,eta,theta,iota,kappa,lambda,
+    Mu,Nu,Xi,Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,
+    mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,    chi,psi,omega,
+    varTheta,
+    varsigma,vartheta,varkappa,varrho,varpi
+  }{
+    \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
+  }
+  \tl_set:Nn \epsilon {
+    \bool_if:NTF \g_um_texgreek_bool \mitvarepsilon \mitepsilon
+  }
+  \tl_set:Nn \phi {
+    \bool_if:NTF \g_um_texgreek_bool \mitvarphi \mitphi
+  }
+  \tl_set:Nn \varepsilon {
+    \bool_if:NTF \g_um_texgreek_bool \mitepsilon \mitvarepsilon
+  }
+  \tl_set:Nn \varphi {
+    \bool_if:NTF \g_um_texgreek_bool \mitphi \mitvarphi
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \section{Maths alphabets mapping definitions}
+% \label{part:mathmap}
+%
+% Algorithm for setting alphabet fonts.
+% By default, when |range| is empty, we are in \emph{implicit} mode.
+% If |range| contains the name of the math alphabet, we are in \emph{explicit}
+% mode and do things slightly differently.
+%
+% Implicit mode:
+% \begin{itemize}
+% \item Try and set all of the alphabet shapes.
+% \item Check for the first glyph of each alphabet to detect if the font supports each
+%       alphabet shape.
+% \item For alphabets that do exist, overwrite whatever's already there.
+% \item For alphabets that are not supported, \emph{do nothing}.
+%       (This includes leaving the old alphabet definition in place.)
+% \end{itemize}
+%
+% Explicit mode:
+% \begin{itemize}
+% \item Only set the alphabets specified.
+% \item Check for the first glyph of the alphabet to detect if the font contains
+%       the alphabet shape in the unicode math plane.
+% \item For unicode math alphabets, overwrite whatever's already there.
+% \item Otherwise, use the \ascii\ letters instead.
+% \end{itemize}
+%
+% \subsection{Defining the math style macros}
+%
+% We call the different shapes that a math alphabet can be a `math style'.
+% Note that different alphabets can exist within the same math style. E.g.,
+% we call `bold' the math style |bf| and within it there are upper and lower
+% case Greek and Roman alphabets and Arabic numerals.
+%
+% \begin{macro}{\g_um_mathalph_seq}
+% This is every math style known to \pkg{unicode-math}.
+%    \begin{macrocode}
+\seq_new:N \g_um_mathalph_seq
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AtEndOfPackage{
+  \tl_map_inline:nn {
+    \mathup\mathit\mathbb\mathbbit
+    \mathscr\mathfrak\mathtt
+    \mathsf\mathsfup\mathsfit
+    \mathbf\mathbfup\mathbfit
+    \mathbfscr\mathbffrak
+    \mathbfsf\mathbfsfup\mathbfsfit
+  }{
+    \seq_put_right:Nn \g_um_mathalph_seq {#1}
+    \um_prepare_mathstyle:f {\exp_after:nW \use_none:nnnnn \token_to_str:N #1}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_prepare_mathstyle:n}
+% \darg{math style name (e.g., \texttt{it} or \texttt{bb})}
+% Define the high level math alphabet macros (\cs{mathit}, etc.) in terms of
+% unicode-math definitions. Use \cs{bgroup}/\cs{egroup} so s'scripts scan the
+% whole thing.
+%    \begin{macrocode}
+\cs_new:Npn \um_prepare_mathstyle:n #1 {
+  \um_init_alphabet:x {#1}
+  \cs_set:cpn {_um_math#1_aux:n} ##1 {
+    \use:c {um_switchto_math#1:} ##1 \egroup
+  }
+  \cs_set_protected:cpx {math#1} {
+    \exp_not:n{
+      \bgroup
+      \mode_if_math:F {
+        \egroup\expandafter
+        \non@alpherr\expandafter{\csname math#1\endcsname\space}
+      }
+    }
+    \exp_not:c {_um_math#1_aux:n}
+  }
+}
+\cs_generate_variant:Nn \um_prepare_mathstyle:n {f}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_init_alphabet:n}
+% \darg{math alphabet name (e.g., \texttt{it} or \texttt{bb})}
+% This macro initialises the macros used to set up a math alphabet.
+% First used with the math alphabet macro is first defined, but then used
+% later when redefining a particular maths alphabet.
+%    \begin{macrocode}
+\cs_set:Npn \um_init_alphabet:n #1 {
+  \um_trace:nx {alph-initialise} {#1}
+  \cs_set_eq:cN {um_switchto_math#1:} \prg_do_nothing:
+}
+\cs_generate_variant:Nn \um_init_alphabet:n {x}
+%    \end{macrocode}
+% Variants
+%    \begin{macrocode}
+\cs_new:Npn \um_maybe_init_alphabet:V {
+  \exp_args:NV \um_maybe_init_alphabet:n
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Defining the math alphabets per style}
+%
+% \begin{macro}{\g_um_default_mathalph_seq}
+% This sequence stores the alphabets in each math style.
+%    \begin{macrocode}
+\seq_new:N \g_um_default_mathalph_seq
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\clist_map_inline:nn {
+  {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
+  {\mathit    } {latin,Latin,greek,Greek,misc}     {\mathit    }  ,
+  {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
+  {\mathbbit  } {misc}                             {\mathbbit  }  ,
+  {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
+  {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
+  {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
+  {\mathsfup  } {latin,Latin,num}                  {\mathsfup  }  ,
+  {\mathsfit  } {latin,Latin}                      {\mathsfit  }  ,
+  {\mathbfup  } {latin,Latin,greek,Greek,num,misc} {\mathbfup  }  ,
+  {\mathbfit  } {latin,Latin,greek,Greek,misc}     {\mathbfit  }  ,
+  {\mathbfscr } {latin,Latin}                      {\mathbfscr }  ,
+  {\mathbffrak} {latin,Latin}                      {\mathbffrak}  ,
+  {\mathbfsfup} {latin,Latin,greek,Greek,num,misc} {\mathbfsfup}  ,
+  {\mathbfsfit} {latin,Latin,greek,Greek,misc}     {\mathbfsfit}
+}{
+  \seq_put_right:Nn \g_um_default_mathalph_seq {#1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Variables:
+%    \begin{macrocode}
+\seq_new:N \l_um_missing_alph_seq
+%    \end{macrocode}
+%
+% \begin{macro}{\um_setup_alphabets:}
+% This function is called within \cs{setmathfont} to configure the
+% mapping between characters inside math styles.
+%    \begin{macrocode}
+\cs_new:Npn \um_setup_alphabets: {
+%    \end{macrocode}
+% If |range=| has been used to configure styles, those choices will be in
+% |\l_um_mathalph_seq|. If not, set up the styles implicitly:
+%    \begin{macrocode}
+  \seq_if_empty:NTF \l_um_mathalph_seq {
+    \um_trace:n {setup-implicit}
+    \seq_set_eq:NN \l_um_mathalph_seq \g_um_default_mathalph_seq
+    \bool_set_true:N \l_um_implicit_alph_bool
+    \um_maybe_init_alphabet:n  {sf}
+    \um_maybe_init_alphabet:n  {bf}
+    \um_maybe_init_alphabet:n  {bfsf}
+  }
+%    \end{macrocode}
+% If |range=| has been used then we're in explicit mode:
+%    \begin{macrocode}
+  {
+    \um_trace:n {setup-explicit}
+    \bool_set_false:N \l_um_implicit_alph_bool
+    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
+    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
+  }
+%    \end{macrocode}
+% Now perform the mapping:
+%    \begin{macrocode}
+  \seq_map_inline:Nn \l_um_mathalph_seq {
+    \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
+    \tl_set:No \l_um_tmpb_tl { \use_ii:nnn  ##1 }
+    \tl_set:No \l_um_remap_style_tl { \use_iii:nnn ##1 }
+    \tl_set:Nx \l_um_remap_style_tl {
+      \exp_after:wN \exp_after:wN \exp_after:wN \use_none:nnnnn
+      \exp_after:wN \token_to_str:N \l_um_remap_style_tl
+    }
+    \tl_if_empty:NT \l_um_tmpb_tl {
+      \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
+      \tl_set:Nn \l_um_tmpb_tl { latin,Latin,greek,Greek,num,misc }
+    }
+    \um_setup_math_alphabet:VVV
+      \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_style_tl
+  }
+  \um_warn_missing_alphabets:
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Npn \um_warn_missing_alphabets: {
+  \seq_if_empty:NF \l_um_missing_alph_seq {
+    \typeout{
+      Package~unicode-math~Warning:~
+      missing~math~alphabets~in~font~ \fontname\l_um_font
+    }
+    \seq_map_inline:Nn \l_um_missing_alph_seq {
+      \typeout{\space\space\space\space##1}
+    }
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_setup_math_alphabet:Nnn}
+% \darg{Math font style command (e.g., \cs{mathbb})}
+% \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
+% \darg{Name of the output math style (usually same as input \texttt{bb})}
+%    \begin{macrocode}
+\cs_new:Npn \um_setup_math_alphabet:Nnn #1#2#3 {
+  \tl_set:Nx \l_um_style_tl {
+    \exp_after:wN \use_none:nnnnn \token_to_str:N #1
+  }
+%    \end{macrocode}
+% First check that at least one of the alphabets for the font shape is defined\dots
+%    \begin{macrocode}
+  \clist_map_inline:nn {#2} {
+    \cs_if_exist:cT {um_config_ \l_um_style_tl _##1:n} {
+      \tl_if_eq:nnTF {##1}{misc} {
+        \um_maybe_init_alphabet:V \l_um_style_tl
+        \clist_map_break:
+      }{
+        \um_glyph_if_exist:cT { \um_to_usv:nn {#3}{##1} }{
+          \um_maybe_init_alphabet:V \l_um_style_tl
+          \clist_map_break:
+        }
+      }
+    }
+  }
+%    \end{macrocode}
+% \dots and then loop through them defining the individual ranges:
+%    \begin{macrocode}
+  \clist_map_inline:nn {#2} {
+    \cs_if_exist:cT {um_config_ \l_um_style_tl _##1:n} {
+      \tl_if_eq:nnTF {##1}{misc} {
+        \um_trace:nx {setup-alph} {math \l_um_style_tl~(##1)}
+        \use:c {um_config_ \l_um_style_tl _##1:n} {#3}
+      }{
+        \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{##1} } {
+          \um_trace:nx {setup-alph} {math \l_um_style_tl~(##1)}
+          \use:c {um_config_ \l_um_style_tl _##1:n} {#3}
+        }{
+          \bool_if:NTF \l_um_implicit_alph_bool {
+            \seq_put_right:Nx \l_um_missing_alph_seq {
+              \@backslashchar math \l_um_style_tl \space
+              (\tl_use:c{g_um_math_alphabet_name_##1_tl})
+            }
+          }{
+            \use:c {um_config_ \l_um_style_tl _##1:n} {up}
+          }
+        }
+      }
+    }
+  }
+}
+\cs_generate_variant:Nn \um_setup_math_alphabet:Nnn {VVV}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \subsection{Mapping `naked' math characters}
+%
+% Before we show the definitions of the alphabet mappings using the functions
+% |\um_config_\l_um_style_tl_##1:n|, we first want to define some functions
+% to be used inside them to actually perform the character mapping.
+%
 % \darg{Starting input char (single)}
 % \darg{Starting output char}
 % Loops through character ranges setting \cmd\mathcode.
@@ -2849,6 +3185,8 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{Mapping chars inside a math style}
+%
 % \begin{macro}{\um_set_mathalph_range:Nnn}
 % \oarg{Number of iterations}
 % \darg{Maths alphabet}
@@ -2919,286 +3257,15 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Resolving Greek symbol name control sequences}
-%
-% \begin{macro}{\um_resolve_greek:}
-% This macro defines \cmd\Alpha\dots\cmd\omega\ as their corresponding
-% unicode (mathematical italic) character. Remember that the mapping
-% to upright or italic happens with the mathcode definitions, whereas these macros
-% just stand for the literal unicode characters.
-%    \begin{macrocode}
-\AtBeginDocument{\um_resolve_greek:}
-\cs_new:Npn \um_resolve_greek: {
-  \clist_map_inline:nn {
-    Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,
-    alpha,beta,gamma,delta,        zeta,eta,theta,iota,kappa,lambda,
-    Mu,Nu,Xi,Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,
-    mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,    chi,psi,omega,
-    varTheta,
-    varsigma,vartheta,varkappa,varrho,varpi
-  }{
-    \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
-  }
-  \tl_set:Nn \epsilon {
-    \bool_if:NTF \g_um_texgreek_bool \mitvarepsilon \mitepsilon
-  }
-  \tl_set:Nn \phi {
-    \bool_if:NTF \g_um_texgreek_bool \mitvarphi \mitphi
-  }
-  \tl_set:Nn \varepsilon {
-    \bool_if:NTF \g_um_texgreek_bool \mitepsilon \mitvarepsilon
-  }
-  \tl_set:Nn \varphi {
-    \bool_if:NTF \g_um_texgreek_bool \mitphi \mitvarphi
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \section{Maths alphabets mapping definitions}
-% \label{part:mathmap}
-%
-% Algorithm for setting alphabet fonts.
-% By default, when |range| is empty, we are in \emph{implicit} mode.
-% If |range| contains the name of the math alphabet, we are in \emph{explicit}
-% mode and do things slightly differently.
-%
-% Implicit mode:
-% \begin{itemize}
-% \item Try and set all of the alphabet shapes.
-% \item Check for the first glyph of each alphabet to detect if the font supports each
-%       alphabet shape.
-% \item For alphabets that do exist, overwrite whatever's already there.
-% \item For alphabets that are not supported, \emph{do nothing}.
-%       (This includes leaving the old alphabet definition in place.)
-% \end{itemize}
-%
-% Explicit mode:
-% \begin{itemize}
-% \item Only set the alphabets specified.
-% \item Check for the first glyph of the alphabet to detect if the font contains
-%       the alphabet shape in the unicode math plane.
-% \item For unicode math alphabets, overwrite whatever's already there.
-% \item Otherwise, use the \ascii\ letters instead.
-% \end{itemize}
-%
-% \subsubsection{Macros}
-%
-% \begin{macro}{\um_prepare_alph:n,\um_prepare_alph:f}
-% Define the high level math alphabet macros (\cs{mathit}, etc.) in terms of
-% unicode-math defintions. Use \cs{bgroup}/\cs{egroup} so s'scripts scan the
-% whole thing.
-%    \begin{macrocode}
-\cs_new:Npn \um_prepare_alph:n #1 {
-  \um_init_alphabet:x {\use_none:nnnn #1}
-  \cs_set:cpn {um_#1:n} ##1 {
-    \use:c {um_switchto_#1:} ##1 \egroup
-  }
-  \cs_set_protected:cpx {#1} {
-    \exp_not:n{
-      \bgroup
-      \mode_if_math:F {
-        \egroup\expandafter
-        \non@alpherr\expandafter{\csname #1\endcsname\space}
-      }
-    }
-    \exp_not:c {um_#1:n}
-  }
-}
-\cs_generate_variant:Nn \um_prepare_alph:n {f}
-%    \end{macrocode}
-% \end{macro}
-%
-% This is every math alphabet known to \pkg{unicode-math}:
-% \begin{macro}{\g_um_mathalph_seq}
-%    \begin{macrocode}
-\seq_new:N \g_um_mathalph_seq
-\AtEndOfPackage{
-  \tl_map_inline:nn {
-    \mathup\mathit\mathbb\mathbbit
-    \mathscr\mathfrak\mathtt
-    \mathsf\mathsfup\mathsfit
-    \mathbf\mathbfup\mathbfit
-    \mathbfscr\mathbffrak
-    \mathbfsf\mathbfsfup\mathbfsfit
-  }{
-    \seq_put_right:Nn \g_um_mathalph_seq {#1}
-    \um_prepare_alph:f {\cs_to_str:N #1}
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\seq_new:N \g_um_default_mathalph_seq
-\clist_map_inline:nn {
-  {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
-  {\mathit    } {latin,Latin,greek,Greek,misc}     {\mathit    }  ,
-  {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
-  {\mathbbit  } {misc}                             {\mathbbit  }  ,
-  {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
-  {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
-  {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
-  {\mathsfup  } {latin,Latin,num}                  {\mathsfup  }  ,
-  {\mathsfit  } {latin,Latin}                      {\mathsfit  }  ,
-  {\mathbfup  } {latin,Latin,greek,Greek,num,misc} {\mathbfup  }  ,
-  {\mathbfit  } {latin,Latin,greek,Greek,misc}     {\mathbfit  }  ,
-  {\mathbfscr } {latin,Latin}                      {\mathbfscr }  ,
-  {\mathbffrak} {latin,Latin}                      {\mathbffrak}  ,
-  {\mathbfsfup} {latin,Latin,greek,Greek,num,misc} {\mathbfsfup}  ,
-  {\mathbfsfit} {latin,Latin,greek,Greek,misc}     {\mathbfsfit}
-}{
-  \seq_put_right:Nn \g_um_default_mathalph_seq {#1}
-}
-%    \end{macrocode}
-%
-% \begin{macro}{\um_setup_alphabets:}
-% Variables:
-%    \begin{macrocode}
-\seq_new:N \l_um_missing_alph_seq
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_new:Npn \um_setup_alphabets: {
-  \seq_clear:N \l_um_missing_alph_seq
-  \seq_if_empty:NTF \l_um_mathalph_seq {
-    \um_trace:n {setup-implicit}
-    \seq_set_eq:NN \l_um_mathalph_seq \g_um_default_mathalph_seq
-    \bool_set_true:N \l_um_implicit_alph_bool
-    \um_maybe_init_alphabet:n  {sf}
-    \um_maybe_init_alphabet:n  {bf}
-    \um_maybe_init_alphabet:n  {bfsf}
-  }{
-    \um_trace:n {setup-explicit}
-    \bool_set_false:N \l_um_implicit_alph_bool
-    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
-    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
-  }
-  \seq_map_inline:Nn \l_um_mathalph_seq {
-    \tl_set:No \l_um_tmpa_tl { \use_i:nnn   ##1 }
-    \tl_set:No \l_um_tmpb_tl { \use_ii:nnn  ##1 }
-    \tl_set:No \l_um_remap_alphabet_tl { \use_iii:nnn ##1 }
-    \tl_if_empty:NTF \l_um_remap_alphabet_tl {
-      \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_tmpa_tl}
-    }{
-      \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \token_to_str:N \l_um_remap_alphabet_tl}
-    }
-    \tl_set:Nx \l_um_remap_alphabet_tl {\exp_after:wN \use_none:nnnnn \l_um_remap_alphabet_tl}
-    \tl_if_empty:NT \l_um_tmpb_tl {
-      \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
-      \tl_set:Nn \l_um_tmpb_tl { latin,Latin,greek,Greek,num,misc }
-    }
-    \um_setup_math_alphabet:VVV \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_alphabet_tl
-  }
-  \um_warn_missing_alphabets:
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_new:Npn \um_warn_missing_alphabets: {
-  \seq_if_empty:NF \l_um_missing_alph_seq {
-    \typeout{
-      Package~unicode-math~Warning:~
-      missing~math~alphabets~in~font~ \fontname\l_um_font
-    }
-    \seq_map_inline:Nn \l_um_missing_alph_seq {
-      \typeout{\space\space\space\space##1}
-    }
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um_setup_math_alphabet:Nnn}
-% \darg{Math font family name (e.g., \cs{mathbb})}
-% \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
-% \darg{Math alphabets output string (usually same as input \texttt{bb})}
-%    \begin{macrocode}
-\cs_new:Npn \um_setup_math_alphabet:Nnn #1#2#3 {
-  \tl_set:Nx \l_um_tmpa_tl {\cs_to_str:N #1}
-  \tl_set:Nx \l_um_tmpb_tl {\exp_after:wN \use_none:nnnn \l_um_tmpa_tl}
-%    \end{macrocode}
-% First check that at least one of the alphabets for the font shape is defined\dots
-%    \begin{macrocode}
-  \clist_map_inline:nn {#2} {
-    \cs_if_exist:cT {um_config_ \l_um_tmpa_tl _##1:n} {
-      \tl_if_eq:nnTF {##1}{misc} {
-        \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
-        \clist_map_break:
-      }{
-        \um_glyph_if_exist:cT { \um_to_usv:nn {#3}{##1} }{
-          \exp_args:NV \um_maybe_init_alphabet:n \l_um_tmpb_tl
-          \clist_map_break:
-        }
-      }
-    }
-  }
-%    \end{macrocode}
-% \dots and then loop through them defining the individual ranges:
-%    \begin{macrocode}
-  \clist_map_inline:nn {#2} {
-    \cs_if_exist:cT {um_config_ \l_um_tmpa_tl _##1:n} {
-      \tl_if_eq:nnTF {##1}{misc} {
-        \um_trace:nx {setup-alph} {\l_um_tmpa_tl~(##1)}
-        \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
-      }{
-        \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{##1} } {
-          \um_trace:nx {setup-alph} {\l_um_tmpa_tl~(##1)}
-          \use:c {um_config_ \l_um_tmpa_tl _##1:n} {#3}
-        }{
-          \bool_if:NTF \l_um_implicit_alph_bool {
-            \seq_put_right:Nx \l_um_missing_alph_seq {
-              \@backslashchar
-              \l_um_tmpa_tl\space(\tl_use:c{g_um_math_alphabet_name_##1_tl})
-            }
-          }{
-            \use:c {um_config_ \l_um_tmpa_tl _##1:n} {up}
-          }
-        }
-      }
-    }
-  }
-}
-\cs_generate_variant:Nn \um_setup_math_alphabet:Nnn {NV,VVV}
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\cs_set:Npn \um_init_alphabet:n #1 {
-  \um_trace:nx {alph-initialise} {#1}
-  \cs_set_eq:cN {um_switchto_math#1:} \prg_do_nothing:
-}
-\cs_generate_variant:Nn \um_init_alphabet:n {x}
-%    \end{macrocode}
-%
-% \begin{macro}{\um_glyph_if_exist:nTF}
-%: TODO: Generalise for arbitrary fonts! \cs{um@font} is not always the one used for a specific glyph!!
-%    \begin{macrocode}
-\prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F} {
-  \etex_iffontchar:D \l_um_font #1 \scan_stop:
-    \prg_return_true:
-  \else:
-    \prg_return_false:
-  \fi:
-}
-\cs_generate_variant:Nn \um_glyph_if_exist_p:n {c}
-\cs_generate_variant:Nn \um_glyph_if_exist:nTF {c}
-\cs_generate_variant:Nn \um_glyph_if_exist:nT  {c}
-\cs_generate_variant:Nn \um_glyph_if_exist:nF  {c}
-%    \end{macrocode}
-% \end{macro}
-%
-%
 % \subsection{Alphabets}
 %
 % \subsubsection{Upright: \cmd\mathup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathup_num:n #1 {
+\cs_new:Npn \um_config_up_num:n #1 {
   \um_map_chars_numbers:nn {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathup {up}{#1}
 }
-\cs_new:Npn \um_config_mathup_Latin:n #1 {
+\cs_new:Npn \um_config_up_Latin:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_Latin:nn {up} {#1}
   }{
@@ -3208,7 +3275,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Latin:Nnn \mathup {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathup_latin:n #1 {
+\cs_new:Npn \um_config_up_latin:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_latin:nn {up} {#1}
   }{
@@ -3221,7 +3288,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_latin:Nnn \mathup {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathup_Greek:n #1 {
+\cs_new:Npn \um_config_up_Greek:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_Greek:nn {up}{#1}
   }{
@@ -3231,7 +3298,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Greek:Nnn \mathup {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathup_greek:n #1 {
+\cs_new:Npn \um_config_up_greek:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_greek:nn {up} {#1}
   }{
@@ -3241,7 +3308,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_greek:Nnn \mathup {up,it} {#1}
 }
-\cs_new:Npn \um_config_mathup_misc:n #1 {
+\cs_new:Npn \um_config_up_misc:n #1 {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{up}{up}
   }{
@@ -3266,7 +3333,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Italic: \cmd\mathit}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathit_Latin:n #1 {
+\cs_new:Npn \um_config_it_Latin:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_Latin:nn {it} {#1}
   }{
@@ -3276,7 +3343,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Latin:Nnn \mathit {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathit_latin:n #1 {
+\cs_new:Npn \um_config_it_latin:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_latin:nn {it} {#1}
     \um_map_single:nnn {h}{it}{#1}
@@ -3292,7 +3359,7 @@ This work is "author-maintained" by Will Robertson.
   \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessj} {up,it} {#1}
 }
-\cs_new:Npn \um_config_mathit_Greek:n #1 {
+\cs_new:Npn \um_config_it_Greek:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_Greek:nn {it}{#1}
   }{
@@ -3302,7 +3369,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Greek:Nnn \mathit {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathit_greek:n #1 {
+\cs_new:Npn \um_config_it_greek:n #1 {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_greek:nn {it} {#1}
   }{
@@ -3312,7 +3379,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_greek:Nnn \mathit {up,it} {#1}
 }
-\cs_new:Npn \um_config_mathit_misc:n #1 {
+\cs_new:Npn \um_config_it_misc:n #1 {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{it}{it}
   }{
@@ -3335,10 +3402,10 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Blackboard or double-struck: \cmd\mathbb\ and \cmd\mathbbit}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbb_latin:n #1 {
+\cs_new:Npn \um_config_bb_latin:n #1 {
   \um_set_mathalphabet_latin:Nnn \mathbb {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbb_Latin:n #1 {
+\cs_new:Npn \um_config_bb_Latin:n #1 {
   \um_set_mathalphabet_Latin:Nnn \mathbb {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {C} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {H} {up,it} {#1}
@@ -3348,17 +3415,17 @@ This work is "author-maintained" by Will Robertson.
   \um_set_mathalphabet_pos:Nnnn  \mathbb {R} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {Z} {up,it} {#1}
 }
-\cs_new:Npn \um_config_mathbb_num:n #1 {
+\cs_new:Npn \um_config_bb_num:n #1 {
   \um_set_mathalphabet_numbers:Nnn \mathbb {up}{#1}
 }
-\cs_new:Npn \um_config_mathbb_misc:n #1 {
+\cs_new:Npn \um_config_bb_misc:n #1 {
   \um_set_mathalphabet_pos:Nnnn \mathbb        {Pi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb        {pi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb     {Gamma} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb     {gamma} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb {summation} {up} {#1}
 }
-\cs_new:Npn \um_config_mathbbit_misc:n #1 {
+\cs_new:Npn \um_config_bbit_misc:n #1 {
   \um_set_mathalphabet_pos:Nnnn \mathbbit {D} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {d} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {e} {up,it} {#1}
@@ -3370,7 +3437,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Script or caligraphic: \cmd\mathscr\ and \cmd\mathcal}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathscr_Latin:n #1 {
+\cs_new:Npn \um_config_scr_Latin:n #1 {
   \um_set_mathalphabet_Latin:Nnn \mathscr    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {B}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {E}{up,it}{#1}
@@ -3381,7 +3448,7 @@ This work is "author-maintained" by Will Robertson.
   \um_set_mathalphabet_pos:Nnnn  \mathscr {M}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {R}{up,it}{#1}
 }
-\cs_new:Npn \um_config_mathscr_latin:n #1 {
+\cs_new:Npn \um_config_scr_latin:n #1 {
   \um_set_mathalphabet_latin:Nnn \mathscr    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {e}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {g}{up,it}{#1}
@@ -3392,7 +3459,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Fractur or fraktur or blackletter: \cmd\mathfrak}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathfrak_Latin:n #1 {
+\cs_new:Npn \um_config_frak_Latin:n #1 {
   \um_set_mathalphabet_Latin:Nnn \mathfrak    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {C}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {H}{up,it}{#1}
@@ -3400,18 +3467,18 @@ This work is "author-maintained" by Will Robertson.
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {R}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {Z}{up,it}{#1}
 }
-\cs_new:Npn \um_config_mathfrak_latin:n #1 {
+\cs_new:Npn \um_config_frak_latin:n #1 {
   \um_set_mathalphabet_latin:Nnn \mathfrak {up,it}{#1}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Sans serif upright: \cmd\mathsfup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathsfup_num:n #1 {
+\cs_new:Npn \um_config_sfup_num:n #1 {
   \um_set_mathalphabet_numbers:Nnn \mathsf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathsfup {up}{#1}
 }
-\cs_new:Npn \um_config_mathsfup_Latin:n #1 {
+\cs_new:Npn \um_config_sfup_Latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {sfup} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathsf {up}{#1}
@@ -3423,7 +3490,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Latin:Nnn \mathsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathsfup_latin:n #1 {
+\cs_new:Npn \um_config_sfup_latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {sfup} {#1}
     \um_set_mathalphabet_latin:Nnn \mathsf {up}{#1}
@@ -3440,7 +3507,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Sans serif italic: \cmd\mathsfit}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathsfit_Latin:n #1 {
+\cs_new:Npn \um_config_sfit_Latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {sfit} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathsf {it}{#1}
@@ -3452,7 +3519,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Latin:Nnn \mathsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathsfit_latin:n #1 {
+\cs_new:Npn \um_config_sfit_latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {sfit} {#1}
     \um_set_mathalphabet_latin:Nnn \mathsf {it}{#1}
@@ -3468,13 +3535,13 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Typewriter or monospaced: \cmd\mathtt}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathtt_num:n #1 {
+\cs_new:Npn \um_config_tt_num:n #1 {
   \um_set_mathalphabet_numbers:Nnn \mathtt {up}{#1}
 }
-\cs_new:Npn \um_config_mathtt_Latin:n #1 {
+\cs_new:Npn \um_config_tt_Latin:n #1 {
   \um_set_mathalphabet_Latin:Nnn \mathtt {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathtt_latin:n #1 {
+\cs_new:Npn \um_config_tt_latin:n #1 {
   \um_set_mathalphabet_latin:Nnn \mathtt {up,it}{#1}
 }
 %    \end{macrocode}
@@ -3482,7 +3549,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Bold Italic: \cmd\mathbfit}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbfit_Latin:n #1 {
+\cs_new:Npn \um_config_bfit_Latin:n #1 {
   \bool_if:NF \g_um_bfupLatin_bool {
     \um_map_chars_Latin:nn {bfup,bfit} {#1}
   }
@@ -3497,7 +3564,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfit_latin:n #1 {
+\cs_new:Npn \um_config_bfit_latin:n #1 {
   \bool_if:NF \g_um_bfuplatin_bool {
     \um_map_chars_latin:nn {bfup,bfit} {#1}
   }
@@ -3512,7 +3579,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfit_Greek:n #1 {
+\cs_new:Npn \um_config_bfit_Greek:n #1 {
   \um_set_mathalphabet_Greek:Nnn \mathbfit {up,it}{#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_Greek:nn {bfit}{#1}
@@ -3524,7 +3591,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfit_greek:n #1 {
+\cs_new:Npn \um_config_bfit_greek:n #1 {
   \um_set_mathalphabet_greek:Nnn \mathbfit {up,it} {#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_greek:nn {bfit} {#1}
@@ -3536,7 +3603,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfit_misc:n #1 {
+\cs_new:Npn \um_config_bfit_misc:n #1 {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfit}{#1}
   }{
@@ -3573,11 +3640,11 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Bold Upright: \cmd\mathbfup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbfup_num:n #1 {
+\cs_new:Npn \um_config_bfup_num:n #1 {
   \um_set_mathalphabet_numbers:Nnn \mathbf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathbfup {up}{#1}
 }
-\cs_new:Npn \um_config_mathbfup_Latin:n #1 {
+\cs_new:Npn \um_config_bfup_Latin:n #1 {
   \bool_if:NT \g_um_bfupLatin_bool {
     \um_map_chars_Latin:nn {bfup,bfit} {#1}
   }
@@ -3592,7 +3659,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfup_latin:n #1 {
+\cs_new:Npn \um_config_bfup_latin:n #1 {
   \bool_if:NT \g_um_bfuplatin_bool {
     \um_map_chars_latin:nn {bfup,bfit} {#1}
   }
@@ -3607,7 +3674,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfup_Greek:n #1 {
+\cs_new:Npn \um_config_bfup_Greek:n #1 {
   \um_set_mathalphabet_Greek:Nnn \mathbfup {up,it}{#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_Greek:nn {bfup}{#1}
@@ -3619,7 +3686,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfup_greek:n #1 {
+\cs_new:Npn \um_config_bfup_greek:n #1 {
   \um_set_mathalphabet_greek:Nnn \mathbfup {up,it} {#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_greek:nn {bfup} {#1}
@@ -3631,7 +3698,7 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 }
-\cs_new:Npn \um_config_mathbfup_misc:n #1 {
+\cs_new:Npn \um_config_bfup_misc:n #1 {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfup}{#1}
   }{
@@ -3671,31 +3738,31 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Bold fractur or fraktur or blackletter: \cmd\mathbffrak}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbffrak_Latin:n #1 {
+\cs_new:Npn \um_config_bffrak_Latin:n #1 {
   \um_set_mathalphabet_Latin:Nnn \mathbffrak {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbffrak_latin:n #1 {
+\cs_new:Npn \um_config_bffrak_latin:n #1 {
   \um_set_mathalphabet_latin:Nnn \mathbffrak {up,it}{#1}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Bold script or calligraphic: \cmd\mathbfscr}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbfscr_Latin:n #1 {
+\cs_new:Npn \um_config_bfscr_Latin:n #1 {
   \um_set_mathalphabet_Latin:Nnn \mathbfscr {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbfscr_latin:n #1 {
+\cs_new:Npn \um_config_bfscr_latin:n #1 {
   \um_set_mathalphabet_latin:Nnn \mathbfscr {up,it}{#1}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Bold upright sans serif: \cmd\mathbfsfup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbfsfup_num:n #1 {
+\cs_new:Npn \um_config_bfsfup_num:n #1 {
   \um_set_mathalphabet_numbers:Nnn \mathbfsf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathbfsfup {up}{#1}
 }
-\cs_new:Npn \um_config_mathbfsfup_Latin:n #1 {
+\cs_new:Npn \um_config_bfsfup_Latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {bfsfup} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbfsf {up}{#1}
@@ -3707,7 +3774,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Latin:Nnn \mathbfsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbfsfup_latin:n #1 {
+\cs_new:Npn \um_config_bfsfup_latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {bfsfup} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {up}{#1}
@@ -3719,7 +3786,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_latin:Nnn \mathbfsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbfsfup_Greek:n #1 {
+\cs_new:Npn \um_config_bfsfup_Greek:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Greek:nn {bfsfup}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbfsf {up}{#1}
@@ -3731,7 +3798,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Greek:Nnn \mathbfsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbfsfup_greek:n #1 {
+\cs_new:Npn \um_config_bfsfup_greek:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_greek:nn {bfsfup} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbfsf {up} {#1}
@@ -3743,7 +3810,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_greek:Nnn \mathbfsfup {up,it} {#1}
 }
-\cs_new:Npn \um_config_mathbfsfup_misc:n #1 {
+\cs_new:Npn \um_config_bfsfup_misc:n #1 {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfsfup}{#1}
   }{
@@ -3780,7 +3847,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Bold italic sans serif: \cmd\mathbfsfit}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_mathbfsfit_Latin:n #1 {
+\cs_new:Npn \um_config_bfsfit_Latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {bfsfit} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbfsf {it}{#1}
@@ -3792,7 +3859,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Latin:Nnn \mathbfsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbfsfit_latin:n #1 {
+\cs_new:Npn \um_config_bfsfit_latin:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {bfsfit} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {it}{#1}
@@ -3804,7 +3871,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_latin:Nnn \mathbfsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbfsfit_Greek:n #1 {
+\cs_new:Npn \um_config_bfsfit_Greek:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Greek:nn {bfsfit}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbfsf {it}{#1}
@@ -3816,7 +3883,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_Greek:Nnn \mathbfsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_mathbfsfit_greek:n #1 {
+\cs_new:Npn \um_config_bfsfit_greek:n #1 {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_greek:nn {bfsfit} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbfsf {it} {#1}
@@ -3828,7 +3895,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \um_set_mathalphabet_greek:Nnn \mathbfsfit {up,it} {#1}
 }
-\cs_new:Npn \um_config_mathbfsfit_misc:n #1 {
+\cs_new:Npn \um_config_bfsfit_misc:n #1 {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfsfit}{#1}
   }{
@@ -3862,7 +3929,7 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
-% \section{Definitions of the math symbols}
+% \section{Definitions of the active math characters}
 %
 % Here we define every unicode math codepoint an equivalent macro name.
 % The two are equivalent, in a |\let\xyz=^^^^1234| kind of way.
@@ -3951,7 +4018,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % Lots of little things to tidy up.
 %
-% \subsubsection{Primes}
+% \subsection{Primes}
 %
 % We need a new `prime' algorithm. Unicode math has four pre-drawn prime glyphs.
 % \begin{quote}\obeylines
@@ -4191,7 +4258,7 @@ This work is "author-maintained" by Will Robertson.
 \group_end:
 %    \end{macrocode}
 %
-% \subsubsection{Unicode radicals}
+% \subsection{Unicode radicals}
 %
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
@@ -4244,7 +4311,7 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{Unicode sub- and super-scripts}
+% \subsection{Unicode sub- and super-scripts}
 %
 % The idea here is to enter a scanning state after a superscript or subscript
 % is encountered.
@@ -4466,7 +4533,7 @@ This work is "author-maintained" by Will Robertson.
 \um_setup_active_frac:
 %    \end{macrocode}
 %
-% \subsubsection{Synonyms and all the rest}
+% \subsection{Synonyms and all the rest}
 %
 % These are symbols with multiple names. Eventually to be taken care of
 % automatically by the maths characters database.
@@ -4523,7 +4590,7 @@ This work is "author-maintained" by Will Robertson.
 % \end{macro}
 %
 %
-% \subsubsection{Compatibility}
+% \subsection{Compatibility}
 %
 % We need to change \LaTeX's idea of the font used to typeset
 % things like \cmd\sin\ and \cmd\cos:
@@ -4969,6 +5036,8 @@ This work is "author-maintained" by Will Robertson.
 \setmonofont[Scale=MatchLowercase]{Consolas}
 \setmathfont{Cambria Math}
 \newfontface\umfont{STIXGeneral}
+
+\usepackage{hyperref}
 
 \linespread{1.069}      % A bit more space between lines
 \frenchspacing         % Remove ugly extra space after punctuation
