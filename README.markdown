@@ -15,21 +15,24 @@ the more the package is used the more stable it will become. (Things are general
 
 Unicode maths is currently supported to one degree or another by the fonts
 
- - [Cambria Math][0] (Microsoft, proprietry),
- - [Asana Math][1] (Apostolos Syropolous, open source),
- - [Neo Euler][2] (Khalid Hosny, open source),
- - [STIX][3] (STI Pub, freely available), and
- - [XITS Math][4] (Khalid Hosny, open source),
+ - [Cambria Math][CM] (Microsoft),
+ - [Asana Math][AM] (Apostolos Syropolous),
+ - [Neo Euler][NE] (Khalid Hosny),
+ - [STIX][SM] (STI Pub), and
+ - [XITS Math][XM] (Khalid Hosny).
+
+With the exception of Cambria Math, which is proprietry, the fonts above
+are all freely available and released under the [Open Font Licence][OFL].
 
 I'm always looking for new fonts to test with, so please let me know of any
 new releases.
 
-[0]: http://www.ascenderfonts.com/font/cambria-regular.aspx
-[1]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
-[2]: http://github.com/khaledhosny/euler-otf
-[3]: http://www.aip.org/stixfonts/
-[4]: http://github.com/khaledhosny/xits-math
-
+[CM]: http://www.ascenderfonts.com/font/cambria-regular.aspx
+[AM]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
+[NE]: http://github.com/khaledhosny/euler-otf
+[SM]: http://www.aip.org/stixfonts/
+[XM]: http://github.com/khaledhosny/xits-math
+[OFL]: http://scripts.sil.org/OFL
 
 PACKAGE USAGE
 -------------
