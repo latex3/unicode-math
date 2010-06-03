@@ -2436,26 +2436,6 @@ This work is "author-maintained" by Will Robertson.
 % transformation from \cmd\int\ to \cmd\intop\ during the expansion of
 % \cmd\UnicodeMathSymbol\ in the appropriate contexts.
 %
-% Following is a table of every math operator (\cmd\mathop) defined in
-% |unicode-math-table.tex|, from which a subset need to be flagged for
-% \cmd\nolimits\ adjustments.
-% The limits behaviour as specified by \pkg{unicode-math} are shown
-% (with grey 'scripts).
-%
-% \begingroup
-% \setmathfont[SizeFeatures={
-%     {Size=-10, Colour=888888},
-%     {Size=10-, Colour=FF0000}}]{STIXGeneral}
-% \def\UnicodeMathSymbol#1#2#3#4{\ifx\mathop#3\def\tempa{\scshape\MakeLowercase{u+\@gobble#1} & $\displaystyle#2_0^1$ & \small\cmd#2 & \parbox[b]{6.1cm}{\raggedright\scshape#4} \\}\expandafter\tempa\fi}
-% \begin{longtable}[l]{@{}lccl@{}}
-% \toprule
-% \textsc{usv} & Ex. & Macro & Description \\
-% \midrule
-% \catcode`\%=14\input unicode-math-table.tex
-% \bottomrule
-% \end{longtable}
-% \endgroup
-%
 % \begin{macro}{\l_um_nolimits_tl}
 % This macro is a sequence containing those maths operators that require a
 % \cmd\nolimits\ suffix.
@@ -2531,51 +2511,10 @@ This work is "author-maintained" by Will Robertson.
 % \end{macro}
 % No re-definition is made for \cmd\right\ because it's not
 % necessary.
-% 
-%
-% Here are all \cmd\mathopen\ characters:
-% \begingroup
-% \setmathfont[Colour=FF0000]{STIXGeneral}
-% \let\sqrtold\sqrt
-% \def\sqrt{\sqrtold{}}
-% \renewcommand\UnicodeMathSymbol[4]{\ifx\mathopen#3\def\tempa{\scshape\MakeLowercase{u+\@gobble#1} & $\displaystyle#2$ & \small\cmd#2 & \parbox[b]{6.1cm}{\raggedright\scshape#4} \\}\expandafter\tempa\fi}
-% \begin{longtable}[l]{@{}lccl@{}}
-% \toprule
-% USV & Ex. & Macro & Description \\
-% \midrule
-% \catcode`\%=14\input unicode-math-table.tex
-% \bottomrule
-% \end{longtable}
-% \endgroup
-%
-% And \cmd\mathclose:
-% \begingroup
-% \setmathfont[Colour=FF0000]{STIXGeneral}
-% \renewcommand\UnicodeMathSymbol[4]{\ifx\mathclose#3\def\tempa{\scshape\MakeLowercase{u+\@gobble#1} & $\displaystyle#2$ & \small\cmd#2 & \parbox[b]{6.1cm}{\raggedright\scshape#4} \\}\expandafter\tempa\fi}
-% \begin{longtable}[l]{@{}lccl@{}}
-% \toprule
-% USV & Ex. & Macro & Description \\
-% \midrule
-% \catcode`\%=14\input unicode-math-table.tex
-% \bottomrule
-% \end{longtable}
-% \endgroup
-%
 %
 % \subsection{Maths accents}
 %
 % Maths accents should just work \emph{if they are available in the font}.
-% \begingroup
-% \setmathfont[Colour=FF0000]{Cambria Math}
-% \renewcommand\UnicodeMathSymbol[4]{\ifx\mathaccent#3\def\tempa{\scshape\MakeLowercase{u+\@gobble#1} & $\displaystyle#2 x$ & \small\cmd#2 & \parbox[b]{6.1cm}{\raggedright\scshape#4} \\}\expandafter\tempa\fi}
-% \begin{longtable}[l]{@{}lccl@{}}
-% \toprule
-% USV & Ex. & Macro & Description \\
-% \midrule
-% \catcode`\%=14\input unicode-math-table.tex
-% \bottomrule
-% \end{longtable}
-% \endgroup
 %
 % \section{Font features}
 %

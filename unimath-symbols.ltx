@@ -1,0 +1,129 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% SYMBOLS DEFINED BY UNICODE-MATH
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+\makeatletter
+
+\usepackage{booktabs,longtable,shortvrb,geometry,varwidth,textcomp,hyperref}
+
+\geometry{margin=3cm}
+\hypersetup{colorlinks,linkcolor=black}
+
+\def\cmd#1{\texttt{\textbackslash\expandafter\@gobble\string#1}}
+
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX,Numbers={Monospaced}]{TeX Gyre Pagella}
+\usepackage{unicode-math}
+\setmathfont[SizeFeatures={
+    {Size=-10, Colour=888888},
+    {Size=10-, Colour=FF0000}}]{STIXGeneral}
+
+\def\TABLE{%
+\begin{longtable}[l]{@{}lcll@{}}
+\toprule
+\textsc{usv} & Ex. & Macro & Description \\
+\midrule
+\input unicode-math-table.tex\relax\\
+\bottomrule
+\end{longtable}
+}
+\def\USV#1{\small\scshape\MakeLowercase{U+\@gobble#1}}
+\def\CMD#1{\small\cmd#1}
+\def\DESC#1{%
+  \begin{varwidth}[t]{10cm}
+    \raggedright\linespread{0.6}\scshape#1%
+  \end{varwidth}
+}
+
+\newcommand\SHOW[1]{%
+\def\UnicodeMathSymbol##1##2##3##4{%
+  \def\1{#1}\def\2{##3}%
+  \ifx\1\2%
+    \def\tempa{%
+      \USV{##1} &%
+      \SYMB{##2} &%
+      \CMD{##2} & \DESC{##4}\\%
+    }%
+    \expandafter\tempa
+  \fi
+}%
+\TABLE
+}
+\def\SYMB#1{$\displaystyle#1$}
+
+\begin{document}
+\MakeShortVerb\|
+\title{Every symbol defined by \textsf{unicode-math}}
+\author{Will Robertson\\\texttt{wspr81@gmail.com}}
+\maketitle
+
+This document uses the file \texttt{unicode-math-table.tex}
+to print every symbol defined by the \textsf{unicode-math}
+package. Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
+
+\tableofcontents
+
+\clearpage
+\section{Opening symbols, \cmd\mathopen}
+\begingroup
+\let\sqrtold\sqrt
+\def\sqrt{\sqrtold{}}
+\SHOW\mathopen
+\endgroup
+
+\clearpage
+\section{Closing symbols, \cmd\mathclose}
+\SHOW\mathclose
+
+\clearpage
+\section{Fence symbols, \cmd\mathfence}
+\SHOW\mathfence
+
+\section{Punctuation symbols, \cmd\mathpunct}
+\SHOW\mathpunct
+
+\clearpage
+\section{Accents, \cmd\mathaccent}
+
+Note that accents will only be properly placed if used with an OpenType font with the necessary information. The examples shown below use `Cambria Math'.
+
+\setmathfont[Color=FF0000]{Cambria Math}
+\begingroup
+\def\SYMB#1{$\displaystyle#1 x$}
+\SHOW\mathaccent
+\endgroup
+\setmathfont[SizeFeatures={
+    {Size=-10, Colour=888888},
+    {Size=10-, Colour=FF0000}}]{STIXGeneral}
+
+\clearpage
+\section{Big operators, \cmd\mathop}
+
+Of the operators shown below, a subset need to be flagged by \textsf{unicode-math} for \cmd\nolimits\ adjustments.
+The limits behaviour as specified by \textsf{unicode-math} are shown with grey subscripts and superscripts.
+\begingroup
+\def\SYMB#1{$\displaystyle#1_0^1$}
+\SHOW\mathop
+\endgroup
+
+\clearpage
+\section{Binary relations, \cmd\mathbin}
+\SHOW\mathbin
+
+\clearpage
+\section{Ordinary symbols, \cmd\mathord}
+\SHOW\mathord
+
+\clearpage
+\section{Relation symbols, \cmd\mathrel}
+\SHOW\mathrel
+
+\clearpage
+\section{Alphabetical symbols, \cmd\mathalpha}
+\SHOW\mathalpha
+
+
+
+\end{document}

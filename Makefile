@@ -41,26 +41,34 @@ help:
 
 #### SETUP ####
 
+# file and folder names:
+
 PKG = unicode-math
 TBL = $(PKG)-table.tex
 SUITE = $(PKG)-testsuite
 XMPL = unimath-example.ltx
-
-UPDATE = `which dtx-update` || true  # TODO: generalise
+SYM = unimath-symbols
 
 testdir=testfiles
 builddir=build
 tds=$(builddir)/$(PKG).tds
 
-PKGSOURCE = $(PKG).dtx $(TBL) $(SUITE).ltx Makefile
-LTXSOURCE = $(PKG).sty $(TBL)
+UPDATE = `which dtx-update` || true  # TODO: generalise
 
-DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL)
-DERIVED = $(PKG).sty
+# these files end up in the CTAN directory:
+PKGSOURCE = $(PKG).dtx $(TBL) Makefile
+DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL) $(SYM).pdf
+CTANFILES = $(PKGSOURCE)  $(DOC)  ../$(testdir)
+BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
+
+# these are what's needed to compile and make stuff:
+
+LTXSOURCE = $(PKG).sty $(TBL)
 
 SUITESOURCE = \
   $(testdir)/umtest-preamble.tex \
   $(testdir)/umtest-suite.tex
+
 SWEETSAUCE = ginger and chilli
 
 TESTOUT = $(shell ls $(testdir)/umtest*.safe.png)
@@ -71,21 +79,23 @@ BUILDSOURCE = $(addprefix $(builddir)/,$(LTXSOURCE))
 BUILDSUITE  = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
 BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC)
 
+# and this is how the TDS zip file is produced:
+
 TDSFILES = \
 	$(tds)/source/latex/$(PKG)/$(PKG).dtx \
 	$(tds)/source/latex/$(PKG)/$(SUITE).ltx \
+	$(tds)/source/latex/$(PKG)/$(SYM).ltx \
 	$(tds)/source/latex/$(PKG)/Makefile \
 	$(tds)/source/latex/$(PKG)/$(testdir) \
 	$(tds)/doc/latex/$(PKG)/unicode-math.pdf \
 	$(tds)/doc/latex/$(PKG)/unicode-math-testsuite.pdf \
 	$(tds)/doc/latex/$(PKG)/README \
 	$(tds)/doc/latex/$(PKG)/$(XMPL) \
+	$(tds)/doc/latex/$(PKG)/$(SYM).pdf \
 	$(tds)/tex/latex/$(PKG)/unicode-math.sty \
 	$(tds)/tex/latex/$(PKG)/unicode-math-table.tex
 
-CTANFILES = $(PKGSOURCE)  $(DOC)  ../$(testdir)
 
-BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
 
 #### BASICS ####
 
@@ -128,6 +138,11 @@ $(builddir)/$(PKG).pdf:  $(builddir)/$(PKG).dtx $(BUILDSOURCE)
 	makeindex -s gind.ist $(PKG) && \
 	xelatex $(PKG).dtx;
 
+$(builddir)/$(SYM).pdf:  $(builddir)/$(SYM).ltx
+	cd $(builddir); \
+	xelatex $(SYM).ltx && \
+	xelatex $(SYM).ltx;
+
 $(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE)
 	xelatex -output-directory=$(builddir) $<
 
@@ -150,6 +165,9 @@ $(builddir)/$(SUITE).ltx: $(SUITE).ltx
 	cp -f  $< $@
 
 $(builddir)/$(XMPL): $(XMPL)
+	cp -f  $< $@
+
+$(builddir)/$(SYM).ltx: $(SYM).ltx
 	cp -f  $< $@
 
 

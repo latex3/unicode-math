@@ -148,7 +148,9 @@ greater.
 This work is author-maintained and consists of the files
 
 - unicode-math.dtx,
-- unicode-math-table.tex;
+- unicode-math-table.tex,
+- unimath-example.ltx,
+- unimath-symbols.ltx;
 
 the derived file
 
@@ -157,7 +159,9 @@ the derived file
 the compiled documentation files
 
 - unicode-math.pdf,
-- unicode-math-testsuite.pdf;
+- unicode-math-testsuite.pdf,
+- unimath-example.pdf,
+- unimath-symbols.pdf;
 
 and the test suite for this package
 
