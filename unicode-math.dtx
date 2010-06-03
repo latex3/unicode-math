@@ -2615,7 +2615,11 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 % \begin{macro}{\um_if_mathalph_decl:nTF}
-% Takes input like |\mathscr/{Latin}->\mathup|
+% Possible forms of input:\\
+% |\mathscr|\\
+% |\mathscr->\mathup|\\
+% |\mathscr/{Latin}|\\
+% |\mathscr/{Latin}->\mathup|\\
 % Outputs:\\
 % |tmpa|: math style (\eg, |\mathscr|)\\
 % |tmpb|: alphabets (\eg, |Latin|)\\
@@ -2623,14 +2627,15 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
   \KV_remove_surrounding_spaces:nw {\tl_set:Nf\l_um_tmpa_tl} #1 \q_nil
-  \tl_set:Nn \l_um_tmpb_tl {}
-  \tl_set_eq:NN \l_um_tmpc_tl \l_um_tmpa_tl
+  \tl_clear:N \l_um_tmpb_tl
+  \tl_clear:N \l_um_tmpc_tl
   \tl_if_in:NnT \l_um_tmpa_tl {->} {
     \exp_after:wN \um_split_arrow:w \l_um_tmpa_tl \q_nil
   }
   \tl_if_in:NnT \l_um_tmpa_tl {/} {
     \exp_after:wN \um_split_slash:w \l_um_tmpa_tl \q_nil
   }
+  \tl_if_empty:NT \l_um_tmpc_tl { \tl_set_eq:NN \l_um_tmpc_tl \l_um_tmpa_tl }
   \seq_if_in:NVTF \g_um_mathalph_seq \l_um_tmpa_tl {
     \prg_return_true:
   }{
