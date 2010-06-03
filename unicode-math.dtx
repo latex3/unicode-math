@@ -43,7 +43,7 @@ This work is "author-maintained" by Will Robertson.
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % \title{Experimental Unicode mathematical typesetting: The \pkg{unicode-math} package}
-% \author{Will Robertson}
+% \author{Will Robertson\\\texttt{will.robertson@latex-project.org}}
 % \date{\umfiledate \qquad \umfileversion}
 %
 % \maketitle
@@ -56,16 +56,37 @@ This work is "author-maintained" by Will Robertson.
 % for backwards compatibility.
 % Performance issues may be encountered until algorithms are refined.
 % \endgroup
-% 
-% This package is intended to be a complete implementation of Unicode
-% maths for \LaTeX\ using the \XeTeX\ (and later, Lua\TeX) typesetting engines.
+%
+% (But don't take the warning too seriously, either.
+% I hope the package is now ready to use.)
+%
+% This is the first release of the \pkg{unicode-math} package, which is
+% intended to be a complete implementation of Unicode
+% maths for \LaTeX\ using the \XeTeX\ and Lua\TeX\ typesetting engines.
 % With this package, changing maths fonts will be as easy as changing
 % text fonts --- not that there are many Unicode maths fonts yet.
-% 
-% Maths input is simplified with Unicode since literal glyphs may be
-% entered instead of control sequences.
+% Maths input can also be simplified with Unicode since literal glyphs may be
+% entered instead of control sequences in your document source.
+%
+% The package is fulled tested under \XeTeX, but Lua\TeX\ support is not
+% yet complete. User beware, but let me know of any troubles.
+%
+% Alongside this documentation file, you should be able to find a minimal
+% example demonstrating the use of the package,
+% `\texttt{unimath-example.ltx}'. It also comes with a separate document,
+% `\texttt{unimath-symbols.pdf}',
+% containing a complete listing of mathematical symbols defined by
+% \pkg{unicode-math}.
+%
+% Finally, while the STIX fonts may be used with this package, accessing
+% their alphabets in their `private user area' is not yet supported.
+% (Of these additional alphabets there is a separate caligraphic design
+% distinct to the script design already included.)
+% Better support for the STIX fonts is planned for an upcoming revision of the
+% package after any problems have been ironed out with the initial version.
+%
 % \end{abstract}
-% 
+%
 % \newpage
 % \tableofcontents
 %
@@ -78,13 +99,15 @@ This work is "author-maintained" by Will Robertson.
 % conjectured that some effect could be spent to create a cross-format
 % package that would also work with Lua\TeX.
 %
-% Users who desire to specify maths alphabets only (Greek and Latin letters)
+% Users who desire to specify maths alphabets only (Greek and Latin letters,
+% and Arabic numerals)
 % may wish to use Andrew Moschou's \pkg{mathspec} package instead.
-% 
+%
 % \section{Acknowledgements}
-% 
-% Many thanks to
-% Microsoft for developing OpenType math as part of Office~2007;
+%
+% Many thanks to:
+% Microsoft for developing the mathematics extension to OpenType as part of
+% Microsoft Office~2007;
 % Jonathan Kew for implementing Unicode math support in \XeTeX;
 % Barbara Beeton for her prodigious effort compiling the definitive list of Unicode math
 % glyphs and their \LaTeX\ names (inventing them where necessary), and also
