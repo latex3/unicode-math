@@ -27,7 +27,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<package>\ProvidesPackage{unicode-math}
 %<*package>
-  [2010/06/01 v0.5 Unicode maths in XeLaTeX]
+  [2010/06/03 v0.5 Unicode maths in XeLaTeX]
 %</package>
 %<*internal>
 \documentclass{ltxdoc}
@@ -2884,7 +2884,7 @@ This work is "author-maintained" by Will Robertson.
     \mathbfsf\mathbfsfup\mathbfsfit
   }{
     \seq_put_right:Nn \g_um_mathalph_seq {#1}
-    \um_prepare_mathstyle:f {\exp_after:nW \use_none:nnnnn \token_to_str:N #1}
+    \um_prepare_mathstyle:f {\exp_after:wN \use_none:nnnnn \token_to_str:N #1}
   }
 }
 %    \end{macrocode}
