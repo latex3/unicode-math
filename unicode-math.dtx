@@ -157,7 +157,24 @@ This work is "author-maintained" by Will Robertson.
 %     \bottomrule
 %   \end{tabular}
 % \end{table}
-% 
+%
+% \subsection{Known issues}
+%
+% In some cases, \XeTeX's math support is either missing or I have not
+% discovered how to access features for various types of maths construct.
+% An example of this are horizontal extensible symbols, such as underbraces,
+% overbraces, and arrows that can grow longer if necessary. Behaviour with
+% such symbols is not necessarily going to be consistent; please report
+% problem areas to me.
+%
+% \LaTeX's concept of math `versions' is not yet supported. The only way to
+% get bold maths is to add markup for it all. This is still an area that
+% requires investigation.
+%
+% Symbols for maths characters have been inherited from the STIX project and
+% may change slightly in the long term. We have tried to preserve backwards
+% compatibility with \LaTeX\ conventions as best as possible; again, please
+% report areas of concern.
 %
 % \section{Unicode maths font setup}
 %
