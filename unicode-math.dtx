@@ -117,9 +117,9 @@ This work is "author-maintained" by Will Robertson.
 % to extend and use \TeX\ in the future.
 % Apostolos Syropoulos, Joel Salomon, Khaled Hosny, and Mariusz Wodzicki
 % have been fantastic beta testers.
-% 
+%
 % \section{Getting started}
-% 
+%
 % Load \pkg{unicode-math} as a regular \LaTeX\ package. It should be loaded
 % after any other maths or font-related package in case it needs to overwrite
 % their definitions. Here's an example:
@@ -130,7 +130,7 @@ This work is "author-maintained" by Will Robertson.
 % \setmathfont{Cambria Math}
 % \end{verbatim}
 % \end{quote}
-% 
+%
 % \subsection{Package options}
 % Package options may be set when the package as loaded or at any later
 % stage with the \cs{unimathsetup} command. Therefore, the following two
@@ -146,7 +146,7 @@ This work is "author-maintained" by Will Robertson.
 % Note, however, that some package options affects how maths is initialised
 % and changing an option such as |math-style| will not take effect until a
 % new maths font is set up.
-% 
+%
 % Package options may \emph{also} be used when declaring new maths fonts,
 % passed via options to the \cs{setmathfont} command.
 % Therefore, the following two examples are equivalent:
@@ -158,10 +158,10 @@ This work is "author-maintained" by Will Robertson.
 % \setmathfont[math-style=TeX]{Cambria Math}
 % \end{verbatim}
 % \end{quote}
-% 
+%
 % A short list of package options is shown in \tabref{pkgopt}.
 % See following sections for more information.
-% 
+%
 % \begin{table}\centering
 %   \topcaption{Package options.}
 %   \tablabel{pkgopt}
@@ -218,7 +218,7 @@ This work is "author-maintained" by Will Robertson.
 % Font features specific to \pkg{unicode-math} are shown in \tabref{mathfontfeatures}.
 % Package options (see \tabref{pkgopt}) may also be used.
 % Other \pkg{fontspec} features are also valid.
-% 
+%
 % \begin{table}\centering
 %   \topcaption{Maths font options.}
 %   \tablabel{mathfontfeatures}
@@ -248,9 +248,9 @@ This work is "author-maintained" by Will Robertson.
 % for accessing the glyph, such as \cs{int}, or whole collection of symbols with
 % the same math type, such as \cs{mathopen}, or complete math alphabets such as \cs{mathbb}.
 % (Only numerical slots, however, can be used in ranged declarations.)
-% 
+%
 % \subsubsection{Control over maths alphabets}
-% 
+%
 % Exact control over maths alphabets can be somewhat involved.
 % Here is the current plan.
 % \begin{itemize}
@@ -258,14 +258,14 @@ This work is "author-maintained" by Will Robertson.
 % \item |[range=\mathbfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (with |latin|, |Latin|, |num| as well for Latin lower-/upper-case and numbers).
 % \item |[range=\mathsfit->\mathbfsfit]| to map to different output alphabet(s) (which is rather useless right now but will become less useless in the future).
 % \end{itemize}
-% 
+%
 % And now the trick.
 % If a particular math alphabet is not defined in the font, fall back onto the lower-base plane (i.e., upright) glyphs.
 % Therefore, to use an \ascii-encoded fractur font, for example, write
 % \par{\centering|\setmathfont[range=\mathfrak]{SomeFracturFont}|\par}\noindent
 % and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
 % If necessary (but why?) this behaviour can be forced with |[range=\mathfrac->\mathup]|.
-% 
+%
 %
 % \subsection{Script and scriptscript fonts/features}
 % \seclabel{sscript}
@@ -273,7 +273,7 @@ This work is "author-maintained" by Will Robertson.
 % Cambria Math uses OpenType font features to activate smaller optical sizes
 % for scriptsize and scriptscriptsize symbols (the $B$ and $C$, respectively,
 % in $A_{B_C}$). Other fonts will possibly use entirely separate fonts.
-% 
+%
 % Not yet implemented: Both of these options
 % must be taken into account. I hope this will be mostly automatic from the
 % users' points of view. The |+ssty| feature can be detected and applied
@@ -405,48 +405,48 @@ This work is "author-maintained" by Will Robertson.
 %   \end{tabular}
 % \end{table}
 %
-% 
+%
 % \subsection{Sans serif style}
 % \seclabel{sans-style}
-% 
+%
 % Unicode contains upright and italic, medium and bold mathematical alphabet characters.
 % These may be explicitly selected with the \cs{mathsfup}, \cs{mathsfit}, \cs{mathbfsfup}, and \cs{mathbfsfit}
 % commands discussed in \secref{all-math-alphabets}.
-% 
+%
 % How should the generic \cs{mathsf} behave? Unlike bold, sans serif is used much more sparingly
 % in mathematics. I've seen recommendations to typeset tensors in sans serif italic
 % or sans serif italic bold (e.g., examples in the \pkg{isomath} and \pkg{mattens} packages).
 % But \LaTeX's \cs{mathsf} is \textsl{upright} sans serif.
-% 
+%
 % Therefore I reluctantly add the package options |[sans-style=upright]| and |[sans-style=italic]| to control the behaviour of \cs{mathsf}.
 % The |upright| style sets up the command to use the seemingly-useless upright sans serif, including Greek;
 % the |italic| style switches to using italic in both Latin and Greek alphabets.
 % In other words, this option simply changes the meaning of \cs{mathsf} to either \cs{mathsfup} or \cs{mathsfit}, respectively.
 % Please let me know if more granular control is necessary here.
-% 
+%
 % There is also a |[sans-style=literal]| setting, set automatically with |[math-style=literal]|, which retains the uprightness of the input characters used when selecting the sans serif output.
-% 
+%
 % \subsubsection{What about bold sans serif?}
-% 
+%
 % While you might want your bold upright and your sans serif italic, I don't believe you'd also want
 % your bold sans serif upright (or all vice versa, if that's even conceivable). Therefore, bold sans
 % serif follows from the setting for sans serif; it is completely independent of the setting for bold.
-% 
+%
 % In other words, \cs{mathbfsf} is \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
-% 
+%
 % Note well! There is no medium-weight sans serif Greek alphabet in Unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
-% 
+%
 % \subsection{All (the rest) of the mathematical alphabets}
 % \seclabel{all-math-alphabets}
-% 
+%
 % Unicode contains separate codepoints for most if not all variations of alphabet
 % shape one may wish to use in mathematical notation. The complete list is shown
 % in \tabref{mathalphabets}. Some of these have been covered in the previous sections.
-% 
+%
 % At present, the math font switching commands do not nest; therefore if you want
 % sans serif bold, you must write |\mathsfbf{...}| rather than |\mathbf{\mathsf{...}}|.
 % This may change in the future.
-% 
+%
 % \begin{table}
 % \caption{Mathematical alphabets defined in Unicode. Black dots indicate an alphabet exists in the font specified; grey dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
 % \tablabel{mathalphabets}
@@ -478,25 +478,25 @@ This work is "author-maintained" by Will Robertson.
 % \bottomrule
 % \end{tabular}
 % \end{table}
-% 
+%
 % \subsubsection{Double-struck}
-% 
+%
 % The double-struck alphabet (also known as `blackboard bold') consists of
 % upright Latin letters $\{\mathbb{a}$--$\mathbb{z}$,$\mathbb{A}$$\mathbb{Z}\}$,
 % numerals $\mathbb{0}$--$\mathbb{9}$, summation symbol $\mathbb\sum$, and four
 % Greek letters only: $\{\mathbb{\gamma\pi\Gamma\Pi}\}$.
-% 
+%
 % While |\mathbb{\sum}| does produce a double-struck summation symbol,
-% its limits aren't properly aligned (see \secref{limits}). Therefore,
+% its limits aren't properly aligned. Therefore,
 % either the literal character or the control sequence \cs{Bbbsum} are
 % recommended instead.
-% 
+%
 % There are also five Latin \emph{italic} double-struck letters: $\mathbbit{Ddeij}$.
 % These can be accessed (if not with their literal characters or control sequences)
 % with the \cs{mathbbit} alphabet switch, but note that only those five letters
 % will give the expected output.
-% 
-% 
+%
+%
 %
 % \subsection{Miscellanea}
 %
@@ -715,32 +715,32 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Colon}
 % \seclabel{colon}
-% 
+%
 % The colon is one of the few confusing characters of Unicode maths.
 % In \TeX, \texttt{:} is defined as a colon with relation spacing: `$a:b$'.
 % While \cs{colon} is defined as a colon with punctuation spacing: `$a\colon b$'.
-% 
+%
 % In Unicode, \unichar{003A} {colon} is defined as a punctuation symbol,
 % while \unichar{2236} {ratio} is the colon-like symbol used in mathematics to denote
 % ratios and other things.
-% 
+%
 % This breaks the usual straightforward mapping from control sequence to Unicode input character
 % to (the same) Unicode glyph.
-% 
+%
 % To preserve input compatibility, we remap the \ascii\ input character `\texttt{:}' to \unichar{2236}.
 % Typing a literal \unichar{2236} char will result in the same output.
 % If \pkg{amsmath} is loaded, then the definition of \cs{colon} is inherited from there
 % (it looks like a punctuation colon with additional space around it).
 % Otherwise, \cs{colon} is made to output a colon with \cs{mathpunct} spacing.
-% 
+%
 % The package option |colon=literal| forces \ascii\ input `|:|' to be printed as \cs{mathcolon} instead.
 %
-% 
+%
 % \subsubsection{Slashes and backslashes}
 % \seclabel{slash-delimiter}
-% 
+%
 % There are several slash-like symbols defined in Unicode. The complete list is shown in \tabref{slashes}.
-% 
+%
 % \begin{table}\centering
 % \caption{Slashes and backslashes.}
 % \tablabel{slashes}
@@ -760,45 +760,45 @@ This work is "author-maintained" by Will Robertson.
 % \bottomrule
 % \end{tabular}
 % \end{table}
-% 
+%
 % In regular \LaTeX\ we can write \cs{left}\cs{slash}\dots\cs{right}\cs{backslash}
 % and so on and obtain extensible delimiter-like symbols. Not all of the Unicode slashes
 % are suitable for this (and do not have the font support to do it).
-% 
+%
 % \paragraph{Slash}
-% 
+%
 % Of \unichar{2044} {fraction slash}, TR25 says that it is:
 % \begin{quote}
 % \dots used to build up simple fractions in running text\dots 
 % however parsers of mathematical texts should be prepared to handle fraction slash 
 % when it is received from other sources.
 % \end{quote}
-% 
+%
 % \unichar{2215} {division slash} should be used when division is represented
 % without a built-up fraction; $\pi\approx22/7$, for example.
-% 
+%
 % \unichar{29F8} {big solidus} is a `big operator' (like $\sum$).
-% 
+%
 % \paragraph{Backslash}
-% 
+%
 % The \unichar{005C} {reverse solidus} character \cs{backslash} is used for denoting
 % double cosets: $A\backslash B$. (So I'm led to believe.) 
 % It may be used as a `stretchy' delimiter if supported by the font.
-% 
+%
 % MathML uses \unichar{2216} {set minus} like this: $A\smallsetminus B$.\footnote{\S4.4.5.11 \url{http://www.w3.org/TR/MathML3/}}
 % The \LaTeX\ command name \cs{smallsetminus} is used for backwards compatibility.
-% 
+%
 % Presumably, \unichar{29F5} {reverse solidus operator} is intended to
 % be used in a similar way, but it could also (perhaps?) be used to
 % represent `inverse division': $\pi\approx7\mathbin{\backslash}22$.^^A
 % \footnote{This is valid syntax in the Octave and Matlab programming languages,
 % in which it means matrix inverse pre-multiplication. I.e., $A\mathbin{\backslash} B\equiv A^{-1}B$.}
 % The \LaTeX\ name for this character is \cs{setminus}.
-% 
+%
 % Finally, \unichar{29F9} {big reverse solidus} is a `big operator' (like $\sum$).
-% 
+%
 % \paragraph{How to use all of these things}
-% 
+%
 % Unfortunately, font support for the above characters/glyphs is rather inconsistent.
 % In Cambria Math, the only slash that grows (say when writing
 % \[
@@ -807,7 +807,7 @@ This work is "author-maintained" by Will Robertson.
 % \]
 % is the \textsc{fraction slash}, which we just established above is
 % sort of only supposed to be used in text.
-% 
+%
 % Of the above characters, the following are allowed to be used after
 % \cs{left}, \cs{middle}, and \cs{right}:
 % \begin{itemize}
@@ -816,16 +816,16 @@ This work is "author-maintained" by Will Robertson.
 % \item \cs{slash}; and,
 % \item \cs{backslash} (the only reverse slash).
 % \end{itemize}
-% 
+%
 % However, we assume that there is only \emph{one} stretchy slash
 % in the font; this is assumed by default to be \unichar{002F} {solidus}.
 % Writing \cs{left/} or \cs{left}\cs{slash} or \cs{left}{fracslash}
 % will all result in the same stretchy delimiter being used.
-% 
+%
 % The delimiter used can be changed with the |slash-delimiter| package option.
 % Allowed values are |ascii|, |frac|, and |div|, corresponding to the respective
 % Unicode slots.
-% 
+%
 % For example: as mentioned above, Cambria Math's stretchy slash is
 % \unichar{2044} {fraction slash}. When using Cambria Math, then
 % \pkg{unicode-math} should be loaded with the |slash-delimiter=frac| option.
@@ -2502,7 +2502,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsection{Radicals}
 %
 % The radical for square root is organised in \cs{um_set_mathsymbol:nNNn} on
-% page~\pageref{page:radical}. I think it's the only radical ever.
+% page. I think it's the only radical ever.
 % (Actually, there is also \cs{cuberoot} and \cs{fourthroot}, but they don't
 %  seem to behave as proper radicals.)
 %
@@ -4780,7 +4780,7 @@ This work is "author-maintained" by Will Robertson.
 % \appendix
 %
 % \section{Documenting maths support in the NFSS}
-% 
+%
 % In the following, \meta{NFSS decl.} stands for something like |{T1}{lmr}{m}{n}|.
 %
 % \begin{description}
@@ -4843,7 +4843,7 @@ This work is "author-maintained" by Will Robertson.
 %     \expandafter\hexnumber@\csname sym#2\endcsname
 %     {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
 % \end{verbatim}
-% 
+%
 %
 % \section{\XeTeX\ math font dimensions}
 %
