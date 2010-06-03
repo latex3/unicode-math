@@ -12,7 +12,7 @@ help:
 	echo ' '
 	echo '                  help  -  (this message)'
 	echo '                  ctan  -  generate archive for CTAN'
-	echo '                   doc  -  compile documentation'
+	echo '                   doc  -  compile documentation inside build/'
 	echo '                 clean  -  remove build directory and compiled files'
 	echo ' '
 	echo '               install  -  install the package into your home texmf tree'
@@ -60,6 +60,7 @@ PKGSOURCE = $(PKG).dtx $(TBL) Makefile
 DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL) $(SYM).pdf
 CTANFILES = $(PKGSOURCE)  $(DOC)  ../$(testdir)
 BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
+BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
 # these are what's needed to compile and make stuff:
 
@@ -99,7 +100,7 @@ TDSFILES = \
 
 #### BASICS ####
 
-doc: $(DOC)
+doc: $(BUILDDOC)
 
 README:
 
