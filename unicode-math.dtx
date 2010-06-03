@@ -42,7 +42,7 @@ This work is "author-maintained" by Will Robertson.
 % ^^A   DOCUMENTATION BEGINS HERE
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% \title{Experimental unicode mathematical typesetting: The \pkg{unicode-math} package}
+% \title{Experimental Unicode mathematical typesetting: The \pkg{unicode-math} package}
 % \author{Will Robertson}
 % \date{\umfiledate \qquad \umfileversion}
 %
@@ -57,12 +57,12 @@ This work is "author-maintained" by Will Robertson.
 % Performance issues may be encountered until algorithms are refined.
 % \endgroup
 % 
-% This package is intended to be a complete implementation of unicode
+% This package is intended to be a complete implementation of Unicode
 % maths for \LaTeX\ using the \XeTeX\ (and later, Lua\TeX) typesetting engines.
 % With this package, changing maths fonts will be as easy as changing
-% text fonts --- not that there are many unicode maths fonts yet.
+% text fonts --- not that there are many Unicode maths fonts yet.
 % 
-% Maths input is simplified with unicode since literal glyphs may be
+% Maths input is simplified with Unicode since literal glyphs may be
 % entered instead of control sequences.
 % \end{abstract}
 % 
@@ -73,7 +73,7 @@ This work is "author-maintained" by Will Robertson.
 % \section{Introduction}
 %
 % This document describes the \pkg{unicode-math} package, which is an
-% \emph{experimental} implementation of a macro to unicode glyph encoding for
+% \emph{experimental} implementation of a macro to Unicode glyph encoding for
 % mathematical characters. Its intended use is for \XeTeX, although it is
 % conjectured that some effect could be spent to create a cross-format
 % package that would also work with Lua\TeX.
@@ -85,8 +85,8 @@ This work is "author-maintained" by Will Robertson.
 % 
 % Many thanks to
 % Microsoft for developing OpenType math as part of Office~2007;
-% Jonathan Kew for implementing unicode math support in \XeTeX;
-% Barbara Beeton for her prodigious effort compiling the definitive list of unicode math
+% Jonathan Kew for implementing Unicode math support in \XeTeX;
+% Barbara Beeton for her prodigious effort compiling the definitive list of Unicode math
 % glyphs and their \LaTeX\ names (inventing them where necessary), and also
 % for her thoughtful replies to my sometimes incessant questions.
 % Ross Moore and Chris Rowley have provided moral and technical support
@@ -161,17 +161,17 @@ This work is "author-maintained" by Will Robertson.
 %
 % \section{Unicode maths font setup}
 %
-% In the ideal case, a single unicode font will contain all maths glyphs we
+% In the ideal case, a single Unicode font will contain all maths glyphs we
 % need. The file |unicode-math-table.tex| (based on Barbara Beeton's \STIX\ table)
-% provides the mapping between unicode
+% provides the mapping between Unicode
 % maths glyphs and macro names (all 3298 — or however many — of them!). A
 % single command
 % \codeline{\cmd\setmathfont\oarg{font features}\marg{font name}}
 % implements this for every every symbol and alphabetic variant.
 % That means |x| to $x$, |\xi| to $\xi$, |\leq| to $\leq$, etc., |\mathcal{H}|
-% to $\mathcal{H}$ and so on, all for unicode glyphs within a single font.
+% to $\mathcal{H}$ and so on, all for Unicode glyphs within a single font.
 %
-% This package deals well with unicode characters for maths
+% This package deals well with Unicode characters for maths
 % input. This includes using literal Greek letters in formulae,
 % resolving to upright or italic depending on preference.
 %
@@ -198,12 +198,12 @@ This work is "author-maintained" by Will Robertson.
 % \subsection{Using multiple fonts}
 % \seclabel{range}
 %
-% There will probably be few cases where a single unicode maths font suffices
+% There will probably be few cases where a single Unicode maths font suffices
 % (simply due to glyph coverage). The upcoming \STIX\ font comes to mind as a
 % possible exception. It will therefore be necessary to delegate specific
-% unicode ranges of glyphs to separate fonts:
+% Unicode ranges of glyphs to separate fonts:
 %   \codeline{\cmd\setmathfont|[range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
-% where \meta{unicode range} is a comma-separated list of unicode slots and
+% where \meta{unicode range} is a comma-separated list of Unicode slots and
 % ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|. You may also use the macro
 % for accessing the glyph, such as \cs{int}, or whole collection of symbols with
 % the same math type, such as \cs{mathopen}, or complete math alphabets such as \cs{mathbb}.
@@ -244,10 +244,10 @@ This work is "author-maintained" by Will Robertson.
 %
 % \section{Maths input}
 %
-% \XeTeX's unicode support allows maths input through two methods. Like
+% \XeTeX's Unicode support allows maths input through two methods. Like
 % classical \TeX, macros such as \cmd\alpha, \cmd\sum, \cmd\pm, \cmd\leq, and
 % so on, provide verbose access to the entire repertoire of characters defined
-% by unicode. The literal characters themselves may be used instead, for more
+% by Unicode. The literal characters themselves may be used instead, for more
 % readable input files.
 %
 % \subsection{Math `style'}
@@ -272,7 +272,7 @@ This work is "author-maintained" by Will Robertson.
 % `mathematical' italic Latin and Greek alphabets are \emph{unified} from the
 % point of view of having a specified meaning in the source text. That is, to
 % get a mathematical ‘$x$’, either the ascii (`keyboard') letter |x| may
-% be typed, or the actual unicode character may be used. Similarly for Greek
+% be typed, or the actual Unicode character may be used. Similarly for Greek
 % letters. The upright or italic forms are then chosen based on the
 % |math-style| package option.
 %
@@ -336,7 +336,7 @@ This work is "author-maintained" by Will Robertson.
 % |bold-style=upright| all bold characters are upright, and
 % |bold-style=literal| does not change the upright/italic shape of the letter.
 %
-% Upright and italic bold mathematical letters input as direct unicode
+% Upright and italic bold mathematical letters input as direct Unicode
 % characters are normalised with the same rules. For example, with
 % |bold-style=TeX|, a literal bold italic latin character will be typeset
 % upright.
@@ -394,7 +394,7 @@ This work is "author-maintained" by Will Robertson.
 % 
 % In other words, \cs{mathbfsf} is \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
 % 
-% Note well! There is no medium-weight sans serif Greek alphabet in unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
+% Note well! There is no medium-weight sans serif Greek alphabet in Unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
 % 
 % \subsection{All (the rest) of the mathematical alphabets}
 % \seclabel{all-math-alphabets}
@@ -408,7 +408,7 @@ This work is "author-maintained" by Will Robertson.
 % This may change in the future.
 % 
 % \begin{table}
-% \caption{Mathematical alphabets defined in unicode. Black dots indicate an alphabet exists in the font specified; grey dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
+% \caption{Mathematical alphabets defined in Unicode. Black dots indicate an alphabet exists in the font specified; grey dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
 % \tablabel{mathalphabets}
 % \centering
 % \def\Y{\textbullet}
@@ -547,7 +547,7 @@ This work is "author-maintained" by Will Robertson.
 % look like $\epsilon$. The Unicode glyph directly after delta and before zeta
 % is `epsilon' and looks like $\epsilon$; there is a subsequent variant of
 % epsilon that looks like $\varepsilon$. This creates a problem. People who
-% use unicode input won't want their glyphs transforming; \TeX\ users will be
+% use Unicode input won't want their glyphs transforming; \TeX\ users will be
 % confused that what they think as `normal epsilon' is actual the `variant
 % epsilon'. And the same problem exists for `phi'.
 %
@@ -556,7 +556,7 @@ This work is "author-maintained" by Will Robertson.
 % \cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
 % \cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
 % With |vargreek-shape=unicode|, these symbols are swapped.
-% Note, however, that unicode characters are not affected by this option.
+% Note, however, that Unicode characters are not affected by this option.
 % That is, no remapping occurs of the characters/glyphs, only the control sequences.
 %
 % The package default is to use |vargreek-shape=TeX|.
@@ -564,7 +564,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Primes}
 %
 % Primes ($x'$) may be input in several ways. You may use any combination
-% of \ascii\ straight quote (\texttt{\char`\'}), unicode prime \unichar{2032}
+% of \ascii\ straight quote (\texttt{\char`\'}), Unicode prime \unichar{2032}
 % ($'$), and \cs{prime}; when multiple primes occur next to each other, they chain
 % together to form double, triple, or quadruple primes if the font contains
 % pre-drawn glyphs. These may also be accessed with \cs{dprime},
@@ -582,7 +582,7 @@ This work is "author-maintained" by Will Robertson.
 % \end{verbatim}
 %
 % Backwards or reverse primes behave in exactly the same way; use any of \ascii\
-% back tick (\texttt{\char`\`}), unicode reverse prime \unichar{2035}
+% back tick (\texttt{\char`\`}), Unicode reverse prime \unichar{2035}
 % ({\umfont\char"2035}), or \cs{backprime} to access it.
 % Multiple backwards primes can also be called with \cs{backdprime},
 % \cs{backtrprime}, and \cs{backqprime}.
@@ -593,7 +593,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Unicode subscripts and superscripts}
 %
-% You may, if you wish, use unicode subscripts and superscripts in your
+% You may, if you wish, use Unicode subscripts and superscripts in your
 % source document. For basic expressions, the use of these characters
 % can make the input more readable.
 % Adjacent sub- or super-scripts will be concatenated into a single
@@ -625,7 +625,7 @@ This work is "author-maintained" by Will Robertson.
 % ^^^^207f
 % Z}
 % \caption{
-%   The unicode superscripts supported as input characters.
+%   The Unicode superscripts supported as input characters.
 %   These are the literal glyphs from Charis SIL,
 %   not the output seen when used for maths input.
 %   The `A' and `Z' are to provide context for the size and
@@ -667,7 +667,7 @@ This work is "author-maintained" by Will Robertson.
 % ^^^^1d6a
 % Z}
 % \caption{
-%   The unicode subscripts supported as input characters.
+%   The Unicode subscripts supported as input characters.
 %   See note from \figref{superscripts}.
 % }
 % \figlabel{subscripts}
@@ -676,16 +676,16 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Colon}
 % \seclabel{colon}
 % 
-% The colon is one of the few confusing characters of unicode maths.
+% The colon is one of the few confusing characters of Unicode maths.
 % In \TeX, \texttt{:} is defined as a colon with relation spacing: `$a:b$'.
 % While \cs{colon} is defined as a colon with punctuation spacing: `$a\colon b$'.
 % 
-% In unicode, \unichar{003A} {colon} is defined as a punctuation symbol,
+% In Unicode, \unichar{003A} {colon} is defined as a punctuation symbol,
 % while \unichar{2236} {ratio} is the colon-like symbol used in mathematics to denote
 % ratios and other things.
 % 
-% This breaks the usual straightforward mapping from control sequence to unicode input character
-% to (the same) unicode glyph.
+% This breaks the usual straightforward mapping from control sequence to Unicode input character
+% to (the same) Unicode glyph.
 % 
 % To preserve input compatibility, we remap the \ascii\ input character `\texttt{:}' to \unichar{2236}.
 % Typing a literal \unichar{2236} char will result in the same output.
@@ -699,7 +699,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Slashes and backslashes}
 % \seclabel{slash-delimiter}
 % 
-% There are several slash-like symbols defined in unicode. The complete list is shown in \tabref{slashes}.
+% There are several slash-like symbols defined in Unicode. The complete list is shown in \tabref{slashes}.
 % 
 % \begin{table}\centering
 % \caption{Slashes and backslashes.}
@@ -722,7 +722,7 @@ This work is "author-maintained" by Will Robertson.
 % \end{table}
 % 
 % In regular \LaTeX\ we can write \cs{left}\cs{slash}\dots\cs{right}\cs{backslash}
-% and so on and obtain extensible delimiter-like symbols. Not all of the unicode slashes
+% and so on and obtain extensible delimiter-like symbols. Not all of the Unicode slashes
 % are suitable for this (and do not have the font support to do it).
 % 
 % \paragraph{Slash}
@@ -784,7 +784,7 @@ This work is "author-maintained" by Will Robertson.
 % 
 % The delimiter used can be changed with the |slash-delimiter| package option.
 % Allowed values are |ascii|, |frac|, and |div|, corresponding to the respective
-% unicode slots.
+% Unicode slots.
 % 
 % For example: as mentioned above, Cambria Math's stretchy slash is
 % \unichar{2044} {fraction slash}. When using Cambria Math, then
@@ -851,7 +851,7 @@ This work is "author-maintained" by Will Robertson.
 % \showchar{25EF}{large circle}{\lgwhtcircle}
 % \bottomrule
 % \end{tabular}
-% \caption{Filled and hollow unicode circles.}
+% \caption{Filled and hollow Unicode circles.}
 % \tablabel{circles}
 % \end{table}
 %
@@ -1062,11 +1062,11 @@ This work is "author-maintained" by Will Robertson.
 \cs_generate_variant:Nn \fontspec_select:nn {x}
 %    \end{macrocode}
 %
-% \subsection{Alphabet unicode positions}
+% \subsection{Alphabet Unicode positions}
 %
-% Before we begin, let's define the positions of the various unicode
+% Before we begin, let's define the positions of the various Unicode
 % alphabets so that our code is a little more readable.\footnote{`\textsc{u.s.v.}' stands
-% for `unicode scalar value'.}
+% for `Unicode scalar value'.}
 %
 % Rather than `readable', in the end, this makes the code more extensible.
 %    \begin{macrocode}
@@ -1364,9 +1364,9 @@ This work is "author-maintained" by Will Robertson.
 % \subsection{STIX fonts}
 %
 % Version 1.0.0 of the STIX fonts contains a number of
-% alphabets in the private use area of unicode; i.e.,
+% alphabets in the private use area of Unicode; i.e.,
 % it contains many math glyphs that have not (yet or if ever)
-% been accepted into the unicode standard.
+% been accepted into the Unicode standard.
 %
 % But we still want to be able to use them if possible.
 %
@@ -1953,7 +1953,7 @@ This work is "author-maintained" by Will Robertson.
 % \darg{Macro to assign}
 % \darg{Glyph slot}
 % In the examples following, say we're defining for the symbol \cmd\sum ($\sum$).
-% In order for literal unicode characters to be used in the source and still
+% In order for literal Unicode characters to be used in the source and still
 % have the correct limits behaviour, big operators are made math-active.
 % This involves three steps:
 % \begin{itemize}
@@ -2119,7 +2119,7 @@ This work is "author-maintained" by Will Robertson.
 %%    }
 %%  \fi
 %    \end{macrocode}
-% If we're defining the full unicode math repetoire, then we skip all
+% If we're defining the full Unicode math repetoire, then we skip all
 % the parsing processing needed if we're only defining a subset.
 % \begin{itemize}
 % \item Math symbols are defined with \cmd\UnicodeMathSymbol; see \secref{mathsymbol}
@@ -2213,7 +2213,7 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\um_process_symbol_noparse:nnnn}
 % \begin{macro}{\um_process_symbol_parse:nnnn}
 % If the \feat{range} font feature has been used, then only
-% a subset of the unicode glyphs are to be defined.
+% a subset of the Unicode glyphs are to be defined.
 % See \secref{rangeproc} for the code that enables this.
 %    \begin{macrocode}
 \cs_set:Npn \um_process_symbol_noparse:nnnn #1#2#3#4 {
@@ -2652,7 +2652,7 @@ This work is "author-maintained" by Will Robertson.
 % Donald Arseneau's \pkg{selectp} package has a cleverer technique.
 %
 % \begin{macro}{\um@parse@term}
-% \darg{unicode character slot}
+% \darg{Unicode character slot}
 % \darg{control sequence (character macro)}
 % \darg{control sequence (math type)}
 % \darg{code to execute}
@@ -2800,9 +2800,9 @@ This work is "author-maintained" by Will Robertson.
 %
 % \begin{macro}{\um_resolve_greek:}
 % This macro defines \cmd\Alpha\dots\cmd\omega\ as their corresponding
-% unicode (mathematical italic) character. Remember that the mapping
+% Unicode (mathematical italic) character. Remember that the mapping
 % to upright or italic happens with the mathcode definitions, whereas these macros
-% just stand for the literal unicode characters.
+% just stand for the literal Unicode characters.
 %    \begin{macrocode}
 \AtBeginDocument{\um_resolve_greek:}
 \cs_new:Npn \um_resolve_greek: {
@@ -2855,8 +2855,8 @@ This work is "author-maintained" by Will Robertson.
 % \begin{itemize}
 % \item Only set the alphabets specified.
 % \item Check for the first glyph of the alphabet to detect if the font contains
-%       the alphabet shape in the unicode math plane.
-% \item For unicode math alphabets, overwrite whatever's already there.
+%       the alphabet shape in the Unicode math plane.
+% \item For Unicode math alphabets, overwrite whatever's already there.
 % \item Otherwise, use the \ascii\ letters instead.
 % \end{itemize}
 %
@@ -3931,7 +3931,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % \section{Definitions of the active math characters}
 %
-% Here we define every unicode math codepoint an equivalent macro name.
+% Here we define every Unicode math codepoint an equivalent macro name.
 % The two are equivalent, in a |\let\xyz=^^^^1234| kind of way.
 %
 % \begin{macro}{\um@scancharlet}
@@ -4047,8 +4047,8 @@ This work is "author-maintained" by Will Robertson.
 % multiple single primes into a pre-drawn multi-prime glyph; consider
 % $x\prime{}\prime{}\prime$ vs.\ $x\trprime$.
 %
-% For unicode maths, we wish to conserve this behaviour and augment it with
-% the possibility of adding any combination of unicode prime or any of the
+% For Unicode maths, we wish to conserve this behaviour and augment it with
+% the possibility of adding any combination of Unicode prime or any of the
 % $n$-prime characters. E.g., the user might copy-paste a double prime from
 % another source and then later type another single prime after it; the output
 % should be the triple prime.
@@ -4486,7 +4486,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Active fractions}
 % Active fractions can be setup independently of any maths font definition;
-% all it requires is a mapping from the unicode input chars to the relevant
+% all it requires is a mapping from the Unicode input chars to the relevant
 % \LaTeX\ fraction declaration.
 %
 %    \begin{macrocode}
