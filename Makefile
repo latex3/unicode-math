@@ -44,6 +44,7 @@ help:
 PKG = unicode-math
 TBL = $(PKG)-table.tex
 SUITE = $(PKG)-testsuite
+XMPL = unimath-example.ltx
 
 UPDATE = `which dtx-update` || true  # TODO: generalise
 
@@ -51,10 +52,10 @@ testdir=testfiles
 builddir=build
 tds=$(builddir)/$(PKG).tds
 
-PKGSOURCE = $(PKG).dtx $(TBL) $(SUITE).ltx
+PKGSOURCE = $(PKG).dtx $(TBL) $(SUITE).ltx Makefile
 LTXSOURCE = $(PKG).sty $(TBL)
 
-DOC     = $(PKG).pdf $(SUITE).pdf
+DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL)
 DERIVED = $(PKG).sty
 
 SUITESOURCE = \
@@ -78,16 +79,21 @@ TDSFILES = \
 	$(tds)/doc/latex/$(PKG)/unicode-math.pdf \
 	$(tds)/doc/latex/$(PKG)/unicode-math-testsuite.pdf \
 	$(tds)/doc/latex/$(PKG)/README \
+	$(tds)/doc/latex/$(PKG)/$(XMPL) \
 	$(tds)/tex/latex/$(PKG)/unicode-math.sty \
 	$(tds)/tex/latex/$(PKG)/unicode-math-table.tex
 
-CTANFILES = $(PKGSOURCE)  $(DOC)  Makefile  README ../$(testdir)
+CTANFILES = $(PKGSOURCE)  $(DOC)  ../$(testdir)
 
 BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
 
 #### BASICS ####
 
 doc: $(DOC)
+
+README:
+
+$(XMPL):
 
 clean:
 	rm -rf $(builddir)
@@ -141,6 +147,9 @@ $(builddir)/Makefile: Makefile
 	cp -f  $< $@
 
 $(builddir)/$(SUITE).ltx: $(SUITE).ltx
+	cp -f  $< $@
+
+$(builddir)/$(XMPL): $(XMPL)
 	cp -f  $< $@
 
 

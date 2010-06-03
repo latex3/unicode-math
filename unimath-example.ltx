@@ -1,0 +1,48 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% UNICODE-MATH EXAMPLE FILE
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+% Load fontspec and define a document font:
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+
+% Load unicode-math and define a math font:
+\usepackage{unicode-math}
+\setmathfont{Asana Math}
+
+\begin{document}
+\title{An example of \textsf{unicode-math}}
+\author{Will Robertson\\\texttt{wspr81@gmail.com}}
+\maketitle
+
+This is an example of the \textsf{unicode-math} package.
+It allows you to write maths with Unicode input and to use fonts that contain Unicode mathematical glyphs. Follow along in the source code to see how it works.
+
+After loading the package and selecting a font, you shouldn't need to change much to continue to write maths as always.
+\[
+   F(s)=\mathscr L \{f(t)\}=\int_0^\infty \mathrm e^{-st}f(t)\,\mathrm d t 
+\]
+
+The style of Latin and Greek letters is set up by default to match the output of standard \LaTeX: Latin letters and Greek lowercase letters are italic, and Greek uppercase letters are upright. These can be configured with the \texttt{math-style} package option.
+
+One very important feature to recognise is that bold maths now works consistently for both Latin and Greek letters. By default, \verb|\mathbf| will turn a Latin letter bold and upright, and a Greek letter will remain italic and also become bold. For example:
+\[
+  \mathbf{a} = a\,\mathbf{I} \qquad \mathbf{\beta} = \beta\,\mathbf{I}
+\]
+This behaviour can be configured with the \texttt{bold-style} package option.
+
+In the examples above, I've used \LaTeX\ commands to input characters like \verb|\beta|, \verb|\infty|, and so on. These may now be typed directly into the source of the document:
+\[
+   𝐉 = ∇×𝐇 \qquad 𝐁 = μ₀(𝐌 + 𝐇)
+\]
+\[
+  ∫₀³ xⁿφ₁₂(x)\,ⅆx
+\]
+It does not matter if you use upright or italic characters; they will be normalised according to the setting of the \texttt{math-style} and \texttt{bold-style} options.
+
+And that's a brief introduction to the package. Please see the documentation for further details. This is a new package; feedback, suggestions, and bug reports are all most welcome.
+
+\end{document}
