@@ -50,6 +50,8 @@ SUITE = $(PKG)-testsuite
 XMPL = unimath-example.ltx
 SYM = unimath-symbols
 
+COPY = cp -a 
+
 testdir=testfiles
 builddir=build
 tds=$(builddir)/$(PKG).tds
@@ -57,6 +59,7 @@ tds=$(builddir)/$(PKG).tds
 UPDATE = `which dtx-update` || true  # TODO: generalise
 
 # these files end up in the CTAN directory:
+
 PKGSOURCE = $(PKG).dtx $(TBL) Makefile
 DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL) $(SYM).pdf
 CTANFILES = $(PKGSOURCE)  $(DOC)  $(testdir)
@@ -111,9 +114,6 @@ clean:
 	rm -rf $(builddir)
 	rm -f $(PKG).zip $(PKG).pdf $(SUITE).pdf
 
-$(PKG).pdf: $(builddir)/$(PKG).pdf
-	cp $<  $@
-
 all: clean doc ctan
 
 #### BUILD FILES
@@ -121,16 +121,12 @@ all: clean doc ctan
 $(builddir)/$(PKG).dtx: $(PKG).dtx
 	mkdir -p $(builddir)
 	$(UPDATE)
-	cp -f  $<  $@
+	$(COPY)  $<  $@
 
 $(builddir)/$(PKG).sty: $(builddir)/$(PKG).dtx
 	echo "Updating $@"
 	cd $(builddir); \
 	tex $(PKG).dtx > /dev/null ;
-
-$(builddir)/unicode-math-table.tex: unicode-math-table.tex
-	echo "Updating $@"
-	cp -f  $<  $@
 
 $(builddir)/$(PKG).pdf:  $(builddir)/$(PKG).dtx $(BUILDSOURCE)
 	cd $(builddir); \
@@ -144,22 +140,14 @@ $(builddir)/$(SYM).pdf:  $(builddir)/$(SYM).ltx
 	xelatex $(SYM).ltx;
 
 $(builddir)/%.ltx: $(testdir)/%.ltx
-	cp -f  $<  $@
+	$(COPY)  $<  $@
 
-$(builddir)/README: README.markdown
-	cp -f  $< $@
+$(builddir)/%: %
+	$(COPY)  $< $@
 
-$(builddir)/Makefile: Makefile
-	cp -f  $< $@
+$(builddir)/README: $(builddir)/README.markdown
+	mv -f  $<  $@
 
-$(builddir)/$(XMPL): $(XMPL)
-	cp -f  $< $@
-
-$(builddir)/$(SYM).ltx: $(SYM).ltx
-	cp -f  $< $@
-
-$(builddir)/$(testdir): $(testdir)
-	cp -rf $< $@
 
 # Test suite PDF
 
@@ -167,16 +155,13 @@ $(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE) $(builddir)/$(t
 	cd $(builddir); \
 	xelatex $(SUITE).ltx
 
-$(builddir)/$(SUITE).ltx: $(SUITE).ltx
-	cp -f  $< $@
-
 # (these are $(BUILDSUITE):)
 
 $(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
-	cp -f  $<  $@
+	$(COPY)  $<  $@
 
 $(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
-	cp -f  $<  $@
+	$(COPY)  $<  $@
 
 
 ##### CTAN INSTALLATION #####
@@ -184,7 +169,7 @@ $(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
 tds: $(builddir)/$(PKG).tds.zip
 
 $(builddir)/$(PKG).tds.zip: $(tds)/$(PKG).tds.zip
-	cp -f $< $@
+	$(COPY) $< $@
 
 $(tds)/$(PKG).tds.zip: $(TDSFILES)
 	cd $(tds); \
@@ -200,10 +185,10 @@ $(tds)/doc/latex/$(PKG)/% \
 $(tds)/tex/latex/$(PKG)/% \
 $(tds)/source/latex/$(PKG)/% : $(builddir)/%
 	mkdir -p $(shell dirname $@)
-	cp -f  $< $@
+	$(COPY)  $< $@
 
 $(tds)/source/latex/$(PKG)/$(testdir):
-	cp -rf $(testdir)  $(tds)/source/latex/$(PKG)/$(testdir)
+	$(COPY) $(testdir)  $(tds)/source/latex/$(PKG)/$(testdir)
 
 ##### LOCAL TEXMF INSTALLATION #####
 
@@ -213,7 +198,7 @@ TEXMFLOCAL=$(shell kpsewhich --var-value TEXMFLOCAL)
 install: $(TDSFILES)
 	if test -n "$(TEXMFHOME)" ; then \
 		echo "Installing in '$(TEXMFHOME)'."; \
-		cp -rf  $(tds)/  $(TEXMFHOME); \
+		$(COPY)  $(tds)/  $(TEXMFHOME); \
 	else \
 		echo "Cannot locate your home texmf tree. Specify manually with\n\n    make install TEXMFHOME=/path/to/texmf\n" ; \
 		false ; \
@@ -222,7 +207,7 @@ install: $(TDSFILES)
 install-sys: $(TDSFILES)
 	if test -n "$(TEXMFLOCAL)" ; then \
 		echo "Installing in '$(TEXMFLOCAL)'."; \
-		cp -rf  $(tds)/  $(TEXMFLOCAL); \
+		$(COPY)  $(tds)/  $(TEXMFLOCAL); \
 	else \
 		echo "Cannot locate your system-wide local texmf tree. Specify manually with\n\n    make install TEXMFLOCAL=/path/to/texmf\n" ; \
 		false ; \
@@ -238,7 +223,7 @@ xfile: $(F)  $(BUILDSOURCE)
 	  false ; \
 	fi
 	echo Typesetting $(F):
-	cp -f $(F) $(builddir)/$(F)
+	$(COPY) $(F) $(builddir)/$(F)
 	cd $(builddir); xelatex $(F)
 
 lfile: $(F)  $(BUILDSOURCE)
@@ -247,7 +232,7 @@ lfile: $(F)  $(BUILDSOURCE)
 	  false ; \
 	fi
 	echo Typesetting $(F):
-	cp -f $(F) $(builddir)/$(F)
+	$(COPY) $(F) $(builddir)/$(F)
 	cd $(builddir); lualatex $(F)
 
 
@@ -295,5 +280,5 @@ lonelytest = $(addprefix $(builddir)/,$(addsuffix .test.png,$(lonelystub)))
 initest: $(lonelypath)
 
 $(lonelypath): $(lonelytest)
-	cp  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.png/.test.png/`  $@
+	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.png/.test.png/`  $@
 
