@@ -14,13 +14,14 @@ help:
 	echo '                  ctan  -  generate archive for CTAN'
 	echo '                   doc  -  compile documentation inside build/'
 	echo '                 clean  -  remove build directory and compiled files'
+	echo '                   all  -  clean & doc & ctan'
 	echo ' '
 	echo '               install  -  install the package into your home texmf tree'
 	echo '           install-sys  -  install the package into the system-wide texmf tree'
 	echo '                           (may require administration privileges)'
 	echo ' install TEXMF=<texmf>  -  install the package into the path <texmf>'
 	echo ' '
-	echo '                  test  -  run the test suite'
+	echo '                 check  -  run the test suite'
 	echo '               initest  -  initialise any new tests'
 	echo ' '
 	echo '         xfile F=<abc>  -  compile file <abc> with XeLaTeX'
@@ -58,7 +59,7 @@ UPDATE = `which dtx-update` || true  # TODO: generalise
 # these files end up in the CTAN directory:
 PKGSOURCE = $(PKG).dtx $(TBL) Makefile
 DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL) $(SYM).pdf
-CTANFILES = $(PKGSOURCE)  $(DOC)  ../$(testdir)
+CTANFILES = $(PKGSOURCE)  $(DOC)  $(testdir)
 BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
 BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
@@ -113,9 +114,7 @@ clean:
 $(PKG).pdf: $(builddir)/$(PKG).pdf
 	cp $<  $@
 
-$(SUITE).pdf: $(builddir)/$(SUITE).pdf
-	cp $<  $@
-
+all: clean doc ctan
 
 #### BUILD FILES
 
@@ -144,15 +143,6 @@ $(builddir)/$(SYM).pdf:  $(builddir)/$(SYM).ltx
 	xelatex $(SYM).ltx && \
 	xelatex $(SYM).ltx;
 
-$(builddir)/$(SUITE).pdf: $(SUITE).ltx $(BUILDSUITE)
-	xelatex -output-directory=$(builddir) $<
-
-$(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
-	cp -f  $<  $@
-
-$(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
-	cp -f  $<  $@
-
 $(builddir)/%.ltx: $(testdir)/%.ltx
 	cp -f  $<  $@
 
@@ -162,23 +152,43 @@ $(builddir)/README: README.markdown
 $(builddir)/Makefile: Makefile
 	cp -f  $< $@
 
-$(builddir)/$(SUITE).ltx: $(SUITE).ltx
-	cp -f  $< $@
-
 $(builddir)/$(XMPL): $(XMPL)
 	cp -f  $< $@
 
 $(builddir)/$(SYM).ltx: $(SYM).ltx
 	cp -f  $< $@
 
+$(builddir)/$(testdir): $(testdir)
+	cp -rf $< $@
+
+# Test suite PDF
+
+$(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE) $(builddir)/$(testdir)
+	cd $(builddir); \
+	xelatex $(SUITE).ltx
+
+$(builddir)/$(SUITE).ltx: $(SUITE).ltx
+	cp -f  $< $@
+
+# (these are $(BUILDSUITE):)
+
+$(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
+	cp -f  $<  $@
+
+$(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
+	cp -f  $<  $@
+
 
 ##### CTAN INSTALLATION #####
 
-../$(testdir):
+tds: $(builddir)/$(PKG).tds.zip
 
-tds: $(TDSFILES)
-	cd $(builddir); \
-	zip -r $(PKG).tds.zip $(PKG).tds -x *.DS_Store -x *.safe.png
+$(builddir)/$(PKG).tds.zip: $(tds)/$(PKG).tds.zip
+	cp -f $< $@
+
+$(tds)/$(PKG).tds.zip: $(TDSFILES)
+	cd $(tds); \
+	zip -r $(PKG).tds.zip ./* -x *.DS_Store -x *.safe.png
 
 ctan: $(BUILDCTAN) tds
 	cd $(builddir); \
@@ -248,7 +258,9 @@ lfile: $(F)  $(BUILDSOURCE)
 
 #### All tests ####
 
-test: $(BUILDFILES) $(BUILDTESTTARGET)
+test: check # I changed the name of this guy
+
+check: $(BUILDFILES) $(BUILDTESTTARGET)
 	cd $(testdir); \
 	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
 
