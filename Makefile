@@ -35,7 +35,7 @@ help:
 	echo 'test file against this original and warn against any changes.'
 	echo '`make build/umtest****.diff.png` will check a single test.'
 	echo ' '
-	echo 'I recommend `make -j4 test` or thereabouts to parallelise'
+	echo 'I recommend `make -j4 check` or thereabouts to parallelise'
 	echo 'the testing.'
 
 
