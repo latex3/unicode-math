@@ -27,7 +27,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<package>\ProvidesPackage{unicode-math}
 %<*package>
-  [2010/06/03 v0.5 Unicode maths in XeLaTeX]
+  [2010/06/05 v0.5 Unicode maths in XeLaTeX]
 %</package>
 %<*internal>
 \documentclass{ltxdoc}
@@ -528,12 +528,12 @@ This work is "author-maintained" by Will Robertson.
 %     \multicolumn{2}{@{}l}{Description} & Glyph
 %      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
 %     Upright & Serif & $\mathup\nabla$ \\
-%     & Bold serif & $\mathup\mbfnabla$ \\
-%     & Bold sans & \fontspec{STIXGeneral-BoldItalic}\char"1D76F \\
+%     & Bold serif & $\mathbfup\nabla$ \\
+%     & Bold sans & \umfont\char"1D76F \\
 %       \cmidrule(lr){1-2}\cmidrule(lr){3-3}
 %     Italic & Serif & $\mathit\nabla$ \\
 %     & Bold serif & $\mathbfit\nabla$ \\
-%     & Bold sans  & \fontspec{STIXGeneral-Bold}\char"1D7A9 \\
+%     & Bold sans  & \umfont\char"1D7A9 \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -839,10 +839,11 @@ This work is "author-maintained" by Will Robertson.
 % as input characters to abbreviate common fractions.
 %
 % \centerline{\fontspec{Calibri}
-% ¼ ½ ¾  ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞}
+% ¼ ½ ¾  ↉ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞}
 %
 % For example, instead of writing `|\tfrac12 x|', it's more readable to have
-% `|½x|' in the source instead.
+% `|½x|' in the source instead. (There are three missing glyphs above for
+% $0/3$, 1/7$, $1/9$, and $1/10$; I don't have a font that contains them.)
 %
 % If the \cs{tfrac} command exists (i.e., if \pkg{amsmath} is loaded or
 % you have specially defined \cs{tfrac} for this purpose), it will be used
@@ -898,9 +899,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Triangles}
 %
 % While there aren't as many different sizes of triangle as there are circle,
-% there's some important distinctions to make between a few similar characters.
-% Namely, $\triangle$ and $\vartriangle$ and $\increment$ and $\mathup\Delta$.
-% See \tabref{uptriangles} for the full summary.
+% there's some important distinctions to make between a few similar characters. See \tabref{uptriangles} for the full summary.
 %
 % These triangles all have different intended meanings. Note for backwards
 % compatibility with \TeX, \unichar{25B3} has \emph{two} different mappings
@@ -908,7 +907,7 @@ This work is "author-maintained" by Will Robertson.
 % whereas \cs{triangle} is intended to be used as a letter-like symbol.
 %
 % But you're better off if you're using the latter form to indicate an
-% increment to use the glyph intended for this purpose: $\increment x$.
+% increment to use the glyph intended for this purpose, \unichar{2206}: $\increment x$.
 %
 % Finally, given that $\triangle$ and $\increment$ are provided for you
 % already, it is better off to only use upright Greek Delta $\Delta$ if you're
@@ -4504,6 +4503,7 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Npn \um_setup_active_frac: {
   \group_begin:
+  \um_define_active_frac:Nw  ^^^^2189  0/3
   \um_define_active_frac:Nw  ^^^^2152  1/{10}
   \um_define_active_frac:Nw  ^^^^2151  1/9
   \um_define_active_frac:Nw  ^^^^215b  1/8
@@ -5014,7 +5014,7 @@ This work is "author-maintained" by Will Robertson.
 \usepackage[svgnames]{xcolor}
 \usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
 \setcounter{LTchunksize}{100}
-\usepackage[slash-delimiter=frac]{unicode-math}
+\usepackage[slash-delimiter=frac,nabla=literal]{unicode-math}
 \usepackage{metalogo}
 
 %\usepackage[rm,small]{titlesec}
@@ -5025,7 +5025,7 @@ This work is "author-maintained" by Will Robertson.
 \setmathfont{Cambria Math}
 \newfontface\umfont{STIXGeneral}
 
-\usepackage{hyperref}
+\usepackage{hypdoc}
 
 \linespread{1.069}      % A bit more space between lines
 \frenchspacing         % Remove ugly extra space after punctuation
