@@ -27,7 +27,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<package>\ProvidesPackage{unicode-math}
 %<*package>
-  [2010/06/05 v0.5 Unicode maths in XeLaTeX]
+  [2010/06/07 v0.5 Unicode maths in XeLaTeX]
 %</package>
 %<*internal>
 \documentclass{ltxdoc}
@@ -978,6 +978,7 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{xparse}[2009/08/31]
 \RequirePackage{l3keys2e}
 \RequirePackage{fontspec}[2010/05/18]
+\RequirePackage{catchfile}
 %    \end{macrocode}
 %
 % Start using \LaTeX3 --- finally!
@@ -2173,14 +2174,14 @@ This work is "author-maintained" by Will Robertson.
 % If we're defining the full Unicode math repetoire, then we skip all
 % the parsing processing needed if we're only defining a subset.
 % \begin{itemize}
-% \item Math symbols are defined with \cmd\UnicodeMathSymbol; see \secref{mathsymbol}
+% \item Math symbols are defined with \cmd\_um_sym:nnn; see \secref{mathsymbol}
 % for the individual definitions
 % \end{itemize}
 %    \begin{macrocode}
   \bool_if:NTF \l_um_init_bool {
     \tl_set:Nn \um_symfont_tl {um_allsym}
     \msg_trace:nnx {unicode-math} {default-math-font} {#2}
-    \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_noparse:nnnn
+    \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_noparse:nnn
     \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
@@ -2188,7 +2189,7 @@ This work is "author-maintained" by Will Robertson.
   }{
     \int_incr:N \g_um_fam_int
     \tl_set:Nx \um_symfont_tl {um_fam\int_use:N\g_um_fam_int}
-    \cs_set_eq:NN \UnicodeMathSymbol \um_process_symbol_parse:nnnn
+    \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_parse:nnn
     \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_parse:Nnn
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
@@ -2204,8 +2205,7 @@ This work is "author-maintained" by Will Robertson.
 % the source to |unicode-math.tex| which is used to create
 % |unicode-math-table.tex|.
 %    \begin{macrocode}
-  \@input{unicode-math-table.tex}
-  \cs_set_eq:NN \UnicodeMathSymbol \use_none:nnnn
+  \um_input_math_symbol_table:
 %    \end{macrocode}
 % Finally,
 % \begin{itemize}
@@ -2261,20 +2261,20 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Functions for setting up symbols with mathcodes}
 % \seclabel{mathsymbol}
 %
-% \begin{macro}{\um_process_symbol_noparse:nnnn}
-% \begin{macro}{\um_process_symbol_parse:nnnn}
+% \begin{macro}{\um_process_symbol_noparse:nnn}
+% \begin{macro}{\um_process_symbol_parse:nnn}
 % If the \feat{range} font feature has been used, then only
 % a subset of the Unicode glyphs are to be defined.
 % See \secref{rangeproc} for the code that enables this.
 %    \begin{macrocode}
-\cs_set:Npn \um_process_symbol_noparse:nnnn #1#2#3#4 {
+\cs_set:Npn \um_process_symbol_noparse:nnn #1#2#3 {
   \um_set_mathsymbol:nNNn {\um_symfont_tl} #2#3{#1}
 }
 %    \end{macrocode}
 %    \begin{macrocode}
-\cs_set:Npn \um_process_symbol_parse:nnnn #1#2#3#4 {
+\cs_set:Npn \um_process_symbol_parse:nnn #1#2#3 {
   \um@parse@term{#1}{#2}{#3}{
-    \um_process_symbol_noparse:nnnn{#1}{#2}{#3}{#4}
+    \um_process_symbol_noparse:nnn {#1}{#2}{#3}
   }
 }
 %    \end{macrocode}
@@ -2456,7 +2456,7 @@ This work is "author-maintained" by Will Robertson.
 % However, the limits aren't set automatically; that is, we want to define,
 % a la Plain \TeX\ \etc, |\def\int{\intop\nolimits}|, so there needs to be a
 % transformation from \cmd\int\ to \cmd\intop\ during the expansion of
-% \cmd\UnicodeMathSymbol\ in the appropriate contexts.
+% \cmd\_um_sym:nnn\ in the appropriate contexts.
 %
 % \begin{macro}{\l_um_nolimits_tl}
 % This macro is a sequence containing those maths operators that require a
@@ -3924,6 +3924,32 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
+% \section{A token list to contain the data of the math table}
+%
+% Instead of \cmd\input-ing the unicode math table every time we
+% want to re-read its data, we save it within a macro. This has two
+% advantages: 1.~it should be slightly faster, at the expense of memory;
+% 2.~we don't need to worry about catcodes later, since they're frozen
+% at this point.
+%
+%    \begin{macrocode}
+\CatchFileEdef \g_um_mathtable_tl {unicode-math-table.tex} {
+  \cs_set:Npn \UnicodeMathSymbol #1#2#3#4 {
+    \exp_not:n {\_um_sym:nnn{#1}{#2}{#3}}
+  }
+  \char_make_other:N \" % just in case
+}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\um_input_math_symbol_table:}
+% This function simply expands to the token list containing all the data.
+%    \begin{macrocode}
+\cs_new:Npn \um_input_math_symbol_table: {\g_um_mathtable_tl}
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \section{Definitions of the active math characters}
 %
 % Here we define every Unicode math codepoint an equivalent macro name.
@@ -3931,7 +3957,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % \begin{macro}{\um@scancharlet}
 % \begin{macro}{\um@scanactivedef}
-% We need to do some trickery to transform the |\UnicodeMathSymbol| argument
+% We need to do some trickery to transform the |\_um_sym:nnn| argument
 % |"ABCDEF| into the \XeTeX\ `caret input' form |^^^^^abcdef|. It is \emph{very important}
 % that the argument has five characters. Otherwise we need to change the number of |^| chars.
 %
@@ -3972,14 +3998,16 @@ This work is "author-maintained" by Will Robertson.
 % \end{macro}
 % \end{macro}
 %
-% Now give \cmd\UnicodeMathSymbol\ a definition in terms of \cmd\um@scancharlet\
+% Now give \cmd\_um_sym:nnn\ a definition in terms of \cmd\um@scancharlet\
 % and we're good to go.
-% Make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
+%
+% Ensure catcodes are appropriate;
+% make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
 \AtBeginDocument{
   \group_begin:
-    \char_make_math_superscript:N\^
-    \def\UnicodeMathSymbol#1#2#3#4{
+    \char_make_math_superscript:N \^
+    \cs_set:Npn \_um_sym:nnn #1#2#3 {
       \bool_if:nF { \cs_if_eq_p:NN #3 \mathaccent ||
                     \cs_if_eq_p:NN #3 \mathopen   ||
                     \cs_if_eq_p:NN #3 \mathclose } {
@@ -3987,7 +4015,7 @@ This work is "author-maintained" by Will Robertson.
       }
     }
     \char_make_other:N \#
-    \@input{unicode-math-table.tex}
+    \um_input_math_symbol_table:
   \group_end:
 }
 %    \end{macrocode}
