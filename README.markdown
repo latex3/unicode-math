@@ -49,7 +49,7 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-As well as running XeTeX, of course, this package requires recent versions
+As well as running XeTeX or LuaTeX this package requires recent versions
 of the fontspec, expl3 and xpackages packages. If you're using TeX Live 2010
 then there'll be no problems.
 
