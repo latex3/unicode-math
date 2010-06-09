@@ -2630,6 +2630,9 @@ This work is "author-maintained" by Will Robertson.
 % |tmpa|: math style (\eg, |\mathscr|)\\
 % |tmpb|: alphabets (\eg, |Latin|)\\
 % |tmpc|: remap style (\eg, |\mathup|). Defaults to |tmpa|.
+%
+% The remap style can also be |\mathcal->stixcal|, which I marginally prefer
+% in the general case.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
   \KV_remove_surrounding_spaces:nw {\tl_set:Nf\l_um_tmpa_tl} #1 \q_nil
@@ -2650,7 +2653,9 @@ This work is "author-maintained" by Will Robertson.
 }
 \cs_set:Npn \um_split_arrow:w #1->#2 \q_nil {
   \tl_set:Nn \l_um_tmpa_tl {#1}
-  \tl_set:Nn \l_um_tmpc_tl {#2}
+  \tl_if_single:nTF {#2}
+    { \tl_set:Nn \l_um_tmpc_tl {#2} }
+    { \exp_args:NNc \tl_set:Nn \l_um_tmpc_tl {math#2} }
 }
 \cs_set:Npn \um_split_slash:w #1/#2 \q_nil {
   \tl_set:Nn \l_um_tmpa_tl {#1}
