@@ -2640,7 +2640,7 @@ This work is "author-maintained" by Will Robertson.
     \exp_after:wN \um_split_slash:w \l_um_tmpa_tl \q_nil
   }
   \tl_if_empty:NT \l_um_tmpc_tl { \tl_set_eq:NN \l_um_tmpc_tl \l_um_tmpa_tl }
-  \seq_if_in:NVTF \g_um_mathalph_seq \l_um_tmpa_tl {
+  \seq_if_in:NVTF \g_um_mathstyles_seq \l_um_tmpa_tl {
     \prg_return_true:
   }{
     \prg_return_false:
@@ -2876,10 +2876,10 @@ This work is "author-maintained" by Will Robertson.
 % we call `bold' the math style |bf| and within it there are upper and lower
 % case Greek and Roman alphabets and Arabic numerals.
 %
-% \begin{macro}{\g_um_mathalph_seq}
+% \begin{macro}{\g_um_mathstyles_seq}
 % This is every math style known to \pkg{unicode-math}.
 %    \begin{macrocode}
-\seq_new:N \g_um_mathalph_seq
+\seq_new:N \g_um_mathstyles_seq
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -2892,7 +2892,7 @@ This work is "author-maintained" by Will Robertson.
     \mathbfscr\mathbffrak
     \mathbfsf\mathbfsfup\mathbfsfit
   }{
-    \seq_put_right:Nn \g_um_mathalph_seq {#1}
+    \seq_put_right:Nn \g_um_mathstyles_seq {#1}
     \um_prepare_mathstyle:f {\exp_after:wN \use_none:nnnnn \token_to_str:N #1}
   }
 }
