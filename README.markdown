@@ -17,9 +17,9 @@ Unicode maths is currently supported to one degree or another by the fonts
 
  - [Cambria Math][CM] (Microsoft),
  - [Asana Math][AM] (Apostolos Syropolous),
- - [Neo Euler][NE] (Khalid Hosny),
+ - [Neo Euler][NE] (Khaled Hosny),
  - [STIX][SM] (STI Pub), and
- - [XITS Math][XM] (Khalid Hosny).
+ - [XITS Math][XM] (Khaled Hosny).
 
 With the exception of Cambria Math, which is proprietry, the fonts above
 are all freely available and released under the [Open Font Licence][OFL].
