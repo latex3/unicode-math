@@ -220,7 +220,7 @@ install-sys: $(TDSFILES)
 ##### USEFUL FOR TEST FILES #####
 
 xfile: $(F)  $(BUILDSOURCE)
-	if [ "$(F)" = "" ] ; then \
+	if test -z "$(F)" ; then \
 	  echo "Need a filename!\nE.g.  \`make xfile F=test.ltx\`" ; \
 	  false ; \
 	fi
@@ -229,7 +229,7 @@ xfile: $(F)  $(BUILDSOURCE)
 	cd $(builddir); xelatex $(F)
 
 lfile: $(F)  $(BUILDSOURCE)
-	if [ "$(F)" = "" ] ; then \
+	if test -z "$(F)" ; then \
 	  echo "Need a filename!\nE.g.  \`make lfile F=test.ltx\`" ; \
 	  false ; \
 	fi
@@ -244,8 +244,6 @@ lfile: $(F)  $(BUILDSOURCE)
 
 
 #### All tests ####
-
-test: check # I changed the name of this guy
 
 check: $(BUILDFILES) $(BUILDTESTTARGET)
 	cd $(testdir); \
@@ -279,12 +277,11 @@ $(builddir)/L%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/L%.ltx
 #### Generating new tests ####
 
 lonelystub = $(shell cd $(testdir); ls | egrep '(.*\.ltx)|(.*\.safe.pdf)' | cut -d . -f 1 | uniq -u)
-lonelyfile = $(addsuffix .safe.pdf,$(lonelystub))
-lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
-lonelytest = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
+lonelytest = $(addprefix $(testdir)/,$(addsuffix .safe.pdf,$(lonelystub)))
+lonelytesttarget = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
 
-initest: $(lonelypath)
+initest: $(lonelytest)
 
-$(lonelypath): $(lonelytest)
+$(lonelytest): $(lonelytesttarget)
 	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.pdf/.pdf/`  $@
 
