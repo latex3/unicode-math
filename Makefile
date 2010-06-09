@@ -27,13 +27,13 @@ help:
 	echo '         xfile F=<abc>  -  compile file <abc> with XeLaTeX'
 	echo '         lfile F=<abc>  -  compile file <abc> with LuaLaTeX'
 	echo ' '
-	echo 'To add a new test, add a file called umtest****.ltx to'
+	echo 'To add a new test, add a file called X****.ltx to'
 	echo 'directory testfiles/,  run `make initest` and ensure'
-	echo 'that the output umtest****.safe.png is correct.'
+	echo 'that the output X****.safe.pdf is correct.'
 	echo ' '
 	echo '`make test` will then compare future compilations of the'
 	echo 'test file against this original and warn against any changes.'
-	echo '`make build/umtest****.diff.png` will check a single test.'
+	echo '`make build/X****.diff.pdf` will check a single test.'
 	echo ' '
 	echo 'I recommend `make -j4 check` or thereabouts to parallelise'
 	echo 'the testing.'
@@ -70,15 +70,14 @@ BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
 LTXSOURCE = $(PKG).sty $(TBL)
 
-SUITESOURCE = \
-  $(testdir)/umtest-preamble.tex \
-  $(testdir)/umtest-suite.tex
+BUILDSUITE = \
+  $(builddir)/umtest-preamble.tex \
+  $(builddir)/umtest-suite-X.tex \
+  $(builddir)/umtest-suite-L.tex
 
-SWEETSAUCE = ginger and chilli
-
-TESTOUT = $(shell ls $(testdir)/umtest*.safe.png)
-BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.png,.ltx,$(TESTOUT)))
-BUILDTESTTARGET = $(subst $(testdir)/,$(builddir)/,$(subst .safe.png,.diff.png,$(TESTOUT)))
+TESTOUT = $(shell ls $(testdir)/*.safe.pdf)
+BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.ltx,$(TESTOUT)))
+BUILDTESTTARGET = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.diff.pdf,$(TESTOUT)))
 
 BUILDSOURCE = $(addprefix $(builddir)/,$(LTXSOURCE))
 BUILDSUITE  = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
@@ -160,7 +159,10 @@ $(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE) $(builddir)/$(t
 $(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
 	$(COPY)  $<  $@
 
-$(builddir)/umtest-suite.tex: $(testdir)/umtest-suite.tex
+$(builddir)/umtest-suite-X.tex: $(testdir)/umtest-suite-X.tex
+	$(COPY)  $<  $@
+
+$(builddir)/umtest-suite-L.tex: $(testdir)/umtest-suite-L.tex
 	$(COPY)  $<  $@
 
 
@@ -173,13 +175,13 @@ $(builddir)/$(PKG).tds.zip: $(tds)/$(PKG).tds.zip
 
 $(tds)/$(PKG).tds.zip: $(TDSFILES)
 	cd $(tds); \
-	zip -r $(PKG).tds.zip ./* -x *.DS_Store -x *.safe.png
+	zip -r $(PKG).tds.zip ./* -x *.DS_Store -x *.safe.pdf
 
 ctan: $(BUILDCTAN) tds
 	cd $(builddir); \
 	zip -r \
 	  ../$(PKG).zip  $(CTANFILES)  $(PKG).tds.zip \
-	  -x *.DS_Store -x *.safe.png
+	  -x *.DS_Store -x *.safe.pdf
 
 $(tds)/doc/latex/$(PKG)/% \
 $(tds)/tex/latex/$(PKG)/% \
@@ -247,38 +249,42 @@ test: check # I changed the name of this guy
 
 check: $(BUILDFILES) $(BUILDTESTTARGET)
 	cd $(testdir); \
-	ls umtest*.ltx | sed -e 's/umtest\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite.tex
+	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex; \
+	ls L*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex;
 
 
 #### Each step of the process ####
 
-$(builddir)/%.diff.png: $(builddir)/%.test.png
-	echo '$*: Comparing with good PNG.'
-	if [ "${shell compare -metric AE $(builddir)/$*.test.png $(testdir)/$*.safe.png $(builddir)/$*.diff.png}" = "0" ] ; then \
+COMPARE_OPTS = -metric AE -density 300x300
+PIXEL_TOLERANCE = 1
+
+$(builddir)/%.diff.pdf: $(builddir)/%.pdf
+	echo '$*: Comparing with reference PDF.'
+	if [ ${shell compare $(COMPARE_OPTS) $(builddir)/$*.pdf $(testdir)/$*.safe.pdf $(builddir)/$*.diff.pdf  2>&1} -le $(PIXEL_TOLERANCE) ] ; then \
 	  echo '$*: Test passed.' ; \
 	else \
 	  echo '$*: Test failed.' ; \
 	  false ; \
 	fi
 
-$(builddir)/%.test.png: $(builddir)/%.pdf
-	echo '$*: Converting PDF to PNG.'
-	convert -density 300x300  $<  $(builddir)/$*.test.png
+$(builddir)/X%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/X%.ltx
+	echo 'X$*: Generating PDF output from XeLaTeX.'
+	cd $(builddir); xelatex -interaction=batchmode X$*.ltx > /dev/null
 
-$(builddir)/umtest%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/umtest%.ltx
-	echo 'umtest$*: Generating PDF output.'
-	cd $(builddir); xelatex -interaction=batchmode umtest$*.ltx > /dev/null
+$(builddir)/L%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/L%.ltx
+	echo 'L$*: Generating PDF output from LuaLaTeX.'
+	cd $(builddir); lualatex -interaction=batchmode L$*.ltx > /dev/null
 
 
 #### Generating new tests ####
 
-lonelystub = $(shell cd $(testdir); ls | egrep 'umtest(.*\.ltx)|(.*\.safe.png)' | cut -d . -f 1 | uniq -u)
-lonelyfile = $(addsuffix .safe.png,$(lonelystub))
+lonelystub = $(shell cd $(testdir); ls | egrep '(.*\.ltx)|(.*\.safe.pdf)' | cut -d . -f 1 | uniq -u)
+lonelyfile = $(addsuffix .safe.pdf,$(lonelystub))
 lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
-lonelytest = $(addprefix $(builddir)/,$(addsuffix .test.png,$(lonelystub)))
+lonelytest = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
 
 initest: $(lonelypath)
 
 $(lonelypath): $(lonelytest)
-	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.png/.test.png/`  $@
+	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.pdf/.pdf/`  $@
 
