@@ -17,7 +17,11 @@ This work is "author-maintained" by Will Robertson.
 \endpreamble
 \nopostamble
 \askforoverwritefalse
-\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{package}}}
+\generate{\file{unicode-math.sty}{
+  \from{unicode-math.dtx}{preamble}
+  \from{unicode-math.dtx}{msg}
+  \from{unicode-math.dtx}{package,stix}
+}}
 \nopreamble
 \def\tempa{plain}
 \ifx\tempa\fmtname\endgroup\expandafter\bye\fi
@@ -25,10 +29,10 @@ This work is "author-maintained" by Will Robertson.
 \endgroup
 \ProvidesFile{unicode-math.dtx}
 %</internal>
-%<package>\ProvidesPackage{unicode-math}
-%<*package>
-  [2010/06/07 v0.5 Unicode maths in XeLaTeX]
-%</package>
+%<preamble>\ProvidesPackage{unicode-math}
+%<*preamble>
+  [2010/06/09 v0.5 Unicode maths in XeLaTeX]
+%</preamble>
 %<*internal>
 \documentclass{ltxdoc}
 \usepackage{dtx-style}
@@ -956,9 +960,8 @@ This work is "author-maintained" by Will Robertson.
 % \StopEventually{}
 %
 % \part{The \pkg{unicode-math} package}
-%\iffalse
-%<*package>
-%\fi
+%
+%<*preamble>
 %
 % \section{Things we need}
 %
@@ -1102,6 +1105,17 @@ This work is "author-maintained" by Will Robertson.
 %
 %    \begin{macrocode}
 \cs_generate_variant:Nn \fontspec_select:nn {x}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</preamble>
+%    \end{macrocode}
+%
+% (Error messages and warning definitions go here from the |msg| chunk
+%  defined in \secref[vref]{codemsg}.)
+%
+%    \begin{macrocode}
+%<*package>
 %    \end{macrocode}
 %
 % \subsection{Alphabet Unicode positions}
@@ -4719,8 +4733,23 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
 %
 % \section{Error messages}
+% \seclabel{codemsg}
+%
+% These are defined at the beginning of the package, but we leave their
+% definition until now in the source to keep them out of the way.
+%
+%    \begin{macrocode}
+%<*msg>
+%    \end{macrocode}
 %
 % Wrapper functions:
 %    \begin{macrocode}
@@ -4766,15 +4795,11 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
-% The end.
 %    \begin{macrocode}
-\ExplSyntaxOff
-\errorcontextlines=999
+%</msg>
 %    \end{macrocode}
 %
-%\iffalse
-%</package>
-%\fi
+% The end.
 %
 %
 % \section{\STIX\ table data extraction}\label{part:awk}
