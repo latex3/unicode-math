@@ -254,7 +254,7 @@ check: $(BUILDFILES) $(BUILDTESTTARGET)
 
 $(builddir)/%.diff.png: $(builddir)/%.test.png
 	echo '$*: Comparing with good PNG.'
-	if [ "${shell compare -metric RMSE $(builddir)/$*.test.png $(testdir)/$*.safe.png $(builddir)/$*.diff.png | grep 'dB'}" = "0 dB" ] ; then \
+	if [ "${shell compare -metric AE $(builddir)/$*.test.png $(testdir)/$*.safe.png $(builddir)/$*.diff.png}" = "0" ] ; then \
 	  echo '$*: Test passed.' ; \
 	else \
 	  echo '$*: Test failed.' ; \
