@@ -2876,35 +2876,73 @@ This work is "author-maintained" by Will Robertson.
 % \item Otherwise, use the \ascii\ letters instead.
 % \end{itemize}
 %
-% \subsection{Defining the math style macros}
+% \subsection{Initialising math styles}
 %
-% We call the different shapes that a math alphabet can be a `math style'.
-% Note that different alphabets can exist within the same math style. E.g.,
-% we call `bold' the math style |bf| and within it there are upper and lower
-% case Greek and Roman alphabets and Arabic numerals.
+% \begin{macro}{\um_new_mathstyle:N}
+% This function defines a new command like \cs{mathfrak}.
+%    \begin{macrocode}
+\cs_new:Npn \um_new_mathstyle:N #1 {
+  \um_prepare_mathstyle:f {\exp_after:wN \use_none:nnnnn \token_to_str:N #1}
+  \seq_put_right:Nn \g_um_mathstyles_seq {#1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\g_um_default_mathalph_seq}
+% This sequence stores the alphabets in each math style.
+%    \begin{macrocode}
+\seq_new:N \g_um_default_mathalph_seq
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\g_um_mathstyles_seq}
 % This is every math style known to \pkg{unicode-math}.
 %    \begin{macrocode}
 \seq_new:N \g_um_mathstyles_seq
 %    \end{macrocode}
+% \end{macro}
 %
 %    \begin{macrocode}
 \AtEndOfPackage{
-  \tl_map_inline:nn {
-    \mathup\mathit\mathbb\mathbbit
-    \mathscr\mathfrak\mathtt
-    \mathsf\mathsfup\mathsfit
-    \mathbf\mathbfup\mathbfit
-    \mathbfscr\mathbffrak
-    \mathbfsf\mathbfsfup\mathbfsfit
-  }{
-    \seq_put_right:Nn \g_um_mathstyles_seq {#1}
-    \um_prepare_mathstyle:f {\exp_after:wN \use_none:nnnnn \token_to_str:N #1}
-  }
+\clist_map_inline:nn {
+  {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
+  {\mathit    } {latin,Latin,greek,Greek,misc}     {\mathit    }  ,
+  {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
+  {\mathbbit  } {misc}                             {\mathbbit  }  ,
+  {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
+  {\mathcal   } {Latin,num}                        {\mathscr   }  ,
+  {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
+  {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
+  {\mathsfup  } {latin,Latin,num}                  {\mathsfup  }  ,
+  {\mathsfit  } {latin,Latin}                      {\mathsfit  }  ,
+  {\mathbfup  } {latin,Latin,greek,Greek,num,misc} {\mathbfup  }  ,
+  {\mathbfit  } {latin,Latin,greek,Greek,misc}     {\mathbfit  }  ,
+  {\mathbfscr } {latin,Latin}                      {\mathbfscr }  ,
+  {\mathbffrak} {latin,Latin}                      {\mathbffrak}  ,
+  {\mathbfsfup} {latin,Latin,greek,Greek,num,misc} {\mathbfsfup}  ,
+  {\mathbfsfit} {latin,Latin,greek,Greek,misc}     {\mathbfsfit}
+}{
+  \seq_put_right:Nn \g_um_default_mathalph_seq {#1}
+  \exp_after:wN \um_new_mathstyle:N \use_i:nnn #1
 }
 %    \end{macrocode}
-% \end{macro}
+% These are `false' mathstyles that inherit other definitions:
+%    \begin{macrocode}
+\um_new_mathstyle:N \mathsf
+\um_new_mathstyle:N \mathbf
+\um_new_mathstyle:N \mathbfsf
+%    \end{macrocode}
+%    \begin{macrocode}
+}
+%    \end{macrocode}
+%
+%
+% \subsection{Defining the math style macros}
+%
+% We call the different shapes that a math alphabet can be a `math style'.
+% Note that different alphabets can exist within the same math style. E.g.,
+% we call `bold' the math style |bf| and within it there are upper and lower
+% case Greek and Roman alphabets and Arabic numerals.
 %
 % \begin{macro}{\um_prepare_mathstyle:n}
 % \darg{math style name (e.g., \texttt{it} or \texttt{bb})}
@@ -2954,34 +2992,6 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsection{Defining the math alphabets per style}
 %
-% \begin{macro}{\g_um_default_mathalph_seq}
-% This sequence stores the alphabets in each math style.
-%    \begin{macrocode}
-\seq_new:N \g_um_default_mathalph_seq
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\clist_map_inline:nn {
-  {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
-  {\mathit    } {latin,Latin,greek,Greek,misc}     {\mathit    }  ,
-  {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
-  {\mathbbit  } {misc}                             {\mathbbit  }  ,
-  {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
-  {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
-  {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
-  {\mathsfup  } {latin,Latin,num}                  {\mathsfup  }  ,
-  {\mathsfit  } {latin,Latin}                      {\mathsfit  }  ,
-  {\mathbfup  } {latin,Latin,greek,Greek,num,misc} {\mathbfup  }  ,
-  {\mathbfit  } {latin,Latin,greek,Greek,misc}     {\mathbfit  }  ,
-  {\mathbfscr } {latin,Latin}                      {\mathbfscr }  ,
-  {\mathbffrak} {latin,Latin}                      {\mathbffrak}  ,
-  {\mathbfsfup} {latin,Latin,greek,Greek,num,misc} {\mathbfsfup}  ,
-  {\mathbfsfit} {latin,Latin,greek,Greek,misc}     {\mathbfsfit}
-}{
-  \seq_put_right:Nn \g_um_default_mathalph_seq {#1}
-}
-%    \end{macrocode}
-% \end{macro}
 %
 % Variables:
 %    \begin{macrocode}
@@ -3469,6 +3479,12 @@ This work is "author-maintained" by Will Robertson.
   \um_set_mathalphabet_pos:Nnnn  \mathscr {e}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {g}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {o}{up,it}{#1}
+}
+\cs_new:Npn \um_config_cal_Latin:n #1 {
+  \um_set_mathalphabet_Latin:Nnn   \mathcal  {up,it}{#1}
+}
+\cs_new:Npn \um_config_cal_num:n #1 {
+  \um_set_mathalphabet_numbers:Nnn \mathcal  {up,it}{#1}
 }
 %    \end{macrocode}
 %
@@ -4606,12 +4622,6 @@ This work is "author-maintained" by Will Robertson.
     \bool_if:NTF \g_um_literal_colon_bool {:} { \mathpunct{:} }
   }
 }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\mathcal}
-%    \begin{macrocode}
-\def\mathcal{\mathscr}
 %    \end{macrocode}
 % \end{macro}
 %
