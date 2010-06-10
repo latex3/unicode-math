@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/06/10 v0.5 Unicode maths in XeLaTeX]
+  [2010/06/12 v0.5 Unicode maths in XeLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -1989,19 +1989,19 @@ This work is "author-maintained" by Will Robertson.
       \tl_if_in:NnTF \l_um_radicals_tl {#2} {
         \cs_gset:cpx {\cs_to_str:N #2 sign} { \um_radical:nn {#1} {#4} }
       }{
-        \um_set_delcode:n {#4}
+        \um_set_delcode:nnn {#1} {#4} {#4}
         \um_set_mathcode:nnn {#4} \mathopen {#1}
         \cs_gset:Npx #2 { \um_delimiter:Nnn \mathopen {#1} {#4} }
       }
     }
     \mathclose {
-      \um_set_delcode:n {#4}
+      \um_set_delcode:nnn {#1} {#4} {#4}
       \um_set_mathcode:nnn {#4} \mathclose {#1}
       \cs_gset:Npx #2 { \um_delimiter:Nnn \mathclose {#1} {#4} }
     }
     \mathfence {
       \um_set_mathcode:nnn {#4} {#3} {#1}
-      \um_set_delcode:n {#4}
+      \um_set_delcode:nnn {#1} {#4} {#4}
       \cs_gset:cpx {l \cs_to_str:N #2} { \um_delimiter:Nnn \mathopen  {#1} {#4} }
       \cs_gset:cpx {r \cs_to_str:N #2} { \um_delimiter:Nnn \mathclose {#1} {#4} }
     }
@@ -2067,6 +2067,7 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\um_radical:nn}
 % \begin{macro}{\um_delimiter:Nnn}
 % \begin{macro}{\um_accent:Nnn}
+% \begin{macro}{\um_set_delcode:nnn}
 % These are all wrappers for the primitive commands that take numerical
 % input only.
 %    \begin{macrocode}
@@ -2091,8 +2092,15 @@ This work is "author-maintained" by Will Robertson.
 \cs_new:Npn \um_accent:Nnn #1#2#3 {
   \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
+\cs_new:Npn \um_set_delcode:nnn #1#2#3 {
+  \Udelcode#2 = \csname sym#1\endcsname #3
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \cs_generate_variant:Nn \um_set_mathchar:NNnn {c}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -2204,6 +2212,7 @@ This work is "author-maintained" by Will Robertson.
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
     \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
+    \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_noparse:nn
   }{
     \int_incr:N \g_um_fam_int
     \tl_set:Nx \um_symfont_tl {um_fam\int_use:N\g_um_fam_int}
@@ -2212,6 +2221,7 @@ This work is "author-maintained" by Will Robertson.
     \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
     \cs_set_eq:NN \um_map_char_single:nn \um_map_char_parse:nn
+    \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_parse:nn
   }
 %    \end{macrocode}
 % Now defined |\um_symfont_tl| as the \LaTeX\ math font to access everything:
@@ -2219,9 +2229,7 @@ This work is "author-maintained" by Will Robertson.
   \DeclareSymbolFont{\um_symfont_tl}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
 %    \end{macrocode}
-% And now we input every single maths char. See File~\ref{part:awk} for
-% the source to |unicode-math.tex| which is used to create
-% |unicode-math-table.tex|.
+% And now we input every single maths char.
 %    \begin{macrocode}
   \um_input_math_symbol_table:
 %    \end{macrocode}
@@ -2369,6 +2377,33 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsubsection{Delimiter codes}
 %
+%
+% \begin{macro}{\um_assign_delcode:nn}
+%: TODO : hook csnames into range feature
+%    \begin{macrocode}
+\cs_new:Npn \um_assign_delcode_noparse:nn #1#2 {
+  \um_set_delcode:nnn \um_symfont_tl {#1} {#2}
+}
+\cs_new:Npn \um_assign_delcode_parse:nn #1#2 {
+  \um@parse@term {#2}{\@nil}{\@nil} {
+    \um_assign_delcode_noparse:nn {#1} {#2}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\um_assign_delcode:n}
+% Shorthand.
+%    \begin{macrocode}
+\cs_new:Npn \um_assign_delcode:n #1 {
+  \um_assign_delcode:nn {#1} {#1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
 % Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
 % The list of vertical arrows may be incomplete.
 % On the other hand, many fonts won't support them all being stretchy.
@@ -2376,56 +2411,43 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\um_setup_delcodes:}
 %    \begin{macrocode}
 \cs_new:Npn \um_setup_delcodes: {
-  \um_set_delcode:nn {`\/}   {\g_um_slash_delimiter_usv}
-  \um_set_delcode:nn {"2044} {\g_um_slash_delimiter_usv} % fracslash
-  \um_set_delcode:nn {"2215} {\g_um_slash_delimiter_usv} % divslash
-  \um_set_delcode:n {"005C} % backslash
-  \um_set_delcode:nn {`\<} {"27E8} % angle brackets with ascii notation
-  \um_set_delcode:nn {`\>} {"27E9} % angle brackets with ascii notation
-  \um_set_delcode:n {"2191} % up arrow
-  \um_set_delcode:n {"2193} % down arrow
-  \um_set_delcode:n {"2195} % updown arrow
-  \um_set_delcode:n {"219F} % up arrow twohead
-  \um_set_delcode:n {"21A1} % down arrow twohead
-  \um_set_delcode:n {"21A5} % up arrow from bar
-  \um_set_delcode:n {"21A7} % down arrow from bar
-  \um_set_delcode:n {"21A8} % updown arrow from bar
-  \um_set_delcode:n {"21BE} % up harpoon right
-  \um_set_delcode:n {"21BF} % up harpoon left
-  \um_set_delcode:n {"21C2} % down harpoon right
-  \um_set_delcode:n {"21C3} % down harpoon left
-  \um_set_delcode:n {"21C5} % arrows up down
-  \um_set_delcode:n {"21F5} % arrows down up
-  \um_set_delcode:n {"21C8} % arrows up up
-  \um_set_delcode:n {"21CA} % arrows down down
-  \um_set_delcode:n {"21D1} % double up arrow
-  \um_set_delcode:n {"21D3} % double down arrow
-  \um_set_delcode:n {"21D5} % double updown arrow
-  \um_set_delcode:n {"21DE} % up arrow double stroke
-  \um_set_delcode:n {"21DF} % down arrow double stroke
-  \um_set_delcode:n {"21E1} % up arrow dashed
-  \um_set_delcode:n {"21E3} % down arrow dashed
-  \um_set_delcode:n {"21E7} % up white arrow
-  \um_set_delcode:n {"21E9} % down white arrow
-  \um_set_delcode:n {"21EA} % up white arrow from bar
-  \um_set_delcode:n {"21F3} % updown white arrow
+  \um_assign_delcode:nn {`\/}   {\g_um_slash_delimiter_usv}
+  \um_assign_delcode:nn {"2044} {\g_um_slash_delimiter_usv} % fracslash
+  \um_assign_delcode:nn {"2215} {\g_um_slash_delimiter_usv} % divslash
+  \um_assign_delcode:n {"005C} % backslash
+  \um_assign_delcode:nn {`\<} {"27E8} % angle brackets with ascii notation
+  \um_assign_delcode:nn {`\>} {"27E9} % angle brackets with ascii notation
+  \um_assign_delcode:n {"2191} % up arrow
+  \um_assign_delcode:n {"2193} % down arrow
+  \um_assign_delcode:n {"2195} % updown arrow
+  \um_assign_delcode:n {"219F} % up arrow twohead
+  \um_assign_delcode:n {"21A1} % down arrow twohead
+  \um_assign_delcode:n {"21A5} % up arrow from bar
+  \um_assign_delcode:n {"21A7} % down arrow from bar
+  \um_assign_delcode:n {"21A8} % updown arrow from bar
+  \um_assign_delcode:n {"21BE} % up harpoon right
+  \um_assign_delcode:n {"21BF} % up harpoon left
+  \um_assign_delcode:n {"21C2} % down harpoon right
+  \um_assign_delcode:n {"21C3} % down harpoon left
+  \um_assign_delcode:n {"21C5} % arrows up down
+  \um_assign_delcode:n {"21F5} % arrows down up
+  \um_assign_delcode:n {"21C8} % arrows up up
+  \um_assign_delcode:n {"21CA} % arrows down down
+  \um_assign_delcode:n {"21D1} % double up arrow
+  \um_assign_delcode:n {"21D3} % double down arrow
+  \um_assign_delcode:n {"21D5} % double updown arrow
+  \um_assign_delcode:n {"21DE} % up arrow double stroke
+  \um_assign_delcode:n {"21DF} % down arrow double stroke
+  \um_assign_delcode:n {"21E1} % up arrow dashed
+  \um_assign_delcode:n {"21E3} % down arrow dashed
+  \um_assign_delcode:n {"21E7} % up white arrow
+  \um_assign_delcode:n {"21E9} % down white arrow
+  \um_assign_delcode:n {"21EA} % up white arrow from bar
+  \um_assign_delcode:n {"21F3} % updown white arrow
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_set_delcode:nn}
-% \begin{macro}{\um_set_delcode:n}
-%: TODO : hook into range feature
-%    \begin{macrocode}
-\cs_new:Npn \um_set_delcode:nn #1#2 {
-  \Udelcode#1 = \csname sym\um_symfont_tl\endcsname #2
-}
-\cs_new:Npn \um_set_delcode:n #1 {
-  \Udelcode#1 = \csname sym\um_symfont_tl\endcsname #1
-}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
 %
 %
 %

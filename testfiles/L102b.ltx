@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{unicode-math}
+\begin{document}
+\newcommand\ARRAY[4]{%
+  \begin{array}{cc}
+  #1 & #2 \\ #3 & #4
+  \end{array}}
+\def\test{\[
+ \left.\left[\ARRAY a b c d\right]
+ \middle\slash
+       \left[\ARRAY 1 1 1 {\mathsf 0}\right]
+ \right. \]}
+\setmathfont
+  [slash-delimiter=frac]{Cambria Math}
+\setmathfont
+  [range={\mathsfup},
+   Color=0000FF]
+  {STIXGeneral}
+\test
+\setmathfont
+  [slash-delimiter=frac,
+   range="2044,
+   Color=FF0000]
+  {Cambria Math}
+\test
+\end{document}
