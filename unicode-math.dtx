@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/06/12 v0.5 Unicode maths in XeLaTeX]
+  [2010/06/14 v0.5 Unicode maths in XeLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -1581,7 +1581,7 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\usv_set:nnn {stixbftt}{Numerals}{"E3B7}
+\usv_set:nnn {stixbfsfup}{Numerals}{"E3B7}
 %    \end{macrocode}
 %
 % \paragraph{Bold Italic}
@@ -2898,6 +2898,7 @@ This work is "author-maintained" by Will Robertson.
   {\mathbbit  } {misc}                             {\mathbbit  }  ,
   {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
   {\mathcal   } {Latin,num}                        {\mathscr   }  ,
+  {\mathbfcal } {Latin}                            {\mathbfscr }  ,
   {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
   {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
   {\mathsfup  } {latin,Latin,num}                  {\mathsfup  }  ,
@@ -3876,6 +3877,9 @@ This work is "author-maintained" by Will Robertson.
 }
 \cs_new:Npn \um_config_bfscr_latin:n #1 {
   \um_set_mathalphabet_latin:Nnn \mathbfscr {up,it}{#1}
+}
+\cs_new:Npn \um_config_bfcal_Latin:n #1 {
+  \um_set_mathalphabet_Latin:Nnn   \mathbfcal  {up,it}{#1}
 }
 %    \end{macrocode}
 %
