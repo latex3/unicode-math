@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/06/14 v0.5 Unicode maths in XeLaTeX]
+  [2010/06/26 v0.5 Unicode maths in XeLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -4232,6 +4232,17 @@ This work is "author-maintained" by Will Robertson.
 % \item If pcount>4 or the glyph doesn't exist, insert pcount \cs{prime}s with \cs{primekern} between each.
 % \end{itemize}
 %
+% This is a wrapper to insert a superscript; if there is a subsequent
+% trailing superscript, then it is included within the insertion.
+%    \begin{macrocode}
+\cs_new:Nn \um_arg_i_before_egroup:n {#1\egroup}
+\cs_new:Nn \um_superscript:n {
+  ^\bgroup #1
+  \peek_meaning_remove:NTF ^
+    \um_arg_i_before_egroup:n \egroup
+}
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 \muskip_new:N \g_um_primekern_muskip
 \muskip_gset:Nn \g_um_primekern_muskip { -\thinmuskip/2 }% arbitrary
@@ -4240,22 +4251,28 @@ This work is "author-maintained" by Will Robertson.
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_nprimes:Nn #1#2 {
-  ^{
-     #1
-     \prg_replicate:nn {#2-1} { \mskip \g_um_primekern_muskip #1 }
-   }
+  \um_superscript:n {
+    #1
+    \prg_replicate:nn {#2-1} { \mskip \g_um_primekern_muskip #1 }
+  }
 }
 \cs_new:Npn \um_nprimes_select:nn #1#2 {
   \prg_case_int:nnn {#2}{
-    {1} { ^{#1} }
+    {1} { \um_superscript:n {#1} }
     {2} {
-      \um_glyph_if_exist:nTF {"2033} { ^{\um_prime_double_mchar} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2033}
+        { \um_superscript:n {\um_prime_double_mchar} }
+        { \um_nprimes:Nn #1 {#2} }
     }
     {3} {
-      \um_glyph_if_exist:nTF {"2034} {^{\um_prime_triple_mchar} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2034}
+        { \um_superscript:n {\um_prime_triple_mchar} }
+        { \um_nprimes:Nn #1 {#2} }
     }
     {4} {
-      \um_glyph_if_exist:nTF {"2057} { ^{\um_prime_quad_mchar} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2057}
+        { \um_superscript:n {\um_prime_quad_mchar} }
+        { \um_nprimes:Nn #1 {#2} }
     }
   }{
     \um_nprimes:Nn #1 {#2}
@@ -4263,12 +4280,16 @@ This work is "author-maintained" by Will Robertson.
 }
 \cs_new:Npn \um_nbackprimes_select:nn #1#2 {
   \prg_case_int:nnn {#2}{
-    {1} { ^{#1} }
+    {1} { \um_superscript:n {#1} }
     {2} {
-      \um_glyph_if_exist:nTF {"2036} { ^{\um_backprime_double_mchar} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2036}
+        { \um_superscript:n {\um_backprime_double_mchar} }
+        { \um_nprimes:Nn #1 {#2} }
     }
     {3} {
-      \um_glyph_if_exist:nTF {"2037} {^{\um_backprime_triple_mchar} } {\um_nprimes:Nn #1 {#2}}
+      \um_glyph_if_exist:nTF {"2037}
+        { \um_superscript:n {\um_backprime_triple_mchar} }
+        { \um_nprimes:Nn #1 {#2} }
     }
   }{
     \um_nprimes:Nn #1 {#2}
