@@ -3552,7 +3552,7 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
-% \subsubsection{Script or caligraphic: \cmd\mathscr\ and \cmd\mathcal}
+% \subsubsection{Script and caligraphic: \cmd\mathscr\ and \cmd\mathcal}
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_config_scr_Latin:n #1 {
@@ -3572,8 +3572,20 @@ This work is "author-maintained" by Will Robertson.
   \um_set_mathalphabet_pos:Nnnn  \mathscr {g}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {o}{up,it}{#1}
 }
+%    \end{macrocode}
+% These are by default synonyms for the above, but with the STIX
+% fonts we want to use the alternate alphabet.
+%    \begin{macrocode}
 \cs_new:Npn \um_config_cal_Latin:n #1 {
-  \um_set_mathalphabet_Latin:Nnn   \mathcal  {up,it}{#1}
+  \um_set_mathalphabet_Latin:Nnn  \mathcal  {up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {B}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {E}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {F}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {H}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {I}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {L}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {M}{up,it}{#1}
+  \um_set_mathalphabet_pos:Nnnn   \mathcal {R}{up,it}{#1}
 }
 \cs_new:Npn \um_config_cal_num:n #1 {
   \um_set_mathalphabet_numbers:Nnn \mathcal  {up,it}{#1}
