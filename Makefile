@@ -70,17 +70,17 @@ BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
 LTXSOURCE = $(PKG).sty $(TBL)
 
-BUILDSUITE = \
-  $(builddir)/umtest-preamble.tex \
-  $(builddir)/umtest-suite-X.tex \
-  $(builddir)/umtest-suite-L.tex
+SUITESOURCE = \
+  umtest-preamble.tex \
+  umtest-suite-X.tex \
+  umtest-suite-L.tex
 
 TESTOUT = $(shell ls $(testdir)/*.safe.pdf)
 BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.ltx,$(TESTOUT)))
 BUILDTESTTARGET = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.diff.pdf,$(TESTOUT)))
 
 BUILDSOURCE = $(addprefix $(builddir)/,$(LTXSOURCE))
-BUILDSUITE  = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
+BUILDSUITE  = $(addprefix $(builddir)/,$(SUITESOURCE))
 BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC)
 
 # and this is how the TDS zip file is produced:
@@ -141,6 +141,9 @@ $(builddir)/$(SYM).pdf:  $(builddir)/$(SYM).ltx
 $(builddir)/%.ltx: $(testdir)/%.ltx
 	$(COPY)  $<  $@
 
+$(builddir)/%.tex: $(testdir)/%.tex
+	$(COPY)  $<  $@
+
 $(builddir)/%: %
 	$(COPY)  $< $@
 
@@ -154,16 +157,7 @@ $(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE) $(builddir)/$(t
 	cd $(builddir); \
 	xelatex $(SUITE).ltx
 
-# (these are $(BUILDSUITE):)
 
-$(builddir)/umtest-preamble.tex: $(testdir)/umtest-preamble.tex
-	$(COPY)  $<  $@
-
-$(builddir)/umtest-suite-X.tex: $(testdir)/umtest-suite-X.tex
-	$(COPY)  $<  $@
-
-$(builddir)/umtest-suite-L.tex: $(testdir)/umtest-suite-L.tex
-	$(COPY)  $<  $@
 
 
 ##### CTAN INSTALLATION #####
