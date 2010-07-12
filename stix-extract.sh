@@ -188,6 +188,7 @@ awk '
     )
     {
 	  # GRAB INFO
+	  flag = substr($0,1,1)
 	  usv = substr($0,2,5)
       texname = substr($0,84,25)
       type = substr($0,55,1)
@@ -197,6 +198,7 @@ awk '
       # THROW AWAY NON-MATH CHARS
       if ( \
 	    !( usv in ignoreusv ) && \
+	    flag !~ "%" && \
 	    texname      ~ /[\\]/ && \
         substr(texname,0,5) != "\\text"    && \
         substr(texname,0,4) != "\\ipa"    && \
