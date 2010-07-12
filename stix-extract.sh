@@ -190,6 +190,7 @@ awk '
 	  # GRAB INFO
 	  usv = substr($0,2,5)
       texname = substr($0,84,25)
+      type = substr($0,55,1)
       class = substr($0,57,1)
       description = tolower(substr($0,233,350))
 
@@ -201,6 +202,7 @@ awk '
         substr(texname,0,4) != "\\ipa"    && \
         substr(texname,0,5) != "\\tone"    && \
         substr(texname,3,1) != " "    && \
+        type !~ 1 && \
         description !~ /<reserved>/  && \
         description !~ /box drawings/  && \
         description !~ /crop mark/  && \
