@@ -57,7 +57,7 @@ File name: \fn{testmath.tex}}
 %       Math definitions
 
 \newcommand{\A}{\mathcal{A}}
-\newcommand{\B}{\mathcal{B}}
+\newcommand{\BB}{\mathcal{B}}
 \newcommand{\st}{\sigma}
 \newcommand{\XcY}{{(X,Y)}}
 \newcommand{\SX}{{S_X}}
@@ -65,7 +65,7 @@ File name: \fn{testmath.tex}}
 \newcommand{\SXY}{{S_{X,Y}}}
 \newcommand{\SXgYy}{{S_{X|Y}(y)}}
 \newcommand{\Cw}[1]{{\hat C_#1(X|Y)}}
-\newcommand{\G}{{G(X|Y)}}
+\newcommand{\GG}{{G(X|Y)}}
 \newcommand{\PY}{{P_{\mathcal{Y}}}}
 \newcommand{\X}{\mathcal{X}}
 \newcommand{\wt}{\widetilde}
@@ -574,22 +574,22 @@ basis for $X$ consisting of vectors $v^{k}$ defined by
 
 \begin{lem}\label{p0201}
 Let $\A$ be an arrangement. Then
-\[ \chi (\A,t) = \sum_{\B \subseteq \A}
-(-1)^{\abs{\B}} t^{\dim T(\B)}. \]
+\[ \chi (\A,t) = \sum_{\BB \subseteq \A}
+(-1)^{\abs{\BB}} t^{\dim T(\BB)}. \]
 \end{lem}
 
 In order to compute $R''$ recall the definition
-of $S(X,Y)$ from \lemref{lem-per}. Since $H \in \B$,
-$\A_{H} \subseteq \B$. Thus if $T(\B) = Y$ then
-$\B \in S(H,Y)$. Let $L'' = L(\A'')$. Then
+of $S(X,Y)$ from \lemref{lem-per}. Since $H \in \BB$,
+$\A_{H} \subseteq \BB$. Thus if $T(\BB) = Y$ then
+$\BB \in S(H,Y)$. Let $L'' = L(\A'')$. Then
 \begin{equation}\label{E_SXgYy}
 \begin{split}
-R''&= \sum_{H\in \B \subseteq \A} (-1)^{\abs{\B}}
-t^{\dim T(\B)}\\
-&= \sum_{Y \in L''} \sum_{\B \in S(H,Y)}
-(-1)^{\abs{\B}}t^{\dim Y} \\
-&= -\sum_{Y \in L''} \sum_{\B \in S(H,Y)} (-1)^
-{\abs{\B - \A_{H}}} t^{\dim Y} \\
+R''&= \sum_{H\in \BB \subseteq \A} (-1)^{\abs{\BB}}
+t^{\dim T(\BB)}\\
+&= \sum_{Y \in L''} \sum_{\BB \in S(H,Y)}
+(-1)^{\abs{\BB}}t^{\dim Y} \\
+&= -\sum_{Y \in L''} \sum_{\BB \in S(H,Y)} (-1)^
+{\abs{\BB - \A_{H}}} t^{\dim Y} \\
 &= -\sum_{Y \in L''} \mu (H,Y)t^{\dim Y} \\
 &= -\chi (\A '',t).
 \end{split}
@@ -728,15 +728,15 @@ of codewords $\{\st_\phi(x,y):x\in\SXgYy\}$ is prefix free.
 $\Cw1$, the one-way complexity of a random pair $\XcY$,
 is the number of bits $P_\X$ must transmit in the worst case
 when $\PY$ is not permitted to transmit any feedback messages.
-Starting with $\SXY$, the support set of $\XcY$, we define $\G$,
+Starting with $\SXY$, the support set of $\XcY$, we define $\GG$,
 the \textit{characteristic hypergraph} of $\XcY$, and show that
 \[
-\Cw1=\lceil\,\log\chi(\G)\rceil\ .
+\Cw1=\lceil\,\log\chi(\GG)\rceil\ .
 \]
 
 Let $\XcY$ be a random pair. For each $y$ in $\SY$, the support set of
 $Y$, Equation~(\ref{E_SXgYy}) defined $\SXgYy$ to be the set of possible
-$x$ values when $Y=y$. The \textit{characteristic hypergraph} $\G$ of
+$x$ values when $Y=y$. The \textit{characteristic hypergraph} $\GG$ of
 $\XcY$ has $\SX$ as its vertex set and the hyperedge $\SXgYy$ for each
 $y\in\SY$.
 
