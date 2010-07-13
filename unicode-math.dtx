@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/07/12 v0.5 Unicode maths in XeLaTeX]
+  [2010/07/13 v0.5 Unicode maths in XeLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -4827,8 +4827,18 @@ This work is "author-maintained" by Will Robertson.
   }
   \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
   \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
-  \def\@cdots{\mathinner{\cdots}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  \cs_set:Npn \@cdots {\mathinner{\cdots}}
   \cs_set_eq:NN \dotsb@ \cdots
+%    \end{macrocode}
+% This isn't as clever as the \pkg{amsmath} definition but I think it works:
+%    \begin{macrocode}
+  \def \resetMathstrut@ {%
+    \setbox\z@\hbox{$($}%
+    \ht\Mathstrutbox@\ht\z@ \dp\Mathstrutbox@\dp\z@
+  }
 }
 %    \end{macrocode}
 % \paragraph{\pkg{amsopn}}
