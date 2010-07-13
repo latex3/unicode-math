@@ -144,6 +144,9 @@ $(builddir)/%.ltx: $(testdir)/%.ltx
 $(builddir)/%.tex: $(testdir)/%.tex
 	$(COPY)  $<  $@
 
+$(builddir)/$(testdir): $(testdir)
+	$(COPY)  $< $@
+
 $(builddir)/%: %
 	$(COPY)  $< $@
 
@@ -184,7 +187,7 @@ $(tds)/source/latex/$(PKG)/% : $(builddir)/%
 	$(COPY)  $< $@
 
 $(tds)/source/latex/$(PKG)/$(testdir):
-	$(COPY) $(testdir)  $(tds)/source/latex/$(PKG)/$(testdir)
+	$(COPY) $(testdir)  $(tds)/source/latex/$(PKG)/
 
 ##### LOCAL TEXMF INSTALLATION #####
 
