@@ -500,6 +500,28 @@ This work is "author-maintained" by Will Robertson.
 % with the \cs{mathbbit} alphabet switch, but note that only those five letters
 % will give the expected output.
 %
+% \subsubsection{Caligraphic vs.\ Script variants}
+%
+% The Unicode maths encoding contains an alphabet style for `Script' letters,
+% and while by default \cs{mathcal} and \cs{mathscr}
+% are synonyms, there are some situations when a
+% separate `Caligraphic' style is needed as well.
+%
+% If a font contains alternate glyphs for a separat caligraphic style,
+% they can be selected explicitly as shown below.
+% This feature is currently only supported by the XITS~Math font, where
+% the caligraphic letters are accessed with the same glyph slots as the
+% script letters but with the first stylistic set feature (|ss01|) applied.
+% \begin{verbatim}
+%   \setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
+% \end{verbatim}
+% An example is shown below.
+% \begin{quote}
+% \setmathfont[range=\mathscr]{XITS Math}
+% \setmathfont[range=\mathcal,StylisticSet=1]{XITS Math}
+% The Script style (\cs{mathscr}) in XITS Math is: $\mathscr{ABCXYZ}$\par
+% The Caligraphic style (\cs{mathcal}) in XITS Math is: $\mathcal{ABCXYZ}$
+% \end{quote}
 %
 %
 % \subsection{Miscellanea}
@@ -1146,6 +1168,7 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {bb}{Latin}{"1D538}
 \usv_set:nnn {bb}{latin}{"1D552}
 \usv_set:nnn {scr}{Latin}{"1D49C}
+\usv_set:nnn {cal}{Latin}{"1D49C}
 \usv_set:nnn {scr}{latin}{"1D4B6}
 \usv_set:nnn {frak}{Latin}{"1D504}
 \usv_set:nnn {frak}{latin}{"1D51E}
@@ -1178,6 +1201,7 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {bffrak}{Latin}{"1D56C}
 \usv_set:nnn {bffrak}{latin}{"1D586}
 \usv_set:nnn {bfscr}{Latin}{"1D4D0}
+\usv_set:nnn {bfcal}{Latin}{"1D4D0}
 \usv_set:nnn {bfscr}{latin}{"1D4EA}
 \usv_set:nnn {bfsf}{num}{"1D7EC}
 \usv_set:nnn {bfsfup}{num}{"1D7EC}
@@ -1407,6 +1431,17 @@ This work is "author-maintained" by Will Robertson.
 \usv_set:nnn {scr}{e}{"212F}
 \usv_set:nnn {scr}{g}{"210A}
 \usv_set:nnn {scr}{o}{"2134}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {cal}{B}{"212C}
+\usv_set:nnn {cal}{E}{"2130}
+\usv_set:nnn {cal}{F}{"2131}
+\usv_set:nnn {cal}{H}{"210B}
+\usv_set:nnn {cal}{I}{"2110}
+\usv_set:nnn {cal}{L}{"2112}
+\usv_set:nnn {cal}{M}{"2133}
+\usv_set:nnn {cal}{R}{"211B}
 %    \end{macrocode}
 % Fractur exceptions:
 %    \begin{macrocode}
@@ -2897,7 +2932,7 @@ This work is "author-maintained" by Will Robertson.
   {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
   {\mathbbit  } {misc}                             {\mathbbit  }  ,
   {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
-  {\mathcal   } {Latin,num}                        {\mathscr   }  ,
+  {\mathcal   } {Latin}                            {\mathscr   }  ,
   {\mathbfcal } {Latin}                            {\mathbfscr }  ,
   {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
   {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
@@ -3586,9 +3621,6 @@ This work is "author-maintained" by Will Robertson.
   \um_set_mathalphabet_pos:Nnnn   \mathcal {L}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {M}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {R}{up,it}{#1}
-}
-\cs_new:Npn \um_config_cal_num:n #1 {
-  \um_set_mathalphabet_numbers:Nnn \mathcal  {up,it}{#1}
 }
 %    \end{macrocode}
 %
