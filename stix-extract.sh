@@ -5,10 +5,6 @@ awk '
   {
 	# USV characters to ignore
 	
-	#   (temporary, probably)
-	ignoreusv["023DE"] = "\\overbrace               "
-	ignoreusv["023DF"] = "\\underbrace              "
-	
 	#
 	ignoreusv["000C5"] = "\\AA                      "
 	ignoreusv["000C6"] = "\\AE                      "
@@ -77,11 +73,12 @@ awk '
 	ignoreusv["0301B"] = "\\rBrack                  "
 	ignoreusv["0301E"] = "\\cjkdprimequote          "
 	
+	ignoreusv["0FFFD"] = "\\unknown                 "
+		
 	ignoreusv["0FE35"] = "\\overparen               "
 	ignoreusv["0FE36"] = "\\underparen              "
 	ignoreusv["0FE37"] = "\\overbrace               "
 	ignoreusv["0FE38"] = "\\underbrace              "
-	ignoreusv["0FFFD"] = "\\unknown                 "
 		
 	# READ LINE
 	if (  \
@@ -152,6 +149,13 @@ awk '
 		if (texname == "\\%                       ") { printtexname = "\\mathpercent             " }
 		if (texname == "\\&                       ") { printtexname = "\\mathampersand           " }
 
+		# OVER/UNDER brackets/parens/braces (resp.)
+		if (usv == "023B4") { class = "\\mathover" }
+		if (usv == "023DC") { class = "\\mathover" }
+		if (usv == "023DE") { class = "\\mathover" }
+		if (usv == "023B5") { class = "\\mathunder" }
+		if (usv == "023DD") { class = "\\mathunder" }
+		if (usv == "023DF") { class = "\\mathunder" }
 
 	    # TRANSFORM MATH CLASSES
 	    if (class == "N") { class = "\\mathord" }

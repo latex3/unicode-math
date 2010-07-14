@@ -2035,14 +2035,20 @@ This work is "author-maintained" by Will Robertson.
       \um_set_mathcode:nnn {#4} \mathclose {#1}
       \cs_gset:Npx #2 { \um_delimiter:Nnn \mathclose {#1} {#4} }
     }
+    \mathaccent {
+      \cs_gset:Npx #2 { \um_accent:Nnn #3 {#1} {#4} }
+    }
     \mathfence {
       \um_set_mathcode:nnn {#4} {#3} {#1}
       \um_set_delcode:nnn {#1} {#4} {#4}
       \cs_gset:cpx {l \cs_to_str:N #2} { \um_delimiter:Nnn \mathopen  {#1} {#4} }
       \cs_gset:cpx {r \cs_to_str:N #2} { \um_delimiter:Nnn \mathclose {#1} {#4} }
     }
-    \mathaccent {
-      \cs_gset:Npx #2 { \um_accent:Nnn #3 {#1} {#4} }
+    \mathover { % LuaTeX only
+      \cs_set:Npn #2 ##1 { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
+    }
+    \mathunder { % LuaTeX only
+      \cs_set:Npn #2 ##1 { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
     }
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
@@ -2100,10 +2106,10 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\um_set_mathcode:nnn}
 % \begin{macro}{\um_set_mathchar:NNnn}
 % \begin{macro}{\um_set_mathchar:cNnn}
+% \begin{macro}{\um_set_delcode:nnn}
 % \begin{macro}{\um_radical:nn}
 % \begin{macro}{\um_delimiter:Nnn}
 % \begin{macro}{\um_accent:Nnn}
-% \begin{macro}{\um_set_delcode:nnn}
 % These are all wrappers for the primitive commands that take numerical
 % input only.
 %    \begin{macrocode}
@@ -2119,6 +2125,9 @@ This work is "author-maintained" by Will Robertson.
   \Umathchardef #1 =
     \mathchar@type#2 \csname sym#3\endcsname \intexpr_eval:n {#4} \scan_stop:
 }
+\cs_new:Npn \um_set_delcode:nnn #1#2#3 {
+  \Udelcode#2 = \csname sym#1\endcsname #3
+}
 \cs_new:Npn \um_radical:nn #1#2 {
   \Uradical \csname sym#1\endcsname #2 \scan_stop:
 }
@@ -2127,9 +2136,6 @@ This work is "author-maintained" by Will Robertson.
 }
 \cs_new:Npn \um_accent:Nnn #1#2#3 {
   \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-}
-\cs_new:Npn \um_set_delcode:nnn #1#2#3 {
-  \Udelcode#2 = \csname sym#1\endcsname #3
 }
 %    \end{macrocode}
 %
@@ -2144,6 +2150,22 @@ This work is "author-maintained" by Will Robertson.
 % \end{macro}
 % \end{macro}
 % \end{macro}
+%
+%
+% \begin{macro}{\um_overbrace:nnn}
+% \begin{macro}{\um_underbrace:nnn}
+% \LuaTeX\ functions for defining over/under-braces
+%    \begin{macrocode}
+\cs_set:Npn \um_overbrace:nnn #1#2#3 {
+  \luatexUdelimiterover \csname sym#1\endcsname #2 {#3}
+}
+\cs_set:Npn \um_underbrace:nnn #1#2#3 {
+  \luatexUdelimiterunder \csname sym#1\endcsname #2 {#3}
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
 %
 %
 % \begin{macro}{\char_gmake_mathactive:N}
@@ -4105,13 +4127,27 @@ This work is "author-maintained" by Will Robertson.
 % 2.~we don't need to worry about catcodes later, since they're frozen
 % at this point.
 %
+% In time, the case statement inside |set_mathsymbol| will be moved in here
+% to avoid re-running it every time.
 %    \begin{macrocode}
-\CatchFileEdef \g_um_mathtable_tl {unicode-math-table.tex} {
-  \cs_set:Npn \UnicodeMathSymbol #1#2#3#4 {
-    \exp_not:n {\_um_sym:nnn{#1}{#2}{#3}}
+\xetex_or_luatex:nnn { \cs_set:Npn \um_symbol_setup: }
+  {
+    \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
+      \prg_case_tl:Nnn ##3 { \mathover {} \mathunder {} }
+        {
+          \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
+        }
+    }
   }
-  \char_make_other:N \" % just in case
-}
+  {
+    \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
+      \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
+    }
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\CatchFileEdef \g_um_mathtable_tl {unicode-math-table.tex} {\um_symbol_setup:}
 %    \end{macrocode}
 %
 %
@@ -4183,7 +4219,9 @@ This work is "author-maintained" by Will Robertson.
     \cs_set:Npn \_um_sym:nnn #1#2#3 {
       \bool_if:nF { \cs_if_eq_p:NN #3 \mathaccent ||
                     \cs_if_eq_p:NN #3 \mathopen   ||
-                    \cs_if_eq_p:NN #3 \mathclose } {
+                    \cs_if_eq_p:NN #3 \mathclose  ||
+                    \cs_if_eq_p:NN #3 \mathover   ||
+                    \cs_if_eq_p:NN #3 \mathunder } {
         \um@scancharlet#2=#1\@nil\ignorespaces
       }
     }
