@@ -18,7 +18,7 @@
 \usepackage{unicode-math}
 \setmathfont[SizeFeatures={
     {Size=-10, Colour=888888},
-    {Size=10-, Colour=FF0000}}]{STIXGeneral}
+    {Size=10-, Colour=FF0000}}]{XITS Math}
 
 \def\TABLE{%
 \begin{longtable}[l]{@{}lcll@{}}
@@ -87,16 +87,12 @@ package. Use this document to find the command name or the Unicode glyph slot fo
 \clearpage
 \section{Accents, \cmd\mathaccent}
 
-Note that accents will only be properly placed if used with an OpenType font with the necessary information. The examples shown below use `Cambria Math'.
+Note that accents will only be properly placed if used with an OpenType font with the necessary information.
 
-\setmathfont[Color=FF0000]{Cambria Math}
 \begingroup
 \def\SYMB#1{$\displaystyle#1 x$}
 \SHOW\mathaccent
 \endgroup
-\setmathfont[SizeFeatures={
-    {Size=-10, Colour=888888},
-    {Size=10-, Colour=FF0000}}]{STIXGeneral}
 
 \clearpage
 \section{Big operators, \cmd\mathop}
