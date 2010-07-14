@@ -2616,12 +2616,12 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsection{OpenType maths font features}
 %    \begin{macrocode}
-\um@zf@feature{ScriptStyle}{
-  \zf@update@ff{+ssty=0}
-}
-\um@zf@feature{ScriptScriptStyle}{
-  \zf@update@ff{+ssty=1}
-}
+\xetex_or_luatex:nnn { \um@zf@feature {ScriptStyle} }
+  { \zf@update@ff{+ssty=0} }
+  { \zf@update@ff{+ssty=1} }
+\xetex_or_luatex:nnn { \um@zf@feature {ScriptScriptStyle} }
+  { \zf@update@ff{+ssty=1} }
+  { \zf@update@ff{+ssty=2} }
 %    \end{macrocode}
 %
 % \subsection{Script and scriptscript font options}
