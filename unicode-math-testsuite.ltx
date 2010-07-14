@@ -7,13 +7,13 @@
 \newcommand\inserttest[1]{%
   \subsection{Test #1}
   \begin{minipage}{0.5\textwidth}
-  \VerbatimInput{testfiles/umtest#1.ltx}
+  \VerbatimInput{testfiles/#1.ltx}
   \end{minipage}
   \hfill
   \begin{minipage}{8cm+4pt}
     \fboxsep=1pt
     \fboxrule=1pt
-    \fbox{\includegraphics[width=8cm]{testfiles/umtest#1.safe.png}}
+    \fbox{\includegraphics[width=8cm]{testfiles/#1.safe.pdf}}
   \end{minipage}
 }
 

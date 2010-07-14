@@ -135,6 +135,20 @@ changes to unicode-math yourself (be sure to initialise the test suite
 changes have not affected the standard behaviour.
 
 
+CHANGE HISTORY
+--------------
+
+- v0.5a (2010/07/14): TeX Live 2010 release
+
+  * Numerous documentation improvements
+  * Bug fix against stray catcode changes
+  * Add `\mathcal` and `\mathbfcal` as distinct from the Script style; these are only supported by the XITS fonts at present
+  * Small changes to the range of symbols offered (especially note that `\ac` is now `\invlazys` to avoid acronym package clash)
+  * Superscripts are allowed after primes (as they should be)
+  * Numerous LuaLaTeX improvements, including roots and over/under braces.
+
+- v0.5 (2010/06/03): Initial CTAN release
+
 
 LICENCE
 -------

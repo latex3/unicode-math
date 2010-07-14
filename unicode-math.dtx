@@ -4132,6 +4132,9 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \xetex_or_luatex:nnn { \cs_set:Npn \um_symbol_setup: }
   {
+    \def\mathfence{\mathfence}
+    \def\mathover{\mathover}
+    \def\mathunder{\mathunder}
     \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
       \prg_case_tl:Nnn ##3 { \mathover {} \mathunder {} }
         {
