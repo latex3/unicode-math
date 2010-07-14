@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/07/13 v0.5a Unicode maths in XeLaTeX]
+  [2010/07/14 v0.5a Unicode maths in XeLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -2296,6 +2296,7 @@ This work is "author-maintained" by Will Robertson.
   \bool_set_true:N \l_um_fontspec_feature_bool
   \fontspec_select:xn
     {
+      \luatex_if_engine:T { Renderer = Basic, }
       BoldFont = {}, ItalicFont = {},
       Script = Math,
       SizeFeatures = {
