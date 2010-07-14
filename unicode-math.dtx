@@ -2023,6 +2023,7 @@ This work is "author-maintained" by Will Robertson.
     \mathopen {
       \tl_if_in:NnTF \l_um_radicals_tl {#2} {
         \cs_gset:cpx {\cs_to_str:N #2 sign} { \um_radical:nn {#1} {#4} }
+        \tl_set:cn {l_um_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #4}
       }{
         \um_set_delcode:nnn {#1} {#4} {#4}
         \um_set_mathcode:nnn {#4} \mathopen {#1}
@@ -2553,11 +2554,6 @@ This work is "author-maintained" by Will Robertson.
 \tl_new:Nn \l_um_radicals_tl {\sqrt}
 %    \end{macrocode}
 % \end{macro}
-%
-% \begin{example}{}
-%   \setmathfont{Cambria Math} 
-%   \[ \sqrt[2]{1+\sqrt[3]{1+x}} \]
-% \end{example}
 %
 % \subsection{Delimiters}
 % \begin{macro}{\left}
@@ -4481,6 +4477,22 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsection{Unicode radicals}
 %
+%
+% \begin{macro}{\sqrt}
+% Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
+%    \begin{macrocode}
+\luatex_if_engine:T {
+  \DeclareDocumentCommand \sqrt { O{} m } {
+    \luatexUroot \l_um_radical_sqrt_tl {#1} {#2}
+  }
+  \cs_set:Npn \root #1 \of #2 {
+    \luatexUroot \l_um_radical_sqrt_tl {#1} {#2}
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
 % \darg{Leading superscript for the sqrt sign}
@@ -5272,55 +5284,8 @@ This work is "author-maintained" by Will Robertson.
 \frenchspacing         % Remove ugly extra space after punctuation
 
 \definecolor{niceblue}{rgb}{0.2,0.4,0.8}
-\newenvironment{example}[1]
-  {\VerbatimEnvironment
-   \def\Options{#1}
-   \begin{VerbatimOut}[gobble=4]{\examplefilename}}
-  {\end{VerbatimOut}\relax
-   \typesetexample}
 
 \def\theCodelineNo{\textcolor{niceblue}{\sffamily\tiny\arabic{CodelineNo}}}
-
-\let\examplesize\normalsize
-\let\auxwidth\relax
-
-\newlength\examplewidth\newlength\verbatimwidth
-\newlength\exoutdent   \newlength\exverbgap
-\setlength\exverbgap{1em}
-\setlength\exoutdent{-0.15\textwidth}
-\newsavebox\verbatimbox
-\edef\examplefilename{\jobname.example}
-
-\newcommand\typesetexample{\relax
-   \smallskip
-   \noindent
-   \begin{minipage}{\linewidth}
-   \color{niceblue}
-   \hrulefill\par
-   \edef\@tempa{[gobble=0,fontsize=\noexpand\scriptsize,\Options]}
-   \begin{lrbox}{\verbatimbox}\relax
-     \expandafter\BVerbatimInput\@tempa{\examplefilename}
-   \end{lrbox}
-   \begin{list}{}{\setlength\itemindent{0pt}
-                  \setlength\leftmargin\exoutdent
-                  \setlength\rightmargin{0pt}}\item
-   \ifx\auxwidth\relax
-     \setlength\verbatimwidth{\wd\verbatimbox}
-   \else
-     \setlength\verbatimwidth{\auxwidth}
-   \fi
-   \begin{minipage}[c]{\textwidth-\exoutdent-\verbatimwidth-\exverbgap}
-     \catcode`\%=14\centering\input\examplefilename\relax
-   \end{minipage}\hfill
-   \begin{minipage}[c]{\verbatimwidth}
-     \usebox\verbatimbox
-   \end{minipage}
-   \end{list}
-   \par\noindent\hrulefill
-   \end{minipage}
-   \smallskip}
-
-\newcommand*\setverbwidth[1]{\def\auxwidth{#1}}
 
 \newcommand*\name[1]{{#1}}
 \newcommand*\pkg[1]{\textsf{#1}}
