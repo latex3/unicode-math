@@ -79,6 +79,8 @@ awk '
 	ignoreusv["0FE36"] = "\\underparen              "
 	ignoreusv["0FE37"] = "\\overbrace               "
 	ignoreusv["0FE38"] = "\\underbrace              "
+
+	ignoreusv["0203E"] = "\\overline                " # primitive in luatex
 		
 	# READ LINE
 	if (  \

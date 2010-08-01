@@ -4854,6 +4854,13 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+% \verb|\overline| is a \LuaTeX\ primitive:
+%    \begin{macrocode}
+\luatex_if_engine:T {
+  \cs_set:Npn \overline {\pdfprimitive\overline}
+}
+%    \end{macrocode}
+%
 % \begin{macro}{\digamma}
 % \begin{macro}{\Digamma}
 % I might end up just changing these in the table.
