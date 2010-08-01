@@ -149,6 +149,9 @@ awk '
 		if (texname == "\\%                       ") { printtexname = "\\mathpercent             " }
 		if (texname == "\\&                       ") { printtexname = "\\mathampersand           " }
 
+        # Corrections
+		if (usv == "025B5") { class = "\\mathrel" }
+
 		# OVER/UNDER brackets/parens/braces (resp.)
 		if (usv == "023B4") { class = "\\mathover" }
 		if (usv == "023DC") { class = "\\mathover" }
