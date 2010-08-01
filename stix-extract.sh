@@ -160,6 +160,8 @@ awk '
 		if (usv == "023DD") { class = "\\mathunder" }
 		if (usv == "023DF") { class = "\\mathunder" }
 
+		if (usv == "0203E") { class = "\\mathover" } # overline
+
 	    # TRANSFORM MATH CLASSES
 	    if (class == "N") { class = "\\mathord" }
 	    if (class == " ") { class = "\\mathord" }
