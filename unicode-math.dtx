@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/07/14 v0.5a Unicode maths in XeLaTeX]
+  [2010/08/02 v0.5a Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -4822,6 +4822,14 @@ This work is "author-maintained" by Will Robertson.
 \def\bullet{\smblkcircle}
 \def\mathyen{\yen}
 \def\mathsterling{\sterling}
+\def\diamond{\smwhtdiamond}
+%    \end{macrocode}
+%
+% Due to the magic of OpenType math, big operators are automatically
+% enlarged when necessary. Since there isn't a separate unicode glyph for
+% `small integral', I'm not sure if there is a better way to do this:
+%    \begin{macrocode}
+\def\smallint{{\textstyle\int}\limits}
 %    \end{macrocode}
 %
 % \begin{macro}{\colon}
