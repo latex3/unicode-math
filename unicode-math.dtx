@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/08/02 v0.5a Unicode maths in XeLaTeX and LuaLaTeX]
+  [2010/09/17 v0.5a Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -2090,7 +2090,7 @@ This work is "author-maintained" by Will Robertson.
   \group_begin:
     \char_make_active:n {#3}
     \char_gmake_mathactive:n {#3}
-    \um@scanactivedef #3 \@nil { \csname\cs_to_str:N #2 _sym\endcsname }
+    \um_active_char_set:wc #3 \q_nil { \cs_to_str:N #2 _sym }
   \group_end:
   \um_set_mathchar:cNnn {\cs_to_str:N #2 op} \mathop {#1} {#3}
   \cs_gset:cpx { \cs_to_str:N #2 _sym } {
@@ -4167,8 +4167,8 @@ This work is "author-maintained" by Will Robertson.
 % Here we define every Unicode math codepoint an equivalent macro name.
 % The two are equivalent, in a |\let\xyz=^^^^1234| kind of way.
 %
-% \begin{macro}{\um@scancharlet}
-% \begin{macro}{\um@scanactivedef}
+% \begin{macro}{\um_cs_set_eq_active_char:Nw}
+% \begin{macro}{\um_scan_active_def:wn}
 % We need to do some trickery to transform the |\_um_sym:nnn| argument
 % |"ABCDEF| into the \XeTeX\ `caret input' form |^^^^^abcdef|. It is \emph{very important}
 % that the argument has five characters. Otherwise we need to change the number of |^| chars.
@@ -4179,7 +4179,7 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \begingroup
   \char_make_other:N \^
-  \cs_gset:Npn \um@scancharlet#1="#2\@nil {
+  \cs_gset:Npn \um_cs_set_eq_active_char:Nw #1 = "#2 \q_nil {
     \lowercase{
       \tl_rescan:nn {
         \char_make_other:N \{
@@ -4193,15 +4193,17 @@ This work is "author-maintained" by Will Robertson.
     }
   }
 %    \end{macrocode}
-%    Making |^| the right catcode isn't strictly necessary right now but it helps to future proof us with, e.g., breqn.
+% Making |^| the right catcode isn't strictly necessary right now but it helps
+% to future proof us with, e.g., breqn.
+% Because we're inside a |\tl_rescan:nn|, use plain old \TeX\ syntax to avoid
+% any catcode problems.
 %    \begin{macrocode}
-  \gdef\um@scanactivedef"#1\@nil#2{
-    \lowercase{
-      \tl_rescan:nn{
-        \ExplSyntaxOn
-        \char_make_math_superscript:N\^
+  \cs_gnew:Npn \um_active_char_set:wc "#1 \q_nil #2 {
+    \lowercase {
+      \tl_rescan:nn {
+        \catcode`\^=7\relax
       }{
-        \global\def^^^^^#1{#2}
+        \protected\gdef^^^^^#1{\csname #2\endcsname}%
       }
     }
   }
@@ -4210,7 +4212,7 @@ This work is "author-maintained" by Will Robertson.
 % \end{macro}
 % \end{macro}
 %
-% Now give \cmd\_um_sym:nnn\ a definition in terms of \cmd\um@scancharlet\
+% Now give \cmd\_um_sym:nnn\ a definition in terms of \cmd\um_cs_set_eq_active_char:Nw\
 % and we're good to go.
 %
 % Ensure catcodes are appropriate;
@@ -4225,7 +4227,7 @@ This work is "author-maintained" by Will Robertson.
                     \cs_if_eq_p:NN #3 \mathclose  ||
                     \cs_if_eq_p:NN #3 \mathover   ||
                     \cs_if_eq_p:NN #3 \mathunder } {
-        \um@scancharlet#2=#1\@nil\ignorespaces
+        \um_cs_set_eq_active_char:Nw #2 = #1 \q_nil \ignorespaces
       }
     }
     \char_make_other:N \#
@@ -4768,7 +4770,8 @@ This work is "author-maintained" by Will Robertson.
   \char_make_active:N #1
   \char_gmake_mathactive:N #1
   \tl_rescan:nn {
-    \ExplSyntaxOn
+    \catcode`\_=11\relax
+    \catcode`\:=11\relax
   }{
     \cs_gset:Npx #1 {
       \bool_if:NTF \l_um_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
