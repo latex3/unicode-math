@@ -85,7 +85,11 @@ BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC)
 
 # and this is how the TDS zip file is produced:
 
-TDSFILES = \
+INSFILES = \
+	$(tds)/tex/latex/$(PKG)/unicode-math.sty \
+	$(tds)/tex/latex/$(PKG)/unicode-math-table.tex
+
+OTHERFILES = \
 	$(tds)/source/latex/$(PKG)/$(PKG).dtx \
 	$(tds)/source/latex/$(PKG)/$(SUITE).ltx \
 	$(tds)/source/latex/$(PKG)/$(SYM).ltx \
@@ -96,9 +100,8 @@ TDSFILES = \
 	$(tds)/doc/latex/$(PKG)/README \
 	$(tds)/doc/latex/$(PKG)/$(XMPL) \
 	$(tds)/doc/latex/$(PKG)/$(SYM).pdf \
-	$(tds)/tex/latex/$(PKG)/unicode-math.sty \
-	$(tds)/tex/latex/$(PKG)/unicode-math-table.tex
 
+TDSFILES = $(INSFILES) $(OTHERFILES)
 
 
 #### BASICS ####
@@ -194,19 +197,19 @@ $(tds)/source/latex/$(PKG)/$(testdir):
 TEXMFHOME=$(shell kpsewhich --var-value TEXMFHOME)
 TEXMFLOCAL=$(shell kpsewhich --var-value TEXMFLOCAL)
 
-install: $(TDSFILES)
+install: $(INSFILES)
 	if test -n "$(TEXMFHOME)" ; then \
 		echo "Installing in '$(TEXMFHOME)'."; \
-		$(COPY)  $(tds)/  $(TEXMFHOME); \
+		$(COPY)  $(tds)/*  $(TEXMFHOME); \
 	else \
 		echo "Cannot locate your home texmf tree. Specify manually with\n\n    make install TEXMFHOME=/path/to/texmf\n" ; \
 		false ; \
 	fi ;
 
-install-sys: $(TDSFILES)
+install-sys: $(INSFILES)
 	if test -n "$(TEXMFLOCAL)" ; then \
 		echo "Installing in '$(TEXMFLOCAL)'."; \
-		$(COPY)  $(tds)/  $(TEXMFLOCAL); \
+		$(COPY)  $(tds)/*  $(TEXMFLOCAL); \
 	else \
 		echo "Cannot locate your system-wide local texmf tree. Specify manually with\n\n    make install TEXMFLOCAL=/path/to/texmf\n" ; \
 		false ; \
