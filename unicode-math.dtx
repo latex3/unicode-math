@@ -131,9 +131,22 @@ This work is "author-maintained" by Will Robertson.
 % \begin{verbatim}
 % \usepackage{amsmath} % if desired
 % \usepackage{unicode-math}
-% \setmathfont{Cambria Math}
+% \setmathfont{Asana-Math.otf}
 % \end{verbatim}
 % \end{quote}
+%
+% Two OpenType maths fonts are included by default in \TeX\ Live 2010:
+% Asana Math and XITS Math. These can be loaded directly with their filename
+% with both \XeLaTeX\ and \LuaLaTeX; resp.,
+% \begin{quote}
+% \begin{verbatim}
+% \setmathfont{Asana-Math.otf}
+% \setmathfont{xits-math.otf}
+% \end{verbatim}
+% \end{quote}
+% Other OpenType maths fonts may be loaded in the usual way; please see the
+% \pkg{fontspec} documentation for more information.
+%
 %
 % \subsection{Package options}
 % Package options may be set when the package as loaded or at any later
@@ -4168,7 +4181,7 @@ This work is "author-maintained" by Will Robertson.
 % The two are equivalent, in a |\let\xyz=^^^^1234| kind of way.
 %
 % \begin{macro}{\um_cs_set_eq_active_char:Nw}
-% \begin{macro}{\um_scan_active_def:wn}
+% \begin{macro}{\um_active_char_set:wc}
 % We need to do some trickery to transform the |\_um_sym:nnn| argument
 % |"ABCDEF| into the \XeTeX\ `caret input' form |^^^^^abcdef|. It is \emph{very important}
 % that the argument has five characters. Otherwise we need to change the number of |^| chars.
