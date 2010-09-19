@@ -4214,6 +4214,8 @@ This work is "author-maintained" by Will Robertson.
   \cs_gnew:Npn \um_active_char_set:wc "#1 \q_nil #2 {
     \lowercase {
       \tl_rescan:nn {
+        \catcode`\_=11\relax
+        \catcode`\:=11\relax
         \catcode`\^=7\relax
       }{
         \protected\gdef^^^^^#1{\csname #2\endcsname}%
