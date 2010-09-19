@@ -4992,6 +4992,13 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\cs_set_eq:NN \um_text_slash: \slash
+\cs_set:Npn \slash {
+  \mode_if_math:TF {\mathslash} {\um_text_slash:}
+}
+%    \end{macrocode}
+%
 % \paragraph{\pkg{beamer}}
 % At end of the package so the warnings are defined.
 %    \begin{macrocode}
