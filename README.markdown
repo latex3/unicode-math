@@ -138,6 +138,14 @@ changes have not affected the standard behaviour.
 CHANGE HISTORY
 --------------
 
+- v0.5b (2010/09/19): Tune-up
+
+  * Added missing symbols/synonyms:  
+      \diamond  \smallint  \emptyset  \hbar  \backepsilon  \eth
+  * \overline works for LuaLaTeX
+  * Fix \slash; previously, it overwrote the text definition
+  * \vartriangle now has the correct math class
+
 - v0.5a (2010/07/14): TeX Live 2010 release
 
   * Numerous documentation improvements
