@@ -266,6 +266,13 @@ This work is "author-maintained" by Will Robertson.
 % the same math type, such as \cs{mathopen}, or complete math alphabets such as \cs{mathbb}.
 % (Only numerical slots, however, can be used in ranged declarations.)
 %
+% \paragraph{\XeTeX\ users only}
+% \XeTeX\ uses the first maths font selected for choosing various parameters
+% such as the thickness of fraction rules and so on.
+% (In \LuaTeX, they are chosen automatically based on the current font.)
+% To select a new font for these parameters use \cs{resetmathfont},
+% which behaves identically to \cs{setmathfont}.
+%
 % \subsubsection{Control over maths alphabets}
 %
 % Exact control over maths alphabets can be somewhat involved.
@@ -1054,6 +1061,7 @@ This work is "author-maintained" by Will Robertson.
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
 \bool_new:N \l_um_implicit_alph_bool
+\bool_new:N \g_um_mainfont_set_bool
 %    \end{macrocode}
 % For \opt{math-style}:
 %    \begin{macrocode}
@@ -2299,6 +2307,13 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
   \DeclareSymbolFont{\um_symfont_tl}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
+  \bool_if:NF \g_um_mainfont_set_bool {
+    \bool_set_true:N \g_um_mainfont_set_bool
+    \DeclareSymbolFont{symbols}
+      {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
+    \DeclareSymbolFont{largesymbols}
+      {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
+  }
 %    \end{macrocode}
 % And now we input every single maths char.
 %    \begin{macrocode}
@@ -2320,6 +2335,16 @@ This work is "author-maintained" by Will Robertson.
 % Prevent spaces:
 %    \begin{macrocode}
   \ignorespaces
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\resetmathfont}
+%    \begin{macrocode}
+\DeclareDocumentCommand \resetmathfont { O{} m } {
+  \bool_set_false:N \g_um_mainfont_set_bool
+  \setmathfont[#1]{#2}
 }
 %    \end{macrocode}
 % \end{macro}
