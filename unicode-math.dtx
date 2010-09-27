@@ -2655,11 +2655,11 @@ This work is "author-maintained" by Will Robertson.
 % \subsection{OpenType maths font features}
 %    \begin{macrocode}
 \xetex_or_luatex:nnn { \um@zf@feature {ScriptStyle} }
-  { \zf@update@ff{+ssty=0} }
-  { \zf@update@ff{+ssty=1} }
+  { \fontspec_update_featstr:n {+ssty=0} }
+  { \fontspec_update_featstr:n {+ssty=1} }
 \xetex_or_luatex:nnn { \um@zf@feature {ScriptScriptStyle} }
-  { \zf@update@ff{+ssty=1} }
-  { \zf@update@ff{+ssty=2} }
+  { \fontspec_update_featstr:n {+ssty=1} }
+  { \fontspec_update_featstr:n {+ssty=2} }
 %    \end{macrocode}
 %
 % \subsection{Script and scriptscript font options}
@@ -3155,7 +3155,7 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
   \clist_map_inline:nn {#2} {
     \cs_if_exist:cT {um_config_ \l_um_style_tl _##1:n} {
-      \tl_if_eq:nnTF {##1}{misc} {
+      \str_if_eq:nnTF {##1}{misc} {
         \um_maybe_init_alphabet:V \l_um_style_tl
         \clist_map_break:
       }{
@@ -3171,7 +3171,7 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
   \clist_map_inline:nn {#2} {
     \cs_if_exist:cT {um_config_ \l_um_style_tl _##1:n} {
-      \tl_if_eq:nnTF {##1}{misc} {
+      \str_if_eq:nnTF {##1}{misc} {
         \um_trace:nx {setup-alph} {math \l_um_style_tl~(##1)}
         \use:c {um_config_ \l_um_style_tl _##1:n} {#3}
       }{
