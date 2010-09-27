@@ -138,6 +138,13 @@ changes have not affected the standard behaviour.
 CHANGE HISTORY
 --------------
 
+- v0.5c (2010/09/27)
+
+  * Fix a long-standing bug in XeLaTeX in which the "master" math
+    families 2 and 3 weren't being set; hence fraction rules and many other
+    parameters were not being set correctly
+  * Stay in sync with internal fontspec changes
+
 - v0.5b (2010/09/19): Tune-up
 
   * Added missing symbols/synonyms:  
