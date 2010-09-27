@@ -2263,18 +2263,14 @@ This work is "author-maintained" by Will Robertson.
   \keys_set:nn {unicode-math} {#1}
   \um_fontspec_select_font:n {#2}
 %    \end{macrocode}
-% Check for the correct number of \cs{fontdimen}s:
+% Check whether we're using a real maths font:
 %    \begin{macrocode}
-%%  \ifdim \dimexpr\fontdimen9\l_um_font*65536\relax =65pt\relax
-%%    \bool_set_true:N \l_um_ot_math_bool
-%%  \else
-%%    \bool_set_false:N \l_um_ot_math_bool
-%%    \PackageWarningNoLine{unicode-math}{
-%%      The~ font~ '#2' ~is~ not~ a~ valid~ OpenType~ maths~ font.~
-%%      Some~ maths~ features~ will~ not~ be~ available~ or~ behave~
-%%      in~ a~ substandard~ manner
-%%    }
-%%  \fi
+  \group_begin:
+    \fontfamily{\zf@family}\selectfont
+    \fontspec_if_script:nTF {math}
+      {\bool_gset_true:N  \l_um_ot_math_bool}
+      {\bool_gset_false:N \l_um_ot_math_bool}
+  \group_end:
 %    \end{macrocode}
 % If we're defining the full Unicode math repetoire, then we skip all
 % the parsing processing needed if we're only defining a subset.
@@ -2307,7 +2303,7 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
   \DeclareSymbolFont{\um_symfont_tl}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
-  \bool_if:NF \g_um_mainfont_set_bool {
+  \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_set_bool} {
     \bool_set_true:N \g_um_mainfont_set_bool
     \DeclareSymbolFont{symbols}
       {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
