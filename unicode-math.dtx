@@ -4285,7 +4285,7 @@ This work is "author-maintained" by Will Robertson.
   }
 |group_end:
 %    \end{macrocode}
-% Fix \cs{backslash}:
+% Fix \cs{backslash}: ^^A |
 %    \begin{macrocode}
 %    \end{macrocode}
 %
@@ -4946,11 +4946,17 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_tmpa:}
-% A scratch macro.
+% \begin{macro}{\um_tmpa:w}
+% \begin{macro}{\um_tmpb:w}
+% \begin{macro}{\um_tmpc:w}
+% Three scratch macros.
 %    \begin{macrocode}
-\chk_if_free_cs:N \um_tmpa:
+\chk_if_free_cs:N \um_tmpa:w
+\chk_if_free_cs:N \um_tmpb:w
+\chk_if_free_cs:N \um_tmpc:w
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\um_check_and_fix:NNpnpn}
@@ -4967,12 +4973,57 @@ This work is "author-maintained" by Will Robertson.
 % Otherwise issue a warning and don’t overwrite.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Npn \um_check_and_fix:NNpnpn #1 #2 {
+  \tl_set:Nn \l_um_tmpa_tl { #1 }
+  \cs_set_eq:NN \um_tmpa:w #2
+  \tex_afterassignment:D \um_check_and_fix_aux_i:pn
+%    \end{macrocode}
+% We always have to grab the rest of the expected arguments.
+%    \begin{macrocode}
+  \um_tmpa:w \um_tmpb:w
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_check_and_fix_aux_i:pn}
+% \darg{new parameter text}
+% \darg{new replacement text}
+% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_check_and_fix_aux_i:pn {
+  \tex_afterassignment:D \um_check_and_fix_aux_ii:
+  \um_tmpa:w \um_tmpc:w
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_check_and_fix_aux_ii:}
+% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_check_and_fix_aux_ii: {
+  \exp_args:No \um_check_and_fix_aux_iii:nNN
+    \l_um_tmpa_tl \um_tmpb:w \um_tmpc:w
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_check_and_fix_aux_iii:nNN}
+% \darg{command}
+% \darg{macro containing expected definition}
+% \darg{macro containing new definition}
+% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_check_and_fix_aux_iii:nNN #1 #2 #3 {
   \cs_if_exist:NT #1 {
     \token_if_macro:NTF #1 {
-      \group_begin:
-      \tl_set:Nn \l_um_tmpa_tl { \um_check_and_fix_aux:NNpn #1 #2 }
-      \tex_afterassignment:D \l_um_tmpa_tl
-      #2 \um_tmpa:
+      \cs_if_eq:NNTF #1 #2 {
+        \msg_info:nnx { unicode-math } { patch-macro }
+          { \token_to_str:N #1 }
+        \cs_set_eq:NN #1 #3
+      } {
+        \msg_warning:nnxxx { unicode-math } { wrong-meaning }
+          { \token_to_str:N #1 } { \token_to_meaning:N #1 }
+          { \token_to_meaning:N #2 }
+      }
     } {
       \msg_warning:nnx { unicode-math } { macro-expected }
         { \token_to_str:N #1 }
@@ -4981,34 +5032,6 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 % \end{macro}
-%
-% \begin{macro}{\um_check_and_fix_aux:NNpn}
-% \darg{command}
-% \darg{factory command}
-% \darg{new parameter text}
-% \darg{new replacement text}
-% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
-%    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix_aux:NNpn #1 #2 {
-  \cs_if_eq:NNTF #1 \um_tmpa: {
-    \msg_info:nnx { unicode-math } { patch-macro }
-      { \token_to_str:N #1 }
-    \group_end:
-    #2 #1
-  } {
-    \msg_warning:nnxxx { unicode-math } { wrong-meaning }
-      { \token_to_str:N #1 } { \token_to_meaning:N #1 }
-      { \token_to_meaning:N \um_tmpa: }
-%    \end{macrocode}
-% We have to grab the rest of the expected arguments.
-%    \begin{macrocode}
-    \tex_afterassignment:D \group_end:
-    #2 \um_tmpa:
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
 %
 % \paragraph{\pkg{url}}
 % Simply need to get \pkg{url} in a state such that
