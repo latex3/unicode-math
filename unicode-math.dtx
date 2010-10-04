@@ -4946,6 +4946,69 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\um_tmpa:}
+% A scratch macro.
+%    \begin{macrocode}
+\chk_if_free_cs:N \um_tmpa:
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_check_and_fix:NNpnpn}
+% \darg{command}
+% \darg{factory command}
+% \darg{expected parameter text}
+% \darg{expected replacement text}
+% \darg{new parameter text}
+% \darg{new replacement text}
+% Tries to patch \meta{command}.
+% If \meta{command} is undefined, do nothing.
+% Otherwise it must be a macro with the given \meta{expected parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
+% In this case it will be overwritten using the \meta{new parameter text} and the \meta{new replacement text}.
+% Otherwise issue a warning and don’t overwrite.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_check_and_fix:NNpnpn #1 #2 {
+  \cs_if_exist:NT #1 {
+    \token_if_macro:NTF #1 {
+      \group_begin:
+      \tl_set:Nn \l_um_tmpa_tl { \um_check_and_fix_aux:NNpn #1 #2 }
+      \tex_afterassignment:D \l_um_tmpa_tl
+      #2 \um_tmpa:
+    } {
+      \msg_warning:nnx { unicode-math } { macro-expected }
+        { \token_to_str:N #1 }
+    }
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_check_and_fix_aux:NNpn}
+% \darg{command}
+% \darg{factory command}
+% \darg{new parameter text}
+% \darg{new replacement text}
+% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_check_and_fix_aux:NNpn #1 #2 {
+  \cs_if_eq:NNTF #1 \um_tmpa: {
+    \msg_info:nnx { unicode-math } { patch-macro }
+      { \token_to_str:N #1 }
+    \group_end:
+    #2 #1
+  } {
+    \msg_warning:nnxxx { unicode-math } { wrong-meaning }
+      { \token_to_str:N #1 } { \token_to_meaning:N #1 }
+      { \token_to_meaning:N \um_tmpa: }
+%    \end{macrocode}
+% We have to grab the rest of the expected arguments.
+%    \begin{macrocode}
+    \tex_afterassignment:D \group_end:
+    #2 \um_tmpa:
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
 %
 % \paragraph{\pkg{url}}
 % Simply need to get \pkg{url} in a state such that
@@ -4989,6 +5052,56 @@ This work is "author-maintained" by Will Robertson.
   \def \resetMathstrut@ {%
     \setbox\z@\hbox{$($}%
     \ht\Mathstrutbox@\ht\z@ \dp\Mathstrutbox@\dp\z@
+  }
+%    \end{macrocode}
+% The |subarray| environment uses inappropriate font dimensions.
+%    \begin{macrocode}
+  \um_check_and_fix:NNpnpn \subarray \cs_set:Npn #1 {
+    \vcenter
+    \bgroup
+    \Let@
+    \restore@math@cr
+    \default@tag
+    \baselineskip \fontdimen 10~ \scriptfont \tw@
+    \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
+    \lineskip \thr@@ \fontdimen 8~ \scriptfont \thr@@
+    \lineskiplimit \lineskip
+    \ialign
+    \bgroup
+    \ifx c #1 \hfil \fi
+    $ \m@th \scriptstyle ## $
+    \hfil
+    \crcr
+  } #1 {
+    \tex_vcenter:D
+    \c_group_begin_token
+    \Let@
+    \restore@math@cr
+    \default@tag
+    \skip_set:Nn \tex_baselineskip:D {
+%    \end{macrocode}
+% Here we use stack top shift + stack bottom shift, which sounds reasonable.
+%    \begin{macrocode}
+      \tex_fontdimen:D 32~ \tex_scriptfont:D \c_two
+      + \tex_fontdimen:D 34~ \tex_scriptfont:D \c_two
+    }
+    \skip_set:Nn \tex_lineskip:D {
+%    \end{macrocode}
+% Here we use the minimum stack gap.
+%    \begin{macrocode}
+      \tex_fontdimen:D 36~ \tex_scriptfont:D \c_three
+    }
+    \tex_lineskiplimit:D \tex_lineskip:D
+    \ialign
+    \c_group_begin_token
+    \if_meaning:w c #1 \tex_hfil:D \fi:
+    \c_math_shift_token
+    \m@th
+    \tex_scriptstyle:D
+    \c_parameter_token \c_parameter_token
+    \c_math_shift_token
+    \tex_hfil:D
+    \tex_crcr:D
   }
 }
 %    \end{macrocode}
@@ -5105,6 +5218,18 @@ This work is "author-maintained" by Will Robertson.
 \msg_new:nnn {unicode-math} {setup-alph}
 {
   Setup~ alphabet:~ #1.
+}
+\msg_new:nnn {unicode-math} {macro-expected}
+{
+  I've~ expected~ that~ #1~ is~ a~ macro,~ but~ it~ isn't.
+}
+\msg_new:nnn {unicode-math} {wrong-meaning}
+{
+  I've~ expected~ #1~ to~ have~ the~ meaning~ #3,~ but~ it~ has~ the~ meaning~ #2.
+}
+\msg_new:nnn {unicode-math} {patch-macro}
+{
+  I'm~ going~ to~ patch~ macro~ #1.
 }
 %    \end{macrocode}
 %
