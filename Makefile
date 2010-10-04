@@ -276,7 +276,7 @@ $(builddir)/L%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/L%.ltx
 
 #### Generating new tests ####
 
-lonelystub = $(shell cd $(testdir); ls | egrep '(.*\.ltx)|(.*\.safe.pdf)' | cut -d . -f 1 | uniq -u)
+lonelystub = $(shell cd $(testdir); ls | egrep '(.*\.ltx$$)|(.*\.safe.pdf$$)' | cut -d . -f 1 | uniq -u)
 lonelytest = $(addprefix $(testdir)/,$(addsuffix .safe.pdf,$(lonelystub)))
 lonelytesttarget = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
 
