@@ -5169,6 +5169,80 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
+% \paragraph{\pkg{mathtools}}
+% \pkg{mathtools}’s |\cramped| command and others that make use of its internal version use an incorrect font dimension.
+%
+%    \begin{macrocode}
+\um_patch_pkg:nn { mathtools } {
+  \um_check_and_fix:NNpnpn \MT_cramped_internal:Nn \cs_set_nopar:Npn #1 #2 {
+    \sbox \z@ {
+      $
+      \m@th
+      #1
+      \nulldelimiterspace = \z@
+      \radical \z@ { #2 }
+      $
+    }
+    \ifx #1 \displaystyle
+      \dimen@ = \fontdimen 8 \textfont 3
+      \advance \dimen@ .25 \fontdimen 5 \textfont 2
+    \else
+      \dimen@ = 1.25 \fontdimen 8
+      \ifx #1 \textstyle
+        \textfont
+      \else
+        \ifx #1 \scriptstyle
+          \scriptfont
+        \else
+          \scriptscriptfont
+        \fi
+      \fi
+      3
+    \fi
+    \advance \dimen@ -\ht\z@
+    \ht\z@ = -\dimen@
+    \box\z@
+  } #1 #2 {
+    \hbox_set:Nn \l_tmpa_box {
+      \color@setgroup
+      \c_math_shift_token
+      \m@th
+      #1
+      \dim_zero:N \tex_nulldelimiterspace:D
+      \tex_radical:D \c_zero { #2 }
+      \c_math_shift_token
+      \color@endgroup
+    }
+    \box_set_ht:Nn \l_tmpa_box {
+      \box_ht:N \l_tmpa_box
+      - \tex_fontdimen:D
+      \cs_if_eq:NNTF #1 \displaystyle {
+%    \end{macrocode}
+% Here we use the radical vertical gap in display style (font dimension~60)
+%    \begin{macrocode}
+        60 \tex_textfont:D
+      } {
+%    \end{macrocode}
+% Here we use the radical vertical gap in non-display style (font dimension~59)
+%    \begin{macrocode}
+        59
+        \cs_if_eq:NNTF #1 \textstyle {
+          \tex_textfont:D
+        } {
+          \cs_if_eq:NNTF #1 \scriptstyle {
+            \tex_scriptfont:D
+          } {
+            \tex_scriptscriptfont:D
+          }
+        }
+      }
+      \c_two
+    }
+    \box_use_clear:N \l_tmpa_box
+  }
+}
+%    \end{macrocode}
+%
 % \paragraph{\pkg{beamer}}
 % At end of the package so the warnings are defined.
 %    \begin{macrocode}
