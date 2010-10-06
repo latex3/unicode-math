@@ -4947,82 +4947,40 @@ This work is "author-maintained" by Will Robertson.
 % \end{macro}
 %
 % \begin{macro}{\um_tmpa:w}
-% \begin{macro}{\um_tmpb:w}
-% \begin{macro}{\um_tmpc:w}
-% Three scratch macros.
+% A scratch macro.
 %    \begin{macrocode}
 \chk_if_free_cs:N \um_tmpa:w
-\chk_if_free_cs:N \um_tmpb:w
-\chk_if_free_cs:N \um_tmpc:w
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
 %
-% \begin{macro}{\um_check_and_fix:NNpnpn}
+% \begin{macro}{\um_check_and_fix:NNnnnn}
 % \darg{command}
 % \darg{factory command}
-% \darg{expected parameter text}
+% \darg{parameter text}
 % \darg{expected replacement text}
-% \darg{new parameter text}
-% \darg{new replacement text}
+% \darg{new replacement text for \LuaTeX}
+% \darg{new replacement text for \XeTeX}
 % Tries to patch \meta{command}.
 % If \meta{command} is undefined, do nothing.
-% Otherwise it must be a macro with the given \meta{expected parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
-% In this case it will be overwritten using the \meta{new parameter text} and the \meta{new replacement text}.
+% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
+% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text for \LuaTeX} or the \meta{new replacement text for \XeTeX}, depending on the engine.
 % Otherwise issue a warning and don’t overwrite.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix:NNpnpn #1 #2 {
-  \tl_set:Nn \l_um_tmpa_tl { #1 }
-  \cs_set_eq:NN \um_tmpa:w #2
-  \tex_afterassignment:D \um_check_and_fix_aux_i:pn
-%    \end{macrocode}
-% We always have to grab the rest of the expected arguments.
-%    \begin{macrocode}
-  \um_tmpa:w \um_tmpb:w
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um_check_and_fix_aux_i:pn}
-% \darg{new parameter text}
-% \darg{new replacement text}
-% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
-%    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix_aux_i:pn {
-  \tex_afterassignment:D \um_check_and_fix_aux_ii:
-  \um_tmpa:w \um_tmpc:w
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um_check_and_fix_aux_ii:}
-% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
-%    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix_aux_ii: {
-  \exp_args:No \um_check_and_fix_aux_iii:nNN
-    \l_um_tmpa_tl \um_tmpb:w \um_tmpc:w
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\um_check_and_fix_aux_iii:nNN}
-% \darg{command}
-% \darg{macro containing expected definition}
-% \darg{macro containing new definition}
-% Auxiliary macro for \cs{um_check_and_fix:NNpnpn}.
-%    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix_aux_iii:nNN #1 #2 #3 {
+\cs_new_protected_nopar:Npn \um_check_and_fix:NNnnnn #1 #2 #3 #4 #5 #6 {
   \cs_if_exist:NT #1 {
     \token_if_macro:NTF #1 {
-      \cs_if_eq:NNTF #1 #2 {
+      \group_begin:
+      #2 \um_tmpa:w #3 { #4 }
+      \cs_if_eq:NNTF #1 \um_tmpa:w {
         \msg_info:nnx { unicode-math } { patch-macro }
           { \token_to_str:N #1 }
-        \cs_set_eq:NN #1 #3
+        \group_end:
+        \xetex_or_luatex:nnn { #2 #1 #3 } { #6 } { #5 }
       } {
         \msg_warning:nnxxx { unicode-math } { wrong-meaning }
           { \token_to_str:N #1 } { \token_to_meaning:N #1 }
-          { \token_to_meaning:N #2 }
+          { \token_to_meaning:N \um_tmpa:w }
+        \group_end:
       }
     } {
       \msg_warning:nnx { unicode-math } { macro-expected }
@@ -5032,6 +4990,7 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 % \end{macro}
+%
 %
 % \paragraph{\pkg{url}}
 % Simply need to get \pkg{url} in a state such that
@@ -5079,54 +5038,86 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % The |subarray| environment uses inappropriate font dimensions.
 %    \begin{macrocode}
-  \xetex_if_engine:T {
-    \um_check_and_fix:NNpnpn \subarray \cs_set:Npn #1 {
-      \vcenter
-      \bgroup
-      \Let@
-      \restore@math@cr
-      \default@tag
-      \baselineskip \fontdimen 10~ \scriptfont \tw@
-      \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
-      \lineskip \thr@@ \fontdimen 8~ \scriptfont \thr@@
-      \lineskiplimit \lineskip
-      \ialign
-      \bgroup
-      \ifx c #1 \hfil \fi
-      $ \m@th \scriptstyle ## $
-      \hfil
-      \crcr
-    } #1 {
-      \tex_vcenter:D
-      \c_group_begin_token
-      \Let@
-      \restore@math@cr
-      \default@tag
-      \skip_set:Nn \tex_baselineskip:D {
+  \um_check_and_fix:NNnnnn \subarray \cs_set:Npn { #1 } {
+    \vcenter
+    \bgroup
+    \Let@
+    \restore@math@cr
+    \default@tag
+    \baselineskip \fontdimen 10~ \scriptfont \tw@
+    \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
+    \lineskip \thr@@ \fontdimen 8~ \scriptfont \thr@@
+    \lineskiplimit \lineskip
+    \ialign
+    \bgroup
+    \ifx c #1 \hfil \fi
+    $ \m@th \scriptstyle ## $
+    \hfil
+    \crcr
+  } {
+%    \end{macrocode}
+% The version for \LuaTeX\ uses math font parameters for stacks.
+%    \begin{macrocode}
+    \tex_vcenter:D
+    \c_group_begin_token
+    \Let@
+    \restore@math@cr
+    \default@tag
+    \skip_set:Nn \tex_baselineskip:D {
 %    \end{macrocode}
 % Here we use stack top shift + stack bottom shift, which sounds reasonable.
 %    \begin{macrocode}
-        \tex_fontdimen:D 32~ \tex_scriptfont:D \c_two
-        + \tex_fontdimen:D 34~ \tex_scriptfont:D \c_two
-      }
-      \skip_set:Nn \tex_lineskip:D {
+      \luatexUmathstacknumup \tex_scriptstyle:D
+      + \luatexUmathstackdenomdown \tex_scriptstyle:D
+    }
 %    \end{macrocode}
 % Here we use the minimum stack gap.
 %    \begin{macrocode}
-        \tex_fontdimen:D 36~ \tex_scriptfont:D \c_three
-      }
-      \tex_lineskiplimit:D \tex_lineskip:D
-      \ialign
-      \c_group_begin_token
-      \if_meaning:w c #1 \tex_hfil:D \fi:
-      \c_math_shift_token
-      \m@th
-      \tex_scriptstyle:D
-      \c_parameter_token \c_parameter_token
-      \c_math_shift_token
-      \tex_hfil:D
-      \tex_crcr:D
+    \tex_lineskip:D \luatexUmathstackvgap \tex_scriptstyle:D
+    \tex_lineskiplimit:D \tex_lineskip:D
+    \ialign
+    \c_group_begin_token
+    \if_meaning:w c #1 \tex_hfil:D \fi:
+    \c_math_shift_token
+    \m@th
+    \tex_scriptstyle:D
+    \c_parameter_token \c_parameter_token
+    \c_math_shift_token
+    \tex_hfil:D
+    \tex_crcr:D
+  } {
+%    \end{macrocode}
+% The version for \XeTeX\ uses font dimensions for stacks.
+%    \begin{macrocode}
+    \tex_vcenter:D
+    \c_group_begin_token
+    \Let@
+    \restore@math@cr
+    \default@tag
+    \skip_set:Nn \tex_baselineskip:D {
+%    \end{macrocode}
+% Here we use stack top shift + stack bottom shift, which sounds reasonable.
+%    \begin{macrocode}
+      \tex_fontdimen:D 32~ \tex_scriptfont:D \c_two
+      + \tex_fontdimen:D 34~ \tex_scriptfont:D \c_two
     }
+    \skip_set:Nn \tex_lineskip:D {
+%    \end{macrocode}
+% Here we use the minimum stack gap.
+%    \begin{macrocode}
+      \tex_fontdimen:D 36~ \tex_scriptfont:D \c_three
+    }
+    \tex_lineskiplimit:D \tex_lineskip:D
+    \ialign
+    \c_group_begin_token
+    \if_meaning:w c #1 \tex_hfil:D \fi:
+    \c_math_shift_token
+    \m@th
+    \tex_scriptstyle:D
+    \c_parameter_token \c_parameter_token
+    \c_math_shift_token
+    \tex_hfil:D
+    \tex_crcr:D
   }
 }
 %    \end{macrocode}
@@ -5175,74 +5166,81 @@ This work is "author-maintained" by Will Robertson.
 % \pkg{mathtools}’s |\cramped| command and others that make use of its internal version use an incorrect font dimension.
 %
 %    \begin{macrocode}
-\xetex_if_engine:T {
-  \um_patch_pkg:nn { mathtools } {
-    \um_check_and_fix:NNpnpn \MT_cramped_internal:Nn \cs_set_nopar:Npn #1 #2 {
-      \sbox \z@ {
-        $
-        \m@th
-        #1
-        \nulldelimiterspace = \z@
-        \radical \z@ { #2 }
-        $
-      }
-      \ifx #1 \displaystyle
-        \dimen@ = \fontdimen 8 \textfont 3
-        \advance \dimen@ .25 \fontdimen 5 \textfont 2
+\um_patch_pkg:nn { mathtools } {
+  \um_check_and_fix:NNnnnn \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 } {
+    \sbox \z@ {
+      $
+      \m@th
+      #1
+      \nulldelimiterspace = \z@
+      \radical \z@ { #2 }
+      $
+    }
+    \ifx #1 \displaystyle
+      \dimen@ = \fontdimen 8 \textfont 3
+      \advance \dimen@ .25 \fontdimen 5 \textfont 2
+    \else
+      \dimen@ = 1.25 \fontdimen 8
+      \ifx #1 \textstyle
+        \textfont
       \else
-        \dimen@ = 1.25 \fontdimen 8
-        \ifx #1 \textstyle
-          \textfont
+        \ifx #1 \scriptstyle
+          \scriptfont
         \else
-          \ifx #1 \scriptstyle
-            \scriptfont
-          \else
-            \scriptscriptfont
-          \fi
+          \scriptscriptfont
         \fi
-        3
       \fi
-      \advance \dimen@ -\ht\z@
-      \ht\z@ = -\dimen@
-      \box\z@
-    } #1 #2 {
-      \hbox_set:Nn \l_tmpa_box {
-        \color@setgroup
-        \c_math_shift_token
-        \m@th
-        #1
-        \dim_zero:N \tex_nulldelimiterspace:D
-        \tex_radical:D \c_zero { #2 }
-        \c_math_shift_token
-        \color@endgroup
-      }
-      \box_set_ht:Nn \l_tmpa_box {
-        \box_ht:N \l_tmpa_box
-        - \tex_fontdimen:D
-        \cs_if_eq:NNTF #1 \displaystyle {
+      3
+    \fi
+    \advance \dimen@ -\ht\z@
+    \ht\z@ = -\dimen@
+    \box\z@
+  } {
+%    \end{macrocode}
+% \LuaTeX\ has primitives for setting material in cramped mode (thanks to Khaled Hosny for pointing this out).
+% Note we don’t use \cs{mathstyle} since we want to patch only a single command.
+%    \begin{macrocode}
+    \use:c { luatexcramped \cs_to_str:N #1 } { #2 }
+  } {
+%    \end{macrocode}
+% The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
+%    \begin{macrocode}
+    \hbox_set:Nn \l_tmpa_box {
+      \color@setgroup
+      \c_math_shift_token
+      \m@th
+      #1
+      \dim_zero:N \tex_nulldelimiterspace:D
+      \tex_radical:D \c_zero { #2 }
+      \c_math_shift_token
+      \color@endgroup
+    }
+    \box_set_ht:Nn \l_tmpa_box {
+      \box_ht:N \l_tmpa_box
+      - \tex_fontdimen:D
+      \cs_if_eq:NNTF #1 \displaystyle {
 %    \end{macrocode}
 % Here we use the radical vertical gap in display style (font dimension~60)
 %    \begin{macrocode}
-          60 \tex_textfont:D
-        } {
+        60 \tex_textfont:D
+      } {
 %    \end{macrocode}
 % Here we use the radical vertical gap in non-display style (font dimension~59)
 %    \begin{macrocode}
-          59
-          \cs_if_eq:NNTF #1 \textstyle {
-            \tex_textfont:D
+        59
+        \cs_if_eq:NNTF #1 \textstyle {
+          \tex_textfont:D
+        } {
+          \cs_if_eq:NNTF #1 \scriptstyle {
+            \tex_scriptfont:D
           } {
-            \cs_if_eq:NNTF #1 \scriptstyle {
-              \tex_scriptfont:D
-            } {
-              \tex_scriptscriptfont:D
-            }
+            \tex_scriptscriptfont:D
           }
         }
-        \c_two
       }
-      \box_use_clear:N \l_tmpa_box
+      \c_two
     }
+    \box_use_clear:N \l_tmpa_box
   }
 }
 %    \end{macrocode}
