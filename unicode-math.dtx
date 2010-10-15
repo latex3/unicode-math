@@ -1112,7 +1112,7 @@ This work is "author-maintained" by Will Robertson.
 % \subsection{Extras}
 %
 % \begin{macro}{\um_glyph_if_exist:nTF}
-%: TODO: Generalise for arbitrary fonts! \cs{\l_um_font} is not always the one used for a specific glyph!!
+%: TODO: Generalise for arbitrary fonts! \cs{l_um_font} is not always the one used for a specific glyph!!
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F} {
   \etex_iffontchar:D \l_um_font #1 \scan_stop:
@@ -2603,7 +2603,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % Also, what about right-to-left square roots?
 %
-% \begin{macro}{\um@radicals}
+% \begin{macro}{\l_um_radicals_tl}
 % We organise radicals in the same way as nolimits-operators; that is,
 % in a comma-list.
 %    \begin{macrocode}
@@ -2628,6 +2628,266 @@ This work is "author-maintained" by Will Robertson.
 % \subsection{Maths accents}
 %
 % Maths accents should just work \emph{if they are available in the font}.
+%
+% \subsection{Common interface for font parameters}
+%
+% \XeTeX\ and \LuaTeX\ have different interfaces for math font parameters.
+% We use \LuaTeX’s interface because it’s much better, but rename the primitives to be more \LaTeX3-like.
+% There are getter and setter commands for each font parameter.
+% The names of the parameters is derived from the \LuaTeX\ names, with underscores inserted between words.
+% For every parameter \cs{Umath\meta{\LuaTeX\ name}}, we define an expandable getter command \cs{um_\meta{\LaTeX3 name}:N} and a protected setter command \cs{um_set_\meta{\LaTeX3 name}:Nn}.
+% The getter command takes one of the style primitives (\cs{displaystyle} etc.)\ and expands to the font parameter, which is a \meta{dimension}.
+% The setter command takes a style primitive and a dimension expression, which is parsed with \cs{dim_eval:n}.
+%
+% Often, the mapping between font dimensions and font parameters is bijective, but there are cases which require special attention:
+% \begin{itemize}
+% \item Some parameters map to different dimensions in display and non-display styles.
+% \item Likewise, one parameter maps to different dimensions in non-cramped and cramped styles.
+% \item There are a few parameters for which \XeTeX\ doesn’t seem to provide \cs{fontdimen}s; in this case the getter and setter commands are left undefined.
+% \end{itemize}
+%
+% \paragraph{Cramped style tokens}
+% \LuaTeX\ has \cs{crampeddisplaystyle} etc.,\ but they are loaded as \cs{luatexcrampeddisplaystyle} etc.\ by the \pkg{luatextra} package.
+% \XeTeX, however, doesn’t have these primitives, and their syntax cannot really be emulated.
+% Nevertheless, we define these commands as quarks, so they can be used as arguments to the font parameter commands (but nowhere else).
+% Making these commands available is necessary because we need to make a distinction between cramped and non-cramped styles for one font parameter.
+%
+% \begin{macro}{\um_new_cramped_style:N}
+% \darg{command}
+% Define \meta{command} as a new cramped style switch.
+% For \LuaTeX, simply rename the correspronding primitive.
+% For \XeTeX, define \meta{command} as a new quark.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_new_cramped_style:N #1 {
+  \xetex_or_luatex:nn {
+    \quark_new:N #1
+  } {
+    \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 }
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\crampeddisplaystyle}
+% \begin{macro}{\crampedtextstyle}
+% \begin{macro}{\crampedscriptstyle}
+% \begin{macro}{\crampedscriptscriptstyle}
+% The cramped style commands.
+%    \begin{macrocode}
+\um_new_cramped_style:N \crampeddisplaystyle
+\um_new_cramped_style:N \crampedtextstyle
+\um_new_cramped_style:N \crampedscriptstyle
+\um_new_cramped_style:N \crampedscriptscriptstyle
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \paragraph{Font dimension mapping}
+% Font parameters may differ between the styles.
+% \LuaTeX\ accounts for this by having the parameter primitives take a style token argument.
+% To replicate this behavior in \XeTeX, we have to map style tokens to specific combinations of font dimension numbers and math fonts (\cs{textfont} etc.).
+%
+% \begin{macro}{\um_font_dimen:Nnnnn}
+% \darg{style token}
+% \darg{font dimen for display style}
+% \darg{font dimen for cramped display style}
+% \darg{font dimen for non-display styles}
+% \darg{font dimen for cramped non-display styles}
+% Map math style to \XeTeX\ math font dimension.
+% \meta{style token} must be one of the style switches (\cs{displaystyle}, \cs{crampeddisplaystyle}, \dots).
+% The other parameters are integer constants referring to font dimension numbers.
+% The macro expands to a dimension which contains the appropriate font dimension.
+%    \begin{macrocode}
+\xetex_if_engine:T {
+  \cs_new_nopar:Npn \um_font_dimen:Nnnnn #1 #2 #3 #4 #5 {
+    \tex_fontdimen:D
+    \cs_if_eq:NNTF #1 \tex_displaystyle:D {
+      #2 \tex_textfont:D
+    } {
+      \cs_if_eq:NNTF #1 \crampeddisplaystyle {
+        #3 \tex_textfont:D
+      } {
+        \cs_if_eq:NNTF #1 \tex_textstyle:D {
+          #4 \tex_textfont:D
+        } {
+          \cs_if_eq:NNTF #1 \crampedtextstyle {
+            #5 \tex_textfont:D
+          } {
+            \cs_if_eq:NNTF #1 \tex_scriptstyle:D {
+              #4 \tex_scriptfont:D
+            } {
+              \cs_if_eq:NNTF #1 \crampedscriptstyle {
+                #5 \tex_scriptfont:D
+              } {
+                \cs_if_eq:NNTF #1 \tex_scriptscriptstyle:D {
+                  #4 \tex_scriptscriptfont:D
+                } {
+%    \end{macrocode}
+% Should we check here if the style is invalid?
+%    \begin{macrocode}
+                  #5 \tex_scriptscriptfont:D
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+%    \end{macrocode}
+% Which family to use?
+%    \begin{macrocode}
+    \c_two
+  }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \paragraph{Font parameters}
+% This paragraph contains macros for defining the font parameter interface, as well as the definition for all font parameters known to \LuaTeX.
+%
+% \begin{macro}{\um_font_param:nnnnn}
+% \darg{name}
+% \darg{font dimension for non-cramped display style}
+% \darg{font dimension for cramped display style}
+% \darg{font dimension for non-cramped non-display styles}
+% \darg{font dimension for cramped non-display styles}
+% This macro defines getter and setter functions for the font parameter \meta{name}.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+% The \XeTeX\ font dimension numbers must be integer constants.
+%    \begin{macrocode}
+\xetex_or_luatex:nnn {
+  \cs_new_protected_nopar:Npn \um_font_param:nnnnn #1 #2 #3 #4 #5
+} {
+  \um_font_param_aux:ccnnnn { um_ #1 :N } { um_set_ #1 :N }
+    { #2 } { #3 } { #4 } { #5 }
+} {
+  \tl_set:Nn \l_um_tmpa_tl { #1 }
+  \tl_remove_all_in:Nn \l_um_tmpa_tl { _ }
+  \um_font_param_aux:ccc { um_ #1 :N } { um_set_ #1 :N }
+    { luatexUmath \l_um_tmpa_tl }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_font_param:nnn}
+% \darg{name}
+% \darg{font dimension for display style}
+% \darg{font dimension for non-display styles}
+% This macro defines getter and setter functions for the font parameter \meta{name}.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+% The \XeTeX\ font dimension numbers must be integer constants.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_font_param:nnn #1 #2 #3 {
+  \um_font_param:nnnnn { #1 } { #2 } { #2 } { #3 } { #3 }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_font_param:nn}
+% \darg{name}
+% \darg{font dimension}
+% This macro defines getter and setter functions for the font parameter \meta{name}.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+% The \XeTeX\ font dimension number must be an integer constant.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_font_param:nn #1 #2 {
+  \um_font_param:nnnnn { #1 } { #2 } { #2 } { #2 } { #2 }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_font_param:n}
+% \darg{name}
+% This macro defines getter and setter functions for the font parameter \meta{name}, which is considered unavailable in \XeTeX\@.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+%    \begin{macrocode}
+\xetex_or_luatex:nnn {
+  \cs_new_protected_nopar:Npn \um_font_param:n #1
+} { } {
+  \um_font_param:nnnnn { #1 } { 0 } { 0 } { 0 } { 0 }
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_font_param_aux:NNnnnn}
+% \begin{macro}{\um_font_param_aux:NNN}
+% Auxiliary macros for generating font parameter accessor macros.
+%    \begin{macrocode}
+\xetex_or_luatex:nn {
+  \cs_new_protected_nopar:Npn \um_font_param_aux:NNnnnn #1 #2 #3 #4 #5 #6 {
+    \cs_new_nopar:Npn #1 ##1 {
+      \um_font_dimen:Nnnnn ##1 { #3 } { #4 } { #5 } { #6 }
+    }
+    \cs_new_protected_nopar:Npn #2 ##1 ##2 {
+      #1 ##1 \dim_eval:n { ##2 }
+    }
+  }
+  \cs_generate_variant:Nn \um_font_param_aux:NNnnnn { cc }
+} {
+  \cs_new_protected_nopar:Npn \um_font_param_aux:NNN #1 #2 #3 {
+    \cs_new_nopar:Npn #1 ##1 {
+      #3 ##1
+    }
+    \cs_new_protected_nopar:Npn #2 ##1 ##2 {
+      #3 ##1 \dim_eval:n { ##2 }
+    }
+  }
+  \cs_generate_variant:Nn \um_font_param_aux:NNN { ccc }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% Now all font parameters that are listed in the \LuaTeX\ reference follow.
+%    \begin{macrocode}
+\um_font_param:nn { axis } { 15 }
+\um_font_param:nn { operator_size } { 13 }
+\um_font_param:n { fraction_del_size }
+\um_font_param:nnn { fraction_denom_down } { 45 } { 44 }
+\um_font_param:nnn { fraction_denom_vgap } { 50 } { 49 }
+\um_font_param:nnn { fraction_num_up } { 43 } { 42 }
+\um_font_param:nnn { fraction_num_vgap } { 47 } { 46 }
+\um_font_param:nn { fraction_rule } { 48 }
+\um_font_param:nn { limit_above_bgap } { 29 }
+\um_font_param:n { limit_above_kern }
+\um_font_param:nn { limit_above_vgap } { 28 }
+\um_font_param:nn { limit_below_bgap } { 31 }
+\um_font_param:n { limit_below_kern }
+\um_font_param:nn { limit_below_vgap } { 30 }
+\um_font_param:nn { over_delimiter_vgap } { 41 }
+\um_font_param:nn { over_delimiter_bgap } { 38 }
+\um_font_param:nn { under_delimiter_vgap } { 40 }
+\um_font_param:nn { under_delimiter_bgap } { 39 }
+\um_font_param:nn { overbar_kern } { 55 }
+\um_font_param:nn { overbar_rule } { 54 }
+\um_font_param:nn { overbar_vgap } { 53 }
+\um_font_param:n { quad }
+\um_font_param:nn { radical_kern } { 62 }
+\um_font_param:nn { radical_rule } { 61 }
+\um_font_param:nnn { radical_vgap } { 60 } { 59 }
+\um_font_param:nn { radical_degree_before } { 63 }
+\um_font_param:nn { radical_degree_after } { 64 }
+\um_font_param:nn { radical_degree_raise } { 65 }
+\um_font_param:nn { space_after_script } { 27 }
+\um_font_param:nnn { stack_denom_down } { 35 } { 34 }
+\um_font_param:nnn { stack_num_up } { 33 } { 32 }
+\um_font_param:nnn { stack_vgap } { 37 } { 36 }
+\um_font_param:nn { sub_shift_down } { 18 }
+\um_font_param:nn { sub_shift_drop } { 20 }
+\um_font_param:n { subsup_shift_down }
+\um_font_param:nn { sub_top_max } { 19 }
+\um_font_param:nn { subsup_vgap } { 25 }
+\um_font_param:nn { sup_bottom_min } { 23 }
+\um_font_param:nn { sup_shift_drop } { 24 }
+\um_font_param:nnnnn { sup_shift_up } { 21 } { 22 } { 21 } { 22 }
+\um_font_param:nn { supsub_bottom_max } { 26 }
+\um_font_param:nn { underbar_kern } { 58 }
+\um_font_param:nn { underbar_rule } { 57 }
+\um_font_param:nn { underbar_vgap } { 56 }
+\um_font_param:n { connector_overlap_min }
+%    \end{macrocode}
 %
 % \section{Font features}
 %
@@ -4991,6 +5251,23 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\um_check_and_fix:NNnnn}
+% \darg{command}
+% \darg{factory command}
+% \darg{parameter text}
+% \darg{expected replacement text}
+% \darg{new replacement text}
+% Tries to patch \meta{command}.
+% If \meta{command} is undefined, do nothing.
+% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
+% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
+% Otherwise issue a warning and don’t overwrite.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_check_and_fix:NNnnn #1 #2 #3 #4 #5 {
+  \um_check_and_fix:NNnnnn #1 #2 { #3 } { #4 } { #5 } { #5 }
+}
+%    \end{macrocode}
+% \end{macro}
 %
 % \paragraph{\pkg{url}}
 % Simply need to get \pkg{url} in a state such that
@@ -5038,7 +5315,7 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % The |subarray| environment uses inappropriate font dimensions.
 %    \begin{macrocode}
-  \um_check_and_fix:NNnnnn \subarray \cs_set:Npn { #1 } {
+  \um_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 } {
     \vcenter
     \bgroup
     \Let@
@@ -5055,9 +5332,6 @@ This work is "author-maintained" by Will Robertson.
     \hfil
     \crcr
   } {
-%    \end{macrocode}
-% The version for \LuaTeX\ uses math font parameters for stacks.
-%    \begin{macrocode}
     \tex_vcenter:D
     \c_group_begin_token
     \Let@
@@ -5067,46 +5341,13 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % Here we use stack top shift + stack bottom shift, which sounds reasonable.
 %    \begin{macrocode}
-      \luatexUmathstacknumup \tex_scriptstyle:D
-      + \luatexUmathstackdenomdown \tex_scriptstyle:D
+      \um_stack_num_up:N \tex_scriptstyle:D
+      + \um_stack_denom_down:N \tex_scriptstyle:D
     }
 %    \end{macrocode}
 % Here we use the minimum stack gap.
 %    \begin{macrocode}
-    \tex_lineskip:D \luatexUmathstackvgap \tex_scriptstyle:D
-    \tex_lineskiplimit:D \tex_lineskip:D
-    \ialign
-    \c_group_begin_token
-    \if_meaning:w c #1 \tex_hfil:D \fi:
-    \c_math_shift_token
-    \m@th
-    \tex_scriptstyle:D
-    \c_parameter_token \c_parameter_token
-    \c_math_shift_token
-    \tex_hfil:D
-    \tex_crcr:D
-  } {
-%    \end{macrocode}
-% The version for \XeTeX\ uses font dimensions for stacks.
-%    \begin{macrocode}
-    \tex_vcenter:D
-    \c_group_begin_token
-    \Let@
-    \restore@math@cr
-    \default@tag
-    \skip_set:Nn \tex_baselineskip:D {
-%    \end{macrocode}
-% Here we use stack top shift + stack bottom shift, which sounds reasonable.
-%    \begin{macrocode}
-      \tex_fontdimen:D 32~ \tex_scriptfont:D \c_two
-      + \tex_fontdimen:D 34~ \tex_scriptfont:D \c_two
-    }
-    \skip_set:Nn \tex_lineskip:D {
-%    \end{macrocode}
-% Here we use the minimum stack gap.
-%    \begin{macrocode}
-      \tex_fontdimen:D 36~ \tex_scriptfont:D \c_three
-    }
+    \tex_lineskip:D \um_stack_vgap:N \tex_scriptstyle:D
     \tex_lineskiplimit:D \tex_lineskip:D
     \ialign
     \c_group_begin_token
@@ -5200,7 +5441,7 @@ This work is "author-maintained" by Will Robertson.
 % \LuaTeX\ has primitives for setting material in cramped mode (thanks to Khaled Hosny for pointing this out).
 % Note we don’t use \cs{mathstyle} since we want to patch only a single command.
 %    \begin{macrocode}
-    \use:c { luatexcramped \cs_to_str:N #1 } { #2 }
+    \use:c { luatexcramped \cs_to_str:N #1 } #2
   } {
 %    \end{macrocode}
 % The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
@@ -5217,28 +5458,10 @@ This work is "author-maintained" by Will Robertson.
     }
     \box_set_ht:Nn \l_tmpa_box {
       \box_ht:N \l_tmpa_box
-      - \tex_fontdimen:D
-      \cs_if_eq:NNTF #1 \displaystyle {
 %    \end{macrocode}
-% Here we use the radical vertical gap in display style (font dimension~60)
+% Here we use the radical vertical gap.
 %    \begin{macrocode}
-        60 \tex_textfont:D
-      } {
-%    \end{macrocode}
-% Here we use the radical vertical gap in non-display style (font dimension~59)
-%    \begin{macrocode}
-        59
-        \cs_if_eq:NNTF #1 \textstyle {
-          \tex_textfont:D
-        } {
-          \cs_if_eq:NNTF #1 \scriptstyle {
-            \tex_scriptfont:D
-          } {
-            \tex_scriptscriptfont:D
-          }
-        }
-      }
-      \c_two
+      - \um_radical_vgap:N #1
     }
     \box_use_clear:N \l_tmpa_box
   }
@@ -5255,6 +5478,283 @@ This work is "author-maintained" by Will Robertson.
       \beamer@suppressreplacementstrue
     \fi
   }{}
+}
+%    \end{macrocode}
+%
+% \paragraph{\pkg{xy}}
+% The \pkg{xy} package requires a few patches due to font dimensions.
+%    \begin{macrocode}
+\um_patch_pkg:nn { xy } {
+  \um_check_and_fix:NNnnn \xymath@ \cs_gset_nopar:Npn { } {
+    \hbox \bgroup
+    \dimen@ = \the\fontdimen22 \textfont\tw@
+    \xyinside@
+  } {
+    \tex_hbox:D \c_group_begin_token
+    \dim_set:Nn \dimen@ { \um_axis:N \tex_textstyle:D }
+    \xyinside@
+  }
+  \um_check_and_fix:NNnnn \CORNER@i \cs_gset_nopar:Npn { } {
+    \ifx D \next
+      \DN@ D {
+        \xy@ { D } { \Y@c=-\D@c \nextii@\X@c \B@=\Y@c }
+        \CORNER@ii
+      }
+    \else
+      \ifx U \next
+        \DN@ U {
+          \xy@ { U } { \Y@c=~\U@c \nextii@\X@c \B@=\Y@c }
+          \CORNER@ii
+        }
+      \else
+        \ifx A \next
+          \DN@ A {
+            \xy@ { A } {
+              \Y@c=\fontdimen22\textfont\tw@
+              \nextii@\X@c
+              \B@=\Y@c
+            }
+            \CORNER@ii
+          }
+        \else
+          \ifx L \next
+            \DN@ L {
+              \xy@ { L } { \X@c=-\L@c \nextii@\Y@c \A@=\X@c }
+              \CORNER@ii
+            }
+          \else
+            \ifx R \next
+              \DN@ R {
+                \xy@ { R } { \X@c=~\R@c \nextii@\Y@c \A@=\X@c }
+                \CORNER@ii
+              }
+            \else
+              \ifx C \next
+                \DN@ C {
+                  \xy@ { C } { \X@c=~\A@ \Y@c=~\B@ } \CORNER@ii
+                }
+              \else
+                \ifx E \next
+                  \DN@ E {
+                    \xy@ { E } {
+                      \A@=\X@c
+                      \B@=\Y@c
+                      \the\Edge@c\z@
+                      \advance\X@c-\A@
+                      \advance\Y@c-\B@
+                    }
+                    \CORNER@ii
+                  }
+                \else
+                  \ifx P \next
+                    \DN@ P {
+                      \xy@ { P } {
+                        \A@=\X@c
+                        \B@=\Y@c
+                        \the\Edge@c\thr@@
+                        \advance\X@c-\A@
+                        \advance\Y@c-\B@
+                      }
+                      \CORNER@ii
+                    }
+                  \else
+                    \ifx ( \next % )
+                      \DN@(##1) {
+                        \xy@ { (##1) } {
+                          \X@c=##1\X@c \Y@c=##1\Y@c
+                        }
+                        \afterVECTOR@
+                      }
+                    \else
+                      \let\next@=\afterVECTOR@
+                    \fi
+                  \fi
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+    \next@
+  } {
+    \ifx D \next
+      \DN@ D {
+        \xy@ { D } { \Y@c=-\D@c \nextii@\X@c \B@=\Y@c }
+        \CORNER@ii
+      }
+    \else
+      \ifx U \next
+        \DN@ U {
+          \xy@ { U } { \Y@c= \U@c \nextii@\X@c \B@=\Y@c }
+          \CORNER@ii
+        }
+      \else
+        \ifx A \next
+          \DN@ A {
+            \xy@ { A } {
+              \dim_set:Nn \Y@c { \um_axis:N \tex_textstyle:D }
+              \nextii@\X@c
+              \B@=\Y@c
+            }
+            \CORNER@ii
+          }
+        \else
+          \ifx L \next
+            \DN@ L {
+              \xy@ { L } { \X@c=-\L@c \nextii@\Y@c \A@=\X@c }
+              \CORNER@ii
+            }
+          \else
+            \ifx R \next
+              \DN@ R {
+                \xy@ { R } { \X@c= \R@c \nextii@\Y@c \A@=\X@c }
+                \CORNER@ii
+              }
+            \else
+              \ifx C \next
+                \DN@ C {
+                  \xy@ { C } { \X@c= \A@ \Y@c= \B@ }
+                  \CORNER@ii
+                }
+              \else
+                \ifx E \next
+                  \DN@ E {
+                    \xy@ { E } {
+                      \A@=\X@c
+                      \B@=\Y@c
+                      \the\Edge@c\z@
+                      \advance\X@c-\A@
+                      \advance\Y@c-\B@
+                    }
+                    \CORNER@ii
+                  }
+                \else
+                  \ifx P \next
+                    \DN@ P {
+                      \xy@ { P } {
+                        \A@=\X@c
+                        \B@=\Y@c
+                        \the\Edge@c\thr@@
+                        \advance\X@c-\A@
+                        \advance\Y@c-\B@
+                      } \CORNER@ii
+                    }
+                  \else
+                    \ifx ( \next % )
+                      \DN@ (##1) {
+                        \xy@ { (##1) } {
+                          \X@c=##1\X@c \Y@c=##1\Y@c
+                        }
+                        \afterVECTOR@
+                      }
+                    \else
+                      \let\next@=\afterVECTOR@
+                    \fi
+                  \fi
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+    \next@
+  }
+  \um_check_and_fix:NNnnn \entrybox \cs_gset_nopar:Npn { #1 } {
+    \hbox {
+      \setbox\z@=\objectbox { #1 }
+      \A@=\wdz@
+      \R@p=\z@
+      \dimen@=\objectwidth@
+      \advance\dimen@ -\A@
+      \ifdim\dimen@>\z@
+        \advance\A@ \dimen@
+        \R@p=.5\dimen@
+      \fi
+      \dimen@=\objectmargin@
+      \advance\A@ 2\dimen@
+      \advance\R@p \dimen@
+      \B@=\ht\z@
+      \advance\B@\dp\z@
+      \U@p=-\fontdimen22\textfont\tw@
+      \dimen@=\objectheight@
+      \advance\dimen@-\B@
+      \ifdim\dimen@>\z@
+        \advance\B@\dimen@
+      \fi
+      \dimen@=\objectmargin@
+      \advance\B@2\dimen@
+      \setboxz@h {
+        \kern\R@p
+        \raise\U@p\boxz@
+      }
+      \wdz@=\A@
+      \advance\B@-\ht\z@
+      \advance\B@-\dp\z@
+      \B@=.5\B@
+      \dimen@=\ht\z@
+      \advance\dimen@\B@
+      \ht\z@=\dimen@
+      \dimen@=\dp\z@
+      \advance\dimen@\B@
+      \dp\z@=\dimen@
+      \boxz@
+    }
+  } {
+    \hbox {
+      \setbox\z@=\objectbox { #1 }
+      \A@=\wdz@
+      \R@p=\z@
+      \dimen@=\objectwidth@
+      \advance\dimen@ -\A@
+      \ifdim\dimen@>\z@
+        \advance\A@ \dimen@
+        \R@p=.5\dimen@
+      \fi
+      \dimen@=\objectmargin@
+      \advance\A@ 2\dimen@
+      \advance\R@p \dimen@
+      \B@=\ht\z@
+      \advance\B@\dp\z@
+      \dim_set:Nn \U@p { -\um_axis:N \tex_textstyle:D }
+      \dimen@=\objectheight@
+      \advance\dimen@-\B@
+      \ifdim\dimen@>\z@
+        \advance\B@\dimen@
+      \fi
+      \dimen@=\objectmargin@
+      \advance\B@2\dimen@
+      \setboxz@h {
+        \kern\R@p
+        \raise\U@p\boxz@
+      }
+      \wdz@=\A@
+      \advance\B@-\ht\z@
+      \advance\B@-\dp\z@
+      \B@=.5\B@
+      \dimen@=\ht\z@
+      \advance\dimen@\B@
+      \ht\z@=\dimen@
+      \dimen@=\dp\z@
+      \advance\dimen@\B@
+      \dp\z@=\dimen@
+      \boxz@
+    }
+  }
+%    \end{macrocode}
+% \pkg{xy} checks for the default rule thickness at the beginning of the document.
+% Because that doesn’t seem to exist any more, we use the fraction rule thickness.
+%    \begin{macrocode}
+  \AtBeginDocument {
+    \tl_set:Nx \xP@preclw {
+      \tex_the:D \um_fraction_rule:N \tex_textstyle:D
+    }
+    \tl_set:Nx \xP@lw { \xP@dim \xP@preclw }
+    \PackageInfo { xypdf } {
+      Line~ width~ (corrected~ by~ unicode-math):~ \xP@preclw
+    }
+  }
 }
 %    \end{macrocode}
 %
