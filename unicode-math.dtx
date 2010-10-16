@@ -4802,40 +4802,64 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsection{Unicode radicals}
 %
-%
-% \begin{macro}{\sqrt}
-% Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
 %    \begin{macrocode}
-\luatex_if_engine:T {
-  \RenewDocumentCommand \sqrt { O{} m } {
-    \luatexUroot \l_um_radical_sqrt_tl {#1} {#2}
-  }
-  \cs_set:Npn \root #1 \of #2 {
-    \luatexUroot \l_um_radical_sqrt_tl {#1} {#2}
-  }
-}
+\xetex_or_luatex:nnn { \AtBeginDocument } {
+  \@ifpackageloaded { amsmath } { } {
 %    \end{macrocode}
-% \end{macro}
-%
-%
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-\cs_set_nopar:Npn \r@@t #1#2 {
-  \setbox\z@\hbox{$\m@th #1\sqrtsign{#2}$}
-  \um_mathstyle_scale:Nnn{#1}{\kern}{\fontdimen63\l_um_font}
-  \raise \dimexpr(
-      \um_fontdimen_to_percent:nn{65}{\l_um_font}\ht\z@-
-      \um_fontdimen_to_percent:nn{65}{\l_um_font}\dp\z@
-    )\relax
-    \copy \rootbox
-  \um_mathstyle_scale:Nnn{#1}{\kern}{\fontdimen64\l_um_font}
-  \box \z@
-}
+    \um_check_and_fix:NNnnn \r@@t \cs_set_nopar:Npn { #1 #2 } {
+      \setbox \z@ \hbox { $ \m@th #1 \sqrtsign { #2 } $ }
+      \dimen@ \ht\z@
+      \advance \dimen@ -\dp\z@
+      \mkern 5mu
+      \raise .6\dimen@ \copy\rootbox
+      \mkern -10mu
+      \box \z@
+    } {
+      \hbox_set:Nn \l_tmpa_box {
+        \c_math_shift_token
+        \m@th
+        #1
+        \sqrtsign { #2 }
+        \c_math_shift_token
+      }
+      \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
+        \tex_fontdimen:D 63 \l_um_font
+      }
+      \box_move_up:nn {
+        (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
+        * \tex_number:D \tex_fontdimen:D 65 \l_um_font / 100
+      } {
+        \box_use:N \rootbox
+      }
+      \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
+        \tex_fontdimen:D 64 \l_um_font
+      }
+      \box_use_clear:N \l_tmpa_box
+    }
 %    \end{macrocode}
 % \end{macro}
+%    \begin{macrocode}
+  }
+} {
+  \@ifpackageloaded { amsmath } { } {
+%    \end{macrocode}
+% \begin{macro}{\root}
+% Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
+%    \begin{macrocode}
+    \cs_set:Npn \root #1 \of #2 {
+      \luatexUroot \l_um_radical_sqrt_tl { #1 } { #2 }
+    }
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+  }
+}
+%    \end{macrocode}
 %
 %
 % \begin{macro}{\um_fontdimen_to_percent:nn}
@@ -4844,7 +4868,7 @@ This work is "author-maintained" by Will Robertson.
 % \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|. This macro takes a font dimension number and outputs the decimal value of the associated parameter.
 %    \begin{macrocode}
 \cs_new:Npn \um_fontdimen_to_percent:nn #1#2 {
-  0.\strip@pt\dimexpr\fontdimen#1#2 *65536\relax
+  \strip@pt\dimexpr\fontdimen#1#2*65536/100\relax
 }
 %    \end{macrocode}
 % \end{macro}
@@ -5410,8 +5434,109 @@ This work is "author-maintained" by Will Robertson.
       }
     }
   }
+%    \end{macrocode}
+% The roots need a complete rework.
+%    \begin{macrocode}
+  \um_check_and_fix_luatex:NNnnn \plainroot@ \cs_set_nopar:Npn { #1 \of #2 } {
+    \setbox \rootbox \hbox {
+      $ \m@th \scriptscriptstyle { #1 } $
+    }
+    \mathchoice
+      { \r@@t \displaystyle      { #2 } }
+      { \r@@t \textstyle         { #2 } }~
+      { \r@@t \scriptstyle       { #2 } }
+      { \r@@t \scriptscriptstyle { #2 } }
+    \egroup
+  } {
+    \bool_if:nTF {
+      \int_compare_p:nNn { \uproot@ } = { \c_zero }
+      && \int_compare_p:nNn { \leftroot@ } = { \c_zero }
+    } {
+      \luatexUroot \l_um_radical_sqrt_tl { #1 } { #2 }
+    } {
+      \hbox_set:Nn \rootbox {
+        \c_math_shift_token
+        \m@th
+        \tex_scriptscriptstyle:D { #1 }
+        \c_math_shift_token
+      }
+      \tex_mathchoice:D
+        { \r@@t \tex_displaystyle:D      { #2 } }
+        { \r@@t \tex_textstyle:D         { #2 } }
+        { \r@@t \tex_scriptstyle:D       { #2 } }
+        { \r@@t \tex_scriptscriptstyle:D { #2 } }
+    }
+    \c_group_end_token
+  }
+  \um_check_and_fix:NNnnnn \r@@t \cs_set_nopar:Npn { #1 #2 } {
+    \setboxz@h { $ \m@th #1 \sqrtsign { #2 } $ }
+    \dimen@ \ht\z@
+    \advance \dimen@ -\dp\z@
+    \setbox\@ne \hbox { $ \m@th #1 \mskip \uproot@ mu $ }
+    \advance \dimen@ by 1.667 \wd\@ne
+    \mkern -\leftroot@ mu
+    \mkern 5mu
+    \raise .6\dimen@ \copy\rootbox
+    \mkern -10mu
+    \mkern \leftroot@ mu
+    \boxz@
+  } {
+    \hbox_set:Nn \l_tmpa_box {
+      \c_math_shift_token
+      \m@th
+      #1
+      \tex_mskip:D \uproot@ mu
+      \c_math_shift_token
+    }
+    \luatexUroot \l_um_radical_sqrt_tl {
+      \box_move_up:nn { \box_wd:N \l_tmpa_box } {
+        \hbox:n {
+          \c_math_shift_token
+          \m@th
+          \tex_mkern:D -\leftroot@ mu
+          \box_use:N \rootbox
+          \tex_mkern:D \leftroot@ mu
+          \c_math_shift_token
+        }
+      }
+    } {
+      #2
+    }
+  } {
+    \hbox_set:Nn \l_tmpa_box {
+      \c_math_shift_token
+      \m@th
+      #1
+      \sqrtsign { #2 }
+      \c_math_shift_token
+    }
+    \hbox_set:Nn \l_tmpb_box {
+      \c_math_shift_token
+      \m@th
+      #1
+      \tex_mskip:D \uproot@ mu
+      \c_math_shift_token
+    }
+    \tex_mkern:D -\leftroot@ mu
+    \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
+      \tex_fontdimen:D 63 \l_um_font
+    }
+    \box_move_up:nn {
+      \box_wd:N \l_tmpb_box
+      + (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
+      * \tex_number:D \tex_fontdimen:D 65 \l_um_font / 100
+    } {
+      \box_use:N \rootbox
+    }
+    \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
+      \tex_fontdimen:D 64 \l_um_font
+    }
+    \tex_mkern:D \leftroot@ mu
+    \box_use_clear:N \l_tmpa_box
+  }
 }
 %    \end{macrocode}
+%
 % \paragraph{\pkg{amsopn}}
 % This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
 %    \begin{macrocode}

@@ -1,0 +1,15 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\setmathfont{Cambria Math}
+\newcommand*{\test}[1]{%
+  \parbox[b][50pt]{50pt}{\scalebox{3}{$#1$}}%
+}
+\begin{document}
+\test{\sqrt[a]{b}}
+\test{\sqrt[\uproot{10}a]{b}}
+
+\test{\sqrt[\leftroot{10}a]{b}}
+\test{\sqrt[\leftroot{10}\uproot{10}a]{b}}
+\end{document}
