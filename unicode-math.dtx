@@ -5398,7 +5398,7 @@ This work is "author-maintained" by Will Robertson.
     \tex_lineskiplimit:D \tex_lineskip:D
     \ialign
     \c_group_begin_token
-    \if_meaning:w c #1 \tex_hfil:D \fi:
+    \token_if_meaning_eq:NNT c #1 { \tex_hfil:D }
     \c_math_shift_token
     \m@th
     \tex_scriptstyle:D
@@ -5926,6 +5926,59 @@ This work is "author-maintained" by Will Robertson.
     \PackageInfo { xypdf } {
       Line~ width~ (corrected~ by~ unicode-math):~ \xP@preclw
     }
+  }
+}
+%    \end{macrocode}
+%
+% \paragraph{\pkg{delarray}}
+% Once more a simple font dimension replacement.
+%    \begin{macrocode}
+\um_patch_pkg:nn { delarray } {
+  \um_check_and_fix:NNnnn \@del@array \cs_set_nopar:Npn { [ #1 ] #2 #3 #4 } {
+    \setbox \z@ \hbox { $ \left #2 \right #4 $ }
+    \if #1 c
+      \def \@arrayleft  { \left  #2 }
+      \def \@arrayright { \right #4 }
+    \else
+      \def \@arrayleft  { \setbox \z@ }
+      \def \@arrayright {
+        \dimen@ = \dp\z@
+        \advance \dimen@ -\ht\z@
+        \divide  \dimen@ by~ \tw@
+        \advance \dimen@ by \fontdimen 22~ \textfont\tw@
+        \lower \dimen@ \hbox {
+          $ \left #2 \vcenter { \unvbox \z@ } \right #4 $
+        }
+      }
+    \fi
+    \@array [ #1 ] { #3 }
+  } {
+    \hbox_set:Nn \c_zero {
+      \c_math_shift_token
+      \tex_left:D #2
+      \tex_right:D #4
+      \c_math_shift_token
+    }
+    \token_if_eq_charcode:NNTF #1 c {
+      \tl_set:Nn \@arrayleft  { \tex_left:D  #2 }
+      \tl_set:Nn \@arrayright { \tex_right:D #4 }
+    } {
+      \tl_set:Nn \@arrayleft  { \tex_setbox:D \c_zero }
+      \tl_set:Nn \@arrayright {
+        \box_move_down:nn {
+          (\box_dp:N \c_zero - \box_ht:N \c_zero) / 2 + \um_axis:N \tex_textstyle:D
+        } {
+          \hbox:n {
+            \c_math_shift_token
+            \tex_left:D  #2
+            \tex_vcenter:D { \vbox_unpack_clear:N \c_zero }
+            \tex_right:D #4
+            \c_math_shift_token
+          }
+        }
+      }
+    }
+    \@array [ #1 ] { #3 }
   }
 }
 %    \end{macrocode}
