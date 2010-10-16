@@ -1,0 +1,11 @@
+
+
+build/
+
+test.ltx
+test.tex
+
+stix-tbl.txt
+umtable.tex
+
+*.synctex*
