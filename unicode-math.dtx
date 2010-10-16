@@ -5269,6 +5269,50 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\um_check_and_fix_luatex:NNnnn}
+% \begin{macro}{\um_check_and_fix_luatex:cNnnn}
+% \darg{command}
+% \darg{factory command}
+% \darg{parameter text}
+% \darg{expected replacement text}
+% \darg{new replacement text}
+% Tries to patch \meta{command}.
+% If \XeTeX\ is the current engine or \meta{command} is undefined, do nothing.
+% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
+% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
+% Otherwise issue a warning and don’t overwrite.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Npn \um_check_and_fix_luatex:NNnnn #1 #2 #3 #4 #5 {
+  \luatex_if_engine:T {
+    \um_check_and_fix:NNnnn #1 #2 { #3 } { #4 } { #5 }
+  }
+}
+\cs_generate_variant:Nn \um_check_and_fix_luatex:NNnnn { c }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \paragraph{\LaTeXe\ kernel}
+% \cs{frac} can be patched for \LuaTeX, but \cs{choose}, \cs{brack} and \cs{brace} should be discouraged.
+% Probably these fixes (and the analogous \pkg{amsmath} fixes below) should go into \pkg{luatextra} or a similar \LuaLaTeX\ package.
+%    \begin{macrocode}
+\luatex_if_engine:T {
+  \AtBeginDocument {
+    \@ifpackageloaded { amsmath } { } {
+      \um_check_and_fix:NNnnn \frac \cs_set_nopar:Npn { #1 #2 } {
+        {
+          \begingroup #1 \endgroup \over #2
+        }
+      } {
+        {
+          \luatexUstack { \group_begin: #1 \group_end: \over #2 }
+        }
+      }
+    }
+  }
+}
+%    \end{macrocode}
+%
 % \paragraph{\pkg{url}}
 % Simply need to get \pkg{url} in a state such that
 % when it switches to math mode and enters \ascii\ characters, the maths
@@ -5359,6 +5403,33 @@ This work is "author-maintained" by Will Robertson.
     \c_math_shift_token
     \tex_hfil:D
     \tex_crcr:D
+  }
+%    \end{macrocode}
+% For \LuaTeX, \cs{frac} and \cs{genfrac} should use \cs{Ustack} for correct math style selection.
+%    \begin{macrocode}
+  \um_check_and_fix_luatex:cNnnn { frac~ } \cs_set:Npn { #1 #2 } {
+    {
+      \begingroup #1 \endgroup \@@over #2
+    }
+  } {
+    {
+      \luatexUstack { \group_begin: #1 \group_end: \@@over #2 }
+    }
+  }
+  \um_check_and_fix_luatex:NNnnn \@genfrac \cs_set_nopar:Npn {
+    #1 #2 #3 #4 #5
+  } {
+    {
+      #1 { \begingroup #4 \endgroup #2 #3 \relax #5 }
+    }
+  } {
+    {
+      #1 {
+        \luatexUstack {
+          \group_begin: #4 \group_end: #2 #3 \scan_stop: #5
+        }
+      }
+    }
   }
 }
 %    \end{macrocode}
@@ -5469,16 +5540,13 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 % \paragraph{\pkg{beamer}}
-% At end of the package so the warnings are defined.
 %    \begin{macrocode}
-\AtEndOfPackage{
-  \@ifclassloaded{beamer}{
-    \ifbeamer@suppressreplacements\else
-      \um_warning:n {disable-beamer}
-      \beamer@suppressreplacementstrue
-    \fi
-  }{}
-}
+\@ifclassloaded{beamer}{
+  \ifbeamer@suppressreplacements\else
+    \um_warning:n {disable-beamer}
+    \beamer@suppressreplacementstrue
+  \fi
+}{}
 %    \end{macrocode}
 %
 % \paragraph{\pkg{xy}}
