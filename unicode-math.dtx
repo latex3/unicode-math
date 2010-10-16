@@ -2611,20 +2611,6 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Delimiters}
-% \begin{macro}{\left}
-% We redefine the primitive to be preceded by \cmd\mathopen;
-% this gives much better spacing in cases such as \cmd\sin\cmd\left\dots.
-% Courtesy of Frank Mittelbach:\par
-% {\small\url{http://www.latex-project.org/cgi-bin/ltxbugs2html?pr=latex/3853&prlatex/3754}}
-%    \begin{macrocode}
-\let\left@primitive\left
-\def\left{\mathopen{}\left@primitive}
-%    \end{macrocode}
-% \end{macro}
-% No re-definition is made for \cmd\right\ because it's not
-% necessary.
-%
 % \subsection{Maths accents}
 %
 % Maths accents should just work \emph{if they are available in the font}.
