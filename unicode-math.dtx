@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/10/04 v0.5b Unicode maths in XeLaTeX and LuaLaTeX]
+  [2010/10/18 v0.5b Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -4631,6 +4631,7 @@ This work is "author-maintained" by Will Robertson.
   }{
     \um_nprimes:Nn #1 {#2}
   }
+  \egroup
 }
 \cs_new:Npn \um_nbackprimes_select:nn #1#2 {
   \prg_case_int:nnn {#2}{
@@ -4648,6 +4649,7 @@ This work is "author-maintained" by Will Robertson.
   }{
     \um_nprimes:Nn #1 {#2}
   }
+  \egroup
 }
 %    \end{macrocode}
 %
@@ -4655,18 +4657,46 @@ This work is "author-maintained" by Will Robertson.
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_scan_prime: {
+  \bgroup
+  \cs_set_eq:NN \um_superscript:n \use:n
   \int_zero:N \l_um_primecount_int
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_dprime: {
+  \bgroup
+  \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_trprime: {
+  \bgroup
+  \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_qprime: {
+  \bgroup
+  \cs_set_eq:NN \um_superscript:n \use:n
+  \int_set:Nn \l_um_primecount_int {3}
+  \um_scanprime_collect:N \um_prime_single_mchar
+}
+\cs_new:Npn \um_scan_sup_prime: {
+  \bgroup
+  \int_zero:N \l_um_primecount_int
+  \um_scanprime_collect:N \um_prime_single_mchar
+}
+\cs_new:Npn \um_scan_sup_dprime: {
+  \bgroup
+  \int_set:Nn \l_um_primecount_int {1}
+  \um_scanprime_collect:N \um_prime_single_mchar
+}
+\cs_new:Npn \um_scan_sup_trprime: {
+  \bgroup
+  \int_set:Nn \l_um_primecount_int {2}
+  \um_scanprime_collect:N \um_prime_single_mchar
+}
+\cs_new:Npn \um_scan_sup_qprime: {
+  \bgroup
   \int_set:Nn \l_um_primecount_int {3}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
@@ -4717,14 +4747,35 @@ This work is "author-maintained" by Will Robertson.
   }
 }
 \cs_new:Npn \um_scan_backprime: {
+  \bgroup
+  \cs_set_eq:NN \um_superscript:n \use:n
   \int_zero:N \l_um_primecount_int
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Npn \um_scan_backdprime: {
+  \bgroup
+  \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Npn \um_scan_backtrprime: {
+  \bgroup
+  \cs_set_eq:NN \um_superscript:n \use:n
+  \int_set:Nn \l_um_primecount_int {2}
+  \um_scanbackprime_collect:N \um_backprime_single_mchar
+}
+\cs_new:Npn \um_scan_sup_backprime: {
+  \bgroup
+  \int_zero:N \l_um_primecount_int
+  \um_scanbackprime_collect:N \um_backprime_single_mchar
+}
+\cs_new:Npn \um_scan_sup_backdprime: {
+  \bgroup
+  \int_set:Nn \l_um_primecount_int {1}
+  \um_scanbackprime_collect:N \um_backprime_single_mchar
+}
+\cs_new:Npn \um_scan_sup_backtrprime: {
+  \bgroup
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
@@ -4787,15 +4838,15 @@ This work is "author-maintained" by Will Robertson.
   \char_make_active:n {"2036}
   \char_make_active:n {"2037}
   \AtBeginDocument{
-    \cs_set_eq:NN '        \um_scan_prime:
-    \cs_set_eq:NN ^^^^2032 \um_scan_prime:
-    \cs_set_eq:NN ^^^^2033 \um_scan_dprime:
-    \cs_set_eq:NN ^^^^2034 \um_scan_trprime:
-    \cs_set_eq:NN ^^^^2057 \um_scan_qprime:
-    \cs_set_eq:NN `        \um_scan_backprime:
-    \cs_set_eq:NN ^^^^2035 \um_scan_backprime:
-    \cs_set_eq:NN ^^^^2036 \um_scan_backdprime:
-    \cs_set_eq:NN ^^^^2037 \um_scan_backtrprime:
+    \cs_set_eq:NN '        \um_scan_sup_prime:
+    \cs_set_eq:NN ^^^^2032 \um_scan_sup_prime:
+    \cs_set_eq:NN ^^^^2033 \um_scan_sup_dprime:
+    \cs_set_eq:NN ^^^^2034 \um_scan_sup_trprime:
+    \cs_set_eq:NN ^^^^2057 \um_scan_sup_qprime:
+    \cs_set_eq:NN `        \um_scan_sup_backprime:
+    \cs_set_eq:NN ^^^^2035 \um_scan_sup_backprime:
+    \cs_set_eq:NN ^^^^2036 \um_scan_sup_backdprime:
+    \cs_set_eq:NN ^^^^2037 \um_scan_sup_backtrprime:
   }
 \group_end:
 %    \end{macrocode}
