@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2010/10/18 v0.5b Unicode maths in XeLaTeX and LuaLaTeX]
+  [2010/10/25 v0.5b Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -1022,7 +1022,7 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{expl3}[2009/08/12]
 \RequirePackage{xparse}[2009/08/31]
 \RequirePackage{l3keys2e}
-\RequirePackage{fontspec}[2010/05/18]
+\RequirePackage{fontspec}[2010/10/25]
 \RequirePackage{catchfile}
 %    \end{macrocode}
 %
@@ -1057,7 +1057,6 @@ This work is "author-maintained" by Will Robertson.
 %
 % \paragraph{Conditionals}
 %    \begin{macrocode}
-\bool_new:N \l_um_fontspec_feature_bool
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
 \bool_new:N \l_um_implicit_alph_bool
@@ -2876,33 +2875,6 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 % \section{Font features}
-%
-% \begin{macro}{\um@zf@feature}
-% Use the same method as \pkg{fontspec} for feature definition
-% (\ie, using \pkg{xkeyval}) but with a conditional to restrict
-% the scope of these features to \pkg{unicode-math} commands.
-%    \begin{macrocode}
-\newcommand\um@zf@feature[2]{
-  \define@key[zf]{options}{#1}[]{
-    \bool_if:NTF \l_um_fontspec_feature_bool {
-      #2
-    }{
-      \um_warning:n {maths-feature-only}
-    }
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
-% \subsection{OpenType maths font features}
-%    \begin{macrocode}
-\xetex_or_luatex:nnn { \um@zf@feature {ScriptStyle} }
-  { \fontspec_update_featstr:n {+ssty=0} }
-  { \fontspec_update_featstr:n {+ssty=1} }
-\xetex_or_luatex:nnn { \um@zf@feature {ScriptScriptStyle} }
-  { \fontspec_update_featstr:n {+ssty=1} }
-  { \fontspec_update_featstr:n {+ssty=2} }
-%    \end{macrocode}
 %
 % \subsection{Script and scriptscript font options}
 %    \begin{macrocode}
@@ -6060,10 +6032,6 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\msg_new:nnn {unicode-math} {maths-feature-only}
-{
-  The~ '#1'~ font~ feature~ can~ only~ be~ used~ for~ maths~ fonts.
-}
 \msg_new:nnn {unicode-math} {disable-beamer}
 {
   Disabling~ beamer's~ math~ setup.\\
