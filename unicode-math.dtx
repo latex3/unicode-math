@@ -2306,13 +2306,19 @@ This work is "author-maintained" by Will Robertson.
     \bool_set_true:N \g_um_mainfont_already_set_bool
     \fontspec_select:xn {\l_um_font_keyval_tl,
       Scale=1.00001,
-      FontAdjustment={\fontdimen8\font=\the\fontdimen42\zf@basefont}
+      FontAdjustment={
+        \fontdimen8\font=\the\fontdimen43\zf@basefont\relax
+        \fontdimen9\font=\the\fontdimen42\zf@basefont\relax
+      }
     } {#2}
     \DeclareSymbolFont{symbols}
       {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
     \fontspec_select:xn {\l_um_font_keyval_tl,
       Scale=0.99999,
-      FontAdjustment={\fontdimen8\font=\the\fontdimen48\zf@basefont}
+      FontAdjustment={
+        \fontdimen8\font=\the\fontdimen48\zf@basefont\relax
+        \fontdimen9\font=\the\fontdimen28\zf@basefont\relax
+      }
     } {#2}
     \DeclareSymbolFont{largesymbols}
       {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
