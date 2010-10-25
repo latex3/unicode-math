@@ -2307,8 +2307,16 @@ This work is "author-maintained" by Will Robertson.
     \fontspec_select:xn {\l_um_font_keyval_tl,
       Scale=1.00001,
       FontAdjustment={
-        \fontdimen8\font=\the\fontdimen43\zf@basefont\relax
-        \fontdimen9\font=\the\fontdimen42\zf@basefont\relax
+        \xetex_or_luatex:nnn { \fontdimen8\font= }
+        { \the\fontdimen43\zf@basefont\relax }
+        {
+          % equiv of: \the\luatexUmathfractionnumup\displaystyle
+        }
+        \xetex_or_luatex:nnn { \fontdimen9\font= }
+        { \the\fontdimen42\zf@basefont\relax }
+        {
+          % equiv of: \the\luatexUmathfractionnumup\textstyle
+        }
       }
     } {#2}
     \DeclareSymbolFont{symbols}
@@ -2316,8 +2324,16 @@ This work is "author-maintained" by Will Robertson.
     \fontspec_select:xn {\l_um_font_keyval_tl,
       Scale=0.99999,
       FontAdjustment={
-        \fontdimen8\font=\the\fontdimen48\zf@basefont\relax
-        \fontdimen9\font=\the\fontdimen28\zf@basefont\relax
+        \xetex_or_luatex:nnn { \fontdimen8\font= }
+        { \the\fontdimen48\zf@basefont\relax }
+        {
+          % equiv of: \the\luatexUmathfractionrule\displaystyle
+        }
+        \xetex_or_luatex:nnn { \fontdimen9\font= }
+        { \the\fontdimen28\zf@basefont\relax }
+        {
+          % equiv of: \the\luatexUmathlimitabovevgap\displaystyle
+        }
       }
     } {#2}
     \DeclareSymbolFont{largesymbols}
