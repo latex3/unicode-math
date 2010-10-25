@@ -1060,7 +1060,7 @@ This work is "author-maintained" by Will Robertson.
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
 \bool_new:N \l_um_implicit_alph_bool
-\bool_new:N \g_um_mainfont_set_bool
+\bool_new:N \g_um_mainfont_already_set_bool
 %    \end{macrocode}
 % For \opt{math-style}:
 %    \begin{macrocode}
@@ -2302,10 +2302,18 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
   \DeclareSymbolFont{\um_symfont_tl}
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
-  \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_set_bool} {
-    \bool_set_true:N \g_um_mainfont_set_bool
+  \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_already_set_bool} {
+    \bool_set_true:N \g_um_mainfont_already_set_bool
+    \fontspec_select:xn {\l_um_font_keyval_tl,
+      Scale=1.00001,
+      FontAdjustment={\fontdimen8\font=\the\fontdimen42\zf@basefont}
+    } {#2}
     \DeclareSymbolFont{symbols}
       {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
+    \fontspec_select:xn {\l_um_font_keyval_tl,
+      Scale=0.99999,
+      FontAdjustment={\fontdimen8\font=\the\fontdimen48\zf@basefont}
+    } {#2}
     \DeclareSymbolFont{largesymbols}
       {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
   }
@@ -2338,7 +2346,7 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\resetmathfont}
 %    \begin{macrocode}
 \DeclareDocumentCommand \resetmathfont { O{} m } {
-  \bool_set_false:N \g_um_mainfont_set_bool
+  \bool_set_false:N \g_um_mainfont_already_set_bool
   \setmathfont[#1]{#2}
 }
 %    \end{macrocode}
@@ -2349,28 +2357,25 @@ This work is "author-maintained" by Will Robertson.
 % Select the font with \cs{fontspec} and define \cs{l_um_font} from it.
 %    \begin{macrocode}
 \cs_new:Npn \um_fontspec_select_font:n #1 {
-  \bool_set_true:N \l_um_fontspec_feature_bool
-  \fontspec_select:xn
-    {
-      \luatex_if_engine:T { Renderer = Basic, }
-      BoldFont = {}, ItalicFont = {},
-      Script = Math,
-      SizeFeatures = {
-        {Size = \tf@size-} ,
-        {Size = \sf@size-\tf@size ,
-         Font = \l_um_script_font_tl ,
-         \l_um_script_features_tl
-        } ,
-        {Size = -\sf@size ,
-         Font = \l_um_sscript_font_tl ,
-         \l_um_sscript_features_tl
-        }
-      },
-      \l_um_unknown_keys_clist
-    }
-    {#1}
+  \tl_set:Nx \l_um_font_keyval_tl {
+    \luatex_if_engine:T { Renderer = Basic, }
+    BoldFont = {}, ItalicFont = {},
+    Script = Math,
+    SizeFeatures = {
+      {Size = \tf@size-} ,
+      {Size = \sf@size-\tf@size ,
+       Font = \l_um_script_font_tl ,
+       \l_um_script_features_tl
+      } ,
+      {Size = -\sf@size ,
+       Font = \l_um_sscript_font_tl ,
+       \l_um_sscript_features_tl
+      }
+    },
+    \l_um_unknown_keys_clist
+  }
+  \fontspec_select:xn {\l_um_font_keyval_tl} {#1}
   \tl_set_eq:NN \l_um_font \zf@basefont
-  \bool_set_false:N \l_um_fontspec_feature_bool
 }
 %    \end{macrocode}
 % \end{macro}
