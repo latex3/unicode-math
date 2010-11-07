@@ -47,7 +47,8 @@ This work is "author-maintained" by Will Robertson.
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % \title{Experimental Unicode mathematical typesetting: The \pkg{unicode-math} package}
-% \author{Will Robertson\\\texttt{will.robertson@latex-project.org}}
+% \author{Will Robertson\\\texttt{will.robertson@latex-project.org} \and
+%         Philipp Stephani}
 % \date{\umfiledate \qquad \umfileversion}
 %
 % \maketitle
@@ -72,8 +73,10 @@ This work is "author-maintained" by Will Robertson.
 % Maths input can also be simplified with Unicode since literal glyphs may be
 % entered instead of control sequences in your document source.
 %
-% The package is fulled tested under \XeTeX, but Lua\TeX\ support is not
-% yet complete. User beware, but let me know of any troubles.
+% The package provides support for both \XeTeX\ and Lua\TeX. The different
+% engines provide differing levels of support for Unicode maths, and
+% support for Lua\TeX's features in this area is still incomplete.
+% Please let us know of any troubles.
 %
 % Alongside this documentation file, you should be able to find a minimal
 % example demonstrating the use of the package,
@@ -99,13 +102,12 @@ This work is "author-maintained" by Will Robertson.
 %
 % This document describes the \pkg{unicode-math} package, which is an
 % \emph{experimental} implementation of a macro to Unicode glyph encoding for
-% mathematical characters. Its intended use is for \XeTeX, although it is
-% conjectured that some effect could be spent to create a cross-format
-% package that would also work with Lua\TeX.
+% mathematical characters.
 %
 % Users who desire to specify maths alphabets only (Greek and Latin letters,
 % and Arabic numerals)
 % may wish to use Andrew Moschou's \pkg{mathspec} package instead.
+% (\XeTeX-only at time of writing.)
 %
 % \section{Acknowledgements}
 %
@@ -2304,6 +2306,7 @@ This work is "author-maintained" by Will Robertson.
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
   \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_already_set_bool} {
     \bool_set_true:N \g_um_mainfont_already_set_bool
+    % \DeclareMathSizes { \f@size } { \f@size } { \um_fontdimen_to_percent:nn{10}\l_um_font } {⟨ss-size⟩ }
     \fontspec_select:xn {\l_um_font_keyval_tl,
       Scale=1.00001,
       FontAdjustment={
