@@ -1026,6 +1026,7 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{l3keys2e}
 \RequirePackage{fontspec}[2010/10/25]
 \RequirePackage{catchfile}
+\RequirePackage{fix-cm} % avoid some warnings
 %    \end{macrocode}
 %
 % Start using \LaTeX3 --- finally!
@@ -2312,7 +2313,13 @@ This work is "author-maintained" by Will Robertson.
     {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
   \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_already_set_bool} {
     \bool_set_true:N \g_um_mainfont_already_set_bool
-    % \DeclareMathSizes { \f@size } { \f@size } { \um_fontdimen_to_percent:nn{10}\l_um_font } {⟨ss-size⟩ }
+
+    \dim_compare:nF { \fontdimen 10 \l_um_font == 0pt } {
+      \DeclareMathSizes { \f@size } { \f@size }
+      { \um_fontdimen_to_percent:nn{10}{\l_um_font}\dimexpr \f@size pt\relax }
+      { \um_fontdimen_to_percent:nn{11}{\l_um_font}\dimexpr \f@size pt\relax }
+    }
+
     \fontspec_select:xn {\l_um_font_keyval_tl,
       Scale=1.00001,
       FontAdjustment={
