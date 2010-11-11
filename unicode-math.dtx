@@ -5721,26 +5721,6 @@ This work is "author-maintained" by Will Robertson.
 }{}
 %    \end{macrocode}
 %
-% \paragraph{\pkg{xy}}
-% Is the following still required? (Will, Nov 2010)
-%    \begin{macrocode}
-\um_patch_pkg:nn { xy } {
-%    \end{macrocode}
-% \pkg{xy} checks for the default rule thickness at the beginning of the document.
-% Because that doesn’t seem to exist any more, we use the fraction rule thickness.
-%    \begin{macrocode}
-  \AtBeginDocument {
-    \tl_set:Nx \xP@preclw {
-      \tex_the:D \um_fraction_rule:N \tex_textstyle:D
-    }
-    \tl_set:Nx \xP@lw { \xP@dim \xP@preclw }
-    \PackageInfo { xypdf } {
-      Line~ width~ (corrected~ by~ unicode-math):~ \xP@preclw
-    }
-  }
-}
-%    \end{macrocode}
-%
 %
 %    \begin{macrocode}
 \ExplSyntaxOff
