@@ -4517,16 +4517,17 @@ This work is "author-maintained" by Will Robertson.
 % Ensure catcodes are appropriate;
 % make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
-\AtBeginDocument{
+\AtBeginDocument{\um_define_math_chars:}
+\cs_set:Nn \um_define_math_chars: {
   \group_begin:
     \char_make_math_superscript:N \^
-    \cs_set:Npn \_um_sym:nnn #1#2#3 {
-      \bool_if:nF { \cs_if_eq_p:NN #3 \mathaccent ||
-                    \cs_if_eq_p:NN #3 \mathopen   ||
-                    \cs_if_eq_p:NN #3 \mathclose  ||
-                    \cs_if_eq_p:NN #3 \mathover   ||
-                    \cs_if_eq_p:NN #3 \mathunder } {
-        \um_cs_set_eq_active_char:Nw #2 = #1 \q_nil \ignorespaces
+    \cs_set:Npn \_um_sym:nnn ##1##2##3 {
+      \bool_if:nF { \cs_if_eq_p:NN ##3 \mathaccent ||
+                    \cs_if_eq_p:NN ##3 \mathopen   ||
+                    \cs_if_eq_p:NN ##3 \mathclose  ||
+                    \cs_if_eq_p:NN ##3 \mathover   ||
+                    \cs_if_eq_p:NN ##3 \mathunder } {
+        \um_cs_set_eq_active_char:Nw ##2 = ##1 \q_nil \ignorespaces
       }
     }
     \char_make_other:N \#
@@ -4835,7 +4836,8 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\AtBeginDocument {
+\AtBeginDocument{\um_define_prime_commands: \um_define_prime_chars:}
+\cs_set:Nn \um_define_prime_commands: {
   \cs_set_eq:NN \prime       \um_scan_prime:
   \cs_set_eq:NN \drime       \um_scan_dprime:
   \cs_set_eq:NN \trprime     \um_scan_trprime:
@@ -4854,7 +4856,7 @@ This work is "author-maintained" by Will Robertson.
   \char_make_active:n {"2035}
   \char_make_active:n {"2036}
   \char_make_active:n {"2037}
-  \AtBeginDocument{
+  \cs_gset:Nn \um_define_prime_chars: {
     \cs_set_eq:NN '        \um_scan_sup_prime:
     \cs_set_eq:NN ^^^^2032 \um_scan_sup_prime:
     \cs_set_eq:NN ^^^^2033 \um_scan_sup_dprime:
@@ -4871,7 +4873,8 @@ This work is "author-maintained" by Will Robertson.
 % \subsection{Unicode radicals}
 %
 %    \begin{macrocode}
-\xetex_or_luatex:nnn { \AtBeginDocument } {
+\AtBeginDocument{\um_redefine_radical:}
+\xetex_or_luatex:nnn { \cs_set:Nn \um_redefine_radical: } {
   \@ifpackageloaded { amsmath } { } {
 %    \end{macrocode}
 % \begin{macro}{\r@@t}
@@ -4879,23 +4882,15 @@ This work is "author-maintained" by Will Robertson.
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-    \um_check_and_fix:NNnnn \r@@t \cs_set_nopar:Npn { #1 #2 } {
-      \setbox \z@ \hbox { $ \m@th #1 \sqrtsign { #2 } $ }
-      \dimen@ \ht\z@
-      \advance \dimen@ -\dp\z@
-      \mkern 5mu
-      \raise .6\dimen@ \copy\rootbox
-      \mkern -10mu
-      \box \z@
-    } {
+    \cs_set_nopar:Npn \r@@t ##1 ##2 {
       \hbox_set:Nn \l_tmpa_box {
         \c_math_shift_token
         \m@th
-        #1
-        \sqrtsign { #2 }
+        ##1
+        \sqrtsign { ##2 }
         \c_math_shift_token
       }
-      \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
+      \um_mathstyle_scale:Nnn ##1 { \tex_kern:D } {
         \tex_fontdimen:D 63 \l_um_font
       }
       \box_move_up:nn {
@@ -4904,7 +4899,7 @@ This work is "author-maintained" by Will Robertson.
       } {
         \box_use:N \rootbox
       }
-      \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
+      \um_mathstyle_scale:Nnn ##1 { \tex_kern:D } {
         \tex_fontdimen:D 64 \l_um_font
       }
       \box_use_clear:N \l_tmpa_box
@@ -4919,8 +4914,8 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\root}
 % Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
 %    \begin{macrocode}
-    \cs_set:Npn \root #1 \of #2 {
-      \luatexUroot \l_um_radical_sqrt_tl { #1 } { #2 }
+    \cs_set:Npn \root ##1 \of ##2 {
+      \luatexUroot \l_um_radical_sqrt_tl { ##1 } { ##2 }
     }
 %    \end{macrocode}
 % \end{macro}
@@ -5368,15 +5363,16 @@ This work is "author-maintained" by Will Robertson.
 % Probably these fixes (and the analogous \pkg{amsmath} fixes below) should go into \pkg{luatextra} or a similar \LuaLaTeX\ package.
 %    \begin{macrocode}
 \luatex_if_engine:T {
-  \AtBeginDocument {
+  \AtBeginDocument{\um_patch_amsmath:}
+  \cs_set:Nn \um_patch_amsmath: {
     \@ifpackageloaded { amsmath } { } {
-      \um_check_and_fix:NNnnn \frac \cs_set_nopar:Npn { #1 #2 } {
+      \um_check_and_fix:NNnnn \frac \cs_set_nopar:Npn { ##1 ##2 } {
         {
-          \begingroup #1 \endgroup \over #2
+          \begingroup ##1 \endgroup \over ##2
         }
       } {
         {
-          \luatexUstack { \group_begin: #1 \group_end: \over #2 }
+          \luatexUstack { \group_begin: ##1 \group_end: \over ##2 }
         }
       }
     }
