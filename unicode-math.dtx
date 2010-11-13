@@ -4902,17 +4902,17 @@ This work is "author-maintained" by Will Robertson.
         \sqrtsign { ##2 }
         \c_math_shift_token
       }
-      \um_mathstyle_scale:Nnn ##1 { \tex_kern:D } {
-        \tex_fontdimen:D 63 \l_um_font
+      \um_mathstyle_scale:Nnn ##1 { \kern } {
+        \fontdimen 63 \l_um_font
       }
       \box_move_up:nn {
         (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
-        * \tex_number:D \tex_fontdimen:D 65 \l_um_font / 100
+        * \number \fontdimen 65 \l_um_font / 100
       } {
         \box_use:N \rootbox
       }
-      \um_mathstyle_scale:Nnn ##1 { \tex_kern:D } {
-        \tex_fontdimen:D 64 \l_um_font
+      \um_mathstyle_scale:Nnn ##1 { \kern } {
+        \fontdimen 64 \l_um_font
       }
       \box_use_clear:N \l_tmpa_box
     }
@@ -5455,33 +5455,33 @@ This work is "author-maintained" by Will Robertson.
     \hfil
     \crcr
   } {
-    \tex_vcenter:D
+    \vcenter
     \c_group_begin_token
     \Let@
     \restore@math@cr
     \default@tag
-    \skip_set:Nn \tex_baselineskip:D {
+    \skip_set:Nn \baselineskip {
 %    \end{macrocode}
 % Here we use stack top shift + stack bottom shift, which sounds reasonable.
 %    \begin{macrocode}
-      \um_stack_num_up:N \tex_scriptstyle:D
-      + \um_stack_denom_down:N \tex_scriptstyle:D
+      \um_stack_num_up:N \scriptstyle
+      + \um_stack_denom_down:N \scriptstyle
     }
 %    \end{macrocode}
 % Here we use the minimum stack gap.
 %    \begin{macrocode}
-    \tex_lineskip:D \um_stack_vgap:N \tex_scriptstyle:D
-    \tex_lineskiplimit:D \tex_lineskip:D
+    \lineskip \um_stack_vgap:N \scriptstyle
+    \lineskiplimit \lineskip
     \ialign
     \c_group_begin_token
-    \token_if_eq_meaning:NNT c #1 { \tex_hfil:D }
+    \token_if_eq_meaning:NNT c #1 { \hfil }
     \c_math_shift_token
     \m@th
-    \tex_scriptstyle:D
+    \scriptstyle
     \c_parameter_token \c_parameter_token
     \c_math_shift_token
-    \tex_hfil:D
-    \tex_crcr:D
+    \hfil
+    \crcr
   }
 %    \end{macrocode}
 % For \LuaTeX, \cs{frac} and \cs{genfrac} should use \cs{Ustack} for correct math style selection.
@@ -5533,14 +5533,14 @@ This work is "author-maintained" by Will Robertson.
       \hbox_set:Nn \rootbox {
         \c_math_shift_token
         \m@th
-        \tex_scriptscriptstyle:D { #1 }
+        \scriptscriptstyle { #1 }
         \c_math_shift_token
       }
-      \tex_mathchoice:D
-        { \r@@t \tex_displaystyle:D      { #2 } }
-        { \r@@t \tex_textstyle:D         { #2 } }
-        { \r@@t \tex_scriptstyle:D       { #2 } }
-        { \r@@t \tex_scriptscriptstyle:D { #2 } }
+      \mathchoice
+        { \r@@t \displaystyle      { #2 } }
+        { \r@@t \textstyle         { #2 } }
+        { \r@@t \scriptstyle       { #2 } }
+        { \r@@t \scriptscriptstyle { #2 } }
     }
     \c_group_end_token
   }
@@ -5561,7 +5561,7 @@ This work is "author-maintained" by Will Robertson.
       \c_math_shift_token
       \m@th
       #1
-      \tex_mskip:D \uproot@ mu
+      \mskip \uproot@ mu
       \c_math_shift_token
     }
     \luatexUroot \l_um_radical_sqrt_tl {
@@ -5569,9 +5569,9 @@ This work is "author-maintained" by Will Robertson.
         \hbox:n {
           \c_math_shift_token
           \m@th
-          \tex_mkern:D -\leftroot@ mu
+          \mkern -\leftroot@ mu
           \box_use:N \rootbox
-          \tex_mkern:D \leftroot@ mu
+          \mkern \leftroot@ mu
           \c_math_shift_token
         }
       }
@@ -5590,24 +5590,24 @@ This work is "author-maintained" by Will Robertson.
       \c_math_shift_token
       \m@th
       #1
-      \tex_mskip:D \uproot@ mu
+      \mskip \uproot@ mu
       \c_math_shift_token
     }
-    \tex_mkern:D -\leftroot@ mu
-    \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
-      \tex_fontdimen:D 63 \l_um_font
+    \mkern -\leftroot@ mu
+    \um_mathstyle_scale:Nnn #1 { \kern } {
+      \fontdimen 63 \l_um_font
     }
     \box_move_up:nn {
       \box_wd:N \l_tmpb_box
       + (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
-      * \tex_number:D \tex_fontdimen:D 65 \l_um_font / 100
+      * \number \fontdimen 65 \l_um_font / 100
     } {
       \box_use:N \rootbox
     }
-    \um_mathstyle_scale:Nnn #1 { \tex_kern:D } {
-      \tex_fontdimen:D 64 \l_um_font
+    \um_mathstyle_scale:Nnn #1 { \kern } {
+      \fontdimen 64 \l_um_font
     }
-    \tex_mkern:D \leftroot@ mu
+    \mkern \leftroot@ mu
     \box_use_clear:N \l_tmpa_box
   }
 }
@@ -5702,8 +5702,8 @@ This work is "author-maintained" by Will Robertson.
       \c_math_shift_token
       \m@th
       #1
-      \dim_zero:N \tex_nulldelimiterspace:D
-      \tex_radical:D \c_zero { #2 }
+      \dim_zero:N \nulldelimiterspace
+      \radical \c_zero { #2 }
       \c_math_shift_token
       \color@endgroup
     }
