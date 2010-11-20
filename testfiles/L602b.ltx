@@ -9,13 +9,13 @@
 \NewDocumentCommand \mathstylename { } {
   \mathtt {
     \prg_case_int:nnn { \luatexmathstyle } {
-      { \tex_displaystyle:D } { \token_to_str:N \displaystyle }
+      { \displaystyle } { \token_to_str:N \displaystyle }
       { \luatexcrampeddisplaystyle } { \token_to_str:N \crampeddisplaystyle }
-      { \tex_textstyle:D } { \token_to_str:N \textstyle }
+      { \textstyle } { \token_to_str:N \textstyle }
       { \luatexcrampedtextstyle } { \token_to_str:N \crampedtextstyle }
-      { \tex_scriptstyle:D } { \token_to_str:N \scriptstyle }
+      { \scriptstyle } { \token_to_str:N \scriptstyle }
       { \luatexcrampedscriptstyle } { \token_to_str:N \crampedscriptstyle }
-      { \tex_scriptscriptstyle:D } { \token_to_str:N \scriptscriptstyle }
+      { \scriptscriptstyle } { \token_to_str:N \scriptscriptstyle }
       { \luatexcrampedscriptscriptstyle } { \token_to_str:N \crampedscriptscriptstyle }
     } {
       outside math

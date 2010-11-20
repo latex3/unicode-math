@@ -1117,7 +1117,7 @@ This work is "author-maintained" by Will Robertson.
 %: TODO: Generalise for arbitrary fonts! \cs{l_um_font} is not always the one used for a specific glyph!!
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F} {
-  \etex_iffontchar:D \l_um_font #1 \scan_stop:
+  \iffontchar \l_um_font #1 \scan_stop:
     \prg_return_true:
   \else:
     \prg_return_false:
@@ -2747,32 +2747,32 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \xetex_if_engine:T {
   \cs_new_nopar:Npn \um_font_dimen:Nnnnn #1 #2 #3 #4 #5 {
-    \tex_fontdimen:D
-    \cs_if_eq:NNTF #1 \tex_displaystyle:D {
-      #2 \tex_textfont:D
+    \fontdimen
+    \cs_if_eq:NNTF #1 \displaystyle {
+      #2 \textfont
     } {
       \cs_if_eq:NNTF #1 \crampeddisplaystyle {
-        #3 \tex_textfont:D
+        #3 \textfont
       } {
-        \cs_if_eq:NNTF #1 \tex_textstyle:D {
-          #4 \tex_textfont:D
+        \cs_if_eq:NNTF #1 \textstyle {
+          #4 \textfont
         } {
           \cs_if_eq:NNTF #1 \crampedtextstyle {
-            #5 \tex_textfont:D
+            #5 \textfont
           } {
-            \cs_if_eq:NNTF #1 \tex_scriptstyle:D {
-              #4 \tex_scriptfont:D
+            \cs_if_eq:NNTF #1 \scriptstyle {
+              #4 \scriptfont
             } {
               \cs_if_eq:NNTF #1 \crampedscriptstyle {
-                #5 \tex_scriptfont:D
+                #5 \scriptfont
               } {
-                \cs_if_eq:NNTF #1 \tex_scriptscriptstyle:D {
-                  #4 \tex_scriptscriptfont:D
+                \cs_if_eq:NNTF #1 \scriptscriptstyle {
+                  #4 \scriptscriptfont
                 } {
 %    \end{macrocode}
 % Should we check here if the style is invalid?
 %    \begin{macrocode}
-                  #5 \tex_scriptscriptfont:D
+                  #5 \scriptscriptfont
                 }
               }
             }
