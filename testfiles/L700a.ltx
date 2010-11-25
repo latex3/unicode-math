@@ -1,0 +1,13 @@
+\input{umtest-preamble}
+\let\luatexversion\relax
+\newcount\luatexversion
+\luatexversion=65
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[ \vec a \quad \vec{a} \quad \vec{abc} \]
+\unimathsetup{growing-accents}
+\[ \vec a \quad \vec{a} \quad \vec{abc} \]
+\unimathsetup{growing-accents=false}
+\[ \vec a \quad \vec{a} \quad \vec{abc} \]
+\end{document}

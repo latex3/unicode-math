@@ -191,6 +191,7 @@ This work is "author-maintained" by Will Robertson.
 %     |math-style| & Style of letters & \secref{math-style} \\
 %     |bold-style| & Style of bold letters & \secref{bold-style} \\
 %     |sans-style| & Style of sans serif letters & \secref{sans-style} \\
+%     |growing-accents| & Whether accents like \cs{vec} can grow & \secref{growing-accents} \\
 %     |nabla|      & Style of the nabla symbol & \secref{nabla} \\
 %     |partial|    & Style of the partial symbol & \secref{partial} \\
 %     |vargreek-shape|  & Style of phi and epsilon & \secref{vargreek-shape} \\
@@ -547,6 +548,39 @@ This work is "author-maintained" by Will Robertson.
 %
 %
 % \subsection{Miscellanea}
+%
+% \subsubsection{Growing and non-growing accents}
+% \seclabel{growing-accents}
+%
+% There are a few accents for which \TeX\ has both non-growing and growing
+% versions.  Among these are \cs{hat} and \cs{tilde}; the corresponding growing
+% versions are called \cs{widehat} and \cs{widetilde}, respectively.  Some
+% prefer the short accents, other prefer the wide ones.  \pkg{Unicode-math}
+% lets you decide whether you want such accents to grow automatically if the
+% font has wider variants.  If you set the |growing-accents| option to |true|,
+% all accents will grow if possible and the \TeX\ commands for growing and
+% non-growing versions will be synonyms, if you set it to |false|, the behavior
+% of original \TeX\ (different commands for growing and non-growing versions)
+% will be used.  Non-growing accents are only supported in \LuaTeX\ 0.65 and
+% above.  If a supporting engine is detected, non-growing accents are the
+% default, otherwise all accents grow if the font has wider variants for them.
+% In the latter case, setting |growing-accents| to any other value than |true|
+% results in an error.  \tabref{growing-accents} summarizes the possible values
+% for the |growing-accents| option.
+%
+% \begin{table}
+%   \centering
+%   \topcaption{Possible values for the \texttt{growing-accents} option.}
+%   \tablabel{growing-accents}
+%   \begin{tabular}{@{}lll@{}}
+%     \toprule
+%     Setting & \cs{vec} etc.\ grow & \cs{widehat} etc.\ grow \\
+%     \midrule
+%     \texttt{growing-accents=false} & No & Yes \\
+%     \texttt{growing-accents=true} & Yes & Yes \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
 %
 %
 % \subsubsection{Nabla}
@@ -1059,6 +1093,14 @@ This work is "author-maintained" by Will Robertson.
 %
 %
 % \paragraph{Conditionals}
+% Engine capabilities:
+%    \begin{macrocode}
+\bool_new:N \c_um_have_fixed_accents_bool
+\bool_set:Nn \c_um_have_fixed_accents_bool {
+  \c_luatex_is_engine_bool
+  && \int_compare_p:nNn { \luatexversion } > { 64 }
+}
+%    \end{macrocode}
 %    \begin{macrocode}
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
@@ -1088,6 +1130,7 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % For assorted package options:
 %    \begin{macrocode}
+\bool_new:N \l_um_growing_accents_bool
 \bool_new:N \g_um_upNabla_bool
 \bool_new:N \g_um_uppartial_bool
 \bool_new:N \g_um_literal_Nabla_bool
@@ -1859,6 +1902,22 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
+% \paragraph{Accents}
+%    \begin{macrocode}
+\bool_if:NTF \c_um_have_fixed_accents_bool {
+  \keys_define:nn { unicode-math } {
+    growing-accents .bool_set:N = \l_um_growing_accents_bool
+  }
+} {
+  \bool_set_true:N \l_um_growing_accents_bool
+  \keys_define:nn { unicode-math } {
+    growing-accents .choice:,
+    growing-accents .default:n = true,
+    growing-accents / true .code:n = \prg_do_nothing:,
+  }
+}
+%    \end{macrocode}
+%
 % \paragraph{Nabla and partial}
 %    \begin{macrocode}
 \keys_define:nn {unicode-math} {
@@ -2139,6 +2198,9 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\um_radical:nn}
 % \begin{macro}{\um_delimiter:Nnn}
 % \begin{macro}{\um_accent:Nnn}
+% \begin{macro}{\um_wide_top_accent:Nnn}
+% \begin{macro}{\um_wide_bottom_accent:Nnn}
+% \begin{macro}{\um_accent_keyword:}
 % These are all wrappers for the primitive commands that take numerical
 % input only.
 %    \begin{macrocode}
@@ -2163,14 +2225,34 @@ This work is "author-maintained" by Will Robertson.
 \cs_new:Npn \um_delimiter:Nnn #1#2#3 {
   \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
-\cs_new:Npn \um_accent:Nnn #1#2#3 {
+\xetex_or_luatex:nnn { \cs_new:Npn \um_accent:Nnn #1#2#3 } {
   \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+} {
+  \Umathaccent \um_accent_keyword: \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+}
+\luatex_if_engine:T {
+  \cs_new_nopar:Npn \um_wide_top_accent:Nnn #1 #2 #3 {
+    \Umathaccent \mathchar@type #1 \use:c { sym #2 } \scan_stop:
+  }
+  \bool_if:NTF \c_um_have_fixed_accents_bool {
+    \cs_new_nopar:Npn \um_wide_bottom_accent:Nnn #1 #2 #3 {
+      \Umathaccent bot~ \mathchar@type #1 \use:c { sym #2 } \scan_stop:
+    }
+    \cs_new_protected_nopar:Npn \um_accent_keyword: {
+      \bool_if:NF \l_um_growing_accents_bool { fixed~ }
+    }
+  } {
+    \cs_new_nopar:Npn \um_accent_keyword: { }
+  }
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \cs_generate_variant:Nn \um_set_mathchar:NNnn {c}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -5196,7 +5278,6 @@ This work is "author-maintained" by Will Robertson.
 % automatically by the maths characters database.
 %    \begin{macrocode}
 \def\to{\rightarrow}
-\def\overrightarrow{\vec}
 \def\le{\leq}
 \def\ge{\geq}
 \def\neq{\ne}
@@ -5641,9 +5722,42 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-\AtBeginDocument{
+\xetex_or_luatex:nnn { \AtBeginDocument } {
   \def\widehat{\hat}
   \def\widetilde{\tilde}
+  \def\overrightarrow{\vec}
+} {
+  \cs_gset_protected_nopar:Npx \widehat {
+    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0302 }
+  }
+  \cs_gset_protected_nopar:Npx \widetilde {
+    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0303 }
+  }
+  \cs_gset_protected_nopar:Npx \overleftarrow {
+    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20D6 }
+  }
+  \cs_gset_protected_nopar:Npx \overrightarrow {
+    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20D7 }
+  }
+  \cs_gset_protected_nopar:Npx \overleftrightarrow {
+    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20E1 }
+  }
+}
+\bool_if:NT \c_um_have_fixed_accents_bool {
+  \AtBeginDocument {
+    \cs_gset_protected_nopar:Npx \underrightharpoondown {
+      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EC }
+    }
+    \cs_gset_protected_nopar:Npx \underleftharpoondown {
+      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20ED }
+    }
+    \cs_gset_protected_nopar:Npx \underleftarrow {
+      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EE }
+    }
+    \cs_gset_protected_nopar:Npx \underrightarrow {
+      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EF }
+    }
+  }
 }
 %    \end{macrocode}
 %
