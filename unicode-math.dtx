@@ -2236,7 +2236,7 @@ This work is "author-maintained" by Will Robertson.
   }
   \bool_if:NTF \c_um_have_fixed_accents_bool {
     \cs_new_nopar:Npn \um_wide_bottom_accent:Nnn #1 #2 #3 {
-      \Umathaccent bot~ \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
+      \Umathaccent bottom~ \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
     }
     \cs_new_protected_nopar:Npn \um_accent_keyword: {
       \bool_if:NF \l_um_growing_accents_bool { fixed~ }
