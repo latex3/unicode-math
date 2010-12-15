@@ -2456,12 +2456,14 @@ This work is "author-maintained" by Will Robertson.
 % \begin{itemize}
 % \item Remap symbols that don't take their natural mathcode
 % \item Activate any symbols that need to be math-active
+% \item Enable wide/narrow accents
 % \item Assign delimiter codes for symbols that need to grow
 % \item Setup the maths alphabets (\cs{mathbf} etc.)
 % \end{itemize}
 %    \begin{macrocode}
   \um_remap_symbols:
   \um_setup_mathactives:
+  \um_setup_accents:
   \um_setup_delcodes:
   \um_setup_alphabets:
 %    \end{macrocode}
@@ -5723,7 +5725,7 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-\xetex_or_luatex:nnn { \AtBeginDocument } {
+\xetex_or_luatex:nnn { \cs_new_protected_nopar:Npn \um_setup_accents: } {
   \def\widehat{\hat}
   \def\widetilde{\tilde}
   \def\overrightarrow{\vec}
@@ -5743,9 +5745,7 @@ This work is "author-maintained" by Will Robertson.
   \cs_gset_protected_nopar:Npx \overleftrightarrow {
     \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20E1 }
   }
-}
-\bool_if:NT \c_um_have_fixed_accents_bool {
-  \AtBeginDocument {
+  \bool_if:NT \c_um_have_fixed_accents_bool {
     \cs_gset_protected_nopar:Npx \underrightharpoondown {
       \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EC }
     }
