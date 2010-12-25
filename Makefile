@@ -250,7 +250,7 @@ lfile: $(F)  $(BUILDSOURCE)
 check: $(BUILDFILES) $(BUILDTESTTARGET)
 	cd $(testdir); \
 	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex; \
-	ls L*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex;
+	ls [FL]*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex;
 
 
 #### Each step of the process ####
@@ -274,6 +274,10 @@ $(builddir)/X%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/X%.ltx
 $(builddir)/L%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/L%.ltx
 	echo 'L$*: Generating PDF output from LuaLaTeX.'
 	cd $(builddir); lualatex -interaction=batchmode L$*.ltx > /dev/null
+
+$(builddir)/F%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/F%.ltx
+	echo 'F$*: Generating PDF output from LuaLaTeX.'
+	cd $(builddir); lualatex -interaction=batchmode F$*.ltx > /dev/null
 
 
 #### Generating new tests ####
