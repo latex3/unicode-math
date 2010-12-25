@@ -1061,16 +1061,19 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{fontspec}[2010/10/25]
 \RequirePackage{catchfile}
 \RequirePackage{fix-cm} % avoid some warnings
+\RequirePackage{filehook}[2010/12/20]
 %    \end{macrocode}
 %
 % Start using \LaTeX3 --- finally!
 %    \begin{macrocode}
 \ExplSyntaxOn
-\@ifclassloaded{memoir}{
-  \cs_set_eq:NN \um_after_pkg:nn \AtEndPackage
-}{
-  \RequirePackage{scrlfile}
-  \cs_set_eq:NN \um_after_pkg:nn \AfterPackage
+%    \end{macrocode}
+%
+% Patch the \pkg{filehook} package to allow macro parameter characters in hooks.
+%    \begin{macrocode}
+\cs_set_protected_nopar:Npn \AtEndOfFile #1 {
+  \cs_if_exist:cF { \filehook@atend@ #1 } { \tl_clear:c { \filehook@atend@ #1 } }
+  \exp_args:Nc \filehook@prefix { \filehook@atend@ #1 }
 }
 %    \end{macrocode}
 %
@@ -5352,22 +5355,6 @@ This work is "author-maintained" by Will Robertson.
 \def\operator@font{\um_switchto_mathup:}
 %    \end{macrocode}
 %
-% \begin{macro}{\um_patch_pkg:nn}
-% \darg{package}
-% \darg{code}
-% If \meta{package} is loaded either already or later in the preamble, \meta{code}
-% is executed (after the package is loaded in the latter case).
-%    \begin{macrocode}
-\cs_new:Npn \um_patch_pkg:nn #1#2 {
-  \@ifpackageloaded {#1} {
-    #2
-  }{
-    \um_after_pkg:nn {#1} {#2}
-  }
-}
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\um_tmpa:w}
 % A scratch macro.
 %    \begin{macrocode}
@@ -5486,7 +5473,7 @@ This work is "author-maintained" by Will Robertson.
 % but activates automatically so old documents that might change the \cs{url}
 % font still work correctly.
 %    \begin{macrocode}
-\um_patch_pkg:nn {url} {
+\AtEndOfPackageFile * {url} {
   \tl_put_left:Nn \Url@FormatString { \um_switchto_mathup: }
   \tl_put_right:Nn \UrlSpecials {
     \do\`{\mathchar`\`}
@@ -5500,7 +5487,7 @@ This work is "author-maintained" by Will Robertson.
 % \paragraph{\pkg{amsmath}}
 % Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
-\um_patch_pkg:nn {amsmath} {
+\AtEndOfPackageFile * {amsmath} {
   \tl_remove_in:Nn \@begindocumenthook {
     \mathchardef\std@minus\mathcode`\-\relax
     \mathchardef\std@equal\mathcode`\=\relax
@@ -5700,7 +5687,7 @@ This work is "author-maintained" by Will Robertson.
 % \paragraph{\pkg{amsopn}}
 % This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
 %    \begin{macrocode}
-\um_patch_pkg:nn {amsopn} {
+\AtEndOfPackageFile * {amsopn} {
   \cs_set:Npn \newmcodes@ {
     \mathcode`\'39\scan_stop:
     \mathcode`\*42\scan_stop:
@@ -5773,7 +5760,7 @@ This work is "author-maintained" by Will Robertson.
 % \pkg{mathtools}’s |\cramped| command and others that make use of its internal version use an incorrect font dimension.
 %
 %    \begin{macrocode}
-\um_patch_pkg:nn { mathtools } {
+\AtEndOfPackageFile * { mathtools } {
   \um_check_and_fix:NNnnnn \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 } {
     \sbox \z@ {
       $
