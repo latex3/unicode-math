@@ -1061,20 +1061,12 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{fontspec}[2010/10/25]
 \RequirePackage{catchfile}
 \RequirePackage{fix-cm} % avoid some warnings
-\RequirePackage{filehook}[2010/12/20]
+\RequirePackage{filehook}[2010/12/29]
 %    \end{macrocode}
 %
 % Start using \LaTeX3 --- finally!
 %    \begin{macrocode}
 \ExplSyntaxOn
-%    \end{macrocode}
-%
-% Patch the \pkg{filehook} package to allow macro parameter characters in hooks.
-%    \begin{macrocode}
-\cs_set_protected_nopar:Npn \AtEndOfFile #1 {
-  \cs_if_exist:cF { \filehook@atend@ #1 } { \tl_clear:c { \filehook@atend@ #1 } }
-  \exp_args:Nc \filehook@prefix { \filehook@atend@ #1 }
-}
 %    \end{macrocode}
 %
 % \paragraph{Extra \pkg{expl3} variants}
