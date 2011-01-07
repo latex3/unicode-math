@@ -127,17 +127,17 @@ $(builddir)/$(PKG).dtx: $(PKG).dtx
 
 $(builddir)/$(PKG).sty: $(builddir)/$(PKG).dtx
 	echo "Updating $@"
-	cd $(builddir); \
+	cd $(builddir) && \
 	tex $(PKG).dtx > /dev/null ;
 
 $(builddir)/$(PKG).pdf:  $(builddir)/$(PKG).dtx $(BUILDSOURCE)
-	cd $(builddir); \
+	cd $(builddir) && \
 	xelatex $(PKG).dtx && \
 	makeindex -s gind.ist $(PKG) && \
 	xelatex $(PKG).dtx;
 
 $(builddir)/$(SYM).pdf:  $(builddir)/$(SYM).ltx
-	cd $(builddir); \
+	cd $(builddir) && \
 	xelatex $(SYM).ltx && \
 	xelatex $(SYM).ltx;
 
@@ -160,7 +160,7 @@ $(builddir)/README: $(builddir)/README.markdown
 # Test suite PDF
 
 $(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE) $(builddir)/$(testdir)
-	cd $(builddir); \
+	cd $(builddir) && \
 	xelatex $(SUITE).ltx
 
 
@@ -248,8 +248,8 @@ lfile: $(F)  $(BUILDSOURCE)
 #### All tests ####
 
 check: $(BUILDFILES) $(BUILDTESTTARGET)
-	cd $(testdir); \
-	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex; \
+	cd $(testdir) && \
+	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex && \
 	ls [FL]*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex;
 
 
@@ -269,20 +269,20 @@ $(builddir)/%.diff.pdf: $(builddir)/%.pdf
 
 $(builddir)/X%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/X%.ltx
 	echo 'X$*: Generating PDF output from XeLaTeX.'
-	cd $(builddir); xelatex -interaction=batchmode X$*.ltx > /dev/null
+	cd $(builddir) && xelatex -interaction=batchmode X$*.ltx > /dev/null
 
 $(builddir)/L%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/L%.ltx
 	echo 'L$*: Generating PDF output from LuaLaTeX.'
-	cd $(builddir); lualatex -interaction=batchmode L$*.ltx > /dev/null
+	cd $(builddir) && lualatex -interaction=batchmode L$*.ltx > /dev/null
 
 $(builddir)/F%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/F%.ltx
 	echo 'F$*: Generating PDF output from LuaLaTeX.'
-	cd $(builddir); lualatex -interaction=batchmode F$*.ltx > /dev/null
+	cd $(builddir) && lualatex -interaction=batchmode F$*.ltx > /dev/null
 
 
 #### Generating new tests ####
 
-lonelystub = $(shell cd $(testdir); ls | egrep '(.*\.ltx$$)|(.*\.safe.pdf$$)' | cut -d . -f 1 | uniq -u)
+lonelystub = $(shell cd $(testdir) && ls | egrep '(.*\.ltx$$)|(.*\.safe.pdf$$)' | cut -d . -f 1 | uniq -u)
 lonelytest = $(addprefix $(testdir)/,$(addsuffix .safe.pdf,$(lonelystub)))
 lonelytesttarget = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
 
