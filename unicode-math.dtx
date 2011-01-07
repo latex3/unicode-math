@@ -6225,6 +6225,10 @@ This work is "author-maintained" by Will Robertson.
 \usepackage[slash-delimiter=frac,nabla=literal]{unicode-math}
 \usepackage{metalogo,hologo}
 
+\@ifundefined{HOLOGO@ReflectBox@\hologodriver}{%
+  \@namedef{HOLOGO@ReflectBox@\hologodriver}{}%
+}{}
+
 %\usepackage[rm,small]{titlesec}
 
 \setmainfont[Mapping=tex-text]{TeX Gyre Pagella}
