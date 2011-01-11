@@ -92,7 +92,7 @@ awk '
 	  # GRAB INFO
 	  flag = substr($0,1,1)
 	  usv = substr($0,2,5)
-      texname = substr($0,84,25)
+      texname = substr($0,84,26)
       type = substr($0,55,1)
       class = substr($0,57,1)
       description = tolower(substr($0,233,350))
