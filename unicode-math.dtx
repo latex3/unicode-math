@@ -5827,14 +5827,41 @@ This work is "author-maintained" by Will Robertson.
   \NewDocumentCommand \coloneqq { } { \coloneq }
   \NewDocumentCommand \Coloneqq { } { \Coloneq }
   \NewDocumentCommand \eqqcolon { } { \eqcolon }
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%    \begin{macrocode}
 }
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \paragraph{\pkg{colonequals}}
+%
+% \begin{macro}{\ratio}
+% \begin{macro}{\coloncolon}
+% \begin{macro}{\minuscolon}
+% \begin{macro}{\colonequals}
+% \begin{macro}{\equalscolon}
+% \begin{macro}{\coloncolonequals}
+%   Similarly to \pkg{mathtools}, the \pkg{colonequals} defines several colon
+%   combinations.  Fortunately there are no name clashes, so we can just
+%   overwrite their definitions.
+%    \begin{macrocode}
+\AtEndOfPackageFile * { colonequals } {
+  \msg_warning:nn { unicode-math } { colonequals }
+  \RenewDocumentCommand \ratio { } { \mathratio }
+  \RenewDocumentCommand \coloncolon { } { \Colon }
+  \RenewDocumentCommand \minuscolon { } { \dashcolon }
+  \RenewDocumentCommand \colonequals { } { \coloneq }
+  \RenewDocumentCommand \equalscolon { } { \eqcolon }
+  \RenewDocumentCommand \coloncolonequals { } { \Coloneq }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
 % \paragraph{\pkg{beamer}}
 %    \begin{macrocode}
@@ -5845,7 +5872,6 @@ This work is "author-maintained" by Will Robertson.
   \fi
 }{}
 %    \end{macrocode}
-%
 %
 %    \begin{macrocode}
 \ExplSyntaxOff
@@ -5924,6 +5950,21 @@ This work is "author-maintained" by Will Robertson.
   \token_to_str:N \eqqcolon. \\
   Note~ that~ since~ I~ won't~ overwrite~ the~ other~ colon-like \\
   commands,~ using~ them~ will~ lead~ to~ inconsistencies.
+}
+\msg_new:nnn { unicode-math } { colonequals } {
+  I'm~ going~ to~ overwrite~ the~ following~ commands~ from \\
+  the~ `colonequals'~ package: \\
+  \token_to_str:N \ratio,~
+  \token_to_str:N \coloncolon,~
+  \token_to_str:N \minuscolon, \\
+  \token_to_str:N \colonequals,~
+  \token_to_str:N \equalscolon,~
+  \token_to_str:N \coloncolonequals. \\
+  Note~ that~ since~ I~ won't~ overwrite~ the~ other~ colon-like \\
+  commands,~ using~ them~ will~ lead~ to~ inconsistencies. \\
+  Furthermore,~ changing~ \token_to_str:N \colonsep \c_space_tl
+  or~ \token_to_str:N \doublecolonsep \c_space_tl won't~ have \\
+  any~ effect~ on~ the~ re-defined~ commands.
 }
 %    \end{macrocode}
 %
