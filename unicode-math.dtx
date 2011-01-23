@@ -5810,6 +5810,29 @@ This work is "author-maintained" by Will Robertson.
     }
     \box_use_clear:N \l_tmpa_box
   }
+%    \end{macrocode}
+%
+% \begin{macro}{\dblcolon}
+% \begin{macro}{\coloneqq}
+% \begin{macro}{\Coloneqq}
+% \begin{macro}{\eqqcolon}
+%   \pkg{mathtools} defines several commands as combinations of colons and
+%   other characters, but with meanings incompatible to \pkg{unicode-math}.
+%   Thus we issue a warning.  Because \pkg{mathtools} uses
+%   \cmd{\providecommand} \cmd{\AtBeginDocument}, we can just define the
+%   offending commands here.
+%    \begin{macrocode}
+  \msg_warning:nn { unicode-math } { mathtools }
+  \NewDocumentCommand \dblcolon { } { \Colon }
+  \NewDocumentCommand \coloneqq { } { \coloneq }
+  \NewDocumentCommand \Coloneqq { } { \Coloneq }
+  \NewDocumentCommand \eqqcolon { } { \eqcolon }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%    \begin{macrocode}
 }
 %    \end{macrocode}
 %
@@ -5891,6 +5914,16 @@ This work is "author-maintained" by Will Robertson.
 \msg_new:nnn {unicode-math} {patch-macro}
 {
   I'm~ going~ to~ patch~ macro~ #1.
+}
+\msg_new:nnn { unicode-math } { mathtools } {
+  I'm~ going~ to~ overwrite~ the~ following~ commands~ from \\
+  the~ `mathtools'~ package: \\
+  \token_to_str:N \dblcolon,~
+  \token_to_str:N \coloneqq,~
+  \token_to_str:N \Coloneqq,~
+  \token_to_str:N \eqqcolon. \\
+  Note~ that~ since~ I~ won't~ overwrite~ the~ other~ colon-like \\
+  commands,~ using~ them~ will~ lead~ to~ inconsistencies.
 }
 %    \end{macrocode}
 %
