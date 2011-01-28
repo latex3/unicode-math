@@ -49,9 +49,13 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-As well as running XeTeX or LuaTeX this package requires recent versions
-of the fontspec, expl3 and xpackages packages. If you're using TeX Live 2010
-then there'll be no problems.
+As well as running XeTeX or LuaTeX this package requires recent versions of the
+`fontspec`, `expl3`, `xpackages`, `catchfile` and `filehook` packages.  If
+you're using an up-to-date TeX Live 2010 then there'll be no problems.  “Up to
+date” means the current state of TeX Live 2010, as obtained by running `tlmgr
+update --all`; the DVD release of TeX Live 2010 is not recent enough.  For some
+additional features you need LuaTeX 0.65 or later, obtainable via
+[TLcontrib](http://tlcontrib.metatex.org).
 
 
 MAINTENANCE
