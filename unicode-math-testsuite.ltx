@@ -5,6 +5,7 @@
 \setmainfont{TeX Gyre Pagella}
 \setmonofont{Consolas}
 
+\def\prefix{}
 \newcommand\inserttest[1]{%
   \subsection{Test #1}
   \begin{minipage}{0.5\textwidth}
@@ -14,7 +15,7 @@
   \begin{minipage}{8cm+4pt}
     \fboxsep=1pt
     \fboxrule=1pt
-    \fbox{\includegraphics[width=8cm]{testfiles/#1.safe.pdf}}
+    \fbox{\includegraphics[width=8cm]{testfiles/#1\prefix.safe.pdf}}
   \end{minipage}
 }
 
@@ -34,12 +35,18 @@ As well as being good minimal examples, these tests are useful to ensure that ne
 When the test suite is run, the new output is compared pixel by pixel with that shown here and warnings produced if the outputs are not identical.
 \end{minipage}
 
-\section{\XeLaTeX\ test files}
+\section{Test files for both engines}
 
-\input{testfiles/umtest-suite-X.tex}
+\def\prefix{-L}
+\input{testfiles/umtest-suite-F.tex}
+\def\prefix{}
 
 \section{Lua\LaTeX\ test files}
 
 \input{testfiles/umtest-suite-L.tex}
+
+\section{\XeLaTeX\ test files}
+
+\input{testfiles/umtest-suite-X.tex}
 
 \end{document}

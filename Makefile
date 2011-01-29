@@ -273,8 +273,8 @@ BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.ltx,$(TESTOUT
 BUILDTESTTARGET1 = $(TESTOUT)
 BUILDTESTTARGET2 = $(subst $(testdir)/,$(builddir)/,$(BUILDTESTTARGET1))
 BUILDTESTTARGET3 = $(subst .safe.pdf,.diff.pdf,$(BUILDTESTTARGET2))
-BUILDTESTTARGET4 = $(subst .Xsafe.pdf,-X.diff.pdf,$(BUILDTESTTARGET3))
-BUILDTESTTARGET5 = $(subst .Lsafe.pdf,-L.diff.pdf,$(BUILDTESTTARGET4))
+BUILDTESTTARGET4 = $(subst -X.safe.pdf,-X.diff.pdf,$(BUILDTESTTARGET3))
+BUILDTESTTARGET5 = $(subst -L.safe.pdf,-L.diff.pdf,$(BUILDTESTTARGET4))
 BUILDTESTTARGET = $(BUILDTESTTARGET4)
 
 BUILDSOURCE = $(addprefix $(builddir)/,$(LTXSOURCE))
@@ -283,13 +283,12 @@ BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC)
 
 #### All tests ####
 
-check: $(TESTLIST)
-	echo $(BUILDTESTTARGET)
-
-$(TESTLIST): $(BUILDFILES) $(BUILDTESTTARGET)
-	@cd $(testdir); \
-	ls *.ltx | sed -e 's/\(.*\).ltx/\\TEST{\1}/g' > $(TESTLIST)
-
+check: $(BUILDFILES) $(BUILDTESTTARGET)
+	cd $(testdir) && \
+	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex && \
+	ls L*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex && \
+	ls F*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-F.tex;
+	
 $(builddir)/%: $(testdir)/%
 	@mkdir -p $(builddir); \
 	$(COPY) $< $@
@@ -306,13 +305,13 @@ lonelyfile = $(addsuffix .safe.pdf,$(lonelystub))
 lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
 lonelytest = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
 
-Xlonelystub = $(shell cd $(testdir); ls | egrep '(F.*\.ltx)|(F.*.Xsafe.pdf)' | cut -d . -f 1 | uniq -u)
-Xlonelyfile = $(addsuffix .Xsafe.pdf,$(Xlonelystub))
+Xlonelystub = $(shell cd $(testdir); ls | egrep '(F.*\.ltx)|(F.*-X.safe.pdf)' | cut -d . -f 1 | uniq -u)
+Xlonelyfile = $(addsuffix -X.safe.pdf,$(Xlonelystub))
 Xlonelypath = $(addprefix $(testdir)/,$(Xlonelyfile))
 Xlonelytest = $(addprefix $(builddir)/,$(addsuffix -X.pdf,$(Xlonelystub)))
 
-Llonelystub = $(shell cd $(testdir); ls | egrep '(F.*\.ltx)|(F.*.Lsafe.pdf)' | cut -d . -f 1 | uniq -u)
-Llonelyfile = $(addsuffix .Lsafe.pdf,$(Llonelystub))
+Llonelystub = $(shell cd $(testdir); ls | egrep '(F.*\.ltx)|(F.*-L.safe.pdf)' | cut -d . -f 1 | uniq -u)
+Llonelyfile = $(addsuffix -L.safe.pdf,$(Llonelystub))
 Llonelypath = $(addprefix $(testdir)/,$(Llonelyfile))
 Llonelytest = $(addprefix $(builddir)/,$(addsuffix -L.pdf,$(Llonelystub)))
 
@@ -322,10 +321,10 @@ $(lonelypath): $(lonelytest)
 	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.safe.pdf/.pdf/`  $@
 
 $(Xlonelypath): $(Xlonelytest)
-	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.Xsafe.pdf/-X.pdf/`  $@
+	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/-X.safe.pdf/-X.pdf/`  $@
 
 $(Llonelypath): $(Llonelytest)
-	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/.Lsafe.pdf/-L.pdf/`  $@
+	$(COPY)  `echo $@ | sed -e s/$(testdir)/$(builddir)/ -e s/-L.safe.pdf/-L.pdf/`  $@
 
 
 #### TESTS FOR BOTH ENGINES ####
@@ -335,7 +334,7 @@ $(builddir)/F%-L.diff.pdf: $(builddir)/F%-L.pdf
 	if test $(shell compare \
 	                $(COMPARE_OPTS) \
 	                $(builddir)/F$*-L.pdf \
-	                $(testdir)/F$*.Lsafe.pdf \
+	                $(testdir)/F$*-L.safe.pdf \
 	                $(builddir)/F$*-L.diff.pdf 2>&1) -le 1 ; then \
 	  echo 'F$*: Test passed.' ; \
 	else \
@@ -348,7 +347,7 @@ $(builddir)/F%-X.diff.pdf: $(builddir)/F%-X.pdf
 	if test $(shell compare \
 	                $(COMPARE_OPTS) \
 	                $(builddir)/F$*-X.pdf \
-	                $(testdir)/F$*.Xsafe.pdf \
+	                $(testdir)/F$*-X.safe.pdf \
 	                $(builddir)/F$*-X.diff.pdf 2>&1) -le 1 ; then \
 	  echo 'F$*: Test passed.' ; \
 	else \
