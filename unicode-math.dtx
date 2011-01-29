@@ -3520,12 +3520,13 @@ This work is "author-maintained" by Will Robertson.
 % First check that at least one of the alphabets for the font shape is defined\dots
 %    \begin{macrocode}
   \clist_map_inline:nn {#2} {
-    \cs_if_exist:cT {um_config_ \l_um_style_tl _##1:n} {
-      \str_if_eq:nnTF {##1}{misc} {
+    \tl_set:Nx \l_um_tmpa_tl { \trim@spaces {##1} }
+    \cs_if_exist:cT {um_config_ \l_um_style_tl _\l_um_tmpa_tl :n} {
+      \str_if_eq:xxTF {\l_um_tmpa_tl}{misc} {
         \um_maybe_init_alphabet:V \l_um_style_tl
         \clist_map_break:
       }{
-        \um_glyph_if_exist:cT { \um_to_usv:nn {#3}{##1} }{
+        \um_glyph_if_exist:cT { \um_to_usv:nn {#3}{\l_um_tmpa_tl} }{
           \um_maybe_init_alphabet:V \l_um_style_tl
           \clist_map_break:
         }
@@ -3536,22 +3537,23 @@ This work is "author-maintained" by Will Robertson.
 % \dots and then loop through them defining the individual ranges:
 %    \begin{macrocode}
   \clist_map_inline:nn {#2} {
-    \cs_if_exist:cT {um_config_ \l_um_style_tl _##1:n} {
-      \str_if_eq:nnTF {##1}{misc} {
-        \um_trace:nx {setup-alph} {math \l_um_style_tl~(##1)}
-        \use:c {um_config_ \l_um_style_tl _##1:n} {#3}
+    \tl_set:Nx \l_um_tmpa_tl { \trim@spaces {##1} }
+    \cs_if_exist:cT {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {
+      \str_if_eq:xxTF {\l_um_tmpa_tl}{misc} {
+        \um_trace:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
+        \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {#3}
       }{
-        \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{##1} } {
-          \um_trace:nx {setup-alph} {math \l_um_style_tl~(##1)}
-          \use:c {um_config_ \l_um_style_tl _##1:n} {#3}
+        \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{\l_um_tmpa_tl} } {
+          \um_trace:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
+          \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {#3}
         }{
           \bool_if:NTF \l_um_implicit_alph_bool {
             \seq_put_right:Nx \l_um_missing_alph_seq {
               \@backslashchar math \l_um_style_tl \space
-              (\tl_use:c{g_um_math_alphabet_name_##1_tl})
+              (\tl_use:c{g_um_math_alphabet_name_ \l_um_tmpa_tl _tl})
             }
           }{
-            \use:c {um_config_ \l_um_style_tl _##1:n} {up}
+            \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {up}
           }
         }
       }
