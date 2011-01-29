@@ -2,16 +2,17 @@ The UNICODE-MATH package
 ========================
 
 This package will provide a complete implementation of unicode maths for
-XeTeX. While I do not encourage people to use this package for production
-work, I understand that it has certain uses and am making it available for
-distribution. Your testing and feedback is essential to fill in the many gaps
-that I miss!
+XeLaTeX and LuaLaTeX.
 
-The package will soon also work under LuaTeX, but this is not yet supported.
+While I am a little wary of encouraging people to use this package for
+production work, I understand that it has certain uses and am making it
+available for distribution. Your testing and feedback is essential to fill
+in the many gaps that I miss!
 
 Please be aware that this package is undergoing continued development and the
 interface and functionality should not be considered completely stable. But
-the more the package is used the more stable it will become. (Things are generally working now; it is only minutiae that may change in the future.)
+the more the package is used the more stable it will become. (Things are
+generally working now; it is only minutiae that may change in the future.)
 
 Unicode maths is currently supported to one degree or another by the fonts
 
@@ -34,13 +35,14 @@ new releases.
 [XM]: http://github.com/khaledhosny/xits-math
 [OFL]: http://scripts.sil.org/OFL
 
+
 PACKAGE USAGE
 -------------
 
 Please see the PDF documentation for full details. A simple beginning is:
 
     \usepackage{unicode-math}
-    \setmathfont{Cambria Math}
+    \setmathfont{xits-math.otf}
 
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
 Furthermore, it will be in a different font.
@@ -49,13 +51,16 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-As well as running XeTeX or LuaTeX this package requires recent versions of the
-`fontspec`, `expl3`, `xpackages`, `catchfile` and `filehook` packages.  If
-you're using an up-to-date TeX Live 2010 then there'll be no problems.  “Up to
+As well as running XeTeX or LuaTeX this package requires recent versions of
+the `fontspec`, `expl3`, `xpackages`, `catchfile`, and `filehook` packages. If
+you're using an up-to-date TeX Live 2010 then there'll be no problems. “Up to
 date” means the current state of TeX Live 2010, as obtained by running `tlmgr
-update --all`; the DVD release of TeX Live 2010 is not recent enough.  For some
-additional features you need LuaTeX 0.65 or later, obtainable via
-[TLcontrib](http://tlcontrib.metatex.org).
+update --all`; the DVD release of TeX Live 2010 is not recent enough.
+
+For some additional features you need LuaTeX 0.65 or later, which can be
+updated using [TLContrib][TLC].
+
+[TLC]: http://tlcontrib.metatex.org)
 
 
 MAINTENANCE
@@ -145,6 +150,15 @@ changes have not affected the standard behaviour.
 
 CHANGE HISTORY
 --------------
+
+- v0.5d (2011/01/30)
+
+  * Small improvements and bug fixes
+  * Assorted improvements to LuaLaTeX support
+  * Better compatibility with legacy maths packages and environments
+  * Improved behaviour with reading and using maths font dimensions
+  * If you are using LuaTeX 0.65 or later, non-growing accents are supported
+  * Fix the default setting for "vargreek-shape"
 
 - v0.5c (2010/09/27)
 
