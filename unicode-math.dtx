@@ -31,7 +31,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2011/01/25 v0.5b Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/01/29 v0.5b Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass{ltxdoc}
@@ -686,11 +686,13 @@ This work is "author-maintained" by Will Robertson.
 % \subsubsection{Primes}
 %
 % Primes ($x'$) may be input in several ways. You may use any combination
-% of \ascii\ straight quote (\texttt{\char`\'}), Unicode prime \unichar{2032}
-% ($'$), and \cs{prime}; when multiple primes occur next to each other, they chain
+% the \ascii\ straight quote (\texttt{\char`\'}) or the Unicode prime \unichar{2032}
+% ($'$); when multiple primes occur next to each other, they chain
 % together to form double, triple, or quadruple primes if the font contains
-% pre-drawn glyphs. These may also be accessed with \cs{dprime},
-% \cs{trprime}, and \cs{qprime}, respectively.
+% pre-drawn glyphs. The individual prime glyphs are accessed, as usual,
+% with the \cs{prime} command, and the double-, triple-, and quadruple-prime
+% glyphs are available with \cs{dprime}, \cs{trprime}, and \cs{qprime},
+% respectively.
 %
 % If the font does not contain the pre-drawn glyphs or more than four primes
 % are used, the single prime glyph is used multiple times with a negative
@@ -703,11 +705,17 @@ This work is "author-maintained" by Will Robertson.
 % \ExplySyntaxOff
 % \end{verbatim}
 %
-% Backwards or reverse primes behave in exactly the same way; use any of \ascii\
-% back tick (\texttt{\char`\`}), Unicode reverse prime \unichar{2035}
-% ({\umfont\char"2035}), or \cs{backprime} to access it.
-% Multiple backwards primes can also be called with \cs{backdprime},
+% Backwards or reverse primes behave in exactly the same way; use the \ascii\
+% back tick (\texttt{\char`\`}) or the Unicode reverse prime \unichar{2035}
+% ({\umfont\char"2035}).
+% The command to access the backprime is \cs{backprime}, and
+% multiple backwards primes can accessed with \cs{backdprime},
 % \cs{backtrprime}, and \cs{backqprime}.
+%
+% In all cases above, no error checking is performed if you attempt to
+% access a multi-prime glyph in a font that doesn't contain one. For this
+% reason, it may be safer to write \verb|x''''| instead of \verb|x\qprime|
+% in general.
 %
 % If you ever need to enter the straight quote |'| or the backtick |`| in
 % maths mode, these glyphs can be accessed with \cs{mathstraightquote} and
@@ -1060,6 +1068,7 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{l3keys2e}
 \RequirePackage{fontspec}[2010/10/25]
 \RequirePackage{catchfile}
+\RequirePackage{trimspaces}
 \RequirePackage{fix-cm} % avoid some warnings
 \RequirePackage{filehook}[2011/01/03]
 %    \end{macrocode}
@@ -4741,7 +4750,6 @@ This work is "author-maintained" by Will Robertson.
   }{
     \um_nprimes:Nn #1 {#2}
   }
-  \egroup
 }
 \cs_new:Npn \um_nbackprimes_select:nn #1#2 {
   \prg_case_int:nnn {#2}{
@@ -4759,7 +4767,6 @@ This work is "author-maintained" by Will Robertson.
   }{
     \um_nprimes:Nn #1 {#2}
   }
-  \egroup
 }
 %    \end{macrocode}
 %
@@ -4767,46 +4774,38 @@ This work is "author-maintained" by Will Robertson.
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_scan_prime: {
-  \bgroup
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_zero:N \l_um_primecount_int
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_dprime: {
-  \bgroup
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_trprime: {
-  \bgroup
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_qprime: {
-  \bgroup
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {3}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_sup_prime: {
-  \bgroup
   \int_zero:N \l_um_primecount_int
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_sup_dprime: {
-  \bgroup
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_sup_trprime: {
-  \bgroup
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
 \cs_new:Npn \um_scan_sup_qprime: {
-  \bgroup
   \int_set:Nn \l_um_primecount_int {3}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
@@ -4857,35 +4856,29 @@ This work is "author-maintained" by Will Robertson.
   }
 }
 \cs_new:Npn \um_scan_backprime: {
-  \bgroup
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_zero:N \l_um_primecount_int
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Npn \um_scan_backdprime: {
-  \bgroup
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Npn \um_scan_backtrprime: {
-  \bgroup
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Npn \um_scan_sup_backprime: {
-  \bgroup
   \int_zero:N \l_um_primecount_int
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Npn \um_scan_sup_backdprime: {
-  \bgroup
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
 \cs_new:Npn \um_scan_sup_backtrprime: {
-  \bgroup
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
@@ -4930,13 +4923,13 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \AtBeginDocument{\um_define_prime_commands: \um_define_prime_chars:}
 \cs_set:Nn \um_define_prime_commands: {
-  \cs_set_eq:NN \prime       \um_scan_prime:
-  \cs_set_eq:NN \drime       \um_scan_dprime:
-  \cs_set_eq:NN \trprime     \um_scan_trprime:
-  \cs_set_eq:NN \qprime      \um_scan_qprime:
-  \cs_set_eq:NN \backprime   \um_scan_backprime:
-  \cs_set_eq:NN \backdprime  \um_scan_backdprime:
-  \cs_set_eq:NN \backtrprime \um_scan_backtrprime:
+  \cs_set_eq:NN \prime       \um_prime_single_mchar
+  \cs_set_eq:NN \drime       \um_prime_double_mchar
+  \cs_set_eq:NN \trprime     \um_prime_triple_mchar
+  \cs_set_eq:NN \qprime      \um_prime_quad_mchar
+  \cs_set_eq:NN \backprime   \um_backprime_single_mchar
+  \cs_set_eq:NN \backdprime  \um_backprime_double_mchar
+  \cs_set_eq:NN \backtrprime \um_backprime_triple_mchar
 }
 \group_begin:
   \char_make_active:N \'
