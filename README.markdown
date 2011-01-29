@@ -153,11 +153,11 @@ CHANGE HISTORY
 
 - v0.5d (2011/01/30)
 
-  * Small improvements and bug fixes
-  * Assorted improvements to LuaLaTeX support
-  * Better compatibility with legacy maths packages and environments
+  * Assorted improvements to LuaLaTeX support, including non-growing accents
+    available in LuaTeX v0.65 and later
   * Improved behaviour with reading and using maths font dimensions
-  * If you are using LuaTeX 0.65 or later, non-growing accents are supported
+  * Better compatibility with legacy maths packages and environments
+    (always more worked needed, though)
   * Fix the default setting for "vargreek-shape"
 
 - v0.5c (2010/09/27)

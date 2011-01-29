@@ -192,7 +192,6 @@ This work is "author-maintained" by Will Robertson.
 %     |math-style| & Style of letters & \secref{math-style} \\
 %     |bold-style| & Style of bold letters & \secref{bold-style} \\
 %     |sans-style| & Style of sans serif letters & \secref{sans-style} \\
-%     |growing-accents| & Whether accents like \cs{vec} can grow & \secref{growing-accents} \\
 %     |nabla|      & Style of the nabla symbol & \secref{nabla} \\
 %     |partial|    & Style of the partial symbol & \secref{partial} \\
 %     |vargreek-shape|  & Style of phi and epsilon & \secref{vargreek-shape} \\
@@ -550,40 +549,6 @@ This work is "author-maintained" by Will Robertson.
 %
 % \subsection{Miscellanea}
 %
-% \subsubsection{Growing and non-growing accents}
-% \seclabel{growing-accents}
-%
-% There are a few accents for which \TeX\ has both non-growing and growing
-% versions.  Among these are \cs{hat} and \cs{tilde}; the corresponding growing
-% versions are called \cs{widehat} and \cs{widetilde}, respectively.  Some
-% prefer the short accents, other prefer the wide ones.  \pkg{Unicode-math}
-% lets you decide whether you want such accents to grow automatically if the
-% font has wider variants.  If you set the |growing-accents| option to |true|,
-% all accents will grow if possible and the \TeX\ commands for growing and
-% non-growing versions will be synonyms, if you set it to |false|, the behavior
-% of original \TeX\ (different commands for growing and non-growing versions)
-% will be used.  Non-growing accents are only supported in \LuaTeX\ 0.65 and
-% above.  If a supporting engine is detected, non-growing accents are the
-% default, otherwise all accents grow if the font has wider variants for them.
-% In the latter case, setting |growing-accents| to any other value than |true|
-% results in an error.  \tabref{growing-accents} summarizes the possible values
-% for the |growing-accents| option.
-%
-% \begin{table}
-%   \centering
-%   \topcaption{Possible values for the \texttt{growing-accents} option.}
-%   \tablabel{growing-accents}
-%   \begin{tabular}{@{}lll@{}}
-%     \toprule
-%     Setting & \cs{vec} etc.\ grow & \cs{widehat} etc.\ grow \\
-%     \midrule
-%     \texttt{growing-accents=false} & No & Yes \\
-%     \texttt{growing-accents=true} & Yes & Yes \\
-%     \bottomrule
-%   \end{tabular}
-% \end{table}
-%
-%
 % \subsubsection{Nabla}
 % \seclabel{nabla}
 %
@@ -923,6 +888,20 @@ This work is "author-maintained" by Will Robertson.
 % (This should be a font option rather than a package option, but
 % it will change soon.)
 %
+%
+% \subsubsection{Growing and non-growing accents}
+% \seclabel{growing-accents}
+%
+% There are a few accents for which \TeX\ has both non-growing and growing
+% versions.  Among these are \cs{hat} and \cs{tilde}; the corresponding growing
+% versions are called \cs{widehat} and \cs{widetilde}, respectively.
+%
+% \XeTeX\ and older versions of \LuaTeX\ do not support this distinction, however,
+% and \emph{all} accents there will grow automatically. (I.e., \cs{hat} and \cs{widehat}
+% are equivalent.) Unfortunately this is not always appropriate. As of \LuaTeX\ v0.65,
+% these wide/non-wide commands will again behave in their expected manner.
+%
+%
 % \subsubsection{Pre-drawn fraction characters}
 %
 % Pre-drawn fractions \unichar{00BC}--\unichar{00BE}, \unichar{2150}--\unichar{215E}
@@ -1102,8 +1081,7 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \bool_new:N \c_um_have_fixed_accents_bool
 \bool_set:Nn \c_um_have_fixed_accents_bool {
-  \c_luatex_is_engine_bool
-  && \int_compare_p:nNn { \luatexversion } > { 64 }
+  \c_luatex_is_engine_bool && \int_compare_p:n { \luatexversion > 64 }
 }
 %    \end{macrocode}
 %    \begin{macrocode}
@@ -1135,7 +1113,6 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % For assorted package options:
 %    \begin{macrocode}
-\bool_new:N \l_um_growing_accents_bool
 \bool_new:N \g_um_upNabla_bool
 \bool_new:N \g_um_uppartial_bool
 \bool_new:N \g_um_literal_Nabla_bool
@@ -1908,22 +1885,6 @@ This work is "author-maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
-% \paragraph{Accents}
-%    \begin{macrocode}
-\bool_if:NTF \c_um_have_fixed_accents_bool {
-  \keys_define:nn { unicode-math } {
-    growing-accents .bool_set:N = \l_um_growing_accents_bool
-  }
-} {
-  \bool_set_true:N \l_um_growing_accents_bool
-  \keys_define:nn { unicode-math } {
-    growing-accents .choice:,
-    growing-accents .default:n = true,
-    growing-accents / true .code:n = \prg_do_nothing:,
-    growing-accents / false .code:n = \prg_do_nothing:,
-  }
-}
-%    \end{macrocode}
 %
 % \paragraph{Nabla and partial}
 %    \begin{macrocode}
@@ -2020,7 +1981,6 @@ This work is "author-maintained" by Will Robertson.
   }
 }
 %    \end{macrocode}
-%
 %
 % \paragraph{Debug/tracing}
 %    \begin{macrocode}
