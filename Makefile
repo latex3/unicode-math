@@ -157,9 +157,9 @@ $(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE) $(builddir)/$(t
 
 TDS = $(builddir)/$(PKG).tds.zip
 
-tds: TDS
+tds: $(TDS)
 
-$(builddir)/$(PKG).tds.zip: $(tds)/$(PKG).tds.zip
+$(TDS): $(tds)/$(PKG).tds.zip
 	$(COPY) $< $@
 
 $(tds)/$(PKG).tds.zip: $(TDSFILES)
