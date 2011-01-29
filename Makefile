@@ -66,22 +66,9 @@ CTANFILES = $(PKGSOURCE)  $(DOC)  $(testdir)
 BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
 BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
-# these are what's needed to compile and make stuff:
+#
 
 LTXSOURCE = $(PKG).sty $(TBL)
-
-SUITESOURCE = \
-  umtest-preamble.tex \
-  umtest-suite-X.tex \
-  umtest-suite-L.tex
-
-TESTOUT = $(shell ls $(testdir)/*.safe.pdf)
-BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.ltx,$(TESTOUT)))
-BUILDTESTTARGET = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.diff.pdf,$(TESTOUT)))
-
-BUILDSOURCE = $(addprefix $(builddir)/,$(LTXSOURCE))
-BUILDSUITE  = $(addprefix $(builddir)/,$(SUITESOURCE))
-BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC)
 
 # and this is how the TDS zip file is produced:
 
@@ -262,28 +249,35 @@ REDIRECT = > /dev/null
 
 LTXSOURCE = $(NAME).sty
 
-TESTLIST = testsuite-listing.tex
+TESTLIST = umtest-suite-X.tex umtest-suite-L.tex umtest-suite-F.tex
 
 SUITESOURCE = \
   $(testdir)/umtest-preamble.tex \
   $(testdir)/$(TESTLIST)
 
-TESTOUT = $(wildcard $(testdir)/*.*safe.pdf)
+TESTOUT = $(wildcard $(testdir)/*.safe.pdf)
 BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.ltx,$(TESTOUT)))
+
 BUILDTESTTARGET1 = $(TESTOUT)
 BUILDTESTTARGET2 = $(subst $(testdir)/,$(builddir)/,$(BUILDTESTTARGET1))
-BUILDTESTTARGET3 = $(subst .safe.pdf,.diff.pdf,$(BUILDTESTTARGET2))
-BUILDTESTTARGET4 = $(subst -X.safe.pdf,-X.diff.pdf,$(BUILDTESTTARGET3))
-BUILDTESTTARGET5 = $(subst -L.safe.pdf,-L.diff.pdf,$(BUILDTESTTARGET4))
-BUILDTESTTARGET = $(BUILDTESTTARGET4)
+BUILDTESTTARGET3 = $(subst .Xsafe.pdf,-X.diff.pdf,$(BUILDTESTTARGET2))
+BUILDTESTTARGET4 = $(subst .Lsafe.pdf,-L.diff.pdf,$(BUILDTESTTARGET3))
+BUILDTESTTARGET5 = $(subst .safe.pdf,.diff.pdf,$(BUILDTESTTARGET4))
+BUILDTESTTARGET = $(BUILDTESTTARGET5)
 
 BUILDSOURCE = $(addprefix $(builddir)/,$(LTXSOURCE))
 BUILDSUITE  = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
-BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC)
+
+BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC) $(BUILDTESTTARGET)
 
 #### All tests ####
 
-check: $(BUILDFILES) $(BUILDTESTTARGET)
+foo:
+	echo $(BUILDTESTTARGET)
+
+check: $(TESTLIST)
+	
+$(TESTLIST): $(BUILDFILES)
 	cd $(testdir) && \
 	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex && \
 	ls L*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex && \
@@ -300,17 +294,17 @@ $(builddir)/%: %
 
 #### Generating new tests ####
 
-lonelystub = $(shell cd $(testdir); ls | egrep '(X|L)(.*\.ltx)|(X|L)(.*\.safe.pdf)' | cut -d . -f 1 | uniq -u)
+lonelystub = $(shell cd $(testdir); ls | egrep '[XL].(.*\.ltx)|[XL].(.*\.safe\.pdf)' | cut -d . -f 1 | uniq -u )
 lonelyfile = $(addsuffix .safe.pdf,$(lonelystub))
 lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
 lonelytest = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
 
-Xlonelystub = $(shell cd $(testdir); ls | egrep '(F.*\.ltx)|(F.*-X.safe.pdf)' | cut -d . -f 1 | uniq -u)
+Xlonelystub = $(shell cd $(testdir); ls | egrep -o '(F.*\.ltx)|(F.*-X\.safe\.pdf)' | sed -e s/-X.safe.pdf// -e s/.ltx// | uniq -u | uniq )
 Xlonelyfile = $(addsuffix -X.safe.pdf,$(Xlonelystub))
 Xlonelypath = $(addprefix $(testdir)/,$(Xlonelyfile))
 Xlonelytest = $(addprefix $(builddir)/,$(addsuffix -X.pdf,$(Xlonelystub)))
 
-Llonelystub = $(shell cd $(testdir); ls | egrep '(F.*\.ltx)|(F.*-L.safe.pdf)' | cut -d . -f 1 | uniq -u)
+Llonelystub = $(shell cd $(testdir); ls | egrep -o '(F.*\.ltx)|(F.*-L\.safe\.pdf)' | sed -e s/-L.safe.pdf// -e s/.ltx// | uniq -u | uniq )
 Llonelyfile = $(addsuffix -L.safe.pdf,$(Llonelystub))
 Llonelypath = $(addprefix $(testdir)/,$(Llonelyfile))
 Llonelytest = $(addprefix $(builddir)/,$(addsuffix -L.pdf,$(Llonelystub)))
@@ -355,11 +349,11 @@ $(builddir)/F%-X.diff.pdf: $(builddir)/F%-X.pdf
 	  false ; \
 	fi
 
-$(builddir)/F%-L.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/F%-L.ltx
+$(builddir)/F%-L.pdf: $(BUILDSOURCE) $(builddir)/F%-L.ltx
 	@echo 'F$*: Generating PDF output with LuaLaTeX.'
 	@cd $(builddir); lualatex -interaction=nonstopmode F$*-L.ltx  $(REDIRECT)
 
-$(builddir)/F%-X.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/F%-X.ltx
+$(builddir)/F%-X.pdf: $(BUILDSOURCE) $(builddir)/F%-X.ltx
 	@echo 'F$*: Generating PDF output with XeLaTeX.'
 	@cd $(builddir); xelatex -interaction=nonstopmode F$*-X.ltx   $(REDIRECT)
 
