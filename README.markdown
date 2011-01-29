@@ -95,9 +95,9 @@ To install it for all users in your system-wide local texmf tree:
 
     make install-sys
 
-Afterward you usually have to regenerate the TeX Live file databases:
+Afterward you may have to regenerate the TeX Live file databases:
 
-    mktexlsr
+    texhash
 
 See `make help` for further information.
 
