@@ -11,3 +11,7 @@ stix-tbl.txt
 umtable.tex
 
 *.synctex*
+
+/testfiles/umtest-suite-F.tex
+/testfiles/umtest-suite-L.tex
+/testfiles/umtest-suite-X.tex
