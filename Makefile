@@ -144,15 +144,6 @@ $(builddir)/README: $(builddir)/README.markdown
 	mv -f  $<  $@
 
 
-# Test suite PDF
-
-$(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE) $(builddir)/$(testdir)
-	cd $(builddir) && \
-	xelatex $(SUITE).ltx
-
-
-
-
 ##### CTAN INSTALLATION #####
 
 TDS = $(builddir)/$(PKG).tds.zip
@@ -251,9 +242,7 @@ LTXSOURCE = $(NAME).sty
 
 TESTLIST = umtest-suite-X.tex umtest-suite-L.tex umtest-suite-F.tex
 
-SUITESOURCE = \
-  $(testdir)/umtest-preamble.tex \
-  $(testdir)/$(TESTLIST)
+SUITESOURCE = $(addprefix $(testdir)/,umtest-preamble.tex $(TESTLIST))
 
 TESTOUT = $(wildcard $(testdir)/*.safe.pdf)
 BUILDTESTSRC = $(subst $(testdir)/,$(builddir)/,$(subst .safe.pdf,.ltx,$(TESTOUT)))
@@ -270,19 +259,26 @@ BUILDSUITE  = $(subst $(testdir)/,$(builddir)/,$(SUITESOURCE))
 
 BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC) $(BUILDTESTTARGET)
 
+# Test suite PDF
+
+$(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE)
+	cd $(builddir) && \
+	xelatex $(SUITE).ltx
+
+
 #### All tests ####
 
 foo:
 	echo $(BUILDTESTTARGET)
 
 check: $(TESTLIST)
-	
+
 $(TESTLIST): $(BUILDFILES)
 	cd $(testdir) && \
 	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex && \
 	ls L*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex && \
 	ls F*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-F.tex;
-	
+
 $(builddir)/%: $(testdir)/%
 	@mkdir -p $(builddir); \
 	$(COPY) $< $@
