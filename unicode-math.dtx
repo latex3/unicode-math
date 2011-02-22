@@ -2072,33 +2072,33 @@ This work is "author-maintained" by Will Robertson.
     }
     \mathopen {
       \tl_if_in:NnTF \l_um_radicals_tl {#2} {
-        \cs_gset:cpx {\cs_to_str:N #2 sign} { \um_radical:nn {#1} {#4} }
+        \cs_gset_protected_nopar:cpx {\cs_to_str:N #2 sign} { \um_radical:nn {#1} {#4} }
         \tl_set:cn {l_um_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #4}
       }{
         \um_set_delcode:nnn {#1} {#4} {#4}
         \um_set_mathcode:nnn {#4} \mathopen {#1}
-        \cs_gset:Npx #2 { \um_delimiter:Nnn \mathopen {#1} {#4} }
+        \cs_gset_protected_nopar:Npx #2 { \um_delimiter:Nnn \mathopen {#1} {#4} }
       }
     }
     \mathclose {
       \um_set_delcode:nnn {#1} {#4} {#4}
       \um_set_mathcode:nnn {#4} \mathclose {#1}
-      \cs_gset:Npx #2 { \um_delimiter:Nnn \mathclose {#1} {#4} }
+      \cs_gset_protected_nopar:Npx #2 { \um_delimiter:Nnn \mathclose {#1} {#4} }
     }
     \mathaccent {
-      \cs_gset:Npx #2 { \um_accent:Nnn #3 {#1} {#4} }
+      \cs_gset_protected_nopar:Npx #2 { \um_accent:Nnn #3 {#1} {#4} }
     }
     \mathfence {
       \um_set_mathcode:nnn {#4} {#3} {#1}
       \um_set_delcode:nnn {#1} {#4} {#4}
-      \cs_gset:cpx {l \cs_to_str:N #2} { \um_delimiter:Nnn \mathopen  {#1} {#4} }
-      \cs_gset:cpx {r \cs_to_str:N #2} { \um_delimiter:Nnn \mathclose {#1} {#4} }
+      \cs_gset_protected_nopar:cpx {l \cs_to_str:N #2} { \um_delimiter:Nnn \mathopen  {#1} {#4} }
+      \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2} { \um_delimiter:Nnn \mathclose {#1} {#4} }
     }
     \mathover { % LuaTeX only
-      \cs_set:Npn #2 ##1 { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
+      \cs_set_protected_nopar:Npn #2 ##1 { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
     }
     \mathunder { % LuaTeX only
-      \cs_set:Npn #2 ##1 { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
+      \cs_set_protected_nopar:Npn #2 ##1 { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
     }
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
