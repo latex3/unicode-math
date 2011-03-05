@@ -290,17 +290,17 @@ $(builddir)/%: %
 
 #### Generating new tests ####
 
-lonelystub = $(shell cd $(testdir); ls | egrep '[XL].(.*\.ltx)|[XL].(.*\.safe\.pdf)' | cut -d . -f 1 | uniq -u )
+lonelystub = $(shell cd $(testdir); ls | egrep '[XL].(.*\.ltx)$$|[XL].(.*\.safe\.pdf)$$' | cut -d . -f 1 | uniq -u )
 lonelyfile = $(addsuffix .safe.pdf,$(lonelystub))
 lonelypath = $(addprefix $(testdir)/,$(lonelyfile))
 lonelytest = $(addprefix $(builddir)/,$(addsuffix .pdf,$(lonelystub)))
 
-Xlonelystub = $(shell cd $(testdir); ls | egrep -o '(F.*\.ltx)|(F.*-X\.safe\.pdf)' | sed -e s/-X.safe.pdf// -e s/.ltx// | uniq -u | uniq )
+Xlonelystub = $(shell cd $(testdir); ls | egrep -o '(F.*\.ltx)$$|(F.*-X\.safe\.pdf)$$' | sed -e s/-X.safe.pdf// -e s/.ltx// | uniq -u | uniq )
 Xlonelyfile = $(addsuffix -X.safe.pdf,$(Xlonelystub))
 Xlonelypath = $(addprefix $(testdir)/,$(Xlonelyfile))
 Xlonelytest = $(addprefix $(builddir)/,$(addsuffix -X.pdf,$(Xlonelystub)))
 
-Llonelystub = $(shell cd $(testdir); ls | egrep -o '(F.*\.ltx)|(F.*-L\.safe\.pdf)' | sed -e s/-L.safe.pdf// -e s/.ltx// | uniq -u | uniq )
+Llonelystub = $(shell cd $(testdir); ls | egrep -o '(F.*\.ltx)$$|(F.*-L\.safe\.pdf)$$' | sed -e s/-L.safe.pdf// -e s/.ltx// | uniq -u | uniq )
 Llonelyfile = $(addsuffix -L.safe.pdf,$(Llonelystub))
 Llonelypath = $(addprefix $(testdir)/,$(Llonelyfile))
 Llonelytest = $(addprefix $(builddir)/,$(addsuffix -L.pdf,$(Llonelystub)))
