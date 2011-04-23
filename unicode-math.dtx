@@ -6,7 +6,19 @@
 \begingroup
 \input docstrip.tex
 \keepsilent
-\preamble
+\let\MetaPrefix\DoubleperCent
+\declarepreamble\texpreamble
+Copyright 2006-2011 Will Robertson <will.robertson@latex-project.org>
+Copyright 2010-2011 Philipp Stephani <st_philipp@yahoo.de>
+
+This package is free software and may be redistributed and/or modified under
+the conditions of the LaTeX Project Public License, version 1.3c or higher
+(your choice): <http://www.latex-project.org/lppl/>.
+
+This work is "author-maintained" by Will Robertson.
+\endpreamble
+\def\MetaPrefix{--}
+\declarepreamble\luapreamble
 Copyright 2006-2011 Will Robertson <will.robertson@latex-project.org>
 Copyright 2010-2011 Philipp Stephani <st_philipp@yahoo.de>
 
@@ -18,11 +30,17 @@ This work is "author-maintained" by Will Robertson.
 \endpreamble
 \nopostamble
 \askforoverwritefalse
+\let\MetaPrefix\DoubleperCent
+\usepreamble\texpreamble
 \generate{\file{unicode-math.sty}{
   \from{unicode-math.dtx}{preamble}
   \from{unicode-math.dtx}{msg}
   \from{unicode-math.dtx}{package,stix}
 }}
+\def\MetaPrefix{--}
+\usepreamble\luapreamble
+\generate{\file{unicode-math.lua}{\from{unicode-math.dtx}{lua}}}
+\let\MetaPrefix\DoubleperCent
 \nopreamble
 \def\tempa{plain}
 \ifx\tempa\fmtname\endgroup\expandafter\bye\fi
@@ -1178,8 +1196,40 @@ This work is "author-maintained" by Will Robertson.
 \cs_generate_variant:Nn \fontspec_select:nn {x}
 %    \end{macrocode}
 %
+% \subsubsection{\Hologo{LuaLaTeX} module}
+%
+% We create a \pkg{luatexbase} module that contains Lua functions for use with \hologo{LuaLaTeX}.
 %    \begin{macrocode}
+\luatex_if_engine:T {
+  \RequirePackage { luatexbase }
+  \RequirePackage { luaotfload } [ 2010/11/26 ]
+  \RequireLuaModule { unicode-math } [ 2011/04/23 ]
+}
 %</preamble>
+%<*lua>
+local err, warn, info, log = luatexbase.provides_module({
+  name        = "unicode-math",
+  date        = "2011/04/23",
+  version     = 0.1,
+  description = "Unicode math typesetting for LuaLaTeX",
+  author      = "Khaled Hosny, Will Robertson, Philipp Stephani",
+  licence     = "LPPL v1.3+"
+})
+%    \end{macrocode}
+% \LuaTeX\ does not provide interface to accessing
+% \texttt{(Script)ScriptPercentScaleDown} math constants, so we
+% emulate \XeTeX\ behaviour by setting \cs{fontdimen10} and
+% \cs{fontdimen11}.
+%    \begin{macrocode}
+local function set_sscale_dimens(fontdata)
+  local mc = fontdata.MathConstants
+  if mc then
+    fontdata.parameters[10] = mc.ScriptPercentScaleDown or 70
+    fontdata.parameters[11] = mc.ScriptScriptPercentScaleDown or 50
+  end
+end
+luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_math.set_sscale_dimens")
+%</lua>
 %    \end{macrocode}
 %
 % (Error messages and warning definitions go here from the |msg| chunk

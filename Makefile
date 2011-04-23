@@ -68,12 +68,13 @@ BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
 #
 
-LTXSOURCE = $(PKG).sty $(TBL)
+LTXSOURCE = $(PKG).sty $(PKG).lua $(TBL)
 
 # and this is how the TDS zip file is produced:
 
 INSFILES = \
 	$(tds)/tex/latex/$(PKG)/unicode-math.sty \
+	$(tds)/tex/latex/$(PKG)/unicode-math.lua \
 	$(tds)/tex/latex/$(PKG)/unicode-math-table.tex
 
 OTHERFILES = \
@@ -113,6 +114,11 @@ $(builddir)/$(PKG).dtx: $(PKG).dtx
 	$(COPY)  $<  $@
 
 $(builddir)/$(PKG).sty: $(builddir)/$(PKG).dtx
+	echo "Updating $@"
+	cd $(builddir) && \
+	tex $(PKG).dtx > /dev/null ;
+
+$(builddir)/$(PKG).lua: $(builddir)/$(PKG).dtx
 	echo "Updating $@"
 	cd $(builddir) && \
 	tex $(PKG).dtx > /dev/null ;
@@ -238,7 +244,7 @@ COMPARE_OPTS = -density 300x300 -metric ae -fuzz 35%
 # Redefine this to print output if you need:
 REDIRECT = > /dev/null
 
-LTXSOURCE = $(NAME).sty
+LTXSOURCE = $(NAME).sty $(NAME).lua
 
 TESTLIST = umtest-suite-X.tex umtest-suite-L.tex umtest-suite-F.tex
 
