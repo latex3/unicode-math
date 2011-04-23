@@ -50,7 +50,8 @@ SUITE = $(PKG)-testsuite
 XMPL = unimath-example.ltx
 SYM = unimath-symbols
 
-COPY = cp -a 
+COPY = cp -a
+MKTEXLSR = mktexlsr
 
 testdir=testfiles
 builddir=build
@@ -186,7 +187,7 @@ TEXMFLOCAL=$(shell kpsewhich --var-value TEXMFLOCAL)
 install: $(INSFILES)
 	if test -n "$(TEXMFHOME)" ; then \
 		echo "Installing in '$(TEXMFHOME)'."; \
-		$(COPY)  $(tds)/*  $(TEXMFHOME); \
+		$(COPY)  $(tds)/*  $(TEXMFHOME) && $(MKTEXLSR); \
 	else \
 		echo "Cannot locate your home texmf tree. Specify manually with\n\n    make install TEXMFHOME=/path/to/texmf\n" ; \
 		false ; \
@@ -195,7 +196,7 @@ install: $(INSFILES)
 install-sys: $(INSFILES)
 	if test -n "$(TEXMFLOCAL)" ; then \
 		echo "Installing in '$(TEXMFLOCAL)'."; \
-		$(COPY)  $(tds)/*  $(TEXMFLOCAL); \
+		$(COPY)  $(tds)/*  $(TEXMFLOCAL) && $(MKTEXLSR); \
 	else \
 		echo "Cannot locate your system-wide local texmf tree. Specify manually with\n\n    make install TEXMFLOCAL=/path/to/texmf\n" ; \
 		false ; \
