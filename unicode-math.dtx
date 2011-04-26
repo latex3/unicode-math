@@ -50,7 +50,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2011/01/29 v0.5d Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/04/26 v0.5d Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -2311,6 +2311,38 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsection{The main \cs{setmathfont} macro}
 %
+% \begin{macro}{\um_saved_ltxe_glb_settings:}
+%   Save the original definition of \cmd{\glb@settings} in a macro.
+%    \begin{macrocode}
+\cs_new_eq:NN \um_saved_ltxe_glb_settings: \glb@settings
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\glb@settings}
+%   We issue an error if the user tried to typeset math before setting a font.
+%    \begin{macrocode}
+\CheckCommand * \glb@settings {
+     \expandafter\ifx\csname S@\f@size\endcsname\relax
+       \calculate@math@sizes
+     \fi
+     \csname S@\f@size\endcsname
+     \ifmath@fonts
+       \begingroup
+         \escapechar\m@ne
+         \csname mv@\math@version \endcsname
+         \globaldefs\@ne
+         \math@fonts
+         \let \glb@currsize \f@size
+       \endgroup
+        \the\every@math@size
+     \fi
+}
+\cs_set_protected_nopar:Npn \glb@settings {
+  \msg_error:nn { unicode-math } { no-font-selected }
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % Using a |range| including large character sets such as \cmd\mathrel,
 % \cmd\mathalpha, \etc, is \emph{very slow}!
 % I hope to improve the performance somehow.
@@ -2326,6 +2358,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % this allows \cmd\DeclareSymbolFont\ at any point in the document.
 %    \begin{macrocode}
   \let\glb@currsize\relax
+%    \end{macrocode}
+% \item Restore \LaTeXe\ kernel macro to apply settings instead of giving an error.
+%    \begin{macrocode}
+  \cs_set_eq:NN \glb@settings \um_saved_ltxe_glb_settings:
 %    \end{macrocode}
 % \item To start with, assume we're defining the font for every math symbol character.
 %    \begin{macrocode}
@@ -5935,6 +5971,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \msg_new:nnn {unicode-math} {setup-alph}
 {
   Setup~ alphabet:~ #1.
+}
+\msg_new:nnnn { unicode-math } { no-font-selected } {
+  You've~ loaded~ the~ unicode-math~ package,~ but~ you~ forgot~ to~ select \\
+  a~ Unicode~ math~ font.~ Please~ select~ one~ with~ the~ \token_to_str:N \setmathfont \\
+  command.
+} {
+  Loading~ the~ unicode-math~ package~ without~ using~ a~ Unicode~ math~ font \\
+  is~ not~ supported.~ Either~ select~ a~ Unicode~ math~ font,~ or~ don't~ load \\
+  the~ unicode-math~ package.
 }
 \msg_new:nnn {unicode-math} {macro-expected}
 {
