@@ -50,7 +50,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2011/04/26 v0.5d Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/05/05 v0.5d Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -1188,6 +1188,9 @@ This work is "author-maintained" by Will Robertson.
 \um_cs_compat:n {radical}
 \um_cs_compat:n {mathaccent}
 \um_cs_compat:n {delimiter}
+\luatex_if_engine:T {
+  \RequirePackage { lualatex-math } [ 2011/05/05 ]
+}
 %    \end{macrocode}
 %
 % \subsubsection{Function variants}
@@ -5476,28 +5479,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{macro}
 % \end{macro}
 %
-% \paragraph{\LaTeXe\ kernel}
-% \cs{frac} can be patched for \LuaTeX, but \cs{choose}, \cs{brack} and \cs{brace} should be discouraged.
-% Probably these fixes (and the analogous \pkg{amsmath} fixes below) should go into \pkg{luatextra} or a similar \LuaLaTeX\ package.
-%    \begin{macrocode}
-\luatex_if_engine:T {
-  \AtBeginDocument{\um_patch_amsmath:}
-  \cs_set:Nn \um_patch_amsmath: {
-    \@ifpackageloaded { amsmath } { } {
-      \um_check_and_fix:NNnnn \frac \cs_set_nopar:Npn { ##1 ##2 } {
-        {
-          \begingroup ##1 \endgroup \over ##2
-        }
-      } {
-        {
-          \luatexUstack { \group_begin: ##1 \group_end: \over ##2 }
-        }
-      }
-    }
-  }
-}
-%    \end{macrocode}
-%
 % \paragraph{\pkg{url}}
 % Simply need to get \pkg{url} in a state such that
 % when it switches to math mode and enters \ascii\ characters, the maths
@@ -5523,12 +5504,14 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
 \AtEndOfPackageFile * {amsmath} {
-  \tl_remove_in:Nn \@begindocumenthook {
-    \mathchardef\std@minus\mathcode`\-\relax
-    \mathchardef\std@equal\mathcode`\=\relax
+  \xetex_if_engine:T {
+    \tl_remove_in:Nn \@begindocumenthook {
+      \mathchardef\std@minus\mathcode`\-\relax
+      \mathchardef\std@equal\mathcode`\=\relax
+    }
+    \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
+    \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
   }
-  \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
-  \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -5537,83 +5520,60 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % This isn't as clever as the \pkg{amsmath} definition but I think it works:
 %    \begin{macrocode}
-  \def \resetMathstrut@ {%
-    \setbox\z@\hbox{$($}%)
-    \ht\Mathstrutbox@\ht\z@ \dp\Mathstrutbox@\dp\z@
+  \xetex_if_engine:T {
+    \def \resetMathstrut@ {%
+      \setbox\z@\hbox{$($}%)
+      \ht\Mathstrutbox@\ht\z@ \dp\Mathstrutbox@\dp\z@
+    }
   }
 %    \end{macrocode}
 % The |subarray| environment uses inappropriate font dimensions.
 %    \begin{macrocode}
-  \um_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 } {
-    \vcenter
-    \bgroup
-    \Let@
-    \restore@math@cr
-    \default@tag
-    \baselineskip \fontdimen 10~ \scriptfont \tw@
-    \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
-    \lineskip \thr@@ \fontdimen 8~ \scriptfont \thr@@
-    \lineskiplimit \lineskip
-    \ialign
-    \bgroup
-    \ifx c #1 \hfil \fi
-    $ \m@th \scriptstyle ## $
-    \hfil
-    \crcr
-  } {
-    \vcenter
-    \c_group_begin_token
-    \Let@
-    \restore@math@cr
-    \default@tag
-    \skip_set:Nn \baselineskip {
+  \xetex_if_engine:T {
+    \um_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 } {
+      \vcenter
+      \bgroup
+      \Let@
+      \restore@math@cr
+      \default@tag
+      \baselineskip \fontdimen 10~ \scriptfont \tw@
+      \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
+      \lineskip \thr@@ \fontdimen 8~ \scriptfont \thr@@
+      \lineskiplimit \lineskip
+      \ialign
+      \bgroup
+      \ifx c #1 \hfil \fi
+      $ \m@th \scriptstyle ## $
+      \hfil
+      \crcr
+    } {
+      \vcenter
+      \c_group_begin_token
+      \Let@
+      \restore@math@cr
+      \default@tag
+      \skip_set:Nn \baselineskip {
 %    \end{macrocode}
 % Here we use stack top shift + stack bottom shift, which sounds reasonable.
 %    \begin{macrocode}
-      \um_stack_num_up:N \scriptstyle
-      + \um_stack_denom_down:N \scriptstyle
-    }
+        \um_stack_num_up:N \scriptstyle
+        + \um_stack_denom_down:N \scriptstyle
+      }
 %    \end{macrocode}
 % Here we use the minimum stack gap.
 %    \begin{macrocode}
-    \lineskip \um_stack_vgap:N \scriptstyle
-    \lineskiplimit \lineskip
-    \ialign
-    \c_group_begin_token
-    \token_if_eq_meaning:NNT c #1 { \hfil }
-    \c_math_shift_token
-    \m@th
-    \scriptstyle
-    \c_parameter_token \c_parameter_token
-    \c_math_shift_token
-    \hfil
-    \crcr
-  }
-%    \end{macrocode}
-% For \LuaTeX, \cs{frac} and \cs{genfrac} should use \cs{Ustack} for correct math style selection.
-%    \begin{macrocode}
-  \um_check_and_fix_luatex:cNnnn { frac~ } \cs_set:Npn { #1 #2 } {
-    {
-      \begingroup #1 \endgroup \@@over #2
-    }
-  } {
-    {
-      \luatexUstack { \group_begin: #1 \group_end: \@@over #2 }
-    }
-  }
-  \um_check_and_fix_luatex:NNnnn \@genfrac \cs_set_nopar:Npn {
-    #1 #2 #3 #4 #5
-  } {
-    {
-      #1 { \begingroup #4 \endgroup #2 #3 \relax #5 }
-    }
-  } {
-    {
-      #1 {
-        \luatexUstack {
-          \group_begin: #4 \group_end: #2 #3 \scan_stop: #5
-        }
-      }
+      \lineskip \um_stack_vgap:N \scriptstyle
+      \lineskiplimit \lineskip
+      \ialign
+      \c_group_begin_token
+      \token_if_eq_meaning:NNT c #1 { \hfil }
+      \c_math_shift_token
+      \m@th
+      \scriptstyle
+      \c_parameter_token \c_parameter_token
+      \c_math_shift_token
+      \hfil
+      \crcr
     }
   }
 %    \end{macrocode}
@@ -5796,62 +5756,58 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \AtEndOfPackageFile * { mathtools } {
-  \um_check_and_fix:NNnnnn \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 } {
-    \sbox \z@ {
-      $
-      \m@th
-      #1
-      \nulldelimiterspace = \z@
-      \radical \z@ { #2 }
-      $
-    }
-    \ifx #1 \displaystyle
-      \dimen@ = \fontdimen 8 \textfont 3
-      \advance \dimen@ .25 \fontdimen 5 \textfont 2
-    \else
-      \dimen@ = 1.25 \fontdimen 8
-      \ifx #1 \textstyle
-        \textfont
+  \xetex_if_engine:T {
+    \um_check_and_fix:NNnnn \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 } {
+      \sbox \z@ {
+        $
+        \m@th
+        #1
+        \nulldelimiterspace = \z@
+        \radical \z@ { #2 }
+        $
+      }
+      \ifx #1 \displaystyle
+        \dimen@ = \fontdimen 8 \textfont 3
+        \advance \dimen@ .25 \fontdimen 5 \textfont 2
       \else
-        \ifx #1 \scriptstyle
-          \scriptfont
+        \dimen@ = 1.25 \fontdimen 8
+        \ifx #1 \textstyle
+          \textfont
         \else
-          \scriptscriptfont
+          \ifx #1 \scriptstyle
+            \scriptfont
+          \else
+            \scriptscriptfont
+          \fi
         \fi
+        3
       \fi
-      3
-    \fi
-    \advance \dimen@ -\ht\z@
-    \ht\z@ = -\dimen@
-    \box\z@
-  } {
-%    \end{macrocode}
-% \LuaTeX\ has primitives for setting material in cramped mode (thanks to Khaled Hosny for pointing this out).
-% Note we don’t use \cs{mathstyle} since we want to patch only a single command.
-%    \begin{macrocode}
-    \use:c { luatexcramped \cs_to_str:N #1 } #2
-  } {
+      \advance \dimen@ -\ht\z@
+      \ht\z@ = -\dimen@
+      \box\z@
+    } {
 %    \end{macrocode}
 % The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
 %    \begin{macrocode}
-    \hbox_set:Nn \l_tmpa_box {
-      \color@setgroup
-      \c_math_shift_token
-      \m@th
-      #1
-      \dim_zero:N \nulldelimiterspace
-      \radical \c_zero { #2 }
-      \c_math_shift_token
-      \color@endgroup
-    }
-    \box_set_ht:Nn \l_tmpa_box {
-      \box_ht:N \l_tmpa_box
+      \hbox_set:Nn \l_tmpa_box {
+        \color@setgroup
+        \c_math_shift_token
+        \m@th
+        #1
+        \dim_zero:N \nulldelimiterspace
+        \radical \c_zero { #2 }
+        \c_math_shift_token
+        \color@endgroup
+      }
+      \box_set_ht:Nn \l_tmpa_box {
+        \box_ht:N \l_tmpa_box
 %    \end{macrocode}
 % Here we use the radical vertical gap.
 %    \begin{macrocode}
-      - \um_radical_vgap:N #1
+        - \um_radical_vgap:N #1
+      }
+      \box_use_clear:N \l_tmpa_box
     }
-    \box_use_clear:N \l_tmpa_box
   }
 %    \end{macrocode}
 %
