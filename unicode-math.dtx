@@ -2385,6 +2385,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \item Grab the current size information
 % (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
 %    \begin{macrocode}
+  \cs_if_exist:cF { S@ \f@size } { \calculate@math@sizes }
   \csname S@\f@size\endcsname
 %    \end{macrocode}
 % \item Set the name of the math version being defined.
