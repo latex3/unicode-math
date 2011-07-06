@@ -3251,7 +3251,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{tabular}
 %    \begin{macrocode}
   \expandafter\ifx\expandafter\@marker\@tempb\relax
-    \intexpr_compare:nT {#4=#1} \@tempswatrue
+    \int_compare:nT {#4=#1} \@tempswatrue
   \else
 %    \end{macrocode}
 % \begin{tabular}{@{}ll}
@@ -3266,7 +3266,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{tabular}
 %    \begin{macrocode}
     \ifx\@empty\@tempb
-      \intexpr_compare:nT {#4>#1-1} \@tempswatrue
+      \int_compare:nT {#4>#1-1} \@tempswatrue
     \else
 %    \end{macrocode}
 % \begin{tabular}{@{}ll}
@@ -3281,7 +3281,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{tabular}
 %    \begin{macrocode}
       \ifx\@empty\@tempa
-        \intexpr_compare:nT {#4<#2+1} \@tempswatrue
+        \int_compare:nT {#4<#2+1} \@tempswatrue
 %    \end{macrocode}
 % \begin{tabular}{@{}ll}
 % \hline
@@ -3295,8 +3295,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{tabular}
 %    \begin{macrocode}
       \else
-        \intexpr_compare:nT {#4>#1-1} {
-          \intexpr_compare:nT {#4<#2+1} \@tempswatrue
+        \int_compare:nT {#4>#1-1} {
+          \int_compare:nT {#4<#2+1} \@tempswatrue
         }
       \fi
     \fi
