@@ -1066,7 +1066,7 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{l3keys2e}
 \RequirePackage{fontspec}[2010/10/25]
 \RequirePackage{catchfile}
-\RequirePackage{trimspaces}
+\RequirePackage{trimspaces}% I'd like to incorporate this into expl3...
 \RequirePackage{fix-cm} % avoid some warnings
 \RequirePackage{filehook}[2011/01/03]
 %    \end{macrocode}
@@ -3112,22 +3112,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
 }
 %    \end{macrocode}
-%    
-% The following code used to be in \pkg{l3keyval}, but is no longer there:
-% at some stage, an official interface will be needed to this idea.
-% (It was not documented as a function available in \pkg{l3keyval}!)
-%    \begin{macrocode}
-\group_begin:
-\char_set_catcode:nn{`\Q}{3}
-\cs_gset:Npn\KV_remove_surrounding_spaces:nw#1#2\q_nil{
-  #1{\KV_remove_surrounding_spaces_auxi:w \exp_not:N#2Q~Q}
-}
-\cs_gset:Npn\KV_remove_surrounding_spaces_auxi:w#1~Q{
-  \KV_remove_surrounding_spaces_auxii:w #1 Q
-}
-\cs_gset:Npn\KV_remove_surrounding_spaces_auxii:w#1Q#2{#1}
-\group_end:
-%    \end{macrocode}
+%
 %
 % \begin{macro}{\um_if_mathalph_decl:nTF}
 % Possible forms of input:\\
@@ -3144,7 +3129,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % in the general case.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
-  \KV_remove_surrounding_spaces:nw {\tl_set:Nf\l_um_tmpa_tl} #1 \q_nil
+  \tl_set:Nf \l_um_tmpa_tl { \trim@spaces {#1} }
   \tl_clear:N \l_um_tmpb_tl
   \tl_clear:N \l_um_tmpc_tl
   \tl_if_in:NnT \l_um_tmpa_tl {->} {
