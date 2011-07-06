@@ -5038,11 +5038,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
     \cs_set_nopar:Npn \r@@t ##1 ##2 {
       \hbox_set:Nn \l_tmpa_box {
-        \c_math_shift_token
+        \c_math_toggle_token
         \m@th
         ##1
         \sqrtsign { ##2 }
-        \c_math_shift_token
+        \c_math_toggle_token
       }
       \um_mathstyle_scale:Nnn ##1 { \kern } {
         \fontdimen 63 \l_um_font
@@ -5584,11 +5584,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       \ialign
       \c_group_begin_token
       \token_if_eq_meaning:NNT c #1 { \hfil }
-      \c_math_shift_token
+      \c_math_toggle_token
       \m@th
       \scriptstyle
       \c_parameter_token \c_parameter_token
-      \c_math_shift_token
+      \c_math_toggle_token
       \hfil
       \crcr
     }
@@ -5614,10 +5614,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       \luatexUroot \l_um_radical_sqrt_tl { #1 } { #2 }
     } {
       \hbox_set:Nn \rootbox {
-        \c_math_shift_token
+        \c_math_toggle_token
         \m@th
         \scriptscriptstyle { #1 }
-        \c_math_shift_token
+        \c_math_toggle_token
       }
       \mathchoice
         { \r@@t \displaystyle      { #2 } }
@@ -5641,21 +5641,21 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \boxz@
   } {
     \hbox_set:Nn \l_tmpa_box {
-      \c_math_shift_token
+      \c_math_toggle_token
       \m@th
       #1
       \mskip \uproot@ mu
-      \c_math_shift_token
+      \c_math_toggle_token
     }
     \luatexUroot \l_um_radical_sqrt_tl {
       \box_move_up:nn { \box_wd:N \l_tmpa_box } {
         \hbox:n {
-          \c_math_shift_token
+          \c_math_toggle_token
           \m@th
           \mkern -\leftroot@ mu
           \box_use:N \rootbox
           \mkern \leftroot@ mu
-          \c_math_shift_token
+          \c_math_toggle_token
         }
       }
     } {
@@ -5663,18 +5663,18 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   } {
     \hbox_set:Nn \l_tmpa_box {
-      \c_math_shift_token
+      \c_math_toggle_token
       \m@th
       #1
       \sqrtsign { #2 }
-      \c_math_shift_token
+      \c_math_toggle_token
     }
     \hbox_set:Nn \l_tmpb_box {
-      \c_math_shift_token
+      \c_math_toggle_token
       \m@th
       #1
       \mskip \uproot@ mu
-      \c_math_shift_token
+      \c_math_toggle_token
     }
     \mkern -\leftroot@ mu
     \um_mathstyle_scale:Nnn #1 { \kern } {
@@ -5808,12 +5808,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
       \hbox_set:Nn \l_tmpa_box {
         \color@setgroup
-        \c_math_shift_token
+        \c_math_toggle_token
         \m@th
         #1
         \dim_zero:N \nulldelimiterspace
         \radical \c_zero { #2 }
-        \c_math_shift_token
+        \c_math_toggle_token
         \color@endgroup
       }
       \box_set_ht:Nn \l_tmpa_box {
