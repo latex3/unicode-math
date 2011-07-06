@@ -2197,7 +2197,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \cs_new:Npn \um_set_big_operator:nnn #1#2#3 {
   \group_begin:
-    \char_make_active:n {#3}
+    \char_set_catcode_active:n {#3}
     \char_gmake_mathactive:n {#3}
     \um_active_char_set:wc #3 \q_nil { \cs_to_str:N #2 _sym }
   \group_end:
@@ -4645,15 +4645,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % back into their original meaning after the group has ended and |^|'s catcode returns to normal.
 %    \begin{macrocode}
 \begingroup
-  \char_make_other:N \^
+  \char_set_catcode_other:N \^
   \cs_gset:Npn \um_cs_set_eq_active_char:Nw #1 = "#2 \q_nil {
     \lowercase{
       \tl_rescan:nn {
-        \char_make_other:N \{
-        \char_make_other:N \}
-        \char_make_other:N \&
-        \char_make_other:N \%
-        \char_make_other:N \$
+        \char_set_catcode_other:N \{
+        \char_set_catcode_other:N \}
+        \char_set_catcode_other:N \&
+        \char_set_catcode_other:N \%
+        \char_set_catcode_other:N \$
       }{
         \global\let#1=^^^^^#2
       }
@@ -4690,7 +4690,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \AtBeginDocument{\um_define_math_chars:}
 \cs_set:Nn \um_define_math_chars: {
   \group_begin:
-    \char_make_math_superscript:N \^
+    \char_set_catcode_math_superscript:N \^
     \cs_set:Npn \_um_sym:nnn ##1##2##3 {
       \bool_if:nF { \cs_if_eq_p:NN ##3 \mathaccent ||
                     \cs_if_eq_p:NN ##3 \mathopen   ||
@@ -4700,7 +4700,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \um_cs_set_eq_active_char:Nw ##2 = ##1 \q_nil \ignorespaces
       }
     }
-    \char_make_other:N \#
+    \char_set_catcode_other:N \#
     \um_input_math_symbol_table:
   \group_end:
 }
@@ -4710,8 +4710,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \group_begin:
   \lccode`\*=`\\
-  \char_make_escape:N \|
-  \char_make_other:N \\
+  \char_set_catcode_escape:N \|
+  \char_set_catcode_other:N \\
   |lowercase{
     |AtBeginDocument{
       |let|backslash=*
@@ -5001,15 +5001,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \cs_set_eq:NN \backtrprime \um_backprime_triple_mchar
 }
 \group_begin:
-  \char_make_active:N \'
-  \char_make_active:N \`
-  \char_make_active:n {"2032}
-  \char_make_active:n {"2033}
-  \char_make_active:n {"2034}
-  \char_make_active:n {"2057}
-  \char_make_active:n {"2035}
-  \char_make_active:n {"2036}
-  \char_make_active:n {"2037}
+  \char_set_catcode_active:N \'
+  \char_set_catcode_active:N \`
+  \char_set_catcode_active:n {"2032}
+  \char_set_catcode_active:n {"2033}
+  \char_set_catcode_active:n {"2034}
+  \char_set_catcode_active:n {"2057}
+  \char_set_catcode_active:n {"2035}
+  \char_set_catcode_active:n {"2036}
+  \char_set_catcode_active:n {"2037}
   \cs_gset:Nn \um_define_prime_chars: {
     \cs_set_eq:NN '        \um_scan_sup_prime:
     \cs_set_eq:NN ^^^^2032 \um_scan_sup_prime:
@@ -5139,7 +5139,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \cs_set:Npn \um_setup_active_superscript:nn #1#2 {
   \prop_gput:Nxn \g_um_supers_prop   {\meaning #1} {#2}
-  \char_make_active:N #1
+  \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
   \scantokens{
     \cs_gset:Npn #1 {
@@ -5175,7 +5175,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \cs_set:Npn \um_setup_active_subscript:nn #1#2 {
   \prop_gput:Nxn \g_um_subs_prop   {\meaning #1} {#2}
-  \char_make_active:N #1
+  \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
   \scantokens{
     \cs_gset:Npn #1 {
@@ -5290,7 +5290,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \cs_new:Npn \um_define_active_frac:Nw #1 #2/#3 {
-  \char_make_active:N #1
+  \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
   \tl_rescan:nn {
     \catcode`\_=11\relax
