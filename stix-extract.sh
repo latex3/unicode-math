@@ -33,7 +33,9 @@ awk '
 	ignoreusv["002BA"] = "\\cdprime                 "
 	ignoreusv["002BC"] = "\\rasp                    "
 	ignoreusv["002BD"] = "\\lasp                    "
-		
+
+	ignoreusv["003D2"] = "\\upUpsilon               " # repeated from 03A5
+
 	ignoreusv["02002"] = "\\enspace                 "
 	ignoreusv["02003"] = "\\quad                    "
 	ignoreusv["02004"] = "\\thirdemspace            "
@@ -102,7 +104,10 @@ awk '
 	    !( usv in ignoreusv ) && \
 	    flag !~ "%" && \
 	    texname      ~ /[\\]/ && \
-        substr(texname,0,5) != "\\text"    && \
+        ( \
+          substr(texname,0,5) != "\\text" || \
+          substr(texname,0,12) == "\\textUpsilon" \
+        ) && \
         substr(texname,0,4) != "\\ipa"    && \
         substr(texname,0,5) != "\\tone"    && \
         substr(texname,3,1) != " "    && \
@@ -128,28 +133,28 @@ awk '
 		if (usv == "02996") { class = "C" }
 		if (usv == "02982") { class = "B" }
 		if (usv == "022EF") { class = "N" }
-		if (usv == "0219C")                          { printtexname = "\\leftwavearrow           " }
-		if (usv == "0219D")                          { printtexname = "\\rightwavearrow          " }
-		if (texname == "\\upvarepsilon            ") { printtexname = "\\upepsilon               " }
-		if (texname == "\\upepsilon               ") { printtexname = "\\upvarepsilon            " }
-		if (texname == "\\mbfvarepsilon           ") { printtexname = "\\mbfepsilon              " }
-		if (texname == "\\mbfepsilon              ") { printtexname = "\\mbfvarepsilon           " }
-		if (texname == "\\mitvarepsilon           ") { printtexname = "\\mitepsilon              " }
-		if (texname == "\\mitepsilon              ") { printtexname = "\\mitvarepsilon           " }
-		if (texname == "\\mbfitvarepsilon         ") { printtexname = "\\mbfitepsilon            " }
-		if (texname == "\\mbfitepsilon            ") { printtexname = "\\mbfitvarepsilon         " }
-		if (texname == "\\mbfsansvarepsilon       ") { printtexname = "\\mbfsansepsilon          " }
-		if (texname == "\\mbfsansepsilon          ") { printtexname = "\\mbfsansvarepsilon       " }
-		if (texname == "\\mbfitsansvarepsilon     ") { printtexname = "\\mbfitsansepsilon        " }
-		if (texname == "\\mbfitsansepsilon        ") { printtexname = "\\mbfitsansvarepsilon     " }
-		if (texname == "\\slash                   ") { printtexname = "\\divslash                " }
-		if (texname == "\\colon                   ") { printtexname = "\\mathratio               " }
-		if (texname == "\\dots                    ") { printtexname = "\\unicodeellipsis         " }
-		if (texname == "\\cdots                   ") { printtexname = "\\unicodecdots            " }
-			
-		if (texname == "\\#                       ") { printtexname = "\\mathoctothorpe          " }
-		if (texname == "\\%                       ") { printtexname = "\\mathpercent             " }
-		if (texname == "\\&                       ") { printtexname = "\\mathampersand           " }
+		if (usv == "0219C")                           { printtexname = "\\leftwavearrow            " }
+		if (usv == "0219D")                           { printtexname = "\\rightwavearrow           " }
+		if (texname == "\\textUpsilon              ") { printtexname = "\\upUpsilon                " }
+		if (texname == "\\upvarepsilon             ") { printtexname = "\\upepsilon                " }
+		if (texname == "\\upepsilon                ") { printtexname = "\\upvarepsilon             " }
+		if (texname == "\\mbfvarepsilon            ") { printtexname = "\\mbfepsilon               " }
+		if (texname == "\\mbfepsilon               ") { printtexname = "\\mbfvarepsilon            " }
+		if (texname == "\\mitvarepsilon            ") { printtexname = "\\mitepsilon               " }
+		if (texname == "\\mitepsilon               ") { printtexname = "\\mitvarepsilon            " }
+		if (texname == "\\mbfitvarepsilon          ") { printtexname = "\\mbfitepsilon             " }
+		if (texname == "\\mbfitepsilon             ") { printtexname = "\\mbfitvarepsilon          " }
+		if (texname == "\\mbfsansvarepsilon        ") { printtexname = "\\mbfsansepsilon           " }
+		if (texname == "\\mbfsansepsilon           ") { printtexname = "\\mbfsansvarepsilon        " }
+		if (texname == "\\mbfitsansvarepsilon      ") { printtexname = "\\mbfitsansepsilon         " }
+		if (texname == "\\mbfitsansepsilon         ") { printtexname = "\\mbfitsansvarepsilon      " }
+		if (texname == "\\slash                    ") { printtexname = "\\divslash                 " }
+		if (texname == "\\colon                    ") { printtexname = "\\mathratio                " }
+		if (texname == "\\dots                     ") { printtexname = "\\unicodeellipsis          " }
+		if (texname == "\\cdots                    ") { printtexname = "\\unicodecdots             " }
+		if (texname == "\\#                        ") { printtexname = "\\mathoctothorpe           " }
+		if (texname == "\\%                        ") { printtexname = "\\mathpercent              " }
+		if (texname == "\\&                        ") { printtexname = "\\mathampersand            " }
 
         # Corrections
 		if (usv == "025B5") { class = "\\mathrel" }
