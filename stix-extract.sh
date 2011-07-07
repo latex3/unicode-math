@@ -161,7 +161,7 @@ awk '
 		if (usv == "025B3") { class = "\\mathbin" }
 		if (usv == "025B5") { class = "\\mathrel" }
 		if (usv == "02980") { class = "\\mathfence" }
-
+		if (usv == "02A0A") { class = "\\mathop" }
 
 
 		# OVER/UNDER brackets/parens/braces (resp.)
