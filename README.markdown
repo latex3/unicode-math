@@ -52,10 +52,9 @@ REQUIREMENTS
 ------------
 
 As well as running XeTeX or LuaTeX this package requires recent versions of
-the `fontspec`, `expl3`, `xpackages`, `catchfile`, and `filehook` packages. If
-you're using an up-to-date TeX Live 2010 then there'll be no problems. “Up to
-date” means the current state of TeX Live 2010, as obtained by running `tlmgr
-update --all`; the DVD release of TeX Live 2010 is not recent enough.
+the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`, and
+`filehook` packages. If you're using an up-to-date TeX Live 2011 then there'll
+be no problems.
 
 For some additional features you need LuaTeX 0.65 or later, which can be
 updated using [TLContrib][TLC].
@@ -99,10 +98,6 @@ To install unicode-math in your home texmf tree:
 To install it for all users in your system-wide local texmf tree:
 
     make install-sys
-
-Afterward you may have to regenerate the TeX Live file databases:
-
-    texhash
 
 See `make help` for further information.
 
@@ -150,6 +145,22 @@ changes have not affected the standard behaviour.
 
 CHANGE HISTORY
 --------------
+
+- v0.5e (2011/07/07)
+
+  * Fix forward compatibility clash with deprecated expl3 functions (sorry)
+  * Command names are now `\protected`; this makes them safe to use in moving
+    arguments and so on
+  * Similarly to the change in v0.5c, the main math font is now loaded in
+    math family zero (equiv. to LaTeX's `operators` math font)
+  * `\mathring` added
+  * Ensure that a math font has been selected in order to prevent problems
+    in minimal documents (this will be unnecessary when the OpenType LM math
+    font is released)
+  * Typo when defining `\dprime` fixed
+  * Documentation for which was which of epsilon/varepsilon was backwards!
+  * Spurious `\upUpsilon` removed (the one at U+03A5 is now the correct one)
+
 
 - v0.5d (2011/01/30)
 
@@ -221,5 +232,6 @@ and the test suite for this package
 - testfiles/umtest*.ltx,
 - testfiles/umtest*.safe.png.
 
-__________________________________
-Copyright 2006-2010 Will Robertson
+____________________________________
+Copyright 2006-2011   Will Robertson  <will.robertson@latex-project.org>
+Copyright 2010-2011 Philipp Stephani  <st_philipp@yahoo.de>
