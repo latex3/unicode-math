@@ -155,9 +155,14 @@ awk '
 		if (texname == "\\#                        ") { printtexname = "\\mathoctothorpe           " }
 		if (texname == "\\%                        ") { printtexname = "\\mathpercent              " }
 		if (texname == "\\&                        ") { printtexname = "\\mathampersand            " }
+		if (texname == "\\ac                       ") { printtexname = "\\invlazys                 " }
 
         # Corrections
+		if (usv == "025B3") { class = "\\mathbin" }
 		if (usv == "025B5") { class = "\\mathrel" }
+		if (usv == "02980") { class = "\\mathfence" }
+
+
 
 		# OVER/UNDER brackets/parens/braces (resp.)
 		if (usv == "023B4") { class = "\\mathover" }
