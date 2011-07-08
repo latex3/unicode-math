@@ -157,9 +157,13 @@ CHANGE HISTORY
   * Ensure that a math font has been selected in order to prevent problems
     in minimal documents (this will be unnecessary when the OpenType LM math
     font is released)
-  * Typo when defining `\dprime` fixed
   * Documentation for which was which of epsilon/varepsilon was backwards!
+    (thank to Rasmus Villemoes for pointing this out)
   * Spurious `\upUpsilon` removed (the one at U+03A5 is now the correct one)
+  * Typo when defining `\dprime` fixed
+    (thanks to Ulrik Vieth for these last two)
+  * Fix the math class of `\modtwosum`; it is now a large operator
+    (thanks to Michael Ummels)
 
 
 - v0.5d (2011/01/30)
