@@ -52,8 +52,8 @@ REQUIREMENTS
 ------------
 
 As well as running XeTeX or LuaTeX this package requires recent versions of
-the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`, and
-`filehook` packages. If you're using an up-to-date TeX Live 2011 then there'll
+the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`,
+`filehook`, and `lualatex-math` packages. If you're using an up-to-date TeX Live 2011 then there'll
 be no problems.
 
 For some additional features you need LuaTeX 0.65 or later, which can be
@@ -164,6 +164,7 @@ CHANGE HISTORY
     (thanks to Ulrik Vieth for these last two)
   * Fix the math class of `\modtwosum`; it is now a large operator
     (thanks to Michael Ummels)
+  * Move several LuaTeX-related patches to the `lualatex-math` package
 
 
 - v0.5d (2011/01/30)
