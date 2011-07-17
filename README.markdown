@@ -17,22 +17,26 @@ generally working now; it is only minutiae that may change in the future.)
 Unicode maths is currently supported to one degree or another by the fonts
 
  - [Cambria Math][CM] (Microsoft),
+ - [Latin Modern Math][LM] (Bogusław Jackowski, Janusz M. Nowacki)
  - [Asana Math][AM] (Apostolos Syropolous),
  - [Neo Euler][NE] (Khaled Hosny),
  - [STIX][SM] (STI Pub), and
  - [XITS Math][XM] (Khaled Hosny).
 
-With the exception of Cambria Math, which is proprietry, the fonts above
+With the exception of Cambria Math, which is proprietry, and Latin Modern Math,
+which is released under the free [GUST Font License][GFL], the fonts above
 are all freely available and released under the [Open Font Licence][OFL].
 
 I'm always looking for new fonts to test with, so please let me know of any
 new releases.
 
 [CM]: http://www.ascenderfonts.com/font/cambria-regular.aspx
+[LM]: http://www.gust.org.pl/projects/e-foundry/lm-math
 [AM]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
 [NE]: http://github.com/khaledhosny/euler-otf
 [SM]: http://www.aip.org/stixfonts/
 [XM]: http://github.com/khaledhosny/xits-math
+[GFL]: http://www.gust.org.pl/projects/projects/e-foundry/licenses/
 [OFL]: http://scripts.sil.org/OFL
 
 
@@ -42,10 +46,10 @@ PACKAGE USAGE
 Please see the PDF documentation for full details. A simple beginning is:
 
     \usepackage{unicode-math}
-    \setmathfont{xits-math.otf}
 
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
-Furthermore, it will be in a different font.
+Furthermore, it will be in typeset in Latin Modern Math, which is similar
+to Computer Modern.
 
 
 REQUIREMENTS

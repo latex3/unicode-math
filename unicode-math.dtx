@@ -156,17 +156,23 @@ This work is "author-maintained" by Will Robertson.
 % \end{verbatim}
 % \end{quote}
 %
-% Two OpenType maths fonts are included by default in \TeX\ Live 2010:
-% Asana Math and XITS Math. These can be loaded directly with their filename
+% Three OpenType maths fonts are included by default in \TeX\ Live 2011:
+% Latin Modern Math, Asana Math, and XITS Math.
+% These can be loaded directly with their filename
 % with both \XeLaTeX\ and \LuaLaTeX; resp.,
 % \begin{quote}
 % \begin{verbatim}
+% \setmathfont{lmmath-regular.otf}
 % \setmathfont{Asana-Math.otf}
 % \setmathfont{xits-math.otf}
 % \end{verbatim}
 % \end{quote}
 % Other OpenType maths fonts may be loaded in the usual way; please see the
 % \pkg{fontspec} documentation for more information.
+%
+% Upon loading, \pkg{unicode-math} automatically selects the Latin Modern Math fonts.
+% Once the package is loaded, traditional TFM-based fonts are not supported any more;
+% you can only switch to a different OpenType math font using the \cs{setmathfont} command.
 %
 %
 % \subsection{Package options}
@@ -277,7 +283,7 @@ This work is "author-maintained" by Will Robertson.
 % \seclabel{range}
 %
 % There will probably be few cases where a single Unicode maths font suffices
-% (simply due to glyph coverage). The upcoming \STIX\ font comes to mind as a
+% (simply due to glyph coverage). The \STIX\ font comes to mind as a
 % possible exception. It will therefore be necessary to delegate specific
 % Unicode ranges of glyphs to separate fonts:
 %   \codeline{\cmd\setmathfont|[range=|\meta{unicode range}|,|\meta{font features}|]|\marg{font name}}
@@ -1091,14 +1097,17 @@ This work is "author-maintained" by Will Robertson.
     \cs:w #3 \exp_after:wN \cs_end:
     \cs:w #4 \cs_end:
 }
+\cs_new_protected_nopar:Npn \bool_const:Nn #1 #2 {
+  \bool_new:N #1
+  \bool_set:Nn #1 { #2 }
+}
 %    \end{macrocode}
 %
 %
 % \paragraph{Conditionals}
 % Engine capabilities:
 %    \begin{macrocode}
-\bool_new:N \c_um_have_fixed_accents_bool
-\bool_set:Nn \c_um_have_fixed_accents_bool {
+\bool_const:Nn \c_um_have_fixed_accents_bool {
   \c_luatex_is_engine_bool && \int_compare_p:n { \luatexversion > 64 }
 }
 %    \end{macrocode}
@@ -5874,7 +5883,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 }{}
 %    \end{macrocode}
 %
+% \section{Default font}
+%
+% Finally we select Latin Modern Math as the default math font.
 %    \begin{macrocode}
+\setmathfont { lmmath-regular.otf }
 \ExplSyntaxOff
 %    \end{macrocode}
 %
