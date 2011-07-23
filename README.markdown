@@ -46,10 +46,10 @@ PACKAGE USAGE
 Please see the PDF documentation for full details. A simple beginning is:
 
     \usepackage{unicode-math}
+    \setmathfont{xits-math.otf}
 
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
-Furthermore, it will be in typeset in Latin Modern Math, which is similar
-to Computer Modern.
+Furthermore, it will be in a different font.
 
 
 REQUIREMENTS

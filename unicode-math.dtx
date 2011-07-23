@@ -170,7 +170,6 @@ This work is "author-maintained" by Will Robertson.
 % Other OpenType maths fonts may be loaded in the usual way; please see the
 % \pkg{fontspec} documentation for more information.
 %
-% Upon loading, \pkg{unicode-math} automatically selects the Latin Modern Math fonts.
 % Once the package is loaded, traditional TFM-based fonts are not supported any more;
 % you can only switch to a different OpenType math font using the \cs{setmathfont} command.
 %
@@ -5883,11 +5882,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 }{}
 %    \end{macrocode}
 %
-% \section{Default font}
-%
-% Finally we select Latin Modern Math as the default math font.
 %    \begin{macrocode}
-\setmathfont { lmmath-regular.otf }
 \ExplSyntaxOff
 %    \end{macrocode}
 %
