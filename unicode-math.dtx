@@ -1047,6 +1047,7 @@ This work is "author-maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_if_exist:NF \char_set_catcode_other:N
   {
+    \cs_set_eq:NN \c_math_toggle_token \c_math_shift_token
     \cs_set_eq:NN \char_set_catcode_other:N \char_make_other:N
     \cs_set_eq:NN \char_set_catcode_active:N \char_make_active:N
     \cs_set_eq:NN \char_set_catcode_active:n \char_make_active:n
