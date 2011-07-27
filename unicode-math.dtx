@@ -50,7 +50,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2011/07/27 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/07/28 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -1041,6 +1041,19 @@ This work is "author-maintained" by Will Robertson.
 % Start using \LaTeX3 --- finally!
 %    \begin{macrocode}
 \ExplSyntaxOn
+%    \end{macrocode}
+%
+% \paragraph{Forwards compatibility}
+%    \begin{macrocode}
+\cs_if_exist:NF \char_set_catcode_other:N
+  {
+    \cs_set_eq:NN \char_set_catcode_other:N \char_make_other:N
+    \cs_set_eq:NN \char_set_catcode_active:N \char_make_active:N
+    \cs_set_eq:NN \char_set_catcode_active:n \char_make_active:n
+    \cs_set_eq:NN \char_set_catcode_escape:N \char_make_escape:N
+    \cs_set_eq:NN \char_set_catcode_math_superscript:N
+                  \char_make_math_superscript:N
+  }
 %    \end{macrocode}
 %
 % \paragraph{Extra \pkg{expl3} variants}
