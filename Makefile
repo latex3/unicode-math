@@ -163,13 +163,13 @@ $(TDS): $(tds)/$(PKG).tds.zip
 
 $(tds)/$(PKG).tds.zip: $(TDSFILES)
 	cd $(tds); \
-	zip -r $(PKG).tds.zip ./* -x *.DS_Store -x *.safe.pdf
+	zip -r $(PKG).tds.zip ./* -x *.DS_Store -x *.safe.pdf *.ignore.pdf
 
 ctan: $(BUILDCTAN) tds
 	cd $(builddir); \
 	zip -r \
 	  ../$(PKG).zip  $(CTANFILES)  $(PKG).tds.zip \
-	  -x *.DS_Store -x *.safe.pdf
+	  -x *.DS_Store -x *.safe.pdf *.ignore.pdf
 
 $(tds)/doc/latex/$(PKG)/% \
 $(tds)/tex/latex/$(PKG)/% \
@@ -283,9 +283,9 @@ check: $(TESTLIST)
 
 $(TESTLIST): $(BUILDFILES)
 	cd $(testdir) && \
-	ls X*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-X.tex && \
-	ls L*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-L.tex && \
-	ls F*.ltx | sed -e 's/\(.*\).ltx/\\inserttest{\1}/g' > umtest-suite-F.tex;
+	ls X*.safe.pdf | sed -e 's/\(.*\).safe.pdf/\\inserttest{\1}/g' > umtest-suite-X.tex && \
+	ls L*.safe.pdf | sed -e 's/\(.*\).safe.pdf/\\inserttest{\1}/g' > umtest-suite-L.tex && \
+	ls F*-L.safe.pdf | sed -e 's/\(.*\).safe.pdf/\\inserttest{\1}/g' > umtest-suite-F.tex;
 
 $(builddir)/%: $(testdir)/%
 	@mkdir -p $(builddir); \
