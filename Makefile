@@ -58,6 +58,7 @@ builddir=build
 tds=$(builddir)/$(PKG).tds
 
 UPDATE = `which dtx-update` || true  # TODO: generalise
+SPEAKFAIL := `say 'Test failed!'` || true # Mac OS X only?
 
 # these files end up in the CTAN directory:
 
@@ -336,6 +337,7 @@ $(builddir)/F%-L.diff.pdf: $(builddir)/F%-L.pdf
 	  echo 'F$*: Test passed.' ; \
 	else \
 	  echo 'F$*: Test failed.' ; \
+	  $(SPEAKFAIL) ; \
 	  false ; \
 	fi
 
@@ -349,6 +351,7 @@ $(builddir)/F%-X.diff.pdf: $(builddir)/F%-X.pdf
 	  echo 'F$*: Test passed.' ; \
 	else \
 	  echo 'F$*: Test failed.' ; \
+	  $(SPEAKFAIL) ; \
 	  false ; \
 	fi
 
@@ -377,6 +380,7 @@ $(builddir)/L%.diff.pdf: $(builddir)/L%.pdf
 	  echo 'L$*: Test passed.' ; \
 	else \
 	  echo 'L$*: Test failed.' ; \
+	  $(SPEAKFAIL) ; \
 	  false ; \
 	fi
 
@@ -390,6 +394,7 @@ $(builddir)/X%.diff.pdf: $(builddir)/X%.pdf
 	  echo 'X$*: Test passed.' ; \
 	else \
 	  echo 'X$*: Test failed.' ; \
+	  $(SPEAKFAIL) ; \
 	  false ; \
 	fi
 
