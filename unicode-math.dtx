@@ -50,7 +50,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2011/07/28 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/07/31 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -3113,7 +3113,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % in the general case.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
-  \tl_set:Nx \l_um_tmpa_tl { \trim@spaces {#1} }
+  \tl_set:Nx \l_um_tmpa_tl { \trim@spaces@noexp {#1} }
   \tl_clear:N \l_um_tmpb_tl
   \tl_clear:N \l_um_tmpc_tl
   \tl_if_in:NnT \l_um_tmpa_tl {->} {
