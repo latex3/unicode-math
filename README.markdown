@@ -226,10 +226,12 @@ This work is author-maintained and consists of the files
 - unicode-math.dtx,
 - unicode-math-table.tex,
 - unimath-example.ltx,
-- unimath-symbols.ltx;
+- unimath-symbols.ltx,
+- unicode-math-testsuite.ltx;
 
-the derived file
+the derived files
 
+- unicode-math.lua,
 - unicode-math.sty;
 
 the compiled documentation files
@@ -242,9 +244,8 @@ the compiled documentation files
 and the test suite for this package
 
 - testfiles/umtest-preamble.tex,
-- testfiles/umtest-suite.tex,
-- testfiles/umtest*.ltx,
-- testfiles/umtest*.safe.png.
+- testfiles/umtest-suite-(F|L|X).tex,
+- testfiles/*.ltx.
 
 ____________________________________
 Copyright 2006-2011   Will Robertson  <will.robertson@latex-project.org>
