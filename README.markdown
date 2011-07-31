@@ -150,7 +150,7 @@ changes have not affected the standard behaviour.
 CHANGE HISTORY
 --------------
 
-- v0.5e (2011/07/07)
+- v0.5e (2011/07/31)
 
   * Fix forward compatibility clash with deprecated expl3 functions (sorry)
   * Command names are now `\protected`; this makes them safe to use in moving
@@ -169,6 +169,7 @@ CHANGE HISTORY
   * Fix the math class of `\modtwosum`; it is now a large operator
     (thanks to Michael Ummels)
   * Move several LuaTeX-related patches to the `lualatex-math` package
+  * Fixed mathtool's `\cramped` in XeLaTeX usage
 
 
 - v0.5d (2011/01/30)

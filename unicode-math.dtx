@@ -5743,7 +5743,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \AtEndOfPackageFile * { mathtools } {
   \xetex_if_engine:T {
-    \um_check_and_fix:NNnnn \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 } {
+    \um_check_and_fix:NNnnn
+        \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 }
+    {
       \sbox \z@ {
         $
         \m@th
@@ -5771,17 +5773,20 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       \advance \dimen@ -\ht\z@
       \ht\z@ = -\dimen@
       \box\z@
-    } {
+    }
 %    \end{macrocode}
 % The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
+% Note we used `\verb|\XeTeXradical 255 0|' to avoid a seeming bug in \XeTeX;
+% just hope that math font slot is never defined! (Seems reasonable.)
 %    \begin{macrocode}
+    {
       \hbox_set:Nn \l_tmpa_box {
         \color@setgroup
         \c_math_toggle_token
         \m@th
         #1
         \dim_zero:N \nulldelimiterspace
-        \radical \c_zero { #2 }
+        \XeTeXradical \c_twohundred_fifty_five \c_zero { #2 }
         \c_math_toggle_token
         \color@endgroup
       }
