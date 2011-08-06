@@ -138,7 +138,7 @@ After installation you can initialise the testsuite with
 
 Subsequently, the test suite may be executed with
 
-    make test
+    make check
 
 Both of these operations will take quite some time and require ImageMagick's
 `convert` tool to be installed. They are only necessary if you wish to make
