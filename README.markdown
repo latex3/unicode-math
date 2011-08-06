@@ -55,13 +55,15 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-As well as running XeTeX or LuaTeX this package requires recent versions of
+If you're using an up-to-date TeX Live 2011 or MiKTeX 2.9 then there'll be no problems.
+Otherwise, read on.
+
+As well as running XeTeX or LuaTeX, this package requires recent versions of
 the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`,
-`filehook`, and `lualatex-math` packages. If you're using an up-to-date TeX Live 2011 then there'll
-be no problems.
+`filehook`, and `lualatex-math` packages.
 
 For some additional features you need LuaTeX 0.65 or later, which can be
-updated using [TLContrib][TLC].
+updated using [TLContrib][TLC] if you're still using TeX Live 2010.
 
 [TLC]: http://tlcontrib.metatex.org)
 
@@ -83,11 +85,13 @@ Please file bug reports with minimal examples:
 INSTALLATION
 ------------
 
-The steps below assume that you have obtained unicode-math either from CTAN or
-Github and you wish to install the package yourself. If you are using TeX Live
-2010 or later, you may install the latest release version of the package with
+If you are using TeX Live 2010 or later, you may install the latest release
+version of the package with
 
     sudo tlmgr update unicode-math
+
+The steps below assume that you have obtained unicode-math either from CTAN or
+Github and you wish to install the package yourself.
 
 Installation and compilation are automated by the Makefile; see below for the
 manual procedure. To re-compile the documentation (requiring XeLaTeX and a
@@ -108,7 +112,7 @@ See `make help` for further information.
 
 ### Manual procedure
 
-Run TeX on unicode-math.dtx to generate the package file unicode-math.sty:
+Run TeX on unicode-math.dtx to generate the package file `unicode-math.sty`:
 
     tex unicode-math.dtx
 
@@ -150,7 +154,7 @@ changes have not affected the standard behaviour.
 CHANGE HISTORY
 --------------
 
-- v0.5e (2011/07/07)
+- v0.5e (2011/07/31)
 
   * Fix forward compatibility clash with deprecated expl3 functions (sorry)
   * Command names are now `\protected`; this makes them safe to use in moving
@@ -169,6 +173,7 @@ CHANGE HISTORY
   * Fix the math class of `\modtwosum`; it is now a large operator
     (thanks to Michael Ummels)
   * Move several LuaTeX-related patches to the `lualatex-math` package
+  * Fixed mathtool's `\cramped` in XeLaTeX usage
 
 
 - v0.5d (2011/01/30)

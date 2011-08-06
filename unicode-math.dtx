@@ -50,7 +50,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2011/07/07 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/07/31 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -725,22 +725,8 @@ This work is "author-maintained" by Will Robertson.
 % \begin{figure}\centering
 % \fbox{\fontspec{Charis SIL}\Large
 % A
-% ^^^^2070
-% ^^^^00b9
-% ^^^^00b2
-% ^^^^00b3
-% ^^^^2074
-% ^^^^2075
-% ^^^^2076
-% ^^^^2077
-% ^^^^2078
-% ^^^^2079
-% ^^^^207a
-% ^^^^207b
-% ^^^^207c
-% ^^^^207d
-% ^^^^207e
-% ^^^^2071
+% ^^^^2070 ^^^^00b9 ^^^^00b2 ^^^^00b3 ^^^^2074 ^^^^2075 ^^^^2076 ^^^^2077
+% ^^^^2078 ^^^^2079 ^^^^207a ^^^^207b ^^^^207c ^^^^207d ^^^^207e ^^^^2071
 % ^^^^207f
 % Z}
 % \caption{
@@ -756,34 +742,10 @@ This work is "author-maintained" by Will Robertson.
 % \begin{figure}\centering
 % \fbox{\fontspec{Charis SIL}\Large
 % A
-% ^^^^2080
-% ^^^^2081
-% ^^^^2082
-% ^^^^2083
-% ^^^^2084
-% ^^^^2085
-% ^^^^2086
-% ^^^^2087
-% ^^^^2088
-% ^^^^2089
-% ^^^^208a
-% ^^^^208b
-% ^^^^208c
-% ^^^^208d
-% ^^^^208e
-% ^^^^2090
-% ^^^^2091
-% ^^^^1d62
-% ^^^^2092
-% ^^^^1d63
-% ^^^^1d64
-% ^^^^1d65
-% ^^^^2093
-% ^^^^1d66
-% ^^^^1d67
-% ^^^^1d68
-% ^^^^1d69
-% ^^^^1d6a
+% ^^^^2080 ^^^^2081 ^^^^2082 ^^^^2083 ^^^^2084 ^^^^2085 ^^^^2086 ^^^^2087
+% ^^^^2088 ^^^^2089 ^^^^208a ^^^^208b ^^^^208c ^^^^208d ^^^^208e ^^^^2090
+% ^^^^2091 ^^^^1d62 ^^^^2092 ^^^^1d63 ^^^^1d64 ^^^^1d65 ^^^^2093 ^^^^1d66
+% ^^^^1d67 ^^^^1d68 ^^^^1d69 ^^^^1d6a
 % Z}
 % \caption{
 %   The Unicode subscripts supported as input characters.
@@ -1079,6 +1041,20 @@ This work is "author-maintained" by Will Robertson.
 % Start using \LaTeX3 --- finally!
 %    \begin{macrocode}
 \ExplSyntaxOn
+%    \end{macrocode}
+%
+% \paragraph{Forwards compatibility}
+%    \begin{macrocode}
+\cs_if_exist:NF \char_set_catcode_other:N
+  {
+    \cs_set_eq:NN \c_math_toggle_token \c_math_shift_token
+    \cs_set_eq:NN \char_set_catcode_other:N \char_make_other:N
+    \cs_set_eq:NN \char_set_catcode_active:N \char_make_active:N
+    \cs_set_eq:NN \char_set_catcode_active:n \char_make_active:n
+    \cs_set_eq:NN \char_set_catcode_escape:N \char_make_escape:N
+    \cs_set_eq:NN \char_set_catcode_math_superscript:N
+                  \char_make_math_superscript:N
+  }
 %    \end{macrocode}
 %
 % \paragraph{Extra \pkg{expl3} variants}
@@ -3137,7 +3113,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % in the general case.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
-  \tl_set:Nf \l_um_tmpa_tl { \trim@spaces {#1} }
+  \tl_set:Nx \l_um_tmpa_tl { \trim@spaces@noexp {#1} }
   \tl_clear:N \l_um_tmpb_tl
   \tl_clear:N \l_um_tmpc_tl
   \tl_if_in:NnT \l_um_tmpa_tl {->} {
@@ -5767,7 +5743,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \AtEndOfPackageFile * { mathtools } {
   \xetex_if_engine:T {
-    \um_check_and_fix:NNnnn \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 } {
+    \um_check_and_fix:NNnnn
+        \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 }
+    {
       \sbox \z@ {
         $
         \m@th
@@ -5795,17 +5773,20 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       \advance \dimen@ -\ht\z@
       \ht\z@ = -\dimen@
       \box\z@
-    } {
+    }
 %    \end{macrocode}
 % The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
+% Note we used `\verb|\XeTeXradical 255 0|' to avoid a seeming bug in \XeTeX;
+% just hope that math font slot is never defined! (Seems reasonable.)
 %    \begin{macrocode}
+    {
       \hbox_set:Nn \l_tmpa_box {
         \color@setgroup
         \c_math_toggle_token
         \m@th
         #1
         \dim_zero:N \nulldelimiterspace
-        \radical \c_zero { #2 }
+        \XeTeXradical \c_twohundred_fifty_five \c_zero { #2 }
         \c_math_toggle_token
         \color@endgroup
       }

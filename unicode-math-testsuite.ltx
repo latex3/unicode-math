@@ -9,13 +9,13 @@
 \newcommand\inserttest[1]{%
   \subsection{Test #1}
   \begin{minipage}{0.5\textwidth}
-  \VerbatimInput{testfiles/#1.ltx}
+  \VerbatimInput{#1\prefix.ltx}
   \end{minipage}
   \hfill
   \begin{minipage}{8cm+4pt}
     \fboxsep=1pt
     \fboxrule=1pt
-    \fbox{\includegraphics[width=8cm]{testfiles/#1\prefix.safe.pdf}}
+    \fbox{\includegraphics[width=8cm]{../testfiles/#1\prefix.safe.pdf}}
   \end{minipage}
 }
 
@@ -37,16 +37,17 @@ When the test suite is run, the new output is compared pixel by pixel with that 
 
 \section{Test files for both engines}
 
-\def\prefix{-L}
-\input{testfiles/umtest-suite-F.tex}
+Only the Lua\LaTeX\ output is shown; there will be (usually only) negligible differences between the outout between the two engines.
+
+\input{umtest-suite-F.tex}
 \def\prefix{}
 
 \section{Lua\LaTeX\ test files}
 
-\input{testfiles/umtest-suite-L.tex}
+\input{umtest-suite-L.tex}
 
 \section{\XeLaTeX\ test files}
 
-\input{testfiles/umtest-suite-X.tex}
+\input{umtest-suite-X.tex}
 
 \end{document}
