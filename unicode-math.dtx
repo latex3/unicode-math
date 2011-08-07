@@ -50,7 +50,7 @@ This work is "author-maintained" by Will Robertson.
 %</internal>
 %<preamble>\ProvidesPackage{unicode-math}
 %<*preamble>
-  [2011/07/31 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/08/07 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -1173,7 +1173,7 @@ This work is "author-maintained" by Will Robertson.
 \um_cs_compat:n {mathaccent}
 \um_cs_compat:n {delimiter}
 \luatex_if_engine:T {
-  \RequirePackage { lualatex-math } [ 2011/05/05 ]
+  \RequirePackage { lualatex-math } [ 2011/08/07 ]
 }
 %    \end{macrocode}
 %
@@ -2085,12 +2085,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % To start with, we've got a power of two as many \cmd\fam s as before. So (from |ltfssbas.dtx|) we want to redefine
 %    \begin{macrocode}
-\def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
-\let\newfam\new@mathgroup
+\xetex_if_engine:T {
+  \def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
+  \let\newfam\new@mathgroup
+}
 %    \end{macrocode}
 %
 % This is sufficient for \LaTeX's \cmd\DeclareSymbolFont-type commands to be able
 % to define 256 named maths fonts.
+% For \hologo{LuaLaTeX}, this is handled by the \pkg{lualatex-math} package.
 %
 % \subsection{Setting math chars, math codes, etc.}
 %
