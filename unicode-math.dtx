@@ -5206,10 +5206,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % The main theme here is stolen from the source to the various \cs{peek_} functions.
 % Consider this function as simply boilerplate:
+% TODO: move all this to expl3, and don't use internal expl3 macros.
 %    \begin{macrocode}
 \cs_new:Npn \um_scan_sscript:TF #1#2 {
   \tl_set:Nx \l_peek_true_aux_tl { \exp_not:n{ #1 } }
-  \tl_set_eq:NN \l_peek_true_tl \c_peek_true_remove_next_tl
+  \tl_set_eq:NN \l_peek_true_tl \peek_true_remove:w
   \tl_set:Nx \l_peek_false_tl {\exp_not:n{\group_align_safe_end: #2}}
   \group_align_safe_begin:
     \peek_after:NN \um_peek_execute_branches_ss:
