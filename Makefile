@@ -58,7 +58,7 @@ builddir=build
 tds=$(builddir)/$(PKG).tds
 
 UPDATE = `which dtx-update` || true  # TODO: generalise
-SPEAKFAIL := `say 'Test failed!'` || true # Mac OS X only?
+SPEAKFAIL := say 'Test failed!' || true # Mac OS X only?
 
 # these files end up in the CTAN directory:
 
@@ -329,11 +329,9 @@ $(Llonelypath): $(Llonelytest)
 
 $(builddir)/F%-L.diff.pdf: $(builddir)/F%-L.pdf
 	@echo 'F$*: Comparing PDF from LuaLaTeX against reference output.'
-	if test $(shell compare \
-	                $(COMPARE_OPTS) \
-	                $(builddir)/F$*-L.pdf \
-	                $(testdir)/F$*-L.safe.pdf \
-	                $(builddir)/F$*-L.diff.pdf 2>&1) -le 1 ; then \
+	compare_result="$$(compare "$(builddir)/F$*-L.pdf" "$(testdir)/F$*-L.safe.pdf" $(COMPARE_OPTS) "$(builddir)/F$*-L.diff.pdf" 2>&1)" ; \
+	if [ 0 -eq "$$?" -a 1 -ge "$$compare_result" ] ; \
+	then \
 	  echo 'F$*: Test passed.' ; \
 	else \
 	  echo 'F$*: Test failed.' ; \
@@ -343,11 +341,9 @@ $(builddir)/F%-L.diff.pdf: $(builddir)/F%-L.pdf
 
 $(builddir)/F%-X.diff.pdf: $(builddir)/F%-X.pdf
 	@echo 'F$*: Comparing PDF from XeLaTeX against reference output.'
-	if test $(shell compare \
-	                $(COMPARE_OPTS) \
-	                $(builddir)/F$*-X.pdf \
-	                $(testdir)/F$*-X.safe.pdf \
-	                $(builddir)/F$*-X.diff.pdf 2>&1) -le 1 ; then \
+	compare_result="$$(compare "$(builddir)/F$*-X.pdf" "$(testdir)/F$*-X.safe.pdf" $(COMPARE_OPTS) "$(builddir)/F$*-X.diff.pdf" 2>&1)" ; \
+	if [ 0 -eq "$$?" -a 1 -ge "$$compare_result" ] ; \
+	then \
 	  echo 'F$*: Test passed.' ; \
 	else \
 	  echo 'F$*: Test failed.' ; \
@@ -374,9 +370,9 @@ $(builddir)/F%-X.ltx: $(builddir)/F%.ltx
 
 $(builddir)/L%.diff.pdf: $(builddir)/L%.pdf
 	@echo 'L$*: Comparing PDF against reference output.'
-	if test $(shell compare $(COMPARE_OPTS) \
-	          $(builddir)/L$*.pdf $(testdir)/L$*.safe.pdf \
-	          $(builddir)/L$*.diff.pdf 2>&1) -le 1 ; then \
+	compare_result="$$(compare "$(builddir)/L$*.pdf" "$(testdir)/L$*.safe.pdf" $(COMPARE_OPTS) "$(builddir)/L$*.diff.pdf" 2>&1)" ; \
+	if [ 0 -eq "$$?" -a 1 -ge "$$compare_result" ] ; \
+	then \
 	  echo 'L$*: Test passed.' ; \
 	else \
 	  echo 'L$*: Test failed.' ; \
@@ -386,11 +382,9 @@ $(builddir)/L%.diff.pdf: $(builddir)/L%.pdf
 
 $(builddir)/X%.diff.pdf: $(builddir)/X%.pdf
 	@echo 'X$*: Comparing PDF against reference output.'
-	if test $(shell compare \
-	                $(COMPARE_OPTS) \
-	                $(builddir)/X$*.pdf \
-	                $(testdir)/X$*.safe.pdf \
-	                $(builddir)/X$*.diff.pdf 2>&1) -le 1 ; then \
+	compare_result="$$(compare "$(builddir)/X$*.pdf" "$(testdir)/X$*.safe.pdf" $(COMPARE_OPTS) "$(builddir)/X$*.diff.pdf" 2>&1)" ; \
+	if [ 0 -eq "$$?" -a 1 -ge "$$compare_result" ] ; \
+	then \
 	  echo 'X$*: Test passed.' ; \
 	else \
 	  echo 'X$*: Test failed.' ; \
@@ -400,11 +394,11 @@ $(builddir)/X%.diff.pdf: $(builddir)/X%.pdf
 
 $(builddir)/X%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/X%.ltx
 	@echo 'X$*: Generating PDF output with XeLaTeX.'
-	@cd $(builddir); xelatex -interaction=nonstopmode X$*.ltx $(REDIRECT)
+	@cd $(builddir) && xelatex -interaction=nonstopmode X$*.ltx $(REDIRECT)
 
 $(builddir)/L%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/L%.ltx
 	@echo 'L$*: Generating PDF output with LuaLaTeX.'
-	@cd $(builddir); lualatex -interaction=nonstopmode L$*.ltx $(REDIRECT)
+	@cd $(builddir) && lualatex -interaction=nonstopmode L$*.ltx $(REDIRECT)
 
 #### HACK: allow `make <foobar>` run that test.
 
