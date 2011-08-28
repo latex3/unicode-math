@@ -2427,7 +2427,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Check whether we're using a real maths font:
 %    \begin{macrocode}
   \group_begin:
-    \fontfamily{\zf@family}\selectfont
+    \fontfamily{\l_um_family_tl}\selectfont
     \fontspec_if_script:nTF {math}
       {\bool_gset_true:N  \l_um_ot_math_bool}
       {\bool_gset_false:N \l_um_ot_math_bool}
@@ -2463,7 +2463,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Now define |\um_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
   \DeclareSymbolFont{\um_symfont_tl}
-    {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
+    {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
 
   \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_already_set_bool} {
     \bool_set_true:N \g_um_mainfont_already_set_bool
@@ -2478,7 +2478,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % Set defaults for fam2 for legacy compatibility:
 %    \begin{macrocode}
-    \fontspec_select:xn {\l_um_font_keyval_tl,
+    \fontspec_set_family:Nxn \l_um_family_tl
+      {
+      \l_um_font_keyval_tl,
       Scale=1.00001,
       FontAdjustment={
         \fontdimen8\font= \um_get_fontparam:nn {43} {FractionNumeratorDisplayStyleShiftUp}\relax
@@ -2499,11 +2501,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       }
     } {#2}
     \DeclareSymbolFont{symbols}
-      {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
+      {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
 %    \end{macrocode}
 % Set defaults for fam3 for legacy compatibility:
 %    \begin{macrocode}
-    \fontspec_select:xn {\l_um_font_keyval_tl,
+    \fontspec_set_family:Nxn \l_um_family_tl
+      {
+      \l_um_font_keyval_tl,
       Scale=0.99999,
       FontAdjustment={
         \fontdimen8\font= \um_get_fontparam:nn {48} {FractionRuleThickness}\relax
@@ -2515,7 +2519,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       }
     } {#2}
     \DeclareSymbolFont{largesymbols}
-      {\encodingdefault}{\zf@family}{\mddefault}{\updefault}
+      {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
   }
 %    \end{macrocode}
 % And now we input every single maths char.
@@ -2582,7 +2586,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     },
     \l_um_unknown_keys_clist
   }
-  \fontspec_select:xn {\l_um_font_keyval_tl} {#1}
+  \fontspec_set_family:Nxn \l_um_family_tl {\l_um_font_keyval_tl} {#1}
   \tl_set_eq:NN \l_um_font \zf@basefont
 }
 %    \end{macrocode}
