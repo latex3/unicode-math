@@ -1049,7 +1049,6 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{l3keys2e}
 \RequirePackage{fontspec}[2010/10/25]
 \RequirePackage{catchfile}
-\RequirePackage{trimspaces}% I'd like to incorporate this into expl3...
 \RequirePackage{fix-cm} % avoid some warnings
 \RequirePackage{filehook}[2011/01/03]
 %    \end{macrocode}
@@ -3187,7 +3186,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % in the general case.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \um_if_mathalph_decl:n {TF} {
-  \tl_set:Nx \l_um_tmpa_tl { \trim@spaces@noexp {#1} }
+  \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {#1} }
   \tl_clear:N \l_um_tmpb_tl
   \tl_clear:N \l_um_tmpc_tl
   \tl_if_in:NnT \l_um_tmpa_tl {->} {
@@ -3627,7 +3626,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % First check that at least one of the alphabets for the font shape is defined\dots
 %    \begin{macrocode}
   \clist_map_inline:nn {#2} {
-    \tl_set:Nx \l_um_tmpa_tl { \trim@spaces {##1} }
+    \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {um_config_ \l_um_style_tl _\l_um_tmpa_tl :n} {
       \str_if_eq:xxTF {\l_um_tmpa_tl}{misc} {
         \um_maybe_init_alphabet:V \l_um_style_tl
@@ -3644,7 +3643,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \dots and then loop through them defining the individual ranges:
 %    \begin{macrocode}
   \clist_map_inline:nn {#2} {
-    \tl_set:Nx \l_um_tmpa_tl { \trim@spaces {##1} }
+    \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {
       \str_if_eq:xxTF {\l_um_tmpa_tl}{misc} {
         \um_trace:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
