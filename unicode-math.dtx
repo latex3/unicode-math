@@ -2390,27 +2390,33 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \clist_clear:N \l_um_unknown_keys_clist
   \seq_clear:N \l_um_missing_alph_seq
 %    \end{macrocode}
+% \item By default use the `normal' math version
+%    \begin{macrocode}
+   \tl_set:Nn \l_um_mversion_tl {normal}
+%    \end{macrocode}
+% \item Other range initialisations
+%    \begin{macrocode}
+    \tl_set:Nn \um_symfont_tl {operators}
+    \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_noparse:nnn
+    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
+    \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
+    \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
+    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
+    \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_noparse:nn
+%    \end{macrocode}
 % \end{itemize}
 %    \begin{macrocode}
 }
 \DeclareDocumentCommand \setmathfont { O{} m } {
   \um_init:
 %    \end{macrocode}
-% \begin{itemize}
-% \item Grab the current size information
+% Grab the current size information:
 % (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
 %    \begin{macrocode}
   \cs_if_exist:cF { S@ \f@size } { \calculate@math@sizes }
   \csname S@\f@size\endcsname
 %    \end{macrocode}
-% \item Set the name of the math version being defined.
-%       (obviously more needs to be done here!)
-% \end{itemize}
-%    \begin{macrocode}
-  \tl_set:Nn \l_um_mversion_tf {normal}
-  \DeclareMathVersion{\l_um_mversion_tf}
-%    \end{macrocode}
-% \item Define default font features for the script and scriptscript font.
+% Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
   \tl_set:Nn \l_um_script_features_tl  {Style=MathScript}
   \tl_set:Nn \l_um_sscript_features_tl {Style=MathScriptScript}
@@ -2440,29 +2446,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % for the individual definitions
 % \end{itemize}
 %    \begin{macrocode}
-  \bool_if:NTF \l_um_init_bool {
-    \tl_set:Nn \um_symfont_tl {operators}
-    \msg_trace:nnx {unicode-math} {default-math-font} {#2}
-    \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_noparse:nnn
-    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
-    \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
-    \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
-    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
-    \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_noparse:nn
-  }{
-    \int_incr:N \g_um_fam_int
-    \tl_set:Nx \um_symfont_tl {um_fam\int_use:N\g_um_fam_int}
-    \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_parse:nnn
-    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_parse:Nnn
-    \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
-    \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
-    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_parse:nn
-    \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_parse:nn
-  }
+  \bool_if:NT \l_um_init_bool
+    { \msg_trace:nnx {unicode-math} {default-math-font} {#2} }
 %    \end{macrocode}
 % Now define |\um_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
-  \DeclareSymbolFont{\um_symfont_tl}
+  \SetSymbolFont{\um_symfont_tl}{\l_um_mversion_tl}
     {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
 
   \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_already_set_bool} {
@@ -2499,8 +2488,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \fontdimen21\font=0pt\relax % delim2 = FractionDelimiterSize
         \fontdimen22\font=\um_get_fontparam:nn {15} {AxisHeight}\relax
       }
-    } {#2}
-    \DeclareSymbolFont{symbols}
+      } {#2}
+    \SetSymbolFont{symbols}{\l_um_mversion_tl}
       {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
 %    \end{macrocode}
 % Set defaults for fam3 for legacy compatibility:
@@ -2518,7 +2507,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \fontdimen13\font=0pt\relax
       }
     } {#2}
-    \DeclareSymbolFont{largesymbols}
+    \SetSymbolFont{largesymbols}{\l_um_mversion_tl}
       {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
   }
 %    \end{macrocode}
@@ -3094,6 +3083,18 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \section{Font features}
 %
+% \subsection{Math version}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math}
+  {
+    version .code:n =
+      {
+        \tl_set:Nn \l_um_mversion_tl {#1}
+        \DeclareMathVersion{\l_um_mversion_tl}
+      }
+  }
+%    \end{macrocode}
+%
 % \subsection{Script and scriptscript font options}
 %    \begin{macrocode}
 \keys_define:nn {unicode-math}
@@ -3114,6 +3115,20 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \keys_define:nn {unicode-math} {
   range .code:n = {
     \bool_set_false:N \l_um_init_bool
+%    \end{macrocode}
+% Set processing functions according:
+%    \begin{macrocode}
+    \int_incr:N \g_um_fam_int
+    \tl_set:Nx \um_symfont_tl {um_fam\int_use:N\g_um_fam_int}
+    \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_parse:nnn
+    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_parse:Nnn
+    \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_parse:nnn
+    \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
+    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_parse:nn
+    \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_parse:nn
+%    \end{macrocode}
+% Proceed:
+%    \begin{macrocode}
     \seq_clear:N \l_um_char_range_seq
     \seq_clear:N \l_um_mathalph_seq
     \clist_map_inline:nn {#1} {
