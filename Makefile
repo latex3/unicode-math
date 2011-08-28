@@ -70,12 +70,14 @@ BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
 #
 
-LTXSOURCE = $(PKG).sty $(PKG).lua $(TBL)
+LTXSOURCE = $(PKG).sty $(PKG)-xetex.sty $(PKG)-luatex.sty $(PKG).lua $(TBL)
 
 # and this is how the TDS zip file is produced:
 
 INSFILES = \
 	$(tds)/tex/latex/$(PKG)/unicode-math.sty \
+	$(tds)/tex/latex/$(PKG)/unicode-math-xetex.sty \
+	$(tds)/tex/latex/$(PKG)/unicode-math-luatex.sty \
 	$(tds)/tex/latex/$(PKG)/unicode-math.lua \
 	$(tds)/tex/latex/$(PKG)/unicode-math-table.tex
 
@@ -103,7 +105,7 @@ README:
 $(XMPL):
 
 clean:
-	rm -rf $(builddir)
+	rm -rf $(builddir)/*
 	rm -f $(PKG).zip $(PKG).pdf $(SUITE).pdf
 
 all: clean doc ctan
@@ -209,21 +211,25 @@ install-sys: $(INSFILES)
 
 xfile: $(F)  $(BUILDSOURCE)
 	if test -z "$(F)" ; then \
-	  echo "Need a filename!\nE.g.  \`make xfile F=test.ltx\`" ; \
-	  false ; \
+	  echo "Typesetting test.tex:"; \
+	  $(COPY) test.tex $(builddir)/test.tex; \
+	  cd $(builddir); xelatex test.tex; \
+	else \
+	  echo Typesetting $(F):; \
+	  $(COPY) $(F) $(builddir)/$(F); \
+	  cd $(builddir); xelatex $(F); \
 	fi
-	echo Typesetting $(F):
-	$(COPY) $(F) $(builddir)/$(F)
-	cd $(builddir); xelatex $(F)
 
 lfile: $(F)  $(BUILDSOURCE)
 	if test -z "$(F)" ; then \
-	  echo "Need a filename!\nE.g.  \`make lfile F=test.ltx\`" ; \
-	  false ; \
+	  echo "Typesetting test.tex:"; \
+	  $(COPY) test.tex $(builddir)/test.tex; \
+	  cd $(builddir); lualatex test.tex; \
+	else \
+	  echo Typesetting $(F):; \
+	  $(COPY) $(F) $(builddir)/$(F); \
+	  cd $(builddir); lualatex $(F); \
 	fi
-	echo Typesetting $(F):
-	$(COPY) $(F) $(builddir)/$(F)
-	cd $(builddir); lualatex $(F)
 
 
 #############
@@ -246,7 +252,7 @@ COMPARE_OPTS = -density 300x300 -metric ae -fuzz 35%
 # Redefine this to print output if you need:
 REDIRECT = > /dev/null
 
-LTXSOURCE = $(NAME).sty $(NAME).lua
+LTXSOURCE = $(NAME).sty $(NAME)-xetex.sty $(NAME)-luatex.sty $(NAME).lua
 
 TESTLIST = umtest-suite-X.tex umtest-suite-L.tex umtest-suite-F.tex
 
@@ -275,9 +281,6 @@ $(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE)
 
 
 #### All tests ####
-
-foo:
-	echo $(BUILDTESTTARGET)
 
 check: $(TESTLIST)
 

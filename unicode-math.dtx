@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/08/07 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/08/29 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -1212,6 +1212,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 %<*package&(XE|LU)>
+\ExplSyntaxOn
 %    \end{macrocode}
 %
 % \subsection{Engine differences}
@@ -2439,6 +2440,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % Now define |\um_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
+  \DeclareSymbolFont{\um_symfont_tl}
+    {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
   \SetSymbolFont{\um_symfont_tl}{\l_um_mversion_tl}
     {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
 %    \end{macrocode}
@@ -2574,7 +2577,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \cs_new:Nn \um_fontspec_select_font: {
   \tl_set:Nx \l_um_font_keyval_tl {
-    \luatex_if_engine:T { Renderer = Basic, }
+%<LU>     Renderer = Basic,
     BoldFont = {}, ItalicFont = {},
     Script = Math,
     SizeFeatures = {
@@ -5965,9 +5968,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \ExplSyntaxOff
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 %</package&(XE|LU)>
 %    \end{macrocode}
 %
