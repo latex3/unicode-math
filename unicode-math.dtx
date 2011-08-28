@@ -2384,8 +2384,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
-  \tl_set:Nn \l_um_script_features_tl  {ScriptStyle}
-  \tl_set:Nn \l_um_sscript_features_tl {ScriptScriptStyle}
+  \tl_set:Nn \l_um_script_features_tl  {Style=MathScript}
+  \tl_set:Nn \l_um_sscript_features_tl {Style=MathScriptScript}
   \tl_set:Nn \l_um_script_font_tl      {#2}
   \tl_set:Nn \l_um_sscript_font_tl     {#2}
 %    \end{macrocode}
