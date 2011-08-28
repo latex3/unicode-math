@@ -1173,6 +1173,7 @@ This work is "author-maintained" by Will Robertson.
 %
 %    \begin{macrocode}
 \cs_generate_variant:Nn \fontspec_set_family:Nnn {Nx}
+\cs_generate_variant:Nn \fontspec_set_fontface:NNnn {NNx}
 %    \end{macrocode}
 %
 % \subsubsection{\Hologo{LuaLaTeX} module}
@@ -2540,8 +2541,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \cs_new:Nn \um_get_fontparam:nn
-%<XE>  { \the\fontdimen#1\zf@basefont\relax }
-%<LU>  { \directlua{fontspec.mathfontdimen("zf@basefont","#2")} }
+%<XE>  { \the\fontdimen#1\l_um_font\relax }
+%<LU>  { \directlua{fontspec.mathfontdimen("l_um_font","#2")} }
 %    \end{macrocode}
 %
 % \begin{macro}{\resetmathfont}
@@ -2575,8 +2576,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     },
     \l_um_unknown_keys_clist
   }
-  \fontspec_set_family:Nxn \l_um_family_tl {\l_um_font_keyval_tl} {#1}
-  \tl_set_eq:NN \l_um_font \zf@basefont
+  \fontspec_set_fontface:NNxn \l_um_font \l_um_family_tl {\l_um_font_keyval_tl} {#1}
 }
 %    \end{macrocode}
 % \end{macro}
