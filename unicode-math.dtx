@@ -340,6 +340,22 @@ This work is "author-maintained" by Will Robertson.
 % automatically with \pkg{fontspec} options. We might have to wait until
 % MnMath, for example, before we really know.
 %
+%
+% \subsection{Maths `versions'}
+%
+% \LaTeX\ uses a concept known as maths versions to switch math fonts
+% mid-document.
+% This is useful because it is more efficient than loading a complete maths
+% font from scratch every time---especially in the case of Unicode maths!
+% The canonical example for maths versions is to select a `bold' maths font
+% which might be suitable for section headings, say.
+% (Not everyone agrees with this typesetting choice, though; be careful.)
+%
+% To select a new maths font in a particular version, use the syntax
+%   \codeline{\cmd\setmathfont|[version=|\meta{version name}|,|\meta{font features}|]|\marg{font name}}
+% and to switch between maths versions mid-document use the \LaTeX\ command
+% \cmd\mathversion\marg{version name}.
+%
 % \section{Maths input}
 %
 % \XeTeX's Unicode support allows maths input through two methods. Like
@@ -2440,8 +2456,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % Now define |\um_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
-  \DeclareSymbolFont{\um_symfont_tl}
-    {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
+  \cs_if_exist:cF { sym \um_symfont_tl }
+    {
+      \DeclareSymbolFont{\um_symfont_tl}
+        {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
+    }
   \SetSymbolFont{\um_symfont_tl}{\l_um_mversion_tl}
     {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
 %    \end{macrocode}
