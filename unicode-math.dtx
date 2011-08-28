@@ -35,7 +35,13 @@ This work is "author-maintained" by Will Robertson.
 \generate{\file{unicode-math.sty}{
   \from{unicode-math.dtx}{preamble}
   \from{unicode-math.dtx}{msg}
-  \from{unicode-math.dtx}{package,stix}
+  \from{unicode-math.dtx}{load}
+}}
+\generate{\file{unicode-math-xetex.sty}{
+  \from{unicode-math.dtx}{package,XE}
+}}
+\generate{\file{unicode-math-luatex.sty}{
+  \from{unicode-math.dtx}{package,LU}
 }}
 \def\MetaPrefix{--}
 \usepreamble\luapreamble
@@ -48,7 +54,9 @@ This work is "author-maintained" by Will Robertson.
 \endgroup
 \ProvidesFile{unicode-math.dtx}
 %</internal>
-%<preamble>\ProvidesPackage{unicode-math}
+%<preamble&!XE&!LU>\ProvidesPackage{unicode-math}
+%<preamble&XE>\ProvidesPackage{unicode-math-xetex}
+%<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
   [2011/08/07 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
@@ -1012,7 +1020,15 @@ This work is "author-maintained" by Will Robertson.
 %
 % \part{The \pkg{unicode-math} package}
 %
-%<*preamble>
+% We bifurcate the package based on the engine being used.
+%    \begin{macrocode}
+%<*load>
+\luatex_if_engine:T { \usepackage{unicode-math-luatex} \endinput }
+\xetex_if_engine:T  { \usepackage{unicode-math-xetex}  \endinput }
+%</load>
+%    \end{macrocode}
+%
+%<*preamble&!XE&!LU>
 %
 % \section{Things we need}
 %
@@ -1080,12 +1096,6 @@ This work is "author-maintained" by Will Robertson.
 %
 %
 % \paragraph{Conditionals}
-% Engine capabilities:
-%    \begin{macrocode}
-\bool_const:Nn \c_um_have_fixed_accents_bool {
-  \c_luatex_is_engine_bool && \int_compare_p:n { \luatexversion > 64 }
-}
-%    \end{macrocode}
 %    \begin{macrocode}
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
@@ -1158,41 +1168,19 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Compatibility with Lua\TeX}
-%
-%    \begin{macrocode}
-\xetex_or_luatex:nnn { \cs_new:Npn \um_cs_compat:n #1 }
-  { \cs_set_eq:cc {U#1} {XeTeX#1}   }
-  { \cs_set_eq:cc {U#1} {luatexU#1} }
-\um_cs_compat:n {mathcode}
-\um_cs_compat:n {delcode}
-\um_cs_compat:n {mathcodenum}
-\um_cs_compat:n {mathcharnum}
-\um_cs_compat:n {mathchardef}
-\um_cs_compat:n {radical}
-\um_cs_compat:n {mathaccent}
-\um_cs_compat:n {delimiter}
-\luatex_if_engine:T {
-  \RequirePackage { lualatex-math } [ 2011/08/07 ]
-}
-%    \end{macrocode}
 %
 % \subsubsection{Function variants}
 %
 %    \begin{macrocode}
-\cs_generate_variant:Nn \fontspec_select:nn {x}
+\cs_generate_variant:Nn \fontspec_set_family:Nnn {Nx}
 %    \end{macrocode}
 %
 % \subsubsection{\Hologo{LuaLaTeX} module}
 %
 % We create a \pkg{luatexbase} module that contains Lua functions for use with \hologo{LuaLaTeX}.
 %    \begin{macrocode}
-\luatex_if_engine:T {
-  \RequirePackage { luatexbase }
-  \RequirePackage { luaotfload } [ 2010/11/26 ]
-  \RequireLuaModule { unicode-math } [ 2011/04/23 ]
-}
-%</preamble>
+%</preamble&!XE&!LU>
+%
 %<*lua>
 local err, warn, info, log = luatexbase.provides_module({
   name        = "unicode-math",
@@ -1223,7 +1211,40 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %  defined in \secref[vref]{codemsg}.)
 %
 %    \begin{macrocode}
-%<*package>
+%<*package&(XE|LU)>
+%    \end{macrocode}
+%
+% \subsection{Engine differences}
+%
+%    \begin{macrocode}
+\cs_new:Nn \um_cs_compat:n
+%<XE>  { \cs_set_eq:cc {U#1} {XeTeX#1}   }
+%<LU>  { \cs_set_eq:cc {U#1} {luatexU#1} }
+\um_cs_compat:n {mathcode}
+\um_cs_compat:n {delcode}
+\um_cs_compat:n {mathcodenum}
+\um_cs_compat:n {mathcharnum}
+\um_cs_compat:n {mathchardef}
+\um_cs_compat:n {radical}
+\um_cs_compat:n {mathaccent}
+\um_cs_compat:n {delimiter}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<XE>\bool_set_false:N \c_um_have_fixed_accents_bool
+%<*LU>
+\bool_const:Nn \c_um_have_fixed_accents_bool
+  { \int_compare_p:n { \luatexversion > 64 } }
+%</LU>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*LU>
+\RequirePackage { lualatex-math } [ 2011/08/07 ]
+\RequirePackage { luatexbase }
+\RequirePackage { luaotfload } [ 2010/11/26 ]
+\RequireLuaModule { unicode-math } [ 2011/04/23 ]
+%</LU>
 %    \end{macrocode}
 %
 % \subsection{Alphabet Unicode positions}
@@ -1548,7 +1569,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % But we still want to be able to use them if possible.
 %
 %    \begin{macrocode}
-%</package>
+%</package&(XE|LU)>
 %<*stix>
 %    \end{macrocode}
 %
@@ -1776,7 +1797,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 %</stix>
-%<*package>
+%<*package&(XE|LU)>
 %    \end{macrocode}
 %
 % \subsection{Package options}
@@ -2085,10 +2106,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % To start with, we've got a power of two as many \cmd\fam s as before. So (from |ltfssbas.dtx|) we want to redefine
 %    \begin{macrocode}
-\xetex_if_engine:T {
-  \def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
-  \let\newfam\new@mathgroup
-}
+%<*XE>
+\def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
+\let\newfam\new@mathgroup
+%</XE>
 %    \end{macrocode}
 %
 % This is sufficient for \LaTeX's \cmd\DeclareSymbolFont-type commands to be able
@@ -2233,12 +2254,19 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \cs_new:Npn \um_delimiter:Nnn #1#2#3 {
   \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
-\xetex_or_luatex:nnn { \cs_new:Npn \um_accent:Nnn #1#2#3 } {
-  \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-} {
-  \Umathaccent \c_um_accent_keyword_tl \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-}
-\luatex_if_engine:T {
+\cs_new:Nn \um_accent:Nnn
+%<*XE>
+  {
+    \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+  }
+%</XE>
+%<*LU>
+  {
+    \Umathaccent \c_um_accent_keyword_tl
+      \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+  }
+%</LU>
+%<*LU>
   \cs_new_nopar:Npn \um_wide_top_accent:Nnn #1 #2 #3 {
     \Umathaccent \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
   }
@@ -2250,7 +2278,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   } {
     \tl_const:Nn \c_um_accent_keyword_tl { }
   }
-}
+%</LU>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -2341,7 +2369,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \doarg{font features}
 % \darg{font name}
 %    \begin{macrocode}
-\cs_new:Npn \um_init: {
+\cs_new:Nn \um_init: {
 %    \end{macrocode}
 % \begin{itemize}
 % \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
@@ -2518,11 +2546,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %
 %    \begin{macrocode}
-\xetex_or_luatex:nnn { \cs_new:Nn \um_get_fontparam:nn } {
-  \the\fontdimen#1\zf@basefont\relax
-}{
-  \directlua{fontspec.mathfontdimen("zf@basefont","#2")}
-}
+\cs_new:Nn \um_get_fontparam:nn
+%<XE>  { \the\fontdimen#1\zf@basefont\relax }
+%<LU>  { \directlua{fontspec.mathfontdimen("zf@basefont","#2")} }
 %    \end{macrocode}
 %
 % \begin{macro}{\resetmathfont}
@@ -2830,13 +2856,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % For \LuaTeX, simply rename the correspronding primitive.
 % For \XeTeX, define \meta{command} as a new quark.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_new_cramped_style:N #1 {
-  \xetex_or_luatex:nn {
-    \quark_new:N #1
-  } {
-    \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 }
-  }
-}
+\cs_new_protected_nopar:Nn \um_new_cramped_style:N
+%<XE>  { \quark_new:N #1 }
+%<LU>  { \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 } }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2872,7 +2894,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % The other parameters are integer constants referring to font dimension numbers.
 % The macro expands to a dimension which contains the appropriate font dimension.
 %    \begin{macrocode}
-\xetex_if_engine:T {
+%<*XE>
   \cs_new_nopar:Npn \um_font_dimen:Nnnnn #1 #2 #3 #4 #5 {
     \fontdimen
     \cs_if_eq:NNTF #1 \displaystyle {
@@ -2912,7 +2934,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
     \c_two
   }
-}
+%</XE>
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2929,17 +2951,21 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
 % The \XeTeX\ font dimension numbers must be integer constants.
 %    \begin{macrocode}
-\xetex_or_luatex:nnn {
-  \cs_new_protected_nopar:Npn \um_font_param:nnnnn #1 #2 #3 #4 #5
-} {
+\cs_new_protected_nopar:Nn \um_font_param:nnnnn
+%<*XE>
+{
   \um_font_param_aux:ccnnnn { um_ #1 :N } { um_set_ #1 :N }
     { #2 } { #3 } { #4 } { #5 }
-} {
+}
+%</XE>
+%<*LU>
+{
   \tl_set:Nn \l_um_tmpa_tl { #1 }
   \tl_remove_all_in:Nn \l_um_tmpa_tl { _ }
   \um_font_param_aux:ccc { um_ #1 :N } { um_set_ #1 :N }
     { luatexUmath \l_um_tmpa_tl }
 }
+%</LU>
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2975,11 +3001,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % This macro defines getter and setter functions for the font parameter \meta{name}, which is considered unavailable in \XeTeX\@.
 % The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
 %    \begin{macrocode}
-\xetex_or_luatex:nnn {
-  \cs_new_protected_nopar:Npn \um_font_param:n #1
-} { } {
-  \um_font_param:nnnnn { #1 } { 0 } { 0 } { 0 } { 0 }
-}
+\cs_new_protected_nopar:Nn \um_font_param:n
+%<XE>  { }
+%<LU>  { \um_font_param:nnnnn { #1 } { 0 } { 0 } { 0 } { 0 } }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2987,8 +3011,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_font_param_aux:NNN}
 % Auxiliary macros for generating font parameter accessor macros.
 %    \begin{macrocode}
-\xetex_or_luatex:nn {
-  \cs_new_protected_nopar:Npn \um_font_param_aux:NNnnnn #1 #2 #3 #4 #5 #6 {
+%<*XE>
+\cs_new_protected_nopar:Nn \um_font_param_aux:NNnnnn
+  {
     \cs_new_nopar:Npn #1 ##1 {
       \um_font_dimen:Nnnnn ##1 { #3 } { #4 } { #5 } { #6 }
     }
@@ -2996,9 +3021,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       #1 ##1 \dim_eval:n { ##2 }
     }
   }
-  \cs_generate_variant:Nn \um_font_param_aux:NNnnnn { cc }
-} {
-  \cs_new_protected_nopar:Npn \um_font_param_aux:NNN #1 #2 #3 {
+\cs_generate_variant:Nn \um_font_param_aux:NNnnnn { cc }
+%</XE>
+%<*LU>
+\cs_new_protected_nopar:Nn \um_font_param_aux:NNN
+  {
     \cs_new_nopar:Npn #1 ##1 {
       #3 ##1
     }
@@ -3006,8 +3033,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       #3 ##1 \dim_eval:n { ##2 }
     }
   }
-  \cs_generate_variant:Nn \um_font_param_aux:NNN { ccc }
-}
+\cs_generate_variant:Nn \um_font_param_aux:NNN { ccc }
+%</LU>
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -4572,7 +4599,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % In time, the case statement inside |set_mathsymbol| will be moved in here
 % to avoid re-running it every time.
 %    \begin{macrocode}
-\xetex_or_luatex:nnn { \cs_set:Npn \um_symbol_setup: }
+\cs_set:Npn \um_symbol_setup:
+%<*XE>
   {
     \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
       \prg_case_tl:Nnn ##3 { \mathover {} \mathunder {} }
@@ -4581,11 +4609,14 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         }
     }
   }
+%</XE>
+%<*LU>
   {
     \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
       \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
     }
   }
+%</LU>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -5000,7 +5031,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \AtBeginDocument{\um_redefine_radical:}
-\xetex_or_luatex:nnn { \cs_set:Nn \um_redefine_radical: } {
+\cs_set:Nn \um_redefine_radical:
+%<*XE>
+ {
   \@ifpackageloaded { amsmath } { } {
 %    \end{macrocode}
 % \begin{macro}{\r@@t}
@@ -5034,7 +5067,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{macro}
 %    \begin{macrocode}
   }
-} {
+ }
+%</XE>
+%<*LU>
+ {
   \@ifpackageloaded { amsmath } { } {
 %    \end{macrocode}
 % \begin{macro}{\root}
@@ -5047,7 +5083,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{macro}
 %    \begin{macrocode}
   }
-}
+ }
+%</LU>
 %    \end{macrocode}
 %
 %
@@ -5412,7 +5449,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \msg_info:nnx { unicode-math } { patch-macro }
           { \token_to_str:N #1 }
         \group_end:
-        \xetex_or_luatex:nnn { #2 #1 #3 } { #6 } { #5 }
+        #2 #1 #3
+%<XE>          { #6 }
+%<LU>          { #5 }
       } {
         \msg_warning:nnxxx { unicode-math } { wrong-meaning }
           { \token_to_str:N #1 } { \token_to_meaning:N #1 }
@@ -5494,14 +5533,14 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
 \AtEndOfPackageFile * {amsmath} {
-  \xetex_if_engine:T {
+%<*XE>
     \tl_remove_in:Nn \@begindocumenthook {
       \mathchardef\std@minus\mathcode`\-\relax
       \mathchardef\std@equal\mathcode`\=\relax
     }
     \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
     \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
-  }
+%</XE>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -5510,16 +5549,14 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % This isn't as clever as the \pkg{amsmath} definition but I think it works:
 %    \begin{macrocode}
-  \xetex_if_engine:T {
+%<*XE>
     \def \resetMathstrut@ {%
       \setbox\z@\hbox{$($}%)
       \ht\Mathstrutbox@\ht\z@ \dp\Mathstrutbox@\dp\z@
     }
-  }
 %    \end{macrocode}
 % The |subarray| environment uses inappropriate font dimensions.
 %    \begin{macrocode}
-  \xetex_if_engine:T {
     \um_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 } {
       \vcenter
       \bgroup
@@ -5565,7 +5602,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       \hfil
       \crcr
     }
-  }
+%</XE>
 %    \end{macrocode}
 % The roots need a complete rework.
 %    \begin{macrocode}
@@ -5697,11 +5734,16 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-\xetex_or_luatex:nnn { \cs_new_protected_nopar:Npn \um_setup_accents: } {
+\cs_new_protected_nopar:Nn \um_setup_accents:
+%<*XE>
+ {
   \def\widehat{\hat}
   \def\widetilde{\tilde}
   \def\overrightarrow{\vec}
-} {
+ }
+%</XE>
+%<*LU>
+ {
   \cs_gset_protected_nopar:Npx \widehat {
     \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0302 }
   }
@@ -5731,7 +5773,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EF }
     }
   }
-}
+ }
+%</LU>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -5746,7 +5789,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \AtEndOfPackageFile * { mathtools } {
-  \xetex_if_engine:T {
+%<*XE>
     \chk_if_free_cs:N \g_um_empty_fam
     \newfam \g_um_empty_fam
     \um_check_and_fix:NNnnn
@@ -5804,7 +5847,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       }
       \box_use_clear:N \l_tmpa_box
     }
-  }
+%</XE>
 %    \end{macrocode}
 %
 % \begin{macro}{\dblcolon}
@@ -5873,7 +5916,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</package>
+%</package&(XE|LU)>
 %    \end{macrocode}
 %
 % \section{Error messages}
