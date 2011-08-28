@@ -2371,6 +2371,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \darg{font name}
 %    \begin{macrocode}
 \cs_new:Nn \um_init: {
+  \bool_set_true:N  \l_um_ot_math_bool
 %    \end{macrocode}
 % \begin{itemize}
 % \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
@@ -2405,111 +2406,52 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
     \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_noparse:nn
 %    \end{macrocode}
+% \item Define default font features for the script and scriptscript font.
+%    \begin{macrocode}
+  \tl_set:Nn \l_um_script_features_tl  {Style=MathScript}
+  \tl_set:Nn \l_um_sscript_features_tl {Style=MathScriptScript}
+  \tl_set_eq:NN \l_um_script_font_tl   \l_um_fontname_tl
+  \tl_set_eq:NN \l_um_sscript_font_tl  \l_um_fontname_tl
+%    \end{macrocode}
 % \end{itemize}
 %    \begin{macrocode}
 }
 \DeclareDocumentCommand \setmathfont { O{} m } {
+  \tl_set:Nn \l_um_fontname_tl {#2}
   \um_init:
 %    \end{macrocode}
 % Grab the current size information:
 % (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
+% The macro \cmd\S@\meta{size}
+% contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
+% \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
 %    \begin{macrocode}
   \cs_if_exist:cF { S@ \f@size } { \calculate@math@sizes }
   \csname S@\f@size\endcsname
 %    \end{macrocode}
-% Define default font features for the script and scriptscript font.
-%    \begin{macrocode}
-  \tl_set:Nn \l_um_script_features_tl  {Style=MathScript}
-  \tl_set:Nn \l_um_sscript_features_tl {Style=MathScriptScript}
-  \tl_set:Nn \l_um_script_font_tl      {#2}
-  \tl_set:Nn \l_um_sscript_font_tl     {#2}
-%    \end{macrocode}
-% Use \pkg{fontspec} to select a font to use. The macro \cmd\S@\meta{size}
-% contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
-% \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
+% Parse options and tell people what's going on:
 %    \begin{macrocode}
   \keys_set:nn {unicode-math} {#1}
-  \um_fontspec_select_font:n {#2}
+  \bool_if:NT \l_um_init_bool { \um_trace:n {default-math-font} }
 %    \end{macrocode}
-% Check whether we're using a real maths font:
+% Use \pkg{fontspec} to select a font to use.
 %    \begin{macrocode}
-  \group_begin:
-    \fontfamily{\l_um_family_tl}\selectfont
-    \fontspec_if_script:nTF {math}
-      {\bool_gset_true:N  \l_um_ot_math_bool}
-      {\bool_gset_false:N \l_um_ot_math_bool}
-  \group_end:
-%    \end{macrocode}
-% If we're defining the full Unicode math repetoire, then we skip all
-% the parsing processing needed if we're only defining a subset.
-% \begin{itemize}
-% \item Math symbols are defined with \cmd\_um_sym:nnn; see \secref{mathsymbol}
-% for the individual definitions
-% \end{itemize}
-%    \begin{macrocode}
-  \bool_if:NT \l_um_init_bool
-    { \msg_trace:nnx {unicode-math} {default-math-font} {#2} }
+  \um_fontspec_select_font:
 %    \end{macrocode}
 % Now define |\um_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
   \SetSymbolFont{\um_symfont_tl}{\l_um_mversion_tl}
     {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
-
+%    \end{macrocode}
+% Declare the math sizes (i.e., scaling of superscripts) for the specific
+% values for this font,
+% and set defaults for math fams two and three for legacy compatibility:
+%    \begin{macrocode}
   \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_already_set_bool} {
     \bool_set_true:N \g_um_mainfont_already_set_bool
-%    \end{macrocode}
-% Set the math sizes according to the recommend font parameters:
-%    \begin{macrocode}
-    \dim_compare:nF { \fontdimen 10 \l_um_font == 0pt } {
-      \DeclareMathSizes { \f@size } { \f@size }
-      { \um_fontdimen_to_percent:nn{10}{\l_um_font}\dimexpr \f@size pt\relax }
-      { \um_fontdimen_to_percent:nn{11}{\l_um_font}\dimexpr \f@size pt\relax }
-    }
-%    \end{macrocode}
-% Set defaults for fam2 for legacy compatibility:
-%    \begin{macrocode}
-    \fontspec_set_family:Nxn \l_um_family_tl
-      {
-      \l_um_font_keyval_tl,
-      Scale=1.00001,
-      FontAdjustment={
-        \fontdimen8\font= \um_get_fontparam:nn {43} {FractionNumeratorDisplayStyleShiftUp}\relax
-        \fontdimen9\font= \um_get_fontparam:nn {42} {FractionNumeratorShiftUp}\relax
-        \fontdimen10\font=\um_get_fontparam:nn {32} {StackTopShiftUp}\relax
-        \fontdimen11\font=\um_get_fontparam:nn {45} {FractionDenominatorDisplayStyleShiftDown}\relax
-        \fontdimen12\font=\um_get_fontparam:nn {44} {FractionDenominatorShiftDown}\relax
-        \fontdimen13\font=\um_get_fontparam:nn {21} {SuperscriptShiftUp}\relax
-        \fontdimen14\font=\um_get_fontparam:nn {21} {SuperscriptShiftUp}\relax
-        \fontdimen15\font=\um_get_fontparam:nn {22} {SuperscriptShiftUpCramped}\relax
-        \fontdimen16\font=\um_get_fontparam:nn {18} {SubscriptShiftDown}\relax
-        \fontdimen17\font=\um_get_fontparam:nn {18} {SubscriptShiftDownWithSuperscript}\relax
-        \fontdimen18\font=\um_get_fontparam:nn {24} {SuperscriptBaselineDropMax}\relax
-        \fontdimen19\font=\um_get_fontparam:nn {20} {SubscriptBaselineDropMin}\relax
-        \fontdimen20\font=0pt\relax % delim1 = FractionDelimiterDisplaySize
-        \fontdimen21\font=0pt\relax % delim2 = FractionDelimiterSize
-        \fontdimen22\font=\um_get_fontparam:nn {15} {AxisHeight}\relax
-      }
-      } {#2}
-    \SetSymbolFont{symbols}{\l_um_mversion_tl}
-      {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
-%    \end{macrocode}
-% Set defaults for fam3 for legacy compatibility:
-%    \begin{macrocode}
-    \fontspec_set_family:Nxn \l_um_family_tl
-      {
-      \l_um_font_keyval_tl,
-      Scale=0.99999,
-      FontAdjustment={
-        \fontdimen8\font= \um_get_fontparam:nn {48} {FractionRuleThickness}\relax
-        \fontdimen9\font= \um_get_fontparam:nn {28} {UpperLimitGapMin}\relax
-        \fontdimen10\font=\um_get_fontparam:nn {30} {LowerLimitGapMin}\relax
-        \fontdimen11\font=\um_get_fontparam:nn {29} {UpperLimitBaselineRiseMin}\relax
-        \fontdimen12\font=\um_get_fontparam:nn {31} {LowerLimitBaselineDropMin}\relax
-        \fontdimen13\font=0pt\relax
-      }
-    } {#2}
-    \SetSymbolFont{largesymbols}{\l_um_mversion_tl}
-      {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
+    \um_declare_math_sizes:
+    \um_setup_legacy_fam_two:
+    \um_setup_legacy_fam_three:
   }
 %    \end{macrocode}
 % And now we input every single maths char.
@@ -2531,10 +2473,83 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \um_setup_delcodes:
   \um_setup_alphabets:
 %    \end{macrocode}
-% Prevent spaces:
+% Prevent spaces, and that's it:
 %    \begin{macrocode}
   \ignorespaces
 }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\um_declare_math_sizes:}
+% Set the math sizes according to the recommend font parameters:
+%    \begin{macrocode}
+\cs_new:Nn \um_declare_math_sizes:
+  {
+    \dim_compare:nF { \fontdimen 10 \l_um_font == 0pt }
+      {
+        \DeclareMathSizes { \f@size } { \f@size }
+          { \um_fontdimen_to_scale:nn {10} {\l_um_font} }
+          { \um_fontdimen_to_scale:nn {11} {\l_um_font} }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\um_setup_legacy_fam_two:}
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_legacy_fam_two:
+  {
+    \fontspec_set_family:Nxn \l_um_family_tl
+      {
+      \l_um_font_keyval_tl,
+      Scale=1.00001,
+      FontAdjustment={
+        \fontdimen8\font= \um_get_fontparam:nn {43} {FractionNumeratorDisplayStyleShiftUp}\relax
+        \fontdimen9\font= \um_get_fontparam:nn {42} {FractionNumeratorShiftUp}\relax
+        \fontdimen10\font=\um_get_fontparam:nn {32} {StackTopShiftUp}\relax
+        \fontdimen11\font=\um_get_fontparam:nn {45} {FractionDenominatorDisplayStyleShiftDown}\relax
+        \fontdimen12\font=\um_get_fontparam:nn {44} {FractionDenominatorShiftDown}\relax
+        \fontdimen13\font=\um_get_fontparam:nn {21} {SuperscriptShiftUp}\relax
+        \fontdimen14\font=\um_get_fontparam:nn {21} {SuperscriptShiftUp}\relax
+        \fontdimen15\font=\um_get_fontparam:nn {22} {SuperscriptShiftUpCramped}\relax
+        \fontdimen16\font=\um_get_fontparam:nn {18} {SubscriptShiftDown}\relax
+        \fontdimen17\font=\um_get_fontparam:nn {18} {SubscriptShiftDownWithSuperscript}\relax
+        \fontdimen18\font=\um_get_fontparam:nn {24} {SuperscriptBaselineDropMax}\relax
+        \fontdimen19\font=\um_get_fontparam:nn {20} {SubscriptBaselineDropMin}\relax
+        \fontdimen20\font=0pt\relax % delim1 = FractionDelimiterDisplaySize
+        \fontdimen21\font=0pt\relax % delim2 = FractionDelimiterSize
+        \fontdimen22\font=\um_get_fontparam:nn {15} {AxisHeight}\relax
+      }
+      } {\l_um_fontname_tl}
+    \SetSymbolFont{symbols}{\l_um_mversion_tl}
+      {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\um_setup_legacy_fam_three:}
+%    \begin{macrocode}
+\cs_new:Nn \um_setup_legacy_fam_three:
+  {
+    \fontspec_set_family:Nxn \l_um_family_tl
+      {
+      \l_um_font_keyval_tl,
+      Scale=0.99999,
+      FontAdjustment={
+        \fontdimen8\font= \um_get_fontparam:nn {48} {FractionRuleThickness}\relax
+        \fontdimen9\font= \um_get_fontparam:nn {28} {UpperLimitGapMin}\relax
+        \fontdimen10\font=\um_get_fontparam:nn {30} {LowerLimitGapMin}\relax
+        \fontdimen11\font=\um_get_fontparam:nn {29} {UpperLimitBaselineRiseMin}\relax
+        \fontdimen12\font=\um_get_fontparam:nn {31} {LowerLimitBaselineDropMin}\relax
+        \fontdimen13\font=0pt\relax
+      }
+    } {\l_um_fontname_tl}
+    \SetSymbolFont{largesymbols}{\l_um_mversion_tl}
+      {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2558,7 +2573,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_fontspec_select_font:}
 % Select the font with \cs{fontspec} and define \cs{l_um_font} from it.
 %    \begin{macrocode}
-\cs_new:Npn \um_fontspec_select_font:n #1 {
+\cs_new:Nn \um_fontspec_select_font: {
   \tl_set:Nx \l_um_font_keyval_tl {
     \luatex_if_engine:T { Renderer = Basic, }
     BoldFont = {}, ItalicFont = {},
@@ -2576,7 +2591,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     },
     \l_um_unknown_keys_clist
   }
-  \fontspec_set_fontface:NNxn \l_um_font \l_um_family_tl {\l_um_font_keyval_tl} {#1}
+  \fontspec_set_fontface:NNxn \l_um_font \l_um_family_tl
+    {\l_um_font_keyval_tl} {\l_um_fontname_tl}
+%    \end{macrocode}
+% Check whether we're using a real maths font:
+%    \begin{macrocode}
+  \group_begin:
+    \fontfamily{\l_um_family_tl}\selectfont
+    \fontspec_if_script:nF {math} {\bool_gset_false:N \l_um_ot_math_bool}
+  \group_end:
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3116,7 +3139,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   range .code:n = {
     \bool_set_false:N \l_um_init_bool
 %    \end{macrocode}
-% Set processing functions according:
+% Set processing functions if we're not defining the full Unicode math repetoire.
+% Math symbols are defined with \cmd\_um_sym:nnn; see \secref{mathsymbol}
+% for the individual definitions
 %    \begin{macrocode}
     \int_incr:N \g_um_fam_int
     \tl_set:Nx \um_symfont_tl {um_fam\int_use:N\g_um_fam_int}
@@ -5108,14 +5133,23 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %
 % \begin{macro}{\um_fontdimen_to_percent:nn}
+% \begin{macro}{\um_fontdimen_to_scale:nn}
 % \darg{Font dimen number}
 % \darg{Font `variable'}
-% \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|. This macro takes a font dimension number and outputs the decimal value of the associated parameter.
+% \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|.
+% \cs{um_fontdimen_to_percent:nn} takes a font dimension number and outputs the decimal value of the associated parameter.
+% \cs{um_fontdimen_to_scale:nn} returns a dimension correspond to the current
+% font size relative proportion based on that percentage.
 %    \begin{macrocode}
 \cs_new:Npn \um_fontdimen_to_percent:nn #1#2 {
   \strip@pt\dimexpr\fontdimen#1#2*65536/100\relax
 }
+\cs_new:Nn \um_fontdimen_to_scale:nn
+  {
+    \um_fontdimen_to_percent:nn {#1} {#2} \dimexpr \f@size pt\relax
+  }
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\um_mathstyle_scale:Nnn}
@@ -5968,7 +6002,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 }
 \msg_new:nnn {unicode-math} {default-math-font}
 {
-  Defining~ the~ default~ maths~ font~ as~ '#1'.
+  Defining~ the~ default~ maths~ font~ as~ '\l_um_fontname_tl'.
 }
 \msg_new:nnn {unicode-math} {setup-implicit}
 {
