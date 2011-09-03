@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/08/29 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/09/03 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -2128,7 +2128,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \let\newfam\new@mathgroup
 %</XE>
 %    \end{macrocode}
-%
 % This is sufficient for \LaTeX's \cmd\DeclareSymbolFont-type commands to be able
 % to define 256 named maths fonts.
 % For \hologo{LuaLaTeX}, this is handled by the \pkg{lualatex-math} package.
@@ -3126,6 +3125,44 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 % \section{Font features}
+%
+% \begin{macro}{\new@mathversion}
+% Fix bug in the \LaTeX\ version.
+% (Fixed upstream, too, but unsure when that will propagate.)
+%    \begin{macrocode}
+\def\new@mathversion#1{%
+  \expandafter\in@\expandafter#1\expandafter{\version@list}%
+  \ifin@
+    \@font@info{Redeclaring math version
+               `\expandafter\@gobblefour\string#1'}%
+  \else
+    \expandafter\newcount\csname c@\expandafter
+                                \@gobble\string#1\endcsname
+    \def\version@elt{\noexpand\version@elt\noexpand}%
+    \edef\version@list{\version@list\version@elt#1}%
+  \fi
+  \toks@{}%
+  \count@\z@
+  \def\group@elt##1##2{%
+       \advance\count@\@ne
+       \addto@hook\toks@{\getanddefine@fonts##1##2}%
+       }%
+  \group@list
+  \global\csname c@\expandafter\@gobble\string#1\endcsname\count@
+  \def\alpha@elt##1##2##3{%
+       \ifx##2\no@alphabet@error
+         \toks@\expandafter{\the\toks@\install@mathalphabet##1%
+             {\no@alphabet@error##1}}%
+       \else
+         \toks@\expandafter{\the\toks@\install@mathalphabet##1%
+             {\select@group##1##2##3}}%
+       \fi
+          }%
+  \alpha@list
+  \xdef#1{\the\toks@}%
+}
+%    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Math version}
 %    \begin{macrocode}
