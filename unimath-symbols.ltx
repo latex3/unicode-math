@@ -16,14 +16,50 @@
 \usepackage{fontspec}
 \setmainfont[Ligatures=TeX,Numbers={Monospaced}]{TeX Gyre Pagella}
 \usepackage{unicode-math}
-\setmathfont[SizeFeatures={
-    {Size=-10, Colour=888888},
-    {Size=10-, Colour=FF0000}}]{XITS Math}
+\setmathfont{XITS Math}
+
+\setmathfont[version=lm,SizeFeatures={
+    {Size=-10, Colour=999999},
+    {Size=10-, Colour=CC6666}}]{lmmath-regular.otf}
+
+\setmathfont[version=xits,SizeFeatures={
+    {Size=-10, Colour=999999},
+    {Size=10-, Colour=CCCC66}}]{xits-math.otf}
+
+\setmathfont[version=lucida,SizeFeatures={
+    {Size=-10, Colour=999999},
+    {Size=10-, Colour=66CC66}}]{Lucida Math}
+ 
+\setmathfont[version=lucibold,SizeFeatures={
+    {Size=-10, Colour=999999},
+    {Size=10-, Colour=66CC66}}]{Lucida Math Demibold}
+
+\setmathfont[version=cambria,SizeFeatures={
+    {Size=-10, Colour=999999},
+    {Size=10-, Colour=66CCCC}}]{Cambria Math}
+
+\setmathfont[version=asana,SizeFeatures={
+    {Size=-10, Colour=999999},
+    {Size=10-, Colour=6666CC}}]{Asana-Math.otf}
+
+\setmathfont[version=euler,SizeFeatures={
+    {Size=-10, Colour=999999},
+    {Size=10-, Colour=CC66CC}}]{Neo Euler}
+    
+\ExplSyntaxOn
+\fontspec_set_fontface:NNnn \lm \x {} {lmmath-regular.otf}
+\fontspec_set_fontface:NNnn \xits \x {} {xits-math.otf}
+\fontspec_set_fontface:NNnn \lucida \x {} {Lucida~ Math}
+\fontspec_set_fontface:NNnn \lucibold \x {} {Lucida~ Math~ Demibold}
+\fontspec_set_fontface:NNnn \cambria \x {} {Cambria~ Math}
+\fontspec_set_fontface:NNnn \asana \x {} {Asana-Math.otf}
+\fontspec_set_fontface:NNnn \euler \x {} {Neo~ Euler}
+\ExplSyntaxOff
 
 \def\TABLE{%
-\begin{longtable}[l]{@{}lcll@{}}
+\begin{longtable}[l]{@{}lcccccccll@{}}
 \toprule
-\textsc{usv} & Ex. & Macro & Description \\
+\textsc{usv} & M & X & C & L & D & A & E & Macro & Description \\
 \midrule
 \input unicode-math-table.tex\relax\\
 \bottomrule
@@ -32,8 +68,8 @@
 \def\USV#1{\small\scshape\MakeLowercase{U+\@gobble#1}}
 \def\CMD#1{\small\cmd#1}
 \def\DESC#1{%
-  \begin{varwidth}[t]{10cm}
-    \raggedright\linespread{0.6}\scshape#1%
+  \begin{varwidth}[t]{6cm}
+    \raggedright\linespread{0.6}\footnotesize #1%
   \end{varwidth}
 }
 
@@ -42,16 +78,28 @@
   \def\1{#1}\def\2{##3}%
   \ifx\1\2%
     \def\tempa{%
-      \USV{##1} &%
-      \SYMB{##2} &%
-      \CMD{##2} & \DESC{##4}\\%
+      \USV{##1} &
+      \SYMB{##2}{lm}{##1} &
+      \SYMB{##2}{xits}{##1} &
+      \SYMB{##2}{cambria}{##1} &
+      \SYMB{##2}{lucida}{##1} &
+      \SYMB{##2}{lucibold}{##1} &
+      \SYMB{##2}{asana}{##1} &
+      \SYMB{##2}{euler}{##1} &
+      \CMD{##2} &
+      \DESC{##4} \\%
     }%
     \expandafter\tempa
   \fi
 }%
 \TABLE
 }
-\def\SYMB#1{$\displaystyle#1$}
+\def\SYMB#1#2#3{%
+  \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \mathversion{#2}%
+    $\displaystyle#1$%
+  \fi
+}
 
 \begin{document}
 \MakeShortVerb\|
@@ -61,7 +109,18 @@
 
 This document uses the file \texttt{unicode-math-table.tex}
 to print every symbol defined by the \textsf{unicode-math}
-package. Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
+package.
+Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
+Seven fonts are shown:
+\begin{itemize}
+\item[M] \mathversion{lm} $\mathup{Latin~ Modern~ Math}$
+\item[X] \mathversion{xits} $\mathup{XITS~ Math}$
+\item[C] \mathversion{cambria} $\mathup{Cambria~ Math}$
+\item[L] \mathversion{lucida} $\mathup{Lucida~ Math}$
+\item[D] \mathversion{lucibold} $\mathup{Lucida~ Math~ Demibold}$
+\item[A] \mathversion{asana} $\mathup{Asana~ Math}$
+\item[E] \mathversion{euler} $\mathup{Neo~ Euler}$
+\end{itemize}
 
 \tableofcontents
 
@@ -90,7 +149,12 @@ package. Use this document to find the command name or the Unicode glyph slot fo
 Note that accents will only be properly placed if used with an OpenType font with the necessary information.
 
 \begingroup
-\def\SYMB#1{$\displaystyle#1 x$}
+\def\SYMB#1#2#3{%
+  \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \mathversion{#2}%
+    $\displaystyle#1 x$%
+  \fi
+}
 \SHOW\mathaccent
 \endgroup
 
@@ -100,7 +164,12 @@ Note that accents will only be properly placed if used with an OpenType font wit
 Of the operators shown below, a subset need to be flagged by \textsf{unicode-math} for \cmd\nolimits\ adjustments.
 The limits behaviour as specified by \textsf{unicode-math} are shown with grey subscripts and superscripts.
 \begingroup
-\def\SYMB#1{$\displaystyle#1_0^1$}
+\def\SYMB#1#2#3{%
+  \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \mathversion{#2}%
+    $\displaystyle#1_0^1$%
+  \fi
+}
 \SHOW\mathop
 \endgroup
 
