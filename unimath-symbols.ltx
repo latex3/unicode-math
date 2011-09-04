@@ -6,7 +6,7 @@
 \documentclass{article}
 \makeatletter
 
-\usepackage{booktabs,longtable,shortvrb,geometry,varwidth,textcomp,hyperref}
+\usepackage{booktabs,shortvrb,geometry,varwidth,textcomp,longtable,hyperref}
 
 \geometry{margin=3cm}
 \hypersetup{colorlinks,linkcolor=black}
@@ -14,34 +14,48 @@
 \def\cmd#1{\texttt{\textbackslash\expandafter\@gobble\string#1}}
 
 \usepackage{fontspec}
-\setmainfont[Ligatures=TeX,Numbers={Monospaced}]{TeX Gyre Pagella}
+\setmainfont[Ligatures=TeX,Numbers={Lowercase,Monospaced}]{TeX Gyre Pagella}
 \usepackage{unicode-math}
 \setmathfont{XITS Math}
 
+\newcounter{lm}
+\setcounter{lm}{-1}
 \setmathfont[version=lm,SizeFeatures={
     {Size=-10, Colour=999999},
     {Size=10-, Colour=CC6666}}]{lmmath-regular.otf}
 
+\newcounter{xits}
+\setcounter{xits}{-1}
 \setmathfont[version=xits,SizeFeatures={
     {Size=-10, Colour=999999},
     {Size=10-, Colour=CCCC66}}]{xits-math.otf}
 
+\newcounter{lucida}
+\setcounter{lucida}{-1}
 \setmathfont[version=lucida,SizeFeatures={
     {Size=-10, Colour=999999},
     {Size=10-, Colour=66CC66}}]{Lucida Math}
  
+\newcounter{lucibold}
+\setcounter{lucibold}{-1}
 \setmathfont[version=lucibold,SizeFeatures={
     {Size=-10, Colour=999999},
     {Size=10-, Colour=66CC66}}]{Lucida Math Demibold}
 
+\newcounter{cambria}
+\setcounter{cambria}{-1}
 \setmathfont[version=cambria,SizeFeatures={
     {Size=-10, Colour=999999},
     {Size=10-, Colour=66CCCC}}]{Cambria Math}
 
+\newcounter{asana}
+\setcounter{asana}{-1}
 \setmathfont[version=asana,SizeFeatures={
     {Size=-10, Colour=999999},
     {Size=10-, Colour=6666CC}}]{Asana-Math.otf}
 
+\newcounter{euler}
+\setcounter{euler}{-1}
 \setmathfont[version=euler,SizeFeatures={
     {Size=-10, Colour=999999},
     {Size=10-, Colour=CC66CC}}]{Neo Euler}
@@ -57,19 +71,21 @@
 \ExplSyntaxOff
 
 \def\TABLE{%
+\setlength\LTleft{-2cm}
+\par\noindent
 \begin{longtable}[l]{@{}lcccccccll@{}}
-\toprule
-\textsc{usv} & M & X & C & L & D & A & E & Macro & Description \\
-\midrule
-\input unicode-math-table.tex\relax\\
-\bottomrule
+  \toprule
+  \textsc{usv} & M & X & C & L & D & A & E & Macro & Description \\
+  \midrule \endhead
+  \input unicode-math-table.tex\relax\\
+  \bottomrule
 \end{longtable}
 }
-\def\USV#1{\small\scshape\MakeLowercase{U+\@gobble#1}}
-\def\CMD#1{\small\cmd#1}
+\def\USV#1{\footnotesize\scshape\MakeLowercase{\@gobble#1}}
+\def\CMD#1{\footnotesize\cmd#1}
 \def\DESC#1{%
   \begin{varwidth}[t]{6cm}
-    \raggedright\linespread{0.6}\footnotesize #1%
+    \raggedright\linespread{0.6}\scriptsize #1%
   \end{varwidth}
 }
 
@@ -96,6 +112,7 @@
 }
 \def\SYMB#1#2#3{%
   \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \refstepcounter{#2}%
     \mathversion{#2}%
     $\displaystyle#1$%
   \fi
@@ -111,15 +128,15 @@ This document uses the file \texttt{unicode-math-table.tex}
 to print every symbol defined by the \textsf{unicode-math}
 package.
 Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
-Seven fonts are shown:
+Seven fonts are shown: (with approximate symbol counts)
 \begin{itemize}
-\item[M] \mathversion{lm} $\mathup{Latin~ Modern~ Math}$
-\item[X] \mathversion{xits} $\mathup{XITS~ Math}$
-\item[C] \mathversion{cambria} $\mathup{Cambria~ Math}$
-\item[L] \mathversion{lucida} $\mathup{Lucida~ Math}$
-\item[D] \mathversion{lucibold} $\mathup{Lucida~ Math~ Demibold}$
-\item[A] \mathversion{asana} $\mathup{Asana~ Math}$
-\item[E] \mathversion{euler} $\mathup{Neo~ Euler}$
+\item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
+\item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
+\item[C] \mathversion{cambria} $\mathup{Cambria\ Math}$ (\ref{count:cambria})
+\item[L] \mathversion{lucida} $\mathup{Lucida\ Math}$ (\ref{count:lucida})
+\item[D] \mathversion{lucibold} $\mathup{Lucida\ Math\ Demibold}$ (\ref{count:lucibold})
+\item[A] \mathversion{asana} $\mathup{Asana\ Math}$ (\ref{count:asana})
+\item[E] \mathversion{euler} $\mathup{Neo\ Euler}$ (\ref{count:euler})
 \end{itemize}
 
 \tableofcontents
@@ -151,6 +168,7 @@ Note that accents will only be properly placed if used with an OpenType font wit
 \begingroup
 \def\SYMB#1#2#3{%
   \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \refstepcounter{#2}%
     \mathversion{#2}%
     $\displaystyle#1 x$%
   \fi
@@ -166,6 +184,7 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \begingroup
 \def\SYMB#1#2#3{%
   \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \stepcounter{#2}%
     \mathversion{#2}%
     $\displaystyle#1_0^1$%
   \fi
@@ -189,6 +208,12 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \section{Alphabetical symbols, \cmd\mathalpha}
 \SHOW\mathalpha
 
-
+\refstepcounter{lm}\label{count:lm}
+\refstepcounter{xits}\label{count:xits}
+\refstepcounter{cambria}\label{count:cambria}
+\refstepcounter{lucida}\label{count:lucida}
+\refstepcounter{lucibold}\label{count:lucibold}
+\refstepcounter{asana}\label{count:asana}
+\refstepcounter{euler}\label{count:euler}
 
 \end{document}
