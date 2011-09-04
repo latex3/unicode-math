@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/09/03 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/09/04 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -3653,21 +3653,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \um_setup_math_alphabet:VVV
       \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_style_tl
   }
-  \um_warn_missing_alphabets:
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_new:Npn \um_warn_missing_alphabets: {
-  \seq_if_empty:NF \l_um_missing_alph_seq {
-    \typeout{
-      Package~unicode-math~Warning:~
-      missing~math~alphabets~in~font~ \fontname\l_um_font
-    }
-    \seq_map_inline:Nn \l_um_missing_alph_seq {
-      \typeout{\space\space\space\space##1}
-    }
-  }
+  \seq_if_empty:NF \l_um_missing_alph_seq { \um_trace:n { missing-alphabets } }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -6069,6 +6055,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   is~ not~ supported.~ Either~ select~ a~ Unicode~ math~ font,~ or~ don't~ load \\
   the~ unicode-math~ package.
 }
+\msg_new:nnn { unicode-math } { missing-alphabets }
+  {
+    Missing~math~alphabets~in~font~ "\fontname\l_um_font" \\ \\
+    \seq_map_function:NN \l_um_missing_alph_seq \um_print_indent:n
+  }
+\cs_new:Nn \um_print_indent:n { \space\space\space\space #1 \\ }
 \msg_new:nnn {unicode-math} {macro-expected}
 {
   I've~ expected~ that~ #1~ is~ a~ macro,~ but~ it~ isn't.
@@ -6516,3 +6508,4 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 \endinput
  
+                                                                                                                                                                                            
