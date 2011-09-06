@@ -5876,7 +5876,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \cs_set_eq:NN \um_text_slash: \slash
-\cs_set:Npn \slash {
+\cs_set_protected:Npn \slash {
   \mode_if_math:TF {\mathslash} {\um_text_slash:}
 }
 %    \end{macrocode}
