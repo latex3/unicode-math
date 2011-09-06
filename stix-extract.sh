@@ -4,7 +4,7 @@ cat stix-tbl.txt |
 awk '
   {
 	# USV characters to ignore
-	
+
 	#
 	ignoreusv["000C5"] = "\\AA                      "
 	ignoreusv["000C6"] = "\\AE                      "
@@ -22,13 +22,13 @@ awk '
 	ignoreusv["0014B"] = "\\ng                      "
 	ignoreusv["00152"] = "\\OE                      "
 	ignoreusv["00153"] = "\\oe                      "
-	
+
 	ignoreusv["0019B"] = "\\lambdaslash             "
 	ignoreusv["001A0"] = "\\Ohorn                   "
 	ignoreusv["001A1"] = "\\ohorn                   "
 	ignoreusv["001AF"] = "\\Uhorn                   "
 	ignoreusv["001B0"] = "\\uhorn                   "
-	
+
 	ignoreusv["002B9"] = "\\cprime                  "
 	ignoreusv["002BA"] = "\\cdprime                 "
 	ignoreusv["002BC"] = "\\rasp                    "
@@ -54,36 +54,36 @@ awk '
 	ignoreusv["02012"] = "\\figdash                 "
 	ignoreusv["02013"] = "\\endash                  "
 	ignoreusv["02014"] = "\\emdash                  "
-	
+
 	ignoreusv["0205F"] = "\\medmathspace            "
 	ignoreusv["02060"] = "\\wordjoin                "
 	ignoreusv["02061"] = "\\functionapply           "
 	ignoreusv["02062"] = "\\invisibletimes          "
 	ignoreusv["02063"] = "\\invisiblesep            "
 	ignoreusv["02064"] = "\\invisibleplus           "
-		
+
 	ignoreusv["02329"] = "\\clangle                 "
 	ignoreusv["0232A"] = "\\crangle                 "
 
 	ignoreusv["024C8"] = "\\circledS                "
-	
+
 	ignoreusv["027CB"] = "\\mathoverlaylongsolidus  "
-	
+
 	ignoreusv["0300A"] = "\\lAngle                  "
 	ignoreusv["0300B"] = "\\rAngle                  "
 	ignoreusv["0301A"] = "\\lBrack                  "
 	ignoreusv["0301B"] = "\\rBrack                  "
 	ignoreusv["0301E"] = "\\cjkdprimequote          "
-	
+
 	ignoreusv["0FFFD"] = "\\unknown                 "
-		
+
 	ignoreusv["0FE35"] = "\\overparen               "
 	ignoreusv["0FE36"] = "\\underparen              "
 	ignoreusv["0FE37"] = "\\overbrace               "
 	ignoreusv["0FE38"] = "\\underbrace              "
 
 	ignoreusv["0203E"] = "\\overline                " # primitive in luatex
-		
+
 	# READ LINE
 	if (  \
       printusv != substr($0,2,5) &&  \
@@ -127,6 +127,7 @@ awk '
         printtexname = texname;
 
 		# FIXES
+
 		if (texname == "\\bigtriangleup           ") { class = "B" }
 		if (texname == "\\Vvert                   ") { class = "F" }
 		if (usv == "02995") { class = "O" }
@@ -157,6 +158,22 @@ awk '
 		if (texname == "\\&                        ") { printtexname = "\\mathampersand            " }
 		if (texname == "\\ac                       ") { printtexname = "\\invlazys                 " }
 
+    # partials:
+		if (usv == "02202") { class = "A" }
+		if (usv == "1D6DB") { class = "A" }
+		if (usv == "1D715") { class = "A" }
+		if (usv == "1D74F") { class = "A" }
+		if (usv == "1D789") { class = "A" }
+		if (usv == "1D7C3") { class = "A" }
+
+    # nablas:
+		if (usv == "02207") { class = "A" }
+		if (usv == "1D6C1") { class = "A" }
+		if (usv == "1D6FB") { class = "A" }
+		if (usv == "1D735") { class = "A" }
+		if (usv == "1D76F") { class = "A" }
+		if (usv == "1D7A9") { class = "A" }
+
         # Corrections
 		if (usv == "025B3") { class = "\\mathbin" }
 		if (usv == "025B5") { class = "\\mathrel" }
@@ -186,7 +203,7 @@ awk '
 	    if (class == "L") { class = "\\mathop" }
 	    if (class == "O") { class = "\\mathopen" }
 	    if (class == "C") { class = "\\mathclose" }
-				
+
 
 		# PRINT
 		sub(/\^/, "\\string^", description)
