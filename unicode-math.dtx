@@ -834,8 +834,8 @@ This work is "author-maintained" by Will Robertson.
 %
 % Of \unichar{2044} {fraction slash}, TR25 says that it is:
 % \begin{quote}
-% \dots used to build up simple fractions in running text\dots 
-% however parsers of mathematical texts should be prepared to handle fraction slash 
+% \dots used to build up simple fractions in running text\dots
+% however parsers of mathematical texts should be prepared to handle fraction slash
 % when it is received from other sources.
 % \end{quote}
 %
@@ -847,7 +847,7 @@ This work is "author-maintained" by Will Robertson.
 % \paragraph{Backslash}
 %
 % The \unichar{005C} {reverse solidus} character \cs{backslash} is used for denoting
-% double cosets: $A\backslash B$. (So I'm led to believe.) 
+% double cosets: $A\backslash B$. (So I'm led to believe.)
 % It may be used as a `stretchy' delimiter if supported by the font.
 %
 % MathML uses \unichar{2216} {set minus} like this: $A\smallsetminus B$.\footnote{\S4.4.5.11 \url{http://www.w3.org/TR/MathML3/}}
@@ -5376,11 +5376,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \cs_new:Npn \um_peek_execute_branches_ss_aux: {
   \prop_if_in:cxTF
-    {g_um_\l_um_tmpa_tl _prop} 
-    {\meaning\l_peek_token} 
+    {g_um_\l_um_tmpa_tl _prop}
+    {\meaning\l_peek_token}
     {
-      \prop_get:cxN 
-        {g_um_\l_um_tmpa_tl _prop} 
+      \prop_get:cxN
+        {g_um_\l_um_tmpa_tl _prop}
         {\meaning\l_peek_token}
         \l_um_tmpb_tl
       \tl_put_right:NV \l_um_ss_chain_tl \l_um_tmpb_tl
@@ -6308,7 +6308,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \mathfontdimen{Sub\-Superscript\-Gap\-Min}
 % {Minimum gap between the superscript and subscript ink. Suggested: 4×default rule thickness.}
 % \mathfontdimen{Superscript\-Bottom\-Max\-With\-Subscript}
-% {The maximum level to which the (ink) bottom of superscript can be pushed to increase the gap between superscript and subscript, before subscript starts being moved down. 
+% {The maximum level to which the (ink) bottom of superscript can be pushed to increase the gap between superscript and subscript, before subscript starts being moved down.
 % Suggested: /5 x-height.}
 % \mathfontdimen{Space\-After\-Script}
 % {Extra white space to be added after each subscript and superscript. Suggested: 0.5pt for a 12 pt font.}
@@ -6420,8 +6420,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \renewenvironment{theglossary}
   {\small\list{}{}
      \item\relax
-     \glossary@prologue\GlossaryParms 
-     \let\item\@idxitem \ignorespaces 
+     \glossary@prologue\GlossaryParms
+     \let\item\@idxitem \ignorespaces
      \def\pfill{\hspace*{\fill}}}
   {\endlist}
 
@@ -6507,5 +6507,5 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \typeout{*************************************************************}
 %
 \endinput
- 
+
                                                                                                                                                                                             
