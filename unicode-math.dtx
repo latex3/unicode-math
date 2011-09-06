@@ -2113,7 +2113,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \set@@mathdelimiter\DeclareMathRadical\mathchar@type
   \DeclareSymbolFontAlphabet\DeclareSymbolFontAlphabet@
 }{
-  \tl_remove_in:Nn \@preamblecmds {\do#1}
+  \tl_remove_once:Nn \@preamblecmds {\do#1}
 }
 %    \end{macrocode}
 %
@@ -2837,7 +2837,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % It removes an item from the nolimits list.
 %    \begin{macrocode}
 \DeclareDocumentCommand \removenolimits {m} {
-  \tl_remove_all_in:Nn \l_um_nolimits_tl {#1}
+  \tl_remove_all:Nn \l_um_nolimits_tl {#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2997,7 +2997,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %<*LU>
 {
   \tl_set:Nn \l_um_tmpa_tl { #1 }
-  \tl_remove_all_in:Nn \l_um_tmpa_tl { _ }
+  \tl_remove_all:Nn \l_um_tmpa_tl { _ }
   \um_font_param_aux:ccc { um_ #1 :N } { um_set_ #1 :N }
     { luatexUmath \l_um_tmpa_tl }
 }
@@ -5631,7 +5631,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \AtEndOfPackageFile * {amsmath} {
 %<*XE>
-    \tl_remove_in:Nn \@begindocumenthook {
+    \tl_remove_once:Nn \@begindocumenthook {
       \mathchardef\std@minus\mathcode`\-\relax
       \mathchardef\std@equal\mathcode`\=\relax
     }
