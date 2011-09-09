@@ -1074,20 +1074,6 @@ This work is "author-maintained" by Will Robertson.
 \ExplSyntaxOn
 %    \end{macrocode}
 %
-% \paragraph{Forwards compatibility}
-%    \begin{macrocode}
-\cs_if_exist:NF \char_set_catcode_other:N
-  {
-    \cs_set_eq:NN \c_math_toggle_token \c_math_shift_token
-    \cs_set_eq:NN \char_set_catcode_other:N \char_make_other:N
-    \cs_set_eq:NN \char_set_catcode_active:N \char_make_active:N
-    \cs_set_eq:NN \char_set_catcode_active:n \char_make_active:n
-    \cs_set_eq:NN \char_set_catcode_escape:N \char_make_escape:N
-    \cs_set_eq:NN \char_set_catcode_math_superscript:N
-                  \char_make_math_superscript:N
-  }
-%    \end{macrocode}
-%
 % \paragraph{Extra \pkg{expl3} variants}
 %    \begin{macrocode}
 \cs_generate_variant:Nn \tl_put_right:Nn {cx}
@@ -2812,7 +2798,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % I've a feeling that it's more useful \emph{not} to include the multiple
 % integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
-\tl_new:Nn \l_um_nolimits_tl {
+\tl_new:N \l_um_nolimits_tl
+\tl_set:Nn \l_um_nolimits_tl {
   \int\iint\iiint\iiiint\oint\oiint\oiiint
   \intclockwise\varointclockwise\ointctrclockwise\sumint
   \intbar\intBar\fint\cirfnint\awint\rppolint
@@ -2855,7 +2842,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % We organise radicals in the same way as nolimits-operators; that is,
 % in a comma-list.
 %    \begin{macrocode}
-\tl_new:Nn \l_um_radicals_tl {\sqrt}
+\tl_new:N \l_um_radicals_tl
+\tl_set:Nn \l_um_radicals_tl {\sqrt}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -4756,7 +4744,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Because we're inside a |\tl_rescan:nn|, use plain old \TeX\ syntax to avoid
 % any catcode problems.
 %    \begin{macrocode}
-  \cs_gnew:Npn \um_active_char_set:wc "#1 \q_nil #2 {
+  \cs_new:Npn \um_active_char_set:wc "#1 \q_nil #2 {
     \lowercase {
       \tl_rescan:nn {
         \catcode`\_=11\relax
@@ -5347,7 +5335,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \tl_set_eq:NN \l_peek_true_tl \peek_true_remove:w
   \tl_set:Nx \l_peek_false_tl {\exp_not:n{\group_align_safe_end: #2}}
   \group_align_safe_begin:
-    \peek_after:NN \um_peek_execute_branches_ss:
+    \peek_after:Nw \um_peek_execute_branches_ss:
 }
 %    \end{macrocode}
 % We do not skip spaces when scanning ahead, and we explicitly wish to
