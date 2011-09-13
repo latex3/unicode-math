@@ -5427,6 +5427,26 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \um_setup_active_frac:
 %    \end{macrocode}
 %
+% \subsection{Overbrace and underbrace}
+%    \begin{macrocode}
+%<*XE>
+\renewcommand\overbrace[1]{\mathop{\vbox{\setbox\z@\hbox{$\displaystyle#1$}
+  \dimen@=\dimexpr\wd\z@+3\p@\relax
+  \setbox\tw@\hbox{$\left\{\vcenter to\dimen@{\vss}\right.$}
+  \m@th\ialign{##\crcr\noalign{\kern-\p@}%
+     \rotatebox[origin=Bl]{-90}{\box\tw@}\crcr\noalign{\kern0\p@\nointerlineskip}%
+     \hfil\box\z@\hfil\crcr}}}\limits}
+
+\renewcommand\underbrace[1]{\mathop{\vtop{\setbox\z@\hbox{$\displaystyle#1$}
+ \dimen@=\dimexpr\wd\z@+3\p@\relax
+ \setbox\tw@\hbox{$\left\}\vcenter to\dimen@{\vss}\right.$}
+ \m@th\ialign{##\crcr
+  \hfil\box\z@\hfil\crcr
+  \noalign{\kern1\p@\nointerlineskip}%
+  \rotatebox[origin=Br]{-90}{\box\tw@}\crcr\noalign{\kern0\p@}}}}\limits}
+%</XE>
+%    \end{macrocode}
+%
 % \subsection{Synonyms and all the rest}
 %
 % These are symbols with multiple names. Eventually to be taken care of
