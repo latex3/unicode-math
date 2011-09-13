@@ -27,6 +27,10 @@ help:
 	echo '         xfile F=<abc>  -  compile file <abc> with XeLaTeX'
 	echo '         lfile F=<abc>  -  compile file <abc> with LuaLaTeX'
 	echo ' '
+	echo ' '
+	echo 'Append `hometree=none` to any of the above to disable searching
+	echo 'the home texmf directory.'
+	echo ' '
 	echo 'To add a new test, add a file called X****.ltx to'
 	echo 'directory testfiles/,  run `make initest` and ensure'
 	echo 'that the output X****.safe.pdf is correct.'
@@ -59,6 +63,8 @@ tds=$(builddir)/$(PKG).tds
 
 UPDATE = `which dtx-update` || true  # TODO: generalise
 SPEAKFAIL := say 'Test failed!' || true # Mac OS X only?
+
+hometree = `kpsewhich -var-value=TEXMFHOME`
 
 # these files end up in the CTAN directory:
 
@@ -129,14 +135,14 @@ $(builddir)/$(PKG).lua: $(builddir)/$(PKG).dtx
 
 $(builddir)/$(PKG).pdf:  $(builddir)/$(PKG).dtx $(BUILDSOURCE)
 	cd $(builddir) && \
-	xelatex $(PKG).dtx && \
+	$(run_xelatex) $(PKG).dtx && \
 	makeindex -s gind.ist $(PKG) && \
-	xelatex $(PKG).dtx;
+	$(run_xelatex) $(PKG).dtx;
 
 $(builddir)/$(SYM).pdf:  $(builddir)/$(SYM).ltx
 	cd $(builddir) && \
-	xelatex $(SYM).ltx && \
-	xelatex $(SYM).ltx;
+	$(run_xelatex) $(SYM).ltx && \
+	$(run_xelatex) $(SYM).ltx;
 
 $(builddir)/%.ltx: $(testdir)/%.ltx
 	$(COPY)  $<  $@
@@ -206,6 +212,8 @@ install-sys: $(INSFILES)
 	fi ;
 
 
+run_xelatex  = export TEXMFHOME=$(hometree) && xelatex
+run_lualatex = export TEXMFHOME=$(hometree) && lualatex
 
 ##### USEFUL FOR TEST FILES #####
 
@@ -213,22 +221,22 @@ xfile: $(F)  $(BUILDSOURCE)
 	if test -z "$(F)" ; then \
 	  echo "Typesetting test.tex:"; \
 	  $(COPY) test.tex $(builddir)/test.tex; \
-	  cd $(builddir); xelatex test.tex; \
+	  cd $(builddir); $(run_xelatex) test.tex; \
 	else \
 	  echo Typesetting $(F):; \
 	  $(COPY) $(F) $(builddir)/$(F); \
-	  cd $(builddir); xelatex $(F); \
+	  cd $(builddir); $(run_xelatex) $(F); \
 	fi
 
 lfile: $(F)  $(BUILDSOURCE)
 	if test -z "$(F)" ; then \
 	  echo "Typesetting test.tex:"; \
 	  $(COPY) test.tex $(builddir)/test.tex; \
-	  cd $(builddir); lualatex test.tex; \
+	  cd $(builddir); $(run_lualatex) test.tex; \
 	else \
 	  echo Typesetting $(F):; \
 	  $(COPY) $(F) $(builddir)/$(F); \
-	  cd $(builddir); lualatex $(F); \
+	  cd $(builddir); $(run_lualatex) $(F); \
 	fi
 
 
@@ -277,7 +285,7 @@ BUILDFILES  = $(BUILDSOURCE) $(BUILDSUITE) $(BUILDTESTSRC) $(BUILDTESTTARGET)
 
 $(builddir)/$(SUITE).pdf: $(builddir)/$(SUITE).ltx $(BUILDSUITE)
 	cd $(builddir) && \
-	xelatex $(SUITE).ltx
+	$(run_xelatex) $(SUITE).ltx
 
 
 #### All tests ####
@@ -356,11 +364,11 @@ $(builddir)/F%-X.diff.pdf: $(builddir)/F%-X.pdf
 
 $(builddir)/F%-L.pdf: $(BUILDSOURCE) $(builddir)/F%-L.ltx
 	@echo 'F$*: Generating PDF output with LuaLaTeX.'
-	@cd $(builddir); lualatex -interaction=nonstopmode F$*-L.ltx  $(REDIRECT)
+	@cd $(builddir); $(run_lualatex) -interaction=nonstopmode F$*-L.ltx  $(REDIRECT)
 
 $(builddir)/F%-X.pdf: $(BUILDSOURCE) $(builddir)/F%-X.ltx
 	@echo 'F$*: Generating PDF output with XeLaTeX.'
-	@cd $(builddir); xelatex -interaction=nonstopmode F$*-X.ltx   $(REDIRECT)
+	@cd $(builddir); $(run_xelatex) -interaction=nonstopmode F$*-X.ltx   $(REDIRECT)
 
 $(builddir)/F%-L.ltx: $(builddir)/F%.ltx
 	$(COPY) $< $@
@@ -397,11 +405,11 @@ $(builddir)/X%.diff.pdf: $(builddir)/X%.pdf
 
 $(builddir)/X%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/X%.ltx
 	@echo 'X$*: Generating PDF output with XeLaTeX.'
-	@cd $(builddir) && xelatex -interaction=nonstopmode X$*.ltx $(REDIRECT)
+	@cd $(builddir) && $(run_xelatex) -interaction=nonstopmode X$*.ltx $(REDIRECT)
 
 $(builddir)/L%.pdf: $(BUILDSOURCE) $(BUILDSUITE) $(builddir)/L%.ltx
 	@echo 'L$*: Generating PDF output with LuaLaTeX.'
-	@cd $(builddir) && lualatex -interaction=nonstopmode L$*.ltx $(REDIRECT)
+	@cd $(builddir) && $(run_lualatex) -interaction=nonstopmode L$*.ltx $(REDIRECT)
 
 #### HACK: allow `make <foobar>` run that test.
 
