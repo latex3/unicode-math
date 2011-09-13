@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/09/04 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/09/13 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -2433,7 +2433,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Parse options and tell people what's going on:
 %    \begin{macrocode}
   \keys_set:nn {unicode-math} {#1}
-  \bool_if:NT \l_um_init_bool { \um_trace:n {default-math-font} }
+  \bool_if:NT \l_um_init_bool { \um_log:n {default-math-font} }
 %    \end{macrocode}
 % Use \pkg{fontspec} to select a font to use.
 %    \begin{macrocode}
@@ -3576,7 +3576,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % later when redefining a particular maths alphabet.
 %    \begin{macrocode}
 \cs_set:Npn \um_init_alphabet:n #1 {
-  \um_trace:nx {alph-initialise} {#1}
+  \um_log:nx {alph-initialise} {#1}
   \cs_set_eq:cN {um_switchto_math#1:} \prg_do_nothing:
 }
 \cs_generate_variant:Nn \um_init_alphabet:n {x}
@@ -3607,7 +3607,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % |\l_um_mathalph_seq|. If not, set up the styles implicitly:
 %    \begin{macrocode}
   \seq_if_empty:NTF \l_um_mathalph_seq {
-    \um_trace:n {setup-implicit}
+    \um_log:n {setup-implicit}
     \seq_set_eq:NN \l_um_mathalph_seq \g_um_default_mathalph_seq
     \bool_set_true:N \l_um_implicit_alph_bool
     \um_maybe_init_alphabet:n  {sf}
@@ -3618,7 +3618,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % If |range=| has been used then we're in explicit mode:
 %    \begin{macrocode}
   {
-    \um_trace:n {setup-explicit}
+    \um_log:n {setup-explicit}
     \bool_set_false:N \l_um_implicit_alph_bool
     \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
     \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
@@ -3641,7 +3641,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \um_setup_math_alphabet:VVV
       \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_style_tl
   }
-  \seq_if_empty:NF \l_um_missing_alph_seq { \um_trace:n { missing-alphabets } }
+  \seq_if_empty:NF \l_um_missing_alph_seq { \um_log:n { missing-alphabets } }
 }
 %    \end{macrocode}
 % \end{macro}
@@ -3679,11 +3679,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {
       \str_if_eq:xxTF {\l_um_tmpa_tl}{misc} {
-        \um_trace:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
+        \um_log:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
         \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {#3}
       }{
         \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{\l_um_tmpa_tl} } {
-          \um_trace:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
+          \um_log:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
           \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {#3}
         }{
           \bool_if:NTF \l_um_implicit_alph_bool {
@@ -6004,8 +6004,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Wrapper functions:
 %    \begin{macrocode}
 \cs_new:Npn \um_warning:n { \msg_warning:nn {unicode-math} }
-\cs_new:Npn \um_trace:n   { \msg_trace:nn   {unicode-math} }
-\cs_new:Npn \um_trace:nx  { \msg_trace:nnx  {unicode-math} }
+\cs_new:Npn \um_log:n   { \msg_log:nn   {unicode-math} }
+\cs_new:Npn \um_log:nx  { \msg_log:nnx  {unicode-math} }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
