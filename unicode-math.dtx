@@ -2048,13 +2048,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \keys_define:nn {unicode-math} {
   trace .choice: ,
   trace / debug .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { trace } { warning }
+    \msg_redirect_module:nnn { unicode-math } { log } { warning }
   } ,
   trace / on .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { trace } { trace }
+    \msg_redirect_module:nnn { unicode-math } { log } { log }
   } ,
   trace / off .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { trace } { none }
+    \msg_redirect_module:nnn { unicode-math } { log } { none }
   } ,
 }
 %    \end{macrocode}
