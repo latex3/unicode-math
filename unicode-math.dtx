@@ -1142,12 +1142,12 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\tl_set:Nn \g_um_math_alphabet_name_latin_tl {Latin,~lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Latin_tl {Latin,~uppercase}
-\tl_set:Nn \g_um_math_alphabet_name_greek_tl {Greek,~lowercase}
-\tl_set:Nn \g_um_math_alphabet_name_Greek_tl {Greek,~uppercase}
-\tl_set:Nn \g_um_math_alphabet_name_num_tl   {Numerals}
-\tl_set:Nn \g_um_math_alphabet_name_misc_tl  {Misc.}
+\tl_const:Nn \c_um_math_alphabet_name_latin_tl {Latin,~lowercase}
+\tl_const:Nn \c_um_math_alphabet_name_Latin_tl {Latin,~uppercase}
+\tl_const:Nn \c_um_math_alphabet_name_greek_tl {Greek,~lowercase}
+\tl_const:Nn \c_um_math_alphabet_name_Greek_tl {Greek,~uppercase}
+\tl_const:Nn \c_um_math_alphabet_name_num_tl   {Numerals}
+\tl_const:Nn \c_um_math_alphabet_name_misc_tl  {Misc.}
 %    \end{macrocode}
 %
 % \subsection{Extras}
@@ -3679,7 +3679,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
           \bool_if:NTF \l_um_implicit_alph_bool {
             \seq_put_right:Nx \l_um_missing_alph_seq {
               \@backslashchar math \l_um_style_tl \space
-              (\tl_use:c{g_um_math_alphabet_name_ \l_um_tmpa_tl _tl})
+              (\tl_use:c{c_um_math_alphabet_name_ \l_um_tmpa_tl _tl})
             }
           }{
             \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {up}
