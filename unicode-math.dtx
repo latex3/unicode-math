@@ -1089,14 +1089,18 @@ This work is "author-maintained" by Will Robertson.
     \cs:w #3 \exp_after:wN \cs_end:
     \cs:w #4 \cs_end:
 }
+%    \end{macrocode}
+%
+%
+% \paragraph{Conditionals}
+%
+%    \begin{macrocode}
 \cs_new_protected_nopar:Npn \bool_const:Nn #1 #2 {
   \bool_new:N #1
   \bool_set:Nn #1 { #2 }
 }
 %    \end{macrocode}
 %
-%
-% \paragraph{Conditionals}
 %    \begin{macrocode}
 \bool_new:N \l_um_ot_math_bool
 \bool_new:N \l_um_init_bool
@@ -1131,7 +1135,7 @@ This work is "author-maintained" by Will Robertson.
 \bool_new:N \g_um_literal_Nabla_bool
 \bool_new:N \g_um_literal_partial_bool
 \bool_new:N \g_um_texgreek_bool
-\bool_gset_true:N \g_um_texgreek_bool
+\bool_set_true:N \g_um_texgreek_bool
 \bool_new:N \l_um_smallfrac_bool
 \bool_new:N \g_um_literal_colon_bool
 %    \end{macrocode}
