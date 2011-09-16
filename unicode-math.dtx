@@ -1535,10 +1535,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % Rather than `readable', in the end, this makes the code more extensible.
 %    \begin{macrocode}
-\cs_new:Npn \usv_set:nnn #1#2#3 {
+\cs_new:Nn \usv_set:nnn {
   \tl_set:cn { \um_to_usv:nn {#1}{#2} } {#3}
 }
-\cs_new:Npn \um_to_usv:nn #1#2 { g_um_#1_#2_usv }
+\cs_new:Nn \um_to_usv:nn { g_um_#1_#2_usv }
 %    \end{macrocode}
 % \paragraph{Alphabets}
 %    \begin{macrocode}
@@ -2128,41 +2128,52 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % There are a bunch of tests to perform to process the various characters.
 % The following assignments should all be fairly straightforward.
 %    \begin{macrocode}
-\cs_set:Npn \um_set_mathsymbol:nNNn #1#2#3#4 {
+\cs_set:Nn \um_set_mathsymbol:nNNn {
   \prg_case_tl:Nnn #3 {
-    \mathop {
-      \um_set_big_operator:nnn {#1} {#2} {#4}
-    }
-    \mathopen {
-      \tl_if_in:NnTF \l_um_radicals_tl {#2} {
-        \cs_gset_protected_nopar:cpx {\cs_to_str:N #2 sign} { \um_radical:nn {#1} {#4} }
-        \tl_set:cn {l_um_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #4}
-      }{
-        \um_set_delcode:nnn {#1} {#4} {#4}
-        \um_set_mathcode:nnn {#4} \mathopen {#1}
-        \cs_gset_protected_nopar:Npx #2 { \um_delimiter:Nnn \mathopen {#1} {#4} }
+    \mathop { \um_set_big_operator:nnn {#1} {#2} {#4} }
+    \mathopen
+      {
+        \tl_if_in:NnTF \l_um_radicals_tl {#2}
+          {
+            \cs_gset_protected_nopar:cpx {\cs_to_str:N #2 sign}
+              { \um_radical:nn {#1} {#4} }
+            \tl_set:cn {l_um_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #4}
+          }
+          {
+            \um_set_delcode:nnn {#1} {#4} {#4}
+            \um_set_mathcode:nnn {#4} \mathopen {#1}
+            \cs_gset_protected_nopar:Npx #2
+              { \um_delimiter:Nnn \mathopen {#1} {#4} }
+          }
       }
-    }
-    \mathclose {
-      \um_set_delcode:nnn {#1} {#4} {#4}
-      \um_set_mathcode:nnn {#4} \mathclose {#1}
-      \cs_gset_protected_nopar:Npx #2 { \um_delimiter:Nnn \mathclose {#1} {#4} }
-    }
-    \mathaccent {
-      \cs_gset_protected_nopar:Npx #2 { \um_accent:Nnn #3 {#1} {#4} }
-    }
-    \mathfence {
-      \um_set_mathcode:nnn {#4} {#3} {#1}
-      \um_set_delcode:nnn {#1} {#4} {#4}
-      \cs_gset_protected_nopar:cpx {l \cs_to_str:N #2} { \um_delimiter:Nnn \mathopen  {#1} {#4} }
-      \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2} { \um_delimiter:Nnn \mathclose {#1} {#4} }
-    }
-    \mathover { % LuaTeX only
-      \cs_set_protected_nopar:Npn #2 ##1 { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
-    }
-    \mathunder { % LuaTeX only
-      \cs_set_protected_nopar:Npn #2 ##1 { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
-    }
+    \mathclose
+      {
+        \um_set_delcode:nnn {#1} {#4} {#4}
+        \um_set_mathcode:nnn {#4} \mathclose {#1}
+        \cs_gset_protected_nopar:Npx #2
+          { \um_delimiter:Nnn \mathclose {#1} {#4} }
+      }
+    \mathaccent
+      { \cs_gset_protected_nopar:Npx #2 { \um_accent:Nnn #3 {#1} {#4} } }
+    \mathfence
+      {
+        \um_set_mathcode:nnn {#4} {#3} {#1}
+        \um_set_delcode:nnn {#1} {#4} {#4}
+        \cs_gset_protected_nopar:cpx {l \cs_to_str:N #2}
+          { \um_delimiter:Nnn \mathopen  {#1} {#4} }
+        \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
+          { \um_delimiter:Nnn \mathclose {#1} {#4} }
+      }
+    \mathover % LuaTeX only
+      {
+        \cs_set_protected_nopar:Npn #2 ##1
+          { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
+      }
+    \mathunder % LuaTeX only
+      {
+        \cs_set_protected_nopar:Npn #2 ##1
+          { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
+      }
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
   }
@@ -2205,7 +2216,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % (~\cs{int} $\to$~) $\int$ $\to$ \cs{int_sym} $\to$ \cs{intop}
 % \end{quote}
 %    \begin{macrocode}
-\cs_new:Npn \um_set_big_operator:nnn #1#2#3 {
+\cs_new:Nn \um_set_big_operator:nnn {
   \group_begin:
     \char_set_catcode_active:n {#3}
     \char_gmake_mathactive:n {#3}
@@ -2247,13 +2258,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \Umathchardef #1 =
     \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
 }
-\cs_new:Npn \um_set_delcode:nnn #1#2#3 {
+\cs_new:Nn \um_set_delcode:nnn {
   \Udelcode#2 = \csname sym#1\endcsname #3
 }
-\cs_new:Npn \um_radical:nn #1#2 {
+\cs_new:Nn \um_radical:nn {
   \Uradical \csname sym#1\endcsname #2 \scan_stop:
 }
-\cs_new:Npn \um_delimiter:Nnn #1#2#3 {
+\cs_new:Nn \um_delimiter:Nnn {
   \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
 \cs_new:Nn \um_accent:Nnn
@@ -2318,10 +2329,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\char_gmake_mathactive:N}
 % \begin{macro}{\char_gmake_mathactive:n}
 %    \begin{macrocode}
-\cs_new:Npn \char_gmake_mathactive:N #1 {
+\cs_new:Nn \char_gmake_mathactive:N {
   \global\mathcode `#1 = "8000 \scan_stop:
 }
-\cs_new:Npn \char_gmake_mathactive:n #1 {
+\cs_new:Nn \char_gmake_mathactive:n {
   \global\mathcode #1 = "8000 \scan_stop:
 }
 %    \end{macrocode}
@@ -2653,12 +2664,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Where |\um_remap_symbol:nnn| is defined to be one of these two, depending
 % on the range setup:
 %    \begin{macrocode}
-\cs_new:Npn \um_remap_symbol_parse:nnn #1#2#3 {
   \um@parse@term {#3} {\@nil} {#2} {
+\cs_new:Nn \um_remap_symbol_parse:nnn {
     \um_remap_symbol_noparse:nnn {#1} {#2} {#3}
   }
 }
-\cs_new:Npn \um_remap_symbol_noparse:nnn #1#2#3 {
+\cs_new:Nn \um_remap_symbol_noparse:nnn {
   \clist_map_inline:nn {#1} {
     \um_set_mathcode:nnnn {##1} {#2} {\um_symfont_tl} {#3}
   }
@@ -2708,11 +2719,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_assign_delcode:nn}
 %: TODO : hook csnames into range feature
 %    \begin{macrocode}
-\cs_new:Npn \um_assign_delcode_noparse:nn #1#2 {
+\cs_new:Nn \um_assign_delcode_noparse:nn {
   \um_set_delcode:nnn \um_symfont_tl {#1} {#2}
 }
-\cs_new:Npn \um_assign_delcode_parse:nn #1#2 {
   \um@parse@term {#2}{\@nil}{\@nil} {
+\cs_new:Nn \um_assign_delcode_parse:nn {
     \um_assign_delcode_noparse:nn {#1} {#2}
   }
 }
@@ -2723,7 +2734,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_assign_delcode:n}
 % Shorthand.
 %    \begin{macrocode}
-\cs_new:Npn \um_assign_delcode:n #1 {
+\cs_new:Nn \um_assign_delcode:n {
   \um_assign_delcode:nn {#1} {#1}
 }
 %    \end{macrocode}
@@ -3479,7 +3490,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_new_mathstyle:N}
 % This function defines a new command like \cs{mathfrak}.
 %    \begin{macrocode}
-\cs_new:Npn \um_new_mathstyle:N #1 {
+\cs_new:Nn \um_new_mathstyle:N {
   \um_prepare_mathstyle:f {\exp_after:wN \use_none:nnnnn \token_to_str:N #1}
   \seq_put_right:Nn \g_um_mathstyles_seq {#1}
 }
@@ -3549,7 +3560,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % unicode-math definitions. Use \cs{bgroup}/\cs{egroup} so s'scripts scan the
 % whole thing.
 %    \begin{macrocode}
-\cs_new:Npn \um_prepare_mathstyle:n #1 {
+\cs_new:Nn \um_prepare_mathstyle:n {
   \um_init_alphabet:x {#1}
   \cs_set:cpn {_um_math#1_aux:n} ##1 {
     \use:c {um_switchto_math#1:} ##1 \egroup
@@ -3651,7 +3662,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
 % \darg{Name of the output math style (usually same as input \texttt{bb})}
 %    \begin{macrocode}
-\cs_new:Npn \um_setup_math_alphabet:Nnn #1#2#3 {
+\cs_new:Nn \um_setup_math_alphabet:Nnn {
   \tl_set:Nx \l_um_style_tl {
     \exp_after:wN \use_none:nnnnn \token_to_str:N #1
   }
@@ -3725,14 +3736,14 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_map_char_noparse:nn}
 % \begin{macro}{\um_map_char_parse:nn}
 %    \begin{macrocode}
-\cs_new:Npn \um_map_char_noparse:nn #1#2 {
+\cs_new:Nn \um_map_char_noparse:nn {
   \um_set_mathcode:nnnn {#1}{\mathalpha}{\um_symfont_tl}{#2}
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_map_char_parse:nn #1#2 {
-  \um@parse@term {#1} {\@nil} {\mathalpha} {
+\cs_new:Nn \um_map_char_parse:nn {
+  \um_if_char_spec:nNNT {#1} {\@nil} {\mathalpha} {
     \um_map_char_noparse:nn {#1}{#2}
   }
 }
@@ -3745,7 +3756,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \darg{from alphabet(s)}
 % \darg{to alphabet}
 %    \begin{macrocode}
-\cs_new:Npn \um_map_char_single:nnn #1#2#3 {
+\cs_new:Nn \um_map_char_single:nnn {
   \um_map_char_single:cc { \um_to_usv:nn {#1}{#3} }
                          { \um_to_usv:nn {#2}{#3} }
 }
@@ -3777,7 +3788,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % And the wrapper with names:
 %    \begin{macrocode}
-\cs_new:Npn \um_map_chars_range:nnnn #1#2#3#4 {
+\cs_new:Nn \um_map_chars_range:nnnn {
   \um_map_chars_range:ncc {#1} { \um_to_usv:nn {#2}{#4} }
                                { \um_to_usv:nn {#3}{#4} }
 }
@@ -3787,7 +3798,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \subsubsection{Functions for alphabets}
 %
 %    \begin{macrocode}
-\cs_set:Npn \um_map_chars_Latin:nn #1#2 {
+\cs_new:Nn \um_map_chars_Latin:nn {
   \clist_map_inline:nn {#1} {
     \um_map_chars_range:nnnn {26} {##1} {#2} {Latin}
   }
@@ -3795,7 +3806,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_set:Npn \um_map_chars_latin:nn #1#2 {
+\cs_new:Nn \um_map_chars_latin:nn {
   \clist_map_inline:nn {#1} {
     \um_map_chars_range:nnnn {26} {##1} {#2} {latin}
   }
@@ -3803,7 +3814,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_set:Npn \um_map_chars_greek:nn #1#2 {
+\cs_new:Nn \um_map_chars_greek:nn {
   \clist_map_inline:nn {#1} {
     \um_map_chars_range:nnnn {25} {##1} {#2} {greek}
     \um_map_char_single:nnn {##1} {#2} {varepsilon}
@@ -3817,7 +3828,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_set:Npn \um_map_chars_Greek:nn #1#2 {
+\cs_new:Nn \um_map_chars_Greek:nn {
   \clist_map_inline:nn {#1} {
     \um_map_chars_range:nnnn {25} {##1} {#2} {Greek}
     \um_map_char_single:nnn {##1} {#2} {varTheta}
@@ -3826,7 +3837,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_set:Npn \um_map_chars_numbers:nn #1#2 {
+\cs_new:Nn \um_map_chars_numbers:nn {
   \um_map_chars_range:nnnn {10} {#1} {#2} {num}
 }
 %    \end{macrocode}
@@ -3851,7 +3862,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % Adds \cs{um_set_mathcode:nnnn} declarations to the specified maths alphabet's definition.
 %    \begin{macrocode}
-\cs_set:Npn \um_mathmap_noparse:Nnn #1#2#3 {
+\cs_new:Nn \um_mathmap_noparse:Nnn {
   \clist_map_inline:nn {#2} {
     \tl_put_right:cx {um_switchto_\cs_to_str:N #1:} {
       \um_set_mathcode:nnnn{##1}{\mathalpha}{\um_symfont_tl}{#3}
@@ -3869,7 +3880,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cs{um_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
-\cs_set:Npn \um_mathmap_parse:Nnn #1#2#3 {
+\cs_new:Nn \um_mathmap_parse:Nnn {
   \clist_if_in:NnT \l_um_char_num_range_clist {#3} {
     \um_mathmap_noparse:Nnn {#1}{#2}{#3}
   }
@@ -3899,9 +3910,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % First the version that uses numbers:
 %    \begin{macrocode}
 \cs_new:Npn \um_set_mathalph_range:nNnn #1#2#3#4 {
-  \prg_stepwise_inline:nnnn {0}{1}{#1-1} {
-    \um_set_mathalphabet_char:Nnn {#2} { ##1 + #3 } { ##1 + #4 }
-  }
+  \prg_stepwise_inline:nnnn {0}{1}{#1-1}
+    { \um_set_mathalphabet_char:Nnn {#2} { ##1 + #3 } { ##1 + #4 } }
 }
 \cs_generate_variant:Nn \um_set_mathalph_range:nNnn {nNcc}
 %    \end{macrocode}
@@ -3919,31 +3929,28 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \cs_new:Npn \um_set_mathalphabet_pos:Nnnn #1#2#3#4 {
   \cs_if_exist:cT { \um_to_usv:nn {#4}{#2} } {
-    \clist_map_inline:nn {#3} {
-      \um_set_mathalphabet_char:Nnnn #1 {##1} {#4} {#2}
-    }
+    \clist_map_inline:nn {#3}
+      { \um_set_mathalphabet_char:Nnnn #1 {##1} {#4} {#2} }
   }
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_numbers:Nnn #1#2#3 {
-  \clist_map_inline:nn {#2} {
-    \um_set_mathalph_range:nNnnn {10} #1  {##1} {#3} {num}
-  }
+\cs_new:Nn \um_set_mathalphabet_numbers:Nnn {
+  \clist_map_inline:nn {#2}
+    { \um_set_mathalph_range:nNnnn {10} #1  {##1} {#3} {num} }
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_Latin:Nnn #1#2#3 {
-  \clist_map_inline:nn {#2} {
-    \um_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {Latin}
-  }
+\cs_new:Nn \um_set_mathalphabet_Latin:Nnn {
+  \clist_map_inline:nn {#2}
+    { \um_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {Latin} }
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_latin:Nnn #1#2#3 {
+\cs_new:Nn \um_set_mathalphabet_latin:Nnn {
   \clist_map_inline:nn {#2} {
     \um_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {latin}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {h}
@@ -3952,7 +3959,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_Greek:Nnn #1#2#3 {
+\cs_new:Nn \um_set_mathalphabet_Greek:Nnn {
   \clist_map_inline:nn {#2} {
     \um_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {Greek}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varTheta}
@@ -3961,7 +3968,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_greek:Nnn #1#2#3 {
+\cs_new:Nn \um_set_mathalphabet_greek:Nnn {
   \clist_map_inline:nn {#2} {
     \um_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {greek}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varepsilon}
@@ -3978,24 +3985,21 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsubsection{Upright: \cmd\mathup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_up_num:n #1 {
+\cs_new:Nn \um_config_up_num:n {
   \um_map_chars_numbers:nn {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathup {up}{#1}
 }
-\cs_new:Npn \um_config_up_Latin:n #1 {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_Latin:nn {up} {#1}
-  }{
-    \bool_if:NT \g_um_upLatin_bool {
-      \um_map_chars_Latin:nn {up,it} {#1}
-    }
+\cs_new:Nn \um_config_up_Latin:n
+  {
+    \bool_if:NTF \g_um_literal_bool { \um_map_chars_Latin:nn {up} {#1} }
+  {
+    \bool_if:NT \g_um_upLatin_bool { \um_map_chars_Latin:nn {up,it} {#1} }
   }
   \um_set_mathalphabet_Latin:Nnn \mathup {up,it}{#1}
 }
-\cs_new:Npn \um_config_up_latin:n #1 {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_latin:nn {up} {#1}
-  }{
+\cs_new:Nn \um_config_up_latin:n {
+  \bool_if:NTF \g_um_literal_bool { \um_map_chars_latin:nn {up} {#1} }
+  {
     \bool_if:NT \g_um_uplatin_bool {
       \um_map_chars_latin:nn        {up,it} {#1}
       \um_map_single:nnn        {h} {up,it} {#1}
@@ -4005,27 +4009,23 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_latin:Nnn \mathup {up,it}{#1}
 }
-\cs_new:Npn \um_config_up_Greek:n #1 {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_Greek:nn {up}{#1}
-  }{
-    \bool_if:NT \g_um_upGreek_bool {
-      \um_map_chars_Greek:nn {up,it}{#1}
-    }
+\cs_new:Nn \um_config_up_Greek:n {
+  \bool_if:NTF \g_um_literal_bool { \um_map_chars_Greek:nn {up}{#1} }
+  {
+    \bool_if:NT \g_um_upGreek_bool { \um_map_chars_Greek:nn {up,it}{#1} }
   }
   \um_set_mathalphabet_Greek:Nnn \mathup {up,it}{#1}
 }
-\cs_new:Npn \um_config_up_greek:n #1 {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_greek:nn {up} {#1}
-  }{
+\cs_new:Nn \um_config_up_greek:n {
+  \bool_if:NTF \g_um_literal_bool { \um_map_chars_greek:nn {up} {#1} }
+  {
     \bool_if:NT \g_um_upgreek_bool {
       \um_map_chars_greek:nn {up,it} {#1}
     }
   }
   \um_set_mathalphabet_greek:Nnn \mathup {up,it} {#1}
 }
-\cs_new:Npn \um_config_up_misc:n #1 {
+\cs_new:Nn \um_config_up_misc:n {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{up}{up}
   }{
@@ -4050,17 +4050,14 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \subsubsection{Italic: \cmd\mathit}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_it_Latin:n #1 {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_Latin:nn {it} {#1}
-  }{
-    \bool_if:NF \g_um_upLatin_bool {
-      \um_map_chars_Latin:nn {up,it} {#1}
-    }
+\cs_new:Nn \um_config_it_Latin:n {
+  \bool_if:NTF \g_um_literal_bool { \um_map_chars_Latin:nn {it} {#1} }
+  {
+    \bool_if:NF \g_um_upLatin_bool { \um_map_chars_Latin:nn {up,it} {#1} }
   }
   \um_set_mathalphabet_Latin:Nnn \mathit {up,it}{#1}
 }
-\cs_new:Npn \um_config_it_latin:n #1 {
+\cs_new:Nn \um_config_it_latin:n {
   \bool_if:NTF \g_um_literal_bool {
     \um_map_chars_latin:nn {it} {#1}
     \um_map_single:nnn {h}{it}{#1}
@@ -4076,27 +4073,21 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessj} {up,it} {#1}
 }
-\cs_new:Npn \um_config_it_Greek:n #1 {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_Greek:nn {it}{#1}
+\cs_new:Nn \um_config_it_Greek:n {
+  \bool_if:NTF \g_um_literal_bool { \um_map_chars_Greek:nn {it}{#1}
   }{
-    \bool_if:NF \g_um_upGreek_bool {
-      \um_map_chars_Greek:nn {up,it}{#1}
-    }
+    \bool_if:NF \g_um_upGreek_bool { \um_map_chars_Greek:nn {up,it}{#1} }
   }
   \um_set_mathalphabet_Greek:Nnn \mathit {up,it}{#1}
 }
-\cs_new:Npn \um_config_it_greek:n #1 {
-  \bool_if:NTF \g_um_literal_bool {
-    \um_map_chars_greek:nn {it} {#1}
-  }{
-    \bool_if:NF \g_um_upgreek_bool {
-      \um_map_chars_greek:nn {it,up} {#1}
-    }
+\cs_new:Nn \um_config_it_greek:n {
+  \bool_if:NTF \g_um_literal_bool { \um_map_chars_greek:nn {it} {#1} }
+  {
+    \bool_if:NF \g_um_upgreek_bool { \um_map_chars_greek:nn {it,up} {#1} }
   }
   \um_set_mathalphabet_greek:Nnn \mathit {up,it} {#1}
 }
-\cs_new:Npn \um_config_it_misc:n #1 {
+\cs_new:Nn \um_config_it_misc:n {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{it}{it}
   }{
@@ -4119,10 +4110,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \subsubsection{Blackboard or double-struck: \cmd\mathbb\ and \cmd\mathbbit}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_bb_latin:n #1 {
+\cs_new:Nn \um_config_bb_latin:n {
   \um_set_mathalphabet_latin:Nnn \mathbb {up,it}{#1}
 }
-\cs_new:Npn \um_config_bb_Latin:n #1 {
+\cs_new:Nn \um_config_bb_Latin:n {
   \um_set_mathalphabet_Latin:Nnn \mathbb {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {C} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {H} {up,it} {#1}
@@ -4132,17 +4123,17 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \um_set_mathalphabet_pos:Nnnn  \mathbb {R} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {Z} {up,it} {#1}
 }
-\cs_new:Npn \um_config_bb_num:n #1 {
+\cs_new:Nn \um_config_bb_num:n {
   \um_set_mathalphabet_numbers:Nnn \mathbb {up}{#1}
 }
-\cs_new:Npn \um_config_bb_misc:n #1 {
+\cs_new:Nn \um_config_bb_misc:n {
   \um_set_mathalphabet_pos:Nnnn \mathbb        {Pi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb        {pi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb     {Gamma} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb     {gamma} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb {summation} {up} {#1}
 }
-\cs_new:Npn \um_config_bbit_misc:n #1 {
+\cs_new:Nn \um_config_bbit_misc:n {
   \um_set_mathalphabet_pos:Nnnn \mathbbit {D} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {d} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {e} {up,it} {#1}
@@ -4154,7 +4145,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \subsubsection{Script and caligraphic: \cmd\mathscr\ and \cmd\mathcal}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_scr_Latin:n #1 {
+\cs_new:Nn \um_config_scr_Latin:n {
   \um_set_mathalphabet_Latin:Nnn \mathscr    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {B}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {E}{up,it}{#1}
@@ -4165,7 +4156,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \um_set_mathalphabet_pos:Nnnn  \mathscr {M}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {R}{up,it}{#1}
 }
-\cs_new:Npn \um_config_scr_latin:n #1 {
+\cs_new:Nn \um_config_scr_latin:n {
   \um_set_mathalphabet_latin:Nnn \mathscr    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {e}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {g}{up,it}{#1}
@@ -4175,7 +4166,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % These are by default synonyms for the above, but with the STIX
 % fonts we want to use the alternate alphabet.
 %    \begin{macrocode}
-\cs_new:Npn \um_config_cal_Latin:n #1 {
+\cs_new:Nn \um_config_cal_Latin:n {
   \um_set_mathalphabet_Latin:Nnn  \mathcal  {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {B}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {E}{up,it}{#1}
@@ -4191,7 +4182,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \subsubsection{Fractur or fraktur or blackletter: \cmd\mathfrak}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_frak_Latin:n #1 {
+\cs_new:Nn \um_config_frak_Latin:n {
   \um_set_mathalphabet_Latin:Nnn \mathfrak    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {C}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {H}{up,it}{#1}
@@ -4199,18 +4190,18 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {R}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {Z}{up,it}{#1}
 }
-\cs_new:Npn \um_config_frak_latin:n #1 {
+\cs_new:Nn \um_config_frak_latin:n {
   \um_set_mathalphabet_latin:Nnn \mathfrak {up,it}{#1}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Sans serif upright: \cmd\mathsfup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_sfup_num:n #1 {
+\cs_new:Nn \um_config_sfup_num:n {
   \um_set_mathalphabet_numbers:Nnn \mathsf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathsfup {up}{#1}
 }
-\cs_new:Npn \um_config_sfup_Latin:n #1 {
+\cs_new:Nn \um_config_sfup_Latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {sfup} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathsf {up}{#1}
@@ -4222,7 +4213,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_Latin:Nnn \mathsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_sfup_latin:n #1 {
+\cs_new:Nn \um_config_sfup_latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {sfup} {#1}
     \um_set_mathalphabet_latin:Nnn \mathsf {up}{#1}
@@ -4239,7 +4230,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \subsubsection{Sans serif italic: \cmd\mathsfit}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_config_sfit_Latin:n #1 {
+\cs_new:Nn \um_config_sfit_Latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {sfit} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathsf {it}{#1}
@@ -4251,7 +4242,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_Latin:Nnn \mathsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_sfit_latin:n #1 {
+\cs_new:Nn \um_config_sfit_latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {sfit} {#1}
     \um_set_mathalphabet_latin:Nnn \mathsf {it}{#1}
@@ -4267,13 +4258,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsubsection{Typewriter or monospaced: \cmd\mathtt}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_tt_num:n #1 {
+\cs_new:Nn \um_config_tt_num:n {
   \um_set_mathalphabet_numbers:Nnn \mathtt {up}{#1}
 }
-\cs_new:Npn \um_config_tt_Latin:n #1 {
+\cs_new:Nn \um_config_tt_Latin:n {
   \um_set_mathalphabet_Latin:Nnn \mathtt {up,it}{#1}
 }
-\cs_new:Npn \um_config_tt_latin:n #1 {
+\cs_new:Nn \um_config_tt_latin:n {
   \um_set_mathalphabet_latin:Nnn \mathtt {up,it}{#1}
 }
 %    \end{macrocode}
@@ -4281,7 +4272,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsubsection{Bold Italic: \cmd\mathbfit}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_bfit_Latin:n #1 {
+\cs_new:Nn \um_config_bfit_Latin:n {
   \bool_if:NF \g_um_bfupLatin_bool {
     \um_map_chars_Latin:nn {bfup,bfit} {#1}
   }
@@ -4296,7 +4287,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfit_latin:n #1 {
+\cs_new:Nn \um_config_bfit_latin:n {
   \bool_if:NF \g_um_bfuplatin_bool {
     \um_map_chars_latin:nn {bfup,bfit} {#1}
   }
@@ -4311,7 +4302,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfit_Greek:n #1 {
+\cs_new:Nn \um_config_bfit_Greek:n {
   \um_set_mathalphabet_Greek:Nnn \mathbfit {up,it}{#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_Greek:nn {bfit}{#1}
@@ -4323,7 +4314,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfit_greek:n #1 {
+\cs_new:Nn \um_config_bfit_greek:n {
   \um_set_mathalphabet_greek:Nnn \mathbfit {up,it} {#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_greek:nn {bfit} {#1}
@@ -4335,7 +4326,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfit_misc:n #1 {
+\cs_new:Nn \um_config_bfit_misc:n {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfit}{#1}
   }{
@@ -4372,11 +4363,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsubsection{Bold Upright: \cmd\mathbfup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_bfup_num:n #1 {
+\cs_new:Nn \um_config_bfup_num:n {
   \um_set_mathalphabet_numbers:Nnn \mathbf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathbfup {up}{#1}
 }
-\cs_new:Npn \um_config_bfup_Latin:n #1 {
+\cs_new:Nn \um_config_bfup_Latin:n {
   \bool_if:NT \g_um_bfupLatin_bool {
     \um_map_chars_Latin:nn {bfup,bfit} {#1}
   }
@@ -4391,7 +4382,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfup_latin:n #1 {
+\cs_new:Nn \um_config_bfup_latin:n {
   \bool_if:NT \g_um_bfuplatin_bool {
     \um_map_chars_latin:nn {bfup,bfit} {#1}
   }
@@ -4406,7 +4397,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfup_Greek:n #1 {
+\cs_new:Nn \um_config_bfup_Greek:n {
   \um_set_mathalphabet_Greek:Nnn \mathbfup {up,it}{#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_Greek:nn {bfup}{#1}
@@ -4418,7 +4409,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfup_greek:n #1 {
+\cs_new:Nn \um_config_bfup_greek:n {
   \um_set_mathalphabet_greek:Nnn \mathbfup {up,it} {#1}
   \bool_if:NTF \g_um_bfliteral_bool {
     \um_map_chars_greek:nn {bfup} {#1}
@@ -4430,7 +4421,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     }
   }
 }
-\cs_new:Npn \um_config_bfup_misc:n #1 {
+\cs_new:Nn \um_config_bfup_misc:n {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfup}{#1}
   }{
@@ -4470,34 +4461,34 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsubsection{Bold fractur or fraktur or blackletter: \cmd\mathbffrak}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_bffrak_Latin:n #1 {
+\cs_new:Nn \um_config_bffrak_Latin:n {
   \um_set_mathalphabet_Latin:Nnn \mathbffrak {up,it}{#1}
 }
-\cs_new:Npn \um_config_bffrak_latin:n #1 {
+\cs_new:Nn \um_config_bffrak_latin:n {
   \um_set_mathalphabet_latin:Nnn \mathbffrak {up,it}{#1}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Bold script or calligraphic: \cmd\mathbfscr}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_bfscr_Latin:n #1 {
+\cs_new:Nn \um_config_bfscr_Latin:n {
   \um_set_mathalphabet_Latin:Nnn \mathbfscr {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfscr_latin:n #1 {
+\cs_new:Nn \um_config_bfscr_latin:n {
   \um_set_mathalphabet_latin:Nnn \mathbfscr {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfcal_Latin:n #1 {
+\cs_new:Nn \um_config_bfcal_Latin:n {
   \um_set_mathalphabet_Latin:Nnn   \mathbfcal  {up,it}{#1}
 }
 %    \end{macrocode}
 %
 % \subsubsection{Bold upright sans serif: \cmd\mathbfsfup}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_bfsfup_num:n #1 {
+\cs_new:Nn \um_config_bfsfup_num:n {
   \um_set_mathalphabet_numbers:Nnn \mathbfsf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathbfsfup {up}{#1}
 }
-\cs_new:Npn \um_config_bfsfup_Latin:n #1 {
+\cs_new:Nn \um_config_bfsfup_Latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {bfsfup} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbfsf {up}{#1}
@@ -4509,7 +4500,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_Latin:Nnn \mathbfsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfsfup_latin:n #1 {
+\cs_new:Nn \um_config_bfsfup_latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {bfsfup} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {up}{#1}
@@ -4521,7 +4512,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_latin:Nnn \mathbfsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfsfup_Greek:n #1 {
+\cs_new:Nn \um_config_bfsfup_Greek:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Greek:nn {bfsfup}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbfsf {up}{#1}
@@ -4533,7 +4524,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_Greek:Nnn \mathbfsfup {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfsfup_greek:n #1 {
+\cs_new:Nn \um_config_bfsfup_greek:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_greek:nn {bfsfup} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbfsf {up} {#1}
@@ -4545,7 +4536,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_greek:Nnn \mathbfsfup {up,it} {#1}
 }
-\cs_new:Npn \um_config_bfsfup_misc:n #1 {
+\cs_new:Nn \um_config_bfsfup_misc:n {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfsfup}{#1}
   }{
@@ -4582,7 +4573,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsubsection{Bold italic sans serif: \cmd\mathbfsfit}
 %    \begin{macrocode}
-\cs_new:Npn \um_config_bfsfit_Latin:n #1 {
+\cs_new:Nn \um_config_bfsfit_Latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Latin:nn {bfsfit} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbfsf {it}{#1}
@@ -4594,7 +4585,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_Latin:Nnn \mathbfsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfsfit_latin:n #1 {
+\cs_new:Nn \um_config_bfsfit_latin:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_latin:nn {bfsfit} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {it}{#1}
@@ -4606,7 +4597,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_latin:Nnn \mathbfsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfsfit_Greek:n #1 {
+\cs_new:Nn \um_config_bfsfit_Greek:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_Greek:nn {bfsfit}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbfsf {it}{#1}
@@ -4618,7 +4609,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_Greek:Nnn \mathbfsfit {up,it}{#1}
 }
-\cs_new:Npn \um_config_bfsfit_greek:n #1 {
+\cs_new:Nn \um_config_bfsfit_greek:n {
   \bool_if:NTF \g_um_sfliteral_bool {
     \um_map_chars_greek:nn {bfsfit} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbfsf {it} {#1}
@@ -4630,7 +4621,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   }
   \um_set_mathalphabet_greek:Nnn \mathbfsfit {up,it} {#1}
 }
-\cs_new:Npn \um_config_bfsfit_misc:n #1 {
+\cs_new:Nn \um_config_bfsfit_misc:n {
   \bool_if:NTF \g_um_literal_Nabla_bool {
     \um_map_single:nnn {Nabla}{bfsfit}{#1}
   }{
@@ -4675,7 +4666,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % In time, the case statement inside |set_mathsymbol| will be moved in here
 % to avoid re-running it every time.
 %    \begin{macrocode}
-\cs_set:Npn \um_symbol_setup:
+\cs_new:Npn \um_symbol_setup:
 %<*XE>
   {
     \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
@@ -4703,7 +4694,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_input_math_symbol_table:}
 % This function simply expands to the token list containing all the data.
 %    \begin{macrocode}
-\cs_new:Npn \um_input_math_symbol_table: {\g_um_mathtable_tl}
+\cs_new:Nn \um_input_math_symbol_table: {\g_um_mathtable_tl}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -4767,7 +4758,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
 \AtBeginDocument{\um_define_math_chars:}
-\cs_set:Nn \um_define_math_chars: {
+\cs_new:Nn \um_define_math_chars: {
   \group_begin:
     \char_set_catcode_math_superscript:N \^
     \cs_set:Npn \_um_sym:nnn ##1##2##3 {
@@ -4871,13 +4862,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_nprimes:Nn #1#2 {
+\cs_new:Nn \um_nprimes:Nn {
   \um_superscript:n {
     #1
     \prg_replicate:nn {#2-1} { \mskip \g_um_primekern_muskip #1 }
   }
 }
-\cs_new:Npn \um_nprimes_select:nn #1#2 {
+\cs_new:Nn \um_nprimes_select:nn {
   \prg_case_int:nnn {#2}{
     {1} { \um_superscript:n {#1} }
     {2} {
@@ -4899,7 +4890,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \um_nprimes:Nn #1 {#2}
   }
 }
-\cs_new:Npn \um_nbackprimes_select:nn #1#2 {
+\cs_new:Nn \um_nbackprimes_select:nn {
   \prg_case_int:nnn {#2}{
     {1} { \um_superscript:n {#1} }
     {2} {
@@ -4957,7 +4948,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \int_set:Nn \l_um_primecount_int {3}
   \um_scanprime_collect:N \um_prime_single_mchar
 }
-\cs_new:Npn \um_scanprime_collect:N #1 {
+\cs_new:Nn \um_scanprime_collect:N {
   \int_incr:N \l_um_primecount_int
   \peek_meaning_remove:NTF ' {
     \um_scanprime_collect:N #1
@@ -5030,7 +5021,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
 }
-\cs_new:Npn \um_scanbackprime_collect:N #1 {
+\cs_new:Nn \um_scanbackprime_collect:N {
   \int_incr:N \l_um_primecount_int
   \peek_meaning_remove:NTF ` {
     \um_scanbackprime_collect:N #1
@@ -5070,7 +5061,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \AtBeginDocument{\um_define_prime_commands: \um_define_prime_chars:}
-\cs_set:Nn \um_define_prime_commands: {
+\cs_new:Nn \um_define_prime_commands: {
   \cs_set_eq:NN \prime       \um_prime_single_mchar
   \cs_set_eq:NN \dprime      \um_prime_double_mchar
   \cs_set_eq:NN \trprime     \um_prime_triple_mchar
@@ -5107,7 +5098,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %    \begin{macrocode}
 \AtBeginDocument{\um_redefine_radical:}
-\cs_set:Nn \um_redefine_radical:
+\cs_new:Nn \um_redefine_radical:
 %<*XE>
  {
   \@ifpackageloaded { amsmath } { } {
@@ -5173,7 +5164,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \cs{um_fontdimen_to_scale:nn} returns a dimension correspond to the current
 % font size relative proportion based on that percentage.
 %    \begin{macrocode}
-\cs_new:Npn \um_fontdimen_to_percent:nn #1#2 {
+\cs_new:Nn \um_fontdimen_to_percent:nn {
   \strip@pt\dimexpr\fontdimen#1#2*65536/100\relax
 }
 \cs_new:Nn \um_fontdimen_to_scale:nn
@@ -5190,7 +5181,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \darg{Length control sequence to be scaled according to the math style}
 % This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
 %    \begin{macrocode}
-\cs_new:Npn \um_mathstyle_scale:Nnn #1#2#3 {
+\cs_new:Nn \um_mathstyle_scale:Nnn {
   \ifx#1\scriptstyle
     #2\um_fontdimen_to_percent:nn{10}\l_um_font#3
   \else
@@ -5231,7 +5222,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \cs{scantokens} makes this process much simpler since we can activate the
 % char and assign its meaning in one step.
 %    \begin{macrocode}
-\cs_set:Npn \um_setup_active_superscript:nn #1#2 {
+\cs_new:Nn \um_setup_active_superscript:nn {
   \prop_gput:Nxn \g_um_supers_prop   {\meaning #1} {#2}
   \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
@@ -5267,7 +5258,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % \paragraph{Subscripts} Ditto above.
 %    \begin{macrocode}
-\cs_set:Npn \um_setup_active_subscript:nn #1#2 {
+\cs_new:Nn \um_setup_active_subscript:nn {
   \prop_gput:Nxn \g_um_subs_prop   {\meaning #1} {#2}
   \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
