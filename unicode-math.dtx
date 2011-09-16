@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/09/14 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/09/15 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -1177,12 +1177,289 @@ This work is "author-maintained" by Will Robertson.
 \cs_generate_variant:Nn \fontspec_set_fontface:NNnn {NNx}
 %    \end{macrocode}
 %
+% \subsection{Package options}
+%
+% \begin{macro}{\unimathsetup}
+% This macro can be used in lieu of or later to override
+% options declared when the package is loaded.
+%    \begin{macrocode}
+\DeclareDocumentCommand \unimathsetup {m} {
+  \clist_clear:N \l_um_unknown_keys_clist
+  \keys_set:nn {unicode-math} {#1}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \paragraph{math-style}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  normal-style .choice_code:n =
+  {
+    \bool_set_false:N \g_um_literal_bool
+    \ifcase \l_keys_choice_int
+      \bool_set_false:N \g_um_upGreek_bool
+      \bool_set_false:N \g_um_upgreek_bool
+      \bool_set_false:N \g_um_upLatin_bool
+      \bool_set_false:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_upGreek_bool
+      \bool_set_false:N \g_um_upgreek_bool
+      \bool_set_false:N \g_um_upLatin_bool
+      \bool_set_false:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_upGreek_bool
+      \bool_set_true:N \g_um_upgreek_bool
+      \bool_set_true:N \g_um_upLatin_bool
+      \bool_set_false:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_upGreek_bool
+      \bool_set_true:N \g_um_upgreek_bool
+      \bool_set_true:N \g_um_upLatin_bool
+      \bool_set_true:N \g_um_uplatin_bool
+    \or
+      \bool_set_true:N \g_um_literal_bool
+    \fi
+  } ,
+  normal-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  math-style .choice_code:n =
+  {
+    \ifcase \l_keys_choice_int
+      \unimathsetup {
+        normal-style=ISO,
+        bold-style=ISO,
+        sans-style=italic,
+        nabla=upright,
+        partial=italic,
+      }
+    \or
+      \unimathsetup {
+        normal-style=TeX,
+        bold-style=TeX,
+        sans-style=upright,
+        nabla=upright,
+        partial=italic,
+      }
+    \or
+      \unimathsetup {
+        normal-style=french,
+        bold-style=upright,
+        sans-style=upright,
+        nabla=upright,
+        partial=upright,
+      }
+    \or
+      \unimathsetup {
+        normal-style=upright,
+        bold-style=upright,
+        sans-style=upright,
+        nabla=upright,
+        partial=upright,
+      }
+    \or
+      \unimathsetup {
+        normal-style=literal,
+        bold-style=literal,
+        sans-style=literal,
+        colon=literal,
+        nabla=literal,
+        partial=literal,
+      }
+    \fi
+  } ,
+  math-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
+}
+%    \end{macrocode}
+%
+% \paragraph{bold-style}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  bold-style .choice_code:n = {
+    \bool_set_false:N \g_um_bfliteral_bool
+    \ifcase \l_keys_choice_int
+      \bool_set_false:N \g_um_bfupGreek_bool
+      \bool_set_false:N \g_um_bfupgreek_bool
+      \bool_set_false:N \g_um_bfupLatin_bool
+      \bool_set_false:N \g_um_bfuplatin_bool
+    \or
+      \bool_set_true:N \g_um_bfupGreek_bool
+      \bool_set_false:N \g_um_bfupgreek_bool
+      \bool_set_true:N \g_um_bfupLatin_bool
+      \bool_set_true:N \g_um_bfuplatin_bool
+    \or
+      \bool_set_true:N \g_um_bfupGreek_bool
+      \bool_set_true:N \g_um_bfupgreek_bool
+      \bool_set_true:N \g_um_bfupLatin_bool
+      \bool_set_true:N \g_um_bfuplatin_bool
+    \or
+      \bool_set_true:N \g_um_bfliteral_bool
+    \fi
+  } ,
+  bold-style .generate_choices:n = {ISO,TeX,upright,literal} ,
+}
+%    \end{macrocode}
+%
+% \paragraph{sans-style}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  sans-style .choice_code:n = {
+    \ifcase \l_keys_choice_int
+      \bool_set_false:N \g_um_upsans_bool
+    \or
+      \bool_set_true:N \g_um_upsans_bool
+    \or
+      \bool_set_true:N \g_um_sfliteral_bool
+    \fi
+  } ,
+  sans-style .generate_choices:n = {italic,upright,literal} ,
+}
+%    \end{macrocode}
+%
+%
+% \paragraph{Nabla and partial}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  nabla .choice_code:n = {
+    \bool_set_false:N \g_um_literal_Nabla_bool
+    \ifcase \l_keys_choice_int
+      \bool_set_true:N \g_um_upNabla_bool
+    \or
+      \bool_set_false:N \g_um_upNabla_bool
+    \or
+      \bool_set_true:N \g_um_literal_Nabla_bool
+    \fi
+  } ,
+  nabla .generate_choices:n = {upright,italic,literal} ,
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  partial .choice_code:n = {
+    \bool_set_false:N \g_um_literal_partial_bool
+    \ifcase \l_keys_choice_int
+      \bool_set_true:N \g_um_uppartial_bool
+    \or
+      \bool_set_false:N \g_um_uppartial_bool
+    \or
+      \bool_set_true:N \g_um_literal_partial_bool
+    \fi
+  } ,
+  partial .generate_choices:n = {upright,italic,literal} ,
+}
+%    \end{macrocode}
+%
+% \paragraph{Epsilon and phi shapes}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  vargreek-shape .choice: ,
+  vargreek-shape / unicode .code:n = {
+    \bool_set_false:N \g_um_texgreek_bool
+  } ,
+  vargreek-shape / TeX .code:n = {
+    \bool_set_true:N \g_um_texgreek_bool
+  }
+}
+%    \end{macrocode}
+%
+% \paragraph{Colon style}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  colon .choice: ,
+  colon / literal .code:n = {
+    \bool_set_true:N \g_um_literal_colon_bool
+  } ,
+  colon / TeX .code:n = {
+    \bool_set_false:N \g_um_literal_colon_bool
+  }
+}
+%    \end{macrocode}
+%
+% \paragraph{Slash delimiter style}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  slash-delimiter .choice: ,
+  slash-delimiter / ascii .code:n = {
+    \tl_set:Nn \g_um_slash_delimiter_usv {"002F}
+  } ,
+  slash-delimiter / frac .code:n = {
+    \tl_set:Nn \g_um_slash_delimiter_usv {"2044}
+  } ,
+  slash-delimiter / div .code:n = {
+    \tl_set:Nn \g_um_slash_delimiter_usv {"2215}
+  }
+}
+%    \end{macrocode}
+%
+%
+% \paragraph{Active fraction style}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  active-frac .choice: ,
+  active-frac / small .code:n = {
+    \cs_if_exist:NTF \tfrac {
+      \bool_set_true:N \l_um_smallfrac_bool
+    }{
+      \um_warning:n {no-tfrac}
+      \bool_set_false:N \l_um_smallfrac_bool
+    }
+    \use:c{um_setup_active_frac:}
+  } ,
+  active-frac / normalsize .code:n = {
+    \bool_set_false:N \l_um_smallfrac_bool
+    \use:c{um_setup_active_frac:}
+  }
+}
+%    \end{macrocode}
+%
+% \paragraph{Debug/tracing}
+%    \begin{macrocode}
+\keys_define:nn {unicode-math} {
+  trace .choice: ,
+  trace / debug .code:n = {
+    \msg_redirect_module:nnn { unicode-math } { log } { warning }
+  } ,
+  trace / on .code:n = {
+    \msg_redirect_module:nnn { unicode-math } { log } { log }
+  } ,
+  trace / off .code:n = {
+    \msg_redirect_module:nnn { unicode-math } { log } { none }
+  } ,
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\clist_new:N \l_um_unknown_keys_clist
+\keys_define:nn {unicode-math} {
+  unknown .code:n = {
+    \clist_put_right:No \l_um_unknown_keys_clist {
+      \l_keys_key_tl = {#1}
+    }
+  }
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\unimathsetup {math-style=TeX}
+\unimathsetup {slash-delimiter=ascii}
+\unimathsetup {trace=off}
+\cs_if_exist:NT \tfrac {
+  \unimathsetup {active-frac=small}
+}
+\ProcessKeysOptions {unicode-math}
+%    \end{macrocode}
+%
+%
 % \subsubsection{\Hologo{LuaLaTeX} module}
 %
 % We create a \pkg{luatexbase} module that contains Lua functions for use with \hologo{LuaLaTeX}.
 %    \begin{macrocode}
 %</preamble&!XE&!LU>
-%
 %<*lua>
 local err, warn, info, log = luatexbase.provides_module({
   name        = "unicode-math",
@@ -1801,283 +2078,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 %</stix>
 %<*package&(XE|LU)>
-%    \end{macrocode}
-%
-% \subsection{Package options}
-%
-% \begin{macro}{\unimathsetup}
-% This macro can be used in lieu of or later to override
-% options declared when the package is loaded.
-%    \begin{macrocode}
-\DeclareDocumentCommand \unimathsetup {m} {
-  \clist_clear:N \l_um_unknown_keys_clist
-  \keys_set:nn {unicode-math} {#1}
-}
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \paragraph{math-style}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  normal-style .choice_code:n =
-  {
-    \bool_set_false:N \g_um_literal_bool
-    \ifcase \l_keys_choice_int
-      \bool_set_false:N \g_um_upGreek_bool
-      \bool_set_false:N \g_um_upgreek_bool
-      \bool_set_false:N \g_um_upLatin_bool
-      \bool_set_false:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_upGreek_bool
-      \bool_set_false:N \g_um_upgreek_bool
-      \bool_set_false:N \g_um_upLatin_bool
-      \bool_set_false:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_upGreek_bool
-      \bool_set_true:N \g_um_upgreek_bool
-      \bool_set_true:N \g_um_upLatin_bool
-      \bool_set_false:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_upGreek_bool
-      \bool_set_true:N \g_um_upgreek_bool
-      \bool_set_true:N \g_um_upLatin_bool
-      \bool_set_true:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_literal_bool
-    \fi
-  } ,
-  normal-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  math-style .choice_code:n =
-  {
-    \ifcase \l_keys_choice_int
-      \unimathsetup {
-        normal-style=ISO,
-        bold-style=ISO,
-        sans-style=italic,
-        nabla=upright,
-        partial=italic,
-      }
-    \or
-      \unimathsetup {
-        normal-style=TeX,
-        bold-style=TeX,
-        sans-style=upright,
-        nabla=upright,
-        partial=italic,
-      }
-    \or
-      \unimathsetup {
-        normal-style=french,
-        bold-style=upright,
-        sans-style=upright,
-        nabla=upright,
-        partial=upright,
-      }
-    \or
-      \unimathsetup {
-        normal-style=upright,
-        bold-style=upright,
-        sans-style=upright,
-        nabla=upright,
-        partial=upright,
-      }
-    \or
-      \unimathsetup {
-        normal-style=literal,
-        bold-style=literal,
-        sans-style=literal,
-        colon=literal,
-        nabla=literal,
-        partial=literal,
-      }
-    \fi
-  } ,
-  math-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
-}
-%    \end{macrocode}
-%
-% \paragraph{bold-style}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  bold-style .choice_code:n = {
-    \bool_set_false:N \g_um_bfliteral_bool
-    \ifcase \l_keys_choice_int
-      \bool_set_false:N \g_um_bfupGreek_bool
-      \bool_set_false:N \g_um_bfupgreek_bool
-      \bool_set_false:N \g_um_bfupLatin_bool
-      \bool_set_false:N \g_um_bfuplatin_bool
-    \or
-      \bool_set_true:N \g_um_bfupGreek_bool
-      \bool_set_false:N \g_um_bfupgreek_bool
-      \bool_set_true:N \g_um_bfupLatin_bool
-      \bool_set_true:N \g_um_bfuplatin_bool
-    \or
-      \bool_set_true:N \g_um_bfupGreek_bool
-      \bool_set_true:N \g_um_bfupgreek_bool
-      \bool_set_true:N \g_um_bfupLatin_bool
-      \bool_set_true:N \g_um_bfuplatin_bool
-    \or
-      \bool_set_true:N \g_um_bfliteral_bool
-    \fi
-  } ,
-  bold-style .generate_choices:n = {ISO,TeX,upright,literal} ,
-}
-%    \end{macrocode}
-%
-% \paragraph{sans-style}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  sans-style .choice_code:n = {
-    \ifcase \l_keys_choice_int
-      \bool_set_false:N \g_um_upsans_bool
-    \or
-      \bool_set_true:N \g_um_upsans_bool
-    \or
-      \bool_set_true:N \g_um_sfliteral_bool
-    \fi
-  } ,
-  sans-style .generate_choices:n = {italic,upright,literal} ,
-}
-%    \end{macrocode}
-%
-%
-% \paragraph{Nabla and partial}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  nabla .choice_code:n = {
-    \bool_set_false:N \g_um_literal_Nabla_bool
-    \ifcase \l_keys_choice_int
-      \bool_set_true:N \g_um_upNabla_bool
-    \or
-      \bool_set_false:N \g_um_upNabla_bool
-    \or
-      \bool_set_true:N \g_um_literal_Nabla_bool
-    \fi
-  } ,
-  nabla .generate_choices:n = {upright,italic,literal} ,
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  partial .choice_code:n = {
-    \bool_set_false:N \g_um_literal_partial_bool
-    \ifcase \l_keys_choice_int
-      \bool_set_true:N \g_um_uppartial_bool
-    \or
-      \bool_set_false:N \g_um_uppartial_bool
-    \or
-      \bool_set_true:N \g_um_literal_partial_bool
-    \fi
-  } ,
-  partial .generate_choices:n = {upright,italic,literal} ,
-}
-%    \end{macrocode}
-%
-% \paragraph{Epsilon and phi shapes}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  vargreek-shape .choice: ,
-  vargreek-shape / unicode .code:n = {
-    \bool_set_false:N \g_um_texgreek_bool
-  } ,
-  vargreek-shape / TeX .code:n = {
-    \bool_set_true:N \g_um_texgreek_bool
-  }
-}
-%    \end{macrocode}
-%
-% \paragraph{Colon style}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  colon .choice: ,
-  colon / literal .code:n = {
-    \bool_set_true:N \g_um_literal_colon_bool
-  } ,
-  colon / TeX .code:n = {
-    \bool_set_false:N \g_um_literal_colon_bool
-  }
-}
-%    \end{macrocode}
-%
-% \paragraph{Slash delimiter style}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  slash-delimiter .choice: ,
-  slash-delimiter / ascii .code:n = {
-    \tl_set:Nn \g_um_slash_delimiter_usv {"002F}
-  } ,
-  slash-delimiter / frac .code:n = {
-    \tl_set:Nn \g_um_slash_delimiter_usv {"2044}
-  } ,
-  slash-delimiter / div .code:n = {
-    \tl_set:Nn \g_um_slash_delimiter_usv {"2215}
-  }
-}
-%    \end{macrocode}
-%
-%
-% \paragraph{Active fraction style}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  active-frac .choice: ,
-  active-frac / small .code:n = {
-    \cs_if_exist:NTF \tfrac {
-      \bool_set_true:N \l_um_smallfrac_bool
-    }{
-      \um_warning:n {no-tfrac}
-      \bool_set_false:N \l_um_smallfrac_bool
-    }
-    \use:c{um_setup_active_frac:}
-  } ,
-  active-frac / normalsize .code:n = {
-    \bool_set_false:N \l_um_smallfrac_bool
-    \use:c{um_setup_active_frac:}
-  }
-}
-%    \end{macrocode}
-%
-% \paragraph{Debug/tracing}
-%    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  trace .choice: ,
-  trace / debug .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { log } { warning }
-  } ,
-  trace / on .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { log } { log }
-  } ,
-  trace / off .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { log } { none }
-  } ,
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\clist_new:N \l_um_unknown_keys_clist
-\keys_define:nn {unicode-math} {
-  unknown .code:n = {
-    \clist_put_right:No \l_um_unknown_keys_clist {
-      \l_keys_key_tl = {#1}
-    }
-  }
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\unimathsetup {math-style=TeX}
-\unimathsetup {slash-delimiter=ascii}
-\unimathsetup {trace=off}
-\cs_if_exist:NT \tfrac {
-  \unimathsetup {active-frac=small}
-}
-\ProcessKeysOptions {unicode-math}
 %    \end{macrocode}
 %
 % \subsection{Overcoming \cmd\@onlypreamble}
