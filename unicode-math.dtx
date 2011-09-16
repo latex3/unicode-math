@@ -2730,9 +2730,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_assign_delcode:n}
 % Shorthand.
 %    \begin{macrocode}
-\cs_new:Nn \um_assign_delcode:n {
-  \um_assign_delcode:nn {#1} {#1}
-}
+\cs_new:Nn \um_assign_delcode:n { \um_assign_delcode:nn {#1} {#1} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2846,8 +2844,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Also, what about right-to-left square roots?
 %
 % \begin{macro}{\l_um_radicals_tl}
-% We organise radicals in the same way as nolimits-operators; that is,
-% in a comma-list.
+% We organise radicals in the same way as nolimits-operators.
 %    \begin{macrocode}
 \tl_new:N \l_um_radicals_tl
 \tl_set:Nn \l_um_radicals_tl {\sqrt}
