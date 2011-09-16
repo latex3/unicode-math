@@ -1188,7 +1188,7 @@ This work is "author-maintained" by Will Robertson.
 % options declared when the package is loaded.
 %    \begin{macrocode}
 \DeclareDocumentCommand \unimathsetup {m} {
-  \keys_set_known:nnN  {unicode-math} {#1} \l_um_unknown_keys_clist
+  \keys_set:nn  {unicode-math} {#1}
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2435,7 +2435,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % Parse options and tell people what's going on:
 %    \begin{macrocode}
-  \keys_set:nn {unicode-math} {#1}
+  \keys_set_known:nnN {unicode-math} {#1} \l_um_unknown_keys_clist
   \bool_if:NT \l_um_init_bool { \um_log:n {default-math-font} }
 %    \end{macrocode}
 % Use \pkg{fontspec} to select a font to use.
