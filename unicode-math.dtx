@@ -1184,8 +1184,7 @@ This work is "author-maintained" by Will Robertson.
 % options declared when the package is loaded.
 %    \begin{macrocode}
 \DeclareDocumentCommand \unimathsetup {m} {
-  \clist_clear:N \l_um_unknown_keys_clist
-  \keys_set:nn {unicode-math} {#1}
+  \keys_set_known:nnN  {unicode-math} {#1} \l_um_unknown_keys_clist
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1430,17 +1429,6 @@ This work is "author-maintained" by Will Robertson.
   trace / off .code:n = {
     \msg_redirect_module:nnn { unicode-math } { log } { none }
   } ,
-}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\clist_new:N \l_um_unknown_keys_clist
-\keys_define:nn {unicode-math} {
-  unknown .code:n = {
-    \clist_put_right:No \l_um_unknown_keys_clist {
-      \l_keys_key_tl = {#1}
-    }
-  }
 }
 %    \end{macrocode}
 %
@@ -2401,7 +2389,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \seq_clear:N \l_um_char_range_seq
   \clist_clear:N \l_um_char_num_range_clist
   \seq_clear:N \l_um_mathalph_seq
-  \clist_clear:N \l_um_unknown_keys_clist
   \seq_clear:N \l_um_missing_alph_seq
 %    \end{macrocode}
 % \item By default use the `normal' math version
