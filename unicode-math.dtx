@@ -2417,6 +2417,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
     \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
     \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_noparse:nn
+    \cs_set_eq:NN \um_make_mathactive:nNN \um_make_mathactive_noparse:nNN
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
@@ -2637,7 +2638,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_set:Npn \um_process_symbol_parse:nnn #1#2#3 {
-  \um@parse@term{#1}{#2}{#3}{
+  \um_if_char_spec:nNNT{#1}{#2}{#3}{
     \um_process_symbol_noparse:nnn {#1}{#2}{#3}
   }
 }
@@ -2664,8 +2665,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Where |\um_remap_symbol:nnn| is defined to be one of these two, depending
 % on the range setup:
 %    \begin{macrocode}
-  \um@parse@term {#3} {\@nil} {#2} {
 \cs_new:Nn \um_remap_symbol_parse:nnn {
+  \um_if_char_spec:nNNT {#3} {\@nil} {#2} {
     \um_remap_symbol_noparse:nnn {#1} {#2} {#3}
   }
 }
@@ -2701,15 +2702,20 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{macro}
 %
 % \begin{macro}{\um_make_mathactive:nNN}
-%: TODO : hook into range feature
 % Makes |#1| a mathactive char, and gives cs |#2| the meaning of mathchar |#1|
 % with class |#3|.
 % You are responsible for giving active |#1| a particular meaning!
 %    \begin{macrocode}
-\cs_new:Npn \um_make_mathactive:nNN #1#2#3 {
-  \um_set_mathchar:NNnn #2 #3 {\um_symfont_tl} {#1}
-  \char_gmake_mathactive:n {#1}
-}
+\cs_new:Nn \um_make_mathactive_parse:nNN
+  {
+    \um_if_char_spec:nNNT {#1} #2 #3
+      { \um_make_mathactive_noparse:nNN {#1} #2 #3 }
+  }
+\cs_new:Nn \um_make_mathactive_noparse:nNN
+  {
+    \um_set_mathchar:NNnn #2 #3 {\um_symfont_tl} {#1}
+    \char_gmake_mathactive:n {#1}
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2717,13 +2723,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 %
 % \begin{macro}{\um_assign_delcode:nn}
-%: TODO : hook csnames into range feature
 %    \begin{macrocode}
 \cs_new:Nn \um_assign_delcode_noparse:nn {
   \um_set_delcode:nnn \um_symfont_tl {#1} {#2}
 }
-  \um@parse@term {#2}{\@nil}{\@nil} {
 \cs_new:Nn \um_assign_delcode_parse:nn {
+  \um_if_char_spec:nNNT {#2}{\@nil}{\@nil} {
     \um_assign_delcode_noparse:nn {#1} {#2}
   }
 }
@@ -3192,6 +3197,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \seq_new:N \l_um_mathalph_seq
 \seq_new:N \l_um_char_range_seq
+\seq_new:N \l_um_mclass_range_seq
+\seq_new:N \l_um_cmd_range_seq
 \keys_define:nn {unicode-math} {
   range .code:n = {
     \bool_set_false:N \l_um_init_bool
@@ -3208,10 +3215,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \cs_set_eq:NN \um_maybe_init_alphabet:n \use_none:n
     \cs_set_eq:NN \um_map_char_single:nn \um_map_char_parse:nn
     \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_parse:nn
+    \cs_set_eq:NN \um_make_mathactive:nNN \um_make_mathactive_parse:nNN
 %    \end{macrocode}
-% Proceed:
+% Proceed by filling up the various `range' seqs according to the user options.
 %    \begin{macrocode}
     \seq_clear:N \l_um_char_range_seq
+    \seq_clear:N \l_um_mclass_range_seq
+    \seq_clear:N \l_um_cmd_range_seq
     \seq_clear:N \l_um_mathalph_seq
     \clist_map_inline:nn {#1} {
       \um_if_mathalph_decl:nTF {##1} {
@@ -3221,11 +3231,31 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
           { \exp_not:V \l_um_tmpc_tl }
         }
       }{
-        \seq_put_right:Nn \l_um_char_range_seq {##1}
+%    \end{macrocode}
+% Four cases:
+% math class matching the known list;
+% single item that is a control sequence---command name;
+% single item that isn't---edge case, must be 0--9;
+% none of the above---char range.
+%    \begin{macrocode}
+        \seq_if_in:NnTF \g_um_mathclasses_seq {##1}
+          { \seq_put_right:Nn \l_um_mclass_range_seq {##1} }
+          {
+            \bool_if:nTF { \tl_if_single_p:n {##1} && \token_if_cs_p:N ##1 }
+              { \seq_put_right:Nn \l_um_cmd_range_seq {##1} }
+              { \seq_put_right:Nn \l_um_char_range_seq {##1} }
+          }
       }
     }
   }
 }
+\seq_new:N \g_um_mathclasses_seq
+\seq_set_from_clist:Nn \g_um_mathclasses_seq
+  {
+    \mathord,\mathalpha,\mathop,\mathbin,\mathrel,
+    \mathopen,\mathclose,\mathpunct,\mathaccent,
+    \mathfence,\mathover,\mathunder
+  }
 %    \end{macrocode}
 %
 %
@@ -3276,10 +3306,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Pretty basic comma separated range processing.
 % Donald Arseneau's \pkg{selectp} package has a cleverer technique.
 %
-% \begin{macro}{\um@parse@term}
+% \begin{macro}{\um_if_char_spec:nNNT}
 % \darg{Unicode character slot}
 % \darg{control sequence (character macro)}
-% \darg{control sequence (math type)}
+% \darg{control sequence (math class)}
 % \darg{code to execute}
 % This macro expands to |#4|
 % if any of its arguments are contained in \cmd\l_um_char_range_seq.
@@ -3303,120 +3333,68 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{tabular}
 % \end{table}
 %
-% Start by iterating over the commalist, ignoring empties, and initialising the scratch conditional:
+% We have three tests, performed sequentially in order of execution time.
+% Any test finding a match jumps directly to the end.
 %    \begin{macrocode}
-\newcommand\um@parse@term[4]{
-  \seq_map_variable:NNn \l_um_char_range_seq \@ii {
-    \unless\ifx\@ii\@empty
-      \@tempswafalse
-%    \end{macrocode}
-% Match to either the character macro (\cmd\alpha) or the math type (\cmd\mathbin):
-%    \begin{macrocode}
-      \expandafter\um@firstchar\expandafter{\@ii}
-      \ifx\@tempa\um@backslash
-        \expandafter\ifx\@ii#2\relax
-          \@tempswatrue
-        \else
-          \expandafter\ifx\@ii#3\relax
-            \@tempswatrue
-          \fi
-        \fi
-%    \end{macrocode}
-% Otherwise, we have a number range, which is passed to another macro:
-%    \begin{macrocode}
-      \else
-        \expandafter\um@parse@range\@ii-\@marker-\@nil#1\@nil
-      \fi
-%    \end{macrocode}
-% If we have a match, execute the code!
-% It also populates the
-% \cmd\l_um_char_num_range_clist\ macro, which is used when defining
-% \cmd\mathbf\ (\etc) \cmd\mathchar\ remappings.
-%    \begin{macrocode}
-      \if@tempswa
+\cs_new:Nn \um_if_char_spec:nNNT
+  {
+
+    % math class:
+    \seq_if_in:NnT \l_um_mclass_range_seq {#3}
+      { \use_none_delimit_by_q_nil:w }
+
+    % command name:
+    \seq_if_in:NnT \l_um_cmd_range_seq {#2}
+      { \use_none_delimit_by_q_nil:w }
+
+    % character slot:
+    \seq_map_inline:Nn \l_um_char_range_seq
+      {
+        \um_int_if_range_matches_slot:nnT {##1} {#1}
+          { \seq_map_break:n { \use_none_delimit_by_q_nil:w } }
+      }
+
+    % this executes if no match was found:
+    \use_none:nnn
+    \q_nil
+    \use:n
+      {
         \clist_put_right:Nx \l_um_char_num_range_clist { \int_eval:n {#1} }
         #4
-      \fi
-    \fi
+      }
   }
-}
-\def\um@firstof#1#2\@nil{#1}
-\edef\um@backslash{\expandafter\um@firstof\string\string\@nil}
-\def\um@firstchar#1{\edef\@tempa{\expandafter\um@firstof\string#1\@nil}}
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um@parse@range}
-% Weird syntax.
-% As shown previously in \tabref{ranges}, this macro can be passed four different input types via \cmd\um@parse@term.
+% \begin{macro}{\um_int_if_range_matches_slot:nnT}
+% A `numrange' is like |-2,5-8,12,17-| (can be unsorted).
+%
+% Four cases, four argument types:
+% \begin{Verbatim}
+%    #2     #3      #4
+%   [ 1] - [qn] - [   ] qs
+%   [ 1] - [  ] - [qn-] qs
+%   [  ] - [ 3] - [qn-] qs
+%   [ 1] - [ 3] - [qn-] qs
+% \end{Verbatim}
+%
 %    \begin{macrocode}
-\def\um@parse@range#1-#2-#3\@nil#4\@nil{
-  \def\@tempa{#1}
-  \def\@tempb{#2}
+\cs_new:Nn \um_int_if_range_matches_slot:nnT
+  { \um_numrange_parse:nwT {#1} #2 - \q_nil - \q_stop {#3} }
 %    \end{macrocode}
-% \begin{tabular}{@{}ll}
-% \hline
-% Range & $r=x$ \\
-% C-list input & \cmd\@ii=|X| \\
-% Macro input & |\um@parse@range X-\@marker-\@nil#1\@nil| \\
-% Arguments &
-%     \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
-%   = \texttt{\textcolor{red}{X}-\textcolor{blue}{\cmd\@marker}-\textcolor{Green}{\char`\{\char`\}}} \\
-% \hline
-% \end{tabular}
+%
 %    \begin{macrocode}
-  \expandafter\ifx\expandafter\@marker\@tempb\relax
-    \int_compare:nT {#4=#1} \@tempswatrue
-  \else
-%    \end{macrocode}
-% \begin{tabular}{@{}ll}
-% \hline
-% Range & $r\geq x$ \\
-% C-list input & \cmd\@ii=|X-| \\
-% Macro input & |\um@parse@range X--\@marker-\@nil#1\@nil|\\
-% Arguments &
-%    \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
-% = \texttt{\textcolor{red}{X}-\textcolor{blue}{\char`\{\char`\}}-\textcolor{Green}{\cmd\@marker-}} \\
-% \hline
-% \end{tabular}
-%    \begin{macrocode}
-    \ifx\@empty\@tempb
-      \int_compare:nT {#4>#1-1} \@tempswatrue
-    \else
-%    \end{macrocode}
-% \begin{tabular}{@{}ll}
-% \hline
-% Range & $r\leq y$ \\
-% C-list input & \cmd\@ii=|-Y|  \\
-% Macro input & |\um@parse@range -Y-\@marker-\@nil#1\@nil|\\
-% Arguments &
-%    \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
-% = \texttt{\textcolor{red}{\char`\{\char`\}}-\textcolor{blue}{Y}-\textcolor{Green}{\cmd\@marker-}}\\
-% \hline
-% \end{tabular}
-%    \begin{macrocode}
-      \ifx\@empty\@tempa
-        \int_compare:nT {#4<#2+1} \@tempswatrue
-%    \end{macrocode}
-% \begin{tabular}{@{}ll}
-% \hline
-% Range & $x \leq r \leq y$  \\
-% C-list input & \cmd\@ii=|X-Y|  \\
-% Macro input & |\um@parse@range X-Y-\@marker-\@nil#1\@nil|\\
-% Arguments &
-%     \texttt{\textcolor{red}{\char`\#1}-\textcolor{blue}{\char`\#2}-\textcolor{Green}{\char`\#3}}
-% =  \texttt{\textcolor{red}{X}-\textcolor{blue}{Y}-\textcolor{Green}{\cmd\@marker-}}\\
-% \hline
-% \end{tabular}
-%    \begin{macrocode}
-      \else
-        \int_compare:nT {#4>#1-1} {
-          \int_compare:nT {#4<#2+1} \@tempswatrue
-        }
-      \fi
-    \fi
-  \fi
-}
+\cs_set:Npn \um_numrange_parse:nwT #1 #2 - #3 - #4 \q_stop #5
+  {
+    \tl_if_empty:nTF {#4} { \int_compare:nT {#1=#2} {#5} }
+      {
+    \tl_if_empty:nTF {#3} { \int_compare:nT {#1>=#2} {#5} }
+      {
+    \tl_if_empty:nTF {#2} { \int_compare:nT {#1<=#3} {#5} }
+      {
+    \int_compare:nT {#1>=#2} { \int_compare:nT {#1<=#3} {#5} }
+      } } }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3876,7 +3854,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
-% When \cmd\um@parse@term\ is executed, it populates the \cmd\l_um_char_num_range_clist\
+% When \cmd\um_if_char_spec:nNNT\ is executed, it populates the \cmd\l_um_char_num_range_clist\
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cs{um_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
