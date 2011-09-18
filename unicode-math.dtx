@@ -2161,15 +2161,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
-    \mathover % LuaTeX only
+    \mathover
       {
-        \cs_set_protected_nopar:Npn #2 ##1
-          { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
+%<LU>        \cs_set_protected_nopar:Npn #2 ##1
+%<LU>          { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
       }
     \mathunder % LuaTeX only
       {
-        \cs_set_protected_nopar:Npn #2 ##1
-          { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
+%<LU>        \cs_set_protected_nopar:Npn #2 ##1
+%<LU>          { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
       }
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
@@ -5388,23 +5388,46 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \um_setup_active_frac:
 %    \end{macrocode}
 %
-% \subsection{Overbrace and underbrace}
+% \subsection{\XeTeX\ over- and under- brace, paren, bracket}
+% Thanks to Claudio Beccari for this code.
 %    \begin{macrocode}
 %<*XE>
-\renewcommand\overbrace[1]{\mathop{\vbox{\setbox\z@\hbox{$\displaystyle#1$}
-  \dimen@=\dimexpr\wd\z@+3\p@\relax
-  \setbox\tw@\hbox{$\left\{\vcenter to\dimen@{\vss}\right.$}
-  \m@th\ialign{##\crcr\noalign{\kern-\p@}%
-     \rotatebox[origin=Bl]{-90}{\box\tw@}\crcr\noalign{\kern0\p@\nointerlineskip}%
-     \hfil\box\z@\hfil\crcr}}}\limits}
+\cs_new:Nn \um_over_bracket:nN
+  {
+    \mathop { \vbox {
+      \setbox\z@\hbox{$\displaystyle#1$}
+      \dimen@=\dimexpr\wd\z@+3\p@\relax
+      \setbox\tw@\hbox{$\left #2 \vcenter to\dimen@{\vss} \right. $}
+      \m@th\ialign
+        {
+          ##\crcr\noalign{\kern-\p@}%
+          \rotatebox[origin=Bl]{-90}
+            {\box\tw@}\crcr\noalign{\kern0\p@\nointerlineskip}%
+          \hfil\box\z@\hfil\crcr
+        }
+    } } \limits
+  }
 
-\renewcommand\underbrace[1]{\mathop{\vtop{\setbox\z@\hbox{$\displaystyle#1$}
- \dimen@=\dimexpr\wd\z@+3\p@\relax
- \setbox\tw@\hbox{$\left\}\vcenter to\dimen@{\vss}\right.$}
- \m@th\ialign{##\crcr
-  \hfil\box\z@\hfil\crcr
-  \noalign{\kern1\p@\nointerlineskip}%
-  \rotatebox[origin=Br]{-90}{\box\tw@}\crcr\noalign{\kern0\p@}}}}\limits}
+\cs_new:Nn \um_under_bracket:nN
+  {
+    \mathop { \vtop {
+      \setbox\z@\hbox{$\displaystyle#1$}
+      \dimen@=\dimexpr\wd\z@+3\p@\relax
+      \setbox\tw@\hbox{$\left #2 \vcenter to\dimen@{\vss} \right. $}
+      \m@th\ialign
+        {
+          ##\crcr\hfil\box\z@\hfil\crcr
+          \noalign{\kern1\p@\nointerlineskip}%
+          \rotatebox[origin=Br]{-90}{\box\tw@}\crcr\noalign{\kern0\p@}
+        }
+    } } \limits
+  }
+\DeclareDocumentCommand \overbrace    {m} { \um_over_bracket:nN  {#1} \{ }
+\DeclareDocumentCommand \overbracket  {m} { \um_over_bracket:nN  {#1}  [ }
+\DeclareDocumentCommand \overparen    {m} { \um_over_bracket:nN  {#1}  ( }
+\DeclareDocumentCommand \underbrace   {m} { \um_under_bracket:nN {#1} \} }
+\DeclareDocumentCommand \underbracket {m} { \um_under_bracket:nN {#1}  ] }
+\DeclareDocumentCommand \underparen   {m} { \um_under_bracket:nN {#1}  ) }
 %</XE>
 %    \end{macrocode}
 %
