@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/09/16 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/09/18 v0.5e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -4686,18 +4686,19 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % to perform the lowercasing and |\let|. \cmd\scantokens\ changes the carets
 % back into their original meaning after the group has ended and |^|'s catcode returns to normal.
 %    \begin{macrocode}
-\begingroup
+\group_begin:
   \char_set_catcode_other:N \^
   \cs_gset:Npn \um_cs_set_eq_active_char:Nw #1 = "#2 \q_nil {
-    \lowercase{
+    \tex_lowercase:D {
       \tl_rescan:nn {
+        \ExplSyntaxOn
         \char_set_catcode_other:N \{
         \char_set_catcode_other:N \}
         \char_set_catcode_other:N \&
         \char_set_catcode_other:N \%
         \char_set_catcode_other:N \$
       }{
-        \global\let#1=^^^^^#2
+        \cs_gset_eq:NN #1 ^^^^^#2
       }
     }
   }
@@ -4708,17 +4709,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % any catcode problems.
 %    \begin{macrocode}
   \cs_new:Npn \um_active_char_set:wc "#1 \q_nil #2 {
-    \lowercase {
-      \tl_rescan:nn {
-        \catcode`\_=11\relax
-        \catcode`\:=11\relax
-        \catcode`\^=7\relax
-      }{
-        \protected\gdef^^^^^#1{\csname #2\endcsname}%
-      }
+    \tex_lowercase:D {
+      \tl_rescan:nn { \ExplSyntaxOn }
+        { \cs_gset_protected_nopar:Npx ^^^^^#1 { \exp_not:c {#2} } }
     }
   }
-\endgroup
+\group_end:
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
