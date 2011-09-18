@@ -2161,16 +2161,18 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
+%<*LU>
     \mathover
       {
-%<LU>        \cs_set_protected_nopar:Npn #2 ##1
-%<LU>          { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
+        \cs_set_protected_nopar:Npx #2 ##1
+          { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
       }
-    \mathunder % LuaTeX only
+    \mathunder
       {
-%<LU>        \cs_set_protected_nopar:Npn #2 ##1
-%<LU>          { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
+        \cs_set_protected_nopar:Npx #2 ##1
+          { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
       }
+%</LU>
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
   }
@@ -4823,8 +4825,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \cs_new:Nn \um_arg_i_before_egroup:n {#1\egroup}
 \cs_new:Nn \um_superscript:n {
   ^\bgroup #1
-  \peek_meaning_remove:NTF ^
-    \um_arg_i_before_egroup:n \egroup
+  \peek_meaning_remove:NTF ^ \um_arg_i_before_egroup:n \egroup
 }
 %    \end{macrocode}
 %
@@ -5407,7 +5408,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         }
     } } \limits
   }
-
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \cs_new:Nn \um_under_bracket:nN
   {
     \mathop { \vtop {
