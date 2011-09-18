@@ -154,6 +154,31 @@ changes have not affected the standard behaviour.
 CHANGE HISTORY
 --------------
 
+- v0.6 (2011/09/18)
+
+  * Keep in sync with fontspec internals
+    (sorry for the small delay where things were broken)
+  * Keep in sync with expl3 deprecated functions
+  * Math versions (finally) implemented; can now change maths fonts
+    mid-document without reinitialising everything
+    (thanks to Ulrike Fischer and Ulrik Vieth)
+  * Symbols file `unimath-symbols.pdf` now uses maths versions to compare
+    all of the OpenType maths fonts I currently have access to
+  * Over- and under- braces, brackets, and parentheses now work in XeTeX
+    (thanks to Claudio Beccari)
+  * Many internal changes, including a re-write of the `range` feature;
+    it should now be faster and more robust
+  * Tentative programmer's interface for querying the current math style:
+    `\l_um_mathstyle_tl`.
+  * Remove (outdated) interaction with beamer; you must specify
+    `professionalfonts` manually for now
+  * Quieten the console output when loading maths fonts with incomplete maths
+    style coverage
+  * Synonym added: `\lnot` -> `\neg`
+  * Two added Unicode symbols (names tentative): `\blanksymbol` and `\openbox`
+    (thanks to Apostolos Syropoulos)
+  * Fixed literal sub-/super-script input.
+
 - v0.5e (2011/07/31)
 
   * Fix forward compatibility clash with deprecated expl3 functions (sorry)
@@ -175,7 +200,6 @@ CHANGE HISTORY
   * Move several LuaTeX-related patches to the `lualatex-math` package
   * Fixed mathtool's `\cramped` in XeLaTeX usage
 
-
 - v0.5d (2011/01/30)
 
   * Assorted improvements to LuaLaTeX support, including non-growing accents
@@ -194,7 +218,7 @@ CHANGE HISTORY
 
 - v0.5b (2010/09/19): Tune-up
 
-  * Added missing symbols/synonyms:  
+  * Added missing symbols/synonyms:
       \diamond  \smallint  \emptyset  \hbar  \backepsilon  \eth
   * \overline works for LuaLaTeX
   * Fix \slash; previously, it overwrote the text definition
@@ -204,8 +228,10 @@ CHANGE HISTORY
 
   * Numerous documentation improvements
   * Bug fix against stray catcode changes
-  * Add `\mathcal` and `\mathbfcal` as distinct from the Script style; these are only supported by the XITS fonts at present
-  * Small changes to the range of symbols offered (especially note that `\ac` is now `\invlazys` to avoid acronym package clash)
+  * Add `\mathcal` and `\mathbfcal` as distinct from the Script style;
+    these are only supported by the XITS fonts at present
+  * Small changes to the range of symbols offered (especially note that `\ac`
+    is now `\invlazys` to avoid acronym package clash)
   * Superscripts are allowed after primes (as they should be)
   * Numerous LuaLaTeX improvements, including roots and over/under braces.
 
