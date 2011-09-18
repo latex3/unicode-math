@@ -82,27 +82,16 @@ This work is "author-maintained" by Will Robertson.
 %
 % \begin{abstract}
 % \noindent
-% \begingroup
-% \bfseries
-% Warning! This package is experimental and subject to change without regard
-% for backwards compatibility.
-% Performance issues may be encountered until algorithms are refined.
-% \endgroup
-%
-% (But don't take the warning too seriously, either.
-% I hope the package is now ready to use.)
-%
-% This is the first release of the \pkg{unicode-math} package, which is
+% This is the first incarnation of the \pkg{unicode-math} package, which is
 % intended to be a complete implementation of Unicode
 % maths for \LaTeX\ using the \XeTeX\ and Lua\TeX\ typesetting engines.
-% With this package, changing maths fonts will be as easy as changing
-% text fonts --- not that there are many Unicode maths fonts yet.
+% With this package, changing maths fonts is as easy as changing
+% text fonts --- and there are more and more maths fonts appearing now.
 % Maths input can also be simplified with Unicode since literal glyphs may be
 % entered instead of control sequences in your document source.
 %
 % The package provides support for both \XeTeX\ and Lua\TeX. The different
-% engines provide differing levels of support for Unicode maths, and
-% support for Lua\TeX's features in this area is still incomplete.
+% engines provide differing levels of support for Unicode maths.
 % Please let us know of any troubles.
 %
 % Alongside this documentation file, you should be able to find a minimal
@@ -110,7 +99,7 @@ This work is "author-maintained" by Will Robertson.
 % `\texttt{unimath-example.ltx}'. It also comes with a separate document,
 % `\texttt{unimath-symbols.pdf}',
 % containing a complete listing of mathematical symbols defined by
-% \pkg{unicode-math}.
+% \pkg{unicode-math}, including comparisons between different fonts.
 %
 % Finally, while the STIX fonts may be used with this package, accessing
 % their alphabets in their `private user area' is not yet supported.
@@ -125,6 +114,7 @@ This work is "author-maintained" by Will Robertson.
 % \tableofcontents
 %
 % \newpage
+% \part{User documentation}
 % \section{Introduction}
 %
 % This document describes the \pkg{unicode-math} package, which is an
@@ -142,9 +132,11 @@ This work is "author-maintained" by Will Robertson.
 % Microsoft for developing the mathematics extension to OpenType as part of
 % Microsoft Office~2007;
 % Jonathan Kew for implementing Unicode math support in \XeTeX;
+% Taco Hoekwater for implementing Unicode math support in \LuaTeX;
 % Barbara Beeton for her prodigious effort compiling the definitive list of Unicode math
 % glyphs and their \LaTeX\ names (inventing them where necessary), and also
-% for her thoughtful replies to my sometimes incessant questions.
+% for her thoughtful replies to my sometimes incessant questions;
+% Philipp Stephani for extending the package to support \LuaTeX.
 % Ross Moore and Chris Rowley have provided moral and technical support
 % from the very early days with great insight into the issues we face trying
 % to extend and use \TeX\ in the future.
@@ -241,10 +233,6 @@ This work is "author-maintained" by Will Robertson.
 % such symbols is not necessarily going to be consistent; please report
 % problem areas to me.
 %
-% \LaTeX's concept of math `versions' is not yet supported. The only way to
-% get bold maths is to add markup for it all. This is still an area that
-% requires investigation.
-%
 % Symbols for maths characters have been inherited from the STIX project and
 % may change slightly in the long term. We have tried to preserve backwards
 % compatibility with \LaTeX\ conventions as best as possible; again, please
@@ -297,7 +285,7 @@ This work is "author-maintained" by Will Robertson.
 % where \meta{unicode range} is a comma-separated list of Unicode slots and
 % ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|. You may also use the macro
 % for accessing the glyph, such as \cs{int}, or whole collection of symbols with
-% the same math type, such as \cs{mathopen}, or complete math alphabets such as \cs{mathbb}.
+% the same math type, such as \cs{mathopen}, or complete math styles such as \cs{mathbb}.
 % (Only numerical slots, however, can be used in ranged declarations.)
 %
 % \paragraph{\XeTeX\ users only}
@@ -313,7 +301,7 @@ This work is "author-maintained" by Will Robertson.
 % Here is the current plan.
 % \begin{itemize}
 % \item |[range=\mathbb]| to use the font for `bb' letters only.
-% \item |[range=\mathbfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (with |latin|, |Latin|, |num| as well for Latin lower-/upper-case and numbers).
+% \item |[range=\mathbfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (also with |latin|, |Latin|, |num| as possible options for Latin lower-/upper-case and numbers, resp.).
 % \item |[range=\mathsfit->\mathbfsfit]| to map to different output alphabet(s) (which is rather useless right now but will become less useless in the future).
 % \end{itemize}
 %
@@ -322,7 +310,7 @@ This work is "author-maintained" by Will Robertson.
 % Therefore, to use an \ascii-encoded fractur font, for example, write
 % \par{\centering|\setmathfont[range=\mathfrak]{SomeFracturFont}|\par}\noindent
 % and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
-% If necessary (but why?) this behaviour can be forced with |[range=\mathfrac->\mathup]|.
+% If necessary this behaviour can be forced with |[range=\mathfrac->\mathup]|.
 %
 %
 % \subsection{Script and scriptscript fonts/features}
@@ -332,28 +320,29 @@ This work is "author-maintained" by Will Robertson.
 % for scriptsize and scriptscriptsize symbols (the $B$ and $C$, respectively,
 % in $A_{B_C}$). Other fonts will possibly use entirely separate fonts.
 %
-% Not yet implemented: Both of these options
-% must be taken into account. I hope this will be mostly automatic from the
-% users' points of view. The |+ssty| feature can be detected and applied
-% automatically, and appropriate optical size information embedded in the
-% fonts will ensure this latter case. Fine tuning should be possible
-% automatically with \pkg{fontspec} options. We might have to wait until
-% MnMath, for example, before we really know.
+% The features |script-font| and |sscript-font| allow alternate fonts to be
+% selected for the script and scriptscript sizes, and |script-features| and
+% |sscript-features| to apply different OpenType features to them.
+%
+% By default |script-features| is defined as |Style=MathScript| and |sscript-features| is |Style=MathScriptScript|.
+% These correspond to the two levels of OpenType's |ssty| feature tag.
+% If the |(s)script-features| options are specified manually, you must
+% additionally specify the |Style| options as above.
 %
 %
 % \subsection{Maths `versions'}
 %
-% \LaTeX\ uses a concept known as maths versions to switch math fonts
+% \LaTeX\ uses a concept known as `maths versions' to switch math fonts
 % mid-document.
 % This is useful because it is more efficient than loading a complete maths
-% font from scratch every time---especially in the case of Unicode maths!
+% font from scratch every time---especially with thousands of glyphs in the case of Unicode maths!
 % The canonical example for maths versions is to select a `bold' maths font
 % which might be suitable for section headings, say.
 % (Not everyone agrees with this typesetting choice, though; be careful.)
 %
 % To select a new maths font in a particular version, use the syntax
 %   \codeline{\cmd\setmathfont|[version=|\meta{version name}|,|\meta{font features}|]|\marg{font name}}
-% and to switch between maths versions mid-document use the \LaTeX\ command
+% and to switch between maths versions mid-document use the standard \LaTeX\ command
 % \cmd\mathversion\marg{version name}.
 %
 % \section{Maths input}
@@ -370,7 +359,7 @@ This work is "author-maintained" by Will Robertson.
 % Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright}
 % uppercase Greek letters for variables in mathematics. This is contrary to
 % the \textsc{iso} standards of using italic forms for both upper- and lowercase.
-% Furthermore, the French (contrary again, \emph{quelle surprise}) have been
+% Furthermore, the French have been
 % known to use upright uppercase \emph{Latin} letters as well as upright
 % upper- and lowercase Greek. Finally, it is not unknown to use upright letters
 % for all characters, as seen in the Euler fonts.
@@ -378,7 +367,7 @@ This work is "author-maintained" by Will Robertson.
 % The \pkg{unicode-math} package accommodates these possibilities with an
 % interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a
 % package option \opt{math-style} that takes one of four arguments:
-% \opt{TeX}, \opt{ISO}, \opt{french}, or \opt{upright}.
+% \opt{TeX}, \opt{ISO}, \opt{french}, or \opt{upright} (case sensitive).
 %
 % The philosophy behind the interface to the mathematical alphabet symbols
 % lies in \LaTeX's attempt of separating content and formatting. Because input
@@ -493,7 +482,7 @@ This work is "author-maintained" by Will Robertson.
 % But \LaTeX's \cs{mathsf} is \textsl{upright} sans serif.
 %
 % Therefore I reluctantly add the package options |[sans-style=upright]| and |[sans-style=italic]| to control the behaviour of \cs{mathsf}.
-% The |upright| style sets up the command to use the seemingly-useless upright sans serif, including Greek;
+% The |upright| style sets up the command to use upright sans serif, including Greek;
 % the |italic| style switches to using italic in both Latin and Greek alphabets.
 % In other words, this option simply changes the meaning of \cs{mathsf} to either \cs{mathsfup} or \cs{mathsfit}, respectively.
 % Please let me know if more granular control is necessary here.
@@ -522,11 +511,11 @@ This work is "author-maintained" by Will Robertson.
 % This may change in the future.
 %
 % \begin{table}
-% \caption{Mathematical alphabets defined in Unicode. Black dots indicate an alphabet exists in the font specified; grey dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
+% \caption{Mathematical alphabets defined in Unicode. Black dots indicate an alphabet exists in the font specified; blue dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
 % \tablabel{mathalphabets}
 % \centering
 % \def\Y{\textbullet}
-% \def\M{\textcolor{gray}{\textbullet}}
+% \def\M{\textcolor{blue}{\textbullet}}
 % \begin{tabular}{@{} lll l ccc @{}}
 % \toprule
 % \multicolumn{3}{c}{Font} & & \multicolumn{3}{c}{Alphabet} \\
@@ -1038,16 +1027,14 @@ This work is "author-maintained" by Will Robertson.
 % maths style (\cs{mathbf}, \cs{mathit}, etc.), you can query the
 % variable \cs{l_um_mathstyle_tl}. It will contain the maths style
 % without the leading `math' string; for example,
-% \begin{Verbatim}
-%   \mathbf { \show \l_um_mathstyle_tl }
-% \end{Verbatim}
+% |\mathbf { \show \l_um_mathstyle_tl }|
 % will produce `bf'.
 %
 % \StopEventually{}
 %
-% \part{The \pkg{unicode-math} package}
+% \part{Package implementation}
 %
-% We bifurcate the package based on the engine being used.
+% We (later on) bifurcate the package based on the engine being used.
 %    \begin{macrocode}
 %<*load>
 \luatex_if_engine:T { \usepackage{unicode-math-luatex} \endinput }
@@ -1055,9 +1042,13 @@ This work is "author-maintained" by Will Robertson.
 %</load>
 %    \end{macrocode}
 %
-%<*preamble&!XE&!LU>
+% \section{Header code}
 %
-% \section{Things we need}
+% The shared part of the code starts here before the split mentioned above.
+%
+%    \begin{macrocode}
+%<*preamble&!XE&!LU>
+%    \end{macrocode}
 %
 %    \begin{macrocode}
 \usepackage{ifxetex,ifluatex}
@@ -1189,8 +1180,7 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-%
-% \subsubsection{Function variants}
+% \subsection{Function variants}
 %
 %    \begin{macrocode}
 \cs_generate_variant:Nn \fontspec_set_family:Nnn {Nx}
@@ -1463,7 +1453,7 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %
-% \subsubsection{\Hologo{LuaLaTeX} module}
+% \section{\Hologo{LuaLaTeX} module}
 %
 % We create a \pkg{luatexbase} module that contains Lua functions for use with \hologo{LuaLaTeX}.
 %    \begin{macrocode}
@@ -1496,6 +1486,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % (Error messages and warning definitions go here from the |msg| chunk
 %  defined in \secref[vref]{codemsg}.)
+%
+% \section{Bifurcation}
+% And here the split begins. Most of the code is still shared, but
+% code for \LuaTeX\ uses the `LU' prefix and code for \XeTeX\ uses `XE'.
 %
 %    \begin{macrocode}
 %<*package&(XE|LU)>
@@ -6506,6 +6500,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \catcode`\_=11\relax
   \catcode`\:=11\relax
 }
+
+\def\partname{Part}
+
 %    \end{macrocode}
 %</dtx-style>
 %\fi
