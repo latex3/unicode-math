@@ -1031,6 +1031,17 @@ This work is "author-maintained" by Will Robertson.
 % (Not yet implemented.)
 % \fi
 %
+% \subsubsection{Programmer's interface}
+%
+% (Tentative and under construction.)
+% If you are writing some code that needs to know the current
+% maths style (\cs{mathbf}, \cs{mathit}, etc.), you can query the
+% variable \cs{l_um_mathstyle_tl}. It will contain the maths style
+% without the leading `math' string; for example,
+% \begin{Verbatim}
+%   \mathbf { \show \l_um_mathstyle_tl }
+% \end{Verbatim}
+% will produce `bf'.
 %
 % \StopEventually{}
 %
@@ -3532,6 +3543,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % Define the high level math alphabet macros (\cs{mathit}, etc.) in terms of
 % unicode-math definitions. Use \cs{bgroup}/\cs{egroup} so s'scripts scan the
 % whole thing.
+%
+% The flag \cs{l_um_mathstyle_tl} is for other applications to query the
+% current math style.
 %    \begin{macrocode}
 \cs_new:Nn \um_prepare_mathstyle:n {
   \um_init_alphabet:x {#1}
@@ -3541,14 +3555,17 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \cs_set_protected:cpx {math#1} {
     \exp_not:n{
       \bgroup
-      \mode_if_math:F {
-        \egroup\expandafter
-        \non@alpherr\expandafter{\csname math#1\endcsname\space}
-      }
+      \mode_if_math:F
+        {
+          \egroup\expandafter
+          \non@alpherr\expandafter{\csname math#1\endcsname\space}
+        }
+      \tl_set:Nn \l_um_mathstyle_tl {#1}
     }
     \exp_not:c {_um_math#1_aux:n}
   }
 }
+\tl_new:N \l_um_mathstyle_tl
 \cs_generate_variant:Nn \um_prepare_mathstyle:n {f}
 %    \end{macrocode}
 % \end{macro}
