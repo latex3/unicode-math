@@ -5437,10 +5437,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         }
     } } \limits
   }
-\DeclareDocumentCommand \overbrace    {m} { \um_over_bracket:nN  {#1} \{ }
+\RenewDocumentCommand   \overbrace    {m} { \um_over_bracket:nN  {#1} \{ }
 \DeclareDocumentCommand \overbracket  {m} { \um_over_bracket:nN  {#1}  [ }
 \DeclareDocumentCommand \overparen    {m} { \um_over_bracket:nN  {#1}  ( }
-\DeclareDocumentCommand \underbrace   {m} { \um_under_bracket:nN {#1} \} }
+\RenewDocumentCommand   \underbrace   {m} { \um_under_bracket:nN {#1} \} }
 \DeclareDocumentCommand \underbracket {m} { \um_under_bracket:nN {#1}  ] }
 \DeclareDocumentCommand \underparen   {m} { \um_under_bracket:nN {#1}  ) }
 %</XE>
