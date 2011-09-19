@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/09/18 v0.6 Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/09/19 v0.6a Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -2755,6 +2755,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_setup_delcodes:}
 %    \begin{macrocode}
 \cs_new:Npn \um_setup_delcodes: {
+  \um_assign_delcode:nn {`\.} {\c_zero} % ensure \left. and \right. work
   \um_assign_delcode:nn {`\/}   {\g_um_slash_delimiter_usv}
   \um_assign_delcode:nn {"2044} {\g_um_slash_delimiter_usv} % fracslash
   \um_assign_delcode:nn {"2215} {\g_um_slash_delimiter_usv} % divslash

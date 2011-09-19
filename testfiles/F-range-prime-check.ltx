@@ -1,0 +1,17 @@
+%
+% See http://github.com/wspr/unicode-math/issues/171
+%
+% The fix is related to the fact that primes use the `mathactive'
+% section of the unicode-math code, which is now controlled by
+% the parsing range feature (as it always should have been).
+
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont[Colour=FF0000]{xits-math.otf}
+\setmathfont
+  [range=\mathop,Colour=0000FF]
+  {xits-math.otf}
+
+\begin{document}
+\[ f(x) = \int f'(x) dx \]
+\end{document}

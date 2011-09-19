@@ -154,6 +154,10 @@ changes have not affected the standard behaviour.
 CHANGE HISTORY
 --------------
 
+- v0.6 (2011/09/19)
+
+  * Always a bug that slips through the cracks! Fixes `\left.` and `\right.`
+
 - v0.6 (2011/09/18)
 
   * Keep in sync with fontspec internals
