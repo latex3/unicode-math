@@ -997,6 +997,21 @@ This work is "author-maintained" by Will Robertson.
 % \tablabel{uptriangles}
 % \end{table}
 %
+% \subsubsection{Warning messages}
+%
+% This package can produce a number of informational messages to try and inform the user when something might be going wrong due to package conflicts or something else.
+% As an experimental feature, these can be turn off on an individual basis with the package option |warnings-off| which takes a comma-separated list of warnings to suppress.
+% A warning will give you its name when printed on the console output; e.g.,
+% \begin{Verbatim}
+% * unicode-math warning: "mathtools-colon"
+% *
+% * ... <warning message> ...
+% \end{Verbatim}
+% This warning could be suppressed by loading the package as follows:
+% \begin{Verbatim}
+% \usepackage[warnings-off={mathtools-colon}]{unicode-math}
+% \end{Verbatim}
+%
 % \iffalse
 % \subsubsection{Normalising some input characters}
 %
@@ -1427,6 +1442,19 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 % \paragraph{Debug/tracing}
+%
+%
+%    \begin{macrocode}
+\keys_define:nn {unicode-math}
+  {
+    warnings-off .code:n =
+      {
+        \clist_map_inline:nn {#1}
+          { \msg_redirect_name:nnn { unicode-math } { ##1 } { none } }
+      }
+  }
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 \keys_define:nn {unicode-math} {
   trace .choice: ,

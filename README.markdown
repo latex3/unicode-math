@@ -154,9 +154,11 @@ changes have not affected the standard behaviour.
 CHANGE HISTORY
 --------------
 
-- v0.6 (2011/09/19)
+- v0.6a (2011/09/19)
 
   * Always a bug that slips through the cracks! Fixes `\left.` and `\right.`
+  * Add experimental package option `warnings-off=...` which allows warnings
+    to be suppressed on an individual basis.
 
 - v0.6 (2011/09/18)
 
