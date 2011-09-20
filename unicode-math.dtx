@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/09/19 v0.6a Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/09/20 v0.6a Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -172,6 +172,7 @@ This work is "author-maintained" by Will Robertson.
 %
 % Once the package is loaded, traditional TFM-based fonts are not supported any more;
 % you can only switch to a different OpenType math font using the \cs{setmathfont} command.
+% If you do not load an OpenType maths font before |\begin{document}|, Latin Modern Math (see above) will be loaded automatically.
 %
 %
 % \subsection{Package options}
@@ -2374,38 +2375,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %
 % \subsection{The main \cs{setmathfont} macro}
 %
-% \begin{macro}{\um_saved_ltxe_glb_settings:}
-%   Save the original definition of \cmd{\glb@settings} in a macro.
-%    \begin{macrocode}
-\cs_new_eq:NN \um_saved_ltxe_glb_settings: \glb@settings
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\glb@settings}
-%   We issue an error if the user tried to typeset math before setting a font.
-%    \begin{macrocode}
-\CheckCommand * \glb@settings {
-     \expandafter\ifx\csname S@\f@size\endcsname\relax
-       \calculate@math@sizes
-     \fi
-     \csname S@\f@size\endcsname
-     \ifmath@fonts
-       \begingroup
-         \escapechar\m@ne
-         \csname mv@\math@version \endcsname
-         \globaldefs\@ne
-         \math@fonts
-         \let \glb@currsize \f@size
-       \endgroup
-        \the\every@math@size
-     \fi
-}
-\cs_set_protected_nopar:Npn \glb@settings {
-  \msg_error:nn { unicode-math } { no-font-selected }
-}
-%    \end{macrocode}
-% \end{macro}
-%
 % Using a |range| including large character sets such as \cmd\mathrel,
 % \cmd\mathalpha, \etc, is \emph{very slow}!
 % I hope to improve the performance somehow.
@@ -2421,11 +2390,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
 % this allows \cmd\DeclareSymbolFont\ at any point in the document.
 %    \begin{macrocode}
-  \let\glb@currsize\relax
-%    \end{macrocode}
-% \item Restore \LaTeXe\ kernel macro to apply settings instead of giving an error.
-%    \begin{macrocode}
-  \cs_set_eq:NN \glb@settings \um_saved_ltxe_glb_settings:
+  \cs_set_eq:NN \glb@currsize \scan_stop:
 %    \end{macrocode}
 % \item To start with, assume we're defining the font for every math symbol character.
 %    \begin{macrocode}
@@ -4808,6 +4773,17 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 %    \end{macrocode}
 %
+% \section{Fall-back font}
+%
+% Want to load Latin Modern Math if nothing else.
+%    \begin{macrocode}
+\AtBeginDocument { \um_load_lm_if_necessary: }
+\cs_new:Nn \um_load_lm_if_necessary:
+  {
+    \cs_if_exist:NF \l_um_fontname_tl { \setmathfont{lmmath-regular.otf} }
+  }
+%    \end{macrocode}
+%
 % \section{Epilogue}
 %
 % Lots of little things to tidy up.
@@ -6081,15 +6057,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \msg_new:nnn {unicode-math} {setup-alph}
 {
   Setup~ alphabet:~ #1.
-}
-\msg_new:nnnn { unicode-math } { no-font-selected } {
-  You've~ loaded~ the~ unicode-math~ package,~ but~ you~ forgot~ to~ select~
-  a~ Unicode~ math~ font.~ Please~ select~ one~ with~ the~ \token_to_str:N \setmathfont \\
-  command.
-} {
-  Loading~ the~ unicode-math~ package~ without~ using~ a~ Unicode~ math~ font~
-  is~ not~ supported.~ Either~ select~ a~ Unicode~ math~ font,~ or~ don't~
-  load~ the~ unicode-math~ package.
 }
 \msg_new:nnn { unicode-math } { missing-alphabets }
   {
