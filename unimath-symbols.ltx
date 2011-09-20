@@ -1,3 +1,4 @@
+%!TEX TS-program = LuaLaTeX
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % SYMBOLS DEFINED BY UNICODE-MATH
@@ -6,7 +7,7 @@
 \documentclass{article}
 \makeatletter
 
-\usepackage{booktabs,shortvrb,geometry,varwidth,textcomp,longtable,hyperref}
+\usepackage{booktabs,catchfile,shortvrb,geometry,metalogo,varwidth,textcomp,longtable,hyperref}
 
 \geometry{margin=3cm}
 \hypersetup{colorlinks,linkcolor=black}
@@ -15,69 +16,37 @@
 
 \usepackage{fontspec}
 \setmainfont[Ligatures=TeX,Numbers={Lowercase,Monospaced}]{TeX Gyre Pagella}
-\usepackage{unicode-math}
-\setmathfont{XITS Math}
+\usepackage[math-style=literal,bold-style=literal]{unicode-math}
 
-\newcounter{lm}
-\setcounter{lm}{-1}
-\setmathfont[version=lm,SizeFeatures={
-    {Size=-10, Colour=999999},
-    {Size=10-, Colour=CC6666}}]{lmmath-regular.otf}
-
-\newcounter{xits}
-\setcounter{xits}{-1}
-\setmathfont[version=xits,SizeFeatures={
-    {Size=-10, Colour=999999},
-    {Size=10-, Colour=CCCC66}}]{xits-math.otf}
-
-\newcounter{lucida}
-\setcounter{lucida}{-1}
-\setmathfont[version=lucida,SizeFeatures={
-    {Size=-10, Colour=999999},
-    {Size=10-, Colour=66CC66}}]{Lucida Math}
- 
-\newcounter{lucibold}
-\setcounter{lucibold}{-1}
-\setmathfont[version=lucibold,SizeFeatures={
-    {Size=-10, Colour=999999},
-    {Size=10-, Colour=66CC66}}]{Lucida Math Demibold}
-
-\newcounter{cambria}
-\setcounter{cambria}{-1}
-\setmathfont[version=cambria,SizeFeatures={
-    {Size=-10, Colour=999999},
-    {Size=10-, Colour=66CCCC}}]{Cambria Math}
-
-\newcounter{asana}
-\setcounter{asana}{-1}
-\setmathfont[version=asana,SizeFeatures={
-    {Size=-10, Colour=999999},
-    {Size=10-, Colour=6666CC}}]{Asana-Math.otf}
-
-\newcounter{euler}
-\setcounter{euler}{-1}
-\setmathfont[version=euler,SizeFeatures={
-    {Size=-10, Colour=999999},
-    {Size=10-, Colour=CC66CC}}]{Neo Euler}
-    
 \ExplSyntaxOn
-\fontspec_set_fontface:NNnn \lm \x {} {lmmath-regular.otf}
-\fontspec_set_fontface:NNnn \xits \x {} {xits-math.otf}
-\fontspec_set_fontface:NNnn \lucida \x {} {Lucida~ Math}
-\fontspec_set_fontface:NNnn \lucibold \x {} {Lucida~ Math~ Demibold}
-\fontspec_set_fontface:NNnn \cambria \x {} {Cambria~ Math}
-\fontspec_set_fontface:NNnn \asana \x {} {Asana-Math.otf}
-\fontspec_set_fontface:NNnn \euler \x {} {Neo~ Euler}
+\cs_generate_variant:Nn \fontspec_set_fontface:NNnn {c}
+
+\def\defmathfont#1#2#3{
+  \newcounter{#1}
+  \setcounter{#1}{-1}
+  \setmathfont[version=#1,SizeFeatures={
+      {Size=-10, Colour=999999},
+      {Size=10-, Colour=#3}}]{#2}
+  \fontspec_set_fontface:cNnn {#1} \x {} {#2}
+}
 \ExplSyntaxOff
 
+\defmathfont{lm}{lmmath-regular.otf}{CC6666}
+\defmathfont{xits}{xits-math.otf}{CCCC66}
+\defmathfont{lucida}{Lucida Math}{66CC66}
+\defmathfont{lucibold}{Lucida Math Demibold}{66CC66}
+\defmathfont{cambria}{Cambria Math}{66CCCC}
+\defmathfont{asana}{Asana-Math.otf}{6666CC}
+\defmathfont{euler}{Neo Euler}{CC66CC}
+
+\def\INPUT{\input{unicode-math-table.tex}}
 \def\TABLE{%
-\setlength\LTleft{-2cm}
 \par\noindent
 \begin{longtable}[l]{@{}lcccccccll@{}}
   \toprule
   \textsc{usv} & M & X & C & L & D & A & E & Macro & Description \\
   \midrule \endhead
-  \input unicode-math-table.tex\relax\\
+  \INPUT\\
   \bottomrule
 \end{longtable}
 }
@@ -90,25 +59,26 @@
 }
 
 \newcommand\SHOW[1]{%
-\def\UnicodeMathSymbol##1##2##3##4{%
-  \def\1{#1}\def\2{##3}%
-  \ifx\1\2%
+  \def\UnicodeMathSymbol##1##2##3##4{%
+    \def\1{#1}\def\2{##3}%
+    \ifx\1\2\PRINTLINE{##1}{##2}{##4}\fi
+  }%
+  \TABLE
+}
+\def\PRINTLINE#1#2#3{%
     \def\tempa{%
-      \USV{##1} &
-      \SYMB{##2}{lm}{##1} &
-      \SYMB{##2}{xits}{##1} &
-      \SYMB{##2}{cambria}{##1} &
-      \SYMB{##2}{lucida}{##1} &
-      \SYMB{##2}{lucibold}{##1} &
-      \SYMB{##2}{asana}{##1} &
-      \SYMB{##2}{euler}{##1} &
-      \CMD{##2} &
-      \DESC{##4} \\%
+      \USV{#1} &
+      \SYMB{#2}{lm}{#1} &
+      \SYMB{#2}{xits}{#1} &
+      \SYMB{#2}{cambria}{#1} &
+      \SYMB{#2}{lucida}{#1} &
+      \SYMB{#2}{lucibold}{#1} &
+      \SYMB{#2}{asana}{#1} &
+      \SYMB{#2}{euler}{#1} &
+      \CMD{#2} &
+      \DESC{#3} \\%
     }%
     \expandafter\tempa
-  \fi
-}%
-\TABLE
 }
 \def\SYMB#1#2#3{%
   \expandafter\iffontchar\csname#2\endcsname #3\relax
@@ -160,6 +130,35 @@ Seven fonts are shown: (with approximate symbol counts)
 \section{Punctuation symbols, \cmd\mathpunct}
 \SHOW\mathpunct
 
+\section{`Over' symbols, \cmd\mathover}
+Lua\LaTeX\ only; faked in \XeLaTeX.
+
+\begingroup
+\def\SYMB#1#2#3{%
+  \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \refstepcounter{#2}%
+    \mathversion{#2}%
+    $\displaystyle #1{\mitx+\mity}$%
+  \fi
+}
+\SHOW\mathover
+\endgroup
+
+
+\section{`Under' symbols, \cmd\mathunder}
+Lua\LaTeX\ only; faked in \XeLaTeX.
+
+\begingroup
+\def\SYMB#1#2#3{%
+  \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \refstepcounter{#2}%
+    \mathversion{#2}%
+    $\displaystyle #1{\mitx+\mity}$%
+  \fi
+}
+\SHOW\mathunder
+\endgroup
+
 \clearpage
 \section{Accents, \cmd\mathaccent}
 
@@ -170,7 +169,7 @@ Note that accents will only be properly placed if used with an OpenType font wit
   \expandafter\iffontchar\csname#2\endcsname #3\relax
     \refstepcounter{#2}%
     \mathversion{#2}%
-    $\displaystyle#1 x$%
+    $\displaystyle#1 \mitx$%
   \fi
 }
 \SHOW\mathaccent
@@ -192,7 +191,6 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \SHOW\mathop
 \endgroup
 
-\clearpage
 \section{Binary relations, \cmd\mathbin}
 \SHOW\mathbin
 
@@ -206,7 +204,168 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 
 \clearpage
 \section{Alphabetical symbols, \cmd\mathalpha}
-\SHOW\mathalpha
+
+% first read in all \mathalpha symbols into a variable:
+\ExplSyntaxOn
+\cs_set:Npn \UnicodeMathSymbol #1#2#3#4 {
+  \str_if_eq:nnT {\mathalpha} {#3} {
+    \exp_not:n { \UnicodeMathSymbol {#1}{#2}{#3}{#4} }
+  }
+}
+\CatchFileEdef
+  \ALPHA{unicode-math-table.tex}
+  {\char_set_catcode_space:N \ }
+
+% now each time we print an alphabet we remove the slot;
+% this ensures we won't miss anything
+
+\def\INPUT{\ALPHA}
+\cs_new:Npn \SLOTS #1#2 {
+  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
+    \bool_if:nT
+    {
+      \int_compare_p:n {##1 >= #1} && \int_compare_p:n {##1 <= #2}
+    }
+    {
+      \PRINTLINE{##1}{##2}{##4}
+    }
+  }
+  \TABLE
+  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
+    \bool_if:nT
+    {
+      \int_compare_p:n {##1 > #2} || \int_compare_p:n {##1 < #1}
+    }
+    {
+      \exp_not:n { \UnicodeMathSymbol {##1}{##2}{##3}{##4} }
+    }
+  }
+  \edef\ALPHA{\ALPHA}
+}
+
+\ExplSyntaxOff
+
+\subsection{Normal weight}
+
+\subsubsection{Upright Greek, uppercase}
+\SLOTS{"00391}{"003A9}
+
+\subsubsection{Upright Greek, lowercase}
+\SLOTS{"003B1}{"003F5}
+
+\subsubsection{Italic, Latin, uppercase}
+\SLOTS{"1D434}{"1D44D}
+
+\subsubsection{Italic, Latin, lowercase}
+\SLOTS{"1D44E}{"1D467}
+
+\subsubsection{Italic Greek, uppercase}
+\SLOTS{"1D6E2}{"1D6FA}
+
+\subsubsection{Italic Greek, lowercase}
+\SLOTS{"1D6FC}{"1D71B}
+
+\subsubsection{Script, Latin, uppercase}
+\SLOTS{"1D49C}{"1D4B5}
+
+\subsubsection{Script, Latin, lowercase}
+\SLOTS{"1D4B6}{"1D4CF}
+
+\subsubsection{Fraktur, Latin, uppercase}
+\SLOTS{"1D504}{"1D51C}
+
+\subsubsection{Fraktur, Latin, lowercase}
+\SLOTS{"1D51E}{"1D537}
+
+\subsubsection{Blackboard, Latin, uppercase}
+\SLOTS{"1D538}{"1D550}
+
+\subsubsection{Blackboard, Latin, lowercase}
+\SLOTS{"1D552}{"1D56B}
+
+\subsubsection{Sans serif, Latin, uppercase}
+\SLOTS{"1D5A0}{"1D5B9}
+
+\subsubsection{Sans serif, Latin, lowercase}
+\SLOTS{"1D5BA}{"1D5D3}
+
+\subsubsection{Italic sans serif, Latin, uppercase}
+\SLOTS{"1D608}{"1D621}
+
+\subsubsection{Italic sans serif, Latin, lowercase}
+\SLOTS{"1D622}{"1D63B}
+
+\subsubsection{Typewriter, Latin, uppercase}
+\SLOTS{"1D670}{"1D689}
+
+\subsubsection{Typewriter, Latin, lowercase}
+\SLOTS{"1D68A}{"1D6A3}
+
+\subsection{Bold}
+
+\subsubsection{Bold, Latin, uppercase}
+\SLOTS{"1D400}{"1D419}
+
+\subsubsection{Bold, Latin, lowercase}
+\SLOTS{"1D41A}{"1D433}
+
+\subsubsection{Bold Greek, uppercase}
+\SLOTS{"1D6A8}{"1D6C0}
+
+\subsubsection{Bold Greek, lowercase}
+\SLOTS{"1D6C2}{"1D6E1}
+
+\subsubsection{Bold italic, Latin, uppercase}
+\SLOTS{"1D468}{"1D481}
+
+\subsubsection{Bold italic, Latin, lowercase}
+\SLOTS{"1D482}{"1D49B}
+
+\subsubsection{Bold italic Greek, uppercase}
+\SLOTS{"1D71C}{"1D734}
+
+\subsubsection{Bold italic Greek, lowercase}
+\SLOTS{"1D736}{"1D755}
+
+\subsubsection{Bold script, Latin, uppercase}
+\SLOTS{"1D4D0}{"1D4E9}
+
+\subsubsection{Bold script, Latin, lowercase}
+\SLOTS{"1D4EA}{"1D503}
+
+\subsubsection{Bold fraktur, Latin, uppercase}
+\SLOTS{"1D56C}{"1D585}
+
+\subsubsection{Bold fraktur, Latin, lowercase}
+\SLOTS{"1D586}{"1D59F}
+
+\subsubsection{Bold sans serif, Latin, uppercase}
+\SLOTS{"1D5D4}{"1D5ED}
+
+\subsubsection{Bold sans serif, Latin, lowercase}
+\SLOTS{"1D5EE}{"1D607}
+
+\subsubsection{Bold italic sans serif, Latin, uppercase}
+\SLOTS{"1D63C}{"1D655}
+
+\subsubsection{Bold italic sans serif, Latin, lowercase}
+\SLOTS{"1D656}{"1D66F}
+
+\subsubsection{Bold sans serif Greek, uppercase}
+\SLOTS{"1D756}{"1D76E}
+
+\subsubsection{Bold sans serif Greek, lowercase}
+\SLOTS{"1D770}{"1D78F}
+
+\subsubsection{Bold italic sans serif Greek, uppercase}
+\SLOTS{"1D790}{"1D7A8}
+
+\subsubsection{Bold italic sans serif Greek, lowercase}
+\SLOTS{"1D7AA}{"1D7C9}
+
+\subsection{Miscellaneous}
+\def\UnicodeMathSymbol#1#2#3#4{\PRINTLINE{#1}{#2}{#4}}
+\TABLE
 
 \refstepcounter{lm}\label{count:lm}
 \refstepcounter{xits}\label{count:xits}
