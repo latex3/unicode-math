@@ -58,7 +58,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2011/09/21 v0.6a Unicode maths in XeLaTeX and LuaLaTeX]
+  [2011/10/25 v0.6a Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -3346,7 +3346,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     % character slot:
     \seq_map_inline:Nn \l_um_char_range_seq
       {
-        \um_int_if_range_matches_slot:nnT {##1} {#1}
+        \um_int_if_slot_in_range:nnT {#1} {##1}
           { \seq_map_break:n { \use_none_delimit_by_q_nil:w } }
       }
 
@@ -3362,20 +3362,20 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\um_int_if_range_matches_slot:nnT}
+% \begin{macro}{\um_int_if_slot_in_range:nnT}
 % A `numrange' is like |-2,5-8,12,17-| (can be unsorted).
 %
 % Four cases, four argument types:
 % \begin{Verbatim}
-%    #2     #3      #4
-%   [ 1] - [qn] - [   ] qs
-%   [ 1] - [  ] - [qn-] qs
-%   [  ] - [ 3] - [qn-] qs
-%   [ 1] - [ 3] - [qn-] qs
+% input    #2     #3      #4
+% "1  "   [ 1] - [qn] - [   ] qs
+% "1- "   [ 1] - [  ] - [qn-] qs
+% " -3"   [  ] - [ 3] - [qn-] qs
+% "1-3"   [ 1] - [ 3] - [qn-] qs
 % \end{Verbatim}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_int_if_range_matches_slot:nnT
+\cs_new:Nn \um_int_if_slot_in_range:nnT
   { \um_numrange_parse:nwT {#1} #2 - \q_nil - \q_stop {#3} }
 %    \end{macrocode}
 %
