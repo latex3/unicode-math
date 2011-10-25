@@ -70,7 +70,7 @@ hometree = `kpsewhich -var-value=TEXMFHOME`
 
 PKGSOURCE = $(PKG).dtx $(TBL) Makefile
 DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL) $(SYM).pdf
-CTANFILES = $(PKGSOURCE)  $(DOC)  $(testdir)
+CTANFILES = $(PKGSOURCE) $(XMPL) $(SYM).ltx $(DOC) $(testdir)
 BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
 BUILDDOC = $(addprefix $(builddir)/,$(DOC))
 
