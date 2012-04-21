@@ -2176,8 +2176,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_gset_protected_nopar:Npx #2
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
-    \mathaccent
-      { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {fixed} {#1} {#4} } }
     \mathfence
       {
         \um_set_mathcode:nnn {#4} {#3} {#1}
@@ -2187,6 +2185,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
+    \mathaccent
+      { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {fixed} {#1} {#4} } }
     \mathover
       {
         \cs_set_protected_nopar:Npx #2 ##1
