@@ -191,6 +191,10 @@ awk '
 
 		if (usv == "0203E") { class = "\\mathover" } # overline
 
+		# bottom accents
+		if (usv == "00331") { class = "\\mathbotaccent" }
+		if (usv == "020E8") { class = "\\mathbotaccent" }
+
 	    # TRANSFORM MATH CLASSES
 	    if (class == "N") { class = "\\mathord" }
 	    if (class == " ") { class = "\\mathord" }

@@ -2187,6 +2187,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
       }
     \mathaccent
       { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {fixed} {#1} {#4} } }
+    \mathbotaccent
+      { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {bottom~ fixed} {#1} {#4} } }
     \mathover
       {
         \cs_set_protected_nopar:Npx #2 ##1
@@ -2208,6 +2210,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \edef\mathfence{\string\mathfence}
 \edef\mathover{\string\mathover}
 \edef\mathunder{\string\mathunder}
+\edef\mathbotaccent{\string\mathbotaccent}
 %    \end{macrocode}
 %
 %
@@ -3196,7 +3199,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   {
     \mathord,\mathalpha,\mathop,\mathbin,\mathrel,
     \mathopen,\mathclose,\mathpunct,\mathaccent,
-    \mathfence,\mathover,\mathunder
+    \mathfence,\mathover,\mathunder,\mathbotaccent
   }
 %    \end{macrocode}
 %
@@ -4681,7 +4684,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
                     \cs_if_eq_p:NN ##3 \mathopen   ||
                     \cs_if_eq_p:NN ##3 \mathclose  ||
                     \cs_if_eq_p:NN ##3 \mathover   ||
-                    \cs_if_eq_p:NN ##3 \mathunder } {
+                    \cs_if_eq_p:NN ##3 \mathunder  ||
+                    \cs_if_eq_p:NN ##3 \mathbotaccent } {
         \um_cs_set_eq_active_char:Nw ##2 = ##1 \q_nil \ignorespaces
       }
     }
