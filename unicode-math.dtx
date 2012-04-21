@@ -2190,12 +2190,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \mathover
       {
         \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
+          { \mathop { \um_wide_top_accent:Nnn \mathaccent {#1} {#4} {##1} } \limits }
       }
     \mathunder
       {
         \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
+          { \mathop { \um_wide_bottom_accent:Nnn \mathaccent {#1} {#4} {##1} } \limits }
       }
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
@@ -2315,24 +2315,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{macro}
 % \end{macro}
 % \end{macro}
-%
-%
-% \begin{macro}{\um_overbrace:nnn}
-% \begin{macro}{\um_underbrace:nnn}
-% \LuaTeX\ functions for defining over/under-braces
-%    \begin{macrocode}
-\cs_set:Npn \um_overbrace:nnn #1#2#3 {
-  \Umathaccent
-    \mathchar@type\mathaccent \csname sym#1\endcsname #2 {#3}
-}
-\cs_set:Npn \um_underbrace:nnn #1#2#3 {
-  \Umathaccent~ bottom~
-    \mathchar@type\mathaccent \csname sym#1\endcsname #2 {#3}
-}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
 %
 %
 % \begin{macro}{\char_gmake_mathactive:N}
