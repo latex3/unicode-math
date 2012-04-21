@@ -5821,16 +5821,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-\cs_new_protected_nopar:Nn \um_setup_accents:
-%<*XE>
- {
-  \def\widehat{\hat}
-  \def\widetilde{\tilde}
-  \def\overrightarrow{\vec}
- }
-%</XE>
-%<*LU>
- {
+\cs_new_protected_nopar:Nn \um_setup_accents: {
   \cs_gset_protected_nopar:Npx \widehat {
     \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0302 }
   }
@@ -5858,8 +5849,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \cs_gset_protected_nopar:Npx \underrightarrow {
     \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EF }
   }
- }
-%</LU>
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
