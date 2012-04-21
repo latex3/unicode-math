@@ -2177,7 +2177,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
     \mathaccent
-      { \cs_gset_protected_nopar:Npx #2 { \um_accent:Nnn #3 {#1} {#4} } }
+      { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {fixed} {#1} {#4} } }
     \mathfence
       {
         \um_set_mathcode:nnn {#4} {#3} {#1}
@@ -2190,12 +2190,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
     \mathover
       {
         \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \um_wide_top_accent:Nnn \mathaccent {#1} {#4} {##1} } \limits }
+          { \mathop { \um_accent:nnn {} {#1} {#4} {##1} } \limits }
       }
     \mathunder
       {
         \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \um_wide_bottom_accent:Nnn \mathaccent {#1} {#4} {##1} } \limits }
+          { \mathop { \um_accent:nnn {bottom} {#1} {#4} {##1} } \limits }
       }
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
@@ -2262,9 +2262,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_set_delcode:nnn}
 % \begin{macro}{\um_radical:nn}
 % \begin{macro}{\um_delimiter:Nnn}
-% \begin{macro}{\um_accent:Nnn}
-% \begin{macro}{\um_wide_top_accent:Nnn}
-% \begin{macro}{\um_wide_bottom_accent:Nnn}
+% \begin{macro}{\um_accent:nnn}
 % \begin{macro}{\um_accent_keyword:}
 % These are all wrappers for the primitive commands that take numerical
 % input only.
@@ -2290,22 +2288,14 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \cs_new:Nn \um_delimiter:Nnn {
   \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
-\cs_new:Nn \um_accent:Nnn {
-  \Umathaccent fixed~ \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-}
-\cs_new_nopar:Npn \um_wide_top_accent:Nnn #1 #2 #3 {
-  \Umathaccent \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
-}
-\cs_new_nopar:Npn \um_wide_bottom_accent:Nnn #1 #2 #3 {
-  \Umathaccent bottom~ \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
+\cs_new:Nn \um_accent:nnn {
+  \Umathaccent #1~ \mathchar@type\mathaccent \use:c { sym #2 } #3 \scan_stop:
 }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \cs_generate_variant:Nn \um_set_mathchar:NNnn {c}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -5745,31 +5735,31 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \um_setup_accents: {
   \cs_gset_protected_nopar:Npx \widehat {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0302 }
+    \um_accent:nnn {} { \um_symfont_tl } { "0302 }
   }
   \cs_gset_protected_nopar:Npx \widetilde {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0303 }
+    \um_accent:nnn {} { \um_symfont_tl } { "0303 }
   }
   \cs_gset_protected_nopar:Npx \overleftarrow {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20D6 }
+    \um_accent:nnn {} { \um_symfont_tl } { "20D6 }
   }
   \cs_gset_protected_nopar:Npx \overrightarrow {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20D7 }
+    \um_accent:nnn {} { \um_symfont_tl } { "20D7 }
   }
   \cs_gset_protected_nopar:Npx \overleftrightarrow {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20E1 }
+    \um_accent:nnn {} { \um_symfont_tl } { "20E1 }
   }
   \cs_gset_protected_nopar:Npx \underrightharpoondown {
-    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EC }
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20EC }
   }
   \cs_gset_protected_nopar:Npx \underleftharpoondown {
-    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20ED }
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20ED }
   }
   \cs_gset_protected_nopar:Npx \underleftarrow {
-    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EE }
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20EE }
   }
   \cs_gset_protected_nopar:Npx \underrightarrow {
-    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EF }
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20EF }
   }
 }
 %    \end{macrocode}
