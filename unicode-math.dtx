@@ -1542,14 +1542,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%<XE>\bool_set_false:N \c_um_have_fixed_accents_bool
-%<*LU>
-\bool_const:Nn \c_um_have_fixed_accents_bool
-  { \int_compare_p:n { \luatexversion > 64 } }
-%</LU>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 %<*LU>
 \RequirePackage { lualatex-math } [ 2011/08/07 ]
 \RequirePackage { luatexbase }
@@ -2308,22 +2300,17 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %</XE>
 %<*LU>
   {
-    \Umathaccent \c_um_accent_keyword_tl
+    \Umathaccent fixed
       \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
   }
 %</LU>
 %<*LU>
-  \cs_new_nopar:Npn \um_wide_top_accent:Nnn #1 #2 #3 {
-    \Umathaccent \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
-  }
-  \bool_if:NTF \c_um_have_fixed_accents_bool {
-    \cs_new_nopar:Npn \um_wide_bottom_accent:Nnn #1 #2 #3 {
-      \Umathaccent bottom~ \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
-    }
-    \tl_const:Nn \c_um_accent_keyword_tl { fixed }
-  } {
-    \tl_const:Nn \c_um_accent_keyword_tl { }
-  }
+\cs_new_nopar:Npn \um_wide_top_accent:Nnn #1 #2 #3 {
+  \Umathaccent \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
+}
+\cs_new_nopar:Npn \um_wide_bottom_accent:Nnn #1 #2 #3 {
+  \Umathaccent bottom~ \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
+}
 %</LU>
 %    \end{macrocode}
 %
@@ -5870,19 +5857,17 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \cs_gset_protected_nopar:Npx \overleftrightarrow {
     \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20E1 }
   }
-  \bool_if:NT \c_um_have_fixed_accents_bool {
-    \cs_gset_protected_nopar:Npx \underrightharpoondown {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EC }
-    }
-    \cs_gset_protected_nopar:Npx \underleftharpoondown {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20ED }
-    }
-    \cs_gset_protected_nopar:Npx \underleftarrow {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EE }
-    }
-    \cs_gset_protected_nopar:Npx \underrightarrow {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EF }
-    }
+  \cs_gset_protected_nopar:Npx \underrightharpoondown {
+    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EC }
+  }
+  \cs_gset_protected_nopar:Npx \underleftharpoondown {
+    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20ED }
+  }
+  \cs_gset_protected_nopar:Npx \underleftarrow {
+    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EE }
+  }
+  \cs_gset_protected_nopar:Npx \underrightarrow {
+    \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EF }
   }
  }
 %</LU>
