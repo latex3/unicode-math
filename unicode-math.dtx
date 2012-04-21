@@ -229,10 +229,9 @@ This work is "author-maintained" by Will Robertson.
 %
 % In some cases, \XeTeX's math support is either missing or I have not
 % discovered how to access features for various types of maths construct.
-% An example of this are horizontal extensible symbols, such as underbraces,
-% overbraces, and arrows that can grow longer if necessary. Behaviour with
-% such symbols is not necessarily going to be consistent; please report
-% problem areas to me.
+% An example of this are horizontal extensible symbols, such as arrows that can
+% grow longer if necessary. Behaviour with such symbols is not necessarily
+% going to be consistent; please report problem areas to me.
 %
 % Symbols for maths characters have been inherited from the STIX project and
 % may change slightly in the long term. We have tried to preserve backwards
@@ -288,13 +287,6 @@ This work is "author-maintained" by Will Robertson.
 % for accessing the glyph, such as \cs{int}, or whole collection of symbols with
 % the same math type, such as \cs{mathopen}, or complete math styles such as \cs{mathbb}.
 % (Only numerical slots, however, can be used in ranged declarations.)
-%
-% \paragraph{\XeTeX\ users only}
-% \XeTeX\ uses the first maths font selected for choosing various parameters
-% such as the thickness of fraction rules and so on.
-% (In \LuaTeX, they are chosen automatically based on the current font.)
-% To select a new font for these parameters use \cs{resetmathfont},
-% which behaves identically to \cs{setmathfont}.
 %
 % \subsubsection{Control over maths alphabets}
 %
@@ -895,10 +887,11 @@ This work is "author-maintained" by Will Robertson.
 % versions.  Among these are \cs{hat} and \cs{tilde}; the corresponding growing
 % versions are called \cs{widehat} and \cs{widetilde}, respectively.
 %
-% \XeTeX\ and older versions of \LuaTeX\ do not support this distinction, however,
-% and \emph{all} accents there will grow automatically. (I.e., \cs{hat} and \cs{widehat}
-% are equivalent.) Unfortunately this is not always appropriate. As of \LuaTeX\ v0.65,
-% these wide/non-wide commands will again behave in their expected manner.
+% Older versions of \XeTeX\ and \LuaTeX\ did not support this distinction,
+% however, and \emph{all} accents there were growing automatically. (I.e.,
+% \cs{hat} and \cs{widehat} are equivalent.) As of \LuaTeX\ v0.65 and \XeTeX\
+% v0.9998, these wide/non-wide commands will again behave in their expected
+% manner.
 %
 %
 % \subsubsection{Pre-drawn fraction characters}
@@ -1542,14 +1535,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%<XE>\bool_set_false:N \c_um_have_fixed_accents_bool
-%<*LU>
-\bool_const:Nn \c_um_have_fixed_accents_bool
-  { \int_compare_p:n { \luatexversion > 64 } }
-%</LU>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 %<*LU>
 \RequirePackage { lualatex-math } [ 2011/08/07 ]
 \RequirePackage { luatexbase }
@@ -2184,8 +2169,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_gset_protected_nopar:Npx #2
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
-    \mathaccent
-      { \cs_gset_protected_nopar:Npx #2 { \um_accent:Nnn #3 {#1} {#4} } }
     \mathfence
       {
         \um_set_mathcode:nnn {#4} {#3} {#1}
@@ -2195,18 +2178,20 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
-%<*LU>
+    \mathaccent
+      { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {fixed} {#1} {#4} } }
+    \mathbotaccent
+      { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {bottom~ fixed} {#1} {#4} } }
     \mathover
       {
         \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \um_overbrace:nnn {#1} {#4} {##1} } \limits }
+          { \mathop { \um_accent:nnn {} {#1} {#4} {##1} } \limits }
       }
     \mathunder
       {
         \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
+          { \mathop { \um_accent:nnn {bottom} {#1} {#4} {##1} } \limits }
       }
-%</LU>
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
   }
@@ -2218,6 +2203,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \edef\mathfence{\string\mathfence}
 \edef\mathover{\string\mathover}
 \edef\mathunder{\string\mathunder}
+\edef\mathbotaccent{\string\mathbotaccent}
 %    \end{macrocode}
 %
 %
@@ -2272,9 +2258,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \begin{macro}{\um_set_delcode:nnn}
 % \begin{macro}{\um_radical:nn}
 % \begin{macro}{\um_delimiter:Nnn}
-% \begin{macro}{\um_accent:Nnn}
-% \begin{macro}{\um_wide_top_accent:Nnn}
-% \begin{macro}{\um_wide_bottom_accent:Nnn}
+% \begin{macro}{\um_accent:nnn}
 % \begin{macro}{\um_accent_keyword:}
 % These are all wrappers for the primitive commands that take numerical
 % input only.
@@ -2300,31 +2284,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \cs_new:Nn \um_delimiter:Nnn {
   \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
-\cs_new:Nn \um_accent:Nnn
-%<*XE>
-  {
-    \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-  }
-%</XE>
-%<*LU>
-  {
-    \Umathaccent \c_um_accent_keyword_tl
-      \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-  }
-%</LU>
-%<*LU>
-  \cs_new_nopar:Npn \um_wide_top_accent:Nnn #1 #2 #3 {
-    \Umathaccent \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
-  }
-  \bool_if:NTF \c_um_have_fixed_accents_bool {
-    \cs_new_nopar:Npn \um_wide_bottom_accent:Nnn #1 #2 #3 {
-      \Umathaccent bottom~ \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
-    }
-    \tl_const:Nn \c_um_accent_keyword_tl { fixed }
-  } {
-    \tl_const:Nn \c_um_accent_keyword_tl { }
-  }
-%</LU>
+\cs_new:Nn \um_accent:nnn {
+  \Umathaccent #1~ \mathchar@type\mathaccent \use:c { sym #2 } #3 \scan_stop:
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -2339,26 +2301,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \end{macro}
 % \end{macro}
 % \end{macro}
-% \end{macro}
-% \end{macro}
-%
-%
-% \begin{macro}{\um_overbrace:nnn}
-% \begin{macro}{\um_underbrace:nnn}
-% \LuaTeX\ functions for defining over/under-braces
-%    \begin{macrocode}
-\cs_set:Npn \um_overbrace:nnn #1#2#3 {
-  \luatexUmathaccent
-    \mathchar@type\mathaccent \csname sym#1\endcsname #2 {#3}
-}
-\cs_set:Npn \um_underbrace:nnn #1#2#3 {
-  \luatexUmathaccent~ bottom~
-    \mathchar@type\mathaccent \csname sym#1\endcsname #2 {#3}
-}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
 %
 %
 % \begin{macro}{\char_gmake_mathactive:N}
@@ -2576,14 +2518,10 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %<LU>  { \directlua{fontspec.mathfontdimen("l_um_font","#2")} }
 %    \end{macrocode}
 %
-% \begin{macro}{\resetmathfont}
+% Backward compatibility alias.
 %    \begin{macrocode}
-\DeclareDocumentCommand \resetmathfont { O{} m } {
-  \bool_set_false:N \g_um_mainfont_already_set_bool
-  \setmathfont[#1]{#2}
-}
+\cs_set_eq:NN \resetmathfont \setmathfont
 %    \end{macrocode}
-% \end{macro}
 %
 %
 % \begin{macro}{\um_fontspec_select_font:}
@@ -3250,7 +3188,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   {
     \mathord,\mathalpha,\mathop,\mathbin,\mathrel,
     \mathopen,\mathclose,\mathpunct,\mathaccent,
-    \mathfence,\mathover,\mathunder
+    \mathfence,\mathover,\mathunder,\mathbotaccent
   }
 %    \end{macrocode}
 %
@@ -4652,24 +4590,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % In time, the case statement inside |set_mathsymbol| will be moved in here
 % to avoid re-running it every time.
 %    \begin{macrocode}
-\cs_new:Npn \um_symbol_setup:
-%<*XE>
-  {
-    \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
-      \prg_case_tl:Nnn ##3 { \mathover {} \mathunder {} }
-        {
-          \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
-        }
-    }
+\cs_new:Npn \um_symbol_setup: {
+  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
+    \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
   }
-%</XE>
-%<*LU>
-  {
-    \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
-      \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
-    }
-  }
-%</LU>
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -4748,7 +4673,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
                     \cs_if_eq_p:NN ##3 \mathopen   ||
                     \cs_if_eq_p:NN ##3 \mathclose  ||
                     \cs_if_eq_p:NN ##3 \mathover   ||
-                    \cs_if_eq_p:NN ##3 \mathunder } {
+                    \cs_if_eq_p:NN ##3 \mathunder  ||
+                    \cs_if_eq_p:NN ##3 \mathbotaccent } {
         \um_cs_set_eq_active_char:Nw ##2 = ##1 \q_nil \ignorespaces
       }
     }
@@ -5407,51 +5333,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \um_setup_active_frac:
 %    \end{macrocode}
 %
-% \subsection{\XeTeX\ over- and under- brace, paren, bracket}
-% Thanks to Claudio Beccari for this code.
-%    \begin{macrocode}
-%<*XE>
-\cs_new:Nn \um_over_bracket:nN
-  {
-    \mathop { \vbox {
-      \setbox\z@\hbox{$\displaystyle#1$}
-      \dimen@=\dimexpr\wd\z@+3\p@\relax
-      \setbox\tw@\hbox{$\left #2 \vcenter to\dimen@{\vss} \right. $}
-      \m@th\ialign
-        {
-          ##\crcr\noalign{\kern-\p@}%
-          \rotatebox[origin=Bl]{-90}
-            {\box\tw@}\crcr\noalign{\kern0\p@\nointerlineskip}%
-          \hfil\box\z@\hfil\crcr
-        }
-    } } \limits
-  }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_new:Nn \um_under_bracket:nN
-  {
-    \mathop { \vtop {
-      \setbox\z@\hbox{$\displaystyle#1$}
-      \dimen@=\dimexpr\wd\z@+3\p@\relax
-      \setbox\tw@\hbox{$\left #2 \vcenter to\dimen@{\vss} \right. $}
-      \m@th\ialign
-        {
-          ##\crcr\hfil\box\z@\hfil\crcr
-          \noalign{\kern1\p@\nointerlineskip}%
-          \rotatebox[origin=Br]{-90}{\box\tw@}\crcr\noalign{\kern0\p@}
-        }
-    } } \limits
-  }
-\RenewDocumentCommand   \overbrace    {m} { \um_over_bracket:nN  {#1} \{ }
-\DeclareDocumentCommand \overbracket  {m} { \um_over_bracket:nN  {#1}  [ }
-\DeclareDocumentCommand \overparen    {m} { \um_over_bracket:nN  {#1}  ( }
-\RenewDocumentCommand   \underbrace   {m} { \um_under_bracket:nN {#1} \} }
-\DeclareDocumentCommand \underbracket {m} { \um_under_bracket:nN {#1}  ] }
-\DeclareDocumentCommand \underparen   {m} { \um_under_bracket:nN {#1}  ) }
-%</XE>
-%    \end{macrocode}
-%
 % \subsection{Synonyms and all the rest}
 %
 % These are symbols with multiple names. Eventually to be taken care of
@@ -5845,47 +5726,38 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-\cs_new_protected_nopar:Nn \um_setup_accents:
-%<*XE>
- {
-  \def\widehat{\hat}
-  \def\widetilde{\tilde}
-  \def\overrightarrow{\vec}
- }
-%</XE>
-%<*LU>
- {
+\cs_new_protected_nopar:Nn \um_setup_accents: {
   \cs_gset_protected_nopar:Npx \widehat {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0302 }
+    \um_accent:nnn {} { \um_symfont_tl } { "0302 }
   }
   \cs_gset_protected_nopar:Npx \widetilde {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "0303 }
+    \um_accent:nnn {} { \um_symfont_tl } { "0303 }
   }
   \cs_gset_protected_nopar:Npx \overleftarrow {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20D6 }
+    \um_accent:nnn {} { \um_symfont_tl } { "20D6 }
   }
   \cs_gset_protected_nopar:Npx \overrightarrow {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20D7 }
+    \um_accent:nnn {} { \um_symfont_tl } { "20D7 }
   }
   \cs_gset_protected_nopar:Npx \overleftrightarrow {
-    \um_wide_top_accent:Nnn \mathaccent { \um_symfont_tl } { "20E1 }
+    \um_accent:nnn {} { \um_symfont_tl } { "20E1 }
   }
-  \bool_if:NT \c_um_have_fixed_accents_bool {
-    \cs_gset_protected_nopar:Npx \underrightharpoondown {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EC }
-    }
-    \cs_gset_protected_nopar:Npx \underleftharpoondown {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20ED }
-    }
-    \cs_gset_protected_nopar:Npx \underleftarrow {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EE }
-    }
-    \cs_gset_protected_nopar:Npx \underrightarrow {
-      \um_wide_bottom_accent:Nnn \mathaccent { \um_symfont_tl } { "20EF }
-    }
+  \cs_gset_protected_nopar:Npx \wideutilde {
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "0330 }
   }
- }
-%</LU>
+  \cs_gset_protected_nopar:Npx \underrightharpoondown {
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20EC }
+  }
+  \cs_gset_protected_nopar:Npx \underleftharpoondown {
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20ED }
+  }
+  \cs_gset_protected_nopar:Npx \underleftarrow {
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20EE }
+  }
+  \cs_gset_protected_nopar:Npx \underrightarrow {
+    \um_accent:nnn {bottom} { \um_symfont_tl } { "20EF }
+  }
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
