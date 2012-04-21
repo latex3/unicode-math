@@ -2292,26 +2292,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \cs_new:Nn \um_delimiter:Nnn {
   \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
 }
-\cs_new:Nn \um_accent:Nnn
-%<*XE>
-  {
-    \Umathaccent \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-  }
-%</XE>
-%<*LU>
-  {
-    \Umathaccent fixed
-      \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-  }
-%</LU>
-%<*LU>
+\cs_new:Nn \um_accent:Nnn {
+  \Umathaccent fixed~ \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+}
 \cs_new_nopar:Npn \um_wide_top_accent:Nnn #1 #2 #3 {
   \Umathaccent \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
 }
 \cs_new_nopar:Npn \um_wide_bottom_accent:Nnn #1 #2 #3 {
   \Umathaccent bottom~ \mathchar@type #1 \use:c { sym #2 } #3 \scan_stop:
 }
-%</LU>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
