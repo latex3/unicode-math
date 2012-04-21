@@ -2187,7 +2187,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
           { \um_delimiter:Nnn \mathclose {#1} {#4} }
       }
-%<*LU>
     \mathover
       {
         \cs_set_protected_nopar:Npx #2 ##1
@@ -2198,7 +2197,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
         \cs_set_protected_nopar:Npx #2 ##1
           { \mathop { \um_underbrace:nnn {#1} {#4} {##1} } \limits }
       }
-%</LU>
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
   }
@@ -2324,11 +2322,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % \LuaTeX\ functions for defining over/under-braces
 %    \begin{macrocode}
 \cs_set:Npn \um_overbrace:nnn #1#2#3 {
-  \luatexUmathaccent
+  \Umathaccent
     \mathchar@type\mathaccent \csname sym#1\endcsname #2 {#3}
 }
 \cs_set:Npn \um_underbrace:nnn #1#2#3 {
-  \luatexUmathaccent~ bottom~
+  \Umathaccent~ bottom~
     \mathchar@type\mathaccent \csname sym#1\endcsname #2 {#3}
 }
 %    \end{macrocode}
@@ -4628,24 +4626,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 % In time, the case statement inside |set_mathsymbol| will be moved in here
 % to avoid re-running it every time.
 %    \begin{macrocode}
-\cs_new:Npn \um_symbol_setup:
-%<*XE>
-  {
-    \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
-      \prg_case_tl:Nnn ##3 { \mathover {} \mathunder {} }
-        {
-          \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
-        }
-    }
+\cs_new:Npn \um_symbol_setup: {
+  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
+    \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
   }
-%</XE>
-%<*LU>
-  {
-    \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
-      \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
-    }
-  }
-%</LU>
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -5381,51 +5366,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
   \group_end:
 }
 \um_setup_active_frac:
-%    \end{macrocode}
-%
-% \subsection{\XeTeX\ over- and under- brace, paren, bracket}
-% Thanks to Claudio Beccari for this code.
-%    \begin{macrocode}
-%<*XE>
-\cs_new:Nn \um_over_bracket:nN
-  {
-    \mathop { \vbox {
-      \setbox\z@\hbox{$\displaystyle#1$}
-      \dimen@=\dimexpr\wd\z@+3\p@\relax
-      \setbox\tw@\hbox{$\left #2 \vcenter to\dimen@{\vss} \right. $}
-      \m@th\ialign
-        {
-          ##\crcr\noalign{\kern-\p@}%
-          \rotatebox[origin=Bl]{-90}
-            {\box\tw@}\crcr\noalign{\kern0\p@\nointerlineskip}%
-          \hfil\box\z@\hfil\crcr
-        }
-    } } \limits
-  }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_new:Nn \um_under_bracket:nN
-  {
-    \mathop { \vtop {
-      \setbox\z@\hbox{$\displaystyle#1$}
-      \dimen@=\dimexpr\wd\z@+3\p@\relax
-      \setbox\tw@\hbox{$\left #2 \vcenter to\dimen@{\vss} \right. $}
-      \m@th\ialign
-        {
-          ##\crcr\hfil\box\z@\hfil\crcr
-          \noalign{\kern1\p@\nointerlineskip}%
-          \rotatebox[origin=Br]{-90}{\box\tw@}\crcr\noalign{\kern0\p@}
-        }
-    } } \limits
-  }
-\RenewDocumentCommand   \overbrace    {m} { \um_over_bracket:nN  {#1} \{ }
-\DeclareDocumentCommand \overbracket  {m} { \um_over_bracket:nN  {#1}  [ }
-\DeclareDocumentCommand \overparen    {m} { \um_over_bracket:nN  {#1}  ( }
-\RenewDocumentCommand   \underbrace   {m} { \um_under_bracket:nN {#1} \} }
-\DeclareDocumentCommand \underbracket {m} { \um_under_bracket:nN {#1}  ] }
-\DeclareDocumentCommand \underparen   {m} { \um_under_bracket:nN {#1}  ) }
-%</XE>
 %    \end{macrocode}
 %
 % \subsection{Synonyms and all the rest}
