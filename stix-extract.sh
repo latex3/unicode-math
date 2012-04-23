@@ -157,6 +157,9 @@ awk '
 		if (texname == "\\%                        ") { printtexname = "\\mathpercent              " }
 		if (texname == "\\&                        ") { printtexname = "\\mathampersand            " }
 		if (texname == "\\ac                       ") { printtexname = "\\invlazys                 " }
+		if (texname == "\\ntriangleleft            ") { printtexname = "\\nvartriangleleft         " }
+		if (texname == "\\ntriangleright           ") { printtexname = "\\nvartriangleright        " }
+
 
     # partials:
 		if (usv == "02202") { class = "A" }

@@ -2447,6 +2447,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
   \um_setup_accents:
   \um_setup_delcodes:
   \um_setup_alphabets:
+  \um_setup_negations:
 %    \end{macrocode}
 % Prevent spaces, and that's it:
 %    \begin{macrocode}
@@ -5782,6 +5783,57 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 \cs_set_eq:NN \um_text_slash: \slash
 \cs_set_protected:Npn \slash {
   \mode_if_math:TF {\mathslash} {\um_text_slash:}
+}
+%    \end{macrocode}
+%
+% \paragraph{\cs{not}}
+% The situation of \cs{not} symbol is currently messy, in Unicode it is defined
+% as a combining mark so naturally it should be treated as a math accent,
+% however neither Lua\TeX\ nor \XeTeX\ correctly place it as it needs special
+% treatment compared to other accents, furthermore a math accent changes the
+% spacing of its nucleus, so \cs{not=} will be spaced as an ordinary not
+% relational symbol, which is undesired.
+%
+% Here modify \cs{not} to a macro that tries to use predefined negated symbols,
+% which would give better results in most cases, until there is more robust
+% solution in the engines.
+%
+% This code is based on an answer to a TeX -- Stack Exchange question by Enrico
+% Gregorio\footnote{\url{http://tex.stackexchange.com/a/47260/729}}.
+%
+%    \begin{macrocode}
+\tl_new:N \l_not_token_name_tl
+
+\cs_new:Npn \not_newnot:N #1 {
+   \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
+   \tl_if_empty:xF { \tl_tail:V \l_not_token_name_tl } {
+     \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
+   }
+   \cs_if_exist:cTF { n \l_not_token_name_tl } {
+     \use:c { n \l_not_token_name_tl }
+     } {
+     \cs_if_exist:cTF { not \l_not_token_name_tl } {
+       \use:c { not \l_not_token_name_tl }
+       } {
+       \not_oldnot: #1 %\l_not_token_name_tl
+       }
+     }
+}
+
+\cs_new_protected_nopar:Nn \um_setup_negations: {
+  \cs_set_eq:NN \not_oldnot: \not
+  \cs_set_eq:NN \not \not_newnot:N
+
+  \cs_gset:cpn { not= }    { \neq }
+  \cs_gset:cpn { not< }    { \nless }
+  \cs_gset:cpn { not> }    { \ngtr }
+  \cs_gset:Npn  \ngets     { \nleftarrow }
+  \cs_gset:Npn  \nsimeq    { \nsime }
+  \cs_gset:Npn  \nequal    { \ne }
+  \cs_gset:Npn  \nle       { \nleq }
+  \cs_gset:Npn  \nge       { \ngeq }
+  \cs_gset:Npn  \ngreater  { \ngtr }
+  \cs_gset:Npn  \nforksnot { \forks }
 }
 %    \end{macrocode}
 %
