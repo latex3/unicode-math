@@ -5811,13 +5811,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
    }
    \cs_if_exist:cTF { n \l_not_token_name_tl } {
      \use:c { n \l_not_token_name_tl }
-     } {
+   } {
      \cs_if_exist:cTF { not \l_not_token_name_tl } {
        \use:c { not \l_not_token_name_tl }
-       } {
+     } {
        \not_oldnot: #1 %\l_not_token_name_tl
-       }
      }
+   }
 }
 
 \cs_new_protected_nopar:Nn \um_setup_negations: {
