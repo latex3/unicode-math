@@ -1482,7 +1482,7 @@ This work is "author-maintained" by Will Robertson.
 %<*lua>
 local err, warn, info, log = luatexbase.provides_module({
   name        = "unicode-math",
-  date        = "2011/04/23",
+  date        = "2012/04/23",
   version     = 0.1,
   description = "Unicode math typesetting for LuaLaTeX",
   author      = "Khaled Hosny, Will Robertson, Philipp Stephani",
@@ -1502,6 +1502,22 @@ local function set_sscale_dimens(fontdata)
   end
 end
 luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_math.set_sscale_dimens")
+%    \end{macrocode}
+%
+% Cambria Math has too small \texttt{DisplayOperatorMinHeight} constant, so we
+% patch it to amore accebtable value.
+%
+%    \begin{macrocode}
+local function patch_cambria_domh(fontdata)
+  local mc = fontdata.MathConstants
+  local mh = 2800 / fontdata.units * fontdata.size
+  if fontdata.psname == "CambriaMath" and mc then
+    if mc.DisplayOperatorMinHeight < mh then
+      mc.DisplayOperatorMinHeight = mh
+    end
+  end
+end
+luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria.domh")
 %</lua>
 %    \end{macrocode}
 %
@@ -1538,7 +1554,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 \RequirePackage { lualatex-math } [ 2011/08/07 ]
 \RequirePackage { luatexbase }
 \RequirePackage { luaotfload } [ 2010/11/26 ]
-\RequireLuaModule { unicode-math } [ 2011/04/23 ]
+\RequireLuaModule { unicode-math } [ 2012/04/23 ]
 %</LU>
 %    \end{macrocode}
 %
