@@ -2810,7 +2810,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % We organise radicals in the same way as nolimits-operators.
 %    \begin{macrocode}
 \tl_new:N \l_um_radicals_tl
-\tl_set:Nn \l_um_radicals_tl {\sqrt}
+\tl_set:Nn \l_um_radicals_tl {\sqrt \longdivision}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5374,6 +5374,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 \def\gets{\leftarrow}
 \def\mathring{\ocirc}
 \def\lnot{\neg}
+\def\longdivision{\longdivisionsign}
 %    \end{macrocode}
 % These are somewhat odd: (and their usual Unicode uprightness does not match their amssymb glyphs)
 %    \begin{macrocode}
@@ -6072,7 +6073,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % \cmd\DeclareMathDelimiter\marg{symbol}\marg{type}\marg{sym.\ font}\marg{slot}\marg{sym.\ font}\marg{slot}
 %
 % \item[Radicals] Similar to delimiters (\cmd\DeclareMathRadical\ takes the same syntax) but
-% behave `weirdly'. \cmd\sqrt\ might very well be the only one.
+% behave `weirdly'.
 % \end{description}
 % In those cases, glyph slots in \emph{two} symbol fonts are required; one for the small (`regular') case,
 % the other for situations when the glyph is larger. This is not the case in \XeTeX.
