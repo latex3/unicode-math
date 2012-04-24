@@ -157,6 +157,9 @@ awk '
 		if (texname == "\\%                        ") { printtexname = "\\mathpercent              " }
 		if (texname == "\\&                        ") { printtexname = "\\mathampersand            " }
 		if (texname == "\\ac                       ") { printtexname = "\\invlazys                 " }
+		if (texname == "\\ntriangleleft            ") { printtexname = "\\nvartriangleleft         " }
+		if (texname == "\\ntriangleright           ") { printtexname = "\\nvartriangleright        " }
+
 
     # partials:
 		if (usv == "02202") { class = "A" }
@@ -190,6 +193,14 @@ awk '
 		if (usv == "023DF") { class = "\\mathunder" }
 
 		if (usv == "0203E") { class = "\\mathover" } # overline
+
+		# bottom accents
+		if (usv == "00331") { class = "\\mathbotaccent" }
+		if (usv == "020E8") { class = "\\mathbotaccent" }
+
+		# moustache
+		if (usv == "023B0") { class = "\\mathopen" }
+		if (usv == "023B1") { class = "\\mathclose" }
 
 	    # TRANSFORM MATH CLASSES
 	    if (class == "N") { class = "\\mathord" }

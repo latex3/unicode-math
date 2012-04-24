@@ -33,8 +33,8 @@
 
 \defmathfont{lm}{lmmath-regular.otf}{CC6666}
 \defmathfont{xits}{xits-math.otf}{CCCC66}
-\defmathfont{lucida}{Lucida Math}{66CC66}
-\defmathfont{lucibold}{Lucida Math Demibold}{66CC66}
+\defmathfont{lucida}{Lucida Bright Math OT}{66CC66}
+\defmathfont{lucibold}{Lucida Bright Math OT Demibold}{66CC66}
 \defmathfont{cambria}{Cambria Math}{66CCCC}
 \defmathfont{asana}{Asana-Math.otf}{6666CC}
 \defmathfont{euler}{Neo Euler}{CC66CC}
@@ -133,8 +133,8 @@ Symbols defined in \textsf{amssymb} are indicated with { \color[gray]{0.7} \text
 \clearpage
 \section{Opening symbols, \cmd\mathopen}
 \begingroup
-\let\sqrtold\sqrt
-\def\sqrt{\sqrtold{}}
+\def\sqrt{\sqrtsign{}}
+\def\longdivision{\longdivisionsign{}}
 \SHOW\mathopen
 \endgroup
 
@@ -150,8 +150,6 @@ Symbols defined in \textsf{amssymb} are indicated with { \color[gray]{0.7} \text
 \SHOW\mathpunct
 
 \section{`Over' symbols, \cmd\mathover}
-Lua\LaTeX\ only; faked in \XeLaTeX.
-
 \begingroup
 \def\SYMB#1#2#3{%
   \expandafter\iffontchar\csname#2\endcsname #3\relax
@@ -165,8 +163,6 @@ Lua\LaTeX\ only; faked in \XeLaTeX.
 
 
 \section{`Under' symbols, \cmd\mathunder}
-Lua\LaTeX\ only; faked in \XeLaTeX.
-
 \begingroup
 \def\SYMB#1#2#3{%
   \expandafter\iffontchar\csname#2\endcsname #3\relax
