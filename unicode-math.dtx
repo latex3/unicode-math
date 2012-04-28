@@ -5916,6 +5916,45 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
     }
 %</XE>
 %    \end{macrocode}
+% \begin{macro}{\overbracket}
+% \begin{macro}{\underbracket}
+%   \pkg{mathtools}’s |\overbracket| and |\underbracket| take optional
+%   arguments and are defined in terms of rules, so we keep them, and rename
+%   ours to |\Uoverbracket| and |\Uunderbracket|.
+%    \begin{macrocode}
+\AtEndOfPackageFile * { mathtools } {
+    \let\MToverbracket =\overbracket
+    \let\MTunderbracket=\underbracket
+
+    \AtBeginDocument {
+        \msg_warning:nn { unicode-math } { mathtools-overbracket }
+
+	\def\downbracketfill#1#2{%
+%    \end{macrocode}
+%   Original definition used the height of |\braceld| which is not available
+%   with Unicode fonts, so we are hard coding the $5/18$ex suggested by
+%   \pkg{mathtools}’s documentation.
+%    \begin{macrocode}
+            \edef\l_MT_bracketheight_fdim{.27ex}%
+            \downbracketend{#1}{#2}
+            \leaders \vrule \@height #1 \@depth \z@ \hfill
+            \downbracketend{#1}{#2}%
+        }
+	\def\upbracketfill#1#2{%
+            \edef\l_MT_bracketheight_fdim{.27ex}%
+            \upbracketend{#1}{#2}
+            \leaders \vrule \@height \z@ \@depth #1 \hfill
+            \upbracketend{#1}{#2}%
+        }
+	\let\Uoverbracket =\overbracket
+	\let\Uunderbracket=\underbracket
+        \let\overbracket  =\MToverbracket
+        \let\underbracket =\MTunderbracket
+    }
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
 % \begin{macro}{\dblcolon}
 % \begin{macro}{\coloneqq}
@@ -6033,6 +6072,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 \msg_new:nnn {unicode-math} {patch-macro}
 {
   I'm~ going~ to~ patch~ macro~ #1.
+}
+\msg_new:nnn { unicode-math } { mathtools-overbracket } {
+  Using~ \token_to_str:N \overbracket\ and~
+         \token_to_str:N \underbracke\ from~
+	 `mathtools'~ package.\\
+  \\
+  Use~ \token_to_str:N \Uoverbracket\ and~
+       \token_to_str:N \Uunderbracke\ for~
+       original~ `unicode-math'~ definition.
 }
 \msg_new:nnn { unicode-math } { mathtools-colon } {
   I'm~ going~ to~ overwrite~ the~ following~ commands~ from~
