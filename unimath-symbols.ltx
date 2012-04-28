@@ -190,6 +190,18 @@ Note that accents will only be properly placed if used with an OpenType font wit
 \SHOW\mathaccent
 \endgroup
 
+\section{Bottom accents, \cmd\mathbotaccent}
+\begingroup
+\def\SYMB#1#2#3{%
+  \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \refstepcounter{#2}%
+    \mathversion{#2}%
+    $\displaystyle#1 \mitx$%
+  \fi
+}
+\SHOW\mathbotaccent
+\endgroup
+
 \clearpage
 \section{Big operators, \cmd\mathop}
 
