@@ -2432,6 +2432,15 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
   \SetSymbolFont{\um_symfont_tl}{\l_um_mversion_tl}
     {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
 %    \end{macrocode}
+% Set the bold math version.
+%    \begin{macrocode}
+  \tl_set:Nn \l_um_tmpa_tl {normal}
+  \tl_if_eq:NNT \l_um_mversion_tl \l_um_tmpa_tl
+    {
+    \SetSymbolFont{\um_symfont_tl}{bold}
+      {\encodingdefault}{\l_um_family_tl}{\bfdefault}{\updefault}
+    }
+%    \end{macrocode}
 % Declare the math sizes (i.e., scaling of superscripts) for the specific
 % values for this font,
 % and set defaults for math fams two and three for legacy compatibility:
@@ -2516,6 +2525,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
       } {\l_um_fontname_tl}
     \SetSymbolFont{symbols}{\l_um_mversion_tl}
       {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
+
+    \tl_set:Nn \l_um_tmpa_tl {normal}
+    \tl_if_eq:NNT \l_um_mversion_tl \l_um_tmpa_tl
+      {
+      \SetSymbolFont{symbols}{bold}
+        {\encodingdefault}{\l_um_family_tl}{\bfdefault}{\updefault}
+      }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -2539,6 +2555,13 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
     } {\l_um_fontname_tl}
     \SetSymbolFont{largesymbols}{\l_um_mversion_tl}
       {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
+
+    \tl_set:Nn \l_um_tmpa_tl {normal}
+    \tl_if_eq:NNT \l_um_mversion_tl \l_um_tmpa_tl
+      {
+      \SetSymbolFont{largesymbols}{bold}
+        {\encodingdefault}{\l_um_family_tl}{\bfdefault}{\updefault}
+      }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -2562,7 +2585,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 \cs_new:Nn \um_fontspec_select_font: {
   \tl_set:Nx \l_um_font_keyval_tl {
 %<LU>     Renderer = Basic,
-    BoldFont = {}, ItalicFont = {},
+    BoldItalicFont = {}, ItalicFont = {},
     Script = Math,
     SizeFeatures = {
       {Size = \tf@size-} ,
