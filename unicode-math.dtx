@@ -608,11 +608,11 @@ This work is "author-maintained" by Will Robertson.
 %      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
 %     Upright & Serif & $\mathup\nabla$ \\
 %     & Bold serif & $\mathbfup\nabla$ \\
-%     & Bold sans & \umfont\char"1D76F \\
+%     & Bold sans & $\mathbfsfup\nabla$ \\
 %       \cmidrule(lr){1-2}\cmidrule(lr){3-3}
 %     Italic & Serif & $\mathit\nabla$ \\
 %     & Bold serif & $\mathbfit\nabla$ \\
-%     & Bold sans  & \umfont\char"1D7A9 \\
+%     & Bold sans  & $\mathbfsfit\nabla$ \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -653,8 +653,8 @@ This work is "author-maintained" by Will Robertson.
 %               & Italic  & $\mathit\partial$ \\
 %     Bold      & Upright & $\mathbfup\partial$ \\
 %               & Italic  & $\mathbfit\partial$ \\
-%     Sans bold & Upright & \umfont\char"1D789 \\
-%               & Italic  & \umfont\char"1D7C3 \\
+%     Sans bold & Upright & $\mathbfsfup\partial$ \\
+%               & Italic  & $\mathbfsfit\partial$ \\
 %       \bottomrule
 %   \end{tabular}
 % \end{table}
@@ -6469,7 +6469,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 \setsansfont[Scale=MatchLowercase,Ligatures=TeX]{Candara}
 \setmonofont[Scale=MatchLowercase]{Consolas}
 \setmathfont{Cambria Math}
-\newfontface\umfont{STIXGeneral}
+\newfontface\umfont{XITS Math}
 
 \usepackage{hypdoc}
 \hypersetup{linktocpage}
