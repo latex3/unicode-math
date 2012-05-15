@@ -4763,7 +4763,11 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 \AtBeginDocument { \um_load_lm_if_necessary: }
 \cs_new:Nn \um_load_lm_if_necessary:
   {
-    \cs_if_exist:NF \l_um_fontname_tl { \setmathfont{lmmath-regular.otf} }
+    \cs_if_exist:NF \l_um_fontname_tl
+      {
+        % XXX: update this when lmmath-bold.otf is released
+        \setmathfont[BoldFont={lmmath-regular.otf}]{lmmath-regular.otf}
+      }
   }
 %    \end{macrocode}
 %
