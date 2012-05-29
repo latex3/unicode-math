@@ -18,6 +18,7 @@ Unicode maths is currently supported to one degree or another by the fonts
 
  - [Cambria Math][CM] (Microsoft),
  - [Latin Modern Math][LM] (Bogusław Jackowski, Janusz M. Nowacki)
+ - [TeX Gyre Pagella Math][PM] (Bogusław Jackowski, Janusz M. Nowacki)
  - [Asana Math][AM] (Apostolos Syropolous),
  - [Neo Euler][NE] (Khaled Hosny),
  - [STIX][SM] (STI Pub), and
@@ -32,6 +33,7 @@ new releases.
 
 [CM]: http://www.ascenderfonts.com/font/cambria-regular.aspx
 [LM]: http://www.gust.org.pl/projects/e-foundry/lm-math
+[PM]: http://www.ctan.org/pkg/tex-gyre-math-pagella
 [AM]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
 [NE]: http://github.com/khaledhosny/euler-otf
 [SM]: http://www.aip.org/stixfonts/
@@ -55,17 +57,12 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-If you're using an up-to-date TeX Live 2011 or MiKTeX 2.9 then there'll be no problems.
+If you're using an up-to-date TeX Live 2011/2012 or MiKTeX 2.9 then there'll be no problems.
 Otherwise, read on.
 
 As well as running XeTeX or LuaTeX, this package requires recent versions of
 the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`,
 `filehook`, and `lualatex-math` packages.
-
-For some additional features you need LuaTeX 0.65 or later, which can be
-updated using [TLContrib][TLC] if you're still using TeX Live 2010.
-
-[TLC]: http://tlcontrib.metatex.org)
 
 
 MAINTENANCE
@@ -85,8 +82,7 @@ Please file bug reports with minimal examples:
 INSTALLATION
 ------------
 
-If you are using TeX Live 2010 or later, you may install the latest release
-version of the package with
+If you are using the currently supported version of TeX Live (about to be 2012 at time of writing), you may install the latest release version of the package with
 
     sudo tlmgr update unicode-math
 
@@ -144,15 +140,31 @@ Subsequently, the test suite may be executed with
 
     make check
 
-Both of these operations will take quite some time and require ImageMagick's
-`convert` tool to be installed. They are only necessary if you wish to make
-changes to unicode-math yourself (be sure to initialise the test suite
-*before* any changes are made to the package) and you wish to ensure that your
-changes have not affected the standard behaviour.
+Both of these operations will take quite some time and require ImageMagick's `convert` tool to be installed.
+They are only necessary if you wish to make changes to unicode-math yourself (be sure to initialise the test suite *before* any changes are made to the package) and you wish to ensure that your changes have not affected the standard behaviour.
 
 
 CHANGE HISTORY
 --------------
+
+- v0.7 (2012/05/29): The TeX Live 2012 release.
+
+  * Most changes (and all significant ones) in this release thanks to Khaled Hosny, who is now credited as an author of the package.
+  * Many improvements for XeTeX support to take advantage of the new engine (v0.9998) in TL2012.
+      * As a result, `\resetmathfont` is no longer required.
+  * Improve `\not` to use pre-combined glyphs where possible.
+  * LM Math is loaded by default.
+  * Support bottom accents.
+      * And add `\wideutilde`.
+  * The ‘symbols’ document is somewhat better organised and contains information on whether a symbol is defined in plain TeX or amssymb.
+  * Various other minor fixes and additions:
+      * `\underleftrightarrow` added for fonts that support it.
+      * Don’t overwrite mathtool’s `\overbracket` and `\underbracket`.
+      * Bug in `[range=...]` parsing fixed.
+      * Add `\longdivision`.
+      * Add `\lgroup` and `\rgroup`.
+      * Fix ‘moustache’ delimiters.
+      * `\openbox` renamed to `\mathvisiblespace`, since it is already defined in amsthm as an empty box.
 
 - v0.6a (2011/09/19)
 
