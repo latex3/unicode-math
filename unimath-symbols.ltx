@@ -27,7 +27,7 @@
   \setmathfont[version=#1,SizeFeatures={
       {Size=-10, Colour=999999},
       {Size=10-, Colour=#3}}]{#2}
-  \fontspec_set_fontface:cNnn {#1} \x {} {#2}
+  \fontspec_set_fontface:cNnn {#1} \x {ItalicFont={},BoldFont={}} {#2}
 }
 \ExplSyntaxOff
 
@@ -109,7 +109,7 @@
 
 \begin{document}
 \MakeShortVerb\|
-\title{Every symbol defined by \textsf{unicode-math}}
+\title{Every symbol (most symbols) defined by \textsf{unicode-math}}
 \author{Will Robertson\\\texttt{wspr81@gmail.com}}
 \maketitle
 
@@ -117,7 +117,7 @@ This document uses the file \texttt{unicode-math-table.tex}
 to print every symbol defined by the \textsf{unicode-math}
 package.
 Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
-Seven fonts are shown: (with approximate symbol counts)
+Eight fonts are shown: (with approximate symbol counts)
 \begin{itemize}
 \item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
 \item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
@@ -128,8 +128,8 @@ Seven fonts are shown: (with approximate symbol counts)
 \item[P] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
 \item[E] \mathversion{euler} $\mathup{Neo\ Euler}$ (\ref{count:euler})
 \end{itemize}
-Symbols defined in Plain \TeX\ are indicated with { \color[gray]{0.7} \textsuperscript{\sffamily (p)} } after their macro name.
-Symbols defined in \textsf{amssymb} are indicated with { \color[gray]{0.7} \textsuperscript{\sffamily (a)} }.
+Symbols defined in Plain \TeX\ are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (p)}} after their macro name.
+Symbols defined in \textsf{amssymb} are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (a)}}.
 
 \tableofcontents
 
