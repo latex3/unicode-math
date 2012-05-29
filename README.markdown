@@ -24,9 +24,9 @@ Unicode maths is currently supported to one degree or another by the fonts
  - [STIX][SM] (STI Pub), and
  - [XITS Math][XM] (Khaled Hosny).
 
-With the exception of Cambria Math, which is proprietry, and Latin Modern Math,
-which is released under the free [GUST Font License][GFL], the fonts above
-are all freely available and released under the [Open Font Licence][OFL].
+With the exception of Cambria Math, which is proprietry, the fonts above
+are all freely available and released under open source licences
+(the [GUST Font License][GFL] and [Open Font Licence][OFL]).
 
 I'm always looking for new fonts to test with, so please let me know of any
 new releases.
@@ -57,8 +57,8 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-If you're using an up-to-date TeX Live 2011/2012 or MiKTeX 2.9 then there'll be no problems.
-Otherwise, read on.
+If you're using an up-to-date TeX Live 2011/2012 or MiKTeX 2.9 then there'll 
+be no problems. Otherwise, read on.
 
 As well as running XeTeX or LuaTeX, this package requires recent versions of
 the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`,
@@ -82,7 +82,9 @@ Please file bug reports with minimal examples:
 INSTALLATION
 ------------
 
-If you are using the currently supported version of TeX Live (about to be 2012 at time of writing), you may install the latest release version of the package with
+If you are using the currently supported version of TeX Live (about to be 2012 
+at time of writing), you may install the latest release version of the package 
+with
 
     sudo tlmgr update unicode-math
 
@@ -140,8 +142,12 @@ Subsequently, the test suite may be executed with
 
     make check
 
-Both of these operations will take quite some time and require ImageMagick's `convert` tool to be installed.
-They are only necessary if you wish to make changes to unicode-math yourself (be sure to initialise the test suite *before* any changes are made to the package) and you wish to ensure that your changes have not affected the standard behaviour.
+Both of these operations will take quite some time and require ImageMagick's 
+`convert` tool to be installed.
+They are only necessary if you wish to make changes to unicode-math yourself 
+(be sure to initialise the test suite *before* any changes are made to the 
+package) and you wish to ensure that your changes have not affected the 
+standard behaviour.
 
 
 CHANGE HISTORY
@@ -149,14 +155,17 @@ CHANGE HISTORY
 
 - v0.7 (2012/05/30): The TeX Live 2012 release.
 
-  * Most changes (and all significant ones) in this release thanks to Khaled Hosny, who is now credited as an author of the package.
-  * Many improvements for XeTeX support to take advantage of the new engine (v0.9998) in TL2012.
+  * Most changes (and all significant ones) in this release thanks to Khaled 
+    Hosny, who is now credited as an author of the package.
+  * Many improvements for XeTeX support to take advantage of the new engine 
+    (v0.9998) in TL2012.
       * As a result, `\resetmathfont` is no longer required.
   * Improve `\not` to use pre-combined glyphs where possible.
   * LM Math is loaded by default.
   * Support bottom accents.
       * And add `\wideutilde`.
-  * The ‘symbols’ document is somewhat better organised and contains information on whether a symbol is defined in plain TeX or amssymb.
+  * The ‘symbols’ document is somewhat better organised and contains
+    information on whether a symbol is defined in plain TeX or amssymb.
   * Various other minor fixes and additions:
       * `\underleftrightarrow` added for fonts that support it.
       * Don’t overwrite mathtool’s `\overbracket` and `\underbracket`.
@@ -164,7 +173,8 @@ CHANGE HISTORY
       * Add `\longdivision`.
       * Add `\lgroup` and `\rgroup`.
       * Fix ‘moustache’ delimiters.
-      * `\openbox` renamed to `\mathvisiblespace`, since it is already defined in amsthm as an empty box.
+      * `\openbox` renamed to `\mathvisiblespace`, since it is already defined
+        in amsthm as an empty box.
 
 - v0.6a (2011/09/19)
 
@@ -292,5 +302,6 @@ and the test suite for this package
 - testfiles/*.ltx.
 
 ____________________________________
-Copyright 2006-2011   Will Robertson  <will.robertson@latex-project.org>
+Copyright 2006-2012   Will Robertson  <will.robertson@latex-project.org>
 Copyright 2010-2011 Philipp Stephani  <st_philipp@yahoo.de>
+Copyright 2012          Khaled Hosny  <khaledhosny@eglug.org>

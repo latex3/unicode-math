@@ -8,9 +8,9 @@
 \keepsilent
 \let\MetaPrefix\DoubleperCent
 \declarepreamble\texpreamble
-Copyright 2006-2011 Will Robertson <will.robertson@latex-project.org>
+Copyright 2006-2012   Will Robertson <will.robertson@latex-project.org>
 Copyright 2010-2011 Philipp Stephani <st_philipp@yahoo.de>
-Copyright 2012 Khaled Hosny <khaledhosny@eglug.org>
+Copyright 2012          Khaled Hosny <khaledhosny@eglug.org>
 
 This package is free software and may be redistributed and/or modified under
 the conditions of the LaTeX Project Public License, version 1.3c or higher
@@ -112,11 +112,11 @@ This work is "author-maintained" by Will Robertson.
 %
 % \end{abstract}
 %
-% \newpage
-% \tableofcontents
+% \doparttoc\faketableofcontents
 %
 % \newpage
 % \part{User documentation}
+% \parttoc
 % \section{Introduction}
 %
 % This document describes the \pkg{unicode-math} package, which is an
@@ -901,11 +901,11 @@ This work is "author-maintained" by Will Robertson.
 % Pre-drawn fractions \unichar{00BC}--\unichar{00BE}, \unichar{2150}--\unichar{215E}
 % are not suitable for use in mathematics output. However, they can be useful
 % as input characters to abbreviate common fractions.
-%
-% \centerline{\fontspec{DejaVuSerif.ttf}% available in TeX Live 2012 if not earlier
-% ¼ ½ ¾  ↉ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞}
-%
-% For example, instead of writing `|\tfrac12 x|', it's more readable to have
+% \begin{center}
+% \fontspec{DejaVuSerif.ttf} ^^A available in TeX Live 2012 if not earlier
+% ¼ ½ ¾  ↉ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞
+% \end{center}
+% For example, instead of writing `|\tfrac12 x|', you may consider it more readable to have
 % `|½x|' in the source instead.
 %
 % If the \cs{tfrac} command exists (i.e., if \pkg{amsmath} is loaded or
@@ -992,21 +992,6 @@ This work is "author-maintained" by Will Robertson.
 % \tablabel{uptriangles}
 % \end{table}
 %
-% \subsubsection{Warning messages}
-%
-% This package can produce a number of informational messages to try and inform the user when something might be going wrong due to package conflicts or something else.
-% As an experimental feature, these can be turn off on an individual basis with the package option |warnings-off| which takes a comma-separated list of warnings to suppress.
-% A warning will give you its name when printed on the console output; e.g.,
-% \begin{Verbatim}
-% * unicode-math warning: "mathtools-colon"
-% *
-% * ... <warning message> ...
-% \end{Verbatim}
-% This warning could be suppressed by loading the package as follows:
-% \begin{Verbatim}
-% \usepackage[warnings-off={mathtools-colon}]{unicode-math}
-% \end{Verbatim}
-%
 % \iffalse
 % \subsubsection{Normalising some input characters}
 %
@@ -1030,7 +1015,24 @@ This work is "author-maintained" by Will Robertson.
 % (Not yet implemented.)
 % \fi
 %
-% \subsubsection{Programmer's interface}
+% \section{Advanced}
+%
+% \subsection{Warning messages}
+%
+% This package can produce a number of informational messages to try and inform the user when something might be going wrong due to package conflicts or something else.
+% As an experimental feature, these can be turn off on an individual basis with the package option |warnings-off| which takes a comma-separated list of warnings to suppress.
+% A warning will give you its name when printed on the console output; e.g.,
+% \begin{Verbatim}[gobble=2]
+%   * unicode-math warning: "mathtools-colon"
+%   *
+%   * ... <warning message> ...
+% \end{Verbatim}
+% This warning could be suppressed by loading the package as follows:
+% \begin{Verbatim}[gobble=2]
+%   \usepackage[warnings-off={mathtools-colon}]{unicode-math}
+% \end{Verbatim}
+%
+% \subsection{Programmer's interface}
 %
 % (Tentative and under construction.)
 % If you are writing some code that needs to know the current
@@ -1042,20 +1044,20 @@ This work is "author-maintained" by Will Robertson.
 %
 % \StopEventually{}
 %
+% \clearpage
 % \part{Package implementation}
+% \parttoc
+%
+% \section{Header code}
 %
 % We (later on) bifurcate the package based on the engine being used.
 %    \begin{macrocode}
 %<*load>
-\luatex_if_engine:T { \usepackage{unicode-math-luatex} \endinput }
-\xetex_if_engine:T  { \usepackage{unicode-math-xetex}  \endinput }
+\luatex_if_engine:T { \RequirePackage{unicode-math-luatex} \endinput }
+\xetex_if_engine:T  { \RequirePackage{unicode-math-xetex}  \endinput }
 %</load>
 %    \end{macrocode}
-%
-% \section{Header code}
-%
-% The shared part of the code starts here before the split mentioned above.
-%
+% The shared part of the code starts here before the split above.
 %    \begin{macrocode}
 %<*preamble&!XE&!LU>
 %    \end{macrocode}
@@ -1094,7 +1096,6 @@ This work is "author-maintained" by Will Robertson.
 \RequirePackage{fix-cm} % avoid some warnings
 \RequirePackage{filehook}[2011/01/03]
 %    \end{macrocode}
-%
 % Start using \LaTeX3 --- finally!
 %    \begin{macrocode}
 \ExplSyntaxOn
@@ -1108,29 +1109,17 @@ This work is "author-maintained" by Will Robertson.
 \cs_generate_variant:Nn \prop_get:NnN {cxN}
 \cs_generate_variant:Nn \prop_if_in:NnTF {cx}
 %    \end{macrocode}
-%
+% Extra expansion command:
 %    \begin{macrocode}
-\cs_new:Npn \exp_args:NNcc #1#2#3#4 {
+\cs_set:Npn \exp_args:NNcc #1#2#3#4 {
   \exp_after:wN #1 \exp_after:wN #2
     \cs:w #3 \exp_after:wN \cs_end:
     \cs:w #4 \cs_end:
 }
 %    \end{macrocode}
 %
-% For for old command in lualatex-math: (Sept 2011)
-%    \begin{macrocode}
-\cs_set_eq:NN \tl_replace_in:Nnn \tl_replace_once:Nnn
-%    \end{macrocode}
-%
 %
 % \paragraph{Conditionals}
-%
-%    \begin{macrocode}
-\cs_new_protected_nopar:Npn \bool_const:Nn #1 #2 {
-  \bool_new:N #1
-  \bool_set:Nn #1 { #2 }
-}
-%    \end{macrocode}
 %
 %    \begin{macrocode}
 \bool_new:N \l_um_ot_math_bool
@@ -6480,6 +6469,8 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 
 \usepackage{hypdoc}
 \hypersetup{linktocpage}
+
+\usepackage{minitoc}
 
 \linespread{1.069}      % A bit more space between lines
 \frenchspacing         % Remove ugly extra space after punctuation
