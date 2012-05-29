@@ -147,7 +147,7 @@ They are only necessary if you wish to make changes to unicode-math yourself (be
 CHANGE HISTORY
 --------------
 
-- v0.7 (2012/05/29): The TeX Live 2012 release.
+- v0.7 (2012/05/30): The TeX Live 2012 release.
 
   * Most changes (and all significant ones) in this release thanks to Khaled Hosny, who is now credited as an author of the package.
   * Many improvements for XeTeX support to take advantage of the new engine (v0.9998) in TL2012.
