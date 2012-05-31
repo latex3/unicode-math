@@ -430,7 +430,7 @@ This work is "author-maintained" by Will Robertson.
 % either switches to upright for Latin letters (|bold-style=TeX|) as well or
 % keeps them italic (|bold-style=ISO|).
 %
-% To match the package options for non-bold characters, for
+% To match the package options for non-bold characters, with option
 % |bold-style=upright| all bold characters are upright, and
 % |bold-style=literal| does not change the upright/italic shape of the letter.
 %
@@ -490,7 +490,7 @@ This work is "author-maintained" by Will Robertson.
 % your bold sans serif upright (or all vice versa, if that's even conceivable). Therefore, bold sans
 % serif follows from the setting for sans serif; it is completely independent of the setting for bold.
 %
-% In other words, \cs{mathbfsf} is \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
+% In other words, \cs{mathbfsf} is either \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
 %
 % Note well! There is no medium-weight sans serif Greek alphabet in Unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
 %
@@ -501,7 +501,7 @@ This work is "author-maintained" by Will Robertson.
 % shape one may wish to use in mathematical notation. The complete list is shown
 % in \tabref{mathalphabets}. Some of these have been covered in the previous sections.
 %
-% At present, the math font switching commands do not nest; therefore if you want
+% The math font switching commands do not nest; therefore if you want
 % sans serif bold, you must write |\mathsfbf{...}| rather than |\mathbf{\mathsf{...}}|.
 % This may change in the future.
 %
@@ -670,7 +670,7 @@ This work is "author-maintained" by Will Robertson.
 % confused that what they think as `normal epsilon' is actual the `variant
 % epsilon'. And the same problem exists for `phi'.
 %
-% We have a package option to control this behaviour.
+% We have an option to control this behaviour.
 % With |vargreek-shape=TeX|,
 % \cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
 % \cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
