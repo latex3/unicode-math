@@ -5240,9 +5240,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % TODO: move all this to expl3, and don't use internal expl3 macros.
 %    \begin{macrocode}
 \cs_new:Npn \um_scan_sscript:TF #1#2 {
-  \tl_set:Nx \peek_true_aux:w { \exp_not:n{ #1 } }
-  \tl_set_eq:NN \peek_true:w \peek_true_remove:w
-  \tl_set:Nx \peek_false:w { \exp_not:n { \group_align_safe_end: #2 } }
+  \tl_set:Nx \__peek_true_aux:w { \exp_not:n{ #1 } }
+  \tl_set_eq:NN \__peek_true:w \__peek_true_remove:w
+  \tl_set:Nx \__peek_false:w { \exp_not:n { \group_align_safe_end: #2 } }
   \group_align_safe_begin:
     \peek_after:Nw \um_peek_execute_branches_ss:
 }
@@ -5256,7 +5256,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
     \token_if_eq_catcode_p:NN \l_peek_token \c_group_end_token ||
     \token_if_eq_meaning_p:NN \l_peek_token \c_space_token
   }
-  { \peek_false:w  }
+  { \__peek_false:w  }
   { \um_peek_execute_branches_ss_aux: }
 }
 %    \end{macrocode}
@@ -5278,9 +5278,9 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
       \prop_get:cxN
         {g_um_\l_um_tmpa_tl _prop} {\meaning\l_peek_token} \l_um_tmpb_tl
       \tl_put_right:NV \l_um_ss_chain_tl \l_um_tmpb_tl
-      \peek_true:w
+      \__peek_true:w
     }
-    { \peek_false:w }
+    { \__peek_false:w }
 }
 %    \end{macrocode}
 %
