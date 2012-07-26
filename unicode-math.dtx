@@ -60,7 +60,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2012/05/30 v0.7 Unicode maths in XeLaTeX and LuaLaTeX]
+  [2012/07/26 v0.7a Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -1179,13 +1179,14 @@ This work is "author-maintained" by Will Robertson.
 % \begin{macro}{\um_glyph_if_exist:nTF}
 %: TODO: Generalise for arbitrary fonts! \cs{l_um_font} is not always the one used for a specific glyph!!
 %    \begin{macrocode}
-\prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F} {
-  \iffontchar \l_um_font #1 \scan_stop:
+\prg_new_conditional:Nnn \um_glyph_if_exist:n {p,TF,T,F}
+ {
+  \etex_iffontchar:D \l_um_font #1 \scan_stop:
     \prg_return_true:
   \else:
     \prg_return_false:
   \fi:
-}
+ }
 \cs_generate_variant:Nn \um_glyph_if_exist_p:n {c}
 \cs_generate_variant:Nn \um_glyph_if_exist:nTF {c}
 \cs_generate_variant:Nn \um_glyph_if_exist:nT  {c}
@@ -1206,237 +1207,194 @@ This work is "author-maintained" by Will Robertson.
 % This macro can be used in lieu of or later to override
 % options declared when the package is loaded.
 %    \begin{macrocode}
-\DeclareDocumentCommand \unimathsetup {m} {
+\DeclareDocumentCommand \unimathsetup {m}
+ {
   \keys_set:nn  {unicode-math} {#1}
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
+%    \begin{macrocode}
+\cs_new:Nn \um_keys_choices:nn
+ {
+  \cs_set:Npn \um_keys_choices_fn:n ##1 { \um_keys_choices_aux:nnn {#1} ##1 , }
+  \use:x
+   {
+    \exp_not:N \keys_define:nn {unicode-math}
+     {
+      #1 .choice: ,
+      \tl_map_function:nN {#2} \um_keys_choices_fn:n
+     }
+   }
+ }
+\cs_new:Nn \um_keys_choices_aux:nnn { #1 / #2 .code:n = { \exp_not:n {#3} } }
+%    \end{macrocode}
 %
 % \paragraph{math-style}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  normal-style .choice_code:n =
-  {
-    \bool_set_false:N \g_um_literal_bool
-    \ifcase \l_keys_choice_int
-      \bool_set_false:N \g_um_upGreek_bool
-      \bool_set_false:N \g_um_upgreek_bool
-      \bool_set_false:N \g_um_upLatin_bool
-      \bool_set_false:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_upGreek_bool
-      \bool_set_false:N \g_um_upgreek_bool
-      \bool_set_false:N \g_um_upLatin_bool
-      \bool_set_false:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_upGreek_bool
-      \bool_set_true:N \g_um_upgreek_bool
-      \bool_set_true:N \g_um_upLatin_bool
-      \bool_set_false:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_upGreek_bool
-      \bool_set_true:N \g_um_upgreek_bool
-      \bool_set_true:N \g_um_upLatin_bool
-      \bool_set_true:N \g_um_uplatin_bool
-    \or
-      \bool_set_true:N \g_um_literal_bool
-    \fi
-  } ,
-  normal-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
-}
+\um_keys_choices:nn {normal-style}
+ {
+   { {ISO} {
+       \bool_set_false:N \g_um_literal_bool
+       \bool_set_false:N \g_um_upGreek_bool
+       \bool_set_false:N \g_um_upgreek_bool
+       \bool_set_false:N \g_um_upLatin_bool
+       \bool_set_false:N \g_um_uplatin_bool } }
+   { {TeX} {
+       \bool_set_false:N \g_um_literal_bool
+       \bool_set_true:N  \g_um_upGreek_bool
+       \bool_set_false:N \g_um_upgreek_bool
+       \bool_set_false:N \g_um_upLatin_bool
+       \bool_set_false:N \g_um_uplatin_bool } }
+   { {french} {
+       \bool_set_false:N \g_um_literal_bool
+       \bool_set_true:N  \g_um_upGreek_bool
+       \bool_set_true:N  \g_um_upgreek_bool
+       \bool_set_true:N  \g_um_upLatin_bool
+       \bool_set_false:N \g_um_uplatin_bool } }
+   { {upright} {
+       \bool_set_false:N \g_um_literal_bool
+       \bool_set_true:N  \g_um_upGreek_bool
+       \bool_set_true:N  \g_um_upgreek_bool
+       \bool_set_true:N  \g_um_upLatin_bool
+       \bool_set_true:N  \g_um_uplatin_bool } }
+   { {literal} {
+       \bool_set_true:N  \g_um_literal_bool } }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  math-style .choice_code:n =
-  {
-    \ifcase \l_keys_choice_int
-      \unimathsetup {
-        normal-style=ISO,
-        bold-style=ISO,
-        sans-style=italic,
-        nabla=upright,
-        partial=italic,
-      }
-    \or
-      \unimathsetup {
-        normal-style=TeX,
-        bold-style=TeX,
-        sans-style=upright,
-        nabla=upright,
-        partial=italic,
-      }
-    \or
-      \unimathsetup {
-        normal-style=french,
-        bold-style=upright,
-        sans-style=upright,
-        nabla=upright,
-        partial=upright,
-      }
-    \or
-      \unimathsetup {
-        normal-style=upright,
-        bold-style=upright,
-        sans-style=upright,
-        nabla=upright,
-        partial=upright,
-      }
-    \or
-      \unimathsetup {
-        normal-style=literal,
-        bold-style=literal,
-        sans-style=literal,
-        colon=literal,
-        nabla=literal,
-        partial=literal,
-      }
-    \fi
-  } ,
-  math-style .generate_choices:n = {ISO,TeX,french,upright,literal} ,
-}
+\um_keys_choices:nn {math-style}
+ {
+  { {ISO} {
+      \unimathsetup { nabla=upright, partial=italic,
+       normal-style=ISO, bold-style=ISO, sans-style=italic } } }
+  { {TeX} {
+      \unimathsetup { nabla=upright, partial=italic,
+        normal-style=TeX, bold-style=TeX, sans-style=upright } } }
+  { {french} {
+      \unimathsetup { nabla=upright, partial=upright,
+        normal-style=french, bold-style=upright, sans-style=upright } } }
+  { {upright} {
+      \unimathsetup { nabla=upright, partial=upright,
+        normal-style=upright, bold-style=upright, sans-style=upright } } }
+  { {literal} {
+      \unimathsetup { colon=literal, nabla=literal, partial=literal,
+        normal-style=literal, bold-style=literal, sans-style=literal } } }
+ }
 %    \end{macrocode}
 %
 % \paragraph{bold-style}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  bold-style .choice_code:n = {
-    \bool_set_false:N \g_um_bfliteral_bool
-    \ifcase \l_keys_choice_int
+\um_keys_choices:nn {bold-style}
+ {
+  {{ISO} {
+      \bool_set_false:N \g_um_bfliteral_bool
       \bool_set_false:N \g_um_bfupGreek_bool
       \bool_set_false:N \g_um_bfupgreek_bool
       \bool_set_false:N \g_um_bfupLatin_bool
-      \bool_set_false:N \g_um_bfuplatin_bool
-    \or
+      \bool_set_false:N \g_um_bfuplatin_bool }}
+  {{TeX} {
+      \bool_set_false:N \g_um_bfliteral_bool
       \bool_set_true:N \g_um_bfupGreek_bool
       \bool_set_false:N \g_um_bfupgreek_bool
       \bool_set_true:N \g_um_bfupLatin_bool
-      \bool_set_true:N \g_um_bfuplatin_bool
-    \or
+      \bool_set_true:N \g_um_bfuplatin_bool }}
+  {{upright} {
+      \bool_set_false:N \g_um_bfliteral_bool
       \bool_set_true:N \g_um_bfupGreek_bool
       \bool_set_true:N \g_um_bfupgreek_bool
       \bool_set_true:N \g_um_bfupLatin_bool
-      \bool_set_true:N \g_um_bfuplatin_bool
-    \or
-      \bool_set_true:N \g_um_bfliteral_bool
-    \fi
-  } ,
-  bold-style .generate_choices:n = {ISO,TeX,upright,literal} ,
-}
+      \bool_set_true:N \g_um_bfuplatin_bool }}
+  {{literal} {
+      \bool_set_true:N \g_um_bfliteral_bool }}
+ }
 %    \end{macrocode}
 %
 % \paragraph{sans-style}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  sans-style .choice_code:n = {
-    \ifcase \l_keys_choice_int
-      \bool_set_false:N \g_um_upsans_bool
-    \or
-      \bool_set_true:N \g_um_upsans_bool
-    \or
-      \bool_set_true:N \g_um_sfliteral_bool
-    \fi
-  } ,
-  sans-style .generate_choices:n = {italic,upright,literal} ,
-}
+\um_keys_choices:nn {sans-style}
+ {
+  { {italic}  { \bool_set_false:N \g_um_upsans_bool    } }
+  { {upright} { \bool_set_true:N  \g_um_upsans_bool    } }
+  { {literal} { \bool_set_true:N  \g_um_sfliteral_bool } }
+ }
 %    \end{macrocode}
 %
 %
 % \paragraph{Nabla and partial}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  nabla .choice_code:n = {
-    \bool_set_false:N \g_um_literal_Nabla_bool
-    \ifcase \l_keys_choice_int
-      \bool_set_true:N \g_um_upNabla_bool
-    \or
-      \bool_set_false:N \g_um_upNabla_bool
-    \or
-      \bool_set_true:N \g_um_literal_Nabla_bool
-    \fi
-  } ,
-  nabla .generate_choices:n = {upright,italic,literal} ,
-}
+\um_keys_choices:nn {nabla}
+ {
+  { {upright} { \bool_set_false:N \g_um_literal_Nabla_bool
+                \bool_set_true:N  \g_um_upNabla_bool    } }
+  { {italic}  { \bool_set_false:N \g_um_literal_Nabla_bool
+                \bool_set_false:N \g_um_upNabla_bool    } }
+  { {literal} { \bool_set_true:N  \g_um_literal_Nabla_bool } }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  partial .choice_code:n = {
-    \bool_set_false:N \g_um_literal_partial_bool
-    \ifcase \l_keys_choice_int
-      \bool_set_true:N \g_um_uppartial_bool
-    \or
-      \bool_set_false:N \g_um_uppartial_bool
-    \or
-      \bool_set_true:N \g_um_literal_partial_bool
-    \fi
-  } ,
-  partial .generate_choices:n = {upright,italic,literal} ,
-}
+\um_keys_choices:nn {partial}
+ {
+  { {upright} { \bool_set_false:N \g_um_literal_partial_bool
+                \bool_set_true:N  \g_um_uppartial_bool    } }
+  { {italic}  { \bool_set_false:N \g_um_literal_partial_bool
+                \bool_set_false:N \g_um_uppartial_bool    } }
+  { {literal} { \bool_set_true:N  \g_um_literal_partial_bool } }
+ }
 %    \end{macrocode}
 %
 % \paragraph{Epsilon and phi shapes}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  vargreek-shape .choice: ,
-  vargreek-shape / unicode .code:n = {
-    \bool_set_false:N \g_um_texgreek_bool
-  } ,
-  vargreek-shape / TeX .code:n = {
-    \bool_set_true:N \g_um_texgreek_bool
-  }
-}
+\um_keys_choices:nn {vargreek-shape}
+ {
+  {{unicode} {\bool_set_false:N \g_um_texgreek_bool}}
+  {{TeX}     {\bool_set_true:N  \g_um_texgreek_bool}}
+ }
 %    \end{macrocode}
 %
 % \paragraph{Colon style}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  colon .choice: ,
-  colon / literal .code:n = {
-    \bool_set_true:N \g_um_literal_colon_bool
-  } ,
-  colon / TeX .code:n = {
-    \bool_set_false:N \g_um_literal_colon_bool
-  }
-}
+\um_keys_choices:nn {colon}
+ {
+  {{literal} {\bool_set_true:N  \g_um_literal_colon_bool}}
+  {{TeX}     {\bool_set_false:N \g_um_literal_colon_bool}}
+ }
 %    \end{macrocode}
 %
 % \paragraph{Slash delimiter style}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  slash-delimiter .choice: ,
-  slash-delimiter / ascii .code:n = {
-    \tl_set:Nn \g_um_slash_delimiter_usv {"002F}
-  } ,
-  slash-delimiter / frac .code:n = {
-    \tl_set:Nn \g_um_slash_delimiter_usv {"2044}
-  } ,
-  slash-delimiter / div .code:n = {
-    \tl_set:Nn \g_um_slash_delimiter_usv {"2215}
-  }
-}
+\um_keys_choices:nn {slash-delimiter}
+ {
+  {{ascii} {\tl_set:Nn \g_um_slash_delimiter_usv {"002F}}}
+  {{frac}  {\tl_set:Nn \g_um_slash_delimiter_usv {"2044}}}
+  {{div}   {\tl_set:Nn \g_um_slash_delimiter_usv {"2215}}}
+ }
 %    \end{macrocode}
 %
 %
 % \paragraph{Active fraction style}
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  active-frac .choice: ,
-  active-frac / small .code:n = {
-    \cs_if_exist:NTF \tfrac {
+\um_keys_choices:nn {active-frac}
+ {
+  {{small}
+   {
+    \cs_if_exist:NTF \tfrac
+     {
       \bool_set_true:N \l_um_smallfrac_bool
-    }{
+     }{
       \um_warning:n {no-tfrac}
       \bool_set_false:N \l_um_smallfrac_bool
-    }
-    \use:c{um_setup_active_frac:}
-  } ,
-  active-frac / normalsize .code:n = {
+     }
+    \use:c {um_setup_active_frac:}
+   }}
+  {{normalsize}
+   {
     \bool_set_false:N \l_um_smallfrac_bool
-    \use:c{um_setup_active_frac:}
-  }
-}
+    \use:c {um_setup_active_frac:}
+   }}
+ }
 %    \end{macrocode}
 %
 % \paragraph{Debug/tracing}
@@ -1454,18 +1412,12 @@ This work is "author-maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\keys_define:nn {unicode-math} {
-  trace .choice: ,
-  trace / debug .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { log } { warning }
-  } ,
-  trace / on .code:n = {
-    % default
-  } ,
-  trace / off .code:n = {
-    \msg_redirect_module:nnn { unicode-math } { log } { none }
-  } ,
-}
+\um_keys_choices:nn {trace}
+ {
+  { {on}    {} } % default
+  { {debug} { \msg_redirect_module:nnn { unicode-math } { log } { warning } } }
+  { {off}   { \msg_redirect_module:nnn { unicode-math } { log } { none } } }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
