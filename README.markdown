@@ -153,6 +153,10 @@ standard behaviour.
 CHANGE HISTORY
 --------------
 
+- v0.7a (2012/07/28)
+
+  * Keep in sync with expl3 changes.
+
 - v0.7 (2012/05/30): The TeX Live 2012 release.
 
   * Most changes (and all significant ones) in this release thanks to Khaled 
