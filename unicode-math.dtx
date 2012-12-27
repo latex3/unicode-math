@@ -5705,6 +5705,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % \paragraph{\pkg{amsopn}}
 % This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
 %    \begin{macrocode}
+%<*XE>
 \AtEndOfPackageFile * {amsopn} {
   \cs_set:Npn \newmcodes@ {
     \mathcode`\'39\scan_stop:
@@ -5718,6 +5719,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
     \mathcode`\:"603A\scan_stop:
   }
 }
+%</XE>
 %    \end{macrocode}
 % \paragraph{Symbols}
 %    \begin{macrocode}
