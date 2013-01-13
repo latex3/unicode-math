@@ -2127,7 +2127,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % The following assignments should all be fairly straightforward.
 %    \begin{macrocode}
 \cs_set:Nn \um_set_mathsymbol:nNNn {
-  \prg_case_tl:Nnn #3 {
+  \tl_case:Nnn #3 {
     \mathop { \um_set_big_operator:nnn {#1} {#2} {#4} }
     \mathopen
       {
@@ -3597,7 +3597,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
   \clist_map_inline:nn {#2} {
     \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {um_config_ \l_um_style_tl _\l_um_tmpa_tl :n} {
-      \str_if_eq:xxTF {\l_um_tmpa_tl}{misc} {
+      \str_if_eq_x:nnTF {\l_um_tmpa_tl}{misc} {
         \um_maybe_init_alphabet:V \l_um_style_tl
         \clist_map_break:
       }{
@@ -3614,7 +3614,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
   \clist_map_inline:nn {#2} {
     \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {
-      \str_if_eq:xxTF {\l_um_tmpa_tl}{misc} {
+      \str_if_eq_x:nnTF {\l_um_tmpa_tl}{misc} {
         \um_log:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
         \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {#3}
       }{
@@ -3707,7 +3707,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % First the function with numbers:
 %    \begin{macrocode}
 \cs_set:Npn \um_map_chars_range:nnn #1#2#3 {
-  \prg_stepwise_inline:nnnn {0}{1}{#1-1} {
+  \int_step_inline:nnnn {0}{1}{#1-1} {
     \um_map_char_single:nn {#2+##1}{#3+##1}
   }
 }
@@ -3840,7 +3840,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % First the version that uses numbers:
 %    \begin{macrocode}
 \cs_new:Npn \um_set_mathalph_range:nNnn #1#2#3#4 {
-  \prg_stepwise_inline:nnnn {0}{1}{#1-1}
+  \int_step_inline:nnnn {0}{1}{#1-1}
     { \um_set_mathalphabet_char:Nnn {#2} { ##1 + #3 } { ##1 + #4 } }
 }
 \cs_generate_variant:Nn \um_set_mathalph_range:nNnn {nNcc}
@@ -4797,7 +4797,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
   }
 }
 \cs_new:Nn \um_nprimes_select:nn {
-  \prg_case_int:nnn {#2}{
+  \int_case:nnn {#2}{
     {1} { \um_superscript:n {#1} }
     {2} {
       \um_glyph_if_exist:nTF {"2033}
@@ -4819,7 +4819,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
   }
 }
 \cs_new:Nn \um_nbackprimes_select:nn {
-  \prg_case_int:nnn {#2}{
+  \int_case:nnn {#2}{
     {1} { \um_superscript:n {#1} }
     {2} {
       \um_glyph_if_exist:nTF {"2036}
