@@ -1501,18 +1501,25 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 %
 % \subsection{Engine differences}
 %
+% \XeTeX\ before version 0.9999 did not support |\U| prefix for extended math
+% primitives, and while \LuaTeX\ had it from the start, prior 0.75.0 the
+% \LaTeX\ format did not provide them without the |\luatex| prefix.
+%
 %    \begin{macrocode}
-\cs_new:Nn \um_cs_compat:n
-%<XE>  { \cs_set_eq:cc {U#1} {XeTeX#1}   }
-%<LU>  { \cs_set_eq:cc {U#1} {luatexU#1} }
-\um_cs_compat:n {mathcode}
-\um_cs_compat:n {delcode}
-\um_cs_compat:n {mathcodenum}
-\um_cs_compat:n {mathcharnum}
-\um_cs_compat:n {mathchardef}
-\um_cs_compat:n {radical}
-\um_cs_compat:n {mathaccent}
-\um_cs_compat:n {delimiter}
+%<XE>\ifdim\number\XeTeXversion\XeTeXrevision in<0.9999in
+%<LU>\ifnum\luatexversion<75%
+  \cs_new:Nn \um_cs_compat:n
+%<XE>    { \cs_set_eq:cc {U#1} {XeTeX#1}   }
+%<LU>    { \cs_set_eq:cc {U#1} {luatexU#1} }
+  \um_cs_compat:n {mathcode}
+  \um_cs_compat:n {delcode}
+  \um_cs_compat:n {mathcodenum}
+  \um_cs_compat:n {mathcharnum}
+  \um_cs_compat:n {mathchardef}
+  \um_cs_compat:n {radical}
+  \um_cs_compat:n {mathaccent}
+  \um_cs_compat:n {delimiter}
+\fi
 %    \end{macrocode}
 %
 %    \begin{macrocode}
