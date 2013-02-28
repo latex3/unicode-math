@@ -164,7 +164,7 @@ This work is "author-maintained" by Will Robertson.
 % with both \XeLaTeX\ and \LuaLaTeX; resp.,
 % \begin{quote}
 % \begin{verbatim}
-% \setmathfont{lmmath-regular.otf}
+% \setmathfont{latinmodern-math.otf}
 % \setmathfont{Asana-Math.otf}
 % \setmathfont{xits-math.otf}
 % \end{verbatim}
@@ -4723,7 +4723,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
     \cs_if_exist:NF \l_um_fontname_tl
       {
         % XXX: update this when lmmath-bold.otf is released
-        \setmathfont[BoldFont={lmmath-regular.otf}]{lmmath-regular.otf}
+        \setmathfont[BoldFont={latinmodern-math.otf}]{latinmodern-math.otf}
       }
   }
 %    \end{macrocode}
