@@ -57,7 +57,7 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-If you're using an up-to-date TeX Live 2011/2012 or MiKTeX 2.9 then there'll 
+If you're using an up-to-date TeX Live 2011/2012 or MiKTeX 2.9 then there'll
 be no problems. Otherwise, read on.
 
 As well as running XeTeX or LuaTeX, this package requires recent versions of
@@ -82,8 +82,8 @@ Please file bug reports with minimal examples:
 INSTALLATION
 ------------
 
-If you are using the currently supported version of TeX Live (about to be 2012 
-at time of writing), you may install the latest release version of the package 
+If you are using the currently supported version of TeX Live (about to be 2012
+at time of writing), you may install the latest release version of the package
 with
 
     sudo tlmgr update unicode-math
@@ -142,16 +142,26 @@ Subsequently, the test suite may be executed with
 
     make check
 
-Both of these operations will take quite some time and require ImageMagick's 
+Both of these operations will take quite some time and require ImageMagick's
 `convert` tool to be installed.
-They are only necessary if you wish to make changes to unicode-math yourself 
-(be sure to initialise the test suite *before* any changes are made to the 
-package) and you wish to ensure that your changes have not affected the 
+They are only necessary if you wish to make changes to unicode-math yourself
+(be sure to initialise the test suite *before* any changes are made to the
+package) and you wish to ensure that your changes have not affected the
 standard behaviour.
 
 
 CHANGE HISTORY
 --------------
+
+- v0.7c (2013/02/25)
+
+  * The Latin Modern math font name changed TWICE. Only caught the first one.
+    Sorry for any inconvenience caused.
+
+- v0.7b (2013/02/22)
+
+  * Keep in sync with Latin Modern Math font name change.
+  * Keep in sync with expl3 changes.
 
 - v0.7a (2012/07/28)
 
@@ -159,9 +169,9 @@ CHANGE HISTORY
 
 - v0.7 (2012/05/30): The TeX Live 2012 release.
 
-  * Most changes (and all significant ones) in this release thanks to Khaled 
+  * Most changes (and all significant ones) in this release thanks to Khaled
     Hosny, who is now credited as an author of the package.
-  * Many improvements for XeTeX support to take advantage of the new engine 
+  * Many improvements for XeTeX support to take advantage of the new engine
     (v0.9998) in TL2012.
       * As a result, `\resetmathfont` is no longer required.
   * Improve `\not` to use pre-combined glyphs where possible.
