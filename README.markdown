@@ -153,6 +153,10 @@ standard behaviour.
 CHANGE HISTORY
 --------------
 
+- v0.7d (2013/03/16)
+
+  * More expl3 changes missed first time around. (Sorry again.)
+
 - v0.7c (2013/02/25)
 
   * The Latin Modern math font name changed TWICE. Only caught the first one.

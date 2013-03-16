@@ -16,19 +16,19 @@ This package is free software and may be redistributed and/or modified under
 the conditions of the LaTeX Project Public License, version 1.3c or higher
 (your choice): <http://www.latex-project.org/lppl/>.
 
-This work is "author-maintained" by Will Robertson.
+This work is "maintained" by Will Robertson.
 \endpreamble
 \def\MetaPrefix{--}
 \declarepreamble\luapreamble
-Copyright 2006-2011 Will Robertson <will.robertson@latex-project.org>
-Copyright 2010-2011 Philipp Stephani <st_philipp@yahoo.de>
-Copyright 2012 Khaled Hosny <khaledhosny@eglug.org>
+Copyright 2006-2013   Will Robertson <will.robertson@latex-project.org>
+Copyright 2010-2013 Philipp Stephani <st_philipp@yahoo.de>
+Copyright 2012-2013     Khaled Hosny <khaledhosny@eglug.org>
 
 This package is free software and may be redistributed and/or modified under
 the conditions of the LaTeX Project Public License, version 1.3c or higher
 (your choice): <http://www.latex-project.org/lppl/>.
 
-This work is "author-maintained" by Will Robertson.
+This work is "maintained" by Will Robertson.
 \endpreamble
 \nopostamble
 \askforoverwritefalse
@@ -60,7 +60,7 @@ This work is "author-maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2013/02/25 v0.7c Unicode maths in XeLaTeX and LuaLaTeX]
+  [2013/03/16 v0.7d Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -84,8 +84,8 @@ This work is "author-maintained" by Will Robertson.
 %
 % \begin{abstract}
 % \noindent
-% This is the first incarnation of the \pkg{unicode-math} package, which is
-% intended to be a complete implementation of Unicode
+% This document describes the \pkg{unicode-math} package, which is
+% intended as an implementation of Unicode
 % maths for \LaTeX\ using the \XeTeX\ and Lua\TeX\ typesetting engines.
 % With this package, changing maths fonts is as easy as changing
 % text fonts --- and there are more and more maths fonts appearing now.
@@ -150,25 +150,20 @@ This work is "author-maintained" by Will Robertson.
 % Load \pkg{unicode-math} as a regular \LaTeX\ package. It should be loaded
 % after any other maths or font-related package in case it needs to overwrite
 % their definitions. Here's an example:
-% \begin{quote}
-% \begin{verbatim}
+% \begin{Verbatim}
 % \usepackage{amsmath} % if desired
 % \usepackage{unicode-math}
 % \setmathfont{Asana-Math.otf}
-% \end{verbatim}
-% \end{quote}
-%
+% \end{Verbatim}
 % Three OpenType maths fonts are included by default in \TeX\ Live 2011:
 % Latin Modern Math, Asana Math, and XITS Math.
 % These can be loaded directly with their filename
 % with both \XeLaTeX\ and \LuaLaTeX; resp.,
-% \begin{quote}
-% \begin{verbatim}
+% \begin{Verbatim}
 % \setmathfont{latinmodern-math.otf}
 % \setmathfont{Asana-Math.otf}
 % \setmathfont{xits-math.otf}
-% \end{verbatim}
-% \end{quote}
+% \end{Verbatim}
 % Other OpenType maths fonts may be loaded in the usual way; please see the
 % \pkg{fontspec} documentation for more information.
 %
@@ -181,14 +176,12 @@ This work is "author-maintained" by Will Robertson.
 % Package options may be set when the package as loaded or at any later
 % stage with the \cs{unimathsetup} command. Therefore, the following two
 % examples are equivalent:
-% \begin{quote}
-% \begin{verbatim}
+% \begin{Verbatim}
 % \usepackage[math-style=TeX]{unicode-math}
 % % OR
 % \usepackage{unicode-math}
 % \unimathsetup{math-style=TeX}
-% \end{verbatim}
-% \end{quote}
+% \end{Verbatim}
 % Note, however, that some package options affects how maths is initialised
 % and changing an option such as |math-style| will not take effect until a
 % new maths font is set up.
@@ -196,14 +189,12 @@ This work is "author-maintained" by Will Robertson.
 % Package options may \emph{also} be used when declaring new maths fonts,
 % passed via options to the \cs{setmathfont} command.
 % Therefore, the following two examples are equivalent:
-% \begin{quote}
-% \begin{verbatim}
+% \begin{Verbatim}
 % \unimathsetup{math-style=TeX}
 % \setmathfont{Cambria Math}
 % % OR
 % \setmathfont[math-style=TeX]{Cambria Math}
-% \end{verbatim}
-% \end{quote}
+% \end{Verbatim}
 %
 % A short list of package options is shown in \tabref{pkgopt}.
 % See following sections for more information.
@@ -696,12 +687,11 @@ This work is "author-maintained" by Will Robertson.
 % kern to get the spacing right. There is no user interface to adjust this
 % negative kern yet (because I haven't decided what it should look like);
 % if you need to, write something like this:
-% \begin{verbatim}
+% \begin{Verbatim}
 % \ExplSyntaxOn
 % \muskip_gset:Nn \g_um_primekern_muskip { -\thinmuskip/2 }
 % \ExplySyntaxOff
-% \end{verbatim}
-%
+% \end{Verbatim}
 % Backwards or reverse primes behave in exactly the same way; use the \ascii\
 % back tick (\texttt{\char`\`}) or the Unicode reverse prime \unichar{2035}
 % ({\umfont\char"2035}).
@@ -923,7 +913,7 @@ This work is "author-maintained" by Will Robertson.
 % \cs{bullet} for black. This package maps those commands to \cs{vysmwhtcircle},
 % \cs{mdlgwhtcircle}, and \cs{smblkcircle}, respectively.
 %
-% \begin{table}
+% \begin{table}\centering
 % \def\showchar#1#2#3{ \textsc{u}+{\small\ttfamily #1} & \texttt{\string#3} & \umfont \char"#1 \\}
 % \begin{tabular}{@{}llc@{}}
 % \toprule
@@ -975,7 +965,7 @@ This work is "author-maintained" by Will Robertson.
 % already, it is better off to only use upright Greek Delta $\Delta$ if you're
 % actually using it as a symbolic entity such as a variable on its own.
 %
-% \begin{table}
+% \begin{table}\centering
 % \begin{tabular}{@{}llcl@{}}
 % \toprule
 % Slot & Command & Glyph & Class \\
@@ -1021,13 +1011,13 @@ This work is "author-maintained" by Will Robertson.
 % This package can produce a number of informational messages to try and inform the user when something might be going wrong due to package conflicts or something else.
 % As an experimental feature, these can be turn off on an individual basis with the package option |warnings-off| which takes a comma-separated list of warnings to suppress.
 % A warning will give you its name when printed on the console output; e.g.,
-% \begin{Verbatim}[gobble=2]
+% \begin{Verbatim}
 %   * unicode-math warning: "mathtools-colon"
 %   *
 %   * ... <warning message> ...
 % \end{Verbatim}
 % This warning could be suppressed by loading the package as follows:
-% \begin{Verbatim}[gobble=2]
+% \begin{Verbatim}
 %   \usepackage[warnings-off={mathtools-colon}]{unicode-math}
 % \end{Verbatim}
 %
@@ -5802,7 +5792,7 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 
 \cs_new:Npn \not_newnot:N #1 {
    \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
-   \tl_if_empty:xF { \tl_tail:V \l_not_token_name_tl } {
+   \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl } {
      \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
    }
    \cs_if_exist:cTF { n \l_not_token_name_tl } {
@@ -5839,7 +5829,6 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 %    \begin{macrocode}
 \AtEndOfPackageFile * { mathtools } {
 %<*XE>
-    \chk_if_free_cs:N \g_um_empty_fam
     \newfam \g_um_empty_fam
     \um_check_and_fix:NNnnn
         \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 }
@@ -6179,19 +6168,19 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 % \paragraph{Summary}
 %
 % For symbols, something like:
-% \begin{verbatim}
+% \begin{Verbatim}
 % \def\DeclareMathSymbol#1#2#3#4{
 %   \global\mathchardef#1"\mathchar@type#2
 %     \expandafter\hexnumber@\csname sym#2\endcsname
 %     {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
-% \end{verbatim}
+% \end{Verbatim}
 % For characters, something like:
-% \begin{verbatim}
+% \begin{Verbatim}
 % \def\DeclareMathSymbol#1#2#3#4{
 %   \global\mathcode`#1"\mathchar@type#2
 %     \expandafter\hexnumber@\csname sym#2\endcsname
 %     {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
-% \end{verbatim}
+% \end{Verbatim}
 %
 % \section{Legacy \TeX\ font dimensions}
 %
@@ -6422,16 +6411,21 @@ luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria
 \usepackage[slash-delimiter=frac,nabla=literal]{unicode-math}
 \usepackage{metalogo,hologo}
 
+\fvset{gobble=2,fontsize=\small,xleftmargin=2em}
 %\usepackage[rm,small]{titlesec}
 
 \setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
-\setsansfont[Scale=MatchLowercase,Ligatures=TeX]{Candara}
-\setmonofont[Scale=MatchLowercase]{Consolas}
+\setsansfont[Scale=MatchLowercase,Ligatures=TeX]{Iwona}
+\setmonofont[Scale=MatchLowercase]{Inconsolata}
 \setmathfont{texgyrepagella-math.otf}
 \newfontface\umfont{XITS Math}
 
 \usepackage{hypdoc}
 \hypersetup{linktocpage}
+
+% work around some issue turning | into "j" inside mathsf in the definition of \Module:
+% (also prettify)
+\def\Module#1{{\footnotesize\color{red}$\langle$\texttt{#1}$\rangle$}}
 
 \usepackage{minitoc}
 
