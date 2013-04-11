@@ -1466,8 +1466,12 @@ luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_
 %    \begin{macrocode}
 local function patch_cambria_domh(fontdata)
   local mc = fontdata.MathConstants
-  local mh = 2800 / fontdata.units * fontdata.size
-  if fontdata.psname == "CambriaMath" and mc then
+  if mc and fontdata.psname == "CambriaMath" then
+    -- keeping backward compatibility with luaotfload v1
+    -- for some unknown reason, fontdata.parameters.units might be empty
+    local em = fontdata.parameters.units or fontdata.units or 1000
+    local sz = fontdata.parameters.size or fontdata.size
+    local mh = 2800 / em * sz
     if mc.DisplayOperatorMinHeight < mh then
       mc.DisplayOperatorMinHeight = mh
     end
