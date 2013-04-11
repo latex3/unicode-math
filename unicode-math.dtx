@@ -1468,10 +1468,19 @@ local function patch_cambria_domh(fontdata)
   local mc = fontdata.MathConstants
   if mc and fontdata.psname == "CambriaMath" then
     -- keeping backward compatibility with luaotfload v1
-    -- for some unknown reason, fontdata.parameters.units might be empty
-    local em = fontdata.parameters.units or fontdata.units or 1000
+    local units_per_em
+    local metadata = fontdata.shared and fontdata.shared.rawdata.metadata
+    if metadata and metadata.units_per_em then
+      units_per_em = metadata.units_per_em
+    elseif fontdata.parameters.units then
+      units_per_em = fontdata.parameters.units
+    elseif fontdata.units then
+      units_per_em = fontdata.units
+    else
+      units_per_em = 1000
+    end
     local sz = fontdata.parameters.size or fontdata.size
-    local mh = 2800 / em * sz
+    local mh = 2800 / units_per_em * sz
     if mc.DisplayOperatorMinHeight < mh then
       mc.DisplayOperatorMinHeight = mh
     end
