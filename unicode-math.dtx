@@ -60,7 +60,7 @@ This work is "maintained" by Will Robertson.
 %<preamble&XE>\ProvidesPackage{unicode-math-xetex}
 %<preamble&LU>\ProvidesPackage{unicode-math-luatex}
 %<*preamble>
-  [2013/03/16 v0.7d Unicode maths in XeLaTeX and LuaLaTeX]
+  [2013/05/04 v0.7e Unicode maths in XeLaTeX and LuaLaTeX]
 %</preamble>
 %<*internal>
 \documentclass[a4paper]{ltxdoc}
@@ -1438,8 +1438,8 @@ This work is "maintained" by Will Robertson.
 %<*lua>
 local err, warn, info, log = luatexbase.provides_module({
   name        = "unicode-math",
-  date        = "2013/04/11",
-  version     = 0.2,
+  date        = "2013/05/04",
+  version     = 0.3,
   description = "Unicode math typesetting for LuaLaTeX",
   author      = "Khaled Hosny, Will Robertson, Philipp Stephani",
   licence     = "LPPL v1.3+"
@@ -1449,44 +1449,49 @@ local err, warn, info, log = luatexbase.provides_module({
 % \texttt{(Script)ScriptPercentScaleDown} math constants, so we
 % emulate \XeTeX\ behaviour by setting \cs{fontdimen10} and
 % \cs{fontdimen11}.
+% 
+% |luaotfload| now provides these, they shoud be removed in the
+% next version.
 %    \begin{macrocode}
-local function set_sscale_dimens(fontdata)
-  local mc = fontdata.MathConstants
-  if mc then
-    fontdata.parameters[10] = mc.ScriptPercentScaleDown or 70
-    fontdata.parameters[11] = mc.ScriptScriptPercentScaleDown or 50
+if luaotfload and luaotfload.module and luaotfload.module.version < 2 then
+  local function set_sscale_dimens(fontdata)
+    local mc = fontdata.MathConstants
+    if mc then
+      fontdata.parameters[10] = mc.ScriptPercentScaleDown or 70
+      fontdata.parameters[11] = mc.ScriptScriptPercentScaleDown or 50
+    end
   end
-end
-luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_math.set_sscale_dimens")
+  luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_math.set_sscale_dimens")
 %    \end{macrocode}
 %
 % Cambria Math has too small \texttt{DisplayOperatorMinHeight} constant, so we
 % patch it to amore accebtable value.
 %
 %    \begin{macrocode}
-local function patch_cambria_domh(fontdata)
-  local mc = fontdata.MathConstants
-  if mc and fontdata.psname == "CambriaMath" then
-    -- keeping backward compatibility with luaotfload v1
-    local units_per_em
-    local metadata = fontdata.shared and fontdata.shared.rawdata.metadata
-    if metadata and metadata.units_per_em then
-      units_per_em = metadata.units_per_em
-    elseif fontdata.parameters.units then
-      units_per_em = fontdata.parameters.units
-    elseif fontdata.units then
-      units_per_em = fontdata.units
-    else
-      units_per_em = 1000
-    end
-    local sz = fontdata.parameters.size or fontdata.size
-    local mh = 2800 / units_per_em * sz
-    if mc.DisplayOperatorMinHeight < mh then
-      mc.DisplayOperatorMinHeight = mh
+  local function patch_cambria_domh(fontdata)
+    local mc = fontdata.MathConstants
+    if mc and fontdata.psname == "CambriaMath" then
+      -- keeping backward compatibility with luaotfload v1
+      local units_per_em
+      local metadata = fontdata.shared and fontdata.shared.rawdata.metadata
+      if metadata and metadata.units_per_em then
+        units_per_em = metadata.units_per_em
+      elseif fontdata.parameters.units then
+        units_per_em = fontdata.parameters.units
+      elseif fontdata.units then
+        units_per_em = fontdata.units
+      else
+        units_per_em = 1000
+      end
+      local sz = fontdata.parameters.size or fontdata.size
+      local mh = 2800 / units_per_em * sz
+      if mc.DisplayOperatorMinHeight < mh then
+        mc.DisplayOperatorMinHeight = mh
+      end
     end
   end
+  luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria.domh")
 end
-luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria.domh")
 %</lua>
 %    \end{macrocode}
 %
