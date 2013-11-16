@@ -5824,9 +5824,10 @@ end
    }
 }
 
+\cs_set_eq:NN \not_oldnot: \not
+\cs_set_eq:NN \not \not_newnot:N
+
 \cs_new_protected_nopar:Nn \um_setup_negations: {
-  \cs_set_eq:NN \not_oldnot: \not
-  \cs_set_eq:NN \not \not_newnot:N
 
   \cs_gset:cpn { not= }    { \neq }
   \cs_gset:cpn { not< }    { \nless }
