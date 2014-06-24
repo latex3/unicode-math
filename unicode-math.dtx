@@ -1085,6 +1085,27 @@ This work is "maintained" by Will Robertson.
 \RequirePackage{fix-cm} % avoid some warnings
 \RequirePackage{filehook}[2011/01/03]
 %    \end{macrocode}
+% Need this part from \pkg{fixltx2e}:
+%    \begin{macrocode}
+\def\@DeclareMathSizes #1#2#3#4#5{%
+  \@defaultunits\dimen@ #2pt\relax\@nnil
+  \if $#3$%
+    \expandafter\let\csname S@\strip@pt\dimen@\endcsname\math@fontsfalse
+  \else
+    \@defaultunits\dimen@ii #3pt\relax\@nnil
+    \@defaultunits\@tempdima #4pt\relax\@nnil
+    \@defaultunits\@tempdimb #5pt\relax\@nnil
+    \toks@{#1}%
+    \expandafter\xdef\csname S@\strip@pt\dimen@\endcsname{%
+      \gdef\noexpand\tf@size{\strip@pt\dimen@ii}%
+      \gdef\noexpand\sf@size{\strip@pt\@tempdima}%
+      \gdef\noexpand\ssf@size{\strip@pt\@tempdimb}%
+      \the\toks@
+    }%
+  \fi
+}
+%    \end{macrocode}
+%
 % Start using \LaTeX3 --- finally!
 %    \begin{macrocode}
 \ExplSyntaxOn
