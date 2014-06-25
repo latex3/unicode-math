@@ -1040,6 +1040,8 @@ This work is "maintained" by Will Robertson.
 % \section{Header code}
 %
 % We (later on) bifurcate the package based on the engine being used.
+% These separate package files are indicated with the Docstrip flags \textsf{LU} and \textsf{XE}, respectively.
+% Shared code executed before loading the engine-specific code is indicated with the flag \textsf{preamble}.
 %    \begin{macrocode}
 %<*load>
 \luatex_if_engine:T { \RequirePackage{unicode-math-luatex} \endinput }
@@ -1051,6 +1053,7 @@ This work is "maintained" by Will Robertson.
 %<*preamble&!XE&!LU>
 %    \end{macrocode}
 %
+% Bail early if using pdf\TeX.
 %    \begin{macrocode}
 \usepackage{ifxetex,ifluatex}
 \ifxetex
@@ -1119,7 +1122,8 @@ This work is "maintained" by Will Robertson.
 \cs_generate_variant:Nn \prop_get:NnN {cxN}
 \cs_generate_variant:Nn \prop_if_in:NnTF {cx}
 %    \end{macrocode}
-% Extra expansion command:
+%
+% An extra expansion command:
 %    \begin{macrocode}
 \cs_set:Npn \exp_args:NNcc #1#2#3#4 {
   \exp_after:wN #1 \exp_after:wN #2
@@ -1128,6 +1132,11 @@ This work is "maintained" by Will Robertson.
 }
 %    \end{macrocode}
 %
+% For \pkg{fontspec}:
+%    \begin{macrocode}
+\cs_generate_variant:Nn \fontspec_set_family:Nnn {Nx}
+\cs_generate_variant:Nn \fontspec_set_fontface:NNnn {NNx}
+%    \end{macrocode}
 %
 % \paragraph{Conditionals}
 %
@@ -1175,6 +1184,7 @@ This work is "maintained" by Will Robertson.
 \int_new:N \g_um_fam_int
 %    \end{macrocode}
 %
+% For displaying in warning messages, etc.:
 %    \begin{macrocode}
 \tl_const:Nn \c_um_math_alphabet_name_latin_tl {Latin,~lowercase}
 \tl_const:Nn \c_um_math_alphabet_name_Latin_tl {Latin,~uppercase}
@@ -1185,6 +1195,8 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 %
 % \subsection{Extras}
+%
+% What might end up being provided by the kernel.
 %
 % \begin{macro}{\um_glyph_if_exist:nTF}
 %: TODO: Generalise for arbitrary fonts! \cs{l_um_font} is not always the one used for a specific glyph!!
@@ -1204,12 +1216,70 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Function variants}
+% \begin{macro}{\um_set_mathcode:nnnn}
+% \begin{macro}{\um_set_mathcode:nnn}
+% \begin{macro}{\um_set_mathchar:NNnn}
+% \begin{macro}{\um_set_mathchar:cNnn}
+% \begin{macro}{\um_set_delcode:nnn}
+% \begin{macro}{\um_radical:nn}
+% \begin{macro}{\um_delimiter:Nnn}
+% \begin{macro}{\um_accent:nnn}
+% \begin{macro}{\um_accent_keyword:}
+% These are all wrappers for the primitive commands that take numerical
+% input only.
+%    \begin{macrocode}
+\cs_set:Npn \um_set_mathcode:nnnn #1#2#3#4 {
+  \Umathcode \int_eval:n {#1} =
+    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
+}
+\cs_set:Npn \um_set_mathcode:nnn #1#2#3 {
+  \Umathcode \int_eval:n {#1} =
+    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#1} \scan_stop:
+}
+\cs_set:Npn \um_set_mathchar:NNnn #1#2#3#4 {
+  \Umathchardef #1 =
+    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
+}
+\cs_new:Nn \um_set_delcode:nnn {
+  \Udelcode#2 = \csname sym#1\endcsname #3 \scan_stop:
+}
+\cs_new:Nn \um_radical:nn {
+  \Uradical \csname sym#1\endcsname #2 \scan_stop:
+}
+\cs_new:Nn \um_delimiter:Nnn {
+  \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+}
+\cs_new:Nn \um_accent:nnn {
+  \Umathaccent #1~ \mathchar@type\mathaccent \use:c { sym #2 } #3 \scan_stop:
+}
+%    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_generate_variant:Nn \fontspec_set_family:Nnn {Nx}
-\cs_generate_variant:Nn \fontspec_set_fontface:NNnn {NNx}
+\cs_generate_variant:Nn \um_set_mathchar:NNnn {c}
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%
+% \begin{macro}{\char_gmake_mathactive:N}
+% \begin{macro}{\char_gmake_mathactive:n}
+%    \begin{macrocode}
+\cs_new:Nn \char_gmake_mathactive:N {
+  \global\mathcode `#1 = "8000 \scan_stop:
+}
+\cs_new:Nn \char_gmake_mathactive:n {
+  \global\mathcode #1 = "8000 \scan_stop:
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
 % \subsection{Package options}
 %
@@ -1451,12 +1521,22 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %
+% End of preamble code.
+%    \begin{macrocode}
+%</preamble&!XE&!LU>
+%    \end{macrocode}
+%
+% (Error messages and warning definitions go here from the |msg| chunk
+%  defined in \secref[vref]{codemsg}.)
+%
 % \section{\Hologo{LuaLaTeX} module}
+%
+%    \begin{macrocode}
+%<*lua>
+%    \end{macrocode}
 %
 % We create a \pkg{luatexbase} module that contains Lua functions for use with \hologo{LuaLaTeX}.
 %    \begin{macrocode}
-%</preamble&!XE&!LU>
-%<*lua>
 local err, warn, info, log = luatexbase.provides_module({
   name        = "unicode-math",
   date        = "2013/05/04",
@@ -1471,7 +1551,7 @@ local err, warn, info, log = luatexbase.provides_module({
 % emulate \XeTeX\ behaviour by setting \cs{fontdimen10} and
 % \cs{fontdimen11}.
 % 
-% |luaotfload| now provides these, they shoud be removed in the
+% |luaotfload| now provides these, they should be removed in the
 % next version.
 %    \begin{macrocode}
 if luaotfload and luaotfload.module and luaotfload.module.version < 2 then
@@ -1486,7 +1566,7 @@ if luaotfload and luaotfload.module and luaotfload.module.version < 2 then
 %    \end{macrocode}
 %
 % Cambria Math has too small \texttt{DisplayOperatorMinHeight} constant, so we
-% patch it to amore accebtable value.
+% patch it to amore acceptable value.
 %
 %    \begin{macrocode}
   local function patch_cambria_domh(fontdata)
@@ -1513,15 +1593,16 @@ if luaotfload and luaotfload.module and luaotfload.module.version < 2 then
   end
   luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria.domh")
 end
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 %</lua>
 %    \end{macrocode}
 %
-% (Error messages and warning definitions go here from the |msg| chunk
-%  defined in \secref[vref]{codemsg}.)
-%
 % \section{Bifurcation}
+%
 % And here the split begins. Most of the code is still shared, but
-% code for \LuaTeX\ uses the `LU' prefix and code for \XeTeX\ uses `XE'.
+% code for \LuaTeX\ uses the `\textsf{LU}' flag and code for \XeTeX\ uses `\textsf{XE}'.
 %
 %    \begin{macrocode}
 %<*package&(XE|LU)>
@@ -1533,29 +1614,13 @@ end
 % \XeTeX\ before version 0.9999 did not support |\U| prefix for extended math
 % primitives, and while \LuaTeX\ had it from the start, prior 0.75.0 the
 % \LaTeX\ format did not provide them without the |\luatex| prefix.
-%
-%    \begin{macrocode}
-%<XE>\ifdim\number\XeTeXversion\XeTeXrevision in<0.9999in
-%<LU>\ifnum\luatexversion<75%
-  \cs_new:Nn \um_cs_compat:n
-%<XE>    { \cs_set_eq:cc {U#1} {XeTeX#1}   }
-%<LU>    { \cs_set_eq:cc {U#1} {luatexU#1} }
-  \um_cs_compat:n {mathcode}
-  \um_cs_compat:n {delcode}
-  \um_cs_compat:n {mathcodenum}
-  \um_cs_compat:n {mathcharnum}
-  \um_cs_compat:n {mathchardef}
-  \um_cs_compat:n {radical}
-  \um_cs_compat:n {mathaccent}
-  \um_cs_compat:n {delimiter}
-\fi
-%    \end{macrocode}
+% We assume that users of \pkg{unicode-math} are using up-to-date engines however.
 %
 %    \begin{macrocode}
 %<*LU>
-\RequirePackage { lualatex-math } [ 2011/08/07 ]
+\RequirePackage { lualatex-math }  [ 2011/08/07 ]
 \RequirePackage { luatexbase }
-\RequirePackage { luaotfload } [ 2010/11/26 ]
+\RequirePackage { luaotfload }     [ 2010/11/26 ]
 \RequireLuaModule { unicode-math } [ 2012/04/23 ]
 %</LU>
 %    \end{macrocode}
@@ -1568,64 +1633,65 @@ end
 %
 % Rather than `readable', in the end, this makes the code more extensible.
 %    \begin{macrocode}
-\cs_new:Nn \usv_set:nnn {
+\cs_new:Nn \usv_set:nnn
+ {
   \tl_set:cn { \um_to_usv:nn {#1}{#2} } {#3}
-}
+ }
 \cs_new:Nn \um_to_usv:nn { g_um_#1_#2_usv }
 %    \end{macrocode}
 % \paragraph{Alphabets}
 %    \begin{macrocode}
-\usv_set:nnn {up}{num}{48}
-\usv_set:nnn {up}{Latin}{65}
-\usv_set:nnn {up}{latin}{97}
-\usv_set:nnn {up}{Greek}{"391}
-\usv_set:nnn {up}{greek}{"3B1}
-\usv_set:nnn {it}{Latin}{"1D434}
-\usv_set:nnn {it}{latin}{"1D44E}
-\usv_set:nnn {it}{Greek}{"1D6E2}
-\usv_set:nnn {it}{greek}{"1D6FC}
-\usv_set:nnn {bb}{num}{"1D7D8}
-\usv_set:nnn {bb}{Latin}{"1D538}
-\usv_set:nnn {bb}{latin}{"1D552}
-\usv_set:nnn {scr}{Latin}{"1D49C}
-\usv_set:nnn {cal}{Latin}{"1D49C}
-\usv_set:nnn {scr}{latin}{"1D4B6}
+\usv_set:nnn {up}  {num}  {48}
+\usv_set:nnn {up}  {Latin}{65}
+\usv_set:nnn {up}  {latin}{97}
+\usv_set:nnn {up}  {Greek}{"391}
+\usv_set:nnn {up}  {greek}{"3B1}
+\usv_set:nnn {it}  {Latin}{"1D434}
+\usv_set:nnn {it}  {latin}{"1D44E}
+\usv_set:nnn {it}  {Greek}{"1D6E2}
+\usv_set:nnn {it}  {greek}{"1D6FC}
+\usv_set:nnn {bb}  {num}  {"1D7D8}
+\usv_set:nnn {bb}  {Latin}{"1D538}
+\usv_set:nnn {bb}  {latin}{"1D552}
+\usv_set:nnn {scr} {Latin}{"1D49C}
+\usv_set:nnn {cal} {Latin}{"1D49C}
+\usv_set:nnn {scr} {latin}{"1D4B6}
 \usv_set:nnn {frak}{Latin}{"1D504}
 \usv_set:nnn {frak}{latin}{"1D51E}
-\usv_set:nnn {sf}{num}{"1D7E2}
-\usv_set:nnn {sfup}{num}{"1D7E2}
-\usv_set:nnn {sfit}{num}{"1D7E2}
+\usv_set:nnn {sf}  {num}  {"1D7E2}
+\usv_set:nnn {sfup}{num}  {"1D7E2}
+\usv_set:nnn {sfit}{num}  {"1D7E2}
 \usv_set:nnn {sfup}{Latin}{"1D5A0}
-\usv_set:nnn {sf}{Latin}{"1D5A0}
+\usv_set:nnn {sf}  {Latin}{"1D5A0}
 \usv_set:nnn {sfup}{latin}{"1D5BA}
-\usv_set:nnn {sf}{latin}{"1D5BA}
+\usv_set:nnn {sf}  {latin}{"1D5BA}
 \usv_set:nnn {sfit}{Latin}{"1D608}
 \usv_set:nnn {sfit}{latin}{"1D622}
-\usv_set:nnn {tt}{num}{"1D7F6}
-\usv_set:nnn {tt}{Latin}{"1D670}
-\usv_set:nnn {tt}{latin}{"1D68A}
+\usv_set:nnn {tt}  {num}  {"1D7F6}
+\usv_set:nnn {tt}  {Latin}{"1D670}
+\usv_set:nnn {tt}  {latin}{"1D68A}
 %    \end{macrocode}
 % Bold:
 %    \begin{macrocode}
-\usv_set:nnn {bf}{num}{"1D7CE}
-\usv_set:nnn {bfup}{num}{"1D7CE}
-\usv_set:nnn {bfit}{num}{"1D7CE}
-\usv_set:nnn {bfup}{Latin}{"1D400}
-\usv_set:nnn {bfup}{latin}{"1D41A}
-\usv_set:nnn {bfup}{Greek}{"1D6A8}
-\usv_set:nnn {bfup}{greek}{"1D6C2}
-\usv_set:nnn {bfit}{Latin}{"1D468}
-\usv_set:nnn {bfit}{latin}{"1D482}
-\usv_set:nnn {bfit}{Greek}{"1D71C}
-\usv_set:nnn {bfit}{greek}{"1D736}
+\usv_set:nnn {bf}    {num}  {"1D7CE}
+\usv_set:nnn {bfup}  {num}  {"1D7CE}
+\usv_set:nnn {bfit}  {num}  {"1D7CE}
+\usv_set:nnn {bfup}  {Latin}{"1D400}
+\usv_set:nnn {bfup}  {latin}{"1D41A}
+\usv_set:nnn {bfup}  {Greek}{"1D6A8}
+\usv_set:nnn {bfup}  {greek}{"1D6C2}
+\usv_set:nnn {bfit}  {Latin}{"1D468}
+\usv_set:nnn {bfit}  {latin}{"1D482}
+\usv_set:nnn {bfit}  {Greek}{"1D71C}
+\usv_set:nnn {bfit}  {greek}{"1D736}
 \usv_set:nnn {bffrak}{Latin}{"1D56C}
 \usv_set:nnn {bffrak}{latin}{"1D586}
-\usv_set:nnn {bfscr}{Latin}{"1D4D0}
-\usv_set:nnn {bfcal}{Latin}{"1D4D0}
-\usv_set:nnn {bfscr}{latin}{"1D4EA}
-\usv_set:nnn {bfsf}{num}{"1D7EC}
-\usv_set:nnn {bfsfup}{num}{"1D7EC}
-\usv_set:nnn {bfsfit}{num}{"1D7EC}
+\usv_set:nnn {bfscr} {Latin}{"1D4D0}
+\usv_set:nnn {bfcal} {Latin}{"1D4D0}
+\usv_set:nnn {bfscr} {latin}{"1D4EA}
+\usv_set:nnn {bfsf}  {num}  {"1D7EC}
+\usv_set:nnn {bfsfup}{num}  {"1D7EC}
+\usv_set:nnn {bfsfit}{num}  {"1D7EC}
 \usv_set:nnn {bfsfup}{Latin}{"1D5D4}
 \usv_set:nnn {bfsfup}{latin}{"1D5EE}
 \usv_set:nnn {bfsfup}{Greek}{"1D756}
@@ -1637,68 +1703,68 @@ end
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\usv_set:nnn {bfsf}{Latin}{ \bool_if:NTF \g_um_upLatin_bool \g_um_bfsfup_Latin_usv \g_um_bfsfit_Latin_usv }
-\usv_set:nnn {bfsf}{latin}{ \bool_if:NTF \g_um_uplatin_bool \g_um_bfsfup_latin_usv \g_um_bfsfit_latin_usv }
-\usv_set:nnn {bfsf}{Greek}{ \bool_if:NTF \g_um_upGreek_bool \g_um_bfsfup_Greek_usv \g_um_bfsfit_Greek_usv }
-\usv_set:nnn {bfsf}{greek}{ \bool_if:NTF \g_um_upgreek_bool \g_um_bfsfup_greek_usv \g_um_bfsfit_greek_usv }
-\usv_set:nnn {bf}{Latin}{ \bool_if:NTF \g_um_bfupLatin_bool \g_um_bfup_Latin_usv \g_um_bfit_Latin_usv }
-\usv_set:nnn {bf}{latin}{ \bool_if:NTF \g_um_bfuplatin_bool \g_um_bfup_latin_usv \g_um_bfit_latin_usv }
-\usv_set:nnn {bf}{Greek}{ \bool_if:NTF \g_um_bfupGreek_bool \g_um_bfup_Greek_usv \g_um_bfit_Greek_usv }
-\usv_set:nnn {bf}{greek}{ \bool_if:NTF \g_um_bfupgreek_bool \g_um_bfup_greek_usv \g_um_bfit_greek_usv }
+\usv_set:nnn {bfsf}{Latin}{ \bool_if:NTF \g_um_upLatin_bool   \g_um_bfsfup_Latin_usv \g_um_bfsfit_Latin_usv }
+\usv_set:nnn {bfsf}{latin}{ \bool_if:NTF \g_um_uplatin_bool   \g_um_bfsfup_latin_usv \g_um_bfsfit_latin_usv }
+\usv_set:nnn {bfsf}{Greek}{ \bool_if:NTF \g_um_upGreek_bool   \g_um_bfsfup_Greek_usv \g_um_bfsfit_Greek_usv }
+\usv_set:nnn {bfsf}{greek}{ \bool_if:NTF \g_um_upgreek_bool   \g_um_bfsfup_greek_usv \g_um_bfsfit_greek_usv }
+\usv_set:nnn {bf}  {Latin}{ \bool_if:NTF \g_um_bfupLatin_bool \g_um_bfup_Latin_usv   \g_um_bfit_Latin_usv   }
+\usv_set:nnn {bf}  {latin}{ \bool_if:NTF \g_um_bfuplatin_bool \g_um_bfup_latin_usv   \g_um_bfit_latin_usv   }
+\usv_set:nnn {bf}  {Greek}{ \bool_if:NTF \g_um_bfupGreek_bool \g_um_bfup_Greek_usv   \g_um_bfit_Greek_usv   }
+\usv_set:nnn {bf}  {greek}{ \bool_if:NTF \g_um_bfupgreek_bool \g_um_bfup_greek_usv   \g_um_bfit_greek_usv   }
 %    \end{macrocode}
 % Greek variants:
 %    \begin{macrocode}
-\usv_set:nnn {up}{varTheta}{"3F4}
-\usv_set:nnn {up}{Digamma}{"3DC}
+\usv_set:nnn {up}{varTheta}  {"3F4}
+\usv_set:nnn {up}{Digamma}   {"3DC}
 \usv_set:nnn {up}{varepsilon}{"3F5}
-\usv_set:nnn {up}{vartheta}{"3D1}
-\usv_set:nnn {up}{varkappa}{"3F0}
-\usv_set:nnn {up}{varphi}{"3D5}
-\usv_set:nnn {up}{varrho}{"3F1}
-\usv_set:nnn {up}{varpi}{"3D6}
-\usv_set:nnn {up}{digamma}{"3DD}
+\usv_set:nnn {up}{vartheta}  {"3D1}
+\usv_set:nnn {up}{varkappa}  {"3F0}
+\usv_set:nnn {up}{varphi}    {"3D5}
+\usv_set:nnn {up}{varrho}    {"3F1}
+\usv_set:nnn {up}{varpi}     {"3D6}
+\usv_set:nnn {up}{digamma}   {"3DD}
 %    \end{macrocode}
 % Bold:
 %    \begin{macrocode}
-\usv_set:nnn {bfup}{varTheta}{"1D6B9}
-\usv_set:nnn {bfup}{Digamma}{"1D7CA}
+\usv_set:nnn {bfup}{varTheta}  {"1D6B9}
+\usv_set:nnn {bfup}{Digamma}   {"1D7CA}
 \usv_set:nnn {bfup}{varepsilon}{"1D6DC}
-\usv_set:nnn {bfup}{vartheta}{"1D6DD}
-\usv_set:nnn {bfup}{varkappa}{"1D6DE}
-\usv_set:nnn {bfup}{varphi}{"1D6DF}
-\usv_set:nnn {bfup}{varrho}{"1D6E0}
-\usv_set:nnn {bfup}{varpi}{"1D6E1}
-\usv_set:nnn {bfup}{digamma}{"1D7CB}
+\usv_set:nnn {bfup}{vartheta}  {"1D6DD}
+\usv_set:nnn {bfup}{varkappa}  {"1D6DE}
+\usv_set:nnn {bfup}{varphi}    {"1D6DF}
+\usv_set:nnn {bfup}{varrho}    {"1D6E0}
+\usv_set:nnn {bfup}{varpi}     {"1D6E1}
+\usv_set:nnn {bfup}{digamma}   {"1D7CB}
 %    \end{macrocode}
 % Italic Greek variants:
 %    \begin{macrocode}
-\usv_set:nnn {it}{varTheta}{"1D6F3}
+\usv_set:nnn {it}{varTheta}  {"1D6F3}
 \usv_set:nnn {it}{varepsilon}{"1D716}
-\usv_set:nnn {it}{vartheta}{"1D717}
-\usv_set:nnn {it}{varkappa}{"1D718}
-\usv_set:nnn {it}{varphi}{"1D719}
-\usv_set:nnn {it}{varrho}{"1D71A}
-\usv_set:nnn {it}{varpi}{"1D71B}
+\usv_set:nnn {it}{vartheta}  {"1D717}
+\usv_set:nnn {it}{varkappa}  {"1D718}
+\usv_set:nnn {it}{varphi}    {"1D719}
+\usv_set:nnn {it}{varrho}    {"1D71A}
+\usv_set:nnn {it}{varpi}     {"1D71B}
 %    \end{macrocode}
 % Bold italic:
 %    \begin{macrocode}
-\usv_set:nnn {bfit}{varTheta}{"1D72D}
+\usv_set:nnn {bfit}{varTheta}  {"1D72D}
 \usv_set:nnn {bfit}{varepsilon}{"1D750}
-\usv_set:nnn {bfit}{vartheta}{"1D751}
-\usv_set:nnn {bfit}{varkappa}{"1D752}
-\usv_set:nnn {bfit}{varphi}{"1D753}
-\usv_set:nnn {bfit}{varrho}{"1D754}
-\usv_set:nnn {bfit}{varpi}{"1D755}
+\usv_set:nnn {bfit}{vartheta}  {"1D751}
+\usv_set:nnn {bfit}{varkappa}  {"1D752}
+\usv_set:nnn {bfit}{varphi}    {"1D753}
+\usv_set:nnn {bfit}{varrho}    {"1D754}
+\usv_set:nnn {bfit}{varpi}     {"1D755}
 %    \end{macrocode}
 % Bold sans:
 %    \begin{macrocode}
-\usv_set:nnn {bfsfup}{varTheta}{"1D767}
+\usv_set:nnn {bfsfup}{varTheta}  {"1D767}
 \usv_set:nnn {bfsfup}{varepsilon}{"1D78A}
-\usv_set:nnn {bfsfup}{vartheta}{"1D78B}
-\usv_set:nnn {bfsfup}{varkappa}{"1D78C}
-\usv_set:nnn {bfsfup}{varphi}{"1D78D}
-\usv_set:nnn {bfsfup}{varrho}{"1D78E}
-\usv_set:nnn {bfsfup}{varpi}{"1D78F}
+\usv_set:nnn {bfsfup}{vartheta}  {"1D78B}
+\usv_set:nnn {bfsfup}{varkappa}  {"1D78C}
+\usv_set:nnn {bfsfup}{varphi}    {"1D78D}
+\usv_set:nnn {bfsfup}{varrho}    {"1D78E}
+\usv_set:nnn {bfsfup}{varpi}     {"1D78F}
 %    \end{macrocode}
 % Bold sans italic:
 %    \begin{macrocode}
@@ -1872,6 +1938,10 @@ end
 \usv_set:nnn {frak}{Z}{"2128}
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+%</package&(XE|LU)>
+%    \end{macrocode}
+%
 % \subsection{STIX fonts}
 %
 % Version 1.0.0 of the STIX fonts contains a number of
@@ -1882,7 +1952,6 @@ end
 % But we still want to be able to use them if possible.
 %
 %    \begin{macrocode}
-%</package&(XE|LU)>
 %<*stix>
 %    \end{macrocode}
 %
@@ -2110,6 +2179,9 @@ end
 %
 %    \begin{macrocode}
 %</stix>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 %<*package&(XE|LU)>
 %    \end{macrocode}
 %
@@ -2117,7 +2189,8 @@ end
 %
 % The requirement of only setting up the maths fonts in the preamble is now removed. The following list might be overly ambitious.
 %    \begin{macrocode}
-\tl_map_inline:nn {
+\tl_map_inline:nn
+ {
   \new@mathgroup\cdp@list\cdp@elt\DeclareMathSizes
   \@DeclareMathSizes\newmathalphabet\newmathalphabet@@\newmathalphabet@@@
   \DeclareMathVersion\define@mathalphabet\define@mathgroup\addtoversion
@@ -2131,9 +2204,10 @@ end
   \@DeclareMathDelimiter\@xDeclareMathDelimiter\set@mathdelimiter
   \set@@mathdelimiter\DeclareMathRadical\mathchar@type
   \DeclareSymbolFontAlphabet\DeclareSymbolFontAlphabet@
-}{
+ }
+ {
   \tl_remove_once:Nn \@preamblecmds {\do#1}
-}
+ }
 %    \end{macrocode}
 %
 % \section{Fundamentals}
@@ -2161,40 +2235,13 @@ end
 % There are a bunch of tests to perform to process the various characters.
 % The following assignments should all be fairly straightforward.
 %    \begin{macrocode}
-\cs_set:Nn \um_set_mathsymbol:nNNn {
+\cs_set:Nn \um_set_mathsymbol:nNNn
+ {
   \tl_case:Nnn #3 {
-    \mathop { \um_set_big_operator:nnn {#1} {#2} {#4} }
-    \mathopen
-      {
-        \tl_if_in:NnTF \l_um_radicals_tl {#2}
-          {
-            \cs_gset_protected_nopar:cpx {\cs_to_str:N #2 sign}
-              { \um_radical:nn {#1} {#4} }
-            \tl_set:cn {l_um_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #4}
-          }
-          {
-            \um_set_delcode:nnn {#1} {#4} {#4}
-            \um_set_mathcode:nnn {#4} \mathopen {#1}
-            \cs_gset_protected_nopar:Npx #2
-              { \um_delimiter:Nnn \mathopen {#1} {#4} }
-          }
-      }
-    \mathclose
-      {
-        \um_set_delcode:nnn {#1} {#4} {#4}
-        \um_set_mathcode:nnn {#4} \mathclose {#1}
-        \cs_gset_protected_nopar:Npx #2
-          { \um_delimiter:Nnn \mathclose {#1} {#4} }
-      }
-    \mathfence
-      {
-        \um_set_mathcode:nnn {#4} {#3} {#1}
-        \um_set_delcode:nnn {#1} {#4} {#4}
-        \cs_gset_protected_nopar:cpx {l \cs_to_str:N #2}
-          { \um_delimiter:Nnn \mathopen  {#1} {#4} }
-        \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
-          { \um_delimiter:Nnn \mathclose {#1} {#4} }
-      }
+    \mathop    { \um_set_big_operator:nnn {#1} {#2} {#4} }
+    \mathopen  { \um_set_math_open:nnn    {#1} {#2} {#4} }
+    \mathclose { \um_set_math_close:nnn   {#1} {#2} {#4} }
+    \mathfence { \um_set_math_fence:nnnn  {#1} {#2} {#3} {#4} }
     \mathaccent
       { \cs_gset_protected_nopar:Npx #2 { \um_accent:nnn {fixed} {#1} {#4} } }
     \mathbotaccent
@@ -2212,7 +2259,7 @@ end
   }{
     \um_set_mathcode:nnn {#4} {#3} {#1}
   }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2252,86 +2299,79 @@ end
 % (~\cs{int} $\to$~) $\int$ $\to$ \cs{int_sym} $\to$ \cs{intop}
 % \end{quote}
 %    \begin{macrocode}
-\cs_new:Nn \um_set_big_operator:nnn {
+\cs_new:Nn \um_set_big_operator:nnn
+ {
   \group_begin:
     \char_set_catcode_active:n {#3}
     \char_gmake_mathactive:n {#3}
     \um_active_char_set:wc #3 \q_nil { \cs_to_str:N #2 _sym }
   \group_end:
   \um_set_mathchar:cNnn {\cs_to_str:N #2 op} \mathop {#1} {#3}
-  \cs_gset:cpx { \cs_to_str:N #2 _sym } {
+  \cs_gset:cpx { \cs_to_str:N #2 _sym }
+   {
     \exp_not:c { \cs_to_str:N #2 op   }
     \exp_not:n { \tl_if_in:NnT \l_um_nolimits_tl {#2} \nolimits }
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 %
-%
-% \begin{macro}{\um_set_mathcode:nnnn}
-% \begin{macro}{\um_set_mathcode:nnn}
-% \begin{macro}{\um_set_mathchar:NNnn}
-% \begin{macro}{\um_set_mathchar:cNnn}
-% \begin{macro}{\um_set_delcode:nnn}
-% \begin{macro}{\um_radical:nn}
-% \begin{macro}{\um_delimiter:Nnn}
-% \begin{macro}{\um_accent:nnn}
-% \begin{macro}{\um_accent_keyword:}
-% These are all wrappers for the primitive commands that take numerical
-% input only.
+% \begin{macro}{\um_set_math_open:nnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Glyph slot}
 %    \begin{macrocode}
-\cs_set:Npn \um_set_mathcode:nnnn #1#2#3#4 {
-  \Umathcode \int_eval:n {#1} =
-    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
-}
-\cs_set:Npn \um_set_mathcode:nnn #1#2#3 {
-  \Umathcode \int_eval:n {#1} =
-    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#1} \scan_stop:
-}
-\cs_set:Npn \um_set_mathchar:NNnn #1#2#3#4 {
-  \Umathchardef #1 =
-    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
-}
-\cs_new:Nn \um_set_delcode:nnn {
-  \Udelcode#2 = \csname sym#1\endcsname #3
-}
-\cs_new:Nn \um_radical:nn {
-  \Uradical \csname sym#1\endcsname #2 \scan_stop:
-}
-\cs_new:Nn \um_delimiter:Nnn {
-  \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-}
-\cs_new:Nn \um_accent:nnn {
-  \Umathaccent #1~ \mathchar@type\mathaccent \use:c { sym #2 } #3 \scan_stop:
-}
+\cs_new:Nn \um_set_math_open:nnn
+ {
+  \tl_if_in:NnTF \l_um_radicals_tl {#2}
+   {
+     \cs_gset_protected_nopar:cpx {\cs_to_str:N #2 sign}
+       { \um_radical:nn {#1} {#3} }
+     \tl_set:cn {l_um_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #3}
+   }
+   {
+     \um_set_delcode:nnn {#1} {#3} {#3}
+     \um_set_mathcode:nnn {#3} \mathopen {#1}
+     \cs_gset_protected_nopar:Npx #2
+       { \um_delimiter:Nnn \mathopen {#1} {#3} }
+   }
+ }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\um_set_math_close:nnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Glyph slot}
 %    \begin{macrocode}
-\cs_generate_variant:Nn \um_set_mathchar:NNnn {c}
+\cs_new:Nn \um_set_math_close:nnn
+ {
+  \um_set_delcode:nnn {#1} {#3} {#3}
+  \um_set_mathcode:nnn {#3} \mathclose {#1}
+  \cs_gset_protected_nopar:Npx #2
+    { \um_delimiter:Nnn \mathclose {#1} {#3} }
+ }
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
-%
-% \begin{macro}{\char_gmake_mathactive:N}
-% \begin{macro}{\char_gmake_mathactive:n}
+% \begin{macro}{\um_set_math_fence:nnnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Type, \eg, \cmd\mathalpha}
+% \darg{Glyph slot}
 %    \begin{macrocode}
-\cs_new:Nn \char_gmake_mathactive:N {
-  \global\mathcode `#1 = "8000 \scan_stop:
-}
-\cs_new:Nn \char_gmake_mathactive:n {
-  \global\mathcode #1 = "8000 \scan_stop:
-}
+\cs_new:Nn \um_set_math_fence:nnnn
+ {
+  \um_set_mathcode:nnn {#4} {#3} {#1}
+  \um_set_delcode:nnn {#1} {#4} {#4}
+  \cs_gset_protected_nopar:cpx {l \cs_to_str:N #2}
+    { \um_delimiter:Nnn \mathopen  {#1} {#4} }
+  \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
+    { \um_delimiter:Nnn \mathclose {#1} {#4} }
+ }
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
+%
 %
 %
 % \subsection{The main \cs{setmathfont} macro}
@@ -2344,48 +2384,6 @@ end
 % \doarg{font features}
 % \darg{font name}
 %    \begin{macrocode}
-\cs_new:Nn \um_init: {
-  \bool_set_true:N  \l_um_ot_math_bool
-%    \end{macrocode}
-% \begin{itemize}
-% \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
-% this allows \cmd\DeclareSymbolFont\ at any point in the document.
-%    \begin{macrocode}
-  \cs_set_eq:NN \glb@currsize \scan_stop:
-%    \end{macrocode}
-% \item To start with, assume we're defining the font for every math symbol character.
-%    \begin{macrocode}
-  \bool_set_true:N \l_um_init_bool
-  \seq_clear:N \l_um_char_range_seq
-  \clist_clear:N \l_um_char_num_range_clist
-  \seq_clear:N \l_um_mathalph_seq
-  \seq_clear:N \l_um_missing_alph_seq
-%    \end{macrocode}
-% \item By default use the `normal' math version
-%    \begin{macrocode}
-   \tl_set:Nn \l_um_mversion_tl {normal}
-%    \end{macrocode}
-% \item Other range initialisations
-%    \begin{macrocode}
-    \tl_set:Nn \um_symfont_tl {operators}
-    \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_noparse:nnn
-    \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
-    \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
-    \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
-    \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
-    \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_noparse:nn
-    \cs_set_eq:NN \um_make_mathactive:nNN \um_make_mathactive_noparse:nNN
-%    \end{macrocode}
-% \item Define default font features for the script and scriptscript font.
-%    \begin{macrocode}
-  \tl_set:Nn \l_um_script_features_tl  {Style=MathScript}
-  \tl_set:Nn \l_um_sscript_features_tl {Style=MathScriptScript}
-  \tl_set_eq:NN \l_um_script_font_tl   \l_um_fontname_tl
-  \tl_set_eq:NN \l_um_sscript_font_tl  \l_um_fontname_tl
-%    \end{macrocode}
-% \end{itemize}
-%    \begin{macrocode}
-}
 \DeclareDocumentCommand \setmathfont { O{} m } {
   \tl_set:Nn \l_um_fontname_tl {#2}
   \um_init:
@@ -2423,7 +2421,7 @@ end
   \tl_set:Nn \l_um_tmpa_tl {normal}
   \tl_if_eq:NNT \l_um_mversion_tl \l_um_tmpa_tl
     {
-    \SetSymbolFont{\um_symfont_tl}{bold}
+     \SetSymbolFont{\um_symfont_tl}{bold}
       {\encodingdefault}{\l_um_family_tl}{\bfdefault}{\updefault}
     }
 %    \end{macrocode}
@@ -2431,12 +2429,13 @@ end
 % values for this font,
 % and set defaults for math fams two and three for legacy compatibility:
 %    \begin{macrocode}
-  \bool_if:nT {\l_um_ot_math_bool && !\g_um_mainfont_already_set_bool} {
+  \bool_if:nT { \l_um_ot_math_bool && !\g_um_mainfont_already_set_bool }
+   {
     \bool_set_true:N \g_um_mainfont_already_set_bool
     \um_declare_math_sizes:
     \um_setup_legacy_fam_two:
     \um_setup_legacy_fam_three:
-  }
+   }
 %    \end{macrocode}
 % And now we input every single maths char.
 %    \begin{macrocode}
@@ -2465,9 +2464,65 @@ end
 %    \end{macrocode}
 % \end{macro}
 %
+% Backward compatibility alias.
+%    \begin{macrocode}
+\cs_set_eq:NN \resetmathfont \setmathfont
+%    \end{macrocode}
+%
+% \begin{macro}{\um_init:}
+%    \begin{macrocode}
+\cs_new:Nn \um_init:
+ {
+%    \end{macrocode}
+% \begin{itemize}
+% \item Initially assume we're using a proper OpenType font with unicode maths.
+%    \begin{macrocode}
+  \bool_set_true:N  \l_um_ot_math_bool
+%    \end{macrocode}
+% \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
+% this allows \cmd\DeclareSymbolFont\ at any point in the document.
+%    \begin{macrocode}
+  \cs_set_eq:NN \glb@currsize \scan_stop:
+%    \end{macrocode}
+% \item To start with, assume we're defining the font for every math symbol character.
+%    \begin{macrocode}
+  \bool_set_true:N \l_um_init_bool
+  \seq_clear:N \l_um_char_range_seq
+  \clist_clear:N \l_um_char_num_range_clist
+  \seq_clear:N \l_um_mathalph_seq
+  \seq_clear:N \l_um_missing_alph_seq
+%    \end{macrocode}
+% \item By default use the `normal' math version.
+%    \begin{macrocode}
+  \tl_set:Nn \l_um_mversion_tl {normal}
+%    \end{macrocode}
+% \item Other range initialisations.
+%    \begin{macrocode}
+  \tl_set:Nn \um_symfont_tl {operators}
+  \cs_set_eq:NN \_um_sym:nnn \um_process_symbol_noparse:nnn
+  \cs_set_eq:NN \um_set_mathalphabet_char:Nnn \um_mathmap_noparse:Nnn
+  \cs_set_eq:NN \um_remap_symbol:nnn \um_remap_symbol_noparse:nnn
+  \cs_set_eq:NN \um_maybe_init_alphabet:n \um_init_alphabet:n
+  \cs_set_eq:NN \um_map_char_single:nn \um_map_char_noparse:nn
+  \cs_set_eq:NN \um_assign_delcode:nn \um_assign_delcode_noparse:nn
+  \cs_set_eq:NN \um_make_mathactive:nNN \um_make_mathactive_noparse:nNN
+%    \end{macrocode}
+% \item Define default font features for the script and scriptscript font.
+%    \begin{macrocode}
+  \tl_set:Nn \l_um_script_features_tl  {Style=MathScript}
+  \tl_set:Nn \l_um_sscript_features_tl {Style=MathScriptScript}
+  \tl_set_eq:NN \l_um_script_font_tl   \l_um_fontname_tl
+  \tl_set_eq:NN \l_um_sscript_font_tl  \l_um_fontname_tl
+%    \end{macrocode}
+% \end{itemize}
+%    \begin{macrocode}
+ }
+%    \end{macrocode}
+% \end{macro}
+%
 %
 % \begin{macro}{\um_declare_math_sizes:}
-% Set the math sizes according to the recommend font parameters:
+% Set the math sizes according to the recommended font parameters:
 %    \begin{macrocode}
 \cs_new:Nn \um_declare_math_sizes:
   {
@@ -2484,6 +2539,7 @@ end
 %
 %
 % \begin{macro}{\um_setup_legacy_fam_two:}
+% \TeX\ won't load the same font twice at the same scale, so we need to magnify this one by an imperceptable amount.
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_legacy_fam_two:
   {
@@ -2491,7 +2547,8 @@ end
       {
       \l_um_font_keyval_tl,
       Scale=1.00001,
-      FontAdjustment={
+      FontAdjustment =
+       {
         \fontdimen8\font= \um_get_fontparam:nn {43} {FractionNumeratorDisplayStyleShiftUp}\relax
         \fontdimen9\font= \um_get_fontparam:nn {42} {FractionNumeratorShiftUp}\relax
         \fontdimen10\font=\um_get_fontparam:nn {32} {StackTopShiftUp}\relax
@@ -2507,7 +2564,7 @@ end
         \fontdimen20\font=0pt\relax % delim1 = FractionDelimiterDisplaySize
         \fontdimen21\font=0pt\relax % delim2 = FractionDelimiterSize
         \fontdimen22\font=\um_get_fontparam:nn {15} {AxisHeight}\relax
-      }
+       }
       } {\l_um_fontname_tl}
     \SetSymbolFont{symbols}{\l_um_mversion_tl}
       {\encodingdefault}{\l_um_family_tl}{\mddefault}{\updefault}
@@ -2523,6 +2580,7 @@ end
 % \end{macro}
 %
 % \begin{macro}{\um_setup_legacy_fam_three:}
+% Similarly, this font is shrunk by an imperceptable amount for \TeX\ to load it again.
 %    \begin{macrocode}
 \cs_new:Nn \um_setup_legacy_fam_three:
   {
@@ -2559,31 +2617,33 @@ end
 %<LU>  { \directlua{fontspec.mathfontdimen("l_um_font","#2")} }
 %    \end{macrocode}
 %
-% Backward compatibility alias.
-%    \begin{macrocode}
-\cs_set_eq:NN \resetmathfont \setmathfont
-%    \end{macrocode}
 %
 %
 % \begin{macro}{\um_fontspec_select_font:}
 % Select the font with \cs{fontspec} and define \cs{l_um_font} from it.
 %    \begin{macrocode}
-\cs_new:Nn \um_fontspec_select_font: {
+\cs_new:Nn \um_fontspec_select_font:
+ {
   \tl_set:Nx \l_um_font_keyval_tl {
 %<LU>     Renderer = Basic,
     BoldItalicFont = {}, ItalicFont = {},
     Script = Math,
-    SizeFeatures = {
-      {Size = \tf@size-} ,
-      {Size = \sf@size-\tf@size ,
+    SizeFeatures =
+     {
+      {
+       Size = \tf@size-
+      } ,
+      {
+       Size = \sf@size-\tf@size ,
        Font = \l_um_script_font_tl ,
        \l_um_script_features_tl
       } ,
-      {Size = -\sf@size ,
+      {
+       Size = -\sf@size ,
        Font = \l_um_sscript_font_tl ,
        \l_um_sscript_features_tl
       }
-    },
+     } ,
     \l_um_unknown_keys_clist
   }
   \fontspec_set_fontface:NNxn \l_um_font \l_um_family_tl
@@ -2595,7 +2655,7 @@ end
     \fontfamily{\l_um_family_tl}\selectfont
     \fontspec_if_script:nF {math} {\bool_gset_false:N \l_um_ot_math_bool}
   \group_end:
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2609,16 +2669,19 @@ end
 % a subset of the Unicode glyphs are to be defined.
 % See \secref{rangeproc} for the code that enables this.
 %    \begin{macrocode}
-\cs_set:Npn \um_process_symbol_noparse:nnn #1#2#3 {
+\cs_set:Nn \um_process_symbol_noparse:nnn
+ {
   \um_set_mathsymbol:nNNn {\um_symfont_tl} #2#3{#1}
-}
+ }
 %    \end{macrocode}
 %    \begin{macrocode}
-\cs_set:Npn \um_process_symbol_parse:nnn #1#2#3 {
-  \um_if_char_spec:nNNT{#1}{#2}{#3}{
+\cs_set:Nn \um_process_symbol_parse:nnn
+ {
+  \um_if_char_spec:nNNT{#1}{#2}{#3}
+   {
     \um_process_symbol_noparse:nnn {#1}{#2}{#3}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2630,28 +2693,34 @@ end
 % This function is used to define the mathcodes for those chars which should
 % be mapped to a different glyph than themselves.
 %    \begin{macrocode}
-\cs_new:Npn \um_remap_symbols: {
+\cs_new:Npn \um_remap_symbols:
+ {
   \um_remap_symbol:nnn{`\-}{\mathbin}{"02212}% hyphen to minus
   \um_remap_symbol:nnn{`\*}{\mathbin}{"02217}% text asterisk to "centred asterisk"
-  \bool_if:NF \g_um_literal_colon_bool {
+  \bool_if:NF \g_um_literal_colon_bool
+   {
     \um_remap_symbol:nnn{`\:}{\mathrel}{"02236}% colon to ratio (i.e., punct to rel)
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 % Where |\um_remap_symbol:nnn| is defined to be one of these two, depending
 % on the range setup:
 %    \begin{macrocode}
-\cs_new:Nn \um_remap_symbol_parse:nnn {
-  \um_if_char_spec:nNNT {#3} {\@nil} {#2} {
+\cs_new:Nn \um_remap_symbol_parse:nnn
+ {
+  \um_if_char_spec:nNNT {#3} {\@nil} {#2}
+   {
     \um_remap_symbol_noparse:nnn {#1} {#2} {#3}
-  }
-}
-\cs_new:Nn \um_remap_symbol_noparse:nnn {
-  \clist_map_inline:nn {#1} {
+   }
+ }
+\cs_new:Nn \um_remap_symbol_noparse:nnn
+ {
+  \clist_map_inline:nn {#1}
+   {
     \um_set_mathcode:nnnn {##1} {#2} {\um_symfont_tl} {#3}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2664,7 +2733,8 @@ end
 %
 % \begin{macro}{\um_setup_mathactives:}
 %    \begin{macrocode}
-\cs_new:Npn \um_setup_mathactives: {
+\cs_new:Npn \um_setup_mathactives:
+ {
   \um_make_mathactive:nNN {"2032} \um_prime_single_mchar \mathord
   \um_make_mathactive:nNN {"2033} \um_prime_double_mchar \mathord
   \um_make_mathactive:nNN {"2034} \um_prime_triple_mchar \mathord
@@ -2674,7 +2744,7 @@ end
   \um_make_mathactive:nNN {"2037} \um_backprime_triple_mchar \mathord
   \um_make_mathactive:nNN {`\'} \mathstraightquote \mathord
   \um_make_mathactive:nNN {`\`} \mathbacktick      \mathord
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2701,14 +2771,17 @@ end
 %
 % \begin{macro}{\um_assign_delcode:nn}
 %    \begin{macrocode}
-\cs_new:Nn \um_assign_delcode_noparse:nn {
+\cs_new:Nn \um_assign_delcode_noparse:nn
+ {
   \um_set_delcode:nnn \um_symfont_tl {#1} {#2}
-}
-\cs_new:Nn \um_assign_delcode_parse:nn {
-  \um_if_char_spec:nNNT {#2}{\@nil}{\@nil} {
+ }
+\cs_new:Nn \um_assign_delcode_parse:nn
+ {
+  \um_if_char_spec:nNNT {#2} {\@nil} {\@nil}
+   {
     \um_assign_delcode_noparse:nn {#1} {#2}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2722,13 +2795,14 @@ end
 %
 %
 %
+% \begin{macro}{\um_setup_delcodes:}
 % Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
 % The list of vertical arrows may be incomplete.
 % On the other hand, many fonts won't support them all being stretchy.
 % And some of them are probably not meant to stretch, either. But adding them here doesn't hurt.
-% \begin{macro}{\um_setup_delcodes:}
 %    \begin{macrocode}
-\cs_new:Npn \um_setup_delcodes: {
+\cs_new:Npn \um_setup_delcodes:
+ {
   \um_assign_delcode:nn {`\.} {\c_zero} % ensure \left. and \right. work
   \um_assign_delcode:nn {`\/}   {\g_um_slash_delimiter_usv}
   \um_assign_delcode:nn {"2044} {\g_um_slash_delimiter_usv} % fracslash
@@ -2763,7 +2837,7 @@ end
   \um_assign_delcode:n {"21E9} % down white arrow
   \um_assign_delcode:n {"21EA} % up white arrow from bar
   \um_assign_delcode:n {"21F3} % updown white arrow
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2791,13 +2865,14 @@ end
 % integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
 \tl_new:N \l_um_nolimits_tl
-\tl_set:Nn \l_um_nolimits_tl {
+\tl_set:Nn \l_um_nolimits_tl
+ {
   \int\iint\iiint\iiiint\oint\oiint\oiiint
   \intclockwise\varointclockwise\ointctrclockwise\sumint
   \intbar\intBar\fint\cirfnint\awint\rppolint
   \scpolint\npolint\pointint\sqint\intlarhk\intx
   \intcap\intcup\upint\lowint
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2805,9 +2880,10 @@ end
 % This macro appends material to the macro containing the list of operators
 % that don't take limits.
 %    \begin{macrocode}
-\DeclareDocumentCommand \addnolimits {m} {
+\DeclareDocumentCommand \addnolimits {m}
+ {
   \tl_put_right:Nn \l_um_nolimits_tl {#1}
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2815,9 +2891,10 @@ end
 % Can this macro be given a better name?
 % It removes an item from the nolimits list.
 %    \begin{macrocode}
-\DeclareDocumentCommand \removenolimits {m} {
+\DeclareDocumentCommand \removenolimits {m}
+ {
   \tl_remove_all:Nn \l_um_nolimits_tl {#1}
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2992,9 +3069,10 @@ end
 % The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
 % The \XeTeX\ font dimension numbers must be integer constants.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_font_param:nnn #1 #2 #3 {
+\cs_new_protected_nopar:Nn \um_font_param:nnn
+ {
   \um_font_param:nnnnn { #1 } { #2 } { #2 } { #3 } { #3 }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3005,9 +3083,10 @@ end
 % The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
 % The \XeTeX\ font dimension number must be an integer constant.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_font_param:nn #1 #2 {
+\cs_new_protected_nopar:Nn \um_font_param:nn
+ {
   \um_font_param:nnnnn { #1 } { #2 } { #2 } { #2 } { #2 }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3029,24 +3108,28 @@ end
 %<*XE>
 \cs_new_protected_nopar:Nn \um_font_param_aux:NNnnnn
   {
-    \cs_new_nopar:Npn #1 ##1 {
+    \cs_new_nopar:Npn #1 ##1
+     {
       \um_font_dimen:Nnnnn ##1 { #3 } { #4 } { #5 } { #6 }
-    }
-    \cs_new_protected_nopar:Npn #2 ##1 ##2 {
+     }
+    \cs_new_protected_nopar:Npn #2 ##1 ##2
+     {
       #1 ##1 \dim_eval:n { ##2 }
-    }
+     }
   }
 \cs_generate_variant:Nn \um_font_param_aux:NNnnnn { cc }
 %</XE>
 %<*LU>
 \cs_new_protected_nopar:Nn \um_font_param_aux:NNN
   {
-    \cs_new_nopar:Npn #1 ##1 {
+    \cs_new_nopar:Npn #1 ##1
+     {
       #3 ##1
-    }
-    \cs_new_protected_nopar:Npn #2 ##1 ##2 {
+     }
+    \cs_new_protected_nopar:Npn #2 ##1 ##2
+     {
       #3 ##1 \dim_eval:n { ##2 }
-    }
+     }
   }
 \cs_generate_variant:Nn \um_font_param_aux:NNN { ccc }
 %</LU>
@@ -3158,12 +3241,12 @@ end
 % \subsection{Script and scriptscript font options}
 %    \begin{macrocode}
 \keys_define:nn {unicode-math}
-{
+ {
   script-features  .tl_set:N =  \l_um_script_features_tl ,
   sscript-features .tl_set:N = \l_um_sscript_features_tl ,
        script-font .tl_set:N =      \l_um_script_font_tl ,
       sscript-font .tl_set:N =     \l_um_sscript_font_tl ,
-}
+ }
 %    \end{macrocode}
 %
 % \subsection{Range processing}
@@ -3174,7 +3257,8 @@ end
 \seq_new:N \l_um_char_range_seq
 \seq_new:N \l_um_mclass_range_seq
 \seq_new:N \l_um_cmd_range_seq
-\keys_define:nn {unicode-math} {
+\keys_define:nn {unicode-math}
+ {
   range .code:n = {
     \bool_set_false:N \l_um_init_bool
 %    \end{macrocode}
@@ -3223,7 +3307,12 @@ end
       }
     }
   }
-}
+ }
+%    \end{macrocode}
+%
+% \begin{macro}{\g_um_mathclasses_seq}
+% Every math class.
+%    \begin{macrocode}
 \seq_new:N \g_um_mathclasses_seq
 \seq_set_from_clist:Nn \g_um_mathclasses_seq
   {
@@ -3232,7 +3321,7 @@ end
     \mathfence,\mathover,\mathunder,\mathbotaccent
   }
 %    \end{macrocode}
-%
+% \end{macro}
 %
 % \begin{macro}{\um_if_mathalph_decl:nTF}
 % Possible forms of input:\\
@@ -3443,10 +3532,11 @@ end
 % \begin{macro}{\um_new_mathstyle:N}
 % This function defines a new command like \cs{mathfrak}.
 %    \begin{macrocode}
-\cs_new:Nn \um_new_mathstyle:N {
+\cs_new:Nn \um_new_mathstyle:N
+ {
   \um_prepare_mathstyle:f {\exp_after:wN \use_none:nnnnn \token_to_str:N #1}
   \seq_put_right:Nn \g_um_mathstyles_seq {#1}
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3465,8 +3555,10 @@ end
 % \end{macro}
 %
 %    \begin{macrocode}
-\AtEndOfPackage{
-\clist_map_inline:nn {
+\AtEndOfPackage
+ {
+\clist_map_inline:nn
+ {
   {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
   {\mathit    } {latin,Latin,greek,Greek,misc}     {\mathit    }  ,
   {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
@@ -3484,19 +3576,20 @@ end
   {\mathbffrak} {latin,Latin}                      {\mathbffrak}  ,
   {\mathbfsfup} {latin,Latin,greek,Greek,num,misc} {\mathbfsfup}  ,
   {\mathbfsfit} {latin,Latin,greek,Greek,misc}     {\mathbfsfit}
-}{
+ }
+ {
   \seq_put_right:Nn \g_um_default_mathalph_seq {#1}
   \exp_after:wN \um_new_mathstyle:N \use_i:nnn #1
-}
+ }
 %    \end{macrocode}
 % These are `false' mathstyles that inherit other definitions:
 %    \begin{macrocode}
-\um_new_mathstyle:N \mathsf
-\um_new_mathstyle:N \mathbf
-\um_new_mathstyle:N \mathbfsf
+  \um_new_mathstyle:N \mathsf
+  \um_new_mathstyle:N \mathbf
+  \um_new_mathstyle:N \mathbfsf
 %    \end{macrocode}
 %    \begin{macrocode}
-}
+ }
 %    \end{macrocode}
 %
 %
@@ -3516,13 +3609,17 @@ end
 % The flag \cs{l_um_mathstyle_tl} is for other applications to query the
 % current math style.
 %    \begin{macrocode}
-\cs_new:Nn \um_prepare_mathstyle:n {
+\cs_new:Nn \um_prepare_mathstyle:n
+ {
   \um_init_alphabet:x {#1}
-  \cs_set:cpn {_um_math#1_aux:n} ##1 {
+  \cs_set:cpn {_um_math#1_aux:n} ##1
+   {
     \use:c {um_switchto_math#1:} ##1 \egroup
-  }
-  \cs_set_protected:cpx {math#1} {
-    \exp_not:n{
+   }
+  \cs_set_protected:cpx {math#1}
+   {
+    \exp_not:n
+     {
       \bgroup
       \mode_if_math:F
         {
@@ -3530,10 +3627,10 @@ end
           \non@alpherr\expandafter{\csname math#1\endcsname\space}
         }
       \tl_set:Nn \l_um_mathstyle_tl {#1}
-    }
+     }
     \exp_not:c {_um_math#1_aux:n}
-  }
-}
+   }
+ }
 \tl_new:N \l_um_mathstyle_tl
 \cs_generate_variant:Nn \um_prepare_mathstyle:n {f}
 %    \end{macrocode}
@@ -3545,18 +3642,20 @@ end
 % First used with the math alphabet macro is first defined, but then used
 % later when redefining a particular maths alphabet.
 %    \begin{macrocode}
-\cs_set:Npn \um_init_alphabet:n #1 {
+\cs_set:Nn \um_init_alphabet:n
+ {
   \um_log:nx {alph-initialise} {#1}
   \cs_set_eq:cN {um_switchto_math#1:} \prg_do_nothing:
-}
+ }
 \cs_generate_variant:Nn \um_init_alphabet:n {x}
 %    \end{macrocode}
 % Variants (cannot use |\cs_generate_variant:Nn| because the base function is
 % defined dynamically.)
 %    \begin{macrocode}
-\cs_new:Npn \um_maybe_init_alphabet:V {
+\cs_new:Npn \um_maybe_init_alphabet:V
+ {
   \exp_args:NV \um_maybe_init_alphabet:n
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3572,7 +3671,8 @@ end
 % This function is called within \cs{setmathfont} to configure the
 % mapping between characters inside math styles.
 %    \begin{macrocode}
-\cs_new:Npn \um_setup_alphabets: {
+\cs_new:Npn \um_setup_alphabets:
+ {
 %    \end{macrocode}
 % If |range=| has been used to configure styles, those choices will be in
 % |\l_um_mathalph_seq|. If not, set up the styles implicitly:
@@ -3613,7 +3713,7 @@ end
       \l_um_tmpa_tl \l_um_tmpb_tl \l_um_remap_style_tl
   }
   \seq_if_empty:NF \l_um_missing_alph_seq { \um_log:n { missing-alphabets } }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3622,54 +3722,70 @@ end
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
 % \darg{Name of the output math style (usually same as input \texttt{bb})}
 %    \begin{macrocode}
-\cs_new:Nn \um_setup_math_alphabet:Nnn {
-  \tl_set:Nx \l_um_style_tl {
+\cs_new:Nn \um_setup_math_alphabet:Nnn
+ {
+  \tl_set:Nx \l_um_style_tl
+   {
     \exp_after:wN \use_none:nnnnn \token_to_str:N #1
-  }
+   }
 %    \end{macrocode}
 % First check that at least one of the alphabets for the font shape is defined\dots
 %    \begin{macrocode}
-  \clist_map_inline:nn {#2} {
+  \clist_map_inline:nn {#2}
+   {
     \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {##1} }
-    \cs_if_exist:cT {um_config_ \l_um_style_tl _\l_um_tmpa_tl :n} {
-      \str_if_eq_x:nnTF {\l_um_tmpa_tl}{misc} {
+    \cs_if_exist:cT {um_config_ \l_um_style_tl _\l_um_tmpa_tl :n}
+     {
+      \str_if_eq_x:nnTF {\l_um_tmpa_tl}{misc}
+       {
         \um_maybe_init_alphabet:V \l_um_style_tl
         \clist_map_break:
-      }{
-        \um_glyph_if_exist:cT { \um_to_usv:nn {#3}{\l_um_tmpa_tl} }{
+       }
+       {
+        \um_glyph_if_exist:cT { \um_to_usv:nn {#3}{\l_um_tmpa_tl} }
+         {
           \um_maybe_init_alphabet:V \l_um_style_tl
           \clist_map_break:
-        }
-      }
-    }
-  }
+         }
+       }
+     }
+   }
 %    \end{macrocode}
 % \dots and then loop through them defining the individual ranges:
 %    \begin{macrocode}
-  \clist_map_inline:nn {#2} {
+  \clist_map_inline:nn {#2}
+   {
     \tl_set:Nx \l_um_tmpa_tl { \tl_trim_spaces:n {##1} }
-    \cs_if_exist:cT {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {
-      \str_if_eq_x:nnTF {\l_um_tmpa_tl}{misc} {
+    \cs_if_exist:cT {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n}
+     {
+      \str_if_eq_x:nnTF {\l_um_tmpa_tl}{misc}
+       {
         \um_log:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
         \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {#3}
-      }{
-        \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{\l_um_tmpa_tl} } {
+       }
+       {
+        \um_glyph_if_exist:cTF { \um_to_usv:nn {#3}{\l_um_tmpa_tl} }
+         {
           \um_log:nx {setup-alph} {math \l_um_style_tl~(\l_um_tmpa_tl)}
           \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {#3}
-        }{
-          \bool_if:NTF \l_um_implicit_alph_bool {
-            \seq_put_right:Nx \l_um_missing_alph_seq {
+         }
+         {
+          \bool_if:NTF \l_um_implicit_alph_bool
+           {
+            \seq_put_right:Nx \l_um_missing_alph_seq
+             {
               \@backslashchar math \l_um_style_tl \space
               (\tl_use:c{c_um_math_alphabet_name_ \l_um_tmpa_tl _tl})
-            }
-          }{
+             }
+           }
+           {
             \use:c {um_config_ \l_um_style_tl _ \l_um_tmpa_tl :n} {up}
-          }
-        }
-      }
-    }
-  }
-}
+           }
+         }
+       }
+     }
+   }
+ }
 \cs_generate_variant:Nn \um_setup_math_alphabet:Nnn {VVV}
 %    \end{macrocode}
 % \end{macro}
@@ -3698,17 +3814,20 @@ end
 % \begin{macro}{\um_map_char_noparse:nn}
 % \begin{macro}{\um_map_char_parse:nn}
 %    \begin{macrocode}
-\cs_new:Nn \um_map_char_noparse:nn {
+\cs_new:Nn \um_map_char_noparse:nn
+ {
   \um_set_mathcode:nnnn {#1}{\mathalpha}{\um_symfont_tl}{#2}
-}
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_map_char_parse:nn {
-  \um_if_char_spec:nNNT {#1} {\@nil} {\mathalpha} {
+\cs_new:Nn \um_map_char_parse:nn
+ {
+  \um_if_char_spec:nNNT {#1} {\@nil} {\mathalpha}
+   {
     \um_map_char_noparse:nn {#1}{#2}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -3718,18 +3837,21 @@ end
 % \darg{from alphabet(s)}
 % \darg{to alphabet}
 %    \begin{macrocode}
-\cs_new:Nn \um_map_char_single:nnn {
+\cs_new:Nn \um_map_char_single:nnn
+ {
   \um_map_char_single:cc { \um_to_usv:nn {#1}{#3} }
                          { \um_to_usv:nn {#2}{#3} }
-}
-\cs_set:Npn \um_map_single:nnn #1#2#3 {
+ }
+\cs_set:Nn \um_map_single:nnn
+ {
   \cs_if_exist:cT { \um_to_usv:nn {#3} {#1} }
   {
-    \clist_map_inline:nn {#2} {
+    \clist_map_inline:nn {#2}
+     {
       \um_map_char_single:nnn {##1} {#3} {#1}
-    }
+     }
   }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3741,43 +3863,51 @@ end
 % \darg{Alphabet name (Latin)}
 % First the function with numbers:
 %    \begin{macrocode}
-\cs_set:Npn \um_map_chars_range:nnn #1#2#3 {
+\cs_set:Nn \um_map_chars_range:nnn
+ {
   \int_step_inline:nnnn {0}{1}{#1-1} {
     \um_map_char_single:nn {#2+##1}{#3+##1}
   }
-}
+ }
 \cs_generate_variant:Nn \um_map_chars_range:nnn {ncc}
 %    \end{macrocode}
 % And the wrapper with names:
 %    \begin{macrocode}
-\cs_new:Nn \um_map_chars_range:nnnn {
+\cs_new:Nn \um_map_chars_range:nnnn
+ {
   \um_map_chars_range:ncc {#1} { \um_to_usv:nn {#2}{#4} }
                                { \um_to_usv:nn {#3}{#4} }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsubsection{Functions for alphabets}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_map_chars_Latin:nn {
-  \clist_map_inline:nn {#1} {
+\cs_new:Nn \um_map_chars_Latin:nn
+ {
+  \clist_map_inline:nn {#1}
+   {
     \um_map_chars_range:nnnn {26} {##1} {#2} {Latin}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_map_chars_latin:nn {
-  \clist_map_inline:nn {#1} {
+\cs_new:Nn \um_map_chars_latin:nn
+ {
+  \clist_map_inline:nn {#1}
+   {
     \um_map_chars_range:nnnn {26} {##1} {#2} {latin}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_map_chars_greek:nn {
-  \clist_map_inline:nn {#1} {
+\cs_new:Nn \um_map_chars_greek:nn
+ {
+  \clist_map_inline:nn {#1}
+   {
     \um_map_chars_range:nnnn {25} {##1} {#2} {greek}
     \um_map_char_single:nnn {##1} {#2} {varepsilon}
     \um_map_char_single:nnn {##1} {#2} {vartheta}
@@ -3785,23 +3915,26 @@ end
     \um_map_char_single:nnn {##1} {#2} {varphi}
     \um_map_char_single:nnn {##1} {#2} {varrho}
     \um_map_char_single:nnn {##1} {#2} {varpi}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_map_chars_Greek:nn {
-  \clist_map_inline:nn {#1} {
+\cs_new:Nn \um_map_chars_Greek:nn
+ {
+  \clist_map_inline:nn {#1}
+   {
     \um_map_chars_range:nnnn {25} {##1} {#2} {Greek}
     \um_map_char_single:nnn {##1} {#2} {varTheta}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_map_chars_numbers:nn {
+\cs_new:Nn \um_map_chars_numbers:nn
+ {
   \um_map_chars_range:nnnn {10} {#1} {#2} {num}
-}
+ }
 %    \end{macrocode}
 %
 %
@@ -3815,9 +3948,10 @@ end
 % Cannot use |\cs_generate_variant:Nn| because the base function is
 % defined dynamically.
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_char:Ncc {
+\cs_new:Npn \um_set_mathalphabet_char:Ncc
+ {
   \exp_args:NNcc \um_set_mathalphabet_char:Nnn
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3827,13 +3961,16 @@ end
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % Adds \cs{um_set_mathcode:nnnn} declarations to the specified maths alphabet's definition.
 %    \begin{macrocode}
-\cs_new:Nn \um_mathmap_noparse:Nnn {
-  \clist_map_inline:nn {#2} {
-    \tl_put_right:cx {um_switchto_\cs_to_str:N #1:} {
+\cs_new:Nn \um_mathmap_noparse:Nnn
+ {
+  \clist_map_inline:nn {#2}
+   {
+    \tl_put_right:cx {um_switchto_\cs_to_str:N #1:}
+     {
       \um_set_mathcode:nnnn{##1}{\mathalpha}{\um_symfont_tl}{#3}
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3845,11 +3982,13 @@ end
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cs{um_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
-\cs_new:Nn \um_mathmap_parse:Nnn {
-  \clist_if_in:NnT \l_um_char_num_range_clist {#3} {
+\cs_new:Nn \um_mathmap_parse:Nnn
+ {
+  \clist_if_in:NnT \l_um_char_num_range_clist {#3}
+   {
     \um_mathmap_noparse:Nnn {#1}{#2}{#3}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3859,10 +3998,11 @@ end
 % \darg{output math alphabet name}
 % \darg{char name to map}
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_char:Nnnn #1#2#3#4 {
+\cs_new:Nn \um_set_mathalphabet_char:Nnnn
+ {
   \um_set_mathalphabet_char:Ncc #1 { \um_to_usv:nn {#2} {#4} }
                                    { \um_to_usv:nn {#3} {#4} }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3874,67 +4014,79 @@ end
 % Loops through character ranges setting \cmd\mathcode.
 % First the version that uses numbers:
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalph_range:nNnn #1#2#3#4 {
+\cs_new:Nn \um_set_mathalph_range:nNnn
+ {
   \int_step_inline:nnnn {0}{1}{#1-1}
     { \um_set_mathalphabet_char:Nnn {#2} { ##1 + #3 } { ##1 + #4 } }
-}
+ }
 \cs_generate_variant:Nn \um_set_mathalph_range:nNnn {nNcc}
 %    \end{macrocode}
 % Then the wrapper version that uses names:
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalph_range:nNnnn #1#2#3#4#5 {
+\cs_new:Nn \um_set_mathalph_range:nNnnn
+ {
   \um_set_mathalph_range:nNcc {#1} #2 { \um_to_usv:nn {#3} {#5} }
                                       { \um_to_usv:nn {#4} {#5} }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsubsection{Individual mapping functions for different alphabets}
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_set_mathalphabet_pos:Nnnn #1#2#3#4 {
-  \cs_if_exist:cT { \um_to_usv:nn {#4}{#2} } {
+\cs_new:Nn \um_set_mathalphabet_pos:Nnnn
+ {
+  \cs_if_exist:cT { \um_to_usv:nn {#4}{#2} }
+   {
     \clist_map_inline:nn {#3}
       { \um_set_mathalphabet_char:Nnnn #1 {##1} {#4} {#2} }
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_set_mathalphabet_numbers:Nnn {
+\cs_new:Nn \um_set_mathalphabet_numbers:Nnn
+ {
   \clist_map_inline:nn {#2}
     { \um_set_mathalph_range:nNnnn {10} #1  {##1} {#3} {num} }
-}
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_set_mathalphabet_Latin:Nnn {
+\cs_new:Nn \um_set_mathalphabet_Latin:Nnn
+ {
   \clist_map_inline:nn {#2}
     { \um_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {Latin} }
-}
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_set_mathalphabet_latin:Nnn {
-  \clist_map_inline:nn {#2} {
+\cs_new:Nn \um_set_mathalphabet_latin:Nnn
+ {
+  \clist_map_inline:nn {#2}
+   {
     \um_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {latin}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {h}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_set_mathalphabet_Greek:Nnn {
-  \clist_map_inline:nn {#2} {
+\cs_new:Nn \um_set_mathalphabet_Greek:Nnn
+ {
+  \clist_map_inline:nn {#2}
+   {
     \um_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {Greek}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varTheta}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_set_mathalphabet_greek:Nnn {
-  \clist_map_inline:nn {#2} {
+\cs_new:Nn \um_set_mathalphabet_greek:Nnn
+ {
+  \clist_map_inline:nn {#2}
+   {
     \um_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {greek}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varepsilon}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {vartheta}
@@ -3942,143 +4094,188 @@ end
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varphi}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varrho}
     \um_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varpi}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 % \subsection{Alphabets}
 %
 % \subsubsection{Upright: \cmd\mathup}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_up_num:n {
+\cs_new:Nn \um_config_up_num:n
+ {
   \um_map_chars_numbers:nn {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathup {up}{#1}
-}
+ }
+
 \cs_new:Nn \um_config_up_Latin:n
-  {
-    \bool_if:NTF \g_um_literal_bool { \um_map_chars_Latin:nn {up} {#1} }
-  {
+ {
+  \bool_if:NTF \g_um_literal_bool { \um_map_chars_Latin:nn {up} {#1} }
+   {
     \bool_if:NT \g_um_upLatin_bool { \um_map_chars_Latin:nn {up,it} {#1} }
-  }
-  \um_set_mathalphabet_Latin:Nnn \mathup {up,it}{#1}
-}
-\cs_new:Nn \um_config_up_latin:n {
+   }
+  \um_set_mathalphabet_Latin:Nnn \mathup {up,it} {#1}
+ }
+
+\cs_new:Nn \um_config_up_latin:n
+ {
   \bool_if:NTF \g_um_literal_bool { \um_map_chars_latin:nn {up} {#1} }
-  {
-    \bool_if:NT \g_um_uplatin_bool {
+   {
+    \bool_if:NT \g_um_uplatin_bool
+     {
       \um_map_chars_latin:nn        {up,it} {#1}
       \um_map_single:nnn        {h} {up,it} {#1}
       \um_map_single:nnn {dotlessi} {up,it} {#1}
       \um_map_single:nnn {dotlessj} {up,it} {#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_latin:Nnn \mathup {up,it}{#1}
-}
-\cs_new:Nn \um_config_up_Greek:n {
+ }
+
+\cs_new:Nn \um_config_up_Greek:n
+ {
   \bool_if:NTF \g_um_literal_bool { \um_map_chars_Greek:nn {up}{#1} }
-  {
+   {
     \bool_if:NT \g_um_upGreek_bool { \um_map_chars_Greek:nn {up,it}{#1} }
-  }
+   }
   \um_set_mathalphabet_Greek:Nnn \mathup {up,it}{#1}
-}
-\cs_new:Nn \um_config_up_greek:n {
+ }
+
+\cs_new:Nn \um_config_up_greek:n
+ {
   \bool_if:NTF \g_um_literal_bool { \um_map_chars_greek:nn {up} {#1} }
-  {
-    \bool_if:NT \g_um_upgreek_bool {
+   {
+    \bool_if:NT \g_um_upgreek_bool
+     {
       \um_map_chars_greek:nn {up,it} {#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_greek:Nnn \mathup {up,it} {#1}
-}
-\cs_new:Nn \um_config_up_misc:n {
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+ }
+
+\cs_new:Nn \um_config_up_misc:n
+ {
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_map_single:nnn {Nabla}{up}{up}
-  }{
-    \bool_if:NT \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NT \g_um_upNabla_bool
+     {
       \um_map_single:nnn {Nabla}{up,it}{up}
-    }
-  }
-  \bool_if:NTF \g_um_literal_partial_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_map_single:nnn {partial}{up}{up}
-  }{
-    \bool_if:NT \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NT \g_um_uppartial_bool
+     {
       \um_map_single:nnn {partial}{up,it}{up}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_pos:Nnnn \mathup  {partial} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathup    {Nabla} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathup {dotlessi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathup {dotlessj} {up,it} {#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Italic: \cmd\mathit}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_config_it_Latin:n {
+\cs_new:Nn \um_config_it_Latin:n
+ {
   \bool_if:NTF \g_um_literal_bool { \um_map_chars_Latin:nn {it} {#1} }
-  {
+   {
     \bool_if:NF \g_um_upLatin_bool { \um_map_chars_Latin:nn {up,it} {#1} }
-  }
+   }
   \um_set_mathalphabet_Latin:Nnn \mathit {up,it}{#1}
-}
-\cs_new:Nn \um_config_it_latin:n {
-  \bool_if:NTF \g_um_literal_bool {
+ }
+
+\cs_new:Nn \um_config_it_latin:n
+ {
+  \bool_if:NTF \g_um_literal_bool
+   {
     \um_map_chars_latin:nn {it} {#1}
     \um_map_single:nnn {h}{it}{#1}
-  }{
-    \bool_if:NF \g_um_uplatin_bool {
+   }
+   {
+    \bool_if:NF \g_um_uplatin_bool
+     {
       \um_map_chars_latin:nn {up,it} {#1}
       \um_map_single:nnn {h}{up,it}{#1}
       \um_map_single:nnn {dotlessi}{up,it}{#1}
       \um_map_single:nnn {dotlessj}{up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_latin:Nnn \mathit            {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathit {dotlessj} {up,it} {#1}
-}
-\cs_new:Nn \um_config_it_Greek:n {
-  \bool_if:NTF \g_um_literal_bool { \um_map_chars_Greek:nn {it}{#1}
-  }{
+ }
+
+\cs_new:Nn \um_config_it_Greek:n
+ {
+  \bool_if:NTF \g_um_literal_bool
+   {
+    \um_map_chars_Greek:nn {it}{#1}
+   }
+   {
     \bool_if:NF \g_um_upGreek_bool { \um_map_chars_Greek:nn {up,it}{#1} }
-  }
+   }
   \um_set_mathalphabet_Greek:Nnn \mathit {up,it}{#1}
-}
-\cs_new:Nn \um_config_it_greek:n {
-  \bool_if:NTF \g_um_literal_bool { \um_map_chars_greek:nn {it} {#1} }
-  {
+ }
+
+\cs_new:Nn \um_config_it_greek:n
+ {
+  \bool_if:NTF \g_um_literal_bool
+   {
+    \um_map_chars_greek:nn {it} {#1}
+   }
+   {
     \bool_if:NF \g_um_upgreek_bool { \um_map_chars_greek:nn {it,up} {#1} }
-  }
+   }
   \um_set_mathalphabet_greek:Nnn \mathit {up,it} {#1}
-}
-\cs_new:Nn \um_config_it_misc:n {
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+ }
+
+\cs_new:Nn \um_config_it_misc:n
+ {
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_map_single:nnn {Nabla}{it}{it}
-  }{
-    \bool_if:NF \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NF \g_um_upNabla_bool
+     {
       \um_map_single:nnn {Nabla}{up,it}{it}
-    }
-  }
-  \bool_if:NTF \g_um_literal_partial_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_map_single:nnn {partial}{it}{it}
-  }{
-    \bool_if:NF \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NF \g_um_uppartial_bool
+     {
       \um_map_single:nnn {partial}{up,it}{it}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_pos:Nnnn \mathit {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn \mathit {Nabla}   {up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Blackboard or double-struck: \cmd\mathbb\ and \cmd\mathbbit}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_config_bb_latin:n {
+\cs_new:Nn \um_config_bb_latin:n
+ {
   \um_set_mathalphabet_latin:Nnn \mathbb {up,it}{#1}
-}
-\cs_new:Nn \um_config_bb_Latin:n {
+ }
+
+\cs_new:Nn \um_config_bb_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn \mathbb {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {C} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {H} {up,it} {#1}
@@ -4087,30 +4284,37 @@ end
   \um_set_mathalphabet_pos:Nnnn  \mathbb {Q} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {R} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbb {Z} {up,it} {#1}
-}
-\cs_new:Nn \um_config_bb_num:n {
+ }
+
+\cs_new:Nn \um_config_bb_num:n
+ {
   \um_set_mathalphabet_numbers:Nnn \mathbb {up}{#1}
-}
-\cs_new:Nn \um_config_bb_misc:n {
+ }
+
+\cs_new:Nn \um_config_bb_misc:n
+ {
   \um_set_mathalphabet_pos:Nnnn \mathbb        {Pi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb        {pi} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb     {Gamma} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb     {gamma} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbb {summation} {up} {#1}
-}
-\cs_new:Nn \um_config_bbit_misc:n {
+ }
+
+\cs_new:Nn \um_config_bbit_misc:n
+ {
   \um_set_mathalphabet_pos:Nnnn \mathbbit {D} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {d} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {e} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {i} {up,it} {#1}
   \um_set_mathalphabet_pos:Nnnn \mathbbit {j} {up,it} {#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Script and caligraphic: \cmd\mathscr\ and \cmd\mathcal}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_config_scr_Latin:n {
+\cs_new:Nn \um_config_scr_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn \mathscr    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {B}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {E}{up,it}{#1}
@@ -4120,18 +4324,21 @@ end
   \um_set_mathalphabet_pos:Nnnn  \mathscr {L}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {M}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {R}{up,it}{#1}
-}
-\cs_new:Nn \um_config_scr_latin:n {
+ }
+
+\cs_new:Nn \um_config_scr_latin:n
+ {
   \um_set_mathalphabet_latin:Nnn \mathscr    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {e}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {g}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathscr {o}{up,it}{#1}
-}
+ }
 %    \end{macrocode}
 % These are by default synonyms for the above, but with the STIX
 % fonts we want to use the alternate alphabet.
 %    \begin{macrocode}
-\cs_new:Nn \um_config_cal_Latin:n {
+\cs_new:Nn \um_config_cal_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn  \mathcal  {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {B}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {E}{up,it}{#1}
@@ -4141,483 +4348,640 @@ end
   \um_set_mathalphabet_pos:Nnnn   \mathcal {L}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {M}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn   \mathcal {R}{up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Fractur or fraktur or blackletter: \cmd\mathfrak}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_config_frak_Latin:n {
+\cs_new:Nn \um_config_frak_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn \mathfrak    {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {C}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {H}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {I}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {R}{up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathfrak {Z}{up,it}{#1}
-}
-\cs_new:Nn \um_config_frak_latin:n {
+ }
+\cs_new:Nn \um_config_frak_latin:n
+ {
   \um_set_mathalphabet_latin:Nnn \mathfrak {up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Sans serif upright: \cmd\mathsfup}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_sfup_num:n {
+\cs_new:Nn \um_config_sfup_num:n
+ {
   \um_set_mathalphabet_numbers:Nnn \mathsf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathsfup {up}{#1}
-}
-\cs_new:Nn \um_config_sfup_Latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+\cs_new:Nn \um_config_sfup_Latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_Latin:nn {sfup} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathsf {up}{#1}
-  }{
-    \bool_if:NT \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NT \g_um_upsans_bool
+     {
       \um_map_chars_Latin:nn {sfup,sfit} {#1}
       \um_set_mathalphabet_Latin:Nnn \mathsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_Latin:Nnn \mathsfup {up,it}{#1}
-}
-\cs_new:Nn \um_config_sfup_latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+\cs_new:Nn \um_config_sfup_latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_latin:nn {sfup} {#1}
     \um_set_mathalphabet_latin:Nnn \mathsf {up}{#1}
-  }{
-    \bool_if:NT \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NT \g_um_upsans_bool
+     {
       \um_map_chars_latin:nn {sfup,sfit} {#1}
       \um_set_mathalphabet_latin:Nnn \mathsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_latin:Nnn \mathsfup {up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Sans serif italic: \cmd\mathsfit}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_config_sfit_Latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+\cs_new:Nn \um_config_sfit_Latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_Latin:nn {sfit} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathsf {it}{#1}
-  }{
-    \bool_if:NF \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NF \g_um_upsans_bool
+     {
       \um_map_chars_Latin:nn {sfup,sfit} {#1}
       \um_set_mathalphabet_Latin:Nnn \mathsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_Latin:Nnn \mathsfit {up,it}{#1}
-}
-\cs_new:Nn \um_config_sfit_latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+\cs_new:Nn \um_config_sfit_latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_latin:nn {sfit} {#1}
     \um_set_mathalphabet_latin:Nnn \mathsf {it}{#1}
-  }{
-    \bool_if:NF \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NF \g_um_upsans_bool
+     {
       \um_map_chars_latin:nn {sfup,sfit} {#1}
       \um_set_mathalphabet_latin:Nnn \mathsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_latin:Nnn \mathsfit {up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Typewriter or monospaced: \cmd\mathtt}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_tt_num:n {
+\cs_new:Nn \um_config_tt_num:n
+ {
   \um_set_mathalphabet_numbers:Nnn \mathtt {up}{#1}
-}
-\cs_new:Nn \um_config_tt_Latin:n {
+ }
+\cs_new:Nn \um_config_tt_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn \mathtt {up,it}{#1}
-}
-\cs_new:Nn \um_config_tt_latin:n {
+ }
+\cs_new:Nn \um_config_tt_latin:n
+ {
   \um_set_mathalphabet_latin:Nnn \mathtt {up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 %
 % \subsubsection{Bold Italic: \cmd\mathbfit}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_bfit_Latin:n {
-  \bool_if:NF \g_um_bfupLatin_bool {
+\cs_new:Nn \um_config_bfit_Latin:n
+ {
+  \bool_if:NF \g_um_bfupLatin_bool
+   {
     \um_map_chars_Latin:nn {bfup,bfit} {#1}
-  }
+   }
   \um_set_mathalphabet_Latin:Nnn \mathbfit {up,it}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_Latin:nn {bfit} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbf {it}{#1}
-  }{
-    \bool_if:NF \g_um_bfupLatin_bool {
+   }
+   {
+    \bool_if:NF \g_um_bfupLatin_bool
+     {
       \um_map_chars_Latin:nn {bfup,bfit} {#1}
       \um_set_mathalphabet_Latin:Nnn \mathbf {up,it}{#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfit_latin:n {
-  \bool_if:NF \g_um_bfuplatin_bool {
+     }
+   }
+ }
+
+\cs_new:Nn \um_config_bfit_latin:n
+ {
+  \bool_if:NF \g_um_bfuplatin_bool
+   {
     \um_map_chars_latin:nn {bfup,bfit} {#1}
-  }
+   }
   \um_set_mathalphabet_latin:Nnn \mathbfit {up,it}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_latin:nn {bfit} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbf {it}{#1}
-  }{
-    \bool_if:NF \g_um_bfuplatin_bool {
+   }
+   {
+    \bool_if:NF \g_um_bfuplatin_bool
+     {
       \um_map_chars_latin:nn {bfup,bfit} {#1}
       \um_set_mathalphabet_latin:Nnn \mathbf {up,it}{#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfit_Greek:n {
+     }
+   }
+ }
+
+\cs_new:Nn \um_config_bfit_Greek:n
+ {
   \um_set_mathalphabet_Greek:Nnn \mathbfit {up,it}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_Greek:nn {bfit}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbf {it}{#1}
-  }{
-    \bool_if:NF \g_um_bfupGreek_bool {
+   }
+   {
+    \bool_if:NF \g_um_bfupGreek_bool
+     {
       \um_map_chars_Greek:nn {bfup,bfit}{#1}
       \um_set_mathalphabet_Greek:Nnn \mathbf {up,it}{#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfit_greek:n {
+     }
+   }
+ }
+
+\cs_new:Nn \um_config_bfit_greek:n
+ {
   \um_set_mathalphabet_greek:Nnn \mathbfit {up,it} {#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_greek:nn {bfit} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbf {it} {#1}
-  }{
-    \bool_if:NF \g_um_bfupgreek_bool {
+   }
+   {
+    \bool_if:NF \g_um_bfupgreek_bool
+     {
       \um_map_chars_greek:nn {bfit,bfup} {#1}
       \um_set_mathalphabet_greek:Nnn \mathbf {up,it} {#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfit_misc:n {
-  \bool_if:NTF \g_um_literal_Nabla_bool {
-    \um_map_single:nnn {Nabla}{bfit}{#1}
-  }{
-    \bool_if:NF \g_um_upNabla_bool {
-      \um_map_single:nnn {Nabla}{bfup,bfit}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_partial_bool {
-    \um_map_single:nnn {partial}{bfit}{#1}
-  }{
-    \bool_if:NF \g_um_uppartial_bool {
-      \um_map_single:nnn {partial}{bfup,bfit}{#1}
-    }
-  }
+     }
+   }
+ }
+
+\cs_new:Nn \um_config_bfit_misc:n
+ {
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   { \um_map_single:nnn {Nabla}{bfit}{#1} }
+   {
+    \bool_if:NF \g_um_upNabla_bool
+     { \um_map_single:nnn {Nabla}{bfup,bfit}{#1} }
+   }
+  \bool_if:NTF \g_um_literal_partial_bool
+   { \um_map_single:nnn {partial}{bfit}{#1} }
+   {
+    \bool_if:NF \g_um_uppartial_bool
+     { \um_map_single:nnn {partial}{bfup,bfit}{#1} }
+   }
   \um_set_mathalphabet_pos:Nnnn  \mathbfit {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfit {Nabla}   {up,it}{#1}
-  \bool_if:NTF \g_um_literal_partial_bool {
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {it}{#1}
-  }{
-    \bool_if:NF \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NF \g_um_uppartial_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up,it}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {it}{#1}
-  }{
-    \bool_if:NF \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NF \g_um_upNabla_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {up,it}{#1}
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 %
 %
 % \subsubsection{Bold Upright: \cmd\mathbfup}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_bfup_num:n {
+\cs_new:Nn \um_config_bfup_num:n
+ {
   \um_set_mathalphabet_numbers:Nnn \mathbf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathbfup {up}{#1}
-}
-\cs_new:Nn \um_config_bfup_Latin:n {
-  \bool_if:NT \g_um_bfupLatin_bool {
+ }
+
+\cs_new:Nn \um_config_bfup_Latin:n
+ {
+  \bool_if:NT \g_um_bfupLatin_bool
+   {
     \um_map_chars_Latin:nn {bfup,bfit} {#1}
-  }
+   }
   \um_set_mathalphabet_Latin:Nnn \mathbfup {up,it}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_Latin:nn {bfup} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbf {up}{#1}
-  }{
-    \bool_if:NT \g_um_bfupLatin_bool {
+   }
+   {
+    \bool_if:NT \g_um_bfupLatin_bool
+     {
       \um_map_chars_Latin:nn {bfup,bfit} {#1}
       \um_set_mathalphabet_Latin:Nnn \mathbf {up,it}{#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfup_latin:n {
-  \bool_if:NT \g_um_bfuplatin_bool {
+     }
+   }
+ }
+
+\cs_new:Nn \um_config_bfup_latin:n
+ {
+  \bool_if:NT \g_um_bfuplatin_bool
+   {
     \um_map_chars_latin:nn {bfup,bfit} {#1}
-  }
+   }
   \um_set_mathalphabet_latin:Nnn \mathbfup {up,it}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_latin:nn {bfup} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbf {up}{#1}
-  }{
-    \bool_if:NT \g_um_bfuplatin_bool {
+   }
+   {
+    \bool_if:NT \g_um_bfuplatin_bool
+     {
       \um_map_chars_latin:nn {bfup,bfit} {#1}
       \um_set_mathalphabet_latin:Nnn \mathbf {up,it}{#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfup_Greek:n {
+     }
+   }
+ }
+\cs_new:Nn \um_config_bfup_Greek:n
+ {
   \um_set_mathalphabet_Greek:Nnn \mathbfup {up,it}{#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_Greek:nn {bfup}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbf {up}{#1}
-  }{
-    \bool_if:NT \g_um_bfupGreek_bool {
+   }
+   {
+    \bool_if:NT \g_um_bfupGreek_bool
+     {
       \um_map_chars_Greek:nn {bfup,bfit}{#1}
       \um_set_mathalphabet_Greek:Nnn \mathbf {up,it}{#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfup_greek:n {
+     }
+   }
+ }
+
+\cs_new:Nn \um_config_bfup_greek:n
+ {
   \um_set_mathalphabet_greek:Nnn \mathbfup {up,it} {#1}
-  \bool_if:NTF \g_um_bfliteral_bool {
+  \bool_if:NTF \g_um_bfliteral_bool
+   {
     \um_map_chars_greek:nn {bfup} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbf {up} {#1}
-  }{
-    \bool_if:NT \g_um_bfupgreek_bool {
+   }
+   {
+    \bool_if:NT \g_um_bfupgreek_bool
+     {
       \um_map_chars_greek:nn {bfup,bfit} {#1}
       \um_set_mathalphabet_greek:Nnn \mathbf {up,it} {#1}
-    }
-  }
-}
-\cs_new:Nn \um_config_bfup_misc:n {
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+     }
+   }
+ }
+
+\cs_new:Nn \um_config_bfup_misc:n
+ {
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_map_single:nnn {Nabla}{bfup}{#1}
-  }{
-    \bool_if:NT \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NT \g_um_upNabla_bool
+     {
       \um_map_single:nnn {Nabla}{bfup,bfit}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_partial_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_map_single:nnn {partial}{bfup}{#1}
-  }{
-    \bool_if:NT \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NT \g_um_uppartial_bool
+     {
       \um_map_single:nnn {partial}{bfup,bfit}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {Nabla}   {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {digamma} {up}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfup {Digamma} {up}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbf   {digamma} {up}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbf   {Digamma} {up}{#1}
-  \bool_if:NTF \g_um_literal_partial_bool {
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up}{#1}
-  }{
-    \bool_if:NT \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NT \g_um_uppartial_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbf {partial} {up,it}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {up}{#1}
-  }{
-    \bool_if:NT \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NT \g_um_upNabla_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbf {Nabla}   {up,it}{#1}
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Bold fractur or fraktur or blackletter: \cmd\mathbffrak}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_bffrak_Latin:n {
+\cs_new:Nn \um_config_bffrak_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn \mathbffrak {up,it}{#1}
-}
-\cs_new:Nn \um_config_bffrak_latin:n {
+ }
+
+\cs_new:Nn \um_config_bffrak_latin:n
+ {
   \um_set_mathalphabet_latin:Nnn \mathbffrak {up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Bold script or calligraphic: \cmd\mathbfscr}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_bfscr_Latin:n {
+\cs_new:Nn \um_config_bfscr_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn \mathbfscr {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfscr_latin:n {
+ }
+\cs_new:Nn \um_config_bfscr_latin:n
+ {
   \um_set_mathalphabet_latin:Nnn \mathbfscr {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfcal_Latin:n {
+ }
+\cs_new:Nn \um_config_bfcal_Latin:n
+ {
   \um_set_mathalphabet_Latin:Nnn   \mathbfcal  {up,it}{#1}
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Bold upright sans serif: \cmd\mathbfsfup}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_bfsfup_num:n {
+\cs_new:Nn \um_config_bfsfup_num:n
+ {
   \um_set_mathalphabet_numbers:Nnn \mathbfsf   {up}{#1}
   \um_set_mathalphabet_numbers:Nnn \mathbfsfup {up}{#1}
-}
-\cs_new:Nn \um_config_bfsfup_Latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+\cs_new:Nn \um_config_bfsfup_Latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_Latin:nn {bfsfup} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbfsf {up}{#1}
-  }{
-    \bool_if:NT \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NT \g_um_upsans_bool
+     {
       \um_map_chars_Latin:nn {bfsfup,bfsfit} {#1}
       \um_set_mathalphabet_Latin:Nnn \mathbfsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_Latin:Nnn \mathbfsfup {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfsfup_latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+
+\cs_new:Nn \um_config_bfsfup_latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_latin:nn {bfsfup} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {up}{#1}
-  }{
-    \bool_if:NT \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NT \g_um_upsans_bool
+     {
       \um_map_chars_latin:nn {bfsfup,bfsfit} {#1}
       \um_set_mathalphabet_latin:Nnn \mathbfsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_latin:Nnn \mathbfsfup {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfsfup_Greek:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+
+\cs_new:Nn \um_config_bfsfup_Greek:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_Greek:nn {bfsfup}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbfsf {up}{#1}
-  }{
-    \bool_if:NT \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NT \g_um_upsans_bool
+     {
       \um_map_chars_Greek:nn {bfsfup,bfsfit}{#1}
       \um_set_mathalphabet_Greek:Nnn \mathbfsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_Greek:Nnn \mathbfsfup {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfsfup_greek:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+
+\cs_new:Nn \um_config_bfsfup_greek:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_greek:nn {bfsfup} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbfsf {up} {#1}
-  }{
-    \bool_if:NT \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NT \g_um_upsans_bool
+     {
       \um_map_chars_greek:nn {bfsfup,bfsfit} {#1}
       \um_set_mathalphabet_greek:Nnn \mathbfsf {up,it} {#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_greek:Nnn \mathbfsfup {up,it} {#1}
-}
-\cs_new:Nn \um_config_bfsfup_misc:n {
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+ }
+\cs_new:Nn \um_config_bfsfup_misc:n
+ {
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_map_single:nnn {Nabla}{bfsfup}{#1}
-  }{
-    \bool_if:NT \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NT \g_um_upNabla_bool
+     {
       \um_map_single:nnn {Nabla}{bfsfup,bfsfit}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_partial_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_map_single:nnn {partial}{bfsfup}{#1}
-  }{
-    \bool_if:NT \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NT \g_um_uppartial_bool
+     {
       \um_map_single:nnn {partial}{bfsfup,bfsfit}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfup {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfup {Nabla}   {up,it}{#1}
-  \bool_if:NTF \g_um_literal_partial_bool {
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up}{#1}
-  }{
-    \bool_if:NT \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NT \g_um_uppartial_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up,it}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {up}{#1}
-  }{
-    \bool_if:NT \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NT \g_um_upNabla_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {up,it}{#1}
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 %
 %
 % \subsubsection{Bold italic sans serif: \cmd\mathbfsfit}
 %    \begin{macrocode}
-\cs_new:Nn \um_config_bfsfit_Latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+\cs_new:Nn \um_config_bfsfit_Latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_Latin:nn {bfsfit} {#1}
     \um_set_mathalphabet_Latin:Nnn \mathbfsf {it}{#1}
-  }{
-    \bool_if:NF \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NF \g_um_upsans_bool
+     {
       \um_map_chars_Latin:nn {bfsfup,bfsfit} {#1}
       \um_set_mathalphabet_Latin:Nnn \mathbfsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_Latin:Nnn \mathbfsfit {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfsfit_latin:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+
+\cs_new:Nn \um_config_bfsfit_latin:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_latin:nn {bfsfit} {#1}
     \um_set_mathalphabet_latin:Nnn \mathbfsf {it}{#1}
-  }{
-    \bool_if:NF \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NF \g_um_upsans_bool
+     {
       \um_map_chars_latin:nn {bfsfup,bfsfit} {#1}
       \um_set_mathalphabet_latin:Nnn \mathbfsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_latin:Nnn \mathbfsfit {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfsfit_Greek:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+
+\cs_new:Nn \um_config_bfsfit_Greek:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_Greek:nn {bfsfit}{#1}
     \um_set_mathalphabet_Greek:Nnn \mathbfsf {it}{#1}
-  }{
-    \bool_if:NF \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NF \g_um_upsans_bool
+     {
       \um_map_chars_Greek:nn {bfsfup,bfsfit}{#1}
       \um_set_mathalphabet_Greek:Nnn \mathbfsf {up,it}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_Greek:Nnn \mathbfsfit {up,it}{#1}
-}
-\cs_new:Nn \um_config_bfsfit_greek:n {
-  \bool_if:NTF \g_um_sfliteral_bool {
+ }
+
+\cs_new:Nn \um_config_bfsfit_greek:n
+ {
+  \bool_if:NTF \g_um_sfliteral_bool
+   {
     \um_map_chars_greek:nn {bfsfit} {#1}
     \um_set_mathalphabet_greek:Nnn \mathbfsf {it} {#1}
-  }{
-    \bool_if:NF \g_um_upsans_bool {
+   }
+   {
+    \bool_if:NF \g_um_upsans_bool
+     {
       \um_map_chars_greek:nn {bfsfup,bfsfit} {#1}
       \um_set_mathalphabet_greek:Nnn \mathbfsf {up,it} {#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_greek:Nnn \mathbfsfit {up,it} {#1}
-}
-\cs_new:Nn \um_config_bfsfit_misc:n {
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+ }
+
+\cs_new:Nn \um_config_bfsfit_misc:n
+ {
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_map_single:nnn {Nabla}{bfsfit}{#1}
-  }{
-    \bool_if:NF \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NF \g_um_upNabla_bool
+     {
       \um_map_single:nnn {Nabla}{bfsfup,bfsfit}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_partial_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_map_single:nnn {partial}{bfsfit}{#1}
-  }{
-    \bool_if:NF \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NF \g_um_uppartial_bool
+     {
       \um_map_single:nnn {partial}{bfsfup,bfsfit}{#1}
-    }
-  }
+     }
+   }
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfit {partial} {up,it}{#1}
   \um_set_mathalphabet_pos:Nnnn  \mathbfsfit {Nabla}   {up,it}{#1}
-  \bool_if:NTF \g_um_literal_partial_bool {
+  \bool_if:NTF \g_um_literal_partial_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {it}{#1}
-  }{
-    \bool_if:NF \g_um_uppartial_bool {
+   }
+   {
+    \bool_if:NF \g_um_uppartial_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbfsf {partial} {up,it}{#1}
-    }
-  }
-  \bool_if:NTF \g_um_literal_Nabla_bool {
+     }
+   }
+  \bool_if:NTF \g_um_literal_Nabla_bool
+   {
     \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {it}{#1}
-  }{
-    \bool_if:NF \g_um_upNabla_bool {
+   }
+   {
+    \bool_if:NF \g_um_upNabla_bool
+     {
       \um_set_mathalphabet_pos:Nnnn  \mathbfsf {Nabla}   {up,it}{#1}
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 %
 % \section{A token list to contain the data of the math table}
@@ -4631,11 +4995,13 @@ end
 % In time, the case statement inside |set_mathsymbol| will be moved in here
 % to avoid re-running it every time.
 %    \begin{macrocode}
-\cs_new:Npn \um_symbol_setup: {
-  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
-    \exp_not:n {\_um_sym:nnn{##1}{##2}{##3}}
-  }
-}
+\cs_new:Npn \um_symbol_setup:
+ {
+  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4
+   {
+    \exp_not:n { \_um_sym:nnn {##1} {##2} {##3} }
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -4668,32 +5034,38 @@ end
 %    \begin{macrocode}
 \group_begin:
   \char_set_catcode_other:N \^
-  \cs_gset:Npn \um_cs_set_eq_active_char:Nw #1 = "#2 \q_nil {
-    \tex_lowercase:D {
-      \tl_rescan:nn {
+  \cs_gset:Npn \um_cs_set_eq_active_char:Nw #1 = "#2 \q_nil
+   {
+    \tex_lowercase:D
+     {
+      \tl_rescan:nn
+       {
         \ExplSyntaxOn
         \char_set_catcode_other:N \{
         \char_set_catcode_other:N \}
         \char_set_catcode_other:N \&
         \char_set_catcode_other:N \%
         \char_set_catcode_other:N \$
-      }{
+       }
+       {
         \cs_gset_eq:NN #1 ^^^^^#2
-      }
-    }
-  }
+       }
+     }
+   }
 %    \end{macrocode}
 % Making |^| the right catcode isn't strictly necessary right now but it helps
 % to future proof us with, e.g., breqn.
 % Because we're inside a |\tl_rescan:nn|, use plain old \TeX\ syntax to avoid
 % any catcode problems.
 %    \begin{macrocode}
-  \cs_new:Npn \um_active_char_set:wc "#1 \q_nil #2 {
-    \tex_lowercase:D {
+  \cs_new:Npn \um_active_char_set:wc "#1 \q_nil #2
+   {
+    \tex_lowercase:D
+     {
       \tl_rescan:nn { \ExplSyntaxOn }
         { \cs_gset_protected_nopar:Npx ^^^^^#1 { \exp_not:c {#2} } }
-    }
-  }
+     }
+   }
 \group_end:
 %    \end{macrocode}
 % \end{macro}
@@ -4706,23 +5078,26 @@ end
 % make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
 \AtBeginDocument{\um_define_math_chars:}
-\cs_new:Nn \um_define_math_chars: {
+\cs_new:Nn \um_define_math_chars:
+ {
   \group_begin:
     \char_set_catcode_math_superscript:N \^
-    \cs_set:Npn \_um_sym:nnn ##1##2##3 {
+    \cs_set:Npn \_um_sym:nnn ##1##2##3
+     {
       \bool_if:nF { \cs_if_eq_p:NN ##3 \mathaccent ||
                     \cs_if_eq_p:NN ##3 \mathopen   ||
                     \cs_if_eq_p:NN ##3 \mathclose  ||
                     \cs_if_eq_p:NN ##3 \mathover   ||
                     \cs_if_eq_p:NN ##3 \mathunder  ||
-                    \cs_if_eq_p:NN ##3 \mathbotaccent } {
+                    \cs_if_eq_p:NN ##3 \mathbotaccent }
+      {
         \um_cs_set_eq_active_char:Nw ##2 = ##1 \q_nil \ignorespaces
       }
-    }
+     }
     \char_set_catcode_other:N \#
     \um_input_math_symbol_table:
   \group_end:
-}
+ }
 %    \end{macrocode}
 % Fix \cs{backslash}, which is defined as the escape char character
 % above:
@@ -4731,15 +5106,14 @@ end
   \lccode`\*=`\\
   \char_set_catcode_escape:N \|
   \char_set_catcode_other:N \\
-  |lowercase{
-    |AtBeginDocument{
+  |lowercase
+   {
+    |AtBeginDocument
+     {
       |let|backslash=*
-    }
-  }
+     }
+   }
 |group_end:
-%    \end{macrocode}
-% Fix \cs{backslash}: ^^A |
-%    \begin{macrocode}
 %    \end{macrocode}
 %
 % \section{Fall-back font}
@@ -4812,10 +5186,11 @@ end
 % trailing superscript, then it is included within the insertion.
 %    \begin{macrocode}
 \cs_new:Nn \um_arg_i_before_egroup:n {#1\egroup}
-\cs_new:Nn \um_superscript:n {
+\cs_new:Nn \um_superscript:n
+ {
   ^\bgroup #1
   \peek_meaning_remove:NTF ^ \um_arg_i_before_egroup:n \egroup
-}
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -4825,14 +5200,19 @@ end
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \um_nprimes:Nn {
-  \um_superscript:n {
+\cs_new:Nn \um_nprimes:Nn
+ {
+  \um_superscript:n
+   {
     #1
     \prg_replicate:nn {#2-1} { \mskip \g_um_primekern_muskip #1 }
-  }
-}
-\cs_new:Nn \um_nprimes_select:nn {
-  \int_case:nnn {#2}{
+   }
+ }
+
+\cs_new:Nn \um_nprimes_select:nn
+ {
+  \int_case:nnn {#2}
+   {
     {1} { \um_superscript:n {#1} }
     {2} {
       \um_glyph_if_exist:nTF {"2033}
@@ -4849,12 +5229,15 @@ end
         { \um_superscript:n {\um_prime_quad_mchar} }
         { \um_nprimes:Nn #1 {#2} }
     }
-  }{
+   }
+   {
     \um_nprimes:Nn #1 {#2}
-  }
-}
-\cs_new:Nn \um_nbackprimes_select:nn {
-  \int_case:nnn {#2}{
+   }
+ }
+\cs_new:Nn \um_nbackprimes_select:nn
+ {
+  \int_case:nnn {#2}
+   {
     {1} { \um_superscript:n {#1} }
     {2} {
       \um_glyph_if_exist:nTF {"2036}
@@ -4866,165 +5249,209 @@ end
         { \um_superscript:n {\um_backprime_triple_mchar} }
         { \um_nprimes:Nn #1 {#2} }
     }
-  }{
+   }
+   {
     \um_nprimes:Nn #1 {#2}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 % Scanning is annoying because I'm too lazy to do it for the general case.
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_scan_prime: {
+\cs_new:Npn \um_scan_prime:
+ {
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_zero:N \l_um_primecount_int
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Npn \um_scan_dprime: {
+ }
+\cs_new:Npn \um_scan_dprime:
+ {
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Npn \um_scan_trprime: {
+ }
+\cs_new:Npn \um_scan_trprime:
+ {
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Npn \um_scan_qprime: {
+ }
+\cs_new:Npn \um_scan_qprime:
+ {
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {3}
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Npn \um_scan_sup_prime: {
+ }
+\cs_new:Npn \um_scan_sup_prime:
+ {
   \int_zero:N \l_um_primecount_int
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Npn \um_scan_sup_dprime: {
+ }
+\cs_new:Npn \um_scan_sup_dprime:
+ {
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Npn \um_scan_sup_trprime: {
+ }
+\cs_new:Npn \um_scan_sup_trprime:
+ {
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Npn \um_scan_sup_qprime: {
+ }
+\cs_new:Npn \um_scan_sup_qprime:
+ {
   \int_set:Nn \l_um_primecount_int {3}
   \um_scanprime_collect:N \um_prime_single_mchar
-}
-\cs_new:Nn \um_scanprime_collect:N {
+ }
+\cs_new:Nn \um_scanprime_collect:N
+ {
   \int_incr:N \l_um_primecount_int
-  \peek_meaning_remove:NTF ' {
-    \um_scanprime_collect:N #1
-  }{
-    \peek_meaning_remove:NTF \um_scan_prime: {
-      \um_scanprime_collect:N #1
-    }{
-      \peek_meaning_remove:NTF ^^^^2032 {
-        \um_scanprime_collect:N #1
-      }{
-        \peek_meaning_remove:NTF \um_scan_dprime: {
+  \peek_meaning_remove:NTF ' 
+   { \um_scanprime_collect:N #1 }
+   {
+    \peek_meaning_remove:NTF \um_scan_prime:
+     { \um_scanprime_collect:N #1 }
+     {
+      \peek_meaning_remove:NTF ^^^^2032
+       { \um_scanprime_collect:N #1 }
+       {
+        \peek_meaning_remove:NTF \um_scan_dprime:
+         {
           \int_incr:N \l_um_primecount_int
           \um_scanprime_collect:N #1
-        }{
-          \peek_meaning_remove:NTF ^^^^2033 {
+         }
+         {
+          \peek_meaning_remove:NTF ^^^^2033
+           {
             \int_incr:N \l_um_primecount_int
             \um_scanprime_collect:N #1
-          }{
-            \peek_meaning_remove:NTF \um_scan_trprime: {
+           }
+           {
+            \peek_meaning_remove:NTF \um_scan_trprime:
+             {
               \int_add:Nn \l_um_primecount_int {2}
               \um_scanprime_collect:N #1
-            }{
-              \peek_meaning_remove:NTF ^^^^2034 {
+             }
+             {
+              \peek_meaning_remove:NTF ^^^^2034
+               {
                 \int_add:Nn \l_um_primecount_int {2}
                 \um_scanprime_collect:N #1
-              }{
-                \peek_meaning_remove:NTF \um_scan_qprime: {
+               }
+               {
+                \peek_meaning_remove:NTF \um_scan_qprime:
+                 {
                   \int_add:Nn \l_um_primecount_int {3}
                   \um_scanprime_collect:N #1
-                }{
-                  \peek_meaning_remove:NTF ^^^^2057 {
+                 }
+                 {
+                  \peek_meaning_remove:NTF ^^^^2057
+                   {
                     \int_add:Nn \l_um_primecount_int {3}
                     \um_scanprime_collect:N #1
-                  }{
+                   }
+                   {
                     \um_nprimes_select:nn {#1} {\l_um_primecount_int}
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-\cs_new:Npn \um_scan_backprime: {
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+\cs_new:Npn \um_scan_backprime:
+ {
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_zero:N \l_um_primecount_int
   \um_scanbackprime_collect:N \um_backprime_single_mchar
-}
-\cs_new:Npn \um_scan_backdprime: {
+ }
+\cs_new:Npn \um_scan_backdprime:
+ {
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
-}
-\cs_new:Npn \um_scan_backtrprime: {
+ }
+\cs_new:Npn \um_scan_backtrprime:
+ {
   \cs_set_eq:NN \um_superscript:n \use:n
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
-}
-\cs_new:Npn \um_scan_sup_backprime: {
+ }
+\cs_new:Npn \um_scan_sup_backprime:
+ {
   \int_zero:N \l_um_primecount_int
   \um_scanbackprime_collect:N \um_backprime_single_mchar
-}
-\cs_new:Npn \um_scan_sup_backdprime: {
+ }
+\cs_new:Npn \um_scan_sup_backdprime:
+ {
   \int_set:Nn \l_um_primecount_int {1}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
-}
-\cs_new:Npn \um_scan_sup_backtrprime: {
+ }
+\cs_new:Npn \um_scan_sup_backtrprime:
+ {
   \int_set:Nn \l_um_primecount_int {2}
   \um_scanbackprime_collect:N \um_backprime_single_mchar
-}
-\cs_new:Nn \um_scanbackprime_collect:N {
+ }
+\cs_new:Nn \um_scanbackprime_collect:N
+ {
   \int_incr:N \l_um_primecount_int
-  \peek_meaning_remove:NTF ` {
+  \peek_meaning_remove:NTF `
+   {
     \um_scanbackprime_collect:N #1
-  }{
-    \peek_meaning_remove:NTF \um_scan_backprime: {
+   }
+   {
+    \peek_meaning_remove:NTF \um_scan_backprime:
+     {
       \um_scanbackprime_collect:N #1
-    }{
-      \peek_meaning_remove:NTF ^^^^2035 {
+     }
+     {
+      \peek_meaning_remove:NTF ^^^^2035
+       {
         \um_scanbackprime_collect:N #1
-      }{
-        \peek_meaning_remove:NTF \um_scan_backdprime: {
+       }
+       {
+        \peek_meaning_remove:NTF \um_scan_backdprime:
+         {
           \int_incr:N \l_um_primecount_int
           \um_scanbackprime_collect:N #1
-        }{
-          \peek_meaning_remove:NTF ^^^^2036 {
+         }
+         {
+          \peek_meaning_remove:NTF ^^^^2036
+           {
             \int_incr:N \l_um_primecount_int
             \um_scanbackprime_collect:N #1
-          }{
-            \peek_meaning_remove:NTF \um_scan_backtrprime: {
+           }
+           {
+            \peek_meaning_remove:NTF \um_scan_backtrprime:
+             {
               \int_add:Nn \l_um_primecount_int {2}
               \um_scanbackprime_collect:N #1
-            }{
-              \peek_meaning_remove:NTF ^^^^2037 {
+             }
+             {
+              \peek_meaning_remove:NTF ^^^^2037
+               {
                 \int_add:Nn \l_um_primecount_int {2}
                 \um_scanbackprime_collect:N #1
-              }{
+               }
+               {
                 \um_nbackprimes_select:nn {#1} {\l_um_primecount_int}
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \AtBeginDocument{\um_define_prime_commands: \um_define_prime_chars:}
-\cs_new:Nn \um_define_prime_commands: {
+\cs_new:Nn \um_define_prime_commands:
+ {
   \cs_set_eq:NN \prime       \um_prime_single_mchar
   \cs_set_eq:NN \dprime      \um_prime_double_mchar
   \cs_set_eq:NN \trprime     \um_prime_triple_mchar
@@ -5032,7 +5459,7 @@ end
   \cs_set_eq:NN \backprime   \um_backprime_single_mchar
   \cs_set_eq:NN \backdprime  \um_backprime_double_mchar
   \cs_set_eq:NN \backtrprime \um_backprime_triple_mchar
-}
+ }
 \group_begin:
   \char_set_catcode_active:N \'
   \char_set_catcode_active:N \`
@@ -5043,7 +5470,8 @@ end
   \char_set_catcode_active:n {"2035}
   \char_set_catcode_active:n {"2036}
   \char_set_catcode_active:n {"2037}
-  \cs_gset:Nn \um_define_prime_chars: {
+  \cs_gset:Nn \um_define_prime_chars:
+   {
     \cs_set_eq:NN '        \um_scan_sup_prime:
     \cs_set_eq:NN ^^^^2032 \um_scan_sup_prime:
     \cs_set_eq:NN ^^^^2033 \um_scan_sup_dprime:
@@ -5053,7 +5481,7 @@ end
     \cs_set_eq:NN ^^^^2035 \um_scan_sup_backprime:
     \cs_set_eq:NN ^^^^2036 \um_scan_sup_backdprime:
     \cs_set_eq:NN ^^^^2037 \um_scan_sup_backtrprime:
-  }
+   }
 \group_end:
 %    \end{macrocode}
 %
@@ -5064,55 +5492,58 @@ end
 \cs_new:Nn \um_redefine_radical:
 %<*XE>
  {
-  \@ifpackageloaded { amsmath } { } {
+  \@ifpackageloaded { amsmath } { }
+   {
 %    \end{macrocode}
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-    \cs_set_nopar:Npn \r@@t ##1 ##2 {
-      \hbox_set:Nn \l_tmpa_box {
+    \cs_set_nopar:Npn \r@@t ##1 ##2
+     {
+      \hbox_set:Nn \l_tmpa_box
+       {
         \c_math_toggle_token
         \m@th
         ##1
         \sqrtsign { ##2 }
         \c_math_toggle_token
-      }
-      \um_mathstyle_scale:Nnn ##1 { \kern } {
-        \fontdimen 63 \l_um_font
-      }
-      \box_move_up:nn {
+       }
+      \um_mathstyle_scale:Nnn ##1 { \kern }
+       { \fontdimen 63 \l_um_font }
+      \box_move_up:nn
+       {
         (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
         * \number \fontdimen 65 \l_um_font / 100
-      } {
-        \box_use:N \rootbox
-      }
-      \um_mathstyle_scale:Nnn ##1 { \kern } {
-        \fontdimen 64 \l_um_font
-      }
+       }
+       { \box_use:N \rootbox }
+      \um_mathstyle_scale:Nnn ##1 { \kern }
+       { \fontdimen 64 \l_um_font }
       \box_use_clear:N \l_tmpa_box
-    }
+     }
 %    \end{macrocode}
 % \end{macro}
 %    \begin{macrocode}
-  }
+   }
  }
 %</XE>
 %<*LU>
  {
-  \@ifpackageloaded { amsmath } { } {
+  \@ifpackageloaded { amsmath } { }
+   {
 %    \end{macrocode}
 % \begin{macro}{\root}
 % Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
 %    \begin{macrocode}
-    \cs_set:Npn \root ##1 \of ##2 {
+    \cs_set:Npn \root ##1 \of ##2
+     {
       \luatexUroot \l_um_radical_sqrt_tl { ##1 } { ##2 }
-    }
+     }
 %    \end{macrocode}
 % \end{macro}
 %    \begin{macrocode}
-  }
+   }
  }
 %</LU>
 %    \end{macrocode}
@@ -5127,13 +5558,14 @@ end
 % \cs{um_fontdimen_to_scale:nn} returns a dimension correspond to the current
 % font size relative proportion based on that percentage.
 %    \begin{macrocode}
-\cs_new:Nn \um_fontdimen_to_percent:nn {
+\cs_new:Nn \um_fontdimen_to_percent:nn
+ {
   \strip@pt\dimexpr\fontdimen#1#2*65536/100\relax
-}
+ }
 \cs_new:Nn \um_fontdimen_to_scale:nn
-  {
-    \um_fontdimen_to_percent:nn {#1} {#2} \dimexpr \f@size pt\relax
-  }
+ {
+  \um_fontdimen_to_percent:nn {#1} {#2} \dimexpr \f@size pt\relax
+ }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -5144,17 +5576,18 @@ end
 % \darg{Length control sequence to be scaled according to the math style}
 % This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
 %    \begin{macrocode}
-\cs_new:Nn \um_mathstyle_scale:Nnn {
+\cs_new:Nn \um_mathstyle_scale:Nnn
+ {
   \ifx#1\scriptstyle
-    #2\um_fontdimen_to_percent:nn{10}\l_um_font#3
+    #2 \um_fontdimen_to_percent:nn {10} \l_um_font #3
   \else
     \ifx#1\scriptscriptstyle
-      #2\um_fontdimen_to_percent:nn{11}\l_um_font#3
+      #2 \um_fontdimen_to_percent:nn {11} \l_um_font #3
     \else
-      #2#3
+      #2 #3
     \fi
   \fi
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5185,19 +5618,22 @@ end
 % \cs{scantokens} makes this process much simpler since we can activate the
 % char and assign its meaning in one step.
 %    \begin{macrocode}
-\cs_new:Nn \um_setup_active_superscript:nn {
+\cs_new:Nn \um_setup_active_superscript:nn
+ {
   \prop_gput:Nxn \g_um_supers_prop   {\meaning #1} {#2}
   \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
-  \scantokens{
-    \cs_gset:Npn #1 {
+  \scantokens
+   {
+    \cs_gset:Npn #1
+     {
       \tl_set:Nn \l_um_ss_chain_tl {#2}
       \cs_set_eq:NN \um_sub_or_super:n \sp
       \tl_set:Nn \l_um_tmpa_tl {supers}
       \um_scan_sscript:
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 % Bam:
 %    \begin{macrocode}
@@ -5221,19 +5657,22 @@ end
 %    \end{macrocode}
 % \paragraph{Subscripts} Ditto above.
 %    \begin{macrocode}
-\cs_new:Nn \um_setup_active_subscript:nn {
+\cs_new:Nn \um_setup_active_subscript:nn
+ {
   \prop_gput:Nxn \g_um_subs_prop   {\meaning #1} {#2}
   \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
-  \scantokens{
-    \cs_gset:Npn #1 {
+  \scantokens
+   {
+    \cs_gset:Npn #1
+     {
       \tl_set:Nn \l_um_ss_chain_tl {#2}
       \cs_set_eq:NN \um_sub_or_super:n \sb
       \tl_set:Nn \l_um_tmpa_tl {subs}
       \um_scan_sscript:
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 % A few more subscripts than superscripts:
 %    \begin{macrocode}
@@ -5272,38 +5711,44 @@ end
 %    \end{macrocode}
 % The scanning command, evident in its purpose:
 %    \begin{macrocode}
-\cs_new:Npn \um_scan_sscript: {
-  \um_scan_sscript:TF {
+\cs_new:Npn \um_scan_sscript:
+ {
+  \um_scan_sscript:TF
+   {
     \um_scan_sscript:
-  }{
+   }
+   {
     \um_sub_or_super:n {\l_um_ss_chain_tl}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % The main theme here is stolen from the source to the various \cs{peek_} functions.
 % Consider this function as simply boilerplate:
 % TODO: move all this to expl3, and don't use internal expl3 macros.
 %    \begin{macrocode}
-\cs_new:Npn \um_scan_sscript:TF #1#2 {
+\cs_new:Npn \um_scan_sscript:TF #1#2
+ {
   \tl_set:Nx \__peek_true_aux:w { \exp_not:n{ #1 } }
   \tl_set_eq:NN \__peek_true:w \__peek_true_remove:w
   \tl_set:Nx \__peek_false:w { \exp_not:n { \group_align_safe_end: #2 } }
   \group_align_safe_begin:
     \peek_after:Nw \um_peek_execute_branches_ss:
-}
+ }
 %    \end{macrocode}
 % We do not skip spaces when scanning ahead, and we explicitly wish to
 % bail out on encountering a space or a brace.
 %    \begin{macrocode}
-\cs_new:Npn \um_peek_execute_branches_ss: {
-  \bool_if:nTF {
+\cs_new:Npn \um_peek_execute_branches_ss:
+ {
+  \bool_if:nTF
+   {
     \token_if_eq_catcode_p:NN \l_peek_token \c_group_begin_token ||
     \token_if_eq_catcode_p:NN \l_peek_token \c_group_end_token ||
     \token_if_eq_meaning_p:NN \l_peek_token \c_space_token
-  }
-  { \__peek_false:w  }
-  { \um_peek_execute_branches_ss_aux: }
-}
+   }
+   { \__peek_false:w  }
+   { \um_peek_execute_branches_ss_aux: }
+ }
 %    \end{macrocode}
 % This is the actual comparison code.
 % Because the peeking has already tokenised the next token,
@@ -5316,7 +5761,8 @@ end
 % build up a chain of sub-/superscripts and iterate. (If not, exit and
 % typeset what we've already collected.)
 %    \begin{macrocode}
-\cs_new:Npn \um_peek_execute_branches_ss_aux: {
+\cs_new:Npn \um_peek_execute_branches_ss_aux:
+ {
   \prop_if_in:cxTF
     {g_um_\l_um_tmpa_tl _prop} {\meaning\l_peek_token}
     {
@@ -5326,7 +5772,7 @@ end
       \__peek_true:w
     }
     { \__peek_false:w }
-}
+ }
 %    \end{macrocode}
 %
 % \subsubsection{Active fractions}
@@ -5335,24 +5781,29 @@ end
 % \LaTeX\ fraction declaration.
 %
 %    \begin{macrocode}
-\cs_new:Npn \um_define_active_frac:Nw #1 #2/#3 {
+\cs_new:Npn \um_define_active_frac:Nw #1 #2/#3
+ {
   \char_set_catcode_active:N #1
   \char_gmake_mathactive:N #1
-  \tl_rescan:nn {
+  \tl_rescan:nn
+   {
     \catcode`\_=11\relax
     \catcode`\:=11\relax
-  }{
-    \cs_gset:Npx #1 {
+   }
+   {
+    \cs_gset:Npx #1
+     {
       \bool_if:NTF \l_um_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
           {#2} {#3}
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 % These are redefined for each math font selection in case the |active-frac|
 % feature changes.
 %    \begin{macrocode}
-\cs_new:Npn \um_setup_active_frac: {
+\cs_new:Npn \um_setup_active_frac:
+ {
   \group_begin:
   \um_define_active_frac:Nw  ^^^^2189  0/3
   \um_define_active_frac:Nw  ^^^^2152  1/{10}
@@ -5374,7 +5825,7 @@ end
   \um_define_active_frac:Nw  ^^^^215a  5/6
   \um_define_active_frac:Nw  ^^^^215e  7/8
   \group_end:
-}
+ }
 \um_setup_active_frac:
 %    \end{macrocode}
 %
@@ -5422,13 +5873,16 @@ end
 % This is wrong: it should be \unichar{003A} {colon} instead!
 % We hope no-one will notice.
 %    \begin{macrocode}
-\@ifpackageloaded{amsmath}{
+\@ifpackageloaded{amsmath}
+ {
   % define their own colon, perhaps I should just steal it. (It does look much better.)
-}{
-  \cs_set_protected:Npn \colon {
+ }
+ {
+  \cs_set_protected:Npn \colon
+   {
     \bool_if:NTF \g_um_literal_colon_bool {:} { \mathpunct{:} }
-  }
-}
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5471,30 +5925,36 @@ end
 % In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text for \LuaTeX} or the \meta{new replacement text for \XeTeX}, depending on the engine.
 % Otherwise issue a warning and don’t overwrite.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix:NNnnnn #1 #2 #3 #4 #5 #6 {
-  \cs_if_exist:NT #1 {
-    \token_if_macro:NTF #1 {
+\cs_new_protected_nopar:Nn \um_check_and_fix:NNnnnn
+ {
+  \cs_if_exist:NT #1
+   {
+    \token_if_macro:NTF #1
+     {
       \group_begin:
       #2 \um_tmpa:w #3 { #4 }
-      \cs_if_eq:NNTF #1 \um_tmpa:w {
+      \cs_if_eq:NNTF #1 \um_tmpa:w
+       {
         \msg_info:nnx { unicode-math } { patch-macro }
           { \token_to_str:N #1 }
         \group_end:
         #2 #1 #3
 %<XE>          { #6 }
 %<LU>          { #5 }
-      } {
+       }
+       {
         \msg_warning:nnxxx { unicode-math } { wrong-meaning }
           { \token_to_str:N #1 } { \token_to_meaning:N #1 }
           { \token_to_meaning:N \um_tmpa:w }
         \group_end:
-      }
-    } {
+       }
+     }
+     {
       \msg_warning:nnx { unicode-math } { macro-expected }
         { \token_to_str:N #1 }
-    }
-  }
-}
+     }
+   }
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5510,9 +5970,10 @@ end
 % In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
 % Otherwise issue a warning and don’t overwrite.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix:NNnnn #1 #2 #3 #4 #5 {
+\cs_new_protected_nopar:Nn \um_check_and_fix:NNnnn
+ {
   \um_check_and_fix:NNnnnn #1 #2 { #3 } { #4 } { #5 } { #5 }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5529,11 +5990,13 @@ end
 % In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
 % Otherwise issue a warning and don’t overwrite.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Npn \um_check_and_fix_luatex:NNnnn #1 #2 #3 #4 #5 {
-  \luatex_if_engine:T {
+\cs_new_protected_nopar:Nn \um_check_and_fix_luatex:NNnnn
+ {
+  \luatex_if_engine:T
+   {
     \um_check_and_fix:NNnnn #1 #2 { #3 } { #4 } { #5 }
-  }
-}
+   }
+ }
 \cs_generate_variant:Nn \um_check_and_fix_luatex:NNnnn { c }
 %    \end{macrocode}
 % \end{macro}
@@ -5549,26 +6012,30 @@ end
 % but activates automatically so old documents that might change the \cs{url}
 % font still work correctly.
 %    \begin{macrocode}
-\AtEndOfPackageFile * {url} {
+\AtEndOfPackageFile * {url}
+ {
   \tl_put_left:Nn \Url@FormatString { \um_switchto_mathup: }
-  \tl_put_right:Nn \UrlSpecials {
+  \tl_put_right:Nn \UrlSpecials
+   {
     \do\`{\mathchar`\`}
     \do\'{\mathchar`\'}
     \do\${\mathchar`\$}
     \do\&{\mathchar`\&}
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 % \paragraph{\pkg{amsmath}}
 % Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
-\AtEndOfPackageFile * {amsmath} {
+\AtEndOfPackageFile * {amsmath}
+ {
 %<*XE>
-    \tl_remove_once:Nn \@begindocumenthook {
+    \tl_remove_once:Nn \@begindocumenthook
+     {
       \mathchardef\std@minus\mathcode`\-\relax
       \mathchardef\std@equal\mathcode`\=\relax
-    }
+     }
     \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
     \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
 %</XE>
@@ -5581,14 +6048,16 @@ end
 % This isn't as clever as the \pkg{amsmath} definition but I think it works:
 %    \begin{macrocode}
 %<*XE>
-    \def \resetMathstrut@ {%
+    \def \resetMathstrut@
+     {%
       \setbox\z@\hbox{$($}%)
       \ht\Mathstrutbox@\ht\z@ \dp\Mathstrutbox@\dp\z@
-    }
+     }
 %    \end{macrocode}
 % The |subarray| environment uses inappropriate font dimensions.
 %    \begin{macrocode}
-    \um_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 } {
+    \um_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 }
+     {
       \vcenter
       \bgroup
       \Let@
@@ -5604,19 +6073,21 @@ end
       $ \m@th \scriptstyle ## $
       \hfil
       \crcr
-    } {
+     }
+     {
       \vcenter
       \c_group_begin_token
       \Let@
       \restore@math@cr
       \default@tag
-      \skip_set:Nn \baselineskip {
+      \skip_set:Nn \baselineskip
+       {
 %    \end{macrocode}
 % Here we use stack top shift + stack bottom shift, which sounds reasonable.
 %    \begin{macrocode}
         \um_stack_num_up:N \scriptstyle
         + \um_stack_denom_down:N \scriptstyle
-      }
+       }
 %    \end{macrocode}
 % Here we use the minimum stack gap.
 %    \begin{macrocode}
@@ -5632,43 +6103,51 @@ end
       \c_math_toggle_token
       \hfil
       \crcr
-    }
+     }
 %</XE>
 %    \end{macrocode}
 % The roots need a complete rework.
 %    \begin{macrocode}
-  \um_check_and_fix_luatex:NNnnn \plainroot@ \cs_set_nopar:Npn { #1 \of #2 } {
-    \setbox \rootbox \hbox {
+  \um_check_and_fix_luatex:NNnnn \plainroot@ \cs_set_nopar:Npn { #1 \of #2 }
+   {
+    \setbox \rootbox \hbox
+     {
       $ \m@th \scriptscriptstyle { #1 } $
-    }
+     }
     \mathchoice
       { \r@@t \displaystyle      { #2 } }
       { \r@@t \textstyle         { #2 } }~
       { \r@@t \scriptstyle       { #2 } }
       { \r@@t \scriptscriptstyle { #2 } }
     \egroup
-  } {
-    \bool_if:nTF {
+   }
+   {
+    \bool_if:nTF
+     {
       \int_compare_p:nNn { \uproot@ } = { \c_zero }
       && \int_compare_p:nNn { \leftroot@ } = { \c_zero }
-    } {
+     }
+     {
       \luatexUroot \l_um_radical_sqrt_tl { #1 } { #2 }
-    } {
-      \hbox_set:Nn \rootbox {
+     }
+     {
+      \hbox_set:Nn \rootbox
+       {
         \c_math_toggle_token
         \m@th
         \scriptscriptstyle { #1 }
         \c_math_toggle_token
-      }
+       }
       \mathchoice
         { \r@@t \displaystyle      { #2 } }
         { \r@@t \textstyle         { #2 } }
         { \r@@t \scriptstyle       { #2 } }
         { \r@@t \scriptscriptstyle { #2 } }
-    }
+     }
     \c_group_end_token
-  }
-  \um_check_and_fix:NNnnnn \r@@t \cs_set_nopar:Npn { #1 #2 } {
+   }
+  \um_check_and_fix:NNnnnn \r@@t \cs_set_nopar:Npn { #1 #2 }
+   {
     \setboxz@h { $ \m@th #1 \sqrtsign { #2 } $ }
     \dimen@ \ht\z@
     \advance \dimen@ -\dp\z@
@@ -5680,69 +6159,82 @@ end
     \mkern -10mu
     \mkern \leftroot@ mu
     \boxz@
-  } {
-    \hbox_set:Nn \l_tmpa_box {
+   }
+   {
+    \hbox_set:Nn \l_tmpa_box
+     {
       \c_math_toggle_token
       \m@th
       #1
       \mskip \uproot@ mu
       \c_math_toggle_token
-    }
-    \luatexUroot \l_um_radical_sqrt_tl {
-      \box_move_up:nn { \box_wd:N \l_tmpa_box } {
-        \hbox:n {
+     }
+    \luatexUroot \l_um_radical_sqrt_tl
+     {
+      \box_move_up:nn { \box_wd:N \l_tmpa_box }
+       {
+        \hbox:n
+         {
           \c_math_toggle_token
           \m@th
           \mkern -\leftroot@ mu
           \box_use:N \rootbox
           \mkern \leftroot@ mu
           \c_math_toggle_token
-        }
-      }
-    } {
-      #2
-    }
-  } {
-    \hbox_set:Nn \l_tmpa_box {
+         }
+       }
+     }
+     { #2 }
+   }
+   {
+    \hbox_set:Nn \l_tmpa_box
+     {
       \c_math_toggle_token
       \m@th
       #1
       \sqrtsign { #2 }
       \c_math_toggle_token
-    }
-    \hbox_set:Nn \l_tmpb_box {
+     }
+    \hbox_set:Nn \l_tmpb_box
+     {
       \c_math_toggle_token
       \m@th
       #1
       \mskip \uproot@ mu
       \c_math_toggle_token
-    }
+     }
     \mkern -\leftroot@ mu
-    \um_mathstyle_scale:Nnn #1 { \kern } {
+    \um_mathstyle_scale:Nnn #1 { \kern }
+     {
       \fontdimen 63 \l_um_font
-    }
-    \box_move_up:nn {
+     }
+    \box_move_up:nn
+     {
       \box_wd:N \l_tmpb_box
       + (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
       * \number \fontdimen 65 \l_um_font / 100
-    } {
+     } 
+     {
       \box_use:N \rootbox
-    }
-    \um_mathstyle_scale:Nnn #1 { \kern } {
+     }
+    \um_mathstyle_scale:Nnn #1 { \kern }
+     {
       \fontdimen 64 \l_um_font
-    }
+     }
     \mkern \leftroot@ mu
     \box_use_clear:N \l_tmpa_box
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 % \paragraph{\pkg{amsopn}}
 % This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
 %    \begin{macrocode}
 %<*XE>
-\AtEndOfPackageFile * {amsopn} {
-  \cs_set:Npn \newmcodes@ {
+\AtEndOfPackageFile * {amsopn}
+ {
+  \cs_set:Npn \newmcodes@
+   {
     \mathcode`\'39\scan_stop:
     \mathcode`\*42\scan_stop:
     \mathcode`\."613A\scan_stop:
@@ -5752,8 +6244,8 @@ end
     \mathcode`\-45\scan_stop:
     \mathcode`\/47\scan_stop:
     \mathcode`\:"603A\scan_stop:
-  }
-}
+   }
+ }
 %</XE>
 %    \end{macrocode}
 % \paragraph{Symbols}
@@ -5767,48 +6259,61 @@ end
 %    \end{macrocode}
 % \paragraph{Accents}
 %    \begin{macrocode}
-\cs_new_protected_nopar:Nn \um_setup_accents: {
-  \cs_gset_protected_nopar:Npx \widehat {
+\cs_new_protected_nopar:Nn \um_setup_accents:
+ {
+  \cs_gset_protected_nopar:Npx \widehat
+   {
     \um_accent:nnn {} { \um_symfont_tl } { "0302 }
-  }
-  \cs_gset_protected_nopar:Npx \widetilde {
+   }
+  \cs_gset_protected_nopar:Npx \widetilde
+   {
     \um_accent:nnn {} { \um_symfont_tl } { "0303 }
-  }
-  \cs_gset_protected_nopar:Npx \overleftarrow {
+   }
+  \cs_gset_protected_nopar:Npx \overleftarrow
+   {
     \um_accent:nnn {} { \um_symfont_tl } { "20D6 }
-  }
-  \cs_gset_protected_nopar:Npx \overrightarrow {
+   }
+  \cs_gset_protected_nopar:Npx \overrightarrow
+   {
     \um_accent:nnn {} { \um_symfont_tl } { "20D7 }
-  }
-  \cs_gset_protected_nopar:Npx \overleftrightarrow {
+   }
+  \cs_gset_protected_nopar:Npx \overleftrightarrow
+   {
     \um_accent:nnn {} { \um_symfont_tl } { "20E1 }
-  }
-  \cs_gset_protected_nopar:Npx \wideutilde {
+   }
+  \cs_gset_protected_nopar:Npx \wideutilde
+   {
     \um_accent:nnn {bottom} { \um_symfont_tl } { "0330 }
-  }
-  \cs_gset_protected_nopar:Npx \underrightharpoondown {
+   }
+  \cs_gset_protected_nopar:Npx \underrightharpoondown
+   {
     \um_accent:nnn {bottom} { \um_symfont_tl } { "20EC }
-  }
-  \cs_gset_protected_nopar:Npx \underleftharpoondown {
+   }
+  \cs_gset_protected_nopar:Npx \underleftharpoondown
+   {
     \um_accent:nnn {bottom} { \um_symfont_tl } { "20ED }
-  }
-  \cs_gset_protected_nopar:Npx \underleftarrow {
+   }
+  \cs_gset_protected_nopar:Npx \underleftarrow
+   {
     \um_accent:nnn {bottom} { \um_symfont_tl } { "20EE }
-  }
-  \cs_gset_protected_nopar:Npx \underrightarrow {
+   }
+  \cs_gset_protected_nopar:Npx \underrightarrow
+   {
     \um_accent:nnn {bottom} { \um_symfont_tl } { "20EF }
-  }
-  \cs_gset_protected_nopar:Npx \underleftrightarrow {
+   }
+  \cs_gset_protected_nopar:Npx \underleftrightarrow
+   {
     \um_accent:nnn {bottom} { \um_symfont_tl } { "034D }
-  }
-}
+   }
+ }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \cs_set_eq:NN \um_text_slash: \slash
-\cs_set_protected:Npn \slash {
+\cs_set_protected:Npn \slash
+ {
   \mode_if_math:TF {\mathslash} {\um_text_slash:}
-}
+ }
 %    \end{macrocode}
 %
 % \paragraph{\cs{not}}
@@ -5829,27 +6334,33 @@ end
 %    \begin{macrocode}
 \tl_new:N \l_not_token_name_tl
 
-\cs_new:Npn \not_newnot:N #1 {
+\cs_new:Npn \not_newnot:N #1
+ {
    \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
-   \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl } {
+   \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl }
+    {
      \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
-   }
-   \cs_if_exist:cTF { n \l_not_token_name_tl } {
+    }
+   \cs_if_exist:cTF { n \l_not_token_name_tl }
+    {
      \use:c { n \l_not_token_name_tl }
-   } {
-     \cs_if_exist:cTF { not \l_not_token_name_tl } {
+    }
+    {
+     \cs_if_exist:cTF { not \l_not_token_name_tl }
+      {
        \use:c { not \l_not_token_name_tl }
-     } {
+      }
+      {
        \not_oldnot: #1 %\l_not_token_name_tl
-     }
-   }
-}
+      }
+    }
+ }
 
 \cs_set_eq:NN \not_oldnot: \not
 \cs_set_eq:NN \not \not_newnot:N
 
-\cs_new_protected_nopar:Nn \um_setup_negations: {
-
+\cs_new_protected_nopar:Nn \um_setup_negations:
+ {
   \cs_gset:cpn { not= }    { \neq }
   \cs_gset:cpn { not< }    { \nless }
   \cs_gset:cpn { not> }    { \ngtr }
@@ -5860,27 +6371,29 @@ end
   \cs_gset:Npn  \nge       { \ngeq }
   \cs_gset:Npn  \ngreater  { \ngtr }
   \cs_gset:Npn  \nforksnot { \forks }
-}
+ }
 %    \end{macrocode}
 %
 % \paragraph{\pkg{mathtools}}
 % \pkg{mathtools}’s |\cramped| command and others that make use of its internal version use an incorrect font dimension.
 %
 %    \begin{macrocode}
-\AtEndOfPackageFile * { mathtools } {
+\AtEndOfPackageFile * { mathtools }
+ {
 %<*XE>
     \newfam \g_um_empty_fam
     \um_check_and_fix:NNnnn
         \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 }
-    {
-      \sbox \z@ {
+     {
+      \sbox \z@
+       {
         $
         \m@th
         #1
         \nulldelimiterspace = \z@
         \radical \z@ { #2 }
         $
-      }
+       }
       \ifx #1 \displaystyle
         \dimen@ = \fontdimen 8 \textfont 3
         \advance \dimen@ .25 \fontdimen 5 \textfont 2
@@ -5900,13 +6413,14 @@ end
       \advance \dimen@ -\ht\z@
       \ht\z@ = -\dimen@
       \box\z@
-    }
+     }
 %    \end{macrocode}
 % The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
 % Note we used `\verb|\XeTeXradical|' with a newly-allocated empty family to make sure that the radical rule width is not set.
 %    \begin{macrocode}
-    {
-      \hbox_set:Nn \l_tmpa_box {
+     {
+      \hbox_set:Nn \l_tmpa_box
+       {
         \color@setgroup
         \c_math_toggle_token
         \m@th
@@ -5915,32 +6429,37 @@ end
         \XeTeXradical \g_um_empty_fam \c_zero { #2 }
         \c_math_toggle_token
         \color@endgroup
-      }
-      \box_set_ht:Nn \l_tmpa_box {
+       }
+      \box_set_ht:Nn \l_tmpa_box
+       {
         \box_ht:N \l_tmpa_box
 %    \end{macrocode}
 % Here we use the radical vertical gap.
 %    \begin{macrocode}
         - \um_radical_vgap:N #1
-      }
+       }
       \box_use_clear:N \l_tmpa_box
-    }
+     }
 %</XE>
 %    \end{macrocode}
+%
 % \begin{macro}{\overbracket}
 % \begin{macro}{\underbracket}
 %   \pkg{mathtools}’s |\overbracket| and |\underbracket| take optional
 %   arguments and are defined in terms of rules, so we keep them, and rename
 %   ours to |\Uoverbracket| and |\Uunderbracket|.
 %    \begin{macrocode}
-\AtEndOfPackageFile * { mathtools } {
-    \let\MToverbracket =\overbracket
-    \let\MTunderbracket=\underbracket
+\AtEndOfPackageFile * { mathtools }
+ {
+    \cs_set_eq:NN \MToverbracket  \overbracket
+    \cs_set_eq:NN \MTunderbracket \underbracket
 
-    \AtBeginDocument {
-        \msg_warning:nn { unicode-math } { mathtools-overbracket }
+    \AtBeginDocument
+     {
+      \msg_warning:nn { unicode-math } { mathtools-overbracket }
 
-	\def\downbracketfill#1#2{%
+	\def\downbracketfill#1#2
+	 {%
 %    \end{macrocode}
 %   Original definition used the height of |\braceld| which is not available
 %   with Unicode fonts, so we are hard coding the $5/18$ex suggested by
@@ -5950,19 +6469,20 @@ end
             \downbracketend{#1}{#2}
             \leaders \vrule \@height #1 \@depth \z@ \hfill
             \downbracketend{#1}{#2}%
-        }
-	\def\upbracketfill#1#2{%
+     }
+	\def\upbracketfill#1#2
+	 {%
             \edef\l_MT_bracketheight_fdim{.27ex}%
             \upbracketend{#1}{#2}
             \leaders \vrule \@height \z@ \@depth #1 \hfill
             \upbracketend{#1}{#2}%
-        }
+     }
 	\let\Uoverbracket =\overbracket
 	\let\Uunderbracket=\underbracket
         \let\overbracket  =\MToverbracket
         \let\underbracket =\MTunderbracket
-    }
-}
+     }
+ }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -5982,7 +6502,7 @@ end
   \NewDocumentCommand \coloneqq { } { \coloneq }
   \NewDocumentCommand \Coloneqq { } { \Coloneq }
   \NewDocumentCommand \eqqcolon { } { \eqcolon }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -6001,7 +6521,8 @@ end
 %   combinations.  Fortunately there are no name clashes, so we can just
 %   overwrite their definitions.
 %    \begin{macrocode}
-\AtEndOfPackageFile * { colonequals } {
+\AtEndOfPackageFile * { colonequals }
+ {
   \msg_warning:nn { unicode-math } { colonequals }
   \RenewDocumentCommand \ratio { } { \mathratio }
   \RenewDocumentCommand \coloncolon { } { \Colon }
@@ -6009,7 +6530,7 @@ end
   \RenewDocumentCommand \colonequals { } { \coloneq }
   \RenewDocumentCommand \equalscolon { } { \eqcolon }
   \RenewDocumentCommand \coloncolonequals { } { \Coloneq }
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
