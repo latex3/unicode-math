@@ -18,18 +18,6 @@ the conditions of the LaTeX Project Public License, version 1.3c or higher
 
 This work is "maintained" by Will Robertson.
 \endpreamble
-\def\MetaPrefix{--}
-\declarepreamble\luapreamble
-Copyright 2006-2013   Will Robertson <will.robertson@latex-project.org>
-Copyright 2010-2013 Philipp Stephani <st_philipp@yahoo.de>
-Copyright 2012-2013     Khaled Hosny <khaledhosny@eglug.org>
-
-This package is free software and may be redistributed and/or modified under
-the conditions of the LaTeX Project Public License, version 1.3c or higher
-(your choice): <http://www.latex-project.org/lppl/>.
-
-This work is "maintained" by Will Robertson.
-\endpreamble
 \nopostamble
 \askforoverwritefalse
 \let\MetaPrefix\DoubleperCent
@@ -45,11 +33,6 @@ This work is "maintained" by Will Robertson.
 \generate{\file{unicode-math-luatex.sty}{
   \from{unicode-math.dtx}{package,LU}
 }}
-\def\MetaPrefix{--}
-\usepreamble\luapreamble
-\generate{\file{unicode-math.lua}{\from{unicode-math.dtx}{lua}}}
-\let\MetaPrefix\DoubleperCent
-\nopreamble
 \def\tempa{plain}
 \ifx\tempa\fmtname\endgroup\expandafter\bye\fi
 \generate{\file{dtx-style.sty}{\from{\jobname.dtx}{dtx-style}}}
@@ -1566,76 +1549,6 @@ This work is "maintained" by Will Robertson.
 % (Error messages and warning definitions go here from the |msg| chunk
 %  defined in \secref[vref]{codemsg}.)
 %
-% \section{\Hologo{LuaLaTeX} module}
-%
-%    \begin{macrocode}
-%<*lua>
-%    \end{macrocode}
-%
-% We create a \pkg{luatexbase} module that contains Lua functions for use with \hologo{LuaLaTeX}.
-%    \begin{macrocode}
-local err, warn, info, log = luatexbase.provides_module({
-  name        = "unicode-math",
-  date        = "2013/05/04",
-  version     = 0.3,
-  description = "Unicode math typesetting for LuaLaTeX",
-  author      = "Khaled Hosny, Will Robertson, Philipp Stephani",
-  licence     = "LPPL v1.3+"
-})
-%    \end{macrocode}
-% \LuaTeX\ does not provide interface to accessing
-% \texttt{(Script)ScriptPercentScaleDown} math constants, so we
-% emulate \XeTeX\ behaviour by setting \cs{fontdimen10} and
-% \cs{fontdimen11}.
-% 
-% |luaotfload| now provides these, they should be removed in the
-% next version.
-%    \begin{macrocode}
-if luaotfload and luaotfload.module and luaotfload.module.version < 2 then
-  local function set_sscale_dimens(fontdata)
-    local mc = fontdata.MathConstants
-    if mc then
-      fontdata.parameters[10] = mc.ScriptPercentScaleDown or 70
-      fontdata.parameters[11] = mc.ScriptScriptPercentScaleDown or 50
-    end
-  end
-  luatexbase.add_to_callback("luaotfload.patch_font", set_sscale_dimens, "unicode_math.set_sscale_dimens")
-%    \end{macrocode}
-%
-% Cambria Math has too small \texttt{DisplayOperatorMinHeight} constant, so we
-% patch it to amore acceptable value.
-%
-%    \begin{macrocode}
-  local function patch_cambria_domh(fontdata)
-    local mc = fontdata.MathConstants
-    if mc and fontdata.psname == "CambriaMath" then
-      -- keeping backward compatibility with luaotfload v1
-      local units_per_em
-      local metadata = fontdata.shared and fontdata.shared.rawdata.metadata
-      if metadata and metadata.units_per_em then
-        units_per_em = metadata.units_per_em
-      elseif fontdata.parameters.units then
-        units_per_em = fontdata.parameters.units
-      elseif fontdata.units then
-        units_per_em = fontdata.units
-      else
-        units_per_em = 1000
-      end
-      local sz = fontdata.parameters.size or fontdata.size
-      local mh = 2800 / units_per_em * sz
-      if mc.DisplayOperatorMinHeight < mh then
-        mc.DisplayOperatorMinHeight = mh
-      end
-    end
-  end
-  luatexbase.add_to_callback("luaotfload.patch_font", patch_cambria_domh, "cambria.domh")
-end
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</lua>
-%    \end{macrocode}
-%
 % \section{Bifurcation}
 %
 % And here the split begins. Most of the code is still shared, but
@@ -1655,10 +1568,8 @@ end
 %
 %    \begin{macrocode}
 %<*LU>
-\RequirePackage { lualatex-math }  [ 2011/08/07 ]
-\RequirePackage { luatexbase }
-\RequirePackage { luaotfload }     [ 2010/11/26 ]
-\RequireLuaModule { unicode-math } [ 2012/04/23 ]
+\RequirePackage{luaotfload}   [2014/05/18]
+\RequirePackage{lualatex-math}[2011/08/07]
 %</LU>
 %    \end{macrocode}
 %
