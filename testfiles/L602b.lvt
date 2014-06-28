@@ -1,6 +1,5 @@
 \input{umtest-preamble}
 
-\usepackage{amsmath}
 \usepackage{unicode-math}
 
 \setmathfont{xits-math.otf}
@@ -9,7 +8,7 @@
 
 \NewDocumentCommand \mathstylename { } {
   \mathtt {
-    \prg_case_int:nnn { \luatexmathstyle } {
+    \int_case:nnF { \luatexmathstyle } {
       { \displaystyle } { \token_to_str:N \displaystyle }
       { \luatexcrampeddisplaystyle } { \token_to_str:N \crampeddisplaystyle }
       { \textstyle } { \token_to_str:N \textstyle }
@@ -33,13 +32,5 @@ $\mathstylename \over \mathstylename$
 $\luatexUstack{\mathstylename \over \mathstylename}$
 
 $\frac{\mathstylename}{\mathstylename}$
-
-$\dfrac{\mathstylename}{\mathstylename}$
-
-$\tfrac{\mathstylename}{\mathstylename}$
-
-$\binom{\mathstylename}{\mathstylename}$
-
-$\genfrac{/}{)}{}{}{\mathstylename}{\mathstylename}$
 
 \end{document}

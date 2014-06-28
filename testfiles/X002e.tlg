@@ -1,0 +1,238 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks20
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 7.30006pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 6.00015pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 7.29984pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 5.99995pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 44.0862fil
+...\write-{}
+...\glue(\topskip) 10.0
+...\hbox(0.0+0.0)x227.62207, glue set 76.0474fil
+....\hbox(0.0+0.0)x15.0
+....\hbox(0.0+0.0)x136.57463, glue set 68.2873fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\baselineskip) 5.25684
+...\hbox(6.74316+0.07813)x155.61035, shifted 36.00586
+....\l_fontspec_font Α
+....\l_fontspec_font Β
+....\l_fontspec_font Γ
+....\l_fontspec_font Δ
+....\l_fontspec_font Ε
+....\l_fontspec_font Ζ
+....\l_fontspec_font Η
+....\l_fontspec_font Θ
+....\l_fontspec_font ϴ
+....\l_fontspec_font Ι
+....\l_fontspec_font Κ
+....\l_fontspec_font Λ
+....\l_fontspec_font Μ
+....\l_fontspec_font Ν
+....\l_fontspec_font Ξ
+....\l_fontspec_font Ο
+....\l_fontspec_font Π
+....\l_fontspec_font Ρ
+....\l_fontspec_font Σ
+....\l_fontspec_font Τ
+....\l_fontspec_font Υ
+....\l_fontspec_font Φ
+....\l_fontspec_font Χ
+....\l_fontspec_font Ψ
+....\l_fontspec_font Ω
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 4.91016
+...\hbox(7.01172+2.17285)x167.96875, shifted 29.82666
+....\l_fontspec_font α
+....\l_fontspec_font β
+....\l_fontspec_font γ
+....\l_fontspec_font δ
+....\l_fontspec_font ε
+....\l_fontspec_font ϵ
+....\l_fontspec_font ζ
+....\l_fontspec_font η
+....\l_fontspec_font θ
+....\l_fontspec_font ϑ
+....\l_fontspec_font ι
+....\l_fontspec_font κ
+....\l_fontspec_font ϰ
+....\l_fontspec_font λ
+....\l_fontspec_font μ
+....\l_fontspec_font ν
+....\l_fontspec_font ξ
+....\l_fontspec_font ο
+....\l_fontspec_font π
+....\l_fontspec_font ϖ
+....\l_fontspec_font ρ
+....\l_fontspec_font ϱ
+....\l_fontspec_font ς
+....\l_fontspec_font σ
+....\l_fontspec_font τ
+....\l_fontspec_font υ
+....\l_fontspec_font φ
+....\l_fontspec_font ϕ
+....\l_fontspec_font χ
+....\l_fontspec_font ψ
+....\l_fontspec_font ω
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.08398
+...\hbox(6.74316+0.07813)x155.61035, shifted 36.00586
+....\l_fontspec_font Α
+....\l_fontspec_font Β
+....\l_fontspec_font Γ
+....\l_fontspec_font Δ
+....\l_fontspec_font Ε
+....\l_fontspec_font Ζ
+....\l_fontspec_font Η
+....\l_fontspec_font Θ
+....\l_fontspec_font ϴ
+....\l_fontspec_font Ι
+....\l_fontspec_font Κ
+....\l_fontspec_font Λ
+....\l_fontspec_font Μ
+....\l_fontspec_font Ν
+....\l_fontspec_font Ξ
+....\l_fontspec_font Ο
+....\l_fontspec_font Π
+....\l_fontspec_font Ρ
+....\l_fontspec_font Σ
+....\l_fontspec_font Τ
+....\l_fontspec_font Υ
+....\l_fontspec_font Φ
+....\l_fontspec_font Χ
+....\l_fontspec_font Ψ
+....\l_fontspec_font Ω
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 4.91016
+...\hbox(7.01172+2.17285)x167.96875, shifted 29.82666
+....\l_fontspec_font α
+....\l_fontspec_font β
+....\l_fontspec_font γ
+....\l_fontspec_font δ
+....\l_fontspec_font ε
+....\l_fontspec_font ϵ
+....\l_fontspec_font ζ
+....\l_fontspec_font η
+....\l_fontspec_font θ
+....\l_fontspec_font ϑ
+....\l_fontspec_font ι
+....\l_fontspec_font κ
+....\l_fontspec_font ϰ
+....\l_fontspec_font λ
+....\l_fontspec_font μ
+....\l_fontspec_font ν
+....\l_fontspec_font ξ
+....\l_fontspec_font ο
+....\l_fontspec_font π
+....\l_fontspec_font ϖ
+....\l_fontspec_font ρ
+....\l_fontspec_font ϱ
+....\l_fontspec_font ς
+....\l_fontspec_font σ
+....\l_fontspec_font τ
+....\l_fontspec_font υ
+....\l_fontspec_font φ
+....\l_fontspec_font ϕ
+....\l_fontspec_font χ
+....\l_fontspec_font ψ
+....\l_fontspec_font ω
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(.aux)

@@ -1,0 +1,251 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count305
+\scratchdimen=\dimen270
+\scratchbox=\box258
+\nofMPsegments=\count306
+\nofMParguments=\count307
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count308
+\MPscratchDim=\dimen271
+\MPnumerator=\count309
+\makeMPintoPDFobject=\count310
+\everyMPtoPDFconversion=\toks25
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 10.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 7.30006pt on input line 10.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 6.00015pt on input line 10.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 10.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 7.29984pt on input line 10.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 5.99995pt on input line 10.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 37.4804fil
+...\write-{}
+...\glue(\topskip) 0.0
+...\hbox(50.0+1.8897)x227.62207, glue set 109.2920fil
+....\hbox(0.0+0.0)x15.0
+....\vbox(50.0+1.8897)x50.0, glue set 21.0694fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(28.93057+1.8897)x50.0, glue set 8.738fil
+......\hbox(0.0+0.0)x0.0
+......\hbox(28.93057+1.8897)x41.262
+.......\pdfsave
+.......\pdfsetmatrix{3 0 0 3}
+.......\hbox(9.64352+0.6299)x0.0, glue set - 13.754fil
+........\hbox(9.64352+0.6299)x13.754
+.........\mathon
+.........\hbox(9.64352+0.6299)x13.754
+..........\hbox(9.64352+0.6299)x13.754
+...........\kern0.6494
+...........\hbox(3.08206+0.06152)x4.0518, shifted -5.62572
+............\EU2/CambriaMath(0)/m/n/6.00006 𝑎
+...........\kern-3.12494
+...........\hbox(9.20898+0.41504)x6.56738, shifted 0.21486
+............\l_fontspec_font √
+...........\vbox(9.64352+0.07813)x5.61035
+............\kern0.6494
+............\rule(0.6494+0.0)x*
+............\kern1.3623
+............\hbox(6.98242+0.07813)x5.61035
+.............\l_fontspec_font 𝑏
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+.......\pdfrestore
+......\penalty 10000
+......\glue(\parfillskip) 0.0 plus 1.0fil
+......\glue(\rightskip) 0.0
+....\glue 3.33 plus 1.665 minus 1.11
+....\vbox(50.0+1.8897)x50.0, glue set 7.2104fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(42.7896+1.8897)x50.0, glue set 8.738fil
+......\hbox(0.0+0.0)x0.0
+......\hbox(42.7896+1.8897)x41.262
+.......\pdfsave
+.......\pdfsetmatrix{3 0 0 3}
+.......\hbox(14.2632+0.6299)x0.0, glue set - 13.754fil
+........\hbox(14.2632+0.6299)x13.754
+.........\mathon
+.........\hbox(14.2632+0.6299)x13.754
+..........\hbox(14.2632+0.6299)x13.754
+...........\kern0.6494
+...........\hbox(8.63748+0.0)x4.0518, shifted -5.62572
+............\hbox(3.08206+0.06152)x4.0518, shifted -5.55542
+.............\mathon
+.............\kern 0.0
+.............\hbox(3.08206+0.06152)x4.0518
+..............\mathon
+..............\EU2/CambriaMath(0)/m/n/6.00006 𝑎
+..............\mathoff
+.............\kern 0.0
+.............\mathoff
+...........\kern-3.12494
+...........\hbox(9.20898+0.41504)x6.56738, shifted 0.21486
+............\l_fontspec_font √
+...........\vbox(9.64352+0.07813)x5.61035
+............\kern0.6494
+............\rule(0.6494+0.0)x*
+............\kern1.3623
+............\hbox(6.98242+0.07813)x5.61035
+.............\l_fontspec_font 𝑏
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+.......\pdfrestore
+......\penalty 10000
+......\glue(\parfillskip) 0.0 plus 1.0fil
+......\glue(\rightskip) 0.0
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\lineskip) 1.0
+...\hbox(50.0+1.8897)x227.62207, glue set 109.2920fil
+....\hbox(0.0+0.0)x15.0
+....\vbox(50.0+1.8897)x50.0, glue set 21.0694fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(28.93057+1.8897)x50.0, glue set 8.738fil
+......\hbox(0.0+0.0)x0.0
+......\hbox(28.93057+1.8897)x41.262
+.......\pdfsave
+.......\pdfsetmatrix{3 0 0 3}
+.......\hbox(9.64352+0.6299)x0.0, glue set - 13.754fil
+........\hbox(9.64352+0.6299)x13.754
+.........\mathon
+.........\hbox(9.64352+0.6299)x13.754
+..........\hbox(9.64352+0.6299)x13.754
+...........\kern0.6494
+...........\hbox(3.08206+0.06152)x4.0518, shifted -5.62572
+............\mathon
+............\kern -5.55542
+............\hbox(3.08206+0.06152)x4.0518
+.............\mathon
+.............\EU2/CambriaMath(0)/m/n/6.00006 𝑎
+.............\mathoff
+............\kern 5.55542
+............\mathoff
+...........\kern-3.12494
+...........\hbox(9.20898+0.41504)x6.56738, shifted 0.21486
+............\l_fontspec_font √
+...........\vbox(9.64352+0.07813)x5.61035
+............\kern0.6494
+............\rule(0.6494+0.0)x*
+............\kern1.3623
+............\hbox(6.98242+0.07813)x5.61035
+.............\l_fontspec_font 𝑏
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+.......\pdfrestore
+......\penalty 10000
+......\glue(\parfillskip) 0.0 plus 1.0fil
+......\glue(\rightskip) 0.0
+....\glue 3.33 plus 1.665 minus 1.11
+....\vbox(50.0+1.8897)x50.0, glue set 7.2104fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\hbox(42.7896+1.8897)x50.0, glue set 8.738fil
+......\hbox(0.0+0.0)x0.0
+......\hbox(42.7896+1.8897)x41.262
+.......\pdfsave
+.......\pdfsetmatrix{3 0 0 3}
+.......\hbox(14.2632+0.6299)x0.0, glue set - 13.754fil
+........\hbox(14.2632+0.6299)x13.754
+.........\mathon
+.........\hbox(14.2632+0.6299)x13.754
+..........\hbox(14.2632+0.6299)x13.754
+...........\kern0.6494
+...........\hbox(8.63748+0.0)x4.0518, shifted -5.62572
+............\hbox(3.08206+0.06152)x4.0518, shifted -5.55542
+.............\mathon
+.............\kern -5.55542
+.............\hbox(3.08206+0.06152)x4.0518
+..............\mathon
+..............\EU2/CambriaMath(0)/m/n/6.00006 𝑎
+..............\mathoff
+.............\kern 5.55542
+.............\mathoff
+...........\kern-3.12494
+...........\hbox(9.20898+0.41504)x6.56738, shifted 0.21486
+............\l_fontspec_font √
+...........\vbox(9.64352+0.07813)x5.61035
+............\kern0.6494
+............\rule(0.6494+0.0)x*
+............\kern1.3623
+............\hbox(6.98242+0.07813)x5.61035
+.............\l_fontspec_font 𝑏
+.........\mathoff
+........\glue 0.0 plus 1.0fil minus 1.0fil
+.......\pdfrestore
+......\penalty 10000
+......\glue(\parfillskip) 0.0 plus 1.0fil
+......\glue(\rightskip) 0.0
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(.aux)

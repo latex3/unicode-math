@@ -1,0 +1,601 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks20
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+LaTeX Font Info:    Font shape `EU2/XITSMath(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 6.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/XITSMath(1)/m/n' will be
+(Font)              scaled to size 7.5001pt on input line 6.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/XITSMath(1)/m/n' will be
+(Font)              scaled to size 6.00015pt on input line 6.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/XITSMath(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 6.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/XITSMath(2)/m/n' will be
+(Font)              scaled to size 7.49988pt on input line 6.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/XITSMath(2)/m/n' will be
+(Font)              scaled to size 5.99995pt on input line 6.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | fonts : loading '/Users/will/Library/Fonts/Linux Libertine/LinLiber
+tine_Re-4.4.1.otf', hash 'linlibertine-re-4-4' :
+luaotfload | fonts : loading done :
+luaotfload | fonts : file size: 1089596 :
+luaotfload | load : loading the Adobe glyph list
+luaotfload | fonts : fixing kernclass table of lookup 'pp_l_2_s' :
+luaotfload | fonts : saving '/Users/will/Library/Fonts/Linux Libertine/LinLibert
+ine_Re-4.4.1.otf' in cache :(save: /Users/will/Library/texlive/2014/texmf-var/lu
+atex-cache/generic/fonts/otf/linlibertine-re-4-4.lua)(save: /Users/will/Library/
+texlive/2014/texmf-var/luatex-cache/generic/fonts/otf/linlibertine-re-4-4.luc)
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 35 (LinLibertineO) defines no feature for script math
+luaotfload: no font with id 35
+luaotfload: font no 35 (LinLibertineO) defines feature cpsp for script latn
+*************************************************
+* fontspec warning: "script-not-exist-latn"
+* 
+* Font 'LinuxLibertineO' does not contain script 'Math'.
+* 'Latin' script used instead.
+*************************************************
+luaotfload: font no 35 (LinLibertineO) defines feature cpsp for script latn
+\g__fontspec_family_Linux Libertine O_int=\count299
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | fonts : loading '/Users/will/Library/Fonts/Linux Libertine/LinLiber
+tine_Bd-4.1.0.otf', hash 'linlibertine-bd-4-1' :
+luaotfload | fonts : loading done :
+luaotfload | fonts : file size: 955076 :
+luaotfload | fonts : fixing kernclass table of lookup 'pp_l_2_s' :
+luaotfload | fonts : saving '/Users/will/Library/Fonts/Linux Libertine/LinLibert
+ine_Bd-4.1.0.otf' in cache :(save: /Users/will/Library/texlive/2014/texmf-var/lu
+atex-cache/generic/fonts/otf/linlibertine-bd-4-1.lua)(save: /Users/will/Library/
+texlive/2014/texmf-var/luatex-cache/generic/fonts/otf/linlibertine-bd-4-1.luc)
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 35 (LinLibertineO) defines feature smcp for script latn with
+language dflt
+luaotfload: font no 35 (LinLibertineO) defines feature smcp for script latn with
+language dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 35 (LinLibertineO) does not define feature ssty for script l
+atn with language dflt
+luaotfload: no font with id 35
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScript' (+ssty) not available for font
+* 'LinuxLibertineO' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 35 (LinLibertineO) defines feature smcp for script latn with
+language dflt
+luaotfload: font no 35 (LinLibertineO) does not define feature ssty for script l
+atn with language dflt
+luaotfload: no font with id 35
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScript' (+ssty) not available for font
+* 'LinuxLibertineO' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 35 (LinLibertineO) defines feature smcp for script latn with
+language dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 35 (LinLibertineO) does not define feature ssty for script l
+atn with language dflt
+luaotfload: no font with id 35
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScriptScript' (+ssty) not available for font
+* 'LinuxLibertineO' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 35 (LinLibertineO) defines feature smcp for script latn with
+language dflt
+luaotfload: font no 35 (LinLibertineO) does not define feature ssty for script l
+atn with language dflt
+luaotfload: no font with id 35
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScriptScript' (+ssty) not available for font
+* 'LinuxLibertineO' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 35 (LinLibertineO) defines feature smcp for script latn with
+language dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 36 (LinLibertineOB) defines feature smcp for script latn wit
+h language dflt
+luaotfload: font no 36 (LinLibertineOB) defines feature smcp for script latn wit
+h language dflt
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'LinuxLibertineO(0)' created for font 'Linux Libertine O' with
+. options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7.5-10,Font=Linux
+. Libertine O,Style=MathScript},{Size=-7.5,Font=Linux Libertine
+. O,Style=MathScriptScript}}].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->"LinuxLibertineO:mode=base;script=latn;language=DFLT;"<7.5-10>"LinuxLiber
+tineO:mode=base;script=latn;language=DFLT;"<-7.5>"LinuxLibertineO:mode=base;scri
+pt=latn;language=DFLT;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. <10->"LinuxLibertineO:mode=base;script=latn;language=DFLT;+smcp;"<7.5-10>"Linu
+xLibertineO:mode=base;script=latn;language=DFLT;+smcp;"<-7.5>"LinuxLibertineO:mo
+de=base;script=latn;language=DFLT;+smcp;"
+. and font adjustment code:
+. 
+. 
+. * 'bold' with NFSS spec.:
+. <->"LinuxLibertineO/B:mode=base;script=latn;language=DFLT;"
+. 
+. * 'bold small caps' with NFSS spec.:
+. <->"LinuxLibertineO/B:mode=base;script=latn;language=DFLT;+smcp;"
+. and font adjustment code:
+. 
+.................................................
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload: font no 37 (LinLibertineO) defines no feature for script math
+luaotfload: no font with id 37
+\symum_fam1=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `um_fam1' in version `normal'
+(Font)                  EU2/LinuxLibertineO(0)/m/n --> EU2/LinuxLibertineO(0)/m/
+n on input line 9.
+LaTeX Font Info:    Overwriting symbol font `um_fam1' in version `bold'
+(Font)                  EU2/LinuxLibertineO(0)/m/n --> EU2/LinuxLibertineO(0)/bx
+/n on input line 9.
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | fonts : loading '/usr/local/texlive/2014/texmf-dist/fonts/opentype/
+public/libertine/LinLibertine_RI.otf', hash 'linlibertine-ri' :
+luaotfload | fonts : loading done :
+luaotfload | fonts : file size: 353408 :
+luaotfload | fonts : fixing kernclass table of lookup ''kern' Horizontal Kerning
+lookup 2 kerning class 0' :
+luaotfload | fonts : fixing kernclass table of lookup ''kern' Horizontal Kerning
+lookup 2 kerning class 1' :
+luaotfload | fonts : fixing kernclass table of lookup ''kern' Horizontal Kerning
+lookup 2 kerning class 2' :
+luaotfload | fonts : fixing kernclass table of lookup ''kern' Horizontal Kerning
+lookup 2 kerning class 3' :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of A (U+00041) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of À (U+000C0) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Á (U+000C1) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Â (U+000C2) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Ã (U+000C3) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Ä (U+000C4) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Å (U+000C5) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Ă (U+00102) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of V (U+00056) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of W (U+00057) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Y (U+00059) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of Ÿ (U+00178) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of K (U+0004B) :
+luaotfload | fonts : lookup ''kern' Horizontal Kerning lookup 2 kerning class 3'
+: ignoring further kerns of X (U+00058) :
+luaotfload | fonts : 14 succesive kerns blocked :
+luaotfload | fonts : saving '/usr/local/texlive/2014/texmf-dist/fonts/opentype/p
+ublic/libertine/LinLibertine_RI.otf' in cache :(save: /Users/will/Library/texliv
+e/2014/texmf-var/luatex-cache/generic/fonts/otf/linlibertine-ri.lua)(save: /User
+s/will/Library/texlive/2014/texmf-var/luatex-cache/generic/fonts/otf/linlibertin
+e-ri.luc)
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 38 (LinLibertineOI) defines no feature for script math
+luaotfload: no font with id 38
+luaotfload: font no 38 (LinLibertineOI) defines feature cpsp for script latn
+*************************************************
+* fontspec warning: "script-not-exist-latn"
+* 
+* Font 'LinuxLibertineOItalic' does not contain script 'Math'.
+* 'Latin' script used instead.
+*************************************************
+luaotfload: font no 38 (LinLibertineOI) defines feature cpsp for script latn
+\g__fontspec_family_Linux Libertine O Italic_int=\count300
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+.................................................
+. fontspec info: "no-font-shape"
+. 
+. Could not resolve font LinuxLibertineOItalic/B (it probably doesn't exist).
+.................................................
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 38 (LinLibertineOI) defines feature smcp for script latn wit
+h language dflt
+luaotfload: font no 38 (LinLibertineOI) defines feature smcp for script latn wit
+h language dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 38 (LinLibertineOI) does not define feature ssty for script 
+latn with language dflt
+luaotfload: no font with id 38
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScript' (+ssty) not available for font
+* 'LinuxLibertineOItalic' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 38 (LinLibertineOI) defines feature smcp for script latn wit
+h language dflt
+luaotfload: font no 38 (LinLibertineOI) does not define feature ssty for script 
+latn with language dflt
+luaotfload: no font with id 38
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScript' (+ssty) not available for font
+* 'LinuxLibertineOItalic' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 38 (LinLibertineOI) defines feature smcp for script latn wit
+h language dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 38 (LinLibertineOI) does not define feature ssty for script 
+latn with language dflt
+luaotfload: no font with id 38
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScriptScript' (+ssty) not available for font
+* 'LinuxLibertineOItalic' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 38 (LinLibertineOI) defines feature smcp for script latn wit
+h language dflt
+luaotfload: font no 38 (LinLibertineOI) does not define feature ssty for script 
+latn with language dflt
+luaotfload: no font with id 38
+*************************************************
+* fontspec warning: "icu-feature-not-exist-in-font"
+* 
+* OpenType feature 'Style=MathScriptScript' (+ssty) not available for font
+* 'LinuxLibertineOItalic' with script 'Math' and language 'Default'.
+*************************************************
+luaotfload: font no 38 (LinLibertineOI) defines feature smcp for script latn wit
+h language dflt
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'LinuxLibertineOItalic(0)' created for font 'Linux Libertine O
+. Italic' with options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7.5-10,Font=Linux
+. Libertine O Italic,Style=MathScript},{Size=-7.5,Font=Linux Libertine O
+. Italic,Style=MathScriptScript}}].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->"LinuxLibertineOItalic:mode=base;script=latn;language=DFLT;"<7.5-10>"Linu
+xLibertineOItalic:mode=base;script=latn;language=DFLT;"<-7.5>"LinuxLibertineOIta
+lic:mode=base;script=latn;language=DFLT;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. <10->"LinuxLibertineOItalic:mode=base;script=latn;language=DFLT;+smcp;"<7.5-10
+>"LinuxLibertineOItalic:mode=base;script=latn;language=DFLT;+smcp;"<-7.5>"LinuxL
+ibertineOItalic:mode=base;script=latn;language=DFLT;+smcp;"
+. and font adjustment code:
+. 
+.................................................
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload: font no 39 (LinLibertineOI) defines no feature for script math
+luaotfload: no font with id 39
+\symum_fam2=\mathgroup5
+LaTeX Font Info:    Overwriting symbol font `um_fam2' in version `normal'
+(Font)                  EU2/LinuxLibertineOItalic(0)/m/n --> EU2/LinuxLibertineO
+Italic(0)/m/n on input line 10.
+LaTeX Font Info:    Overwriting symbol font `um_fam2' in version `bold'
+(Font)                  EU2/LinuxLibertineOItalic(0)/m/n --> EU2/LinuxLibertineO
+Italic(0)/bx/n on input line 10.
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload: font no 35 (LinLibertineO) defines no feature for script math
+luaotfload: no font with id 35
+luaotfload: font no 35 (LinLibertineO) defines feature cpsp for script latn
+*************************************************
+* fontspec warning: "script-not-exist-latn"
+* 
+* Font 'LinuxLibertineO' does not contain script 'Math'.
+* 'Latin' script used instead.
+*************************************************
+luaotfload: font no 35 (LinLibertineO) defines feature cpsp for script latn
+luaotfload | load : auto-selecting default features for script: latn
+luaotfload | load : no defaults for script "latn", falling back to "dflt"
+luaotfload: font no 37 (LinLibertineO) defines no feature for script math
+luaotfload: no font with id 37
+\symum_fam3=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `um_fam3' in version `normal'
+(Font)                  EU2/LinuxLibertineO(0)/m/n --> EU2/LinuxLibertineO(0)/m/
+n on input line 16.
+LaTeX Font Info:    Overwriting symbol font `um_fam3' in version `bold'
+(Font)                  EU2/LinuxLibertineO(0)/m/n --> EU2/LinuxLibertineO(0)/bx
+/n on input line 16.
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 19.2368fil
+...\write-{}
+...\glue(\topskip) 2.95
+...\hbox(7.05+0.11)x227.62207, glue set 177.4720fil
+....\hbox(0.0+0.0)x15.0
+....\EU2/lmr/m/n/10 D
+....\EU2/lmr/m/n/10 e
+....\EU2/lmr/m/n/10 f
+....\EU2/lmr/m/n/10 a
+....\EU2/lmr/m/n/10 u
+....\EU2/lmr/m/n/10 l
+....\EU2/lmr/m/n/10 t
+....\EU2/lmr/m/n/10 :
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 0.67503
+...\hbox(11.21497+1.77)x75.38411, shifted 76.11899
+....\l_fontspec_font (
+....\l_fontspec_font 𝑎
+....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+....\l_fontspec_font +
+....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+....\l_fontspec_font 𝑏
+....\l_fontspec_font )
+....\hbox(5.07+0.0)x4.15999, shifted -3.99994
+.....\EU2/XITSMath(0)/m/n/7.5 2
+....\glue(\thickmuskip) 2.77771 plus 2.77771
+....\l_fontspec_font =
+....\glue(\thickmuskip) 2.77771 plus 2.77771
+....\hbox(11.21497+1.76501)x31.14435
+.....\hbox(9.73+2.59)x9.28, shifted -0.82498
+......\l_fontspec_font √
+.....\vbox(11.21497+0.41)x21.86435
+......\kern0.65999
+......\rule(0.65999+0.0)x*
+......\kern3.215
+......\hbox(6.68+0.41)x21.86435
+.......\l_fontspec_font 𝑐
+.......\kern0.5
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑑
+.......\kern0.6
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\glue(\baselineskip) 3.18
+...\hbox(7.05+2.05)x227.62207, glue set 51.3520fil
+....\EU2/lmr/m/n/10 E
+....\EU2/lmr/m/n/10 x
+....\EU2/lmr/m/n/10 a
+....\EU2/lmr/m/n/10 m
+....\EU2/lmr/m/n/10 p
+....\EU2/lmr/m/n/10 l
+....\EU2/lmr/m/n/10 e
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 o
+....\EU2/lmr/m/n/10 f
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 a
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 n
+....\EU2/lmr/m/n/10 o
+....\EU2/lmr/m/n/10 n
+....\EU2/lmr/m/n/10 -
+....\EU2/lmr/m/n/10 a
+....\EU2/lmr/m/n/10 t
+....\EU2/lmr/m/n/10 h
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 O
+....\EU2/lmr/m/n/10 p
+....\kern 0.28
+....\EU2/lmr/m/n/10 e
+....\EU2/lmr/m/n/10 n
+....\EU2/lmr/m/n/10 T
+....\kern -0.28
+....\EU2/lmr/m/n/10 y
+....\EU2/lmr/m/n/10 p
+....\kern 0.28
+....\EU2/lmr/m/n/10 e
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 f
+....\EU2/lmr/m/n/10 o
+....\EU2/lmr/m/n/10 n
+....\kern -0.28
+....\EU2/lmr/m/n/10 t
+....\EU2/lmr/m/n/10 :
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\lineskip) 1.0
+...\hbox(11.36496+1.77)x74.98409, shifted 76.319
+....\l_fontspec_font (
+....\l_fontspec_font a
+....\kern0.26
+....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+....\l_fontspec_font +
+....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+....\l_fontspec_font b
+....\kern0.34
+....\l_fontspec_font )
+....\hbox(4.335+0.015)x3.70999, shifted -3.99994
+.....\EU2/LinuxLibertineO(0)/m/n/7.5 2
+....\glue(\thickmuskip) 2.77771 plus 2.77771
+....\l_fontspec_font =
+....\glue(\thickmuskip) 2.77771 plus 2.77771
+....\hbox(11.36496+1.61502)x30.67433
+.....\hbox(9.73+2.59)x9.28, shifted -0.97498
+......\l_fontspec_font √
+.....\vbox(11.36496+0.41)x21.39433
+......\kern0.65999
+......\rule(0.65999+0.0)x*
+......\kern3.06499
+......\hbox(6.98+0.41)x21.39433
+.......\l_fontspec_font c
+.......\kern0.54
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font d
+.......\kern0.78
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\baselineskip) 3.29
+...\hbox(6.94+2.05)x227.62207, glue set 164.1720fil
+....\EU2/lmr/m/n/10 W
+....\EU2/lmr/m/n/10 i
+....\EU2/lmr/m/n/10 t
+....\EU2/lmr/m/n/10 h
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 s
+....\EU2/lmr/m/n/10 y
+....\EU2/lmr/m/n/10 m
+....\kern -0.28
+....\EU2/lmr/m/n/10 b
+....\kern 0.28
+....\EU2/lmr/m/n/10 o
+....\EU2/lmr/m/n/10 l
+....\EU2/lmr/m/n/10 s
+....\EU2/lmr/m/n/10 :
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\lineskip) 1.0
+...\hbox(11.51996+2.04)x69.48407, shifted 79.069
+....\l_fontspec_font (
+....\l_fontspec_font a
+....\kern0.26
+....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+....\l_fontspec_font +
+....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+....\l_fontspec_font b
+....\kern0.34
+....\l_fontspec_font )
+....\hbox(4.335+0.015)x3.70999, shifted -3.99994
+.....\EU2/LinuxLibertineO(0)/m/n/7.5 2
+....\glue(\thickmuskip) 2.77771 plus 2.77771
+....\l_fontspec_font =
+....\glue(\thickmuskip) 2.77771 plus 2.77771
+....\hbox(11.51996+1.46002)x29.09433
+.....\hbox(9.73+2.59)x9.28, shifted -1.12997
+......\l_fontspec_font √
+.....\vbox(11.51996+0.1)x19.81433
+......\kern0.65999
+......\rule(0.65999+0.0)x*
+......\kern3.21999
+......\hbox(6.98+0.1)x19.81433
+.......\l_fontspec_font c
+.......\kern0.54
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font d
+.......\kern0.78
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(.aux)

@@ -1,0 +1,248 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks25
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+LaTeX Font Info:    Font shape `EU2/AsanaMath(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/AsanaMath(1)/m/n' will be
+(Font)              scaled to size 7.30006pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/AsanaMath(1)/m/n' will be
+(Font)              scaled to size 6.00015pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/AsanaMath(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/AsanaMath(2)/m/n' will be
+(Font)              scaled to size 7.29984pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+LaTeX Font Info:    Font shape `EU2/AsanaMath(2)/m/n' will be
+(Font)              scaled to size 5.99995pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 120.1409fil
+...\write-{}
+...\glue(\topskip) 2.5
+...\hbox(7.5+2.5)x227.62207, glue set 25.5889fil
+....\hbox(0.0+0.0)x15.0
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(4.95+0.11)x15.91
+.....\l_fontspec_font 𝑥
+.....\l_fontspec_font ‵
+.....\l_fontspec_font ‵
+.....\l_fontspec_font ‵
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(4.95+0.11)x26.83
+.....\l_fontspec_font 𝑥
+.....\l_fontspec_font ‵
+.....\l_fontspec_font ‵
+.....\l_fontspec_font ‵
+.....\l_fontspec_font ‵
+.....\l_fontspec_font ‵
+.....\l_fontspec_font ‵
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(7.22342+0.11)x8.05717
+.....\l_fontspec_font 𝑥
+.....\hbox(3.61348+0.0)x3.06717, shifted -3.60994
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(7.22342+0.11)x11.48816
+.....\l_fontspec_font 𝑥
+.....\hbox(3.61348+0.0)x6.49815, shifted -3.60994
+......\EU2/AsanaMath(0)/m/n/7.29996 ‷
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(7.22342+0.11)x17.17651
+.....\l_fontspec_font 𝑥
+.....\hbox(3.61348+0.0)x12.18651, shifted -3.60994
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(7.22342+0.11)x8.05717
+.....\l_fontspec_font 𝑥
+.....\hbox(3.61348+0.0)x3.06717, shifted -3.60994
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(7.22342+0.11)x11.48816
+.....\l_fontspec_font 𝑥
+.....\hbox(3.61348+0.0)x6.49815, shifted -3.60994
+......\EU2/AsanaMath(0)/m/n/7.29996 ‷
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\glue 3.33 plus 1.665 minus 1.11
+....\EU2/lmr/m/n/10 [
+....\mathon
+....\hbox(7.22342+0.11)x20.23595
+.....\l_fontspec_font 𝑥
+.....\hbox(3.61348+0.0)x8.53877, shifted -3.60994
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+......\glue -0.83331
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\l_fontspec_font ‵
+.....\hbox(3.61348+0.0)x3.06717, shifted -3.60994
+......\EU2/AsanaMath(0)/m/n/7.29996 ‵
+....\mathoff
+....\EU2/lmr/m/n/10 ]
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue(\parskip) 0.0 plus 1.0
+...\glue(\baselineskip) 2.27658
+...\hbox(7.22342+0.11)x227.62207, glue set 141.6549fil
+....\hbox(0.0+0.0)x15.0
+....\mathon
+....\l_fontspec_font 𝑥
+....\hbox(3.61348+0.0)x14.01038, shifted -3.60994
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\hbox(3.61348+0.0)x14.01038, shifted -3.60994
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+.....\glue -0.83331
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‵
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\hbox(3.61348+0.0)x6.49815, shifted -3.60994
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‷
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\hbox(3.61348+0.0)x6.49815, shifted -3.60994
+.....\EU2/AsanaMath(0)/m/n/7.29996 ‷
+....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(F-primes-back.aux)

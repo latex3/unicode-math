@@ -1,0 +1,487 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package ifluatex Info: LuaTeX detected.
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/luatex-loader.sty
+(/usr/local/texlive/2014/texmf-dist/scripts/oberdiek/oberdiek.luatex.lua))
+\pdftexcmds@toks=\toks21
+)
+\Gread@gobject=\count107
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count108
+\scratchdimen=\dimen129
+\scratchbox=\box28
+\nofMPsegments=\count109
+\nofMParguments=\count110
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count111
+\MPscratchDim=\dimen130
+\MPnumerator=\count112
+\makeMPintoPDFobject=\count113
+\everyMPtoPDFconversion=\toks23
+))) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+\Gin@req@height=\dimen131
+\Gin@req@width=\dimen132
+)
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 80.2068fil
+...\write-{}
+...\glue(\topskip) 10.0
+...\hbox(0.0+0.0)x227.62207, glue set 212.6220fil
+....\hbox(0.0+0.0)x15.0
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\lineskip) 1.0
+...\hbox(14.9051+7.69284)x99.51581, shifted 64.05313
+....\hbox(14.9051+7.69284)x33.17194
+.....\hbox(14.9051+7.69284)x33.17194
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+......\vbox(14.9051+7.69284)x30.77194
+.......\hbox(8.14003+0.83333)x30.77194
+........\OML/cmm/m/it/10 a
+........\hbox(4.51111+0.0)x4.48613, shifted -3.62892
+.........\OT1/cmr/m/n/7 2
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OT1/cmr/m/n/10 +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OML/cmm/m/it/10 b
+........\hbox(4.51111+0.0)x4.48613, shifted -3.62892
+.........\OT1/cmr/m/n/7 2
+.......\kern3.23175
+.......\rule(0.39998+0.0)x*
+.......\kern1.75952
+.......\hbox(7.4+0.83333)x30.77194
+........\OML/cmm/m/it/10 a
+........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+.........\OT1/cmr/m/n/7 2
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OT1/cmr/m/n/10 +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OML/cmm/m/it/10 b
+........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+.........\OT1/cmr/m/n/7 2
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+....\hbox(14.56505+7.69284)x33.17194
+.....\hbox(14.56505+7.69284)x33.17194
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+......\vbox(14.56505+7.69284)x30.77194
+.......\hbox(7.79997+0.83333)x30.77194
+........\mathon
+........\hbox(8.29994+0.83333)x30.77194
+.........\hbox(0.0+0.0)x0.0, shifted -7.89996
+.........\vbox(8.29994+0.83333)x30.77194
+..........\kern0.39998
+..........\rule(0.0+0.0)x*
+..........\kern0.49997
+..........\hbox(7.4+0.83333)x30.77194
+...........\OML/cmm/m/it/10 a
+...........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+............\OT1/cmr/m/n/7 2
+...........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+...........\OT1/cmr/m/n/10 +
+...........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+...........\OML/cmm/m/it/10 b
+...........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+............\OT1/cmr/m/n/7 2
+........\mathoff
+.......\kern3.23175
+.......\rule(0.39998+0.0)x*
+.......\kern1.75952
+.......\hbox(7.4+0.83333)x30.77194
+........\OML/cmm/m/it/10 a
+........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+.........\OT1/cmr/m/n/7 2
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OT1/cmr/m/n/10 +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OML/cmm/m/it/10 b
+........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+.........\OT1/cmr/m/n/7 2
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+....\hbox(14.9051+7.69284)x33.17194
+.....\hbox(14.9051+7.69284)x33.17194
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+......\vbox(14.9051+7.69284)x30.77194
+.......\hbox(8.14003+0.83333)x30.77194
+........\OML/cmm/m/it/10 a
+........\hbox(4.51111+0.0)x4.48613, shifted -3.62892
+.........\OT1/cmr/m/n/7 2
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OT1/cmr/m/n/10 +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OML/cmm/m/it/10 b
+........\hbox(4.51111+0.0)x4.48613, shifted -3.62892
+.........\OT1/cmr/m/n/7 2
+.......\kern3.23175
+.......\rule(0.39998+0.0)x*
+.......\kern1.35954
+.......\hbox(7.79997+0.83333)x30.77194
+........\mathon
+........\hbox(8.29994+0.83333)x30.77194
+.........\hbox(0.0+0.0)x0.0, shifted -7.89996
+.........\vbox(8.29994+0.83333)x30.77194
+..........\kern0.39998
+..........\rule(0.0+0.0)x*
+..........\kern0.49997
+..........\hbox(7.4+0.83333)x30.77194
+...........\OML/cmm/m/it/10 a
+...........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+............\OT1/cmr/m/n/7 2
+...........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+...........\OT1/cmr/m/n/10 +
+...........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+...........\OML/cmm/m/it/10 b
+...........\hbox(4.51111+0.0)x4.48613, shifted -2.88889
+............\OT1/cmr/m/n/7 2
+........\mathoff
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\glue(\lineskip) 1.0
+...\hbox(16.95491+4.4955)x227.62207, glue set 4.3152fil
+....\mathon
+....\hbox(10.17732+4.28175)x24.19888
+.....\hbox(10.17732+4.28175)x24.19888
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+......\vbox(10.17732+4.28175)x21.79889
+.......\hbox(6.24+0.83334)x21.79889
+........\OML/cmm/m/it/7 a
+........\hbox(3.22221+0.0)x3.90283, shifted -3.01779
+.........\OT1/cmr/m/n/5 2
+........\OT1/cmr/m/n/7 +
+........\OML/cmm/m/it/7 b
+........\hbox(3.22221+0.0)x3.90283, shifted -3.01779
+.........\OT1/cmr/m/n/5 2
+.......\kern0.40398
+.......\rule(0.39998+0.0)x*
+.......\kern0.52621
+.......\hbox(5.2222+0.83334)x21.79889
+........\OML/cmm/m/it/7 a
+........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+.........\OT1/cmr/m/n/5 2
+........\OT1/cmr/m/n/7 +
+........\OML/cmm/m/it/7 b
+........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+.........\OT1/cmr/m/n/5 2
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+....\hbox(9.4995+4.28175)x24.19888
+.....\hbox(9.4995+4.28175)x24.19888
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+......\vbox(9.4995+4.28175)x21.79889
+.......\hbox(5.56218+0.83334)x21.79889
+........\mathon
+........\hbox(5.98715+0.83334)x21.79889
+.........\hbox(0.0+0.0)x0.0, shifted -5.64717
+.........\vbox(5.98715+0.83334)x21.79889
+..........\kern0.33998
+..........\rule(0.0+0.0)x*
+..........\kern0.42497
+..........\hbox(5.2222+0.83334)x21.79889
+...........\OML/cmm/m/it/7 a
+...........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+............\OT1/cmr/m/n/5 2
+...........\OT1/cmr/m/n/7 +
+...........\OML/cmm/m/it/7 b
+...........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+............\OT1/cmr/m/n/5 2
+........\mathoff
+.......\kern0.40398
+.......\rule(0.39998+0.0)x*
+.......\kern0.52621
+.......\hbox(5.2222+0.83334)x21.79889
+........\OML/cmm/m/it/7 a
+........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+.........\OT1/cmr/m/n/5 2
+........\OT1/cmr/m/n/7 +
+........\OML/cmm/m/it/7 b
+........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+.........\OT1/cmr/m/n/5 2
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+....\hbox(10.17732+4.4955)x24.19888
+.....\hbox(10.17732+4.4955)x24.19888
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+......\vbox(10.17732+4.4955)x21.79889
+.......\hbox(6.24+0.83334)x21.79889
+........\OML/cmm/m/it/7 a
+........\hbox(3.22221+0.0)x3.90283, shifted -3.01779
+.........\OT1/cmr/m/n/5 2
+........\OT1/cmr/m/n/7 +
+........\OML/cmm/m/it/7 b
+........\hbox(3.22221+0.0)x3.90283, shifted -3.01779
+.........\OT1/cmr/m/n/5 2
+.......\kern0.40398
+.......\rule(0.39998+0.0)x*
+.......\kern0.39998
+.......\hbox(5.56218+0.83334)x21.79889
+........\mathon
+........\hbox(5.98715+0.83334)x21.79889
+.........\hbox(0.0+0.0)x0.0, shifted -5.64717
+.........\vbox(5.98715+0.83334)x21.79889
+..........\kern0.33998
+..........\rule(0.0+0.0)x*
+..........\kern0.42497
+..........\hbox(5.2222+0.83334)x21.79889
+...........\OML/cmm/m/it/7 a
+...........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+............\OT1/cmr/m/n/5 2
+...........\OT1/cmr/m/n/7 +
+...........\OML/cmm/m/it/7 b
+...........\hbox(3.22221+0.0)x3.90283, shifted -1.99998
+............\OT1/cmr/m/n/5 2
+........\mathoff
+......\hbox(0.0+0.0)x1.2, shifted -2.5
+....\OML/cmm/m/it/10 a
+....\hbox(8.33331+4.53062)x67.65036, shifted -5.60701
+.....\hbox(8.33331+4.28778)x22.38345
+......\hbox(8.33331+4.28778)x22.38345
+.......\hbox(0.0+0.0)x1.2, shifted -1.75
+.......\vbox(8.33331+4.28778)x19.98346
+........\hbox(5.23997+0.83336)x19.98346
+.........\OML/cmm/m/it/5 a
+.........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+..........\OT1/cmr/m/n/5 2
+.........\OT1/cmr/m/n/5 +
+.........\OML/cmm/m/it/5 b
+.........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+..........\OT1/cmr/m/n/5 2
+........\kern0.33998
+........\rule(0.33998+0.0)x*
+........\kern0.33998
+........\hbox(4.69444+0.83336)x19.98346
+.........\OML/cmm/m/it/5 a
+.........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..........\OT1/cmr/m/n/5 2
+.........\OT1/cmr/m/n/5 +
+.........\OML/cmm/m/it/5 b
+.........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..........\OT1/cmr/m/n/5 2
+.......\hbox(0.0+0.0)x1.2, shifted -1.75
+.....\hbox(8.03062+4.28778)x22.38345
+......\hbox(8.03062+4.28778)x22.38345
+.......\hbox(0.0+0.0)x1.2, shifted -1.75
+.......\vbox(8.03062+4.28778)x19.98346
+........\hbox(4.93729+0.83336)x19.98346
+.........\mathon
+.........\hbox(5.24083+0.83336)x19.98346
+..........\hbox(0.0+0.0)x0.0, shifted -4.99799
+..........\vbox(5.24083+0.83336)x19.98346
+...........\kern0.24284
+...........\rule(0.0+0.0)x*
+...........\kern0.30354
+...........\hbox(4.69444+0.83336)x19.98346
+............\OML/cmm/m/it/5 a
+............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+.............\OT1/cmr/m/n/5 2
+............\OT1/cmr/m/n/5 +
+............\OML/cmm/m/it/5 b
+............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+.............\OT1/cmr/m/n/5 2
+.........\mathoff
+........\kern0.33998
+........\rule(0.33998+0.0)x*
+........\kern0.33998
+........\hbox(4.69444+0.83336)x19.98346
+.........\OML/cmm/m/it/5 a
+.........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..........\OT1/cmr/m/n/5 2
+.........\OT1/cmr/m/n/5 +
+.........\OML/cmm/m/it/5 b
+.........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..........\OT1/cmr/m/n/5 2
+.......\hbox(0.0+0.0)x1.2, shifted -1.75
+.....\hbox(8.33331+4.53062)x22.38345
+......\hbox(8.33331+4.53062)x22.38345
+.......\hbox(0.0+0.0)x1.2, shifted -1.75
+.......\vbox(8.33331+4.53062)x19.98346
+........\hbox(5.23997+0.83336)x19.98346
+.........\OML/cmm/m/it/5 a
+.........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+..........\OT1/cmr/m/n/5 2
+.........\OT1/cmr/m/n/5 +
+.........\OML/cmm/m/it/5 b
+.........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+..........\OT1/cmr/m/n/5 2
+........\kern0.33998
+........\rule(0.33998+0.0)x*
+........\kern0.33998
+........\hbox(4.93729+0.83336)x19.98346
+.........\mathon
+.........\hbox(5.24083+0.83336)x19.98346
+..........\hbox(0.0+0.0)x0.0, shifted -4.99799
+..........\vbox(5.24083+0.83336)x19.98346
+...........\kern0.24284
+...........\rule(0.0+0.0)x*
+...........\kern0.30354
+...........\hbox(4.69444+0.83336)x19.98346
+............\OML/cmm/m/it/5 a
+............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+.............\OT1/cmr/m/n/5 2
+............\OT1/cmr/m/n/5 +
+............\OML/cmm/m/it/5 b
+............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+.............\OT1/cmr/m/n/5 2
+.........\mathoff
+.......\hbox(0.0+0.0)x1.2, shifted -1.75
+....\OML/cmm/m/it/10 a
+....\hbox(13.32599+0.0)x72.488, shifted -3.62892
+.....\OML/cmm/m/it/7 a
+.....\hbox(7.6876+4.88492)x67.65036, shifted -5.63838
+......\hbox(7.6876+4.64207)x22.38345
+.......\hbox(7.6876+4.64207)x22.38345
+........\hbox(0.0+0.0)x1.2, shifted -1.25
+........\vbox(7.6876+4.64207)x19.98346
+.........\hbox(5.23997+0.83336)x19.98346
+..........\OML/cmm/m/it/5 a
+..........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+...........\OT1/cmr/m/n/5 2
+..........\OT1/cmr/m/n/5 +
+..........\OML/cmm/m/it/5 b
+..........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+...........\OT1/cmr/m/n/5 2
+.........\kern0.24284
+.........\rule(0.24284+0.0)x*
+.........\kern0.24284
+.........\hbox(4.69444+0.83336)x19.98346
+..........\OML/cmm/m/it/5 a
+..........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+...........\OT1/cmr/m/n/5 2
+..........\OT1/cmr/m/n/5 +
+..........\OML/cmm/m/it/5 b
+..........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+...........\OT1/cmr/m/n/5 2
+........\hbox(0.0+0.0)x1.2, shifted -1.25
+......\hbox(7.38492+4.64207)x22.38345
+.......\hbox(7.38492+4.64207)x22.38345
+........\hbox(0.0+0.0)x1.2, shifted -1.25
+........\vbox(7.38492+4.64207)x19.98346
+.........\hbox(4.93729+0.83336)x19.98346
+..........\mathon
+..........\hbox(5.24083+0.83336)x19.98346
+...........\hbox(0.0+0.0)x0.0, shifted -4.99799
+...........\vbox(5.24083+0.83336)x19.98346
+............\kern0.24284
+............\rule(0.0+0.0)x*
+............\kern0.30354
+............\hbox(4.69444+0.83336)x19.98346
+.............\OML/cmm/m/it/5 a
+.............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..............\OT1/cmr/m/n/5 2
+.............\OT1/cmr/m/n/5 +
+.............\OML/cmm/m/it/5 b
+.............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..............\OT1/cmr/m/n/5 2
+..........\mathoff
+.........\kern0.24284
+.........\rule(0.24284+0.0)x*
+.........\kern0.24284
+.........\hbox(4.69444+0.83336)x19.98346
+..........\OML/cmm/m/it/5 a
+..........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+...........\OT1/cmr/m/n/5 2
+..........\OT1/cmr/m/n/5 +
+..........\OML/cmm/m/it/5 b
+..........\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+...........\OT1/cmr/m/n/5 2
+........\hbox(0.0+0.0)x1.2, shifted -1.25
+......\hbox(7.6876+4.88492)x22.38345
+.......\hbox(7.6876+4.88492)x22.38345
+........\hbox(0.0+0.0)x1.2, shifted -1.25
+........\vbox(7.6876+4.88492)x19.98346
+.........\hbox(5.23997+0.83336)x19.98346
+..........\OML/cmm/m/it/5 a
+..........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+...........\OT1/cmr/m/n/5 2
+..........\OT1/cmr/m/n/5 +
+..........\OML/cmm/m/it/5 b
+..........\hbox(3.22221+0.0)x3.90283, shifted -2.01776
+...........\OT1/cmr/m/n/5 2
+.........\kern0.24284
+.........\rule(0.24284+0.0)x*
+.........\kern0.24284
+.........\hbox(4.93729+0.83336)x19.98346
+..........\mathon
+..........\hbox(5.24083+0.83336)x19.98346
+...........\hbox(0.0+0.0)x0.0, shifted -4.99799
+...........\vbox(5.24083+0.83336)x19.98346
+............\kern0.24284
+............\rule(0.0+0.0)x*
+............\kern0.30354
+............\hbox(4.69444+0.83336)x19.98346
+.............\OML/cmm/m/it/5 a
+.............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..............\OT1/cmr/m/n/5 2
+.............\OT1/cmr/m/n/5 +
+.............\OML/cmm/m/it/5 b
+.............\hbox(3.22221+0.0)x3.90283, shifted -1.47223
+..............\OT1/cmr/m/n/5 2
+..........\mathoff
+........\hbox(0.0+0.0)x1.2, shifted -1.25
+....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(.aux)

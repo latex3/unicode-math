@@ -1,0 +1,470 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks20
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.5001pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.00015pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.49988pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.99995pt on input line 5.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 51.8955fil
+...\write-{}
+...\glue(\topskip) 10.0
+...\hbox(0.0+0.0)x227.62207, glue set 76.0474fil
+....\hbox(0.0+0.0)x15.0
+....\hbox(0.0+0.0)x136.57463, glue set 68.2873fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\lineskip) 1.0
+...\hbox(23.86258+0.41)x165.85236, shifted 30.88486
+....\vbox(23.86258+0.41)x54.17303
+.....\kern0.0
+.....\hbox(5.1225+1.4025)x54.17303, glue set 15.6002fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑒
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑓
+......\kern0.9
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑔
+......\kern0.3
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 ℎ
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern1.59746
+.....\vbox(15.74013+0.41)x54.17303
+......\hbox(13.56+0.00014)x0.0, glue set 0.45644
+.......\hbox(10.93+0.0)x8.97
+........\l_fontspec_font 󰄡
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(13.56+0.0)x18.44
+........\l_fontspec_font 󰄦
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x3.25
+........\l_fontspec_font 󰄥
+.......\glue -1.09 plus 0.59001
+.......\hbox(10.93+0.0)x8.97
+........\l_fontspec_font 󰄢
+......\kern-4.5
+......\hbox(6.68+0.41)x54.17303
+.......\l_fontspec_font 𝑎
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑏
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑐
+.......\kern0.5
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑑
+.......\kern0.6
+....\glue(\thinmuskip) 1.66663
+....\vbox(20.81258+0.41)x54.17303
+.....\kern0.0
+.....\hbox(5.1225+1.4025)x54.17303, glue set 15.6002fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑒
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑓
+......\kern0.9
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑔
+......\kern0.3
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 ℎ
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern1.59746
+.....\vbox(12.69012+0.41)x54.17303
+......\hbox(10.51+0.00014)x0.0, glue set 0.3769
+.......\hbox(10.51+0.0)x18.2
+........\l_fontspec_font 󰄬
+.......\glue -2.12 plus 1.62001
+.......\hbox(10.51+0.0)x6.33
+........\l_fontspec_font 󰄱
+.......\glue -2.12 plus 1.62001
+.......\hbox(10.51+0.0)x6.33
+........\l_fontspec_font 󰄱
+.......\glue -2.12 plus 1.62001
+.......\hbox(10.51+0.0)x6.33
+........\l_fontspec_font 󰄱
+.......\glue -2.12 plus 1.62001
+.......\hbox(10.51+0.0)x6.33
+........\l_fontspec_font 󰄱
+.......\glue -2.12 plus 1.62001
+.......\hbox(10.51+0.0)x18.2
+........\l_fontspec_font 󰄭
+......\kern-4.5
+......\hbox(6.68+0.41)x54.17303
+.......\l_fontspec_font 𝑎
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑏
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑐
+.......\kern0.5
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑑
+.......\kern0.6
+....\glue(\thinmuskip) 1.66663
+....\vbox(22.93259+0.41)x54.17303
+.....\kern0.0
+.....\hbox(5.1225+1.4025)x54.17303, glue set 15.6002fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑒
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑓
+......\kern0.9
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑔
+......\kern0.3
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 ℎ
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern1.59746
+.....\vbox(14.81013+0.41)x54.17303
+......\hbox(12.63+0.00014)x0.0, glue set 0.3769
+.......\hbox(12.63+0.0)x18.2
+........\l_fontspec_font 󰄨
+.......\glue -2.12 plus 1.62001
+.......\hbox(12.63+0.0)x6.33
+........\l_fontspec_font 󰊙
+.......\glue -2.12 plus 1.62001
+.......\hbox(12.63+0.0)x6.33
+........\l_fontspec_font 󰊙
+.......\glue -2.12 plus 1.62001
+.......\hbox(12.63+0.0)x6.33
+........\l_fontspec_font 󰊙
+.......\glue -2.12 plus 1.62001
+.......\hbox(12.63+0.0)x6.33
+........\l_fontspec_font 󰊙
+.......\glue -2.12 plus 1.62001
+.......\hbox(12.63+0.0)x18.2
+........\l_fontspec_font 󰄩
+......\kern-4.5
+......\hbox(6.68+0.41)x54.17303
+.......\l_fontspec_font 𝑎
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑏
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑐
+.......\kern0.5
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font +
+.......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+.......\l_fontspec_font 𝑑
+.......\kern0.6
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 4.91
+...\hbox(6.68+17.50012)x165.85236, shifted 30.88486
+....\vbox(6.68+17.50012)x54.17303
+.....\hbox(6.68+9.47516)x54.17303
+......\vbox(7.09515+9.06)x54.17303, shifted 0.41516
+.......\hbox(6.68+0.41)x54.17303
+........\l_fontspec_font 𝑎
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑏
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑐
+........\kern0.5
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑑
+........\kern0.6
+.......\hbox(0.00516+9.06)x0.0, glue set 0.45644
+........\hbox(0.0+6.43)x8.97
+.........\l_fontspec_font 󰄣
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+9.06)x18.44
+.........\l_fontspec_font 󰄧
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x3.25
+.........\l_fontspec_font 󰄤
+........\glue -1.09 plus 0.59001
+........\hbox(0.0+6.43)x8.97
+.........\l_fontspec_font 󰄰
+.....\kern1.49997
+.....\hbox(5.1225+1.4025)x54.17303, glue set 15.6002fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑒
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑓
+......\kern0.9
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑔
+......\kern0.3
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 ℎ
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.0
+....\glue(\thinmuskip) 1.66663
+....\vbox(6.68+14.45012)x54.17303
+.....\hbox(6.68+6.42516)x54.17303
+......\vbox(7.09515+6.01)x54.17303, shifted 0.41516
+.......\hbox(6.68+0.41)x54.17303
+........\l_fontspec_font 𝑎
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑏
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑐
+........\kern0.5
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑑
+........\kern0.6
+.......\hbox(0.00516+6.01)x0.0, glue set 0.3769
+........\hbox(0.0+6.01)x18.2
+.........\l_fontspec_font 󰄮
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+6.01)x6.33
+.........\l_fontspec_font 󰄲
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+6.01)x6.33
+.........\l_fontspec_font 󰄲
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+6.01)x6.33
+.........\l_fontspec_font 󰄲
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+6.01)x6.33
+.........\l_fontspec_font 󰄲
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+6.01)x18.2
+.........\l_fontspec_font 󰄯
+.....\kern1.49997
+.....\hbox(5.1225+1.4025)x54.17303, glue set 15.6002fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑒
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑓
+......\kern0.9
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑔
+......\kern0.3
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 ℎ
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.0
+....\glue(\thinmuskip) 1.66663
+....\vbox(6.68+16.57013)x54.17303
+.....\hbox(6.68+8.54517)x54.17303
+......\vbox(7.09515+8.13)x54.17303, shifted 0.41516
+.......\hbox(6.68+0.41)x54.17303
+........\l_fontspec_font 𝑎
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑏
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑐
+........\kern0.5
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\l_fontspec_font 𝑑
+........\kern0.6
+.......\hbox(0.00516+8.13)x0.0, glue set 0.3769
+........\hbox(0.0+8.13)x18.2
+.........\l_fontspec_font 󰄪
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+8.13)x6.33
+.........\l_fontspec_font 󰊚
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+8.13)x6.33
+.........\l_fontspec_font 󰊚
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+8.13)x6.33
+.........\l_fontspec_font 󰊚
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+8.13)x6.33
+.........\l_fontspec_font 󰊚
+........\glue -2.12 plus 1.62001
+........\hbox(0.0+8.13)x18.2
+.........\l_fontspec_font 󰄫
+.....\kern1.49997
+.....\hbox(5.1225+1.4025)x54.17303, glue set 15.6002fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑒
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑓
+......\kern0.9
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 𝑔
+......\kern0.3
+......\EU2/xits-math.otf(0)/m/n/7.5 /
+......\EU2/xits-math.otf(0)/m/n/7.5 ℎ
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern0.0
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(F-over-under.aux)

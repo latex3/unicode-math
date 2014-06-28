@@ -1,0 +1,856 @@
+This is a generated file for the LaTeX (2e + expl3) validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks20
+) (/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG
+,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+))
+Overfull \hbox (3.1587pt too wide) in paragraph at lines 7--7
+[][][] 
+\hbox(0.0+0.0)x29.60367
+.\hbox(0.0+0.0)x15.0
+.\hbox(0.0+0.0)x17.76237, glue set 8.8812fil
+..\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\penalty 10000
+.\glue(\parfillskip) 0.0 plus 1.0fil
+.\glue(\rightskip) 0.0
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+luaotfload | load : auto-selecting default features for script: dflt
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 7.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.5001pt on input line 7.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.00015pt on input line 7.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 7.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.49988pt on input line 7.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.99995pt on input line 7.
+luaotfload | load : auto-selecting default features for script: math
+luaotfload | load : no defaults for script "math", falling back to "dflt"
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207
+...\write-{}
+...\glue(\topskip) 0.0
+...\hbox(142.2638+1.94)x227.62207, glue set 5.0fil
+....\vbox(142.2638+0.11)x29.60367, glue set - 0.70486
+.....\glue 0.0 plus -2.0
+.....\glue(\splittopskip) 10.0 plus 2.0
+.....\hbox(0.0+0.0)x29.60367
+......\hbox(0.0+0.0)x15.0
+......\hbox(0.0+0.0)x17.76237, glue set 8.8812fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+......\penalty 10000
+......\glue(\parfillskip) 0.0 plus 1.0fil
+......\glue(\rightskip) 0.0
+.....\penalty 10000
+.....\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+.....\glue(\baselineskip) 3.82
+.....\hbox(8.18+0.11)x18.98, shifted 5.31184
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x9.26
+.......\hbox(6.62+1.56)x0.0, shifted 6.37001
+........\l_fontspec_font ̸
+.......\kern-4.49
+.......\hbox(4.49+0.0)x9.26
+........\l_fontspec_font ←
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.71
+.....\hbox(8.18+0.11)x18.98, shifted 5.31184
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x9.26
+.......\hbox(6.62+1.56)x0.0, shifted 6.37001
+........\l_fontspec_font ̸
+.......\kern-4.49
+.......\hbox(4.49+0.0)x9.26
+........\l_fontspec_font ←
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.71
+.....\hbox(8.18+0.11)x18.98, shifted 5.31184
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x9.26
+.......\hbox(6.62+1.56)x0.0, shifted 6.37001
+........\l_fontspec_font ̸
+.......\kern-4.48
+.......\hbox(4.48+0.0)x9.26
+........\l_fontspec_font →
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.71
+.....\hbox(8.18+0.11)x18.98, shifted 5.31184
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x9.26
+.......\hbox(6.62+1.56)x0.0, shifted 6.37001
+........\l_fontspec_font ̸
+.......\kern-4.49
+.......\hbox(4.49+0.0)x9.26
+........\l_fontspec_font ↔
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.70001
+.....\hbox(9.18999+0.45)x18.98, shifted 5.31184
+......\l_fontspec_font 𝑎
+......\vbox(9.18999+0.45)x9.26
+.......\hbox(6.62+1.56)x0.0, shifted 6.37001
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.51+0.45)x9.26
+........\l_fontspec_font ⇐
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.70001
+.....\hbox(8.84999+0.11)x18.98, shifted 5.31184
+......\l_fontspec_font 𝑎
+......\vbox(8.84999+0.1)x9.26
+.......\hbox(6.62+1.56)x0.0, shifted 6.37001
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.17+0.1)x9.26
+........\l_fontspec_font ⇔
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.70001
+.....\hbox(9.18999+0.45)x18.98, shifted 5.31184
+......\l_fontspec_font 𝑎
+......\vbox(9.18999+0.45)x9.26
+.......\hbox(6.62+1.56)x0.0, shifted 6.37001
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.51+0.45)x9.26
+........\l_fontspec_font ⇒
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.25002
+.....\hbox(10.29999+0.11)x15.32, shifted 7.14183
+......\l_fontspec_font 𝑎
+......\vbox(10.29999+0.0)x5.6
+.......\hbox(6.62+1.56)x0.0, shifted 4.54001
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.62+0.0)x5.6
+........\l_fontspec_font ∃
+......\l_fontspec_font 𝑏
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\rule(*+*)x0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\vbox(142.2638+0.11)x29.60367, glue set - 0.55026
+.....\glue 0.0 plus -2.0
+.....\glue(\splittopskip) 1.01001 plus 2.0
+.....\hbox(8.98999+0.27)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.98999+0.27)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.31+0.27)x6.85
+........\l_fontspec_font ∈
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.74
+.....\hbox(8.98999+0.27)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.98999+0.27)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.31+0.27)x6.85
+........\l_fontspec_font ∋
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.15001
+.....\hbox(10.57999+1.89)x12.38, shifted 8.61183
+......\l_fontspec_font 𝑎
+......\vbox(10.57999+1.89)x2.66
+.......\hbox(6.62+1.56)x0.0, shifted 3.07
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.9+1.89)x2.66
+........\l_fontspec_font ∣
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\lineskip) 1.0
+.....\hbox(10.57999+1.89)x14.95, shifted 7.32684
+......\l_fontspec_font 𝑎
+......\vbox(10.57999+1.89)x5.23
+.......\hbox(6.62+1.56)x0.0, shifted 4.35501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.9+1.89)x5.23
+........\l_fontspec_font ∥
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.93001
+.....\hbox(8.18+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-3.62
+.......\hbox(3.62+0.0)x6.85
+........\l_fontspec_font ∼
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.71
+.....\hbox(8.18+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.45
+.......\hbox(4.45+0.0)x6.85
+........\l_fontspec_font ≃
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.89
+.....\hbox(9.0+0.27)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.0+0.27)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.32+0.27)x6.85
+........\l_fontspec_font ≅
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.3
+.....\hbox(8.43+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.43+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(4.75+0.0)x6.85
+........\l_fontspec_font ≈
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.71
+.....\hbox(8.18+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-3.86
+.......\hbox(3.86+0.0)x6.85
+........\l_fontspec_font =
+......\l_fontspec_font 𝑏
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\rule(*+*)x0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\vbox(142.2638+1.03)x29.60367, glue set - 0.48901
+.....\glue 0.0 plus -2.0
+.....\glue(\splittopskip) 1.82 plus 2.0
+.....\hbox(8.18+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.18+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-3.86
+.......\hbox(3.86+0.0)x6.85
+........\l_fontspec_font =
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.43001
+.....\hbox(8.45999+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.45999+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(4.78+0.0)x6.85
+........\l_fontspec_font ≡
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 3.23001
+.....\hbox(8.65999+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.65999+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(4.98+0.0)x6.85
+........\l_fontspec_font ≍
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.87001
+.....\hbox(9.01999+0.24)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.01999+0.24)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.34+0.24)x6.85
+........\l_fontspec_font <
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.74
+.....\hbox(9.01999+0.24)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.01999+0.24)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.34+0.24)x6.85
+........\l_fontspec_font <
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.74
+.....\hbox(9.01999+0.24)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.01999+0.24)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.34+0.24)x6.85
+........\l_fontspec_font >
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.74
+.....\hbox(9.01999+0.24)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.01999+0.24)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.34+0.24)x6.85
+........\l_fontspec_font >
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.99
+.....\hbox(9.76999+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.76999+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.09+1.03)x6.85
+........\l_fontspec_font ≤
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.20001
+.....\hbox(9.76999+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.76999+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.09+1.03)x6.85
+........\l_fontspec_font ≤
+......\l_fontspec_font 𝑏
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\rule(*+*)x0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\vbox(142.2638+0.25)x29.60367, glue set - 0.61984
+.....\glue 0.0 plus -2.0
+.....\glue(\splittopskip) 0.23001 plus 2.0
+.....\hbox(9.76999+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.76999+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.09+1.03)x6.85
+........\l_fontspec_font ≥
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.20001
+.....\hbox(9.76999+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.76999+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.09+1.03)x6.85
+........\l_fontspec_font ≥
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 0.65001
+.....\hbox(10.31999+1.64)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(10.31999+1.64)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.64+1.64)x6.85
+........\l_fontspec_font ≲
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 0.04001
+.....\hbox(10.31999+1.64)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(10.31999+1.64)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.64+1.64)x6.85
+........\l_fontspec_font ≳
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\lineskip) 1.0
+.....\hbox(10.73+2.04)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(10.73+2.04)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(7.05+2.04)x6.85
+........\l_fontspec_font ≶
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\lineskip) 1.0
+.....\hbox(10.73+2.04)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(10.73+2.04)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(7.05+2.04)x6.85
+........\l_fontspec_font ≷
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 0.96
+.....\hbox(9.0+0.26)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.0+0.26)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.32+0.26)x6.85
+........\l_fontspec_font ≺
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.74
+.....\hbox(9.0+0.26)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.0+0.26)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.32+0.26)x6.85
+........\l_fontspec_font ≻
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.75002
+.....\hbox(8.98999+0.25)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.98999+0.25)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.31+0.25)x6.85
+........\l_fontspec_font ⊂
+......\l_fontspec_font 𝑏
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\rule(*+*)x0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\vbox(142.2638+1.19)x29.60367, glue set - 0.48901
+.....\glue 0.0 plus -2.0
+.....\glue(\splittopskip) 1.01001 plus 2.0
+.....\hbox(8.98999+0.25)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.98999+0.25)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.31+0.25)x6.85
+........\l_fontspec_font ⊃
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.0
+.....\hbox(9.75+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.75+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.07+1.03)x6.85
+........\l_fontspec_font ⊆
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.22
+.....\hbox(9.75+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.75+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.07+1.03)x6.85
+........\l_fontspec_font ⊇
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 0.67001
+.....\hbox(10.29999+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(10.29999+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.62+0.0)x6.85
+........\l_fontspec_font ⊢
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.59001
+.....\hbox(10.29999+0.11)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(10.29999+0.0)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.62+0.0)x6.85
+........\l_fontspec_font ⊨
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.59001
+.....\hbox(10.29999+0.11)x18.32, shifted 5.64183
+......\l_fontspec_font 𝑎
+......\vbox(10.29999+0.0)x8.6
+.......\hbox(6.62+1.56)x0.0, shifted 6.04001
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.62+0.0)x8.6
+........\l_fontspec_font ⊩
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.59001
+.....\hbox(10.29999+0.11)x18.32, shifted 5.64183
+......\l_fontspec_font 𝑎
+......\vbox(10.29999+0.0)x8.6
+.......\hbox(6.62+1.56)x0.0, shifted 6.04001
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.62+0.0)x8.6
+........\l_fontspec_font ⊫
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.93001
+.....\hbox(9.95999+1.2)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.95999+1.2)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.28+1.2)x6.85
+........\l_fontspec_font ≼
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 0.83002
+.....\hbox(9.96999+1.19)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.96999+1.19)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.29+1.19)x6.85
+........\l_fontspec_font ≽
+......\l_fontspec_font 𝑏
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\rule(*+*)x0.0
+....\glue 0.0 plus 1.0fil minus 1.0fil
+....\vbox(142.2638+0.11)x29.60367, glue set 0.674
+.....\glue 0.0 plus -2.0
+.....\glue(\splittopskip) 0.25 plus 2.0
+.....\hbox(9.75+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.75+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.07+1.03)x6.85
+........\l_fontspec_font ⊑
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.22
+.....\hbox(9.75+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.75+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.07+1.03)x6.85
+........\l_fontspec_font ⊒
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.98001
+.....\hbox(8.98999+0.25)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.98999+0.25)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.31+0.25)x6.85
+........\l_fontspec_font ⊲
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.76001
+.....\hbox(8.98999+0.25)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(8.98999+0.25)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.31+0.25)x6.85
+........\l_fontspec_font ⊳
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 2.0
+.....\hbox(9.75+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.75+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.07+1.03)x6.85
+........\l_fontspec_font ⊴
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.22
+.....\hbox(9.75+1.03)x16.57, shifted 6.51683
+......\l_fontspec_font 𝑎
+......\vbox(9.75+1.03)x6.85
+.......\hbox(6.62+1.56)x0.0, shifted 5.16501
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(6.07+1.03)x6.85
+........\l_fontspec_font ⊵
+......\l_fontspec_font 𝑏
+.....\penalty 0
+.....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+.....\penalty 10000
+.....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+.....\glue(\baselineskip) 1.72
+.....\hbox(9.25+0.11)x15.92, shifted 6.84184
+......\l_fontspec_font 𝑎
+......\vbox(9.25+0.1)x6.2
+.......\hbox(6.62+1.56)x0.0, shifted 4.84001
+........\l_fontspec_font ̸
+.......\kern-4.5
+.......\hbox(5.57+0.1)x6.2
+........\l_fontspec_font ⫝
+......\l_fontspec_font 𝑏
+....\hbox(4.42+1.94)x0.0, glue set - 5.56fil
+.....\hbox(4.42+1.94)x5.56
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+...\kern -1.94
+...\penalty 0
+...\penalty 10000
+...\penalty 0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(F-.aux)
