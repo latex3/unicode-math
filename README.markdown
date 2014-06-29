@@ -153,6 +153,17 @@ standard behaviour.
 CHANGE HISTORY
 --------------
 
+- v0.7e (2014/06/30)
+
+  * No longer assume fixltx2e has been loaded.
+  * Some ascii math symbols have been renamed with a \math... prefix, such as \mathquestion.
+  * Assume latest luaotfload is being used; no need for a separate unicode-math.lua script.
+  * Assorted typos and minor bugs.
+
+- v0.7e (2013/05/04)
+
+  * Track luaotfload updates.
+
 - v0.7d (2013/03/16)
 
   * More expl3 changes missed first time around. (Sorry again.)
