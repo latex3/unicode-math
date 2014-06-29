@@ -543,12 +543,12 @@ This work is "maintained" by Will Robertson.
 % the caligraphic letters are accessed with the same glyph slots as the
 % script letters but with the first stylistic set feature (|ss01|) applied.
 % \begin{verbatim}
-%   \setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
+%   \setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{xits-math.otf}
 % \end{verbatim}
 % An example is shown below.
 % \begin{quote}
-% \setmathfont[range=\mathscr]{XITS Math}
-% \setmathfont[range=\mathcal,StylisticSet=1]{XITS Math}
+% \setmathfont[range=\mathscr]{xits-math.otf}
+% \setmathfont[range=\mathcal,StylisticSet=1]{xits-math.otf}
 % The Script style (\cs{mathscr}) in XITS Math is: $\mathscr{ABCXYZ}$\par
 % The Caligraphic style (\cs{mathcal}) in XITS Math is: $\mathcal{ABCXYZ}$
 % \end{quote}
@@ -5396,11 +5396,23 @@ This work is "maintained" by Will Robertson.
 \fvset{gobble=2,fontsize=\small,xleftmargin=2em}
 %\usepackage[rm,small]{titlesec}
 
-\setmainfont[Ligatures=TeX]{TeX Gyre Pagella}
-\setsansfont[Scale=MatchLowercase,Ligatures=TeX]{Iwona}
-\setmonofont[Scale=MatchLowercase]{Inconsolata}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Iwona}%
+ [
+  Scale=MatchLowercase,
+  Extension = .otf,
+  UprightFont = *-Regular,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold,
+  BoldItalicFont = *-BoldItalic,
+ ]
+\setmonofont{Inconsolatazi4-Regular.otf}%
+ [
+  Scale=MatchLowercase,
+  BoldFont=Inconsolatazi4-Bold.otf
+ ]
 \setmathfont{texgyrepagella-math.otf}
-\newfontface\umfont{XITS Math}
+\newfontface\umfont{xits-math.otf}
 
 \usepackage{hypdoc}
 \hypersetup{linktocpage}
