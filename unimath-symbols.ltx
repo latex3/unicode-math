@@ -33,6 +33,7 @@
 
 \defmathfont{lm}{latinmodern-math.otf}{CC6666}
 \defmathfont{xits}{xits-math.otf}{CCCC66}
+\defmathfont{stix}{STIX Math}{AA66CC}
 \defmathfont{cambria}{Cambria Math}{66CCCC}
 \defmathfont{asana}{Asana-Math.otf}{6666CC}
 \defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}
@@ -41,9 +42,9 @@
 \def\INPUT{\input{unicode-math-table.tex}}
 \def\TABLE{%
 \par\noindent
-\begin{longtable}[l]{@{}lccccccll@{}}
+\begin{longtable}[l]{@{}lcccccccll@{}}
   \toprule
-  \textsc{usv} & M & X & C & A & P & E & Macro & Description \\
+  \textsc{usv} & M & X & S & C & A & P & E & Macro & Description \\
   \midrule \endhead
   \INPUT\\
   \bottomrule
@@ -70,6 +71,7 @@
       \USV{#1} &
       \SYMB{#2}{lm}{#1} &
       \SYMB{#2}{xits}{#1} &
+      \SYMB{#2}{stix}{#1} &
       \SYMB{#2}{cambria}{#1} &
       \SYMB{#2}{asana}{#1} &
       \SYMB{#2}{pagella}{#1} &
@@ -144,6 +146,7 @@ Eight fonts are shown: (with approximate symbol counts)
 \begin{itemize}
 \item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
 \item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
+\item[S] \mathversion{stix} $\mathup{STIX\ Math}$ (\ref{count:stix})
 \item[C] \mathversion{cambria} $\mathup{Cambria\ Math}$ (\ref{count:cambria})
 \item[A] \mathversion{asana} $\mathup{Asana\ Math}$ (\ref{count:asana})
 \item[P] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
@@ -421,6 +424,7 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 
 \refstepcounter{lm}\label{count:lm}
 \refstepcounter{xits}\label{count:xits}
+\refstepcounter{stix}\label{count:stix}
 \refstepcounter{cambria}\label{count:cambria}
 \refstepcounter{asana}\label{count:asana}
 \refstepcounter{pagella}\label{count:pagella}
