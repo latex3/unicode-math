@@ -1102,7 +1102,6 @@ This work is "maintained" by Will Robertson.
  }
 %    \end{macrocode}
 %
-% Start using \LaTeX3 --- finally!
 %    \begin{macrocode}
 \ExplSyntaxOn
 %    \end{macrocode}
@@ -1337,6 +1336,22 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+% \paragraph{Compatibility}
+%    \begin{macrocode}
+\bool_new:N \g_@@_mathit_text_bool
+\bool_new:N \g_@@_mathbf_text_bool
+\@@_keys_choices:nn {mathit}
+ {
+  {math} { \bool_set_false:N \g_@@_mathit_text_bool }
+  {text} { \bool_set_true:N  \g_@@_mathit_text_bool }
+ }
+\@@_keys_choices:nn {mathbf}
+ {
+  {math} { \bool_set_false:N \g_@@_mathbf_text_bool }
+  {text} { \bool_set_true:N  \g_@@_mathbf_text_bool }
+ }
+%    \end{macrocode}
+%
 % \paragraph{math-style}
 %    \begin{macrocode}
 \@@_keys_choices:nn {normal-style}
@@ -1553,10 +1568,22 @@ This work is "maintained" by Will Robertson.
 \unimathsetup {math-style=TeX}
 \unimathsetup {slash-delimiter=ascii}
 \unimathsetup {trace=off}
+\unimathsetup {mathit=text,mathbf=text}
 \cs_if_exist:NT \tfrac { \unimathsetup {active-frac=small} }
 \ProcessKeysOptions {unicode-math}
 %    \end{macrocode}
 %
+% \subsection{Programmers' interface}
+%
+% \begin{macro}{\unimath_get_mathstyle:}
+% This command expands to the currently math style.
+%    \begin{macrocode}
+\cs_new:Nn \unimath_get_mathstyle:
+ {
+  \tl_use:N \l_@@_mathstyle_tl
+ }
+%    \end{macrocode}
+% \end{macro}
 %
 % End of preamble code.
 %    \begin{macrocode}
@@ -1565,6 +1592,7 @@ This work is "maintained" by Will Robertson.
 %
 % (Error messages and warning definitions go here from the |msg| chunk
 %  defined in \secref[vref]{codemsg}.)
+%
 %
 % \section{Bifurcation}
 %
@@ -1867,7 +1895,7 @@ This work is "maintained" by Will Robertson.
 % Prevent spaces, and that's it:
 %    \begin{macrocode}
   \ignorespaces
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1907,7 +1935,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
   \tl_set:Nn \@@_symfont_tl {operators}
   \cs_set_eq:NN \_@@_sym:nnn \@@_process_symbol_noparse:nnn
-  \cs_set_eq:NN \@@_set_mathalphabet_char:Nnn \@@_mathmap_noparse:Nnn
+  \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
   \cs_set_eq:NN \@@_remap_symbol:nnn \@@_remap_symbol_noparse:nnn
   \cs_set_eq:NN \@@_maybe_init_alphabet:n \@@_init_alphabet:n
   \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
@@ -2117,16 +2145,12 @@ This work is "maintained" by Will Robertson.
 \cs_new:Nn \@@_remap_symbol_parse:nnn
  {
   \@@_if_char_spec:nNNT {#3} {\@nil} {#2}
-   {
-    \@@_remap_symbol_noparse:nnn {#1} {#2} {#3}
-   }
+   { \@@_remap_symbol_noparse:nnn {#1} {#2} {#3} }
  }
 \cs_new:Nn \@@_remap_symbol_noparse:nnn
  {
   \clist_map_inline:nn {#1}
-   {
-    \@@_set_mathcode:nnnn {##1} {#2} {\@@_symfont_tl} {#3}
-   }
+   { \@@_set_mathcode:nnnn {##1} {#2} {\@@_symfont_tl} {#3} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2744,33 +2768,39 @@ This work is "maintained" by Will Robertson.
 % The remap style can also be |\mathcal->stixcal|, which I marginally prefer
 % in the general case.
 %    \begin{macrocode}
-\prg_new_conditional:Nnn \@@_if_mathalph_decl:n {TF} {
-  \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {#1} }
+\prg_new_conditional:Nnn \@@_if_mathalph_decl:n {TF}
+ {
+  \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n { \tl_to_str:n {#1} } }
+  \tl_remove_all:Nn \l_@@_tmpa_tl { \tl_to_str:n {\math} }
   \tl_clear:N \l_@@_tmpb_tl
   \tl_clear:N \l_@@_tmpc_tl
-  \tl_if_in:NnT \l_@@_tmpa_tl {->} {
-    \exp_after:wN \@@_split_arrow:w \l_@@_tmpa_tl \q_nil
-  }
-  \tl_if_in:NnT \l_@@_tmpa_tl {/} {
-    \exp_after:wN \@@_split_slash:w \l_@@_tmpa_tl \q_nil
-  }
-  \tl_if_empty:NT \l_@@_tmpc_tl { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
-  \seq_if_in:NVTF \g_@@_mathstyles_seq \l_@@_tmpa_tl {
-    \prg_return_true:
-  }{
-    \prg_return_false:
-  }
-}
-\cs_set:Npn \@@_split_arrow:w #1->#2 \q_nil {
+  
+  \tl_if_in:NnT \l_@@_tmpa_tl {->}
+   { \exp_after:wN \@@_split_arrow:w \l_@@_tmpa_tl \q_nil }
+   
+  \tl_if_in:NnT \l_@@_tmpa_tl {/}
+   { \exp_after:wN \@@_split_slash:w \l_@@_tmpa_tl \q_nil }
+   
+  \tl_if_empty:NT \l_@@_tmpc_tl
+   { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
+   
+  \seq_if_in:NVTF \g_@@_mathstyles_seq \l_@@_tmpa_tl
+   { \prg_return_true: } { \prg_return_false: }
+ }
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_set:Npn \@@_split_arrow:w #1->#2 \q_nil
+ {
   \tl_set:Nn \l_@@_tmpa_tl {#1}
-  \tl_if_single:nTF {#2}
-    { \tl_set:Nn \l_@@_tmpc_tl {#2} }
-    { \exp_args:NNc \tl_set:Nn \l_@@_tmpc_tl {math#2} }
-}
-\cs_set:Npn \@@_split_slash:w #1/#2 \q_nil {
+  \tl_set:Nx \l_@@_tmpc_tl { \tl_to_str:n {#1} }
+ }
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_set:Npn \@@_split_slash:w #1/#2 \q_nil
+ {
   \tl_set:Nn \l_@@_tmpa_tl {#1}
   \tl_set:Nn \l_@@_tmpb_tl {#2}
-}
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2936,17 +2966,6 @@ This work is "maintained" by Will Robertson.
 %
 % \subsection{Initialising math styles}
 %
-% \begin{macro}{\@@_new_mathstyle:N}
-% This function defines a new command like \cs{mathfrak}.
-%    \begin{macrocode}
-\cs_new:Nn \@@_new_mathstyle:N
- {
-  \@@_prepare_mathstyle:f {\exp_after:wN \use_none:nnnnn \token_to_str:N #1}
-  \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
- }
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\g_@@_default_mathalph_seq}
 % This sequence stores the alphabets in each math style.
 %    \begin{macrocode}
@@ -2966,37 +2985,55 @@ This work is "maintained" by Will Robertson.
  {
 \clist_map_inline:nn
  {
-  {\mathup    } {latin,Latin,greek,Greek,num,misc} {\mathup    }  ,
-  {\mathit    } {latin,Latin,greek,Greek,misc}     {\mathit    }  ,
-  {\mathbb    } {latin,Latin,num,misc}             {\mathbb    }  ,
-  {\mathbbit  } {misc}                             {\mathbbit  }  ,
-  {\mathscr   } {latin,Latin}                      {\mathscr   }  ,
-  {\mathcal   } {Latin}                            {\mathscr   }  ,
-  {\mathbfcal } {Latin}                            {\mathbfscr }  ,
-  {\mathfrak  } {latin,Latin}                      {\mathfrak  }  ,
-  {\mathtt    } {latin,Latin,num}                  {\mathtt    }  ,
-  {\mathsfup  } {latin,Latin,num}                  {\mathsfup  }  ,
-  {\mathsfit  } {latin,Latin}                      {\mathsfit  }  ,
-  {\mathbfup  } {latin,Latin,greek,Greek,num,misc} {\mathbfup  }  ,
-  {\mathbfit  } {latin,Latin,greek,Greek,misc}     {\mathbfit  }  ,
-  {\mathbfscr } {latin,Latin}                      {\mathbfscr }  ,
-  {\mathbffrak} {latin,Latin}                      {\mathbffrak}  ,
-  {\mathbfsfup} {latin,Latin,greek,Greek,num,misc} {\mathbfsfup}  ,
-  {\mathbfsfit} {latin,Latin,greek,Greek,misc}     {\mathbfsfit}
+  up, it, bf, tt, bfup, bfit, bb , bbit, scr, bfscr, cal, bfcal,
+  frak, bffrak, sfup, sfit, bfsfup, bfsfit, sf, bfsf
  }
+ { \@@_prepare_mathstyle:n {#1} }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_default_mathalph:nnn
  {
-  \seq_put_right:Nn \g_@@_default_mathalph_seq {#1}
-  \exp_after:wN \@@_new_mathstyle:N \use_i:nnn #1
+  \seq_put_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
  }
-%    \end{macrocode}
-% These are `false' mathstyles that inherit other definitions:
-%    \begin{macrocode}
-  \@@_new_mathstyle:N \mathsf
-  \@@_new_mathstyle:N \mathbf
-  \@@_new_mathstyle:N \mathbfsf
-%    \end{macrocode}
-%    \begin{macrocode}
+\@@_default_mathalph:nnn {up    } {latin,Latin,greek,Greek,num,misc} {up    }
+\@@_default_mathalph:nnn {it    } {latin,Latin,greek,Greek,misc}     {it    }
+\@@_default_mathalph:nnn {bb    } {latin,Latin,num,misc}             {bb    }
+\@@_default_mathalph:nnn {bbit  } {misc}                             {bbit  }
+\@@_default_mathalph:nnn {scr   } {latin,Latin}                      {scr   }
+\@@_default_mathalph:nnn {cal   } {Latin}                            {scr   }
+\@@_default_mathalph:nnn {bfcal } {Latin}                            {bfscr }
+\@@_default_mathalph:nnn {frak  } {latin,Latin}                      {frak  }
+\@@_default_mathalph:nnn {tt    } {latin,Latin,num}                  {tt    }
+\@@_default_mathalph:nnn {sfup  } {latin,Latin,num}                  {sfup  }
+\@@_default_mathalph:nnn {sfit  } {latin,Latin}                      {sfit  }
+\@@_default_mathalph:nnn {bfup  } {latin,Latin,greek,Greek,num,misc} {bfup  }
+\@@_default_mathalph:nnn {bfit  } {latin,Latin,greek,Greek,misc}     {bfit  }
+\@@_default_mathalph:nnn {bfscr } {latin,Latin}                      {bfscr }
+\@@_default_mathalph:nnn {bffrak} {latin,Latin}                      {bffrak}
+\@@_default_mathalph:nnn {bfsfup} {latin,Latin,greek,Greek,num,misc} {bfsfup}
+\@@_default_mathalph:nnn {bfsfit} {latin,Latin,greek,Greek,misc}     {bfsfit}
  }
+
+%% TODO: fix :)
+\def\mathnormal{\symit}
+\def\mathup{\symup    }
+\def\mathit{\symit    }
+\def\mathbb{\symbb    }
+\def\mathbbit{\symbbit  }
+\def\mathscr{\symscr   }
+\def\mathcal{\symcal   }
+\def\mathbfcal{\symbfcal }
+\def\mathfrak{\symfrak  }
+\def\mathtt{\symtt    }
+\def\mathsfup{\symsfup  }
+\def\mathsfit{\symsfit  }
+\def\mathbfup{\symbfup  }
+\def\mathbfit{\symbfit  }
+\def\mathbfscr{\symbfscr }
+\def\mathbffrak{\symbffrak}
+\def\mathbfsfup{\symbfsfup}
+\def\mathbfsfit{\symbfsfit}
 %    \end{macrocode}
 %
 %
@@ -3018,12 +3055,12 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_prepare_mathstyle:n
  {
+  \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
+
   \@@_init_alphabet:x {#1}
-  \cs_set:cpn {_@@_math#1_aux:n} ##1
-   {
-    \use:c {@@_switchto_math#1:} ##1 \egroup
-   }
-  \cs_set_protected:cpx {math#1}
+  \cs_set:cpn {_@@_sym_#1_aux:n} ##1
+   { \use:c {@@_switchto_#1:} ##1 \egroup }
+  \cs_set_protected:cpx {sym#1}
    {
     \exp_not:n
      {
@@ -3031,28 +3068,28 @@ This work is "maintained" by Will Robertson.
       \mode_if_math:F
         {
           \egroup\expandafter
-          \non@alpherr\expandafter{\csname math#1\endcsname\space}
+          \non@alpherr\expandafter{\csname sym#1\endcsname\space}
         }
       \tl_set:Nn \l_@@_mathstyle_tl {#1}
      }
-    \exp_not:c {_@@_math#1_aux:n}
+    \exp_not:c {_@@_sym_#1_aux:n}
    }
  }
 \tl_new:N \l_@@_mathstyle_tl
-\cs_generate_variant:Nn \@@_prepare_mathstyle:n {f}
 %    \end{macrocode}
 % \end{macro}
+%
 %
 % \begin{macro}{\@@_init_alphabet:n}
 % \darg{math alphabet name (e.g., \texttt{it} or \texttt{bb})}
 % This macro initialises the macros used to set up a math alphabet.
-% First used with the math alphabet macro is first defined, but then used
+% First used when the math alphabet macro is first defined, but then used
 % later when redefining a particular maths alphabet.
 %    \begin{macrocode}
 \cs_set:Nn \@@_init_alphabet:n
  {
   \@@_log:nx {alph-initialise} {#1}
-  \cs_set_eq:cN {@@_switchto_math#1:} \prg_do_nothing:
+  \cs_set_eq:cN {@@_switchto_#1:} \prg_do_nothing:
  }
 \cs_generate_variant:Nn \@@_init_alphabet:n {x}
 %    \end{macrocode}
@@ -3060,9 +3097,7 @@ This work is "maintained" by Will Robertson.
 % defined dynamically.)
 %    \begin{macrocode}
 \cs_new:Npn \@@_maybe_init_alphabet:V
- {
-  \exp_args:NV \@@_maybe_init_alphabet:n
- }
+ { \exp_args:NV \@@_maybe_init_alphabet:n }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3084,57 +3119,56 @@ This work is "maintained" by Will Robertson.
 % If |range=| has been used to configure styles, those choices will be in
 % |\l_@@_mathalph_seq|. If not, set up the styles implicitly:
 %    \begin{macrocode}
-  \seq_if_empty:NTF \l_@@_mathalph_seq {
+  \seq_if_empty:NTF \l_@@_mathalph_seq
+   {
     \@@_log:n {setup-implicit}
     \seq_set_eq:NN \l_@@_mathalph_seq \g_@@_default_mathalph_seq
     \bool_set_true:N \l_@@_implicit_alph_bool
     \@@_maybe_init_alphabet:n  {sf}
     \@@_maybe_init_alphabet:n  {bf}
     \@@_maybe_init_alphabet:n  {bfsf}
-  }
+   }
 %    \end{macrocode}
 % If |range=| has been used then we're in explicit mode:
 %    \begin{macrocode}
-  {
+   {
     \@@_log:n {setup-explicit}
     \bool_set_false:N \l_@@_implicit_alph_bool
-    \cs_set_eq:NN \@@_set_mathalphabet_char:Nnn \@@_mathmap_noparse:Nnn
+    \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
     \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
-  }
+   }
 %    \end{macrocode}
 % Now perform the mapping:
 %    \begin{macrocode}
-  \seq_map_inline:Nn \l_@@_mathalph_seq {
+  \seq_map_inline:Nn \l_@@_mathalph_seq
+   {
     \tl_set:No \l_@@_tmpa_tl { \use_i:nnn   ##1 }
     \tl_set:No \l_@@_tmpb_tl { \use_ii:nnn  ##1 }
     \tl_set:No \l_@@_remap_style_tl { \use_iii:nnn ##1 }
-    \tl_set:Nx \l_@@_remap_style_tl {
-      \exp_after:wN \exp_after:wN \exp_after:wN \use_none:nnnnn
-      \exp_after:wN \token_to_str:N \l_@@_remap_style_tl
-    }
-    \tl_if_empty:NT \l_@@_tmpb_tl {
+
+    \tl_if_empty:NT \l_@@_tmpb_tl
+     {
       \cs_set_eq:NN \@@_maybe_init_alphabet:n \@@_init_alphabet:n
       \tl_set:Nn \l_@@_tmpb_tl { latin,Latin,greek,Greek,num,misc }
-    }
+     }
+    
     \@@_setup_math_alphabet:VVV
       \l_@@_tmpa_tl \l_@@_tmpb_tl \l_@@_remap_style_tl
-  }
+   }
+
   \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
  }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_setup_math_alphabet:Nnn}
-% \darg{Math font style command (e.g., \cs{mathbb})}
+% \begin{macro}{\@@_setup_math_alphabet:nnn}
+% \darg{Math font style command (e.g., \cs{bb})}
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
-% \darg{Name of the output math style (usually same as input \texttt{bb})}
+% \darg{Name of the output math style (usually same as the name of the style \texttt{bb})}
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_math_alphabet:Nnn
+\cs_new:Nn \@@_setup_math_alphabet:nnn
  {
-  \tl_set:Nx \l_@@_style_tl
-   {
-    \exp_after:wN \use_none:nnnnn \token_to_str:N #1
-   }
+  \tl_set:Nx \l_@@_style_tl {#1}
 %    \end{macrocode}
 % First check that at least one of the alphabets for the font shape is defined\dots
 %    \begin{macrocode}
@@ -3143,7 +3177,7 @@ This work is "maintained" by Will Robertson.
     \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {@@_config_ \l_@@_style_tl _\l_@@_tmpa_tl :n}
      {
-      \str_if_eq_x:nnTF {\l_@@_tmpa_tl}{misc}
+      \str_if_eq_x:nnTF {\l_@@_tmpa_tl} {misc}
        {
         \@@_maybe_init_alphabet:V \l_@@_style_tl
         \clist_map_break:
@@ -3165,7 +3199,7 @@ This work is "maintained" by Will Robertson.
     \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {@@_config_ \l_@@_style_tl _ \l_@@_tmpa_tl :n}
      {
-      \str_if_eq_x:nnTF {\l_@@_tmpa_tl}{misc}
+      \str_if_eq_x:nnTF {\l_@@_tmpa_tl} {misc}
        {
         \@@_log:nx {setup-alph} {math \l_@@_style_tl~(\l_@@_tmpa_tl)}
         \use:c {@@_config_ \l_@@_style_tl _ \l_@@_tmpa_tl :n} {#3}
@@ -3193,7 +3227,7 @@ This work is "maintained" by Will Robertson.
      }
    }
  }
-\cs_generate_variant:Nn \@@_setup_math_alphabet:Nnn {VVV}
+\cs_generate_variant:Nn \@@_setup_math_alphabet:nnn {VVV}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3222,18 +3256,14 @@ This work is "maintained" by Will Robertson.
 % \begin{macro}{\@@_map_char_parse:nn}
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_char_noparse:nn
- {
-  \@@_set_mathcode:nnnn {#1}{\mathalpha}{\@@_symfont_tl}{#2}
- }
+ { \@@_set_mathcode:nnnn {#1}{\mathalpha}{\@@_symfont_tl}{#2} }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_char_parse:nn
  {
   \@@_if_char_spec:nNNT {#1} {\@nil} {\mathalpha}
-   {
-    \@@_map_char_noparse:nn {#1}{#2}
-   }
+   { \@@_map_char_noparse:nn {#1}{#2} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -3254,9 +3284,7 @@ This work is "maintained" by Will Robertson.
   \cs_if_exist:cT { \@@_to_usv:nn {#3} {#1} }
   {
     \clist_map_inline:nn {#2}
-     {
-      \@@_map_char_single:nnn {##1} {#3} {#1}
-     }
+     { \@@_map_char_single:nnn {##1} {#3} {#1} }
   }
  }
 %    \end{macrocode}
@@ -3272,9 +3300,8 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Nn \@@_map_chars_range:nnn
  {
-  \int_step_inline:nnnn {0}{1}{#1-1} {
-    \@@_map_char_single:nn {#2+##1}{#3+##1}
-  }
+  \int_step_inline:nnnn {0}{1}{#1-1}
+   { \@@_map_char_single:nn {#2+##1}{#3+##1} }
  }
 \cs_generate_variant:Nn \@@_map_chars_range:nnn {ncc}
 %    \end{macrocode}
@@ -3294,9 +3321,7 @@ This work is "maintained" by Will Robertson.
 \cs_new:Nn \@@_map_chars_Latin:nn
  {
   \clist_map_inline:nn {#1}
-   {
-    \@@_map_chars_range:nnnn {26} {##1} {#2} {Latin}
-   }
+   { \@@_map_chars_range:nnnn {26} {##1} {#2} {Latin} }
  }
 %    \end{macrocode}
 %
@@ -3304,9 +3329,7 @@ This work is "maintained" by Will Robertson.
 \cs_new:Nn \@@_map_chars_latin:nn
  {
   \clist_map_inline:nn {#1}
-   {
-    \@@_map_chars_range:nnnn {26} {##1} {#2} {latin}
-   }
+   { \@@_map_chars_range:nnnn {26} {##1} {#2} {latin} }
  }
 %    \end{macrocode}
 %
@@ -3339,9 +3362,7 @@ This work is "maintained" by Will Robertson.
 %
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_chars_numbers:nn
- {
-  \@@_map_chars_range:nnnn {10} {#1} {#2} {num}
- }
+ { \@@_map_chars_range:nnnn {10} {#1} {#2} {num} }
 %    \end{macrocode}
 %
 %
@@ -3350,70 +3371,68 @@ This work is "maintained" by Will Robertson.
 % \subsubsection{Functions for setting up the maths alphabets}
 %
 % \begin{macro}{\@@_set_mathalphabet_char:Nnn}
-% This is a wrapper for either |\@@_mathmap_noparse:Nnn| or
+% This is a wrapper for either |\@@_mathmap_noparse:nnn| or
 % |\@@_mathmap_parse:Nnn|, depending on the context.
 % Cannot use |\cs_generate_variant:Nn| because the base function is
 % defined dynamically.
 %    \begin{macrocode}
-\cs_new:Npn \@@_set_mathalphabet_char:Ncc
- {
-  \exp_args:NNcc \@@_set_mathalphabet_char:Nnn
- }
+\cs_new:Npn \@@_set_mathalphabet_char:ncc
+ { \exp_args:Nncc \@@_set_mathalphabet_char:nnn }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_mathmap_noparse:Nnn}
+% \begin{macro}{\@@_mathmap_noparse:nnn}
 % \darg{Maths alphabet, \eg, \cmd\mathbb}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % Adds \cs{@@_set_mathcode:nnnn} declarations to the specified maths alphabet's definition.
 %    \begin{macrocode}
-\cs_new:Nn \@@_mathmap_noparse:Nnn
+\cs_new:Nn \@@_mathmap_noparse:nnn
  {
   \clist_map_inline:nn {#2}
    {
-    \tl_put_right:cx {@@_switchto_\cs_to_str:N #1:}
+    \tl_put_right:cx {@@_switchto_#1:}
      {
-      \@@_set_mathcode:nnnn{##1}{\mathalpha}{\@@_symfont_tl}{#3}
+      \@@_set_mathcode:nnnn {##1} {\mathalpha} {\@@_symfont_tl} {#3}
      }
    }
  }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_mathmap_parse:Nnn}
-% \darg{Maths alphabet, \eg, \cmd\mathbb}
+% \begin{macro}{\@@_mathmap_parse:nnn}
+% \darg{Maths alphabet, \eg, `bb'}
 % \darg{Input slot(s), \eg, the slot for `A' (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$'}
 % When \cmd\@@_if_char_spec:nNNT\ is executed, it populates the \cmd\l_@@_char_nrange_clist\
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cs{@@_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
-\cs_new:Nn \@@_mathmap_parse:Nnn
+\cs_new:Nn \@@_mathmap_parse:nnn
  {
   \clist_if_in:NnT \l_@@_char_nrange_clist {#3}
    {
-    \@@_mathmap_noparse:Nnn {#1}{#2}{#3}
+    \@@_mathmap_noparse:nnn {#1}{#2}{#3}
    }
  }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_set_mathalphabet_char:Nnnn}
+% \begin{macro}{\@@_set_mathalphabet_char:nnnn}
 % \darg{math style command}
 % \darg{input math alphabet name}
 % \darg{output math alphabet name}
 % \darg{char name to map}
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalphabet_char:Nnnn
+\cs_new:Nn \@@_set_mathalphabet_char:nnnn
  {
-  \@@_set_mathalphabet_char:Ncc #1 { \@@_to_usv:nn {#2} {#4} }
-                                   { \@@_to_usv:nn {#3} {#4} }
+  \@@_set_mathalphabet_char:ncc {#1} { \@@_to_usv:nn {#2} {#4} }
+                                     { \@@_to_usv:nn {#3} {#4} }
  }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_set_mathalph_range:nNnn}
+% \begin{macro}{\@@_set_mathalph_range:nnnn}
 % \darg{Number of iterations}
 % \darg{Maths alphabet}
 % \darg{Starting input char (single)}
@@ -3421,19 +3440,19 @@ This work is "maintained" by Will Robertson.
 % Loops through character ranges setting \cmd\mathcode.
 % First the version that uses numbers:
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalph_range:nNnn
+\cs_new:Nn \@@_set_mathalph_range:nnnn
  {
   \int_step_inline:nnnn {0}{1}{#1-1}
-    { \@@_set_mathalphabet_char:Nnn {#2} { ##1 + #3 } { ##1 + #4 } }
+    { \@@_set_mathalphabet_char:nnn {#2} { ##1 + #3 } { ##1 + #4 } }
  }
-\cs_generate_variant:Nn \@@_set_mathalph_range:nNnn {nNcc}
+\cs_generate_variant:Nn \@@_set_mathalph_range:nnnn {nncc}
 %    \end{macrocode}
 % Then the wrapper version that uses names:
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalph_range:nNnnn
+\cs_new:Nn \@@_set_mathalph_range:nnnnn
  {
-  \@@_set_mathalph_range:nNcc {#1} #2 { \@@_to_usv:nn {#3} {#5} }
-                                      { \@@_to_usv:nn {#4} {#5} }
+  \@@_set_mathalph_range:nncc {#1} {#2} { \@@_to_usv:nn {#3} {#5} }
+                                        { \@@_to_usv:nn {#4} {#5} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -3441,66 +3460,66 @@ This work is "maintained" by Will Robertson.
 % \subsubsection{Individual mapping functions for different alphabets}
 %
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalphabet_pos:Nnnn
+\cs_new:Nn \@@_set_mathalphabet_pos:nnnn
  {
   \cs_if_exist:cT { \@@_to_usv:nn {#4}{#2} }
    {
     \clist_map_inline:nn {#3}
-      { \@@_set_mathalphabet_char:Nnnn #1 {##1} {#4} {#2} }
+      { \@@_set_mathalphabet_char:nnnn {#1} {##1} {#4} {#2} }
    }
  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalphabet_numbers:Nnn
+\cs_new:Nn \@@_set_mathalphabet_numbers:nnn
  {
   \clist_map_inline:nn {#2}
-    { \@@_set_mathalph_range:nNnnn {10} #1  {##1} {#3} {num} }
+    { \@@_set_mathalph_range:nnnnn {10} {#1} {##1} {#3} {num} }
  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalphabet_Latin:Nnn
+\cs_new:Nn \@@_set_mathalphabet_Latin:nnn
  {
   \clist_map_inline:nn {#2}
-    { \@@_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {Latin} }
+    { \@@_set_mathalph_range:nnnnn {26} {#1} {##1} {#3} {Latin} }
  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalphabet_latin:Nnn
+\cs_new:Nn \@@_set_mathalphabet_latin:nnn
  {
   \clist_map_inline:nn {#2}
    {
-    \@@_set_mathalph_range:nNnnn {26} #1 {##1} {#3} {latin}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {h}
+    \@@_set_mathalph_range:nnnnn {26} {#1} {##1} {#3} {latin}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {h}
    }
  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalphabet_Greek:Nnn
+\cs_new:Nn \@@_set_mathalphabet_Greek:nnn
  {
   \clist_map_inline:nn {#2}
    {
-    \@@_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {Greek}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varTheta}
+    \@@_set_mathalph_range:nnnnn {25} {#1} {##1} {#3} {Greek}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varTheta}
    }
  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\cs_new:Nn \@@_set_mathalphabet_greek:Nnn
+\cs_new:Nn \@@_set_mathalphabet_greek:nnn
  {
   \clist_map_inline:nn {#2}
    {
-    \@@_set_mathalph_range:nNnnn {25} #1 {##1} {#3} {greek}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varepsilon}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {vartheta}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varkappa}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varphi}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varrho}
-    \@@_set_mathalphabet_char:Nnnn    #1 {##1} {#3} {varpi}
+    \@@_set_mathalph_range:nnnnn {25} {#1} {##1} {#3} {greek}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varepsilon}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {vartheta}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varkappa}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varphi}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varrho}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varpi}
    }
  }
 %    \end{macrocode}
@@ -4431,7 +4450,7 @@ This work is "maintained" by Will Robertson.
 % We need to change \LaTeX's idea of the font used to typeset
 % things like \cmd\sin\ and \cmd\cos:
 %    \begin{macrocode}
-\def\operator@font{\@@_switchto_mathup:}
+\def\operator@font{\@@_switchto_up:}
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_check_and_fix:NNnnnn}
@@ -4527,13 +4546,13 @@ This work is "maintained" by Will Robertson.
 % setup (i.e., \pkg{unicode-math}) doesn't remap the symbols into Plane 1.
 % Which is, of course, what \cs{mathup} is doing.
 %
-% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\@@_switchto_mathup:}|
+% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\@@_switchto_up:}|
 % but activates automatically so old documents that might change the \cs{url}
 % font still work correctly.
 %    \begin{macrocode}
 \AtEndOfPackageFile * {url}
  {
-  \tl_put_left:Nn \Url@FormatString { \@@_switchto_mathup: }
+  \tl_put_left:Nn \Url@FormatString { \@@_switchto_up: }
   \tl_put_right:Nn \UrlSpecials
    {
     \do\`{\mathchar`\`}
