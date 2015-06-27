@@ -11,9 +11,10 @@
 %
 % Wrapper functions:
 %    \begin{macrocode}
+\cs_new:Npn \@@_error:n   { \msg_error:nn   {unicode-math} }
 \cs_new:Npn \@@_warning:n { \msg_warning:nn {unicode-math} }
-\cs_new:Npn \@@_log:n   { \msg_log:nn   {unicode-math} }
-\cs_new:Npn \@@_log:nx  { \msg_log:nnx  {unicode-math} }
+\cs_new:Npn \@@_log:n     { \msg_log:nn     {unicode-math} }
+\cs_new:Npn \@@_log:nx    { \msg_log:nnx    {unicode-math} }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -41,6 +42,11 @@
 \msg_new:nnn {unicode-math} {setup-alph}
 {
   Setup~ alphabet:~ #1.
+}
+\msg_new:nnn {unicode-math} {no-alphabet}
+{
+  I~ am~ trying~ to~ set~ up~ alphabet~"#1"~ but~ there~ are~ no~ configuration~ settings~ for~ it.
+  See~ file~ "unicode-math-alphabets.dtx".
 }
 \msg_new:nnn { unicode-math } { missing-alphabets }
   {
