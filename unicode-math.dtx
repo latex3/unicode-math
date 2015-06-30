@@ -2952,6 +2952,8 @@ This work is "maintained" by Will Robertson.
     varsigma,vartheta,varkappa,varrho,varpi
   }{
     \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
+    \tl_set:cx {up ##1} { \exp_not:N \symup \exp_not:c { ##1 } }
+    \tl_set:cx {it ##1} { \exp_not:N \symit \exp_not:c { ##1 } }
   }
   \tl_set:Nn \epsilon {
     \bool_if:NTF \g_@@_texgreek_bool \mitvarepsilon \mitepsilon
