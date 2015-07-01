@@ -3235,6 +3235,17 @@ This work is "maintained" by Will Robertson.
 \@@_default_mathalph:nnn {bfsfit} {latin,Latin,greek,Greek,misc}     {bfsfit}
 %    \end{macrocode}
 %
+% \subsection{Replacing legacy pure-maths alphabets}
+% The following are alphabets which do not have a math/text ambiguity.
+%    \begin{macrocode}
+\clist_map_inline:nn
+ { normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak }
+ {
+  \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } }
+ }
+%    \end{macrocode}
+%
+%
 %
 % \subsection{Defining the math alphabets per style}
 %
