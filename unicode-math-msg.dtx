@@ -13,6 +13,7 @@
 %    \begin{macrocode}
 \cs_new:Npn \@@_error:n   { \msg_error:nn   {unicode-math} }
 \cs_new:Npn \@@_warning:n { \msg_warning:nn {unicode-math} }
+\cs_new:Npn \@@_warning:nnn { \msg_warning:nnxx {unicode-math} }
 \cs_new:Npn \@@_log:n     { \msg_log:nn     {unicode-math} }
 \cs_new:Npn \@@_log:nx    { \msg_log:nnx    {unicode-math} }
 %    \end{macrocode}
@@ -48,11 +49,15 @@
   I~ am~ trying~ to~ set~ up~ alphabet~"#1"~ but~ there~ are~ no~ configuration~ settings~ for~ it.
   See~ file~ "unicode-math-alphabets.dtx".
 }
+\msg_new:nnn { unicode-math } { no-named-range }
+ {
+  I~ am~ trying~ to~ define~ new~ alphabet~ "#2"~ in~ range~ "#1",~ but~ range~ "#1"~ hasn't~ been~ defined~ yet.
+ }
 \msg_new:nnn { unicode-math } { missing-alphabets }
-  {
-    Missing~math~alphabets~in~font~ "\fontname\l_@@_font" \\ \\
-    \seq_map_function:NN \l_@@_missing_alph_seq \@@_print_indent:n
-  }
+ {
+  Missing~math~alphabets~in~font~ "\fontname\l_@@_font" \\ \\
+  \seq_map_function:NN \l_@@_missing_alph_seq \@@_print_indent:n
+ }
 \cs_new:Nn \@@_print_indent:n { \space\space\space\space #1 \\ }
 \msg_new:nnn {unicode-math} {macro-expected}
 {

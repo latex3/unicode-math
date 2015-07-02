@@ -4,147 +4,14 @@
 %<*alphabets>
 %    \end{macrocode}
 %
-%    \begin{macrocode}
-\cs_new:Nn \@@_new_alphabet_config:nnn
- { \cs_new:cn { @@_config_#1_#2:n } {#3} }
-\cs_new:Nn \@@_alphabet_config:nnn { \use:c {@@_config_#1_#2:n} {#3} }
-\prg_new_conditional:Nnn \@@_if_alphabet_exists:nn {T,TF}
- {
-  \cs_if_exist:cTF {@@_config_#1_#2:n}
-   \prg_return_true: \prg_return_false:
- }
-%    \end{macrocode}
-%
-%
-% \subsubsection{Normal: normal}
-%
-%    \begin{macrocode}
-\@@_new_alphabet_config:nnn {normal} {Latin}
- {
-  \bool_if:NTF \g_@@_literal_bool { \@@_map_chars_Latin:nn {it} {#1} }
-   {
-    \bool_if:NF \g_@@_upLatin_bool { \@@_map_chars_Latin:nn {up,it} {#1} }
-   }
- }
-
-\@@_new_alphabet_config:nnn {normal} {latin}
- {
-  \bool_if:NTF \g_@@_literal_bool
-   {
-    \@@_map_chars_latin:nn {it} {#1}
-    \@@_map_single:nnn {h}{it}{#1}
-   }
-   {
-    \bool_if:NF \g_@@_uplatin_bool
-     {
-      \@@_map_chars_latin:nn {up,it} {#1}
-      \@@_map_single:nnn {h}{up,it}{#1}
-      \@@_map_single:nnn {dotlessi}{up,it}{#1}
-      \@@_map_single:nnn {dotlessj}{up,it}{#1}
-     }
-   }
- }
-
-\@@_new_alphabet_config:nnn {normal} {Greek}
- {
-  \bool_if:NTF \g_@@_literal_bool
-   { \@@_map_chars_Greek:nn {it}{#1} }
-   {
-    \bool_if:NF \g_@@_upGreek_bool
-     { \@@_map_chars_Greek:nn {up,it}{#1} }
-   }
- }
-
-\@@_new_alphabet_config:nnn {normal} {greek}
- {
-  \bool_if:NTF \g_@@_literal_bool
-   {
-    \@@_map_chars_greek:nn {it} {#1}
-   }
-   {
-    \bool_if:NF \g_@@_upgreek_bool { \@@_map_chars_greek:nn {it,up} {#1} }
-   }
- }
-
-\@@_new_alphabet_config:nnn {normal} {misc}
- {
-  \bool_if:NTF \g_@@_literal_Nabla_bool
-   {
-    \@@_map_single:nnn {Nabla}{it}{it}
-   }
-   {
-    \bool_if:NF \g_@@_upNabla_bool
-     {
-      \@@_map_single:nnn {Nabla}{up,it}{it}
-     }
-   }
-  \bool_if:NTF \g_@@_literal_partial_bool
-   {
-    \@@_map_single:nnn {partial}{it}{it}
-   }
-   {
-    \bool_if:NF \g_@@_uppartial_bool
-     {
-      \@@_map_single:nnn {partial}{up,it}{it}
-     }
-   }
- }
-%    \end{macrocode}
-%
-%
-%
-% \subsubsection{Literal: literal}
-%
-%    \begin{macrocode}
-\@@_new_alphabet_config:nnn {literal} {num}
- {
-  \@@_map_chars_numbers:nn {up} {#1}
-  \@@_set_mathalphabet_numbers:nnn {up} {up} {#1}
- }
-
-\@@_new_alphabet_config:nnn {literal} {Latin}
- {
-  \@@_map_chars_Latin:nn {up} {#1}
-  \@@_set_mathalphabet_Latin:nnn {up} {up,it} {#1}
- }
-
-\@@_new_alphabet_config:nnn {literal} {latin}
- {
-  \@@_map_chars_latin:nn {up} {#1}
-  \@@_set_mathalphabet_latin:nnn {up} {up,it} {#1}
- }
-
-\@@_new_alphabet_config:nnn {literal} {Greek}
- {
-  \@@_map_chars_Greek:nn {up} {#1}
-  \@@_set_mathalphabet_Greek:nnn {up} {up,it} {#1}
- }
-
-\@@_new_alphabet_config:nnn {literal} {greek}
- {
-  \@@_map_chars_greek:nn {up} {#1}
-  \@@_set_mathalphabet_greek:nnn {up} {up,it} {#1}
- }
-
-\@@_new_alphabet_config:nnn {literal} {misc}
- {
-  \@@_map_single:nnn {Nabla}{up}{up}
-  \@@_map_single:nnn {partial}{up}{up}
-  \@@_set_mathalphabet_pos:nnnn {up}  {partial} {up,it} {#1}
-  \@@_set_mathalphabet_pos:nnnn {up}    {Nabla} {up,it} {#1}
-  \@@_set_mathalphabet_pos:nnnn {up} {dotlessi} {up,it} {#1}
-  \@@_set_mathalphabet_pos:nnnn {up} {dotlessj} {up,it} {#1}
- }
-%    \end{macrocode}
-%
 %
 % \subsubsection{Upright: up}
 %
 %    \begin{macrocode}
 \@@_new_alphabet_config:nnn {up} {num}
  {
-  \@@_map_chars_numbers:nn {up}{#1}
-  \@@_set_mathalphabet_numbers:nnn {up} {up}{#1}
+  \@@_map_chars_numbers:nn {up} {#1}
+  \@@_set_mathalphabet_numbers:nnn {up} {up} {#1}
  }
 
 \@@_new_alphabet_config:nnn {up} {Latin}
@@ -154,6 +21,8 @@
     \bool_if:NT \g_@@_upLatin_bool { \@@_map_chars_Latin:nn {up,it} {#1} }
    }
   \@@_set_mathalphabet_Latin:nnn {up} {up,it} {#1}
+  \@@_set_mathalphabet_Latin:nnn {literal} {up} {up}
+  \@@_set_mathalphabet_Latin:nnn {literal} {it} {it}
  }
 
 \@@_new_alphabet_config:nnn {up} {latin}
@@ -169,6 +38,8 @@
      }
    }
   \@@_set_mathalphabet_latin:nnn {up} {up,it}{#1}
+  \@@_set_mathalphabet_latin:nnn {literal} {up} {up}
+  \@@_set_mathalphabet_latin:nnn {literal} {it} {it}
  }
 
 \@@_new_alphabet_config:nnn {up} {Greek}
@@ -178,6 +49,8 @@
     \bool_if:NT \g_@@_upGreek_bool { \@@_map_chars_Greek:nn {up,it}{#1} }
    }
   \@@_set_mathalphabet_Greek:nnn {up} {up,it}{#1}
+  \@@_set_mathalphabet_Greek:nnn {literal} {up} {up}
+  \@@_set_mathalphabet_Greek:nnn {literal} {it} {it}
  }
 
 \@@_new_alphabet_config:nnn {up} {greek}
@@ -190,6 +63,8 @@
      }
    }
   \@@_set_mathalphabet_greek:nnn {up} {up,it} {#1}
+  \@@_set_mathalphabet_greek:nnn {literal} {up} {up}
+  \@@_set_mathalphabet_greek:nnn {literal} {it} {it}
  }
 
 \@@_new_alphabet_config:nnn {up} {misc}
