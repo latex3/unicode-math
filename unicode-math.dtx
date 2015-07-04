@@ -1871,7 +1871,8 @@ This work is "maintained" by Will Robertson.
 % \darg{font name}
 % \doarg{font features}
 %    \begin{macrocode}
-\DeclareDocumentCommand \setmathfont { O{} m O{} } {
+\DeclareDocumentCommand \setmathfont { O{} m O{} }
+ {
   \tl_set:Nn \l_@@_fontname_tl {#2}
   \@@_init:
 %    \end{macrocode}
@@ -3884,7 +3885,7 @@ This work is "maintained" by Will Robertson.
     \cs_if_exist:NF \l_@@_fontname_tl
       {
         % XXX: update this when lmmath-bold.otf is released
-        \setmathfont[BoldFont={latinmodern-math.otf}]{latinmodern-math.otf}
+        \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
       }
   }
 %    \end{macrocode}
