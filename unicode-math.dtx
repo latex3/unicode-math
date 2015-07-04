@@ -1070,36 +1070,13 @@ This work is "maintained" by Will Robertson.
 %
 % \paragraph{Packages}
 %    \begin{macrocode}
-\RequirePackage{expl3}[2011/07/01]
-\RequirePackage{xparse}[2009/08/31]
+\RequirePackage{expl3}[2015/03/01]
+\RequirePackage{xparse}
 \RequirePackage{l3keys2e}
-\RequirePackage{fontspec}[2010/10/25]
+\RequirePackage{fontspec}[2015/03/14]
 \RequirePackage{catchfile}
 \RequirePackage{fix-cm} % avoid some warnings
-\RequirePackage{filehook}[2011/01/03]
-%    \end{macrocode}
-% Need this part from \pkg{fixltx2e}:
-%    \begin{macrocode}
-\@ifpackageloaded{fixltx2e}{}
- {%
-\def\@DeclareMathSizes #1#2#3#4#5{%
-  \@defaultunits\dimen@ #2pt\relax\@nnil
-  \if $#3$%
-    \expandafter\let\csname S@\strip@pt\dimen@\endcsname\math@fontsfalse
-  \else
-    \@defaultunits\dimen@ii #3pt\relax\@nnil
-    \@defaultunits\@tempdima #4pt\relax\@nnil
-    \@defaultunits\@tempdimb #5pt\relax\@nnil
-    \toks@{#1}%
-    \expandafter\xdef\csname S@\strip@pt\dimen@\endcsname{%
-      \gdef\noexpand\tf@size{\strip@pt\dimen@ii}%
-      \gdef\noexpand\sf@size{\strip@pt\@tempdima}%
-      \gdef\noexpand\ssf@size{\strip@pt\@tempdimb}%
-      \the\toks@
-    }%
-  \fi
-}%
- }
+\RequirePackage{filehook}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -4321,7 +4298,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_fontdimen_to_percent:nn
  {
-  \fp_eval:n { (\strip@pt\fontdimen#1#2) * 65536 / 100 }
+  \fp_eval:n { \dim_to_decimal:n { \fontdimen #1 #2 } * 65536 / 100 }
  }
 \cs_new:Nn \@@_fontdimen_to_scale:nn
  {
