@@ -2512,7 +2512,7 @@ This work is "maintained" by Will Robertson.
 \cs_new_protected_nopar:Nn \@@_font_param:nnnnn
 %<*XE>
 {
-  \@@_font_param_aux:ccnnnn { @@_ #1 :N } { @@_set_ #1 :N }
+  \@@_font_param_aux:ccnnnn { @@_ #1 :N } { @@_set_ #1 :Nn }
     { #2 } { #3 } { #4 } { #5 }
 }
 %</XE>
@@ -2520,7 +2520,7 @@ This work is "maintained" by Will Robertson.
 {
   \tl_set:Nn \l_@@_tmpa_tl { #1 }
   \tl_remove_all:Nn \l_@@_tmpa_tl { _ }
-  \@@_font_param_aux:ccc { @@_ #1 :N } { @@_set_ #1 :N }
+  \@@_font_param_aux:ccc { @@_ #1 :N } { @@_set_ #1 :Nn }
     { luatexUmath \l_@@_tmpa_tl }
 }
 %</LU>
