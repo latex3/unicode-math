@@ -1720,6 +1720,9 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Nn \@@_set_mathsymbol:nNNn
  {
+  \int_compare:nT { \char_value_catcode:n {#4} == 11 }
+   { \char_set_catcode_other:n {#4} }
+
   \tl_case:Nnn #3 {
     \mathop    { \@@_set_big_operator:nnn {#1} {#2} {#4} }
     \mathopen  { \@@_set_math_open:nnn    {#1} {#2} {#4} }
