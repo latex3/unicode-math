@@ -5064,7 +5064,7 @@ This work is "maintained" by Will Robertson.
 % Gregorio\footnote{\url{http://tex.stackexchange.com/a/47260/729}}.
 %
 %    \begin{macrocode}
-\cs_new:Npn \not_newnot:N #1
+\cs_new:Npn \@@_newnot:N #1
  {
    \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
    \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl }
@@ -5081,14 +5081,16 @@ This work is "maintained" by Will Robertson.
        \use:c { not \l_not_token_name_tl }
       }
       {
-       \not_oldnot: #1 %\l_not_token_name_tl
+       \@@_oldnot: #1 %\l_not_token_name_tl
       }
     }
  }
-
-\cs_set_eq:NN \not_oldnot: \not
-\cs_set_eq:NN \not \not_newnot:N
-
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_set_eq:NN \@@_oldnot: \not
+\AtBeginDocument{\cs_set_eq:NN \not \@@_newnot:N}
+%    \end{macrocode}
+%    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_setup_negations:
  {
   \cs_gset:cpn { not= }    { \neq }
