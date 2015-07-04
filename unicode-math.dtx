@@ -1891,8 +1891,14 @@ This work is "maintained" by Will Robertson.
   \bool_if:NT \l_@@_init_bool { \@@_log:n {default-math-font} }
 %    \end{macrocode}
 % Use \pkg{fontspec} to select a font to use.
+% After loading the font, we detect what sizes it recommends for scriptsize and scriptscriptsize, so after setting those values appropriately, we reload the font to take these into account.
 %    \begin{macrocode}
   \@@_fontspec_select_font:
+  \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
+   {
+    \@@_declare_math_sizes:
+    \@@_fontspec_select_font: 
+   }
 %    \end{macrocode}
 % Now define |\@@_symfont_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
@@ -1920,7 +1926,6 @@ This work is "maintained" by Will Robertson.
   \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
    {
     \bool_set_true:N \g_@@_mainfont_already_set_bool
-    \@@_declare_math_sizes:
     \@@_setup_legacy_fam_two:
     \@@_setup_legacy_fam_three:
    }
@@ -3878,14 +3883,17 @@ This work is "maintained" by Will Robertson.
 % \section{Fall-back font}
 %
 % Want to load Latin Modern Math if nothing else.
+% Reset the `font already loaded' boolean so that a new font being set will do the right thing.
+% TODO: need a better way to do this for the general case.
 %    \begin{macrocode}
 \AtBeginDocument { \@@_load_lm_if_necessary: }
 \cs_new:Nn \@@_load_lm_if_necessary:
   {
     \cs_if_exist:NF \l_@@_fontname_tl
       {
-        % XXX: update this when lmmath-bold.otf is released
+        % TODO: update this when lmmath-bold.otf is released
         \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
+        \bool_set_false:N \g_@@_mainfont_already_set_bool
       }
   }
 %    \end{macrocode}
@@ -4313,11 +4321,11 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_fontdimen_to_percent:nn
  {
-  \strip@pt\dimexpr\fontdimen#1#2*65536/100\relax
+  \fp_eval:n { (\strip@pt\fontdimen#1#2) * 65536 / 100 }
  }
 \cs_new:Nn \@@_fontdimen_to_scale:nn
  {
-  \@@_fontdimen_to_percent:nn {#1} {#2} \dimexpr \f@size pt\relax
+  \fp_eval:n {\@@_fontdimen_to_percent:nn {#1} {#2} * \f@size } pt
  }
 %    \end{macrocode}
 % \end{macro}
