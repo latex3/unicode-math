@@ -10,15 +10,15 @@
 %    \begin{macrocode}
 \@@_new_alphabet_config:nnn {up} {num}
  {
-  \@@_map_chars_numbers:nn {up} {#1}
+  \@@_set_normal_numbers:nn {up} {#1}
   \@@_set_mathalphabet_numbers:nnn {up} {up} {#1}
  }
 
 \@@_new_alphabet_config:nnn {up} {Latin}
  {
-  \bool_if:NTF \g_@@_literal_bool { \@@_map_chars_Latin:nn {up} {#1} }
+  \bool_if:NTF \g_@@_literal_bool { \@@_set_normal_Latin:nn {up} {#1} }
    {
-    \bool_if:NT \g_@@_upLatin_bool { \@@_map_chars_Latin:nn {up,it} {#1} }
+    \bool_if:NT \g_@@_upLatin_bool { \@@_set_normal_Latin:nn {up,it} {#1} }
    }
   \@@_set_mathalphabet_Latin:nnn {up} {up,it} {#1}
   \@@_set_mathalphabet_Latin:nnn {literal} {up} {up}
@@ -27,14 +27,14 @@
 
 \@@_new_alphabet_config:nnn {up} {latin}
  {
-  \bool_if:NTF \g_@@_literal_bool { \@@_map_chars_latin:nn {up} {#1} }
+  \bool_if:NTF \g_@@_literal_bool { \@@_set_normal_latin:nn {up} {#1} }
    {
     \bool_if:NT \g_@@_uplatin_bool
      {
-      \@@_map_chars_latin:nn        {up,it} {#1}
-      \@@_map_single:nnn        {h} {up,it} {#1}
-      \@@_map_single:nnn {dotlessi} {up,it} {#1}
-      \@@_map_single:nnn {dotlessj} {up,it} {#1}
+      \@@_set_normal_latin:nn        {up,it} {#1}
+      \@@_set_normal_char:nnn        {h} {up,it} {#1}
+      \@@_set_normal_char:nnn {dotlessi} {up,it} {#1}
+      \@@_set_normal_char:nnn {dotlessj} {up,it} {#1}
      }
    }
   \@@_set_mathalphabet_latin:nnn {up} {up,it}{#1}
@@ -44,9 +44,9 @@
 
 \@@_new_alphabet_config:nnn {up} {Greek}
  {
-  \bool_if:NTF \g_@@_literal_bool { \@@_map_chars_Greek:nn {up}{#1} }
+  \bool_if:NTF \g_@@_literal_bool { \@@_set_normal_Greek:nn {up}{#1} }
    {
-    \bool_if:NT \g_@@_upGreek_bool { \@@_map_chars_Greek:nn {up,it}{#1} }
+    \bool_if:NT \g_@@_upGreek_bool { \@@_set_normal_Greek:nn {up,it}{#1} }
    }
   \@@_set_mathalphabet_Greek:nnn {up} {up,it}{#1}
   \@@_set_mathalphabet_Greek:nnn {literal} {up} {up}
@@ -55,11 +55,11 @@
 
 \@@_new_alphabet_config:nnn {up} {greek}
  {
-  \bool_if:NTF \g_@@_literal_bool { \@@_map_chars_greek:nn {up} {#1} }
+  \bool_if:NTF \g_@@_literal_bool { \@@_set_normal_greek:nn {up} {#1} }
    {
     \bool_if:NT \g_@@_upgreek_bool
      {
-      \@@_map_chars_greek:nn {up,it} {#1}
+      \@@_set_normal_greek:nn {up,it} {#1}
      }
    }
   \@@_set_mathalphabet_greek:nnn {up} {up,it} {#1}
@@ -71,22 +71,22 @@
  {
   \bool_if:NTF \g_@@_literal_Nabla_bool
    {
-    \@@_map_single:nnn {Nabla}{up}{up}
+    \@@_set_normal_char:nnn {Nabla}{up}{up}
    }
    {
     \bool_if:NT \g_@@_upNabla_bool
      {
-      \@@_map_single:nnn {Nabla}{up,it}{up}
+      \@@_set_normal_char:nnn {Nabla}{up,it}{up}
      }
    }
   \bool_if:NTF \g_@@_literal_partial_bool
    {
-    \@@_map_single:nnn {partial}{up}{up}
+    \@@_set_normal_char:nnn {partial}{up}{up}
    }
    {
     \bool_if:NT \g_@@_uppartial_bool
      {
-      \@@_map_single:nnn {partial}{up,it}{up}
+      \@@_set_normal_char:nnn {partial}{up,it}{up}
      }
    }
   \@@_set_mathalphabet_pos:nnnn {up}  {partial} {up,it} {#1}
@@ -101,9 +101,9 @@
 %    \begin{macrocode}
 \@@_new_alphabet_config:nnn {it} {Latin}
  {
-  \bool_if:NTF \g_@@_literal_bool { \@@_map_chars_Latin:nn {it} {#1} }
+  \bool_if:NTF \g_@@_literal_bool { \@@_set_normal_Latin:nn {it} {#1} }
    {
-    \bool_if:NF \g_@@_upLatin_bool { \@@_map_chars_Latin:nn {up,it} {#1} }
+    \bool_if:NF \g_@@_upLatin_bool { \@@_set_normal_Latin:nn {up,it} {#1} }
    }
   \@@_set_mathalphabet_Latin:nnn {it}{up,it}{#1}
  }
@@ -112,16 +112,16 @@
  {
   \bool_if:NTF \g_@@_literal_bool
    {
-    \@@_map_chars_latin:nn {it} {#1}
-    \@@_map_single:nnn {h}{it}{#1}
+    \@@_set_normal_latin:nn {it} {#1}
+    \@@_set_normal_char:nnn {h}{it}{#1}
    }
    {
     \bool_if:NF \g_@@_uplatin_bool
      {
-      \@@_map_chars_latin:nn {up,it} {#1}
-      \@@_map_single:nnn {h}{up,it}{#1}
-      \@@_map_single:nnn {dotlessi}{up,it}{#1}
-      \@@_map_single:nnn {dotlessj}{up,it}{#1}
+      \@@_set_normal_latin:nn {up,it} {#1}
+      \@@_set_normal_char:nnn {h}{up,it}{#1}
+      \@@_set_normal_char:nnn {dotlessi}{up,it}{#1}
+      \@@_set_normal_char:nnn {dotlessj}{up,it}{#1}
      }
    }
   \@@_set_mathalphabet_latin:nnn {it}            {up,it} {#1}
@@ -133,10 +133,10 @@
  {
   \bool_if:NTF \g_@@_literal_bool
    {
-    \@@_map_chars_Greek:nn {it}{#1}
+    \@@_set_normal_Greek:nn {it}{#1}
    }
    {
-    \bool_if:NF \g_@@_upGreek_bool { \@@_map_chars_Greek:nn {up,it}{#1} }
+    \bool_if:NF \g_@@_upGreek_bool { \@@_set_normal_Greek:nn {up,it}{#1} }
    }
   \@@_set_mathalphabet_Greek:nnn {it} {up,it}{#1}
  }
@@ -145,10 +145,10 @@
  {
   \bool_if:NTF \g_@@_literal_bool
    {
-    \@@_map_chars_greek:nn {it} {#1}
+    \@@_set_normal_greek:nn {it} {#1}
    }
    {
-    \bool_if:NF \g_@@_upgreek_bool { \@@_map_chars_greek:nn {it,up} {#1} }
+    \bool_if:NF \g_@@_upgreek_bool { \@@_set_normal_greek:nn {it,up} {#1} }
    }
   \@@_set_mathalphabet_greek:nnn {it} {up,it} {#1}
  }
@@ -157,22 +157,22 @@
  {
   \bool_if:NTF \g_@@_literal_Nabla_bool
    {
-    \@@_map_single:nnn {Nabla}{it}{it}
+    \@@_set_normal_char:nnn {Nabla}{it}{it}
    }
    {
     \bool_if:NF \g_@@_upNabla_bool
      {
-      \@@_map_single:nnn {Nabla}{up,it}{it}
+      \@@_set_normal_char:nnn {Nabla}{up,it}{it}
      }
    }
   \bool_if:NTF \g_@@_literal_partial_bool
    {
-    \@@_map_single:nnn {partial}{it}{it}
+    \@@_set_normal_char:nnn {partial}{it}{it}
    }
    {
     \bool_if:NF \g_@@_uppartial_bool
      {
-      \@@_map_single:nnn {partial}{up,it}{it}
+      \@@_set_normal_char:nnn {partial}{up,it}{it}
      }
    }
   \@@_set_mathalphabet_pos:nnnn {it} {partial} {up,it}{#1}
@@ -294,13 +294,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_Latin:nn {sfup} {#1}
+    \@@_set_normal_Latin:nn {sfup} {#1}
     \@@_set_mathalphabet_Latin:nnn {sf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_upsans_bool
      {
-      \@@_map_chars_Latin:nn {sfup,sfit} {#1}
+      \@@_set_normal_Latin:nn {sfup,sfit} {#1}
       \@@_set_mathalphabet_Latin:nnn {sf} {up,it}{#1}
      }
    }
@@ -310,13 +310,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_latin:nn {sfup} {#1}
+    \@@_set_normal_latin:nn {sfup} {#1}
     \@@_set_mathalphabet_latin:nnn {sf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_upsans_bool
      {
-      \@@_map_chars_latin:nn {sfup,sfit} {#1}
+      \@@_set_normal_latin:nn {sfup,sfit} {#1}
       \@@_set_mathalphabet_latin:nnn {sf} {up,it}{#1}
      }
    }
@@ -331,13 +331,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_Latin:nn {sfit} {#1}
+    \@@_set_normal_Latin:nn {sfit} {#1}
     \@@_set_mathalphabet_Latin:nnn {sf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_upsans_bool
      {
-      \@@_map_chars_Latin:nn {sfup,sfit} {#1}
+      \@@_set_normal_Latin:nn {sfup,sfit} {#1}
       \@@_set_mathalphabet_Latin:nnn {sf} {up,it}{#1}
      }
    }
@@ -347,13 +347,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_latin:nn {sfit} {#1}
+    \@@_set_normal_latin:nn {sfit} {#1}
     \@@_set_mathalphabet_latin:nnn {sf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_upsans_bool
      {
-      \@@_map_chars_latin:nn {sfup,sfit} {#1}
+      \@@_set_normal_latin:nn {sfup,sfit} {#1}
       \@@_set_mathalphabet_latin:nnn {sf} {up,it}{#1}
      }
    }
@@ -384,18 +384,18 @@
  {
   \bool_if:NF \g_@@_bfupLatin_bool
    {
-    \@@_map_chars_Latin:nn {bfup,bfit} {#1}
+    \@@_set_normal_Latin:nn {bfup,bfit} {#1}
    }
   \@@_set_mathalphabet_Latin:nnn {bfit} {up,it}{#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_Latin:nn {bfit} {#1}
+    \@@_set_normal_Latin:nn {bfit} {#1}
     \@@_set_mathalphabet_Latin:nnn {bf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_bfupLatin_bool
      {
-      \@@_map_chars_Latin:nn {bfup,bfit} {#1}
+      \@@_set_normal_Latin:nn {bfup,bfit} {#1}
       \@@_set_mathalphabet_Latin:nnn {bf} {up,it}{#1}
      }
    }
@@ -405,18 +405,18 @@
  {
   \bool_if:NF \g_@@_bfuplatin_bool
    {
-    \@@_map_chars_latin:nn {bfup,bfit} {#1}
+    \@@_set_normal_latin:nn {bfup,bfit} {#1}
    }
   \@@_set_mathalphabet_latin:nnn {bfit} {up,it}{#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_latin:nn {bfit} {#1}
+    \@@_set_normal_latin:nn {bfit} {#1}
     \@@_set_mathalphabet_latin:nnn {bf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_bfuplatin_bool
      {
-      \@@_map_chars_latin:nn {bfup,bfit} {#1}
+      \@@_set_normal_latin:nn {bfup,bfit} {#1}
       \@@_set_mathalphabet_latin:nnn {bf} {up,it}{#1}
      }
    }
@@ -427,13 +427,13 @@
   \@@_set_mathalphabet_Greek:nnn {bfit} {up,it}{#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_Greek:nn {bfit}{#1}
+    \@@_set_normal_Greek:nn {bfit}{#1}
     \@@_set_mathalphabet_Greek:nnn {bf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_bfupGreek_bool
      {
-      \@@_map_chars_Greek:nn {bfup,bfit}{#1}
+      \@@_set_normal_Greek:nn {bfup,bfit}{#1}
       \@@_set_mathalphabet_Greek:nnn {bf} {up,it}{#1}
      }
    }
@@ -444,13 +444,13 @@
   \@@_set_mathalphabet_greek:nnn {bfit} {up,it} {#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_greek:nn {bfit} {#1}
+    \@@_set_normal_greek:nn {bfit} {#1}
     \@@_set_mathalphabet_greek:nnn {bf} {it} {#1}
    }
    {
     \bool_if:NF \g_@@_bfupgreek_bool
      {
-      \@@_map_chars_greek:nn {bfit,bfup} {#1}
+      \@@_set_normal_greek:nn {bfit,bfup} {#1}
       \@@_set_mathalphabet_greek:nnn {bf} {up,it} {#1}
      }
    }
@@ -459,16 +459,16 @@
 \@@_new_alphabet_config:nnn {bfit} {misc}
  {
   \bool_if:NTF \g_@@_literal_Nabla_bool
-   { \@@_map_single:nnn {Nabla}{bfit}{#1} }
+   { \@@_set_normal_char:nnn {Nabla}{bfit}{#1} }
    {
     \bool_if:NF \g_@@_upNabla_bool
-     { \@@_map_single:nnn {Nabla}{bfup,bfit}{#1} }
+     { \@@_set_normal_char:nnn {Nabla}{bfup,bfit}{#1} }
    }
   \bool_if:NTF \g_@@_literal_partial_bool
-   { \@@_map_single:nnn {partial}{bfit}{#1} }
+   { \@@_set_normal_char:nnn {partial}{bfit}{#1} }
    {
     \bool_if:NF \g_@@_uppartial_bool
-     { \@@_map_single:nnn {partial}{bfup,bfit}{#1} }
+     { \@@_set_normal_char:nnn {partial}{bfup,bfit}{#1} }
    }
   \@@_set_mathalphabet_pos:nnnn {bfit} {partial} {up,it}{#1}
   \@@_set_mathalphabet_pos:nnnn {bfit} {Nabla}   {up,it}{#1}
@@ -508,18 +508,18 @@
  {
   \bool_if:NT \g_@@_bfupLatin_bool
    {
-    \@@_map_chars_Latin:nn {bfup,bfit} {#1}
+    \@@_set_normal_Latin:nn {bfup,bfit} {#1}
    }
   \@@_set_mathalphabet_Latin:nnn {bfup} {up,it}{#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_Latin:nn {bfup} {#1}
+    \@@_set_normal_Latin:nn {bfup} {#1}
     \@@_set_mathalphabet_Latin:nnn {bf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_bfupLatin_bool
      {
-      \@@_map_chars_Latin:nn {bfup,bfit} {#1}
+      \@@_set_normal_Latin:nn {bfup,bfit} {#1}
       \@@_set_mathalphabet_Latin:nnn {bf} {up,it}{#1}
      }
    }
@@ -529,18 +529,18 @@
  {
   \bool_if:NT \g_@@_bfuplatin_bool
    {
-    \@@_map_chars_latin:nn {bfup,bfit} {#1}
+    \@@_set_normal_latin:nn {bfup,bfit} {#1}
    }
   \@@_set_mathalphabet_latin:nnn {bfup} {up,it}{#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_latin:nn {bfup} {#1}
+    \@@_set_normal_latin:nn {bfup} {#1}
     \@@_set_mathalphabet_latin:nnn {bf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_bfuplatin_bool
      {
-      \@@_map_chars_latin:nn {bfup,bfit} {#1}
+      \@@_set_normal_latin:nn {bfup,bfit} {#1}
       \@@_set_mathalphabet_latin:nnn {bf} {up,it}{#1}
      }
    }
@@ -550,13 +550,13 @@
   \@@_set_mathalphabet_Greek:nnn {bfup} {up,it}{#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_Greek:nn {bfup}{#1}
+    \@@_set_normal_Greek:nn {bfup}{#1}
     \@@_set_mathalphabet_Greek:nnn {bf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_bfupGreek_bool
      {
-      \@@_map_chars_Greek:nn {bfup,bfit}{#1}
+      \@@_set_normal_Greek:nn {bfup,bfit}{#1}
       \@@_set_mathalphabet_Greek:nnn {bf} {up,it}{#1}
      }
    }
@@ -567,13 +567,13 @@
   \@@_set_mathalphabet_greek:nnn {bfup} {up,it} {#1}
   \bool_if:NTF \g_@@_bfliteral_bool
    {
-    \@@_map_chars_greek:nn {bfup} {#1}
+    \@@_set_normal_greek:nn {bfup} {#1}
     \@@_set_mathalphabet_greek:nnn {bf} {up} {#1}
    }
    {
     \bool_if:NT \g_@@_bfupgreek_bool
      {
-      \@@_map_chars_greek:nn {bfup,bfit} {#1}
+      \@@_set_normal_greek:nn {bfup,bfit} {#1}
       \@@_set_mathalphabet_greek:nnn {bf} {up,it} {#1}
      }
    }
@@ -583,22 +583,22 @@
  {
   \bool_if:NTF \g_@@_literal_Nabla_bool
    {
-    \@@_map_single:nnn {Nabla}{bfup}{#1}
+    \@@_set_normal_char:nnn {Nabla}{bfup}{#1}
    }
    {
     \bool_if:NT \g_@@_upNabla_bool
      {
-      \@@_map_single:nnn {Nabla}{bfup,bfit}{#1}
+      \@@_set_normal_char:nnn {Nabla}{bfup,bfit}{#1}
      }
    }
   \bool_if:NTF \g_@@_literal_partial_bool
    {
-    \@@_map_single:nnn {partial}{bfup}{#1}
+    \@@_set_normal_char:nnn {partial}{bfup}{#1}
    }
    {
     \bool_if:NT \g_@@_uppartial_bool
      {
-      \@@_map_single:nnn {partial}{bfup,bfit}{#1}
+      \@@_set_normal_char:nnn {partial}{bfup,bfit}{#1}
      }
    }
   \@@_set_mathalphabet_pos:nnnn {bfup} {partial} {up,it}{#1}
@@ -670,13 +670,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_Latin:nn {bfsfup} {#1}
+    \@@_set_normal_Latin:nn {bfsfup} {#1}
     \@@_set_mathalphabet_Latin:nnn {bfsf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_upsans_bool
      {
-      \@@_map_chars_Latin:nn {bfsfup,bfsfit} {#1}
+      \@@_set_normal_Latin:nn {bfsfup,bfsfit} {#1}
       \@@_set_mathalphabet_Latin:nnn {bfsf} {up,it}{#1}
      }
    }
@@ -687,13 +687,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_latin:nn {bfsfup} {#1}
+    \@@_set_normal_latin:nn {bfsfup} {#1}
     \@@_set_mathalphabet_latin:nnn {bfsf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_upsans_bool
      {
-      \@@_map_chars_latin:nn {bfsfup,bfsfit} {#1}
+      \@@_set_normal_latin:nn {bfsfup,bfsfit} {#1}
       \@@_set_mathalphabet_latin:nnn {bfsf} {up,it}{#1}
      }
    }
@@ -704,13 +704,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_Greek:nn {bfsfup}{#1}
+    \@@_set_normal_Greek:nn {bfsfup}{#1}
     \@@_set_mathalphabet_Greek:nnn {bfsf} {up}{#1}
    }
    {
     \bool_if:NT \g_@@_upsans_bool
      {
-      \@@_map_chars_Greek:nn {bfsfup,bfsfit}{#1}
+      \@@_set_normal_Greek:nn {bfsfup,bfsfit}{#1}
       \@@_set_mathalphabet_Greek:nnn {bfsf} {up,it}{#1}
      }
    }
@@ -721,13 +721,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_greek:nn {bfsfup} {#1}
+    \@@_set_normal_greek:nn {bfsfup} {#1}
     \@@_set_mathalphabet_greek:nnn {bfsf} {up} {#1}
    }
    {
     \bool_if:NT \g_@@_upsans_bool
      {
-      \@@_map_chars_greek:nn {bfsfup,bfsfit} {#1}
+      \@@_set_normal_greek:nn {bfsfup,bfsfit} {#1}
       \@@_set_mathalphabet_greek:nnn {bfsf} {up,it} {#1}
      }
    }
@@ -737,22 +737,22 @@
  {
   \bool_if:NTF \g_@@_literal_Nabla_bool
    {
-    \@@_map_single:nnn {Nabla}{bfsfup}{#1}
+    \@@_set_normal_char:nnn {Nabla}{bfsfup}{#1}
    }
    {
     \bool_if:NT \g_@@_upNabla_bool
      {
-      \@@_map_single:nnn {Nabla}{bfsfup,bfsfit}{#1}
+      \@@_set_normal_char:nnn {Nabla}{bfsfup,bfsfit}{#1}
      }
    }
   \bool_if:NTF \g_@@_literal_partial_bool
    {
-    \@@_map_single:nnn {partial}{bfsfup}{#1}
+    \@@_set_normal_char:nnn {partial}{bfsfup}{#1}
    }
    {
     \bool_if:NT \g_@@_uppartial_bool
      {
-      \@@_map_single:nnn {partial}{bfsfup,bfsfit}{#1}
+      \@@_set_normal_char:nnn {partial}{bfsfup,bfsfit}{#1}
      }
    }
   \@@_set_mathalphabet_pos:nnnn {bfsfup} {partial} {up,it}{#1}
@@ -787,13 +787,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_Latin:nn {bfsfit} {#1}
+    \@@_set_normal_Latin:nn {bfsfit} {#1}
     \@@_set_mathalphabet_Latin:nnn {bfsf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_upsans_bool
      {
-      \@@_map_chars_Latin:nn {bfsfup,bfsfit} {#1}
+      \@@_set_normal_Latin:nn {bfsfup,bfsfit} {#1}
       \@@_set_mathalphabet_Latin:nnn {bfsf} {up,it}{#1}
      }
    }
@@ -804,13 +804,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_latin:nn {bfsfit} {#1}
+    \@@_set_normal_latin:nn {bfsfit} {#1}
     \@@_set_mathalphabet_latin:nnn {bfsf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_upsans_bool
      {
-      \@@_map_chars_latin:nn {bfsfup,bfsfit} {#1}
+      \@@_set_normal_latin:nn {bfsfup,bfsfit} {#1}
       \@@_set_mathalphabet_latin:nnn {bfsf} {up,it}{#1}
      }
    }
@@ -821,13 +821,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_Greek:nn {bfsfit}{#1}
+    \@@_set_normal_Greek:nn {bfsfit}{#1}
     \@@_set_mathalphabet_Greek:nnn {bfsf} {it}{#1}
    }
    {
     \bool_if:NF \g_@@_upsans_bool
      {
-      \@@_map_chars_Greek:nn {bfsfup,bfsfit}{#1}
+      \@@_set_normal_Greek:nn {bfsfup,bfsfit}{#1}
       \@@_set_mathalphabet_Greek:nnn {bfsf} {up,it}{#1}
      }
    }
@@ -838,13 +838,13 @@
  {
   \bool_if:NTF \g_@@_sfliteral_bool
    {
-    \@@_map_chars_greek:nn {bfsfit} {#1}
+    \@@_set_normal_greek:nn {bfsfit} {#1}
     \@@_set_mathalphabet_greek:nnn {bfsf} {it} {#1}
    }
    {
     \bool_if:NF \g_@@_upsans_bool
      {
-      \@@_map_chars_greek:nn {bfsfup,bfsfit} {#1}
+      \@@_set_normal_greek:nn {bfsfup,bfsfit} {#1}
       \@@_set_mathalphabet_greek:nnn {bfsf} {up,it} {#1}
      }
    }
@@ -855,22 +855,22 @@
  {
   \bool_if:NTF \g_@@_literal_Nabla_bool
    {
-    \@@_map_single:nnn {Nabla}{bfsfit}{#1}
+    \@@_set_normal_char:nnn {Nabla}{bfsfit}{#1}
    }
    {
     \bool_if:NF \g_@@_upNabla_bool
      {
-      \@@_map_single:nnn {Nabla}{bfsfup,bfsfit}{#1}
+      \@@_set_normal_char:nnn {Nabla}{bfsfup,bfsfit}{#1}
      }
    }
   \bool_if:NTF \g_@@_literal_partial_bool
    {
-    \@@_map_single:nnn {partial}{bfsfit}{#1}
+    \@@_set_normal_char:nnn {partial}{bfsfit}{#1}
    }
    {
     \bool_if:NF \g_@@_uppartial_bool
      {
-      \@@_map_single:nnn {partial}{bfsfup,bfsfit}{#1}
+      \@@_set_normal_char:nnn {partial}{bfsfup,bfsfit}{#1}
      }
    }
   \@@_set_mathalphabet_pos:nnnn {bfsfit} {partial} {up,it}{#1}
