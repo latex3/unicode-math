@@ -3409,6 +3409,7 @@ This work is "maintained" by Will Robertson.
    {
     \cs_gset:Npn #1
      {
+      \bgroup
       \tl_set:Nn \l_@@_ss_chain_tl {#2}
       \cs_set_eq:NN \@@_sub_or_super:n \sp
       \tl_set:Nn \l_@@_tmpa_tl {supers}
@@ -3448,6 +3449,7 @@ This work is "maintained" by Will Robertson.
    {
     \cs_gset:Npn #1
      {
+      \bgroup
       \tl_set:Nn \l_@@_ss_chain_tl {#2}
       \cs_set_eq:NN \@@_sub_or_super:n \sb
       \tl_set:Nn \l_@@_tmpa_tl {subs}
@@ -3500,7 +3502,7 @@ This work is "maintained" by Will Robertson.
     \@@_scan_sscript:
    }
    {
-    \@@_sub_or_super:n {\l_@@_ss_chain_tl}
+    \@@_sub_or_super:n {\l_@@_ss_chain_tl\egroup}
    }
  }
 %    \end{macrocode}
