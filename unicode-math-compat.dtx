@@ -154,7 +154,7 @@
       \default@tag
       \baselineskip \fontdimen 10~ \scriptfont \tw@
       \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
-      \lineskip \thr@@ \fontdimen 8~ \scriptfont \thr@@
+      \lineskip \thr@@@@ \fontdimen 8~ \scriptfont \thr@@@@
       \lineskiplimit \lineskip
       \ialign
       \bgroup
@@ -204,10 +204,10 @@
       $ \m@th \scriptscriptstyle { #1 } $
      }
     \mathchoice
-      { \r@@t \displaystyle      { #2 } }
-      { \r@@t \textstyle         { #2 } }~
-      { \r@@t \scriptstyle       { #2 } }
-      { \r@@t \scriptscriptstyle { #2 } }
+      { \r@@@@t \displaystyle      { #2 } }
+      { \r@@@@t \textstyle         { #2 } }~
+      { \r@@@@t \scriptstyle       { #2 } }
+      { \r@@@@t \scriptscriptstyle { #2 } }
     \egroup
    }
    {
@@ -228,14 +228,14 @@
         \c_math_toggle_token
        }
       \mathchoice
-        { \r@@t \displaystyle      { #2 } }
-        { \r@@t \textstyle         { #2 } }
-        { \r@@t \scriptstyle       { #2 } }
-        { \r@@t \scriptscriptstyle { #2 } }
+        { \r@@@@t \displaystyle      { #2 } }
+        { \r@@@@t \textstyle         { #2 } }
+        { \r@@@@t \scriptstyle       { #2 } }
+        { \r@@@@t \scriptscriptstyle { #2 } }
      }
     \c_group_end_token
    }
-  \@@_check_and_fix:NNnnnn \r@@t \cs_set_nopar:Npn { #1 #2 }
+  \@@_check_and_fix:NNnnnn \r@@@@t \cs_set_nopar:Npn { #1 #2 }
    {
     \setboxz@h { $ \m@th #1 \sqrtsign { #2 } $ }
     \dimen@ \ht\z@

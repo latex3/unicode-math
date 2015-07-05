@@ -6,6 +6,22 @@
 %<*internal>
 \begingroup
 \input l3docstrip.tex
+\begingroup
+  \catcode`\_ = 12 %
+  \long\gdef\prepareActiveModule#1{%
+    \if\relax#1\relax
+       \let\replaceModuleInLine\empty
+    \else
+      \def\replaceModuleInLine{%
+        \replaceAllIn\inLine{@@@@}{!!!!!FOURAT!!!!!}%
+        \replaceAllIn\inLine{__@@}{__#1}%
+        \replaceAllIn\inLine{_@@}{__#1}%
+        \replaceAllIn\inLine{@@}{__#1}%
+        \replaceAllIn\inLine{!!!!!FOURAT!!!!!}{@@}%
+      }%
+    \fi
+  }
+\endgroup
 \keepsilent
 \let\MetaPrefix\DoubleperCent
 \declarepreamble\texpreamble
@@ -29,13 +45,14 @@ This work is "maintained" by Will Robertson.
   \from{unicode-math-usv.dtx}{usv}
   \from{unicode-math.dtx}{load}
   \from{unicode-math-alphabets.dtx}{alphabets}
-  \from{unicode-math-compat.dtx}{compat}
 }}
 \generate{\file{unicode-math-xetex.sty}{
   \from{unicode-math.dtx}{package,XE}
+  \from{unicode-math-compat.dtx}{compat,XE}
 }}
 \generate{\file{unicode-math-luatex.sty}{
   \from{unicode-math.dtx}{package,LU}
+  \from{unicode-math-compat.dtx}{compat,LU}
 }}
 \def\tempa{plain}
 \ifx\tempa\fmtname\endgroup\expandafter\bye\fi
@@ -3284,7 +3301,7 @@ This work is "maintained" by Will Robertson.
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-    \cs_set_nopar:Npn \r@@t ##1 ##2
+    \cs_set_nopar:Npn \r@@@@t ##1 ##2
      {
       \hbox_set:Nn \l_tmpa_box
        {
