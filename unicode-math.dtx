@@ -1019,6 +1019,7 @@ This work is "maintained" by Will Robertson.
   \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
   \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_noparse:nn
   \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_noparse:nNN
+  \cs_set_eq:NN \@@_set_accent:Nnn \@@_set_accent_noparse:Nnn
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
@@ -1184,15 +1185,15 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Nn \@@_process_symbol_noparse:nnn
  {
-  \@@_set_mathsymbol:nNNn {\@@_symfont_tl} #2#3{#1}
+  \@@_set_mathsymbol:nNNn {\@@_symfont_tl} #2 #3 {#1}
  }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_set:Nn \@@_process_symbol_parse:nnn
  {
-  \@@_if_char_spec:nNNT{#1}{#2}{#3}
+  \@@_if_char_spec:nNNT {#1} {#2} {#3}
    {
-    \@@_process_symbol_noparse:nnn {#1}{#2}{#3}
+    \@@_process_symbol_noparse:nnn {#1} {#2} {#3}
    }
  }
 %    \end{macrocode}
@@ -1780,6 +1781,7 @@ This work is "maintained" by Will Robertson.
     \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
     \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_parse:nn
     \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_parse:nNN
+    \cs_set_eq:NN \@@_set_accent:Nnn \@@_set_accent_parse:Nnn
 %    \end{macrocode}
 % Proceed by filling up the various `range' seqs according to the user options.
 %    \begin{macrocode}
@@ -3689,53 +3691,35 @@ This work is "maintained" by Will Robertson.
 \cs_set:Npn \cdots {\mathinner{\unicodecdots}}
 %    \end{macrocode}
 % \paragraph{Accents}
+% This code should probably be much earlier in this file!
 %    \begin{macrocode}
+\cs_new:Nn \@@_set_accent_parse:Nnn
+ {
+  \@@_if_char_spec:nNNT {#3} #1 \mathaccent
+   {
+    \@@_set_accent_noparse:Nnn #1 {#2} {#3}
+   }
+ }
+\cs_new:Nn \@@_set_accent_noparse:Nnn
+ {
+  \cs_gset_protected_nopar:Npx #1
+   {
+    \@@_accent:nnn {#2} { \@@_symfont_tl } {#3}
+   }
+ }
 \cs_new_protected_nopar:Nn \@@_setup_accents:
  {
-  \cs_gset_protected_nopar:Npx \widehat
-   {
-    \@@_accent:nnn {} { \@@_symfont_tl } { "0302 }
-   }
-  \cs_gset_protected_nopar:Npx \widetilde
-   {
-    \@@_accent:nnn {} { \@@_symfont_tl } { "0303 }
-   }
-  \cs_gset_protected_nopar:Npx \overleftarrow
-   {
-    \@@_accent:nnn {} { \@@_symfont_tl } { "20D6 }
-   }
-  \cs_gset_protected_nopar:Npx \overrightarrow
-   {
-    \@@_accent:nnn {} { \@@_symfont_tl } { "20D7 }
-   }
-  \cs_gset_protected_nopar:Npx \overleftrightarrow
-   {
-    \@@_accent:nnn {} { \@@_symfont_tl } { "20E1 }
-   }
-  \cs_gset_protected_nopar:Npx \wideutilde
-   {
-    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "0330 }
-   }
-  \cs_gset_protected_nopar:Npx \underrightharpoondown
-   {
-    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20EC }
-   }
-  \cs_gset_protected_nopar:Npx \underleftharpoondown
-   {
-    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20ED }
-   }
-  \cs_gset_protected_nopar:Npx \underleftarrow
-   {
-    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20EE }
-   }
-  \cs_gset_protected_nopar:Npx \underrightarrow
-   {
-    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20EF }
-   }
-  \cs_gset_protected_nopar:Npx \underleftrightarrow
-   {
-    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "034D }
-   }
+  \@@_set_accent:Nnn \widehat               {}       { "0302 }
+  \@@_set_accent:Nnn \widetilde             {}       { "0303 }
+  \@@_set_accent:Nnn \overleftarrow         {}       { "20D6 }
+  \@@_set_accent:Nnn \overrightarrow        {}       { "20D7 }
+  \@@_set_accent:Nnn \overleftrightarrow    {}       { "20E1 }
+  \@@_set_accent:Nnn \wideutilde            {bottom} { "0330 }
+  \@@_set_accent:Nnn \underrightharpoondown {bottom} { "20EC }
+  \@@_set_accent:Nnn \underleftharpoondown  {bottom} { "20ED }
+  \@@_set_accent:Nnn \underleftarrow        {bottom} { "20EE }
+  \@@_set_accent:Nnn \underrightarrow       {bottom} { "20EF }
+  \@@_set_accent:Nnn \underleftrightarrow   {bottom} { "034D }
  }
 %    \end{macrocode}
 %
