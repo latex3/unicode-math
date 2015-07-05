@@ -3669,6 +3669,16 @@ This work is "maintained" by Will Robertson.
 \def\smallint{\mathop{\textstyle\int}\limits}
 %    \end{macrocode}
 %
+% \begin{macro}{\underbar}
+%    \begin{macrocode}
+\cs_set_eq:NN \latexe_underbar:n \underbar
+\renewcommand\underbar
+ {
+  \mode_if_math:TF \mathunderbar \latexe_underbar:n
+ }
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\colon}
 % Define \cs{colon} as a mathpunct `|:|'.
 % This is wrong: it should be \unichar{003A} {colon} instead!
@@ -3742,6 +3752,7 @@ This work is "maintained" by Will Robertson.
   \@@_set_accent:Nnn \underleftarrow        {bottom} { "20EE }
   \@@_set_accent:Nnn \underrightarrow       {bottom} { "20EF }
   \@@_set_accent:Nnn \underleftrightarrow   {bottom} { "034D }
+  \@@_set_accent:Nnn \mathunderbar          {bottom} { "00332 }
  }
 %    \end{macrocode}
 %
