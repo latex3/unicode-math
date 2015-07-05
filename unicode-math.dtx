@@ -3679,6 +3679,131 @@ This work is "maintained" by Will Robertson.
 % \end{macro}
 % \end{macro}
 %
+% \paragraph{Symbols}
+%    \begin{macrocode}
+\cs_set:Npn \| {\Vert}
+%    \end{macrocode}
+% \cs{mathinner} items:
+%    \begin{macrocode}
+\cs_set:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
+\cs_set:Npn \cdots {\mathinner{\unicodecdots}}
+%    \end{macrocode}
+% \paragraph{Accents}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Nn \@@_setup_accents:
+ {
+  \cs_gset_protected_nopar:Npx \widehat
+   {
+    \@@_accent:nnn {} { \@@_symfont_tl } { "0302 }
+   }
+  \cs_gset_protected_nopar:Npx \widetilde
+   {
+    \@@_accent:nnn {} { \@@_symfont_tl } { "0303 }
+   }
+  \cs_gset_protected_nopar:Npx \overleftarrow
+   {
+    \@@_accent:nnn {} { \@@_symfont_tl } { "20D6 }
+   }
+  \cs_gset_protected_nopar:Npx \overrightarrow
+   {
+    \@@_accent:nnn {} { \@@_symfont_tl } { "20D7 }
+   }
+  \cs_gset_protected_nopar:Npx \overleftrightarrow
+   {
+    \@@_accent:nnn {} { \@@_symfont_tl } { "20E1 }
+   }
+  \cs_gset_protected_nopar:Npx \wideutilde
+   {
+    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "0330 }
+   }
+  \cs_gset_protected_nopar:Npx \underrightharpoondown
+   {
+    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20EC }
+   }
+  \cs_gset_protected_nopar:Npx \underleftharpoondown
+   {
+    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20ED }
+   }
+  \cs_gset_protected_nopar:Npx \underleftarrow
+   {
+    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20EE }
+   }
+  \cs_gset_protected_nopar:Npx \underrightarrow
+   {
+    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "20EF }
+   }
+  \cs_gset_protected_nopar:Npx \underleftrightarrow
+   {
+    \@@_accent:nnn {bottom} { \@@_symfont_tl } { "034D }
+   }
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set_eq:NN \@@_text_slash: \slash
+\cs_set_protected:Npn \slash
+ {
+  \mode_if_math:TF {\mathslash} {\@@_text_slash:}
+ }
+%    \end{macrocode}
+%
+% \paragraph{\cs{not}}
+% The situation of \cs{not} symbol is currently messy, in Unicode it is defined
+% as a combining mark so naturally it should be treated as a math accent,
+% however neither Lua\TeX\ nor \XeTeX\ correctly place it as it needs special
+% treatment compared to other accents, furthermore a math accent changes the
+% spacing of its nucleus, so \cs{not=} will be spaced as an ordinary not
+% relational symbol, which is undesired.
+%
+% Here modify \cs{not} to a macro that tries to use predefined negated symbols,
+% which would give better results in most cases, until there is more robust
+% solution in the engines.
+%
+% This code is based on an answer to a TeX -- Stack Exchange question by Enrico
+% Gregorio\footnote{\url{http://tex.stackexchange.com/a/47260/729}}.
+%
+%    \begin{macrocode}
+\cs_new:Npn \@@_newnot:N #1
+ {
+   \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
+   \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl }
+    {
+     \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
+    }
+   \cs_if_exist:cTF { n \l_not_token_name_tl }
+    {
+     \use:c { n \l_not_token_name_tl }
+    }
+    {
+     \cs_if_exist:cTF { not \l_not_token_name_tl }
+      {
+       \use:c { not \l_not_token_name_tl }
+      }
+      {
+       \@@_oldnot: #1 %\l_not_token_name_tl
+      }
+    }
+ }
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_set_eq:NN \@@_oldnot: \not
+\AtBeginDocument{\cs_set_eq:NN \not \@@_newnot:N}
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Nn \@@_setup_negations:
+ {
+  \cs_gset:cpn { not= }    { \neq }
+  \cs_gset:cpn { not< }    { \nless }
+  \cs_gset:cpn { not> }    { \ngtr }
+  \cs_gset:Npn  \ngets     { \nleftarrow }
+  \cs_gset:Npn  \nsimeq    { \nsime }
+  \cs_gset:Npn  \nequal    { \ne }
+  \cs_gset:Npn  \nle       { \nleq }
+  \cs_gset:Npn  \nge       { \ngeq }
+  \cs_gset:Npn  \ngreater  { \ngtr }
+  \cs_gset:Npn  \nforksnot { \forks }
+ }
+%    \end{macrocode}
 %
 %    \begin{macrocode}
 %</package&(XE|LU)>
