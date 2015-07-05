@@ -1313,7 +1313,10 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_delcodes:
  {
-  \@@_assign_delcode:nn {`\.} {\c_zero} % ensure \left. and \right. work
+  % ensure \left. and \right. work:
+  \@@_set_delcode:nnn \@@_symfont_tl {`\.} {\c_zero}
+  % this is forcefully done to fix a bug -- indicates a larger problem!
+  
   \@@_assign_delcode:nn {`\/}   {\g_@@_slash_delimiter_usv}
   \@@_assign_delcode:nn {"2044} {\g_@@_slash_delimiter_usv} % fracslash
   \@@_assign_delcode:nn {"2215} {\g_@@_slash_delimiter_usv} % divslash
