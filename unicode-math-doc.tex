@@ -42,7 +42,14 @@
 \fvset{gobble=2,fontsize=\small,xleftmargin=2em}
 %\usepackage[rm,small]{titlesec}
 
-\setmainfont{TeX Gyre Pagella}
+\setmainfont{texgyrepagella}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular ,
+  ItalicFont = *-bold ,
+  BoldFont = *-italic ,
+  BoldItalicFont = *-bolditalic ,
+ ]
 \setsansfont{Iwona}%
  [
   Scale=MatchLowercase,
@@ -777,7 +784,7 @@ you think it is appropriate.
 A
 ^^^^2070 ^^^^00b9 ^^^^00b2 ^^^^00b3 ^^^^2074 ^^^^2075 ^^^^2076 ^^^^2077
 ^^^^2078 ^^^^2079 ^^^^207a ^^^^207b ^^^^207c ^^^^207d ^^^^207e ^^^^2071
-^^^^207f
+^^^^207f ^^^^207f ^^^^02b0 ^^^^02b2 ^^^^02b3 ^^^^02b7 ^^^^02b8
 Z}
 \caption{
   The Unicode superscripts supported as input characters.
