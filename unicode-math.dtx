@@ -2330,7 +2330,7 @@ This work is "maintained" by Will Robertson.
 \@@_default_mathalph:nnn {bfsfit} {latin,Latin,greek,Greek,misc}     {bfsfit}
 %    \end{macrocode}
 %
-% \subsection{Define symbol style commands}
+% \subsubsection{Define symbol style commands}
 % Finally, all of the `symbol styles' commands are set up, which are the commands to access each of the named alphabet styles. There is not a one-to-one mapping between symbol style commands and named style ranges!
 %    \begin{macrocode}
 \clist_map_inline:nn
@@ -2342,7 +2342,18 @@ This work is "maintained" by Will Robertson.
  { \@@_prepare_mathstyle:n {#1} }
 %    \end{macrocode}
 %
-% \subsection{Replacing legacy pure-maths alphabets}
+%
+% \subsubsection{New names for legacy textmath alphabet selection}
+% In case a package option overwrites, say, \cs{mathbf} with \cs{symbf}.
+%    \begin{macrocode}
+\clist_map_inline:nn
+ { rm, it, bf, sf, tt }
+ { \cs_set_eq:cc { mathtext #1 } { sym #1 } }
+%    \end{macrocode}
+% Perhaps these should actually be defined using a hypothetical unicode-math interface to creating new such styles. To come.
+%
+%
+% \subsubsection{Replacing legacy pure-maths alphabets}
 % The following are alphabets which do not have a math/text ambiguity.
 %    \begin{macrocode}
 \clist_map_inline:nn
@@ -2350,9 +2361,7 @@ This work is "maintained" by Will Robertson.
    normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak, tt,
    up, bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
  }
- {
-  \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } }
- }
+ { \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } } }
 %    \end{macrocode}
 %
 %
