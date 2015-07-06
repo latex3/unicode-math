@@ -340,18 +340,18 @@ for accessing the glyph, such as \cs{int}, or whole collection of symbols with
 the same math type, such as \cs{mathopen}, or complete math styles such as \cs{mathbb}.
 (Only numerical slots, however, can be used in ranged declarations.)
 
-\subsubsection{Control over maths alphabets}
+\subsubsection{Control over maths styles}
 
-Exact control over maths alphabets can be somewhat involved.
+Exact control over maths styles can be somewhat involved.
 Here is the current plan.
 \begin{itemize}
 \item |[range=\mathbb]| to use the font for `bb' letters only.
 \item |[range=\mathbfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (also with |latin|, |Latin|, |num| as possible options for Latin lower-/upper-case and numbers, resp.).
-\item |[range=\mathsfit->\mathbfsfit]| to map to different output alphabet(s) (which is rather useless right now but will become less useless in the future).
+\item |[range=\mathsfit->\mathbfsfit]| to map to different output styles(s) (which is rather useless right now but will become less useless in the future).
 \end{itemize}
 
 And now the trick.
-If a particular math alphabet is not defined in the font, fall back onto the lower-base plane (i.e., upright) glyphs.
+If a particular math style is not defined in the font, fall back onto the lower-base plane (i.e., upright) glyphs.
 Therefore, to use an \ascii-encoded fractur font, for example, write
 \par{\centering|\setmathfont{SomeFracturFont}[range=\mathfrak]|\par}\noindent
 and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
@@ -390,6 +390,28 @@ To select a new maths font in a particular version, use the syntax
 and to switch between maths versions mid-document use the standard \LaTeX\ command
 \cmd\mathversion\marg{version name}.
 
+
+\subsection{Legacy maths `alphabet' commands}
+
+\LaTeX\ traditionally uses \cs{DeclareMathAlphabet} and \cs{SetMathAlphabet} to define document commands such as \cs{mathit}, \cs{mathbf}, and so on.
+While these commands can still be used, \pkg{unicode-math} defines a wrapper command to assist with the creation of new such maths alphabet commands.
+This command is known as \cs{setmathface} in symmetry with \pkg{fontspec}'s \cs{newfontface} command; it takes syntax:
+\begin{quote}
+  \cmd\setmathfontface\meta{command}\marg{font name}|[|\meta{font features}|]|
+  
+  \makebox[0pt][l]{\cmd\setmathfontface\meta{command}\marg{font name}|[||version=|\meta{version name}|,|\meta{font features}|]|}
+\end{quote}
+For example, if you want to define a new legacy maths alphabet font \cs{mathittt}:
+\begin{verbatim}
+  \setmathfontface\mathittt{texgyrecursor-italic.otf}
+  ...
+  $\mathittt{foo} = \mathittt{a} + \mathittt{b}$
+\end{verbatim}
+
+What is the difference between a style and a legacy alphabet?
+TODO: answer this question.
+
+
 \section{Maths input}
 
 \XeTeX's Unicode support allows maths input through two methods. Like
@@ -414,7 +436,7 @@ interface heavily inspired by Walter Schmidt's \pkg{lucimatx} package: a
 package option \opt{math-style} that takes one of four arguments:
 \opt{TeX}, \opt{ISO}, \opt{french}, or \opt{upright} (case sensitive).
 
-The philosophy behind the interface to the mathematical alphabet symbols
+The philosophy behind the interface to the mathematical symbols
 lies in \LaTeX's attempt of separating content and formatting. Because input
 source text may come from a variety of places, the upright and
 `mathematical' italic Latin and Greek alphabets are \emph{unified} from the
@@ -427,7 +449,7 @@ letters. The upright or italic forms are then chosen based on the
 If glyphs are desired that do not map as per the package option (for
 example, an upright `g' is desired but typing |$g$| yields `$g$'),
 \emph{markup} is required to specify this; to follow from the example:
-|\mathup{g}|. Maths alphabets commands such as \cmd\mathup\ are detailed
+|\mathup{g}|. Maths style commands such as \cmd\mathup\ are detailed
 later.
 
 \paragraph{Alternative interface}
@@ -476,7 +498,7 @@ examples: \cmd\mathbf\ in the former (`$\mathbfup{M}$'), and \cmd\bm\ (or
 \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
 
 In \pkg{unicode-math}, the \cmd\mathbf\ command works directly with both
-Greek and Latin maths alphabet characters and depending on package option
+Greek and Latin maths characters and depending on package option
 either switches to upright for Latin letters (|bold-style=TeX|) as well or
 keeps them italic (|bold-style=ISO|).
 
@@ -517,7 +539,7 @@ The \opt{bold-style} options' effects are shown in brief in
 \subsection{Sans serif style}
 \seclabel{sans-style}
 
-Unicode contains upright and italic, medium and bold mathematical alphabet characters.
+Unicode contains upright and italic, medium and bold mathematical style characters.
 These may be explicitly selected with the \cs{mathsfup}, \cs{mathsfit}, \cs{mathbfsfup}, and \cs{mathbfsfit}
 commands discussed in \secref{all-math-alphabets}.
 
@@ -528,7 +550,7 @@ But \LaTeX's \cs{mathsf} is \textsl{upright} sans serif.
 
 Therefore I reluctantly add the package options |[sans-style=upright]| and |[sans-style=italic]| to control the behaviour of \cs{mathsf}.
 The |upright| style sets up the command to use upright sans serif, including Greek;
-the |italic| style switches to using italic in both Latin and Greek alphabets.
+the |italic| style switches to using italic in both Latin and Greek.
 In other words, this option simply changes the meaning of \cs{mathsf} to either \cs{mathsfup} or \cs{mathsfit}, respectively.
 Please let me know if more granular control is necessary here.
 
@@ -542,12 +564,12 @@ serif follows from the setting for sans serif; it is completely independent of t
 
 In other words, \cs{mathbfsf} is either \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
 
-Note well! There is no medium-weight sans serif Greek alphabet in Unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
+Note well! There is no medium-weight sans serif Greek range in Unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
 
-\subsection{All (the rest) of the mathematical alphabets}
+\subsection{All (the rest) of the mathematical styles}
 \seclabel{all-math-alphabets}
 
-Unicode contains separate codepoints for most if not all variations of alphabet
+Unicode contains separate codepoints for most if not all variations of style
 shape one may wish to use in mathematical notation. The complete list is shown
 in \tabref{mathalphabets}. Some of these have been covered in the previous sections.
 
@@ -556,7 +578,7 @@ sans serif bold, you must write |\mathbfsf{...}| rather than |\mathbf{\mathsf{..
 This may change in the future.
 
 \begin{table}
-\caption{Mathematical alphabets defined in Unicode. Black dots indicate an alphabet exists in the font specified; blue dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
+\caption{Mathematical styles defined in Unicode. Black dots indicate an style exists in the font specified; blue dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
 \tablabel{mathalphabets}
 \centering
 \def\Y{\textbullet}
@@ -589,7 +611,7 @@ Fraktur    & Upright & Normal & \cs{mathfrak}   & \Y &    &     \\
 
 \subsubsection{Double-struck}
 
-The double-struck alphabet (also known as `blackboard bold') consists of
+The double-struck style (also known as `blackboard bold') consists of
 upright Latin letters $\{\mathbb{a}$--$\mathbb{z}$,$\mathbb{A}$$\mathbb{Z}\}$,
 numerals $\mathbb{0}$--$\mathbb{9}$, summation symbol $\mathbb\sum$, and four
 Greek letters only: $\{\mathbb{\gamma\pi\Gamma\Pi}\}$.
@@ -601,12 +623,12 @@ recommended instead.
 
 There are also five Latin \emph{italic} double-struck letters: $\mathbbit{Ddeij}$.
 These can be accessed (if not with their literal characters or control sequences)
-with the \cs{mathbbit} alphabet switch, but note that only those five letters
+with the \cs{mathbbit} style switch, but note that only those five letters
 will give the expected output.
 
 \subsubsection{Caligraphic vs.\ Script variants}
 
-The Unicode maths encoding contains an alphabet style for `Script' letters,
+The Unicode maths encoding contains a style for `Script' letters,
 and while by default \cs{mathcal} and \cs{mathscr}
 are synonyms, there are some situations when a
 separate `Caligraphic' style is needed as well.

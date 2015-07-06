@@ -896,6 +896,37 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{\cs{newmathalphabet}}
+%
+% \begin{macro}{\newmathalphabet}
+%    \begin{macrocode}
+\keys_define:nn {@@_mathface}
+  {
+    version .code:n =
+      {
+        \tl_set:Nn \l_@@_mversion_tl {#1}
+      }
+  }
+
+\DeclareDocumentCommand \setmathfontface { m O{} m O{} }
+ {
+  \tl_clear:N \l_@@_mversion_tl
+ 
+  \keys_set_known:nnN {@@_mathface} {#2,#4} \l_@@_keyval_clist
+  \exp_args:Nnx \fontspec_set_family:Nxn \l_@@_tmpa_tl
+   { ItalicFont={}, BoldFont={}, \exp_not:V \l_@@_keyval_clist } {#3}
+  
+  \tl_if_empty:NT \l_@@_mversion_tl
+   {
+    \tl_set:Nn \l_@@_mversion_tl {normal}
+    \DeclareMathAlphabet #1 {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
+   }
+  \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
+ }
+
+\@onlypreamble \setmathfontface
+%    \end{macrocode}
+% \end{macro}
 %
 %
 % \subsection{The main \cs{setmathfont} macro}
