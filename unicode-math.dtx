@@ -515,20 +515,20 @@ This work is "maintained" by Will Robertson.
             }
       {TeX} {
              \bool_set_false:N \g_@@_bfliteral_bool
-             \bool_set_true:N \g_@@_bfupGreek_bool
+             \bool_set_true:N  \g_@@_bfupGreek_bool
              \bool_set_false:N \g_@@_bfupgreek_bool
-             \bool_set_true:N \g_@@_bfupLatin_bool
-             \bool_set_true:N \g_@@_bfuplatin_bool
+             \bool_set_true:N  \g_@@_bfupLatin_bool
+             \bool_set_true:N  \g_@@_bfuplatin_bool
             }
   {upright} {
              \bool_set_false:N \g_@@_bfliteral_bool
-             \bool_set_true:N \g_@@_bfupGreek_bool
-             \bool_set_true:N \g_@@_bfupgreek_bool
-             \bool_set_true:N \g_@@_bfupLatin_bool
-             \bool_set_true:N \g_@@_bfuplatin_bool
+             \bool_set_true:N  \g_@@_bfupGreek_bool
+             \bool_set_true:N  \g_@@_bfupgreek_bool
+             \bool_set_true:N  \g_@@_bfupLatin_bool
+             \bool_set_true:N  \g_@@_bfuplatin_bool
             }
   {literal} {
-             \bool_set_true:N \g_@@_bfliteral_bool
+             \bool_set_true:N  \g_@@_bfliteral_bool
             }
  }
 %    \end{macrocode}
@@ -679,7 +679,6 @@ This work is "maintained" by Will Robertson.
 % (Error messages and warning definitions go here from the |msg| chunk
 %  defined in \secref[vref]{codemsg}.)
 %
-%
 % \section{Bifurcation}
 %
 % And here the split begins. Most of the code is still shared, but
@@ -829,7 +828,9 @@ This work is "maintained" by Will Robertson.
     \@@_char_gmake_mathactive:n {#3}
     \@@_active_char_set:wc #3 \q_nil { \cs_to_str:N #2 _sym }
   \group_end:
+  
   \@@_set_mathchar:cNnn {\cs_to_str:N #2 op} \mathop {#1} {#3}
+  
   \cs_gset:cpx { \cs_to_str:N #2 _sym }
    {
     \exp_not:c { \cs_to_str:N #2 op   }
