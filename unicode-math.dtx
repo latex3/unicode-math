@@ -291,10 +291,6 @@ This work is "maintained" by Will Robertson.
     \prg_return_false:
   \fi:
  }
-\cs_generate_variant:Nn \@@_glyph_if_exist_p:n {c}
-\cs_generate_variant:Nn \@@_glyph_if_exist:nTF {c}
-\cs_generate_variant:Nn \@@_glyph_if_exist:nT  {c}
-\cs_generate_variant:Nn \@@_glyph_if_exist:nF  {c}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -373,11 +369,15 @@ This work is "maintained" by Will Robertson.
 %
 % Rather than `readable', in the end, this makes the code more extensible.
 %    \begin{macrocode}
-\cs_new:Nn \usv_set:nnn
+\cs_new:Nn \usv_set:nnn 
+ { \tl_set:cn { g_@@_#1_#2_usv } {#3} }
+\cs_new:Nn \@@_to_usv:nn
+ { \use:c { g_@@_#1_#2_usv } }
+\prg_new_conditional:Nnn \@@_usv_if_exist:nn {T,F,TF}
  {
-  \tl_set:cn { \@@_to_usv:nn {#1}{#2} } {#3}
+  \cs_if_exist:cTF { g_@@_#1_#2_usv }
+   \prg_return_true: \prg_return_false:
  }
-\cs_new:Nn \@@_to_usv:nn { g_@@_#1_#2_usv }
 %    \end{macrocode}
 %
 % \subsection{Package options}
@@ -2432,7 +2432,7 @@ This work is "maintained" by Will Robertson.
         \clist_map_break:
        }
        {
-        \@@_glyph_if_exist:cT { \@@_to_usv:nn {\l_@@_style_tl}{\l_@@_alphabet_tl} }
+        \@@_glyph_if_exist:nT { \@@_to_usv:nn {\l_@@_style_tl}{\l_@@_alphabet_tl} }
          {
           \@@_maybe_init_alphabet:V \l_@@_style_tl
           \clist_map_break:
@@ -2455,7 +2455,7 @@ This work is "maintained" by Will Robertson.
         \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {#3}
        }
        {
-        \@@_glyph_if_exist:cTF { \@@_to_usv:nn {\l_@@_style_tl}{\l_@@_alphabet_tl} }
+        \@@_glyph_if_exist:nTF { \@@_to_usv:nn {\l_@@_style_tl}{\l_@@_alphabet_tl} }
          {
           \@@_log:nx {setup-alph} {math \l_@@_style_tl~(\l_@@_alphabet_tl)}
           \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {#3}
@@ -2520,8 +2520,8 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_char_single:nnn
  {
-  \@@_map_char_single:nn { \use:c { \@@_to_usv:nn {#1}{#3} } }
-                         { \use:c { \@@_to_usv:nn {#2}{#3} } }
+  \@@_map_char_single:nn { \@@_to_usv:nn {#1}{#3} }
+                         { \@@_to_usv:nn {#2}{#3} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2544,8 +2544,8 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_chars_range:nnnn
  {
-  \@@_map_chars_range:nnn {#1} { \use:c { \@@_to_usv:nn {#2}{#4} } }
-                               { \use:c { \@@_to_usv:nn {#3}{#4} } }
+  \@@_map_chars_range:nnn {#1} { \@@_to_usv:nn {#2}{#4} }
+                               { \@@_to_usv:nn {#3}{#4} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2556,7 +2556,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Nn \@@_set_normal_char:nnn
  {
-  \cs_if_exist:cT { \@@_to_usv:nn {#3} {#1} }
+  \@@_usv_if_exist:nnT {#3} {#1}
   {
     \clist_map_inline:nn {#2}
      {
@@ -2689,8 +2689,8 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_set_mathalphabet_char:nnnn
  {
-  \@@_set_mathalphabet_char:nnn {#1} { \use:c { \@@_to_usv:nn {#2} {#4} } }
-                                     { \use:c { \@@_to_usv:nn {#3} {#4} } }
+  \@@_set_mathalphabet_char:nnn {#1} { \@@_to_usv:nn {#2} {#4} }
+                                     { \@@_to_usv:nn {#3} {#4} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2713,8 +2713,8 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_set_mathalph_range:nnnnn
  {
-  \@@_set_mathalph_range:nnnn {#1} {#2} { \use:c { \@@_to_usv:nn {#3} {#5} } }
-                                        { \use:c { \@@_to_usv:nn {#4} {#5} } }
+  \@@_set_mathalph_range:nnnn {#1} {#2} { \@@_to_usv:nn {#3} {#5} }
+                                        { \@@_to_usv:nn {#4} {#5} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2724,7 +2724,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_set_mathalphabet_pos:nnnn
  {
-  \cs_if_exist:cT { \@@_to_usv:nn {#4} {#2} }
+  \@@_usv_if_exist:nnT {#4} {#2}
    {
     \clist_map_inline:nn {#3}
       { \@@_set_mathalphabet_char:nnnn {#1} {##1} {#4} {#2} }
