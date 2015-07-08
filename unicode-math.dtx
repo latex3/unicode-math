@@ -225,9 +225,14 @@ This work is "maintained" by Will Robertson.
 \tl_const:Nn \c_@@_math_alphabet_name_num_tl   {Numerals}
 \tl_const:Nn \c_@@_math_alphabet_name_misc_tl  {Misc.}
 %    \end{macrocode}
+%
 %    \begin{macrocode}
 \tl_new:N \l_@@_mathstyle_tl
-
+%    \end{macrocode}
+%
+% Used to store the font switch for the \cs{operator@font}.
+%    \begin{macrocode}
+\tl_new:N \g_@@_operator_mathfont_tl
 %    \end{macrocode}
 %
 % Variables:
@@ -896,9 +901,9 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{\cs{newmathalphabet}}
+% \subsection{\cs{setmathalphabet}}
 %
-% \begin{macro}{\newmathalphabet}
+% \begin{macro}{\setmathalphabet}
 %    \begin{macrocode}
 \keys_define:nn {@@_mathface}
   {
@@ -922,11 +927,115 @@ This work is "maintained" by Will Robertson.
     \DeclareMathAlphabet #1 {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
    }
   \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
+  
+  \tl_case:Nn #1
+   {
+    \mathrm { \cs_set_eq:NN \g__fontspec_mathrm_tl \l_@@_tmpa_tl }
+    \mathsf { \cs_set_eq:NN \g__fontspec_mathsf_tl \l_@@_tmpa_tl }
+    \mathtt { \cs_set_eq:NN \g__fontspec_mathtt_tl \l_@@_tmpa_tl }
+   }
  }
 
 \@onlypreamble \setmathfontface
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{\setoperatorfont}
+% TODO: add check?
+%    \begin{macrocode}
+\DeclareDocumentCommand \setoperatorfont {m}
+ { \tl_set:Nn \g_@@_operator_mathfont_tl {#1} }
+\setoperatorfont{\mathrm}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Hooks into \pkg{fontspec}}
+%
+% Historically, \cs{mathrm} and so on were completely overwritten by \pkg{unicode-math}, and \pkg{fontspec}'s methods for setting these fonts in the classical manner were bypassed.
+%
+% While we could now re-activate the way that \pkg{fontspec} does the following, because we can now change maths fonts whenever it's better to define new commands in \pkg{unicode-math} to define the \cs{mathXYZ} fonts.
+%
+% \subsubsection{Text font}
+%    \begin{macrocode}
+\cs_generate_variant:Nn \tl_if_eq:nnT {o} 
+\cs_set:Nn \__fontspec_setmainfont:nn
+ {
+  \fontspec_set_family:Nnn \rmdefault {#1}{#2}
+  \tl_if_eq:onT {\g__fontspec_mathrm_tl} {\rmdefault}
+   {
+%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {#1} {#2}
+%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {Renderer=Basic,#1} {#2}
+    \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\updefault
+    \SetMathAlphabet\mathit{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\itdefault
+    \SetMathAlphabet\mathbf{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\bfdefault\updefault
+   }
+  \normalfont
+  \ignorespaces
+ }
+
+\cs_set:Nn \__fontspec_setsansfont:nn
+ {
+  \fontspec_set_family:Nnn \sfdefault {#1}{#2}
+  \tl_if_eq:onT {\g__fontspec_mathsf_tl} {\sfdefault}
+   {
+%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {#1} {#2}
+%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {Renderer=Basic,#1} {#2}
+    \SetMathAlphabet\mathsf{normal}\g_fontspec_encoding_tl\g__fontspec_mathsf_tl\mddefault\updefault
+    \SetMathAlphabet\mathsf{bold}  \g_fontspec_encoding_tl\g__fontspec_mathsf_tl\bfdefault\updefault
+   }
+  \normalfont
+  \ignorespaces
+ }
+
+\cs_set:Nn \__fontspec_setmonofont:nn
+ {
+  \fontspec_set_family:Nnn \ttdefault {#1}{#2}
+  \tl_if_eq:onT {\g__fontspec_mathtt_tl} {\ttdefault}
+   {
+%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {#1} {#2}
+%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {Renderer=Basic,#1} {#2}
+    \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\updefault
+    \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\updefault
+   }
+  \normalfont
+  \ignorespaces
+ }
+%    \end{macrocode}
+%
+% \subsubsection{Maths font}
+% If the maths fonts are set explicitly, then the text commands above will not execute their branches to set the maths font alphabets.
+%    \begin{macrocode}
+\cs_set:Nn \__fontspec_setmathrm:nn
+ {
+%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {#1} {#2}
+%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {Renderer=Basic,#1} {#2}
+  \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\updefault
+  \SetMathAlphabet\mathit{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\itdefault
+  \SetMathAlphabet\mathbf{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\bfdefault\updefault
+ }
+\cs_set:Nn \__fontspec_setboldmathrm:nn
+ {
+%<XE>  \fontspec_set_family:Nnn \g__fontspec_bfmathrm_tl {#1} {#2}
+%<LU>  \fontspec_set_family:Nnn \g__fontspec_bfmathrm_tl {Renderer=Basic,#1} {#2}
+  \SetMathAlphabet\mathrm{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\mddefault\updefault
+  \SetMathAlphabet\mathbf{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\bfdefault\updefault
+  \SetMathAlphabet\mathit{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\mddefault\itdefault
+ }
+\cs_set:Nn \__fontspec_setmathsf:nn
+ {
+%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {#1} {#2}
+%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {Renderer=Basic,#1} {#2}
+  \SetMathAlphabet\mathsf{normal}\g_fontspec_encoding_tl\g__fontspec_mathsf_tl\mddefault\updefault
+  \SetMathAlphabet\mathsf{bold}  \g_fontspec_encoding_tl\g__fontspec_mathsf_tl\bfdefault\updefault
+ }
+\cs_set:Nn \__fontspec_setmathtt:nn
+ {
+%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {#1} {#2}
+%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {Renderer=Basic,#1} {#2}
+  \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\updefault
+  \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\updefault
+ }
+%    \end{macrocode}
 %
 %
 % \subsection{The main \cs{setmathfont} macro}
@@ -2101,93 +2210,6 @@ This work is "maintained" by Will Robertson.
  }
 %    \end{macrocode}
 %
-% \subsection{Hooks into \pkg{fontspec}}
-%
-% Historically, \cs{mathrm} and so on were completely overwritten by \pkg{unicode-math}, and \pkg{fontspec}'s methods for setting these fonts in the classical manner were bypassed.
-%
-% While we could now re-activate the way that \pkg{fontspec} does the following, because we can now change maths fonts whenever it's better to define new commands in \pkg{unicode-math} to define the \cs{mathXYZ} fonts.
-%
-% \subsubsection{Text font}
-%    \begin{macrocode}
-\cs_generate_variant:Nn \tl_if_eq:nnT {o} 
-\cs_set:Nn \__fontspec_setmainfont:nn
- {
-  \fontspec_set_family:Nnn \rmdefault {#1}{#2}
-  \tl_if_eq:onT {\g__fontspec_mathrm_tl} {\rmdefault}
-   {
-%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {#1} {#2}
-%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {Renderer=Basic,#1} {#2}
-    \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\updefault
-    \SetMathAlphabet\mathit{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\itdefault
-    \SetMathAlphabet\mathbf{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\bfdefault\updefault
-   }
-  \normalfont
-  \ignorespaces
- }
-
-\cs_set:Nn \__fontspec_setsansfont:nn
- {
-  \fontspec_set_family:Nnn \sfdefault {#1}{#2}
-  \tl_if_eq:onT {\g__fontspec_mathsf_tl} {\sfdefault}
-   {
-%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {#1} {#2}
-%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {Renderer=Basic,#1} {#2}
-    \SetMathAlphabet\mathsf{normal}\g_fontspec_encoding_tl\g__fontspec_mathsf_tl\mddefault\updefault
-    \SetMathAlphabet\mathsf{bold}  \g_fontspec_encoding_tl\g__fontspec_mathsf_tl\bfdefault\updefault
-   }
-  \normalfont
-  \ignorespaces
- }
-
-\cs_set:Nn \__fontspec_setmonofont:nn
- {
-  \fontspec_set_family:Nnn \ttdefault {#1}{#2}
-  \tl_if_eq:onT {\g__fontspec_mathtt_tl} {\ttdefault}
-   {
-%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {#1} {#2}
-%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {Renderer=Basic,#1} {#2}
-    \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\updefault
-    \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\updefault
-   }
-  \normalfont
-  \ignorespaces
- }
-%    \end{macrocode}
-%
-% \subsubsection{Maths font}
-% If the maths fonts are set explicitly, then the text commands above will not execute their branches to set the maths font alphabets.
-%    \begin{macrocode}
-\cs_set:Nn \__fontspec_setmathrm:nn
- {
-%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {#1} {#2}
-%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {Renderer=Basic,#1} {#2}
-  \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\updefault
-  \SetMathAlphabet\mathit{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\itdefault
-  \SetMathAlphabet\mathbf{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\bfdefault\updefault
- }
-\cs_set:Nn \__fontspec_setboldmathrm:nn
- {
-%<XE>  \fontspec_set_family:Nnn \g__fontspec_bfmathrm_tl {#1} {#2}
-%<LU>  \fontspec_set_family:Nnn \g__fontspec_bfmathrm_tl {Renderer=Basic,#1} {#2}
-  \SetMathAlphabet\mathrm{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\mddefault\updefault
-  \SetMathAlphabet\mathbf{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\bfdefault\updefault
-  \SetMathAlphabet\mathit{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\mddefault\itdefault
- }
-\cs_set:Nn \__fontspec_setmathsf:nn
- {
-%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {#1} {#2}
-%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {Renderer=Basic,#1} {#2}
-  \SetMathAlphabet\mathsf{normal}\g_fontspec_encoding_tl\g__fontspec_mathsf_tl\mddefault\updefault
-  \SetMathAlphabet\mathsf{bold}  \g_fontspec_encoding_tl\g__fontspec_mathsf_tl\bfdefault\updefault
- }
-\cs_set:Nn \__fontspec_setmathtt:nn
- {
-%<XE>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {#1} {#2}
-%<LU>  \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {Renderer=Basic,#1} {#2}
-  \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\updefault
-  \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\updefault
- }
-%    \end{macrocode}
 %
 %
 % \subsection{Setting styles}
@@ -2395,6 +2417,60 @@ This work is "maintained" by Will Robertson.
  { \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } } }
 %    \end{macrocode}
 %
+% \subsubsection{Fixing up \cs{operator@font}}
+%
+%In LaTeX maths, the command |\operator@font| is defined that switches to the |operator| mathgroup. The classic example is the |\sin| in |$\sin{x}$|; essentially we're using |\mathrm| to typeset the upright symbols, but the syntax is |{\operator@font sin}|.
+%
+%It turns out that hooking into |\operator@font| is hard because all other maths font selection in 2e uses |\mathrm{...}| style.
+%
+%Then reading source2e a little more I stumbled upon: (in the definition of |\select@group|)
+%\begin{quote}
+% We surround |\select@group| with braces so that functions using it can be used directly after |_| or |^|. However, if we use oldstyle syntax where the math alphabet doesn’t have arguments (ie if |\math@bgroup| is not |\bgroup|) we need to get rid of the extra group.
+%\end{quote}
+%So there's a trick we can use.
+%Because it's late and I'm tired, I went for the first thing that jumped out at me:
+%\begin{Verbatim}
+%    \documentclass{article}
+%    \DeclareMathAlphabet\mathfoo{OT1}{lmdh}{m}{n}
+%    \begin{document}
+%    \makeatletter
+%    ${\operator@font Mod}\, x$
+%    
+%    \def\operator@font{%
+%      \let \math@bgroup \relax
+%      \def \math@egroup {\let \math@bgroup \@@math@bgroup
+%                         \let \math@egroup \@@math@egroup}%
+%      \mathfoo}
+%    ${\operator@font Mod}\, x$
+%    \end{document}
+%\end{Verbatim}
+% We define a new math alphabet |\mathfoo| to select the Latin Modern Dunhill font, and then locally redefine |\math@bgroup| to allow |\mathfoo| to be used without an argument temporarily.
+%
+% Now that I've written this whole thing out, another solution pops to mind:
+%\begin{Verbatim}
+%    \documentclass{article}
+%    \DeclareSymbolFont{foo}{OT1}{lmdh}{m}{n}
+%    \DeclareSymbolFontAlphabet\mathfoo{foo}
+%    \begin{document}
+%    \makeatletter
+%    ${\operator@font Mod}\, x$
+%    
+%    \def\operator@font{\mathgroup\symfoo}
+%    ${\operator@font Mod}\, x$
+%    \end{document}
+%\end{Verbatim}
+%I guess that's the better approach!!
+%
+% Or perhaps I should just use |\@fontswitch| to do the first solution with a nicer wrapper. I really should read things more carefully:
+% \begin{macro}{\operator@font}
+%    \begin{macrocode}
+\cs_set:Npn \operator@font
+ {
+  \@@_switchto_literal:
+  \@fontswitch {} { \g_@@_operator_mathfont_tl }
+ }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 % \subsection{Defining the math alphabets per style}
