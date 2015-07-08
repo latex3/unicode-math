@@ -2203,7 +2203,7 @@ This work is "maintained" by Will Robertson.
   \relax\ifmmode % <- not sure if this is really necessary since we've just checked for mmode and raised an error if not!
     \math@bgroup
       \cs_if_eq:cNF {M@\f@encoding} #1 {#1}
-      \@@_switchto_up: %% FIXME: should be `literal' not `up'
+      \@@_switchto_literal:
       \mathgroup #2 \relax
     \expandafter\math@egroup
   \fi
@@ -2261,13 +2261,13 @@ This work is "maintained" by Will Robertson.
   \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
 
   \@@_init_alphabet:x {#1}
-  \cs_set:cpn {_@@_sym_#1_aux:n} ##1
-   { \use:c {@@_switchto_#1:} ##1 \egroup }
+  \cs_set:cpn {_@@_sym_#1_aux:n}
+   { \use:c {@@_switchto_#1:} \math@egroup }
   \cs_set_protected:cpx {sym#1}
    {
     \exp_not:n
      {
-      \bgroup
+      \math@bgroup
       \mode_if_math:F
         {
           \egroup\expandafter
