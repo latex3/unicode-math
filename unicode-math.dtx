@@ -1,5 +1,5 @@
 % \iffalse
-% !TEX TS-program = XeLaTeX
+% !TEX TS-program = pdfTeX
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ^^A   SELF-EXTRACTION BEGINS HERE
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2043,11 +2043,11 @@ This work is "maintained" by Will Robertson.
 % These latter can either be the command name of a specific character, \emph{or} the math
 % type of one (\eg, \cmd\mathbin).
 %
-% Character ranges are passed to \cmd\um@parse@range, which accepts input in the form shown in \tabref{ranges}.
+% Character ranges are passed to \cs{@@_if_char_spec:nNNT}, which accepts input in the form shown in \tabref{ranges}.
 %
 % \begin{table}[htbp]
 % \centering
-% \topcaption{Ranges accepted by \cmd\um@parse@range.}
+% \topcaption{Ranges accepted by \cs{@@_if_char_spec:nNNT}.}
 % \label{tab:ranges}
 % \begin{tabular}{>{\ttfamily}cc}
 % \textrm{Input} & Range \\
@@ -2312,11 +2312,12 @@ This work is "maintained" by Will Robertson.
  {
   \prop_new:c {g_@@_named_range_#1_prop}
  }
-\clist_map_inline:nn
+\clist_set:Nn \g_@@_named_ranges_clist
  {
   up, it, tt, bfup, bfit, bb , bbit, scr, bfscr, cal, bfcal,
-  frak, bffrak, sfup, sfit, bfsfup, bfsfit, bfsf,
+  frak, bffrak, sfup, sfit, bfsfup, bfsfit, bfsf 
  }
+\clist_map_inline:Nn \g_@@_named_ranges_clist
  { \@@_new_named_range:n {#1} }
 %    \end{macrocode}
 %
@@ -2401,7 +2402,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \clist_map_inline:nn
  { rm, it, bf, sf, tt }
- { \cs_set_eq:cc { mathtext #1 } { sym #1 } }
+ { \cs_set_eq:cc { mathtext #1 } { math #1 } }
 %    \end{macrocode}
 % Perhaps these should actually be defined using a hypothetical unicode-math interface to creating new such styles. To come.
 %
@@ -2411,10 +2412,13 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \clist_map_inline:nn
  { 
-   normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak, tt,
-   up, bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
+   up, normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak, tt,
+   bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
  }
  { \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } } }
+
+\cs_set_protected:Npn \mathrm { \mathup }
+\cs_set_protected:Npn \symrm  { \symup  }
 %    \end{macrocode}
 %
 % \subsubsection{Fixing up \cs{operator@font}}

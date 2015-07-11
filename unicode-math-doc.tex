@@ -39,15 +39,15 @@
 \usepackage[slash-delimiter=frac,nabla=literal]{unicode-math}
 \usepackage{metalogo,hologo}
 
-\fvset{gobble=2,fontsize=\small,xleftmargin=2em}
-%\usepackage[rm,small]{titlesec}
+\fvset{fontsize=\small,xleftmargin=2em}
+\usepackage[it]{titlesec}
 
 \setmainfont{texgyrepagella}%
  [
   Extension = .otf ,
   UprightFont = *-regular ,
-  ItalicFont = *-bold ,
-  BoldFont = *-italic ,
+  ItalicFont = *-italic ,
+  BoldFont = *-bold ,
   BoldItalicFont = *-bolditalic ,
  ]
 \setsansfont{Iwona}%
@@ -64,7 +64,9 @@
   Scale=MatchLowercase,
   BoldFont=Inconsolatazi4-Bold.otf
  ]
+
 \setmathfont{texgyrepagella-math.otf}
+\setmathfont[version=xits]{xits-math.otf}
 \newfontface\umfont{xits-math.otf}
 
 \usepackage{hypdoc}
@@ -176,6 +178,8 @@ package after any problems have been ironed out with the initial version.
 \newpage
 \part{User documentation}
 \parttoc
+
+\clearpage
 \section{Introduction}
 
 This document describes the \pkg{unicode-math} package, which is an
@@ -230,6 +234,38 @@ Once the package is loaded, traditional TFM-based fonts are not supported any mo
 you can only switch to a different OpenType math font using the \cs{setmathfont} command.
 If you do not load an OpenType maths font before |\begin{document}|, Latin Modern Math (see above) will be loaded automatically.
 
+\subsection{New commands}
+\textbf{New v0.8:}
+\pkg{unicode-math} provides the following commands (usage: |$\symbfsf{g}$|${}\to\symbfsf{g}$) to select specific `alphabets' within the unicode maths font:
+\begin{quote}
+\ExplSyntaxOn
+\clist_map_inline:nn {
+  normal, literal, up, bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf,
+  bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
+  up, sf, bf, tt, it,
+  }{\cs{sym#1}~}
+\ExplSyntaxOff
+\end{quote}
+Many of these are also defined with `familiar' synonyms:
+\begin{quote}
+\ExplSyntaxOn
+\clist_map_inline:nn {
+   normal, bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
+   bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
+  }{\mbox{\cs{math#1}}~}
+\ExplSyntaxOff
+\end{quote}
+So what about \cs{mathup}, \cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}?
+(N.B.: \cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is prefered as it is a script agnostic term.)
+These commands have `overloaded' meanings in \LaTeX, and it's important to consider the subtle differences between, e.g., \cs{symbf} and \cs{mathbf}.
+The former switches to single-letter mathematical symbols, whereas the second switches to a text font that behaves correctly in mathematics but should be used for multi-letter identifiers.
+These four commands (and \cs{mathrm}) are defined in the traditional \LaTeX\ manner.
+Further details are discussed in \secref{mathselect}.
+
+Additional similar commands can be defined using
+\begin{Verbatim}
+\setmathfontface\mathfoo{...}
+\end{Verbatim}
 
 \subsection{Package options}
 Package options may be set when the package as loaded or at any later
@@ -277,18 +313,6 @@ See following sections for more information.
   \end{tabular}
 \end{table}
 
-\subsection{Known issues}
-
-In some cases, \XeTeX's math support is either missing or I have not
-discovered how to access features for various types of maths construct.
-An example of this are horizontal extensible symbols, such as arrows that can
-grow longer if necessary. Behaviour with such symbols is not necessarily
-going to be consistent; please report problem areas to me.
-
-Symbols for maths characters have been inherited from the STIX project and
-may change slightly in the long term. We have tried to preserve backwards
-compatibility with \LaTeX\ conventions as best as possible; again, please
-report areas of concern.
 
 \section{Unicode maths font setup}
 
@@ -334,16 +358,21 @@ There will probably be few cases where a single Unicode maths font suffices
 possible exception. It will therefore be necessary to delegate specific
 Unicode ranges of glyphs to separate fonts:
   \codeline{\cmd\setmathfont\marg{font name}|[range=|\meta{unicode range}|,|\meta{font features}|]|}
-where \meta{unicode range} is a comma-separated list of Unicode slots and
-ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|. You may also use the macro
-for accessing the glyph, such as \cs{int}, or whole collection of symbols with
-the same math type, such as \cs{mathopen}, or complete math styles such as \cs{mathbb}.
+where \meta{unicode range} is a comma-separated list of Unicode slot numbers and ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|.
+Note that \TeX's syntax for accessing the slot number of a character, such as |`\+|, will also work here.
+
+You may also use the macro for accessing the glyph, such as \cs{int}, or whole collection of symbols with the same math type, such as \cs{mathopen}, or complete math styles such as \cs{symbb}.
 (Only numerical slots, however, can be used in ranged declarations.)
 
-\subsubsection{Control over maths styles}
+\subsubsection{Control over alphabet ranges}
 
-Exact control over maths styles can be somewhat involved.
-Here is the current plan.
+As discussed earlier, Unicode mathematics consists of a number of `alphabet styles' within a single font. In \pkg{unicode-math}, these ranges are indicated with the following (hopefully self-explanatory) labels:
+\begin{quote}\ttfamily
+\ExplSyntaxOn
+\clist_use:Nn \g__um_named_ranges_clist {\,,\,~}
+\ExplSyntaxOff
+\end{quote}
+
 \begin{itemize}
 \item |[range=\mathbb]| to use the font for `bb' letters only.
 \item |[range=\mathbfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (also with |latin|, |Latin|, |num| as possible options for Latin lower-/upper-case and numbers, resp.).
@@ -351,7 +380,7 @@ Here is the current plan.
 \end{itemize}
 
 And now the trick.
-If a particular math style is not defined in the font, fall back onto the lower-base plane (i.e., upright) glyphs.
+If a particular math style is not defined in the font, we fall back onto the lower-base plane (i.e., `upright') glyphs.
 Therefore, to use an \ascii-encoded fractur font, for example, write
 \par{\centering|\setmathfont{SomeFracturFont}[range=\mathfrak]|\par}\noindent
 and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
@@ -392,6 +421,7 @@ and to switch between maths versions mid-document use the standard \LaTeX\ comma
 
 
 \subsection{Legacy maths `alphabet' commands}
+\seclabel{mathselect}
 
 \LaTeX\ traditionally uses \cs{DeclareMathAlphabet} and \cs{SetMathAlphabet} to define document commands such as \cs{mathit}, \cs{mathbf}, and so on.
 While these commands can still be used, \pkg{unicode-math} defines a wrapper command to assist with the creation of new such maths alphabet commands.
@@ -408,8 +438,59 @@ For example, if you want to define a new legacy maths alphabet font \cs{mathittt
   $\mathittt{foo} = \mathittt{a} + \mathittt{b}$
 \end{verbatim}
 
-What is the difference between a style and a legacy alphabet?
-TODO: answer this question.
+\paragraph{Operator font}
+On a related note, \LaTeX\ defines an internal command \cs{operator@font} for typesetting elements such as |\sin| and |\cos|.
+This font is selected from the legacy |operators| NFSS `MathAlphabet', which is no longer relevant in the context of \pkg{unicode-math}.
+By default, the \cs{operator@font} command is defined to switch to the \cs{mathrm} font.
+You may now change these using the command:
+\begin{Verbatim}
+\setoperatorfont\mathit
+\end{Verbatim}
+Or, to select a \pkg{unicode-math} range:
+\begin{Verbatim}
+\setoperatorfont\symbf
+\end{Verbatim}
+\setoperatorfont\symbf
+For example, after the latter above, |$\sin x$| will produce `$\sin x$'.
+
+\mathversion{normal}
+\setoperatorfont\mathrm
+
+\subsection{Default `text math' fonts}
+
+The five `text math' fonts, discussed above, are: \cs{mathrm}, \cs{mathbf}, \cs{mathit}, \cs{mathsf}, and \cs{mathtt}.
+These commands are also defined under the synonyms: \cs{mathtextrm}, \cs{mathtextbf}, and so on.
+
+When selecting document fonts using \pkg{fontspec} commands such as \cs{setmainfont}, \pkg{unicode-math} inserts some additional that keeps the current default fonts `in sync' with their corresponding \cs{mathrm} commands, etc.
+
+For example, in standard \LaTeX, \cs{mathsf} doesn't change even if the main document font is changed using |\renewcommand\sfdefault{...}|. With \pkg{unicode-math} loaded, after writing |\setsansfont{Helvetica}|, \cs{mathsf} will now be set in Helvetica.
+
+If the \cs{mathsf} font is set explicitly at any time in the preamble, this `auto-following' does not occur. The legacy math font switches can be defined either with commands defined by \pkg{fontspec} (|\setmathrm|, |\setmathsf|, etc.) or using the more general |\setmathfontface\mathsf| interface defined by \pkg{unicode-math}.
+
+\paragraph{Replacing `text math' fonts by symbols}
+For certain types of documents that use legacy input syntax (say you're typesetting a new version of a book written in the 1990s), it would be preferable to use |\symbf| rather than |\mathbf| en masse.
+For example, if bold maths is used only for vectors and matrices, a dedicated symbol font will produce better spacing and will better match the main math font.
+
+Alternatively, you may have used an old version of \pkg{unicode-math} (pre-v0.8), when the \cs{symXYZ} commands were not defined and \cs{mathbf} behaved like \cs{symbf} does now.
+A series of package options (\tabref{legacyfontswitch}) are provided to facilitate switching the definition of \cs{mathXYZ} for the five legacy text math font definitions.
+
+\begin{table}
+  \centering
+  \topcaption{Maths text font configuration options. Note that \cs{mathup} and \cs{mathrm} are aliases of each other and cannot be configured separately.}
+  \tablabel{legacyfontswitch}
+  \begin{tabular}{lll}
+    \toprule
+    Defaults (from `text' font) & From `maths symbols' \\
+    \midrule
+    |mathrm=text| &   |mathrm=sym |  \\
+    |mathup=text|\llap{$^\ast$} &   |mathup=sym |\llap{$^\ast$}  \\
+    |mathit=text| &   |mathit=sym |  \\
+    |mathsf=text| &   |mathsf=sym |  \\
+    |mathbf=text| &   |mathbf=sym |  \\
+    |mathtt=text| &   |mathtt=sym |  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 
 \section{Maths input}
