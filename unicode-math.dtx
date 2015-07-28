@@ -3156,7 +3156,7 @@ This work is "maintained" by Will Robertson.
 
 \cs_new:Nn \@@_nprimes_select:nn
  {
-  \int_case:nnn {#2}
+  \int_case:nnF {#2}
    {
     {1} { \@@_superscript:n {#1} }
     {2} {
@@ -3181,7 +3181,7 @@ This work is "maintained" by Will Robertson.
  }
 \cs_new:Nn \@@_nbackprimes_select:nn
  {
-  \int_case:nnn {#2}
+  \int_case:nnF {#2}
    {
     {1} { \@@_superscript:n {#1} }
     {2} {
