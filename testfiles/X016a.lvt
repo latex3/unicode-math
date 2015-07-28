@@ -1,9 +1,0 @@
-\input{umtest-preamble}
-\usepackage{unicode-math}
-\setmathfont{Asana-Math.otf}
-\begin{document}
-\[\mathtt{\LATINtext}\]
-\[\mathtt{\latintext}\]
-\[\mathtt{\LATINmath}\]
-\[\mathtt{\latinmath}\]
-\end{document}

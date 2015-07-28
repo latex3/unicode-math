@@ -17,7 +17,7 @@
         \replaceAllIn\inLine{__@@}{__#1}%
         \replaceAllIn\inLine{_@@}{__#1}%
         \replaceAllIn\inLine{@@}{__#1}%
-        \replaceAllIn\inLine{!!!!!FOURAT!!!!!}{@@}%
+        \replaceAllIn\inLine{!!!!!FOURAT!!!!!}{@@}% i.e., use @@@@ when you need literal @@ in code
       }%
     \fi
   }
@@ -143,25 +143,6 @@ This work is "maintained" by Will Robertson.
 \ExplSyntaxOn
 %    \end{macrocode}
 %
-% \paragraph{Extra \pkg{expl3} variants}
-%    \begin{macrocode}
-\cs_generate_variant:Nn \tl_put_right:Nn {cx}
-\cs_generate_variant:Nn \seq_if_in:NnTF {NV}
-\cs_generate_variant:Nn \prop_gput:Nnn {Nxn}
-\cs_generate_variant:Nn \prop_get:NnN {cxN}
-\cs_generate_variant:Nn \prop_if_in:NnTF {cx}
-%    \end{macrocode}
-%
-% An extra expansion command:
-%    \begin{macrocode}
-\cs_set:Npn \exp_args:NNcc #1#2#3#4
- {
-  \exp_after:wN #1 \exp_after:wN #2
-    \cs:w #3 \exp_after:wN \cs_end:
-    \cs:w #4 \cs_end:
- }
-%    \end{macrocode}
-%
 % For \pkg{fontspec}:
 %    \begin{macrocode}
 \cs_generate_variant:Nn \fontspec_set_family:Nnn {Nx}
@@ -207,8 +188,11 @@ This work is "maintained" by Will Robertson.
 \bool_set_true:N \g_@@_texgreek_bool
 \bool_new:N \l_@@_smallfrac_bool
 \bool_new:N \g_@@_literal_colon_bool
+\bool_new:N \g_@@_mathrm_text_bool
 \bool_new:N \g_@@_mathit_text_bool
 \bool_new:N \g_@@_mathbf_text_bool
+\bool_new:N \g_@@_mathsf_text_bool
+\bool_new:N \g_@@_mathtt_text_bool
 %    \end{macrocode}
 %
 % \paragraph{Variables}
@@ -250,9 +234,11 @@ This work is "maintained" by Will Robertson.
 \seq_new:N \g_@@_mathclasses_seq
 \seq_set_from_clist:Nn \g_@@_mathclasses_seq
   {
-    \mathord,\mathalpha,\mathop,\mathbin,\mathrel,
-    \mathopen,\mathclose,\mathpunct,\mathaccent,
-    \mathfence,\mathover,\mathunder,\mathbotaccent
+    \mathord,\mathalpha,\mathbin,\mathrel,\mathpunct,
+     \mathop,
+    \mathopen,\mathclose,
+    \mathfence,\mathover,\mathunder,
+     \mathaccent,\mathbotaccent,\mathaccentwide,\mathbotaccentwide
   }
 %    \end{macrocode}
 % \end{macro}
@@ -266,8 +252,13 @@ This work is "maintained" by Will Robertson.
 % \end{macro}
 %
 % \begin{macro}{\g_@@_mathstyles_seq}
-% This is every math style known to \pkg{unicode-math}.
+% This is every `named range' and every `math style' known to \pkg{unicode-math}.
+% A named range is such as "bfit" and "sfit", which are also math styles (with \cs{symbfit} and \cs{symsfit}).
+% `Mathstyles' are a superset of named ranges and also include commands such as \cs{symbf} and \cs{symsf}.
+%
+% N.B. for parsing purposes `named ranges' are defined as strings!
 %    \begin{macrocode}
+\seq_new:N \g_@@_named_ranges_seq
 \seq_new:N \g_@@_mathstyles_seq
 %    \end{macrocode}
 % \end{macro}
@@ -392,9 +383,7 @@ This work is "maintained" by Will Robertson.
 % options declared when the package is loaded.
 %    \begin{macrocode}
 \DeclareDocumentCommand \unimathsetup {m}
- {
-  \keys_set:nn  {unicode-math} {#1}
- }
+ { \keys_set:nn {unicode-math} {#1} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -431,15 +420,35 @@ This work is "maintained" by Will Robertson.
 %
 % \paragraph{Compatibility}
 %    \begin{macrocode}
+\@@_keys_choices:nn {mathup}
+ {
+  {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
+  {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
+ }
+\@@_keys_choices:nn {mathrm}
+ {
+  {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
+  {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
+ }
 \@@_keys_choices:nn {mathit}
  {
-  {math} { \bool_set_false:N \g_@@_mathit_text_bool }
+  {sym}  { \bool_set_false:N \g_@@_mathit_text_bool }
   {text} { \bool_set_true:N  \g_@@_mathit_text_bool }
  }
 \@@_keys_choices:nn {mathbf}
  {
-  {math} { \bool_set_false:N \g_@@_mathbf_text_bool }
+  {sym}  { \bool_set_false:N \g_@@_mathbf_text_bool }
   {text} { \bool_set_true:N  \g_@@_mathbf_text_bool }
+ }
+\@@_keys_choices:nn {mathsf}
+ {
+  {sym}  { \bool_set_false:N \g_@@_mathsf_text_bool }
+  {text} { \bool_set_true:N  \g_@@_mathsf_text_bool }
+ }
+\@@_keys_choices:nn {mathtt}
+ {
+  {sym}  { \bool_set_false:N \g_@@_mathtt_text_bool }
+  {text} { \bool_set_true:N  \g_@@_mathtt_text_bool }
  }
 %    \end{macrocode}
 %
@@ -659,7 +668,7 @@ This work is "maintained" by Will Robertson.
 \unimathsetup {math-style=TeX}
 \unimathsetup {slash-delimiter=ascii}
 \unimathsetup {trace=off}
-\unimathsetup {mathit=text,mathbf=text}
+\unimathsetup {mathrm=text,mathit=text,mathbf=text,mathsf=text,mathtt=text}
 \cs_if_exist:NT \tfrac { \unimathsetup {active-frac=small} }
 \ProcessKeysOptions {unicode-math}
 %    \end{macrocode}
@@ -736,19 +745,6 @@ This work is "maintained" by Will Robertson.
 %
 % \section{Fundamentals}
 %
-% \subsection{Enlarging the number of maths families}
-%
-% To start with, we've got a power of two as many \cmd\fam s as before. So (from |ltfssbas.dtx|) we want to redefine
-%    \begin{macrocode}
-%<*XE>
-\def\new@mathgroup{\alloc@8\mathgroup\chardef\@cclvi}
-\let\newfam\new@mathgroup
-%</XE>
-%    \end{macrocode}
-% This is sufficient for \LaTeX's \cmd\DeclareSymbolFont-type commands to be able
-% to define 256 named maths fonts.
-% For \hologo{LuaLaTeX}, this is handled by the \pkg{lualatex-math} package.
-%
 % \subsection{Setting math chars, math codes, etc.}
 %
 % \begin{macro}{\@@_set_mathsymbol:nNNn}
@@ -758,34 +754,38 @@ This work is "maintained" by Will Robertson.
 % \darg{Slot, \eg, \texttt{"221E}}
 % There are a bunch of tests to perform to process the various characters.
 % The following assignments should all be fairly straightforward.
+%
+% The catcode setting is to work around (strange?) behaviour in LuaTeX in which catcode 11 characters don't have italic correction for maths.
 %    \begin{macrocode}
 \cs_set:Nn \@@_set_mathsymbol:nNNn
  {
   \int_compare:nT { \char_value_catcode:n {#4} == 11 }
    { \char_set_catcode_other:n {#4} }
 
-  \tl_case:Nnn #3 {
+  \tl_case:Nn #3
+   {
+    \mathord   { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathalpha { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathbin   { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathrel   { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathpunct { \@@_set_mathcode:nnn {#4} {#3} {#1} }
     \mathop    { \@@_set_big_operator:nnn {#1} {#2} {#4} }
     \mathopen  { \@@_set_math_open:nnn    {#1} {#2} {#4} }
     \mathclose { \@@_set_math_close:nnn   {#1} {#2} {#4} }
     \mathfence { \@@_set_math_fence:nnnn  {#1} {#2} {#3} {#4} }
     \mathaccent
-      { \cs_gset_protected_nopar:Npx #2 { \@@_accent:nnn {fixed} {#1} {#4} } }
+     { \@@_set_math_accent:Nnnn #2 {fixed} {#1} {#4} }
     \mathbotaccent
-      { \cs_gset_protected_nopar:Npx #2 { \@@_accent:nnn {bottom~ fixed} {#1} {#4} } }
+     { \@@_set_math_accent:Nnnn #2 {bottom~ fixed} {#1} {#4} }
+    \mathaccentwide
+     { \@@_set_math_accent:Nnnn #2 {} {#1} {#4} }
+    \mathbotaccentwide
+     { \@@_set_math_accent:Nnnn #2 {bottom} {#1} {#4} }
     \mathover
-      {
-        \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \@@_accent:nnn {} {#1} {#4} {##1} } \limits }
-      }
+     { \@@_set_math_overunder:Nnnn #2 {} {#1} {#4} }
     \mathunder
-      {
-        \cs_set_protected_nopar:Npx #2 ##1
-          { \mathop { \@@_accent:nnn {bottom} {#1} {#4} {##1} } \limits }
-      }
-  }{
-    \@@_set_mathcode:nnn {#4} {#3} {#1}
-  }
+     { \@@_set_math_overunder:Nnnn #2 {bottom} {#1} {#4} }
+   }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -795,6 +795,8 @@ This work is "maintained" by Will Robertson.
 \edef\mathover{\string\mathover}
 \edef\mathunder{\string\mathunder}
 \edef\mathbotaccent{\string\mathbotaccent}
+\edef\mathaccentwide{\string\mathaccentwide}
+\edef\mathbotaccentwide{\string\mathbotaccentwide}
 %    \end{macrocode}
 %
 %
@@ -892,11 +894,43 @@ This work is "maintained" by Will Robertson.
 \cs_new:Nn \@@_set_math_fence:nnnn
  {
   \@@_set_mathcode:nnn {#4} {#3} {#1}
-  \@@_set_delcode:nnn {#1} {#4} {#4}
+  \@@_set_delcode:nnn  {#1} {#4} {#4}
   \cs_gset_protected_nopar:cpx {l \cs_to_str:N #2}
     { \@@_delimiter:Nnn \mathopen  {#1} {#4} }
   \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
     { \@@_delimiter:Nnn \mathclose {#1} {#4} }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_math_accent:Nnnn}
+% \darg{Accend command}
+% \darg{Accent type (string)}
+% \darg{Symbol font name}
+% \darg{Glyph slot}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_math_accent:Nnnn
+ {
+  \cs_gset_protected_nopar:Npx #1
+   { \@@_accent:nnn {#2} {#3} {#4} }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_math_overunder:Nnnn}
+% \darg{Accend command}
+% \darg{Accent type (string)}
+% \darg{Symbol font name}
+% \darg{Glyph slot}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_math_overunder:Nnnn
+ {
+  \cs_gset_protected_nopar:Npx #1 ##1
+   {
+    \mathop
+     { \@@_accent:nnn {#2} {#3} {#4} {##1} }
+    \limits
+   }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -906,12 +940,10 @@ This work is "maintained" by Will Robertson.
 % \begin{macro}{\setmathalphabet}
 %    \begin{macrocode}
 \keys_define:nn {@@_mathface}
-  {
-    version .code:n =
-      {
-        \tl_set:Nn \l_@@_mversion_tl {#1}
-      }
-  }
+ {
+  version .code:n =
+   { \tl_set:Nn \l_@@_mversion_tl {#1} }
+ }
 
 \DeclareDocumentCommand \setmathfontface { m O{} m O{} }
  {
@@ -928,6 +960,7 @@ This work is "maintained" by Will Robertson.
    }
   \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
   
+  % integrate with fontspec's \setmathrm etc:
   \tl_case:Nn #1
    {
     \mathrm { \cs_set_eq:NN \g__fontspec_mathrm_tl \l_@@_tmpa_tl }
@@ -938,6 +971,7 @@ This work is "maintained" by Will Robertson.
 
 \@onlypreamble \setmathfontface
 %    \end{macrocode}
+% Note that \LaTeX's SetMathAlphabet simply doesn't work to "reset" a maths alphabet font after "\begin{document}", so unlike most of the other maths commands around we still restrict this one to the preamble.
 % \end{macro}
 %
 % \begin{macro}{\setoperatorfont}
@@ -1071,7 +1105,10 @@ This work is "maintained" by Will Robertson.
 % Use \pkg{fontspec} to select a font to use.
 % After loading the font, we detect what sizes it recommends for scriptsize and scriptscriptsize, so after setting those values appropriately, we reload the font to take these into account.
 %    \begin{macrocode}
+
+  \csname TIC\endcsname
   \@@_fontspec_select_font:
+  \csname TOC\endcsname
   \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
    {
     \@@_declare_math_sizes:
@@ -1110,7 +1147,9 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 % And now we input every single maths char.
 %    \begin{macrocode}
+  \csname TIC\endcsname
   \@@_input_math_symbol_table:
+  \csname TOC\endcsname
 %    \end{macrocode}
 % Finally,
 % \begin{itemize}
@@ -1123,9 +1162,10 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
   \@@_remap_symbols:
   \@@_setup_mathactives:
-  \@@_setup_accents:
   \@@_setup_delcodes:
+  \csname TIC\endcsname
   \@@_setup_alphabets:
+  \csname TOC\endcsname
   \@@_setup_negations:
 %    \end{macrocode}
 % Prevent spaces, and that's it:
@@ -1177,7 +1217,6 @@ This work is "maintained" by Will Robertson.
   \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
   \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_noparse:nn
   \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_noparse:nNN
-  \cs_set_eq:NN \@@_set_accent:Nnn \@@_set_accent_noparse:Nnn
 %    \end{macrocode}
 % \item Define default font features for the script and scriptscript font.
 %    \begin{macrocode}
@@ -1859,44 +1898,6 @@ This work is "maintained" by Will Robertson.
 %
 % \section{Font features}
 %
-% \begin{macro}{\new@mathversion}
-% Fix bug in the \LaTeX\ version.
-% (Fixed upstream, too, but unsure when that will propagate.)
-%    \begin{macrocode}
-\def\new@mathversion#1{%
-  \expandafter\in@\expandafter#1\expandafter{\version@list}%
-  \ifin@
-    \@font@info{Redeclaring math version
-               `\expandafter\@gobblefour\string#1'}%
-  \else
-    \expandafter\newcount\csname c@\expandafter
-                                \@gobble\string#1\endcsname
-    \def\version@elt{\noexpand\version@elt\noexpand}%
-    \edef\version@list{\version@list\version@elt#1}%
-  \fi
-  \toks@{}%
-  \count@\z@
-  \def\group@elt##1##2{%
-       \advance\count@\@ne
-       \addto@hook\toks@{\getanddefine@fonts##1##2}%
-       }%
-  \group@list
-  \global\csname c@\expandafter\@gobble\string#1\endcsname\count@
-  \def\alpha@elt##1##2##3{%
-       \ifx##2\no@alphabet@error
-         \toks@\expandafter{\the\toks@\install@mathalphabet##1%
-             {\no@alphabet@error##1}}%
-       \else
-         \toks@\expandafter{\the\toks@\install@mathalphabet##1%
-             {\select@group##1##2##3}}%
-       \fi
-          }%
-  \alpha@list
-  \xdef#1{\the\toks@}%
-}
-%    \end{macrocode}
-% \end{macro}
-%
 % \subsection{Math version}
 %    \begin{macrocode}
 \keys_define:nn {unicode-math}
@@ -1904,7 +1905,7 @@ This work is "maintained" by Will Robertson.
     version .code:n =
       {
         \tl_set:Nn \l_@@_mversion_tl {#1}
-        \DeclareMathVersion{\l_@@_mversion_tl}
+        \DeclareMathVersion {\l_@@_mversion_tl}
       }
   }
 %    \end{macrocode}
@@ -1926,7 +1927,8 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \keys_define:nn {unicode-math}
  {
-  range .code:n = {
+  range .code:n =
+   {
     \bool_set_false:N \l_@@_init_bool
 %    \end{macrocode}
 % Set processing functions if we're not defining the full Unicode math repetoire.
@@ -1942,7 +1944,6 @@ This work is "maintained" by Will Robertson.
     \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
     \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_parse:nn
     \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_parse:nNN
-    \cs_set_eq:NN \@@_set_accent:Nnn \@@_set_accent_parse:Nnn
 %    \end{macrocode}
 % Proceed by filling up the various `range' seqs according to the user options.
 %    \begin{macrocode}
@@ -1950,14 +1951,19 @@ This work is "maintained" by Will Robertson.
     \seq_clear:N \l_@@_mclass_range_seq
     \seq_clear:N \l_@@_cmd_range_seq
     \seq_clear:N \l_@@_mathalph_seq
-    \clist_map_inline:nn {#1} {
-      \@@_if_mathalph_decl:nTF {##1} {
-        \seq_put_right:Nx \l_@@_mathalph_seq {
+
+    \clist_map_inline:nn {#1}
+     {
+      \@@_if_mathalph_decl:nTF {##1}
+       {
+        \seq_put_right:Nx \l_@@_mathalph_seq
+         {
           { \exp_not:V \l_@@_tmpa_tl }
           { \exp_not:V \l_@@_tmpb_tl }
           { \exp_not:V \l_@@_tmpc_tl }
-        }
-      }{
+         }
+       }
+       {
 %    \end{macrocode}
 % Four cases:
 % math class matching the known list;
@@ -1972,9 +1978,9 @@ This work is "maintained" by Will Robertson.
               { \seq_put_right:Nn \l_@@_cmd_range_seq {##1} }
               { \seq_put_right:Nn \l_@@_char_range_seq {##1} }
           }
-      }
-    }
-  }
+       }
+     }
+   }
  }
 %    \end{macrocode}
 %
@@ -1995,8 +2001,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \@@_if_mathalph_decl:n {TF}
  {
-  \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n { \tl_to_str:n {#1} } }
-  \tl_remove_all:Nn \l_@@_tmpa_tl { \tl_to_str:N \math }
+  \tl_set:Nn  \l_@@_tmpa_tl {#1}  
   \tl_clear:N \l_@@_tmpb_tl
   \tl_clear:N \l_@@_tmpc_tl
   
@@ -2005,26 +2010,31 @@ This work is "maintained" by Will Robertson.
    
   \tl_if_in:NnT \l_@@_tmpa_tl {/}
    { \exp_after:wN \@@_split_slash:w \l_@@_tmpa_tl \q_nil }
-   
+  
+  \tl_set:Nx \l_@@_tmpa_tl { \tl_to_str:N \l_@@_tmpa_tl }  
+  \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \math }
+  \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \sym }
+  \tl_trim_spaces:N \l_@@_tmpa_tl
+
   \tl_if_empty:NT \l_@@_tmpc_tl
    { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
-   
-  \seq_if_in:NVTF \g_@@_mathstyles_seq \l_@@_tmpa_tl
+  
+  \seq_if_in:NVTF \g_@@_named_ranges_seq \l_@@_tmpa_tl
    { \prg_return_true: } { \prg_return_false: }
  }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_set:Npn \@@_split_arrow:w #1->#2 \q_nil
  {
-  \tl_set:Nn \l_@@_tmpa_tl {#1}
-  \tl_set:Nx \l_@@_tmpc_tl { \tl_to_str:n {#1} }
+  \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {#1} }
+  \tl_set:Nx \l_@@_tmpc_tl { \tl_trim_spaces:n {#2} }
  }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_set:Npn \@@_split_slash:w #1/#2 \q_nil
  {
-  \tl_set:Nn \l_@@_tmpa_tl {#1}
-  \tl_set:Nn \l_@@_tmpb_tl {#2}
+  \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {#1} }
+  \tl_set:Nx \l_@@_tmpb_tl { \tl_trim_spaces:n {#2} }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2064,7 +2074,6 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_if_char_spec:nNNT
   {
-
     % math class:
     \seq_if_in:NnT \l_@@_mclass_range_seq {#3}
       { \use_none_delimit_by_q_nil:w }
@@ -2134,32 +2143,31 @@ This work is "maintained" by Will Robertson.
 % just stand for the literal Unicode characters.
 %    \begin{macrocode}
 \AtBeginDocument{\@@_resolve_greek:}
-\cs_new:Npn \@@_resolve_greek: {
-  \clist_map_inline:nn {
+\cs_new:Npn \@@_resolve_greek:
+ {
+  \clist_map_inline:nn
+   {
     Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,
     alpha,beta,gamma,delta,        zeta,eta,theta,iota,kappa,lambda,
     Mu,Nu,Xi,Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,
     mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,    chi,psi,omega,
     varTheta,
     varsigma,vartheta,varkappa,varrho,varpi
-  }{
+   }
+   {
     \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
     \tl_set:cx {up ##1} { \exp_not:N \symup \exp_not:c { ##1 } }
     \tl_set:cx {it ##1} { \exp_not:N \symit \exp_not:c { ##1 } }
-  }
-  \tl_set:Nn \epsilon {
-    \bool_if:NTF \g_@@_texgreek_bool \mitvarepsilon \mitepsilon
-  }
-  \tl_set:Nn \phi {
-    \bool_if:NTF \g_@@_texgreek_bool \mitvarphi \mitphi
-  }
-  \tl_set:Nn \varepsilon {
-    \bool_if:NTF \g_@@_texgreek_bool \mitepsilon \mitvarepsilon
-  }
-  \tl_set:Nn \varphi {
-    \bool_if:NTF \g_@@_texgreek_bool \mitphi \mitvarphi
-  }
-}
+   }
+  \tl_set:Nn \epsilon
+   { \bool_if:NTF \g_@@_texgreek_bool \mitvarepsilon \mitepsilon }
+  \tl_set:Nn \phi
+   { \bool_if:NTF \g_@@_texgreek_bool \mitvarphi \mitphi }
+  \tl_set:Nn \varepsilon
+   { \bool_if:NTF \g_@@_texgreek_bool \mitepsilon \mitvarepsilon }
+  \tl_set:Nn \varphi
+   { \bool_if:NTF \g_@@_texgreek_bool \mitphi \mitvarphi }
+ }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2200,13 +2208,14 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Npn \use@mathgroup #1 #2
  {
-  \relax\ifmmode % <- not sure if this is really necessary since we've just checked for mmode and raised an error if not!
+  \mode_if_math:T % <- not sure if this is really necessary since we've just checked for mmode and raised an error if not!
+   {
     \math@bgroup
       \cs_if_eq:cNF {M@\f@encoding} #1 {#1}
       \@@_switchto_literal:
       \mathgroup #2 \relax
-    \expandafter\math@egroup
-  \fi
+    \math@egroup
+   }
  }
 %    \end{macrocode}
 %
@@ -2259,8 +2268,7 @@ This work is "maintained" by Will Robertson.
 \cs_new:Nn \@@_prepare_mathstyle:n
  {
   \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
-
-  \@@_init_alphabet:x {#1}
+  \@@_init_alphabet:n {#1}
   \cs_set:cpn {_@@_sym_#1_aux:n}
    { \use:c {@@_switchto_#1:} \math@egroup }
   \cs_set_protected:cpx {sym#1}
@@ -2293,13 +2301,6 @@ This work is "maintained" by Will Robertson.
   \@@_log:nx {alph-initialise} {#1}
   \cs_set_eq:cN {@@_switchto_#1:} \prg_do_nothing:
  }
-\cs_generate_variant:Nn \@@_init_alphabet:n {x}
-%    \end{macrocode}
-% Variants (cannot use |\cs_generate_variant:Nn| because the base function is
-% defined dynamically.)
-%    \begin{macrocode}
-\cs_new:Npn \@@_maybe_init_alphabet:V
- { \exp_args:NV \@@_maybe_init_alphabet:n }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2363,6 +2364,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_default_mathalph:nnn
  {
+  \seq_put_right:Nx \g_@@_named_ranges_seq { \tl_to_str:n {#1} }
   \seq_put_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
  }
 \@@_default_mathalph:nnn {up    } {latin,Latin,greek,Greek,num,misc} {up    }
@@ -2412,14 +2414,36 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \clist_map_inline:nn
  { 
-   up, normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak, tt,
+   normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak, tt,
    bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
  }
- { \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } } }
-
-\cs_set_protected:Npn \mathrm { \mathup }
+ {
+  \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } }
+ }
+%    \end{macrocode}
+%
+%
+% \subsubsection{New commands for ambiguous alphabets}
+%    \begin{macrocode}
+\AtBeginDocument{
+\clist_map_inline:nn
+ { rm, it, bf, sf, tt }
+ {
+  \cs_set_protected:cpx { math #1 }
+   {
+    \exp_not:n { \bool_if:NTF  } \exp_not:c { g_@@_ math #1 _text_bool}
+     { \exp_not:c { mathtext #1 } }
+     { \exp_not:c { sym #1 } }
+   }
+ }}
+%    \end{macrocode}
+%
+% \paragraph{Alias \cs{mathrm} as legacy name for \cs{mathup}}
+%    \begin{macrocode}
+\cs_set_protected:Npn \mathup { \mathrm }
 \cs_set_protected:Npn \symrm  { \symup  }
 %    \end{macrocode}
+%
 %
 % \subsubsection{Fixing up \cs{operator@font}}
 %
@@ -2512,71 +2536,73 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
   \seq_map_inline:Nn \l_@@_mathalph_seq
    {
-    \tl_set:No \l_@@_style_tl { \use_i:nnn   ##1 }
-    \tl_set:No \l_@@_alphabet_tl { \use_ii:nnn  ##1 }
-    \tl_set:No \l_@@_remap_style_tl { \use_iii:nnn ##1 }
+    \tl_set:No \l_@@_style_tl          { \use_i:nnn   ##1 }
+    \clist_set:No \l_@@_alphabet_clist { \use_ii:nnn  ##1 }
+    \tl_set:No \l_@@_remap_style_tl    { \use_iii:nnn ##1 }
 
-    \tl_if_empty:NT \l_@@_alphabet_tl
+    \clist_if_empty:NT \l_@@_alphabet_clist
      {
       \cs_set_eq:NN \@@_maybe_init_alphabet:n \@@_init_alphabet:n
-      \tl_set:Nn \l_@@_alphabet_tl { latin,Latin,greek,Greek,num,misc }
+      \clist_set:Nn \l_@@_alphabet_clist { latin, Latin, greek, Greek, num, misc }
      }
     
-    \@@_setup_math_alphabet:VVV
-      \l_@@_style_tl \l_@@_alphabet_tl \l_@@_remap_style_tl
+    \@@_setup_math_alphabet:NNN
+      \l_@@_style_tl \l_@@_alphabet_clist \l_@@_remap_style_tl
    }
-
   \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
  }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_setup_math_alphabet:nnn}
+% \begin{macro}{\@@_setup_math_alphabet:NNN}
 % \darg{Math font style (e.g., \cs{bb})}
 % \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
 % \darg{Name of the output math style (usually same as the name of the style \texttt{bb})}
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_math_alphabet:nnn
+\cs_new:Nn \@@_setup_math_alphabet:NNN
  {
-  \tl_set:Nx \l_@@_style_tl {#1}  
+  \tl_set_eq:NN \l_@@_style_tl #1% actually a no-op but makes the code clearer! 
 %    \end{macrocode}
-% First check that at least one of the alphabets for the font shape is defined\dots
+% First check that at least one of the alphabets for the font shape is defined
+% (this process is fast) \dots
 %    \begin{macrocode}
-  \clist_map_inline:nn {#2}
+  \clist_map_inline:Nn #2
    {
-    \tl_set:Nx \l_@@_alphabet_tl { \tl_trim_spaces:n {##1} }
+    \tl_set:Nn \l_@@_alphabet_tl {##1}
     \@@_if_alphabet_exists:nnTF \l_@@_style_tl \l_@@_alphabet_tl
      {
       \str_if_eq_x:nnTF {\l_@@_alphabet_tl} {misc}
        {
-        \@@_maybe_init_alphabet:V \l_@@_style_tl
+        \@@_maybe_init_alphabet:n \l_@@_style_tl
         \clist_map_break:
        }
        {
-        \@@_glyph_if_exist:nT { \@@_to_usv:nn {\l_@@_style_tl}{\l_@@_alphabet_tl} }
+        \@@_glyph_if_exist:nT { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
          {
-          \@@_maybe_init_alphabet:V \l_@@_style_tl
+          \@@_maybe_init_alphabet:n \l_@@_style_tl
           \clist_map_break:
          }
        }
      }
-     { \msg_warning:nnx {unicode-math} {no-alphabet} {\l_@@_style_tl/\l_@@_alphabet_tl} }
+     { \msg_warning:nnx {unicode-math} {no-alphabet} { \l_@@_style_tl / \l_@@_alphabet_tl } }
    }
 %    \end{macrocode}
 % \dots and then loop through them defining the individual ranges:
+% (currently this process is slow)
 %    \begin{macrocode}
-  \clist_map_inline:nn {#2}
+  \csname TIC\endcsname
+  \clist_map_inline:Nn #2
    {
     \tl_set:Nx \l_@@_alphabet_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {@@_config_ \l_@@_style_tl _ \l_@@_alphabet_tl :n}
      {
-      \str_if_eq_x:nnTF {\l_@@_alphabet_tl} {misc}
+      \exp_args:No \tl_if_eq:nnTF \l_@@_alphabet_tl {misc}
        {
         \@@_log:nx {setup-alph} {math \l_@@_style_tl~(\l_@@_alphabet_tl)}
         \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {#3}
        }
        {
-        \@@_glyph_if_exist:nTF { \@@_to_usv:nn {\l_@@_style_tl}{\l_@@_alphabet_tl} }
+        \@@_glyph_if_exist:nTF { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
          {
           \@@_log:nx {setup-alph} {math \l_@@_style_tl~(\l_@@_alphabet_tl)}
           \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {#3}
@@ -2586,7 +2612,7 @@ This work is "maintained" by Will Robertson.
            {
             \seq_put_right:Nx \l_@@_missing_alph_seq
              {
-              \@backslashchar math \l_@@_style_tl \space
+              \@backslashchar sym \l_@@_style_tl \space
               (\tl_use:c{c_@@_math_alphabet_name_ \l_@@_alphabet_tl _tl})
              }
            }
@@ -2597,8 +2623,8 @@ This work is "maintained" by Will Robertson.
        }
      }
    }
+  \csname TOC\endcsname
  }
-\cs_generate_variant:Nn \@@_setup_math_alphabet:nnn {VVV}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3009,12 +3035,9 @@ This work is "maintained" by Will Robertson.
     \char_set_catcode_math_superscript:N \^
     \cs_set:Npn \_@@_sym:nnn ##1##2##3
      {
-      \bool_if:nF { \cs_if_eq_p:NN ##3 \mathaccent ||
-                    \cs_if_eq_p:NN ##3 \mathopen   ||
-                    \cs_if_eq_p:NN ##3 \mathclose  ||
-                    \cs_if_eq_p:NN ##3 \mathover   ||
-                    \cs_if_eq_p:NN ##3 \mathunder  ||
-                    \cs_if_eq_p:NN ##3 \mathbotaccent }
+      \tl_if_in:nnT 
+       { \mathord \mathalpha \mathbin \mathrel \mathpunct \mathop \mathfence }
+       {##3}
       {
         \@@_cs_set_eq_active_char:Nw ##2 = ##1 \q_nil \ignorespaces
       }
@@ -3540,7 +3563,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_setup_active_superscript:nn
  {
-  \prop_gput:Nxn \g_@@_supers_prop   {\meaning #1} {#2}
+  \prop_gput:Non \g_@@_supers_prop   {\meaning #1} {#2}
   \char_set_catcode_active:N #1
   \@@_char_gmake_mathactive:N #1
   \scantokens
@@ -3585,7 +3608,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_setup_active_subscript:nn
  {
-  \prop_gput:Nxn \g_@@_subs_prop   {\meaning #1} {#2}
+  \prop_gput:Non \g_@@_subs_prop   {\meaning #1} {#2}
   \char_set_catcode_active:N #1
   \@@_char_gmake_mathactive:N #1
   \scantokens
@@ -3690,10 +3713,10 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Npn \@@_peek_execute_branches_ss_aux:
  {
-  \prop_if_in:cxTF
+  \prop_if_in:coTF
     {g_@@_\l_@@_tmpa_tl _prop} {\meaning\l_peek_token}
     {
-      \prop_get:cxN
+      \prop_get:coN
         {g_@@_\l_@@_tmpa_tl _prop} {\meaning\l_peek_token} \l_@@_tmpb_tl
       \tl_put_right:NV \l_@@_ss_chain_tl \l_@@_tmpb_tl
       \__peek_true:w
@@ -3855,39 +3878,6 @@ This work is "maintained" by Will Robertson.
 \cs_set:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
 \cs_set:Npn \cdots {\mathinner{\unicodecdots}}
 %    \end{macrocode}
-% \paragraph{Accents}
-% This code should probably be much earlier in this file!
-%    \begin{macrocode}
-\cs_new:Nn \@@_set_accent_parse:Nnn
- {
-  \@@_if_char_spec:nNNT {#3} #1 \mathaccent
-   {
-    \@@_set_accent_noparse:Nnn #1 {#2} {#3}
-   }
- }
-\cs_new:Nn \@@_set_accent_noparse:Nnn
- {
-  \cs_gset_protected_nopar:Npx #1
-   {
-    \@@_accent:nnn {#2} { \@@_symfont_tl } {#3}
-   }
- }
-\cs_new_protected_nopar:Nn \@@_setup_accents:
- {
-  \@@_set_accent:Nnn \widehat               {}       { "0302 }
-  \@@_set_accent:Nnn \widetilde             {}       { "0303 }
-  \@@_set_accent:Nnn \overleftarrow         {}       { "20D6 }
-  \@@_set_accent:Nnn \overrightarrow        {}       { "20D7 }
-  \@@_set_accent:Nnn \overleftrightarrow    {}       { "20E1 }
-  \@@_set_accent:Nnn \wideutilde            {bottom} { "0330 }
-  \@@_set_accent:Nnn \underrightharpoondown {bottom} { "20EC }
-  \@@_set_accent:Nnn \underleftharpoondown  {bottom} { "20ED }
-  \@@_set_accent:Nnn \underleftarrow        {bottom} { "20EE }
-  \@@_set_accent:Nnn \underrightarrow       {bottom} { "20EF }
-  \@@_set_accent:Nnn \underleftrightarrow   {bottom} { "034D }
-  \@@_set_accent:Nnn \mathunderbar          {bottom} { "00332 }
- }
-%    \end{macrocode}
 %
 %    \begin{macrocode}
 \cs_set_eq:NN \@@_text_slash: \slash
@@ -3930,7 +3920,7 @@ This work is "maintained" by Will Robertson.
        \use:c { not \l_not_token_name_tl }
       }
       {
-       \@@_oldnot: #1 %\l_not_token_name_tl
+       \@@_oldnot: #1
       }
     }
  }

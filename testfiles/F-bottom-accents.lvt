@@ -1,6 +1,0 @@
-\input{umtest-preamble}
-\usepackage{unicode-math}
-\setmathfont{xits-math.otf}
-\begin{document}
-\[ \underbar x \qquad \threeunderdot x \qquad \wideutilde M \qquad \wideutilde {x+y} \]
-\end{document}

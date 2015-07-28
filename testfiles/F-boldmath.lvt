@@ -1,9 +1,0 @@
-\input{umtest-preamble}
-\usepackage{unicode-math}
-\setmathfont{Lucida Bright Math OT}
-\begin{document}
-\begin{tabular}{lr}
-normal & $a+b=c$ \\
-bold & \boldmath $a+b=c$ \\
-\end{tabular}
-\end{document}

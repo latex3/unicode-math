@@ -373,18 +373,25 @@ As discussed earlier, Unicode mathematics consists of a number of `alphabet styl
 \ExplSyntaxOff
 \end{quote}
 
+Fonts can be selected for specified ranges only; use the following syntax:
 \begin{itemize}
-\item |[range=\mathbb]| to use the font for `bb' letters only.
-\item |[range=\mathbfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (also with |latin|, |Latin|, |num| as possible options for Latin lower-/upper-case and numbers, resp.).
-\item |[range=\mathsfit->\mathbfsfit]| to map to different output styles(s) (which is rather useless right now but will become less useless in the future).
+\item |[range=bb]| to use the font for `bb' letters only.
+\item |[range=bfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (also with |latin|, |Latin|, |num| as possible options for Latin lower-/upper-case and numbers, resp.).
+\item |[range=up->sfup]| to map to different output styles.
 \end{itemize}
 
-And now the trick.
+Note that `meta-styles' such as `|bf|' and `|sf|' are not included here since they are context dependent. Use |[range=bfup]| and |[range=bfit]| to effect changes to the particular ranges selected by `|bf|' (and similarly for `|sf|').
+
 If a particular math style is not defined in the font, we fall back onto the lower-base plane (i.e., `upright') glyphs.
 Therefore, to use an \ascii-encoded fractur font, for example, write
-\par{\centering|\setmathfont{SomeFracturFont}[range=\mathfrak]|\par}\noindent
+\par{\centering|\setmathfont{SomeFracturFont}[range=frak]|\par}\noindent
 and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
-If necessary this behaviour can be forced with |[range=\mathfrac->\mathup]|.
+If necessary this behaviour can be forced with |[range=frak->up]|, since the `|up|' range corresponds to \ascii\ letters.
+
+If you wanted to swap the maths symbols with sans serif forms, it would be possible to write |[range={up->sfup,it->sfit}]|.
+Note, however, that at present Unicode does not encode glyphs for sans serif Greek (\tabref{mathalphabets}).
+
+\textbf{v0.8:} Note that in previous versions of \pkg{unicode-math}, these features were labelled |[range=\mathbb]| and so on. This old syntax is still supported for backwards compatibility, but is now discouraged.
 
 
 \subsection{Script and scriptscript fonts/features}
@@ -522,7 +529,7 @@ lies in \LaTeX's attempt of separating content and formatting. Because input
 source text may come from a variety of places, the upright and
 `mathematical' italic Latin and Greek alphabets are \emph{unified} from the
 point of view of having a specified meaning in the source text. That is, to
-get a mathematical ‘$x$’, either the ascii (`keyboard') letter |x| may
+get a mathematical ‘$x$’, either the \ascii\ (`keyboard') letter |x| may
 be typed, or the actual Unicode character may be used. Similarly for Greek
 letters. The upright or italic forms are then chosen based on the
 |math-style| package option.
@@ -863,7 +870,7 @@ multiple backwards primes can accessed with \cs{backdprime},
 
 In all cases above, no error checking is performed if you attempt to
 access a multi-prime glyph in a font that doesn't contain one. For this
-reason, it may be safer to write \verb|x''''| instead of \verb|x\qprime|
+reason, it may be safer to write |x''''| instead of |x\qprime|
 in general.
 
 If you ever need to enter the straight quote |'| or the backtick |`| in
