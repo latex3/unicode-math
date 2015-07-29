@@ -1,12 +1,6 @@
 #!/usr/bin/env texlua
 
--- Build script for breqn
-
 module = "unicode-math"
-
-unpackfiles = {"*.dtx"}
-
-excludefiles = {}
 
 --[[
 deps = {"../l3svn/l3kernel","../l3svn/l3packages/xparse"}
@@ -15,10 +9,16 @@ typesetdeps = deps
 unpackdeps  = deps
 --]]
 
-checkopts   = "-interaction=nonstopmode"
+excludefiles = {}
 
+sourcefiles = {"*.dtx","unicode-math-table.tex"}
+unpackfiles = {"unicode-math.dtx"}
+installfiles = {"*.sty","unicode-math-table.tex"}
+
+checkopts   = " -interaction=errorstopmode -halt-on-error "
+
+checkengines = {"xetex","luatex"}
 stdengine  = "luatex"
-chkengines = {"xetex","luatex"}
 
 kpse.set_program_name("kpsewhich")
 dofile(kpse.lookup("l3build.lua"))

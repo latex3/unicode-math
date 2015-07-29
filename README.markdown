@@ -57,9 +57,6 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-If you're using an up-to-date TeX Live 2011/2012 or MiKTeX 2.9 then there'll
-be no problems. Otherwise, read on.
-
 As well as running XeTeX or LuaTeX, this package requires recent versions of
 the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`,
 `filehook`, and `lualatex-math` packages.
@@ -79,79 +76,25 @@ Please file bug reports with minimal examples:
 > <http://github.com/wspr/unicode-math/issues>
 
 
-INSTALLATION
-------------
-
-If you are using the currently supported version of TeX Live (about to be 2012
-at time of writing), you may install the latest release version of the package
-with
-
-    sudo tlmgr update unicode-math
-
-The steps below assume that you have obtained unicode-math either from CTAN or
-Github and you wish to install the package yourself.
-
-Installation and compilation are automated by the Makefile; see below for the
-manual procedure. To re-compile the documentation (requiring XeLaTeX and a
-variety of installed fonts):
-
-    make doc
-
-To install unicode-math in your home texmf tree:
-
-    make install
-
-To install it for all users in your system-wide local texmf tree:
-
-    make install-sys
-
-See `make help` for further information.
-
-
-### Manual procedure
-
-Run TeX on unicode-math.dtx to generate the package file `unicode-math.sty`:
-
-    tex unicode-math.dtx
-
-If you have the necessary fonts, you may compile the documentation
-with XeLaTeX:
-
-    xelatex unicode-math.dtx
-
-To install the package, place unicode-math.sty and unicode-math-table.tex in a
-location searched by XeLaTeX, inside the directory structure
-`<texmf>/tex/latex/unicode-math/`. The appropriate `<texmf>` location for a
-single-user installation can be found with
-
-    kpsewhich --var-value TEXMFHOME
-
-For a system-wide (multi-user) installation, use the location returned by
-
-    kpsewhich --var-value TEXMFLOCAL
-
-
-TEST SUITE
-----------
-
-After installation you can initialise the testsuite with
-
-    make initest
-
-Subsequently, the test suite may be executed with
-
-    make check
-
-Both of these operations will take quite some time and require ImageMagick's
-`convert` tool to be installed.
-They are only necessary if you wish to make changes to unicode-math yourself
-(be sure to initialise the test suite *before* any changes are made to the
-package) and you wish to ensure that your changes have not affected the
-standard behaviour.
-
 
 CHANGE HISTORY
 --------------
+
+- v0.8  (2015/07/29)  **Breaking changes in this update!**
+
+  * `\mathrm` (`\mathup`), `\mathit`, `\mathbf`, `\mathsf`, and `\mathtt` revert to their traditional LaTeX meanings; they are set up to match their equivalent text fonts unless specifically set using `\setmathrm` and friends from `fontspec` or the new `\setmathfontface` in `unicode-math`. These commands should be used for *multi*-letter identifiers.
+
+  * New "symbol" commands have been added, `\symrm` (`\symup`), `symit`, ..., to replace the behaviour of the old commands. These should be used for *single*-letter identifiers. See the package documentation for more detail on these and related commands.
+
+  * Package options `mathit=sym`, `mathbf=sym`, etc., reverse the changes above to revert to pre-v0.8 behaviour for `\mathXYZ`. Regardless of package option, `\symXYZ` always maps to symbols and `\mathtextXYZ` is provided for the traditional `\mathXYZ` font switch.
+
+  * New command `\setoperatorfont` to set the font used for commands such as `\sin` and `\cos`. Usage: `\setoperatorfont\mathbf` or any command defined with `\setmathfontface`.
+
+  * Traditional LaTeX `\DeclareMathAlphabet` now works again for legacy font-loading packages.
+
+  * Commands defined to "force" Greek letters with `\upbeta` and `\itbeta`, etc.
+
+  * Assorted bug fixes and minor changes.
 
 - v0.7e (2014/06/30)
 
