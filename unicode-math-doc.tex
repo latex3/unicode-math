@@ -547,12 +547,14 @@ example, an upright `g' is desired but typing |$g$| yields `$g$'),
 |\mathup{g}|. Maths style commands such as \cmd\mathup\ are detailed
 later.
 
-\paragraph{Alternative interface}
+\paragraph{`Literal' interface}
 However, some users may not like this convention of normalising their input.
 For them, an upright |x| is an upright `x' and that's that.
 (This will be the case when obtaining source text from copy/pasting PDF or
 Microsoft Word documents, for example.)
 For these users, the |literal| option to |math-style| will effect this behaviour.
+The \cs{symliteral}\marg{syms} command can also be used, regardless of package setting, to force the style to match the literal input characters.
+This is a `mirror' to \cs{symnormal}\marg{syms} (also alias \cs{mathnormal}) which `resets' the character mapping in its argument to whatever originally set up through package options.
 
 The \opt{math-style} options' effects are shown in brief in \tabref{math-style}.
 
