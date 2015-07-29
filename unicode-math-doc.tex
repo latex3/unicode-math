@@ -256,7 +256,7 @@ Many of these are also defined with `familiar' synonyms:
 \ExplSyntaxOff
 \end{quote}
 So what about \cs{mathup}, \cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}?
-(N.B.: \cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is prefered as it is a script agnostic term.)
+(N.B.: \cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is prefered as it is a script-agnostic term.)
 These commands have `overloaded' meanings in \LaTeX, and it's important to consider the subtle differences between, e.g., \cs{symbf} and \cs{mathbf}.
 The former switches to single-letter mathematical symbols, whereas the second switches to a text font that behaves correctly in mathematics but should be used for multi-letter identifiers.
 These four commands (and \cs{mathrm}) are defined in the traditional \LaTeX\ manner.
@@ -445,28 +445,11 @@ For example, if you want to define a new legacy maths alphabet font \cs{mathittt
   $\mathittt{foo} = \mathittt{a} + \mathittt{b}$
 \end{verbatim}
 
-\paragraph{Operator font}
-On a related note, \LaTeX\ defines an internal command \cs{operator@font} for typesetting elements such as |\sin| and |\cos|.
-This font is selected from the legacy |operators| NFSS `MathAlphabet', which is no longer relevant in the context of \pkg{unicode-math}.
-By default, the \cs{operator@font} command is defined to switch to the \cs{mathrm} font.
-You may now change these using the command:
-\begin{Verbatim}
-\setoperatorfont\mathit
-\end{Verbatim}
-Or, to select a \pkg{unicode-math} range:
-\begin{Verbatim}
-\setoperatorfont\symbf
-\end{Verbatim}
-\setoperatorfont\symbf
-For example, after the latter above, |$\sin x$| will produce `$\sin x$'.
 
-\mathversion{normal}
-\setoperatorfont\mathrm
-
-\subsection{Default `text math' fonts}
+\subsubsection{Default `text math' fonts}
 
 The five `text math' fonts, discussed above, are: \cs{mathrm}, \cs{mathbf}, \cs{mathit}, \cs{mathsf}, and \cs{mathtt}.
-These commands are also defined under the synonyms: \cs{mathtextrm}, \cs{mathtextbf}, and so on.
+These commands are also defined with their original definition under synonyms \cs{mathtextrm}, \cs{mathtextbf}, and so on.
 
 When selecting document fonts using \pkg{fontspec} commands such as \cs{setmainfont}, \pkg{unicode-math} inserts some additional that keeps the current default fonts `in sync' with their corresponding \cs{mathrm} commands, etc.
 
@@ -474,7 +457,9 @@ For example, in standard \LaTeX, \cs{mathsf} doesn't change even if the main doc
 
 If the \cs{mathsf} font is set explicitly at any time in the preamble, this `auto-following' does not occur. The legacy math font switches can be defined either with commands defined by \pkg{fontspec} (|\setmathrm|, |\setmathsf|, etc.) or using the more general |\setmathfontface\mathsf| interface defined by \pkg{unicode-math}.
 
-\paragraph{Replacing `text math' fonts by symbols}
+
+\subsubsection{Replacing `text math' fonts by symbols}
+
 For certain types of documents that use legacy input syntax (say you're typesetting a new version of a book written in the 1990s), it would be preferable to use |\symbf| rather than |\mathbf| en masse.
 For example, if bold maths is used only for vectors and matrices, a dedicated symbol font will produce better spacing and will better match the main math font.
 
@@ -498,6 +483,28 @@ A series of package options (\tabref{legacyfontswitch}) are provided to facilita
     \bottomrule
   \end{tabular}
 \end{table}
+
+A `smart' macro is intended for a future version of \pkg{unicode-math} that can automatically distinguish between single- and multi-letter arguments to \cs{mathbf} and use either the maths symbol or the `text math' font as appropriate.
+
+
+\subsubsection{Operator font}
+
+\LaTeX\ defines an internal command \cs{operator@font} for typesetting elements such as |\sin| and |\cos|.
+This font is selected from the legacy |operators| NFSS `MathAlphabet', which is no longer relevant in the context of \pkg{unicode-math}.
+By default, the \cs{operator@font} command is defined to switch to the \cs{mathrm} font.
+You may now change these using the command:
+\begin{Verbatim}
+\setoperatorfont\mathit
+\end{Verbatim}
+Or, to select a \pkg{unicode-math} range:
+\begin{Verbatim}
+\setoperatorfont\symbf
+\end{Verbatim}
+\setoperatorfont\symbf
+For example, after the latter above, |$\sin x$| will produce `$\sin x$'.
+
+\mathversion{normal}
+\setoperatorfont\mathrm
 
 
 \section{Maths input}
