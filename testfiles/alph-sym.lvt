@@ -1,0 +1,11 @@
+\input{umtest-preamble}
+\OMIT
+\usepackage[math-style=ISO]{unicode-math}  
+\setmathfont{xits-math.otf}
+\setmathfont[range=it/{latin, greek, Greek}]{Asana-Math.otf}  
+\begin{document}
+\TIMO
+$abc$ $ABC$
+$\alpha\beta\gamma$
+$\Alpha\Beta\Gamma$
+\end{document}  

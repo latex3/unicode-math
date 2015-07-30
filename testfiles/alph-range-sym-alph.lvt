@@ -1,0 +1,14 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont[Colour=330000]{xits-math.otf}
+\setmathfont[range=\mathit/{latin}, Colour=660000]{xits-math.otf}
+\setmathfont[range=\mathit/{Greek}, Colour=990000]{xits-math.otf}
+\setmathfont[range=\mathit/{greek}, Colour=BB0000]{xits-math.otf}
+\setmathfont[range=\mathup/{num}, Colour=EE0000]{xits-math.otf}
+\begin{document}
+\[\symit{\LATINtext}\]
+\[\symit{\latintext}\]
+\[\symit{\GREEKtext}\]
+\[\symit{\greektext}\]
+\[0123456789\]
+\end{document}

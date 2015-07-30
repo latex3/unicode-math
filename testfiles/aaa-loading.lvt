@@ -1,0 +1,6 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\begin{document}
+$y=mx+c$
+\end{document}

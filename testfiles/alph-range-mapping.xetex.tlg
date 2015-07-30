@@ -1,0 +1,402 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 14.
+LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.4712pt on input line 14.
+LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0294pt on input line 14.
+LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 14.
+LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.47098pt on input line 14.
+LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.0292pt on input line 14.
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 0.51648fil
+...\write-{}
+...\glue(\topskip) 10.0
+...\rule(0.0+0.0)x*
+...\penalty 10000
+...\glue -28.45274
+...\glue 0.0
+...\glue(\parskip) 0.0 plus 1.0
+...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil
+....\hbox(0.0+0.0)x15.0
+....\hbox(0.0+0.0)x136.57463, glue set 68.28732fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\baselineskip) 5.24
+...\hbox(6.76+1.75)x196.96004, shifted 15.33102, display
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2916
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2917
+....\kern0.77
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2918
+....\kern1.24
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2919
+....\kern1.0
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2920
+....\kern1.35
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2921
+....\kern1.84
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2922
+....\kern1.0
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2923
+....\kern1.3
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2924
+....\kern1.5
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2925
+....\kern1.12
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2926
+....\kern1.35
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2927
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2928
+....\kern1.3
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2929
+....\kern1.3
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2930
+....\kern1.05
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2931
+....\kern1.53
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2932
+....\kern1.03
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2933
+....\kern0.9
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2934
+....\kern0.96
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2935
+....\kern1.8
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2936
+....\kern1.06
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2937
+....\kern1.74
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2938
+....\kern1.76
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2939
+....\kern1.46
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2940
+....\kern1.84
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2941
+....\kern1.66
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.42
+...\hbox(6.83+1.87)x130.11002, shifted 48.75603, display
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2498
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2499
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2500
+....\kern0.5
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2501
+....\kern0.6
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2502
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2503
+....\kern1.2
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2504
+....\kern0.4
+....\EU1/xits-math.otf(3)/m/n/10 glyph#965
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2505
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2506
+....\kern0.6
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2507
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2508
+....\kern0.2
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2509
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2510
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2511
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2512
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2513
+....\kern0.4
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2514
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2515
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2516
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2517
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2518
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2519
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2520
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2521
+....\EU1/xits-math.otf(3)/m/n/10 glyph#2522
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.37001
+...\hbox(6.76+1.77)x173.18001, shifted 27.22104, display
+....\hbox(6.76+1.77)x173.18001
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#66
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#67
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#68
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#69
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#70
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#71
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#72
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#73
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#74
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#75
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#76
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#77
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#78
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#79
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#80
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#81
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#82
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#83
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#84
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#85
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#86
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#87
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#88
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#89
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#90
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#91
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.39
+...\hbox(6.84+2.16)x117.23001, shifted 55.19603, display
+....\hbox(6.84+2.16)x117.23001
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2838
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2839
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2840
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2841
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2842
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2843
+.....\kern1.0
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2844
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2845
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2846
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2847
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2848
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2849
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2850
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2851
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2852
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2853
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2854
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2855
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2856
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2857
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2858
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2859
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2860
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2861
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2862
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#2863
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 2.92
+...\hbox(6.92+0.19)x181.0, shifted 23.31104, display
+....\hbox(6.92+0.19)x181.0
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3074
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3075
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3076
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3077
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3078
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3079
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3080
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3081
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3091
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3082
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3083
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3084
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3085
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3086
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3087
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3088
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3089
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3090
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3092
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3093
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3094
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3095
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3096
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3097
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3098
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 4.83
+...\hbox(6.98+2.05)x187.06999, shifted 20.27605, display
+....\hbox(6.98+2.05)x187.06999
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3216
+.....\kern0.4
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3217
+.....\kern0.7
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3218
+.....\kern0.53
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3219
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3220
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3242
+.....\kern0.4
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3221
+.....\kern0.9
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3222
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3223
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3243
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3224
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3225
+.....\kern0.5
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3244
+.....\kern0.6
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3226
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3227
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3228
+.....\kern0.5
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3229
+.....\kern0.5
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3230
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3231
+.....\kern0.5
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3247
+.....\kern0.5
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3232
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3246
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3233
+.....\kern0.7
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3234
+.....\kern0.5
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3235
+.....\kern0.8
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3236
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3237
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3245
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3238
+.....\kern0.95
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3239
+.....\kern0.95
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3240
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.26
+...\hbox(6.69+0.11)x198.11995, shifted 14.75107, display
+....\hbox(6.69+0.11)x198.11995
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3132
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3133
+.....\kern0.4
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3134
+.....\kern1.45
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3135
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3136
+.....\kern0.6
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3137
+.....\kern0.7
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3138
+.....\kern0.9
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3139
+.....\kern0.15
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3149
+.....\kern0.15
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3140
+.....\kern0.9
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3141
+.....\kern0.7
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3142
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3143
+.....\kern0.9
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3144
+.....\kern0.9
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3145
+.....\kern0.75
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3146
+.....\kern0.2
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3147
+.....\kern0.9
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3148
+.....\kern1.5
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3150
+.....\kern0.65
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3151
+.....\kern1.6
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3152
+.....\kern1.6
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3153
+.....\kern0.15
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3154
+.....\kern0.6
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3155
+.....\kern1.13
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#3156
+.....\kern0.2
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 5.06
+...\hbox(6.83+2.2)x160.0, shifted 33.81104, display
+....\hbox(6.83+2.2)x160.0
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#658
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#659
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#660
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#661
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#662
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#706
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#663
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#664
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#665
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#689
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#666
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#667
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#703
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#668
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#669
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#670
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#671
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#672
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#673
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#692
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#674
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#704
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#675
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#676
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#677
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#678
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#679
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#691
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#680
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#681
+.....\kern0.4
+.....\EU1/xits-math.otf(3)/m/n/10 glyph#682
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207
+(.aux)

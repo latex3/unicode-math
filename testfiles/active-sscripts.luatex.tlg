@@ -1,0 +1,360 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks19
+) (../pdftexcmds.sty
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+(/usr/local/texlive/2015/texmf-dist/scripts/oberdiek/pdftexcmds.lua)
+\pdftexcmds@toks=\toks20
+)
+(../epstopdf-base.sty
+(../grfext.sty
+(../kvdefinekeys.sty
+))
+(../kvoptions.sty
+(../kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(../epstopdf-sys.cfg
+))
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 6.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 7.30006pt on input line 6.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 6.00015pt on input line 6.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 6.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 7.29984pt on input line 6.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 5.99995pt on input line 6.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845, direction TLT
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362, direction TLT
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207, direction TLT
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 56.38696fil, direction TLT
+...\write-{}
+...\glue(\topskip) 5.24902
+...\hbox(4.75098+2.12296)x227.62207, glue set 20.49355fil, direction TLT
+....\whatsit
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.07486)x13.08656, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 0
+.....\EU2/CambriaMath(0)/m/n/7.29996 1
+.....\EU2/CambriaMath(0)/m/n/7.29996 2
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.0606)x13.08656, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 1
+.....\EU2/CambriaMath(0)/m/n/7.29996 2
+.....\EU2/CambriaMath(0)/m/n/7.29996 3
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.0606)x13.08656, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 2
+.....\EU2/CambriaMath(0)/m/n/7.29996 3
+.....\EU2/CambriaMath(0)/m/n/7.29996 4
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.78703+0.07486)x13.08656, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 3
+.....\EU2/CambriaMath(0)/m/n/7.29996 4
+.....\EU2/CambriaMath(0)/m/n/7.29996 5
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.78703+0.07486)x13.08656, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 4
+.....\EU2/CambriaMath(0)/m/n/7.29996 5
+.....\EU2/CambriaMath(0)/m/n/7.29996 6
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.78703+0.07486)x13.08656, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 5
+.....\EU2/CambriaMath(0)/m/n/7.29996 6
+.....\EU2/CambriaMath(0)/m/n/7.29996 7
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.08199)x13.08656, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 6
+.....\EU2/CambriaMath(0)/m/n/7.29996 7
+.....\EU2/CambriaMath(0)/m/n/7.29996 8
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.08199)x12.88696, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 7
+.....\EU2/CambriaMath(0)/m/n/7.29996 8
+.....\EU2/CambriaMath(0)/m/n/7.29996 9
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.08199)x13.97412, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 8
+.....\EU2/CambriaMath(0)/m/n/7.29996 9
+.....\EU2/CambriaMath(0)/m/n/7.29996 +
+....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue(\parskip) 12.0
+...\glue(\baselineskip) 5.12607
+...\hbox(4.75098+3.6521)x227.62207, glue set - 0.25012, direction TLT
+....\whatsit
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.06416)x15.06128, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 9
+.....\EU2/CambriaMath(0)/m/n/7.29996 +
+.....\EU2/CambriaMath(0)/m/n/7.29996 −
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(5.1506+1.61113)x14.0668, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 +
+.....\EU2/CambriaMath(0)/m/n/7.29996 −
+.....\EU2/CambriaMath(0)/m/n/7.29996 (
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(5.1506+1.61113)x14.0668, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 −
+.....\EU2/CambriaMath(0)/m/n/7.29996 (
+.....\EU2/CambriaMath(0)/m/n/7.29996 =
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(5.1506+1.61113)x11.78557, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 (
+.....\EU2/CambriaMath(0)/m/n/7.29996 =
+.....\EU2/CambriaMath(0)/m/n/7.29996 )
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(5.1506+1.61113)x13.31471, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 =
+.....\EU2/CambriaMath(0)/m/n/7.29996 )
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑎
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(5.1506+1.61113)x11.96379, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 )
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑎
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑒
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(3.63928+0.06416)x13.23273, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑎
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑒
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑜
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(3.63928+0.06416)x12.98677, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑒
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑜
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑥
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.07486)x13.25053, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑜
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑥
+.....\EU2/CambriaMath(0)/m/n/7.29996 0
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\hbox(4.61594+0.07486)x13.17567, shifted 2.04097, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑥
+.....\EU2/CambriaMath(0)/m/n/7.29996 0
+.....\EU2/CambriaMath(0)/m/n/7.29996 1
+....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue(\parskip) 12.0
+...\glue(\lineskip) 1.0
+...\hbox(8.81265+0.07813)x227.62207, glue set 105.92422fil, direction TLT
+....\whatsit
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern0.24414
+....\hbox(5.1506+1.61113)x24.50345, shifted -3.66205, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 0
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑖
+.....\EU2/CambriaMath(0)/m/n/7.29996 +
+.....\EU2/CambriaMath(0)/m/n/7.29996 )
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑛
+.....\EU2/CambriaMath(0)/m/n/7.29996 2
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern0.24414
+....\hbox(5.1506+1.61113)x20.2796, shifted -3.66205, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑖
+.....\EU2/CambriaMath(0)/m/n/7.29996 +
+.....\EU2/CambriaMath(0)/m/n/7.29996 )
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑛
+.....\EU2/CambriaMath(0)/m/n/7.29996 2
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern0.24414
+....\hbox(4.61594+0.06416)x9.37956, shifted -3.66205, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑛
+.....\EU2/CambriaMath(0)/m/n/7.29996 2
+....\mathoff
+....\glue 3.33 plus 1.665 minus 1.11
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern0.24414
+....\hbox(5.1506+1.61113)x20.2796, shifted -3.66205, direction TLT
+.....\EU2/CambriaMath(0)/m/n/7.29996 2
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑖
+.....\EU2/CambriaMath(0)/m/n/7.29996 +
+.....\EU2/CambriaMath(0)/m/n/7.29996 )
+.....\EU2/CambriaMath(0)/m/n/7.29996 𝑛
+....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue(\parskip) 12.0
+...\glue(\baselineskip) 1.42485
+...\hbox(10.49702+2.40605)x227.62207, glue set 186.77606fil, direction TLT
+....\whatsit
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\mathon
+....\l_fontspec_font 𝑥
+....\kern-0.09766
+....\vbox(12.84248+0.0606)x20.6214, shifted 2.34546, direction TLT
+.....\hbox(5.1506+1.61113)x20.2796, shifted 0.3418, direction TLT
+......\EU2/CambriaMath(0)/m/n/7.29996 2
+......\EU2/CambriaMath(0)/m/n/7.29996 𝑖
+......\EU2/CambriaMath(0)/m/n/7.29996 +
+......\EU2/CambriaMath(0)/m/n/7.29996 )
+......\EU2/CambriaMath(0)/m/n/7.29996 𝑛
+.....\kern1.46481
+.....\hbox(4.61594+0.0606)x8.86272, direction TLT
+......\EU2/CambriaMath(0)/m/n/7.29996 3
+......\EU2/CambriaMath(0)/m/n/7.29996 4
+....\mathoff
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207, direction TLT
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(.aux)

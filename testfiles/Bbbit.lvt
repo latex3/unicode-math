@@ -1,0 +1,7 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\begin{document}
+\[\mathbbit{Ddeij}\qquad\mathbbit{𝐷𝑑𝑒𝑖𝑗}\]
+\[\symbbit{Ddeij}\qquad\symbbit{𝐷𝑑𝑒𝑖𝑗}\]
+\end{document}

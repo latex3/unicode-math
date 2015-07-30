@@ -1,0 +1,13 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\setlength\parskip{12pt}
+\begin{document}
+$x₀₁₂$ $x₁₂₃$ $x₂₃₄$ $x₃₄₅$ $x₄₅₆$ $x₅₆₇$ $x₆₇₈$ $x₇₈₉$ $x₈₉₊$
+
+$x₉₊₋$ $x₊₋₍$ $x₋₍₌$ $x₍₌₎$ $x₌₎ₐ$ $x₎ₐₑ$ $xₐₑₒ$ $xₑₒₓ$ $xₒₓ₀$ $xₓ₀₁$
+
+$x⁰ⁱ⁺⁾ⁿ²$ $xⁱ⁺⁾ⁿ²$ $xⁿ²$ $x²ⁱ⁺⁾ⁿ$
+
+$x₃₄²ⁱ⁺⁾ⁿ$
+\end{document}

@@ -1,0 +1,22 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\setmathfont[
+    range={
+      up/{latin}->sfup ,
+      it/{Latin}->sfit ,
+      up/{Greek}->bfup ,
+      it/{greek}->bfit ,
+    }
+  ]{xits-math.otf}
+\begin{document}
+\vspace*{-1cm}
+\[\LATINtext\]
+\[\latintext\]
+\[\symup\LATINtext\]
+\[\symup\latintext\]
+\[{\GREEKtext}\]
+\[{\greektext}\]
+\[{\symit\GREEKtext}\]
+\[{\symup\greektext}\]
+\end{document}

@@ -1,0 +1,10 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\begin{document}
+\setmathfont{xits-math.otf}
+\[ \vec a \quad \vec{a} \quad \vec{abc} \quad
+\overrightarrow{abc} \quad \overleftarrow{abc} \quad
+\overleftrightarrow{abc} \quad
+\underrightarrow{abc} \quad \underleftarrow{abc} \quad
+\underleftrightarrow{abc} \]
+\end{document}

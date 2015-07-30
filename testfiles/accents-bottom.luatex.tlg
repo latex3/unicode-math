@@ -1,0 +1,143 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks19
+) (../pdftexcmds.sty
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+(/usr/local/texlive/2015/texmf-dist/scripts/oberdiek/pdftexcmds.lua)
+\pdftexcmds@toks=\toks20
+)
+(../epstopdf-base.sty
+(../grfext.sty
+(../kvdefinekeys.sty
+))
+(../kvoptions.sty
+(../kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(../epstopdf-sys.cfg
+))
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 5.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.4712pt on input line 5.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0294pt on input line 5.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 5.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.47098pt on input line 5.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.0292pt on input line 5.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845, direction TLT
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362, direction TLT
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207, direction TLT
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 95.62358fil, direction TLT
+...\write-{}
+...\glue(\topskip) 10.0
+...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
+....\whatsit
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\hbox(0.0+0.0)x136.57463, glue set 68.28732fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\baselineskip) 5.47
+...\hbox(6.53+4.63)x103.70435, shifted 61.95886, direction TLT
+....\vbox(4.5+1.91)x5.5, shifted 0.09, direction TLT
+.....\hbox(4.41+0.09)x5.5, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 𝑥
+.....\hbox(0.0+1.91)x0.0, shifted 5.05, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 ̲
+....\glue 20.0
+....\vbox(4.5+2.18)x5.5, shifted 0.09, direction TLT
+.....\hbox(4.41+0.09)x5.5, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 𝑥
+.....\hbox(0.0+2.18)x0.0, shifted 4.89, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 ⃨
+....\glue 20.0
+....\vbox(6.53+2.69)x10.95, direction TLT
+.....\hbox(6.53+0.0)x10.95, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 𝑀
+.....\hbox(0.0+2.69)x0.0, shifted 0.585, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 󰂉
+....\glue 20.0
+....\vbox(7.3+2.8)x21.75435, shifted 1.83, direction TLT
+.....\hbox(5.47+1.83)x21.75435, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 𝑥
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\EU2/xits-math.otf(0)/m/n/10 +
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\EU2/xits-math.otf(0)/m/n/10 𝑦
+.....\hbox(0.0+2.8)x0.0, shifted 1.44719, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 󰃨
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207, direction TLT
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(.aux)
