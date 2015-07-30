@@ -15,7 +15,16 @@
 \def\cmd#1{\texttt{\textbackslash\expandafter\@gobble\string#1}}
 
 \usepackage{fontspec}
-\setmainfont[Ligatures=TeX,Numbers={Lowercase,Monospaced}]{TeX Gyre Pagella}
+\setmainfont{texgyrepagella}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular,
+  ItalicFont = *-italic,
+  BoldFont = *-bold,
+  BoldItalicFont = *-bolditalic,
+  Ligatures=TeX,
+  Numbers={Lowercase,Monospaced},
+ ]
 \usepackage[math-style=literal,bold-style=literal]{unicode-math}
 
 \ExplSyntaxOn
@@ -33,7 +42,7 @@
 
 \defmathfont{lm}{latinmodern-math.otf}{CC6666}
 \defmathfont{xits}{xits-math.otf}{CCCC66}
-\defmathfont{stix}{STIX Math}{AA66CC}
+\defmathfont{stix}{STIXMath-Regular.otf}{AA66CC}
 \defmathfont{cambria}{Cambria Math}{66CCCC}
 \defmathfont{asana}{Asana-Math.otf}{6666CC}
 \defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}
@@ -50,7 +59,9 @@
   \bottomrule
 \end{longtable}
 }
-\def\USV#1{\footnotesize\scshape\MakeLowercase{\@gobble#1}}
+\makeatletter
+\def\USV#1{\footnotesize\scshape\MakeLowercase{u+\@gobble#1}}
+\makeatother
 \def\CMD#1{\footnotesize\cmd#1}
 \def\DESC#1{%
   \begin{varwidth}[t]{6cm}

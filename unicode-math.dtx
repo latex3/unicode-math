@@ -1,5 +1,5 @@
 % \iffalse
-% !TEX TS-program = pdfTeX
+% !TEX TS-program = XeLaTeX
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ^^A   SELF-EXTRACTION BEGINS HERE
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -971,7 +971,7 @@ This work is "maintained" by Will Robertson.
 
 \@onlypreamble \setmathfontface
 %    \end{macrocode}
-% Note that \LaTeX's SetMathAlphabet simply doesn't work to "reset" a maths alphabet font after "\begin{document}", so unlike most of the other maths commands around we still restrict this one to the preamble.
+% Note that \LaTeX's SetMathAlphabet simply doesn't work to "reset" a maths alphabet font after \verb"\begin{document}", so unlike most of the other maths commands around we still restrict this one to the preamble.
 % \end{macro}
 %
 % \begin{macro}{\setoperatorfont}
@@ -3946,23 +3946,6 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 %</package&(XE|LU)>
 %    \end{macrocode}
-%
-%
-% \iffalse
-%
-%\fi
-%
-% \typeout{*************************************************************}
-% \typeout{*}
-% \typeout{* To finish the installation you have to move the following}
-% \typeout{* file into a directory searched by XeTeX/LuaTeX:}
-% \typeout{*}
-% \typeout{* \space\space\space unicode-math.sty}
-% \typeout{* \space\space\space unicode-math-xetex.sty}
-% \typeout{* \space\space\space unicode-math-luatex.sty}
-% \typeout{* \space\space\space unicode-math-table.tex}
-% \typeout{*}
-% \typeout{*************************************************************}
 %
 \endinput
 
