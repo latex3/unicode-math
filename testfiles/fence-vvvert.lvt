@@ -1,0 +1,10 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\begin{document}
+\[ \left⦀ \left⦀ \left⦀ \left⦀ \left⦀ \left⦀ x^2 
+    \right⦀^2 \right⦀^2 \right⦀^2 \right⦀^2 \right⦀^2 \right⦀ \]
+
+\[ \left\Vvert \left\Vvert \left\Vvert \left\Vvert \left\Vvert \left\Vvert x^2 
+    \right\Vvert^2 \right\Vvert^2 \right\Vvert^2 \right\Vvert^2 \right\Vvert^2 \right\Vvert \]
+\end{document}
