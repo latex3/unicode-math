@@ -236,7 +236,7 @@ If you do not load an OpenType maths font before |\begin{document}|, Latin Moder
 
 \subsection{New commands}
 \textbf{New v0.8:}
-\pkg{unicode-math} provides the following commands (usage: |$\symbfsf{g}$|${}\to\symbfsf{g}$) to select specific `alphabets' within the unicode maths font:
+\pkg{unicode-math} provides the following commands to select specific `alphabets' within the unicode maths font: (usage, e.g.: |$\symbfsf{g}$|${}\to\symbfsf{g}$)
 \begin{quote}
 \ExplSyntaxOn
 \clist_map_inline:nn {
@@ -323,8 +323,8 @@ maths glyphs and macro names (all 3298 — or however many — of them!). A
 single command
 \codeline{\cmd\setmathfont\marg{font name}\oarg{font features}}
 implements this for every every symbol and alphabetic variant.
-That means |x| to $x$, |\xi| to $\xi$, |\leq| to $\leq$, etc., |\mathscr{H}|
-to $\mathscr{H}$ and so on, all for Unicode glyphs within a single font.
+That means |x| to $x$, |\xi| to $\xi$, |\leq| to $\leq$, etc., |\symscr{H}|
+to $\symscr{H}$ and so on, all for Unicode glyphs within a single font.
 
 This package deals well with Unicode characters for maths
 input. This includes using literal Greek letters in formulae,
@@ -544,8 +544,8 @@ letters. The upright or italic forms are then chosen based on the
 If glyphs are desired that do not map as per the package option (for
 example, an upright `g' is desired but typing |$g$| yields `$g$'),
 \emph{markup} is required to specify this; to follow from the example:
-|\mathup{g}|. Maths style commands such as \cmd\mathup\ are detailed
-later.
+|\symup{g}|.
+Maths style commands such as \cmd\symup\ are detailed later.
 
 \paragraph{`Literal' interface}
 However, some users may not like this convention of normalising their input.
@@ -568,10 +568,10 @@ The \opt{math-style} options' effects are shown in brief in \tabref{math-style}.
        \cmidrule(l){2-3}
       \rmfamily Package option & Latin & Greek \\
     \midrule
-      math-style=ISO & $(a,z,B,X)$ & $\mathit{(\alpha,\beta,\Gamma,\Xi)}$ \\
-      math-style=TeX & $(a,z,B,X)$ & $(\mathit\alpha,\mathit\beta,\mathup\Gamma,\mathup\Xi)$ \\
-      math-style=french & $(a,z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
-      math-style=upright & $(\mathup a,\mathup z,\mathup B,\mathup X)$ & $(\mathup\alpha,\mathup\beta,\mathup\Gamma,\mathup\Xi)$ \\
+      math-style=ISO & $(a,z,B,X)$ & $\symit{(\alpha,\beta,\Gamma,\Xi)}$ \\
+      math-style=TeX & $(a,z,B,X)$ & $(\symit\alpha,\symit\beta,\symup\Gamma,\symup\Xi)$ \\
+      math-style=french & $(a,z,\symup B,\symup X)$ & $(\symup\alpha,\symup\beta,\symup\Gamma,\symup\Xi)$ \\
+      math-style=upright & $(\symup a,\symup z,\symup B,\symup X)$ & $(\symup\alpha,\symup\beta,\symup\Gamma,\symup\Xi)$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -583,7 +583,7 @@ The \opt{math-style} options' effects are shown in brief in \tabref{math-style}.
 Similar as in the previous section, ISO standards differ somewhat to \TeX's
 conventions (and classical typesetting) for `boldness' in mathematics. In
 the past, it has been customary to use bold \emph{upright} letters to denote
-things like vectors and matrices. For example, \( \mathbfup{M} =
+things like vectors and matrices. For example, \( \symbfup{M} =
 (\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively
 scarcity of bold italic fonts in the pre-digital typesetting era. It has
 been suggested that \emph{italic} bold symbols are used nowadays instead.
@@ -591,10 +591,10 @@ been suggested that \emph{italic} bold symbols are used nowadays instead.
 Bold Greek letters have simply been bold variant glyphs of their regular
 weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta)
 \). Confusingly, the syntax in \LaTeX\ has been different for these two
-examples: \cmd\mathbf\ in the former (`$\mathbfup{M}$'), and \cmd\bm\ (or
+examples: \cmd\symbf\ in the former (`$\symbfup{M}$'), and \cmd\bm\ (or
 \cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
 
-In \pkg{unicode-math}, the \cmd\mathbf\ command works directly with both
+In \pkg{unicode-math}, the \cmd\symbf\ command works directly with both
 Greek and Latin maths characters and depending on package option
 either switches to upright for Latin letters (|bold-style=TeX|) as well or
 keeps them italic (|bold-style=ISO|).
@@ -625,9 +625,9 @@ The \opt{bold-style} options' effects are shown in brief in
        \cmidrule(l){2-3}
       \rmfamily Package option & Latin & Greek \\
     \midrule
-      bold-style=ISO & $(\mathbfit a, \mathbfit z, \mathbfit B, \mathbfit X)$ & $(\mathbfit\alpha, \mathbfit\beta, \mathbfit\Gamma, \mathbfit\Xi)$ \\
-      bold-style=TeX & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfit\alpha, \mathbfit\beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
-      bold-style=upright & $(\mathbfup a,\mathbfup z,\mathbfup B,\mathbfup X)$ & $(\mathbfup \alpha,\mathbfup \beta,\mathbfup \Gamma,\mathbfup \Xi)$ \\
+      bold-style=ISO & $(\symbfit a, \symbfit z, \symbfit B, \symbfit X)$ & $(\symbfit\alpha, \symbfit\beta, \symbfit\Gamma, \symbfit\Xi)$ \\
+      bold-style=TeX & $(\symbfup a,\symbfup z,\symbfup B,\symbfup X)$ & $(\symbfit\alpha, \symbfit\beta,\symbfup \Gamma,\symbfup \Xi)$ \\
+      bold-style=upright & $(\symbfup a,\symbfup z,\symbfup B,\symbfup X)$ & $(\symbfup \alpha,\symbfup \beta,\symbfup \Gamma,\symbfup \Xi)$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -659,9 +659,10 @@ While you might want your bold upright and your sans serif italic, I don't belie
 your bold sans serif upright (or all vice versa, if that's even conceivable). Therefore, bold sans
 serif follows from the setting for sans serif; it is completely independent of the setting for bold.
 
-In other words, \cs{mathbfsf} is either \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And |[sans-style=literal]| causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
+In other words, \cs{mathbfsf} is either \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And \texttt{[sans-style = literal]} causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
 
-Note well! There is no medium-weight sans serif Greek range in Unicode; therefore, |\mathsf{\alpha}| does not make sense (simply produces `$\mathsf{\alpha}$') while |\mathbfsf{\alpha}| gives `$\mathsf{\alpha}$'.
+N.B.: there is no medium-weight sans serif Greek range in Unicode.
+Therefore, |\symsf{\alpha}| does not make sense (it produces `$\symsf{\alpha}$'), while |\symbfsf{\alpha}| gives `$\symsf{\alpha}$' as expected.
 
 \subsection{All (the rest) of the mathematical styles}
 \seclabel{all-math-alphabets}
@@ -671,7 +672,7 @@ shape one may wish to use in mathematical notation. The complete list is shown
 in \tabref{mathalphabets}. Some of these have been covered in the previous sections.
 
 The math font switching commands do not nest; therefore if you want
-sans serif bold, you must write |\mathbfsf{...}| rather than |\mathbf{\mathsf{...}}|.
+sans serif bold, you must write |\symbfsf{...}| rather than |\symbf{\symsf{...}}|.
 This may change in the future.
 
 \begin{table}
@@ -679,7 +680,7 @@ This may change in the future.
 \tablabel{mathalphabets}
 \centering
 \def\Y{\textbullet}
-\def\M{\textcolor{blue}{\textbullet}}
+\def\M{\textcolor[rgb]{0.5,0.5,1}{\textbullet}}
 \begin{tabular}{@{} lll l ccc @{}}
 \toprule
 \multicolumn{3}{c}{Font} & & \multicolumn{3}{c}{Alphabet} \\
@@ -709,16 +710,16 @@ Fraktur    & Upright & Normal & \cs{mathfrak}   & \Y &    &     \\
 \subsubsection{Double-struck}
 
 The double-struck style (also known as `blackboard bold') consists of
-upright Latin letters $\{\mathbb{a}$--$\mathbb{z}$,$\mathbb{A}$$\mathbb{Z}\}$,
-numerals $\mathbb{0}$--$\mathbb{9}$, summation symbol $\mathbb\sum$, and four
-Greek letters only: $\{\mathbb{\gamma\pi\Gamma\Pi}\}$.
+upright Latin letters $\{\symbb{a}$--$\symbb{z}$,$\symbb{A}$$\symbb{Z}\}$,
+numerals $\symbb{0}$--$\symbb{9}$, summation symbol $\symbb\sum$, and four
+Greek letters only: $\{\symbb{\gamma\pi\Gamma\Pi}\}$.
 
-While |\mathbb{\sum}| does produce a double-struck summation symbol,
+While |\symbb{\sum}| does produce a double-struck summation symbol,
 its limits aren't properly aligned. Therefore,
 either the literal character or the control sequence \cs{Bbbsum} are
 recommended instead.
 
-There are also five Latin \emph{italic} double-struck letters: $\mathbbit{Ddeij}$.
+There are also five Latin \emph{italic} double-struck letters: $\symbbit{Ddeij}$.
 These can be accessed (if not with their literal characters or control sequences)
 with the \cs{mathbbit} style switch, but note that only those five letters
 will give the expected output.
@@ -736,14 +737,14 @@ This feature is currently only supported by the XITS~Math font, where
 the caligraphic letters are accessed with the same glyph slots as the
 script letters but with the first stylistic set feature (|ss01|) applied.
 \begin{verbatim}
-  \setmathfont{xits-math.otf}[range={\mathcal,\mathbfcal},StylisticSet=1]
+  \setmathfont{xits-math.otf}[range={\symcal,\symbfcal},StylisticSet=1]
 \end{verbatim}
 An example is shown below.
 \begin{quote}
-\setmathfont{xits-math.otf}[range=\mathscr]
-\setmathfont{xits-math.otf}[range=\mathcal,StylisticSet=1]
-The Script style (\cs{mathscr}) in XITS Math is: $\mathscr{ABCXYZ}$\par
-The Caligraphic style (\cs{mathcal}) in XITS Math is: $\mathcal{ABCXYZ}$
+\setmathfont{xits-math.otf}[range=\symscr]
+\setmathfont{xits-math.otf}[range=\symcal,StylisticSet=1]
+The Script style (\cs{mathscr}) in XITS Math is: $\symscr{ABCXYZ}$\par
+The Caligraphic style (\cs{mathcal}) in XITS Math is: $\symcal{ABCXYZ}$
 \end{quote}
 
 
@@ -760,7 +761,7 @@ The Caligraphic style (\cs{mathcal}) in XITS Math is: $\mathcal{ABCXYZ}$
  The package options |nabla=upright| and
  |nabla=italic| switch between the two choices, and |nabla=literal| respects
  the shape of the input character. This is then inherited
- through \cmd\mathbf; \cmd\mathit\ and \cmd\mathup\ can be used to force one
+ through \cmd\symbf; \cmd\symit\ and \cmd\symup\ can be used to force one
  way or the other.
 
 |nabla=italic| is the default. |nabla=literal| is
@@ -775,13 +776,13 @@ activated automatically after |math-style=literal|.
       \toprule
     \multicolumn{2}{@{}l}{Description} & Glyph
      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-    Upright & Serif & $\mathup\nabla$ \\
-    & Bold serif & $\mathbfup\nabla$ \\
-    & Bold sans & $\mathbfsfup\nabla$ \\
+    Upright & Serif & $\symup\nabla$ \\
+    & Bold serif & $\symbfup\nabla$ \\
+    & Bold sans & $\symbfsfup\nabla$ \\
       \cmidrule(lr){1-2}\cmidrule(lr){3-3}
-    Italic & Serif & $\mathit\nabla$ \\
-    & Bold serif & $\mathbfit\nabla$ \\
-    & Bold sans  & $\mathbfsfit\nabla$ \\
+    Italic & Serif & $\symit\nabla$ \\
+    & Bold serif & $\symbfit\nabla$ \\
+    & Bold sans  & $\symbfsfit\nabla$ \\
       \bottomrule
   \end{tabular}
 \end{table}
@@ -818,12 +819,12 @@ incorrectly shown in an italic style.}
       \toprule
     \multicolumn{2}{@{}l}{Description} & Glyph
      \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-    Regular   & Upright & $\mathup\partial$ \\
-              & Italic  & $\mathit\partial$ \\
-    Bold      & Upright & $\mathbfup\partial$ \\
-              & Italic  & $\mathbfit\partial$ \\
-    Sans bold & Upright & $\mathbfsfup\partial$ \\
-              & Italic  & $\mathbfsfit\partial$ \\
+    Regular   & Upright & $\symup\partial$ \\
+              & Italic  & $\symit\partial$ \\
+    Bold      & Upright & $\symbfup\partial$ \\
+              & Italic  & $\symbfit\partial$ \\
+    Sans bold & Upright & $\symbfsfup\partial$ \\
+              & Italic  & $\symbfsfit\partial$ \\
       \bottomrule
   \end{tabular}
 \end{table}
@@ -1206,7 +1207,7 @@ If you are writing some code that needs to know the current
 maths style (\cs{mathbf}, \cs{mathit}, etc.), you can query the
 variable \cs{l_@@_mathstyle_tl}. It will contain the maths style
 without the leading `math' string; for example,
-|\mathbf { \show \l_@@_mathstyle_tl }|
+|\symbf { \show \l_@@_mathstyle_tl }|
 will produce `bf'.
 
 \StopEventually{\end{document}}
