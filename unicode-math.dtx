@@ -2348,7 +2348,10 @@ This work is "maintained" by Will Robertson.
  }
 %    \end{macrocode}
 %    \begin{macrocode}
-\cs_new:Nn \@@_alphabet_config:nnn { \use:c {@@_config_#1_#2:n} {#3} }
+\cs_new:Nn \@@_alphabet_config:nnn
+ {
+  \use:c {@@_config_#1_#2:n} {#3}
+ }
 %    \end{macrocode}
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \@@_if_alphabet_exists:nn {T,TF}
@@ -2366,6 +2369,7 @@ This work is "maintained" by Will Robertson.
  {
   \seq_put_right:Nx \g_@@_named_ranges_seq { \tl_to_str:n {#1} }
   \seq_put_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
+  \prop_gput:cnn { g_@@_named_range_#1_prop } { default-alpha } {#2}
  }
 \@@_default_mathalph:nnn {up    } {latin,Latin,greek,Greek,num,misc} {up    }
 \@@_default_mathalph:nnn {it    } {latin,Latin,greek,Greek,misc}     {it    }
@@ -2531,42 +2535,38 @@ This work is "maintained" by Will Robertson.
     \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
     \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
    }
-%    \end{macrocode}
-% Now perform the mapping:
-%    \begin{macrocode}
+
+  % Now perform the mapping:
   \seq_map_inline:Nn \l_@@_mathalph_seq
    {
-    \tl_set:No \l_@@_style_tl          { \use_i:nnn   ##1 }
+    \tl_set:No    \l_@@_style_tl       { \use_i:nnn   ##1 }
     \clist_set:No \l_@@_alphabet_clist { \use_ii:nnn  ##1 }
-    \tl_set:No \l_@@_remap_style_tl    { \use_iii:nnn ##1 }
+    \tl_set:No    \l_@@_remap_style_tl { \use_iii:nnn ##1 }
 
+    % If no set of alphabets is defined:
     \clist_if_empty:NT \l_@@_alphabet_clist
      {
       \cs_set_eq:NN \@@_maybe_init_alphabet:n \@@_init_alphabet:n
-      \clist_set:Nn \l_@@_alphabet_clist { latin, Latin, greek, Greek, num, misc }
+      \prop_get:cnN { g_@@_named_range_ \l_@@_style_tl _prop }
+       { default-alpha } \l_@@_alphabet_clist
      }
     
-    \@@_setup_math_alphabet:NNN
-      \l_@@_style_tl \l_@@_alphabet_clist \l_@@_remap_style_tl
+    \@@_setup_math_alphabet:
    }
   \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
  }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_setup_math_alphabet:NNN}
-% \darg{Math font style (e.g., \cs{bb})}
-% \darg{Math alphabets, comma separated of \{latin,Latin,greek,Greek,num\}}
-% \darg{Name of the output math style (usually same as the name of the style \texttt{bb})}
+% \begin{macro}{\@@_setup_math_alphabet:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_math_alphabet:NNN
+\cs_new:Nn \@@_setup_math_alphabet:
  {
-  \tl_set_eq:NN \l_@@_style_tl #1% actually a no-op but makes the code clearer! 
 %    \end{macrocode}
 % First check that at least one of the alphabets for the font shape is defined
 % (this process is fast) \dots
 %    \begin{macrocode}
-  \clist_map_inline:Nn #2
+  \clist_map_inline:Nn \l_@@_alphabet_clist
    {
     \tl_set:Nn \l_@@_alphabet_tl {##1}
     \@@_if_alphabet_exists:nnTF \l_@@_style_tl \l_@@_alphabet_tl
@@ -2591,21 +2591,21 @@ This work is "maintained" by Will Robertson.
 % (currently this process is slow)
 %    \begin{macrocode}
   \csname TIC\endcsname
-  \clist_map_inline:Nn #2
+  \clist_map_inline:Nn \l_@@_alphabet_clist
    {
     \tl_set:Nx \l_@@_alphabet_tl { \tl_trim_spaces:n {##1} }
     \cs_if_exist:cT {@@_config_ \l_@@_style_tl _ \l_@@_alphabet_tl :n}
      {
       \exp_args:No \tl_if_eq:nnTF \l_@@_alphabet_tl {misc}
        {
-        \@@_log:nx {setup-alph} {math \l_@@_style_tl~(\l_@@_alphabet_tl)}
-        \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {#3}
+        \@@_log:nx {setup-alph} {sym \l_@@_style_tl~(\l_@@_alphabet_tl)}
+        \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {\l_@@_remap_style_tl}
        }
        {
-        \@@_glyph_if_exist:nTF { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
+        \@@_glyph_if_exist:nTF { \@@_to_usv:nn {\l_@@_remap_style_tl} {\l_@@_alphabet_tl} }
          {
-          \@@_log:nx {setup-alph} {math \l_@@_style_tl~(\l_@@_alphabet_tl)}
-          \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {#3}
+          \@@_log:nx {setup-alph} {sym \l_@@_style_tl~(\l_@@_alphabet_tl)}
+          \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {\l_@@_remap_style_tl}
          }
          {
           \bool_if:NTF \l_@@_implicit_alph_bool
