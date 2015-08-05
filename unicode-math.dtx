@@ -39,20 +39,25 @@ This work is "maintained" by Will Robertson.
 \askforoverwritefalse
 \let\MetaPrefix\DoubleperCent
 \usepreamble\texpreamble
+\ifdefined\UMDEBUG
+  \def\UMDEBUG{,debug}%
+\else
+  \def\UMDEBUG{}%
+\fi
 \generate{\file{unicode-math.sty}{
-  \from{unicode-math.dtx}{preamble}
-  \from{unicode-math-msg.dtx}{msg}
-  \from{unicode-math-usv.dtx}{usv}
-  \from{unicode-math.dtx}{load}
-  \from{unicode-math-alphabets.dtx}{alphabets}
+  \from{unicode-math.dtx}{preamble\UMDEBUG}
+  \from{unicode-math-msg.dtx}{msg\UMDEBUG}
+  \from{unicode-math-usv.dtx}{usv\UMDEBUG}
+  \from{unicode-math.dtx}{load\UMDEBUG}
+  \from{unicode-math-alphabets.dtx}{alphabets\UMDEBUG}
 }}
 \generate{\file{unicode-math-xetex.sty}{
-  \from{unicode-math.dtx}{package,XE}
-  \from{unicode-math-compat.dtx}{compat,XE}
+  \from{unicode-math.dtx}{package,XE\UMDEBUG}
+  \from{unicode-math-compat.dtx}{compat,XE\UMDEBUG}
 }}
 \generate{\file{unicode-math-luatex.sty}{
-  \from{unicode-math.dtx}{package,LU}
-  \from{unicode-math-compat.dtx}{compat,LU}
+  \from{unicode-math.dtx}{package,LU\UMDEBUG}
+  \from{unicode-math-compat.dtx}{compat,LU\UMDEBUG}
 }}
 \def\tempa{plain}
 \ifx\tempa\fmtname\endgroup\expandafter\bye\fi
@@ -1106,9 +1111,9 @@ This work is "maintained" by Will Robertson.
 % After loading the font, we detect what sizes it recommends for scriptsize and scriptscriptsize, so after setting those values appropriately, we reload the font to take these into account.
 %    \begin{macrocode}
 
-  \csname TIC\endcsname
+%<debug>  \csname TIC\endcsname
   \@@_fontspec_select_font:
-  \csname TOC\endcsname
+%<debug>  \csname TOC\endcsname
   \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
    {
     \@@_declare_math_sizes:
@@ -1147,9 +1152,9 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 % And now we input every single maths char.
 %    \begin{macrocode}
-  \csname TIC\endcsname
+%<debug>  \csname TIC\endcsname
   \@@_input_math_symbol_table:
-  \csname TOC\endcsname
+%<debug>  \csname TOC\endcsname
 %    \end{macrocode}
 % Finally,
 % \begin{itemize}
@@ -1163,9 +1168,9 @@ This work is "maintained" by Will Robertson.
   \@@_remap_symbols:
   \@@_setup_mathactives:
   \@@_setup_delcodes:
-  \csname TIC\endcsname
+%<debug>  \csname TIC\endcsname
   \@@_setup_alphabets:
-  \csname TOC\endcsname
+%<debug>  \csname TOC\endcsname
   \@@_setup_negations:
 %    \end{macrocode}
 % Prevent spaces, and that's it:
@@ -2590,7 +2595,7 @@ This work is "maintained" by Will Robertson.
 % \dots and then loop through them defining the individual ranges:
 % (currently this process is slow)
 %    \begin{macrocode}
-  \csname TIC\endcsname
+%<debug>  \csname TIC\endcsname
   \clist_map_inline:Nn \l_@@_alphabet_clist
    {
     \tl_set:Nx \l_@@_alphabet_tl { \tl_trim_spaces:n {##1} }
@@ -2623,7 +2628,7 @@ This work is "maintained" by Will Robertson.
        }
      }
    }
-  \csname TOC\endcsname
+%<debug>  \csname TOC\endcsname
  }
 %    \end{macrocode}
 % \end{macro}
