@@ -39,10 +39,10 @@ This work is "maintained" by Will Robertson.
 \askforoverwritefalse
 \let\MetaPrefix\DoubleperCent
 \usepreamble\texpreamble
-\ifdefined\UMDEBUG
-  \def\UMDEBUG{,debug}%
-\else
+\ifx\UMDEBUG\undefined
   \def\UMDEBUG{}%
+\else
+  \def\UMDEBUG{,debug}%
 \fi
 \generate{\file{unicode-math.sty}{
   \from{unicode-math.dtx}{preamble\UMDEBUG}
