@@ -761,10 +761,15 @@ This work is "maintained" by Will Robertson.
 % The following assignments should all be fairly straightforward.
 %
 % The catcode setting is to work around (strange?) behaviour in LuaTeX in which catcode 11 characters don't have italic correction for maths.
+% We don't adjust ascii chars, however, because certain punctuation should not have their catcodes changed.
 %    \begin{macrocode}
 \cs_set:Nn \@@_set_mathsymbol:nNNn
  {
-  \int_compare:nT { \char_value_catcode:n {#4} == 11 }
+  \bool_if:nT
+   {
+    \int_compare_p:nNn {#4} > {127} &&
+    \int_compare_p:nNn { \char_value_catcode:n {#4} } = {11}
+   }
    { \char_set_catcode_other:n {#4} }
 
   \tl_case:Nn #3
