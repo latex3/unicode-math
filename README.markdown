@@ -14,9 +14,10 @@ interface and functionality should not be considered completely stable. But
 the more the package is used the more stable it will become. (Things are
 generally working now; it is only minutiae that may change in the future.)
 
-Unicode maths is currently supported to one degree or another by the fonts
+Unicode maths is currently supported by the fonts
 
  - [Cambria Math][CM] (Microsoft),
+ - [Minion Math][MM] (Johannes Küster, typoma GmbH)
  - [Latin Modern Math][LM] (Bogusław Jackowski, Janusz M. Nowacki)
  - [TeX Gyre Pagella Math][PM] (Bogusław Jackowski, Janusz M. Nowacki)
  - [Asana Math][AM] (Apostolos Syropolous),
@@ -32,6 +33,7 @@ I'm always looking for new fonts to test with, so please let me know of any
 new releases.
 
 [CM]: http://www.ascenderfonts.com/font/cambria-regular.aspx
+[MM]: http://www.typoma.com/en/fonts.html
 [LM]: http://www.gust.org.pl/projects/e-foundry/lm-math
 [PM]: http://www.ctan.org/pkg/tex-gyre-math-pagella
 [AM]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
@@ -79,6 +81,18 @@ Please file bug reports with minimal examples:
 
 CHANGE HISTORY
 --------------
+
+- v0.8a (2015/08/06)
+
+  * Fix bug with \vert, \|, \(l/r)vert, etc., displaying with the wrong characters.
+
+  * Improve documentation to properly reflect changes in v0.8 and fix some broken examples.
+
+  * No longer reset catcodes of : and @ during \setmathfont .
+
+  * Fix remapping of alphabets (needed for Minion Math) in cases such as:
+
+      \setmathfont[range=bfit->it]{MinionMath-Bold.otf}
 
 - v0.8  (2015/07/29)  **Breaking changes in this update!**
 
