@@ -1670,7 +1670,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_new_cramped_style:N
 %<XE>  { \quark_new:N #1 }
-%<LU>  { \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 } }
+%<LU>  { \directlua { tex.enableprimitives("", {"\cs_to_str:N #1"}) } }
 %    \end{macrocode}
 % \end{macro}
 %
