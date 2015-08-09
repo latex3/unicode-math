@@ -85,7 +85,7 @@ Completed box being shipped out [1]
 ...\hbox(0.0+0.0)x227.62207, direction TLT
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(142.2638+0.0)x227.62207, glue set 44.28452fil, direction TLT
+..\vbox(142.2638+0.0)x227.62207, glue set 44.57964fil, direction TLT
 ...\write-{}
 ...\glue(\topskip) 10.0
 ...\hbox(0.0+0.0)x227.62207, glue set 212.62207fil, direction TLT
@@ -103,30 +103,24 @@ Completed box being shipped out [1]
 ...\glue -3.0
 ...\glue 0.0
 ...\glue(\lineskip) 4.0
-...\hbox(12.5599+7.29504)x227.62207, glue set 0.00525, direction TLT
+...\hbox(12.5599+6.9999)x227.62207, glue set 0.00525, direction TLT
 ....\glue(\tabskip) 0.0
-....\hbox(12.5599+7.29504)x222.36917, glue set 42.59158fil, direction TLT
+....\hbox(12.5599+6.9999)x222.36917, glue set 35.3916fil, direction TLT
 .....\hbox(8.39996+3.60004)x0.0, direction TLT
 ......\vbox(8.39996+3.60004)x0.0, direction TLT
 .......\kern 0.0
 .......\hbox(8.39996+3.60004)x0.0, direction TLT
 ........\rule(8.39996+3.60004)x0.0
-.....\kern 47.84448
-.....\hbox(12.5599+7.29504)x131.9331, direction TLT
+.....\kern 40.6445
+.....\hbox(12.5599+6.9999)x146.33307, direction TLT
 ......\mathon
-......\hbox(12.5599+7.29504)x131.9331, direction TLT
+......\hbox(12.5599+6.9999)x146.33307, direction TLT
 .......\EU2/xits-math.otf(0)/m/n/10 |
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
-.......\hbox(12.5599+7.29504)x11.4, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+.......\hbox(12.5599+6.9999)x13.79999, direction TLT
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -139,28 +133,16 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\EU2/xits-math.otf(0)/m/n/10 |
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
-.......\hbox(12.5599+7.29504)x11.4, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+.......\hbox(12.5599+6.9999)x13.79999, direction TLT
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -173,27 +155,15 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\EU2/xits-math.otf(0)/m/n/10 |
 .......\glue 10.0
-.......\hbox(12.5599+7.29504)x11.4, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+.......\hbox(12.5599+6.9999)x13.79999, direction TLT
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -206,27 +176,15 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 .......\glue 10.0
 .......\EU2/xits-math.otf(0)/m/n/10 |
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
-.......\hbox(12.5599+7.29504)x11.4, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+.......\hbox(12.5599+6.9999)x13.79999, direction TLT
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -239,18 +197,12 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(19.59+0.0)x2.0, shifted 7.29504, direction TLT
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
-.........\glue -6.0 plus 5.50002
-.........\hbox(6.76+1.77)x2.0, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 |
+........\hbox(15.66+2.79)x3.2, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂌
 ......\mathoff
 .....\glue 0.0 plus 1.0fil
 ....\glue(\tabskip) 0.0 plus 1000.0
-....\hbox(12.5599+7.29504)x0.0, direction TLT
+....\hbox(12.5599+6.9999)x0.0, direction TLT
 .....\hbox(8.39996+3.60004)x0.0, direction TLT
 ......\glue 0.0 plus 1.0fil minus 1.0fil
 ......\hbox(8.39996+3.60004)x0.0, direction TLT
@@ -279,14 +231,8 @@ Completed box being shipped out [1]
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\hbox(12.5599+6.9999)x17.85999, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -299,28 +245,16 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\EU2/xits-math.otf(0)/m/n/10 ‖
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\hbox(12.5599+6.9999)x17.85999, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -333,28 +267,16 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\EU2/xits-math.otf(0)/m/n/10 ‖
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\hbox(12.5599+6.9999)x17.85999, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -367,27 +289,15 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\EU2/xits-math.otf(0)/m/n/10 ‖
 .......\glue 10.0
 .......\hbox(12.5599+6.9999)x17.85999, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -400,27 +310,15 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 .......\glue 10.0
 .......\EU2/xits-math.otf(0)/m/n/10 ‖
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\hbox(12.5599+6.9999)x17.85999, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -433,14 +331,8 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\vbox(18.36998+0.0)x5.23, shifted 6.68504, direction TLT
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
-.........\glue -8.0 plus 7.50002
-.........\hbox(6.9+1.89)x5.23, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 ‖
+........\hbox(15.66+2.79)x5.23, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂍
 ......\mathoff
 .....\glue 0.0 plus 1.0fil
 ....\glue(\tabskip) 0.0 plus 1000.0
@@ -473,8 +365,8 @@ Completed box being shipped out [1]
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\hbox(12.5599+6.9999)x19.28, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -487,16 +379,16 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\EU2/xits-math.otf(0)/m/n/10 ⦀
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\hbox(12.5599+6.9999)x19.28, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -509,15 +401,15 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\EU2/xits-math.otf(0)/m/n/10 ⦀
 .......\glue 10.0
 .......\hbox(12.5599+6.9999)x19.28, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -530,15 +422,15 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 .......\glue 10.0
 .......\EU2/xits-math.otf(0)/m/n/10 ⦀
 .......\glue 10.0
 .......\glue(\thinmuskip) 1.66663
 .......\hbox(12.5599+6.9999)x19.28, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 ........\hbox(12.5599+6.9999)x7.4, direction TLT
 .........\hbox(12.5599+6.9999)x7.4, direction TLT
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
@@ -551,8 +443,8 @@ Completed box being shipped out [1]
 ...........\hbox(6.76+0.0)x5.0, direction TLT
 ............\EU2/xits-math.otf(0)/m/n/10 2
 ..........\hbox(0.0+0.0)x1.2, shifted -2.49995, direction TLT
-........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 󰂎
 ......\mathoff
 .....\glue 0.0 plus 1.0fil
 ....\glue(\tabskip) 0.0 plus 1000.0
