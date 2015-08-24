@@ -1665,12 +1665,16 @@ This work is "maintained" by Will Robertson.
 % \begin{macro}{\@@_new_cramped_style:N}
 % \darg{command}
 % Define \meta{command} as a new cramped style switch.
-% For \LuaTeX, simply rename the correspronding primitive.
+% For \LuaTeX, simply rename the correspronding primitive if it is not
+% already defined.
 % For \XeTeX, define \meta{command} as a new quark.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_new_cramped_style:N
 %<XE>  { \quark_new:N #1 }
-%<LU>  { \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 } }
+%<LU>  {
+%<LU>    \cs_if_exist:NF #1
+%<LU>      { \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 } }
+%<LU>  }
 %    \end{macrocode}
 % \end{macro}
 %
