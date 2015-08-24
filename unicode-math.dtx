@@ -135,7 +135,7 @@ This work is "maintained" by Will Robertson.
 %
 % \paragraph{Packages}
 %    \begin{macrocode}
-\RequirePackage{expl3}[2015/03/01]
+\RequirePackage{expl3}[2015/06/26]
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}
 \RequirePackage{fontspec}[2015/03/14]
@@ -1665,16 +1665,13 @@ This work is "maintained" by Will Robertson.
 % \begin{macro}{\@@_new_cramped_style:N}
 % \darg{command}
 % Define \meta{command} as a new cramped style switch.
-% For \LuaTeX, simply rename the correspronding primitive if it is not
-% already defined.
+% For \LuaTeX, simply rename the corresponding primitive (safe even if already
+% defined).
 % For \XeTeX, define \meta{command} as a new quark.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_new_cramped_style:N
 %<XE>  { \quark_new:N #1 }
-%<LU>  {
-%<LU>    \cs_if_exist:NF #1
-%<LU>      { \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 } }
-%<LU>  }
+%<LU>  { \cs_gset_eq:Nc #1 { luatex_ \cs_to_str:N #1 :D } }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3446,15 +3443,6 @@ This work is "maintained" by Will Robertson.
 %
 % \subsection{Unicode radicals}
 %
-% Make sure \cs{Uroot} is defined in the case where the \LaTeX{}
-% kernel doesn't make it available with its native name.
-%    \begin{macrocode}
-%<*LU>
-\cs_if_exist:NF \Uroot
-  { \cs_new_eq:NN \Uroot \luatexUroot }
-%</LU>
-%    \end{macrocode}
-%
 %    \begin{macrocode}
 \AtBeginDocument{\@@_redefine_radical:}
 \cs_new:Nn \@@_redefine_radical:
@@ -3506,7 +3494,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
     \cs_set:Npn \root ##1 \of ##2
      {
-       \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
+       \utex_root:D \l_@@_radical_sqrt_tl { ##1 } { ##2 }
      }
 %    \end{macrocode}
 % \end{macro}
