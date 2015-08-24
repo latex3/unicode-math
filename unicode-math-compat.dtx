@@ -217,7 +217,7 @@
       && \int_compare_p:nNn { \leftroot@ } = { \c_zero }
      }
      {
-      \luatexUroot \l_@@_radical_sqrt_tl { #1 } { #2 }
+        \Uroot \l_@@_radical_sqrt_tl { #1 } { #2 }
      }
      {
       \hbox_set:Nn \rootbox
@@ -258,7 +258,7 @@
       \mskip \uproot@ mu
       \c_math_toggle_token
      }
-    \luatexUroot \l_@@_radical_sqrt_tl
+      \Uroot \l_@@_radical_sqrt_tl
      {
       \box_move_up:nn { \box_wd:N \l_tmpa_box }
        {
