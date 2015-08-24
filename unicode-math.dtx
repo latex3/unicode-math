@@ -3446,6 +3446,15 @@ This work is "maintained" by Will Robertson.
 %
 % \subsection{Unicode radicals}
 %
+% Make sure \cs{Uroot} is defined in the case where the \LaTeX{}
+% kernel doesn't make it available with its native name.
+%    \begin{macrocode}
+%<*LU>
+\cs_if_exist:NF \Uroot
+  { \cs_new_eq:NN \Uroot \luatexUroot }
+%</LU>
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 \AtBeginDocument{\@@_redefine_radical:}
 \cs_new:Nn \@@_redefine_radical:
@@ -3497,7 +3506,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
     \cs_set:Npn \root ##1 \of ##2
      {
-      \luatexUroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
+       \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
      }
 %    \end{macrocode}
 % \end{macro}
