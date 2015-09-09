@@ -14,7 +14,7 @@ interface and functionality should not be considered completely stable. But
 the more the package is used the more stable it will become. (Things are
 generally working now; it is only minutiae that may change in the future.)
 
-Unicode maths is currently supported by the fonts
+Unicode maths is currently supported by the following fonts:
 
  - [Cambria Math][CM] (Microsoft),
  - [Minion Math][MM] (Johannes Küster, typoma GmbH)
@@ -59,9 +59,7 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-As well as running XeTeX or LuaTeX, this package requires recent versions of
-the `fontspec`, `expl3`, `xpackages`, `catchfile`, `trimspaces`,
-`filehook`, and `lualatex-math` packages.
+As well as running XeTeX or LuaTeX, this package requires recent versions of the `fontspec`, `expl3`, `xpackages`, `filehook`, `ucharcat`, and `lualatex-math` packages.
 
 
 MAINTENANCE
@@ -70,8 +68,7 @@ MAINTENANCE
 The current release version is available from CTAN:
 > <http://tug.ctan.org/pkg/unicode-math>
 
-Latest developmental and archived historical versions are
-available from Github:
+Latest developmental and archived historical versions are available from Github:
 > <http://github.com/wspr/unicode-math>
 
 Please file bug reports with minimal examples:
@@ -81,6 +78,10 @@ Please file bug reports with minimal examples:
 
 CHANGE HISTORY
 --------------
+
+- v0.8b (2015/09/09)
+
+  * Bug fix: Use the "ucharcat" package to simplify some code that caused some headaches with \tl_rescan:nn.
 
 - v0.8a (2015/08/06)
 
