@@ -48,34 +48,26 @@ Package grfext Info: Graphics extension search list:
 (grfext)             \AppendGraphicsExtensions on input line 452.
 (../epstopdf-sys.cfg
 ))
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
 (Font)              scaled to size 10.00015pt on input line 5.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
 (Font)              scaled to size 7.4712pt on input line 5.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
 (Font)              scaled to size 6.0294pt on input line 5.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
 (Font)              scaled to size 9.99985pt on input line 5.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
 (Font)              scaled to size 7.47098pt on input line 5.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
 (Font)              scaled to size 6.0292pt on input line 5.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
-e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845, direction TLT
 .\glue -95.04362
@@ -118,5 +110,4 @@ Completed box being shipped out [1]
 ...\glue 0.0 plus 0.0001fil
 ..\glue(\baselineskip) 30.0
 ..\hbox(0.0+0.0)x227.62207, direction TLT
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 (.aux)

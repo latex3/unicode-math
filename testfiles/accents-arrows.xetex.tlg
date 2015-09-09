@@ -23,17 +23,13 @@ Don't change this file in any respect.
 . 
 . Font family 'latinmodern-math.otf(0)' created for font
 . 'latinmodern-math.otf' with options
-. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7
--10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=latinmodern-math.
-otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7-10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf}].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
 . 
-. <10->"[latinmodern-math]/OT:script=math;language=DFLT;"<7-10>"[latinmodern-ma
-th]/OT:script=math;language=DFLT;+ssty=0;"<-7>"[latinmodern-math]/OT:script=mat
-h;language=DFLT;+ssty=1;"
+. <10->"[latinmodern-math]/OT:script=math;language=DFLT;"<7-10>"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=0;"<-7>"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=1;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -51,22 +47,17 @@ h;language=DFLT;+ssty=1;"
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
 (Font)              `operators' in the math version `normal' on input line 3.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> EU1/latinmodern-math.otf(0)/m/n on inpu
-t line 3.
+(Font)                  OT1/cmr/m/n --> EU1/latinmodern-math.otf(0)/m/n on input line 3.
 LaTeX Font Info:    Encoding `OT1' has changed to `EU1' for symbol font
 (Font)              `operators' in the math version `bold' on input line 3.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> EU1/latinmodern-math.otf(0)/bx/n on in
-put line 3.
+(Font)                  OT1/cmr/bx/n --> EU1/latinmodern-math.otf(0)/bx/n on input line 3.
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'latinmodern-math.otf(1)' created for font
 . 'latinmodern-math.otf' with options
-. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7
--10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=latinmodern-math.
-otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},Scale=1.00001,Font
-Adjustment={\fontdimen
+. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7-10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},Scale=1.00001,FontAdjustment={\fontdimen
 . 8\font =6.77pt\relax \relax \fontdimen 9\font =3.94pt\relax \relax
 . \fontdimen 10\font =4.44pt\relax \relax \fontdimen 11\font =6.86pt\relax
 . \relax \fontdimen 12\font =3.45pt\relax \relax \fontdimen 13\font
@@ -80,9 +71,7 @@ Adjustment={\fontdimen
 . 
 . * 'normal' with NFSS spec.:
 . 
-. <10->s*[1.00001]"[latinmodern-math]/OT:script=math;language=DFLT;"<7-10>s*[1.
-00001]"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=0;"<-7>s*[1.00001]
-"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=1;"
+. <10->s*[1.00001]"[latinmodern-math]/OT:script=math;language=DFLT;"<7-10>s*[1.00001]"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=0;"<-7>s*[1.00001]"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=1;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -116,22 +105,17 @@ Adjustment={\fontdimen
 LaTeX Font Info:    Encoding `OMS' has changed to `EU1' for symbol font
 (Font)              `symbols' in the math version `normal' on input line 3.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/cmsy/m/n --> EU1/latinmodern-math.otf(1)/m/n on inp
-ut line 3.
+(Font)                  OMS/cmsy/m/n --> EU1/latinmodern-math.otf(1)/m/n on input line 3.
 LaTeX Font Info:    Encoding `OMS' has changed to `EU1' for symbol font
 (Font)              `symbols' in the math version `bold' on input line 3.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/cmsy/b/n --> EU1/latinmodern-math.otf(1)/bx/n on in
-put line 3.
+(Font)                  OMS/cmsy/b/n --> EU1/latinmodern-math.otf(1)/bx/n on input line 3.
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'latinmodern-math.otf(2)' created for font
 . 'latinmodern-math.otf' with options
-. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7
--10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=latinmodern-math.
-otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},Scale=0.99999,Font
-Adjustment={\fontdimen
+. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7-10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},Scale=0.99999,FontAdjustment={\fontdimen
 . 8\font =0.4pt\relax \relax \fontdimen 9\font =2.0pt\relax \relax \fontdimen
 . 10\font =1.67pt\relax \relax \fontdimen 11\font =1.11pt\relax \relax
 . \fontdimen 12\font =6.0pt\relax \relax \fontdimen 13\font =0pt\relax }].
@@ -140,9 +124,7 @@ Adjustment={\fontdimen
 . 
 . * 'normal' with NFSS spec.:
 . 
-. <10->s*[0.99999]"[latinmodern-math]/OT:script=math;language=DFLT;"<7-10>s*[0.
-99999]"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=0;"<-7>s*[0.99999]
-"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=1;"
+. <10->s*[0.99999]"[latinmodern-math]/OT:script=math;language=DFLT;"<7-10>s*[0.99999]"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=0;"<-7>s*[0.99999]"[latinmodern-math]/OT:script=math;language=DFLT;+ssty=1;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -162,32 +144,25 @@ Adjustment={\fontdimen
 . \relax \fontdimen 12\font =6.0pt\relax \relax \fontdimen 13\font =0pt\relax 
 .................................................
 LaTeX Font Info:    Encoding `OMX' has changed to `EU1' for symbol font
-(Font)              `largesymbols' in the math version `normal' on input line 3
-.
+(Font)              `largesymbols' in the math version `normal' on input line 3.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/cmex/m/n --> EU1/latinmodern-math.otf(2)/m/n on inp
-ut line 3.
+(Font)                  OMX/cmex/m/n --> EU1/latinmodern-math.otf(2)/m/n on input line 3.
 LaTeX Font Info:    Encoding `OMX' has changed to `EU1' for symbol font
 (Font)              `largesymbols' in the math version `bold' on input line 3.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/cmex/m/n --> EU1/latinmodern-math.otf(2)/bx/n on in
-put line 3.
+(Font)                  OMX/cmex/m/n --> EU1/latinmodern-math.otf(2)/bx/n on input line 3.
 \g__fontspec_family_xits-math.otf_int=\count126
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'xits-math.otf(0)' created for font 'xits-math.otf' with options
-. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7
-.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font=xits-math.ot
-f,Style=MathScriptScript}}].
+. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font=xits-math.otf,Style=MathScriptScript}}].
 . 
 . This font family consists of the following shapes:
 . 
 . * 'normal' with NFSS spec.:
 . 
-. <10->"[xits-math]/OT:script=math;language=DFLT;"<7.01236-10>"[xits-math]/OT:s
-cript=math;language=DFLT;+ssty=0;"<-7.01236>"[xits-math]/OT:script=math;languag
-e=DFLT;+ssty=1;"
+. <10->"[xits-math]/OT:script=math;language=DFLT;"<7.01236-10>"[xits-math]/OT:script=math;language=DFLT;+ssty=0;"<-7.01236>"[xits-math]/OT:script=math;language=DFLT;+ssty=1;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -195,18 +170,14 @@ e=DFLT;+ssty=1;"
 . 
 .................................................
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  EU1/latinmodern-math.otf(0)/m/n --> EU1/xits-math.otf(0
-)/m/n on input line 4.
+(Font)                  EU1/latinmodern-math.otf(0)/m/n --> EU1/xits-math.otf(0)/m/n on input line 4.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  EU1/latinmodern-math.otf(0)/bx/n --> EU1/xits-math.otf(
-0)/bx/n on input line 4.
+(Font)                  EU1/latinmodern-math.otf(0)/bx/n --> EU1/xits-math.otf(0)/bx/n on input line 4.
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'xits-math.otf(1)' created for font 'xits-math.otf' with options
-. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7
-.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font=xits-math.ot
-f,Style=MathScriptScript}},Scale=1.00001,FontAdjustment={\fontdimen
+. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font=xits-math.otf,Style=MathScriptScript}},Scale=1.00001,FontAdjustment={\fontdimen
 . 8\font =5.8pt\relax \relax \fontdimen 9\font =4.8pt\relax \relax \fontdimen
 . 10\font =4.8pt\relax \relax \fontdimen 11\font =7.0pt\relax \relax
 . \fontdimen 12\font =4.8pt\relax \relax \fontdimen 13\font =4.0pt\relax
@@ -220,9 +191,7 @@ f,Style=MathScriptScript}},Scale=1.00001,FontAdjustment={\fontdimen
 . 
 . * 'normal' with NFSS spec.:
 . 
-. <10->s*[1.00001]"[xits-math]/OT:script=math;language=DFLT;"<7.01236-10>s*[1.0
-0001]"[xits-math]/OT:script=math;language=DFLT;+ssty=0;"<-7.01236>s*[1.00001]"[
-xits-math]/OT:script=math;language=DFLT;+ssty=1;"
+. <10->s*[1.00001]"[xits-math]/OT:script=math;language=DFLT;"<7.01236-10>s*[1.00001]"[xits-math]/OT:script=math;language=DFLT;+ssty=0;"<-7.01236>s*[1.00001]"[xits-math]/OT:script=math;language=DFLT;+ssty=1;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -237,18 +206,14 @@ xits-math]/OT:script=math;language=DFLT;+ssty=1;"
 . \fontdimen 21\font =0pt\relax \fontdimen 22\font =2.5pt\relax \relax 
 .................................................
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  EU1/latinmodern-math.otf(1)/m/n --> EU1/xits-math.otf(1
-)/m/n on input line 4.
+(Font)                  EU1/latinmodern-math.otf(1)/m/n --> EU1/xits-math.otf(1)/m/n on input line 4.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  EU1/latinmodern-math.otf(1)/bx/n --> EU1/xits-math.otf(
-1)/bx/n on input line 4.
+(Font)                  EU1/latinmodern-math.otf(1)/bx/n --> EU1/xits-math.otf(1)/bx/n on input line 4.
 .................................................
 . fontspec info: "defining-font"
 . 
 . Font family 'xits-math.otf(2)' created for font 'xits-math.otf' with options
-. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7
-.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font=xits-math.ot
-f,Style=MathScriptScript}},Scale=0.99999,FontAdjustment={\fontdimen
+. [BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Size=10-},{Size=7.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font=xits-math.otf,Style=MathScriptScript}},Scale=0.99999,FontAdjustment={\fontdimen
 . 8\font =0.66pt\relax \relax \fontdimen 9\font =1.5pt\relax \relax \fontdimen
 . 10\font =1.5pt\relax \relax \fontdimen 11\font =3.0pt\relax \relax
 . \fontdimen 12\font =6.0pt\relax \relax \fontdimen 13\font =0pt\relax }].
@@ -257,9 +222,7 @@ f,Style=MathScriptScript}},Scale=0.99999,FontAdjustment={\fontdimen
 . 
 . * 'normal' with NFSS spec.:
 . 
-. <10->s*[0.99999]"[xits-math]/OT:script=math;language=DFLT;"<7.01236-10>s*[0.9
-9999]"[xits-math]/OT:script=math;language=DFLT;+ssty=0;"<-7.01236>s*[0.99999]"[
-xits-math]/OT:script=math;language=DFLT;+ssty=1;"
+. <10->s*[0.99999]"[xits-math]/OT:script=math;language=DFLT;"<7.01236-10>s*[0.99999]"[xits-math]/OT:script=math;language=DFLT;+ssty=0;"<-7.01236>s*[0.99999]"[xits-math]/OT:script=math;language=DFLT;+ssty=1;"
 . 
 . * 'small caps' with NFSS spec.:
 . 
@@ -269,11 +232,9 @@ xits-math]/OT:script=math;language=DFLT;+ssty=1;"
 . \relax \fontdimen 12\font =6.0pt\relax \relax \fontdimen 13\font =0pt\relax 
 .................................................
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  EU1/latinmodern-math.otf(2)/m/n --> EU1/xits-math.otf(2
-)/m/n on input line 4.
+(Font)                  EU1/latinmodern-math.otf(2)/m/n --> EU1/xits-math.otf(2)/m/n on input line 4.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  EU1/latinmodern-math.otf(2)/bx/n --> EU1/xits-math.otf(
-2)/bx/n on input line 4.
+(Font)                  EU1/latinmodern-math.otf(2)/bx/n --> EU1/xits-math.otf(2)/bx/n on input line 4.
 LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
 (Font)              scaled to size 10.00015pt on input line 5.
 LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
