@@ -370,7 +370,7 @@ This work is "maintained" by Will Robertson.
 %
 % Rather than `readable', in the end, this makes the code more extensible.
 %    \begin{macrocode}
-\cs_new:Nn \usv_set:nnn 
+\cs_new:Nn \usv_set:nnn
  { \tl_set:cn { g_@@_#1_#2_usv } {#3} }
 \cs_new:Nn \@@_to_usv:nn
  { \use:c { g_@@_#1_#2_usv } }
@@ -637,7 +637,7 @@ This work is "maintained" by Will Robertson.
      }
     \use:c {@@_setup_active_frac:}
    }
-   
+
    {normalsize}
    {
     \bool_set_false:N \l_@@_smallfrac_bool
@@ -845,9 +845,9 @@ This work is "maintained" by Will Robertson.
     \@@_char_gmake_mathactive:n {#3}
     \@@_active_char_set:wc #3 \q_nil { \cs_to_str:N #2 _sym }
   \group_end:
-  
+
   \@@_set_mathchar:cNnn {\cs_to_str:N #2 op} \mathop {#1} {#3}
-  
+
   \cs_gset:cpx { \cs_to_str:N #2 _sym }
    {
     \exp_not:c { \cs_to_str:N #2 op   }
@@ -958,18 +958,18 @@ This work is "maintained" by Will Robertson.
 \DeclareDocumentCommand \setmathfontface { m O{} m O{} }
  {
   \tl_clear:N \l_@@_mversion_tl
- 
+
   \keys_set_known:nnN {@@_mathface} {#2,#4} \l_@@_keyval_clist
   \exp_args:Nnx \fontspec_set_family:Nxn \l_@@_tmpa_tl
    { ItalicFont={}, BoldFont={}, \exp_not:V \l_@@_keyval_clist } {#3}
-  
+
   \tl_if_empty:NT \l_@@_mversion_tl
    {
     \tl_set:Nn \l_@@_mversion_tl {normal}
     \DeclareMathAlphabet #1 {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
    }
   \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
-  
+
   % integrate with fontspec's \setmathrm etc:
   \tl_case:Nn #1
    {
@@ -1001,7 +1001,7 @@ This work is "maintained" by Will Robertson.
 %
 % \subsubsection{Text font}
 %    \begin{macrocode}
-\cs_generate_variant:Nn \tl_if_eq:nnT {o} 
+\cs_generate_variant:Nn \tl_if_eq:nnT {o}
 \cs_set:Nn \__fontspec_setmainfont:nn
  {
   \fontspec_set_family:Nnn \rmdefault {#1}{#2}
@@ -1122,7 +1122,7 @@ This work is "maintained" by Will Robertson.
   \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
    {
     \@@_declare_math_sizes:
-    \@@_fontspec_select_font: 
+    \@@_fontspec_select_font:
    }
 %    \end{macrocode}
 % Now define |\@@_symfont_tl| as the \LaTeX\ math font to access everything:
@@ -1523,7 +1523,7 @@ This work is "maintained" by Will Robertson.
   % ensure \left. and \right. work:
   \@@_set_delcode:nnn \@@_symfont_tl {`\.} {\c_zero}
   % this is forcefully done to fix a bug -- indicates a larger problem!
-  
+
   \@@_assign_delcode:nn {`\/}   {\g_@@_slash_delimiter_usv}
   \@@_assign_delcode:nn {"2044} {\g_@@_slash_delimiter_usv} % fracslash
   \@@_assign_delcode:nn {"2215} {\g_@@_slash_delimiter_usv} % divslash
@@ -2015,24 +2015,24 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \@@_if_mathalph_decl:n {TF}
  {
-  \tl_set:Nn  \l_@@_tmpa_tl {#1}  
+  \tl_set:Nn  \l_@@_tmpa_tl {#1}
   \tl_clear:N \l_@@_tmpb_tl
   \tl_clear:N \l_@@_tmpc_tl
-  
+
   \tl_if_in:NnT \l_@@_tmpa_tl {->}
    { \exp_after:wN \@@_split_arrow:w \l_@@_tmpa_tl \q_nil }
-   
+
   \tl_if_in:NnT \l_@@_tmpa_tl {/}
    { \exp_after:wN \@@_split_slash:w \l_@@_tmpa_tl \q_nil }
-  
-  \tl_set:Nx \l_@@_tmpa_tl { \tl_to_str:N \l_@@_tmpa_tl }  
+
+  \tl_set:Nx \l_@@_tmpa_tl { \tl_to_str:N \l_@@_tmpa_tl }
   \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \math }
   \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \sym }
   \tl_trim_spaces:N \l_@@_tmpa_tl
 
   \tl_if_empty:NT \l_@@_tmpc_tl
    { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
-  
+
   \seq_if_in:NVTF \g_@@_named_ranges_seq \l_@@_tmpa_tl
    { \prg_return_true: } { \prg_return_false: }
  }
@@ -2330,7 +2330,7 @@ This work is "maintained" by Will Robertson.
 \clist_set:Nn \g_@@_named_ranges_clist
  {
   up, it, tt, bfup, bfit, bb , bbit, scr, bfscr, cal, bfcal,
-  frak, bffrak, sfup, sfit, bfsfup, bfsfit, bfsf 
+  frak, bffrak, sfup, sfit, bfsfup, bfsfit, bfsf
  }
 \clist_map_inline:Nn \g_@@_named_ranges_clist
  { \@@_new_named_range:n {#1} }
@@ -2431,7 +2431,7 @@ This work is "maintained" by Will Robertson.
 % The following are alphabets which do not have a math/text ambiguity.
 %    \begin{macrocode}
 \clist_map_inline:nn
- { 
+ {
    normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak, tt,
    bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
  }
@@ -2481,7 +2481,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{document}
 %    \makeatletter
 %    ${\operator@font Mod}\, x$
-%    
+%
 %    \def\operator@font{%
 %      \let \math@bgroup \relax
 %      \def \math@egroup {\let \math@bgroup \@@math@bgroup
@@ -2500,7 +2500,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{document}
 %    \makeatletter
 %    ${\operator@font Mod}\, x$
-%    
+%
 %    \def\operator@font{\mathgroup\symfoo}
 %    ${\operator@font Mod}\, x$
 %    \end{document}
@@ -2564,7 +2564,7 @@ This work is "maintained" by Will Robertson.
       \prop_get:cnN { g_@@_named_range_ \l_@@_style_tl _prop }
        { default-alpha } \l_@@_alphabet_clist
      }
-    
+
     \@@_setup_math_alphabet:
    }
   \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
@@ -3049,7 +3049,7 @@ This work is "maintained" by Will Robertson.
     \char_set_catcode_math_superscript:N \^
     \cs_set:Npn \_@@_sym:nnn ##1##2##3
      {
-      \tl_if_in:nnT 
+      \tl_if_in:nnT
        { \mathord \mathalpha \mathbin \mathrel \mathpunct \mathop \mathfence }
        {##3}
       {
@@ -3265,7 +3265,7 @@ This work is "maintained" by Will Robertson.
 \cs_new:Nn \@@_scanprime_collect:N
  {
   \int_incr:N \l_@@_primecount_int
-  \peek_meaning_remove:NTF ' 
+  \peek_meaning_remove:NTF '
    { \@@_scanprime_collect:N #1 }
    {
     \peek_meaning_remove:NTF \@@_scan_prime:
@@ -3833,7 +3833,7 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 % These are names that are `frozen' in HTML but have dumb names:
 %    \begin{macrocode}
-\def\dbkarow {\dbkarrow} 
+\def\dbkarow {\dbkarrow}
 \def\drbkarow{\drbkarrow}
 \def\hksearow{\hksearrow}
 \def\hkswarow{\hkswarrow}
