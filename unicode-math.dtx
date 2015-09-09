@@ -136,6 +136,7 @@ This work is "maintained" by Will Robertson.
 % \paragraph{Packages}
 %    \begin{macrocode}
 \RequirePackage{expl3}[2015/03/01]
+\RequirePackage{ucharcat}
 \RequirePackage{xparse}
 \RequirePackage{l3keys2e}
 \RequirePackage{fontspec}[2015/03/14]
@@ -146,6 +147,11 @@ This work is "maintained" by Will Robertson.
 %
 %    \begin{macrocode}
 \ExplSyntaxOn
+%    \end{macrocode}
+%
+% Variants needed from \pkg{expl3}:
+%    \begin{macrocode}
+\cs_set_protected_nopar:Npn \exp_last_unbraced:NNx { \::N \::x_unbraced \::: }
 %    \end{macrocode}
 %
 % For \pkg{fontspec}:
@@ -2984,10 +2990,17 @@ This work is "maintained" by Will Robertson.
 %
 % \section{Definitions of the active math characters}
 %
-% Here we define every Unicode math codepoint an equivalent macro name.
-% The two are equivalent, in a |\let\xyz=^^^^1234| kind of way.
-%
 % \begin{macro}{\@@_cs_set_eq_active_char:Nw}
+% This macro is used to give each Unicode math codepoint an equivalent macro name.
+% The two are equivalent, in a |\let\xyz=^^^^1234| kind of way. (For now!!)
+%    \begin{macrocode}
+\cs_set:Npn \@@_cs_set_eq_active_char:Nw #1 = "#2 \q_nil
+  {
+    \exp_last_unbraced:NNx \cs_gset_eq:NN #1 { \Ucharcat "#2 ~ 12 ~ }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\@@_active_char_set:wc}
 % We need to do some trickery to transform the |\_@@_sym:nnn| argument
 % |"ABCDEF| into the \XeTeX\ `caret input' form |^^^^^abcdef|. It is \emph{very important}
@@ -2999,30 +3012,6 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \group_begin:
   \char_set_catcode_other:N \^
-  \cs_gset:Npn \@@_cs_set_eq_active_char:Nw #1 = "#2 \q_nil
-   {
-    \tex_lowercase:D
-     {
-      \tl_rescan:nn
-       {
-        \ExplSyntaxOn
-        \char_set_catcode_other:N \{
-        \char_set_catcode_other:N \}
-        \char_set_catcode_other:N \&
-        \char_set_catcode_other:N \%
-        \char_set_catcode_other:N \$
-       }
-       {
-        \cs_gset_eq:NN #1 ^^^^^#2
-       }
-     }
-   }
-%    \end{macrocode}
-% Making |^| the right catcode isn't strictly necessary right now but it helps
-% to future proof us with, e.g., breqn.
-% Because we're inside a |\tl_rescan:nn|, use plain old \TeX\ syntax to avoid
-% any catcode problems.
-%    \begin{macrocode}
   \cs_new:Npn \@@_active_char_set:wc "#1 \q_nil #2
    {
     \tex_lowercase:D
@@ -3033,7 +3022,10 @@ This work is "maintained" by Will Robertson.
    }
 \group_end:
 %    \end{macrocode}
-% \end{macro}
+% Could be defined simply as the following if Ucharcar allowed active chars!
+% \begin{Verbatim}
+% \exp_last_unbraced:Nx \cs_gset_protected_nopar:Npx { \Ucharcat "#2 ~ 13 ~ } { \exp_not:c {#2} }
+% \end{Verbatim}
 % \end{macro}
 %
 % Now give \cmd\_@@_sym:nnn\ a definition in terms of \cmd\@@_cs_set_eq_active_char:Nw\
@@ -3060,22 +3052,6 @@ This work is "maintained" by Will Robertson.
     \@@_input_math_symbol_table:
   \group_end:
  }
-%    \end{macrocode}
-% Fix \cs{backslash}, which is defined as the escape char character
-% above:
-%    \begin{macrocode}
-\group_begin:
-  \lccode`\*=`\\
-  \char_set_catcode_escape:N \|
-  \char_set_catcode_other:N \\
-  |lowercase
-   {
-    |AtBeginDocument
-     {
-      |let|backslash=*
-     }
-   }
-|group_end:
 %    \end{macrocode}
 %
 % \section{Fall-back font}
