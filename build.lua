@@ -12,7 +12,6 @@ demofiles    = {"unimath-example.ltx"}
 checkopts   = " -interaction=errorstopmode -halt-on-error "
 
 checkengines = {"xetex","luatex"}
-stdengine  = "luatex"
 typesetexe = "xelatex"
 
 packtdszip = true
