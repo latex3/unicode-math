@@ -846,11 +846,9 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_set_big_operator:nnn
  {
-  \group_begin:
-    \char_set_catcode_active:n {#3}
-    \@@_char_gmake_mathactive:n {#3}
-    \@@_active_char_set:wc #3 \q_nil { \cs_to_str:N #2 _sym }
-  \group_end:
+  \@@_char_gmake_mathactive:n {#3}
+  \cs_set_protected_nopar:Npx \@@_tmpa: { \exp_not:c { \cs_to_str:N #2 _sym } }
+  \char_gset_active_eq:nN {#3} \@@_tmpa:
 
   \@@_set_mathchar:cNnn {\cs_to_str:N #2 op} \mathop {#1} {#3}
 
@@ -2990,44 +2988,6 @@ This work is "maintained" by Will Robertson.
 %
 % \section{Definitions of the active math characters}
 %
-% \begin{macro}{\@@_cs_set_eq_active_char:Nw}
-% This macro is used to give each Unicode math codepoint an equivalent macro name.
-% The two are equivalent, in a |\let\xyz=^^^^1234| kind of way. (For now!!)
-%    \begin{macrocode}
-\cs_set:Npn \@@_cs_set_eq_active_char:Nw #1 = "#2 \q_nil
-  {
-    \exp_last_unbraced:NNx \cs_gset_eq:NN #1 { \Ucharcat "#2 ~ 12 ~ }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_active_char_set:wc}
-% We need to do some trickery to transform the |\_@@_sym:nnn| argument
-% |"ABCDEF| into the \XeTeX\ `caret input' form |^^^^^abcdef|. It is \emph{very important}
-% that the argument has five characters. Otherwise we need to change the number of |^| chars.
-%
-% To do this, turn |^| into a regular `other' character and define the macro
-% to perform the lowercasing and |\let|. \cmd\scantokens\ changes the carets
-% back into their original meaning after the group has ended and |^|'s catcode returns to normal.
-%    \begin{macrocode}
-\group_begin:
-  \char_set_catcode_other:N \^
-  \cs_new:Npn \@@_active_char_set:wc "#1 \q_nil #2
-   {
-    \tex_lowercase:D
-     {
-      \tl_rescan:nn { \ExplSyntaxOn }
-        { \cs_gset_protected_nopar:Npx ^^^^^#1 { \exp_not:c {#2} } }
-     }
-   }
-\group_end:
-%    \end{macrocode}
-% Could be defined simply as the following if Ucharcar allowed active chars!
-% \begin{Verbatim}
-% \exp_last_unbraced:Nx \cs_gset_protected_nopar:Npx { \Ucharcat "#2 ~ 13 ~ } { \exp_not:c {#2} }
-% \end{Verbatim}
-% \end{macro}
-%
 % Now give \cmd\_@@_sym:nnn\ a definition in terms of \cmd\@@_cs_set_eq_active_char:Nw\
 % and we're good to go.
 %
@@ -3038,17 +2998,15 @@ This work is "maintained" by Will Robertson.
 \cs_new:Nn \@@_define_math_chars:
  {
   \group_begin:
-    \char_set_catcode_math_superscript:N \^
     \cs_set:Npn \_@@_sym:nnn ##1##2##3
      {
       \tl_if_in:nnT
        { \mathord \mathalpha \mathbin \mathrel \mathpunct \mathop \mathfence }
        {##3}
       {
-        \@@_cs_set_eq_active_char:Nw ##2 = ##1 \q_nil \ignorespaces
+        \exp_last_unbraced:NNx \cs_gset_eq:NN ##2 { \Ucharcat ##1 ~ 12 ~ }
       }
      }
-    \char_set_catcode_other:N \#
     \@@_input_math_symbol_table:
   \group_end:
  }
