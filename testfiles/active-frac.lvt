@@ -1,8 +1,10 @@
 \input{umtest-preamble}
+\OMIT
 \usepackage{amsmath}
 \usepackage{unicode-math}
 \setmathfont{Cambria Math}
 \begin{document}
+\TIMO
 \unimathsetup{active-frac=normalsize}
 \[ ¼ ½ ¾ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞ \]
 \unimathsetup{active-frac=small}
