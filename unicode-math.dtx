@@ -2976,7 +2976,7 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\CatchFileEdef \g_@@_mathtable_tl {unicode-math-table.tex} {\@@_symbol_setup:}
+\tl_set_from_file_x:Nnn \g_@@_mathtable_tl {\@@_symbol_setup:} {unicode-math-table.tex}
 %    \end{macrocode}
 %
 %
