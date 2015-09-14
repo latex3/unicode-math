@@ -1767,7 +1767,7 @@ This work is "maintained" by Will Robertson.
 % \darg{font dimension for non-cramped non-display styles}
 % \darg{font dimension for cramped non-display styles}
 % This macro defines getter and setter functions for the font parameter \meta{name}.
-% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |Umath|.
 % The \XeTeX\ font dimension numbers must be integer constants.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_font_param:nnnnn
@@ -1782,7 +1782,7 @@ This work is "maintained" by Will Robertson.
   \tl_set:Nn \l_@@_tmpa_tl { #1 }
   \tl_remove_all:Nn \l_@@_tmpa_tl { _ }
   \@@_font_param_aux:ccc { @@_ #1 :N } { @@_set_ #1 :Nn }
-    { luatexUmath \l_@@_tmpa_tl }
+    { Umath \l_@@_tmpa_tl }
 }
 %</LU>
 %    \end{macrocode}
@@ -1793,7 +1793,7 @@ This work is "maintained" by Will Robertson.
 % \darg{font dimension for display style}
 % \darg{font dimension for non-display styles}
 % This macro defines getter and setter functions for the font parameter \meta{name}.
-% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |Umath|.
 % The \XeTeX\ font dimension numbers must be integer constants.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_font_param:nnn
@@ -1807,7 +1807,7 @@ This work is "maintained" by Will Robertson.
 % \darg{name}
 % \darg{font dimension}
 % This macro defines getter and setter functions for the font parameter \meta{name}.
-% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |Umath|.
 % The \XeTeX\ font dimension number must be an integer constant.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_font_param:nn
@@ -1820,7 +1820,7 @@ This work is "maintained" by Will Robertson.
 % \begin{macro}{\@@_font_param:n}
 % \darg{name}
 % This macro defines getter and setter functions for the font parameter \meta{name}, which is considered unavailable in \XeTeX\@.
-% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |luatexUmath|.
+% The \LuaTeX\ font parameter name is produced by removing all underscores and prefixing the result with |Umath|.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_font_param:n
 %<XE>  { }
