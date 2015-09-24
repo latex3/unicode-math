@@ -79,6 +79,13 @@ Please file bug reports with minimal examples:
 CHANGE HISTORY
 --------------
 
+- v0.8c (2015/09/24)
+
+  * Add `\over(left/right)harpoon` as "wide" accents.
+  * Add RTL mathematics operators `\arabicmaj` and `\arabichad`, which correspond to `U+1EEF0` and `U+1EEF1`, resp.
+  * Remove `catchfile` package dependency.
+  * Update some internal names to match expl3 standards.
+
 - v0.8b (2015/09/09)
 
   * Bug fix: Use the "ucharcat" package to simplify some code that caused some headaches with \tl_rescan:nn.
