@@ -42,7 +42,8 @@ Package pdftexcmds Info: \pdfdraftmode found.
 ))
 (../kvoptions.sty
 (../kvsetkeys.sty
-))
+(../etexcmds.sty
+)))
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.

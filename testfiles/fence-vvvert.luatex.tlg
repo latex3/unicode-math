@@ -42,7 +42,8 @@ Package pdftexcmds Info: \pdfdraftmode found.
 ))
 (../kvoptions.sty
 (../kvsetkeys.sty
-))
+(../etexcmds.sty
+)))
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
@@ -77,7 +78,7 @@ Completed box being shipped out [1]
 ...\hbox(0.0+0.0)x227.62207, direction TLT
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(142.2638+0.0)x227.62207, glue set 26.15996fil, direction TLT
+..\vbox(142.2638+0.0)x227.62207, glue set 55.31178fil, direction TLT
 ...\write-{}
 ...\glue(\topskip) 10.0
 ...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
@@ -96,50 +97,50 @@ Completed box being shipped out [1]
 ...\penalty 10000
 ...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\lineskip) 1.0
-...\hbox(19.17548+12.87505)x101.65326, shifted 62.9844, direction TLT
-....\hbox(19.17548+12.87505)x101.65326, direction TLT
-.....\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-......\EU2/xits-math.otf(0)/m/n/10 󰃭
-.....\hbox(17.87495+12.87505)x85.62772, direction TLT
-......\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-.......\EU2/xits-math.otf(0)/m/n/10 󰃭
-......\hbox(16.10048+9.80005)x69.60217, direction TLT
-.......\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-........\EU2/xits-math.otf(0)/m/n/10 󰂾
-.......\hbox(14.79996+9.80005)x53.57663, direction TLT
-........\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 󰂾
-........\hbox(11.72495+6.72505)x37.55109, direction TLT
-.........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 󰂎
-.........\hbox(9.0504+3.65005)x21.52554, direction TLT
-..........\hbox(10.66+1.64)x5.94, shifted 2.01006, direction TLT
-...........\EU2/xits-math.otf(0)/m/n/10 󰁊
+...\hbox(15.55301+1.92004)x101.65326, shifted 62.9844, direction TLT
+....\hbox(15.55301+1.92004)x101.65326, direction TLT
+.....\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 ⦀
+.....\hbox(14.25249+1.92004)x85.62772, direction TLT
+......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.......\EU2/xits-math.otf(0)/m/n/10 ⦀
+......\hbox(12.95197+1.92004)x69.60217, direction TLT
+.......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+........\EU2/xits-math.otf(0)/m/n/10 ⦀
+.......\hbox(11.65144+1.92004)x53.57663, direction TLT
+........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(10.35092+1.92004)x37.55109, direction TLT
+.........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+..........\EU2/xits-math.otf(0)/m/n/10 ⦀
+.........\hbox(9.0504+1.92004)x21.52554, direction TLT
+..........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+...........\EU2/xits-math.otf(0)/m/n/10 ⦀
 ..........\EU2/xits-math.otf(0)/m/n/10 𝑥
 ..........\hbox(5.05046+0.0)x4.14554, shifted -3.99994, direction TLT
 ...........\EU2/xits-math.otf(0)/m/n/7.4711 2
-..........\hbox(10.66+1.64)x5.94, shifted 2.01006, direction TLT
-...........\EU2/xits-math.otf(0)/m/n/10 󰁊
+..........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+...........\EU2/xits-math.otf(0)/m/n/10 ⦀
 .........\hbox(5.05046+0.0)x4.14554, shifted -5.30046, direction TLT
 ..........\EU2/xits-math.otf(0)/m/n/7.4711 2
-.........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 󰂎
-........\hbox(5.05046+0.0)x4.14554, shifted -7.975, direction TLT
+.........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+..........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(5.05046+0.0)x4.14554, shifted -6.60098, direction TLT
 .........\EU2/xits-math.otf(0)/m/n/7.4711 2
-........\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 󰂾
-.......\hbox(5.05046+0.0)x4.14554, shifted -11.05002, direction TLT
+........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+.......\hbox(5.05046+0.0)x4.14554, shifted -7.9015, direction TLT
 ........\EU2/xits-math.otf(0)/m/n/7.4711 2
-.......\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-........\EU2/xits-math.otf(0)/m/n/10 󰂾
-......\hbox(5.05046+0.0)x4.14554, shifted -12.35054, direction TLT
+.......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+........\EU2/xits-math.otf(0)/m/n/10 ⦀
+......\hbox(5.05046+0.0)x4.14554, shifted -9.20203, direction TLT
 .......\EU2/xits-math.otf(0)/m/n/7.4711 2
-......\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-.......\EU2/xits-math.otf(0)/m/n/10 󰃭
-.....\hbox(5.05046+0.0)x4.14554, shifted -14.12502, direction TLT
+......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.......\EU2/xits-math.otf(0)/m/n/10 ⦀
+.....\hbox(5.05046+0.0)x4.14554, shifted -10.50255, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/7.4711 2
-.....\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-......\EU2/xits-math.otf(0)/m/n/10 󰃭
+.....\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 ⦀
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\parskip) 0.0 plus 1.0
@@ -159,50 +160,50 @@ Completed box being shipped out [1]
 ...\penalty 10000
 ...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\lineskip) 1.0
-...\hbox(19.17548+12.87505)x101.65326, shifted 62.9844, direction TLT
-....\hbox(19.17548+12.87505)x101.65326, direction TLT
-.....\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-......\EU2/xits-math.otf(0)/m/n/10 󰃭
-.....\hbox(17.87495+12.87505)x85.62772, direction TLT
-......\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-.......\EU2/xits-math.otf(0)/m/n/10 󰃭
-......\hbox(16.10048+9.80005)x69.60217, direction TLT
-.......\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-........\EU2/xits-math.otf(0)/m/n/10 󰂾
-.......\hbox(14.79996+9.80005)x53.57663, direction TLT
-........\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 󰂾
-........\hbox(11.72495+6.72505)x37.55109, direction TLT
-.........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 󰂎
-.........\hbox(9.0504+3.65005)x21.52554, direction TLT
-..........\hbox(10.66+1.64)x5.94, shifted 2.01006, direction TLT
-...........\EU2/xits-math.otf(0)/m/n/10 󰁊
+...\hbox(15.55301+1.92004)x101.65326, shifted 62.9844, direction TLT
+....\hbox(15.55301+1.92004)x101.65326, direction TLT
+.....\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 ⦀
+.....\hbox(14.25249+1.92004)x85.62772, direction TLT
+......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.......\EU2/xits-math.otf(0)/m/n/10 ⦀
+......\hbox(12.95197+1.92004)x69.60217, direction TLT
+.......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+........\EU2/xits-math.otf(0)/m/n/10 ⦀
+.......\hbox(11.65144+1.92004)x53.57663, direction TLT
+........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(10.35092+1.92004)x37.55109, direction TLT
+.........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+..........\EU2/xits-math.otf(0)/m/n/10 ⦀
+.........\hbox(9.0504+1.92004)x21.52554, direction TLT
+..........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+...........\EU2/xits-math.otf(0)/m/n/10 ⦀
 ..........\EU2/xits-math.otf(0)/m/n/10 𝑥
 ..........\hbox(5.05046+0.0)x4.14554, shifted -3.99994, direction TLT
 ...........\EU2/xits-math.otf(0)/m/n/7.4711 2
-..........\hbox(10.66+1.64)x5.94, shifted 2.01006, direction TLT
-...........\EU2/xits-math.otf(0)/m/n/10 󰁊
+..........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+...........\EU2/xits-math.otf(0)/m/n/10 ⦀
 .........\hbox(5.05046+0.0)x4.14554, shifted -5.30046, direction TLT
 ..........\EU2/xits-math.otf(0)/m/n/7.4711 2
-.........\hbox(15.66+2.79)x5.94, shifted 3.93506, direction TLT
-..........\EU2/xits-math.otf(0)/m/n/10 󰂎
-........\hbox(5.05046+0.0)x4.14554, shifted -7.975, direction TLT
+.........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+..........\EU2/xits-math.otf(0)/m/n/10 ⦀
+........\hbox(5.05046+0.0)x4.14554, shifted -6.60098, direction TLT
 .........\EU2/xits-math.otf(0)/m/n/7.4711 2
-........\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-.........\EU2/xits-math.otf(0)/m/n/10 󰂾
-.......\hbox(5.05046+0.0)x4.14554, shifted -11.05002, direction TLT
+........\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.........\EU2/xits-math.otf(0)/m/n/10 ⦀
+.......\hbox(5.05046+0.0)x4.14554, shifted -7.9015, direction TLT
 ........\EU2/xits-math.otf(0)/m/n/7.4711 2
-.......\hbox(20.66+3.94)x5.94, shifted 5.86005, direction TLT
-........\EU2/xits-math.otf(0)/m/n/10 󰂾
-......\hbox(5.05046+0.0)x4.14554, shifted -12.35054, direction TLT
+.......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+........\EU2/xits-math.otf(0)/m/n/10 ⦀
+......\hbox(5.05046+0.0)x4.14554, shifted -9.20203, direction TLT
 .......\EU2/xits-math.otf(0)/m/n/7.4711 2
-......\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-.......\EU2/xits-math.otf(0)/m/n/10 󰃭
-.....\hbox(5.05046+0.0)x4.14554, shifted -14.12502, direction TLT
+......\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+.......\EU2/xits-math.otf(0)/m/n/10 ⦀
+.....\hbox(5.05046+0.0)x4.14554, shifted -10.50255, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/7.4711 2
-.....\hbox(25.66+5.09)x5.94, shifted 7.78505, direction TLT
-......\EU2/xits-math.otf(0)/m/n/10 󰃭
+.....\hbox(6.95+1.89)x5.94, shifted 0.03004, direction TLT
+......\EU2/xits-math.otf(0)/m/n/10 ⦀
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue 0.0 plus 1.0fil
