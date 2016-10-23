@@ -342,10 +342,9 @@
 % \pkg{mathtools}’s |\cramped| command and others that make use of its internal version use an incorrect font dimension.
 %
 %    \begin{macrocode}
+%<*XE>
 \AtEndOfPackageFile * { mathtools }
  {
-%<*XE>
-    \newfam \g_@@_empty_fam
     \@@_check_and_fix:NNnnn
         \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 }
      {
@@ -380,7 +379,9 @@
      }
 %    \end{macrocode}
 % The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
-% Note we used `\verb|\XeTeXradical|' with a newly-allocated empty family to make sure that the radical rule width is not set.
+% Note we used `\verb|\XeTeXradical|' with the family 255 to be almost sure
+% that the radical rule width is not set. Former use of `\newfam` had an
+% upsetting effect on legacy math alphabets.
 %    \begin{macrocode}
      {
       \hbox_set:Nn \l_tmpa_box
@@ -390,7 +391,7 @@
         \m@th
         #1
         \dim_zero:N \nulldelimiterspace
-        \XeTeXradical \g_@@_empty_fam \c_zero { #2 }
+        \XeTeXradical \c_two_hundred_fifty_five \c_zero { #2 }
         \c_math_toggle_token
         \color@endgroup
        }
@@ -404,6 +405,7 @@
        }
       \box_use_clear:N \l_tmpa_box
      }
+ }
 %</XE>
 %    \end{macrocode}
 %
@@ -445,8 +447,7 @@
 	\let\Uunderbracket=\underbracket
         \let\overbracket  =\MToverbracket
         \let\underbracket =\MTunderbracket
-     }
- }
+     }% end of AtBeginDocument
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
