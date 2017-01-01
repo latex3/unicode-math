@@ -99,8 +99,8 @@ This work is "maintained" by Will Robertson.
 % Shared code executed before loading the engine-specific code is indicated with the flag \textsf{preamble}.
 %    \begin{macrocode}
 %<*load>
-\luatex_if_engine:T { \RequirePackage{unicode-math-luatex} }
-\xetex_if_engine:T  { \RequirePackage{unicode-math-xetex}  }
+\sys_if_engine_luatex:T { \RequirePackage{unicode-math-luatex} }
+\sys_if_engine_xetex:T  { \RequirePackage{unicode-math-xetex}  }
 %</load>
 %    \end{macrocode}
 % The shared part of the code starts here before the split above.
