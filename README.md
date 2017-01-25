@@ -87,6 +87,7 @@ CHANGE HISTORY
  * On that note, when using control sequences such as `\mbfitsansvarphi` (and so on), there were a few faulty definitions. The new behaviour is to consistenyl define the `varphi` and `varepsilon` ones as those with the "curly" designs.
  * Add `\wideoverbar`, `\widebreve`, `\widecheck`
  * Add `\mathsection`, `\mathparagraph`
+ * Remove `\mupvarbeta`, `upold(Kk)oppa`, `\up(Ss)tigma`, `\up(Kk)oppa`, `\up(Ss)ampi` — none of these are maths symbols
 
 - v0.8c (2015/09/24)
 
