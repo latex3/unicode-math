@@ -3747,45 +3747,45 @@ This work is "maintained" by Will Robertson.
 % These are symbols with multiple names. Eventually to be taken care of
 % automatically by the maths characters database.
 %    \begin{macrocode}
-\def\to{\rightarrow}
-\def\le{\leq}
-\def\ge{\geq}
-\def\neq{\ne}
-\def\triangle{\mathord{\bigtriangleup}}
-\def\bigcirc{\mdlgwhtcircle}
-\def\circ{\vysmwhtcircle}
-\def\bullet{\smblkcircle}
-\def\mathyen{\yen}
-\def\mathsterling{\sterling}
-\def\diamond{\smwhtdiamond}
-\def\emptyset{\varnothing}
-\def\hbar{\hslash}
-\def\land{\wedge}
-\def\lor{\vee}
-\def\owns{\ni}
-\def\gets{\leftarrow}
-\def\mathring{\ocirc}
-\def\lnot{\neg}
-\def\longdivision{\longdivisionsign}
+\protected\def\to{\rightarrow}
+\protected\def\le{\leq}
+\protected\def\ge{\geq}
+\protected\def\neq{\ne}
+\protected\def\triangle{\mathord{\bigtriangleup}}
+\protected\def\bigcirc{\mdlgwhtcircle}
+\protected\def\circ{\vysmwhtcircle}
+\protected\def\bullet{\smblkcircle}
+\protected\def\mathyen{\yen}
+\protected\def\mathsterling{\sterling}
+\protected\def\diamond{\smwhtdiamond}
+\protected\def\emptyset{\varnothing}
+\protected\def\hbar{\hslash}
+\protected\def\land{\wedge}
+\protected\def\lor{\vee}
+\protected\def\owns{\ni}
+\protected\def\gets{\leftarrow}
+\protected\def\mathring{\ocirc}
+\protected\def\lnot{\neg}
+\protected\def\longdivision{\longdivisionsign}
 %    \end{macrocode}
 % These are somewhat odd: (and their usual Unicode uprightness does not match their amssymb glyphs)
 %    \begin{macrocode}
-\def\backepsilon{\upbackepsilon}
-\def\eth{\matheth}
+\protected\def\backepsilon{\upbackepsilon}
+\protected\def\eth{\matheth}
 %    \end{macrocode}
 % These are names that are `frozen' in HTML but have dumb names:
 %    \begin{macrocode}
-\def\dbkarow {\dbkarrow}
-\def\drbkarow{\drbkarrow}
-\def\hksearow{\hksearrow}
-\def\hkswarow{\hkswarrow}
+\protected\def\dbkarow {\dbkarrow}
+\protected\def\drbkarow{\drbkarrow}
+\protected\def\hksearow{\hksearrow}
+\protected\def\hkswarow{\hkswarrow}
 %    \end{macrocode}
 %
 % Due to the magic of OpenType math, big operators are automatically
 % enlarged when necessary. Since there isn't a separate unicode glyph for
 % `small integral', I'm not sure if there is a better way to do this:
 %    \begin{macrocode}
-\def\smallint{\mathop{\textstyle\int}\limits}
+\protected\def\smallint{\mathop{\textstyle\int}\limits}
 %    \end{macrocode}
 %
 % \begin{macro}{\underbar}
@@ -3820,20 +3820,20 @@ This work is "maintained" by Will Robertson.
 % \begin{macro}{\Digamma}
 % I might end up just changing these in the table.
 %    \begin{macrocode}
-\def\digamma{\updigamma}
-\def\Digamma{\upDigamma}
+\protected\def\digamma{\updigamma}
+\protected\def\Digamma{\upDigamma}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 %
 % \paragraph{Symbols}
 %    \begin{macrocode}
-\cs_set:Npn \| {\Vert}
+\cs_set_protected:Npn \| {\Vert}
 %    \end{macrocode}
 % \cs{mathinner} items:
 %    \begin{macrocode}
-\cs_set:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
-\cs_set:Npn \cdots {\mathinner{\unicodecdots}}
+\cs_set_protected:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
+\cs_set_protected:Npn \cdots {\mathinner{\unicodecdots}}
 %    \end{macrocode}
 %
 %    \begin{macrocode}

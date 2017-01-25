@@ -462,7 +462,7 @@ While these commands can still be used, \pkg{unicode-math} defines a wrapper com
 This command is known as \cs{setmathface} in symmetry with \pkg{fontspec}'s \cs{newfontface} command; it takes syntax:
 \begin{quote}
   \cmd\setmathfontface\meta{command}\marg{font name}|[|\meta{font features}|]|
-  
+
   \makebox[0pt][l]{\cmd\setmathfontface\meta{command}\marg{font name}|[||version=|\meta{version name}|,|\meta{font features}|]|}
 \end{quote}
 For example, if you want to define a new legacy maths alphabet font \cs{mathittt}:
@@ -862,14 +862,13 @@ confused that what they think as `normal epsilon' is actual the `variant
 epsilon'. And the same problem exists for `phi'.
 
 We have an option to control this behaviour.
-With |vargreek-shape=TeX|,
+With |vargreek-shape=TeX| (default),
 \cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
 \cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
 With |vargreek-shape=unicode|, these symbols are swapped.
 Note, however, that Unicode characters are not affected by this option.
-That is, no remapping occurs of the characters/glyphs, only the control sequences.
+That is, no remapping occurs of the characters/glyphs, only in the definitions of the control sequences \cs{phi} and \cs{epsilon} themselves.
 
-The package default is to use |vargreek-shape=TeX|.
 
 \subsubsection{Primes}
 
