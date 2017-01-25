@@ -194,8 +194,6 @@ This work is "maintained" by Will Robertson.
 \bool_new:N \g_@@_uppartial_bool
 \bool_new:N \g_@@_literal_Nabla_bool
 \bool_new:N \g_@@_literal_partial_bool
-\bool_new:N \g_@@_texgreek_bool
-\bool_set_true:N \g_@@_texgreek_bool
 \bool_new:N \l_@@_smallfrac_bool
 \bool_new:N \g_@@_literal_colon_bool
 \bool_new:N \g_@@_mathrm_text_bool
@@ -596,15 +594,6 @@ This work is "maintained" by Will Robertson.
               \bool_set_false:N \g_@@_uppartial_bool
             }
   {literal} { \bool_set_true:N  \g_@@_literal_partial_bool }
- }
-%    \end{macrocode}
-%
-% \paragraph{Epsilon and phi shapes}
-%    \begin{macrocode}
-\@@_keys_choices:nn {vargreek-shape}
- {
-  {unicode} { \bool_set_false:N \g_@@_texgreek_bool }
-  {TeX}     { \bool_set_true:N  \g_@@_texgreek_bool }
  }
 %    \end{macrocode}
 %
@@ -2165,25 +2154,16 @@ This work is "maintained" by Will Robertson.
   \clist_map_inline:nn
    {
     Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,
-    alpha,beta,gamma,delta,        zeta,eta,theta,iota,kappa,lambda,
+    alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,
     Mu,Nu,Xi,Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,
-    mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,    chi,psi,omega,
-    varTheta,
-    varsigma,vartheta,varkappa,varrho,varpi
+    mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,phi,chi,psi,omega,
+    varTheta,varsigma,vartheta,varkappa,varrho,varpi,varepsilon,varphi
    }
    {
     \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
     \tl_set:cx {up ##1} { \exp_not:N \symup \exp_not:c { ##1 } }
     \tl_set:cx {it ##1} { \exp_not:N \symit \exp_not:c { ##1 } }
    }
-  \tl_set:Nn \epsilon
-   { \bool_if:NTF \g_@@_texgreek_bool \mitvarepsilon \mitepsilon }
-  \tl_set:Nn \phi
-   { \bool_if:NTF \g_@@_texgreek_bool \mitvarphi \mitphi }
-  \tl_set:Nn \varepsilon
-   { \bool_if:NTF \g_@@_texgreek_bool \mitepsilon \mitvarepsilon }
-  \tl_set:Nn \varphi
-   { \bool_if:NTF \g_@@_texgreek_bool \mitphi \mitvarphi }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2761,16 +2741,16 @@ This work is "maintained" by Will Robertson.
    {
     \@@_set_mathalphabet_greek:nnn {normal} {##1} {#2}
     \@@_map_chars_range:nnnn {25} {##1} {#2} {greek}
-    \@@_map_char_single:nnn {##1} {#2} {varepsilon}
+    \@@_map_char_single:nnn {##1} {#2} {epsilon}
     \@@_map_char_single:nnn {##1} {#2} {vartheta}
     \@@_map_char_single:nnn {##1} {#2} {varkappa}
-    \@@_map_char_single:nnn {##1} {#2} {varphi}
+    \@@_map_char_single:nnn {##1} {#2} {phi}
     \@@_map_char_single:nnn {##1} {#2} {varrho}
     \@@_map_char_single:nnn {##1} {#2} {varpi}
-    \@@_set_mathalphabet_pos:nnnn {normal} {varepsilon} {##1} {#2}
+    \@@_set_mathalphabet_pos:nnnn {normal} {epsilon} {##1} {#2}
     \@@_set_mathalphabet_pos:nnnn {normal} {vartheta} {##1} {#2}
     \@@_set_mathalphabet_pos:nnnn {normal} {varkappa} {##1} {#2}
-    \@@_set_mathalphabet_pos:nnnn {normal} {varphi} {##1} {#2}
+    \@@_set_mathalphabet_pos:nnnn {normal} {phi} {##1} {#2}
     \@@_set_mathalphabet_pos:nnnn {normal} {varrho} {##1} {#2}
     \@@_set_mathalphabet_pos:nnnn {normal} {varpi} {##1} {#2}
    }
@@ -2940,10 +2920,10 @@ This work is "maintained" by Will Robertson.
   \clist_map_inline:nn {#2}
    {
     \@@_set_mathalph_range:nnnnn {25} {#1} {##1} {#3} {greek}
-    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varepsilon}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {epsilon}
     \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {vartheta}
     \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varkappa}
-    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varphi}
+    \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {phi}
     \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varrho}
     \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varpi}
    }

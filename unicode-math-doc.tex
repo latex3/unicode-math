@@ -850,25 +850,6 @@ is activated following |math-style=literal|.
 
 See \tabref{partial} for the variations on the partial differential symbol.
 
-\subsubsection{Epsilon and phi: $\epsilon$ vs.\ $\varepsilon$ and $\phi$ vs.\ $\varphi$}
-\seclabel{vargreek-shape}
-
-\TeX\ defines \cs{epsilon} to look like $\epsilon$ and \cs{varepsilon} to
-look like $\varepsilon$. By constrast, the Unicode glyph directly after delta and before zeta
-is `epsilon' and looks like $\varepsilon$; there is a subsequent variant of
-epsilon that looks like $\epsilon$. This creates a problem. People who
-use Unicode input won't want their glyphs transforming; \TeX\ users will be
-confused that what they think as `normal epsilon' is actual the `variant
-epsilon'. And the same problem exists for `phi'.
-
-We have an option to control this behaviour.
-With |vargreek-shape=TeX| (default),
-\cs{phi} and \cs{epsilon} produce $\phi$ and $\epsilon$ and
-\cs{varphi} and \cs{varepsilon} produce $\varphi$ and $\varepsilon$.
-With |vargreek-shape=unicode|, these symbols are swapped.
-Note, however, that Unicode characters are not affected by this option.
-That is, no remapping occurs of the characters/glyphs, only in the definitions of the control sequences \cs{phi} and \cs{epsilon} themselves.
-
 
 \subsubsection{Primes}
 

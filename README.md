@@ -14,10 +14,8 @@ interface and functionality should not be considered completely stable. But
 the more the package is used the more stable it will become. (Things are
 generally working now; it is only minutiae that may change in the future.)
 
-Unicode maths is currently supported by the following fonts:
+Unicode maths is currently supported by the following freely available fonts:
 
- - [Cambria Math][CM] (Microsoft),
- - [Minion Math][MM] (Johannes Küster, typoma GmbH)
  - [Latin Modern Math][LM] (Bogusław Jackowski, Janusz M. Nowacki)
  - [TeX Gyre Pagella Math][PM] (Bogusław Jackowski, Janusz M. Nowacki)
  - [Asana Math][AM] (Apostolos Syropolous),
@@ -25,9 +23,13 @@ Unicode maths is currently supported by the following fonts:
  - [STIX][SM] (STI Pub), and
  - [XITS Math][XM] (Khaled Hosny).
 
-With the exception of Cambria Math, which is proprietry, the fonts above
-are all freely available and released under open source licences
+These fonts are available under open source licences
 (the [GUST Font License][GFL] and [Open Font Licence][OFL]).
+
+The following fonts are proprietary with OpenType maths support:
+
+ - [Cambria Math][CM] (Microsoft),
+ - [Minion Math][MM] (Johannes Küster, typoma GmbH)
 
 I'm always looking for new fonts to test with, so please let me know of any
 new releases.
@@ -78,6 +80,12 @@ Please file bug reports with minimal examples:
 
 CHANGE HISTORY
 --------------
+
+- v0.9 (2017/01/25)
+
+ * `vargreek-shape=TeX` and `vargreek-shape=unicode` package options dropped; for consistency and compatibility, `\phi` and `\epsilon` should and will now behave the same as in `TeX`.
+ * On that note, when using control sequences such as `\mbfitsansvarphi` (and so on), there were a few faulty definitions. The new behaviour is to consistenyl define the `varphi` and `varepsilon` ones as those with the "curly" designs.
+ * Add `\wideoverbar`, `\widebreve`, `\widecheck`
 
 - v0.8c (2015/09/24)
 
