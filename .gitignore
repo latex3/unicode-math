@@ -6,7 +6,7 @@ oldtestfiles/*
 testfiles snapshot/
 testfiles to update/
 tidbits/
-*test*
+
 *.sty
 *.pdf
 *.toc
@@ -28,9 +28,5 @@ stix-tbl.txt
 umtable.tex
 
 *.synctex*
-
-/testfiles/umtest-suite-F.tex
-/testfiles/umtest-suite-L.tex
-/testfiles/umtest-suite-X.tex
 
 .DS_Store
