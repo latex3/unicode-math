@@ -85,9 +85,10 @@ CHANGE HISTORY
 
  * `vargreek-shape=TeX` and `vargreek-shape=unicode` package options dropped; for consistency and compatibility, `\phi` and `\epsilon` should and will now behave the same as in `TeX`.
  * On that note, when using control sequences such as `\mbfitsansvarphi` (and so on), there were a few faulty definitions. The new behaviour is to consistenyl define the `varphi` and `varepsilon` ones as those with the "curly" designs.
- * Add `\wideoverbar`, `\widebreve`, `\widecheck`
- * Add `\mathsection`, `\mathparagraph`
- * Remove `\mupvarbeta`, `upold(Kk)oppa`, `\up(Ss)tigma`, `\up(Kk)oppa`, `\up(Ss)ampi` — none of these are maths symbols
+ * Add `\wideoverbar`, `\widebreve`, `\widecheck`.
+ * Add `\mathsection`, `\mathparagraph`.
+ * Remove `\mupvarbeta`, `upold(Kk)oppa`, `\up(Ss)tigma`, `\up(Kk)oppa`, `\up(Ss)ampi` — none of these are maths symbols.
+ * `!` (`\mathexclam`) changed from `\mathpunct` to `\mathclose` for backwards compatibility with TeX.
 
 - v0.8c (2015/09/24)
 
