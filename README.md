@@ -271,7 +271,7 @@ greater.
 
 This work is author-maintained and consists of the files
 
-- unicode-math.dtx,
+- unicode-math*.dtx,
 - unicode-math-table.tex,
 - unimath-example.ltx,
 - unimath-symbols.ltx,
@@ -285,17 +285,15 @@ the derived files
 the compiled documentation files
 
 - unicode-math.pdf,
-- unicode-math-testsuite.pdf,
 - unimath-example.pdf,
 - unimath-symbols.pdf;
 
 and the test suite for this package
 
 - testfiles/umtest-preamble.tex,
-- testfiles/umtest-suite-(F|L|X).tex,
-- testfiles/*.ltx.
+- testfiles/*.(lvt|tlg).
 
 ____________________________________
-Copyright 2006-2012   Will Robertson  <will.robertson@latex-project.org>
-Copyright 2010-2011 Philipp Stephani  <st_philipp@yahoo.de>
-Copyright 2012          Khaled Hosny  <khaledhosny@eglug.org>
+Copyright 2006-2017   Will Robertson <will.robertson@latex-project.org>
+Copyright 2010-2013 Philipp Stephani <st_philipp@yahoo.de>
+Copyright 2012-2015     Khaled Hosny <khaledhosny@eglug.org>
