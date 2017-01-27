@@ -326,20 +326,4 @@ Completed box being shipped out [1]
 ...\glue 0.0 plus 0.0001fil
 ..\glue(\baselineskip) 30.0
 ..\hbox(0.0+0.0)x227.62207, direction TLT
-(.aux)END-TEST-LOG
-)
-Here is how much of LuaTeX's memory you used:
- 19500 strings out of 495119
- 125171,552014 words of node,token memory allocated
- 539 words of node memory still in use:
-   3 hlist, 1 vlist, 1 rule, 25 glue, 7 attribute, 45 glue_spec, 7 attribute_list, 1 write nodes
-   avail lists: 1:6,2:43,3:22,4:9,5:28,6:57,7:65,8:12,9:64
- 22667 multiletter control sequences out of 65536+600000
- 35 fonts using 10712711 bytes
- 56i,4n,67p,944b,223s stack positions out of 5000i,500n,10000p,200000b,100000s
-</usr/local/texlive/2016/texmf-dist/fonts/opentype/public/lm-math/latinmodern-math.otf>
-Output written on .pdf (1 page, 3301 bytes).
-PDF statistics: 15 PDF objects out of 1000 (max. 8388607)
- 8 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 131072)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+(.aux)

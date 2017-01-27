@@ -1,23 +1,29 @@
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
-LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.00015pt on input line 7.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
-LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.4712pt on input line 7.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
-LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0294pt on input line 7.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
-LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.99985pt on input line 7.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
-LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.47098pt on input line 7.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
-LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.0292pt on input line 7.
-luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count130
+\scratchdimen=\dimen147
+\scratchbox=\box42
+\nofMPsegments=\count131
+\nofMParguments=\count132
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count133
+\MPscratchDim=\dimen148
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
+\everyMPtoPDFconversion=\toks19
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty (/us
+r/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty (/usr/local/texli
+ve/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty)) (/usr/local/texlive/
+2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty (/usr/local/texlive/2016/texmf
+-dist/tex/generic/oberdiek/kvsetkeys.sty (/usr/local/texlive/2016/texmf-dist/te
+x/generic/oberdiek/etexcmds.sty))) (/usr/local/texlive/2016/texmf-dist/tex/gene
+ric/oberdiek/pdftexcmds.sty (/usr/local/texlive/2016/texmf-dist/tex/generic/obe
+rdiek/luatex-loader.sty
+(/usr/local/texlive/2016/texmf-dist/scripts/oberdiek/oberdiek.luatex.lua))
+\pdftexcmds@toks=\toks20
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))TIMO
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845, direction TLT
 .\glue -95.04362
@@ -31,7 +37,7 @@ Completed box being shipped out [1]
 ...\write-{}
 ...\glue(\topskip) 10.0
 ...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
-....\whatsit
+....\localpar
 .....\localinterlinepenalty=0
 .....\localbrokenpenalty=0
 .....\localleftbox=null
@@ -50,19 +56,19 @@ Completed box being shipped out [1]
 ....\vbox(4.5+1.91)x5.5, shifted 0.09, direction TLT
 .....\hbox(4.41+0.09)x5.5, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/10 𝑥
-.....\hbox(0.0+1.91)x0.0, shifted 5.05, direction TLT
+.....\hbox(0.0+1.91)x0.0, shifted 5.34, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/10 ̲
 ....\glue 20.0
 ....\vbox(4.5+2.18)x5.5, shifted 0.09, direction TLT
 .....\hbox(4.41+0.09)x5.5, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/10 𝑥
-.....\hbox(0.0+2.18)x0.0, shifted 4.89, direction TLT
+.....\hbox(0.0+2.18)x0.0, shifted 5.18, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/10 ⃨
 ....\glue 20.0
 ....\vbox(6.53+2.69)x10.95, direction TLT
-.....\hbox(6.53+0.0)x10.95, direction TLT
+.....\hbox(6.53+0.0)x10.05, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/10 𝑀
-.....\hbox(0.0+2.69)x0.0, shifted 0.585, direction TLT
+.....\hbox(0.0+2.69)x0.0, shifted 1.35, direction TLT
 ......\EU2/xits-math.otf(0)/m/n/10 󰂏
 ....\glue 20.0
 ....\vbox(7.3+2.8)x21.75435, shifted 1.83, direction TLT
