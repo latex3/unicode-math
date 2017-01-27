@@ -1,23 +1,15 @@
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
-LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
-(Font)              scaled to size 10.00015pt on input line 9.
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
-LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
-(Font)              scaled to size 7.2746pt on input line 9.
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
-LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
-(Font)              scaled to size 6.0294pt on input line 9.
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
-LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
-(Font)              scaled to size 9.99985pt on input line 9.
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
-LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
-(Font)              scaled to size 7.27437pt on input line 9.
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
-LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
-(Font)              scaled to size 6.0292pt on input line 9.
-luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `TU/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line ....
+LaTeX Font Info:    Font shape `TU/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 7.0001pt on input line ....
+LaTeX Font Info:    Font shape `TU/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 5.00008pt on input line ....
+LaTeX Font Info:    Font shape `TU/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line ....
+LaTeX Font Info:    Font shape `TU/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 6.9999pt on input line ....
+LaTeX Font Info:    Font shape `TU/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 4.99992pt on input line ....
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845, direction TLT
 .\glue -95.04362
@@ -27,11 +19,11 @@ Completed box being shipped out [1]
 ...\hbox(0.0+0.0)x227.62207, direction TLT
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(142.2638+0.0)x227.62207, glue set 75.58928fil, direction TLT
+..\vbox(142.2638+0.0)x227.62207, glue set 75.59236fil, direction TLT
 ...\write-{}
 ...\glue(\topskip) 10.0
 ...\hbox(0.0+0.0)x227.62207, glue set 212.62207fil, direction TLT
-....\whatsit
+....\localpar
 .....\localinterlinepenalty=0
 .....\localbrokenpenalty=0
 .....\localleftbox=null
@@ -267,7 +259,7 @@ Completed box being shipped out [1]
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\glue(\baselineskip) 5.23253
 ...\hbox(0.0+0.0)x227.62207, glue set 227.62207fil, direction TLT
-....\whatsit
+....\localpar
 .....\localinterlinepenalty=0
 .....\localbrokenpenalty=0
 .....\localleftbox=null
@@ -277,246 +269,246 @@ Completed box being shipped out [1]
 ....\glue(\rightskip) 0.0
 ...\penalty 10000
 ...\glue(\abovedisplayshortskip) 0.0 plus 3.0
-...\glue(\baselineskip) 1.37039
-...\hbox(10.62961+5.1109)x123.1732, shifted 52.22444, direction TLT
-....\hbox(10.43425+5.0292)x6.60912, direction TLT
-.....\hbox(10.43425+5.0292)x6.60912, direction TLT
-......\hbox(10.43425+5.0292)x6.60912, direction TLT
+...\glue(\baselineskip) 1.55038
+...\hbox(10.44962+5.10782)x120.15546, shifted 53.7333, direction TLT
+....\hbox(10.26163+5.0292)x6.45029, direction TLT
+.....\hbox(10.26163+5.0292)x6.45029, direction TLT
+......\hbox(10.26163+5.0292)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.0292)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.0292)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern3.01079
-........\hbox(4.55011+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 4
+........\kern3.18248
+........\hbox(4.37842+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 4
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.0292)x6.60912, direction TLT
-.....\hbox(10.43425+5.0292)x6.60912, direction TLT
-......\hbox(10.43425+5.0292)x6.60912, direction TLT
+....\hbox(10.26163+5.0292)x6.45029, direction TLT
+.....\hbox(10.26163+5.0292)x6.45029, direction TLT
+......\hbox(10.26163+5.0292)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.0292)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.0292)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 2
+........\kern3.13463
+........\hbox(4.42627+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 2
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.45912+5.0292)x6.60912, direction TLT
-.....\hbox(10.45912+5.0292)x6.60912, direction TLT
-......\hbox(10.45912+5.0292)x6.60912, direction TLT
+....\hbox(10.28555+5.0292)x6.45029, direction TLT
+.....\hbox(10.28555+5.0292)x6.45029, direction TLT
+......\hbox(10.28555+5.0292)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.45912+5.0292)x4.20912, direction TLT
-........\hbox(4.59984+0.06038)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 3
-........\kern2.6178
+.......\vbox(10.28555+5.0292)x4.0503, direction TLT
+........\hbox(4.42627+0.0581)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 3
+........\kern2.62007
 ........\rule(0.6494+0.0)x*
-........\kern3.01079
-........\hbox(4.55011+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 4
+........\kern3.18248
+........\hbox(4.37842+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 4
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.04697)x6.60912, direction TLT
-.....\hbox(10.43425+5.04697)x6.60912, direction TLT
-......\hbox(10.43425+5.04697)x6.60912, direction TLT
+....\hbox(10.26163+5.0463)x6.45029, direction TLT
+.....\hbox(10.26163+5.0463)x6.45029, direction TLT
+......\hbox(10.26163+5.0463)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.04697)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.0463)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern3.02855
-........\hbox(4.53235+0.01776)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 7
+........\kern3.19957
+........\hbox(4.36133+0.01709)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 7
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.09314)x6.60912, direction TLT
-.....\hbox(10.43425+5.09314)x6.60912, direction TLT
-......\hbox(10.43425+5.09314)x6.60912, direction TLT
+....\hbox(10.26163+5.09073)x6.45029, direction TLT
+.....\hbox(10.26163+5.09073)x6.45029, direction TLT
+......\hbox(10.26163+5.09073)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.09314)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.09073)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.06393)x4.20912, glue set 0.09946fil, direction TLT
+........\kern3.13463
+........\hbox(4.42627+0.06152)x4.0503, glue set 0.0957fil, direction TLT
 .........\glue 0.0 plus 1.0fil minus 1.0fil
-.........\EU2/CambriaMath(0)/m/n/7.27449 9
+.........\TU/CambriaMath(0)/m/n/7 9
 .........\glue 0.0 plus 1.0fil minus 1.0fil
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.10379)x10.81824, direction TLT
-.....\hbox(10.43425+5.10379)x10.81824, direction TLT
-......\hbox(10.43425+5.10379)x10.81824, direction TLT
+....\hbox(10.26163+5.10098)x10.50058, direction TLT
+.....\hbox(10.26163+5.10098)x10.50058, direction TLT
+......\hbox(10.26163+5.10098)x10.50058, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.10379)x8.41824, direction TLT
-........\hbox(4.57497+0.0)x8.41824, glue set 2.10457fil, direction TLT
+.......\vbox(10.26163+5.10098)x8.10059, direction TLT
+........\hbox(4.40234+0.0)x8.10059, glue set 2.02515fil, direction TLT
 .........\glue 0.0 plus 1.0fil minus 1.0fil
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.........\TU/CambriaMath(0)/m/n/7 1
 .........\glue 0.0 plus 1.0fil minus 1.0fil
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.07458)x8.41824, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
-.........\EU2/CambriaMath(0)/m/n/7.27449 0
+........\kern3.13463
+........\hbox(4.42627+0.07178)x8.10059, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
+.........\TU/CambriaMath(0)/m/n/7 0
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.08958)x6.60912, direction TLT
-.....\hbox(10.43425+5.08958)x6.60912, direction TLT
-......\hbox(10.43425+5.08958)x6.60912, direction TLT
+....\hbox(10.26163+5.08731)x6.45029, direction TLT
+.....\hbox(10.26163+5.08731)x6.45029, direction TLT
+......\hbox(10.26163+5.08731)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.08958)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.08731)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.06038)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 3
+........\kern3.13463
+........\hbox(4.42627+0.0581)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 3
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.45912+5.08958)x6.60912, direction TLT
-.....\hbox(10.45912+5.08958)x6.60912, direction TLT
-......\hbox(10.45912+5.08958)x6.60912, direction TLT
+....\hbox(10.28555+5.08731)x6.45029, direction TLT
+.....\hbox(10.28555+5.08731)x6.45029, direction TLT
+......\hbox(10.28555+5.08731)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.45912+5.08958)x4.20912, direction TLT
-........\hbox(4.59984+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 2
+.......\vbox(10.28555+5.08731)x4.0503, direction TLT
+........\hbox(4.42627+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 2
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.06038)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 3
+........\kern3.13463
+........\hbox(4.42627+0.0581)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 3
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.10379)x6.60912, direction TLT
-.....\hbox(10.43425+5.10379)x6.60912, direction TLT
-......\hbox(10.43425+5.10379)x6.60912, direction TLT
+....\hbox(10.26163+5.10098)x6.45029, direction TLT
+.....\hbox(10.26163+5.10098)x6.45029, direction TLT
+......\hbox(10.26163+5.10098)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.10379)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.10098)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.79057
-........\hbox(4.77032+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 5
+........\kern2.97057
+........\hbox(4.59033+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 5
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.45912+5.10379)x6.60912, direction TLT
-.....\hbox(10.45912+5.10379)x6.60912, direction TLT
-......\hbox(10.45912+5.10379)x6.60912, direction TLT
+....\hbox(10.28555+5.10098)x6.45029, direction TLT
+.....\hbox(10.28555+5.10098)x6.45029, direction TLT
+......\hbox(10.28555+5.10098)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.45912+5.10379)x4.20912, direction TLT
-........\hbox(4.59984+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 2
+.......\vbox(10.28555+5.10098)x4.0503, direction TLT
+........\hbox(4.42627+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 2
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.79057
-........\hbox(4.77032+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 5
+........\kern2.97057
+........\hbox(4.59033+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 5
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.45912+5.10379)x6.60912, direction TLT
-.....\hbox(10.45912+5.10379)x6.60912, direction TLT
-......\hbox(10.45912+5.10379)x6.60912, direction TLT
+....\hbox(10.28555+5.10098)x6.45029, direction TLT
+.....\hbox(10.28555+5.10098)x6.45029, direction TLT
+......\hbox(10.28555+5.10098)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.45912+5.10379)x4.20912, direction TLT
-........\hbox(4.59984+0.06038)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 3
-........\kern2.6178
+.......\vbox(10.28555+5.10098)x4.0503, direction TLT
+........\hbox(4.42627+0.0581)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 3
+........\kern2.62007
 ........\rule(0.6494+0.0)x*
-........\kern2.79057
-........\hbox(4.77032+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 5
+........\kern2.97057
+........\hbox(4.59033+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 5
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.4094+5.10379)x6.60912, direction TLT
-.....\hbox(10.4094+5.10379)x6.60912, direction TLT
-......\hbox(10.4094+5.10379)x6.60912, direction TLT
+....\hbox(10.2377+5.10098)x6.45029, direction TLT
+.....\hbox(10.2377+5.10098)x6.45029, direction TLT
+......\hbox(10.2377+5.10098)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.4094+5.10379)x4.20912, direction TLT
-........\hbox(4.55011+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 4
+.......\vbox(10.2377+5.10098)x4.0503, direction TLT
+........\hbox(4.37842+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 4
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.79057
-........\hbox(4.77032+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 5
+........\kern2.97057
+........\hbox(4.59033+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 5
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.10379)x6.60912, direction TLT
-.....\hbox(10.43425+5.10379)x6.60912, direction TLT
-......\hbox(10.43425+5.10379)x6.60912, direction TLT
+....\hbox(10.26163+5.10098)x6.45029, direction TLT
+.....\hbox(10.26163+5.10098)x6.45029, direction TLT
+......\hbox(10.26163+5.10098)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.10379)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.10098)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 6
+........\kern3.13463
+........\hbox(4.42627+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 6
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.62961+5.10379)x6.60912, direction TLT
-.....\hbox(10.62961+5.10379)x6.60912, direction TLT
-......\hbox(10.62961+5.10379)x6.60912, direction TLT
+....\hbox(10.44962+5.10098)x6.45029, direction TLT
+.....\hbox(10.44962+5.10098)x6.45029, direction TLT
+......\hbox(10.44962+5.10098)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.62961+5.10379)x4.20912, direction TLT
-........\hbox(4.77032+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 5
-........\kern2.60359
+.......\vbox(10.44962+5.10098)x4.0503, direction TLT
+........\hbox(4.59033+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 5
+........\kern2.6064
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 6
+........\kern3.13463
+........\hbox(4.42627+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 6
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.43425+5.1109)x6.60912, direction TLT
-.....\hbox(10.43425+5.1109)x6.60912, direction TLT
-......\hbox(10.43425+5.1109)x6.60912, direction TLT
+....\hbox(10.26163+5.10782)x6.45029, direction TLT
+.....\hbox(10.26163+5.10782)x6.45029, direction TLT
+......\hbox(10.26163+5.10782)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.43425+5.1109)x4.20912, direction TLT
-........\hbox(4.57497+0.0)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 1
+.......\vbox(10.26163+5.10782)x4.0503, direction TLT
+........\hbox(4.40234+0.0)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 1
 ........\kern2.67818
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.0817)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 8
+........\kern3.13463
+........\hbox(4.42627+0.07861)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 8
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.45912+5.1109)x6.60912, direction TLT
-.....\hbox(10.45912+5.1109)x6.60912, direction TLT
-......\hbox(10.45912+5.1109)x6.60912, direction TLT
+....\hbox(10.28555+5.10782)x6.45029, direction TLT
+.....\hbox(10.28555+5.10782)x6.45029, direction TLT
+......\hbox(10.28555+5.10782)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.45912+5.1109)x4.20912, direction TLT
-........\hbox(4.59984+0.06038)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 3
-........\kern2.6178
+.......\vbox(10.28555+5.10782)x4.0503, direction TLT
+........\hbox(4.42627+0.0581)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 3
+........\kern2.62007
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.0817)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 8
+........\kern3.13463
+........\hbox(4.42627+0.07861)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 8
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.62961+5.1109)x6.60912, direction TLT
-.....\hbox(10.62961+5.1109)x6.60912, direction TLT
-......\hbox(10.62961+5.1109)x6.60912, direction TLT
+....\hbox(10.44962+5.10782)x6.45029, direction TLT
+.....\hbox(10.44962+5.10782)x6.45029, direction TLT
+......\hbox(10.44962+5.10782)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.62961+5.1109)x4.20912, direction TLT
-........\hbox(4.77032+0.07458)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 5
-........\kern2.60359
+.......\vbox(10.44962+5.10782)x4.0503, direction TLT
+........\hbox(4.59033+0.07178)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 5
+........\kern2.6064
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.0817)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 8
+........\kern3.13463
+........\hbox(4.42627+0.07861)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 8
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-....\hbox(10.39163+5.1109)x6.60912, direction TLT
-.....\hbox(10.39163+5.1109)x6.60912, direction TLT
-......\hbox(10.39163+5.1109)x6.60912, direction TLT
+....\hbox(10.22061+5.10782)x6.45029, direction TLT
+.....\hbox(10.22061+5.10782)x6.45029, direction TLT
+......\hbox(10.22061+5.10782)x6.45029, direction TLT
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
-.......\vbox(10.39163+5.1109)x4.20912, direction TLT
-........\hbox(4.53235+0.01776)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 7
-........\kern2.66042
+.......\vbox(10.22061+5.10782)x4.0503, direction TLT
+........\hbox(4.36133+0.01709)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 7
+........\kern2.66109
 ........\rule(0.6494+0.0)x*
-........\kern2.96106
-........\hbox(4.59984+0.0817)x4.20912, direction TLT
-.........\EU2/CambriaMath(0)/m/n/7.27449 8
+........\kern3.13463
+........\hbox(4.42627+0.07861)x4.0503, direction TLT
+.........\TU/CambriaMath(0)/m/n/7 8
 .......\hbox(0.0+0.0)x1.2, shifted -2.8564, direction TLT
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0

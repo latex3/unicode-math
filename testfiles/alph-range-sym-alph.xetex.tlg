@@ -1,33 +1,17 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-%% \CharacterTable
-%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%%   Digits        \0\1\2\3\4\5\6\7\8\9
-%%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%%   Dollar        \$     Percent       \%     Ampersand     \&
-%%   Acute accent  \'     Left paren    \(     Right paren   \)
-%%   Asterisk      \*     Plus          \+     Comma         \,
-%%   Minus         \-     Point         \.     Solidus       \/
-%%   Colon         \:     Semicolon     \;     Less than     \<
-%%   Equals        \=     Greater than  \>     Question mark \?
-%%   Commercial at \@     Left bracket  \[     Backslash     \\
-%%   Right bracket \]     Circumflex    \^     Underscore    \_
-%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%%   Right brace   \}     Tilde         \~}
-%%
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.00015pt on input line 9.
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.4712pt on input line 9.
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0294pt on input line 9.
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.99985pt on input line 9.
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.47098pt on input line 9.
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.0292pt on input line 9.
+LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line ....
+LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.4712pt on input line ....
+LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0294pt on input line ....
+LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line ....
+LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.47098pt on input line ....
+LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.0292pt on input line ....
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845
 .\glue -95.04362
@@ -53,53 +37,53 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 5.31
 ...\hbox(6.69+1.52)x207.08997, shifted 10.26605, display
 ....\hbox(6.69+1.52)x207.08997
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2472
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2473
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2472
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2473
 .....\kern0.4
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2474
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2474
 .....\kern0.8
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2475
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2475
 .....\kern0.15
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2476
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2476
 .....\kern0.6
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2477
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2477
 .....\kern1.45
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2478
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2478
 .....\kern0.2
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2479
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2479
 .....\kern0.9
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2480
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2480
 .....\kern0.9
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2481
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2481
 .....\kern1.2
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2482
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2482
 .....\kern0.8
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2483
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2484
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2483
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2484
 .....\kern0.9
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2485
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2485
 .....\kern0.9
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2486
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2486
 .....\kern0.2
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2487
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2487
 .....\kern1.5
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2488
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2489
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2490
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2488
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2489
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2490
 .....\kern0.7
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2491
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2491
 .....\kern1.6
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2492
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2492
 .....\kern1.1
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2493
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2493
 .....\kern2.25
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2494
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2494
 .....\kern2.25
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2495
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2495
 .....\kern0.6
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2496
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2496
 .....\kern2.0
-.....\EU1/xits-math.otf(0)/m/n/10 glyph#2497
+.....\TU/xits-math.otf(0)/m/n/10 glyph#2497
 .....\kern0.7
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
@@ -108,39 +92,39 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 3.65
 ...\hbox(6.83+1.87)x130.11002, shifted 48.75603, display
 ....\hbox(6.83+1.87)x130.11002
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2498
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2499
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2500
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2498
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2499
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2500
 .....\kern0.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2501
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2501
 .....\kern0.6
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2502
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2503
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2502
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2503
 .....\kern1.2
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2504
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2504
 .....\kern0.4
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#965
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2505
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2506
+.....\TU/xits-math.otf(3)/m/n/10 glyph#965
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2505
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2506
 .....\kern0.6
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2507
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2508
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2507
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2508
 .....\kern0.2
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2509
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2510
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2511
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2512
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2513
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2509
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2510
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2511
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2512
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2513
 .....\kern0.4
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2514
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2515
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2516
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2517
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2518
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2519
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2520
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2521
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2522
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2514
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2515
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2516
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2517
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2518
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2519
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2520
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2521
+.....\TU/xits-math.otf(3)/m/n/10 glyph#2522
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -148,52 +132,52 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 3.44
 ...\hbox(6.69+0.11)x198.11995, shifted 14.75107, display
 ....\hbox(6.69+0.11)x198.11995
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3132
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3133
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3132
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3133
 .....\kern0.4
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3134
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3134
 .....\kern1.45
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3135
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3136
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3135
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3136
 .....\kern0.6
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3137
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3137
 .....\kern0.7
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3138
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3138
 .....\kern0.9
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3139
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3139
 .....\kern0.15
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3149
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3149
 .....\kern0.15
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3140
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3140
 .....\kern0.9
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3141
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3141
 .....\kern0.7
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3142
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3143
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3142
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3143
 .....\kern0.9
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3144
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3144
 .....\kern0.9
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3145
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3145
 .....\kern0.75
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3146
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3146
 .....\kern0.2
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3147
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3147
 .....\kern0.9
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3148
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3148
 .....\kern1.5
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3150
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3150
 .....\kern0.65
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3151
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3151
 .....\kern1.6
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3152
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3152
 .....\kern1.6
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3153
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3153
 .....\kern0.15
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3154
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3154
 .....\kern0.6
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3155
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3155
 .....\kern1.13
-.....\EU1/xits-math.otf(4)/m/n/10 glyph#3156
+.....\TU/xits-math.otf(4)/m/n/10 glyph#3156
 .....\kern0.2
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
@@ -202,73 +186,73 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 5.11
 ...\hbox(6.78+2.02)x173.10995, shifted 27.25606, display
 ....\hbox(6.78+2.02)x173.10995
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3158
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3158
 .....\kern0.4
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3159
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3159
 .....\kern0.65
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3160
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3160
 .....\kern0.8
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3161
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3161
 .....\kern0.4
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3162
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3184
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3162
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3184
 .....\kern0.4
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3163
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3163
 .....\kern1.0
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3164
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3164
 .....\kern0.4
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3165
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3165
 .....\kern0.4
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3185
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3166
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3167
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3185
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3166
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3167
 .....\kern0.6
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3186
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3186
 .....\kern0.7
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3168
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3169
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3168
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3169
 .....\kern0.3
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3170
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3170
 .....\kern0.5
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3171
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3171
 .....\kern0.5
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3172
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3173
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3172
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3173
 .....\kern0.5
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3189
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3189
 .....\kern0.6
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3174
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3188
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3175
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3174
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3188
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3175
 .....\kern0.65
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3176
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3176
 .....\kern0.5
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3177
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3177
 .....\kern0.7
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3178
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3179
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3187
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3180
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3178
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3179
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3187
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3180
 .....\kern0.9
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3181
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3181
 .....\kern0.9
-.....\EU1/xits-math.otf(5)/m/n/10 glyph#3182
+.....\TU/xits-math.otf(5)/m/n/10 glyph#3182
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
 ...\glue(\abovedisplayshortskip) 0.0 plus 3.0
 ...\glue(\baselineskip) 3.09999
 ...\hbox(6.88+0.22)x50.0, shifted 88.81104, display
-....\EU1/xits-math.otf(6)/m/n/10 glyph#49
-....\EU1/xits-math.otf(6)/m/n/10 glyph#50
-....\EU1/xits-math.otf(6)/m/n/10 glyph#51
-....\EU1/xits-math.otf(6)/m/n/10 glyph#52
-....\EU1/xits-math.otf(6)/m/n/10 glyph#53
-....\EU1/xits-math.otf(6)/m/n/10 glyph#54
-....\EU1/xits-math.otf(6)/m/n/10 glyph#55
-....\EU1/xits-math.otf(6)/m/n/10 glyph#56
-....\EU1/xits-math.otf(6)/m/n/10 glyph#57
-....\EU1/xits-math.otf(6)/m/n/10 glyph#58
+....\TU/xits-math.otf(6)/m/n/10 glyph#49
+....\TU/xits-math.otf(6)/m/n/10 glyph#50
+....\TU/xits-math.otf(6)/m/n/10 glyph#51
+....\TU/xits-math.otf(6)/m/n/10 glyph#52
+....\TU/xits-math.otf(6)/m/n/10 glyph#53
+....\TU/xits-math.otf(6)/m/n/10 glyph#54
+....\TU/xits-math.otf(6)/m/n/10 glyph#55
+....\TU/xits-math.otf(6)/m/n/10 glyph#56
+....\TU/xits-math.otf(6)/m/n/10 glyph#57
+....\TU/xits-math.otf(6)/m/n/10 glyph#58
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\glue 0.0 plus 1.0fil

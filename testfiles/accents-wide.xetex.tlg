@@ -1,14 +1,14 @@
-LaTeX Font Info:    Font shape `EU1/latinmodern-math.otf(1)/m/n' will be
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 10.00015pt on input line ....
-LaTeX Font Info:    Font shape `EU1/latinmodern-math.otf(1)/m/n' will be
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 7.01247pt on input line ....
-LaTeX Font Info:    Font shape `EU1/latinmodern-math.otf(1)/m/n' will be
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 4.9808pt on input line ....
-LaTeX Font Info:    Font shape `EU1/latinmodern-math.otf(2)/m/n' will be
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 9.99985pt on input line ....
-LaTeX Font Info:    Font shape `EU1/latinmodern-math.otf(2)/m/n' will be
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 7.01224pt on input line ....
-LaTeX Font Info:    Font shape `EU1/latinmodern-math.otf(2)/m/n' will be
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 4.98067pt on input line ....
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845
@@ -36,79 +36,79 @@ Completed box being shipped out [1]
 ...\hbox(9.03+0.83)x81.79303, shifted 72.91452, display
 ....\vbox(6.7+0.11)x5.72
 .....\hbox(6.7+0.0)x0.0, shifted 5.68999
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2246
+......\l_fontspec_font glyph#2246
 .....\kern-4.42
 .....\hbox(4.42+0.11)x5.72
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1316
+......\l_fontspec_font glyph#1316
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.03+0.22)x7.88
 .....\hbox(6.7+0.0)x0.0, shifted 6.84999
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2246
+......\l_fontspec_font glyph#2246
 .....\kern-4.5
 .....\hbox(6.83+0.22)x7.88
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.03+0.22)x7.88
 .....\hbox(6.7+0.0)x0.0, shifted 0.27
 ......\hbox(6.7+0.0)x7.88, glue set 0.83673
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2257
+.......\l_fontspec_font glyph#2257
 .......\glue -0.95 plus 0.75
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -0.95 plus 0.75
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2259
+.......\l_fontspec_font glyph#2259
 .....\kern-4.5
 .....\hbox(6.83+0.22)x7.88
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.03+0.22)x23.64001
 .....\hbox(6.7+0.0)x0.0
 ......\hbox(6.7+0.0)x23.64001, glue set 0.98317
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2257
+.......\l_fontspec_font glyph#2257
 .......\glue -0.95 plus 0.75
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -1.9 plus 1.7
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2258
+.......\l_fontspec_font glyph#2258
 .......\glue -0.95 plus 0.75
-.......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2259
+.......\l_fontspec_font glyph#2259
 .....\kern-4.5
 .....\hbox(6.83+0.22)x23.64001
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
@@ -118,43 +118,43 @@ Completed box being shipped out [1]
 ...\hbox(9.76+0.83)x81.79303, shifted 72.91452, display
 ....\vbox(7.29+0.11)x5.72
 .....\hbox(7.29+0.0)x0.0, shifted 5.68999
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2264
+......\l_fontspec_font glyph#2264
 .....\kern-4.42
 .....\hbox(4.42+0.11)x5.72
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1316
+......\l_fontspec_font glyph#1316
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.62+0.22)x7.88
 .....\hbox(7.29+0.0)x0.0, shifted 6.84999
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2264
+......\l_fontspec_font glyph#2264
 .....\kern-4.5
 .....\hbox(6.83+0.22)x7.88
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.75+0.22)x7.88
 .....\hbox(7.42+0.0)x0.0, shifted 0.29001
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2284
+......\l_fontspec_font glyph#2284
 .....\kern-4.5
 .....\hbox(6.83+0.22)x7.88
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.76+0.22)x23.64001
 .....\hbox(7.43+0.0)x0.0, shifted 2.22
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2334
+......\l_fontspec_font glyph#2334
 .....\kern-4.5
 .....\hbox(6.83+0.22)x23.64001
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
@@ -164,43 +164,43 @@ Completed box being shipped out [1]
 ...\hbox(9.76+0.83)x81.79303, shifted 72.91452, display
 ....\vbox(7.25+0.11)x5.72
 .....\hbox(7.25+0.0)x0.0, shifted 5.68999
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2268
+......\l_fontspec_font glyph#2268
 .....\kern-4.42
 .....\hbox(4.42+0.11)x5.72
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1316
+......\l_fontspec_font glyph#1316
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.58+0.22)x7.88
 .....\hbox(7.25+0.0)x0.0, shifted 6.84999
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2268
+......\l_fontspec_font glyph#2268
 .....\kern-4.5
 .....\hbox(6.83+0.22)x7.88
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.73+0.22)x7.88
 .....\hbox(7.4+0.0)x0.0, shifted 0.37001
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2288
+......\l_fontspec_font glyph#2288
 .....\kern-4.5
 .....\hbox(6.83+0.22)x7.88
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
-....\EU1/latinmodern-math.otf(0)/m/n/10 glyph#12
+....\l_fontspec_font glyph#12
 ....\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
 ....\vbox(9.76+0.22)x23.64001
 .....\hbox(7.43+0.0)x0.0, shifted 2.34
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#2338
+......\l_fontspec_font glyph#2338
 .....\kern-4.5
 .....\hbox(6.83+0.22)x23.64001
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
-......\EU1/latinmodern-math.otf(0)/m/n/10 glyph#1290
+......\l_fontspec_font glyph#1290
 ......\kern1.05
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
