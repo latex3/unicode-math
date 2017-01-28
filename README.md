@@ -38,7 +38,7 @@ new releases.
 [MM]: http://www.typoma.com/en/fonts.html
 [LM]: http://www.gust.org.pl/projects/e-foundry/lm-math
 [PM]: http://www.ctan.org/pkg/tex-gyre-math-pagella
-[AM]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
+[AM]: http://www.ctan.org/pkg/asana-math
 [NE]: http://github.com/khaledhosny/euler-otf
 [SM]: http://www.aip.org/stixfonts/
 [XM]: http://github.com/khaledhosny/xits-math
