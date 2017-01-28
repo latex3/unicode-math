@@ -1,0 +1,443 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count292
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count293
+\nofMParguments=\count294
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count295
+\MPscratchDim=\dimen262
+\MPnumerator=\count296
+\makeMPintoPDFobject=\count297
+\everyMPtoPDFconversion=\toks19
+) (../pdftexcmds.sty
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+(/usr/local/texlive/2015/texmf-dist/scripts/oberdiek/pdftexcmds.lua)
+\pdftexcmds@toks=\toks20
+)
+(../epstopdf-base.sty
+(../grfext.sty
+(../kvdefinekeys.sty
+))
+(../kvoptions.sty
+(../kvsetkeys.sty
+))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(../epstopdf-sys.cfg
+))
+\g__file_internal_ior=\read1
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:(compiling luc: /usr/local/texlive/2015/texmf-var/luatex-cache/gene
+ric/fonts/otf/latinmodern-math.luc)(load luc: /Users/will/Library/texlive/2015/t
+exmf-var/luatex-cache/generic/fonts/otf/latinmodern-math.luc)
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+\g__fontspec_family_latinmodern-math.otf_int=\count298
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | aux : font no 22 (LatinModernMath-Regular) does not define feature 
+smcp for script math with language dflt
+luaotfload | aux : no font with id 22
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | aux : font no 22 (LatinModernMath-Regular) does not define feature 
+smcp for script math with language dflt
+luaotfload | aux : no font with id 22
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'latinmodern-math.otf(0)' created for font
+. 'latinmodern-math.otf' with options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7-10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=lati
+nmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->"[latinmodern-math]:mode=base;script=math;language=DFLT;"<7-10>"[latinmod
+ern-math]:mode=base;script=math;language=DFLT;+ssty=0;"<-7>"[latinmodern-math]:m
+ode=base;script=math;language=DFLT;+ssty=1;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. 
+. 
+. * 'bold' with NFSS spec.:
+. <->"[latinmodern-math]:mode=base;script=math;language=DFLT;"
+. 
+. * 'bold small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. 
+.................................................
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+LaTeX Font Info:    Encoding `OT1' has changed to `EU2' for symbol font
+(Font)              `operators' in the math version `normal' on input line 3.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> EU2/latinmodern-math.otf(0)/m/n on input
+line 3.
+LaTeX Font Info:    Encoding `OT1' has changed to `EU2' for symbol font
+(Font)              `operators' in the math version `bold' on input line 3.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> EU2/latinmodern-math.otf(0)/bx/n on inp
+ut line 3.
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | aux : font no 22 (LatinModernMath-Regular) does not define feature 
+smcp for script math with language dflt
+luaotfload | aux : no font with id 22
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | aux : font no 22 (LatinModernMath-Regular) does not define feature 
+smcp for script math with language dflt
+luaotfload | aux : no font with id 22
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'latinmodern-math.otf(1)' created for font
+. 'latinmodern-math.otf' with options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7-10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=lati
+nmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},Scale=
+1.00001,FontAdjustment={\fontdimen
+. 8\font =443678.72sp\relax \fontdimen 9\font =258211.84sp\relax \fontdimen
+. 10\font =290979.84sp\relax \fontdimen 11\font =449576.96sp\relax \fontdimen
+. 12\font =226099.2sp\relax \fontdimen 13\font =237895.68sp\relax \fontdimen
+. 14\font =237895.68sp\relax \fontdimen 15\font =189399.04sp\relax \fontdimen
+. 16\font =161873.92sp\relax \fontdimen 17\font =0sp\relax \fontdimen 18\font
+. =163840sp\relax \fontdimen 19\font =131072sp\relax \fontdimen 20\font
+. =0pt\relax \fontdimen 21\font =0pt\relax \fontdimen 22\font =163840sp\relax
+. }].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->s*[1.00001]"[latinmodern-math]:mode=base;script=math;language=DFLT;"<7-10
+>s*[1.00001]"[latinmodern-math]:mode=base;script=math;language=DFLT;+ssty=0;"<-7
+>s*[1.00001]"[latinmodern-math]:mode=base;script=math;language=DFLT;+ssty=1;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. \fontdimen 8\font =443678.72sp\relax \fontdimen 9\font =258211.84sp\relax
+. \fontdimen 10\font =290979.84sp\relax \fontdimen 11\font =449576.96sp\relax
+. \fontdimen 12\font =226099.2sp\relax \fontdimen 13\font =237895.68sp\relax
+. \fontdimen 14\font =237895.68sp\relax \fontdimen 15\font =189399.04sp\relax
+. \fontdimen 16\font =161873.92sp\relax \fontdimen 17\font =0sp\relax
+. \fontdimen 18\font =163840sp\relax \fontdimen 19\font =131072sp\relax
+. \fontdimen 20\font =0pt\relax \fontdimen 21\font =0pt\relax \fontdimen
+. 22\font =163840sp\relax 
+. 
+. * 'bold' with NFSS spec.:
+. <->s*[1.00001]"[latinmodern-math]:mode=base;script=math;language=DFLT;"
+. 
+. * 'bold small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. \fontdimen 8\font =443678.72sp\relax \fontdimen 9\font =258211.84sp\relax
+. \fontdimen 10\font =290979.84sp\relax \fontdimen 11\font =449576.96sp\relax
+. \fontdimen 12\font =226099.2sp\relax \fontdimen 13\font =237895.68sp\relax
+. \fontdimen 14\font =237895.68sp\relax \fontdimen 15\font =189399.04sp\relax
+. \fontdimen 16\font =161873.92sp\relax \fontdimen 17\font =0sp\relax
+. \fontdimen 18\font =163840sp\relax \fontdimen 19\font =131072sp\relax
+. \fontdimen 20\font =0pt\relax \fontdimen 21\font =0pt\relax \fontdimen
+. 22\font =163840sp\relax 
+.................................................
+LaTeX Font Info:    Encoding `OMS' has changed to `EU2' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 3.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> EU2/latinmodern-math.otf(1)/m/n on inpu
+t line 3.
+LaTeX Font Info:    Encoding `OMS' has changed to `EU2' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 3.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> EU2/latinmodern-math.otf(1)/bx/n on inp
+ut line 3.
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+luaotfload | load : path lookup of "latinmodern-math.otf" unsuccessful, falling 
+back to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | aux : font no 22 (LatinModernMath-Regular) does not define feature 
+smcp for script math with language dflt
+luaotfload | aux : no font with id 22
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | load : path lookup of "latinmodern-math" unsuccessful, falling back
+to file:
+luaotfload | aux : font no 22 (LatinModernMath-Regular) does not define feature 
+smcp for script math with language dflt
+luaotfload | aux : no font with id 22
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'latinmodern-math.otf(2)' created for font
+. 'latinmodern-math.otf' with options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7-10,Font=latinmodern-math.otf,Style=MathScript},{Size=-7,Font=lati
+nmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},Scale=
+0.99999,FontAdjustment={\fontdimen
+. 8\font =26214.4sp\relax \fontdimen 9\font =131072sp\relax \fontdimen 10\font
+. =109445.12sp\relax \fontdimen 11\font =72744.96sp\relax \fontdimen 12\font
+. =393216sp\relax \fontdimen 13\font =0pt\relax }].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->s*[0.99999]"[latinmodern-math]:mode=base;script=math;language=DFLT;"<7-10
+>s*[0.99999]"[latinmodern-math]:mode=base;script=math;language=DFLT;+ssty=0;"<-7
+>s*[0.99999]"[latinmodern-math]:mode=base;script=math;language=DFLT;+ssty=1;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. \fontdimen 8\font =26214.4sp\relax \fontdimen 9\font =131072sp\relax
+. \fontdimen 10\font =109445.12sp\relax \fontdimen 11\font =72744.96sp\relax
+. \fontdimen 12\font =393216sp\relax \fontdimen 13\font =0pt\relax 
+. 
+. * 'bold' with NFSS spec.:
+. <->s*[0.99999]"[latinmodern-math]:mode=base;script=math;language=DFLT;"
+. 
+. * 'bold small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. \fontdimen 8\font =26214.4sp\relax \fontdimen 9\font =131072sp\relax
+. \fontdimen 10\font =109445.12sp\relax \fontdimen 11\font =72744.96sp\relax
+. \fontdimen 12\font =393216sp\relax \fontdimen 13\font =0pt\relax 
+.................................................
+LaTeX Font Info:    Encoding `OMX' has changed to `EU2' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 3.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> EU2/latinmodern-math.otf(2)/m/n on inpu
+t line 3.
+LaTeX Font Info:    Encoding `OMX' has changed to `EU2' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 3.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> EU2/latinmodern-math.otf(2)/bx/n on inp
+ut line 3.
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:(compiling luc: /usr/local/texlive/2015/texmf-var/luatex-cache/generic/fon
+ts/otf/xits-math.luc)(load luc: /Users/will/Library/texlive/2015/texmf-var/luate
+x-cache/generic/fonts/otf/xits-math.luc)
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+\g__fontspec_family_xits-math.otf_int=\count299
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | aux : font no 26 (XITSMath) does not define feature smcp for script
+math with language dflt
+luaotfload | aux : no font with id 26
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'xits-math.otf(0)' created for font 'xits-math.otf' with options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font
+=xits-math.otf,Style=MathScriptScript}}].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->"[xits-math]:mode=base;script=math;language=DFLT;"<7.01236-10>"[xits-math
+]:mode=base;script=math;language=DFLT;+ssty=0;"<-7.01236>"[xits-math]:mode=base;
+script=math;language=DFLT;+ssty=1;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. 
+.................................................
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  EU2/latinmodern-math.otf(0)/m/n --> EU2/xits-math.otf(0)
+/m/n on input line 11.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  EU2/latinmodern-math.otf(0)/bx/n --> EU2/xits-math.otf(0
+)/bx/n on input line 11.
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | aux : font no 26 (XITSMath) does not define feature smcp for script
+math with language dflt
+luaotfload | aux : no font with id 26
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'xits-math.otf(1)' created for font 'xits-math.otf' with options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font
+=xits-math.otf,Style=MathScriptScript}},Scale=1.00001,FontAdjustment={\fontdimen
+. 8\font =380108.8sp\relax \fontdimen 9\font =314572.8sp\relax \fontdimen
+. 10\font =314572.8sp\relax \fontdimen 11\font =458752sp\relax \fontdimen
+. 12\font =314572.8sp\relax \fontdimen 13\font =262144sp\relax \fontdimen
+. 14\font =262144sp\relax \fontdimen 15\font =180224sp\relax \fontdimen
+. 16\font =163840sp\relax \fontdimen 17\font =0sp\relax \fontdimen 18\font
+. =245760sp\relax \fontdimen 19\font =32768sp\relax \fontdimen 20\font
+. =0pt\relax \fontdimen 21\font =0pt\relax \fontdimen 22\font =163840sp\relax
+. }].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->s*[1.00001]"[xits-math]:mode=base;script=math;language=DFLT;"<7.01236-10>
+s*[1.00001]"[xits-math]:mode=base;script=math;language=DFLT;+ssty=0;"<-7.01236>s
+*[1.00001]"[xits-math]:mode=base;script=math;language=DFLT;+ssty=1;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. \fontdimen 8\font =380108.8sp\relax \fontdimen 9\font =314572.8sp\relax
+. \fontdimen 10\font =314572.8sp\relax \fontdimen 11\font =458752sp\relax
+. \fontdimen 12\font =314572.8sp\relax \fontdimen 13\font =262144sp\relax
+. \fontdimen 14\font =262144sp\relax \fontdimen 15\font =180224sp\relax
+. \fontdimen 16\font =163840sp\relax \fontdimen 17\font =0sp\relax \fontdimen
+. 18\font =245760sp\relax \fontdimen 19\font =32768sp\relax \fontdimen 20\font
+. =0pt\relax \fontdimen 21\font =0pt\relax \fontdimen 22\font =163840sp\relax 
+.................................................
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  EU2/latinmodern-math.otf(1)/m/n --> EU2/xits-math.otf(1)
+/m/n on input line 11.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  EU2/latinmodern-math.otf(1)/bx/n --> EU2/xits-math.otf(1
+)/bx/n on input line 11.
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : path lookup of "xits-math.otf" unsuccessful, falling back to
+file:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | aux : font no 26 (XITSMath) does not define feature smcp for script
+math with language dflt
+luaotfload | aux : no font with id 26
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to fil
+e:
+.................................................
+. fontspec info: "defining-font"
+. 
+. Font family 'xits-math.otf(2)' created for font 'xits-math.otf' with options
+. [Renderer=Basic,BoldItalicFont={},ItalicFont={},Script=Math,SizeFeatures={{Siz
+e=10-},{Size=7.01236-10,Font=xits-math.otf,Style=MathScript},{Size=-7.01236,Font
+=xits-math.otf,Style=MathScriptScript}},Scale=0.99999,FontAdjustment={\fontdimen
+. 8\font =43253.76sp\relax \fontdimen 9\font =98304sp\relax \fontdimen 10\font
+. =98304sp\relax \fontdimen 11\font =196608sp\relax \fontdimen 12\font
+. =393216sp\relax \fontdimen 13\font =0pt\relax }].
+. 
+. This font family consists of the following shapes:
+. 
+. * 'normal' with NFSS spec.:
+. 
+. <10->s*[0.99999]"[xits-math]:mode=base;script=math;language=DFLT;"<7.01236-10>
+s*[0.99999]"[xits-math]:mode=base;script=math;language=DFLT;+ssty=0;"<-7.01236>s
+*[0.99999]"[xits-math]:mode=base;script=math;language=DFLT;+ssty=1;"
+. 
+. * 'small caps' with NFSS spec.:
+. 
+. and font adjustment code:
+. \fontdimen 8\font =43253.76sp\relax \fontdimen 9\font =98304sp\relax
+. \fontdimen 10\font =98304sp\relax \fontdimen 11\font =196608sp\relax
+. \fontdimen 12\font =393216sp\relax \fontdimen 13\font =0pt\relax 
+.................................................
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  EU2/latinmodern-math.otf(2)/m/n --> EU2/xits-math.otf(2)
+/m/n on input line 11.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  EU2/latinmodern-math.otf(2)/bx/n --> EU2/xits-math.otf(2
+)/bx/n on input line 11.
+catcode of "_" - 11
+catcode of ":" - 11
+catcode of "@" - 11
+(.aux)

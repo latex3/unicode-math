@@ -1,17 +1,76 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.00015pt on input line ....
-LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.0001pt on input line ....
-LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.00008pt on input line ....
-LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.99985pt on input line ....
-LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.9999pt on input line ....
-LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
-(Font)              scaled to size 4.99992pt on input line ....
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks19
+) (../pdftexcmds.sty
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+(/usr/local/texlive/2015/texmf-dist/scripts/oberdiek/pdftexcmds.lua)
+\pdftexcmds@toks=\toks20
+)
+(../epstopdf-base.sty
+(../grfext.sty
+(../kvdefinekeys.sty
+))
+(../kvoptions.sty
+(../kvsetkeys.sty
+(../etexcmds.sty
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(../epstopdf-sys.cfg
+))
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 14.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.4712pt on input line 14.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0294pt on input line 14.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 14.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.47098pt on input line 14.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+LaTeX Font Info:    Font shape `EU2/xits-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.0292pt on input line 14.
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
+luaotfload | load : path lookup of "xits-math" unsuccessful, falling back to file:
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845, direction TLT
 .\glue -95.04362
@@ -30,7 +89,7 @@ Completed box being shipped out [1]
 ...\glue 0.0
 ...\glue(\parskip) 0.0 plus 1.0
 ...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
-....\localpar
+....\whatsit
 .....\localinterlinepenalty=0
 .....\localbrokenpenalty=0
 .....\localleftbox=null
@@ -45,128 +104,131 @@ Completed box being shipped out [1]
 ...\penalty 10000
 ...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\baselineskip) 5.24
-...\hbox(6.76+1.75)x195.30002, shifted 16.16103, direction TLT
-....\l_fontspec_font 𝘈
-....\l_fontspec_font 𝘉
+...\hbox(6.76+1.75)x196.96002, shifted 15.33102, direction TLT
+....\EU2/xits-math.otf(3)/m/n/10 𝘈
+....\EU2/xits-math.otf(3)/m/n/10 𝘉
 ....\kern0.77
-....\l_fontspec_font 𝘊
+....\EU2/xits-math.otf(3)/m/n/10 𝘊
 ....\kern1.24
-....\l_fontspec_font 𝘋
+....\EU2/xits-math.otf(3)/m/n/10 𝘋
 ....\kern1.0
-....\l_fontspec_font 𝘌
+....\EU2/xits-math.otf(3)/m/n/10 𝘌
 ....\kern1.35
-....\l_fontspec_font 𝘍
+....\EU2/xits-math.otf(3)/m/n/10 𝘍
 ....\kern1.84
-....\l_fontspec_font 𝘎
+....\EU2/xits-math.otf(3)/m/n/10 𝘎
 ....\kern1.0
-....\l_fontspec_font 𝘏
+....\EU2/xits-math.otf(3)/m/n/10 𝘏
 ....\kern1.3
-....\l_fontspec_font 𝘐
+....\EU2/xits-math.otf(3)/m/n/10 𝘐
 ....\kern1.5
-....\l_fontspec_font 𝘑
+....\EU2/xits-math.otf(3)/m/n/10 𝘑
 ....\kern1.12
-....\l_fontspec_font 𝘒
+....\EU2/xits-math.otf(3)/m/n/10 𝘒
 ....\kern1.35
-....\l_fontspec_font 𝘓
-....\l_fontspec_font 𝘔
+....\EU2/xits-math.otf(3)/m/n/10 𝘓
+....\EU2/xits-math.otf(3)/m/n/10 𝘔
 ....\kern1.3
-....\l_fontspec_font 𝘕
+....\EU2/xits-math.otf(3)/m/n/10 𝘕
 ....\kern1.3
-....\l_fontspec_font 𝘖
+....\EU2/xits-math.otf(3)/m/n/10 𝘖
 ....\kern1.05
-....\l_fontspec_font 𝘗
+....\EU2/xits-math.otf(3)/m/n/10 𝘗
 ....\kern1.53
-....\l_fontspec_font 𝘘
+....\EU2/xits-math.otf(3)/m/n/10 𝘘
 ....\kern1.03
-....\l_fontspec_font 𝘙
+....\EU2/xits-math.otf(3)/m/n/10 𝘙
 ....\kern0.9
-....\l_fontspec_font 𝘚
+....\EU2/xits-math.otf(3)/m/n/10 𝘚
 ....\kern0.96
-....\l_fontspec_font 𝘛
+....\EU2/xits-math.otf(3)/m/n/10 𝘛
 ....\kern1.8
-....\l_fontspec_font 𝘜
+....\EU2/xits-math.otf(3)/m/n/10 𝘜
 ....\kern1.06
-....\l_fontspec_font 𝘝
+....\EU2/xits-math.otf(3)/m/n/10 𝘝
 ....\kern1.74
-....\l_fontspec_font 𝘞
+....\EU2/xits-math.otf(3)/m/n/10 𝘞
 ....\kern1.76
-....\l_fontspec_font 𝘟
+....\EU2/xits-math.otf(3)/m/n/10 𝘟
 ....\kern1.46
-....\l_fontspec_font 𝘠
+....\EU2/xits-math.otf(3)/m/n/10 𝘠
 ....\kern1.84
-....\l_fontspec_font 𝘡
+....\EU2/xits-math.otf(3)/m/n/10 𝘡
+....\kern1.66
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
 ...\penalty 10000
 ...\glue(\abovedisplayshortskip) 0.0 plus 3.0
 ...\glue(\baselineskip) 3.42
 ...\hbox(6.83+1.87)x130.11002, shifted 48.75603, direction TLT
-....\l_fontspec_font 𝑎
-....\l_fontspec_font 𝑏
-....\l_fontspec_font 𝑐
+....\EU2/xits-math.otf(3)/m/n/10 𝑎
+....\EU2/xits-math.otf(3)/m/n/10 𝑏
+....\EU2/xits-math.otf(3)/m/n/10 𝑐
 ....\kern0.5
-....\l_fontspec_font 𝑑
+....\EU2/xits-math.otf(3)/m/n/10 𝑑
 ....\kern0.6
-....\l_fontspec_font 𝑒
-....\l_fontspec_font 𝑓
+....\EU2/xits-math.otf(3)/m/n/10 𝑒
+....\EU2/xits-math.otf(3)/m/n/10 𝑓
 ....\kern1.2
-....\l_fontspec_font 𝑔
+....\EU2/xits-math.otf(3)/m/n/10 𝑔
 ....\kern0.4
-....\l_fontspec_font ℎ
-....\l_fontspec_font 𝑖
-....\l_fontspec_font 𝑗
+....\EU2/xits-math.otf(3)/m/n/10 ℎ
+....\EU2/xits-math.otf(3)/m/n/10 𝑖
+....\EU2/xits-math.otf(3)/m/n/10 𝑗
 ....\kern0.6
-....\l_fontspec_font 𝑘
-....\l_fontspec_font 𝑙
+....\EU2/xits-math.otf(3)/m/n/10 𝑘
+....\EU2/xits-math.otf(3)/m/n/10 𝑙
 ....\kern0.2
-....\l_fontspec_font 𝑚
-....\l_fontspec_font 𝑛
-....\l_fontspec_font 𝑜
-....\l_fontspec_font 𝑝
-....\l_fontspec_font 𝑞
+....\EU2/xits-math.otf(3)/m/n/10 𝑚
+....\EU2/xits-math.otf(3)/m/n/10 𝑛
+....\EU2/xits-math.otf(3)/m/n/10 𝑜
+....\EU2/xits-math.otf(3)/m/n/10 𝑝
+....\EU2/xits-math.otf(3)/m/n/10 𝑞
 ....\kern0.4
-....\l_fontspec_font 𝑟
-....\l_fontspec_font 𝑠
-....\l_fontspec_font 𝑡
-....\l_fontspec_font 𝑢
-....\l_fontspec_font 𝑣
-....\l_fontspec_font 𝑤
-....\l_fontspec_font 𝑥
-....\l_fontspec_font 𝑦
-....\l_fontspec_font 𝑧
+....\EU2/xits-math.otf(3)/m/n/10 𝑟
+....\EU2/xits-math.otf(3)/m/n/10 𝑠
+....\EU2/xits-math.otf(3)/m/n/10 𝑡
+....\EU2/xits-math.otf(3)/m/n/10 𝑢
+....\EU2/xits-math.otf(3)/m/n/10 𝑣
+....\EU2/xits-math.otf(3)/m/n/10 𝑤
+....\EU2/xits-math.otf(3)/m/n/10 𝑥
+....\EU2/xits-math.otf(3)/m/n/10 𝑦
+....\EU2/xits-math.otf(3)/m/n/10 𝑧
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
 ...\glue(\abovedisplayshortskip) 0.0 plus 3.0
 ...\glue(\baselineskip) 3.37001
-...\hbox(6.76+1.77)x173.18001, shifted 27.22104, direction TLT
-....\hbox(6.76+1.77)x173.18001, direction TLT
-.....\l_fontspec_font A
-.....\l_fontspec_font B
-.....\l_fontspec_font C
-.....\l_fontspec_font D
-.....\l_fontspec_font E
-.....\l_fontspec_font F
-.....\l_fontspec_font G
-.....\l_fontspec_font H
-.....\l_fontspec_font I
-.....\l_fontspec_font J
-.....\l_fontspec_font K
-.....\l_fontspec_font L
-.....\l_fontspec_font M
-.....\l_fontspec_font N
-.....\l_fontspec_font O
-.....\l_fontspec_font P
-.....\l_fontspec_font Q
-.....\l_fontspec_font R
-.....\l_fontspec_font S
-.....\l_fontspec_font T
-.....\l_fontspec_font U
-.....\l_fontspec_font V
-.....\l_fontspec_font W
-.....\l_fontspec_font X
-.....\l_fontspec_font Y
-.....\l_fontspec_font Z
+...\hbox(6.76+1.77)x172.90001, shifted 27.36104, direction TLT
+....\hbox(6.76+1.77)x172.90001, direction TLT
+.....\EU2/xits-math.otf(3)/m/n/10 A
+.....\EU2/xits-math.otf(3)/m/n/10 B
+.....\EU2/xits-math.otf(3)/m/n/10 C
+.....\EU2/xits-math.otf(3)/m/n/10 D
+.....\EU2/xits-math.otf(3)/m/n/10 E
+.....\EU2/xits-math.otf(3)/m/n/10 F
+.....\EU2/xits-math.otf(3)/m/n/10 G
+.....\EU2/xits-math.otf(3)/m/n/10 H
+.....\EU2/xits-math.otf(3)/m/n/10 I
+.....\EU2/xits-math.otf(3)/m/n/10 J
+.....\EU2/xits-math.otf(3)/m/n/10 K
+.....\EU2/xits-math.otf(3)/m/n/10 L
+.....\EU2/xits-math.otf(3)/m/n/10 M
+.....\EU2/xits-math.otf(3)/m/n/10 N
+.....\kern-0.1
+.....\EU2/xits-math.otf(3)/m/n/10 O
+.....\EU2/xits-math.otf(3)/m/n/10 P
+.....\EU2/xits-math.otf(3)/m/n/10 Q
+.....\EU2/xits-math.otf(3)/m/n/10 R
+.....\EU2/xits-math.otf(3)/m/n/10 S
+.....\kern-0.18
+.....\EU2/xits-math.otf(3)/m/n/10 T
+.....\EU2/xits-math.otf(3)/m/n/10 U
+.....\EU2/xits-math.otf(3)/m/n/10 V
+.....\EU2/xits-math.otf(3)/m/n/10 W
+.....\EU2/xits-math.otf(3)/m/n/10 X
+.....\EU2/xits-math.otf(3)/m/n/10 Y
+.....\EU2/xits-math.otf(3)/m/n/10 Z
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -174,33 +236,33 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 3.39
 ...\hbox(6.84+2.16)x117.23001, shifted 55.19603, direction TLT
 ....\hbox(6.84+2.16)x117.23001, direction TLT
-.....\l_fontspec_font 𝖺
-.....\l_fontspec_font 𝖻
-.....\l_fontspec_font 𝖼
-.....\l_fontspec_font 𝖽
-.....\l_fontspec_font 𝖾
-.....\l_fontspec_font 𝖿
+.....\EU2/xits-math.otf(3)/m/n/10 𝖺
+.....\EU2/xits-math.otf(3)/m/n/10 𝖻
+.....\EU2/xits-math.otf(3)/m/n/10 𝖼
+.....\EU2/xits-math.otf(3)/m/n/10 𝖽
+.....\EU2/xits-math.otf(3)/m/n/10 𝖾
+.....\EU2/xits-math.otf(3)/m/n/10 𝖿
 .....\kern1.0
-.....\l_fontspec_font 𝗀
-.....\l_fontspec_font 𝗁
-.....\l_fontspec_font 𝗂
-.....\l_fontspec_font 𝗃
-.....\l_fontspec_font 𝗄
-.....\l_fontspec_font 𝗅
-.....\l_fontspec_font 𝗆
-.....\l_fontspec_font 𝗇
-.....\l_fontspec_font 𝗈
-.....\l_fontspec_font 𝗉
-.....\l_fontspec_font 𝗊
-.....\l_fontspec_font 𝗋
-.....\l_fontspec_font 𝗌
-.....\l_fontspec_font 𝗍
-.....\l_fontspec_font 𝗎
-.....\l_fontspec_font 𝗏
-.....\l_fontspec_font 𝗐
-.....\l_fontspec_font 𝗑
-.....\l_fontspec_font 𝗒
-.....\l_fontspec_font 𝗓
+.....\EU2/xits-math.otf(3)/m/n/10 𝗀
+.....\EU2/xits-math.otf(3)/m/n/10 𝗁
+.....\EU2/xits-math.otf(3)/m/n/10 𝗂
+.....\EU2/xits-math.otf(3)/m/n/10 𝗃
+.....\EU2/xits-math.otf(3)/m/n/10 𝗄
+.....\EU2/xits-math.otf(3)/m/n/10 𝗅
+.....\EU2/xits-math.otf(3)/m/n/10 𝗆
+.....\EU2/xits-math.otf(3)/m/n/10 𝗇
+.....\EU2/xits-math.otf(3)/m/n/10 𝗈
+.....\EU2/xits-math.otf(3)/m/n/10 𝗉
+.....\EU2/xits-math.otf(3)/m/n/10 𝗊
+.....\EU2/xits-math.otf(3)/m/n/10 𝗋
+.....\EU2/xits-math.otf(3)/m/n/10 𝗌
+.....\EU2/xits-math.otf(3)/m/n/10 𝗍
+.....\EU2/xits-math.otf(3)/m/n/10 𝗎
+.....\EU2/xits-math.otf(3)/m/n/10 𝗏
+.....\EU2/xits-math.otf(3)/m/n/10 𝗐
+.....\EU2/xits-math.otf(3)/m/n/10 𝗑
+.....\EU2/xits-math.otf(3)/m/n/10 𝗒
+.....\EU2/xits-math.otf(3)/m/n/10 𝗓
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -208,31 +270,31 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 2.92
 ...\hbox(6.92+0.19)x181.0, shifted 23.31104, direction TLT
 ....\hbox(6.92+0.19)x181.0, direction TLT
-.....\l_fontspec_font 𝚨
-.....\l_fontspec_font 𝚩
-.....\l_fontspec_font 𝚪
-.....\l_fontspec_font 𝚫
-.....\l_fontspec_font 𝚬
-.....\l_fontspec_font 𝚭
-.....\l_fontspec_font 𝚮
-.....\l_fontspec_font 𝚯
-.....\l_fontspec_font 𝚹
-.....\l_fontspec_font 𝚰
-.....\l_fontspec_font 𝚱
-.....\l_fontspec_font 𝚲
-.....\l_fontspec_font 𝚳
-.....\l_fontspec_font 𝚴
-.....\l_fontspec_font 𝚵
-.....\l_fontspec_font 𝚶
-.....\l_fontspec_font 𝚷
-.....\l_fontspec_font 𝚸
-.....\l_fontspec_font 𝚺
-.....\l_fontspec_font 𝚻
-.....\l_fontspec_font 𝚼
-.....\l_fontspec_font 𝚽
-.....\l_fontspec_font 𝚾
-.....\l_fontspec_font 𝚿
-.....\l_fontspec_font 𝛀
+.....\EU2/xits-math.otf(3)/m/n/10 𝚨
+.....\EU2/xits-math.otf(3)/m/n/10 𝚩
+.....\EU2/xits-math.otf(3)/m/n/10 𝚪
+.....\EU2/xits-math.otf(3)/m/n/10 𝚫
+.....\EU2/xits-math.otf(3)/m/n/10 𝚬
+.....\EU2/xits-math.otf(3)/m/n/10 𝚭
+.....\EU2/xits-math.otf(3)/m/n/10 𝚮
+.....\EU2/xits-math.otf(3)/m/n/10 𝚯
+.....\EU2/xits-math.otf(3)/m/n/10 𝚹
+.....\EU2/xits-math.otf(3)/m/n/10 𝚰
+.....\EU2/xits-math.otf(3)/m/n/10 𝚱
+.....\EU2/xits-math.otf(3)/m/n/10 𝚲
+.....\EU2/xits-math.otf(3)/m/n/10 𝚳
+.....\EU2/xits-math.otf(3)/m/n/10 𝚴
+.....\EU2/xits-math.otf(3)/m/n/10 𝚵
+.....\EU2/xits-math.otf(3)/m/n/10 𝚶
+.....\EU2/xits-math.otf(3)/m/n/10 𝚷
+.....\EU2/xits-math.otf(3)/m/n/10 𝚸
+.....\EU2/xits-math.otf(3)/m/n/10 𝚺
+.....\EU2/xits-math.otf(3)/m/n/10 𝚻
+.....\EU2/xits-math.otf(3)/m/n/10 𝚼
+.....\EU2/xits-math.otf(3)/m/n/10 𝚽
+.....\EU2/xits-math.otf(3)/m/n/10 𝚾
+.....\EU2/xits-math.otf(3)/m/n/10 𝚿
+.....\EU2/xits-math.otf(3)/m/n/10 𝛀
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -240,106 +302,107 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 4.83
 ...\hbox(6.98+2.05)x187.06998, shifted 20.27605, direction TLT
 ....\hbox(6.98+2.05)x187.06998, direction TLT
-.....\l_fontspec_font 𝜶
+.....\EU2/xits-math.otf(3)/m/n/10 𝜶
 .....\kern0.4
-.....\l_fontspec_font 𝜷
+.....\EU2/xits-math.otf(3)/m/n/10 𝜷
 .....\kern0.7
-.....\l_fontspec_font 𝜸
+.....\EU2/xits-math.otf(3)/m/n/10 𝜸
 .....\kern0.53
-.....\l_fontspec_font 𝜹
-.....\l_fontspec_font 𝜺
-.....\l_fontspec_font 𝝐
+.....\EU2/xits-math.otf(3)/m/n/10 𝜹
+.....\EU2/xits-math.otf(3)/m/n/10 𝜺
+.....\EU2/xits-math.otf(3)/m/n/10 𝝐
 .....\kern0.4
-.....\l_fontspec_font 𝜻
+.....\EU2/xits-math.otf(3)/m/n/10 𝜻
 .....\kern0.9
-.....\l_fontspec_font 𝜼
-.....\l_fontspec_font 𝜽
-.....\l_fontspec_font 𝝑
-.....\l_fontspec_font 𝜾
-.....\l_fontspec_font 𝜿
+.....\EU2/xits-math.otf(3)/m/n/10 𝜼
+.....\EU2/xits-math.otf(3)/m/n/10 𝜽
+.....\EU2/xits-math.otf(3)/m/n/10 𝝑
+.....\EU2/xits-math.otf(3)/m/n/10 𝜾
+.....\EU2/xits-math.otf(3)/m/n/10 𝜿
 .....\kern0.5
-.....\l_fontspec_font 𝝒
+.....\EU2/xits-math.otf(3)/m/n/10 𝝒
 .....\kern0.6
-.....\l_fontspec_font 𝝀
-.....\l_fontspec_font 𝝁
-.....\l_fontspec_font 𝝂
+.....\EU2/xits-math.otf(3)/m/n/10 𝝀
+.....\EU2/xits-math.otf(3)/m/n/10 𝝁
+.....\EU2/xits-math.otf(3)/m/n/10 𝝂
 .....\kern0.5
-.....\l_fontspec_font 𝝃
+.....\EU2/xits-math.otf(3)/m/n/10 𝝃
 .....\kern0.5
-.....\l_fontspec_font 𝝄
-.....\l_fontspec_font 𝝅
+.....\EU2/xits-math.otf(3)/m/n/10 𝝄
+.....\EU2/xits-math.otf(3)/m/n/10 𝝅
 .....\kern0.5
-.....\l_fontspec_font 𝝕
+.....\EU2/xits-math.otf(3)/m/n/10 𝝕
 .....\kern0.5
-.....\l_fontspec_font 𝝆
-.....\l_fontspec_font 𝝔
-.....\l_fontspec_font 𝝇
+.....\EU2/xits-math.otf(3)/m/n/10 𝝆
+.....\EU2/xits-math.otf(3)/m/n/10 𝝔
+.....\EU2/xits-math.otf(3)/m/n/10 𝝇
 .....\kern0.7
-.....\l_fontspec_font 𝝈
+.....\EU2/xits-math.otf(3)/m/n/10 𝝈
 .....\kern0.5
-.....\l_fontspec_font 𝝉
+.....\EU2/xits-math.otf(3)/m/n/10 𝝉
 .....\kern0.8
-.....\l_fontspec_font 𝝊
-.....\l_fontspec_font 𝝋
-.....\l_fontspec_font 𝝓
-.....\l_fontspec_font 𝝌
+.....\EU2/xits-math.otf(3)/m/n/10 𝝊
+.....\EU2/xits-math.otf(3)/m/n/10 𝝋
+.....\EU2/xits-math.otf(3)/m/n/10 𝝓
+.....\EU2/xits-math.otf(3)/m/n/10 𝝌
 .....\kern0.95
-.....\l_fontspec_font 𝝍
+.....\EU2/xits-math.otf(3)/m/n/10 𝝍
 .....\kern0.95
-.....\l_fontspec_font 𝝎
+.....\EU2/xits-math.otf(3)/m/n/10 𝝎
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
 ...\glue(\abovedisplayshortskip) 0.0 plus 3.0
 ...\glue(\baselineskip) 3.26
-...\hbox(6.69+0.11)x197.91995, shifted 14.85106, direction TLT
-....\hbox(6.69+0.11)x197.91995, direction TLT
-.....\l_fontspec_font 𝛢
-.....\l_fontspec_font 𝛣
+...\hbox(6.69+0.11)x197.65994, shifted 14.98106, direction TLT
+....\hbox(6.69+0.11)x197.65994, direction TLT
+.....\EU2/xits-math.otf(3)/m/n/10 𝛢
+.....\EU2/xits-math.otf(3)/m/n/10 𝛣
 .....\kern0.4
-.....\l_fontspec_font 𝛤
+.....\EU2/xits-math.otf(3)/m/n/10 𝛤
 .....\kern1.45
-.....\l_fontspec_font 𝛥
-.....\l_fontspec_font 𝛦
+.....\EU2/xits-math.otf(3)/m/n/10 𝛥
+.....\EU2/xits-math.otf(3)/m/n/10 𝛦
 .....\kern0.6
-.....\l_fontspec_font 𝛧
+.....\EU2/xits-math.otf(3)/m/n/10 𝛧
 .....\kern0.7
-.....\l_fontspec_font 𝛨
+.....\EU2/xits-math.otf(3)/m/n/10 𝛨
 .....\kern0.9
-.....\l_fontspec_font 𝛩
+.....\EU2/xits-math.otf(3)/m/n/10 𝛩
 .....\kern0.15
-.....\l_fontspec_font 𝛳
+.....\EU2/xits-math.otf(3)/m/n/10 𝛳
 .....\kern0.15
-.....\l_fontspec_font 𝛪
+.....\EU2/xits-math.otf(3)/m/n/10 𝛪
 .....\kern0.9
-.....\l_fontspec_font 𝛫
+.....\EU2/xits-math.otf(3)/m/n/10 𝛫
 .....\kern0.7
-.....\l_fontspec_font 𝛬
-.....\l_fontspec_font 𝛭
+.....\EU2/xits-math.otf(3)/m/n/10 𝛬
+.....\EU2/xits-math.otf(3)/m/n/10 𝛭
 .....\kern0.9
-.....\l_fontspec_font 𝛮
+.....\EU2/xits-math.otf(3)/m/n/10 𝛮
 .....\kern0.9
-.....\l_fontspec_font 𝛯
+.....\EU2/xits-math.otf(3)/m/n/10 𝛯
 .....\kern0.75
-.....\l_fontspec_font 𝛰
+.....\EU2/xits-math.otf(3)/m/n/10 𝛰
 .....\kern0.2
-.....\l_fontspec_font 𝛱
+.....\EU2/xits-math.otf(3)/m/n/10 𝛱
 .....\kern0.9
-.....\l_fontspec_font 𝛲
+.....\EU2/xits-math.otf(3)/m/n/10 𝛲
 .....\kern1.5
-.....\l_fontspec_font 𝛴
+.....\EU2/xits-math.otf(3)/m/n/10 𝛴
 .....\kern0.65
-.....\l_fontspec_font 𝛵
+.....\EU2/xits-math.otf(3)/m/n/10 𝛵
 .....\kern1.6
-.....\l_fontspec_font 𝛶
+.....\EU2/xits-math.otf(3)/m/n/10 𝛶
 .....\kern1.6
-.....\l_fontspec_font 𝛷
+.....\EU2/xits-math.otf(3)/m/n/10 𝛷
 .....\kern0.15
-.....\l_fontspec_font 𝛸
+.....\EU2/xits-math.otf(3)/m/n/10 𝛸
 .....\kern0.6
-.....\l_fontspec_font 𝛹
+.....\EU2/xits-math.otf(3)/m/n/10 𝛹
 .....\kern1.13
-.....\l_fontspec_font 𝛺
+.....\EU2/xits-math.otf(3)/m/n/10 𝛺
+.....\kern0.2
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -347,38 +410,38 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 5.06
 ...\hbox(6.83+2.2)x160.0, shifted 33.81104, direction TLT
 ....\hbox(6.83+2.2)x160.0, direction TLT
-.....\l_fontspec_font α
-.....\l_fontspec_font β
-.....\l_fontspec_font γ
-.....\l_fontspec_font δ
-.....\l_fontspec_font ε
-.....\l_fontspec_font ϵ
-.....\l_fontspec_font ζ
-.....\l_fontspec_font η
-.....\l_fontspec_font θ
-.....\l_fontspec_font ϑ
-.....\l_fontspec_font ι
-.....\l_fontspec_font κ
-.....\l_fontspec_font ϰ
-.....\l_fontspec_font λ
-.....\l_fontspec_font μ
-.....\l_fontspec_font ν
-.....\l_fontspec_font ξ
-.....\l_fontspec_font ο
-.....\l_fontspec_font π
-.....\l_fontspec_font ϖ
-.....\l_fontspec_font ρ
-.....\l_fontspec_font ϱ
-.....\l_fontspec_font ς
-.....\l_fontspec_font σ
-.....\l_fontspec_font τ
-.....\l_fontspec_font υ
-.....\l_fontspec_font φ
-.....\l_fontspec_font ϕ
-.....\l_fontspec_font χ
-.....\l_fontspec_font ψ
+.....\EU2/xits-math.otf(3)/m/n/10 α
+.....\EU2/xits-math.otf(3)/m/n/10 β
+.....\EU2/xits-math.otf(3)/m/n/10 γ
+.....\EU2/xits-math.otf(3)/m/n/10 δ
+.....\EU2/xits-math.otf(3)/m/n/10 ε
+.....\EU2/xits-math.otf(3)/m/n/10 ϵ
+.....\EU2/xits-math.otf(3)/m/n/10 ζ
+.....\EU2/xits-math.otf(3)/m/n/10 η
+.....\EU2/xits-math.otf(3)/m/n/10 θ
+.....\EU2/xits-math.otf(3)/m/n/10 ϑ
+.....\EU2/xits-math.otf(3)/m/n/10 ι
+.....\EU2/xits-math.otf(3)/m/n/10 κ
+.....\EU2/xits-math.otf(3)/m/n/10 ϰ
+.....\EU2/xits-math.otf(3)/m/n/10 λ
+.....\EU2/xits-math.otf(3)/m/n/10 μ
+.....\EU2/xits-math.otf(3)/m/n/10 ν
+.....\EU2/xits-math.otf(3)/m/n/10 ξ
+.....\EU2/xits-math.otf(3)/m/n/10 ο
+.....\EU2/xits-math.otf(3)/m/n/10 π
+.....\EU2/xits-math.otf(3)/m/n/10 ϖ
+.....\EU2/xits-math.otf(3)/m/n/10 ρ
+.....\EU2/xits-math.otf(3)/m/n/10 ϱ
+.....\EU2/xits-math.otf(3)/m/n/10 ς
+.....\EU2/xits-math.otf(3)/m/n/10 σ
+.....\EU2/xits-math.otf(3)/m/n/10 τ
+.....\EU2/xits-math.otf(3)/m/n/10 υ
+.....\EU2/xits-math.otf(3)/m/n/10 φ
+.....\EU2/xits-math.otf(3)/m/n/10 ϕ
+.....\EU2/xits-math.otf(3)/m/n/10 χ
+.....\EU2/xits-math.otf(3)/m/n/10 ψ
 .....\kern0.4
-.....\l_fontspec_font ω
+.....\EU2/xits-math.otf(3)/m/n/10 ω
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\glue 0.0 plus 1.0fil

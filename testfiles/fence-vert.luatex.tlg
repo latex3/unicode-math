@@ -1,17 +1,74 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-LaTeX Font Info:    Font shape `TU/CambriaMath(1)/m/n' will be
-(Font)              scaled to size 10.00015pt on input line ....
-LaTeX Font Info:    Font shape `TU/CambriaMath(1)/m/n' will be
-(Font)              scaled to size 7.0001pt on input line ....
-LaTeX Font Info:    Font shape `TU/CambriaMath(1)/m/n' will be
-(Font)              scaled to size 5.00008pt on input line ....
-LaTeX Font Info:    Font shape `TU/CambriaMath(2)/m/n' will be
-(Font)              scaled to size 9.99985pt on input line ....
-LaTeX Font Info:    Font shape `TU/CambriaMath(2)/m/n' will be
-(Font)              scaled to size 6.9999pt on input line ....
-LaTeX Font Info:    Font shape `TU/CambriaMath(2)/m/n' will be
-(Font)              scaled to size 4.99992pt on input line ....
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count293
+\scratchdimen=\dimen261
+\scratchbox=\box256
+\nofMPsegments=\count294
+\nofMParguments=\count295
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count296
+\MPscratchDim=\dimen262
+\MPnumerator=\count297
+\makeMPintoPDFobject=\count298
+\everyMPtoPDFconversion=\toks19
+) (../pdftexcmds.sty
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+(/usr/local/texlive/2015/texmf-dist/scripts/oberdiek/pdftexcmds.lua)
+\pdftexcmds@toks=\toks20
+)
+(../epstopdf-base.sty
+(../grfext.sty
+(../kvdefinekeys.sty
+))
+(../kvoptions.sty
+(../kvsetkeys.sty
+(../etexcmds.sty
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.tif,.jpeg,.PNG,.PDF,.JPG,.JPEG,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(../epstopdf-sys.cfg
+))
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 10.00015pt on input line 5.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 7.2746pt on input line 5.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(1)/m/n' will be
+(Font)              scaled to size 6.0294pt on input line 5.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 9.99985pt on input line 5.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 7.27437pt on input line 5.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
+LaTeX Font Info:    Font shape `EU2/CambriaMath(2)/m/n' will be
+(Font)              scaled to size 6.0292pt on input line 5.
+luaotfload | load : Lookup/name: "CambriaMath" -> "Cambria Math 100.ttf"
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845, direction TLT
 .\glue -95.04362
@@ -25,7 +82,7 @@ Completed box being shipped out [1]
 ...\write-{}
 ...\glue(\topskip) 10.0
 ...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
-....\localpar
+....\whatsit
 .....\localinterlinepenalty=0
 .....\localbrokenpenalty=0
 .....\localleftbox=null
@@ -40,57 +97,57 @@ Completed box being shipped out [1]
 ...\penalty 10000
 ...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\lineskip) 1.0
-...\hbox(21.1938+15.481)x71.87979, shifted 77.87114, direction TLT
-....\hbox(21.1938+15.481)x71.87979, direction TLT
+...\hbox(21.1938+15.481)x72.83276, shifted 77.39465, direction TLT
+....\hbox(21.1938+15.481)x72.83276, direction TLT
 .....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
-......\l_fontspec_font 󰛩
-.....\hbox(17.6855+11.9727)x60.60783, direction TLT
+......\l_fontspec_font 󰦶
+.....\hbox(18.3116+11.9727)x61.40198, direction TLT
 ......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
-.......\l_fontspec_font 󰘶
-......\hbox(15.47359+9.76079)x49.51166, direction TLT
+.......\l_fontspec_font 󰘪
+......\hbox(15.95781+9.76079)x50.14697, direction TLT
 .......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
-........\l_fontspec_font 󰛟
-.......\hbox(13.25688+7.08989)x38.46431, direction TLT
+........\l_fontspec_font 󰦬
+.......\hbox(13.60402+7.08989)x38.9408, direction TLT
 ........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
-.........\l_fontspec_font 󰘵
-........\hbox(11.07666+5.34673)x27.54391, direction TLT
+.........\l_fontspec_font 󰘩
+........\hbox(11.25023+5.34673)x27.86157, direction TLT
 .........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
-..........\l_fontspec_font 󰛕
-.........\hbox(8.89644+3.18364)x16.66258, direction TLT
+..........\l_fontspec_font 󰦢
+.........\hbox(8.89644+3.18364)x16.82141, direction TLT
 ..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
-...........\l_fontspec_font 󰘴
+...........\l_fontspec_font 󰘨
 ..........\l_fontspec_font 𝑥
 ..........\kern0.30273
 ..........\kern0.24414
-..........\hbox(4.42627+0.0)x4.46532, shifted -3.66205, direction TLT
-...........\TU/CambriaMath(0)/m/n/7 2
+..........\hbox(4.59984+0.0)x4.62415, shifted -3.66205, direction TLT
+...........\EU2/CambriaMath(0)/m/n/7.27449 2
 ..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
-...........\l_fontspec_font 󰘴
-.........\hbox(4.42627+0.0)x4.46532, shifted -6.65039, direction TLT
-..........\TU/CambriaMath(0)/m/n/7 2
+...........\l_fontspec_font 󰘨
+.........\hbox(4.59984+0.0)x4.62415, shifted -6.65039, direction TLT
+..........\EU2/CambriaMath(0)/m/n/7.27449 2
 .........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
-..........\l_fontspec_font 󰛕
-........\hbox(4.42627+0.0)x4.46532, shifted -8.83061, direction TLT
-.........\TU/CambriaMath(0)/m/n/7 2
+..........\l_fontspec_font 󰦢
+........\hbox(4.59984+0.0)x4.62415, shifted -9.00418, direction TLT
+.........\EU2/CambriaMath(0)/m/n/7.27449 2
 ........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
-.........\l_fontspec_font 󰘵
-.......\hbox(4.42627+0.0)x4.46532, shifted -11.01083, direction TLT
-........\TU/CambriaMath(0)/m/n/7 2
+.........\l_fontspec_font 󰘩
+.......\hbox(4.59984+0.0)x4.62415, shifted -11.35797, direction TLT
+........\EU2/CambriaMath(0)/m/n/7.27449 2
 .......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
-........\l_fontspec_font 󰛟
-......\hbox(4.42627+0.0)x4.46532, shifted -13.22754, direction TLT
-.......\TU/CambriaMath(0)/m/n/7 2
+........\l_fontspec_font 󰦬
+......\hbox(4.59984+0.0)x4.62415, shifted -13.71176, direction TLT
+.......\EU2/CambriaMath(0)/m/n/7.27449 2
 ......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
-.......\l_fontspec_font 󰘶
-.....\hbox(4.42627+0.0)x4.46532, shifted -15.43945, direction TLT
-......\TU/CambriaMath(0)/m/n/7 2
+.......\l_fontspec_font 󰘪
+.....\hbox(4.59984+0.0)x4.62415, shifted -16.06555, direction TLT
+......\EU2/CambriaMath(0)/m/n/7.27449 2
 .....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
-......\l_fontspec_font 󰛩
+......\l_fontspec_font 󰦶
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\parskip) 0.0 plus 1.0
 ...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
-....\localpar
+....\whatsit
 .....\localinterlinepenalty=0
 .....\localbrokenpenalty=0
 .....\localleftbox=null
@@ -105,52 +162,52 @@ Completed box being shipped out [1]
 ...\penalty 10000
 ...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\lineskip) 1.0
-...\hbox(21.1938+15.481)x71.87979, shifted 77.87114, direction TLT
-....\hbox(21.1938+15.481)x71.87979, direction TLT
+...\hbox(21.1938+15.481)x72.83276, shifted 77.39465, direction TLT
+....\hbox(21.1938+15.481)x72.83276, direction TLT
 .....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
-......\l_fontspec_font 󰛩
-.....\hbox(17.6855+11.9727)x60.60783, direction TLT
+......\l_fontspec_font 󰦶
+.....\hbox(18.3116+11.9727)x61.40198, direction TLT
 ......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
-.......\l_fontspec_font 󰘶
-......\hbox(15.47359+9.76079)x49.51166, direction TLT
+.......\l_fontspec_font 󰘪
+......\hbox(15.95781+9.76079)x50.14697, direction TLT
 .......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
-........\l_fontspec_font 󰛟
-.......\hbox(13.25688+7.08989)x38.46431, direction TLT
+........\l_fontspec_font 󰦬
+.......\hbox(13.60402+7.08989)x38.9408, direction TLT
 ........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
-.........\l_fontspec_font 󰘵
-........\hbox(11.07666+5.34673)x27.54391, direction TLT
+.........\l_fontspec_font 󰘩
+........\hbox(11.25023+5.34673)x27.86157, direction TLT
 .........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
-..........\l_fontspec_font 󰛕
-.........\hbox(8.89644+3.18364)x16.66258, direction TLT
+..........\l_fontspec_font 󰦢
+.........\hbox(8.89644+3.18364)x16.82141, direction TLT
 ..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
-...........\l_fontspec_font 󰘴
+...........\l_fontspec_font 󰘨
 ..........\l_fontspec_font 𝑥
 ..........\kern0.30273
 ..........\kern0.24414
-..........\hbox(4.42627+0.0)x4.46532, shifted -3.66205, direction TLT
-...........\TU/CambriaMath(0)/m/n/7 2
+..........\hbox(4.59984+0.0)x4.62415, shifted -3.66205, direction TLT
+...........\EU2/CambriaMath(0)/m/n/7.27449 2
 ..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
-...........\l_fontspec_font 󰘴
-.........\hbox(4.42627+0.0)x4.46532, shifted -6.65039, direction TLT
-..........\TU/CambriaMath(0)/m/n/7 2
+...........\l_fontspec_font 󰘨
+.........\hbox(4.59984+0.0)x4.62415, shifted -6.65039, direction TLT
+..........\EU2/CambriaMath(0)/m/n/7.27449 2
 .........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
-..........\l_fontspec_font 󰛕
-........\hbox(4.42627+0.0)x4.46532, shifted -8.83061, direction TLT
-.........\TU/CambriaMath(0)/m/n/7 2
+..........\l_fontspec_font 󰦢
+........\hbox(4.59984+0.0)x4.62415, shifted -9.00418, direction TLT
+.........\EU2/CambriaMath(0)/m/n/7.27449 2
 ........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
-.........\l_fontspec_font 󰘵
-.......\hbox(4.42627+0.0)x4.46532, shifted -11.01083, direction TLT
-........\TU/CambriaMath(0)/m/n/7 2
+.........\l_fontspec_font 󰘩
+.......\hbox(4.59984+0.0)x4.62415, shifted -11.35797, direction TLT
+........\EU2/CambriaMath(0)/m/n/7.27449 2
 .......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
-........\l_fontspec_font 󰛟
-......\hbox(4.42627+0.0)x4.46532, shifted -13.22754, direction TLT
-.......\TU/CambriaMath(0)/m/n/7 2
+........\l_fontspec_font 󰦬
+......\hbox(4.59984+0.0)x4.62415, shifted -13.71176, direction TLT
+.......\EU2/CambriaMath(0)/m/n/7.27449 2
 ......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
-.......\l_fontspec_font 󰘶
-.....\hbox(4.42627+0.0)x4.46532, shifted -15.43945, direction TLT
-......\TU/CambriaMath(0)/m/n/7 2
+.......\l_fontspec_font 󰘪
+.....\hbox(4.59984+0.0)x4.62415, shifted -16.06555, direction TLT
+......\EU2/CambriaMath(0)/m/n/7.27449 2
 .....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
-......\l_fontspec_font 󰛩
+......\l_fontspec_font 󰦶
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue 0.0 plus 1.0fil
