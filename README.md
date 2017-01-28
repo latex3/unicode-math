@@ -81,6 +81,10 @@ Please file bug reports with minimal examples:
 CHANGE HISTORY
 --------------
 
+- v0.8e ()
+
+  * Add `\surd` to access the sqrt symbol.
+
 - v0.8d (2017/01/25)
 
   * `vargreek-shape=TeX` and `vargreek-shape=unicode` package options dropped; for consistency and compatibility, `\phi` and `\epsilon` should and will now behave the same as in `TeX`.
