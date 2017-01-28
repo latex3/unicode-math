@@ -30,3 +30,5 @@ umtable.tex
 *.synctex*
 
 .DS_Store
+
+unicode-math/
