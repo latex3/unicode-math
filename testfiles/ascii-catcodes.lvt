@@ -1,4 +1,6 @@
 \input{umtest-preamble}
+\START
+\OMIT
 \usepackage{unicode-math}
 \begin{document}
 
@@ -10,8 +12,10 @@
 
 \setmathfont{xits-math.otf}
 
+\TIMO
 \typeout{catcode of "\string _" - \the\catcode`\_}
 \typeout{catcode of "\string :" - \the\catcode`\:}
 \typeout{catcode of "\string @" - \the\catcode`\@}
+\OMIT
 
 \end{document}

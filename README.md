@@ -38,7 +38,7 @@ new releases.
 [MM]: http://www.typoma.com/en/fonts.html
 [LM]: http://www.gust.org.pl/projects/e-foundry/lm-math
 [PM]: http://www.ctan.org/pkg/tex-gyre-math-pagella
-[AM]: http://www.ctan.org/tex-archive/fonts/Asana-Math/
+[AM]: http://www.ctan.org/pkg/asana-math
 [NE]: http://github.com/khaledhosny/euler-otf
 [SM]: http://www.aip.org/stixfonts/
 [XM]: http://github.com/khaledhosny/xits-math
@@ -81,14 +81,18 @@ Please file bug reports with minimal examples:
 CHANGE HISTORY
 --------------
 
-- v0.9 (2017/01/25)
+- v0.8e ()
 
- * `vargreek-shape=TeX` and `vargreek-shape=unicode` package options dropped; for consistency and compatibility, `\phi` and `\epsilon` should and will now behave the same as in `TeX`.
- * On that note, when using control sequences such as `\mbfitsansvarphi` (and so on), there were a few faulty definitions. The new behaviour is to consistenyl define the `varphi` and `varepsilon` ones as those with the "curly" designs.
- * Add `\wideoverbar`, `\widebreve`, `\widecheck`.
- * Add `\mathsection`, `\mathparagraph`.
- * Remove `\mupvarbeta`, `upold(Kk)oppa`, `\up(Ss)tigma`, `\up(Kk)oppa`, `\up(Ss)ampi` — none of these are maths symbols.
- * `!` (`\mathexclam`) changed from `\mathpunct` to `\mathclose` for backwards compatibility with TeX.
+  * Add `\surd` to access the sqrt symbol.
+
+- v0.8d (2017/01/25)
+
+  * `vargreek-shape=TeX` and `vargreek-shape=unicode` package options dropped; for consistency and compatibility, `\phi` and `\epsilon` should and will now behave the same as in `TeX`.
+  * On that note, when using control sequences such as `\mbfitsansvarphi` (and so on), there were a few faulty definitions. The new behaviour is to consistenyl define the `varphi` and `varepsilon` ones as those with the "curly" designs.
+  * Add `\wideoverbar`, `\widebreve`, `\widecheck`.
+  * Add `\mathsection`, `\mathparagraph`.
+  * Remove `\mupvarbeta`, `upold(Kk)oppa`, `\up(Ss)tigma`, `\up(Kk)oppa`, `\up(Ss)ampi` — none of these are maths symbols.
+  * `!` (`\mathexclam`) changed from `\mathpunct` to `\mathclose` for backwards compatibility with TeX.
 
 - v0.8c (2015/09/24)
 
