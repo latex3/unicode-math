@@ -1,0 +1,12 @@
+\input{umtest-preamble}
+\OMIT
+\usepackage{unicode-math}
+\begin{document}
+\setmathfont{xits-math.otf}
+\TIMO
+\[ \vec a \quad \vec{a} \quad \vec{abc} \quad
+\overrightarrow{abc} \quad \overleftarrow{abc} \quad
+\overleftrightarrow{abc} \quad
+\underrightarrow{abc} \quad \underleftarrow{abc} \quad
+\underleftrightarrow{abc} \]
+\end{document}

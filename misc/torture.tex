@@ -1,0 +1,760 @@
+% Torture test for math fonts (Mostly from TeX book, some via Karl Berry)
+
+% run in plain TeX
+
+% verbose mode:
+% \tracingoutput = 1
+% \tracingboxes
+
+\def\newpage{\vfill\eject}
+
+% Following is for even bigger sizes than plain provides (for CMEX10 at 10pt)
+\def\biggg#1{{\hbox{$\left#1\vbox to20.5pt{}\right.$}}}
+\def\bigggl{\mathopen\biggg}
+\def\bigggr{\mathclose\biggg}
+\def\Biggg#1{{\hbox{$\left#1\vbox to23.5pt{}\right.$}}}
+\def\Bigggl{\mathopen\Biggg}
+\def\Bigggr{\mathclose\Biggg}
+
+% NOTE: The above is for CM.  All of it subsumed by code in lcdplain.tex...
+
+\input lcdplain.tex	% 
+\input texnansi.tex
+
+% Change general typesetting parameters.
+% 
+\rm
+% \headline = {{\tenrm\folio} \hfil \timestamp}
+\headline = {\hfil {\tenrm\folio} \hfil}
+\footline = {}
+\advance\vsize by .1in
+\raggedbottom
+\raggedright
+\rightskip = 2em plus 5em minus 2em
+\parindent = 0pt
+\parskip = .5\baselineskip
+
+
+% Test the basic character repertoire: we go through the math symbols
+% listed in Appendix F of the TeXbook.  This code is based on the \math
+% test in testfont.tex.  
+
+% Apply \\ to roman and Greek upper- and lowercase, and script
+% uppercase.  Use \ii and \jj for `i' and `j', since sometimes we want
+% the dotless versions.
+\def\lettertrial{Letters: $
+  \\A \\B \\C \\D \\E \\F \\G \\H \\I \\J \\K \\L \\M \\N \\O \\P \\Q
+  \\R \\S \\T \\U \\V \\W \\X \\Y \\Z
+  $\par$
+  \\a \\b \\c \\d \\e \\f \\g \\h \\\ii \\\jj \\k \\l \\m \\n \\o \\p
+  \\q \\r \\s \\t \\u \\v \\w \\x \\y \\z
+  $\par$
+  \\\alpha \\\beta \\\gamma \\\delta \\\epsilon \\\zeta \\\eta \\\theta
+  \\\vartheta \\\iota \\\kappa \\\lambda \\\mu \\\nu \\\xi \\\pi
+  \\\varpi \\\rho \\\sigma \\\tau \\\upsilon \\\phi \\\varphi \\\chi
+  \\\psi \\\omega
+  $\par$
+  \\\Gamma \\\Delta \\\Theta \\\Lambda \\\Xi \\\Pi \\\Sigma \\\Upsilon
+  \\\Phi \\\Psi \\\Omega
+  $\par$
+  \\\scriptA \\\scriptB \\\scriptC \\\scriptD \\\scriptE \\\scriptF
+  \\\scriptG \\\scriptH \\\scriptI \\\scriptJ \\\scriptK \\\scriptL
+  \\\scriptM \\\scriptN \\\scriptO \\\scriptP \\\scriptQ \\\scriptR
+  \\\scriptS \\\scriptT \\\scriptU \\\scriptV \\\scriptW \\\scriptX
+  \\\scriptY \\\scriptZ
+  $\par
+}
+
+% NOTE: present release of TeXtures has a problem with on-screen display of
+% characters with codes above 128 due to attempt to remap from Mac encoding
+% to StandardEncoding, which is inappropriate for math fonts.
+% So some of the upper case Greek characters will display wrong (but print OK).
+
+% Test miscellanous Ord symbols, except for \imath and \jmath.
+\def\miscordtrial{Miscellanous ordinary symbols: $
+  \\\aleph \\\hbar \\\ell \\\wp \\\Re \\\Im \\\partial \\\infty
+  \\\emptyset \\\nabla \\\surd \\\top \\\bot \\\| \\\angle \\\triangle
+  \\\backslash \\\forall \\\exists \\\neg \\\flat \\\natural \\\sharp
+  \\\clubsuit \\\diamondsuit \\\heartsuit \\\spadesuit \\! \\? \\. \\|
+  \\/ \\` \\@ \\"
+  $\par
+}
+
+% Test the various styles of digits.
+\def\digittest{Digits: $0123456789$, $\oldstyle 0123456789$\par}
+
+% Test large operators.
+\def\largeoptrial{Large operators: $
+  \\\sum \\\prod \\\coprod \\\int \\\oint \\\bigcap \\\bigcup
+  \\\bigsqcup \\\bigvee \\\bigwedge \\\bigodot \\\bigotimes \\\bigoplus
+  \\\biguplus
+  $\par
+}
+
+% Binary operators.
+\def\binoptrial{Binary operators: $
+  \\\pm \\\cap \\\vee \\\mp \\\cup \\\wedge \\\setminus \\\uplus
+  \\\oplus \\\cdot \\\sqcap \\\ominus \\\times \\\sqcup \\\otimes \\\ast
+  \\\triangleleft \\\oslash \\\star \\\triangleright \\\odot \\\diamond
+  \\\wr \\\dagger \\\circ \\\bigcirc \\\ddagger \\\bullet
+  \\\bigtriangleup \\\amalg \\\div \\\bigtriangledown \\* \\+ \\-
+  $\par
+}
+
+% \bmod and \pmod, from p.164 of the TeXbook.
+\def\modtest{Mod: 
+  $\gcd(m,n) = \gcd(n,m \bmod n)$, and
+  $x\equiv y+1 \pmod{m^2}$.
+  \par
+}
+
+% Relations.
+\def\relationtrial{Relations: $
+  \\\leq \\\geq \\\equiv \\\prec \\\succ \\\approx  \\\preceq \\\succeq
+  \\\asymp \\\subset \\\supset \\\sim \\\subseteq
+  \\\supseteq \\\simeq \\\sqsubseteq \\\sqsupseteq
+  \\\cong \\\in \\\ni \\\vdash \\\models 
+  \\\parallel \\= \\< \\> \\\mid \\\propto \\\ll \\\gg 
+  \\\bowtie \\\dashv \\\smile \\\frown \\\doteq \\\perp \\: 
+% \\\ne
+  $\par
+}
+
+% Negated relations (for LucidaBright test to use actual composite chars)
+\def\modrelationtrial{Relations: $
+  \\\notleq \\\notgeq \\\notequiv \\\notprec \\\notsucc \\\notapprox
+  \\\notpreceq \\\notsucceq 
+  \\\notasymp \\\notsubset \\\notsupset \\\notsim \\\notsubseteq 
+  \\\notsupseteq \\\notsimeq \\\notsqsubseteq \\\notsqsupseteq
+  \\\notcong \\\notin \\\notni \\\notvdash \\\notmodels
+  \\\notparallel \\\noteq \\\notless \\\notgreater \\{\notmid}
+% no compound character available for the following
+  \\{\not\propto} \\{\not\ll} \\{\not\gg} 
+  \\{\not\bowtie} \\{\not\dashv} \\{\not\smile} \\{\not\frown}
+  \\{\not\doteq} \\{\not\perp} 
+% \\{\not:} \\{\not\ne}
+  $\par
+}
+
+% Negated relations (version for CM)
+\def\negrelationtrial{Negated \begingroup
+  \let\temp = \\%
+  \def\\##1{\temp{\not##1}}%
+  \let\par = \relax
+  \relationtrial
+  $\temp\notin$
+  \endgraf
+\endgroup}
+
+% Negated relations (modified for LucidaBright)
+\def\negrelationtrial{Negated \begingroup
+  \let\temp = \\%
+  \def\\##1{\temp{##1}}%
+  \let\par = \relax
+  \modrelationtrial
+  $\temp\notin$
+  \endgraf
+\endgroup}
+
+% Arrows.
+\def\arrowtrial{Arrows: $
+ \\\leftarrow \\\longleftarrow \\\uparrow \\\Leftarrow \\\Longleftarrow
+ \\\Uparrow \\\rightarrow \\\longrightarrow \\\downarrow \\\Rightarrow
+ \\\Longrightarrow \\\Downarrow \\\leftrightarrow \\\longleftrightarrow
+ \\\updownarrow \\\Leftrightarrow \\\Longleftrightarrow \\\Updownarrow
+ \\\mapsto \\\longmapsto \\\nearrow \\\hookleftarrow \\\hookrightarrow
+ \\\searrow \\\leftharpoonup \\\rightharpoonup \\\swarrow
+ \\\leftharpoondown \\\rightharpoondown \\\nwarrow \\\rightleftharpoons
+ $\par
+}
+
+% \buildrel.
+\def\buildreltest{Buildrel:
+  $\buildrel \alpha\beta \over \longrightarrow$, and
+  $\buildrel \rm def \over =$. 
+%   , and
+%   $\defineequal$.	% only in lcdbright
+  \par
+}
+
+% Delimiters are more complicated, since we want to see them grow.  This
+% code is from the Metafontbook, the end of Appendix H.
+\let\interitem = .
+\newcount\delimpaircount
+
+\def\testdelimpair#1#2{%
+  \Bigggl{#1}\interitem
+  \bigggl{#1}\interitem
+  \Biggl{#1}\interitem
+  \biggl{#1}\interitem
+  \Bigl{#1}\interitem
+  \bigl{#1}\interitem
+  \left#1 \bullet
+  \right#2\interitem
+  \bigr{#2}\interitem
+  \Bigr{#2}\interitem
+  \biggr{#2}\interitem
+  \Biggr{#2}\interitem
+  \bigggr{#2}\interitem
+  \Bigggr{#2}%
+  \advance\delimpaircount by 1
+  \ifodd\delimpaircount \hfil \else \expandafter \foo \fi
+}
+
+\def\foo{\cr}
+
+\def\delimtest{Delimiters: $$\displaylines{\delimpaircount = 0
+  \testdelimpair ()
+  \testdelimpair \lbrack\rbrack
+  \testdelimpair \lgroup\rgroup
+  \testdelimpair \lmoustache\rmoustache
+  \testdelimpair \vert\Vert
+  \testdelimpair \arrowvert\Arrowvert
+  \testdelimpair \uparrow\downarrow
+  \testdelimpair \updownarrow\Updownarrow
+  \testdelimpair \Uparrow\Downarrow
+  \testdelimpair \bracevert{\delimiter"342}
+  \testdelimpair \backslash/
+  \testdelimpair \langle\rangle
+  \testdelimpair \lbrace\rbrace
+  \testdelimpair \lceil\rceil
+  \testdelimpair \lfloor\rfloor
+  \testdelimpair \ldbrack\rdbrack
+  \crcr
+  }$$
+  %
+  % Throw in square roots, too, as long as we're here.
+  $$\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{-1}}}}}}}}}$$
+}
+
+% Punctuation.
+\def\puncttest{Punctuation: 
+  $f\colon A\rightarrow B$,
+  $L(a, b; c\colon x, y;z)$,
+  $a.b : c, d$,
+  \dots, and $x_1 + \cdots + x_n$,
+  don't forget $f(x_1, \ldots, x_n)$.
+  \par
+}
+
+
+
+% Test fractions.
+\def\fractiontrial{Fractions: $
+  \\\over
+  \\\atop
+  \\\choose
+  \\{\above.5pt}
+  \\{\overwithdelims<>}
+  \\{\atopwithdelims[]}
+  \\{\abovewithdelims\lbrace\rbrace1pt}
+  $\par
+}
+
+% Test roots.
+\def\roottest{Roots:
+  $\sqrt{2i}$,
+  $\root 3 \of 2$,
+  $\root n \of {x^n + y^n}$,
+  $\sqrt{\mathstrut a} + \sqrt{\mathstrut d} + \sqrt{\mathstrut y}$,
+  and $\root n+1 \of Q$.
+  \par
+}
+
+% Test various fills.
+\def\filltrial{Filling: $
+  \\\overline \\\underline \\\widehat
+  \\\widetilde \\\overbrace \\\underbrace
+  $\par
+}
+
+% Test accents.
+\def\accenttrial{Accents: $
+  \let\ii = \imath
+  \let\jj = \jmath
+  \\\hat \\\check \\\tilde \\\acute \\\grave \\\dot \\\ddot \\\breve
+  \\\bar \\\vec
+  $\par
+}
+
+
+% Challenges, from pp.180-182 of the TeXbook.
+\def\challenge{
+$n^{\rm th}$ root
+
+% \bf omitted here, since we're not trying to test bold.
+% ${S^{\rm-1}TS=dg}(\omega_1,\ldots,\omega_n) =\Lambda$
+% no bold face \Lambda ...
+${\bf S^{\rm-1}TS=dg}(\omega_1,\ldots,\omega_n) =\Lambda$
+
+$\Pr(\,m=n\mid m+n=3\,)$
+
+$\sin18^\circ={1\over4}(\sqrt5-1)$
+
+$k=1.38\times10^{-16}\rm\,erg/^\circ K$
+
+$\bar\Phi\subset NL_1^*/N=\bar L_1^*
+          \subseteq\cdots\subseteq NL_n^*/N=\bar L_n^*$
+
+$I(\lambda)=\int\!\!\int_Dg(x,y)e^{i\lambda h(x,y)}\,dx\,dy$
+
+$\int_0^1\!\cdots\int_0^1f(x_1,\ldots,x_n)\,dx_1\ldots\,dx_n$
+
+$$x_{2m}\equiv\cases{Q(X_m^2-P_2W_m^2)-2S^2&($m$ odd)\cr
+               \noalign{\vskip2pt} % spread the lines apart a little
+               P_2^2(X_m^2-P_2W_m^2)-2S^2&($m$ even)\cr}\pmod N.$$
+
+$$(1+x_1z+x_1^2z^2+\cdots\,)\ldots(1+x_nz+x_n^2z^2+\cdots\,)
+          ={1\over(1-x_1z)\ldots(1-x_nz)}.$$
+        
+$$\prod_{j\ge0}\biggl(\sum_{k\ge0}a_{jk}z^k\biggr)
+    =\sum_{n\ge0}z^n\,\Biggl(\sum_
+       {\scriptstyle k_0,k_1,\ldots\ge0\atop
+        \scriptstyle k_0+k_1+\cdots=n}
+     a_{0k_0}a_{1k_1}\ldots\,\Biggr).$$
+
+$${(n_1+n_2+\cdots+n_m)!\over n_1!\,n_2!\ldots n_m!}
+    ={n_1+n_2\choose n_2}{n_1+n_2+n_3\choose n_3}
+      \ldots{n_1+n_2+\cdots+n_m\choose n_m}.$$
+
+$$\def\\##1##2{(1-q^{##1_##2+n})} % to save typing
+  \Pi_R{a_1,a_2,\ldots,a_M\atopwithdelims[]b_1,b_2,\ldots,b_N}
+    =\prod_{n=0}^R{\\a1\\a2\ldots\\aM\over\\b1\\b2\ldots\\bN}.$$
+
+$$\sum_{p\rm\;prime}f(p)=\int_{t>1}f(t)\,d\pi(t).$$
+
+$$\{\underbrace{\overbrace{\mathstrut a,\ldots,a}
+        ^{k\;a\mathchar`'\rm s},
+      \overbrace{\mathstrut b,\ldots,b}
+        ^{l\;b\mathchar`'\rm s}}_{k+l\rm\;elements}\}.$$
+        
+$$\pmatrix{\pmatrix{a&b\cr c&d\cr}&
+               \pmatrix{e&f\cr g&h\cr}\cr
+             \noalign{\smallskip}
+             0&\pmatrix{i&j\cr k&l\cr}\cr}.$$
+
+$$\det\left|\,\matrix{
+    c_0&c_1\hfill&c_2\hfill&\ldots&c_n\hfill\cr
+    c_1&c_2\hfill&c_3\hfill&\ldots&c_{n+1}\hfill\cr
+    c_2&c_3\hfill&c_4\hfill&\ldots&c_{n+2}\hfill\cr
+    \,\vdots\hfill&\,\vdots\hfill&
+         \,\vdots\hfill&&\,\vdots\hfill\cr
+    c_n&c_{n+1}\hfill&c_{n+2}\hfill&\ldots&c_{2n}\hfill\cr
+    }\right|>0.$$
+
+$$\mathop{{\sum}'}_{x\in A}f(x)\mathrel{\mathop=^{\rm def}}
+    \sum_{\scriptstyle x\in A\atop\scriptstyle x\ne0}f(x).$$
+
+$$2\uparrow\uparrow k\mathrel{\mathop=^{\rm def}}
+    2^{2^{2^{\cdot^{\cdot^{\cdot^2}}}}}
+      \vbox{\hbox{$\Big\}\scriptstyle k$}\kern0pt}.$$
+
+$$\def\normalbaselines{\baselineskip20pt
+    \lineskip3pt \lineskiplimit3pt }
+  \def\mapright##1{\smash{
+      \mathop{\longrightarrow}\limits^{##1}}}
+  \def\mapdown##1{\Big\downarrow
+    \rlap{$\vcenter{\hbox{$\scriptstyle##1$}}$}}
+  \matrix{&&&&&&0\cr
+    &&&&&&\mapdown{}\cr
+    0&\mapright{}&{\cal O}_C&\mapright\iota&
+      \cal E&\mapright\rho&\cal L&\mapright{}&0\cr
+    &&\Big\Vert&&\mapdown\phi&&\mapdown\psi\cr
+    0&\mapright{}&{\cal O}_C&\mapright{}&
+      \pi_*{\cal O}_D&\mapright\delta&
+      R^1f_*{\cal O}_V(-D)&\mapright{}&0\cr
+    &&&&&&\mapdown{\theta_i\otimes\gamma^{-1}}\cr
+    &&&&&&\hidewidth R^1f_*\bigl({\cal O}
+      _V(-iM)\bigr)\otimes\gamma^{-1}\hidewidth\cr
+    &&&&&&\mapdown{}\cr
+    &&&&&&0\cr}$$
+}
+
+
+% We need the calligraphic capitals available via a control sequence.
+\def\scriptA{{\cal A}} \def\scriptN{{\cal N}}
+\def\scriptB{{\cal B}} \def\scriptO{{\cal O}}
+\def\scriptC{{\cal C}} \def\scriptP{{\cal P}}
+\def\scriptD{{\cal D}} \def\scriptQ{{\cal Q}}
+\def\scriptE{{\cal E}} \def\scriptR{{\cal R}}
+\def\scriptF{{\cal F}} \def\scriptS{{\cal S}}
+\def\scriptG{{\cal G}} \def\scriptT{{\cal T}}
+\def\scriptH{{\cal H}} \def\scriptU{{\cal U}}
+\def\scriptI{{\cal I}} \def\scriptV{{\cal V}}
+\def\scriptJ{{\cal J}} \def\scriptW{{\cal W}}
+\def\scriptK{{\cal K}} \def\scriptX{{\cal X}}
+\def\scriptL{{\cal L}} \def\scriptY{{\cal Y}}
+\def\scriptM{{\cal M}} \def\scriptZ{{\cal Z}}
+
+
+% Ordinarily, use the normal letters.
+\let\ii = i
+\let\jj = j
+
+% Run #1 in each of the four main styles.
+\def\styletest#1{\begingroup
+  (Display style) \everymath = {\displaystyle}#1%
+  (Text style) \everymath = {\textstyle}#1%
+  (Script style) \everymath = {\scriptstyle}#1%
+  (Scriptscript style) \everymath = {\scriptscriptstyle}#1%
+\endgroup}
+
+
+\def\printparam#1{%
+  $\hbox{\tt #1} = \hbox{\rm \expandafter\the\csname #1\endcsname}$%
+}
+
+\def\interspace{\allowbreak\hskip 1em plus.5em minus.5em}
+
+
+
+% Run the tests.
+\centerline{\bf This is a torture test for math fonts.}
+
+\vskip .1in
+
+\noindent
+Testing with \printparam{thinmuskip}, \printparam{medmuskip},
+\printparam{thickmuskip}, \printparam{scriptspace},
+\printparam{delimitershortfall}, \printparam{delimiterfactor},
+\printparam{mathsurround}, \printparam{nulldelimiterspace}.
+
+
+\def\\#1{-#1'}\lettertrial
+\def\\#1{\allowbreak\quad#1x}\miscordtrial
+\styletest\digittest
+
+% Tests the large operators first in text size, then display size.
+\def\\#1{#1^a_b B\interspace}\largeoptrial
+\def\\#1{\displaystyle #1^b_a B \interspace}\largeoptrial
+
+\def\\#1{A#1x\allowbreak\quad}\binoptrial
+\styletest\modtest
+
+\def\\#1{x#1A\allowbreak\quad}\relationtrial
+\def\\#1{y#1B\allowbreak\quad}\negrelationtrial
+\def\\#1{B#1y\allowbreak\quad}\arrowtrial
+
+\newpage % \vskip .25in % try and force page break ...
+
+\styletest\buildreltest
+\delimtest
+\styletest\puncttest
+
+\def\\#1{{Z #1 W}\interspace}\fractiontrial
+\def\\#1{{g #1 d}\interspace}\fractiontrial
+\def\\#1{{b #1 a}\interspace}\fractiontrial
+
+\newpage % \vskip .25in % try and force page break ...
+
+\styletest\roottest
+
+\def\\#1{#1{o}\interspace}\filltrial
+\def\\#1{#1{A + \cdots - Q - \cdots + g}\interspace}\filltrial
+
+\def\\#1{- #1A + #1q}\accenttrial
+
+% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%%
+
+%% recent additions:
+
+% extra stuff from mathtest
+
+$
+\hat{A}\hat{B}\hat{C}\hat{D}\hat{E}\hat{F}\hat{G}\hat{H}
+\hat{I}\hat{J}\hat{K}\hat{L}\hat{M}\hat{N}\hat{O}\hat{P}
+\hat{Q}\hat{R}\hat{S}\hat{T}\hat{U}\hat{V}\hat{W}\hat{X}
+\hat{Y}\hat{Z}
+%
+\quad
+%
+\hat{a}\hat{b}\hat{c}\hat{d}\hat{e}\hat{f}\hat{g}\hat{h}
+\hat{i}\hat{j}\hat{k}\hat{l}\hat{m}\hat{n}\hat{o}\hat{p}
+\hat{q}\hat{r}\hat{s}\hat{t}\hat{u}\hat{v}\hat{w}\hat{x}
+\hat{y}\hat{z}
+$
+
+% Define uppercase Greek italic to use the math italic font.
+\mathchardef\varGamma="100 \mathchardef\varDelta="101
+\mathchardef\varTheta="102 \mathchardef\varLambda="103 \mathchardef\varXi="104
+\mathchardef\varPi="105 \mathchardef\varSigma="106 \mathchardef\varUpsilon="107
+\mathchardef\varPhi="108 \mathchardef\varPsi="109 \mathchardef\varOmega="10A
+
+% Upright uppercase Greek is actually in LBR
+
+$
+\hat{\Gamma}\hat{\Delta}\hat{\Theta}\hat{\Lambda}\hat{\Xi}\hat{\Pi}
+\hat{\Sigma}\hat{\Upsilon}\hat{\Phi}\hat{\Psi}\hat{\Omega}
+%
+\quad
+%
+\hat{\varGamma}\hat{\varDelta}\hat{\varTheta}\hat{\varLambda}\hat{\varXi}\hat{\varPi}
+\hat{\varSigma}\hat{\varUpsilon}\hat{\varPhi}\hat{\varPsi}\hat{\varOmega}
+$
+
+$
+\hat{\alpha}\hat{\beta}\hat{\gamma}\hat{\delta}\hat{\epsilon}\hat{\zeta}
+\hat{\eta}\hat{\theta}\hat{\iota}\hat{\kappa}\hat{\lambda}\hat{\mu}\hat{\nu}
+\hat{\xi}\hat{\pi}\hat{\rho}\hat{\sigma}\hat{\tau}\hat{\upsilon}\hat{\phi}
+\hat{\chi}\hat{\psi}\hat{\omega}\hat{\varepsilon}\hat{\vartheta}\hat{\varpi}
+\hat{\varrho}\hat{\varsigma}\hat{\varphi}
+%
+\quad
+%
+\hat{\partial}\hat{\ell}\hat{\imath}\hat{\jmath}\hat{\wp}
+$
+
+$
+\hat{{\cal A}}\hat{{\cal B}}\hat{{\cal C}}\hat{{\cal D}}\hat{{\cal E}}
+\hat{{\cal F}}\hat{{\cal G}}\hat{{\cal H}}\hat{{\cal I}}\hat{{\cal J}}
+\hat{{\cal K}}\hat{{\cal L}}\hat{{\cal M}}\hat{{\cal N}}\hat{{\cal O}}
+\hat{{\cal P}}\hat{{\cal Q}}\hat{{\cal R}}\hat{{\cal S}}\hat{{\cal T}}
+\hat{{\cal U}}\hat{{\cal V}}\hat{{\cal W}}\hat{{\cal X}}\hat{{\cal Y}}
+\hat{{\cal Z}}
+$
+
+% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%%
+
+%% extra random stuff added from TeX book
+
+% page 133
+
+$x + y - z$, \quad $x + y * z$, \quad $z * y / z$, \quad 
+$(x+y)(x-y) = x^2 - y^2$, 
+
+$x \times y \cdot z = [x\, y\, z]$, \quad $x\circ y \bullet z$, \quad
+$x\cup y \cap z$, \quad $x\sqcup y \sqcap z$, \quad
+
+$x \vee y \wedge z$, \quad $x\pm y\mp z$, \quad
+$x=y/z$, \quad $x:=y$, \quad $x\le y \ne z$, \quad $x \sim y \simeq z$
+$x \equiv y \notequiv z$, \quad $x\subset y \subseteq z$
+
+$\sin2\theta=2\sin\theta\cos\theta$, \quad
+$\hbox{O}(n\log n\log n)$, \quad
+$\Pr(X>x)=\exp(-x/\mu)$,
+
+$\bigl(x\in A(n)\bigm|x\in B(n)\bigr)$, \quad
+$\bigcup_n X_n\bigm\|\bigcap_n Y_n$
+
+% page 178
+
+In text matrices $1\,1\choose0\,1$ and $\bigl({a\atop 1}{b\atop m}{c\atop n}\bigr)$
+
+% page 142
+
+$$a_0+{1\over\displaystyle a_1 +
+{\strut 1\over\displaystyle a_2 +
+{\strut 1\over\displaystyle a_3 +
+{\strut 1\over\displaystyle a_4}}}}$$
+
+% page 143
+
+$${p \choose 2}x^2y^{p-2} - {1\over 1 - x}{1 \over 1 - x^2}
+=
+{a+1\over b}\bigg/{c+1\over d}.$$
+
+%% page 145
+
+$$\sqrt{1+\sqrt{1+\sqrt{1+\sqrt{1+\sqrt{1+x}}}}}$$
+
+%% page 147
+
+$$\left({\partial^2\over\partial x^2} + {\partial^2\over\partial y^2}\right)
+\bigl|\varphi(x+iy)\bigr|^2=0$$
+
+%% page 149
+
+% $$\pi(n)=\sum_{m=2}^n\left\lfloor\biggl(\sum_{k=1}^{m-1}\bigl
+% \lfloor(m/k)\big/\lceil m/k\rceil\bigr\rfloor\biggr)^{-1}\right\rfloor.$$
+
+$$\pi(n)=\sum_{m=2}^n\left\lfloor\Biggl(\sum_{k=1}^{m-1}\bigl
+\lfloor(m/k)\big/\lceil m/k\rceil\bigr\rfloor\Biggr)^{-1}\right\rfloor.$$
+
+% page 168
+
+$$\int_0^\infty {t - i b\over t^2 + b^2}e^{iat}\,dt=e^{ab}E_1(ab), \quad
+a,b > 0.$$
+
+% page 176
+
+$$A = \left(\matrix{x-\lambda&1&0\cr
+0&x-\lambda&1\cr
+0&0&x-\lambda\cr}\right).$$
+
+$$\left\lgroup\matrix{a&b&c\cr d&e&f\cr}\right\rgroup
+\left\lgroup\matrix{u&x\cr v&y\cr w&z\cr}\right\rgroup$$
+
+% page 177
+
+$$A = \pmatrix{a_{11}&a_{12}&\ldots&a_{1n}\cr
+a_{21}&a_{22}&\ldots&a_{2n}\cr
+\vdots&\vdots&\ddots&\vdots\cr
+a_{m1}&a_{m2}&\ldots&a_{mn}\cr}$$
+
+$$M=\bordermatrix{&C&I&C'\cr
+C&1&0&0\cr I&b&1-b&0\cr C'&0&a&1-a\cr}$$
+
+%% page 186
+
+$$\sum_{n=0}^\infty a_nz^n\qquad\hbox{converges if}\qquad
+|z|<\Bigl(\limsup_{n\to\infty}\root n\!\of{|a_n|}\,\Bigr)^{-1}.$$
+
+$${f(x+\Delta x)-f(x)\over\Delta x}\to f'(x)
+\qquad \hbox{as $\Delta x\to0$.}$$
+
+$$\|u_i\|=1,\qquad u_i\cdot u_j=0\quad\hbox{if $i\ne j$.}$$
+
+%% page 191
+
+$$\it\hbox{The confluent image of}\quad\left\{
+\matrix{\hbox{an arc}\hfill\cr\hbox{a circle}\hfill\cr
+\hbox{a fan}\hfill\cr}
+\right\}\quad\hbox{is}\quad\left\{
+\matrix{\hbox{an arc}\hfill\cr
+\hbox{an arc or a circle}\hfill\cr
+\hbox{a fan or an arc}\hfill\cr}\right\}.$$
+
+%% page 191
+
+$$\eqalign{T(n)\le T(2^{\lceil\lg n\rceil})
+&\le c(3^{\lceil\lg n\rceil}-2^{\lceil\lg n\rceil})\cr
+&<3c\cdot3^{\lg n}\cr
+&=3c\,n^{\lg3}.\cr}$$
+
+$$\left\{
+\eqalign{\alpha&=f(z)\cr \beta&=f(z^2)\cr \gamma&=f(z^3)\cr}
+\right\}
+\qquad
+\left\{
+\eqalign{x&=\alpha^2-\beta\cr y&=2\gamma\cr}\right\}.$$
+
+%% page 192
+
+$$\eqalignno{
+(x+y)(x-y)&=x^2-xy+yx-y^2;&(3)\cr
+&=x^2-y^2;&(4)\cr
+(x+y)^2&=x^2+2xy+y^2.&(5)\cr}$$
+
+%% page 192
+
+$$\eqalignno{
+\biggl(\int_{-\infty}^\infty e^{-x^2}\,dx\biggr)^2
+&=\int_{-\infty}^\infty\int_{-\infty}^\infty e^{-(x^2+y^2)}\,dx\,dy\cr
+&=\int_0^{2\pi}\int_0^\infty e^{-r^2}\,dr\,d\theta\cr
+&=\int_0^{2\pi}\biggl(-{e^{-r^2}\over2}
+\biggl|_{r=0}^{r=\infty}\,\biggr)\,d\theta\cr
+&=\pi.&(11)\cr}$$
+
+%% page 197
+
+$$\prod_{k\ge0}{1\over(1-q^kz)}=
+\sum_{n\ge0}z^n\bigg/\!\!\prod_{1\le k\le n}(1-q^k).$$
+
+$$\sum_{\scriptstyle0< i\le m\atop\scriptstyle0<j\le n}p(i,j) \,\ne
+%
+% $$\sum_{i=1}^p \sum_{j=1}^q \sum_{k=1}^r a_{ij} b_{jk} c_{ki}$$
+%
+\sum_{i=1}^p \sum_{j=1}^q \sum_{k=1}^r a_{ij} b_{jk} c_{ki} \,\ne
+%
+\sum_{{\scriptstyle 1\le i\le p \atop \scriptstyle 1\le j\le q}
+\atop \scriptstyle 1\le k\le r} a_{ij} b_{jk} c_{ki}$$
+
+$$\max_{1\le n\le m}\log_2P_n \quad \hbox{and} \quad
+\lim_{x\to0}{\sin x\over x}=1$$
+
+$$p_1(n)=\lim_{m\to\infty}\sum_{\nu=0}^\infty\bigl(1-\cos^{2m}(\nu!^n\pi/n)\bigr)$$
+
+%% new extra stuff imported from math test
+
+$$\widehat{s}, \widehat{ss}, \widehat{sss}, \widehat{ssss}, 
+\widehat{sssss},
+%
+\widehat{f}, \widehat{ff}, \widehat{fff}, \widehat{ffff}, 
+\widehat{fffff}$$
+
+$$\widetilde{s}, \widetilde{ss}, \widetilde{sss}, \widetilde{ssss}, 
+\widetilde{sssss},
+%
+\widetilde{f}, \widetilde{ff}, \widetilde{fff}, \widetilde{ffff}, 
+\widetilde{fffff}$$
+
+% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%%
+
+$$
+\midint f(x) \, dx \quad
+\bigg\largeint f(x) \, dx \quad
+\Bigg\largeint f(x) \, dx \quad
+\biggg\largeint f(x) \, dx \quad
+\Biggg\largeint f(x) \, dx $$
+
+% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%%
+
+$$\int_0^1f(x)\,dx={\sqrt{3}\over2} \neq {\sqrt{2\pi}\over\sqrt{3}}$$
+
+% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%%
+
+$$\sqrt{x}, \sqrt{\pi}, \sqrt{x^2}, \sqrt{{a \over b}}, 
+\sqrt{{a^2+b^2\over a^2 -b^2}}, 
+\sqrt{\sum_{i \neq j}^{n < m}{a^2+b^2\over a^2 -b^2}}
+$$
+
+$${(x+10y)(x-10y)\over x^2-100y^2} = 1 + {a+{x\over y}+c \over 2 + {5^2\over\epsilon_2}-9}$$
+
+$$30^{\circ}, 60^{\circ}, 90^{\circ}, 120^{\circ}$$
+
+$$\sum_{i=1}^{n} \int_0^x f(x)\,dx = \root n+1\of{a^n+b^n}
+= {\pi\over 2}$$
+
+$$\overbrace{x+y} = \underbrace{x+y} = x_{n-2}^{i}$$
+
+$$\overline{x+y} = \underline{x+y} = x_n^{-2}$$
+
+$$\left( \left( \left( \left( \left( \left( \left( x 
+\right)^2 \right)^2 \right)^2 \right)^2 \right)^2 \right)^2 \right)^2 
+\quad \quad 
+\left[ \left[ \left[ \left[ \left[ \left[ \left[ x 
+\right]^2 \right]^2 \right]^2 \right]^2 \right]^2 \right]^2 \right]^2$$
+
+$$\pmatrix{
+A&B&C&D&E&F\cr
+G&H&H&I&J&K\cr
+L&M&N&O&P&Q\cr
+R&S&T&U&V&W\cr} =
+\left[\matrix{
+A&B&C&D&E&F\cr
+G&H&H&I&J&K\cr
+L&M&N&O&P&Q\cr
+R&S&T&U&V&W\cr}\right].
+$$
+
+$$\pmatrix{\pmatrix{\pmatrix{a&b\cr c&d\cr}&
+               \pmatrix{e&f\cr g&h\cr}\cr
+             \noalign{\smallskip}
+             0&\pmatrix{i&j\cr k&l\cr}\cr}&
+\pmatrix{\pmatrix{a&b\cr c&d\cr}&
+               \pmatrix{e&f\cr g&h\cr}\cr
+             \noalign{\smallskip}
+             0&\pmatrix{i&j\cr k&l\cr}\cr}\cr
+\pmatrix{\pmatrix{a&b\cr c&d\cr}&
+               \pmatrix{e&f\cr g&h\cr}\cr
+             \noalign{\smallskip}
+             0&\pmatrix{i&j\cr k&l\cr}\cr}&
+\pmatrix{\pmatrix{a&b\cr c&d\cr}&
+               \pmatrix{e&f\cr g&h\cr}\cr
+             \noalign{\smallskip}
+             0&\pmatrix{i&j\cr k&l\cr}\cr}\cr}.$$
+
+% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%% %%%
+
+
+\challenge
+
+\vskip .25in % \vskip 0.5in
+
+%% Texture
+
+$$\hbox to \hsize{\cleaders\vbox to .5in{\cleaders\hbox{\TeX}\vfil}\hfil}$$
+
+\bye
+
+% Y&Y, Inc. 106 Indian Hill, Carlisle, MA 01741  (508) 371-3286

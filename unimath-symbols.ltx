@@ -15,7 +15,16 @@
 \def\cmd#1{\texttt{\textbackslash\expandafter\@gobble\string#1}}
 
 \usepackage{fontspec}
-\setmainfont[Ligatures=TeX,Numbers={Lowercase,Monospaced}]{TeX Gyre Pagella}
+\setmainfont{texgyrepagella}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular,
+  ItalicFont = *-italic,
+  BoldFont = *-bold,
+  BoldItalicFont = *-bolditalic,
+  Ligatures=TeX,
+  Numbers={Lowercase,Monospaced},
+ ]
 \usepackage[math-style=literal,bold-style=literal]{unicode-math}
 
 \ExplSyntaxOn
@@ -27,16 +36,16 @@
   \setmathfont[version=#1,SizeFeatures={
       {Size=-10, Colour=999999},
       {Size=10-, Colour=#3}}]{#2}
-  \fontspec_set_fontface:cNnn {#1} \x {} {#2}
+  \fontspec_set_fontface:cNnn {#1} \x {ItalicFont={},BoldFont={}} {#2}
 }
 \ExplSyntaxOff
 
-\defmathfont{lm}{lmmath-regular.otf}{CC6666}
+\defmathfont{lm}{latinmodern-math.otf}{CC6666}
 \defmathfont{xits}{xits-math.otf}{CCCC66}
-\defmathfont{lucida}{Lucida Bright Math OT}{66CC66}
-\defmathfont{lucibold}{Lucida Bright Math OT Demibold}{66CC66}
+\defmathfont{stix}{STIXMath-Regular.otf}{AA66CC}
 \defmathfont{cambria}{Cambria Math}{66CCCC}
 \defmathfont{asana}{Asana-Math.otf}{6666CC}
+\defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}
 \defmathfont{euler}{Neo Euler}{CC66CC}
 
 \def\INPUT{\input{unicode-math-table.tex}}
@@ -44,13 +53,15 @@
 \par\noindent
 \begin{longtable}[l]{@{}lcccccccll@{}}
   \toprule
-  \textsc{usv} & M & X & C & L & D & A & E & Macro & Description \\
+  \textsc{usv} & M & X & S & C & A & P & E & Macro & Description \\
   \midrule \endhead
   \INPUT\\
   \bottomrule
 \end{longtable}
 }
-\def\USV#1{\footnotesize\scshape\MakeLowercase{\@gobble#1}}
+\makeatletter
+\def\USV#1{\footnotesize\scshape\MakeLowercase{u+\@gobble#1}}
+\makeatother
 \def\CMD#1{\footnotesize\cmd#1}
 \def\DESC#1{%
   \begin{varwidth}[t]{6cm}
@@ -71,16 +82,21 @@
       \USV{#1} &
       \SYMB{#2}{lm}{#1} &
       \SYMB{#2}{xits}{#1} &
+      \SYMB{#2}{stix}{#1} &
       \SYMB{#2}{cambria}{#1} &
-      \SYMB{#2}{lucida}{#1} &
-      \SYMB{#2}{lucibold}{#1} &
       \SYMB{#2}{asana}{#1} &
+      \SYMB{#2}{pagella}{#1} &
       \SYMB{#2}{euler}{#1} &
       \CMD{#2}
       \tl_if_in:NnT \PLAIN {#2}
         {
           \makebox[0pt][l]
             { \color[gray]{0.7} \textsuperscript{\sffamily (p)} }
+        }
+      \tl_if_in:NnT \LTXSYM {#2}
+        {
+          \makebox[0pt][l]
+            { \color[gray]{0.7} \textsuperscript{\sffamily (l)} }
         }
       \tl_if_in:NnT \AMSSYMB {#2}
         {
@@ -101,13 +117,35 @@
   \fi
 }
 
-\def\PLAIN{\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda\mu\nu\xi\pi\rho\sigma\tau\upsilon\phi\chi\psi\omega\varepsilon\vartheta\varpi\varrho\varsigma\varphi\Gamma\Delta\Theta\Lambda\Xi\Pi\Sigma\Upsilon\Phi\Psi\Omega\aleph\hbar\imath\jmath\ell\wp\Re\Im\partial\infty\prime\emptyset\nabla\surd\top\bot\angle\triangle\forall\exists\neg\flat\natural\sharp\clubsuit\diamondsuit\heartsuit\spadesuit\coprod\bigvee\bigwedge\biguplus\bigcap\bigcup\int\prod\sum\bigotimes\bigoplus\bigodot\oint\bigsqcup\smallint\triangleleft\triangleright\bigtriangleup\bigtriangledown\wedge\land\vee\lor\cap\cup\ddagger\dagger\sqcap\sqcup\uplus\amalg\diamond\bullet\wr\div\odot\oslash\otimes\ominus\oplus\mp\pm\circ\bigcirc\setminus\cdot\ast\times\star\propto\sqsubseteq\sqsupseteq\parallel\mid\dashv\vdash\nearrow\searrow\nwarrow\swarrow\Leftrightarrow\Leftarrow\Rightarrow\neq\ne\lnot\leq\le\geq\ge\succ\prec\approx\succeq\preceq\supset\subset\supseteq\subseteq\in\ni\owns\gg\ll\not\leftrightarrow\leftarrow\gets\rightarrow\to\mapstochar\mapsto\sim\simeq\perp\equiv\asymp\smile\frown\leftharpoonup\leftharpoondown\rightharpoonup\rightharpoondown\joinrel\relbar\Relbar\lhook\hookrightarrow\rhook\hookleftarrow\bowtie\models\Longrightarrow\longrightarrow\longleftarrow\Longleftarrow\longmapsto\longleftrightarrow\Longleftrightarrow\iff\ldotp\cdotp\colon\ldots\cdots\vdots\ddots\acute\grave\ddot\tilde\bar\breve\check\hat\vec\dot\widetilde\widehat\overrightarrow\overleftarrow\overbrace\underbrace\lmoustache\rmoustache\lgroup\rgroup\arrowvert\Arrowvert\bracevert\Vert\vert\uparrow\downarrow\updownarrow\Uparrow\Downarrow\Updownarrow\backslash\rangle\langle\rbrace\lbrace\rceil\lceil\rfloor\lfloor\sqrt}
+\def\PLAIN{\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda\mu\nu\xi\pi\rho\sigma\tau\upsilon\phi\chi\psi\omega\varepsilon\vartheta\varpi\varrho\varsigma\varphi\Gamma\Delta\Theta\Lambda\Xi\Pi\Sigma\Upsilon\Phi\Psi\Omega
+%
+\aleph\hbar\imath\jmath\ell\wp\Re\Im\partial\infty\prime\emptyset\nabla\surd\top\bot\angle\triangle\forall\exists\neg\flat\natural\sharp\clubsuit\diamondsuit\heartsuit\spadesuit
+%
+\coprod\bigvee\bigwedge\biguplus\bigcap\bigcup\int\prod\sum\bigotimes\bigoplus\bigodot\oint\bigsqcup\smallint
+%
+\triangleleft\triangleright\bigtriangleup\bigtriangledown\wedge\land\vee\lor\cap\cup\ddagger\dagger\sqcap\sqcup\uplus\amalg\diamond\bullet\wr\div\odot\oslash\otimes\ominus\oplus\mp\pm\circ\bigcirc\setminus\cdot\ast\times\star\propto\sqsubseteq\sqsupseteq\parallel\mid\dashv\vdash\nearrow\searrow\nwarrow\swarrow\Leftrightarrow\Leftarrow\Rightarrow\neq\ne\lnot\leq\le\geq\ge\succ\prec\approx\succeq\preceq\supset\subset\supseteq\subseteq\in\ni\owns\gg\ll\not\leftrightarrow\leftarrow\gets\rightarrow\to\mapstochar\mapsto\sim\simeq\perp\equiv\asymp\smile\frown\leftharpoonup\leftharpoondown\rightharpoonup\rightharpoondown
+%
+\joinrel\relbar\Relbar\lhook\hookrightarrow\rhook\hookleftarrow\bowtie\models\Longrightarrow\longrightarrow\longleftarrow\Longleftarrow\longmapsto\longleftrightarrow\Longleftrightarrow\iff
+%
+\ldotp\cdotp\colon\ldots\cdots\vdots\ddots
+%
+\acute\grave\ddot\tilde\bar\breve\check\hat\vec\dot\widetilde\widehat
+%
+\overrightarrow\overleftarrow\overbrace\underbrace\lmoustache\rmoustache\lgroup\rgroup\arrowvert\Arrowvert\bracevert\Vert\vert\uparrow\downarrow\updownarrow\Uparrow\Downarrow\Updownarrow\backslash\rangle\langle\rbrace\lbrace\rceil\lceil\rfloor\lfloor\sqrt}
+
+\def\LTXSYM{
+\cong
+\notin
+\rightleftharpoons
+\doteq
+\mathring
+}
 
 \def\AMSSYMB{\boxdot\boxplus\boxtimes\square\blacksquare\centerdot\lozenge\blacklozenge\circlearrowright\circlearrowleft\leftrightharpoons\boxminus\Vdash\Vvdash\vDash\twoheadrightarrow\twoheadleftarrow\leftleftarrows\rightrightarrows\upuparrows\downdownarrows\upharpoonright\restriction\downharpoonright\upharpoonleft\downharpoonleft\rightarrowtail\leftarrowtail\leftrightarrows\rightleftarrows\Lsh\Rsh\rightsquigarrow\leftrightsquigarrow\looparrowleft\looparrowright\circeq\succsim\gtrsim\gtrapprox\multimap\therefore\because\doteqdot\Doteq\triangleq\precsim\lesssim\lessapprox\eqslantless\eqslantgtr\curlyeqprec\curlyeqsucc\preccurlyeq\leqq\leqslant\lessgtr\backprime\risingdotseq\fallingdotseq\succcurlyeq\geqq\geqslant\gtrless\vartriangleright\vartriangleleft\trianglerighteq\trianglelefteq\bigstar\between\blacktriangledown\blacktriangleright\blacktriangleleft\vartriangle\blacktriangle\triangledown\eqcirc\lesseqgtr\gtreqless\lesseqqgtr\gtreqqless\Rrightarrow\Lleftarrow\veebar\barwedge\doublebarwedge\measuredangle\sphericalangle\varpropto\smallsmile\smallfrown\Subset\Supset\Cup\doublecup\Cap\doublecap\curlywedge\curlyvee\leftthreetimes\rightthreetimes\subseteqq\supseteqq\bumpeq\Bumpeq\lll\llless\ggg\gggtr\circledS\pitchfork\dotplus\backsim\backsimeq\complement\intercal\circledcirc\circledast\circleddash\lvertneqq\gvertneqq\nleq\ngeq\nless\ngtr\nprec\nsucc\lneqq\gneqq\nleqslant\ngeqslant\lneq\gneq\npreceq\nsucceq\precnsim\succnsim\lnsim\gnsim\nleqq\ngeqq\precneqq\succneqq\precnapprox\succnapprox\lnapprox\gnapprox\nsim\ncong\diagup\diagdown\varsubsetneq\varsupsetneq\nsubseteqq\nsupseteqq\subsetneqq\supsetneqq\varsubsetneqq\varsupsetneqq\subsetneq\supsetneq\nsubseteq\nsupseteq\nparallel\nmid\nshortmid\nshortparallel\nvdash\nVdash\nvDash\nVDash\ntrianglerighteq\ntrianglelefteq\ntriangleleft\ntriangleright\nleftarrow\nrightarrow\nLeftarrow\nRightarrow\nLeftrightarrow\nleftrightarrow\divideontimes\varnothing\nexists\Finv\Game\eth\eqsim\beth\gimel\daleth\lessdot\gtrdot\ltimes\rtimes\shortmid\shortparallel\smallsetminus\thicksim\thickapprox\approxeq\succapprox\precapprox\curvearrowleft\curvearrowright\digamma\varkappa\Bbbk\hslash\backepsilon}
 
 \begin{document}
 \MakeShortVerb\|
-\title{Every symbol defined by \textsf{unicode-math}}
+\title{Every symbol (most symbols) defined by \textsf{unicode-math}}
 \author{Will Robertson\\\texttt{wspr81@gmail.com}}
 \maketitle
 
@@ -115,18 +153,19 @@ This document uses the file \texttt{unicode-math-table.tex}
 to print every symbol defined by the \textsf{unicode-math}
 package.
 Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
-Seven fonts are shown: (with approximate symbol counts)
+Eight fonts are shown: (with approximate symbol counts)
 \begin{itemize}
 \item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
 \item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
+\item[S] \mathversion{stix} $\mathup{STIX\ Math}$ (\ref{count:stix})
 \item[C] \mathversion{cambria} $\mathup{Cambria\ Math}$ (\ref{count:cambria})
-\item[L] \mathversion{lucida} $\mathup{Lucida\ Math}$ (\ref{count:lucida})
-\item[D] \mathversion{lucibold} $\mathup{Lucida\ Math\ Demibold}$ (\ref{count:lucibold})
 \item[A] \mathversion{asana} $\mathup{Asana\ Math}$ (\ref{count:asana})
+\item[P] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
 \item[E] \mathversion{euler} $\mathup{Neo\ Euler}$ (\ref{count:euler})
 \end{itemize}
-Symbols defined in Plain \TeX\ are indicated with { \color[gray]{0.7} \textsuperscript{\sffamily (p)} } after their macro name.
-Symbols defined in \textsf{amssymb} are indicated with { \color[gray]{0.7} \textsuperscript{\sffamily (a)} }.
+Symbols defined in Plain \TeX\ are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (p)}} after their macro name.
+\LaTeX\ follows Plain \TeX, but defines a handful more, indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (l)}}
+Symbols defined in \textsf{amssymb} are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (a)}}.
 
 \tableofcontents
 
@@ -188,6 +227,18 @@ Note that accents will only be properly placed if used with an OpenType font wit
   \fi
 }
 \SHOW\mathaccent
+\endgroup
+
+\section{Bottom accents, \cmd\mathbotaccent}
+\begingroup
+\def\SYMB#1#2#3{%
+  \expandafter\iffontchar\csname#2\endcsname #3\relax
+    \refstepcounter{#2}%
+    \mathversion{#2}%
+    $\displaystyle#1 \mitx$%
+  \fi
+}
+\SHOW\mathbotaccent
 \endgroup
 
 \clearpage
@@ -384,10 +435,10 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 
 \refstepcounter{lm}\label{count:lm}
 \refstepcounter{xits}\label{count:xits}
+\refstepcounter{stix}\label{count:stix}
 \refstepcounter{cambria}\label{count:cambria}
-\refstepcounter{lucida}\label{count:lucida}
-\refstepcounter{lucibold}\label{count:lucibold}
 \refstepcounter{asana}\label{count:asana}
+\refstepcounter{pagella}\label{count:pagella}
 \refstepcounter{euler}\label{count:euler}
 
 \end{document}

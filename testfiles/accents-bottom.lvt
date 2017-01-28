@@ -1,0 +1,8 @@
+\input{umtest-preamble}
+\OMIT
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\begin{document}
+\TIMO
+\[ \underbar x \qquad \threeunderdot x \qquad \wideutilde M \qquad \wideutilde {x+y} \]
+\end{document}

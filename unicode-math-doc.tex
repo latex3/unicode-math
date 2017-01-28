@@ -1,0 +1,1494 @@
+% !TEX TS-program = XeLaTeX
+
+\providecommand\DOCUMENTEND{T}
+\documentclass[a4paper]{ltxdoc}
+
+\if \DOCUMENTEND T \OnlyDescription \fi
+
+\makeatletter
+\GetFileInfo{unicode-math.dtx}
+\let\umfiledate\filedate
+\let\umfileversion\fileversion
+
+\CheckSum{0}
+\EnableCrossrefs
+\CodelineIndex
+
+\errorcontextlines=999
+
+\def\@dotsep{1000}
+\setcounter{tocdepth}{2}
+\setlength\columnseprule{0.4pt}
+\renewcommand\tableofcontents{\relax
+  \begin{multicols}{2}[\section*{\contentsname}]\relax
+    \@starttoc{toc}\relax
+  \end{multicols}}
+
+\setcounter{IndexColumns}{2}
+\renewenvironment{theglossary}
+  {\small\list{}{}
+     \item\relax
+     \glossary@prologue\GlossaryParms
+     \let\item\@idxitem \ignorespaces
+     \def\pfill{\hspace*{\fill}}}
+  {\endlist}
+
+\usepackage[svgnames]{xcolor}
+\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
+\setcounter{LTchunksize}{100}
+\usepackage[slash-delimiter=frac,nabla=literal]{unicode-math}
+\usepackage{metalogo,hologo}
+
+\fvset{fontsize=\small,xleftmargin=2em}
+\usepackage[it]{titlesec}
+
+\setmainfont{texgyrepagella}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular ,
+  ItalicFont = *-italic ,
+  BoldFont = *-bold ,
+  BoldItalicFont = *-bolditalic ,
+ ]
+\setsansfont{Iwona}%
+ [
+  Scale=MatchLowercase,
+  Extension = .otf,
+  UprightFont = *-Regular,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold,
+  BoldItalicFont = *-BoldItalic,
+ ]
+\setmonofont{Inconsolatazi4-Regular.otf}%
+ [
+  Scale=MatchLowercase,
+  BoldFont=Inconsolatazi4-Bold.otf
+ ]
+
+\setmathfont{texgyrepagella-math.otf}
+\setmathfont[version=xits]{xits-math.otf}
+\newfontface\umfont{xits-math.otf}
+
+\usepackage{hypdoc}
+\hypersetup{linktocpage}
+
+% work around some issue turning | into "j" inside mathsf in the definition of \Module:
+% (also prettify)
+\def\Module#1{{\footnotesize\color{red}$\langle$\texttt{#1}$\rangle$}}
+
+\usepackage{minitoc}
+
+\linespread{1.1}
+\frenchspacing
+
+\definecolor{niceblue}{rgb}{0.2,0.4,0.8}
+
+\def\theCodelineNo{\textcolor{niceblue}{\sffamily\tiny\arabic{CodelineNo}}}
+
+\newcommand*\name[1]{{#1}}
+\newcommand*\pkg[1]{\textsf{#1}}
+\newcommand*\feat[1]{\texttt{#1}}
+\newcommand*\opt[1]{\texttt{#1}}
+
+\newcommand*\note[1]{\unskip\footnote{#1}}
+
+\let\latin\textit
+\def\eg{\latin{e.g.}}
+\def\Eg{\latin{E.g.}}
+\def\ie{\latin{i.e.}}
+\def\etc{\@ifnextchar.{\latin{etc}}{\latin{etc.}\@}}
+
+\def\STIX{\textsc{stix}}
+\def\MacOSX{Mac~OS~X}
+\def\ascii{\textsc{ascii}}
+\def\OMEGA{Omega}
+
+\newcounter{argument}
+
+\makeatletter
+\g@addto@macro\endmacro{\setcounter{argument}{0}}
+\makeatother
+
+\newcommand*\darg[1]{%
+  \stepcounter{argument}%
+  {\ttfamily\char`\#\theargument~:~}#1\par\noindent\ignorespaces
+}
+\newcommand*\doarg[1]{%
+  \stepcounter{argument}%
+  {\ttfamily\makebox[0pt][r]{[}\char`\#\theargument]:~}#1\par\noindent\ignorespaces
+}
+
+\newcommand\codeline[1]{\par{\centering#1\par\noindent}\ignorespaces}
+
+\newcommand\unichar[1]{\textsc{u}+\texttt{\small#1}}
+
+\setlength\parindent{2em}
+
+\def \MakePrivateLetters {%
+  \catcode`\@=11\relax
+  \catcode`\_=11\relax
+  \catcode`\:=11\relax
+}
+
+\def\partname{Part}
+
+\makeatother
+
+\begin{document}
+
+\title{Experimental Unicode mathematical typesetting: The \pkg{unicode-math} package}
+\author{Will Robertson, Philipp Stephani and Khaled Hosny\\
+        \texttt{will.robertson@latex-project.org}}
+\date{\umfiledate \qquad \umfileversion}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+This document describes the \pkg{unicode-math} package, which is
+intended as an implementation of Unicode
+maths for \LaTeX\ using the \XeTeX\ and Lua\TeX\ typesetting engines.
+With this package, changing maths fonts is as easy as changing
+text fonts --- and there are more and more maths fonts appearing now.
+Maths input can also be simplified with Unicode since literal glyphs may be
+entered instead of control sequences in your document source.
+
+The package provides support for both \XeTeX\ and Lua\TeX. The different
+engines provide differing levels of support for Unicode maths.
+Please let us know of any troubles.
+
+Alongside this documentation file, you should be able to find a minimal
+example demonstrating the use of the package,
+`\texttt{unimath-example.ltx}'. It also comes with a separate document,
+`\texttt{unimath-symbols.pdf}',
+containing a complete listing of mathematical symbols defined by
+\pkg{unicode-math}, including comparisons between different fonts.
+
+Finally, while the STIX fonts may be used with this package, accessing
+their alphabets in their `private user area' is not yet supported.
+(Of these additional alphabets there is a separate caligraphic design
+distinct to the script design already included.)
+Better support for the STIX fonts is planned for an upcoming revision of the
+package after any problems have been ironed out with the initial version.
+
+\end{abstract}
+
+\doparttoc\faketableofcontents
+
+\newpage
+\part{User documentation}
+\parttoc
+
+\clearpage
+\section{Introduction}
+
+This document describes the \pkg{unicode-math} package, which is an
+\emph{experimental} implementation of a macro to Unicode glyph encoding for
+mathematical characters.
+
+Users who desire to specify maths alphabets only (Greek and Latin letters,
+and Arabic numerals)
+may wish to use Andrew Moschou's \pkg{mathspec} package instead.
+(\XeTeX-only at time of writing.)
+
+\section{Acknowledgements}
+
+Many thanks to:
+Microsoft for developing the mathematics extension to OpenType as part of
+Microsoft Office~2007;
+Jonathan Kew for implementing Unicode math support in \XeTeX;
+Taco Hoekwater for implementing Unicode math support in \LuaTeX;
+Barbara Beeton for her prodigious effort compiling the definitive list of Unicode math
+glyphs and their \LaTeX\ names (inventing them where necessary), and also
+for her thoughtful replies to my sometimes incessant questions;
+Philipp Stephani for extending the package to support \LuaTeX.
+Ross Moore and Chris Rowley have provided moral and technical support
+from the very early days with great insight into the issues we face trying
+to extend and use \TeX\ in the future.
+Apostolos Syropoulos, Joel Salomon, Khaled Hosny, and Mariusz Wodzicki
+have been fantastic beta testers.
+
+\section{Getting started}
+
+Load \pkg{unicode-math} as a regular \LaTeX\ package. It should be loaded
+after any other maths or font-related package in case it needs to overwrite
+their definitions. Here's an example:
+\begin{Verbatim}
+\usepackage{amsmath} % if desired
+\usepackage{unicode-math}
+\setmathfont{Asana-Math.otf}
+\end{Verbatim}
+Three OpenType maths fonts are included by default in \TeX\ Live 2011:
+Latin Modern Math, Asana Math, and XITS Math.
+These can be loaded directly with their filename
+with both \XeLaTeX\ and \LuaLaTeX; resp.,
+\begin{Verbatim}
+\setmathfont{latinmodern-math.otf}
+\setmathfont{Asana-Math.otf}
+\setmathfont{xits-math.otf}
+\end{Verbatim}
+Other OpenType maths fonts may be loaded in the usual way; please see the
+\pkg{fontspec} documentation for more information.
+
+Once the package is loaded, traditional TFM-based fonts are not supported any more;
+you can only switch to a different OpenType math font using the \cs{setmathfont} command.
+If you do not load an OpenType maths font before |\begin{document}|, Latin Modern Math (see above) will be loaded automatically.
+
+\subsection{New commands}
+\textbf{New v0.8:}
+\pkg{unicode-math} provides the following commands to select specific `alphabets' within the unicode maths font: (usage, e.g.: |$\symbfsf{g}$|${}\to\symbfsf{g}$)
+\begin{quote}
+\ExplSyntaxOn
+\clist_map_inline:nn {
+  normal, literal, up, bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf,
+  bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
+  up, sf, bf, tt, it,
+  }{\cs{sym#1}~}
+\ExplSyntaxOff
+\end{quote}
+Many of these are also defined with `familiar' synonyms:
+\begin{quote}
+\ExplSyntaxOn
+\clist_map_inline:nn {
+   normal, bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
+   bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
+  }{\mbox{\cs{math#1}}~}
+\ExplSyntaxOff
+\end{quote}
+So what about \cs{mathup}, \cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}?
+(N.B.: \cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is prefered as it is a script-agnostic term.)
+These commands have `overloaded' meanings in \LaTeX, and it's important to consider the subtle differences between, e.g., \cs{symbf} and \cs{mathbf}.
+The former switches to single-letter mathematical symbols, whereas the second switches to a text font that behaves correctly in mathematics but should be used for multi-letter identifiers.
+These four commands (and \cs{mathrm}) are defined in the traditional \LaTeX\ manner.
+Further details are discussed in \secref{mathselect}.
+
+Additional similar commands can be defined using
+\begin{Verbatim}
+\setmathfontface\mathfoo{...}
+\end{Verbatim}
+
+\subsection{Package options}
+Package options may be set when the package as loaded or at any later
+stage with the \cs{unimathsetup} command. Therefore, the following two
+examples are equivalent:
+\begin{Verbatim}
+\usepackage[math-style=TeX]{unicode-math}
+% OR
+\usepackage{unicode-math}
+\unimathsetup{math-style=TeX}
+\end{Verbatim}
+Note, however, that some package options affects how maths is initialised
+and changing an option such as |math-style| will not take effect until a
+new maths font is set up.
+
+Package options may \emph{also} be used when declaring new maths fonts,
+passed via options to the \cs{setmathfont} command.
+Therefore, the following two examples are equivalent:
+\begin{Verbatim}
+\unimathsetup{math-style=TeX}
+\setmathfont{Cambria Math}
+% OR
+\setmathfont{Cambria Math}[math-style=TeX]
+\end{Verbatim}
+
+A short list of package options is shown in \tabref{pkgopt}.
+See following sections for more information.
+
+\begin{table}\centering
+  \topcaption{Package options.}
+  \tablabel{pkgopt}
+  \begin{tabular}{lll}
+    \toprule
+    Option & Description & See\dots \\
+    \midrule
+    |math-style| & Style of letters & \secref{math-style} \\
+    |bold-style| & Style of bold letters & \secref{bold-style} \\
+    |sans-style| & Style of sans serif letters & \secref{sans-style} \\
+    |nabla|      & Style of the nabla symbol & \secref{nabla} \\
+    |partial|    & Style of the partial symbol & \secref{partial} \\
+    |vargreek-shape|  & Style of phi and epsilon & \secref{vargreek-shape} \\
+    |colon| & Behaviour of \cs{colon} & \secref{colon} \\
+    |slash-delimiter| & Glyph to use for `stretchy' slash & \secref{slash-delimiter} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\section{Unicode maths font setup}
+
+In the ideal case, a single Unicode font will contain all maths glyphs we
+need. The file |unicode-math-table.tex| (based on Barbara Beeton's \STIX\ table)
+provides the mapping between Unicode
+maths glyphs and macro names (all 3298 — or however many — of them!). A
+single command
+\codeline{\cmd\setmathfont\marg{font name}\oarg{font features}}
+implements this for every every symbol and alphabetic variant.
+That means |x| to $x$, |\xi| to $\xi$, |\leq| to $\leq$, etc., |\symscr{H}|
+to $\symscr{H}$ and so on, all for Unicode glyphs within a single font.
+
+This package deals well with Unicode characters for maths
+input. This includes using literal Greek letters in formulae,
+resolving to upright or italic depending on preference.
+
+Font features specific to \pkg{unicode-math} are shown in \tabref{mathfontfeatures}.
+Package options (see \tabref{pkgopt}) may also be used.
+Other \pkg{fontspec} features are also valid.
+
+\begin{table}\centering
+  \topcaption{Maths font options.}
+  \tablabel{mathfontfeatures}
+  \begin{tabular}{lll}
+    \toprule
+    Option & Description & See\dots \\
+    \midrule
+    |range| & Style of letters & \secref{range} \\
+    |script-font| & Font to use for sub- and super-scripts & \secref{sscript} \\
+    |script-features| & Font features for sub- and super-scripts & \secref{sscript} \\
+    |sscript-font| & Font to use for nested sub- and super-scripts & \secref{sscript} \\
+    |sscript-features| & Font features for nested sub- and super-scripts & \secref{sscript} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Using multiple fonts}
+\seclabel{range}
+
+There will probably be few cases where a single Unicode maths font suffices
+(simply due to glyph coverage). The \STIX\ font comes to mind as a
+possible exception. It will therefore be necessary to delegate specific
+Unicode ranges of glyphs to separate fonts:
+  \codeline{\cmd\setmathfont\marg{font name}|[range=|\meta{unicode range}|,|\meta{font features}|]|}
+where \meta{unicode range} is a comma-separated list of Unicode slot numbers and ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|.
+Note that \TeX's syntax for accessing the slot number of a character, such as |`\+|, will also work here.
+
+You may also use the macro for accessing the glyph, such as \cs{int}, or whole collection of symbols with the same math type, such as \cs{mathopen}, or complete math styles such as \cs{symbb}.
+(Only numerical slots, however, can be used in ranged declarations.)
+
+\subsubsection{Control over alphabet ranges}
+
+As discussed earlier, Unicode mathematics consists of a number of `alphabet styles' within a single font. In \pkg{unicode-math}, these ranges are indicated with the following (hopefully self-explanatory) labels:
+\begin{quote}\ttfamily
+\ExplSyntaxOn
+\clist_use:Nn \g__um_named_ranges_clist {\,,\,~}
+\ExplSyntaxOff
+\end{quote}
+Fonts can be selected for specified ranges only using the following syntax, in which case all other maths font setup remains untouched:
+\begin{itemize}
+\item |[range=bb]| to use the font for `|bb|' letters only.
+\item |[range=bfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (also with |latin|, |Latin|, |num| as possible options for Latin lower-/upper-case and numbers, resp.).
+\item |[range=up->sfup]| to map to different output styles.
+\end{itemize}
+
+Note that `meta-styles' such as `|bf|' and `|sf|' are not included here since they are context dependent. Use |[range=bfup]| and |[range=bfit]| to effect changes to the particular ranges selected by `|bf|' (and similarly for `|sf|').
+
+If a particular math style is not defined in the font, we fall back onto the lower-base plane (i.e., `upright') glyphs.
+Therefore, to use an \ascii-encoded fractur font, for example, write
+\begin{Verbatim}
+  \setmathfont{SomeFracturFont}[range=frak]
+\end{Verbatim}
+and because the math plane fractur glyphs will be missing, \pkg{unicode-math} will know to use the \ascii\ ones instead.
+If necessary this behaviour can be forced with |[range=frak->up]|, since the `|up|' range corresponds to \ascii\ letters.
+
+%If you wanted to swap the maths symbols with sans serif forms, it would be possible to write |[range={up->sfup,it->sfit}]|.
+%Note, however, that at present Unicode does not encode glyphs for sans serif Greek (\tabref{mathalphabets}).
+
+Users of the impressive Minion Math fonts (commercial) may use remapping to access the bold glyphs using:
+\begin{Verbatim}
+  \setmathfont{MinionMath-Regular.otf}
+  \setmathfont{MinionMath-Bold.otf}[range={bfup->up,bfit->it}]
+\end{Verbatim}
+To set up the complete range of optical sizes for these fonts, a font declaration such as the following may be used: (adjust may be desired according to the font size of the document)
+\begin{Verbatim}
+\setmathfont{Minion Math}[
+ SizeFeatures = {
+  {Size =      -6.01,  Font = MinionMath-Tiny},
+  {Size =  6.01-8.41,  Font = MinionMath-Capt},
+  {Size =  8.41-13.01, Font = MinionMath-Regular},
+  {Size = 13.01-19.91, Font = MinionMath-Subh},
+  {Size = 19.91-,      Font = MinionMath-Disp}
+ }]
+
+\setmathfont{Minion Math}[range = {bfup->up,bfit->it},
+ SizeFeatures = {
+  {Size =      -6.01,  Font = MinionMath-BoldTiny},
+  {Size =  6.01-8.41,  Font = MinionMath-BoldCapt},
+  {Size =  8.41-13.01, Font = MinionMath-Bold},
+  {Size = 13.01-19.91, Font = MinionMath-BoldSubh},
+  {Size = 19.91-,      Font = MinionMath-BoldDisp}
+ }]
+\end{Verbatim}
+\textbf{v0.8:} Note that in previous versions of \pkg{unicode-math}, these features were labelled |[range=\mathbb]| and so on. This old syntax is still supported for backwards compatibility, but is now discouraged.
+
+
+\subsection{Script and scriptscript fonts/features}
+\seclabel{sscript}
+
+Cambria Math uses OpenType font features to activate smaller optical sizes
+for scriptsize and scriptscriptsize symbols (the $B$ and $C$, respectively,
+in $A_{B_C}$).
+Other typefaces (such as Minion Math) may use entirely separate font files.
+
+The features |script-font| and |sscript-font| allow alternate fonts to be
+selected for the script and scriptscript sizes, and |script-features| and
+|sscript-features| to apply different OpenType features to them.
+
+By default |script-features| is defined as |Style=MathScript| and |sscript-features| is |Style=MathScriptScript|.
+These correspond to the two levels of OpenType's |ssty| feature tag.
+If the |(s)script-features| options are specified manually, you must
+additionally specify the |Style| options as above.
+
+
+\subsection{Maths `versions'}
+
+\LaTeX\ uses a concept known as `maths versions' to switch math fonts
+mid-document.
+This is useful because it is more efficient than loading a complete maths
+font from scratch every time---especially with thousands of glyphs in the case of Unicode maths!
+The canonical example for maths versions is to select a `bold' maths font
+which might be suitable for section headings, say.
+(Not everyone agrees with this typesetting choice, though; be careful.)
+
+To select a new maths font in a particular version, use the syntax
+  \codeline{\cmd\setmathfont\marg{font name}|[version=|\meta{version name}|,|\meta{font features}|]|}
+and to switch between maths versions mid-document use the standard \LaTeX\ command
+\cmd\mathversion\marg{version name}.
+
+
+\subsection{Legacy maths `alphabet' commands}
+\seclabel{mathselect}
+
+\LaTeX\ traditionally uses \cs{DeclareMathAlphabet} and \cs{SetMathAlphabet} to define document commands such as \cs{mathit}, \cs{mathbf}, and so on.
+While these commands can still be used, \pkg{unicode-math} defines a wrapper command to assist with the creation of new such maths alphabet commands.
+This command is known as \cs{setmathface} in symmetry with \pkg{fontspec}'s \cs{newfontface} command; it takes syntax:
+\begin{quote}
+  \cmd\setmathfontface\meta{command}\marg{font name}|[|\meta{font features}|]|
+
+  \makebox[0pt][l]{\cmd\setmathfontface\meta{command}\marg{font name}|[||version=|\meta{version name}|,|\meta{font features}|]|}
+\end{quote}
+For example, if you want to define a new legacy maths alphabet font \cs{mathittt}:
+\begin{verbatim}
+  \setmathfontface\mathittt{texgyrecursor-italic.otf}
+  ...
+  $\mathittt{foo} = \mathittt{a} + \mathittt{b}$
+\end{verbatim}
+
+
+\subsubsection{Default `text math' fonts}
+
+The five `text math' fonts, discussed above, are: \cs{mathrm}, \cs{mathbf}, \cs{mathit}, \cs{mathsf}, and \cs{mathtt}.
+These commands are also defined with their original definition under synonyms \cs{mathtextrm}, \cs{mathtextbf}, and so on.
+
+When selecting document fonts using \pkg{fontspec} commands such as \cs{setmainfont}, \pkg{unicode-math} inserts some additional that keeps the current default fonts `in sync' with their corresponding \cs{mathrm} commands, etc.
+
+For example, in standard \LaTeX, \cs{mathsf} doesn't change even if the main document font is changed using |\renewcommand\sfdefault{...}|. With \pkg{unicode-math} loaded, after writing |\setsansfont{Helvetica}|, \cs{mathsf} will now be set in Helvetica.
+
+If the \cs{mathsf} font is set explicitly at any time in the preamble, this `auto-following' does not occur. The legacy math font switches can be defined either with commands defined by \pkg{fontspec} (|\setmathrm|, |\setmathsf|, etc.) or using the more general |\setmathfontface\mathsf| interface defined by \pkg{unicode-math}.
+
+
+\subsubsection{Replacing `text math' fonts by symbols}
+
+For certain types of documents that use legacy input syntax (say you're typesetting a new version of a book written in the 1990s), it would be preferable to use |\symbf| rather than |\mathbf| en masse.
+For example, if bold maths is used only for vectors and matrices, a dedicated symbol font will produce better spacing and will better match the main math font.
+
+Alternatively, you may have used an old version of \pkg{unicode-math} (pre-v0.8), when the \cs{symXYZ} commands were not defined and \cs{mathbf} behaved like \cs{symbf} does now.
+A series of package options (\tabref{legacyfontswitch}) are provided to facilitate switching the definition of \cs{mathXYZ} for the five legacy text math font definitions.
+
+\begin{table}
+  \centering
+  \topcaption{Maths text font configuration options. Note that \cs{mathup} and \cs{mathrm} are aliases of each other and cannot be configured separately.}
+  \tablabel{legacyfontswitch}
+  \begin{tabular}{lll}
+    \toprule
+    Defaults (from `text' font) & From `maths symbols' \\
+    \midrule
+    |mathrm=text| &   |mathrm=sym |  \\
+    |mathup=text|\rlap{$^\ast$} &   |mathup=sym|{}\rlap{$^\ast$}  \\
+    |mathit=text| &   |mathit=sym |  \\
+    |mathsf=text| &   |mathsf=sym |  \\
+    |mathbf=text| &   |mathbf=sym |  \\
+    |mathtt=text| &   |mathtt=sym |  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+A `smart' macro is intended for a future version of \pkg{unicode-math} that can automatically distinguish between single- and multi-letter arguments to \cs{mathbf} and use either the maths symbol or the `text math' font as appropriate.
+
+
+\subsubsection{Operator font}
+
+\LaTeX\ defines an internal command \cs{operator@font} for typesetting elements such as |\sin| and |\cos|.
+This font is selected from the legacy |operators| NFSS `MathAlphabet', which is no longer relevant in the context of \pkg{unicode-math}.
+By default, the \cs{operator@font} command is defined to switch to the \cs{mathrm} font.
+You may now change these using the command:
+\begin{Verbatim}
+\setoperatorfont\mathit
+\end{Verbatim}
+Or, to select a \pkg{unicode-math} range:
+\begin{Verbatim}
+\setoperatorfont\symscr
+\end{Verbatim}
+\setoperatorfont\symscr
+For example, after the latter above, |$\sin x$| will produce `$\sin x$'.
+
+\mathversion{normal}
+\setoperatorfont\mathrm
+
+
+\section{Maths input}
+
+\XeTeX's Unicode support allows maths input through two methods. Like
+classical \TeX, macros such as \cmd\alpha, \cmd\sum, \cmd\pm, \cmd\leq, and
+so on, provide verbose access to the entire repertoire of characters defined
+by Unicode. The literal characters themselves may be used instead, for more
+readable input files.
+
+\subsection{Math `style'}
+\seclabel{math-style}
+
+Classically, \TeX\ uses italic lowercase Greek letters and \emph{upright}
+uppercase Greek letters for variables in mathematics. This is contrary to
+the \textsc{iso} standards of using italic forms for both upper- and lowercase.
+Furthermore, in various historical contexts, often associated with French typesetting, it was common to use upright uppercase \emph{Latin} letters as well as upright
+upper- and lowercase Greek, but italic lowercase latin. Finally, it is not unknown to use upright letters
+for all characters, as seen in the Euler fonts.
+
+The \pkg{unicode-math} package accommodates these possibilities with the
+option \opt{math-style} that takes one of four (case sensitive) arguments:
+\opt{TeX}, \opt{ISO}, \opt{french}, or \opt{upright}.\footnote{Interface inspired by Walter Schmidt's \pkg{lucimatx} package.}
+The \opt{math-style} options' effects are shown in brief in \tabref{math-style}.
+
+The philosophy behind the interface to the mathematical symbols
+lies in \LaTeX's attempt of separating content and formatting. Because input
+source text may come from a variety of places, the upright and
+`mathematical' italic Latin and Greek alphabets are \emph{unified} from the
+point of view of having a specified meaning in the source text. That is, to
+get a mathematical ‘$x$’, either the \ascii\ (`keyboard') letter |x| may
+be typed, or the actual Unicode character may be used. Similarly for Greek
+letters. The upright or italic forms are then chosen based on the
+|math-style| package option.
+
+If glyphs are desired that do not map as per the package option (for
+example, an upright `g' is desired but typing |$g$| yields `$g$'),
+\emph{markup} is required to specify this; to follow from the example:
+|\symup{g}|.
+Maths style commands such as \cmd\symup\ are detailed later.
+
+\paragraph{`Literal' interface}
+Some may not like this convention of normalising their input.
+For them, an upright |x| is an upright `x' and that's that.
+(This will be the case when obtaining source text from copy/pasting PDF or
+Microsoft Word documents, for example.)
+For these users, the |literal| option to |math-style| will effect this behaviour.
+The \cs{symliteral}\marg{syms} command can also be used, regardless of package setting, to force the style to match the literal input characters.
+This is a `mirror' to \cs{symnormal}\marg{syms} (also alias \cs{mathnormal}) which `resets' the character mapping in its argument to that originally set up through package options.
+
+\begin{table}
+  \centering
+  \topcaption{Effects of the \opt{math-style} package option.}
+  \tablabel{math-style}
+  \begin{tabular}{@{}>{\ttfamily}lcc@{}}
+    \toprule
+      & \multicolumn{2}{c}{Example} \\
+       \cmidrule(l){2-3}
+      \rmfamily Package option & Latin & Greek \\
+    \midrule
+      math-style=ISO & $(a,z,B,X)$ & $\symit{(\alpha,\beta,\Gamma,\Xi)}$ \\
+      math-style=TeX & $(a,z,B,X)$ & $(\symit\alpha,\symit\beta,\symup\Gamma,\symup\Xi)$ \\
+      math-style=french & $(a,z,\symup B,\symup X)$ & $(\symup\alpha,\symup\beta,\symup\Gamma,\symup\Xi)$ \\
+      math-style=upright & $(\symup a,\symup z,\symup B,\symup X)$ & $(\symup\alpha,\symup\beta,\symup\Gamma,\symup\Xi)$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\subsection{Bold style}
+\seclabel{bold-style}
+
+Similar as in the previous section, ISO standards differ somewhat to \TeX's
+conventions (and classical typesetting) for `boldness' in mathematics. In
+the past, it has been customary to use bold \emph{upright} letters to denote
+things like vectors and matrices. For example, \( \symbfup{M} =
+(\mitM_x,\mitM_y,\mitM_z) \). Presumably, this was due to the relatively
+scarcity of bold italic fonts in the pre-digital typesetting era.
+It has been suggested by some that \emph{italic} bold symbols should be used nowadays instead, but this practise is certainly not widespread.
+
+Bold Greek letters have simply been bold variant glyphs of their regular
+weight, as in \( \mbfitxi = (\mitxi_\mitr,\mitxi_\mitphi,\mitxi_\mittheta)
+\).
+Confusingly, the syntax in \LaTeX\ traditionally has been different for obtaining `normal' bold symbols in Latin and Greek: \cmd\mathbf\ in the former (`$\symbfup{M}$'), and \cmd\bm\ (or
+\cmd\boldsymbol, deprecated) in the latter (`$\mbfitxi$').
+
+In \pkg{unicode-math}, the \cmd\symbf\ command works directly with both
+Greek and Latin maths characters and depending on package option
+either switches to upright for Latin letters (|bold-style=TeX|) as well or
+keeps them italic (|bold-style=ISO|).
+To match the package options for non-bold characters, with option
+|bold-style=upright| all bold characters are upright, and
+|bold-style=literal| does not change the upright/italic shape of the letter.
+The \opt{bold-style} options' effects are shown in brief in \tabref{bold-style}.
+
+Upright and italic bold mathematical letters input as direct Unicode
+characters are normalised with the same rules. For example, with
+|bold-style=TeX|, a literal bold italic latin character will be typeset
+upright.
+
+Note that \opt{bold-style} is independent of \opt{math-style}, although if
+the former is not specified then matching defaults are chosen based on the
+latter.
+
+\begin{table}
+  \centering
+  \topcaption{Effects of the \opt{bold-style} package option.}
+  \tablabel{bold-style}
+  \begin{tabular}{@{}>{\ttfamily}lcc@{}}
+    \toprule
+      & \multicolumn{2}{c}{Example} \\
+       \cmidrule(l){2-3}
+      \rmfamily Package option & Latin & Greek \\
+    \midrule
+      bold-style=ISO & $(\symbfit a, \symbfit z, \symbfit B, \symbfit X)$ & $(\symbfit\alpha, \symbfit\beta, \symbfit\Gamma, \symbfit\Xi)$ \\
+      bold-style=TeX & $(\symbfup a,\symbfup z,\symbfup B,\symbfup X)$ & $(\symbfit\alpha, \symbfit\beta,\symbfup \Gamma,\symbfup \Xi)$ \\
+      bold-style=upright & $(\symbfup a,\symbfup z,\symbfup B,\symbfup X)$ & $(\symbfup \alpha,\symbfup \beta,\symbfup \Gamma,\symbfup \Xi)$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\subsection{Sans serif style}
+\seclabel{sans-style}
+
+Unicode contains upright and italic, medium and bold mathematical style characters.
+These may be explicitly selected with the \cs{mathsfup}, \cs{mathsfit}, \cs{mathbfsfup}, and \cs{mathbfsfit}
+commands discussed in \secref{all-math-alphabets}.
+
+How should the generic \cs{mathsf} behave? Unlike bold, sans serif is used much more sparingly
+in mathematics. I've seen recommendations to typeset tensors in sans serif italic
+or sans serif italic bold (e.g., examples in the \pkg{isomath} and \pkg{mattens} packages).
+But \LaTeX's \cs{mathsf} is \textsl{upright} sans serif.
+
+Therefore I reluctantly add the package options |[sans-style=upright]| and |[sans-style=italic]| to control the behaviour of \cs{mathsf}.
+The |upright| style sets up the command to use upright sans serif, including Greek;
+the |italic| style switches to using italic in both Latin and Greek.
+In other words, this option simply changes the meaning of \cs{mathsf} to either \cs{mathsfup} or \cs{mathsfit}, respectively.
+Please let me know if more granular control is necessary here.
+
+There is also a |[sans-style=literal]| setting, set automatically with |[math-style=literal]|, which retains the uprightness of the input characters used when selecting the sans serif output.
+
+\subsubsection{What about bold sans serif?}
+
+While you might want your bold upright and your sans serif italic, I don't believe you'd also want
+your bold sans serif upright (or all vice versa, if that's even conceivable). Therefore, bold sans
+serif follows from the setting for sans serif; it is completely independent of the setting for bold.
+
+In other words, \cs{mathbfsf} is either \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And \texttt{[sans-style = literal]} causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
+
+N.B.: there is no medium-weight sans serif Greek range in Unicode.
+Therefore, |\symsf{\alpha}| does not make sense (it produces `$\symsf{\alpha}$'), while |\symbfsf{\alpha}| gives `$\symbfsfup{\alpha}$' or `$\symbfsfit{\alpha}$' according to the |sans-style|.
+
+\subsection{All (the rest) of the mathematical styles}
+\seclabel{all-math-alphabets}
+
+Unicode contains separate codepoints for most if not all variations of style
+shape one may wish to use in mathematical notation. The complete list is shown
+in \tabref{mathalphabets}. Some of these have been covered in the previous sections.
+
+The math font switching commands do not nest; therefore if you want
+sans serif bold, you must write |\symbfsf{...}| rather than |\symbf{\symsf{...}}|.
+This may change in the future.
+
+\begin{table}
+\caption{Mathematical styles defined in Unicode. Black dots indicate an style exists in the font specified; blue dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
+\tablabel{mathalphabets}
+\centering
+\def\Y{\textbullet}
+\def\M{\textcolor[rgb]{0.5,0.5,1}{\textbullet}}
+\begin{tabular}{@{} lll l ccc @{}}
+\toprule
+\multicolumn{3}{c}{Font} & & \multicolumn{3}{c}{Alphabet} \\
+\cmidrule(r){1-3}
+\cmidrule(l){5-7}
+Style & Shape & Series & Switch & Latin & Greek & Numerals \\
+\midrule
+Serif      & Upright & Normal & \cs{mathup}     & \Y & \Y & \Y  \\
+           &         & Bold   & \cs{mathbfup}   & \Y & \Y & \Y  \\
+           & Italic  & Normal & \cs{mathit}     & \Y & \Y & \M  \\
+           &         & Bold   & \cs{mathbfit}   & \Y & \Y & \M  \\
+Sans serif & Upright & Normal & \cs{mathsfup}   & \Y &    & \Y  \\
+           & Italic  & Normal & \cs{mathsfit}   & \Y &    & \M  \\
+           & Upright & Bold   & \cs{mathbfsfup} & \Y & \Y & \Y  \\
+           & Italic  & Bold   & \cs{mathbfsfit} & \Y & \Y & \M  \\
+Typewriter & Upright & Normal & \cs{mathtt}     & \Y &    & \Y  \\
+Double-struck & Upright & Normal & \cs{mathbb}     & \Y &    & \Y  \\
+              & Italic  & Normal & \cs{mathbbit}   & \Y &    &  \\
+Script     & Upright & Normal & \cs{mathscr}    & \Y &    &     \\
+           &         & Bold   & \cs{matbfscr}   & \Y &    &     \\
+Fraktur    & Upright & Normal & \cs{mathfrak}   & \Y &    &     \\
+           &         & Bold   & \cs{mathbffrac} & \Y &    &     \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Double-struck}
+
+The double-struck style (also known as `blackboard bold') consists of
+upright Latin letters $\{\symbb{a}$--$\symbb{z}$,$\symbb{A}$$\symbb{Z}\}$,
+numerals $\symbb{0}$--$\symbb{9}$, summation symbol $\symbb\sum$, and four
+Greek letters only: $\{\symbb{\gamma\pi\Gamma\Pi}\}$.
+
+While |\symbb{\sum}| does produce a double-struck summation symbol,
+its limits aren't properly aligned. Therefore,
+either the literal character or the control sequence \cs{Bbbsum} are
+recommended instead.
+
+There are also five Latin \emph{italic} double-struck letters: $\symbbit{Ddeij}$.
+These can be accessed (if not with their literal characters or control sequences)
+with the \cs{mathbbit} style switch, but note that only those five letters
+will give the expected output.
+
+\subsubsection{Caligraphic vs.\ Script variants}
+
+The Unicode maths encoding contains a style for `Script' letters,
+and while by default \cs{mathcal} and \cs{mathscr}
+are synonyms, there are some situations when a
+separate `Caligraphic' style is needed as well.
+
+If a font contains alternate glyphs for a separat caligraphic style,
+they can be selected explicitly as shown below.
+This feature is currently only supported by the XITS~Math font, where
+the caligraphic letters are accessed with the same glyph slots as the
+script letters but with the first stylistic set feature (|ss01|) applied.
+\begin{verbatim}
+  \setmathfont{xits-math.otf}[range={cal,bfcal},StylisticSet=1]
+\end{verbatim}
+An example is shown below.
+\begin{quote}
+\setmathfont{xits-math.otf}[range=scr]
+\setmathfont{xits-math.otf}[range=cal,StylisticSet=1]
+The Script style (\cs{mathscr}) in XITS Math is: $\symscr{ABCXYZ}$\par
+The Caligraphic style (\cs{mathcal}) in XITS Math is: $\symcal{ABCXYZ}$
+\end{quote}
+
+
+\subsection{Miscellanea}
+
+\subsubsection{Nabla}
+\seclabel{nabla}
+
+ The symbol $\nabla$ comes in the six forms shown in \tabref{nabla}.
+ We want an individual option to specify whether we want upright or italic
+ nabla by default (when either upright or italic nabla is used in the
+ source). \TeX\ classically uses an upright nabla, and \textsc{iso}
+ standards agree with this convention.
+ The package options |nabla=upright| and
+ |nabla=italic| switch between the two choices, and |nabla=literal| respects
+ the shape of the input character. This is then inherited
+ through \cmd\symbf; \cmd\symit\ and \cmd\symup\ can be used to force one
+ way or the other.
+
+|nabla=italic| is the default. |nabla=literal| is
+activated automatically after |math-style=literal|.
+
+\begin{table}
+  \begin{minipage}[b]{0.49\textwidth}
+  \centering
+  \topcaption{The various forms of nabla.}
+  \tablabel{nabla}
+  \let \tmpshow\empty
+  \begin{tabular}{@{}llc@{}}
+      \toprule
+    \multicolumn{2}{@{}l}{Description} & Glyph
+     \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
+    Upright & Serif & $\symup\nabla$ \\
+    & Bold serif & $\symbfup\nabla$ \\
+    & Bold sans & $\symbfsfup\nabla$ \\
+      \cmidrule(lr){1-2}\cmidrule(lr){3-3}
+    Italic & Serif & $\symit\nabla$ \\
+    & Bold serif & $\symbfit\nabla$ \\
+    & Bold sans  & $\symbfsfit\nabla$ \\
+      \bottomrule
+  \end{tabular}
+  \end{minipage}\hfill
+  \begin{minipage}[b]{0.49\textwidth}
+  \centering
+  \topcaption{The partial differential.}
+  \tablabel{partial}
+  \begin{tabular}{@{}llc@{}}
+      \toprule
+    \multicolumn{2}{@{}l}{Description} & Glyph
+     \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
+    Regular   & Upright & $\symup\partial$ \\
+              & Italic  & $\symit\partial$ \\
+    Bold      & Upright & $\symbfup\partial$ \\
+              & Italic  & $\symbfit\partial$ \\
+    Sans bold & Upright & $\symbfsfup\partial$ \\
+              & Italic  & $\symbfsfit\partial$ \\
+      \bottomrule
+  \end{tabular}
+  \end{minipage}
+\end{table}
+
+
+\subsubsection{Partial}
+\seclabel{partial}
+
+The same applies to the symbols \unichar{2202} partial differential and
+\unichar{1D715} math italic partial differential.
+
+At time of writing, both the Cambria Math and STIX fonts display these
+two glyphs in the same italic style, but this is hopefully a bug that will
+be corrected in the future~--- the `plain' partial differential should
+really have an upright shape.
+
+Use the |partial=upright| or |partial=italic| package options to specify
+which one you would like, or |partial=literal| to have the same character
+used in the output as was used for the input.
+The default is (always, unless someone requests and
+argues otherwise) |partial=italic|.\footnote{A good argument would revolve
+around some international standards body recommending upright over italic.
+I just don't have the time right now to look it up.} |partial=literal|
+is activated following |math-style=literal|.
+
+See \tabref{partial} for the variations on the partial differential symbol.
+
+
+\subsubsection{Primes}
+
+Primes ($x'$) may be input in several ways. You may use any combination
+the \ascii\ straight quote (\texttt{\char`\'}) or the Unicode prime \unichar{2032}
+($'$); when multiple primes occur next to each other, they chain
+together to form double, triple, or quadruple primes if the font contains
+pre-drawn glyphs. The individual prime glyphs are accessed, as usual,
+with the \cs{prime} command, and the double-, triple-, and quadruple-prime
+glyphs are available with \cs{dprime}, \cs{trprime}, and \cs{qprime},
+respectively.
+
+If the font does not contain the pre-drawn glyphs or more than four primes
+are used, the single prime glyph is used multiple times with a negative
+kern to get the spacing right. There is no user interface to adjust this
+negative kern yet (because I haven't decided what it should look like);
+if you need to, write something like this:
+\begin{Verbatim}
+\ExplSyntaxOn
+\muskip_gset:Nn \g_@@_primekern_muskip { -\thinmuskip/2 }
+\ExplySyntaxOff
+\end{Verbatim}
+Backwards or reverse primes behave in exactly the same way; use the \ascii\
+back tick (\texttt{\char`\`}) or the Unicode reverse prime \unichar{2035}
+({\umfont\char"2035}).
+The command to access the backprime is \cs{backprime}, and
+multiple backwards primes can accessed with \cs{backdprime},
+\cs{backtrprime}, and \cs{backqprime}.
+
+In all cases above, no error checking is performed if you attempt to
+access a multi-prime glyph in a font that doesn't contain one. For this
+reason, it may be safer to write |x''''| instead of |x\qprime|
+in general.
+
+If you ever need to enter the straight quote |'| or the backtick |`| in
+maths mode, these glyphs can be accessed with \cs{mathstraightquote} and
+\cs{mathbacktick}.
+
+\subsubsection{Unicode subscripts and superscripts}
+
+You may, if you wish, use Unicode subscripts and superscripts in your
+source document. For basic expressions, the use of these characters
+can make the input more readable.
+Adjacent sub- or super-scripts will be concatenated into a single
+expression.
+
+The range of subscripts and superscripts supported by this package
+are shown in \figref{superscripts,subscripts}. Please request more if
+you think it is appropriate.
+
+\begin{figure}\centering
+\fbox{\fontspec{Charis SIL}\Large
+A
+^^^^2070 ^^^^00b9 ^^^^00b2 ^^^^00b3 ^^^^2074 ^^^^2075 ^^^^2076 ^^^^2077
+^^^^2078 ^^^^2079 ^^^^207a ^^^^207b ^^^^207c ^^^^207d ^^^^207e ^^^^2071
+^^^^207f ^^^^207f ^^^^02b0 ^^^^02b2 ^^^^02b3 ^^^^02b7 ^^^^02b8
+Z}
+\caption{
+  The Unicode superscripts supported as input characters.
+  These are the literal glyphs from Charis SIL,
+  not the output seen when used for maths input.
+  The `A' and `Z' are to provide context for the size and
+  location of the superscript glyphs.
+}
+\figlabel{superscripts}
+\end{figure}
+
+\begin{figure}\centering
+\fbox{\fontspec{Charis SIL}\Large
+A
+^^^^2080 ^^^^2081 ^^^^2082 ^^^^2083 ^^^^2084 ^^^^2085 ^^^^2086 ^^^^2087
+^^^^2088 ^^^^2089 ^^^^208a ^^^^208b ^^^^208c ^^^^208d ^^^^208e ^^^^2090
+^^^^2091 ^^^^1d62 ^^^^2092 ^^^^1d63 ^^^^1d64 ^^^^1d65 ^^^^2093 ^^^^1d66
+^^^^1d67 ^^^^1d68 ^^^^1d69 ^^^^1d6a
+Z}
+\caption{
+  The Unicode subscripts supported as input characters.
+  See note from \figref{superscripts}.
+}
+\figlabel{subscripts}
+\end{figure}
+
+\subsubsection{Colon}
+\seclabel{colon}
+
+The colon is one of the few confusing characters of Unicode maths.
+In \TeX, \texttt{:} is defined as a colon with relation spacing: `$a:b$'.
+While \cs{colon} is defined as a colon with punctuation spacing: `$a\colon b$'.
+
+In Unicode, \unichar{003A} {colon} is defined as a punctuation symbol,
+while \unichar{2236} {ratio} is the colon-like symbol used in mathematics to denote
+ratios and other things.
+
+This breaks the usual straightforward mapping from control sequence to Unicode input character
+to (the same) Unicode glyph.
+
+To preserve input compatibility, we remap the \ascii\ input character `\texttt{:}' to \unichar{2236}.
+Typing a literal \unichar{2236} char will result in the same output.
+If \pkg{amsmath} is loaded, then the definition of \cs{colon} is inherited from there
+(it looks like a punctuation colon with additional space around it).
+Otherwise, \cs{colon} is made to output a colon with \cs{mathpunct} spacing.
+
+The package option |colon=literal| forces \ascii\ input `|:|' to be printed as \cs{mathcolon} instead.
+
+
+\subsubsection{Slashes and backslashes}
+\seclabel{slash-delimiter}
+
+There are several slash-like symbols defined in Unicode. The complete list is shown in \tabref{slashes}.
+
+\begin{table}\centering
+\caption{Slashes and backslashes.}
+\tablabel{slashes}
+\begin{tabular}{@{}cl@{}cl@{}}
+\toprule
+Slot & Name & Glyph & Command  \\
+\midrule
+\unichar{002F} & \textsc{solidus}                 & \umfont \char"002F & \cs{slash} \\
+\unichar{2044} & \textsc{fraction slash}          & \umfont \char"2044 & \cs{fracslash} \\
+\unichar{2215} & \textsc{division slash}          & \umfont \char"2215 & \cs{divslash} \\
+\unichar{29F8} & \textsc{big solidus}             & \umfont \char"29F8 & \cs{xsol} \\
+\midrule
+\unichar{005C} & \textsc{reverse solidus}         & \umfont \char"005C & \cs{backslash} \\
+\unichar{2216} & \textsc{set minus}               & \umfont \char"2216 & \cs{smallsetminus} \\
+\unichar{29F5} & \textsc{reverse solidus operator}& \umfont \char"29F5 & \cs{setminus} \\
+\unichar{29F9} & \textsc{big reverse solidus}     & \umfont \char"29F9 & \cs{xbsol} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In regular \LaTeX\ we can write \cs{left}\cs{slash}\dots\cs{right}\cs{backslash}
+and so on and obtain extensible delimiter-like symbols. Not all of the Unicode slashes
+are suitable for this (and do not have the font support to do it).
+
+\paragraph{Slash}
+
+Of \unichar{2044} {fraction slash}, TR25 says that it is:
+\begin{quote}
+\dots used to build up simple fractions in running text\dots
+however parsers of mathematical texts should be prepared to handle fraction slash
+when it is received from other sources.
+\end{quote}
+
+\unichar{2215} {division slash} should be used when division is represented
+without a built-up fraction; $\pi\approx22/7$, for example.
+
+\unichar{29F8} {big solidus} is a `big operator' (like $\sum$).
+
+\paragraph{Backslash}
+
+The \unichar{005C} {reverse solidus} character \cs{backslash} is used for denoting
+double cosets: $A\backslash B$. (So I'm led to believe.)
+It may be used as a `stretchy' delimiter if supported by the font.
+
+MathML uses \unichar{2216} {set minus} like this: $A\smallsetminus B$.\footnote{\S4.4.5.11 \url{http://www.w3.org/TR/MathML3/}}
+The \LaTeX\ command name \cs{smallsetminus} is used for backwards compatibility.
+
+Presumably, \unichar{29F5} {reverse solidus operator} is intended to
+be used in a similar way, but it could also (perhaps?) be used to
+represent `inverse division': $\pi\approx7\mathbin{\backslash}22$.^^A
+\footnote{This is valid syntax in the Octave and Matlab programming languages,
+in which it means matrix inverse pre-multiplication. I.e., $A\mathbin{\backslash} B\equiv A^{-1}B$.}
+The \LaTeX\ name for this character is \cs{setminus}.
+
+Finally, \unichar{29F9} {big reverse solidus} is a `big operator' (like $\sum$).
+
+\paragraph{How to use all of these things}
+
+Unfortunately, font support for the above characters/glyphs is rather inconsistent.
+In Cambria Math, the only slash that grows (say when writing
+\[
+\left.\left[\begin{array}{cc} a & b \\ c & d\end{array}\right]\middle\slash
+      \left[\begin{array}{cc} 1 & 1 \\ 1 & 0\end{array}\right] \right.\quad )
+\]
+is the \textsc{fraction slash}, which we just established above is
+sort of only supposed to be used in text.
+
+Of the above characters, the following are allowed to be used after
+\cs{left}, \cs{middle}, and \cs{right}:
+\begin{itemize}
+\item \cs{fracslash};
+\item \cs{slash}; and,
+\item \cs{backslash} (the only reverse slash).
+\end{itemize}
+
+However, we assume that there is only \emph{one} stretchy slash
+in the font; this is assumed by default to be \unichar{002F} {solidus}.
+Writing \cs{left/} or \cs{left}\cs{slash} or \cs{left}\cs{fracslash}
+will all result in the same stretchy delimiter being used.
+
+The delimiter used can be changed with the |slash-delimiter| package option.
+Allowed values are |ascii|, |frac|, and |div|, corresponding to the respective
+Unicode slots.
+
+For example: as mentioned above, Cambria Math's stretchy slash is
+\unichar{2044} {fraction slash}. When using Cambria Math, then
+\pkg{unicode-math} should be loaded with the |slash-delimiter=frac| option.
+(This should be a font option rather than a package option, but
+it will change soon.)
+
+
+\subsubsection{Growing and non-growing accents}
+\seclabel{growing-accents}
+
+There are a few accents for which \TeX\ has both non-growing and growing
+versions.  Among these are \cs{hat} and \cs{tilde}; the corresponding growing
+versions are called \cs{widehat} and \cs{widetilde}, respectively.
+
+Older versions of \XeTeX\ and \LuaTeX\ did not support this distinction,
+however, and \emph{all} accents there were growing automatically. (I.e.,
+\cs{hat} and \cs{widehat} are equivalent.) As of \LuaTeX\ v0.65 and \XeTeX\
+v0.9998, these wide/non-wide commands will again behave in their expected
+manner.
+
+
+\subsubsection{Pre-drawn fraction characters}
+
+Pre-drawn fractions \unichar{00BC}--\unichar{00BE}, \unichar{2150}--\unichar{215E}
+are not suitable for use in mathematics output. However, they can be useful
+as input characters to abbreviate common fractions.
+\begin{center}
+\fontspec{DejaVuSerif.ttf} ^^A available in TeX Live 2012 if not earlier
+¼ ½ ¾  ↉ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞
+\end{center}
+For example, instead of writing `|\tfrac12 x|', you may consider it more readable to have
+`|½x|' in the source instead.
+
+If the \cs{tfrac} command exists (i.e., if \pkg{amsmath} is loaded or
+you have specially defined \cs{tfrac} for this purpose), it will be used
+to typeset the fractions. If not, regular \cs{frac} will be used. The command
+to use (\cs{tfrac} or \cs{frac}) can be forced either way with the package
+option |active-frac=small| or |active-frac=normalsize|, respectively.
+
+\subsubsection{Circles}
+
+Unicode defines a large number of different types of circles for a variety
+of mathematical purposes. There are thirteen alone just considering the
+all white and all black ones, shown in \tabref{circles}.
+
+\LaTeX\ defines considerably fewer: \cs{circ} and cs{bigcirc} for white;
+\cs{bullet} for black. This package maps those commands to \cs{vysmwhtcircle},
+\cs{mdlgwhtcircle}, and \cs{smblkcircle}, respectively.
+
+\begin{table}\centering
+\def\showchar#1#2#3{ \textsc{u}+{\small\ttfamily #1} & \texttt{\string#3} & \umfont \char"#1 \\}
+\begin{tabular}{@{}llc@{}}
+\toprule
+Slot & Command & Glyph \\
+\midrule
+\showchar{00B7}{centerdot}{\cdotp}
+\showchar{22C5}{small middle dot}{\cdot}
+\showchar{2219}{bullet operator}{\vysmblkcircle}
+\showchar{2022}{round bullet, filled}{\smblkcircle}
+\showchar{2981}{z notation spot}{\mdsmblkcircle}
+\showchar{26AB}{medium black circle}{\mdblkcircle}
+\showchar{25CF}{circle, filled}{\mdlgblkcircle}
+\showchar{2B24}{black large circle}{\lgblkcircle}
+\bottomrule
+\end{tabular}
+\def\showchar#1#2#3{ \umfont \char"#1 & \texttt{\string#3} & \textsc{u}+{\small\ttfamily #1} \\}
+\begin{tabular}{@{}cll@{}}
+\toprule
+Glyph & Command & Slot \\
+\midrule
+\\
+\\
+\showchar{2218}{composite function (small circle)}{\vysmwhtcircle}
+\showchar{25E6}{white bullet}{\smwhtcircle}
+\showchar{26AC}{medium small white circle}{\mdsmwhtcircle}
+\showchar{26AA}{medium white circle}{\mdwhtcircle}
+\showchar{25CB}{large circle}{\mdlgwhtcircle}
+\showchar{25EF}{large circle}{\lgwhtcircle}
+\bottomrule
+\end{tabular}
+\caption{Filled and hollow Unicode circles.}
+\tablabel{circles}
+\end{table}
+
+\subsubsection{Triangles}
+
+While there aren't as many different sizes of triangle as there are circle,
+there's some important distinctions to make between a few similar characters. See \tabref{uptriangles} for the full summary.
+
+These triangles all have different intended meanings. Note for backwards
+compatibility with \TeX, \unichar{25B3} has \emph{two} different mappings
+in \pkg{unicode-math}. \cs{bigtriangleup} is intended as a binary operator
+whereas \cs{triangle} is intended to be used as a letter-like symbol.
+
+But you're better off if you're using the latter form to indicate an
+increment to use the glyph intended for this purpose, \unichar{2206}: $\increment x$.
+
+Finally, given that $\triangle$ and $\increment$ are provided for you
+already, it is better off to only use upright Greek Delta $\Delta$ if you're
+actually using it as a symbolic entity such as a variable on its own.
+
+\begin{table}\centering
+\begin{tabular}{@{}llcl@{}}
+\toprule
+Slot & Command & Glyph & Class \\
+\midrule
+\unichar{25B5} & \cs{vartriangle}      & \umfont \char"25B5 & binary \\
+\unichar{25B3} & \cs{bigtriangleup}    & \umfont \char"25B3 & binary \\
+\unichar{25B3} & \cs{triangle}         & \umfont \char"25B3 & ordinary \\
+\unichar{2206} & \cs{increment}        & \umfont \char"2206 & ordinary \\
+\unichar{0394} & \cs{mathup}\cs{Delta} & \umfont \char"0394 & ordinary \\
+\bottomrule
+\end{tabular}
+\caption{Different upwards pointing triangles.}
+\tablabel{uptriangles}
+\end{table}
+
+\iffalse
+\subsubsection{Normalising some input characters}
+
+I believe
+all variant forms should be used as legal input that is normalised to
+a consistent output glyph, because we want to be fault-tolerant in the input.
+Here are the duplicates:
+\begin{quote}\obeylines
+\unichar {251} {latin small letter alpha}
+\unichar {25B} {latin small letter epsilon}
+\unichar {263} {latin small letter gamma}
+\unichar {269} {latin small letter iota}
+\unichar {278} {latin small letter phi}
+\unichar {28A} {latin small letter upsilon}
+\unichar {190} {latin capital letter epsilon}
+\unichar {194} {latin capital letter gamma}
+\unichar {196} {latin capital letter iota}
+\unichar {1B1} {latin capital letter upsilon}
+\end{quote}
+
+(Not yet implemented.)
+\fi
+
+\section{Advanced}
+
+\subsection{Warning messages}
+
+This package can produce a number of informational messages to try and inform the user when something might be going wrong due to package conflicts or something else.
+As an experimental feature, these can be turn off on an individual basis with the package option |warnings-off| which takes a comma-separated list of warnings to suppress.
+A warning will give you its name when printed on the console output; e.g.,
+\begin{Verbatim}
+  * unicode-math warning: "mathtools-colon"
+  *
+  * ... <warning message> ...
+\end{Verbatim}
+This warning could be suppressed by loading the package as follows:
+\begin{Verbatim}
+  \usepackage[warnings-off={mathtools-colon}]{unicode-math}
+\end{Verbatim}
+
+\subsection{Programmer's interface}
+
+(Tentative and under construction.)
+If you are writing some code that needs to know the current
+maths style (\cs{mathbf}, \cs{mathit}, etc.), you can query the
+variable \cs{l_@@_mathstyle_tl}. It will contain the maths style
+without the leading `math' string; for example,
+|\symbf { \show \l_@@_mathstyle_tl }|
+will produce `bf'.
+
+\StopEventually{\end{document}}
+
+\clearpage
+\appendix
+
+\section{\STIX\ table data extraction}\label{part:awk}
+
+The source for the \TeX\ names for the very large number of mathematical
+glyphs are provided via Barbara Beeton's table file for the \STIX\ project
+(|ams.org/STIX|). A version is located at
+|http://www.ams.org/STIX/bnb/stix-tbl.asc|
+but check |http://www.ams.org/STIX/| for more up-to-date info.
+
+This table is converted into a form suitable for reading by \TeX.
+A single file is produced containing all (more than 3298) symbols.
+Future optimisations might include generating various (possibly overlapping) subsets
+so not all definitions must be read just to redefine a small range of symbols.
+Performance for now seems to be acceptable without such measures.
+
+This file is currently developed outside this DTX file. It will be
+incorporated when the final version is ready. (I know this is not how
+things are supposed to work!)
+
+
+\section{Documenting maths support in the NFSS}
+
+In the following, \meta{NFSS decl.} stands for something like |{T1}{lmr}{m}{n}|.
+
+\begin{description}
+\item[Maths symbol fonts] Fonts for symbols: $\propto$, $\leq$, $\rightarrow$
+
+\cmd\DeclareSymbolFont\marg{name}\meta{NFSS decl.}\\
+Declares a named maths font such as |operators| from which symbols are defined with \cmd\DeclareMathSymbol.
+
+\item[Maths alphabet fonts] Fonts for {\font\1=cmmi10 at 10pt\1 ABC}\,–\,{\font\1=cmmi10 at 10pt\1 xyz}, {\font\1=eufm10 at 10pt\1 ABC}\,–\,{\font\1=cmsy10 at 10pt\1 XYZ}, etc.
+
+\cmd\DeclareMathAlphabet\marg{cmd}\meta{NFSS decl.}
+
+For commands such as \cmd\mathbf, accessed
+through maths mode that are unaffected by the current text font, and which are used for
+alphabetic symbols in the \ascii\ range.
+
+\cmd\DeclareSymbolFontAlphabet\marg{cmd}\marg{name}
+
+Alternative (and optimisation) for \cmd\DeclareMathAlphabet\ if a single font is being used
+for both alphabetic characters (as above) and symbols.
+
+\item[Maths `versions'] Different maths weights can be defined with the following, switched
+in text with the \cmd\mathversion\marg{maths version} command.
+
+\cmd\SetSymbolFont\marg{name}\marg{maths version}\meta{NFSS decl.}\\
+\cmd\SetMathAlphabet\marg{cmd}\marg{maths version}\meta{NFSS decl.}
+
+\item[Maths symbols] Symbol definitions in maths for both characters (=) and macros (\cmd\eqdef):
+\cmd\DeclareMathSymbol\marg{symbol}\marg{type}\marg{named font}\marg{slot}
+This is the macro that actually defines which font each symbol comes from and how they behave.
+\end{description}
+Delimiters and radicals use wrappers around \TeX's \cmd\delimiter/\cmd\radical\ primitives,
+which are re-designed in \XeTeX. The syntax used in \LaTeX's NFSS is therefore not so relevant here.
+\begin{description}
+\item[Delimiters] A special class of maths symbol which enlarge themselves in certain contexts.
+
+\cmd\DeclareMathDelimiter\marg{symbol}\marg{type}\marg{sym.\ font}\marg{slot}\marg{sym.\ font}\marg{slot}
+
+\item[Radicals] Similar to delimiters (\cmd\DeclareMathRadical\ takes the same syntax) but
+behave `weirdly'.
+\end{description}
+In those cases, glyph slots in \emph{two} symbol fonts are required; one for the small (`regular') case,
+the other for situations when the glyph is larger. This is not the case in \XeTeX.
+
+Accents are not included yet.
+
+\paragraph{Summary}
+
+For symbols, something like:
+\begin{Verbatim}
+\def\DeclareMathSymbol#1#2#3#4{
+  \global\mathchardef#1"\mathchar@type#2
+    \expandafter\hexnumber@\csname sym#2\endcsname
+    {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
+\end{Verbatim}
+For characters, something like:
+\begin{Verbatim}
+\def\DeclareMathSymbol#1#2#3#4{
+  \global\mathcode`#1"\mathchar@type#2
+    \expandafter\hexnumber@\csname sym#2\endcsname
+    {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
+\end{Verbatim}
+
+\section{Legacy \TeX\ font dimensions}
+
+\centerline{%
+\begin{tabular}[t]{@{}lp{4cm}@{}}
+\toprule
+\multicolumn{2}{@{}c@{}}{Text fonts} \\
+\midrule
+$\phi_1$ & slant per pt                \\
+$\phi_2$ & interword space             \\
+$\phi_3$ & interword stretch           \\
+$\phi_4$ & interword shrink            \\
+$\phi_5$ & x-height                    \\
+$\phi_6$ & quad width                  \\
+$\phi_7$ & extra space                 \\
+$\phi_8$ & cap height (\XeTeX\ only)   \\
+\bottomrule
+\end{tabular}
+\quad
+\begin{tabular}[t]{@{}lp{4cm}@{}}
+\toprule
+\multicolumn{2}{@{}c@{}}{Maths font, \cs{fam}2} \\
+\midrule
+$\sigma_5$    & x height                    \\
+$\sigma_6$    & quad                        \\
+$\sigma_8$    & num1                        \\
+$\sigma_9$    & num2                        \\
+$\sigma_{10}$ & num3                        \\
+$\sigma_{11}$ & denom1                      \\
+$\sigma_{12}$ & denom2                      \\
+$\sigma_{13}$ & sup1                        \\
+$\sigma_{14}$ & sup2                        \\
+$\sigma_{15}$ & sup3                        \\
+$\sigma_{16}$ & sub1                        \\
+$\sigma_{17}$ & sub2                        \\
+$\sigma_{18}$ & sup drop                    \\
+$\sigma_{19}$ & sub drop                    \\
+$\sigma_{20}$ & delim1                      \\
+$\sigma_{21}$ & delim2                      \\
+$\sigma_{22}$ & axis height                 \\
+\bottomrule
+\end{tabular}
+\quad
+\begin{tabular}[t]{@{}lp{4cm}@{}}
+\toprule
+\multicolumn{2}{@{}c@{}}{Maths font, \cs{fam}3} \\
+\midrule
+$\xi_8$    & default rule thickness      \\
+$\xi_9$    & big op spacing1             \\
+$\xi_{10}$ & big op spacing2             \\
+$\xi_{11}$ & big op spacing3             \\
+$\xi_{12}$ & big op spacing4             \\
+$\xi_{13}$ & big op spacing5             \\
+\bottomrule
+\end{tabular}
+}
+
+
+\section{\Hologo{XeTeX} math font dimensions}
+
+These are the extended \cmd\fontdimen s available for suitable fonts
+in \XeTeX. Note that Lua\TeX\ takes an alternative route, and this package
+will eventually provide a wrapper interface to the two (I hope).
+
+\newcounter{mfdimen}
+\setcounter{mfdimen}{9}
+\newcommand\mathfontdimen[2]{^^A
+  \stepcounter{mfdimen}^^A
+  \themfdimen & {\scshape\small #1} & #2\vspace{0.5ex} \tabularnewline}
+
+\begin{longtable}{
+  @{}c>{\raggedright\parfillskip=0pt}p{4cm}>{\raggedright}p{7cm}@{}}
+\toprule \cmd\fontdimen & Dimension name & Description\tabularnewline\midrule \endhead
+\bottomrule\endfoot
+\mathfontdimen{Script\-Percent\-Scale\-Down}
+{Percentage of scaling down for script level 1. Suggested value: 80\%.}
+\mathfontdimen{Script\-Script\-Percent\-Scale\-Down}
+{Percentage of scaling down for script level 2 (Script\-Script). Suggested value: 60\%.}
+\mathfontdimen{Delimited\-Sub\-Formula\-Min\-Height}
+{Minimum height required for a delimited expression to be treated as a subformula. Suggested value: normal line height\,×\,1.5.}
+\mathfontdimen{Display\-Operator\-Min\-Height}
+{Minimum height of n-ary operators (such as integral and summation) for formulas in display mode.}
+\mathfontdimen{Math\-Leading}
+{White space to be left between math formulas to ensure proper line spacing. For example, for applications that treat line gap as a part of line ascender, formulas with ink  going above (os2.sTypoAscender + os2.sTypoLineGap – MathLeading) or with ink going below os2.sTypoDescender will result in increasing line height.}
+\mathfontdimen{Axis\-Height}
+{Axis height of the font. }
+\mathfontdimen{Accent\-Base\-Height}
+{Maximum (ink) height of accent base that does not require raising the accents. Suggested: x-height of the font (os2.sxHeight) plus any possible overshots. }
+\mathfontdimen{Flattened\-Accent\-Base\-Height}
+{Maximum (ink) height of accent base that does not require flattening the accents. Suggested: cap height of the font (os2.sCapHeight).}
+\mathfontdimen{Subscript\-Shift\-Down}
+{The standard shift down applied to subscript elements. Positive for moving in the downward direction. Suggested: os2.ySubscriptYOffset.}
+\mathfontdimen{Subscript\-Top\-Max}
+{Maximum allowed height of the (ink) top of subscripts that does not require moving subscripts further down. Suggested: /5 x-height.}
+\mathfontdimen{Subscript\-Baseline\-Drop\-Min}
+{Minimum allowed drop of the baseline of subscripts relative to the (ink) bottom of the base. Checked for bases that are treated as a box or extended shape. Positive for subscript baseline dropped below the base bottom.}
+\mathfontdimen{Superscript\-Shift\-Up}
+{Standard shift up applied to superscript elements. Suggested: os2.ySuperscriptYOffset.}
+\mathfontdimen{Superscript\-Shift\-Up\-Cramped}
+{Standard shift of superscripts relative to the base, in cramped style.}
+\mathfontdimen{Superscript\-Bottom\-Min}
+{Minimum allowed height of the (ink) bottom of superscripts that does not require moving subscripts further up. Suggested: ¼ x-height.}
+\mathfontdimen{Superscript\-Baseline\-Drop\-Max}
+{Maximum allowed drop of the baseline of superscripts relative to the (ink) top of the base. Checked for bases that are treated as a box or extended shape. Positive for superscript baseline below the base top.}
+\mathfontdimen{Sub\-Superscript\-Gap\-Min}
+{Minimum gap between the superscript and subscript ink. Suggested: 4×default rule thickness.}
+\mathfontdimen{Superscript\-Bottom\-Max\-With\-Subscript}
+{The maximum level to which the (ink) bottom of superscript can be pushed to increase the gap between superscript and subscript, before subscript starts being moved down.
+Suggested: /5 x-height.}
+\mathfontdimen{Space\-After\-Script}
+{Extra white space to be added after each subscript and superscript. Suggested: 0.5pt for a 12 pt font.}
+\mathfontdimen{Upper\-Limit\-Gap\-Min}
+{Minimum gap between the (ink) bottom of the upper limit, and the (ink) top of the base operator. }
+\mathfontdimen{Upper\-Limit\-Baseline\-Rise\-Min}
+{Minimum distance between baseline of upper limit and (ink) top of the base operator.}
+\mathfontdimen{Lower\-Limit\-Gap\-Min}
+{Minimum gap between (ink) top of the lower limit, and (ink) bottom of the base operator.}
+\mathfontdimen{Lower\-Limit\-Baseline\-Drop\-Min}
+{Minimum distance between baseline of the lower limit and (ink) bottom of the base operator.}
+\mathfontdimen{Stack\-Top\-Shift\-Up}
+{Standard shift up applied to the top element of a stack.}
+\mathfontdimen{Stack\-Top\-Display\-Style\-Shift\-Up}
+{Standard shift up applied to the top element of a stack in display style.}
+\mathfontdimen{Stack\-Bottom\-Shift\-Down}
+{Standard shift down applied to the bottom element of a stack. Positive for moving in the downward direction.}
+\mathfontdimen{Stack\-Bottom\-Display\-Style\-Shift\-Down}
+{Standard shift down applied to the bottom element of a stack in display style. Positive for moving in the downward direction.}
+\mathfontdimen{Stack\-Gap\-Min}
+{Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element. Suggested: 3×default rule thickness.}
+\mathfontdimen{Stack\-Display\-Style\-Gap\-Min}
+{Minimum gap between (ink) bottom of the top element of a stack, and the (ink) top of the bottom element in display style. Suggested: 7×default rule thickness.}
+\mathfontdimen{Stretch\-Stack\-Top\-Shift\-Up}
+{Standard shift up applied to the top element of the stretch stack.}
+\mathfontdimen{Stretch\-Stack\-Bottom\-Shift\-Down}
+{Standard shift down applied to the bottom element of the stretch stack. Positive for moving in the downward direction.}
+\mathfontdimen{Stretch\-Stack\-Gap\-Above\-Min}
+{Minimum gap between the ink of the stretched element, and the (ink) bottom of the element above. Suggested: Upper\-Limit\-Gap\-Min}
+\mathfontdimen{Stretch\-Stack\-Gap\-Below\-Min}
+{Minimum gap between the ink of the stretched element, and the (ink) top of the element below. Suggested: Lower\-Limit\-Gap\-Min.}
+\mathfontdimen{Fraction\-Numerator\-Shift\-Up}
+{Standard shift up applied to the numerator. }
+\mathfontdimen{Fraction\-Numerator\-Display\-Style\-Shift\-Up}
+{Standard shift up applied to the numerator in display style. Suggested: Stack\-Top\-Display\-Style\-Shift\-Up.}
+\mathfontdimen{Fraction\-Denominator\-Shift\-Down}
+{Standard shift down applied to the denominator. Positive for moving in the downward direction.}
+\mathfontdimen{Fraction\-Denominator\-Display\-Style\-Shift\-Down}
+{Standard shift down applied to the denominator in display style. Positive for moving in the downward direction. Suggested: Stack\-Bottom\-Display\-Style\-Shift\-Down.}
+\mathfontdimen{Fraction\-Numerator\-Gap\-Min}
+{Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar. Suggested: default rule thickness}
+\mathfontdimen{Fraction\-Num\-Display\-Style\-Gap\-Min}
+{Minimum tolerated gap between the (ink) bottom of the numerator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
+\mathfontdimen{Fraction\-Rule\-Thickness}
+{Thickness of the fraction bar. Suggested: default rule thickness.}
+\mathfontdimen{Fraction\-Denominator\-Gap\-Min}
+{Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar. Suggested: default rule thickness}
+\mathfontdimen{Fraction\-Denom\-Display\-Style\-Gap\-Min}
+{Minimum tolerated gap between the (ink) top of the denominator and the ink of the fraction bar in display style. Suggested: 3×default rule thickness.}
+\mathfontdimen{Skewed\-Fraction\-Horizontal\-Gap}
+{Horizontal distance between the top and bottom elements of a skewed fraction.}
+\mathfontdimen{Skewed\-Fraction\-Vertical\-Gap}
+{Vertical distance between the ink of the top and bottom elements of a skewed fraction.}
+\mathfontdimen{Overbar\-Vertical\-Gap}
+{Distance between the overbar and the (ink) top of he base. Suggested: 3×default rule thickness.}
+\mathfontdimen{Overbar\-Rule\-Thickness}
+{Thickness of overbar. Suggested: default rule thickness.}
+\mathfontdimen{Overbar\-Extra\-Ascender}
+{Extra white space reserved above the overbar. Suggested: default rule thickness.}
+\mathfontdimen{Underbar\-Vertical\-Gap}
+{Distance between underbar and (ink) bottom of the base. Suggested: 3×default rule thickness.}
+\mathfontdimen{Underbar\-Rule\-Thickness}
+{Thickness of underbar. Suggested: default rule thickness.}
+\mathfontdimen{Underbar\-Extra\-Descender}
+{Extra white space reserved below the underbar. Always positive. Suggested: default rule thickness.}
+\mathfontdimen{Radical\-Vertical\-Gap}
+{Space between the (ink) top of the expression and the bar over it. Suggested: 1¼ default rule thickness.}
+\mathfontdimen{Radical\-Display\-Style\-Vertical\-Gap}
+{Space between the (ink) top of the expression and the bar over it. Suggested: default rule thickness + ¼ x-height. }
+\mathfontdimen{Radical\-Rule\-Thickness}
+{Thickness of the radical rule. This is the thickness of the rule in designed or constructed radical signs. Suggested: default rule thickness.}
+\mathfontdimen{Radical\-Extra\-Ascender}
+{Extra white space reserved above the radical. Suggested: Radical\-Rule\-Thickness.}
+\mathfontdimen{Radical\-Kern\-Before\-Degree}
+{Extra horizontal kern before the degree of a radical, if such is present. Suggested: 5/18 of em.}
+\mathfontdimen{Radical\-Kern\-After\-Degree}
+{Negative kern after the degree of a radical, if such is present. Suggested: −10/18 of em.}
+\mathfontdimen{Radical\-Degree\-Bottom\-Raise\-Percent}
+{Height of the bottom of the radical degree, if such is present, in proportion to the ascender of the radical sign. Suggested: 60\%.}
+\end{longtable}
+
+\if \DOCUMENTEND T \end{document} \fi
+
+
+

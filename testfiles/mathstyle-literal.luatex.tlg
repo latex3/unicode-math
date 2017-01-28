@@ -1,0 +1,235 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count130
+\scratchdimen=\dimen147
+\scratchbox=\box42
+\nofMPsegments=\count131
+\nofMParguments=\count132
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count133
+\MPscratchDim=\dimen148
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
+\everyMPtoPDFconversion=\toks19
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty (/us
+r/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty (/usr/local/texli
+ve/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty)) (/usr/local/texlive/
+2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty (/usr/local/texlive/2016/texmf
+-dist/tex/generic/oberdiek/kvsetkeys.sty (/usr/local/texlive/2016/texmf-dist/te
+x/generic/oberdiek/etexcmds.sty))) (/usr/local/texlive/2016/texmf-dist/tex/gene
+ric/oberdiek/pdftexcmds.sty (/usr/local/texlive/2016/texmf-dist/tex/generic/obe
+rdiek/luatex-loader.sty
+(/usr/local/texlive/2016/texmf-dist/scripts/oberdiek/oberdiek.luatex.lua))
+\pdftexcmds@toks=\toks20
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845, direction TLT
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362, direction TLT
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207, direction TLT
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 44.07648fil, direction TLT
+...\write-{}
+...\glue(\topskip) 10.0
+...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\hbox(0.0+0.0)x136.57463, glue set 68.28732fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\baselineskip) 5.25684
+...\hbox(6.74316+1.91406)x155.97168, shifted 35.8252, direction TLT
+....\l_fontspec_font A
+....\l_fontspec_font B
+....\l_fontspec_font C
+....\l_fontspec_font D
+....\l_fontspec_font E
+....\l_fontspec_font F
+....\l_fontspec_font G
+....\l_fontspec_font H
+....\l_fontspec_font I
+....\l_fontspec_font J
+....\l_fontspec_font K
+....\l_fontspec_font L
+....\l_fontspec_font M
+....\l_fontspec_font N
+....\l_fontspec_font O
+....\l_fontspec_font P
+....\l_fontspec_font Q
+....\l_fontspec_font R
+....\l_fontspec_font S
+....\l_fontspec_font T
+....\l_fontspec_font U
+....\l_fontspec_font V
+....\l_fontspec_font W
+....\l_fontspec_font X
+....\l_fontspec_font Y
+....\l_fontspec_font Z
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.07422
+...\hbox(7.01172+2.18262)x126.85547, shifted 50.3833, direction TLT
+....\l_fontspec_font a
+....\l_fontspec_font b
+....\l_fontspec_font c
+....\l_fontspec_font d
+....\l_fontspec_font e
+....\l_fontspec_font f
+....\l_fontspec_font g
+....\l_fontspec_font h
+....\l_fontspec_font i
+....\l_fontspec_font j
+....\l_fontspec_font k
+....\l_fontspec_font l
+....\l_fontspec_font m
+....\l_fontspec_font n
+....\l_fontspec_font o
+....\l_fontspec_font p
+....\l_fontspec_font q
+....\l_fontspec_font r
+....\l_fontspec_font s
+....\l_fontspec_font t
+....\l_fontspec_font u
+....\l_fontspec_font v
+....\l_fontspec_font w
+....\l_fontspec_font x
+....\l_fontspec_font y
+....\l_fontspec_font z
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.07422
+...\hbox(6.74316+1.88965)x172.84668, shifted 27.3877, direction TLT
+....\l_fontspec_font 𝐴
+....\kern0.09766
+....\l_fontspec_font 𝐵
+....\kern0.26855
+....\l_fontspec_font 𝐶
+....\kern0.43945
+....\l_fontspec_font 𝐷
+....\kern0.29297
+....\l_fontspec_font 𝐸
+....\kern0.39063
+....\l_fontspec_font 𝐹
+....\kern0.39063
+....\l_fontspec_font 𝐺
+....\kern0.43945
+....\l_fontspec_font 𝐻
+....\kern0.29297
+....\l_fontspec_font 𝐼
+....\kern0.31738
+....\l_fontspec_font 𝐽
+....\kern0.19531
+....\l_fontspec_font 𝐾
+....\kern0.30273
+....\l_fontspec_font 𝐿
+....\kern0.20508
+....\l_fontspec_font 𝑀
+....\kern0.24414
+....\l_fontspec_font 𝑁
+....\kern0.24414
+....\l_fontspec_font 𝑂
+....\kern0.24414
+....\l_fontspec_font 𝑃
+....\kern0.24414
+....\l_fontspec_font 𝑄
+....\kern0.29297
+....\l_fontspec_font 𝑅
+....\kern0.29297
+....\l_fontspec_font 𝑆
+....\kern0.19531
+....\l_fontspec_font 𝑇
+....\kern0.21973
+....\l_fontspec_font 𝑈
+....\kern0.19531
+....\l_fontspec_font 𝑉
+....\kern0.31738
+....\l_fontspec_font 𝑊
+....\kern0.39063
+....\l_fontspec_font 𝑋
+....\kern0.24414
+....\l_fontspec_font 𝑌
+....\kern0.24414
+....\l_fontspec_font 𝑍
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\penalty 10000
+...\glue(\abovedisplayshortskip) 0.0 plus 3.0
+...\glue(\baselineskip) 3.09863
+...\hbox(7.01172+2.18262)x142.98828, shifted 42.3169, direction TLT
+....\l_fontspec_font 𝑎
+....\kern0.24414
+....\l_fontspec_font 𝑏
+....\kern0.21973
+....\l_fontspec_font 𝑐
+....\kern0.31738
+....\l_fontspec_font 𝑑
+....\kern0.31738
+....\l_fontspec_font 𝑒
+....\kern0.21973
+....\l_fontspec_font 𝑓
+....\kern0.29297
+....\l_fontspec_font 𝑔
+....\kern0.1709
+....\l_fontspec_font ℎ
+....\kern0.1709
+....\l_fontspec_font 𝑖
+....\kern0.31738
+....\l_fontspec_font 𝑗
+....\kern0.1709
+....\l_fontspec_font 𝑘
+....\kern0.29297
+....\l_fontspec_font 𝑙
+....\kern0.31738
+....\l_fontspec_font 𝑚
+....\kern0.1709
+....\l_fontspec_font 𝑛
+....\kern0.1709
+....\l_fontspec_font 𝑜
+....\kern0.21973
+....\l_fontspec_font 𝑝
+....\kern0.12207
+....\l_fontspec_font 𝑞
+....\kern0.30273
+....\l_fontspec_font 𝑟
+....\kern0.21973
+....\l_fontspec_font 𝑠
+....\kern0.20508
+....\l_fontspec_font 𝑡
+....\kern0.24414
+....\l_fontspec_font 𝑢
+....\kern0.2539
+....\l_fontspec_font 𝑣
+....\kern0.29297
+....\l_fontspec_font 𝑤
+....\kern0.29297
+....\l_fontspec_font 𝑥
+....\kern0.30273
+....\l_fontspec_font 𝑦
+....\kern0.1709
+....\l_fontspec_font 𝑧
+...\penalty 0
+...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207, direction TLT
+(.aux)

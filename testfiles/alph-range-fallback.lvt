@@ -1,0 +1,12 @@
+\input{umtest-preamble}
+\OMIT
+\usepackage{unicode-math}
+\setmathfont[Colour=000000]{Cambria Math}
+\setmathfont[range=scr, Colour=FF0000]{texgyrechorus-mediumitalic.otf}
+\begin{document}
+\TIMO
+\[\latintext\]
+\[\mathscr{\latintext}\]
+\[\LATINmath\]
+\[\mathscr{\LATINmath}\]
+\end{document}

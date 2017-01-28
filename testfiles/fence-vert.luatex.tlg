@@ -1,0 +1,173 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count130
+\scratchdimen=\dimen147
+\scratchbox=\box42
+\nofMPsegments=\count131
+\nofMParguments=\count132
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count133
+\MPscratchDim=\dimen148
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
+\everyMPtoPDFconversion=\toks19
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty (/us
+r/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty (/usr/local/texli
+ve/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty)) (/usr/local/texlive/
+2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty (/usr/local/texlive/2016/texmf
+-dist/tex/generic/oberdiek/kvsetkeys.sty (/usr/local/texlive/2016/texmf-dist/te
+x/generic/oberdiek/etexcmds.sty))) (/usr/local/texlive/2016/texmf-dist/tex/gene
+ric/oberdiek/pdftexcmds.sty (/usr/local/texlive/2016/texmf-dist/tex/generic/obe
+rdiek/luatex-loader.sty
+(/usr/local/texlive/2016/texmf-dist/scripts/oberdiek/oberdiek.luatex.lua))
+\pdftexcmds@toks=\toks20
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+Completed box being shipped out [1]
+\vbox(114.22017+0.0)x169.57845, direction TLT
+.\glue -95.04362
+.\vbox(209.2638+0.0)x227.62207, shifted -58.04362, direction TLT
+..\vbox(12.0+0.0)x227.62207, glue set 12.0fil, direction TLT
+...\glue 0.0 plus 1.0fil
+...\hbox(0.0+0.0)x227.62207, direction TLT
+..\glue 25.0
+..\glue(\lineskip) 0.0
+..\vbox(142.2638+0.0)x227.62207, glue set 16.91238fil, direction TLT
+...\write-{}
+...\glue(\topskip) 10.0
+...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\hbox(0.0+0.0)x136.57463, glue set 68.28732fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\lineskip) 1.0
+...\hbox(21.1938+15.481)x71.87979, shifted 77.87114, direction TLT
+....\hbox(21.1938+15.481)x71.87979, direction TLT
+.....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
+......\l_fontspec_font 󰦶
+.....\hbox(17.6855+11.9727)x60.60783, direction TLT
+......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
+.......\l_fontspec_font 󰘪
+......\hbox(15.47359+9.76079)x49.51166, direction TLT
+.......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
+........\l_fontspec_font 󰦬
+.......\hbox(13.25688+7.08989)x38.46431, direction TLT
+........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
+.........\l_fontspec_font 󰘩
+........\hbox(11.07666+5.34673)x27.54391, direction TLT
+.........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
+..........\l_fontspec_font 󰦢
+.........\hbox(8.89644+3.18364)x16.66258, direction TLT
+..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
+...........\l_fontspec_font 󰘨
+..........\l_fontspec_font 𝑥
+..........\kern0.30273
+..........\kern0.24414
+..........\hbox(4.42627+0.0)x4.46532, shifted -3.66205, direction TLT
+...........\EU2/CambriaMath(0)/m/n/7 2
+..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
+...........\l_fontspec_font 󰘨
+.........\hbox(4.42627+0.0)x4.46532, shifted -6.65039, direction TLT
+..........\EU2/CambriaMath(0)/m/n/7 2
+.........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
+..........\l_fontspec_font 󰦢
+........\hbox(4.42627+0.0)x4.46532, shifted -8.83061, direction TLT
+.........\EU2/CambriaMath(0)/m/n/7 2
+........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
+.........\l_fontspec_font 󰘩
+.......\hbox(4.42627+0.0)x4.46532, shifted -11.01083, direction TLT
+........\EU2/CambriaMath(0)/m/n/7 2
+.......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
+........\l_fontspec_font 󰦬
+......\hbox(4.42627+0.0)x4.46532, shifted -13.22754, direction TLT
+.......\EU2/CambriaMath(0)/m/n/7 2
+......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
+.......\l_fontspec_font 󰘪
+.....\hbox(4.42627+0.0)x4.46532, shifted -15.43945, direction TLT
+......\EU2/CambriaMath(0)/m/n/7 2
+.....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
+......\l_fontspec_font 󰦶
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\parskip) 0.0 plus 1.0
+...\hbox(0.0+0.0)x227.62207, glue set 76.04744fil, direction TLT
+....\localpar
+.....\localinterlinepenalty=0
+.....\localbrokenpenalty=0
+.....\localleftbox=null
+.....\localrightbox=null
+....\hbox(0.0+0.0)x15.0, direction TLT
+....\hbox(0.0+0.0)x136.57463, glue set 68.28732fil, direction TLT
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\penalty 10000
+....\glue(\parfillskip) 0.0 plus 1.0fil
+....\glue(\rightskip) 0.0
+...\penalty 10000
+...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue(\lineskip) 1.0
+...\hbox(21.1938+15.481)x71.87979, shifted 77.87114, direction TLT
+....\hbox(21.1938+15.481)x71.87979, direction TLT
+.....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
+......\l_fontspec_font 󰦶
+.....\hbox(17.6855+11.9727)x60.60783, direction TLT
+......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
+.......\l_fontspec_font 󰘪
+......\hbox(15.47359+9.76079)x49.51166, direction TLT
+.......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
+........\l_fontspec_font 󰦬
+.......\hbox(13.25688+7.08989)x38.46431, direction TLT
+........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
+.........\l_fontspec_font 󰘩
+........\hbox(11.07666+5.34673)x27.54391, direction TLT
+.........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
+..........\l_fontspec_font 󰦢
+.........\hbox(8.89644+3.18364)x16.66258, direction TLT
+..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
+...........\l_fontspec_font 󰘨
+..........\l_fontspec_font 𝑥
+..........\kern0.30273
+..........\kern0.24414
+..........\hbox(4.42627+0.0)x4.46532, shifted -3.66205, direction TLT
+...........\EU2/CambriaMath(0)/m/n/7 2
+..........\hbox(8.89648+3.1836)x3.16406, shifted 0.00005, direction TLT
+...........\l_fontspec_font 󰘨
+.........\hbox(4.42627+0.0)x4.46532, shifted -6.65039, direction TLT
+..........\EU2/CambriaMath(0)/m/n/7 2
+.........\hbox(11.05957+5.34668)x3.20801, shifted 0.00005, direction TLT
+..........\l_fontspec_font 󰦢
+........\hbox(4.42627+0.0)x4.46532, shifted -8.83061, direction TLT
+.........\EU2/CambriaMath(0)/m/n/7 2
+........\hbox(12.80273+7.08984)x3.22754, shifted 0.00005, direction TLT
+.........\l_fontspec_font 󰘩
+.......\hbox(4.42627+0.0)x4.46532, shifted -11.01083, direction TLT
+........\EU2/CambriaMath(0)/m/n/7 2
+.......\hbox(15.47363+9.76074)x3.29102, shifted 0.00005, direction TLT
+........\l_fontspec_font 󰦬
+......\hbox(4.42627+0.0)x4.46532, shifted -13.22754, direction TLT
+.......\EU2/CambriaMath(0)/m/n/7 2
+......\hbox(17.68555+11.97266)x3.31543, shifted 0.00005, direction TLT
+.......\l_fontspec_font 󰘪
+.....\hbox(4.42627+0.0)x4.46532, shifted -15.43945, direction TLT
+......\EU2/CambriaMath(0)/m/n/7 2
+.....\hbox(21.1914+15.4834)x3.40332, shifted -0.0024, direction TLT
+......\l_fontspec_font 󰦶
+...\penalty 0
+...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+...\glue 0.0 plus 1.0fil
+...\glue 0.0
+...\glue 0.0 plus 0.0001fil
+..\glue(\baselineskip) 30.0
+..\hbox(0.0+0.0)x227.62207, direction TLT
+(.aux)

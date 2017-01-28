@@ -1,0 +1,568 @@
+
+
+% \subsection{Alphabet Unicode positions}
+%
+% Before we begin, let's define the positions of the various Unicode
+% alphabets so that our code is a little more readable.\footnote{`\textsc{u.s.v.}' stands
+% for `Unicode scalar value'.}
+%
+%    \begin{macrocode}
+%<*usv>
+%    \end{macrocode}
+%
+% \paragraph{Alphabets}
+%    \begin{macrocode}
+\usv_set:nnn {normal}  {num}  {48}
+\usv_set:nnn {normal}  {Latin}{"1D434}
+\usv_set:nnn {normal}  {latin}{"1D44E}
+\usv_set:nnn {normal}  {Greek}{"1D6E2}
+\usv_set:nnn {normal}  {greek}{"1D6FC}
+\usv_set:nnn {normal}{varTheta}  {"1D6F3}
+\usv_set:nnn {normal}{epsilon}{"1D716}
+\usv_set:nnn {normal}{vartheta}  {"1D717}
+\usv_set:nnn {normal}{varkappa}  {"1D718}
+\usv_set:nnn {normal}{phi}    {"1D719}
+\usv_set:nnn {normal}{varrho}    {"1D71A}
+\usv_set:nnn {normal}{varpi}     {"1D71B}
+\usv_set:nnn {normal}    {Nabla}{"1D6FB}
+\usv_set:nnn {normal}    {partial}{"1D715}
+
+\usv_set:nnn {up}  {num}  {48}
+\usv_set:nnn {up}  {Latin}{65}
+\usv_set:nnn {up}  {latin}{97}
+\usv_set:nnn {up}  {Greek}{"391}
+\usv_set:nnn {up}  {greek}{"3B1}
+\usv_set:nnn {it}  {Latin}{"1D434}
+\usv_set:nnn {it}  {latin}{"1D44E}
+\usv_set:nnn {it}  {Greek}{"1D6E2}
+\usv_set:nnn {it}  {greek}{"1D6FC}
+\usv_set:nnn {bb}  {num}  {"1D7D8}
+\usv_set:nnn {bb}  {Latin}{"1D538}
+\usv_set:nnn {bb}  {latin}{"1D552}
+\usv_set:nnn {scr} {Latin}{"1D49C}
+\usv_set:nnn {cal} {Latin}{"1D49C}
+\usv_set:nnn {scr} {latin}{"1D4B6}
+\usv_set:nnn {frak}{Latin}{"1D504}
+\usv_set:nnn {frak}{latin}{"1D51E}
+\usv_set:nnn {sf}  {num}  {"1D7E2}
+\usv_set:nnn {sfup}{num}  {"1D7E2}
+\usv_set:nnn {sfit}{num}  {"1D7E2}
+\usv_set:nnn {sfup}{Latin}{"1D5A0}
+\usv_set:nnn {sf}  {Latin}{"1D5A0}
+\usv_set:nnn {sfup}{latin}{"1D5BA}
+\usv_set:nnn {sf}  {latin}{"1D5BA}
+\usv_set:nnn {sfit}{Latin}{"1D608}
+\usv_set:nnn {sfit}{latin}{"1D622}
+\usv_set:nnn {tt}  {num}  {"1D7F6}
+\usv_set:nnn {tt}  {Latin}{"1D670}
+\usv_set:nnn {tt}  {latin}{"1D68A}
+%    \end{macrocode}
+% Bold:
+%    \begin{macrocode}
+\usv_set:nnn {bf}    {num}  {"1D7CE}
+\usv_set:nnn {bfup}  {num}  {"1D7CE}
+\usv_set:nnn {bfit}  {num}  {"1D7CE}
+\usv_set:nnn {bfup}  {Latin}{"1D400}
+\usv_set:nnn {bfup}  {latin}{"1D41A}
+\usv_set:nnn {bfup}  {Greek}{"1D6A8}
+\usv_set:nnn {bfup}  {greek}{"1D6C2}
+\usv_set:nnn {bfit}  {Latin}{"1D468}
+\usv_set:nnn {bfit}  {latin}{"1D482}
+\usv_set:nnn {bfit}  {Greek}{"1D71C}
+\usv_set:nnn {bfit}  {greek}{"1D736}
+\usv_set:nnn {bffrak}{Latin}{"1D56C}
+\usv_set:nnn {bffrak}{latin}{"1D586}
+\usv_set:nnn {bfscr} {Latin}{"1D4D0}
+\usv_set:nnn {bfcal} {Latin}{"1D4D0}
+\usv_set:nnn {bfscr} {latin}{"1D4EA}
+\usv_set:nnn {bfsf}  {num}  {"1D7EC}
+\usv_set:nnn {bfsfup}{num}  {"1D7EC}
+\usv_set:nnn {bfsfit}{num}  {"1D7EC}
+\usv_set:nnn {bfsfup}{Latin}{"1D5D4}
+\usv_set:nnn {bfsfup}{latin}{"1D5EE}
+\usv_set:nnn {bfsfup}{Greek}{"1D756}
+\usv_set:nnn {bfsfup}{greek}{"1D770}
+\usv_set:nnn {bfsfit}{Latin}{"1D63C}
+\usv_set:nnn {bfsfit}{latin}{"1D656}
+\usv_set:nnn {bfsfit}{Greek}{"1D790}
+\usv_set:nnn {bfsfit}{greek}{"1D7AA}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {bfsf}{Latin}{ \bool_if:NTF \g_@@_upLatin_bool   \g_@@_bfsfup_Latin_usv \g_@@_bfsfit_Latin_usv }
+\usv_set:nnn {bfsf}{latin}{ \bool_if:NTF \g_@@_uplatin_bool   \g_@@_bfsfup_latin_usv \g_@@_bfsfit_latin_usv }
+\usv_set:nnn {bfsf}{Greek}{ \bool_if:NTF \g_@@_upGreek_bool   \g_@@_bfsfup_Greek_usv \g_@@_bfsfit_Greek_usv }
+\usv_set:nnn {bfsf}{greek}{ \bool_if:NTF \g_@@_upgreek_bool   \g_@@_bfsfup_greek_usv \g_@@_bfsfit_greek_usv }
+\usv_set:nnn {bf}  {Latin}{ \bool_if:NTF \g_@@_bfupLatin_bool \g_@@_bfup_Latin_usv   \g_@@_bfit_Latin_usv   }
+\usv_set:nnn {bf}  {latin}{ \bool_if:NTF \g_@@_bfuplatin_bool \g_@@_bfup_latin_usv   \g_@@_bfit_latin_usv   }
+\usv_set:nnn {bf}  {Greek}{ \bool_if:NTF \g_@@_bfupGreek_bool \g_@@_bfup_Greek_usv   \g_@@_bfit_Greek_usv   }
+\usv_set:nnn {bf}  {greek}{ \bool_if:NTF \g_@@_bfupgreek_bool \g_@@_bfup_greek_usv   \g_@@_bfit_greek_usv   }
+%    \end{macrocode}
+% Greek variants:
+%    \begin{macrocode}
+\usv_set:nnn {up}{varTheta}  {"3F4}
+\usv_set:nnn {up}{Digamma}   {"3DC}
+\usv_set:nnn {up}{epsilon}{"3F5}
+\usv_set:nnn {up}{vartheta}  {"3D1}
+\usv_set:nnn {up}{varkappa}  {"3F0}
+\usv_set:nnn {up}{phi}    {"3D5}
+\usv_set:nnn {up}{varrho}    {"3F1}
+\usv_set:nnn {up}{varpi}     {"3D6}
+\usv_set:nnn {up}{digamma}   {"3DD}
+%    \end{macrocode}
+% Bold:
+%    \begin{macrocode}
+\usv_set:nnn {bfup}{varTheta}  {"1D6B9}
+\usv_set:nnn {bfup}{Digamma}   {"1D7CA}
+\usv_set:nnn {bfup}{epsilon}{"1D6DC}
+\usv_set:nnn {bfup}{vartheta}  {"1D6DD}
+\usv_set:nnn {bfup}{varkappa}  {"1D6DE}
+\usv_set:nnn {bfup}{phi}    {"1D6DF}
+\usv_set:nnn {bfup}{varrho}    {"1D6E0}
+\usv_set:nnn {bfup}{varpi}     {"1D6E1}
+\usv_set:nnn {bfup}{digamma}   {"1D7CB}
+%    \end{macrocode}
+% Italic Greek variants:
+%    \begin{macrocode}
+\usv_set:nnn {it}{varTheta}  {"1D6F3}
+\usv_set:nnn {it}{epsilon}{"1D716}
+\usv_set:nnn {it}{vartheta}  {"1D717}
+\usv_set:nnn {it}{varkappa}  {"1D718}
+\usv_set:nnn {it}{phi}    {"1D719}
+\usv_set:nnn {it}{varrho}    {"1D71A}
+\usv_set:nnn {it}{varpi}     {"1D71B}
+%    \end{macrocode}
+% Bold italic:
+%    \begin{macrocode}
+\usv_set:nnn {bfit}{varTheta}  {"1D72D}
+\usv_set:nnn {bfit}{epsilon}{"1D750}
+\usv_set:nnn {bfit}{vartheta}  {"1D751}
+\usv_set:nnn {bfit}{varkappa}  {"1D752}
+\usv_set:nnn {bfit}{phi}    {"1D753}
+\usv_set:nnn {bfit}{varrho}    {"1D754}
+\usv_set:nnn {bfit}{varpi}     {"1D755}
+%    \end{macrocode}
+% Bold sans:
+%    \begin{macrocode}
+\usv_set:nnn {bfsfup}{varTheta}  {"1D767}
+\usv_set:nnn {bfsfup}{epsilon}{"1D78A}
+\usv_set:nnn {bfsfup}{vartheta}  {"1D78B}
+\usv_set:nnn {bfsfup}{varkappa}  {"1D78C}
+\usv_set:nnn {bfsfup}{phi}    {"1D78D}
+\usv_set:nnn {bfsfup}{varrho}    {"1D78E}
+\usv_set:nnn {bfsfup}{varpi}     {"1D78F}
+%    \end{macrocode}
+% Bold sans italic:
+%    \begin{macrocode}
+\usv_set:nnn {bfsfit}{varTheta}  {"1D7A1}
+\usv_set:nnn {bfsfit}{epsilon}{"1D7C4}
+\usv_set:nnn {bfsfit}{vartheta}  {"1D7C5}
+\usv_set:nnn {bfsfit}{varkappa}  {"1D7C6}
+\usv_set:nnn {bfsfit}{phi}    {"1D7C7}
+\usv_set:nnn {bfsfit}{varrho}    {"1D7C8}
+\usv_set:nnn {bfsfit}{varpi}     {"1D7C9}
+%    \end{macrocode}
+% Nabla:
+%    \begin{macrocode}
+\usv_set:nnn {up}    {Nabla}{"02207}
+\usv_set:nnn {it}    {Nabla}{"1D6FB}
+\usv_set:nnn {bfup}  {Nabla}{"1D6C1}
+\usv_set:nnn {bfit}  {Nabla}{"1D735}
+\usv_set:nnn {bfsfup}{Nabla}{"1D76F}
+\usv_set:nnn {bfsfit}{Nabla}{"1D7A9}
+%    \end{macrocode}
+% Partial:
+%    \begin{macrocode}
+\usv_set:nnn {up}    {partial}{"02202}
+\usv_set:nnn {it}    {partial}{"1D715}
+\usv_set:nnn {bfup}  {partial}{"1D6DB}
+\usv_set:nnn {bfit}  {partial}{"1D74F}
+\usv_set:nnn {bfsfup}{partial}{"1D789}
+\usv_set:nnn {bfsfit}{partial}{"1D7C3}
+%    \end{macrocode}
+% \paragraph{Exceptions}
+% These are need for mapping with the exceptions in other alphabets:
+% (coming up)
+%    \begin{macrocode}
+\usv_set:nnn {up}{B}{`\B}
+\usv_set:nnn {up}{C}{`\C}
+\usv_set:nnn {up}{D}{`\D}
+\usv_set:nnn {up}{E}{`\E}
+\usv_set:nnn {up}{F}{`\F}
+\usv_set:nnn {up}{H}{`\H}
+\usv_set:nnn {up}{I}{`\I}
+\usv_set:nnn {up}{L}{`\L}
+\usv_set:nnn {up}{M}{`\M}
+\usv_set:nnn {up}{N}{`\N}
+\usv_set:nnn {up}{P}{`\P}
+\usv_set:nnn {up}{Q}{`\Q}
+\usv_set:nnn {up}{R}{`\R}
+\usv_set:nnn {up}{Z}{`\Z}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {it}{B}{"1D435}
+\usv_set:nnn {it}{C}{"1D436}
+\usv_set:nnn {it}{D}{"1D437}
+\usv_set:nnn {it}{E}{"1D438}
+\usv_set:nnn {it}{F}{"1D439}
+\usv_set:nnn {it}{H}{"1D43B}
+\usv_set:nnn {it}{I}{"1D43C}
+\usv_set:nnn {it}{L}{"1D43F}
+\usv_set:nnn {it}{M}{"1D440}
+\usv_set:nnn {it}{N}{"1D441}
+\usv_set:nnn {it}{P}{"1D443}
+\usv_set:nnn {it}{Q}{"1D444}
+\usv_set:nnn {it}{R}{"1D445}
+\usv_set:nnn {it}{Z}{"1D44D}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {up}{d}{`\d}
+\usv_set:nnn {up}{e}{`\e}
+\usv_set:nnn {up}{g}{`\g}
+\usv_set:nnn {up}{h}{`\h}
+\usv_set:nnn {up}{i}{`\i}
+\usv_set:nnn {up}{j}{`\j}
+\usv_set:nnn {up}{o}{`\o}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {it}{d}{"1D451}
+\usv_set:nnn {it}{e}{"1D452}
+\usv_set:nnn {it}{g}{"1D454}
+\usv_set:nnn {it}{h}{"0210E}
+\usv_set:nnn {it}{i}{"1D456}
+\usv_set:nnn {it}{j}{"1D457}
+\usv_set:nnn {it}{o}{"1D45C}
+%    \end{macrocode}
+% Latin `h':
+%    \begin{macrocode}
+\usv_set:nnn {bb}    {h}{"1D559}
+\usv_set:nnn {tt}    {h}{"1D691}
+\usv_set:nnn {scr}   {h}{"1D4BD}
+\usv_set:nnn {frak}  {h}{"1D525}
+\usv_set:nnn {bfup}  {h}{"1D421}
+\usv_set:nnn {bfit}  {h}{"1D489}
+\usv_set:nnn {sfup}  {h}{"1D5C1}
+\usv_set:nnn {sfit}  {h}{"1D629}
+\usv_set:nnn {bffrak}{h}{"1D58D}
+\usv_set:nnn {bfscr} {h}{"1D4F1}
+\usv_set:nnn {bfsfup}{h}{"1D5F5}
+\usv_set:nnn {bfsfit}{h}{"1D65D}
+%    \end{macrocode}
+% Dotless `i' and `j:
+%    \begin{macrocode}
+\usv_set:nnn {up}{dotlessi}{"00131}
+\usv_set:nnn {up}{dotlessj}{"00237}
+\usv_set:nnn {it}{dotlessi}{"1D6A4}
+\usv_set:nnn {it}{dotlessj}{"1D6A5}
+%    \end{macrocode}
+% Blackboard:
+%    \begin{macrocode}
+\usv_set:nnn {bb}{C}{"2102}
+\usv_set:nnn {bb}{H}{"210D}
+\usv_set:nnn {bb}{N}{"2115}
+\usv_set:nnn {bb}{P}{"2119}
+\usv_set:nnn {bb}{Q}{"211A}
+\usv_set:nnn {bb}{R}{"211D}
+\usv_set:nnn {bb}{Z}{"2124}
+\usv_set:nnn {up}{Pi}       {"003A0}
+\usv_set:nnn {up}{pi}       {"003C0}
+\usv_set:nnn {up}{Gamma}    {"00393}
+\usv_set:nnn {up}{gamma}    {"003B3}
+\usv_set:nnn {up}{summation}{"02211}
+\usv_set:nnn {it}{Pi}       {"1D6F1}
+\usv_set:nnn {it}{pi}       {"1D70B}
+\usv_set:nnn {it}{Gamma}    {"1D6E4}
+\usv_set:nnn {it}{gamma}    {"1D6FE}
+\usv_set:nnn {bb}{Pi}       {"0213F}
+\usv_set:nnn {bb}{pi}       {"0213C}
+\usv_set:nnn {bb}{Gamma}    {"0213E}
+\usv_set:nnn {bb}{gamma}    {"0213D}
+\usv_set:nnn {bb}{summation}{"02140}
+%    \end{macrocode}
+% Italic blackboard:
+%    \begin{macrocode}
+\usv_set:nnn {bbit}{D}{"2145}
+\usv_set:nnn {bbit}{d}{"2146}
+\usv_set:nnn {bbit}{e}{"2147}
+\usv_set:nnn {bbit}{i}{"2148}
+\usv_set:nnn {bbit}{j}{"2149}
+%    \end{macrocode}
+% Script exceptions:
+%    \begin{macrocode}
+\usv_set:nnn {scr}{B}{"212C}
+\usv_set:nnn {scr}{E}{"2130}
+\usv_set:nnn {scr}{F}{"2131}
+\usv_set:nnn {scr}{H}{"210B}
+\usv_set:nnn {scr}{I}{"2110}
+\usv_set:nnn {scr}{L}{"2112}
+\usv_set:nnn {scr}{M}{"2133}
+\usv_set:nnn {scr}{R}{"211B}
+\usv_set:nnn {scr}{e}{"212F}
+\usv_set:nnn {scr}{g}{"210A}
+\usv_set:nnn {scr}{o}{"2134}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {cal}{B}{"212C}
+\usv_set:nnn {cal}{E}{"2130}
+\usv_set:nnn {cal}{F}{"2131}
+\usv_set:nnn {cal}{H}{"210B}
+\usv_set:nnn {cal}{I}{"2110}
+\usv_set:nnn {cal}{L}{"2112}
+\usv_set:nnn {cal}{M}{"2133}
+\usv_set:nnn {cal}{R}{"211B}
+%    \end{macrocode}
+% Fractur exceptions:
+%    \begin{macrocode}
+\usv_set:nnn {frak}{C}{"212D}
+\usv_set:nnn {frak}{H}{"210C}
+\usv_set:nnn {frak}{I}{"2111}
+\usv_set:nnn {frak}{R}{"211C}
+\usv_set:nnn {frak}{Z}{"2128}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*usv>
+%    \end{macrocode}
+%
+% \subsection{STIX fonts}
+%
+% Version 1.0.0 of the STIX fonts contains a number of
+% alphabets in the private use area of Unicode; i.e.,
+% it contains many math glyphs that have not (yet or if ever)
+% been accepted into the Unicode standard.
+%
+% But we still want to be able to use them if possible.
+%
+%    \begin{macrocode}
+%<*stix>
+%    \end{macrocode}
+%
+% \paragraph{Upright}
+%    \begin{macrocode}
+\usv_set:nnn {stixsfup}{partial}{"E17C}
+\usv_set:nnn {stixsfup}{Greek}{"E17D}
+\usv_set:nnn {stixsfup}{greek}{"E196}
+\usv_set:nnn {stixsfup}{varTheta}{"E18E}
+\usv_set:nnn {stixsfup}{epsilon}{"E1AF}
+\usv_set:nnn {stixsfup}{vartheta}{"E1B0}
+\usv_set:nnn {stixsfup}{varkappa}{0000} % ???
+\usv_set:nnn {stixsfup}{phi}{"E1B1}
+\usv_set:nnn {stixsfup}{varrho}{"E1B2}
+\usv_set:nnn {stixsfup}{varpi}{"E1B3}
+\usv_set:nnn {stixupslash}{Greek}{"E2FC}
+%    \end{macrocode}
+%
+% \paragraph{Italic}
+%    \begin{macrocode}
+\usv_set:nnn {stixbbit}{A}{"E154}
+\usv_set:nnn {stixbbit}{B}{"E155}
+\usv_set:nnn {stixbbit}{E}{"E156}
+\usv_set:nnn {stixbbit}{F}{"E157}
+\usv_set:nnn {stixbbit}{G}{"E158}
+\usv_set:nnn {stixbbit}{I}{"E159}
+\usv_set:nnn {stixbbit}{J}{"E15A}
+\usv_set:nnn {stixbbit}{K}{"E15B}
+\usv_set:nnn {stixbbit}{L}{"E15C}
+\usv_set:nnn {stixbbit}{M}{"E15D}
+\usv_set:nnn {stixbbit}{O}{"E15E}
+\usv_set:nnn {stixbbit}{S}{"E15F}
+\usv_set:nnn {stixbbit}{T}{"E160}
+\usv_set:nnn {stixbbit}{U}{"E161}
+\usv_set:nnn {stixbbit}{V}{"E162}
+\usv_set:nnn {stixbbit}{W}{"E163}
+\usv_set:nnn {stixbbit}{X}{"E164}
+\usv_set:nnn {stixbbit}{Y}{"E165}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbbit}{a}{"E166}
+\usv_set:nnn {stixbbit}{b}{"E167}
+\usv_set:nnn {stixbbit}{c}{"E168}
+\usv_set:nnn {stixbbit}{f}{"E169}
+\usv_set:nnn {stixbbit}{g}{"E16A}
+\usv_set:nnn {stixbbit}{h}{"E16B}
+\usv_set:nnn {stixbbit}{k}{"E16C}
+\usv_set:nnn {stixbbit}{l}{"E16D}
+\usv_set:nnn {stixbbit}{m}{"E16E}
+\usv_set:nnn {stixbbit}{n}{"E16F}
+\usv_set:nnn {stixbbit}{o}{"E170}
+\usv_set:nnn {stixbbit}{p}{"E171}
+\usv_set:nnn {stixbbit}{q}{"E172}
+\usv_set:nnn {stixbbit}{r}{"E173}
+\usv_set:nnn {stixbbit}{s}{"E174}
+\usv_set:nnn {stixbbit}{t}{"E175}
+\usv_set:nnn {stixbbit}{u}{"E176}
+\usv_set:nnn {stixbbit}{v}{"E177}
+\usv_set:nnn {stixbbit}{w}{"E178}
+\usv_set:nnn {stixbbit}{x}{"E179}
+\usv_set:nnn {stixbbit}{y}{"E17A}
+\usv_set:nnn {stixbbit}{z}{"E17B}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixsfit}{Numerals}{"E1B4}
+\usv_set:nnn {stixsfit}{partial}{"E1BE}
+\usv_set:nnn {stixsfit}{Greek}{"E1BF}
+\usv_set:nnn {stixsfit}{greek}{"E1D8}
+\usv_set:nnn {stixsfit}{varTheta}{"E1D0}
+\usv_set:nnn {stixsfit}{epsilon}{"E1F1}
+\usv_set:nnn {stixsfit}{vartheta}{"E1F2}
+\usv_set:nnn {stixsfit}{varkappa}{0000} % ???
+\usv_set:nnn {stixsfit}{phi}{"E1F3}
+\usv_set:nnn {stixsfit}{varrho}{"E1F4}
+\usv_set:nnn {stixsfit}{varpi}{"E1F5}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixcal}{Latin}{"E22D}
+\usv_set:nnn {stixcal}{num}{"E262}
+\usv_set:nnn {scr}{num}{48}
+\usv_set:nnn {it}{num}{48}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixsfitslash}{Latin}{"E294}
+\usv_set:nnn {stixsfitslash}{latin}{"E2C8}
+\usv_set:nnn {stixsfitslash}{greek}{"E32C}
+\usv_set:nnn {stixsfitslash}{epsilon}{"E37A}
+\usv_set:nnn {stixsfitslash}{vartheta}{"E35E}
+\usv_set:nnn {stixsfitslash}{varkappa}{"E374}
+\usv_set:nnn {stixsfitslash}{phi}{"E360}
+\usv_set:nnn {stixsfitslash}{varrho}{"E376}
+\usv_set:nnn {stixsfitslash}{varpi}{"E362}
+\usv_set:nnn {stixsfitslash}{digamma}{"E36A}
+%    \end{macrocode}
+%
+% \paragraph{Bold}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfupslash}{Greek}{"E2FD}
+\usv_set:nnn {stixbfupslash}{Digamma}{"E369}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfbb}{A}{"E38A}
+\usv_set:nnn {stixbfbb}{B}{"E38B}
+\usv_set:nnn {stixbfbb}{E}{"E38D}
+\usv_set:nnn {stixbfbb}{F}{"E38E}
+\usv_set:nnn {stixbfbb}{G}{"E38F}
+\usv_set:nnn {stixbfbb}{I}{"E390}
+\usv_set:nnn {stixbfbb}{J}{"E391}
+\usv_set:nnn {stixbfbb}{K}{"E392}
+\usv_set:nnn {stixbfbb}{L}{"E393}
+\usv_set:nnn {stixbfbb}{M}{"E394}
+\usv_set:nnn {stixbfbb}{O}{"E395}
+\usv_set:nnn {stixbfbb}{S}{"E396}
+\usv_set:nnn {stixbfbb}{T}{"E397}
+\usv_set:nnn {stixbfbb}{U}{"E398}
+\usv_set:nnn {stixbfbb}{V}{"E399}
+\usv_set:nnn {stixbfbb}{W}{"E39A}
+\usv_set:nnn {stixbfbb}{X}{"E39B}
+\usv_set:nnn {stixbfbb}{Y}{"E39C}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfbb}{a}{"E39D}
+\usv_set:nnn {stixbfbb}{b}{"E39E}
+\usv_set:nnn {stixbfbb}{c}{"E39F}
+\usv_set:nnn {stixbfbb}{f}{"E3A2}
+\usv_set:nnn {stixbfbb}{g}{"E3A3}
+\usv_set:nnn {stixbfbb}{h}{"E3A4}
+\usv_set:nnn {stixbfbb}{k}{"E3A7}
+\usv_set:nnn {stixbfbb}{l}{"E3A8}
+\usv_set:nnn {stixbfbb}{m}{"E3A9}
+\usv_set:nnn {stixbfbb}{n}{"E3AA}
+\usv_set:nnn {stixbfbb}{o}{"E3AB}
+\usv_set:nnn {stixbfbb}{p}{"E3AC}
+\usv_set:nnn {stixbfbb}{q}{"E3AD}
+\usv_set:nnn {stixbfbb}{r}{"E3AE}
+\usv_set:nnn {stixbfbb}{s}{"E3AF}
+\usv_set:nnn {stixbfbb}{t}{"E3B0}
+\usv_set:nnn {stixbfbb}{u}{"E3B1}
+\usv_set:nnn {stixbfbb}{v}{"E3B2}
+\usv_set:nnn {stixbfbb}{w}{"E3B3}
+\usv_set:nnn {stixbfbb}{x}{"E3B4}
+\usv_set:nnn {stixbfbb}{y}{"E3B5}
+\usv_set:nnn {stixbfbb}{z}{"E3B6}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfsfup}{Numerals}{"E3B7}
+%    \end{macrocode}
+%
+% \paragraph{Bold Italic}
+%    \begin{macrocode}
+\usv_set:nnn {stixbfsfit}{Numerals}{"E1F6}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfbbit}{A}{"E200}
+\usv_set:nnn {stixbfbbit}{B}{"E201}
+\usv_set:nnn {stixbfbbit}{E}{"E203}
+\usv_set:nnn {stixbfbbit}{F}{"E204}
+\usv_set:nnn {stixbfbbit}{G}{"E205}
+\usv_set:nnn {stixbfbbit}{I}{"E206}
+\usv_set:nnn {stixbfbbit}{J}{"E207}
+\usv_set:nnn {stixbfbbit}{K}{"E208}
+\usv_set:nnn {stixbfbbit}{L}{"E209}
+\usv_set:nnn {stixbfbbit}{M}{"E20A}
+\usv_set:nnn {stixbfbbit}{O}{"E20B}
+\usv_set:nnn {stixbfbbit}{S}{"E20C}
+\usv_set:nnn {stixbfbbit}{T}{"E20D}
+\usv_set:nnn {stixbfbbit}{U}{"E20E}
+\usv_set:nnn {stixbfbbit}{V}{"E20F}
+\usv_set:nnn {stixbfbbit}{W}{"E210}
+\usv_set:nnn {stixbfbbit}{X}{"E211}
+\usv_set:nnn {stixbfbbit}{Y}{"E212}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfbbit}{a}{"E213}
+\usv_set:nnn {stixbfbbit}{b}{"E214}
+\usv_set:nnn {stixbfbbit}{c}{"E215}
+\usv_set:nnn {stixbfbbit}{e}{"E217}
+\usv_set:nnn {stixbfbbit}{f}{"E218}
+\usv_set:nnn {stixbfbbit}{g}{"E219}
+\usv_set:nnn {stixbfbbit}{h}{"E21A}
+\usv_set:nnn {stixbfbbit}{k}{"E21D}
+\usv_set:nnn {stixbfbbit}{l}{"E21E}
+\usv_set:nnn {stixbfbbit}{m}{"E21F}
+\usv_set:nnn {stixbfbbit}{n}{"E220}
+\usv_set:nnn {stixbfbbit}{o}{"E221}
+\usv_set:nnn {stixbfbbit}{p}{"E222}
+\usv_set:nnn {stixbfbbit}{q}{"E223}
+\usv_set:nnn {stixbfbbit}{r}{"E224}
+\usv_set:nnn {stixbfbbit}{s}{"E225}
+\usv_set:nnn {stixbfbbit}{t}{"E226}
+\usv_set:nnn {stixbfbbit}{u}{"E227}
+\usv_set:nnn {stixbfbbit}{v}{"E228}
+\usv_set:nnn {stixbfbbit}{w}{"E229}
+\usv_set:nnn {stixbfbbit}{x}{"E22A}
+\usv_set:nnn {stixbfbbit}{y}{"E22B}
+\usv_set:nnn {stixbfbbit}{z}{"E22C}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfcal}{Latin}{"E247}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\usv_set:nnn {stixbfitslash}{Latin}{"E295}
+\usv_set:nnn {stixbfitslash}{latin}{"E2C9}
+\usv_set:nnn {stixbfitslash}{greek}{"E32D}
+\usv_set:nnn {stixsfitslash}{epsilon}{"E37B}
+\usv_set:nnn {stixsfitslash}{vartheta}{"E35F}
+\usv_set:nnn {stixsfitslash}{varkappa}{"E375}
+\usv_set:nnn {stixsfitslash}{phi}{"E361}
+\usv_set:nnn {stixsfitslash}{varrho}{"E377}
+\usv_set:nnn {stixsfitslash}{varpi}{"E363}
+\usv_set:nnn {stixsfitslash}{digamma}{"E36B}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</stix>
+%    \end{macrocode}

@@ -1,0 +1,21 @@
+\input{umtest-preamble}
+\START
+\OMIT
+\usepackage{unicode-math}
+\begin{document}
+
+% This test checks that \setmathfont doesn't affect the catcodes of ascii punctuation, particularly in the case that they're set to "letter" for \makeatletter / \ExplSyntaxOn usage.
+
+\catcode`\_=11\relax
+\catcode`\:=11\relax
+\catcode`\@=11\relax
+
+\setmathfont{xits-math.otf}
+
+\TIMO
+\typeout{catcode of "\string _" - \the\catcode`\_}
+\typeout{catcode of "\string :" - \the\catcode`\:}
+\typeout{catcode of "\string @" - \the\catcode`\@}
+\OMIT
+
+\end{document}

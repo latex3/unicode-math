@@ -68,7 +68,7 @@ hometree = `kpsewhich -var-value=TEXMFHOME`
 
 # these files end up in the CTAN directory:
 
-PKGSOURCE = $(PKG).dtx $(TBL) Makefile
+PKGSOURCE = $(PKG).dtx $(PKG)-msg.dtx $(PKG)-usv.dtx $(TBL) Makefile
 DOC     = $(PKG).pdf $(SUITE).pdf README $(XMPL) $(SYM).pdf
 CTANFILES = $(PKGSOURCE) $(XMPL) $(SYM).ltx $(DOC) $(testdir)
 BUILDCTAN = $(addprefix $(builddir)/,$(CTANFILES))
@@ -89,6 +89,8 @@ INSFILES = \
 
 OTHERFILES = \
 	$(tds)/source/latex/$(PKG)/$(PKG).dtx \
+	$(tds)/source/latex/$(PKG)/$(PKG)-msg.dtx \
+	$(tds)/source/latex/$(PKG)/$(PKG)-usv.dtx \
 	$(tds)/source/latex/$(PKG)/$(SUITE).ltx \
 	$(tds)/source/latex/$(PKG)/$(SYM).ltx \
 	$(tds)/source/latex/$(PKG)/Makefile \
@@ -121,7 +123,7 @@ all: clean doc ctan
 $(builddir)/$(PKG).dtx: $(PKG).dtx
 	mkdir -p $(builddir)
 	$(UPDATE)
-	$(COPY)  $<  $@
+	$(COPY)  *.dtx  $(builddir)/
 
 $(builddir)/$(PKG).sty: $(builddir)/$(PKG).dtx
 	echo "Updating $@"

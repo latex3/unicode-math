@@ -2,7 +2,24 @@
 
 build/
 testfiles/*.pdf
-unicode-math.sty
+oldtestfiles/*
+testfiles snapshot/
+testfiles to update/
+tidbits/
+
+*.sty
+*.pdf
+*.toc
+*.zip
+*.ptc*
+*.mtc*
+*.log
+*.idx
+*.aux
+*.hd
+*.out
+*.maf
+*.orig
 
 test.ltx
 test.tex
@@ -12,6 +29,6 @@ umtable.tex
 
 *.synctex*
 
-/testfiles/umtest-suite-F.tex
-/testfiles/umtest-suite-L.tex
-/testfiles/umtest-suite-X.tex
+.DS_Store
+
+unicode-math/

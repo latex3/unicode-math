@@ -1,0 +1,24 @@
+\input{umtest-preamble}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+
+\begin{document}
+
+\begin{gather*}
+  |       \quad \left|        \frac12 \right|       \quad
+  \vert   \quad \left\vert    \frac12 \right\vert   \quad
+  \lvert  \quad \left\lvert   \frac12 \right\lvert  \quad
+  \rvert  \quad \left\rvert   \frac12 \right\rvert  \\
+  \|      \quad \left\|       \frac12 \right\|      \quad
+  ‖       \quad \left‖        \frac12 \right‖      \quad
+  \Vert   \quad \left\Vert    \frac12 \right\Vert   \quad
+  \lVert  \quad \left\lVert   \frac12 \right\lVert  \quad
+  \rVert  \quad \left\rVert   \frac12 \right\rVert  \\
+  ⦀       \quad \left⦀         \frac12 \right⦀       \quad
+  \Vvert  \quad \left\Vvert   \frac12 \right\Vvert  \quad
+  \lVvert \quad \left\lVvert  \frac12 \right\lVvert \quad
+  \rVvert \quad \left\rVvert  \frac12 \right\rVvert
+\end{gather*}
+
+\end{document}

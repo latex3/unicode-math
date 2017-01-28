@@ -1,0 +1,508 @@
+% \subsection{Compatibility}
+%
+%    \begin{macrocode}
+%<*compat>
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_check_and_fix:NNnnnn}
+% \darg{command}
+% \darg{factory command}
+% \darg{parameter text}
+% \darg{expected replacement text}
+% \darg{new replacement text for \LuaTeX}
+% \darg{new replacement text for \XeTeX}
+% Tries to patch \meta{command}.
+% If \meta{command} is undefined, do nothing.
+% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
+% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text for \LuaTeX} or the \meta{new replacement text for \XeTeX}, depending on the engine.
+% Otherwise issue a warning and don’t overwrite.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Nn \@@_check_and_fix:NNnnnn
+ {
+  \cs_if_exist:NT #1
+   {
+    \token_if_macro:NTF #1
+     {
+      \group_begin:
+      #2 \@@_tmpa:w #3 { #4 }
+      \cs_if_eq:NNTF #1 \@@_tmpa:w
+       {
+        \msg_info:nnx { unicode-math } { patch-macro }
+          { \token_to_str:N #1 }
+        \group_end:
+        #2 #1 #3
+%<XE>          { #6 }
+%<LU>          { #5 }
+       }
+       {
+        \msg_warning:nnxxx { unicode-math } { wrong-meaning }
+          { \token_to_str:N #1 } { \token_to_meaning:N #1 }
+          { \token_to_meaning:N \@@_tmpa:w }
+        \group_end:
+       }
+     }
+     {
+      \msg_warning:nnx { unicode-math } { macro-expected }
+        { \token_to_str:N #1 }
+     }
+   }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_check_and_fix:NNnnn}
+% \darg{command}
+% \darg{factory command}
+% \darg{parameter text}
+% \darg{expected replacement text}
+% \darg{new replacement text}
+% Tries to patch \meta{command}.
+% If \meta{command} is undefined, do nothing.
+% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
+% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
+% Otherwise issue a warning and don’t overwrite.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Nn \@@_check_and_fix:NNnnn
+ {
+  \@@_check_and_fix:NNnnnn #1 #2 { #3 } { #4 } { #5 } { #5 }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_check_and_fix_luatex:NNnnn}
+% \begin{macro}{\@@_check_and_fix_luatex:cNnnn}
+% \darg{command}
+% \darg{factory command}
+% \darg{parameter text}
+% \darg{expected replacement text}
+% \darg{new replacement text}
+% Tries to patch \meta{command}.
+% If \XeTeX\ is the current engine or \meta{command} is undefined, do nothing.
+% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
+% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
+% Otherwise issue a warning and don’t overwrite.
+%    \begin{macrocode}
+\cs_new_protected_nopar:Nn \@@_check_and_fix_luatex:NNnnn
+ {
+%<LU>    \@@_check_and_fix:NNnnn #1 #2 { #3 } { #4 } { #5 }
+ }
+\cs_generate_variant:Nn \@@_check_and_fix_luatex:NNnnn { c }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \paragraph{\pkg{url}}
+% Simply need to get \pkg{url} in a state such that
+% when it switches to math mode and enters \ascii\ characters, the maths
+% setup (i.e., \pkg{unicode-math}) doesn't remap the symbols into Plane 1.
+% Which is, of course, what \cs{mathup} is doing.
+%
+% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\@@_switchto_up:}|
+% but activates automatically so old documents that might change the \cs{url}
+% font still work correctly.
+%    \begin{macrocode}
+\AtEndOfPackageFile * {url}
+ {
+  \tl_put_left:Nn \Url@FormatString { \@@_switchto_up: }
+  \tl_put_right:Nn \UrlSpecials
+   {
+    \do\`{\mathchar`\`}
+    \do\'{\mathchar`\'}
+    \do\${\mathchar`\$}
+    \do\&{\mathchar`\&}
+   }
+ }
+%    \end{macrocode}
+%
+% \paragraph{\pkg{amsmath}}
+% Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
+%    \begin{macrocode}
+\AtEndOfPackageFile * {amsmath}
+ {
+%<*XE>
+    \tl_remove_once:Nn \@begindocumenthook
+     {
+      \mathchardef\std@minus\mathcode`\-\relax
+      \mathchardef\std@equal\mathcode`\=\relax
+     }
+    \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
+    \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
+%</XE>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  \cs_set:Npn \@cdots {\mathinner{\cdots}}
+  \cs_set_eq:NN \dotsb@ \cdots
+%    \end{macrocode}
+% This isn't as clever as the \pkg{amsmath} definition but I think it works:
+%    \begin{macrocode}
+%<*XE>
+    \def \resetMathstrut@
+     {%
+      \setbox\z@\hbox{$($}%)
+      \ht\Mathstrutbox@\ht\z@ \dp\Mathstrutbox@\dp\z@
+     }
+%    \end{macrocode}
+% The |subarray| environment uses inappropriate font dimensions.
+%    \begin{macrocode}
+    \@@_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 }
+     {
+      \vcenter
+      \bgroup
+      \Let@
+      \restore@math@cr
+      \default@tag
+      \baselineskip \fontdimen 10~ \scriptfont \tw@
+      \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
+      \lineskip \thr@@@@ \fontdimen 8~ \scriptfont \thr@@@@
+      \lineskiplimit \lineskip
+      \ialign
+      \bgroup
+      \ifx c #1 \hfil \fi
+      $ \m@th \scriptstyle ## $
+      \hfil
+      \crcr
+     }
+     {
+      \vcenter
+      \c_group_begin_token
+      \Let@
+      \restore@math@cr
+      \default@tag
+      \skip_set:Nn \baselineskip
+       {
+%    \end{macrocode}
+% Here we use stack top shift + stack bottom shift, which sounds reasonable.
+%    \begin{macrocode}
+        \@@_stack_num_up:N \scriptstyle
+        + \@@_stack_denom_down:N \scriptstyle
+       }
+%    \end{macrocode}
+% Here we use the minimum stack gap.
+%    \begin{macrocode}
+      \lineskip \@@_stack_vgap:N \scriptstyle
+      \lineskiplimit \lineskip
+      \ialign
+      \c_group_begin_token
+      \token_if_eq_meaning:NNT c #1 { \hfil }
+      \c_math_toggle_token
+      \m@th
+      \scriptstyle
+      \c_parameter_token \c_parameter_token
+      \c_math_toggle_token
+      \hfil
+      \crcr
+     }
+%</XE>
+%    \end{macrocode}
+% The roots need a complete rework.
+%    \begin{macrocode}
+  \@@_check_and_fix_luatex:NNnnn \plainroot@ \cs_set_nopar:Npn { #1 \of #2 }
+   {
+    \setbox \rootbox \hbox
+     {
+      $ \m@th \scriptscriptstyle { #1 } $
+     }
+    \mathchoice
+      { \r@@@@t \displaystyle      { #2 } }
+      { \r@@@@t \textstyle         { #2 } }~
+      { \r@@@@t \scriptstyle       { #2 } }
+      { \r@@@@t \scriptscriptstyle { #2 } }
+    \egroup
+   }
+   {
+    \bool_if:nTF
+     {
+      \int_compare_p:nNn { \uproot@ } = { \c_zero }
+      && \int_compare_p:nNn { \leftroot@ } = { \c_zero }
+     }
+     {
+        \Uroot \l_@@_radical_sqrt_tl { #1 } { #2 }
+     }
+     {
+      \hbox_set:Nn \rootbox
+       {
+        \c_math_toggle_token
+        \m@th
+        \scriptscriptstyle { #1 }
+        \c_math_toggle_token
+       }
+      \mathchoice
+        { \r@@@@t \displaystyle      { #2 } }
+        { \r@@@@t \textstyle         { #2 } }
+        { \r@@@@t \scriptstyle       { #2 } }
+        { \r@@@@t \scriptscriptstyle { #2 } }
+     }
+    \c_group_end_token
+   }
+  \@@_check_and_fix:NNnnnn \r@@@@t \cs_set_nopar:Npn { #1 #2 }
+   {
+    \setboxz@h { $ \m@th #1 \sqrtsign { #2 } $ }
+    \dimen@ \ht\z@
+    \advance \dimen@ -\dp\z@
+    \setbox\@ne \hbox { $ \m@th #1 \mskip \uproot@ mu $ }
+    \advance \dimen@ by 1.667 \wd\@ne
+    \mkern -\leftroot@ mu
+    \mkern 5mu
+    \raise .6\dimen@ \copy\rootbox
+    \mkern -10mu
+    \mkern \leftroot@ mu
+    \boxz@
+   }
+   {
+    \hbox_set:Nn \l_tmpa_box
+     {
+      \c_math_toggle_token
+      \m@th
+      #1
+      \mskip \uproot@ mu
+      \c_math_toggle_token
+     }
+      \Uroot \l_@@_radical_sqrt_tl
+     {
+      \box_move_up:nn { \box_wd:N \l_tmpa_box }
+       {
+        \hbox:n
+         {
+          \c_math_toggle_token
+          \m@th
+          \mkern -\leftroot@ mu
+          \box_use:N \rootbox
+          \mkern \leftroot@ mu
+          \c_math_toggle_token
+         }
+       }
+     }
+     { #2 }
+   }
+   {
+    \hbox_set:Nn \l_tmpa_box
+     {
+      \c_math_toggle_token
+      \m@th
+      #1
+      \sqrtsign { #2 }
+      \c_math_toggle_token
+     }
+    \hbox_set:Nn \l_tmpb_box
+     {
+      \c_math_toggle_token
+      \m@th
+      #1
+      \mskip \uproot@ mu
+      \c_math_toggle_token
+     }
+    \mkern -\leftroot@ mu
+    \@@_mathstyle_scale:Nnn #1 { \kern }
+     {
+      \fontdimen 63 \l_@@_font
+     }
+    \box_move_up:nn
+     {
+      \box_wd:N \l_tmpb_box
+      + (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
+      * \number \fontdimen 65 \l_@@_font / 100
+     } 
+     {
+      \box_use:N \rootbox
+     }
+    \@@_mathstyle_scale:Nnn #1 { \kern }
+     {
+      \fontdimen 64 \l_@@_font
+     }
+    \mkern \leftroot@ mu
+    \box_use_clear:N \l_tmpa_box
+   }
+ }
+%    \end{macrocode}
+%
+% \paragraph{\pkg{amsopn}}
+% This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
+%    \begin{macrocode}
+%<*XE>
+\AtEndOfPackageFile * {amsopn}
+ {
+  \cs_set:Npn \newmcodes@
+   {
+    \mathcode`\'39\scan_stop:
+    \mathcode`\*42\scan_stop:
+    \mathcode`\."613A\scan_stop:
+%%  \ifnum\mathcode`\-=45 \else
+%%    \mathchardef\std@minus\mathcode`\-\relax
+%%  \fi
+    \mathcode`\-45\scan_stop:
+    \mathcode`\/47\scan_stop:
+    \mathcode`\:"603A\scan_stop:
+   }
+ }
+%</XE>
+%    \end{macrocode}
+%
+% \paragraph{\pkg{mathtools}}
+% \pkg{mathtools}’s |\cramped| command and others that make use of its internal version use an incorrect font dimension.
+%
+%    \begin{macrocode}
+\AtEndOfPackageFile * { mathtools }
+ {
+%<*XE>
+    \newfam \g_@@_empty_fam
+    \@@_check_and_fix:NNnnn
+        \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 }
+     {
+      \sbox \z@
+       {
+        $
+        \m@th
+        #1
+        \nulldelimiterspace = \z@
+        \radical \z@ { #2 }
+        $
+       }
+      \ifx #1 \displaystyle
+        \dimen@ = \fontdimen 8 \textfont 3
+        \advance \dimen@ .25 \fontdimen 5 \textfont 2
+      \else
+        \dimen@ = 1.25 \fontdimen 8
+        \ifx #1 \textstyle
+          \textfont
+        \else
+          \ifx #1 \scriptstyle
+            \scriptfont
+          \else
+            \scriptscriptfont
+          \fi
+        \fi
+        3
+      \fi
+      \advance \dimen@ -\ht\z@
+      \ht\z@ = -\dimen@
+      \box\z@
+     }
+%    \end{macrocode}
+% The \XeTeX\ version is pretty similar to the legacy version, only using the correct font dimensions.
+% Note we used `\verb|\XeTeXradical|' with a newly-allocated empty family to make sure that the radical rule width is not set.
+%    \begin{macrocode}
+     {
+      \hbox_set:Nn \l_tmpa_box
+       {
+        \color@setgroup
+        \c_math_toggle_token
+        \m@th
+        #1
+        \dim_zero:N \nulldelimiterspace
+        \XeTeXradical \g_@@_empty_fam \c_zero { #2 }
+        \c_math_toggle_token
+        \color@endgroup
+       }
+      \box_set_ht:Nn \l_tmpa_box
+       {
+        \box_ht:N \l_tmpa_box
+%    \end{macrocode}
+% Here we use the radical vertical gap.
+%    \begin{macrocode}
+        - \@@_radical_vgap:N #1
+       }
+      \box_use_clear:N \l_tmpa_box
+     }
+%</XE>
+%    \end{macrocode}
+%
+% \begin{macro}{\overbracket}
+% \begin{macro}{\underbracket}
+%   \pkg{mathtools}’s |\overbracket| and |\underbracket| take optional
+%   arguments and are defined in terms of rules, so we keep them, and rename
+%   ours to |\Uoverbracket| and |\Uunderbracket|.
+%    \begin{macrocode}
+\AtEndOfPackageFile * { mathtools }
+ {
+    \cs_set_eq:NN \MToverbracket  \overbracket
+    \cs_set_eq:NN \MTunderbracket \underbracket
+
+    \AtBeginDocument
+     {
+      \msg_warning:nn { unicode-math } { mathtools-overbracket }
+
+	\def\downbracketfill#1#2
+	 {%
+%    \end{macrocode}
+%   Original definition used the height of |\braceld| which is not available
+%   with Unicode fonts, so we are hard coding the $5/18$ex suggested by
+%   \pkg{mathtools}’s documentation.
+%    \begin{macrocode}
+            \edef\l_MT_bracketheight_fdim{.27ex}%
+            \downbracketend{#1}{#2}
+            \leaders \vrule \@height #1 \@depth \z@ \hfill
+            \downbracketend{#1}{#2}%
+     }
+	\def\upbracketfill#1#2
+	 {%
+            \edef\l_MT_bracketheight_fdim{.27ex}%
+            \upbracketend{#1}{#2}
+            \leaders \vrule \@height \z@ \@depth #1 \hfill
+            \upbracketend{#1}{#2}%
+     }
+	\let\Uoverbracket =\overbracket
+	\let\Uunderbracket=\underbracket
+        \let\overbracket  =\MToverbracket
+        \let\underbracket =\MTunderbracket
+     }
+ }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\dblcolon}
+% \begin{macro}{\coloneqq}
+% \begin{macro}{\Coloneqq}
+% \begin{macro}{\eqqcolon}
+%   \pkg{mathtools} defines several commands as combinations of colons and
+%   other characters, but with meanings incompatible to \pkg{unicode-math}.
+%   Thus we issue a warning.  Because \pkg{mathtools} uses
+%   \cmd{\providecommand} \cmd{\AtBeginDocument}, we can just define the
+%   offending commands here.
+%    \begin{macrocode}
+  \msg_warning:nn { unicode-math } { mathtools-colon }
+  \NewDocumentCommand \dblcolon { } { \Colon }
+  \NewDocumentCommand \coloneqq { } { \coloneq }
+  \NewDocumentCommand \Coloneqq { } { \Coloneq }
+  \NewDocumentCommand \eqqcolon { } { \eqcolon }
+ }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \paragraph{\pkg{colonequals}}
+%
+% \begin{macro}{\ratio}
+% \begin{macro}{\coloncolon}
+% \begin{macro}{\minuscolon}
+% \begin{macro}{\colonequals}
+% \begin{macro}{\equalscolon}
+% \begin{macro}{\coloncolonequals}
+%   Similarly to \pkg{mathtools}, the \pkg{colonequals} defines several colon
+%   combinations.  Fortunately there are no name clashes, so we can just
+%   overwrite their definitions.
+%    \begin{macrocode}
+\AtEndOfPackageFile * { colonequals }
+ {
+  \msg_warning:nn { unicode-math } { colonequals }
+  \RenewDocumentCommand \ratio { } { \mathratio }
+  \RenewDocumentCommand \coloncolon { } { \Colon }
+  \RenewDocumentCommand \minuscolon { } { \dashcolon }
+  \RenewDocumentCommand \colonequals { } { \coloneq }
+  \RenewDocumentCommand \equalscolon { } { \eqcolon }
+  \RenewDocumentCommand \coloncolonequals { } { \Coloneq }
+ }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</compat>
+%    \end{macrocode}
