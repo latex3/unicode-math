@@ -47,13 +47,14 @@
 \defmathfont{asana}{Asana-Math.otf}{6666CC}
 \defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}
 \defmathfont{euler}{Neo Euler}{CC66CC}
+\defmathfont{dejavu}{DejaVu Math TeX Gyre}{AACC66}
 
 \def\INPUT{\input{unicode-math-table.tex}}
 \def\TABLE{%
 \par\noindent
-\begin{longtable}[l]{@{}lcccccccll@{}}
+\begin{longtable}[l]{@{}lccccccccll@{}}
   \toprule
-  \textsc{usv} & M & X & S & C & A & P & E & Macro & Description \\
+  \textsc{usv} & M & X & S & C & A & P & E & D & Macro & Description \\
   \midrule \endhead
   \INPUT\\
   \bottomrule
@@ -64,7 +65,7 @@
 \makeatother
 \def\CMD#1{\footnotesize\cmd#1}
 \def\DESC#1{%
-  \begin{varwidth}[t]{6cm}
+  \begin{varwidth}[t]{4cm}
     \raggedright\linespread{0.6}\scriptsize #1%
   \end{varwidth}
 }
@@ -87,6 +88,7 @@
       \SYMB{#2}{asana}{#1} &
       \SYMB{#2}{pagella}{#1} &
       \SYMB{#2}{euler}{#1} &
+      \SYMB{#2}{dejavu}{#1} &
       \CMD{#2}
       \tl_if_in:NnT \PLAIN {#2}
         {
@@ -153,7 +155,7 @@ This document uses the file \texttt{unicode-math-table.tex}
 to print every symbol defined by the \textsf{unicode-math}
 package.
 Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
-Eight fonts are shown: (with approximate symbol counts)
+Nine fonts are shown: (with approximate symbol counts)
 \begin{itemize}
 \item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
 \item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
@@ -162,6 +164,7 @@ Eight fonts are shown: (with approximate symbol counts)
 \item[A] \mathversion{asana} $\mathup{Asana\ Math}$ (\ref{count:asana})
 \item[P] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
 \item[E] \mathversion{euler} $\mathup{Neo\ Euler}$ (\ref{count:euler})
+\item[D] \mathversion{dejavu} $\mathup{DejaVu Math TeX Gyre}$ (\ref{count:dejavu})
 \end{itemize}
 Symbols defined in Plain \TeX\ are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (p)}} after their macro name.
 \LaTeX\ follows Plain \TeX, but defines a handful more, indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (l)}}
@@ -440,5 +443,6 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \refstepcounter{asana}\label{count:asana}
 \refstepcounter{pagella}\label{count:pagella}
 \refstepcounter{euler}\label{count:euler}
+\refstepcounter{dejavu}\label{count:dejavu}
 
 \end{document}
