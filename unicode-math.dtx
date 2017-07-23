@@ -1980,7 +1980,7 @@ This work is "maintained" by Will Robertson.
         \seq_if_in:NnTF \g_@@_mathclasses_seq {##1}
           { \seq_put_right:Nn \l_@@_mclass_range_seq {##1} }
           {
-            \bool_if:nTF { \tl_if_single_p:n {##1} && \token_if_cs_p:N ##1 }
+            \bool_lazy_and:nnTF { \tl_if_single_p:n {##1} } { \token_if_cs_p:N ##1 }
               { \seq_put_right:Nn \l_@@_cmd_range_seq {##1} }
               { \seq_put_right:Nn \l_@@_char_range_seq {##1} }
           }
