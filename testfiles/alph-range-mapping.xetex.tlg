@@ -1,16 +1,16 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
+LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
 (Font)              scaled to size 10.00015pt on input line ....
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
+LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
 (Font)              scaled to size 7.4712pt on input line ....
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(1)/m/n' will be
+LaTeX Font Info:    Font shape `TU/xits-math.otf(1)/m/n' will be
 (Font)              scaled to size 6.0294pt on input line ....
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
+LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
 (Font)              scaled to size 9.99985pt on input line ....
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
+LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
 (Font)              scaled to size 7.47098pt on input line ....
-LaTeX Font Info:    Font shape `EU1/xits-math.otf(2)/m/n' will be
+LaTeX Font Info:    Font shape `TU/xits-math.otf(2)/m/n' will be
 (Font)              scaled to size 6.0292pt on input line ....
 Completed box being shipped out [1]
 \vbox(114.22017+0.0)x169.57845
@@ -21,7 +21,7 @@ Completed box being shipped out [1]
 ...\hbox(0.0+0.0)x227.62207
 ..\glue 25.0
 ..\glue(\lineskip) 0.0
-..\vbox(142.2638+0.0)x227.62207, glue set 0.51648fil
+..\vbox(142.2638+0.0)x227.62207, glue set 2.71625fil
 ...\write-{}
 ...\glue(\topskip) 10.0
 ...\rule(0.0+0.0)x*
@@ -41,55 +41,55 @@ Completed box being shipped out [1]
 ...\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
 ...\glue(\baselineskip) 5.24
 ...\hbox(6.76+1.75)x196.96004, shifted 15.33102, display
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2916
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2917
+....\l_fontspec_font glyph#2916
+....\l_fontspec_font glyph#2917
 ....\kern0.77
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2918
+....\l_fontspec_font glyph#2918
 ....\kern1.24
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2919
+....\l_fontspec_font glyph#2919
 ....\kern1.0
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2920
+....\l_fontspec_font glyph#2920
 ....\kern1.35
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2921
+....\l_fontspec_font glyph#2921
 ....\kern1.84
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2922
+....\l_fontspec_font glyph#2922
 ....\kern1.0
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2923
+....\l_fontspec_font glyph#2923
 ....\kern1.3
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2924
+....\l_fontspec_font glyph#2924
 ....\kern1.5
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2925
+....\l_fontspec_font glyph#2925
 ....\kern1.12
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2926
+....\l_fontspec_font glyph#2926
 ....\kern1.35
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2927
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2928
+....\l_fontspec_font glyph#2927
+....\l_fontspec_font glyph#2928
 ....\kern1.3
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2929
+....\l_fontspec_font glyph#2929
 ....\kern1.3
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2930
+....\l_fontspec_font glyph#2930
 ....\kern1.05
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2931
+....\l_fontspec_font glyph#2931
 ....\kern1.53
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2932
+....\l_fontspec_font glyph#2932
 ....\kern1.03
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2933
+....\l_fontspec_font glyph#2933
 ....\kern0.9
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2934
+....\l_fontspec_font glyph#2934
 ....\kern0.96
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2935
+....\l_fontspec_font glyph#2935
 ....\kern1.8
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2936
+....\l_fontspec_font glyph#2936
 ....\kern1.06
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2937
+....\l_fontspec_font glyph#2937
 ....\kern1.74
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2938
+....\l_fontspec_font glyph#2938
 ....\kern1.76
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2939
+....\l_fontspec_font glyph#2939
 ....\kern1.46
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2940
+....\l_fontspec_font glyph#2940
 ....\kern1.84
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2941
+....\l_fontspec_font glyph#2941
 ....\kern1.66
 ...\penalty 0
 ...\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
@@ -97,39 +97,39 @@ Completed box being shipped out [1]
 ...\glue(\abovedisplayshortskip) 0.0 plus 3.0
 ...\glue(\baselineskip) 3.42
 ...\hbox(6.83+1.87)x130.11002, shifted 48.75603, display
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2498
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2499
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2500
+....\l_fontspec_font glyph#2498
+....\l_fontspec_font glyph#2499
+....\l_fontspec_font glyph#2500
 ....\kern0.5
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2501
+....\l_fontspec_font glyph#2501
 ....\kern0.6
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2502
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2503
+....\l_fontspec_font glyph#2502
+....\l_fontspec_font glyph#2503
 ....\kern1.2
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2504
+....\l_fontspec_font glyph#2504
 ....\kern0.4
-....\EU1/xits-math.otf(3)/m/n/10 glyph#965
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2505
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2506
+....\l_fontspec_font glyph#965
+....\l_fontspec_font glyph#2505
+....\l_fontspec_font glyph#2506
 ....\kern0.6
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2507
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2508
+....\l_fontspec_font glyph#2507
+....\l_fontspec_font glyph#2508
 ....\kern0.2
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2509
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2510
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2511
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2512
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2513
+....\l_fontspec_font glyph#2509
+....\l_fontspec_font glyph#2510
+....\l_fontspec_font glyph#2511
+....\l_fontspec_font glyph#2512
+....\l_fontspec_font glyph#2513
 ....\kern0.4
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2514
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2515
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2516
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2517
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2518
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2519
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2520
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2521
-....\EU1/xits-math.otf(3)/m/n/10 glyph#2522
+....\l_fontspec_font glyph#2514
+....\l_fontspec_font glyph#2515
+....\l_fontspec_font glyph#2516
+....\l_fontspec_font glyph#2517
+....\l_fontspec_font glyph#2518
+....\l_fontspec_font glyph#2519
+....\l_fontspec_font glyph#2520
+....\l_fontspec_font glyph#2521
+....\l_fontspec_font glyph#2522
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -137,32 +137,32 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 3.37001
 ...\hbox(6.76+1.77)x173.18001, shifted 27.22104, display
 ....\hbox(6.76+1.77)x173.18001
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#66
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#67
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#68
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#69
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#70
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#71
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#72
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#73
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#74
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#75
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#76
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#77
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#78
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#79
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#80
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#81
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#82
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#83
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#84
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#85
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#86
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#87
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#88
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#89
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#90
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#91
+.....\l_fontspec_font glyph#66
+.....\l_fontspec_font glyph#67
+.....\l_fontspec_font glyph#68
+.....\l_fontspec_font glyph#69
+.....\l_fontspec_font glyph#70
+.....\l_fontspec_font glyph#71
+.....\l_fontspec_font glyph#72
+.....\l_fontspec_font glyph#73
+.....\l_fontspec_font glyph#74
+.....\l_fontspec_font glyph#75
+.....\l_fontspec_font glyph#76
+.....\l_fontspec_font glyph#77
+.....\l_fontspec_font glyph#78
+.....\l_fontspec_font glyph#79
+.....\l_fontspec_font glyph#80
+.....\l_fontspec_font glyph#81
+.....\l_fontspec_font glyph#82
+.....\l_fontspec_font glyph#83
+.....\l_fontspec_font glyph#84
+.....\l_fontspec_font glyph#85
+.....\l_fontspec_font glyph#86
+.....\l_fontspec_font glyph#87
+.....\l_fontspec_font glyph#88
+.....\l_fontspec_font glyph#89
+.....\l_fontspec_font glyph#90
+.....\l_fontspec_font glyph#91
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -170,33 +170,33 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 3.39
 ...\hbox(6.84+2.16)x117.23001, shifted 55.19603, display
 ....\hbox(6.84+2.16)x117.23001
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2838
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2839
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2840
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2841
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2842
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2843
+.....\l_fontspec_font glyph#2838
+.....\l_fontspec_font glyph#2839
+.....\l_fontspec_font glyph#2840
+.....\l_fontspec_font glyph#2841
+.....\l_fontspec_font glyph#2842
+.....\l_fontspec_font glyph#2843
 .....\kern1.0
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2844
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2845
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2846
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2847
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2848
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2849
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2850
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2851
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2852
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2853
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2854
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2855
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2856
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2857
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2858
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2859
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2860
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2861
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2862
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#2863
+.....\l_fontspec_font glyph#2844
+.....\l_fontspec_font glyph#2845
+.....\l_fontspec_font glyph#2846
+.....\l_fontspec_font glyph#2847
+.....\l_fontspec_font glyph#2848
+.....\l_fontspec_font glyph#2849
+.....\l_fontspec_font glyph#2850
+.....\l_fontspec_font glyph#2851
+.....\l_fontspec_font glyph#2852
+.....\l_fontspec_font glyph#2853
+.....\l_fontspec_font glyph#2854
+.....\l_fontspec_font glyph#2855
+.....\l_fontspec_font glyph#2856
+.....\l_fontspec_font glyph#2857
+.....\l_fontspec_font glyph#2858
+.....\l_fontspec_font glyph#2859
+.....\l_fontspec_font glyph#2860
+.....\l_fontspec_font glyph#2861
+.....\l_fontspec_font glyph#2862
+.....\l_fontspec_font glyph#2863
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -204,31 +204,31 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 2.92
 ...\hbox(6.92+0.19)x181.0, shifted 23.31104, display
 ....\hbox(6.92+0.19)x181.0
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3074
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3075
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3076
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3077
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3078
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3079
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3080
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3081
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3091
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3082
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3083
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3084
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3085
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3086
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3087
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3088
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3089
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3090
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3092
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3093
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3094
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3095
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3096
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3097
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3098
+.....\l_fontspec_font glyph#3074
+.....\l_fontspec_font glyph#3075
+.....\l_fontspec_font glyph#3076
+.....\l_fontspec_font glyph#3077
+.....\l_fontspec_font glyph#3078
+.....\l_fontspec_font glyph#3079
+.....\l_fontspec_font glyph#3080
+.....\l_fontspec_font glyph#3081
+.....\l_fontspec_font glyph#3091
+.....\l_fontspec_font glyph#3082
+.....\l_fontspec_font glyph#3083
+.....\l_fontspec_font glyph#3084
+.....\l_fontspec_font glyph#3085
+.....\l_fontspec_font glyph#3086
+.....\l_fontspec_font glyph#3087
+.....\l_fontspec_font glyph#3088
+.....\l_fontspec_font glyph#3089
+.....\l_fontspec_font glyph#3090
+.....\l_fontspec_font glyph#3092
+.....\l_fontspec_font glyph#3093
+.....\l_fontspec_font glyph#3094
+.....\l_fontspec_font glyph#3095
+.....\l_fontspec_font glyph#3096
+.....\l_fontspec_font glyph#3097
+.....\l_fontspec_font glyph#3098
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -236,53 +236,53 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 4.83
 ...\hbox(6.98+2.05)x187.06999, shifted 20.27605, display
 ....\hbox(6.98+2.05)x187.06999
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3216
+.....\l_fontspec_font glyph#3216
 .....\kern0.4
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3217
+.....\l_fontspec_font glyph#3217
 .....\kern0.7
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3218
+.....\l_fontspec_font glyph#3218
 .....\kern0.53
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3219
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3220
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3242
+.....\l_fontspec_font glyph#3219
+.....\l_fontspec_font glyph#3220
+.....\l_fontspec_font glyph#3242
 .....\kern0.4
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3221
+.....\l_fontspec_font glyph#3221
 .....\kern0.9
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3222
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3223
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3243
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3224
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3225
+.....\l_fontspec_font glyph#3222
+.....\l_fontspec_font glyph#3223
+.....\l_fontspec_font glyph#3243
+.....\l_fontspec_font glyph#3224
+.....\l_fontspec_font glyph#3225
 .....\kern0.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3244
+.....\l_fontspec_font glyph#3244
 .....\kern0.6
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3226
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3227
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3228
+.....\l_fontspec_font glyph#3226
+.....\l_fontspec_font glyph#3227
+.....\l_fontspec_font glyph#3228
 .....\kern0.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3229
+.....\l_fontspec_font glyph#3229
 .....\kern0.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3230
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3231
+.....\l_fontspec_font glyph#3230
+.....\l_fontspec_font glyph#3231
 .....\kern0.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3247
+.....\l_fontspec_font glyph#3247
 .....\kern0.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3232
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3246
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3233
+.....\l_fontspec_font glyph#3232
+.....\l_fontspec_font glyph#3246
+.....\l_fontspec_font glyph#3233
 .....\kern0.7
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3234
+.....\l_fontspec_font glyph#3234
 .....\kern0.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3235
+.....\l_fontspec_font glyph#3235
 .....\kern0.8
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3236
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3237
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3245
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3238
+.....\l_fontspec_font glyph#3236
+.....\l_fontspec_font glyph#3237
+.....\l_fontspec_font glyph#3245
+.....\l_fontspec_font glyph#3238
 .....\kern0.95
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3239
+.....\l_fontspec_font glyph#3239
 .....\kern0.95
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3240
+.....\l_fontspec_font glyph#3240
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ...\penalty 10000
@@ -290,52 +290,52 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 3.26
 ...\hbox(6.69+0.11)x198.11995, shifted 14.75107, display
 ....\hbox(6.69+0.11)x198.11995
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3132
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3133
+.....\l_fontspec_font glyph#3132
+.....\l_fontspec_font glyph#3133
 .....\kern0.4
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3134
+.....\l_fontspec_font glyph#3134
 .....\kern1.45
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3135
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3136
+.....\l_fontspec_font glyph#3135
+.....\l_fontspec_font glyph#3136
 .....\kern0.6
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3137
+.....\l_fontspec_font glyph#3137
 .....\kern0.7
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3138
+.....\l_fontspec_font glyph#3138
 .....\kern0.9
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3139
+.....\l_fontspec_font glyph#3139
 .....\kern0.15
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3149
+.....\l_fontspec_font glyph#3149
 .....\kern0.15
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3140
+.....\l_fontspec_font glyph#3140
 .....\kern0.9
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3141
+.....\l_fontspec_font glyph#3141
 .....\kern0.7
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3142
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3143
+.....\l_fontspec_font glyph#3142
+.....\l_fontspec_font glyph#3143
 .....\kern0.9
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3144
+.....\l_fontspec_font glyph#3144
 .....\kern0.9
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3145
+.....\l_fontspec_font glyph#3145
 .....\kern0.75
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3146
+.....\l_fontspec_font glyph#3146
 .....\kern0.2
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3147
+.....\l_fontspec_font glyph#3147
 .....\kern0.9
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3148
+.....\l_fontspec_font glyph#3148
 .....\kern1.5
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3150
+.....\l_fontspec_font glyph#3150
 .....\kern0.65
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3151
+.....\l_fontspec_font glyph#3151
 .....\kern1.6
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3152
+.....\l_fontspec_font glyph#3152
 .....\kern1.6
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3153
+.....\l_fontspec_font glyph#3153
 .....\kern0.15
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3154
+.....\l_fontspec_font glyph#3154
 .....\kern0.6
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3155
+.....\l_fontspec_font glyph#3155
 .....\kern1.13
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#3156
+.....\l_fontspec_font glyph#3156
 .....\kern0.2
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
@@ -344,43 +344,44 @@ Completed box being shipped out [1]
 ...\glue(\baselineskip) 5.06
 ...\hbox(6.83+2.2)x160.0, shifted 33.81104, display
 ....\hbox(6.83+2.2)x160.0
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#658
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#659
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#660
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#661
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#662
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#706
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#663
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#664
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#665
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#689
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#666
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#667
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#703
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#668
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#669
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#670
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#671
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#672
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#673
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#692
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#674
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#704
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#675
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#676
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#677
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#678
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#679
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#691
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#680
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#681
+.....\l_fontspec_font glyph#658
+.....\l_fontspec_font glyph#659
+.....\l_fontspec_font glyph#660
+.....\l_fontspec_font glyph#661
+.....\l_fontspec_font glyph#662
+.....\l_fontspec_font glyph#706
+.....\l_fontspec_font glyph#663
+.....\l_fontspec_font glyph#664
+.....\l_fontspec_font glyph#665
+.....\l_fontspec_font glyph#689
+.....\l_fontspec_font glyph#666
+.....\l_fontspec_font glyph#667
+.....\l_fontspec_font glyph#703
+.....\l_fontspec_font glyph#668
+.....\l_fontspec_font glyph#669
+.....\l_fontspec_font glyph#670
+.....\l_fontspec_font glyph#671
+.....\l_fontspec_font glyph#672
+.....\l_fontspec_font glyph#673
+.....\l_fontspec_font glyph#692
+.....\l_fontspec_font glyph#674
+.....\l_fontspec_font glyph#704
+.....\l_fontspec_font glyph#675
+.....\l_fontspec_font glyph#676
+.....\l_fontspec_font glyph#677
+.....\l_fontspec_font glyph#678
+.....\l_fontspec_font glyph#679
+.....\l_fontspec_font glyph#691
+.....\l_fontspec_font glyph#680
+.....\l_fontspec_font glyph#681
 .....\kern0.4
-.....\EU1/xits-math.otf(3)/m/n/10 glyph#682
+.....\l_fontspec_font glyph#682
 ...\penalty 0
 ...\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+...\glue -2.2
 ...\glue 0.0 plus 1.0fil
 ...\glue 0.0
 ...\glue 0.0 plus 0.0001fil
 ..\glue(\baselineskip) 30.0
 ..\hbox(0.0+0.0)x227.62207
-(.aux)
+(alph-range-mapping.aux)
