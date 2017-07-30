@@ -759,9 +759,11 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_set:Nn \@@_set_mathsymbol:nNNn
  {
-  \bool_if:nT
+  \bool_lazy_and:nnT
    {
-    \int_compare_p:nNn {#4} > {127} &&
+    \int_compare_p:nNn {#4} > {127}
+   }
+   {
     \int_compare_p:nNn { \char_value_catcode:n {#4} } = {11}
    }
    { \char_set_catcode_other:n {#4} }
@@ -1980,7 +1982,7 @@ This work is "maintained" by Will Robertson.
         \seq_if_in:NnTF \g_@@_mathclasses_seq {##1}
           { \seq_put_right:Nn \l_@@_mclass_range_seq {##1} }
           {
-            \bool_if:nTF { \tl_if_single_p:n {##1} && \token_if_cs_p:N ##1 }
+            \bool_lazy_and:nnTF { \tl_if_single_p:n {##1} } { \token_if_cs_p:N ##1 }
               { \seq_put_right:Nn \l_@@_cmd_range_seq {##1} }
               { \seq_put_right:Nn \l_@@_char_range_seq {##1} }
           }
@@ -3633,11 +3635,11 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Npn \@@_peek_execute_branches_ss:
  {
-  \bool_if:nTF
+  \bool_lazy_any:nTF
    {
-    \token_if_eq_catcode_p:NN \l_peek_token \c_group_begin_token ||
-    \token_if_eq_catcode_p:NN \l_peek_token \c_group_end_token ||
-    \token_if_eq_meaning_p:NN \l_peek_token \c_space_token
+     { \token_if_eq_catcode_p:NN \l_peek_token \c_group_begin_token }
+     { \token_if_eq_catcode_p:NN \l_peek_token \c_group_end_token   }
+     { \token_if_eq_meaning_p:NN \l_peek_token \c_space_token       }
    }
    { \__peek_false:w  }
    { \@@_peek_execute_branches_ss_aux: }

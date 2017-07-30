@@ -291,23 +291,21 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \def\INPUT{\ALPHA}
 \cs_new:Npn \SLOTS #1#2 {
   \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
-    \bool_if:nT
-    {
-      \int_compare_p:n {##1 >= #1} && \int_compare_p:n {##1 <= #2}
-    }
-    {
-      \PRINTLINE{##1}{##2}{##4}
-    }
+    \bool_lazy_and:nnT
+      { \int_compare_p:n {##1 >= #1} }
+      { \int_compare_p:n {##1 <= #2} }
+      {
+        \PRINTLINE{##1}{##2}{##4}
+      }
   }
   \TABLE
   \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4 {
-    \bool_if:nT
-    {
-      \int_compare_p:n {##1 > #2} || \int_compare_p:n {##1 < #1}
-    }
-    {
-      \exp_not:n { \UnicodeMathSymbol {##1}{##2}{##3}{##4} }
-    }
+    \bool_lazy_or:nnT
+      { \int_compare_p:n {##1 > #2} }
+      { \int_compare_p:n {##1 < #1} }
+      {
+        \exp_not:n { \UnicodeMathSymbol {##1}{##2}{##3}{##4} }
+      }
   }
   \edef\ALPHA{\ALPHA}
 }
