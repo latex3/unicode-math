@@ -3621,7 +3621,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Npn \@@_scan_sscript:TF #1#2
  {
-  \tl_set:Nx \__peek_true_aux:w { \exp_not:n{ #1 } }
+  \tl_set:Nx \__peek_true_aux:w { \exp_not:n { \group_align_safe_end: #1 } }
   \tl_set_eq:NN \__peek_true:w \__peek_true_remove:w
   \tl_set:Nx \__peek_false:w { \exp_not:n { \group_align_safe_end: #2 } }
   \group_align_safe_begin:
