@@ -81,10 +81,14 @@ Please file bug reports with minimal examples:
 CHANGE HISTORY
 --------------
 
+- v0.8f (2017/08/02)
+
+  * Emergency fix (thanks Bruno) for another bug revealed by `expl3` update.
+
 - v0.8e (2017/07/30)
 
   * Add `\surd` to access the sqrt symbol.
-  * Fix bug exposed by expl3 update to booleans.
+  * Fix bug exposed by `expl3` update to booleans.
   * Add Deja Vu Math TeX Gyre in list of symbols.
   * Add `\sime` alias for `\simeq` and `\nsimeq` for `\nsime`.
     (For negations it's helpful when they have consistent naming.)
