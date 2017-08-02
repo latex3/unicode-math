@@ -1,0 +1,15 @@
+\input{umtest-preamble}
+
+\OMIT
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\begin{document}
+\[r=s\]
+\TIMO
+
+\begin{align*}
+  r = s₁₂
+\end{align*}
+
+\end{document}
+
