@@ -6,22 +6,6 @@
 %<*internal>
 \begingroup
 \input l3docstrip.tex
-\begingroup
-  \catcode`\_ = 12 %
-  \long\gdef\prepareActiveModule#1{%
-    \if\relax#1\relax
-       \let\replaceModuleInLine\empty
-    \else
-      \def\replaceModuleInLine{%
-        \replaceAllIn\inLine{@@@@}{!!!!!FOURAT!!!!!}%
-        \replaceAllIn\inLine{__@@}{__#1}%
-        \replaceAllIn\inLine{_@@}{__#1}%
-        \replaceAllIn\inLine{@@}{__#1}%
-        \replaceAllIn\inLine{!!!!!FOURAT!!!!!}{@@}% i.e., use @@@@ when you need literal @@ in code
-      }%
-    \fi
-  }
-\endgroup
 \keepsilent
 \let\MetaPrefix\DoubleperCent
 \declarepreamble\texpreamble
