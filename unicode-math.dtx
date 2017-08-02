@@ -3491,9 +3491,8 @@ This work is "maintained" by Will Robertson.
 \group_begin:
 %    \end{macrocode}
 % \paragraph{Superscripts}
-% Populate a property list with superscript characters; their meaning as their
-% key, for reasons that will become apparent soon, and their replacement as
-% each key's value.
+% Populate a property list with superscript characters; themselves as their
+% key, and their replacement as each key's value.
 % Then make the superscript active and bind it to the scanning function.
 %
 % \cs{scantokens} makes this process much simpler since we can activate the
@@ -3501,7 +3500,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_setup_active_superscript:nn
  {
-  \prop_gput:Non \g_@@_supers_prop   {\meaning #1} {#2}
+  \prop_gput:Nnn \g_@@_supers_prop   {#1} {#2}
   \char_set_catcode_active:N #1
   \@@_char_gmake_mathactive:N #1
   \scantokens
@@ -3545,7 +3544,7 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_setup_active_subscript:nn
  {
-  \prop_gput:Non \g_@@_subs_prop   {\meaning #1} {#2}
+  \prop_gput:Nnn \g_@@_subs_prop   {#1} {#2}
   \char_set_catcode_active:N #1
   \@@_char_gmake_mathactive:N #1
   \scantokens
@@ -3604,7 +3603,8 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \group_end:
 %    \end{macrocode}
-% The scanning command, evident in its purpose:
+% The scanning command, which collects a chain of subscripts or a chain
+% of superscripts and then typesets what it has collected.
 %    \begin{macrocode}
 \cs_new:Npn \@@_scan_sscript:
  {
@@ -3617,56 +3617,34 @@ This work is "maintained" by Will Robertson.
    }
  }
 %    \end{macrocode}
-% The main theme here is stolen from the source to the various \cs{peek_} functions.
-% Consider this function as simply boilerplate:
-% TODO: move all this to expl3, and don't use internal expl3 macros.
+% We do not skip spaces when scanning ahead, and we explicitly wish to
+% bail out on encountering a space or a brace.  These cases are filtered
+% using \cs{peek_N_type:TF}.  Otherwise the token can be taken as an
+% \texttt{N}-type argument.  Then we search for it in the appropriate
+% property list (\cs{l_@@_tmpa_tl} is |subs| or |supers|).
+% If found, add the value to the current chain of sub/superscripts.
+% Remember to put the character back in the input otherwise.
+% The \cs{group_align_safe_begin:} and \cs{group_align_safe_end:} are
+% needed in case |#3| is |&|.
 %    \begin{macrocode}
 \cs_new:Npn \@@_scan_sscript:TF #1#2
  {
-  \tl_set:Nx \__peek_true_aux:w { \exp_not:n{ #1 } }
-  \tl_set_eq:NN \__peek_true:w \__peek_true_remove:w
-  \tl_set:Nx \__peek_false:w { \exp_not:n { \group_align_safe_end: #2 } }
-  \group_align_safe_begin:
-    \peek_after:Nw \@@_peek_execute_branches_ss:
- }
-%    \end{macrocode}
-% We do not skip spaces when scanning ahead, and we explicitly wish to
-% bail out on encountering a space or a brace.
-%    \begin{macrocode}
-\cs_new:Npn \@@_peek_execute_branches_ss:
- {
-  \bool_lazy_any:nTF
+  \peek_N_type:TF
    {
-     { \token_if_eq_catcode_p:NN \l_peek_token \c_group_begin_token }
-     { \token_if_eq_catcode_p:NN \l_peek_token \c_group_end_token   }
-     { \token_if_eq_meaning_p:NN \l_peek_token \c_space_token       }
+    \group_align_safe_begin:
+    \@@_scan_sscript_aux:nnN {#1} {#2}
    }
-   { \__peek_false:w  }
-   { \@@_peek_execute_branches_ss_aux: }
+   {#2}
  }
-%    \end{macrocode}
-% This is the actual comparison code.
-% Because the peeking has already tokenised the next token,
-% it's too late to extract its charcode directly. Instead,
-% we look at its meaning, which remains a `character' even
-% though it is itself math-active. If the character is ever
-% made fully active, this will break our assumptions!
-%
-% If the char's meaning exists as a property list key, we
-% build up a chain of sub-/superscripts and iterate. (If not, exit and
-% typeset what we've already collected.)
-%    \begin{macrocode}
-\cs_new:Npn \@@_peek_execute_branches_ss_aux:
+\cs_new:Npn \@@_scan_sscript_aux:nnN #1#2#3
  {
-  \prop_if_in:coTF
-    {g_@@_\l_@@_tmpa_tl _prop} {\meaning\l_peek_token}
-    {
-      \prop_get:coN
-        {g_@@_\l_@@_tmpa_tl _prop} {\meaning\l_peek_token} \l_@@_tmpb_tl
-      \tl_put_right:NV \l_@@_ss_chain_tl \l_@@_tmpb_tl
-      \__peek_true:w
-    }
-    { \__peek_false:w }
+  \prop_get:cnNTF {g_@@_\l_@@_tmpa_tl _prop} {#3} \l_@@_tmpb_tl
+   {
+    \tl_put_right:NV \l_@@_ss_chain_tl \l_@@_tmpb_tl
+    \group_align_safe_end:
+    #1
+   }
+   { \group_align_safe_end: #2 #3 }
  }
 %    \end{macrocode}
 %
