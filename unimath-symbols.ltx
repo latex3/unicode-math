@@ -4,10 +4,10 @@
 % SYMBOLS DEFINED BY UNICODE-MATH
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass{article}
+\documentclass[final]{article}
 \makeatletter
 
-\usepackage{booktabs,catchfile,shortvrb,geometry,metalogo,varwidth,textcomp,longtable,hyperref}
+\usepackage{ragged2e,setspace,booktabs,catchfile,shortvrb,geometry,metalogo,textcomp,longtable,tabu,hyperref}
 
 \geometry{margin=3cm}
 \hypersetup{colorlinks,linkcolor=black}
@@ -52,22 +52,22 @@
 \def\INPUT{\input{unicode-math-table.tex}}
 \def\TABLE{%
 \par\noindent
-\begin{longtable}[l]{@{}lccccccccll@{}}
+\begin{longtabu}[l]{@{}lcccccccclX[l]@{}}
   \toprule
   \textsc{usv} & M & X & S & C & A & P & D & E & Macro & Description \\
   \midrule \endhead
   \INPUT\\
   \bottomrule
-\end{longtable}
+\end{longtabu}
 }
 \makeatletter
 \def\USV#1{\footnotesize\scshape\MakeLowercase{u+\@gobble#1}}
 \makeatother
 \def\CMD#1{\footnotesize\cmd#1}
 \def\DESC#1{%
-  \begin{varwidth}[t]{4cm}
-    \raggedright\linespread{0.6}\scriptsize #1%
-  \end{varwidth}
+  \begin{RaggedRight}\begin{spacing}{0.5}
+    \scriptsize #1%
+  \end{spacing}\end{RaggedRight}
 }
 
 \newcommand\SHOW[1]{%
