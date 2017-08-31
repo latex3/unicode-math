@@ -1225,16 +1225,37 @@ This work is "maintained" by Will Robertson.
 %    \begin{macrocode}
 \cs_new:Nn \@@_declare_math_sizes:
   {
+%<*LU>
+    \fp_compare:nF { \@@_script_style_size:n {ScriptPercentScaleDown} == 0 }
+      {
+        \DeclareMathSizes { \f@size } { \f@size }
+          { \@@_script_style_size:n {ScriptPercentScaleDown} }
+          { \@@_script_style_size:n {ScriptScriptPercentScaleDown} }
+      }
+%</LU>
+%<*XE>
     \dim_compare:nF { \fontdimen 10 \l_@@_font == 0pt }
       {
         \DeclareMathSizes { \f@size } { \f@size }
           { \@@_fontdimen_to_scale:nn {10} {\l_@@_font} }
           { \@@_fontdimen_to_scale:nn {11} {\l_@@_font} }
       }
+%</XE>
   }
 %    \end{macrocode}
 % \end{macro}
 %
+%<*LU>
+% \begin{macro}{\@@_script_style_size:n}
+% Determine script- and scriptscriptstyle sizes using luaotfload:
+%   \begin{macrocode}
+\cs_new:Nn \@@_script_style_size:n
+  {
+    \fp_eval:n {\directlua{tex.sprint(luaotfload.aux.get_math_dimension("l_@@_font","#1"))} * \f@size / 100 }
+  }
+%   \end{macrocode}
+% \end{macro}
+%</LU>
 %
 %
 % \begin{macro}{\@@_setup_legacy_fam_two:}
