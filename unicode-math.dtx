@@ -1072,6 +1072,13 @@ This work is "maintained" by Will Robertson.
 % \doarg{font features}
 %    \begin{macrocode}
 \DeclareDocumentCommand \setmathfont { O{} m O{} }
+  {
+    \@@_setmathfont:nnn {#1} {#2} {#3}
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set:Nn \@@_setmathfont:nnn
  {
   \tl_set:Nn \l_@@_fontname_tl {#2}
   \@@_init:
