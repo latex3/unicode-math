@@ -477,7 +477,7 @@ For example, if you want to define a new legacy maths alphabet font \cs{mathittt
 The five `text math' fonts, discussed above, are: \cs{mathrm}, \cs{mathbf}, \cs{mathit}, \cs{mathsf}, and \cs{mathtt}.
 These commands are also defined with their original definition under synonyms \cs{mathtextrm}, \cs{mathtextbf}, and so on.
 
-When selecting document fonts using \pkg{fontspec} commands such as \cs{setmainfont}, \pkg{unicode-math} inserts some additional that keeps the current default fonts `in sync' with their corresponding \cs{mathrm} commands, etc.
+When selecting document fonts using \pkg{fontspec} commands such as \cs{setmainfont}, \pkg{unicode-math} inserts some additional code into \pkg{fontspec} that keeps the current default fonts `in sync' with their corresponding \cs{mathrm} commands, etc.
 
 For example, in standard \LaTeX, \cs{mathsf} doesn't change even if the main document font is changed using |\renewcommand\sfdefault{...}|. With \pkg{unicode-math} loaded, after writing |\setsansfont{Helvetica}|, \cs{mathsf} will now be set in Helvetica.
 
