@@ -1,13 +1,71 @@
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \input{regression-test.tex}
 \documentclass{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage{geometry}
 \geometry{
   papersize={9cm,6cm},margin=0.5cm
 }
 \pagestyle{empty}
-\showoutput
-\AtBeginDocument{\START}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tracingonline=1\relax
+
+\AtBeginDocument{\START\OMIT}
+\AtEndDocument{\OMIT}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\XETEXONLY{%
+  \ifdefined\directlua
+    \def\NEXT{\TIMO\typeout{*** XeTeX-only test ***}\end{document}\endinput}\fi
+  \csname NEXT\endcsname
+}
+\newcommand\LUATEXONLY{%
+  \ifdefined\directlua\else
+    \def\NEXT{\TIMO\typeout{*** LuaTeX-only test ***}\end{document}\endinput}\fi
+  \csname NEXT\endcsname
+}
+
+\newcommand\MSG[1]{%
+  \TIMO
+  \typeout{#1}%
+  \OMIT
+}
+
+\newcommand\FONTNAME{%
+  \TIMO
+  \typeout{\fontname\font}%
+  \OMIT
+}
+
+\newcommand\SHOWBOX[1]{%
+  \TIMO
+  \scrollmode
+  \showbox#1\relax
+  \OMIT
+}
+
+\makeatletter
+\newcommand\CURRNFSS{%
+  \TIMO
+  \typeout{\curr@fontshape:^^J\space\space\fontname\font}%
+  \OMIT
+}
+\makeatother
+
+\AtBeginDocument{\def\=========================={%
+  \TIMO
+  \SEPARATOR
+  \OMIT
+}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand\LATINtext{ABCDEFGHIJKLMNOPQRSTUVWXYZ}
 \newcommand\latintext{abcdefghijklmnopqrstuvwxyz}
