@@ -1,0 +1,27 @@
+
+\input{umtest-preamble}
+
+\usepackage[mathit=sym]{unicode-math}
+
+\setmainfont{texgyretermes-regular.otf}[ItalicFont=texgyretermes-italic.otf]
+\setmathfont{texgyrepagella-math.otf}
+
+\begin{document}
+
+$a+b$
+
+\START
+
+\MSG{TEXTIT:}
+\setbox12=\hbox{\textit{x}}
+\SHOWBOX {12}
+
+\MSG{MATHIT:}
+\setbox12=\hbox{$\mathit{x}$}
+\SHOWBOX {12}
+
+\MSG{SYMIT:}
+\setbox13=\hbox{$\symit{x}$}
+\SHOWBOX {13}
+
+\end{document}
