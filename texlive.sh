@@ -31,8 +31,6 @@ tlmgr install cm etex knuth-lib latex-bin tex tex-ini-files unicode-data xetex
 tlmgr install   \
   geometry      \
   graphics      \
-  ifluatex      \
-  ifxetex       \
   amsmath       \
   lualatex-math \
   etoolbox      \

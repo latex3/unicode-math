@@ -1,0 +1,883 @@
+
+% \section{Epilogue}
+%
+%    \begin{macrocode}
+%<*package&(XE|LU)>
+%    \end{macrocode}
+%
+% Lots of little things to tidy up.
+%
+% \subsection{Primes}
+%
+% We need a new `prime' algorithm. Unicode math has four pre-drawn prime glyphs.
+% \begin{quote}\obeylines
+% \unichar{2032} {prime} (\cs{prime}): $x\prime$
+% \unichar{2033} {double prime} (\cs{dprime}): $x\dprime$
+% \unichar{2034} {triple prime} (\cs{trprime}): $x\trprime$
+% \unichar{2057} {quadruple prime} (\cs{qprime}): $x\qprime$
+% \end{quote}
+% As you can see, they're all drawn at the correct height without being superscripted.
+% However, in a correctly behaving OpenType font,
+% we also see different behaviour after the \texttt{ssty} feature is applied:
+% \begin{quote}
+% \font\1="Cambria Math:script=math,+ssty=0"\1
+% \char"1D465\char"2032\quad
+% \char"1D465\char"2033\quad
+% \char"1D465\char"2034\quad
+% \char"1D465\char"2057
+% \end{quote}
+% The glyphs are now `full size' so that when placed inside a superscript,
+% their shape will match the originally sized ones. Many thanks to Ross Mills
+% of Tiro Typeworks for originally pointing out this behaviour.
+%
+% In regular \LaTeX, primes can be entered with the straight quote character
+% |'|, and multiple straight quotes chain together to produce multiple
+% primes. Better results can be achieved in \pkg{unicode-math} by chaining
+% multiple single primes into a pre-drawn multi-prime glyph; consider
+% $x\prime{}\prime{}\prime$ vs.\ $x\trprime$.
+%
+% For Unicode maths, we wish to conserve this behaviour and augment it with
+% the possibility of adding any combination of Unicode prime or any of the
+% $n$-prime characters. E.g., the user might copy-paste a double prime from
+% another source and then later type another single prime after it; the output
+% should be the triple prime.
+%
+% Our algorithm is:
+% \begin{itemize}[nolistsep]
+% \item Prime encountered; pcount=1.
+% \item Scan ahead; if prime: pcount:=pcount+1; repeat.
+% \item If not prime, stop scanning.
+% \item If pcount=1, \cs{prime}, end.
+% \item If pcount=2, check \cs{dprime}; if it exists, use it, end; if not, goto last step.
+% \item Ditto pcount=3 \& \cs{trprime}.
+% \item Ditto pcount=4 \& \cs{qprime}.
+% \item If pcount>4 or the glyph doesn't exist, insert pcount \cs{prime}s with \cs{primekern} between each.
+% \end{itemize}
+%
+% This is a wrapper to insert a superscript; if there is a subsequent
+% trailing superscript, then it is included within the insertion.
+%    \begin{macrocode}
+\cs_new:Nn \@@_arg_i_before_egroup:n {#1\egroup}
+\cs_new:Nn \@@_superscript:n
+ {
+  ^\bgroup #1
+  \peek_meaning_remove:NTF ^ \@@_arg_i_before_egroup:n \egroup
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_nprimes:Nn
+ {
+  \@@_superscript:n
+   {
+    #1
+    \prg_replicate:nn {#2-1} { \mskip \g_@@_primekern_muskip #1 }
+   }
+ }
+
+\cs_new:Nn \@@_nprimes_select:nn
+ {
+  \int_case:nnF {#2}
+   {
+    {1} { \@@_superscript:n {#1} }
+    {2} {
+      \@@_glyph_if_exist:nTF {"2033}
+        { \@@_superscript:n {\@@_prime_double_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+    {3} {
+      \@@_glyph_if_exist:nTF {"2034}
+        { \@@_superscript:n {\@@_prime_triple_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+    {4} {
+      \@@_glyph_if_exist:nTF {"2057}
+        { \@@_superscript:n {\@@_prime_quad_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+   }
+   {
+    \@@_nprimes:Nn #1 {#2}
+   }
+ }
+\cs_new:Nn \@@_nbackprimes_select:nn
+ {
+  \int_case:nnF {#2}
+   {
+    {1} { \@@_superscript:n {#1} }
+    {2} {
+      \@@_glyph_if_exist:nTF {"2036}
+        { \@@_superscript:n {\@@_backprime_double_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+    {3} {
+      \@@_glyph_if_exist:nTF {"2037}
+        { \@@_superscript:n {\@@_backprime_triple_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+   }
+   {
+    \@@_nprimes:Nn #1 {#2}
+   }
+ }
+%    \end{macrocode}
+%
+% Scanning is annoying because I'm too lazy to do it for the general case.
+%
+%    \begin{macrocode}
+\cs_new:Npn \@@_scan_prime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_dprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_trprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_qprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {3}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_prime:
+ {
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_dprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_trprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_qprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {3}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Nn \@@_scanprime_collect:N
+ {
+  \int_incr:N \l_@@_primecount_int
+  \peek_meaning_remove:NTF '
+   { \@@_scanprime_collect:N #1 }
+   {
+    \peek_meaning_remove:NTF \@@_scan_prime:
+     { \@@_scanprime_collect:N #1 }
+     {
+      \peek_meaning_remove:NTF ^^^^2032
+       { \@@_scanprime_collect:N #1 }
+       {
+        \peek_meaning_remove:NTF \@@_scan_dprime:
+         {
+          \int_incr:N \l_@@_primecount_int
+          \@@_scanprime_collect:N #1
+         }
+         {
+          \peek_meaning_remove:NTF ^^^^2033
+           {
+            \int_incr:N \l_@@_primecount_int
+            \@@_scanprime_collect:N #1
+           }
+           {
+            \peek_meaning_remove:NTF \@@_scan_trprime:
+             {
+              \int_add:Nn \l_@@_primecount_int {2}
+              \@@_scanprime_collect:N #1
+             }
+             {
+              \peek_meaning_remove:NTF ^^^^2034
+               {
+                \int_add:Nn \l_@@_primecount_int {2}
+                \@@_scanprime_collect:N #1
+               }
+               {
+                \peek_meaning_remove:NTF \@@_scan_qprime:
+                 {
+                  \int_add:Nn \l_@@_primecount_int {3}
+                  \@@_scanprime_collect:N #1
+                 }
+                 {
+                  \peek_meaning_remove:NTF ^^^^2057
+                   {
+                    \int_add:Nn \l_@@_primecount_int {3}
+                    \@@_scanprime_collect:N #1
+                   }
+                   {
+                    \@@_nprimes_select:nn {#1} {\l_@@_primecount_int}
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+\cs_new:Npn \@@_scan_backprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_backdprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_backtrprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_backprime:
+ {
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_backdprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_backtrprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Nn \@@_scanbackprime_collect:N
+ {
+  \int_incr:N \l_@@_primecount_int
+  \peek_meaning_remove:NTF `
+   {
+    \@@_scanbackprime_collect:N #1
+   }
+   {
+    \peek_meaning_remove:NTF \@@_scan_backprime:
+     {
+      \@@_scanbackprime_collect:N #1
+     }
+     {
+      \peek_meaning_remove:NTF ^^^^2035
+       {
+        \@@_scanbackprime_collect:N #1
+       }
+       {
+        \peek_meaning_remove:NTF \@@_scan_backdprime:
+         {
+          \int_incr:N \l_@@_primecount_int
+          \@@_scanbackprime_collect:N #1
+         }
+         {
+          \peek_meaning_remove:NTF ^^^^2036
+           {
+            \int_incr:N \l_@@_primecount_int
+            \@@_scanbackprime_collect:N #1
+           }
+           {
+            \peek_meaning_remove:NTF \@@_scan_backtrprime:
+             {
+              \int_add:Nn \l_@@_primecount_int {2}
+              \@@_scanbackprime_collect:N #1
+             }
+             {
+              \peek_meaning_remove:NTF ^^^^2037
+               {
+                \int_add:Nn \l_@@_primecount_int {2}
+                \@@_scanbackprime_collect:N #1
+               }
+               {
+                \@@_nbackprimes_select:nn {#1} {\l_@@_primecount_int}
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AtBeginDocument{\@@_define_prime_commands: \@@_define_prime_chars:}
+\cs_new:Nn \@@_define_prime_commands:
+ {
+  \cs_set_eq:NN \prime       \@@_prime_single_mchar
+  \cs_set_eq:NN \dprime      \@@_prime_double_mchar
+  \cs_set_eq:NN \trprime     \@@_prime_triple_mchar
+  \cs_set_eq:NN \qprime      \@@_prime_quad_mchar
+  \cs_set_eq:NN \backprime   \@@_backprime_single_mchar
+  \cs_set_eq:NN \backdprime  \@@_backprime_double_mchar
+  \cs_set_eq:NN \backtrprime \@@_backprime_triple_mchar
+ }
+\group_begin:
+  \char_set_catcode_active:N \'
+  \char_set_catcode_active:N \`
+  \char_set_catcode_active:n {"2032}
+  \char_set_catcode_active:n {"2033}
+  \char_set_catcode_active:n {"2034}
+  \char_set_catcode_active:n {"2057}
+  \char_set_catcode_active:n {"2035}
+  \char_set_catcode_active:n {"2036}
+  \char_set_catcode_active:n {"2037}
+  \cs_gset:Nn \@@_define_prime_chars:
+   {
+    \cs_set_eq:NN '        \@@_scan_sup_prime:
+    \cs_set_eq:NN ^^^^2032 \@@_scan_sup_prime:
+    \cs_set_eq:NN ^^^^2033 \@@_scan_sup_dprime:
+    \cs_set_eq:NN ^^^^2034 \@@_scan_sup_trprime:
+    \cs_set_eq:NN ^^^^2057 \@@_scan_sup_qprime:
+    \cs_set_eq:NN `        \@@_scan_sup_backprime:
+    \cs_set_eq:NN ^^^^2035 \@@_scan_sup_backprime:
+    \cs_set_eq:NN ^^^^2036 \@@_scan_sup_backdprime:
+    \cs_set_eq:NN ^^^^2037 \@@_scan_sup_backtrprime:
+   }
+\group_end:
+%    \end{macrocode}
+%
+% \subsection{Unicode radicals}
+%
+% Make sure \cs{Uroot} is defined in the case where the \LaTeX{}
+% kernel doesn't make it available with its native name.
+%    \begin{macrocode}
+%<*LU>
+\cs_if_exist:NF \Uroot
+  { \cs_new_eq:NN \Uroot \luatexUroot }
+%</LU>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AtBeginDocument{\@@_redefine_radical:}
+\cs_new:Nn \@@_redefine_radical:
+%<*XE>
+ {
+  \@ifpackageloaded { amsmath } { }
+   {
+%    \end{macrocode}
+% \begin{macro}{\r@@t}
+% \darg{A mathstyle (for \cmd\mathpalette)}
+% \darg{Leading superscript for the sqrt sign}
+% A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
+%    \begin{macrocode}
+    \cs_set_nopar:Npn \r@@@@t ##1 ##2
+     {
+      \hbox_set:Nn \l_tmpa_box
+       {
+        \c_math_toggle_token
+        \m@th
+        ##1
+        \sqrtsign { ##2 }
+        \c_math_toggle_token
+       }
+      \@@_mathstyle_scale:Nnn ##1 { \kern }
+       { \fontdimen 63 \l_@@_font }
+      \box_move_up:nn
+       {
+        (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
+        * \number \fontdimen 65 \l_@@_font / 100
+       }
+       { \box_use:N \rootbox }
+      \@@_mathstyle_scale:Nnn ##1 { \kern }
+       { \fontdimen 64 \l_@@_font }
+      \box_use_clear:N \l_tmpa_box
+     }
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+   }
+ }
+%</XE>
+%<*LU>
+ {
+  \@ifpackageloaded { amsmath } { }
+   {
+%    \end{macrocode}
+% \begin{macro}{\root}
+% Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
+%    \begin{macrocode}
+    \cs_set:Npn \root ##1 \of ##2
+     {
+       \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
+     }
+%    \end{macrocode}
+% \end{macro}
+%    \begin{macrocode}
+   }
+ }
+%</LU>
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\@@_fontdimen_to_percent:nn}
+% \begin{macro}{\@@_fontdimen_to_scale:nn}
+% \darg{Font dimen number}
+% \darg{Font `variable'}
+% \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|.
+% \cs{@@_fontdimen_to_percent:nn} takes a font dimension number and outputs the decimal value of the associated parameter.
+% \cs{@@_fontdimen_to_scale:nn} returns a dimension correspond to the current
+% font size relative proportion based on that percentage.
+%    \begin{macrocode}
+\cs_new:Nn \@@_fontdimen_to_percent:nn
+ {
+  \fp_eval:n { \dim_to_decimal:n { \fontdimen #1 #2 } * 65536 / 100 }
+ }
+\cs_new:Nn \@@_fontdimen_to_scale:nn
+ {
+  \fp_eval:n {\@@_fontdimen_to_percent:nn {#1} {#2} * \f@size } pt
+ }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\@@_mathstyle_scale:Nnn}
+% \darg{A math style (\cs{scriptstyle}, say)}
+% \darg{Macro that takes a non-delimited length argument (like \cmd\kern)}
+% \darg{Length control sequence to be scaled according to the math style}
+% This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
+%    \begin{macrocode}
+\cs_new:Nn \@@_mathstyle_scale:Nnn
+ {
+  \ifx#1\scriptstyle
+    #2 \@@_fontdimen_to_percent:nn {10} \l_@@_font #3
+  \else
+    \ifx#1\scriptscriptstyle
+      #2 \@@_fontdimen_to_percent:nn {11} \l_@@_font #3
+    \else
+      #2 #3
+    \fi
+  \fi
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Unicode sub- and super-scripts}
+%
+% The idea here is to enter a scanning state after a superscript or subscript
+% is encountered.
+% If subsequent superscripts or subscripts (resp.) are found,
+% they are lumped together.
+% Each sub/super has a corresponding regular size
+% glyph which is used by \XeTeX\ to typeset the results; this means that the
+% actual subscript/superscript glyphs are never seen in the output
+% document~--- they are only used as input characters.
+%
+% Open question: should the superscript-like `modifiers' (\unichar{1D2C}
+% {modifier capital letter a} and on) be included here?
+%    \begin{macrocode}
+\group_begin:
+%    \end{macrocode}
+% \paragraph{Superscripts}
+% Populate a property list with superscript characters; themselves as their
+% key, and their replacement as each key's value.
+% Then make the superscript active and bind it to the scanning function.
+%
+% \cs{scantokens} makes this process much simpler since we can activate the
+% char and assign its meaning in one step.
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_active_superscript:nn
+ {
+  \prop_gput:Nnn \g_@@_supers_prop   {#1} {#2}
+  \char_set_catcode_active:N #1
+  \@@_char_gmake_mathactive:N #1
+  \scantokens
+   {
+    \cs_gset:Npn #1
+     {
+      \tl_set:Nn \l_@@_ss_chain_tl {#2}
+      \cs_set_eq:NN \@@_sub_or_super:n \sp
+      \tl_set:Nn \l_@@_tmpa_tl {supers}
+      \@@_scan_sscript:
+     }
+   }
+ }
+%    \end{macrocode}
+% Bam:
+%    \begin{macrocode}
+\@@_setup_active_superscript:nn {^^^^2070} {0}
+\@@_setup_active_superscript:nn {^^^^00b9} {1}
+\@@_setup_active_superscript:nn {^^^^00b2} {2}
+\@@_setup_active_superscript:nn {^^^^00b3} {3}
+\@@_setup_active_superscript:nn {^^^^2074} {4}
+\@@_setup_active_superscript:nn {^^^^2075} {5}
+\@@_setup_active_superscript:nn {^^^^2076} {6}
+\@@_setup_active_superscript:nn {^^^^2077} {7}
+\@@_setup_active_superscript:nn {^^^^2078} {8}
+\@@_setup_active_superscript:nn {^^^^2079} {9}
+\@@_setup_active_superscript:nn {^^^^207a} {+}
+\@@_setup_active_superscript:nn {^^^^207b} {-}
+\@@_setup_active_superscript:nn {^^^^207c} {=}
+\@@_setup_active_superscript:nn {^^^^207d} {(}
+\@@_setup_active_superscript:nn {^^^^207e} {)}
+\@@_setup_active_superscript:nn {^^^^2071} {i}
+\@@_setup_active_superscript:nn {^^^^207f} {n}
+\@@_setup_active_superscript:nn {^^^^02b0} {h}
+\@@_setup_active_superscript:nn {^^^^02b2} {j}
+\@@_setup_active_superscript:nn {^^^^02b3} {r}
+\@@_setup_active_superscript:nn {^^^^02b7} {w}
+\@@_setup_active_superscript:nn {^^^^02b8} {y}
+%    \end{macrocode}
+% \paragraph{Subscripts} Ditto above.
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_active_subscript:nn
+ {
+  \prop_gput:Nnn \g_@@_subs_prop   {#1} {#2}
+  \char_set_catcode_active:N #1
+  \@@_char_gmake_mathactive:N #1
+  \scantokens
+   {
+    \cs_gset:Npn #1
+     {
+      \tl_set:Nn \l_@@_ss_chain_tl {#2}
+      \cs_set_eq:NN \@@_sub_or_super:n \sb
+      \tl_set:Nn \l_@@_tmpa_tl {subs}
+      \@@_scan_sscript:
+     }
+   }
+ }
+%    \end{macrocode}
+% A few more subscripts than superscripts:
+%    \begin{macrocode}
+\@@_setup_active_subscript:nn {^^^^2080} {0}
+\@@_setup_active_subscript:nn {^^^^2081} {1}
+\@@_setup_active_subscript:nn {^^^^2082} {2}
+\@@_setup_active_subscript:nn {^^^^2083} {3}
+\@@_setup_active_subscript:nn {^^^^2084} {4}
+\@@_setup_active_subscript:nn {^^^^2085} {5}
+\@@_setup_active_subscript:nn {^^^^2086} {6}
+\@@_setup_active_subscript:nn {^^^^2087} {7}
+\@@_setup_active_subscript:nn {^^^^2088} {8}
+\@@_setup_active_subscript:nn {^^^^2089} {9}
+\@@_setup_active_subscript:nn {^^^^208a} {+}
+\@@_setup_active_subscript:nn {^^^^208b} {-}
+\@@_setup_active_subscript:nn {^^^^208c} {=}
+\@@_setup_active_subscript:nn {^^^^208d} {(}
+\@@_setup_active_subscript:nn {^^^^208e} {)}
+\@@_setup_active_subscript:nn {^^^^2090} {a}
+\@@_setup_active_subscript:nn {^^^^2091} {e}
+\@@_setup_active_subscript:nn {^^^^2095} {h}
+\@@_setup_active_subscript:nn {^^^^1d62} {i}
+\@@_setup_active_subscript:nn {^^^^2c7c} {j}
+\@@_setup_active_subscript:nn {^^^^2096} {k}
+\@@_setup_active_subscript:nn {^^^^2097} {l}
+\@@_setup_active_subscript:nn {^^^^2098} {m}
+\@@_setup_active_subscript:nn {^^^^2099} {n}
+\@@_setup_active_subscript:nn {^^^^2092} {o}
+\@@_setup_active_subscript:nn {^^^^209a} {p}
+\@@_setup_active_subscript:nn {^^^^1d63} {r}
+\@@_setup_active_subscript:nn {^^^^209b} {s}
+\@@_setup_active_subscript:nn {^^^^209c} {t}
+\@@_setup_active_subscript:nn {^^^^1d64} {u}
+\@@_setup_active_subscript:nn {^^^^1d65} {v}
+\@@_setup_active_subscript:nn {^^^^2093} {x}
+\@@_setup_active_subscript:nn {^^^^1d66} {\beta}
+\@@_setup_active_subscript:nn {^^^^1d67} {\gamma}
+\@@_setup_active_subscript:nn {^^^^1d68} {\rho}
+\@@_setup_active_subscript:nn {^^^^1d69} {\phi}
+\@@_setup_active_subscript:nn {^^^^1d6a} {\chi}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\group_end:
+%    \end{macrocode}
+% The scanning command, which collects a chain of subscripts or a chain
+% of superscripts and then typesets what it has collected.
+%    \begin{macrocode}
+\cs_new:Npn \@@_scan_sscript:
+ {
+  \@@_scan_sscript:TF
+   {
+    \@@_scan_sscript:
+   }
+   {
+    \@@_sub_or_super:n {\l_@@_ss_chain_tl}
+   }
+ }
+%    \end{macrocode}
+% We do not skip spaces when scanning ahead, and we explicitly wish to
+% bail out on encountering a space or a brace.  These cases are filtered
+% using \cs{peek_N_type:TF}.  Otherwise the token can be taken as an
+% \texttt{N}-type argument.  Then we search for it in the appropriate
+% property list (\cs{l_@@_tmpa_tl} is |subs| or |supers|).
+% If found, add the value to the current chain of sub/superscripts.
+% Remember to put the character back in the input otherwise.
+% The \cs{group_align_safe_begin:} and \cs{group_align_safe_end:} are
+% needed in case |#3| is |&|.
+%    \begin{macrocode}
+\cs_new:Npn \@@_scan_sscript:TF #1#2
+ {
+  \peek_N_type:TF
+   {
+    \group_align_safe_begin:
+    \@@_scan_sscript_aux:nnN {#1} {#2}
+   }
+   {#2}
+ }
+\cs_new:Npn \@@_scan_sscript_aux:nnN #1#2#3
+ {
+  \prop_get:cnNTF {g_@@_\l_@@_tmpa_tl _prop} {#3} \l_@@_tmpb_tl
+   {
+    \tl_put_right:NV \l_@@_ss_chain_tl \l_@@_tmpb_tl
+    \group_align_safe_end:
+    #1
+   }
+   { \group_align_safe_end: #2 #3 }
+ }
+%    \end{macrocode}
+%
+% \subsubsection{Active fractions}
+% Active fractions can be setup independently of any maths font definition;
+% all it requires is a mapping from the Unicode input chars to the relevant
+% \LaTeX\ fraction declaration.
+%
+%    \begin{macrocode}
+\cs_new:Npn \@@_define_active_frac:Nw #1 #2/#3
+ {
+  \char_set_catcode_active:N #1
+  \@@_char_gmake_mathactive:N #1
+  \tl_rescan:nn
+   {
+    \catcode`\_=11\relax
+    \catcode`\:=11\relax
+   }
+   {
+    \cs_gset:Npx #1
+     {
+      \bool_if:NTF \l_@@_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
+          {#2} {#3}
+     }
+   }
+ }
+%    \end{macrocode}
+% These are redefined for each math font selection in case the |active-frac|
+% feature changes.
+%    \begin{macrocode}
+\cs_new:Npn \@@_setup_active_frac:
+ {
+  \group_begin:
+  \@@_define_active_frac:Nw  ^^^^2189  0/3
+  \@@_define_active_frac:Nw  ^^^^2152  1/{10}
+  \@@_define_active_frac:Nw  ^^^^2151  1/9
+  \@@_define_active_frac:Nw  ^^^^215b  1/8
+  \@@_define_active_frac:Nw  ^^^^2150  1/7
+  \@@_define_active_frac:Nw  ^^^^2159  1/6
+  \@@_define_active_frac:Nw  ^^^^2155  1/5
+  \@@_define_active_frac:Nw  ^^^^00bc  1/4
+  \@@_define_active_frac:Nw  ^^^^2153  1/3
+  \@@_define_active_frac:Nw  ^^^^215c  3/8
+  \@@_define_active_frac:Nw  ^^^^2156  2/5
+  \@@_define_active_frac:Nw  ^^^^00bd  1/2
+  \@@_define_active_frac:Nw  ^^^^2157  3/5
+  \@@_define_active_frac:Nw  ^^^^215d  5/8
+  \@@_define_active_frac:Nw  ^^^^2154  2/3
+  \@@_define_active_frac:Nw  ^^^^00be  3/4
+  \@@_define_active_frac:Nw  ^^^^2158  4/5
+  \@@_define_active_frac:Nw  ^^^^215a  5/6
+  \@@_define_active_frac:Nw  ^^^^215e  7/8
+  \group_end:
+ }
+\@@_setup_active_frac:
+%    \end{macrocode}
+%
+% \subsection{Synonyms and all the rest}
+%
+% These are symbols with multiple names. Eventually to be taken care of
+% automatically by the maths characters database.
+%    \begin{macrocode}
+\protected\def\to{\rightarrow}
+\protected\def\le{\leq}
+\protected\def\ge{\geq}
+\protected\def\neq{\ne}
+\protected\def\triangle{\mathord{\bigtriangleup}}
+\protected\def\bigcirc{\mdlgwhtcircle}
+\protected\def\circ{\vysmwhtcircle}
+\protected\def\bullet{\smblkcircle}
+\protected\def\mathyen{\yen}
+\protected\def\mathsterling{\sterling}
+\protected\def\diamond{\smwhtdiamond}
+\protected\def\emptyset{\varnothing}
+\protected\def\hbar{\hslash}
+\protected\def\land{\wedge}
+\protected\def\lor{\vee}
+\protected\def\owns{\ni}
+\protected\def\gets{\leftarrow}
+\protected\def\mathring{\ocirc}
+\protected\def\lnot{\neg}
+\protected\def\longdivision{\longdivisionsign}
+%    \end{macrocode}
+% These are somewhat odd: (and their usual Unicode uprightness does not match their amssymb glyphs)
+%    \begin{macrocode}
+\protected\def\backepsilon{\upbackepsilon}
+\protected\def\eth{\matheth}
+%    \end{macrocode}
+% These are names that are `frozen' in HTML but have dumb names:
+%    \begin{macrocode}
+\protected\def\dbkarow {\dbkarrow}
+\protected\def\drbkarow{\drbkarrow}
+\protected\def\hksearow{\hksearrow}
+\protected\def\hkswarow{\hkswarrow}
+%    \end{macrocode}
+%
+% Due to the magic of OpenType math, big operators are automatically
+% enlarged when necessary. Since there isn't a separate unicode glyph for
+% `small integral', I'm not sure if there is a better way to do this:
+%    \begin{macrocode}
+\protected\def\smallint{\mathop{\textstyle\int}\limits}
+%    \end{macrocode}
+%
+% \begin{macro}{\underbar}
+%    \begin{macrocode}
+\cs_set_eq:NN \latexe_underbar:n \underbar
+\renewcommand\underbar
+ {
+  \mode_if_math:TF \mathunderbar \latexe_underbar:n
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\colon}
+% Define \cs{colon} as a mathpunct `|:|'.
+% This is wrong: it should be \unichar{003A} {colon} instead!
+% We hope no-one will notice.
+%    \begin{macrocode}
+\@ifpackageloaded{amsmath}
+ {
+  % define their own colon, perhaps I should just steal it. (It does look much better.)
+ }
+ {
+  \cs_set_protected:Npn \colon
+   {
+    \bool_if:NTF \g_@@_literal_colon_bool {:} { \mathpunct{:} }
+   }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\digamma}
+% \begin{macro}{\Digamma}
+% I might end up just changing these in the table.
+%    \begin{macrocode}
+\protected\def\digamma{\updigamma}
+\protected\def\Digamma{\upDigamma}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \paragraph{Symbols}
+%    \begin{macrocode}
+\cs_set_protected:Npn \| {\Vert}
+%    \end{macrocode}
+% \cs{mathinner} items:
+%    \begin{macrocode}
+\cs_set_protected:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
+\cs_set_protected:Npn \cdots {\mathinner{\unicodecdots}}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set_eq:NN \@@_text_slash: \slash
+\cs_set_protected:Npn \slash
+ {
+  \mode_if_math:TF {\mathslash} {\@@_text_slash:}
+ }
+%    \end{macrocode}
+%
+% \paragraph{\cs{not}}
+% The situation of \cs{not} symbol is currently messy, in Unicode it is defined
+% as a combining mark so naturally it should be treated as a math accent,
+% however neither Lua\TeX\ nor \XeTeX\ correctly place it as it needs special
+% treatment compared to other accents, furthermore a math accent changes the
+% spacing of its nucleus, so \cs{not=} will be spaced as an ordinary not
+% relational symbol, which is undesired.
+%
+% Here modify \cs{not} to a macro that tries to use predefined negated symbols,
+% which would give better results in most cases, until there is more robust
+% solution in the engines.
+%
+% This code is based on an answer to a TeX -- Stack Exchange question by Enrico
+% Gregorio\footnote{\url{http://tex.stackexchange.com/a/47260/729}}.
+%
+%    \begin{macrocode}
+\cs_new:Npn \@@_newnot:N #1
+ {
+   \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
+   \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl }
+    {
+     \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
+    }
+   \cs_if_exist:cTF { n \l_not_token_name_tl }
+    {
+     \use:c { n \l_not_token_name_tl }
+    }
+    {
+     \cs_if_exist:cTF { not \l_not_token_name_tl }
+      {
+       \use:c { not \l_not_token_name_tl }
+      }
+      {
+       \@@_oldnot: #1
+      }
+    }
+ }
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_set_eq:NN \@@_oldnot: \not
+\AtBeginDocument{\cs_set_eq:NN \not \@@_newnot:N}
+%    \end{macrocode}
+%    \begin{macrocode}
+\cs_new_protected_nopar:Nn \@@_setup_negations:
+ {
+  \cs_gset:cpn { not= }    { \neq }
+  \cs_gset:cpn { not< }    { \nless }
+  \cs_gset:cpn { not> }    { \ngtr }
+  \cs_gset:Npn  \ngets     { \nleftarrow }
+  \cs_gset:Npn  \nsimeq    { \nsime }
+  \cs_gset:Npn  \nequal    { \ne }
+  \cs_gset:Npn  \nle       { \nleq }
+  \cs_gset:Npn  \nge       { \ngeq }
+  \cs_gset:Npn  \ngreater  { \ngtr }
+  \cs_gset:Npn  \nforksnot { \forks }
+ }
+%    \end{macrocode}
+%
+%
+%
+% \section{Fall-back font}
+%
+% Want to load Latin Modern Math if nothing else.
+% Reset the `font already loaded' boolean so that a new font being set will do the right thing.
+% TODO: need a better way to do this for the general case.
+%    \begin{macrocode}
+\AtBeginDocument { \@@_load_lm_if_necessary: }
+\cs_new:Nn \@@_load_lm_if_necessary:
+  {
+    \cs_if_exist:NF \l_@@_fontname_tl
+      {
+        % TODO: update this when lmmath-bold.otf is released
+        \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
+        \bool_set_false:N \g_@@_mainfont_already_set_bool
+      }
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package&(XE|LU)>
+%    \end{macrocode}
+%
+\endinput
+
+
