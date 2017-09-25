@@ -43,7 +43,7 @@ tlmgr install   \
   ucharcat
 
 # Fonts
-tlmgr install Asana-Math tex-gyre-math lm-math xits
+tlmgr install Asana-Math tex-gyre tex-gyre-math lm-math xits
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
