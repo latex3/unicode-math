@@ -25,26 +25,25 @@ tlmgr install l3build luatex
 
 # Required to build plain and LaTeX formats:
 # TeX90 plain for unpacking
-tlmgr install cm etex knuth-lib latex-bin tex tex-ini-files unicode-data \
-  xetex
+tlmgr install cm etex knuth-lib latex-bin tex tex-ini-files unicode-data xetex
 
 # Dependencies
 tlmgr install   \
-  amsmath       \
-  Asana-Math    \
-  etoolbox      \
-  filehook      \
-  fontspec      \
   geometry      \
   graphics      \
   ifluatex      \
   ifxetex       \
-  lm-math       \
+  amsmath       \
   lualatex-math \
+  etoolbox      \
+  filehook      \
   luaotfload    \
+  fontspec      \
   oberdiek      \
-  ucharcat      \
-  xits
+  ucharcat
+
+# Fonts
+tlmgr install Asana-Math tex-gyre-math lm-math xits
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
