@@ -212,61 +212,38 @@ have been fantastic beta testers.
 
 Load \pkg{unicode-math} as a regular \LaTeX\ package. It should be loaded
 after any other maths or font-related package in case it needs to overwrite
-their definitions. Here's an example:
+their definitions. Here's an example using the filename syntax to load the \TeX\ Gyre Pagella Math font: (this works for both \XeLaTeX\ and \LuaLaTeX)
 \begin{Verbatim}
 \usepackage{amsmath} % if desired
 \usepackage{unicode-math}
-\setmathfont{Asana-Math.otf}
+\setmathfont{texgyrepagella-math.otf}
 \end{Verbatim}
-Three OpenType maths fonts are included by default in \TeX\ Live 2011:
-Latin Modern Math, Asana Math, and XITS Math.
-These can be loaded directly with their filename
-with both \XeLaTeX\ and \LuaLaTeX; resp.,
-\begin{Verbatim}
-\setmathfont{latinmodern-math.otf}
-\setmathfont{Asana-Math.otf}
-\setmathfont{xits-math.otf}
-\end{Verbatim}
-Other OpenType maths fonts may be loaded in the usual way; please see the
-\pkg{fontspec} documentation for more information.
 
-Once the package is loaded, traditional TFM-based fonts are not supported any more;
-you can only switch to a different OpenType math font using the \cs{setmathfont} command.
+Once the package is loaded, traditional TFM-based maths fonts are no longer supported;
+you can only switch to a different OpenType maths font using the \cs{setmathfont} command.
 If you do not load an OpenType maths font before |\begin{document}|, Latin Modern Math (see above) will be loaded automatically.
 
 \subsection{New commands}
-\textbf{New v0.8:}
-\pkg{unicode-math} provides the following commands to select specific `alphabets' within the unicode maths font: (usage, e.g.: |$\symbfsf{g}$|${}\to\symbfsf{g}$)
-\begin{quote}
-\ExplSyntaxOn
-\clist_map_inline:nn {
-  normal, literal, up, bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf,
-  bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
-  sf, bf, tt, it,
-  }{\cs{sym#1}~}
-\ExplSyntaxOff
-\end{quote}
-Many of these are also defined with `familiar' synonyms:
-\begin{quote}
-\ExplSyntaxOn
-\clist_map_inline:nn {
-   normal, bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
-   bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf,
-   sf, bf, tt, it,
-  }{\mbox{\cs{math#1}}~}
-\ExplSyntaxOff
-\end{quote}
+\pkg{unicode-math} provides a number of commands (such as |\symbfsf|) to select specific `symbol alphabets' within the unicode maths font, with usage, e.g., |$\symbfsf{g}$|${}\to\symbfsf{g}$.
+The full listing is shown in \Tabref{symvsmath}.
+For backwards compatibility, many of these are also defined with `familiar' synonyms such as |\mathbfsf|.
+However, where possible the `sym' prefix commands should be preferred, as certain synonyms may become deprecated in time.
 
-\begin{table}[t]\centering
-  \topcaption{\pkg{unicode-math} commands.}
+\begin{table}\centering
+  \topcaption{New \pkg{unicode-math} commands.}
   \tablabel{symvsmath}
   \begin{tabular}{lll}
     \toprule
     \pkg{unicode-math} command & Synonym \\
     \midrule
+    |\symup|      &               \\
+    |\symit|      &               \\
+    |\symbf|      &               \\
+    |\symsf|      &               \\
+    |\symtt|      &               \\
+    \midrule
     |\symnormal|  & |\mathnormal| \\
     |\symliteral| &               \\
-    |\symup|      &               \\
     |\symbfup|    & |\mathbfup|   \\
     |\symbfit|    & |\mathbfit|   \\
     |\symsfup|    & |\mathsfup|   \\
@@ -282,25 +259,20 @@ Many of these are also defined with `familiar' synonyms:
     |\symbfcal|   & |\mathbfcal|  \\
     |\symfrak|    & |\mathfrak|   \\
     |\symbffrak|  & |\mathbffrak| \\
-    |\symsf|      & |\mathsf|     \\
-    |\symbf|      & |\mathbf|     \\
-    |\symtt|      & |\mathtt|     \\
-    |\symit|      & |\mathit|     \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-So what about \cs{mathup}, \cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}?
+While most alphabet commands are provided with the \cs{math...} prefix synonyms, there are five `legacy' font alphabets that intentionally behave somewhat different.
+These are \cs{mathup}, \cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}.
 (N.B.: \cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is prefered as it is a script-agnostic term.)
-These commands have `overloaded' meanings in \LaTeX, and it's important to consider the subtle differences between, e.g., \cs{symbf} and \cs{mathbf}.
-The former switches to single-letter mathematical symbols, whereas the second switches to a text font that behaves correctly in mathematics but should be used for multi-letter identifiers.
-These four commands (and \cs{mathrm}) are defined in the traditional \LaTeX\ manner.
-Further details are discussed in \secref{mathselect}.
 
-Additional similar commands can be defined using
-\begin{Verbatim}
-\setmathfontface\mathfoo{...}
-\end{Verbatim}
+These commands have `overloaded' meanings in traditional \LaTeX, and it's important to consider the subtle differences between, e.g., the new \cs{symbf} and \cs{mathbf}.
+The \cs{symbf} command switches to single-letter mathematical symbols (generally within the same OpenType font).
+The \cs{mathbf} command switches to a text font that is set up to behave correctly in mathematics, and should be used for multi-letter identifiers.
+These could be denoted `text math alphabets'; further details are discussed in \secref{mathselect}.
+Additional similar `text math alphabet' commands can be defined using the \cs{setmathfontface} command discussed in \secref{mathselect}.
+To control the behaviour of the default text math alphabet commands to behave in a backwards-compatible mode, see the package options described in \secref{textmathlegacy}.
 
 \subsection{Package options}
 Package options may be set when the package as loaded or at any later
@@ -326,7 +298,7 @@ Therefore, the following two examples are equivalent:
 \setmathfont{Cambria Math}[math-style=TeX]
 \end{Verbatim}
 
-A short list of package options is shown in \tabref{pkgopt}.
+A summary list of package options is shown in \tabref{pkgopt}.
 See following sections for more information.
 
 \begin{table}\centering
@@ -520,6 +492,7 @@ If the \cs{mathsf} font is set explicitly at any time in the preamble, this `aut
 
 
 \subsubsection{Replacing `text math' fonts by symbols}
+\seclabel{textmathlegacy}
 
 For certain types of documents that use legacy input syntax (say you're typesetting a new version of a book written in the 1990s), it would be preferable to use |\symbf| rather than |\mathbf| en masse.
 For example, if bold maths is used only for vectors and matrices, a dedicated symbol font will produce better spacing and will better match the main math font.
@@ -544,8 +517,6 @@ A series of package options (\tabref{legacyfontswitch}) are provided to facilita
     \bottomrule
   \end{tabular}
 \end{table}
-
-A `smart' macro is intended for a future version of \pkg{unicode-math} that can automatically distinguish between single- and multi-letter arguments to \cs{mathbf} and use either the maths symbol or the `text math' font as appropriate.
 
 
 \subsubsection{Operator font}
