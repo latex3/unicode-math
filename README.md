@@ -79,6 +79,13 @@ Please file bug reports with minimal examples:
 See `CHANGES.md` for the complete listing of change history.
 
 
+THANKS
+------
+
+I write LaTeX code as a hobby and a passion, not as part of my day job.
+If you would like to say thanks, please consider a donation at: <https://www.patreon.com/wspr>
+
+
 LICENCE
 -------
 
