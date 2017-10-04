@@ -6,44 +6,8 @@
 %<@@=um>
 %    \end{macrocode}
 %
-% The shared part of the code starts here before the split above.
 %    \begin{macrocode}
-%<*preamble&!XE&!LU>
-%    \end{macrocode}
-%
-% Bail early if using pdf\TeX.
-%    \begin{macrocode}
-\ifdefined\XeTeXversion
-  \ifdim\number\XeTeXversion\XeTeXrevision in<0.9998in%
-    \PackageError{unicode-math}{%
-      Cannot run with this version of XeTeX!\MessageBreak
-      You need XeTeX 0.9998 or newer.%
-    }\@ehd
-  \fi
-\else\ifdefined\luatexversion
-  \ifnum\luatexversion<64%
-    \PackageError{unicode-math}{%
-      Cannot run with this version of LuaTeX!\MessageBreak
-      You need LuaTeX 0.64 or newer.%
-    }\@ehd
-  \fi
-\else
-  \PackageError{unicode-math}{%
-    Cannot be run with pdfLaTeX!\MessageBreak
-    Use XeLaTeX or LuaLaTeX instead.%
-  }\@ehd
-\fi\fi
-%    \end{macrocode}
-%
-% \paragraph{Packages}
-%    \begin{macrocode}
-\RequirePackage{expl3}[2015/03/01]
-\RequirePackage{ucharcat}
-\RequirePackage{xparse}
-\RequirePackage{l3keys2e}
-\RequirePackage{fontspec}[2015/03/14]
-\RequirePackage{fix-cm} % avoid some warnings
-\RequirePackage{filehook}
+%<*package&(XE|LU)>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -614,5 +578,5 @@
 %
 % End of preamble code.
 %    \begin{macrocode}
-%</preamble&!XE&!LU>
+%</package&(XE|LU)>
 %    \end{macrocode}
