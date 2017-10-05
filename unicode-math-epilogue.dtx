@@ -315,7 +315,7 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\AtBeginDocument{\@@_define_prime_commands: \@@_define_prime_chars:}
+\AtBeginDocument { \@@_define_prime_commands: \@@_define_prime_chars: }
 \cs_new:Nn \@@_define_prime_commands:
  {
   \cs_set_eq:NN \prime       \@@_prime_single_mchar
@@ -855,24 +855,6 @@
 %    \end{macrocode}
 %
 %
-%
-% \section{Fall-back font}
-%
-% Want to load Latin Modern Math if nothing else.
-% Reset the `font already loaded' boolean so that a new font being set will do the right thing.
-% TODO: need a better way to do this for the general case.
-%    \begin{macrocode}
-\AtBeginDocument { \@@_load_lm_if_necessary: }
-\cs_new:Nn \@@_load_lm_if_necessary:
-  {
-    \cs_if_exist:NF \l_@@_fontname_tl
-      {
-        % TODO: update this when lmmath-bold.otf is released
-        \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
-        \bool_set_false:N \g_@@_mainfont_already_set_bool
-      }
-  }
-%    \end{macrocode}
 %
 %    \begin{macrocode}
 %</package&(XE|LU)>

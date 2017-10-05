@@ -446,6 +446,28 @@
 \cs_set_eq:NN \resetmathfont \setmathfont
 %    \end{macrocode}
 %
+% \paragraph{Fall-back font}
+%
+% Want to load Latin Modern Math if nothing else.
+% This needs to happen early so that all of the font-loading machinery executes before
+% the other `AtBeginDocument' code.
+%    \begin{macrocode}
+\AtBeginDocument { \@@_load_lm_if_necessary: }
+\cs_new:Nn \@@_load_lm_if_necessary:
+  {
+    \cs_if_exist:NF \l_@@_fontname_tl
+      {
+        % TODO: update this when lmmath-bold.otf is released
+        \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
+        \bool_set_false:N \g_@@_mainfont_already_set_bool
+      }
+  }
+%    \end{macrocode}
+% Note that here we reset the `font already loaded' boolean so that a new font being set
+% will do the right thing in terms of setting up defaults.
+%
+% TODO: need a better way to do this for the general case. (Maybe a `reset' command option?)
+%
 % \begin{macro}{\@@_init:}
 %    \begin{macrocode}
 \cs_new:Nn \@@_init:
