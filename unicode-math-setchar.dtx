@@ -1,0 +1,206 @@
+
+% \section{\DTXCURR --- Setting up maths chars}
+%
+%    \begin{macrocode}
+%<*package&(XE|LU)>
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_set_mathsymbol:nNNn}
+% \darg{A \LaTeX\ symbol font, e.g., \texttt{operators}}
+% \darg{Symbol macro, \eg, \cmd\alpha}
+% \darg{Type, \eg, \cmd\mathalpha}
+% \darg{Slot, \eg, \texttt{"221E}}
+% There are a bunch of tests to perform to process the various characters.
+% The following assignments should all be fairly straightforward.
+%
+% The catcode setting is to work around (strange?) behaviour in LuaTeX in which catcode 11 characters don't have italic correction for maths.
+% We don't adjust ascii chars, however, because certain punctuation should not have their catcodes changed.
+%    \begin{macrocode}
+\cs_set:Nn \@@_set_mathsymbol:nNNn
+ {
+  \bool_lazy_and:nnT
+   {
+    \int_compare_p:nNn {#4} > {127}
+   }
+   {
+    \int_compare_p:nNn { \char_value_catcode:n {#4} } = {11}
+   }
+   { \char_set_catcode_other:n {#4} }
+
+  \tl_case:Nn #3
+   {
+    \mathord   { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathalpha { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathbin   { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathrel   { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathpunct { \@@_set_mathcode:nnn {#4} {#3} {#1} }
+    \mathop    { \@@_set_big_operator:nnn {#1} {#2} {#4} }
+    \mathopen  { \@@_set_math_open:nnn    {#1} {#2} {#4} }
+    \mathclose { \@@_set_math_close:nnn   {#1} {#2} {#4} }
+    \mathfence { \@@_set_math_fence:nnnn  {#1} {#2} {#3} {#4} }
+    \mathaccent
+     { \@@_set_math_accent:Nnnn #2 {fixed} {#1} {#4} }
+    \mathbotaccent
+     { \@@_set_math_accent:Nnnn #2 {bottom~ fixed} {#1} {#4} }
+    \mathaccentwide
+     { \@@_set_math_accent:Nnnn #2 {} {#1} {#4} }
+    \mathbotaccentwide
+     { \@@_set_math_accent:Nnnn #2 {bottom} {#1} {#4} }
+    \mathover
+     { \@@_set_math_overunder:Nnnn #2 {} {#1} {#4} }
+    \mathunder
+     { \@@_set_math_overunder:Nnnn #2 {bottom} {#1} {#4} }
+   }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\edef\mathfence{\string\mathfence}
+\edef\mathover{\string\mathover}
+\edef\mathunder{\string\mathunder}
+\edef\mathbotaccent{\string\mathbotaccent}
+\edef\mathaccentwide{\string\mathaccentwide}
+\edef\mathbotaccentwide{\string\mathbotaccentwide}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\@@_set_big_operator:nnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Glyph slot}
+% In the examples following, say we're defining for the symbol \cmd\sum\ ($\sum$).
+% In order for literal Unicode characters to be used in the source and still
+% have the correct limits behaviour, big operators are made math-active.
+% This involves three steps:
+% \begin{itemize}
+% \item
+% The active math char is defined to expand to the macro \cs{sum_sym}.
+% (Later, the control sequence \cs{sum} will be assigned the math char.)
+% \item
+% Declare the plain old mathchardef for the control sequence \cmd\sumop.
+% (This follows the convention of \LaTeX/\pkg{amsmath}.)
+% \item
+% Define \cs{sum_sym} as \cmd\sumop, followed by \cmd\nolimits\ if necessary.
+% \end{itemize}
+% Whether the \cmd\nolimits\ suffix is inserted is controlled by the
+% token list \cs{l_@@_nolimits_tl}, which contains a list of such characters.
+% This list is checked dynamically to allow it to be updated mid-document.
+%
+% Examples of expansion, by default, for two big operators:
+% \begin{quote}
+% (~\cs{sum} $\to$~) $\sum$ $\to$ \cs{sum_sym} $\to$ \cs{sumop}\cs{nolimits}\par
+% (~\cs{int} $\to$~) $\int$ $\to$ \cs{int_sym} $\to$ \cs{intop}
+% \end{quote}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_big_operator:nnn
+ {
+  \@@_char_gmake_mathactive:n {#3}
+  \cs_set_protected_nopar:Npx \@@_tmpa: { \exp_not:c { \cs_to_str:N #2 _sym } }
+  \char_gset_active_eq:nN {#3} \@@_tmpa:
+
+  \@@_set_mathchar:cNnn {\cs_to_str:N #2 op} \mathop {#1} {#3}
+
+  \cs_gset:cpx { \cs_to_str:N #2 _sym }
+   {
+    \exp_not:c { \cs_to_str:N #2 op   }
+    \exp_not:n { \tl_if_in:NnT \l_@@_nolimits_tl {#2} \nolimits }
+   }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_math_open:nnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Glyph slot}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_math_open:nnn
+ {
+  \tl_if_in:NnTF \l_@@_radicals_tl {#2}
+   {
+     \cs_gset_protected_nopar:cpx {\cs_to_str:N #2 sign}
+       { \@@_radical:nn {#1} {#3} }
+     \tl_set:cn {l_@@_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #3}
+   }
+   {
+     \@@_set_delcode:nnn {#1} {#3} {#3}
+     \@@_set_mathcode:nnn {#3} \mathopen {#1}
+     \cs_gset_protected_nopar:Npx #2
+       { \@@_delimiter:Nnn \mathopen {#1} {#3} }
+   }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_math_close:nnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Glyph slot}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_math_close:nnn
+ {
+  \@@_set_delcode:nnn {#1} {#3} {#3}
+  \@@_set_mathcode:nnn {#3} \mathclose {#1}
+  \cs_gset_protected_nopar:Npx #2
+    { \@@_delimiter:Nnn \mathclose {#1} {#3} }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_math_fence:nnnn}
+% \darg{Symbol font name}
+% \darg{Macro to assign}
+% \darg{Type, \eg, \cmd\mathalpha}
+% \darg{Glyph slot}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_math_fence:nnnn
+ {
+  \@@_set_mathcode:nnn {#4} {#3} {#1}
+  \@@_set_delcode:nnn  {#1} {#4} {#4}
+  \cs_gset_protected_nopar:cpx {l \cs_to_str:N #2}
+    { \@@_delimiter:Nnn \mathopen  {#1} {#4} }
+  \cs_gset_protected_nopar:cpx {r \cs_to_str:N #2}
+    { \@@_delimiter:Nnn \mathclose {#1} {#4} }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_math_accent:Nnnn}
+% \darg{Accend command}
+% \darg{Accent type (string)}
+% \darg{Symbol font name}
+% \darg{Glyph slot}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_math_accent:Nnnn
+ {
+  \cs_gset_protected_nopar:Npx #1
+   { \@@_accent:nnn {#2} {#3} {#4} }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_math_overunder:Nnnn}
+% \darg{Accend command}
+% \darg{Accent type (string)}
+% \darg{Symbol font name}
+% \darg{Glyph slot}
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_math_overunder:Nnnn
+ {
+  \cs_gset_protected_nopar:Npx #1 ##1
+   {
+    \mathop
+     { \@@_accent:nnn {#2} {#3} {#4} {##1} }
+    \limits
+   }
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+%</package&(XE|LU)>
+%    \end{macrocode}
+%
+\endinput
