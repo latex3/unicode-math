@@ -274,6 +274,52 @@
 \@@_font_param:n { connector_overlap_min }
 %    \end{macrocode}
 %
+% \subsection{Historical commands}
+%
+% TODO: maybe no longer necessary?
+%
+% \begin{macro}{\@@_fontdimen_to_percent:nn}
+% \begin{macro}{\@@_fontdimen_to_scale:nn}
+% \darg{Font dimen number}
+% \darg{Font `variable'}
+% \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|.
+% \cs{@@_fontdimen_to_percent:nn} takes a font dimension number and outputs the decimal value of the associated parameter.
+% \cs{@@_fontdimen_to_scale:nn} returns a dimension correspond to the current
+% font size relative proportion based on that percentage.
+%    \begin{macrocode}
+\cs_new:Nn \@@_fontdimen_to_percent:nn
+ {
+  \fp_eval:n { \dim_to_decimal:n { \fontdimen #1 #2 } * 65536 / 100 }
+ }
+\cs_new:Nn \@@_fontdimen_to_scale:nn
+ {
+  \fp_eval:n {\@@_fontdimen_to_percent:nn {#1} {#2} * \f@size } pt
+ }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\@@_mathstyle_scale:Nnn}
+% \darg{A math style (\cs{scriptstyle}, say)}
+% \darg{Macro that takes a non-delimited length argument (like \cmd\kern)}
+% \darg{Length control sequence to be scaled according to the math style}
+% This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
+%    \begin{macrocode}
+\cs_new:Nn \@@_mathstyle_scale:Nnn
+ {
+  \ifx#1\scriptstyle
+    #2 \@@_fontdimen_to_percent:nn {10} \l_@@_font #3
+  \else
+    \ifx#1\scriptscriptstyle
+      #2 \@@_fontdimen_to_percent:nn {11} \l_@@_font #3
+    \else
+      #2 #3
+    \fi
+  \fi
+ }
+%    \end{macrocode}
+% \end{macro}
+%
 %    \begin{macrocode}
 %</package&(XE|LU)>
 %    \end{macrocode}

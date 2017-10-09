@@ -1,0 +1,368 @@
+
+% \section{\DTXCURR --- Primes}
+%
+%    \begin{macrocode}
+%<*package&(XE|LU)>
+%    \end{macrocode}
+%
+% We need a new `prime' algorithm. Unicode math has four pre-drawn prime glyphs.
+% \begin{quote}\obeylines
+% \unichar{2032} {prime} (\cs{prime}): $x\prime$
+% \unichar{2033} {double prime} (\cs{dprime}): $x\dprime$
+% \unichar{2034} {triple prime} (\cs{trprime}): $x\trprime$
+% \unichar{2057} {quadruple prime} (\cs{qprime}): $x\qprime$
+% \end{quote}
+% As you can see, they're all drawn at the correct height without being superscripted.
+% However, in a correctly behaving OpenType font,
+% we also see different behaviour after the \texttt{ssty} feature is applied:
+% \begin{quote}
+% \font\1="[xits-math.otf]:script=math,+ssty=0"\1
+% \char"1D465\char"2032\quad
+% \char"1D465\char"2033\quad
+% \char"1D465\char"2034\quad
+% \char"1D465\char"2057
+% \end{quote}
+% The glyphs are now `full size' so that when placed inside a superscript,
+% their shape will match the originally sized ones. Many thanks to Ross Mills
+% of Tiro Typeworks for originally pointing out this behaviour.
+%
+% In regular \LaTeX, primes can be entered with the straight quote character
+% |'|, and multiple straight quotes chain together to produce multiple
+% primes. Better results can be achieved in \pkg{unicode-math} by chaining
+% multiple single primes into a pre-drawn multi-prime glyph; consider
+% $x\prime{}\prime{}\prime$ vs.\ $x\trprime$.
+%
+% For Unicode maths, we wish to conserve this behaviour and augment it with
+% the possibility of adding any combination of Unicode prime or any of the
+% $n$-prime characters. E.g., the user might copy-paste a double prime from
+% another source and then later type another single prime after it; the output
+% should be the triple prime.
+%
+% Our algorithm is:
+% \begin{itemize}[nolistsep]
+% \item Prime encountered; pcount=1.
+% \item Scan ahead; if prime: pcount:=pcount+1; repeat.
+% \item If not prime, stop scanning.
+% \item If pcount=1, \cs{prime}, end.
+% \item If pcount=2, check \cs{dprime}; if it exists, use it, end; if not, goto last step.
+% \item Ditto pcount=3 \& \cs{trprime}.
+% \item Ditto pcount=4 \& \cs{qprime}.
+% \item If pcount>4 or the glyph doesn't exist, insert pcount \cs{prime}s with \cs{primekern} between each.
+% \end{itemize}
+%
+% This is a wrapper to insert a superscript; if there is a subsequent
+% trailing superscript, then it is included within the insertion.
+%    \begin{macrocode}
+\cs_new:Nn \@@_arg_i_before_egroup:n {#1\egroup}
+\cs_new:Nn \@@_superscript:n
+ {
+  ^\bgroup #1
+  \peek_meaning_remove:NTF ^ \@@_arg_i_before_egroup:n \egroup
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_nprimes:Nn
+ {
+  \@@_superscript:n
+   {
+    #1
+    \prg_replicate:nn {#2-1} { \mskip \g_@@_primekern_muskip #1 }
+   }
+ }
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
+\cs_new:Nn \@@_nprimes_select:nn
+ {
+  \int_case:nnF {#2}
+   {
+    {1} { \@@_superscript:n {#1} }
+    {2} {
+      \@@_glyph_if_exist:nTF {"2033}
+        { \@@_superscript:n {\@@_prime_double_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+    {3} {
+      \@@_glyph_if_exist:nTF {"2034}
+        { \@@_superscript:n {\@@_prime_triple_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+    {4} {
+      \@@_glyph_if_exist:nTF {"2057}
+        { \@@_superscript:n {\@@_prime_quad_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+   }
+   {
+    \@@_nprimes:Nn #1 {#2}
+   }
+ }
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
+\cs_new:Nn \@@_nbackprimes_select:nn
+ {
+  \int_case:nnF {#2}
+   {
+    {1} { \@@_superscript:n {#1} }
+    {2} {
+      \@@_glyph_if_exist:nTF {"2036}
+        { \@@_superscript:n {\@@_backprime_double_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+    {3} {
+      \@@_glyph_if_exist:nTF {"2037}
+        { \@@_superscript:n {\@@_backprime_triple_mchar} }
+        { \@@_nprimes:Nn #1 {#2} }
+    }
+   }
+   {
+    \@@_nprimes:Nn #1 {#2}
+   }
+ }
+%    \end{macrocode}
+%
+% Scanning is annoying because I'm too lazy to do it for the general case.
+%
+%    \begin{macrocode}
+\cs_new:Npn \@@_scan_prime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_dprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_trprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_qprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {3}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_prime:
+ {
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_dprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_trprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_qprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {3}
+  \@@_scanprime_collect:N \@@_prime_single_mchar
+ }
+\cs_new:Nn \@@_scanprime_collect:N
+ {
+  \int_incr:N \l_@@_primecount_int
+  \peek_meaning_remove:NTF '
+   { \@@_scanprime_collect:N #1 }
+   {
+    \peek_meaning_remove:NTF \@@_scan_prime:
+     { \@@_scanprime_collect:N #1 }
+     {
+      \peek_meaning_remove:NTF ^^^^2032
+       { \@@_scanprime_collect:N #1 }
+       {
+        \peek_meaning_remove:NTF \@@_scan_dprime:
+         {
+          \int_incr:N \l_@@_primecount_int
+          \@@_scanprime_collect:N #1
+         }
+         {
+          \peek_meaning_remove:NTF ^^^^2033
+           {
+            \int_incr:N \l_@@_primecount_int
+            \@@_scanprime_collect:N #1
+           }
+           {
+            \peek_meaning_remove:NTF \@@_scan_trprime:
+             {
+              \int_add:Nn \l_@@_primecount_int {2}
+              \@@_scanprime_collect:N #1
+             }
+             {
+              \peek_meaning_remove:NTF ^^^^2034
+               {
+                \int_add:Nn \l_@@_primecount_int {2}
+                \@@_scanprime_collect:N #1
+               }
+               {
+                \peek_meaning_remove:NTF \@@_scan_qprime:
+                 {
+                  \int_add:Nn \l_@@_primecount_int {3}
+                  \@@_scanprime_collect:N #1
+                 }
+                 {
+                  \peek_meaning_remove:NTF ^^^^2057
+                   {
+                    \int_add:Nn \l_@@_primecount_int {3}
+                    \@@_scanprime_collect:N #1
+                   }
+                   {
+                    \@@_nprimes_select:nn {#1} {\l_@@_primecount_int}
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
+\cs_new:Npn \@@_scan_backprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_backdprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_backtrprime:
+ {
+  \cs_set_eq:NN \@@_superscript:n \use:n
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_backprime:
+ {
+  \int_zero:N \l_@@_primecount_int
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_backdprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {1}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Npn \@@_scan_sup_backtrprime:
+ {
+  \int_set:Nn \l_@@_primecount_int {2}
+  \@@_scanbackprime_collect:N \@@_backprime_single_mchar
+ }
+\cs_new:Nn \@@_scanbackprime_collect:N
+ {
+  \int_incr:N \l_@@_primecount_int
+  \peek_meaning_remove:NTF `
+   {
+    \@@_scanbackprime_collect:N #1
+   }
+   {
+    \peek_meaning_remove:NTF \@@_scan_backprime:
+     {
+      \@@_scanbackprime_collect:N #1
+     }
+     {
+      \peek_meaning_remove:NTF ^^^^2035
+       {
+        \@@_scanbackprime_collect:N #1
+       }
+       {
+        \peek_meaning_remove:NTF \@@_scan_backdprime:
+         {
+          \int_incr:N \l_@@_primecount_int
+          \@@_scanbackprime_collect:N #1
+         }
+         {
+          \peek_meaning_remove:NTF ^^^^2036
+           {
+            \int_incr:N \l_@@_primecount_int
+            \@@_scanbackprime_collect:N #1
+           }
+           {
+            \peek_meaning_remove:NTF \@@_scan_backtrprime:
+             {
+              \int_add:Nn \l_@@_primecount_int {2}
+              \@@_scanbackprime_collect:N #1
+             }
+             {
+              \peek_meaning_remove:NTF ^^^^2037
+               {
+                \int_add:Nn \l_@@_primecount_int {2}
+                \@@_scanbackprime_collect:N #1
+               }
+               {
+                \@@_nbackprimes_select:nn {#1} {\l_@@_primecount_int}
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AtBeginDocument { \@@_define_prime_commands: \@@_define_prime_chars: }
+\cs_new:Nn \@@_define_prime_commands:
+ {
+  \cs_set_eq:NN \prime       \@@_prime_single_mchar
+  \cs_set_eq:NN \dprime      \@@_prime_double_mchar
+  \cs_set_eq:NN \trprime     \@@_prime_triple_mchar
+  \cs_set_eq:NN \qprime      \@@_prime_quad_mchar
+  \cs_set_eq:NN \backprime   \@@_backprime_single_mchar
+  \cs_set_eq:NN \backdprime  \@@_backprime_double_mchar
+  \cs_set_eq:NN \backtrprime \@@_backprime_triple_mchar
+ }
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
+\group_begin:
+  \char_set_catcode_active:N \'
+  \char_set_catcode_active:N \`
+  \char_set_catcode_active:n {"2032}
+  \char_set_catcode_active:n {"2033}
+  \char_set_catcode_active:n {"2034}
+  \char_set_catcode_active:n {"2057}
+  \char_set_catcode_active:n {"2035}
+  \char_set_catcode_active:n {"2036}
+  \char_set_catcode_active:n {"2037}
+  \cs_gset:Nn \@@_define_prime_chars:
+   {
+    \cs_set_eq:NN '        \@@_scan_sup_prime:
+    \cs_set_eq:NN ^^^^2032 \@@_scan_sup_prime:
+    \cs_set_eq:NN ^^^^2033 \@@_scan_sup_dprime:
+    \cs_set_eq:NN ^^^^2034 \@@_scan_sup_trprime:
+    \cs_set_eq:NN ^^^^2057 \@@_scan_sup_qprime:
+    \cs_set_eq:NN `        \@@_scan_sup_backprime:
+    \cs_set_eq:NN ^^^^2035 \@@_scan_sup_backprime:
+    \cs_set_eq:NN ^^^^2036 \@@_scan_sup_backdprime:
+    \cs_set_eq:NN ^^^^2037 \@@_scan_sup_backtrprime:
+   }
+\group_end:
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%</package&(XE|LU)>
+%    \end{macrocode}
+%
+\endinput
+
+
