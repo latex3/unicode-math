@@ -183,7 +183,8 @@
 % \end{macro}
 %
 % \begin{macro}{\@@_declare_math_sizes:}
-% Set the math sizes according to the recommended font parameters:
+% Set the math sizes according to the recommended font parameters.
+% TODO: this shouldn't need to be per-engine; check out why the wrappers aren't used.
 %    \begin{macrocode}
 \cs_new:Nn \@@_declare_math_sizes:
   {
@@ -247,11 +248,11 @@
         \fontdimen22\font=\@@_get_fontparam:nn {15} {AxisHeight}\relax
        }
       } {\l_@@_fontname_tl}
+
     \SetSymbolFont{symbols}{\l_@@_mversion_tl}
       {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
 
-    \tl_set:Nn \l_@@_tmpa_tl {normal}
-    \tl_if_eq:NNT \l_@@_mversion_tl \l_@@_tmpa_tl
+    \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
       {
       \SetSymbolFont{symbols}{bold}
         {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
@@ -278,11 +279,11 @@
         \fontdimen13\font=0pt\relax
       }
     } {\l_@@_fontname_tl}
+
     \SetSymbolFont{largesymbols}{\l_@@_mversion_tl}
       {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
 
-    \tl_set:Nn \l_@@_tmpa_tl {normal}
-    \tl_if_eq:NNT \l_@@_mversion_tl \l_@@_tmpa_tl
+    \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
       {
       \SetSymbolFont{largesymbols}{bold}
         {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
@@ -293,8 +294,10 @@
 %
 %    \begin{macrocode}
 \cs_new:Nn \@@_get_fontparam:nn
-%<XE>  { \the\fontdimen#1\l_@@_font\relax }
-%<LU>  { \directlua{fontspec.mathfontdimen("l_@@_font","#2")} }
+  {
+%<XE>    \the\fontdimen#1\l_@@_font\relax
+%<LU>    \directlua{fontspec.mathfontdimen("l_@@_font","#2")}
+  }
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_fontspec_select_font:}
@@ -429,6 +432,9 @@
     \@@_if_char_spec:nNNT {#1} #2 #3
       { \@@_make_mathactive_noparse:nNN {#1} #2 #3 }
   }
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
 \cs_new:Nn \@@_make_mathactive_noparse:nNN
   {
     \@@_set_mathchar:NNnn #2 #3 {\@@_symfont_tl} {#1}
@@ -445,6 +451,9 @@
  {
   \@@_set_delcode:nnn \@@_symfont_tl {#1} {#2}
  }
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
 \cs_new:Nn \@@_assign_delcode_parse:nn
  {
   \@@_if_char_spec:nNNT {#2} {\@nil} {\@nil}
@@ -513,9 +522,8 @@
 %
 % \subsection{(Big) operators}
 %
-% Turns out that \XeTeX\ is clever enough to deal with big operators for us
-% automatically with \cmd\Umathchardef. Amazing!
-%
+% The engine does what is necessary to deal with big operators for us
+% automatically with \cmd\Umathchardef.
 % However, the limits aren't set automatically; that is, we want to define,
 % a la Plain \TeX\ \etc, |\def\int{\intop\nolimits}|, so there needs to be a
 % transformation from \cmd\int\ to \cmd\intop\ during the expansion of
@@ -531,7 +539,6 @@
 % I've a feeling that it's more useful \emph{not} to include the multiple
 % integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
-\tl_new:N \l_@@_nolimits_tl
 \tl_set:Nn \l_@@_nolimits_tl
  {
   \int\iint\iiint\iiiint\oint\oiint\oiiint
