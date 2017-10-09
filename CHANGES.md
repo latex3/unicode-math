@@ -7,7 +7,8 @@ CHANGE HISTORY
       * package version wasn't set;
       * some code was being executed at the wrong time;
       * `\sqrt[]{}` in LuaLaTeX gave incorrect output.
-  * Code is now structured more sensibly
+  * The layout of the code is now structured far more sensibly.
+  * Remove (long deprecated) `\resetmathfont`; for years it has been a synonym for `\setmathfont`.
 
 - v0.8g (2017/10/02)
 
