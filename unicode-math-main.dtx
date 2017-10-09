@@ -1,17 +1,9 @@
 
-% \section{Shared}
+% \section{Main package code}
 %
 %    \begin{macrocode}
 %<*package&(XE|LU)>
 %    \end{macrocode}
-%
-%    \begin{macrocode}
-%<*LU>
-\RequirePackage{lualatex-math}
-%</LU>
-%    \end{macrocode}
-%
-%
 %
 % \section{Fundamentals}
 %
@@ -219,7 +211,9 @@
   version .code:n =
    { \tl_set:Nn \l_@@_mversion_tl {#1} }
  }
-
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
 \DeclareDocumentCommand \setmathfontface { m O{} m O{} }
  {
   \tl_clear:N \l_@@_mversion_tl
@@ -243,7 +237,9 @@
     \mathtt { \cs_set_eq:NN \g__fontspec_mathtt_tl \l_@@_tmpa_tl }
    }
  }
-
+%    \end{macrocode}
+% 
+%    \begin{macrocode}
 \@onlypreamble \setmathfontface
 %    \end{macrocode}
 % Note that \LaTeX's SetMathAlphabet simply doesn't work to "reset" a maths alphabet font after \verb"\begin{document}", so unlike most of the other maths commands around we still restrict this one to the preamble.
