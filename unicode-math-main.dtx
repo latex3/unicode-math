@@ -67,8 +67,7 @@
 %    \end{macrocode}
 % Set the bold math version.
 %    \begin{macrocode}
-  \tl_set:Nn \l_@@_tmpa_tl {normal}
-  \tl_if_eq:NNT \l_@@_mversion_tl \l_@@_tmpa_tl
+  \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
     {
      \SetSymbolFont{\@@_symfont_tl}{bold}
       {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
