@@ -274,34 +274,6 @@
 \@@_font_param:n { connector_overlap_min }
 %    \end{macrocode}
 %
-% \subsection{Resolving Greek symbol name control sequences}
-%
-% \begin{macro}{\@@_resolve_greek:}
-% This macro defines \cmd\Alpha\dots\cmd\omega\ as their corresponding
-% Unicode (mathematical italic) character. Remember that the mapping
-% to upright or italic happens with the mathcode definitions, whereas these macros
-% just stand for the literal Unicode characters.
-%    \begin{macrocode}
-\AtBeginDocument{\@@_resolve_greek:}
-\cs_new:Npn \@@_resolve_greek:
- {
-  \clist_map_inline:nn
-   {
-    Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,
-    alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,
-    Mu,Nu,Xi,Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,
-    mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,phi,chi,psi,omega,
-    varTheta,varsigma,vartheta,varkappa,varrho,varpi,varepsilon,varphi
-   }
-   {
-    \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
-    \tl_set:cx {up ##1} { \exp_not:N \symup \exp_not:c { ##1 } }
-    \tl_set:cx {it ##1} { \exp_not:N \symit \exp_not:c { ##1 } }
-   }
- }
-%    \end{macrocode}
-% \end{macro}
-%
 %    \begin{macrocode}
 %</package&(XE|LU)>
 %    \end{macrocode}
