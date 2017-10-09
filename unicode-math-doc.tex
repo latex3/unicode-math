@@ -1,9 +1,7 @@
 % !TEX TS-program = XeLaTeX
 
-\providecommand\DOCUMENTEND{T}
+\providecommand\DTXFILES{}% if this .tex file is typeset, only include documentation
 \documentclass[a4paper]{ltxdoc}
-
-\if \DOCUMENTEND T \OnlyDescription \fi
 
 \makeatletter
 \GetFileInfo{unicode-math.dtx}
@@ -1493,7 +1491,10 @@ Suggested: /5 x-height.}
 {Height of the bottom of the radical degree, if such is present, in proportion to the ascender of the radical sign. Suggested: 60\%.}
 \end{longtable}
 
-\if \DOCUMENTEND T \end{document} \fi
+\def\DTX#1{\DocInput{#1}}
+\DTXFILES
+
+\end{document}
 
 
 

@@ -5,10 +5,9 @@
 % ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %<*internal>
 \begingroup
-\input l3docstrip.tex
-\keepsilent
-\let\MetaPrefix\DoubleperCent
-\declarepreamble\texpreamble
+\input l3docstrip.tex\relax\keepsilent
+\declarepreamble\defaultpreamble
+
 Copyright 2006-2017   Will Robertson <will.robertson@latex-project.org>
 Copyright 2010-2013 Philipp Stephani <st_philipp@yahoo.de>
 Copyright 2012-2015     Khaled Hosny <khaledhosny@eglug.org>
@@ -21,61 +20,34 @@ This work is "maintained" by Will Robertson.
 \endpreamble
 \nopostamble
 \askforoverwritefalse
-\let\MetaPrefix\DoubleperCent
-\usepreamble\texpreamble
-\ifx\UMDEBUG\undefined
-  \def\UMDEBUG{}%
-\else
-  \def\UMDEBUG{,debug}%
-\fi
-\generate{\file{unicode-math.sty}{
-  \from{unicode-math.dtx}{preamble}
-  \from{unicode-math.dtx}{load\UMDEBUG}
-}}
-\generate{\file{unicode-math-xetex.sty}{
-  \from{unicode-math.dtx}          {preamble,XE}
-  \from{unicode-math-preamble.dtx} {package,XE\UMDEBUG}
-  \from{unicode-math-msg.dtx}      {msg,XE\UMDEBUG}
-  \from{unicode-math-usv.dtx}      {usv,XE\UMDEBUG}
-  \from{unicode-math-shared.dtx}   {package,XE\UMDEBUG}
-  \from{unicode-math-epilogue.dtx} {package,XE\UMDEBUG}
-  \from{unicode-math-compat.dtx}   {package,XE\UMDEBUG}
-  \from{unicode-math-alphabets.dtx}{alphabets\UMDEBUG}
-}}
-\generate{\file{unicode-math-luatex.sty}{
-  \from{unicode-math.dtx}          {preamble,LU}
-  \from{unicode-math-preamble.dtx} {package,LU\UMDEBUG}
-  \from{unicode-math-msg.dtx}      {msg,LU\UMDEBUG}
-  \from{unicode-math-usv.dtx}      {usv,LU\UMDEBUG}
-  \from{unicode-math-shared.dtx}   {package,LU\UMDEBUG}
-  \from{unicode-math-epilogue.dtx} {package,LU\UMDEBUG}
-  \from{unicode-math-compat.dtx}   {package,LU\UMDEBUG}
-  \from{unicode-math-alphabets.dtx}{alphabets\UMDEBUG}
-}}
-\def\tempa{plain}
-\ifx\tempa\fmtname\endgroup\expandafter\bye\fi
-\generate{\file{dtx-style.sty}{\from{\jobname.dtx}{dtx-style}}}
+\ifx\UMDEBUG\undefined\def\UMDEBUG{}\else\def\UMDEBUG{,debug}\fi
+\gdef\DTXFILES{%
+  \DTX{unicode-math.dtx}%          
+  \DTX{unicode-math-preamble.dtx}%
+  \DTX{unicode-math-msg.dtx}%      
+  \DTX{unicode-math-usv.dtx}%      
+  \DTX{unicode-math-shared.dtx}%   
+  \DTX{unicode-math-epilogue.dtx}% 
+  \DTX{unicode-math-compat.dtx}%   
+  \DTX{unicode-math-alphabets.dtx}%
+}
+\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{preamble,load}}}
+\def\DTX#1{\from{#1}{package,XE\UMDEBUG}}
+\generate{\file{unicode-math-xetex.sty}{\DTXFILES}}
+\def\DTX#1{\from{#1}{package,LU\UMDEBUG}}
+\generate{\file{unicode-math-luatex.sty}{\DTXFILES}}
+\def\tempa{plain}\ifx\tempa\fmtname\endgroup\expandafter\bye\fi
 \endgroup
 \ProvidesFile{unicode-math.dtx}
 %</internal>
-%<preamble&!XE&!LU>\ProvidesPackage{unicode-math}
-%<preamble&XE>\ProvidesPackage{unicode-math-xetex}
-%<preamble&LU>\ProvidesPackage{unicode-math-luatex}
-%<*preamble>
-  [2017/10/02 v0.8h Unicode maths in XeLaTeX and LuaLaTeX]
-%</preamble>
+%<package&!XE&!LU>\ProvidesPackage{unicode-math}
+%<package&XE>\ProvidesPackage{unicode-math-xetex}
+%<package&LU>\ProvidesPackage{unicode-math-luatex}
+%<*package>
+  [2017/10/09 v0.8h Unicode maths in XeLaTeX and LuaLaTeX]
+%</package>
 %<*internal>
-\def\DOCUMENTEND{F}
 \input{unicode-math-doc}
-\DocInput{unicode-math.dtx}
-\DocInput{unicode-math-preamble.dtx}
-\DocInput{unicode-math-msg.dtx}
-\DocInput{unicode-math-usv.dtx}
-\DocInput{unicode-math-shared.dtx}
-\DocInput{unicode-math-epilogue.dtx}
-\DocInput{unicode-math-compat.dtx}
-\DocInput{unicode-math-alphabets.dtx}
-\end{document}
 %</internal>
 % \fi
 %
@@ -83,10 +55,15 @@ This work is "maintained" by Will Robertson.
 % \part{Package implementation}
 % \parttoc
 %
+% \section{The \texttt{unicode-math.sty} loading file}
+%
 % The prefix for \pkg{unicode-math} is \texttt{um}:
 %    \begin{macrocode}
 %<@@=um>
 %    \end{macrocode}
+%
+% The plain sty file is a stub which loads necessary packages and then bifurcates into
+% a XeTeX- or LuaTeX-specific version of the package.
 %
 %    \begin{macrocode}
 %<*load>
@@ -131,6 +108,8 @@ This work is "maintained" by Will Robertson.
 \sys_if_engine_xetex:T  { \RequirePackageWithOptions{unicode-math-xetex}  }
 \ExplSyntaxOff
 %    \end{macrocode}
+%
+% That's the end of the base package.
 %
 %    \begin{macrocode}
 %</load>
