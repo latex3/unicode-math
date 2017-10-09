@@ -114,6 +114,13 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%    \begin{macrocode}
+\clist_new:N \g_@@_named_ranges_clist
+\clist_new:N \g_@@_char_nrange_clist
+\clist_new:N \g_@@_unknown_keys_clist
+\clist_new:N \g_@@_alphabet_clist
+%    \end{macrocode}
+%
 % \begin{macro}{\g_@@_mathclasses_seq}
 % Every math class.
 %    \begin{macrocode}
@@ -156,6 +163,18 @@
 \prop_new:N \g_@@_supers_prop
 \prop_new:N \g_@@_subs_prop
 \tl_new:N \l_not_token_name_tl
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\tl_new:N \g_@@_slash_delimiter_usv
+\tl_new:N \g_@@_mathtable_tl
+\tl_new:N \g_@@_fontname_tl
+\tl_new:N \g_@@_mversion_tl
+\tl_new:N \g_@@_symfont_tl
+\tl_new:N \g_@@_font_keyval_tl
+\tl_new:N \g_@@_family_tl
+\tl_new:N \g_@@_style_tl
+\tl_new:N \g_@@_remap_style_tl
 %    \end{macrocode}
 %
 % \subsection{Extras}
@@ -249,18 +268,23 @@
 % alphabets so that our code is a little more readable.\footnote{`\textsc{u.s.v.}' stands
 % for `Unicode scalar value'.}
 %
+% \begin{macro}{\usv_set:nnn,\@@_to_usv:nn}
 % Rather than `readable', in the end, this makes the code more extensible.
 %    \begin{macrocode}
-\cs_new:Nn \usv_set:nnn
- { \tl_set:cn { g_@@_#1_#2_usv } {#3} }
-\cs_new:Nn \@@_to_usv:nn
- { \use:c { g_@@_#1_#2_usv } }
-\prg_new_conditional:Nnn \@@_usv_if_exist:nn {T,F,TF}
- {
-  \cs_if_exist:cTF { g_@@_#1_#2_usv }
-   \prg_return_true: \prg_return_false:
- }
+\cs_new:Nn \usv_set:nnn  { \tl_const:cn { c_@@_#1_#2_usv } {#3} }
+\cs_new:Nn \@@_to_usv:nn {       \use:c { c_@@_#1_#2_usv } }
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[TF]{\@@_usv_if_exist:nn}
+%    \begin{macrocode}
+\prg_new_conditional:Nnn \@@_usv_if_exist:nn {T,F,TF}
+  {
+    \cs_if_exist:cTF { c_@@_#1_#2_usv }
+      \prg_return_true: \prg_return_false:
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Programmers' interface}
 %
