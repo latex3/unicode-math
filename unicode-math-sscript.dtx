@@ -1,0 +1,187 @@
+
+% \section{\DTXCURR --- Unicode sub- and super-scripts}
+%
+%    \begin{macrocode}
+%<*package&(XE|LU)>
+%    \end{macrocode}
+%
+% The idea here is to enter a scanning state after a superscript or subscript
+% is encountered.
+% If subsequent superscripts or subscripts (resp.) are found,
+% they are lumped together.
+% Each sub/super has a corresponding regular size
+% glyph which is used by \XeTeX\ to typeset the results; this means that the
+% actual subscript/superscript glyphs are never seen in the output
+% document~--- they are only used as input characters.
+%
+% Open question: should the superscript-like `modifiers' (\unichar{1D2C}
+% {modifier capital letter a} and on) be included here?
+%    \begin{macrocode}
+\group_begin:
+%    \end{macrocode}
+% \paragraph{Superscripts}
+% Populate a property list with superscript characters; themselves as their
+% key, and their replacement as each key's value.
+% Then make the superscript active and bind it to the scanning function.
+%
+% \cs{scantokens} makes this process much simpler since we can activate the
+% char and assign its meaning in one step.
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_active_superscript:nn
+ {
+  \prop_gput:Nnn \g_@@_supers_prop   {#1} {#2}
+  \char_set_catcode_active:N #1
+  \@@_char_gmake_mathactive:N #1
+  \scantokens
+   {
+    \cs_gset:Npn #1
+     {
+      \tl_set:Nn \l_@@_ss_chain_tl {#2}
+      \cs_set_eq:NN \@@_sub_or_super:n \sp
+      \tl_set:Nn \l_@@_tmpa_tl {supers}
+      \@@_scan_sscript:
+     }
+   }
+ }
+%    \end{macrocode}
+% Bam:
+%    \begin{macrocode}
+\@@_setup_active_superscript:nn {^^^^2070} {0}
+\@@_setup_active_superscript:nn {^^^^00b9} {1}
+\@@_setup_active_superscript:nn {^^^^00b2} {2}
+\@@_setup_active_superscript:nn {^^^^00b3} {3}
+\@@_setup_active_superscript:nn {^^^^2074} {4}
+\@@_setup_active_superscript:nn {^^^^2075} {5}
+\@@_setup_active_superscript:nn {^^^^2076} {6}
+\@@_setup_active_superscript:nn {^^^^2077} {7}
+\@@_setup_active_superscript:nn {^^^^2078} {8}
+\@@_setup_active_superscript:nn {^^^^2079} {9}
+\@@_setup_active_superscript:nn {^^^^207a} {+}
+\@@_setup_active_superscript:nn {^^^^207b} {-}
+\@@_setup_active_superscript:nn {^^^^207c} {=}
+\@@_setup_active_superscript:nn {^^^^207d} {(}
+\@@_setup_active_superscript:nn {^^^^207e} {)}
+\@@_setup_active_superscript:nn {^^^^2071} {i}
+\@@_setup_active_superscript:nn {^^^^207f} {n}
+\@@_setup_active_superscript:nn {^^^^02b0} {h}
+\@@_setup_active_superscript:nn {^^^^02b2} {j}
+\@@_setup_active_superscript:nn {^^^^02b3} {r}
+\@@_setup_active_superscript:nn {^^^^02b7} {w}
+\@@_setup_active_superscript:nn {^^^^02b8} {y}
+%    \end{macrocode}
+% \paragraph{Subscripts} Ditto above.
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_active_subscript:nn
+ {
+  \prop_gput:Nnn \g_@@_subs_prop   {#1} {#2}
+  \char_set_catcode_active:N #1
+  \@@_char_gmake_mathactive:N #1
+  \scantokens
+   {
+    \cs_gset:Npn #1
+     {
+      \tl_set:Nn \l_@@_ss_chain_tl {#2}
+      \cs_set_eq:NN \@@_sub_or_super:n \sb
+      \tl_set:Nn \l_@@_tmpa_tl {subs}
+      \@@_scan_sscript:
+     }
+   }
+ }
+%    \end{macrocode}
+% A few more subscripts than superscripts:
+%    \begin{macrocode}
+\@@_setup_active_subscript:nn {^^^^2080} {0}
+\@@_setup_active_subscript:nn {^^^^2081} {1}
+\@@_setup_active_subscript:nn {^^^^2082} {2}
+\@@_setup_active_subscript:nn {^^^^2083} {3}
+\@@_setup_active_subscript:nn {^^^^2084} {4}
+\@@_setup_active_subscript:nn {^^^^2085} {5}
+\@@_setup_active_subscript:nn {^^^^2086} {6}
+\@@_setup_active_subscript:nn {^^^^2087} {7}
+\@@_setup_active_subscript:nn {^^^^2088} {8}
+\@@_setup_active_subscript:nn {^^^^2089} {9}
+\@@_setup_active_subscript:nn {^^^^208a} {+}
+\@@_setup_active_subscript:nn {^^^^208b} {-}
+\@@_setup_active_subscript:nn {^^^^208c} {=}
+\@@_setup_active_subscript:nn {^^^^208d} {(}
+\@@_setup_active_subscript:nn {^^^^208e} {)}
+\@@_setup_active_subscript:nn {^^^^2090} {a}
+\@@_setup_active_subscript:nn {^^^^2091} {e}
+\@@_setup_active_subscript:nn {^^^^2095} {h}
+\@@_setup_active_subscript:nn {^^^^1d62} {i}
+\@@_setup_active_subscript:nn {^^^^2c7c} {j}
+\@@_setup_active_subscript:nn {^^^^2096} {k}
+\@@_setup_active_subscript:nn {^^^^2097} {l}
+\@@_setup_active_subscript:nn {^^^^2098} {m}
+\@@_setup_active_subscript:nn {^^^^2099} {n}
+\@@_setup_active_subscript:nn {^^^^2092} {o}
+\@@_setup_active_subscript:nn {^^^^209a} {p}
+\@@_setup_active_subscript:nn {^^^^1d63} {r}
+\@@_setup_active_subscript:nn {^^^^209b} {s}
+\@@_setup_active_subscript:nn {^^^^209c} {t}
+\@@_setup_active_subscript:nn {^^^^1d64} {u}
+\@@_setup_active_subscript:nn {^^^^1d65} {v}
+\@@_setup_active_subscript:nn {^^^^2093} {x}
+\@@_setup_active_subscript:nn {^^^^1d66} {\beta}
+\@@_setup_active_subscript:nn {^^^^1d67} {\gamma}
+\@@_setup_active_subscript:nn {^^^^1d68} {\rho}
+\@@_setup_active_subscript:nn {^^^^1d69} {\phi}
+\@@_setup_active_subscript:nn {^^^^1d6a} {\chi}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\group_end:
+%    \end{macrocode}
+% The scanning command, which collects a chain of subscripts or a chain
+% of superscripts and then typesets what it has collected.
+%    \begin{macrocode}
+\cs_new:Npn \@@_scan_sscript:
+ {
+  \@@_scan_sscript:TF
+   {
+    \@@_scan_sscript:
+   }
+   {
+    \@@_sub_or_super:n {\l_@@_ss_chain_tl}
+   }
+ }
+%    \end{macrocode}
+% We do not skip spaces when scanning ahead, and we explicitly wish to
+% bail out on encountering a space or a brace.  These cases are filtered
+% using \cs{peek_N_type:TF}.  Otherwise the token can be taken as an
+% \texttt{N}-type argument.  Then we search for it in the appropriate
+% property list (\cs{l_@@_tmpa_tl} is |subs| or |supers|).
+% If found, add the value to the current chain of sub/superscripts.
+% Remember to put the character back in the input otherwise.
+% The \cs{group_align_safe_begin:} and \cs{group_align_safe_end:} are
+% needed in case |#3| is |&|.
+%    \begin{macrocode}
+\cs_new:Npn \@@_scan_sscript:TF #1#2
+ {
+  \peek_N_type:TF
+   {
+    \group_align_safe_begin:
+    \@@_scan_sscript_aux:nnN {#1} {#2}
+   }
+   {#2}
+ }
+\cs_new:Npn \@@_scan_sscript_aux:nnN #1#2#3
+ {
+  \prop_get:cnNTF {g_@@_\l_@@_tmpa_tl _prop} {#3} \l_@@_tmpb_tl
+   {
+    \tl_put_right:NV \l_@@_ss_chain_tl \l_@@_tmpb_tl
+    \group_align_safe_end:
+    #1
+   }
+   { \group_align_safe_end: #2 #3 }
+ }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%</package&(XE|LU)>
+%    \end{macrocode}
+%
+\endinput
+
+
