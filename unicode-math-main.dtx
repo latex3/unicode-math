@@ -1,11 +1,9 @@
 
-% \section{\DTXCURR --- Main package code}
+% \section{\DTXCURR --- The main \cs{setmathfont} macro}
 %
 %    \begin{macrocode}
 %<*package&(XE|LU)>
 %    \end{macrocode}
-%
-% \subsection{The main \cs{setmathfont} macro}
 %
 % Using a |range| including large character sets such as \cmd\mathrel,
 % \cmd\mathalpha, \etc, is \emph{very slow}!
@@ -45,7 +43,6 @@
 % Use \pkg{fontspec} to select a font to use.
 % After loading the font, we detect what sizes it recommends for scriptsize and scriptscriptsize, so after setting those values appropriately, we reload the font to take these into account.
 %    \begin{macrocode}
-
 %<debug>  \csname TIC\endcsname
   \@@_fontspec_select_font:
 %<debug>  \csname TOC\endcsname
@@ -99,7 +96,6 @@
 % \item Setup the maths alphabets (\cs{mathbf} etc.).
 %       This is an extensive part of the code; see Section~\ref{sec:mathmap}.
 % \item Setup negations, which are handled on an ad hoc basis; see Section~\ref{sec:negations}.
-% \item Finally, ignorespaces; this can probably be removed (FIX)
 % \end{itemize}
 %    \begin{macrocode}
   \@@_remap_symbols:
@@ -109,7 +105,6 @@
   \@@_setup_alphabets:
 %<debug>  \csname TOC\endcsname
   \@@_setup_negations:
-  \ignorespaces
  }
 %    \end{macrocode}
 % \end{macro}
@@ -192,7 +187,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
 % \begin{macro}{\@@_declare_math_sizes:}
 % Set the math sizes according to the recommended font parameters:
 %    \begin{macrocode}
@@ -218,18 +212,17 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%<*LU>
 % \begin{macro}{\@@_script_style_size:n}
 % Determine script- and scriptscriptstyle sizes using luaotfload:
 %   \begin{macrocode}
+%<*LU>
 \cs_new:Nn \@@_script_style_size:n
   {
     \fp_eval:n {\directlua{tex.sprint(luaotfload.aux.get_math_dimension("l_@@_font","#1"))} * \f@size / 100 }
   }
+%</LU>
 %   \end{macrocode}
 % \end{macro}
-%</LU>
-%
 %
 % \begin{macro}{\@@_setup_legacy_fam_two:}
 % \TeX\ won't load the same font twice at the same scale, so we need to magnify this one by an imperceptable amount.
@@ -303,14 +296,11 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
 %    \begin{macrocode}
 \cs_new:Nn \@@_get_fontparam:nn
 %<XE>  { \the\fontdimen#1\l_@@_font\relax }
 %<LU>  { \directlua{fontspec.mathfontdimen("l_@@_font","#2")} }
 %    \end{macrocode}
-%
-%
 %
 % \begin{macro}{\@@_fontspec_select_font:}
 % Select the font with \cs{fontspec} and define \cs{l_@@_font} from it.
@@ -352,8 +342,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
-% \subsubsection{Functions for setting up symbols with mathcodes}
+% \subsection{Functions for setting up symbols with mathcodes}
 % \seclabel{mathsymbol}
 %
 % \begin{macro}{\@@_process_symbol_noparse:nnn}
@@ -378,7 +367,6 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
-%
 %
 % \begin{macro}{\@@_remap_symbols:}
 % \begin{macro}{\@@_remap_symbol_noparse:nnn}
@@ -414,8 +402,7 @@
 % \end{macro}
 % \end{macro}
 %
-%
-% \subsubsection{Active math characters}
+% \subsection{Active math characters}
 %
 % There are more math active chars later in the subscript/superscript section.
 % But they don't need to be able to be typeset directly.
@@ -455,8 +442,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsubsection{Delimiter codes}
-%
+% \subsection{Delimiter codes}
 %
 % \begin{macro}{\@@_assign_delcode:nn}
 %    \begin{macrocode}
@@ -474,15 +460,12 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
 % \begin{macro}{\@@_assign_delcode:n}
 % Shorthand.
 %    \begin{macrocode}
 \cs_new:Nn \@@_assign_delcode:n { \@@_assign_delcode:nn {#1} {#1} }
 %    \end{macrocode}
 % \end{macro}
-%
-%
 %
 % \begin{macro}{\@@_setup_delcodes:}
 % Some symbols that aren't mathopen/mathclose still need to have delimiter codes assigned.
@@ -532,9 +515,6 @@
  }
 %    \end{macrocode}
 % \end{macro}
-%
-%
-%
 %
 % \subsection{(Big) operators}
 %
@@ -606,10 +586,6 @@
 \tl_set:Nn \l_@@_radicals_tl {\sqrt \longdivision}
 %    \end{macrocode}
 % \end{macro}
-%
-% \subsection{Maths accents}
-%
-% Maths accents should just work \emph{if they are available in the font}.
 %
 %    \begin{macrocode}
 %</package&(XE|LU)>
