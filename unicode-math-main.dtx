@@ -97,7 +97,10 @@
 % \item Activate any symbols that need to be math-active
 % \item Enable wide/narrow accents
 % \item Assign delimiter codes for symbols that need to grow
-% \item Setup the maths alphabets (\cs{mathbf} etc.)
+% \item Setup the maths alphabets (\cs{mathbf} etc.).
+%       This is an extensive part of the code; see Section~\ref{sec:mathmap}.
+% \item Setup negations, which are handled on an ad hoc basis; see Section~\ref{sec:negations}.
+% \item Finally, ignorespaces; this can probably be removed (FIX)
 % \end{itemize}
 %    \begin{macrocode}
   \@@_remap_symbols:
@@ -107,9 +110,6 @@
   \@@_setup_alphabets:
 %<debug>  \csname TOC\endcsname
   \@@_setup_negations:
-%    \end{macrocode}
-% Prevent spaces, and that's it:
-%    \begin{macrocode}
   \ignorespaces
  }
 %    \end{macrocode}
