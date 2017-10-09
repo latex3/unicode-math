@@ -118,11 +118,18 @@ This work is "maintained" by Will Robertson.
 \ExplSyntaxOff
 %    \end{macrocode}
 %
-% That's the end of the base package.
-%
 %    \begin{macrocode}
 %</load>
 %    \end{macrocode}
+%
+% That's the end of the base package. The subsequent packages are derived from
+% the following ordered list of \texttt{dtx} files:
+% \begin{multicols}{3}
+% \begin{enumerate}
+% \def\DTX#1{\item \texttt{#1}}
+% \DTXFILES
+% \end{enumerate}
+% \end{multicols}
 %
 \endinput
 
