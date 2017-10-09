@@ -433,7 +433,7 @@
       { \@@_make_mathactive_noparse:nNN {#1} #2 #3 }
   }
 %    \end{macrocode}
-% 
+%
 %    \begin{macrocode}
 \cs_new:Nn \@@_make_mathactive_noparse:nNN
   {
@@ -452,7 +452,7 @@
   \@@_set_delcode:nnn \@@_symfont_tl {#1} {#2}
  }
 %    \end{macrocode}
-% 
+%
 %    \begin{macrocode}
 \cs_new:Nn \@@_assign_delcode_parse:nn
  {
@@ -574,17 +574,11 @@
 %
 % \subsection{Radicals}
 %
-% The radical for square root is organised in \cs{@@_set_mathsymbol:nNNn}.
-% I think it's the only radical ever.
-% (Actually, there is also \cs{cuberoot} and \cs{fourthroot}, but they don't
-%  seem to behave as proper radicals.)
-%
-% Also, what about right-to-left square roots?
-%
 % \begin{macro}{\l_@@_radicals_tl}
+% The radicals are organised in \cs{@@_set_mathsymbol:nNNn}.
 % We organise radicals in the same way as nolimits-operators.
+% (\cs{cuberoot} and \cs{fourthroot}, don't seem to behave as proper radicals.)
 %    \begin{macrocode}
-\tl_new:N \l_@@_radicals_tl
 \tl_set:Nn \l_@@_radicals_tl {\sqrt \longdivision}
 %    \end{macrocode}
 % \end{macro}

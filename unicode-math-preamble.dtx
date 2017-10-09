@@ -87,6 +87,7 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_mathstyle_tl
+\tl_new:N \l_@@_radicals_tl
 \tl_new:N \l_@@_nolimits_tl
 %    \end{macrocode}
 %
@@ -103,6 +104,15 @@
 \seq_new:N \l_@@_mclass_range_seq
 \seq_new:N \l_@@_cmd_range_seq
 %    \end{macrocode}
+%
+% \begin{macro}{\g_@@_alphabets_seq}
+% Each of math `style' (bfup, sfit, etc.) usually contains one or more `alphabets', which are currently |latin|, |Latin|, |greek|, |Greek|, |num|, and |misc|, although there's an implicit potential for more.
+% |misc| is not included in the official list to avoid checking code.
+%    \begin{macrocode}
+\clist_new:N  \g_@@_alphabets_seq
+\clist_set:Nn \g_@@_alphabets_seq { latin, Latin, greek, Greek, num }
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\g_@@_mathclasses_seq}
 % Every math class.

@@ -162,12 +162,6 @@
  { \@@_new_named_range:n {#1} }
 %    \end{macrocode}
 %
-% Each of these styles usually contains one or more `alphabets', which are currently |latin|, |Latin|, |greek|, |Greek|, |num|, and |misc|, although there's an implicit potential for more.
-% |misc| is not included in the official list to avoid checking code.
-%    \begin{macrocode}
-\clist_new:N  \g_@@_alphabets_seq
-\clist_set:Nn \g_@@_alphabets_seq { latin, Latin, greek, Greek, num }
-%    \end{macrocode}
 %
 % Each alphabet style needs to be configured.
 % This happens in Section~\ref{sec:setupalphabets}.
