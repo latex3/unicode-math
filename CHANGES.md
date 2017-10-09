@@ -1,6 +1,14 @@
 CHANGE HISTORY
 --------------
 
+- v0.8h (2017/10/09)
+
+  * Some bugs crept in in the last update due to some code rearrangement:
+      * package version wasn't set;
+      * some code was being executed at the wrong time;
+      * `\sqrt[]{}` in LuaLaTeX gave incorrect output.
+  * Code is now structured more sensibly
+
 - v0.8g (2017/10/02)
 
   * Better use of scriptstyle sizes in LuaTeX (I think a regression).
