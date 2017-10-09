@@ -5,6 +5,69 @@
 %<*package&(XE|LU)>
 %    \end{macrocode}
 %
+% \subsection{A token list to contain the data of the math table}
+%
+% Instead of \cmd\input-ing the unicode math table every time we
+% want to re-read its data, we save it within a macro. This has two
+% advantages: 1.~it should be slightly faster, at the expense of memory;
+% 2.~we don't need to worry about catcodes later, since they're frozen
+% at this point.
+%
+% In time, the case statement inside |set_mathsymbol| will be moved in here
+% to avoid re-running it every time.
+%    \begin{macrocode}
+\cs_new:Npn \@@_symbol_setup:
+ {
+  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4
+   {
+    \exp_not:n { \_@@_sym:nnn {##1} {##2} {##3} }
+   }
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\tl_set_from_file_x:Nnn \g_@@_mathtable_tl {\@@_symbol_setup:} {unicode-math-table.tex}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\@@_input_math_symbol_table:}
+% This function simply expands to the token list containing all the data.
+%    \begin{macrocode}
+\cs_new:Nn \@@_input_math_symbol_table: {\g_@@_mathtable_tl}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Definitions of the active math characters}
+%
+% Now give \cmd\_@@_sym:nnn\ a definition in terms of \cmd\@@_cs_set_eq_active_char:Nw\
+% and we're good to go.
+%
+% Ensure catcodes are appropriate;
+% make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
+%    \begin{macrocode}
+\AtBeginDocument{\@@_define_math_chars:}
+\cs_new:Nn \@@_define_math_chars:
+ {
+  \group_begin:
+    \cs_set:Npn \_@@_sym:nnn ##1##2##3
+     {
+      \tl_if_in:nnT
+       { \mathord \mathalpha \mathbin \mathrel \mathpunct \mathop \mathfence }
+       {##3}
+      {
+        \exp_last_unbraced:NNx \cs_gset_eq:NN ##2 { \Ucharcat ##1 ~ 12 ~ }
+      }
+     }
+    \@@_input_math_symbol_table:
+  \group_end:
+ }
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Commands for each symbol/glyph/char}
+%
 % \begin{macro}{\@@_set_mathsymbol:nNNn}
 % \darg{A \LaTeX\ symbol font, e.g., \texttt{operators}}
 % \darg{Symbol macro, \eg, \cmd\alpha}
