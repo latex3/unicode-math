@@ -34,8 +34,18 @@ This is an example of a *bad* example:
       x^2 + y^2 = z^2
     \]
 
-## Pull Requests
+## Branches and Pull Requests
 
-I'm usually not fussy! Generally I'll just be impressed you've taken the effort.
+There are two main branches in this repository: `master` and `working`.
+Development happens on the `working` branch; once a release is sent to CTAN,
+the `master` branch is rebased to bring it up to date.
 
-If you are changing documentation only (i.e., no code changes), you can add `[ci skip]` to the commit message and the test suite won't be run to check that the changes haven't broken anything.
+The `working` branch should be considered only semi-public; it may have broken
+code and/or use force-pushing to rewrite history on occasions.
+
+If you wish to make a contribution, please start from the `master` branch.
+
+If you are changing documentation only (i.e., no code changes), you can add
+`[ci skip]` to the commit message and the test suite won't be run to check that
+the changes haven't broken anything.
+
