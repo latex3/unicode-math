@@ -20,7 +20,7 @@ This work is "maintained" by Will Robertson.
 \endpreamble
 \nopostamble
 \askforoverwritefalse
-\ifx\UMDEBUG\undefined\def\UMDEBUG{}\else\def\UMDEBUG{,debug}\fi
+\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{base}}}
 \gdef\DTXFILES{%
   \DTX{unicode-math.dtx}%
   \DTX{unicode-math-preamble.dtx}%
@@ -40,7 +40,7 @@ This work is "maintained" by Will Robertson.
   \DTX{unicode-math-compat.dtx}%
   \DTX{unicode-math-alphabets.dtx}%
 }
-\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{preamble,load}}}
+\ifx\UMDEBUG\undefined\def\UMDEBUG{}\else\def\UMDEBUG{,debug}\fi
 \def\DTX#1{\from{#1}{package,XE\UMDEBUG}}
 \generate{\file{unicode-math-xetex.sty}{\DTXFILES}}
 \def\DTX#1{\from{#1}{package,LU\UMDEBUG}}
@@ -49,12 +49,12 @@ This work is "maintained" by Will Robertson.
 \endgroup
 \ProvidesFile{unicode-math.dtx}
 %</internal>
-%<package&!XE&!LU>\ProvidesPackage{unicode-math}
+%<base>\ProvidesPackage{unicode-math}
 %<package&XE>\ProvidesPackage{unicode-math-xetex}
 %<package&LU>\ProvidesPackage{unicode-math-luatex}
-%<*package>
+%<*base|package>
   [2017/10/09 v0.8h Unicode maths in XeLaTeX and LuaLaTeX]
-%</package>
+%</base|package>
 %<*internal>
 \input{unicode-math-doc}
 %</internal>
@@ -75,7 +75,7 @@ This work is "maintained" by Will Robertson.
 % a XeTeX- or LuaTeX-specific version of the package.
 %
 %    \begin{macrocode}
-%<*load>
+%<*base>
 %    \end{macrocode}
 % Bail early if necessary.
 %    \begin{macrocode}
@@ -119,7 +119,7 @@ This work is "maintained" by Will Robertson.
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</load>
+%</base>
 %    \end{macrocode}
 %
 % That's the end of the base package. The subsequent packages are derived from
