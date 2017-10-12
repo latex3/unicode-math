@@ -6,7 +6,7 @@ sourcefiles  = {"*.dtx","unicode-math-table.tex"}
 unpackfiles  = {"unicode-math.dtx"}
 installfiles = {"*.sty","unicode-math-table.tex"}
 typesetfiles = {"unicode-math.dtx","unimath-symbols.ltx"}
-docfiles     = {"unicode-math-doc.tex"}
+docfiles     = {"um-doc*.tex"}
 demofiles    = {"unimath-example.ltx"}
 
 checkengines = {"xetex","luatex"}
