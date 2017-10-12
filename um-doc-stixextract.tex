@@ -1,0 +1,18 @@
+
+\section{\STIX\ table data extraction}\label{part:awk}
+
+The source for the \TeX\ names for the very large number of mathematical
+glyphs are provided via Barbara Beeton's table file for the \STIX\ project
+(|ams.org/STIX|). A version is located at
+|http://www.ams.org/STIX/bnb/stix-tbl.asc|
+but check |http://www.ams.org/STIX/| for more up-to-date info.
+
+This table is converted into a form suitable for reading by \TeX.
+A single file is produced containing all (more than 3298) symbols.
+Future optimisations might include generating various (possibly overlapping) subsets
+so not all definitions must be read just to redefine a small range of symbols.
+Performance for now seems to be acceptable without such measures.
+
+This file is currently developed outside this DTX file. It will be
+incorporated when the final version is ready. (I know this is not how
+things are supposed to work!)

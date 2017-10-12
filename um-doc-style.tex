@@ -1,0 +1,130 @@
+
+\makeatletter
+\GetFileInfo{unicode-math.dtx}
+\let\umfiledate\filedate
+\let\umfileversion\fileversion
+
+\CheckSum{0}
+\EnableCrossrefs
+\CodelineIndex
+
+\errorcontextlines=999
+
+\def\@dotsep{1000}
+\setcounter{tocdepth}{2}
+\setlength\columnseprule{0.4pt}
+\renewcommand\tableofcontents{\relax
+  \begin{multicols}{2}[\section*{\contentsname}]\relax
+    \@starttoc{toc}\relax
+  \end{multicols}}
+
+\setcounter{IndexColumns}{2}
+\renewenvironment{theglossary}
+  {\small\list{}{}
+     \item\relax
+     \glossary@prologue\GlossaryParms
+     \let\item\@idxitem \ignorespaces
+     \def\pfill{\hspace*{\fill}}}
+  {\endlist}
+
+\usepackage[svgnames]{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
+\setcounter{LTchunksize}{100}
+\usepackage[slash-delimiter=frac,nabla=literal]{unicode-math}
+\usepackage{metalogo,hologo}
+
+\fvset{fontsize=\small,xleftmargin=2em}
+\usepackage[it]{titlesec}
+
+\setmainfont{texgyrepagella}%
+ [
+  Extension = .otf ,
+  UprightFont = *-regular ,
+  ItalicFont = *-italic ,
+  BoldFont = *-bold ,
+  BoldItalicFont = *-bolditalic ,
+ ]
+\setsansfont{Iwona}%
+ [
+  Scale=MatchLowercase,
+  Extension = .otf,
+  UprightFont = *-Regular,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold,
+  BoldItalicFont = *-BoldItalic,
+ ]
+\setmonofont{Inconsolatazi4-Regular.otf}%
+ [
+  Scale=MatchLowercase,
+  BoldFont=Inconsolatazi4-Bold.otf
+ ]
+
+\setmathfont{texgyrepagella-math.otf}
+\setmathfont[version=xits]{xits-math.otf}
+\newfontface\umfont{xits-math.otf}
+
+\usepackage{hypdoc}
+\hypersetup{linktocpage}
+
+% work around some issue turning | into "j" inside mathsf in the definition of \Module:
+% (also prettify)
+\def\Module#1{{\footnotesize\color{red}$\langle$\texttt{#1}$\rangle$}}
+
+\usepackage{minitoc}
+
+\linespread{1.1}
+\frenchspacing
+
+\definecolor{niceblue}{rgb}{0.2,0.4,0.8}
+
+\def\theCodelineNo{\textcolor{niceblue}{\sffamily\tiny\arabic{CodelineNo}}}
+
+\newcommand*\name[1]{{#1}}
+\newcommand*\pkg[1]{\textsf{#1}}
+\newcommand*\feat[1]{\texttt{#1}}
+\newcommand*\opt[1]{\texttt{#1}}
+
+\newcommand*\note[1]{\unskip\footnote{#1}}
+
+\let\latin\textit
+\def\eg{\latin{e.g.}}
+\def\Eg{\latin{E.g.}}
+\def\ie{\latin{i.e.}}
+\def\etc{\@ifnextchar.{\latin{etc}}{\latin{etc.}\@}}
+
+\def\STIX{\textsc{stix}}
+\def\MacOSX{Mac~OS~X}
+\def\ascii{\textsc{ascii}}
+\def\OMEGA{Omega}
+
+\newcounter{argument}
+
+\makeatletter
+\g@addto@macro\endmacro{\setcounter{argument}{0}}
+\makeatother
+
+\newcommand*\darg[1]{%
+  \stepcounter{argument}%
+  {\ttfamily\char`\#\theargument~:~}#1\par\noindent\ignorespaces
+}
+\newcommand*\doarg[1]{%
+  \stepcounter{argument}%
+  {\ttfamily\makebox[0pt][r]{[}\char`\#\theargument]:~}#1\par\noindent\ignorespaces
+}
+
+\newcommand\codeline[1]{\par{\centering#1\par\noindent}\ignorespaces}
+
+\newcommand\unichar[1]{\textsc{u}+\texttt{\small#1}}
+
+\setlength\parindent{2em}
+
+\def \MakePrivateLetters {%
+  \catcode`\@=11\relax
+  \catcode`\_=11\relax
+  \catcode`\:=11\relax
+}
+
+\def\partname{Part}
+
+\makeatother

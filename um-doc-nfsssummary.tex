@@ -1,0 +1,65 @@
+
+\section{Documenting maths support in the NFSS}
+
+In the following, \meta{NFSS decl.} stands for something like |{T1}{lmr}{m}{n}|.
+
+\begin{description}
+\item[Maths symbol fonts] Fonts for symbols: $\propto$, $\leq$, $\rightarrow$
+
+\cmd\DeclareSymbolFont\marg{name}\meta{NFSS decl.}\\
+Declares a named maths font such as |operators| from which symbols are defined with \cmd\DeclareMathSymbol.
+
+\item[Maths alphabet fonts] Fonts for {\font\1=cmmi10 at 10pt\1 ABC}\,–\,{\font\1=cmmi10 at 10pt\1 xyz}, {\font\1=eufm10 at 10pt\1 ABC}\,–\,{\font\1=cmsy10 at 10pt\1 XYZ}, etc.
+
+\cmd\DeclareMathAlphabet\marg{cmd}\meta{NFSS decl.}
+
+For commands such as \cmd\mathbf, accessed
+through maths mode that are unaffected by the current text font, and which are used for
+alphabetic symbols in the \ascii\ range.
+
+\cmd\DeclareSymbolFontAlphabet\marg{cmd}\marg{name}
+
+Alternative (and optimisation) for \cmd\DeclareMathAlphabet\ if a single font is being used
+for both alphabetic characters (as above) and symbols.
+
+\item[Maths `versions'] Different maths weights can be defined with the following, switched
+in text with the \cmd\mathversion\marg{maths version} command.
+
+\cmd\SetSymbolFont\marg{name}\marg{maths version}\meta{NFSS decl.}\\
+\cmd\SetMathAlphabet\marg{cmd}\marg{maths version}\meta{NFSS decl.}
+
+\item[Maths symbols] Symbol definitions in maths for both characters (=) and macros (\cmd\eqdef):
+\cmd\DeclareMathSymbol\marg{symbol}\marg{type}\marg{named font}\marg{slot}
+This is the macro that actually defines which font each symbol comes from and how they behave.
+\end{description}
+Delimiters and radicals use wrappers around \TeX's \cmd\delimiter/\cmd\radical\ primitives,
+which are re-designed in \XeTeX. The syntax used in \LaTeX's NFSS is therefore not so relevant here.
+\begin{description}
+\item[Delimiters] A special class of maths symbol which enlarge themselves in certain contexts.
+
+\cmd\DeclareMathDelimiter\marg{symbol}\marg{type}\marg{sym.\ font}\marg{slot}\marg{sym.\ font}\marg{slot}
+
+\item[Radicals] Similar to delimiters (\cmd\DeclareMathRadical\ takes the same syntax) but
+behave `weirdly'.
+\end{description}
+In those cases, glyph slots in \emph{two} symbol fonts are required; one for the small (`regular') case,
+the other for situations when the glyph is larger. This is not the case in \XeTeX.
+
+Accents are not included yet.
+
+\paragraph{Summary}
+
+For symbols, something like:
+\begin{Verbatim}
+\def\DeclareMathSymbol#1#2#3#4{
+  \global\mathchardef#1"\mathchar@type#2
+    \expandafter\hexnumber@\csname sym#2\endcsname
+    {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
+\end{Verbatim}
+For characters, something like:
+\begin{Verbatim}
+\def\DeclareMathSymbol#1#2#3#4{
+  \global\mathcode`#1"\mathchar@type#2
+    \expandafter\hexnumber@\csname sym#2\endcsname
+    {\hexnumber@{\count\z@}\hexnumber@{\count\tw@}}}
+\end{Verbatim}
