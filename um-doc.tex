@@ -363,11 +363,11 @@ If the \cs{mathsf} font is set explicitly at any time in the preamble, this `aut
 \subsubsection{Replacing `text math' fonts by symbols}
 \seclabel{textmathlegacy}
 
-For certain types of documents that use legacy input syntax (say you're typesetting a new version of a book written in the 1990s), it would be preferable to use |\symbf| rather than |\mathbf| en masse.
-For example, if bold maths is used only for vectors and matrices, a dedicated symbol font will produce better spacing and will better match the main math font.
-
-Alternatively, you may have used an old version of \pkg{unicode-math} (pre-v0.8), when the \cs{symXYZ} commands were not defined and \cs{mathbf} behaved like \cs{symbf} does now.
+For certain types of documents that use legacy input syntax, it may be preferable to have |\mathbf| behave as if it were |\symbf| en masse (et cetera respectively).
 A series of package options (\tabref{legacyfontswitch}) are provided to facilitate switching the definition of \cs{mathXYZ} for the five legacy text math font definitions.
+
+For example, if in a particular document |\mathbf| is used only for choosing symbols of vectors and matrices, a dedicated symbol font (|\symbf|) will produce better spacing and will better match the main math font.
+In that case loading |unicode-math| with the |mathbf=sym| will achieve the desired result.
 
 \begin{table}
   \centering
