@@ -93,10 +93,56 @@ you can only switch to a different OpenType maths font using the \cs{setmathfont
 If you do not load an OpenType maths font before |\begin{document}|, Latin Modern Math (see above) will be loaded automatically.
 
 \subsection{New commands}
-\pkg{unicode-math} provides a number of commands (such as |\symbfsf|) to select specific `symbol alphabets' within the unicode maths font, with usage, e.g., |$\symbfsf{g}$|${}\to\symbfsf{g}$.
-The full listing is shown in \Tabref{symvsmath}.
-For backwards compatibility, many of these are also defined with `familiar' synonyms such as |\mathbfsf|.
-However, where possible the `sym' prefix commands should be preferred, as certain synonyms may become deprecated in time.
+\LaTeX, since the first version of \LaTeXe, changed the math group
+selection from, say, |{\bf x}| to |\mathbf{x}|. It introduced commands
+such as |\mathbf|, |\mathit|, |\mathsf|, |\mathtt| and |\mathcal|,
+besides |\mathnormal|.  This was not only done to maintain the analogy
+with |\textbf|, |\textit| and so on, but with the precise purpose of
+loading the needed math groups (or math families) on demand and not
+allocating them if not required by the document.
+
+The introduction of \pkg{unicode-math} posed new problems. For
+instance, there is a big difference between say |fit| as an operator
+name in boldface type and the product of three boldface variables.
+With legacy \TeX{} engines, |\mathbf{fit}| would use a ligature and
+the same would happen with the input |\mathbf{f}\mathbf{i}\mathbf{t}|.
+For the latter case, the user should probably use |\mathbf{f\/}|.
+
+However, there is another important point from a \emph{conceptual}
+point of view. A boldface variable name should be printed using the
+\emph{math font}, whereas a boldface operator name should be printed
+using the \emph{text font}. OpenType math fonts make this distinction
+feasible, because they contain several math alphabets. Of course a
+boldface text~`x' will not differ much (or at all) from a boldface
+math~`x', but this is not the point: they \emph{should} be considered
+different, because the former is |U+0078| in Unicode, the latter is
+|U+1D431|.
+
+When discussing the matter, it soon appeared clear that \emph{two}
+different commands are needed: one for using text boldface in math,
+one for using math boldface. Only the document's author can know
+whether one or the other is needed. The decision was to split off
+the two meanings by using either |\mathbf| (for the boldface text font
+in math) or |\symbf| (for the bold math font).
+
+To be more detailed, most alphabet commands are provided with the
+\cs{math...} prefix synonyms, but there are five `legacy' font alphabets
+that intentionally behave somewhat different.  These are \cs{mathup},
+\cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}.  (N.B.:
+\cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is
+prefered as it is a script-agnostic term.)
+
+The \cs{symbf} command switches to single-letter mathematical symbols
+(generally within the same OpenType font).  The \cs{mathbf} command
+switches to a text font that is set up to behave correctly in
+mathematics, and should be used for multi-letter identifiers.  These
+could be denoted `text math alphabets'; further details are discussed
+in \secref{mathselect}.  Additional similar `text math alphabet'
+commands can be defined using the \cs{setmathfontface} command
+discussed in \secref{mathselect}.  To control the behaviour of the
+default text math alphabet commands to behave in a
+backwards-compatible mode, see the package options described in
+\secref{textmathlegacy}.
 
 \begin{table}\centering
   \topcaption{New \pkg{unicode-math} commands.}
@@ -132,16 +178,17 @@ However, where possible the `sym' prefix commands should be preferred, as certai
   \end{tabular}
 \end{table}
 
-While most alphabet commands are provided with the \cs{math...} prefix synonyms, there are five `legacy' font alphabets that intentionally behave somewhat different.
-These are \cs{mathup}, \cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}.
-(N.B.: \cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is prefered as it is a script-agnostic term.)
+Thus \pkg{unicode-math} provides a number of commands (such as
+|\symbfsf|) to select specific `symbol alphabets' within the unicode
+maths font, with usage, e.g., |$\symbfsf{g}$|${}\to\symbfsf{g}$.  The
+full listing is shown in \Tabref{symvsmath}.  For backwards
+compatibility, many of these are also defined with `familiar' synonyms
+such as |\mathbfsf|.  However, where possible the `sym' prefix
+commands should be preferred, as certain synonyms may become
+deprecated in time. The |\symliteral| command is described in
+\secref{math-style}.
 
-These commands have `overloaded' meanings in traditional \LaTeX, and it's important to consider the subtle differences between, e.g., the new \cs{symbf} and \cs{mathbf}.
-The \cs{symbf} command switches to single-letter mathematical symbols (generally within the same OpenType font).
-The \cs{mathbf} command switches to a text font that is set up to behave correctly in mathematics, and should be used for multi-letter identifiers.
-These could be denoted `text math alphabets'; further details are discussed in \secref{mathselect}.
-Additional similar `text math alphabet' commands can be defined using the \cs{setmathfontface} command discussed in \secref{mathselect}.
-To control the behaviour of the default text math alphabet commands to behave in a backwards-compatible mode, see the package options described in \secref{textmathlegacy}.
+
 
 \subsection{Package options}
 Package options may be set when the package as loaded or at any later
