@@ -221,22 +221,22 @@
         Scale=1.00001,
         FontAdjustment =
           {
-            \fontdimen8\font= \@@_get_fontparam:nn {43} {FractionNumeratorDisplayStyleShiftUp}\relax
-            \fontdimen9\font= \@@_get_fontparam:nn {42} {FractionNumeratorShiftUp}\relax
-            \fontdimen10\font=\@@_get_fontparam:nn {32} {StackTopShiftUp}\relax
-            \fontdimen11\font=\@@_get_fontparam:nn {45} {FractionDenominatorDisplayStyleShiftDown}\relax
-            \fontdimen12\font=\@@_get_fontparam:nn {44} {FractionDenominatorShiftDown}\relax
-            \fontdimen13\font=\@@_get_fontparam:nn {21} {SuperscriptShiftUp}\relax
-            \fontdimen14\font=\@@_get_fontparam:nn {21} {SuperscriptShiftUp}\relax
-            \fontdimen15\font=\@@_get_fontparam:nn {22} {SuperscriptShiftUpCramped}\relax
-            \fontdimen16\font=\@@_get_fontparam:nn {18} {SubscriptShiftDown}\relax
-            \fontdimen17\font=\@@_get_fontparam:nn {18} {SubscriptShiftDownWithSuperscript}\relax
-            \fontdimen18\font=\@@_get_fontparam:nn {24} {SuperscriptBaselineDropMax}\relax
-            \fontdimen19\font=\@@_get_fontparam:nn {20} {SubscriptBaselineDropMin}\relax
-            \fontdimen20\font=0pt\relax % delim1 = FractionDelimiterDisplaySize
-            \fontdimen21\font=0pt\relax % delim2 = FractionDelimiterSize
-            \fontdimen22\font=\@@_get_fontparam:nn {15} {AxisHeight}\relax
-          }
+            \@@_copy_fontparam:nnn { 8} {43} {FractionNumeratorDisplayStyleShiftUp}\relax
+            \@@_copy_fontparam:nnn { 9} {42} {FractionNumeratorShiftUp}\relax
+            \@@_copy_fontparam:nnn {10} {32} {StackTopShiftUp}\relax
+            \@@_copy_fontparam:nnn {11} {45} {FractionDenominatorDisplayStyleShiftDown}\relax
+            \@@_copy_fontparam:nnn {12} {44} {FractionDenominatorShiftDown}\relax
+            \@@_copy_fontparam:nnn {13} {21} {SuperscriptShiftUp}\relax
+            \@@_copy_fontparam:nnn {14} {21} {SuperscriptShiftUp}\relax
+            \@@_copy_fontparam:nnn {15} {22} {SuperscriptShiftUpCramped}\relax
+            \@@_copy_fontparam:nnn {16} {18} {SubscriptShiftDown}\relax
+            \@@_copy_fontparam:nnn {17} {18} {SubscriptShiftDownWithSuperscript}\relax
+            \@@_copy_fontparam:nnn {18} {24} {SuperscriptBaselineDropMax}\relax
+            \@@_copy_fontparam:nnn {19} {20} {SubscriptBaselineDropMin}\relax
+            \@@_zero_fontparam:n   {20} % delim1 = FractionDelimiterDisplaySize
+            \@@_zero_fontparam:n   {21} % delim2 = FractionDelimiterSize
+            \@@_copy_fontparam:nnn {22} {15} {AxisHeight}\relax
+         }
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{symbols}{\l_@@_mversion_tl}
@@ -261,13 +261,13 @@
         \l_@@_font_keyval_tl,
         Scale=0.99999,
         FontAdjustment = {
-          \fontdimen8\font= \@@_get_fontparam:nn {48} {FractionRuleThickness}\relax
-          \fontdimen9\font= \@@_get_fontparam:nn {28} {UpperLimitGapMin}\relax
-          \fontdimen10\font=\@@_get_fontparam:nn {30} {LowerLimitGapMin}\relax
-          \fontdimen11\font=\@@_get_fontparam:nn {29} {UpperLimitBaselineRiseMin}\relax
-          \fontdimen12\font=\@@_get_fontparam:nn {31} {LowerLimitBaselineDropMin}\relax
-          \fontdimen13\font=0pt\relax
-        }
+          \@@_copy_fontparam:nnn { 8} {48} {FractionRuleThickness}\relax
+          \@@_copy_fontparam:nnn { 9} {28} {UpperLimitGapMin}\relax
+          \@@_copy_fontparam:nnn {10} {30} {LowerLimitGapMin}\relax
+          \@@_copy_fontparam:nnn {11} {29} {UpperLimitBaselineRiseMin}\relax
+          \@@_copy_fontparam:nnn {12} {31} {LowerLimitBaselineDropMin}\relax
+          \@@_zero_fontparam:n   {13}
+       }
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{largesymbols}{\l_@@_mversion_tl}
@@ -283,10 +283,24 @@
 % \end{macro}
 %
 %    \begin{macrocode}
+\cs_new:Nn \@@_copy_fontparam:nnn
+  {
+    \fontdimen #1 \font = \@@_get_fontparam:nn {#2} {#3}
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_zero_fontparam:n
+  {
+    \fontdimen #1 \font = 0pt\relax
+ }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \cs_new:Nn \@@_get_fontparam:nn
   {
 %<XE>    \the\fontdimen#1\l_@@_font\relax
-%<LU>    \directlua{fontspec.mathfontdimen("l_@@_font","#2")}
+%<LU>    \directlua{fontspec.mathfontdimen(“l_@@_font”,”#2”)}
   }
 %    \end{macrocode}
 %
