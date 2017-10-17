@@ -479,45 +479,45 @@
 % And some of them are probably not meant to stretch, either. But adding them here doesn't hurt.
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_delcodes:
- {
-  % ensure \left. and \right. work:
-  \@@_set_delcode:nnn \@@_symfont_tl {`\.} {\c_zero}
-  % this is forcefully done to fix a bug -- indicates a larger problem!
+  {
+    % ensure \left. and \right. work:
+    \@@_set_delcode:nnn \@@_symfont_tl {`\.} {\c_zero}
+    % this is forcefully done to fix a bug -- indicates a larger problem!
 
-  \@@_assign_delcode:nn {`\/}   {\g_@@_slash_delimiter_usv}
-  \@@_assign_delcode:nn {"2044} {\g_@@_slash_delimiter_usv} % fracslash
-  \@@_assign_delcode:nn {"2215} {\g_@@_slash_delimiter_usv} % divslash
-  \@@_assign_delcode:n {"005C} % backslash
-  \@@_assign_delcode:nn {`\<} {"27E8} % angle brackets with ascii notation
-  \@@_assign_delcode:nn {`\>} {"27E9} % angle brackets with ascii notation
-  \@@_assign_delcode:n {"2191} % up arrow
-  \@@_assign_delcode:n {"2193} % down arrow
-  \@@_assign_delcode:n {"2195} % updown arrow
-  \@@_assign_delcode:n {"219F} % up arrow twohead
-  \@@_assign_delcode:n {"21A1} % down arrow twohead
-  \@@_assign_delcode:n {"21A5} % up arrow from bar
-  \@@_assign_delcode:n {"21A7} % down arrow from bar
-  \@@_assign_delcode:n {"21A8} % updown arrow from bar
-  \@@_assign_delcode:n {"21BE} % up harpoon right
-  \@@_assign_delcode:n {"21BF} % up harpoon left
-  \@@_assign_delcode:n {"21C2} % down harpoon right
-  \@@_assign_delcode:n {"21C3} % down harpoon left
-  \@@_assign_delcode:n {"21C5} % arrows up down
-  \@@_assign_delcode:n {"21F5} % arrows down up
-  \@@_assign_delcode:n {"21C8} % arrows up up
-  \@@_assign_delcode:n {"21CA} % arrows down down
-  \@@_assign_delcode:n {"21D1} % double up arrow
-  \@@_assign_delcode:n {"21D3} % double down arrow
-  \@@_assign_delcode:n {"21D5} % double updown arrow
-  \@@_assign_delcode:n {"21DE} % up arrow double stroke
-  \@@_assign_delcode:n {"21DF} % down arrow double stroke
-  \@@_assign_delcode:n {"21E1} % up arrow dashed
-  \@@_assign_delcode:n {"21E3} % down arrow dashed
-  \@@_assign_delcode:n {"21E7} % up white arrow
-  \@@_assign_delcode:n {"21E9} % down white arrow
-  \@@_assign_delcode:n {"21EA} % up white arrow from bar
-  \@@_assign_delcode:n {"21F3} % updown white arrow
- }
+    \@@_assign_delcode:nn {`\/}   {\g_@@_slash_delimiter_usv}
+    \@@_assign_delcode:nn {"2044} {\g_@@_slash_delimiter_usv} % fracslash
+    \@@_assign_delcode:nn {"2215} {\g_@@_slash_delimiter_usv} % divslash
+    \@@_assign_delcode:n {"005C} % backslash
+    \@@_assign_delcode:nn {`\<} {"27E8} % angle brackets with ascii notation
+    \@@_assign_delcode:nn {`\>} {"27E9} % angle brackets with ascii notation
+    \@@_assign_delcode:n {"2191} % up arrow
+    \@@_assign_delcode:n {"2193} % down arrow
+    \@@_assign_delcode:n {"2195} % updown arrow
+    \@@_assign_delcode:n {"219F} % up arrow twohead
+    \@@_assign_delcode:n {"21A1} % down arrow twohead
+    \@@_assign_delcode:n {"21A5} % up arrow from bar
+    \@@_assign_delcode:n {"21A7} % down arrow from bar
+    \@@_assign_delcode:n {"21A8} % updown arrow from bar
+    \@@_assign_delcode:n {"21BE} % up harpoon right
+    \@@_assign_delcode:n {"21BF} % up harpoon left
+    \@@_assign_delcode:n {"21C2} % down harpoon right
+    \@@_assign_delcode:n {"21C3} % down harpoon left
+    \@@_assign_delcode:n {"21C5} % arrows up down
+    \@@_assign_delcode:n {"21F5} % arrows down up
+    \@@_assign_delcode:n {"21C8} % arrows up up
+    \@@_assign_delcode:n {"21CA} % arrows down down
+    \@@_assign_delcode:n {"21D1} % double up arrow
+    \@@_assign_delcode:n {"21D3} % double down arrow
+    \@@_assign_delcode:n {"21D5} % double updown arrow
+    \@@_assign_delcode:n {"21DE} % up arrow double stroke
+    \@@_assign_delcode:n {"21DF} % down arrow double stroke
+    \@@_assign_delcode:n {"21E1} % up arrow dashed
+    \@@_assign_delcode:n {"21E3} % down arrow dashed
+    \@@_assign_delcode:n {"21E7} % up white arrow
+    \@@_assign_delcode:n {"21E9} % down white arrow
+    \@@_assign_delcode:n {"21EA} % up white arrow from bar
+    \@@_assign_delcode:n {"21F3} % updown white arrow
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -541,13 +541,13 @@
 % integrals such as $\iiiint$, but that might be a matter of preference.
 %    \begin{macrocode}
 \tl_set:Nn \l_@@_nolimits_tl
- {
-  \int\iint\iiint\iiiint\oint\oiint\oiiint
-  \intclockwise\varointclockwise\ointctrclockwise\sumint
-  \intbar\intBar\fint\cirfnint\awint\rppolint
-  \scpolint\npolint\pointint\sqint\intlarhk\intx
-  \intcap\intcup\upint\lowint
- }
+  {
+    \int\iint\iiint\iiiint\oint\oiint\oiiint
+    \intclockwise\varointclockwise\ointctrclockwise\sumint
+    \intbar\intBar\fint\cirfnint\awint\rppolint
+    \scpolint\npolint\pointint\sqint\intlarhk\intx
+    \intcap\intcup\upint\lowint
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -556,9 +556,9 @@
 % that don't take limits.
 %    \begin{macrocode}
 \DeclareDocumentCommand \addnolimits {m}
- {
-  \tl_put_right:Nn \l_@@_nolimits_tl {#1}
- }
+  {
+    \tl_put_right:Nn \l_@@_nolimits_tl {#1}
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -567,9 +567,9 @@
 % It removes an item from the nolimits list.
 %    \begin{macrocode}
 \DeclareDocumentCommand \removenolimits {m}
- {
-  \tl_remove_all:Nn \l_@@_nolimits_tl {#1}
- }
+  {
+    \tl_remove_all:Nn \l_@@_nolimits_tl {#1}
+  }
 %    \end{macrocode}
 % \end{macro}
 %
