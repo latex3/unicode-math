@@ -1,0 +1,65 @@
+
+% \section{\DTXCURR — The user interface commands}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% \begin{macro}{\unimathsetup}
+% This macro can be used in lieu of or later to override
+% options declared when the package is loaded.
+%    \begin{macrocode}
+\DeclareDocumentCommand \unimathsetup {m} { \keys_set:nn {unicode-math} {#1} }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setmathfont}
+% \doarg{font features (first optional argument retained for backwards compatibility)}
+% \darg{font name}
+% \doarg{font features}
+%    \begin{macrocode}
+\DeclareDocumentCommand \setmathfont { O{} m O{} }
+  {
+    \@@_setmathfont:nn {#1,#3} {#2}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setmathfontface}
+%    \begin{macrocode}
+\DeclareDocumentCommand \setmathfontface { m O{} m O{} }
+  {
+    \@@_setmathfontface:Nnn #1 {#2,#4} {#3}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\addnolimits}
+% This macro appends material to the macro containing the list of operators
+% that don’t take limits.
+%    \begin{macrocode}
+\DeclareDocumentCommand \addnolimits {m}
+  {
+    \tl_put_right:Nn \l_@@_nolimits_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\removenolimits}
+% Can this macro be given a better name?
+% It removes an item from the nolimits list.
+%    \begin{macrocode}
+\DeclareDocumentCommand \removenolimits {m}
+  {
+    \tl_remove_all:Nn \l_@@_nolimits_tl {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+%
+\endinput
