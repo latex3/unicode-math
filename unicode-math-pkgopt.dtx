@@ -5,14 +5,6 @@
 %<*package>
 %    \end{macrocode}
 %
-% \begin{macro}{\unimathsetup}
-% This macro can be used in lieu of or later to override
-% options declared when the package is loaded.
-%    \begin{macrocode}
-\DeclareDocumentCommand \unimathsetup {m} { \keys_set:nn {unicode-math} {#1} }
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\@@_keys_choices:nn}
 % To simplify the creation of option keys, let's iterate in pairs rather than worry about equals signs and commas.
 %    \begin{macrocode}
