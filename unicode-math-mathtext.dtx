@@ -44,20 +44,6 @@
  }
 %    \end{macrocode}
 % 
-%    \begin{macrocode}
-\@onlypreamble \setmathfontface
-%    \end{macrocode}
-% Note that \LaTeX's SetMathAlphabet simply doesn't work to "reset" a maths alphabet font after \verb"\begin{document}", so unlike most of the other maths commands around we still restrict this one to the preamble.
-% \end{macro}
-%
-% \begin{macro}{\setoperatorfont}
-% TODO: add check?
-%    \begin{macrocode}
-\DeclareDocumentCommand \setoperatorfont {m}
- { \tl_set:Nn \g_@@_operator_mathfont_tl {#1} }
-\setoperatorfont{\mathrm}
-%    \end{macrocode}
-% \end{macro}
 %
 % \subsection{Hooks into \pkg{fontspec}}
 %
