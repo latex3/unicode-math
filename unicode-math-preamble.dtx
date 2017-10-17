@@ -246,6 +246,33 @@
 % \end{macro}
 % \end{macro}
 %
+% \begin{macro}{\@@_copy_fontparam:nnn}
+%    \begin{macrocode}
+\cs_new:Nn \@@_copy_fontparam:nnn
+  {
+    \fontdimen #1 \font = \@@_get_fontparam:nn {#2} {#3}
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_zero_fontparam:n}
+%    \begin{macrocode}
+\cs_new:Nn \@@_zero_fontparam:n
+  {
+    \fontdimen #1 \font = 0pt\relax
+ }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_get_fontparam:nn}
+%    \begin{macrocode}
+\cs_new:Nn \@@_get_fontparam:nn
+  {
+%<XE>    \the\fontdimen#1\l_@@_font\relax
+%<LU>    \directlua{fontspec.mathfontdimen("l_@@_font","#2")}
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\@@_char_gmake_mathactive:N}
 % \begin{macro}{\@@_char_gmake_mathactive:n}
