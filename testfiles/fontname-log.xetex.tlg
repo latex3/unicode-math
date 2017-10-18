@@ -1,12 +1,9 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-"[texgyrepagella-regular.otf]"
 \1 
-"[texgyrepagella-regular.otf]"
 \2 
-"[texgyrepagella-regular.otf]"
 \2 
-"[texgyrepagella-regular.otf]"
+\3 
 \1 
 Here is the problem I'm trying to solve:
 > \box0=

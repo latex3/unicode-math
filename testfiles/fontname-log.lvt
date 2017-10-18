@@ -11,7 +11,6 @@
 
 \font\1="[texgyrepagella-regular.otf]" at 10pt
 \1
-\FONTNAME
 \MSG{\the\font}
 
 % After loading the same font in csname \string\2,
@@ -20,21 +19,26 @@
 
 \font\2="[texgyrepagella-regular.otf]" at 10pt
 \1
-\FONTNAME
 \MSG{\the\font}
 
 % Can't just erase the reference to \string\2:
 
 \let\2\nullfont
 \1
-\FONTNAME
+\MSG{\the\font}
+
+% Let's try something in a group:
+
+\begingroup
+\font\3="[texgyrepagella-regular.otf]" at 10pt
+\endgroup
+\1
 \MSG{\the\font}
 
 % Have to redeclare \string\1 again:
 
 \font\1="[texgyrepagella-regular.otf]" at 10pt
 \1
-\FONTNAME
 \MSG{\the\font}
 
 \MSG{Here is the problem I'm trying to solve:}
