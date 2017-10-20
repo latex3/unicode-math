@@ -1,13 +1,12 @@
 % !TEX TS-program = XeLaTeX
 
-\providecommand\DTXFILES{}% if this .tex file is typeset, only include documentation
 \documentclass[a4paper]{ltxdoc}
 \input{um-doc-style.tex}
 \begin{document}
 
 \title{Experimental Unicode mathematical typesetting: The \pkg{unicode-math} package}
 \author{Will Robertson, Philipp Stephani and Khaled Hosny\\
-        \texttt{will.robertson@latex-project.org}}
+        \texttt{https://github.com/wspr/unicode-math/}}
 \date{\umfiledate \qquad \umfileversion}
 
 \maketitle
@@ -42,11 +41,8 @@ package after any problems have been ironed out with the initial version.
 
 \end{abstract}
 
-\doparttoc\faketableofcontents
-
 \newpage
-\part{User documentation}
-\parttoc
+\tableofcontents
 
 \clearpage
 \section{Introduction}
@@ -1132,8 +1128,6 @@ without the leading `math' string; for example,
 |\symbf { \show \l_@@_mathstyle_tl }|
 will produce `bf'.
 
-\StopEventually{\end{document}}
-
 \clearpage
 \appendix
 
@@ -1142,10 +1136,4 @@ will produce `bf'.
 \input{um-doc-legacyfontdimen.tex}
 \input{um-doc-mathfontdimen.tex}
 
-\def\DTX#1{\gdef\DTXCURR{#1}\DocInput{#1}}
-\DTXFILES
-
 \end{document}
-
-
-

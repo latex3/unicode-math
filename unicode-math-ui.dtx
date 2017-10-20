@@ -32,13 +32,13 @@
     \@@_setmathfontface:Nnn #1 {#2,#4} {#3}
   }
 %    \end{macrocode}
-% \end{macro}
 %
+% Note that \LaTeX’s \cs{SetMathAlphabet} simply doesn’t work to “reset” a maths alphabet font after \verb”\begin{document}”, so unlike most of the other maths commands around we still restrict this one to the preamble.
 %    \begin{macrocode}
 \@onlypreamble \setmathfontface
 %    \end{macrocode}
-% Note that \LaTeX’s \cs{SetMathAlphabet} simply doesn’t work to “reset” a maths alphabet font after \verb”\begin{document}”, so unlike most of the other maths commands around we still restrict this one to the preamble.
 % \end{macro}
+%
 %
 % \begin{macro}{\setoperatorfont}
 % TODO: add check?

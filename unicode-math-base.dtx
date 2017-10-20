@@ -1,0 +1,63 @@
+%
+% \section{The \texttt{unicode-math.sty} loading file}
+%
+% The prefix for \pkg{unicode-math} is \texttt{um}:
+%    \begin{macrocode}
+%<@@=um>
+%    \end{macrocode}
+%
+% The plain sty file is a stub which loads necessary packages and then bifurcates into
+% a XeTeX- or LuaTeX-specific version of the package.
+%
+%    \begin{macrocode}
+%<*base>
+%    \end{macrocode}
+% Bail early if necessary.
+%    \begin{macrocode}
+\ifdefined\XeTeXversion
+  \ifdim\number\XeTeXversion\XeTeXrevision in<0.9998in%
+    \PackageError{unicode-math}{%
+      Cannot run with this version of XeTeX!\MessageBreak
+      You need XeTeX 0.9998 or newer.%
+    }\@ehd
+  \fi
+\else\ifdefined\luatexversion
+  \ifnum\luatexversion<64%
+    \PackageError{unicode-math}{%
+      Cannot run with this version of LuaTeX!\MessageBreak
+      You need LuaTeX 0.64 or newer.%
+    }\@ehd
+  \fi
+\else
+  \PackageError{unicode-math}{%
+    Cannot be run with pdfLaTeX!\MessageBreak
+    Use XeLaTeX or LuaLaTeX instead.%
+  }\@ehd
+\fi\fi
+%    \end{macrocode}
+%
+% \paragraph{Packages}
+% Assuming people are running up-to-date packages.
+%    \begin{macrocode}
+\RequirePackage{expl3,xparse,l3keys2e}
+\RequirePackage{fontspec}
+\RequirePackage{ucharcat}
+\RequirePackage{fix-cm} % avoid some warnings (still necessary? check...)
+\RequirePackage{filehook}
+%    \end{macrocode}
+% \paragraph{Bifurcate}
+%    \begin{macrocode}
+\ExplSyntaxOn
+\sys_if_engine_luatex:T { \RequirePackageWithOptions{unicode-math-luatex} }
+\sys_if_engine_xetex:T  { \RequirePackageWithOptions{unicode-math-xetex}  }
+\ExplSyntaxOff
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</base>
+%    \end{macrocode}
+%
+% That's the end of the base package.
+%
+\endinput
+

@@ -1,137 +1,44 @@
-% \iffalse
-% !TEX TS-program = XeLaTeX
-% ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ^^A   SELF-EXTRACTION BEGINS HERE
-% ^^A %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%<*internal>
-\begingroup
-\input l3docstrip.tex\relax\keepsilent
-\declarepreamble\defaultpreamble
-
-Copyright 2006-2017   Will Robertson <will.robertson@latex-project.org>
-Copyright 2010-2013 Philipp Stephani <st_philipp@yahoo.de>
-Copyright 2012-2015     Khaled Hosny <khaledhosny@eglug.org>
-
-This package is free software and may be redistributed and/or modified under
-the conditions of the LaTeX Project Public License, version 1.3c or higher
-(your choice): <http://www.latex-project.org/lppl/>.
-
-This work is "maintained" by Will Robertson.
-\endpreamble
-\nopostamble
-\askforoverwritefalse
-\generate{\file{unicode-math.sty}{\from{unicode-math.dtx}{base}}}
-\gdef\DTXFILES{%
-  \DTX{unicode-math.dtx}%
-  \DTX{unicode-math-preamble.dtx}%
-  \DTX{unicode-math-ui.dtx}%
-  \DTX{unicode-math-pkgopt.dtx}%
-  \DTX{unicode-math-msg.dtx}%
-  \DTX{unicode-math-usv.dtx}%
-  \DTX{unicode-math-setchar.dtx}%
-  \DTX{unicode-math-mathtext.dtx}%
-  \DTX{unicode-math-main.dtx}%
-  \DTX{unicode-math-fontopt.dtx}%
-  \DTX{unicode-math-fontparam.dtx}%
-  \DTX{unicode-math-mathmap.dtx}%
-  \DTX{unicode-math-mathtext.dtx}%
-  \DTX{unicode-math-epilogue.dtx}%
-  \DTX{unicode-math-primes.dtx}%
-  \DTX{unicode-math-sscript.dtx}%
-  \DTX{unicode-math-compat.dtx}%
-  \DTX{unicode-math-alphabets.dtx}%
-}
-\ifx\UMDEBUG\undefined\def\UMDEBUG{}\else\def\UMDEBUG{,debug}\fi
-\def\DTX#1{\from{#1}{package,XE\UMDEBUG}}
-\generate{\file{unicode-math-xetex.sty}{\DTXFILES}}
-\def\DTX#1{\from{#1}{package,LU\UMDEBUG}}
-\generate{\file{unicode-math-luatex.sty}{\DTXFILES}}
-\def\tempa{plain}\ifx\tempa\fmtname\endgroup\expandafter\bye\fi
-\endgroup
+%
+% \section{Package declaration}
+%
+%    \begin{macrocode}
+%<*dtx>
 \ProvidesFile{unicode-math.dtx}
-%</internal>
+%</dtx>
 %<base>\ProvidesPackage{unicode-math}
 %<package&XE>\ProvidesPackage{unicode-math-xetex}
 %<package&LU>\ProvidesPackage{unicode-math-luatex}
 %<*base|package>
   [2017/10/09 v0.8h Unicode maths in XeLaTeX and LuaLaTeX]
 %</base|package>
-%<*internal>
-\input{um-doc}
-%</internal>
-% \fi
-%
-% \clearpage
-% \part{Package implementation}
-% \parttoc
-%
-% \section{The \texttt{unicode-math.sty} loading file}
-%
-% The prefix for \pkg{unicode-math} is \texttt{um}:
-%    \begin{macrocode}
-%<@@=um>
 %    \end{macrocode}
 %
-% The plain sty file is a stub which loads necessary packages and then bifurcates into
-% a XeTeX- or LuaTeX-specific version of the package.
 %
 %    \begin{macrocode}
-%<*base>
+%<*dtx>
+\def\DTXFILES{
+  \DTX{unicode-math.dtx}
+  \DTX{unicode-math-base.dtx}
+  \DTX{unicode-math-preamble.dtx}
+  \DTX{unicode-math-ui.dtx}
+  \DTX{unicode-math-pkgopt.dtx}
+  \DTX{unicode-math-msg.dtx}
+  \DTX{unicode-math-usv.dtx}
+  \DTX{unicode-math-setchar.dtx}
+  \DTX{unicode-math-mathtext.dtx}
+  \DTX{unicode-math-main.dtx}
+  \DTX{unicode-math-fontopt.dtx}
+  \DTX{unicode-math-fontparam.dtx}
+  \DTX{unicode-math-mathmap.dtx}
+  \DTX{unicode-math-mathtext.dtx}
+  \DTX{unicode-math-epilogue.dtx}
+  \DTX{unicode-math-primes.dtx}
+  \DTX{unicode-math-sscript.dtx}
+  \DTX{unicode-math-compat.dtx}
+  \DTX{unicode-math-alphabets.dtx}
+}
+%</dtx>
 %    \end{macrocode}
-% Bail early if necessary.
-%    \begin{macrocode}
-\ifdefined\XeTeXversion
-  \ifdim\number\XeTeXversion\XeTeXrevision in<0.9998in%
-    \PackageError{unicode-math}{%
-      Cannot run with this version of XeTeX!\MessageBreak
-      You need XeTeX 0.9998 or newer.%
-    }\@ehd
-  \fi
-\else\ifdefined\luatexversion
-  \ifnum\luatexversion<64%
-    \PackageError{unicode-math}{%
-      Cannot run with this version of LuaTeX!\MessageBreak
-      You need LuaTeX 0.64 or newer.%
-    }\@ehd
-  \fi
-\else
-  \PackageError{unicode-math}{%
-    Cannot be run with pdfLaTeX!\MessageBreak
-    Use XeLaTeX or LuaLaTeX instead.%
-  }\@ehd
-\fi\fi
-%    \end{macrocode}
-%
-% \paragraph{Packages}
-% Assuming people are running up-to-date packages.
-%    \begin{macrocode}
-\RequirePackage{expl3,xparse,l3keys2e}
-\RequirePackage{fontspec}
-\RequirePackage{ucharcat}
-\RequirePackage{fix-cm} % avoid some warnings (still necessary? check...)
-\RequirePackage{filehook}
-%    \end{macrocode}
-% \paragraph{Bifurcate}
-%    \begin{macrocode}
-\ExplSyntaxOn
-\sys_if_engine_luatex:T { \RequirePackageWithOptions{unicode-math-luatex} }
-\sys_if_engine_xetex:T  { \RequirePackageWithOptions{unicode-math-xetex}  }
-\ExplSyntaxOff
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</base>
-%    \end{macrocode}
-%
-% That's the end of the base package. The subsequent packages are derived from
-% the following ordered list of \texttt{dtx} files:
-% \begin{multicols}{3}
-% \begin{enumerate}
-% \def\DTX#1{\item \texttt{#1}}
-% \DTXFILES
-% \end{enumerate}
-% \end{multicols}
 %
 \endinput
-
 

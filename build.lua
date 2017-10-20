@@ -2,12 +2,12 @@
 
 module = "unicode-math"
 
-sourcefiles  = {"*.dtx","unicode-math-table.tex"}
-unpackfiles  = {"unicode-math.dtx"}
+sourcefiles  = {"*.dtx","*.ins","unicode-math-table.tex"}
+unpackfiles  = {"unicode-math.ins"}
 installfiles = {"*.sty","unicode-math-table.tex"}
-typesetfiles = {"unicode-math.dtx","unimath-symbols.ltx"}
-docfiles     = {"um-doc*.tex"}
-demofiles    = {"unimath-example.ltx"}
+typesetfiles = {"*.ltx"}
+docfiles     = {"*.ltx","um-doc*.tex"}
+demofiles    = {"unimath-example.tex"}
 
 checkengines = {"xetex","luatex"}
 typesetexe = "xelatex"
