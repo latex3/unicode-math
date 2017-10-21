@@ -7,7 +7,7 @@ unpackfiles  = {"unicode-math.ins"}
 installfiles = {"*.sty","unicode-math-table.tex"}
 typesetfiles = {"*.ltx"}
 docfiles     = {"*.ltx","um-doc*.tex"}
-demofiles    = {"unimath-example.tex"}
+textfiles.   = {"*.md","LICENSE"}
 
 checkengines = {"xetex","luatex"}
 typesetexe = "xelatex"
