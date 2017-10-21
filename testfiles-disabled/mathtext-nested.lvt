@@ -1,0 +1,16 @@
+
+\input{umtest-preamble}
+
+\usepackage{fontspec}
+
+\begin{document}
+
+\START
+
+\setbox0=\hbox{$\mathcal{A}$}
+\SHOWBOX{0}
+
+\setbox0=\hbox{$\mathrm{\mathcal{A}}$}
+\SHOWBOX{0}
+
+\end{document}
