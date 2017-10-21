@@ -8,7 +8,7 @@
 #
 # Updates the first line of the file to match the filename
 
-for ii in *.tex *.ltx *.dtx ; do
+for ii in *.ins *.tex *.ltx *.dtx ; do
 
 echo $ii
 
