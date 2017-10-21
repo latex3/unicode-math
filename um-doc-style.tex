@@ -9,25 +9,6 @@
 \EnableCrossrefs
 \CodelineIndex
 
-\errorcontextlines=999
-
-\def\@dotsep{1000}
-\setcounter{tocdepth}{2}
-\setlength\columnseprule{0.4pt}
-\renewcommand\tableofcontents{\relax
-  \begin{multicols}{2}[\section*{\contentsname}]\relax
-    \@starttoc{toc}\relax
-  \end{multicols}}
-
-\setcounter{IndexColumns}{2}
-\renewenvironment{theglossary}
-  {\small\list{}{}
-     \item\relax
-     \glossary@prologue\GlossaryParms
-     \let\item\@idxitem \ignorespaces
-     \def\pfill{\hspace*{\fill}}}
-  {\endlist}
-
 \usepackage[svgnames]{xcolor}
 \usepackage[inline]{enumitem}
 \usepackage{array,booktabs,calc,enumitem,fancyvrb,graphicx,ifthen,longtable,refstyle,subfig,topcapt,url,varioref,underscore}
@@ -71,8 +52,6 @@
 % work around some issue turning | into "j" inside mathsf in the definition of \Module:
 % (also prettify)
 \def\Module#1{{\footnotesize\color{red}$\langle$\texttt{#1}$\rangle$}}
-
-\usepackage{minitoc}
 
 \linespread{1.1}
 \frenchspacing
@@ -125,7 +104,5 @@
   \catcode`\_=11\relax
   \catcode`\:=11\relax
 }
-
-\def\partname{Part}
 
 \makeatother

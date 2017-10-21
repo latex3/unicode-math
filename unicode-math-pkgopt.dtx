@@ -1,5 +1,5 @@
 
-% \section{\DTXCURR --- setup and package options}
+% \section{setup and package options}
 %
 %    \begin{macrocode}
 %<*package>
@@ -22,14 +22,14 @@
  }
 \cs_new:Nn \@@_keys_choices_aux:nnn { #1 / #2 .code:n = { \exp_not:n {#3} } , }
 %    \end{macrocode}
-% 
+%
 %    \begin{macrocode}
 \cs_new:Nn \@@_tl_map_dbl:nN
   {
     \__@@_tl_map_dbl:Nnn #2 #1 \q_recursion_tail {}{} \q_recursion_stop
   }
 %    \end{macrocode}
-% 
+%
 %    \begin{macrocode}
 \cs_new:Nn \__@@_tl_map_dbl:Nnn
   {

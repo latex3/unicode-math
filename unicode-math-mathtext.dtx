@@ -1,5 +1,5 @@
 
-% \section{\DTXCURR --- Maths text commands}
+% \section{Maths text commands}
 %
 %    \begin{macrocode}
 %<*package>
@@ -15,14 +15,14 @@
    { \tl_set:Nn \l_@@_mversion_tl {#1} }
  }
 %    \end{macrocode}
-% 
+%
 %    \begin{macrocode}
 \cs_set:Nn \@@_setmathfontface:Nnn
  {
   \tl_clear:N \l_@@_mversion_tl
 
   \keys_set_known:nnN {@@_mathface} {#2} \l_@@_keyval_clist
-  
+
   \exp_args:Nnx \fontspec_set_family:Nxn \l_@@_tmpa_tl
    { ItalicFont={}, BoldFont={}, \exp_not:V \l_@@_keyval_clist } {#3}
 
@@ -31,7 +31,7 @@
     \tl_set:Nn \l_@@_mversion_tl {normal}
     \DeclareMathAlphabet #1 {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
    }
-  
+
   \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
 
   % integrate with fontspec's \setmathrm etc:
