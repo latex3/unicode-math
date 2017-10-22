@@ -95,34 +95,36 @@ greater.
 
 [LPPL]: http://www.latex-project.org/lppl/
 
-This work is author-maintained and consists of the files
+This work is author-maintained and consists of the code files:
 
 - unicode-math.dtx,
-- unicode-math-*.dtx,
-- unicode-math-table.tex,
-- unimath-example.ltx,
-- unimath-symbols.ltx,
-- unicode-math-testsuite.ltx;
+- unicode-math.ins,
+- um-code-*.dtx,
+- unicode-math-table.tex;
 
-the derived files
+the documentation files:
+
+- unicode-math.ltx,
+- unicode-math-code.ltx,
+- um-doc*.tex,
+- unimath-example.ltx,
+- unimath-symbols.ltx;
+
+the derived files:
 
 - unicode-math.lua,
 - unicode-math-xetex.sty,
 - unicode-math-luatex.sty,
 - unicode-math.sty;
 
-the compiled documentation files
+the compiled documentation files:
 
 - unicode-math.pdf,
+- unicode-math-code.pdf,
 - unimath-example.pdf,
 - unimath-symbols.pdf;
 
-and the test suite for this package
+and the test suite:
 
 - testfiles/umtest-preamble.tex,
 - testfiles/*.(lvt|tlg).
-
-____________________________________
-Copyright 2006-2017   Will Robertson <will.robertson@latex-project.org>
-Copyright 2010-2013 Philipp Stephani <st_philipp@yahoo.de>
-Copyright 2012-2015     Khaled Hosny <khaledhosny@eglug.org>
