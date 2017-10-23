@@ -49,3 +49,17 @@ If you are changing documentation only (i.e., no code changes), you can add
 `[ci skip]` to the commit message and the test suite won't be run to check that
 the changes haven't broken anything.
 
+
+## Copyright
+
+Copyright statements in most package files are updated en masse by the bash script
+`update-copyright.sh` using the file COPYRIGHT as a template.
+(The updating script has been tested on macOS only.)
+
+Contributors are listed in the copyright statement if they have more than one
+entry in the following list:
+
+    git log --all --date=short --format='%cN %ad'  | sed 's/\(.*[0-9]*\)-[0-9]*-[0-9]*/\1/' | sort -u
+
+Contributors are added to the COPYRIGHT file manually. If your name doesn't appear
+in that list, you might need to check your Git setup.
