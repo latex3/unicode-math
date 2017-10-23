@@ -126,5 +126,5 @@ the compiled documentation files:
 
 and the test suite:
 
-- testfiles/umtest-preamble.tex,
+- testfiles/support/umtest-preamble.tex,
 - testfiles/*.(lvt|tlg).

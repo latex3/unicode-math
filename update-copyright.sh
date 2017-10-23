@@ -1,4 +1,10 @@
 ## UPDATE-COPYRIGHT.SH
+#
+# To set this up as a post-commit hook in Git:
+#
+#     chmod +x update-copyright.sh
+#     cp update-copyright.sh .git/hooks/post-commit
+#
 
 # 1.
 # Updates copyright for Will to the current year.
