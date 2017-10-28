@@ -15,6 +15,14 @@
 \cs_set:Nn \@@_setmathfont:nn
   {
     \tl_set:Nn \l_@@_fontname_tl {#2}
+%    \end{macrocode}
+% Erase any conception \LaTeX\ has of previously defined math symbol fonts;
+% this allows \cmd\DeclareSymbolFont\ at any point in the document.
+%    \begin{macrocode}
+    \cs_set_eq:NN \glb@currsize \scan_stop:
+%    \end{macrocode}
+% Initialise all local variabes:
+%    \begin{macrocode}
     \@@_init:
 %    \end{macrocode}
 % Grab the current size information:
@@ -80,13 +88,12 @@
 %    \end{macrocode}
 % Finally,
 % \begin{itemize}
-% \item Remap symbols that don't take their natural mathcode
-% \item Activate any symbols that need to be math-active
-% \item Enable wide/narrow accents
-% \item Assign delimiter codes for symbols that need to grow
-% \item Setup the maths alphabets (\cs{mathbf} etc.).
-%       This is an extensive part of the code; see Section~\ref{sec:mathmap}.
-% \item Setup negations, which are handled on an ad hoc basis; see Section~\ref{sec:negations}.
+% \item remap symbols that don't take their natural mathcode;
+% \item activate any symbols that need to be math-active;
+% \item assign delimiter codes for symbols that need to grow;
+% \item setup the maths alphabets (\cs{symbf} etc.) ---
+%       this is an extensive part of the code; see Section~\ref{sec:mathmap};
+% \item setup negations, which are handled on an ad hoc basis; see Section~\ref{sec:negations}.
 % \end{itemize}
 %    \begin{macrocode}
     \@@_remap_symbols:
@@ -126,32 +133,27 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_init:
   {
-%    \end{macrocode}
-% \begin{itemize}
-% \item Initially assume we're using a proper OpenType font with unicode maths.
-%    \begin{macrocode}
     \bool_set_true:N  \l_@@_ot_math_bool
+    \tl_set:Nn \l_@@_mversion_tl {normal}
+    \tl_set:Nn \@@_symfont_tl {operators}
 %    \end{macrocode}
-% \item Erase any conception \LaTeX\ has of previously defined math symbol fonts;
-% this allows \cmd\DeclareSymbolFont\ at any point in the document.
+% Defaults for the script and scriptscript font.
 %    \begin{macrocode}
-    \cs_set_eq:NN \glb@currsize \scan_stop:
+    \tl_set:Nn    \l_@@_script_features_tl  {Style=MathScript}
+    \tl_set:Nn    \l_@@_sscript_features_tl {Style=MathScriptScript}
+    \tl_set_eq:NN \l_@@_script_font_tl      \l_@@_fontname_tl
+    \tl_set_eq:NN \l_@@_sscript_font_tl     \l_@@_fontname_tl
 %    \end{macrocode}
-% \item To start with, assume we're defining the font for every math symbol character.
+% Default to defining the font for every math symbol character.
 %    \begin{macrocode}
     \bool_set_true:N \l_@@_init_bool
-    \seq_clear:N \l_@@_char_range_seq
-    \clist_clear:N \l_@@_char_nrange_clist
-    \seq_clear:N \l_@@_mathalph_seq
-    \seq_clear:N \l_@@_missing_alph_seq
+    \seq_clear:N     \l_@@_char_range_seq
+    \clist_clear:N   \l_@@_char_nrange_clist
+    \seq_clear:N     \l_@@_mathalph_seq
+    \seq_clear:N     \l_@@_missing_alph_seq
 %    \end{macrocode}
-% \item By default use the `normal' math version.
+% Other range initialisations.
 %    \begin{macrocode}
-    \tl_set:Nn \l_@@_mversion_tl {normal}
-%    \end{macrocode}
-% \item Other range initialisations.
-%    \begin{macrocode}
-    \tl_set:Nn \@@_symfont_tl {operators}
     \cs_set_eq:NN \_@@_sym:nnn \@@_process_symbol_noparse:nnn
     \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
     \cs_set_eq:NN \@@_remap_symbol:nnn \@@_remap_symbol_noparse:nnn
@@ -159,16 +161,6 @@
     \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
     \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_noparse:nn
     \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_noparse:nNN
-%    \end{macrocode}
-% \item Define default font features for the script and scriptscript font.
-%    \begin{macrocode}
-    \tl_set:Nn \l_@@_script_features_tl  {Style=MathScript}
-    \tl_set:Nn \l_@@_sscript_features_tl {Style=MathScriptScript}
-    \tl_set_eq:NN \l_@@_script_font_tl   \l_@@_fontname_tl
-    \tl_set_eq:NN \l_@@_sscript_font_tl  \l_@@_fontname_tl
-%    \end{macrocode}
-% \end{itemize}
-%    \begin{macrocode}
   }
 %    \end{macrocode}
 % \end{macro}
