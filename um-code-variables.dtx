@@ -1,0 +1,181 @@
+%%^^J%%  um-code-variables.dtx  -  part of UNICODE-MATH <github.com/wspr/unicode-math>
+
+% \section{Variable initialisation}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+%
+% \paragraph{Conditionals}
+%
+% True if using a proper OpenType font with unicode maths
+%    \begin{macrocode}
+\bool_new:N \l_@@_ot_math_bool
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_init_bool
+\bool_new:N \l_@@_implicit_alph_bool
+\bool_new:N \g_@@_mainfont_already_set_bool
+%    \end{macrocode}
+% For \opt{math-style}:
+%    \begin{macrocode}
+\bool_new:N \g_@@_literal_bool
+\bool_new:N \g_@@_upLatin_bool
+\bool_new:N \g_@@_uplatin_bool
+\bool_new:N \g_@@_upGreek_bool
+\bool_new:N \g_@@_upgreek_bool
+%    \end{macrocode}
+% For \opt{bold-style}:
+%    \begin{macrocode}
+\bool_new:N \g_@@_bfliteral_bool
+\bool_new:N \g_@@_bfupLatin_bool
+\bool_new:N \g_@@_bfuplatin_bool
+\bool_new:N \g_@@_bfupGreek_bool
+\bool_new:N \g_@@_bfupgreek_bool
+%    \end{macrocode}
+% For \opt{sans-style}:
+%    \begin{macrocode}
+\bool_new:N \g_@@_upsans_bool
+\bool_new:N \g_@@_sfliteral_bool
+%    \end{macrocode}
+% For assorted package options:
+%    \begin{macrocode}
+\bool_new:N \g_@@_upNabla_bool
+\bool_new:N \g_@@_uppartial_bool
+\bool_new:N \g_@@_literal_Nabla_bool
+\bool_new:N \g_@@_literal_partial_bool
+\bool_new:N \l_@@_smallfrac_bool
+\bool_new:N \g_@@_literal_colon_bool
+\bool_new:N \g_@@_mathrm_text_bool
+\bool_new:N \g_@@_mathit_text_bool
+\bool_new:N \g_@@_mathbf_text_bool
+\bool_new:N \g_@@_mathsf_text_bool
+\bool_new:N \g_@@_mathtt_text_bool
+%    \end{macrocode}
+%
+% \paragraph{Variables}
+%    \begin{macrocode}
+\int_new:N \g_@@_fam_int
+%    \end{macrocode}
+%
+% For displaying in warning messages, etc.:
+%    \begin{macrocode}
+\tl_const:Nn \c_@@_math_alphabet_name_latin_tl {Latin,~lowercase}
+\tl_const:Nn \c_@@_math_alphabet_name_Latin_tl {Latin,~uppercase}
+\tl_const:Nn \c_@@_math_alphabet_name_greek_tl {Greek,~lowercase}
+\tl_const:Nn \c_@@_math_alphabet_name_Greek_tl {Greek,~uppercase}
+\tl_const:Nn \c_@@_math_alphabet_name_num_tl   {Numerals}
+\tl_const:Nn \c_@@_math_alphabet_name_misc_tl  {Misc.}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_mathstyle_tl
+\tl_new:N \l_@@_radicals_tl
+\tl_new:N \l_@@_nolimits_tl
+%    \end{macrocode}
+%
+% Used to store the font switch for the \cs{operator@font}.
+%    \begin{macrocode}
+\tl_new:N \g_@@_operator_mathfont_tl
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\seq_new:N \l_@@_missing_alph_seq
+\seq_new:N \l_@@_mathalph_seq
+\seq_new:N \l_@@_char_range_seq
+\seq_new:N \l_@@_mclass_range_seq
+\seq_new:N \l_@@_cmd_range_seq
+%    \end{macrocode}
+%
+% \begin{macro}{\g_@@_alphabets_seq}
+% Each of math `style' (bfup, sfit, etc.) usually contains one or more `alphabets', which are currently |latin|, |Latin|, |greek|, |Greek|, |num|, and |misc|, although there's an implicit potential for more.
+% |misc| is not included in the official list to avoid checking code.
+%    \begin{macrocode}
+\clist_new:N  \g_@@_alphabets_seq
+\clist_set:Nn \g_@@_alphabets_seq { latin, Latin, greek, Greek, num }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\clist_new:N \g_@@_named_ranges_clist
+\clist_new:N \g_@@_char_nrange_clist
+\clist_new:N \g_@@_unknown_keys_clist
+\clist_new:N \g_@@_alphabet_clist
+%    \end{macrocode}
+%
+% \begin{macro}{\g_@@_mathclasses_seq}
+% Every math class.
+%    \begin{macrocode}
+\seq_new:N \g_@@_mathclasses_seq
+\seq_set_from_clist:Nn \g_@@_mathclasses_seq
+  {
+    \mathord,\mathalpha,\mathbin,\mathrel,\mathpunct,
+     \mathop,
+    \mathopen,\mathclose,
+    \mathfence,\mathover,\mathunder,
+     \mathaccent,\mathbotaccent,\mathaccentwide,\mathbotaccentwide
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+
+% \begin{macro}{\g_@@_default_mathalph_seq}
+% This sequence stores the alphabets in each math style.
+%    \begin{macrocode}
+\seq_new:N \g_@@_default_mathalph_seq
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\g_@@_mathstyles_seq}
+% This is every `named range' and every `math style' known to \pkg{unicode-math}.
+% A named range is such as "bfit" and "sfit", which are also math styles (with \cs{symbfit} and \cs{symsfit}).
+% `Mathstyles' are a superset of named ranges and also include commands such as \cs{symbf} and \cs{symsf}.
+%
+% N.B. for parsing purposes `named ranges' are defined as strings!
+%    \begin{macrocode}
+\seq_new:N \g_@@_named_ranges_seq
+\seq_new:N \g_@@_mathstyles_seq
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\muskip_new:N \g_@@_primekern_muskip
+\muskip_gset:Nn \g_@@_primekern_muskip { -\thinmuskip/2 }% arbitrary
+\int_new:N \l_@@_primecount_int
+\prop_new:N \g_@@_supers_prop
+\prop_new:N \g_@@_subs_prop
+\tl_new:N \l_not_token_name_tl
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\tl_new:N \g_@@_slash_delimiter_usv
+\tl_new:N \g_@@_mathtable_tl
+\tl_new:N \g_@@_fontname_tl
+\tl_new:N \g_@@_mversion_tl
+\tl_new:N \g_@@_symfont_tl
+\tl_new:N \g_@@_font_keyval_tl
+\tl_new:N \g_@@_family_tl
+\tl_new:N \g_@@_style_tl
+\tl_new:N \g_@@_remap_style_tl
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+
+\endinput
+
+% /©
+%
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+%
+% Copyright 2006-2017  Will Robertson, LPPL "maintainer"
+% Copyright 2010-2017  Philipp Stephani
+% Copyright 2011-2017  Joseph Wright
+% Copyright 2012-2015  Khaled Hosny
+%
+% ©/
