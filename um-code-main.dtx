@@ -51,21 +51,21 @@
         \@@_fontspec_select_font:
       }
 %    \end{macrocode}
-% Now define |\@@_symfont_tl| as the \LaTeX\ math font to access everything:
+% Now define |\l_@@_symfont_label_tl| as the \LaTeX\ math font to access everything:
 %    \begin{macrocode}
-    \cs_if_exist:cF { sym \@@_symfont_tl }
+    \cs_if_exist:cF { sym \l_@@_symfont_label_tl }
       {
-        \DeclareSymbolFont{\@@_symfont_tl}
+        \DeclareSymbolFont{\l_@@_symfont_label_tl}
           {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
       }
-    \SetSymbolFont{\@@_symfont_tl}{\l_@@_mversion_tl}
+    \SetSymbolFont{\l_@@_symfont_label_tl}{\l_@@_mversion_tl}
       {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
 %    \end{macrocode}
 % Set the bold math version.
 %    \begin{macrocode}
     \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
       {
-        \SetSymbolFont{\@@_symfont_tl}{bold}
+        \SetSymbolFont{\l_@@_symfont_label_tl}{bold}
           {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
       }
 %    \end{macrocode}
@@ -135,7 +135,7 @@
   {
     \bool_set_true:N  \l_@@_ot_math_bool
     \tl_set:Nn \l_@@_mversion_tl {normal}
-    \tl_set:Nn \@@_symfont_tl {operators}
+    \tl_set:Nn \l_@@_symfont_label_tl {operators}
 %    \end{macrocode}
 % Defaults for the script and scriptscript font.
 %    \begin{macrocode}
@@ -328,7 +328,7 @@
 %    \begin{macrocode}
 \cs_set:Nn \@@_process_symbol_noparse:nnn
   {
-    \@@_set_mathsymbol:nNNn {\@@_symfont_tl} #2 #3 {#1}
+    \@@_set_mathsymbol:nNNn {\l_@@_symfont_label_tl} #2 #3 {#1}
   }
 %    \end{macrocode}
 %    \begin{macrocode}
@@ -371,7 +371,7 @@
 \cs_new:Nn \@@_remap_symbol_noparse:nnn
   {
     \clist_map_inline:nn {#1}
-      { \@@_set_mathcode:nnnn {##1} {#2} {\@@_symfont_tl} {#3} }
+      { \@@_set_mathcode:nnnn {##1} {#2} {\l_@@_symfont_label_tl} {#3} }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -414,7 +414,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_make_mathactive_noparse:nNN
   {
-    \@@_set_mathchar:NNnn #2 #3 {\@@_symfont_tl} {#1}
+    \@@_set_mathchar:NNnn #2 #3 {\l_@@_symfont_label_tl} {#1}
     \@@_char_gmake_mathactive:n {#1}
   }
 %    \end{macrocode}
@@ -426,7 +426,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_assign_delcode_noparse:nn
   {
-    \@@_set_delcode:nnn \@@_symfont_tl {#1} {#2}
+    \@@_set_delcode:nnn \l_@@_symfont_label_tl {#1} {#2}
   }
 %    \end{macrocode}
 %
@@ -457,7 +457,7 @@
 \cs_new:Npn \@@_setup_delcodes:
   {
     % ensure \left. and \right. work:
-    \@@_set_delcode:nnn \@@_symfont_tl {`\.} {\c_zero}
+    \@@_set_delcode:nnn \l_@@_symfont_label_tl {`\.} {\c_zero}
     % this is forcefully done to fix a bug -- indicates a larger problem!
 
     \@@_assign_delcode:nn {`\/}   {\g_@@_slash_delimiter_usv}

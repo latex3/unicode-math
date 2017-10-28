@@ -426,7 +426,7 @@
 % \begin{macro}{\@@_map_char_parse:nn}
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_char_noparse:nn
- { \@@_set_mathcode:nnnn {#1}{\mathalpha}{\@@_symfont_tl}{#2} }
+ { \@@_set_mathcode:nnnn {#1}{\mathalpha}{\l_@@_symfont_label_tl}{#2} }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -584,7 +584,7 @@
    {
     \tl_put_right:cx {@@_switchto_#1:}
      {
-      \@@_set_mathcode:nnnn {##1} {\mathalpha} {\@@_symfont_tl} {#3}
+      \@@_set_mathcode:nnnn {##1} {\mathalpha} {\l_@@_symfont_label_tl} {#3}
      }
    }
  }
