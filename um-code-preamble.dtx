@@ -16,6 +16,8 @@
 \ExplSyntaxOn
 %    \end{macrocode}
 %
+% \subsection{\pkg{expl3} variants}
+%
 % Variants needed from \pkg{expl3}:
 %    \begin{macrocode}
 \cs_set_protected_nopar:Npn \exp_last_unbraced:NNx { \::N \::x_unbraced \::: }
@@ -44,6 +46,8 @@
  }
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsubsection{Mathcode and friends}
 %
 % \begin{macro}{\@@_set_mathcode:nnnn}
 % \begin{macro}{\@@_set_mathcode:nnn}
@@ -96,6 +100,23 @@
 % \end{macro}
 % \end{macro}
 %
+% \begin{macro}{\@@_char_gmake_mathactive:N}
+% \begin{macro}{\@@_char_gmake_mathactive:n}
+%    \begin{macrocode}
+\cs_new:Nn \@@_char_gmake_mathactive:N
+ {
+  \global\mathcode `#1 = "8000 \scan_stop:
+ }
+\cs_new:Nn \@@_char_gmake_mathactive:n
+ {
+  \global\mathcode #1 = "8000 \scan_stop:
+ }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \subsubsection{Font parameters}
+%
 % \begin{macro}{\@@_copy_fontparam:nnn}
 %    \begin{macrocode}
 \cs_new:Nn \@@_copy_fontparam:nnn
@@ -124,22 +145,8 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_char_gmake_mathactive:N}
-% \begin{macro}{\@@_char_gmake_mathactive:n}
-%    \begin{macrocode}
-\cs_new:Nn \@@_char_gmake_mathactive:N
- {
-  \global\mathcode `#1 = "8000 \scan_stop:
- }
-\cs_new:Nn \@@_char_gmake_mathactive:n
- {
-  \global\mathcode #1 = "8000 \scan_stop:
- }
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
 %
-% \subsection{Alphabet Unicode positions}
+% \subsection{Alphabet Unicode positions (USVs)}
 %
 % Before we begin, let's define the positions of the various Unicode
 % alphabets so that our code is a little more readable.\footnote{`\textsc{u.s.v.}' stands
@@ -163,10 +170,11 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
 % \subsection{Overcoming \texorpdfstring{\cmd\@onlypreamble}{\textbackslash @onlypreamble}}
 %
-% The requirement of only setting up the maths fonts in the preamble is now removed.
-% The following list might be overly ambitious.
+% The requirement of only setting up the maths fonts in the preamble is lifted.
+% (Perhaps unwisely.)
 %    \begin{macrocode}
 \tl_map_inline:nn
  {
