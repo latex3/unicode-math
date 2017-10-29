@@ -37,13 +37,13 @@
 % \begin{macro}{\@@_glyph_if_exist:NnTF}
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \@@_glyph_if_exist:Nn {p,TF,T,F}
- {
-  \etex_iffontchar:D #1 #2 \scan_stop:
-    \prg_return_true:
-  \else:
-    \prg_return_false:
-  \fi:
- }
+  {
+    \etex_iffontchar:D #1 #2 \scan_stop:
+      \prg_return_true:
+    \else:
+      \prg_return_false:
+    \fi:
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -61,30 +61,55 @@
 % These are all wrappers for the primitive commands that take numerical
 % input only.
 %    \begin{macrocode}
-\cs_set:Npn \@@_set_mathcode:nnnn #1#2#3#4 {
-  \Umathcode \int_eval:n {#1} =
-    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
-}
-\cs_set:Npn \@@_set_mathcode:nnn #1#2#3 {
-  \Umathcode \int_eval:n {#1} =
-    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#1} \scan_stop:
-}
-\cs_set:Npn \@@_set_mathchar:NNnn #1#2#3#4 {
-  \Umathchardef #1 =
-    \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
-}
-\cs_new:Nn \@@_set_delcode:nnn {
-  \Udelcode#2 = \csname sym#1\endcsname #3 \scan_stop:
-}
-\cs_new:Nn \@@_radical:nn {
-  \Uradical \csname sym#1\endcsname #2 \scan_stop:
-}
-\cs_new:Nn \@@_delimiter:Nnn {
-  \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
-}
-\cs_new:Nn \@@_accent:nnn {
-  \Umathaccent #1~ \mathchar@type\mathaccent \use:c { sym #2 } #3 \scan_stop:
-}
+\cs_set:Npn \@@_set_mathcode:nnnn #1#2#3#4
+  {
+    \Umathcode \int_eval:n {#1} =
+      \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set:Npn \@@_set_mathcode:nnn #1#2#3
+  {
+    \Umathcode \int_eval:n {#1} =
+      \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#1} \scan_stop:
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set:Npn \@@_set_mathchar:NNnn #1#2#3#4
+  {
+    \Umathchardef #1 =
+      \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_set_delcode:nnn
+  {
+    \Udelcode#2 = \csname sym#1\endcsname #3 \scan_stop:
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_radical:nn
+  {
+    \Uradical \csname sym#1\endcsname #2 \scan_stop:
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_delimiter:Nnn
+  {
+    \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_accent:nnn
+  {
+    \Umathaccent #1~ \mathchar@type\mathaccent \use:c { sym #2 } #3 \scan_stop:
+  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -104,13 +129,13 @@
 % \begin{macro}{\@@_char_gmake_mathactive:n}
 %    \begin{macrocode}
 \cs_new:Nn \@@_char_gmake_mathactive:N
- {
-  \global\mathcode `#1 = "8000 \scan_stop:
- }
+  {
+    \global\mathcode `#1 = "8000 \scan_stop:
+  }
 \cs_new:Nn \@@_char_gmake_mathactive:n
- {
-  \global\mathcode #1 = "8000 \scan_stop:
- }
+  {
+    \global\mathcode #1 = "8000 \scan_stop:
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -122,7 +147,7 @@
 \cs_new:Nn \@@_copy_fontparam:nnn
   {
     \fontdimen #1 \font = \@@_get_fontparam:nn {#2} {#3}
- }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -131,7 +156,7 @@
 \cs_new:Nn \@@_zero_fontparam:n
   {
     \fontdimen #1 \font = 0pt\relax
- }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -177,24 +202,24 @@
 % (Perhaps unwisely.)
 %    \begin{macrocode}
 \tl_map_inline:nn
- {
-  \new@mathgroup\cdp@list\cdp@elt\DeclareMathSizes
-  \@DeclareMathSizes\newmathalphabet\newmathalphabet@@\newmathalphabet@@@
-  \DeclareMathVersion\define@mathalphabet\define@mathgroup\addtoversion
-  \version@list\version@elt\alpha@list\alpha@elt
-  \restore@mathversion\init@restore@version\dorestore@version\process@table
-  \new@mathversion\DeclareSymbolFont\group@list\group@elt
-  \new@symbolfont\SetSymbolFont\SetSymbolFont@\get@cdp
-  \DeclareMathAlphabet\new@mathalphabet\SetMathAlphabet\SetMathAlphabet@
-  \DeclareMathAccent\set@mathaccent\DeclareMathSymbol\set@mathchar
-  \set@mathsymbol\DeclareMathDelimiter\@xxDeclareMathDelimiter
-  \@DeclareMathDelimiter\@xDeclareMathDelimiter\set@mathdelimiter
-  \set@@mathdelimiter\DeclareMathRadical\mathchar@type
-  \DeclareSymbolFontAlphabet\DeclareSymbolFontAlphabet@
- }
- {
-  \tl_remove_once:Nn \@preamblecmds {\do#1}
- }
+  {
+    \new@mathgroup\cdp@list\cdp@elt\DeclareMathSizes
+    \@DeclareMathSizes\newmathalphabet\newmathalphabet@@\newmathalphabet@@@
+    \DeclareMathVersion\define@mathalphabet\define@mathgroup\addtoversion
+    \version@list\version@elt\alpha@list\alpha@elt
+    \restore@mathversion\init@restore@version\dorestore@version\process@table
+    \new@mathversion\DeclareSymbolFont\group@list\group@elt
+    \new@symbolfont\SetSymbolFont\SetSymbolFont@\get@cdp
+    \DeclareMathAlphabet\new@mathalphabet\SetMathAlphabet\SetMathAlphabet@
+    \DeclareMathAccent\set@mathaccent\DeclareMathSymbol\set@mathchar
+    \set@mathsymbol\DeclareMathDelimiter\@xxDeclareMathDelimiter
+    \@DeclareMathDelimiter\@xDeclareMathDelimiter\set@mathdelimiter
+    \set@@mathdelimiter\DeclareMathRadical\mathchar@type
+    \DeclareSymbolFontAlphabet\DeclareSymbolFontAlphabet@
+  }
+  {
+    \tl_remove_once:Nn \@preamblecmds {\do#1}
+  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
