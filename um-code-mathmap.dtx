@@ -358,7 +358,7 @@
         \clist_map_break:
        }
        {
-        \@@_glyph_if_exist:nT { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
+        \@@_glyph_if_exist:NnT \l_@@_font { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
          {
           \@@_maybe_init_alphabet:n \l_@@_style_tl
           \clist_map_break:
@@ -383,7 +383,7 @@
         \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {\l_@@_remap_style_tl}
        }
        {
-        \@@_glyph_if_exist:nTF { \@@_to_usv:nn {\l_@@_remap_style_tl} {\l_@@_alphabet_tl} }
+        \@@_glyph_if_exist:NnTF \l_@@_font { \@@_to_usv:nn {\l_@@_remap_style_tl} {\l_@@_alphabet_tl} }
          {
           \@@_log:nx {setup-alph} {sym \l_@@_style_tl~(\l_@@_alphabet_tl)}
           \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {\l_@@_remap_style_tl}

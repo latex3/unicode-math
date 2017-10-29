@@ -28,16 +28,15 @@
 %    \end{macrocode}
 %
 %
-% \subsection{Extras}
+% \subsection{Primitive font commands}
 %
 % What might end up being provided by the kernel.
 %
-% \begin{macro}{\@@_glyph_if_exist:nTF}
-%: TODO: Generalise for arbitrary fonts! \cs{l_@@_font} is not always the one used for a specific glyph!!
+% \begin{macro}{\@@_glyph_if_exist:NnTF}
 %    \begin{macrocode}
-\prg_new_conditional:Nnn \@@_glyph_if_exist:n {p,TF,T,F}
+\prg_new_conditional:Nnn \@@_glyph_if_exist:Nn {p,TF,T,F}
  {
-  \etex_iffontchar:D \l_@@_font #1 \scan_stop:
+  \etex_iffontchar:D #1 #2 \scan_stop:
     \prg_return_true:
   \else:
     \prg_return_false:

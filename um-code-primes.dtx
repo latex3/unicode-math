@@ -80,17 +80,17 @@
    {
     {1} { \@@_superscript:n {#1} }
     {2} {
-      \@@_glyph_if_exist:nTF {"2033}
+      \@@_glyph_if_exist:NnTF \l_@@_font {"2033}
         { \@@_superscript:n {\@@_prime_double_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
     {3} {
-      \@@_glyph_if_exist:nTF {"2034}
+      \@@_glyph_if_exist:NnTF \l_@@_font {"2034}
         { \@@_superscript:n {\@@_prime_triple_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
     {4} {
-      \@@_glyph_if_exist:nTF {"2057}
+      \@@_glyph_if_exist:NnTF \l_@@_font {"2057}
         { \@@_superscript:n {\@@_prime_quad_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
@@ -108,12 +108,12 @@
    {
     {1} { \@@_superscript:n {#1} }
     {2} {
-      \@@_glyph_if_exist:nTF {"2036}
+      \@@_glyph_if_exist:NnTF \l_@@_font {"2036}
         { \@@_superscript:n {\@@_backprime_double_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
     {3} {
-      \@@_glyph_if_exist:nTF {"2037}
+      \@@_glyph_if_exist:NnTF \l_@@_font {"2037}
         { \@@_superscript:n {\@@_backprime_triple_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
