@@ -51,13 +51,6 @@
 %
 % \begin{macro}{\@@_set_mathcode:nnnn}
 % \begin{macro}{\@@_set_mathcode:nnn}
-% \begin{macro}{\@@_set_mathchar:NNnn}
-% \begin{macro}{\@@_set_mathchar:cNnn}
-% \begin{macro}{\@@_set_delcode:nnn}
-% \begin{macro}{\@@_radical:nn}
-% \begin{macro}{\@@_delimiter:Nnn}
-% \begin{macro}{\@@_accent:nnn}
-% \begin{macro}{\@@_accent_keyword:}
 % These are all wrappers for the primitive commands that take numerical
 % input only.
 %    \begin{macrocode}
@@ -75,7 +68,11 @@
       \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#1} \scan_stop:
   }
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
+% \begin{macro}{\@@_set_mathchar:NNnn}
+% \begin{macro}{\@@_set_mathchar:cNnn}
 %    \begin{macrocode}
 \cs_set:Npn \@@_set_mathchar:NNnn #1#2#3#4
   {
@@ -83,46 +80,47 @@
       \mathchar@type#2 \csname sym#3\endcsname \int_eval:n {#4} \scan_stop:
   }
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
+%    \begin{macrocode}
+\cs_generate_variant:Nn \@@_set_mathchar:NNnn {c}
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_set_delcode:nnn}
 %    \begin{macrocode}
 \cs_new:Nn \@@_set_delcode:nnn
   {
     \Udelcode#2 = \csname sym#1\endcsname #3 \scan_stop:
   }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\@@_radical:nn}
 %    \begin{macrocode}
 \cs_new:Nn \@@_radical:nn
   {
     \Uradical \csname sym#1\endcsname #2 \scan_stop:
   }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\@@_delimiter:Nnn}
 %    \begin{macrocode}
 \cs_new:Nn \@@_delimiter:Nnn
   {
     \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
   }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\@@_accent:nnn}
 %    \begin{macrocode}
 \cs_new:Nn \@@_accent:nnn
   {
     \Umathaccent #1~ \mathchar@type\mathaccent \use:c { sym #2 } #3 \scan_stop:
   }
 %    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_generate_variant:Nn \@@_set_mathchar:NNnn {c}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\@@_char_gmake_mathactive:N}
