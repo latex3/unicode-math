@@ -2,19 +2,8 @@
 
 % \section{Package declaration}
 %
-%    \begin{macrocode}
-%<*dtx>
-\ProvidesFile{unicode-math.dtx}
-%</dtx>
-%<base>\ProvidesPackage{unicode-math}
-%<package&XE>\ProvidesPackage{unicode-math-xetex}
-%<package&LU>\ProvidesPackage{unicode-math-luatex}
-%<*base|package>
-  [2017/10/09 v0.8h Unicode maths in XeLaTeX and LuaLaTeX]
-%</base|package>
-%    \end{macrocode}
-%
-%
+% List all \texttt{dtx} files for
+% (a) the \texttt{ins} file and~(b) typesetting the code.
 %    \begin{macrocode}
 %<*dtx>
 \def\DTXFILES{
@@ -40,6 +29,31 @@
   \DTX{um-code-alphabets.dtx}
 }
 %</dtx>
+%    \end{macrocode}
+%
+% Now exit if we're using plain \TeX; this would usually be the case when
+% loading this file with \texttt{unicode-math.ins}.
+%    \begin{macrocode}
+%<*dtx>
+\def\tmpa{plain}
+\ifx\tmpa\fmtname\expandafter\endinput\fi
+%</dtx>
+%    \end{macrocode}
+%
+% Declare the package version and date. For loading this file directly
+% as a \texttt{dtx} file, \cs{fileversion} and \cs{filedate} will be set
+% correctly when using \cs{GetFileInfo} without having to load the package
+% directly.
+%    \begin{macrocode}
+%<base>\ProvidesPackage{unicode-math}
+%<package&XE>\ProvidesPackage{unicode-math-xetex}
+%<package&LU>\ProvidesPackage{unicode-math-luatex}
+%<*dtx>
+\ProvidesFile{unicode-math.dtx}
+%</dtx>
+%<*base|package>
+  [2017/10/09 v0.8h Unicode maths in XeLaTeX and LuaLaTeX]
+%</base|package>
 %    \end{macrocode}
 
 \endinput
