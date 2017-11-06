@@ -5,7 +5,6 @@ module = "unicode-math"
 sourcefiles  = {"*.dtx","*.ins","unicode-math-table.tex"}
 installfiles = {"*.sty","unicode-math-table.tex"}
 typesetfiles = {"*.ltx"}
-docfiles     = {"um-doc*.tex"}
 textfiles    = {"README.md","CHANGES.md"}
 
 checkengines = {"xetex","luatex"}
