@@ -2,7 +2,7 @@
 
 module = "unicode-math"
 
-sourcefiles  = {"*.dtx","*.ins","unicode-math-table.tex"}
+sourcefiles  = {"*.dtx","*.ins","*.tex","*.ltx"}
 installfiles = {"*.sty","unicode-math-table.tex"}
 typesetfiles = {"*.ltx"}
 textfiles    = {"README.md","CHANGES.md"}
