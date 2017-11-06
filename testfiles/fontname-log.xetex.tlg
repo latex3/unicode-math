@@ -9,7 +9,7 @@ Here is the problem I'm trying to solve:
 > \box0=
 \hbox(4.42+0.11)x5.29
 .\mathon
-.\l_fontspec_font glyph#1296
+.\TU/latinmodern-math.otf(0)/m/n/10 glyph#1296
 .\mathoff
 ! OK.
 <to be read again> 

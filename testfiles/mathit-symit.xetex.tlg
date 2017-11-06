@@ -23,7 +23,7 @@ SYMIT:
 > \box13=
 \hbox(4.82+0.11)x5.12
 .\mathon
-.\l_fontspec_font glyph#490
+.\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#490
 .\kern0.12
 .\mathoff
 ! OK.
