@@ -1,6 +1,13 @@
 CHANGE HISTORY
 --------------
 
+- v0.8i (2017/11/18)
+
+  * Many internal changes to support future work.
+  * Improved documentation describing the `\mathXX` and `\symXX` commands.
+  * Documentation is now split into `unicode-math.pdf` (for the user)
+    and `unicode-math-code.pdf` (for the typeset source code).
+
 - v0.8h (2017/10/09)
 
   * Some bugs crept in in the last update due to some code rearrangement:
