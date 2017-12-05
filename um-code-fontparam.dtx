@@ -1,5 +1,4 @@
 %%^^A%% um-code-fontparam.dtx -- part of UNICODE-MATH <wspr.io/unicode-math>
-%%^^A%% Interface for font parameters
 
 % \section{Common interface for font parameters}
 %
@@ -135,18 +134,18 @@
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_font_param:nnnnn
 %<*XE>
-{
-  \@@_font_param_aux:ccnnnn { @@_ #1 :N } { @@_set_ #1 :Nn }
-    { #2 } { #3 } { #4 } { #5 }
-}
+  {
+    \@@_font_param_aux:ccnnnn { @@_ #1 :N } { @@_set_ #1 :Nn }
+      { #2 } { #3 } { #4 } { #5 }
+  }
 %</XE>
 %<*LU>
-{
-  \tl_set:Nn \l_@@_tmpa_tl { #1 }
-  \tl_remove_all:Nn \l_@@_tmpa_tl { _ }
-  \@@_font_param_aux:ccc { @@_ #1 :N } { @@_set_ #1 :Nn }
-    { Umath \l_@@_tmpa_tl }
-}
+  {
+    \tl_set:Nn \l_@@_tmpa_tl { #1 }
+    \tl_remove_all:Nn \l_@@_tmpa_tl { _ }
+    \@@_font_param_aux:ccc { @@_ #1 :N } { @@_set_ #1 :Nn }
+      { Umath \l_@@_tmpa_tl }
+  }
 %</LU>
 %    \end{macrocode}
 % \end{macro}
@@ -160,9 +159,9 @@
 % The \XeTeX\ font dimension numbers must be integer constants.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_font_param:nnn
- {
-  \@@_font_param:nnnnn { #1 } { #2 } { #2 } { #3 } { #3 }
- }
+  {
+    \@@_font_param:nnnnn { #1 } { #2 } { #2 } { #3 } { #3 }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -174,9 +173,9 @@
 % The \XeTeX\ font dimension number must be an integer constant.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_font_param:nn
- {
-  \@@_font_param:nnnnn { #1 } { #2 } { #2 } { #2 } { #2 }
- }
+  {
+    \@@_font_param:nnnnn { #1 } { #2 } { #2 } { #2 } { #2 }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -199,13 +198,13 @@
 \cs_new_protected_nopar:Nn \@@_font_param_aux:NNnnnn
   {
     \cs_new_nopar:Npn #1 ##1
-     {
-      \@@_font_dimen:Nnnnn ##1 { #3 } { #4 } { #5 } { #6 }
-     }
+      {
+        \@@_font_dimen:Nnnnn ##1 { #3 } { #4 } { #5 } { #6 }
+      }
     \cs_new_protected_nopar:Npn #2 ##1 ##2
-     {
-      #1 ##1 \dim_eval:n { ##2 }
-     }
+      {
+        #1 ##1 \dim_eval:n { ##2 }
+      }
   }
 \cs_generate_variant:Nn \@@_font_param_aux:NNnnnn { cc }
 %</XE>
@@ -213,13 +212,13 @@
 \cs_new_protected_nopar:Nn \@@_font_param_aux:NNN
   {
     \cs_new_nopar:Npn #1 ##1
-     {
-      #3 ##1
-     }
+      {
+        #3 ##1
+      }
     \cs_new_protected_nopar:Npn #2 ##1 ##2
-     {
-      #3 ##1 \dim_eval:n { ##2 }
-     }
+      {
+        #3 ##1 \dim_eval:n { ##2 }
+      }
   }
 \cs_generate_variant:Nn \@@_font_param_aux:NNN { ccc }
 %</LU>
@@ -290,13 +289,13 @@
 % font size relative proportion based on that percentage.
 %    \begin{macrocode}
 \cs_new:Nn \@@_fontdimen_to_percent:nn
- {
-  \fp_eval:n { \dim_to_decimal:n { \fontdimen #1 #2 } * 65536 / 100 }
- }
+  {
+    \fp_eval:n { \dim_to_decimal:n { \fontdimen #1 #2 } * 65536 / 100 }
+  }
 \cs_new:Nn \@@_fontdimen_to_scale:nn
- {
-  \fp_eval:n {\@@_fontdimen_to_percent:nn {#1} {#2} * \f@size } pt
- }
+  {
+    \fp_eval:n {\@@_fontdimen_to_percent:nn {#1} {#2} * \f@size } pt
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -308,17 +307,17 @@
 % This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
 %    \begin{macrocode}
 \cs_new:Nn \@@_mathstyle_scale:Nnn
- {
-  \ifx#1\scriptstyle
-    #2 \@@_fontdimen_to_percent:nn {10} \l_@@_font #3
-  \else
-    \ifx#1\scriptscriptstyle
-      #2 \@@_fontdimen_to_percent:nn {11} \l_@@_font #3
+  {
+    \ifx#1\scriptstyle
+      #2 \@@_fontdimen_to_percent:nn {10} \l_@@_font #3
     \else
-      #2 #3
+      \ifx#1\scriptscriptstyle
+        #2 \@@_fontdimen_to_percent:nn {11} \l_@@_font #3
+      \else
+        #2 #3
+      \fi
     \fi
-  \fi
- }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
