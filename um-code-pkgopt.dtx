@@ -11,17 +11,19 @@
 % To simplify the creation of option keys, let's iterate in pairs rather than worry about equals signs and commas.
 %    \begin{macrocode}
 \cs_new:Nn \@@_keys_choices:nn
- {
-  \cs_set:Npn \@@_keys_choices_fn:nn { \@@_keys_choices_aux:nnn {#1} }
-  \use:x
-   {
-    \exp_not:N \keys_define:nn {unicode-math}
-     {
-      #1 .choice: ,
-      \@@_tl_map_dbl:nN {#2} \@@_keys_choices_fn:nn
-     }
-   }
- }
+  {
+    \cs_set:Npn \@@_keys_choices_fn:nn { \@@_keys_choices_aux:nnn {#1} }
+    \use:x
+      {
+        \exp_not:N \keys_define:nn {unicode-math}
+          {
+            #1 .choice: ,
+            \@@_tl_map_dbl:nN {#2} \@@_keys_choices_fn:nn
+          }
+      }
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
 \cs_new:Nn \@@_keys_choices_aux:nnn { #1 / #2 .code:n = { \exp_not:n {#3} } , }
 %    \end{macrocode}
 %
@@ -46,41 +48,51 @@
 % \paragraph{Compatibility}
 %    \begin{macrocode}
 \@@_keys_choices:nn {mathup}
- {
-  {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
-  {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
- }
+  {
+    {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
+    {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
 \@@_keys_choices:nn {mathrm}
- {
-  {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
-  {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
- }
+  {
+    {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
+    {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
 \@@_keys_choices:nn {mathit}
- {
-  {sym}  { \bool_set_false:N \g_@@_mathit_text_bool }
-  {text} { \bool_set_true:N  \g_@@_mathit_text_bool }
- }
+  {
+    {sym}  { \bool_set_false:N \g_@@_mathit_text_bool }
+    {text} { \bool_set_true:N  \g_@@_mathit_text_bool }
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
 \@@_keys_choices:nn {mathbf}
- {
-  {sym}  { \bool_set_false:N \g_@@_mathbf_text_bool }
-  {text} { \bool_set_true:N  \g_@@_mathbf_text_bool }
- }
+  {
+    {sym}  { \bool_set_false:N \g_@@_mathbf_text_bool }
+    {text} { \bool_set_true:N  \g_@@_mathbf_text_bool }
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
 \@@_keys_choices:nn {mathsf}
- {
-  {sym}  { \bool_set_false:N \g_@@_mathsf_text_bool }
-  {text} { \bool_set_true:N  \g_@@_mathsf_text_bool }
- }
+  {
+    {sym}  { \bool_set_false:N \g_@@_mathsf_text_bool }
+    {text} { \bool_set_true:N  \g_@@_mathsf_text_bool }
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
 \@@_keys_choices:nn {mathtt}
- {
-  {sym}  { \bool_set_false:N \g_@@_mathtt_text_bool }
-  {text} { \bool_set_true:N  \g_@@_mathtt_text_bool }
- }
+  {
+    {sym}  { \bool_set_false:N \g_@@_mathtt_text_bool }
+    {text} { \bool_set_true:N  \g_@@_mathtt_text_bool }
+  }
 %    \end{macrocode}
 %
 % \paragraph{math-style}
 %    \begin{macrocode}
 \@@_keys_choices:nn {normal-style}
- {
+  {
        {ISO} {
               \bool_set_false:N \g_@@_literal_bool
               \bool_set_false:N \g_@@_upGreek_bool
@@ -112,12 +124,12 @@
    {literal} {
               \bool_set_true:N  \g_@@_literal_bool
              }
- }
+  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \@@_keys_choices:nn {math-style}
- {
+  {
       {ISO} {
              \unimathsetup { nabla=upright, partial=italic,
               normal-style=ISO, bold-style=ISO, sans-style=italic }
@@ -138,13 +150,13 @@
              \unimathsetup { colon=literal, nabla=literal, partial=literal,
                normal-style=literal, bold-style=literal, sans-style=literal }
             }
- }
+  }
 %    \end{macrocode}
 %
 % \paragraph{bold-style}
 %    \begin{macrocode}
 \@@_keys_choices:nn {bold-style}
- {
+  {
       {ISO} {
              \bool_set_false:N \g_@@_bfliteral_bool
              \bool_set_false:N \g_@@_bfupGreek_bool
@@ -169,92 +181,96 @@
   {literal} {
              \bool_set_true:N  \g_@@_bfliteral_bool
             }
- }
+  }
 %    \end{macrocode}
 %
 % \paragraph{sans-style}
 %    \begin{macrocode}
 \@@_keys_choices:nn {sans-style}
- {
-  {italic}  { \bool_set_false:N \g_@@_upsans_bool    }
-  {upright} { \bool_set_true:N  \g_@@_upsans_bool    }
-  {literal} { \bool_set_true:N  \g_@@_sfliteral_bool }
- }
+  {
+    {italic}  { \bool_set_false:N \g_@@_upsans_bool    }
+    {upright} { \bool_set_true:N  \g_@@_upsans_bool    }
+    {literal} { \bool_set_true:N  \g_@@_sfliteral_bool }
+  }
 %    \end{macrocode}
 %
 %
 % \paragraph{Nabla and partial}
 %    \begin{macrocode}
 \@@_keys_choices:nn {nabla}
- {
-  {upright} {
-              \bool_set_false:N \g_@@_literal_Nabla_bool
-              \bool_set_true:N  \g_@@_upNabla_bool
-            }
-  {italic}  {
-              \bool_set_false:N \g_@@_literal_Nabla_bool
-              \bool_set_false:N \g_@@_upNabla_bool
-            }
-  {literal} { \bool_set_true:N  \g_@@_literal_Nabla_bool }
- }
+  {
+    {upright} {
+                \bool_set_false:N \g_@@_literal_Nabla_bool
+                \bool_set_true:N  \g_@@_upNabla_bool
+              }
+    {italic}  {
+                \bool_set_false:N \g_@@_literal_Nabla_bool
+                \bool_set_false:N \g_@@_upNabla_bool
+              }
+    {literal} {
+                \bool_set_true:N  \g_@@_literal_Nabla_bool
+              }
+  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \@@_keys_choices:nn {partial}
- {
-  {upright} {
-              \bool_set_false:N \g_@@_literal_partial_bool
-              \bool_set_true:N  \g_@@_uppartial_bool
-            }
-  {italic}  {
-              \bool_set_false:N \g_@@_literal_partial_bool
-              \bool_set_false:N \g_@@_uppartial_bool
-            }
-  {literal} { \bool_set_true:N  \g_@@_literal_partial_bool }
- }
+  {
+   {upright} {
+               \bool_set_false:N \g_@@_literal_partial_bool
+               \bool_set_true:N  \g_@@_uppartial_bool
+             }
+   {italic}  {
+               \bool_set_false:N \g_@@_literal_partial_bool
+               \bool_set_false:N \g_@@_uppartial_bool
+             }
+   {literal} {
+               \bool_set_true:N  \g_@@_literal_partial_bool
+             }
+  }
 %    \end{macrocode}
 %
 % \paragraph{Colon style}
 %    \begin{macrocode}
 \@@_keys_choices:nn {colon}
- {
-  {literal} { \bool_set_true:N  \g_@@_literal_colon_bool }
-  {TeX}     { \bool_set_false:N \g_@@_literal_colon_bool }
- }
+  {
+    {literal} { \bool_set_true:N  \g_@@_literal_colon_bool }
+    {TeX}     { \bool_set_false:N \g_@@_literal_colon_bool }
+  }
 %    \end{macrocode}
 %
 % \paragraph{Slash delimiter style}
 %    \begin{macrocode}
 \@@_keys_choices:nn {slash-delimiter}
- {
-  {ascii} { \tl_set:Nn \g_@@_slash_delimiter_usv {"002F} }
-  {frac}  { \tl_set:Nn \g_@@_slash_delimiter_usv {"2044} }
-  {div}   { \tl_set:Nn \g_@@_slash_delimiter_usv {"2215} }
- }
+  {
+    {ascii} { \tl_set:Nn \g_@@_slash_delimiter_usv {"002F} }
+    {frac}  { \tl_set:Nn \g_@@_slash_delimiter_usv {"2044} }
+    {div}   { \tl_set:Nn \g_@@_slash_delimiter_usv {"2215} }
+  }
 %    \end{macrocode}
 %
 %
 % \paragraph{Active fraction style}
 %    \begin{macrocode}
 \@@_keys_choices:nn {active-frac}
- {
-   {small}
-   {
-    \cs_if_exist:NTF \tfrac
-     { \bool_set_true:N \l_@@_smallfrac_bool }
-     {
-      \@@_warning:n {no-tfrac}
-      \bool_set_false:N \l_@@_smallfrac_bool
-     }
-    \use:c {@@_setup_active_frac:}
-   }
+  {
+    {small}
+    {
+      \cs_if_exist:NTF \tfrac
+        { \bool_set_true:N \l_@@_smallfrac_bool }
+        {
+          \@@_warning:n {no-tfrac}
+          \bool_set_false:N \l_@@_smallfrac_bool
+        }
+      \use:c {@@_setup_active_frac:}
+    }
 
-   {normalsize}
-   {
-    \bool_set_false:N \l_@@_smallfrac_bool
-    \use:c {@@_setup_active_frac:}
-   }
- }
+    {normalsize}
+    {
+      \bool_set_false:N \l_@@_smallfrac_bool
+      \use:c {@@_setup_active_frac:}
+    }
+  }
 %    \end{macrocode}
 %
 % \paragraph{Debug/tracing}
@@ -272,11 +288,11 @@
 %
 %    \begin{macrocode}
 \@@_keys_choices:nn {trace}
- {
-  {on}    {} % default
-  {debug} { \msg_redirect_module:nnn { unicode-math } { log } { warning } }
-  {off}   { \msg_redirect_module:nnn { unicode-math } { log } { none } }
- }
+  {
+    {on}    {} % default
+    {debug} { \msg_redirect_module:nnn { unicode-math } { log } { warning } }
+    {off}   { \msg_redirect_module:nnn { unicode-math } { log } { none } }
+  }
 %    \end{macrocode}
 %
 % \subsection{Defaults}
