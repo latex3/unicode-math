@@ -22,12 +22,12 @@
 % \subsection{Script and scriptscript font options}
 %    \begin{macrocode}
 \keys_define:nn {unicode-math}
- {
-  script-features  .tl_set:N =  \l_@@_script_features_tl ,
-  sscript-features .tl_set:N = \l_@@_sscript_features_tl ,
-       script-font .tl_set:N =      \l_@@_script_font_tl ,
-      sscript-font .tl_set:N =     \l_@@_sscript_font_tl ,
- }
+  {
+    script-features  .tl_set:N =  \l_@@_script_features_tl ,
+    sscript-features .tl_set:N = \l_@@_sscript_features_tl ,
+         script-font .tl_set:N =      \l_@@_script_font_tl ,
+        sscript-font .tl_set:N =     \l_@@_sscript_font_tl ,
+  }
 %    \end{macrocode}
 %
 % \subsection{Range processing}
@@ -35,44 +35,43 @@
 %
 %    \begin{macrocode}
 \keys_define:nn {unicode-math}
- {
-  range .code:n =
-   {
-    \bool_set_false:N \l_@@_init_bool
+  {
+    range .code:n =
+      {
+        \bool_set_false:N \l_@@_init_bool
 %    \end{macrocode}
 % Set processing functions if we're not defining the full Unicode math repetoire.
 % Math symbols are defined with \cmd\_@@_sym:nnn; see \secref{mathsymbol}
 % for the individual definitions
 %    \begin{macrocode}
-    \int_incr:N \g_@@_fam_int
-    \tl_set:Nx \l_@@_symfont_label_tl {@@_fam\int_use:N\g_@@_fam_int}
-    \cs_set_eq:NN \_@@_sym:nnn \@@_process_symbol_parse:nnn
-    \cs_set_eq:NN \@@_set_mathalphabet_char:Nnn \@@_mathmap_parse:Nnn
-    \cs_set_eq:NN \@@_remap_symbol:nnn \@@_remap_symbol_parse:nnn
-    \cs_set_eq:NN \@@_maybe_init_alphabet:n \use_none:n
-    \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
-    \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_parse:nn
-    \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_parse:nNN
+        \int_incr:N \g_@@_fam_int
+        \tl_set:Nx \l_@@_symfont_label_tl {@@_fam\int_use:N\g_@@_fam_int}
+        \cs_set_eq:NN \_@@_sym:nnn \@@_process_symbol_parse:nnn
+        \cs_set_eq:NN \@@_set_mathalphabet_char:Nnn \@@_mathmap_parse:Nnn
+        \cs_set_eq:NN \@@_remap_symbol:nnn \@@_remap_symbol_parse:nnn
+        \cs_set_eq:NN \@@_maybe_init_alphabet:n \use_none:n
+        \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
+        \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_parse:nn
+        \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_parse:nNN
 %    \end{macrocode}
 % Proceed by filling up the various `range' seqs according to the user options.
 %    \begin{macrocode}
-    \seq_clear:N \l_@@_char_range_seq
-    \seq_clear:N \l_@@_mclass_range_seq
-    \seq_clear:N \l_@@_cmd_range_seq
-    \seq_clear:N \l_@@_mathalph_seq
+        \seq_clear:N \l_@@_char_range_seq
+        \seq_clear:N \l_@@_mclass_range_seq
+        \seq_clear:N \l_@@_cmd_range_seq
+        \seq_clear:N \l_@@_mathalph_seq
 
-    \clist_map_inline:nn {#1}
-     {
-      \@@_if_mathalph_decl:nTF {##1}
-       {
-        \seq_put_right:Nx \l_@@_mathalph_seq
-         {
-          { \exp_not:V \l_@@_tmpa_tl }
-          { \exp_not:V \l_@@_tmpb_tl }
-          { \exp_not:V \l_@@_tmpc_tl }
-         }
-       }
-       {
+        \clist_map_inline:nn {#1}
+          {
+            \@@_if_mathalph_decl:nTF {##1}
+              {
+                \seq_put_right:Nx \l_@@_mathalph_seq
+                 {
+                   { \exp_not:V \l_@@_tmpa_tl }
+                   { \exp_not:V \l_@@_tmpb_tl }
+                   { \exp_not:V \l_@@_tmpc_tl }
+                 }
+              }
 %    \end{macrocode}
 % Four cases:
 % math class matching the known list;
@@ -80,17 +79,18 @@
 % single item that isn't---edge case, must be 0--9;
 % none of the above---char range.
 %    \begin{macrocode}
-        \seq_if_in:NnTF \g_@@_mathclasses_seq {##1}
-          { \seq_put_right:Nn \l_@@_mclass_range_seq {##1} }
-          {
-            \bool_lazy_and:nnTF { \tl_if_single_p:n {##1} } { \token_if_cs_p:N ##1 }
-              { \seq_put_right:Nn \l_@@_cmd_range_seq {##1} }
-              { \seq_put_right:Nn \l_@@_char_range_seq {##1} }
+              {
+                \seq_if_in:NnTF \g_@@_mathclasses_seq {##1}
+                  { \seq_put_right:Nn \l_@@_mclass_range_seq {##1} }
+                  {
+                    \bool_lazy_and:nnTF { \tl_if_single_p:n {##1} } { \token_if_cs_p:N ##1 }
+                      { \seq_put_right:Nn \l_@@_cmd_range_seq {##1} }
+                      { \seq_put_right:Nn \l_@@_char_range_seq {##1} }
+              }
           }
-       }
-     }
-   }
- }
+      }
+    }
+  }
 %    \end{macrocode}
 %
 %
@@ -109,42 +109,42 @@
 % in the general case.
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \@@_if_mathalph_decl:n {TF}
- {
-  \tl_set:Nn  \l_@@_tmpa_tl {#1}
-  \tl_clear:N \l_@@_tmpb_tl
-  \tl_clear:N \l_@@_tmpc_tl
+  {
+    \tl_set:Nn  \l_@@_tmpa_tl {#1}
+    \tl_clear:N \l_@@_tmpb_tl
+    \tl_clear:N \l_@@_tmpc_tl
 
-  \tl_if_in:NnT \l_@@_tmpa_tl {->}
-   { \exp_after:wN \@@_split_arrow:w \l_@@_tmpa_tl \q_nil }
+    \tl_if_in:NnT \l_@@_tmpa_tl {->}
+      { \exp_after:wN \@@_split_arrow:w \l_@@_tmpa_tl \q_nil }
 
-  \tl_if_in:NnT \l_@@_tmpa_tl {/}
-   { \exp_after:wN \@@_split_slash:w \l_@@_tmpa_tl \q_nil }
+    \tl_if_in:NnT \l_@@_tmpa_tl {/}
+      { \exp_after:wN \@@_split_slash:w \l_@@_tmpa_tl \q_nil }
 
-  \tl_set:Nx \l_@@_tmpa_tl { \tl_to_str:N \l_@@_tmpa_tl }
-  \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \math }
-  \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \sym }
-  \tl_trim_spaces:N \l_@@_tmpa_tl
+    \tl_set:Nx \l_@@_tmpa_tl { \tl_to_str:N \l_@@_tmpa_tl }
+    \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \math }
+    \exp_args:NNx \tl_remove_all:Nn \l_@@_tmpa_tl { \token_to_str:N \sym }
+    \tl_trim_spaces:N \l_@@_tmpa_tl
 
-  \tl_if_empty:NT \l_@@_tmpc_tl
-   { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
+    \tl_if_empty:NT \l_@@_tmpc_tl
+      { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
 
-  \seq_if_in:NVTF \g_@@_named_ranges_seq \l_@@_tmpa_tl
-   { \prg_return_true: } { \prg_return_false: }
- }
+    \seq_if_in:NVTF \g_@@_named_ranges_seq \l_@@_tmpa_tl
+      { \prg_return_true: } { \prg_return_false: }
+  }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_set:Npn \@@_split_arrow:w #1->#2 \q_nil
- {
-  \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {#1} }
-  \tl_set:Nx \l_@@_tmpc_tl { \tl_trim_spaces:n {#2} }
- }
+  {
+    \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {#1} }
+    \tl_set:Nx \l_@@_tmpc_tl { \tl_trim_spaces:n {#2} }
+  }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_set:Npn \@@_split_slash:w #1/#2 \q_nil
- {
-  \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {#1} }
-  \tl_set:Nx \l_@@_tmpb_tl { \tl_trim_spaces:n {#2} }
- }
+  {
+    \tl_set:Nx \l_@@_tmpa_tl { \tl_trim_spaces:n {#1} }
+    \tl_set:Nx \l_@@_tmpb_tl { \tl_trim_spaces:n {#2} }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -224,7 +224,9 @@
 %
 %    \begin{macrocode}
 \cs_new:Nn \@@_int_if_slot_in_range:nnT
-  { \@@_numrange_parse:nwT {#1} #2 - \q_nil - \q_stop {#3} }
+  {
+    \@@_numrange_parse:nwT {#1} #2 - \q_nil - \q_stop {#3}
+  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
