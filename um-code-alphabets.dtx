@@ -429,211 +429,216 @@
   }
 
 \@@_new_alphabet_config:nnn {bfit} {Greek}
- {
-  \@@_set_mathalphabet_Greek:nnn {bfit} {up,it}{#1}
-  \bool_if:NTF \g_@@_bfliteral_bool
-   {
-    \@@_set_normal_Greek:nn {bfit}{#1}
-    \@@_set_mathalphabet_Greek:nnn {bf} {it}{#1}
-   }
-   {
-    \bool_if:NF \g_@@_bfupGreek_bool
-     {
-      \@@_set_normal_Greek:nn {bfup,bfit}{#1}
-      \@@_set_mathalphabet_Greek:nnn {bf} {up,it}{#1}
-     }
-   }
- }
+  {
+    \@@_set_mathalphabet_Greek:nnn {bfit} {up,it}{#1}
+    \bool_if:NTF \g_@@_bfliteral_bool
+      {
+        \@@_set_normal_Greek:nn {bfit}{#1}
+        \@@_set_mathalphabet_Greek:nnn {bf} {it}{#1}
+      }
+      {
+        \bool_if:NF \g_@@_bfupGreek_bool
+          {
+            \@@_set_normal_Greek:nn {bfup,bfit}{#1}
+            \@@_set_mathalphabet_Greek:nnn {bf} {up,it}{#1}
+          }
+      }
+  }
 
 \@@_new_alphabet_config:nnn {bfit} {greek}
- {
-  \@@_set_mathalphabet_greek:nnn {bfit} {up,it} {#1}
-  \bool_if:NTF \g_@@_bfliteral_bool
-   {
-    \@@_set_normal_greek:nn {bfit} {#1}
-    \@@_set_mathalphabet_greek:nnn {bf} {it} {#1}
-   }
-   {
-    \bool_if:NF \g_@@_bfupgreek_bool
-     {
-      \@@_set_normal_greek:nn {bfit,bfup} {#1}
-      \@@_set_mathalphabet_greek:nnn {bf} {up,it} {#1}
-     }
-   }
- }
+  {
+    \@@_set_mathalphabet_greek:nnn {bfit} {up,it} {#1}
+    \bool_if:NTF \g_@@_bfliteral_bool
+      {
+        \@@_set_normal_greek:nn {bfit} {#1}
+        \@@_set_mathalphabet_greek:nnn {bf} {it} {#1}
+      }
+      {
+        \bool_if:NF \g_@@_bfupgreek_bool
+          {
+            \@@_set_normal_greek:nn {bfit,bfup} {#1}
+            \@@_set_mathalphabet_greek:nnn {bf} {up,it} {#1}
+          }
+      }
+  }
 
 \@@_new_alphabet_config:nnn {bfit} {misc}
- {
-  \bool_if:NTF \g_@@_literal_Nabla_bool
-   { \@@_set_normal_char:nnn {Nabla}{bfit}{#1} }
-   {
-    \bool_if:NF \g_@@_upNabla_bool
-     { \@@_set_normal_char:nnn {Nabla}{bfup,bfit}{#1} }
-   }
-  \bool_if:NTF \g_@@_literal_partial_bool
-   { \@@_set_normal_char:nnn {partial}{bfit}{#1} }
-   {
-    \bool_if:NF \g_@@_uppartial_bool
-     { \@@_set_normal_char:nnn {partial}{bfup,bfit}{#1} }
-   }
-  \@@_set_mathalphabet_pos:nnnn {bfit} {partial} {up,it}{#1}
-  \@@_set_mathalphabet_pos:nnnn {bfit} {Nabla}   {up,it}{#1}
-  \bool_if:NTF \g_@@_literal_partial_bool
-   {
-    \@@_set_mathalphabet_pos:nnnn {bf} {partial} {it}{#1}
-   }
-   {
-    \bool_if:NF \g_@@_uppartial_bool
-     {
-      \@@_set_mathalphabet_pos:nnnn {bf} {partial} {up,it}{#1}
-     }
-   }
-  \bool_if:NTF \g_@@_literal_Nabla_bool
-   {
-    \@@_set_mathalphabet_pos:nnnn {bf} {Nabla}   {it}{#1}
-   }
-   {
-    \bool_if:NF \g_@@_upNabla_bool
-     {
-      \@@_set_mathalphabet_pos:nnnn {bf} {Nabla}   {up,it}{#1}
-     }
-   }
- }
+  {
+    \bool_if:NTF \g_@@_literal_Nabla_bool
+      { \@@_set_normal_char:nnn {Nabla} {bfit} {#1} }
+      {
+        \bool_if:NF \g_@@_upNabla_bool
+          { \@@_set_normal_char:nnn {Nabla} {bfup,bfit} {#1} }
+      }
+
+    \bool_if:NTF \g_@@_literal_partial_bool
+      { \@@_set_normal_char:nnn {partial} {bfit} {#1} }
+      {
+        \bool_if:NF \g_@@_uppartial_bool
+          { \@@_set_normal_char:nnn {partial} {bfup,bfit} {#1} }
+      }
+
+    \@@_set_mathalphabet_pos:nnnn {bfit} {partial} {up,it} {#1}
+    \@@_set_mathalphabet_pos:nnnn {bfit} {Nabla}   {up,it} {#1}
+ 
+    \bool_if:NTF \g_@@_literal_partial_bool
+      {
+        \@@_set_mathalphabet_pos:nnnn {bf} {partial} {it}{#1}
+      }
+      {
+        \bool_if:NF \g_@@_uppartial_bool
+          {
+            \@@_set_mathalphabet_pos:nnnn {bf} {partial} {up,it}{#1}
+          }
+      }
+
+    \bool_if:NTF \g_@@_literal_Nabla_bool
+      {
+        \@@_set_mathalphabet_pos:nnnn {bf} {Nabla}   {it}{#1}
+      }
+      {
+        \bool_if:NF \g_@@_upNabla_bool
+          {
+            \@@_set_mathalphabet_pos:nnnn {bf} {Nabla}   {up,it}{#1}
+          }
+      }
+  }
 %    \end{macrocode}
 %
 %
 % \subsection{Bold Upright: bfup}
 %    \begin{macrocode}
 \@@_new_alphabet_config:nnn {bfup} {num}
- {
-  \@@_set_mathalphabet_numbers:nnn {bf}   {up}{#1}
-  \@@_set_mathalphabet_numbers:nnn {bfup} {up}{#1}
- }
+  {
+    \@@_set_mathalphabet_numbers:nnn {bf}   {up} {#1}
+    \@@_set_mathalphabet_numbers:nnn {bfup} {up} {#1}
+  }
 
 \@@_new_alphabet_config:nnn {bfup} {Latin}
- {
-  \bool_if:NT \g_@@_bfupLatin_bool
-   {
-    \@@_set_normal_Latin:nn {bfup,bfit} {#1}
-   }
-  \@@_set_mathalphabet_Latin:nnn {bfup} {up,it}{#1}
-  \bool_if:NTF \g_@@_bfliteral_bool
-   {
-    \@@_set_normal_Latin:nn {bfup} {#1}
-    \@@_set_mathalphabet_Latin:nnn {bf} {up}{#1}
-   }
-   {
+  {
     \bool_if:NT \g_@@_bfupLatin_bool
-     {
-      \@@_set_normal_Latin:nn {bfup,bfit} {#1}
-      \@@_set_mathalphabet_Latin:nnn {bf} {up,it}{#1}
-     }
-   }
+      {
+        \@@_set_normal_Latin:nn {bfup,bfit} {#1}
+      }
+    \@@_set_mathalphabet_Latin:nnn {bfup} {up,it} {#1}
+    \bool_if:NTF \g_@@_bfliteral_bool
+      {
+        \@@_set_normal_Latin:nn {bfup} {#1}
+        \@@_set_mathalphabet_Latin:nnn {bf} {up} {#1}
+      }
+      {
+        \bool_if:NT \g_@@_bfupLatin_bool
+          {
+            \@@_set_normal_Latin:nn {bfup,bfit} {#1}
+            \@@_set_mathalphabet_Latin:nnn {bf} {up,it} {#1}
+          }
+      }
  }
 
 \@@_new_alphabet_config:nnn {bfup} {latin}
- {
-  \bool_if:NT \g_@@_bfuplatin_bool
-   {
-    \@@_set_normal_latin:nn {bfup,bfit} {#1}
-   }
-  \@@_set_mathalphabet_latin:nnn {bfup} {up,it}{#1}
-  \bool_if:NTF \g_@@_bfliteral_bool
-   {
-    \@@_set_normal_latin:nn {bfup} {#1}
-    \@@_set_mathalphabet_latin:nnn {bf} {up}{#1}
-   }
-   {
+  {
     \bool_if:NT \g_@@_bfuplatin_bool
-     {
-      \@@_set_normal_latin:nn {bfup,bfit} {#1}
-      \@@_set_mathalphabet_latin:nnn {bf} {up,it}{#1}
-     }
-   }
- }
+      {
+        \@@_set_normal_latin:nn {bfup,bfit} {#1}
+      }
+    \@@_set_mathalphabet_latin:nnn {bfup} {up,it} {#1}
+    \bool_if:NTF \g_@@_bfliteral_bool
+      {
+        \@@_set_normal_latin:nn {bfup} {#1}
+        \@@_set_mathalphabet_latin:nnn {bf} {up} {#1}
+      }
+      {
+        \bool_if:NT \g_@@_bfuplatin_bool
+          {
+            \@@_set_normal_latin:nn {bfup,bfit} {#1}
+            \@@_set_mathalphabet_latin:nnn {bf} {up,it} {#1}
+          }
+      }
+  }
+
 \@@_new_alphabet_config:nnn {bfup} {Greek}
- {
-  \@@_set_mathalphabet_Greek:nnn {bfup} {up,it}{#1}
-  \bool_if:NTF \g_@@_bfliteral_bool
-   {
-    \@@_set_normal_Greek:nn {bfup}{#1}
-    \@@_set_mathalphabet_Greek:nnn {bf} {up}{#1}
-   }
-   {
-    \bool_if:NT \g_@@_bfupGreek_bool
-     {
-      \@@_set_normal_Greek:nn {bfup,bfit}{#1}
-      \@@_set_mathalphabet_Greek:nnn {bf} {up,it}{#1}
-     }
-   }
- }
+  {
+    \@@_set_mathalphabet_Greek:nnn {bfup} {up,it} {#1}
+    \bool_if:NTF \g_@@_bfliteral_bool
+      {
+        \@@_set_normal_Greek:nn {bfup} {#1}
+        \@@_set_mathalphabet_Greek:nnn {bf} {up} {#1}
+      }
+      {
+        \bool_if:NT \g_@@_bfupGreek_bool
+          {
+            \@@_set_normal_Greek:nn {bfup,bfit} {#1}
+            \@@_set_mathalphabet_Greek:nnn {bf} {up,it} {#1}
+          }
+      }
+  }
 
 \@@_new_alphabet_config:nnn {bfup} {greek}
- {
-  \@@_set_mathalphabet_greek:nnn {bfup} {up,it} {#1}
-  \bool_if:NTF \g_@@_bfliteral_bool
-   {
-    \@@_set_normal_greek:nn {bfup} {#1}
-    \@@_set_mathalphabet_greek:nnn {bf} {up} {#1}
-   }
-   {
-    \bool_if:NT \g_@@_bfupgreek_bool
-     {
-      \@@_set_normal_greek:nn {bfup,bfit} {#1}
-      \@@_set_mathalphabet_greek:nnn {bf} {up,it} {#1}
-     }
-   }
- }
+  {
+    \@@_set_mathalphabet_greek:nnn {bfup} {up,it} {#1}
+    \bool_if:NTF \g_@@_bfliteral_bool
+      {
+        \@@_set_normal_greek:nn {bfup} {#1}
+        \@@_set_mathalphabet_greek:nnn {bf} {up} {#1}
+      }
+      {
+        \bool_if:NT \g_@@_bfupgreek_bool
+          {
+            \@@_set_normal_greek:nn {bfup,bfit} {#1}
+            \@@_set_mathalphabet_greek:nnn {bf} {up,it} {#1}
+          }
+      }
+  }
 
 \@@_new_alphabet_config:nnn {bfup} {misc}
- {
-  \bool_if:NTF \g_@@_literal_Nabla_bool
-   {
-    \@@_set_normal_char:nnn {Nabla}{bfup}{#1}
-   }
-   {
-    \bool_if:NT \g_@@_upNabla_bool
-     {
-      \@@_set_normal_char:nnn {Nabla}{bfup,bfit}{#1}
-     }
-   }
-  \bool_if:NTF \g_@@_literal_partial_bool
-   {
-    \@@_set_normal_char:nnn {partial}{bfup}{#1}
-   }
-   {
-    \bool_if:NT \g_@@_uppartial_bool
-     {
-      \@@_set_normal_char:nnn {partial}{bfup,bfit}{#1}
-     }
-   }
-  \@@_set_mathalphabet_pos:nnnn {bfup} {partial} {up,it}{#1}
-  \@@_set_mathalphabet_pos:nnnn {bfup} {Nabla}   {up,it}{#1}
-  \@@_set_mathalphabet_pos:nnnn {bfup} {digamma} {up}{#1}
-  \@@_set_mathalphabet_pos:nnnn {bfup} {Digamma} {up}{#1}
-  \@@_set_mathalphabet_pos:nnnn {bf}   {digamma} {up}{#1}
-  \@@_set_mathalphabet_pos:nnnn {bf}   {Digamma} {up}{#1}
-  \bool_if:NTF \g_@@_literal_partial_bool
-   {
-    \@@_set_mathalphabet_pos:nnnn {bf} {partial} {up}{#1}
-   }
-   {
-    \bool_if:NT \g_@@_uppartial_bool
-     {
-      \@@_set_mathalphabet_pos:nnnn {bf} {partial} {up,it}{#1}
-     }
-   }
-  \bool_if:NTF \g_@@_literal_Nabla_bool
-   {
-    \@@_set_mathalphabet_pos:nnnn {bf} {Nabla}   {up}{#1}
-   }
-   {
-    \bool_if:NT \g_@@_upNabla_bool
-     {
-      \@@_set_mathalphabet_pos:nnnn {bf} {Nabla}   {up,it}{#1}
-     }
-   }
- }
+  {
+    \bool_if:NTF \g_@@_literal_Nabla_bool
+      {
+        \@@_set_normal_char:nnn {Nabla} {bfup} {#1}
+      }
+      {
+        \bool_if:NT \g_@@_upNabla_bool
+          {
+            \@@_set_normal_char:nnn {Nabla} {bfup,bfit} {#1}
+          }
+      }
+    \bool_if:NTF \g_@@_literal_partial_bool
+      {
+        \@@_set_normal_char:nnn {partial} {bfup} {#1}
+      }
+      {
+        \bool_if:NT \g_@@_uppartial_bool
+          {
+            \@@_set_normal_char:nnn {partial} {bfup,bfit} {#1}
+          }
+      }
+    \@@_set_mathalphabet_pos:nnnn {bfup} {partial} {up,it} {#1}
+    \@@_set_mathalphabet_pos:nnnn {bfup} {Nabla}   {up,it} {#1}
+    \@@_set_mathalphabet_pos:nnnn {bfup} {digamma} {up} {#1}
+    \@@_set_mathalphabet_pos:nnnn {bfup} {Digamma} {up} {#1}
+    \@@_set_mathalphabet_pos:nnnn {bf}   {digamma} {up} {#1}
+    \@@_set_mathalphabet_pos:nnnn {bf}   {Digamma} {up} {#1}
+    \bool_if:NTF \g_@@_literal_partial_bool
+      {
+        \@@_set_mathalphabet_pos:nnnn {bf} {partial} {up} {#1}
+      }
+      {
+        \bool_if:NT \g_@@_uppartial_bool
+          {
+            \@@_set_mathalphabet_pos:nnnn {bf} {partial} {up,it} {#1}
+          }
+      }
+    \bool_if:NTF \g_@@_literal_Nabla_bool
+      {
+        \@@_set_mathalphabet_pos:nnnn {bf} {Nabla} {up}{#1}
+      }
+      {
+        \bool_if:NT \g_@@_upNabla_bool
+          {
+            \@@_set_mathalphabet_pos:nnnn {bf} {Nabla} {up,it} {#1}
+          }
+      }
+  }
 %    \end{macrocode}
 %
 % \subsection{Bold fractur or fraktur or blackletter: bffrak}
