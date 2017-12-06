@@ -17,23 +17,25 @@
 % to upright or italic happens with the mathcode definitions, whereas these macros
 % just stand for the literal Unicode characters.
 %    \begin{macrocode}
-\AtBeginDocument{\@@_resolve_greek:}
+\AtBeginDocument { \@@_resolve_greek: }
+%    \end{macrocode}
+%    \begin{macrocode}
 \cs_new:Npn \@@_resolve_greek:
- {
-  \clist_map_inline:nn
-   {
-    Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,
-    alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,
-    Mu,Nu,Xi,Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,
-    mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,phi,chi,psi,omega,
-    varTheta,varsigma,vartheta,varkappa,varrho,varpi,varepsilon,varphi
-   }
-   {
-    \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
-    \tl_set:cx {up ##1} { \exp_not:N \symup \exp_not:c { ##1 } }
-    \tl_set:cx {it ##1} { \exp_not:N \symit \exp_not:c { ##1 } }
-   }
- }
+  {
+    \clist_map_inline:nn
+      {
+        Alpha,Beta,Gamma,Delta,Epsilon,Zeta,Eta,Theta,Iota,Kappa,Lambda,
+        alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,
+        Mu,Nu,Xi,Omicron,Pi,Rho,Sigma,Tau,Upsilon,Phi,Chi,Psi,Omega,
+        mu,nu,xi,omicron,pi,rho,sigma,tau,upsilon,phi,chi,psi,omega,
+        varTheta,varsigma,vartheta,varkappa,varrho,varpi,varepsilon,varphi
+      }
+      {
+        \tl_set:cx {##1} { \exp_not:c { mit ##1 } }
+        \tl_set:cx {up ##1} { \exp_not:N \symup \exp_not:c { ##1 } }
+        \tl_set:cx {it ##1} { \exp_not:N \symit \exp_not:c { ##1 } }
+      }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -45,69 +47,70 @@
 % kernel doesn't make it available with its native name.
 %    \begin{macrocode}
 %<*LU>
-\cs_if_exist:NF \Uroot
-  { \cs_new_eq:NN \Uroot \luatexUroot }
+\cs_if_exist:NF \Uroot { \cs_new_eq:NN \Uroot \luatexUroot }
 %</LU>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \AtBeginDocument{\@@_redefine_radical:}
+%    \end{macrocode}
+%    \begin{macrocode}
 \cs_new:Nn \@@_redefine_radical:
 %<*XE>
- {
-  \@ifpackageloaded { amsmath } { }
-   {
+  {
+    \@ifpackageloaded { amsmath } { }
+      {
 %    \end{macrocode}
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-    \cs_set_nopar:Npn \r@@@@t ##1 ##2
-     {
-      \hbox_set:Nn \l_tmpa_box
-       {
-        \c_math_toggle_token
-        \m@th
-        ##1
-        \sqrtsign { ##2 }
-        \c_math_toggle_token
-       }
-      \@@_mathstyle_scale:Nnn ##1 { \kern }
-       { \fontdimen 63 \l_@@_font }
-      \box_move_up:nn
-       {
-        (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
-        * \number \fontdimen 65 \l_@@_font / 100
-       }
-       { \box_use:N \rootbox }
-      \@@_mathstyle_scale:Nnn ##1 { \kern }
-       { \fontdimen 64 \l_@@_font }
-      \box_use_clear:N \l_tmpa_box
-     }
+        \cs_set_nopar:Npn \r@@@@t ##1 ##2
+          {
+            \hbox_set:Nn \l_tmpa_box
+              {
+                \c_math_toggle_token
+                \m@th
+                ##1
+                \sqrtsign { ##2 }
+                \c_math_toggle_token
+              }
+            \@@_mathstyle_scale:Nnn ##1 { \kern }
+              { \fontdimen 63 \l_@@_font }
+            \box_move_up:nn
+              {
+                (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
+                * \number \fontdimen 65 \l_@@_font / 100
+              }
+              { \box_use:N \rootbox }
+            \@@_mathstyle_scale:Nnn ##1 { \kern }
+              { \fontdimen 64 \l_@@_font }
+            \box_use_clear:N \l_tmpa_box
+          }
 %    \end{macrocode}
 % \end{macro}
 %    \begin{macrocode}
-   }
- }
+      }
+  }
 %</XE>
 %<*LU>
- {
-  \@ifpackageloaded { amsmath } { }
-   {
+  {
+    \@ifpackageloaded { amsmath } { }
+      {
 %    \end{macrocode}
 % \begin{macro}{\root}
 % Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
 %    \begin{macrocode}
-    \cs_set:Npn \root ##1 \of ##2
-     {
-       \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
-     }
+        \cs_set:Npn \root ##1 \of ##2
+          {
+            \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
+          }
 %    \end{macrocode}
 % \end{macro}
 %    \begin{macrocode}
-   }
- }
+      }
+  }
 %</LU>
 %    \end{macrocode}
 %
@@ -118,50 +121,52 @@
 %
 %    \begin{macrocode}
 \cs_new:Npn \@@_define_active_frac:Nw #1 #2/#3
- {
-  \char_set_catcode_active:N #1
-  \@@_char_gmake_mathactive:N #1
-  \tl_rescan:nn
-   {
-    \catcode`\_=11\relax
-    \catcode`\:=11\relax
-   }
-   {
-    \cs_gset:Npx #1
-     {
-      \bool_if:NTF \l_@@_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
-          {#2} {#3}
-     }
-   }
- }
+  {
+    \char_set_catcode_active:N #1
+    \@@_char_gmake_mathactive:N #1
+    \tl_rescan:nn
+      {
+        \catcode`\_=11\relax
+        \catcode`\:=11\relax
+      }
+      {
+        \cs_gset:Npx #1
+          {
+            \bool_if:NTF \l_@@_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
+            {#2} {#3}
+          }
+      }
+  }
 %    \end{macrocode}
 % These are redefined for each math font selection in case the |active-frac|
 % feature changes.
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_active_frac:
- {
-  \group_begin:
-  \@@_define_active_frac:Nw  ^^^^2189  0/3
-  \@@_define_active_frac:Nw  ^^^^2152  1/{10}
-  \@@_define_active_frac:Nw  ^^^^2151  1/9
-  \@@_define_active_frac:Nw  ^^^^215b  1/8
-  \@@_define_active_frac:Nw  ^^^^2150  1/7
-  \@@_define_active_frac:Nw  ^^^^2159  1/6
-  \@@_define_active_frac:Nw  ^^^^2155  1/5
-  \@@_define_active_frac:Nw  ^^^^00bc  1/4
-  \@@_define_active_frac:Nw  ^^^^2153  1/3
-  \@@_define_active_frac:Nw  ^^^^215c  3/8
-  \@@_define_active_frac:Nw  ^^^^2156  2/5
-  \@@_define_active_frac:Nw  ^^^^00bd  1/2
-  \@@_define_active_frac:Nw  ^^^^2157  3/5
-  \@@_define_active_frac:Nw  ^^^^215d  5/8
-  \@@_define_active_frac:Nw  ^^^^2154  2/3
-  \@@_define_active_frac:Nw  ^^^^00be  3/4
-  \@@_define_active_frac:Nw  ^^^^2158  4/5
-  \@@_define_active_frac:Nw  ^^^^215a  5/6
-  \@@_define_active_frac:Nw  ^^^^215e  7/8
-  \group_end:
- }
+  {
+    \group_begin:
+      \@@_define_active_frac:Nw  ^^^^2189  0/3
+      \@@_define_active_frac:Nw  ^^^^2152  1/{10}
+      \@@_define_active_frac:Nw  ^^^^2151  1/9
+      \@@_define_active_frac:Nw  ^^^^215b  1/8
+      \@@_define_active_frac:Nw  ^^^^2150  1/7
+      \@@_define_active_frac:Nw  ^^^^2159  1/6
+      \@@_define_active_frac:Nw  ^^^^2155  1/5
+      \@@_define_active_frac:Nw  ^^^^00bc  1/4
+      \@@_define_active_frac:Nw  ^^^^2153  1/3
+      \@@_define_active_frac:Nw  ^^^^215c  3/8
+      \@@_define_active_frac:Nw  ^^^^2156  2/5
+      \@@_define_active_frac:Nw  ^^^^00bd  1/2
+      \@@_define_active_frac:Nw  ^^^^2157  3/5
+      \@@_define_active_frac:Nw  ^^^^215d  5/8
+      \@@_define_active_frac:Nw  ^^^^2154  2/3
+      \@@_define_active_frac:Nw  ^^^^00be  3/4
+      \@@_define_active_frac:Nw  ^^^^2158  4/5
+      \@@_define_active_frac:Nw  ^^^^215a  5/6
+      \@@_define_active_frac:Nw  ^^^^215e  7/8
+    \group_end:
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
 \@@_setup_active_frac:
 %    \end{macrocode}
 %
@@ -215,9 +220,9 @@
 %    \begin{macrocode}
 \cs_set_eq:NN \latexe_underbar:n \underbar
 \renewcommand\underbar
- {
-  \mode_if_math:TF \mathunderbar \latexe_underbar:n
- }
+  {
+    \mode_if_math:TF \mathunderbar \latexe_underbar:n
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -227,15 +232,15 @@
 % We hope no-one will notice.
 %    \begin{macrocode}
 \@ifpackageloaded{amsmath}
- {
-  % define their own colon, perhaps I should just steal it. (It does look much better.)
- }
- {
-  \cs_set_protected:Npn \colon
-   {
-    \bool_if:NTF \g_@@_literal_colon_bool {:} { \mathpunct{:} }
-   }
- }
+  {
+    % define their own colon, perhaps I should just steal it. (It does look much better.)
+  }
+  {
+    \cs_set_protected:Npn \colon
+      {
+        \bool_if:NTF \g_@@_literal_colon_bool {:} { \mathpunct{:} }
+      }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -262,9 +267,9 @@
 %    \begin{macrocode}
 \cs_set_eq:NN \@@_text_slash: \slash
 \cs_set_protected:Npn \slash
- {
-  \mode_if_math:TF {\mathslash} {\@@_text_slash:}
- }
+  {
+    \mode_if_math:TF {\mathslash} {\@@_text_slash:}
+  }
 %    \end{macrocode}
 %
 % \subsubsection{\cs{not}}
@@ -286,26 +291,26 @@
 %
 %    \begin{macrocode}
 \cs_new:Npn \@@_newnot:N #1
- {
-   \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
-   \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl }
-    {
-     \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
-    }
-   \cs_if_exist:cTF { n \l_not_token_name_tl }
-    {
-     \use:c { n \l_not_token_name_tl }
-    }
-    {
-     \cs_if_exist:cTF { not \l_not_token_name_tl }
+  {
+    \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
+    \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl }
       {
-       \use:c { not \l_not_token_name_tl }
+        \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
+      }
+    \cs_if_exist:cTF { n \l_not_token_name_tl }
+      {
+        \use:c { n \l_not_token_name_tl }
       }
       {
-       \@@_oldnot: #1
+        \cs_if_exist:cTF { not \l_not_token_name_tl }
+          {
+            \use:c { not \l_not_token_name_tl }
+          }
+          {
+            \@@_oldnot: #1
+          }
       }
-    }
- }
+  }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_set_eq:NN \@@_oldnot: \not
@@ -313,18 +318,18 @@
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_setup_negations:
- {
-  \cs_gset:cpn { not= }    { \neq }
-  \cs_gset:cpn { not< }    { \nless }
-  \cs_gset:cpn { not> }    { \ngtr }
-  \cs_gset:Npn  \ngets     { \nleftarrow }
-  \cs_gset:Npn  \nsimeq    { \nsime }
-  \cs_gset:Npn  \nequal    { \ne }
-  \cs_gset:Npn  \nle       { \nleq }
-  \cs_gset:Npn  \nge       { \ngeq }
-  \cs_gset:Npn  \ngreater  { \ngtr }
-  \cs_gset:Npn  \nforksnot { \forks }
- }
+  {
+    \cs_gset:cpn { not= }    { \neq }
+    \cs_gset:cpn { not< }    { \nless }
+    \cs_gset:cpn { not> }    { \ngtr }
+    \cs_gset:Npn  \ngets     { \nleftarrow }
+    \cs_gset:Npn  \nsimeq    { \nsime }
+    \cs_gset:Npn  \nequal    { \ne }
+    \cs_gset:Npn  \nle       { \nleq }
+    \cs_gset:Npn  \nge       { \ngeq }
+    \cs_gset:Npn  \ngreater  { \ngtr }
+    \cs_gset:Npn  \nforksnot { \forks }
+  }
 %    \end{macrocode}
 %
 %
