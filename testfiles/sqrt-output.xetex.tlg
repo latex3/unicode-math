@@ -1,0 +1,75 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+SQRT x
+> \box12=
+\hbox(7.80502+0.69499)x12.01999
+.\mathon
+.\hbox(7.80502+0.69499)x12.01999
+..\vbox(0.6+7.3)x6.9, shifted -6.60501
+...\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#4124
+..\vbox(7.80502+0.11)x5.12
+...\kern0.6
+...\rule(0.6+0.0)x*
+...\kern1.785
+...\hbox(4.82+0.11)x5.12
+....\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#490
+....\kern0.12
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+SQRT x squared
+> \box12=
+\hbox(11.22626+0.87375)x16.83414
+.\mathon
+.\hbox(11.22626+0.87375)x16.83414
+..\vbox(0.6+10.9)x7.03, shifted -10.02625
+...\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#4136
+..\vbox(11.22626+0.11)x9.80414
+...\kern0.6
+...\rule(0.6+0.0)x*
+...\kern1.96376
+...\hbox(8.06248+0.11)x9.80414
+....\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#490
+....\kern0.12
+....\hbox(5.10243+0.02222)x4.68414, shifted -2.96005
+.....\TU/texgyrepagella-math.otf(0)/m/n/7.40556 glyph#1245
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+SQRT FRAC x y
+> \box12=
+\hbox(15.75003+10.74998)x15.15
+.\mathon
+.\hbox(15.75003+10.74998)x15.15
+..\vbox(0.6+25.3)x7.57, shifted -14.55002
+...\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#4184
+..\vbox(15.75003+9.42009)x7.57999
+...\kern0.6
+...\rule(0.6+0.0)x*
+...\kern2.5299
+...\hbox(12.02011+9.42009)x7.57999
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(12.02011+9.42009)x5.18
+.....\hbox(4.82+0.11)x5.18, glue set 0.03fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#490
+......\kern0.12
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern4.29005
+.....\rule(0.59999+0.0)x*
+.....\kern4.04013
+.....\hbox(4.82+2.76)x5.18
+......\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#491
+......\kern0.18
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+***************
+Compilation 1 of test file completed with exit status 256
