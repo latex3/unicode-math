@@ -94,7 +94,10 @@
 % \end{macro}
 % \end{macro}
 %
-% \paragraph{\pkg{url}}
+% \section{Patching/augmenting 3rd-party packages}
+%
+% \subsection{\pkg{url}}
+%
 % Simply need to get \pkg{url} in a state such that
 % when it switches to math mode and enters \ascii\ characters, the maths
 % setup (i.e., \pkg{unicode-math}) doesn't remap the symbols into Plane 1.
@@ -105,19 +108,19 @@
 % font still work correctly.
 %    \begin{macrocode}
 \AtEndOfPackageFile * {url}
- {
-  \tl_put_left:Nn \Url@FormatString { \@@_switchto_up: }
-  \tl_put_right:Nn \UrlSpecials
-   {
-    \do\`{\mathchar`\`}
-    \do\'{\mathchar`\'}
-    \do\${\mathchar`\$}
-    \do\&{\mathchar`\&}
-   }
- }
+  {
+    \tl_put_left:Nn \Url@FormatString { \@@_switchto_up: }
+    \tl_put_right:Nn \UrlSpecials
+      {
+        \do \` { \mathchar`\` }
+        \do \' { \mathchar`\' }
+        \do \$ { \mathchar`\$ }
+        \do \& { \mathchar`\& }
+      }
+  }
 %    \end{macrocode}
 %
-% \paragraph{\pkg{amsmath}}
+% \subsection{\pkg{amsmath}}
 % Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
 \AtEndOfPackageFile * {amsmath}
@@ -319,29 +322,29 @@
  }
 %    \end{macrocode}
 %
-% \paragraph{\pkg{amsopn}}
+% \subsection{\pkg{amsopn}}
 % This code is to improve the output of analphabetic symbols in text of operator names (\cs{sin}, \cs{cos}, etc.). Just comment out the offending lines for now:
 %    \begin{macrocode}
 %<*XE>
 \AtEndOfPackageFile * {amsopn}
- {
-  \cs_set:Npn \newmcodes@
-   {
-    \mathcode`\'39\scan_stop:
-    \mathcode`\*42\scan_stop:
-    \mathcode`\."613A\scan_stop:
-%%  \ifnum\mathcode`\-=45 \else
-%%    \mathchardef\std@minus\mathcode`\-\relax
-%%  \fi
-    \mathcode`\-45\scan_stop:
-    \mathcode`\/47\scan_stop:
-    \mathcode`\:"603A\scan_stop:
-   }
- }
+  {
+    \cs_set:Npn \newmcodes@
+      {
+        \mathcode`\'39\scan_stop:
+        \mathcode`\*42\scan_stop:
+        \mathcode`\."613A\scan_stop:
+%%      \ifnum\mathcode`\-=45 \else
+%%        \mathchardef\std@minus\mathcode`\-\relax
+%%      \fi
+        \mathcode`\-45\scan_stop:
+        \mathcode`\/47\scan_stop:
+        \mathcode`\:"603A\scan_stop:
+      }
+  }
 %</XE>
 %    \end{macrocode}
 %
-% \paragraph{\pkg{mathtools}}
+% \subsection{\pkg{mathtools}}
 % \pkg{mathtools}’s |\cramped| command and others that make use of its internal version use an incorrect font dimension.
 %
 %    \begin{macrocode}
@@ -417,40 +420,42 @@
 %   \pkg{mathtools}’s |\overbracket| and |\underbracket| take optional
 %   arguments and are defined in terms of rules, so we keep them, and rename
 %   ours to |\Uoverbracket| and |\Uunderbracket|.
-%    \begin{macrocode}
-\AtEndOfPackageFile * { mathtools }
- {
-    \cs_set_eq:NN \MToverbracket  \overbracket
-    \cs_set_eq:NN \MTunderbracket \underbracket
-
-    \AtBeginDocument
-     {
-      \msg_warning:nn { unicode-math } { mathtools-overbracket }
-
-	\def\downbracketfill#1#2
-	 {%
-%    \end{macrocode}
+%
 %   Original definition used the height of |\braceld| which is not available
 %   with Unicode fonts, so we are hard coding the $5/18$ex suggested by
 %   \pkg{mathtools}’s documentation.
 %    \begin{macrocode}
-            \edef\l_MT_bracketheight_fdim{.27ex}%
-            \downbracketend{#1}{#2}
+\AtEndOfPackageFile * { mathtools }
+  {
+    \cs_set_eq:NN \MToverbracket  \overbracket
+    \cs_set_eq:NN \MTunderbracket \underbracket
+
+    \AtBeginDocument
+      {
+        \msg_warning:nn { unicode-math } { mathtools-overbracket }
+
+    	  \cs_set:Npn \downbracketfill #1 #2
+	        {
+            \tl_set:Nn \l_MT_bracketheight_fdim {.27ex}
+            \downbracketend {#1} {#2}
             \leaders \vrule \@height #1 \@depth \z@ \hfill
-            \downbracketend{#1}{#2}%
-     }
-	\def\upbracketfill#1#2
-	 {%
-            \edef\l_MT_bracketheight_fdim{.27ex}%
-            \upbracketend{#1}{#2}
+            \downbracketend {#1} {#2}
+          }
+
+	      \cs_set:Npn \upbracketfill #1 #2
+	        {
+            \tl_set:Nn \l_MT_bracketheight_fdim {.27ex}
+            \upbracketend {#1} {#2}
             \leaders \vrule \@height \z@ \@depth #1 \hfill
-            \upbracketend{#1}{#2}%
+            \upbracketend {#1} {#2}
+          }
+
+	      \cs_set_eq:NN \Uoverbracket  \overbracket
+	      \cs_set_eq:NN \Uunderbracket \underbracket
+        \cs_set_eq:NN \overbracket   \MToverbracket
+        \cs_set_eq:NN \underbracket  \MTunderbracket
      }
-	\let\Uoverbracket =\overbracket
-	\let\Uunderbracket=\underbracket
-        \let\overbracket  =\MToverbracket
-        \let\underbracket =\MTunderbracket
-     }% end of AtBeginDocument
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -465,19 +470,21 @@
 %   \cmd{\providecommand} \cmd{\AtBeginDocument}, we can just define the
 %   offending commands here.
 %    \begin{macrocode}
-  \msg_warning:nn { unicode-math } { mathtools-colon }
-  \NewDocumentCommand \dblcolon { } { \Colon }
-  \NewDocumentCommand \coloneqq { } { \coloneq }
-  \NewDocumentCommand \Coloneqq { } { \Coloneq }
-  \NewDocumentCommand \eqqcolon { } { \eqcolon }
- }
+\AtEndOfPackageFile * { mathtools }
+  {
+    \msg_warning:nn { unicode-math } { mathtools-colon }
+    \NewDocumentCommand \dblcolon { } { \Colon }
+    \NewDocumentCommand \coloneqq { } { \coloneq }
+    \NewDocumentCommand \Coloneqq { } { \Coloneq }
+    \NewDocumentCommand \eqqcolon { } { \eqcolon }
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 %
-% \paragraph{\pkg{colonequals}}
+% \subsection{\pkg{colonequals}}
 %
 % \begin{macro}{\ratio}
 % \begin{macro}{\coloncolon}
@@ -490,15 +497,15 @@
 %   overwrite their definitions.
 %    \begin{macrocode}
 \AtEndOfPackageFile * { colonequals }
- {
-  \msg_warning:nn { unicode-math } { colonequals }
-  \RenewDocumentCommand \ratio { } { \mathratio }
-  \RenewDocumentCommand \coloncolon { } { \Colon }
-  \RenewDocumentCommand \minuscolon { } { \dashcolon }
-  \RenewDocumentCommand \colonequals { } { \coloneq }
-  \RenewDocumentCommand \equalscolon { } { \eqcolon }
-  \RenewDocumentCommand \coloncolonequals { } { \Coloneq }
- }
+  {
+    \msg_warning:nn { unicode-math } { colonequals }
+    \RenewDocumentCommand \ratio { } { \mathratio }
+    \RenewDocumentCommand \coloncolon { } { \Colon }
+    \RenewDocumentCommand \minuscolon { } { \dashcolon }
+    \RenewDocumentCommand \colonequals { } { \coloneq }
+    \RenewDocumentCommand \equalscolon { } { \eqcolon }
+    \RenewDocumentCommand \coloncolonequals { } { \Coloneq }
+  }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
