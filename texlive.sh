@@ -37,8 +37,7 @@ tlmgr install   \
   filehook      \
   luaotfload    \
   fontspec      \
-  oberdiek      \
-  ucharcat
+  oberdiek
 
 # Fonts
 tlmgr install Asana-Math tex-gyre tex-gyre-math lm-math xits

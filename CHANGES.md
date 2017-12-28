@@ -1,6 +1,10 @@
 CHANGE HISTORY
 --------------
 
+- v0.9 ()
+
+  * No longer loads the `ucharcat` package
+
 - v0.8i (2017/11/18)
 
   * Many internal changes to support future work.

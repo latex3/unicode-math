@@ -61,7 +61,7 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-As well as running XeTeX or LuaTeX, this package requires recent versions of the `fontspec`, `expl3`, `xpackages`, `filehook`, `ucharcat`, and `lualatex-math` packages.
+As well as running XeTeX or LuaTeX, this package requires recent versions of the `fontspec`, `expl3`, `xpackages`, `filehook`, and `lualatex-math` packages.
 
 
 MAINTENANCE
