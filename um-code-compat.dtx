@@ -7,13 +7,12 @@
 %<*package>
 %    \end{macrocode}
 %
-% \begin{macro}{\@@_check_and_fix:NNnnnn}
+% \begin{macro}{\@@_check_and_fix:NNnnn}
 % \darg{command}
 % \darg{factory command}
 % \darg{parameter text}
 % \darg{expected replacement text}
-% \darg{new replacement text for \LuaTeX}
-% \darg{new replacement text for \XeTeX}
+% \darg{new replacement text}
 % Tries to patch \meta{command}.
 % If \meta{command} is undefined, do nothing.
 % Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
@@ -30,12 +29,9 @@
       #2 \@@_tmpa:w #3 { #4 }
       \cs_if_eq:NNTF #1 \@@_tmpa:w
        {
-        \msg_info:nnx { unicode-math } { patch-macro }
-          { \token_to_str:N #1 }
+        \msg_info:nnx { unicode-math } { patch-macro } { \token_to_str:N #1 }
         \group_end:
-        #2 #1 #3
-%<XE>          { #6 }
-%<LU>          { #5 }
+        #2 #1 #3 { #5 }
        }
        {
         \msg_warning:nnxxx { unicode-math } { wrong-meaning }
@@ -51,47 +47,6 @@
    }
  }
 %    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_check_and_fix:NNnnn}
-% \darg{command}
-% \darg{factory command}
-% \darg{parameter text}
-% \darg{expected replacement text}
-% \darg{new replacement text}
-% Tries to patch \meta{command}.
-% If \meta{command} is undefined, do nothing.
-% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
-% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
-% Otherwise issue a warning and don’t overwrite.
-%    \begin{macrocode}
-\cs_new_protected_nopar:Nn \@@_check_and_fix:NNnnn
- {
-  \@@_check_and_fix:NNnnnn #1 #2 { #3 } { #4 } { #5 } { #5 }
- }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_check_and_fix_luatex:NNnnn}
-% \begin{macro}{\@@_check_and_fix_luatex:cNnnn}
-% \darg{command}
-% \darg{factory command}
-% \darg{parameter text}
-% \darg{expected replacement text}
-% \darg{new replacement text}
-% Tries to patch \meta{command}.
-% If \XeTeX\ is the current engine or \meta{command} is undefined, do nothing.
-% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
-% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text}.
-% Otherwise issue a warning and don’t overwrite.
-%    \begin{macrocode}
-\cs_new_protected_nopar:Nn \@@_check_and_fix_luatex:NNnnn
- {
-%<LU>    \@@_check_and_fix:NNnnn #1 #2 { #3 } { #4 } { #5 }
- }
-\cs_generate_variant:Nn \@@_check_and_fix_luatex:NNnnn { c }
-%    \end{macrocode}
-% \end{macro}
 % \end{macro}
 %
 % \section{Patching/augmenting 3rd-party packages}
@@ -203,7 +158,8 @@
 %    \end{macrocode}
 % The roots need a complete rework.
 %    \begin{macrocode}
-  \@@_check_and_fix_luatex:NNnnn \plainroot@ \cs_set_nopar:Npn { #1 \of #2 }
+%<*LU>
+  \@@_check_and_fix:NNnnn \plainroot@ \cs_set_nopar:Npn { #1 \of #2 }
    {
     \setbox \rootbox \hbox
      {
@@ -241,7 +197,11 @@
      }
     \c_group_end_token
    }
-  \@@_check_and_fix:NNnnnn \r@@@@t \cs_set_nopar:Npn { #1 #2 }
+%</LU>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  \@@_check_and_fix:NNnnn \r@@@@t \cs_set_nopar:Npn { #1 #2 }
    {
     \setboxz@h { $ \m@th #1 \sqrtsign { #2 } $ }
     \dimen@ \ht\z@
@@ -255,6 +215,7 @@
     \mkern \leftroot@ mu
     \boxz@
    }
+%<*LU>
    {
     \hbox_set:Nn \l_tmpa_box
      {
@@ -281,6 +242,8 @@
      }
      { #2 }
    }
+%</LU>
+%<*XE>
    {
     \hbox_set:Nn \l_tmpa_box
      {
@@ -319,6 +282,7 @@
     \mkern \leftroot@ mu
     \box_use_clear:N \l_tmpa_box
    }
+%</XE>
  }
 %    \end{macrocode}
 %
