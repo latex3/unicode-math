@@ -3,7 +3,7 @@ CHANGE HISTORY
 
 - v0.9 ()
 
-  * No longer loads the `ucharcat` package
+  * No longer loads the `ucharcat` or `fix-cm` packages
 
 - v0.8i (2017/11/18)
 
