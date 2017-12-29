@@ -3,6 +3,8 @@ CHANGE HISTORY
 
 - v0.9 ()
 
+  * Fix problem with infinite loop with `\cdots` when `amsmath` loaded second
+  * `\nabla` and `\partial` have corrected documentation
   * No longer loads the `ucharcat` or `fix-cm` packages
 
 - v0.8i (2017/11/18)
