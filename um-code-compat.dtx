@@ -80,15 +80,16 @@
 %    \begin{macrocode}
 \AtEndOfPackageFile * {amsmath}
   {
-%<*XE>
     \tl_remove_once:Nn \@begindocumenthook
       {
         \mathchardef\std@minus\mathcode`\-\relax
         \mathchardef\std@equal\mathcode`\=\relax
       }
-    \def\std@minus{\Umathcharnum\Umathcodenum`\-\relax}
-    \def\std@equal{\Umathcharnum\Umathcodenum`\=\relax}
-%</XE>
+    \AtBeginDocument
+      {
+        \Umathcharnumdef\std@minus\Umathcodenum`-
+        \Umathcharnumdef\std@equal\Umathcodenum`=
+      }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
