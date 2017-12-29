@@ -1,0 +1,27 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+
+\begin{document}
+
+$a+b$
+
+\START
+
+\setmathfont{texgyrepagella-math.otf}
+\MSG{default}
+\setbox12=\hbox{$\partial$ $\symbf{\partial}$}
+\SHOWBOX {12}
+
+\setmathfont[partial=upright]{texgyrepagella-math.otf}
+\MSG{upright}
+\setbox12=\hbox{$\partial$ $\symbf{\partial}$}
+\SHOWBOX {12}
+
+\setmathfont[partial=italic]{texgyrepagella-math.otf}
+\MSG{italic}
+\setbox12=\hbox{$\partial$ $\symbf{\partial}$}
+\SHOWBOX {12}
+
+\end{document}

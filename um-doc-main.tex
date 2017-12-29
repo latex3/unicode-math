@@ -685,14 +685,13 @@ The Caligraphic style (\cs{mathcal}) in XITS Math is: $\symcal{ABCXYZ}$
  nabla by default (when either upright or italic nabla is used in the
  source). \TeX\ classically uses an upright nabla, and \textsc{iso}
  standards agree with this convention.
- The package options |nabla=upright| and
+ The package options |nabla=upright| (default) and
  |nabla=italic| switch between the two choices, and |nabla=literal| respects
- the shape of the input character. This is then inherited
- through \cmd\symbf; \cmd\symit\ and \cmd\symup\ can be used to force one
- way or the other.
+ the shape of the input character.
+|nabla=literal| is activated automatically after |math-style=literal|.
 
-|nabla=italic| is the default. |nabla=literal| is
-activated automatically after |math-style=literal|.
+These settings are then inherited through \cmd\symbf; \cmd\symit\ and \cmd\symup\ can be used to force the shape of the nabla one way or the other.
+
 
 \begin{table}
   \begin{minipage}[b]{0.49\textwidth}
@@ -701,17 +700,17 @@ activated automatically after |math-style=literal|.
   \tablabel{nabla}
   \let \tmpshow\empty
   \begin{tabular}{@{}llc@{}}
-      \toprule
-    \multicolumn{2}{@{}l}{Description} & Glyph
-     \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-    Upright & Serif & $\symup\nabla$ \\
-    & Bold serif & $\symbfup\nabla$ \\
-    & Bold sans & $\symbfsfup\nabla$ \\
-      \cmidrule(lr){1-2}\cmidrule(lr){3-3}
-    Italic & Serif & $\symit\nabla$ \\
-    & Bold serif & $\symbfit\nabla$ \\
-    & Bold sans  & $\symbfsfit\nabla$ \\
-      \bottomrule
+    \toprule
+    \multicolumn{2}{@{}l}{Description} & Glyph \\
+    \cmidrule(r){1-2}\cmidrule(l){3-3}
+    Upright & Serif      & $\symup\nabla$     \\
+            & Bold serif & $\symbfup\nabla$   \\
+            & Bold sans  & $\symbfsfup\nabla$ \\
+    \cmidrule(lr){1-2}\cmidrule(lr){3-3}
+    Italic & Serif       & $\symit\nabla$     \\
+           & Bold serif  & $\symbfit\nabla$   \\
+           & Bold sans   & $\symbfsfit\nabla$ \\
+    \bottomrule
   \end{tabular}
   \end{minipage}\hfill
   \begin{minipage}[b]{0.49\textwidth}
@@ -719,16 +718,16 @@ activated automatically after |math-style=literal|.
   \topcaption{The partial differential.}
   \tablabel{partial}
   \begin{tabular}{@{}llc@{}}
-      \toprule
-    \multicolumn{2}{@{}l}{Description} & Glyph
-     \\ \cmidrule(r){1-2}\cmidrule(l){3-3}
-    Regular   & Upright & $\symup\partial$ \\
-              & Italic  & $\symit\partial$ \\
-    Bold      & Upright & $\symbfup\partial$ \\
-              & Italic  & $\symbfit\partial$ \\
+    \toprule
+    \multicolumn{2}{@{}l}{Description} & Glyph \\
+    \cmidrule(r){1-2}\cmidrule(l){3-3}
+    Regular   & Upright & $\symup\partial$     \\
+              & Italic  & $\symit\partial$     \\
+    Bold      & Upright & $\symbfup\partial$   \\
+              & Italic  & $\symbfit\partial$   \\
     Sans bold & Upright & $\symbfsfup\partial$ \\
               & Italic  & $\symbfsfit\partial$ \\
-      \bottomrule
+    \bottomrule
   \end{tabular}
   \end{minipage}
 \end{table}
@@ -737,22 +736,13 @@ activated automatically after |math-style=literal|.
 \subsubsection{Partial}
 \seclabel{partial}
 
-The same applies to the symbols \unichar{2202} partial differential and
-\unichar{1D715} math italic partial differential.
+The same logic as for nabla applies to the symbols \unichar{2202} partial differential and \unichar{1D715} math italic partial differential.
+However, in practice these symbols are often designed identically in an italic style.
 
-At time of writing, both the Cambria Math and STIX fonts display these
-two glyphs in the same italic style, but this is hopefully a bug that will
-be corrected in the future~--- the `plain' partial differential should
-really have an upright shape.
-
-Use the |partial=upright| or |partial=italic| package options to specify
+If the font you are using supports it, use the |partial=upright| or |partial=italic| (default) package options to specify
 which one you would like, or |partial=literal| to have the same character
 used in the output as was used for the input.
-The default is (always, unless someone requests and
-argues otherwise) |partial=italic|.\footnote{A good argument would revolve
-around some international standards body recommending upright over italic.
-I just don't have the time right now to look it up.} |partial=literal|
-is activated following |math-style=literal|.
+|partial=literal| is activated following |math-style=literal|.
 
 See \tabref{partial} for the variations on the partial differential symbol.
 
