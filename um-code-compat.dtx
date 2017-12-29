@@ -19,7 +19,7 @@
 % In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text for \LuaTeX} or the \meta{new replacement text for \XeTeX}, depending on the engine.
 % Otherwise issue a warning and don’t overwrite.
 %    \begin{macrocode}
-\cs_new_protected_nopar:Nn \@@_check_and_fix:NNnnnn
+\cs_new_protected_nopar:Nn \@@_check_and_fix:NNnnn
   {
     \cs_if_exist:NT #1
       {
