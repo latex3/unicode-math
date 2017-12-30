@@ -200,23 +200,6 @@
 %</XE>
 %    \end{macrocode}
 %
-% \subsection{\pkg{amsopn}}
-%
-%    \begin{macrocode}
-    \cs_set:Npn \newmcodes@
-      {
-        \mathcode`\'39\scan_stop:
-        \mathcode`\*42\scan_stop:
-        \mathcode`\."613A\scan_stop:
-%%      \ifnum\mathcode`\-=45 \else
-%%        \mathchardef\std@minus\mathcode`\-\relax
-%%      \fi
-        \mathcode`\-45\scan_stop:
-        \mathcode`\/47\scan_stop:
-        \mathcode`\:"603A\scan_stop:
-      }
-%    \end{macrocode}
-%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}

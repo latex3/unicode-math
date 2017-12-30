@@ -5,6 +5,7 @@ CHANGE HISTORY
 
   * Fix problem with infinite loop with `\cdots` when `amsmath` loaded second
   * `\nabla` and `\partial` have corrected documentation
+  * `\std@minus` & `\std@equal` now properly corrected (#332)
   * No longer loads the `ucharcat` or `fix-cm` packages
 
 - v0.8i (2017/11/18)
