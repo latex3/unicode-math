@@ -961,6 +961,20 @@ v0.9998, these wide/non-wide commands will again behave in their expected
 manner.
 
 
+\subsubsection{Negations and the \cs{not} command}
+\seclabel{negations}
+
+The \cs{not} command in classic \LaTeXe\ was a mathematical slash modifying glyph that allowed for `negating` maths symbols where pre-built glyphs were not available. While Unicode encodes a slot for this modifying slash, it is only well-supported in \LuaTeX\ and not in \XeTeX.
+
+To provide more flexibility, the \pkg{unicode-math} package defines \cs{not} to search for a predefined `negated' definitions for its argument and use that if available. This method can be used for fine-tuning in cases where spacing needs to be adjusted.
+
+To define custom negated definitions for either symbols (e.g., \verb|\not=|) or commands (e.g., \verb|\not\equal|), use the \cs{DeclareNotCommand}\meta{symbol or cmd}{definition} command. Its usage is as follows:
+\begin{verbatim}
+\DeclareNotCommand {=} {\neq}
+\DeclareNotCommand {\equal} {\neq}
+\end{verbatim}
+
+
 \subsubsection{Pre-drawn fraction characters}
 
 Pre-drawn fractions \unichar{00BC}--\unichar{00BE}, \unichar{2150}--\unichar{215E}

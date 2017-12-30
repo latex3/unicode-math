@@ -3,6 +3,8 @@ CHANGE HISTORY
 
 - v0.9 ()
 
+  * Some bug fixes to `\not` (#126, #343, #363) and new (tentative) command
+    `\DeclareNotCommand` for defining custom negations (feedback sought).
   * `\std@minus` & `\std@equal` now properly corrected (#332)
   * Add `\lbparen`/`\rbparen` ‘lenticular brackets’ (#428)
   * Fix problem with infinite loop with `\cdots` when `amsmath` loaded after `unicode-math` (#227)

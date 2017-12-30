@@ -115,6 +115,9 @@
      { \@@_set_math_overunder:Nnnn #2 {} {#1} {#4} }
     \mathunder
      { \@@_set_math_overunder:Nnnn #2 {bottom} {#1} {#4} }
+    \mathaccentoverlay
+%<LU>     { \@@_set_math_accent:Nnnn #2 {overlay~ fixed} {#1} {#4} }
+%<XE>     { \@@_set_math_accent:Nnnn #2 {} {#1} {#4} }
    }
  }
 %    \end{macrocode}
@@ -126,6 +129,7 @@
 \edef\mathunder{\string\mathunder}
 \edef\mathbotaccent{\string\mathbotaccent}
 \edef\mathaccentwide{\string\mathaccentwide}
+\edef\mathaccentoverlay{\string\mathaccentoverlay}
 \edef\mathbotaccentwide{\string\mathbotaccentwide}
 %    \end{macrocode}
 %

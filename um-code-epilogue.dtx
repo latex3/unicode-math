@@ -277,8 +277,9 @@
 %
 % The situation of \cs{not} symbol is currently messy, in Unicode it is defined
 % as a combining mark so naturally it should be treated as a math accent,
-% however neither Lua\TeX\ nor \XeTeX\ correctly place it as it needs special
-% treatment compared to other accents, furthermore a math accent changes the
+% however \XeTeX\ does not correctly place it as it needs special
+% treatment compared to other accents.
+% Furthermore a math accent changes the
 % spacing of its nucleus, so \cs{not=} will be spaced as an ordinary not
 % relational symbol, which is undesired.
 %
@@ -290,46 +291,52 @@
 % Gregorio\footnote{\url{http://tex.stackexchange.com/a/47260/729}}.
 %
 %    \begin{macrocode}
-\cs_new:Npn \@@_newnot:N #1
+\DeclareDocumentCommand \not {m}
   {
-    \tl_set:Nx \l_not_token_name_tl { \token_to_str:N #1 }
-    \exp_args:Nx \tl_if_empty:nF { \tl_tail:V \l_not_token_name_tl }
+    \tl_set:Nx \l_@@_not_token_name_tl { \cs_to_str:N #1 }
+    \tl_if_empty:NT \l_@@_not_token_name_tl
       {
-        \tl_set:Nx \l_not_token_name_tl { \tl_tail:V \l_not_token_name_tl }
+        \tl_set:Nx \l_@@_not_token_name_tl { \token_to_str:N #1 }
       }
-    \cs_if_exist:cTF { n \l_not_token_name_tl }
+    \cs_if_exist:cTF { n \l_@@_not_token_name_tl }
       {
-        \use:c { n \l_not_token_name_tl }
+        \use:c { n \l_@@_not_token_name_tl }
       }
       {
-        \cs_if_exist:cTF { not \l_not_token_name_tl }
+        \cs_if_exist:cTF { not \l_@@_not_token_name_tl }
           {
-            \use:c { not \l_not_token_name_tl }
+            \use:c { not \l_@@_not_token_name_tl }
           }
           {
-            \@@_oldnot: #1
+            \tl_if_eq:nnTF {#1} {$} { \notaccent{} $ } { \notaccent #1 }
           }
       }
   }
 %    \end{macrocode}
+%
 %    \begin{macrocode}
-\cs_set_eq:NN \@@_oldnot: \not
-\AtBeginDocument{\cs_set_eq:NN \not \@@_newnot:N}
-%    \end{macrocode}
-%    \begin{macrocode}
-\cs_new_protected_nopar:Nn \@@_setup_negations:
+\DeclareDocumentCommand \DeclareNotCommand {mm}
   {
-    \cs_gset:cpn { not= }    { \neq }
-    \cs_gset:cpn { not< }    { \nless }
-    \cs_gset:cpn { not> }    { \ngtr }
-    \cs_gset:Npn  \ngets     { \nleftarrow }
-    \cs_gset:Npn  \nsimeq    { \nsime }
-    \cs_gset:Npn  \nequal    { \ne }
-    \cs_gset:Npn  \nle       { \nleq }
-    \cs_gset:Npn  \nge       { \ngeq }
-    \cs_gset:Npn  \ngreater  { \ngtr }
-    \cs_gset:Npn  \nforksnot { \forks }
+    \tl_set:Nx \l_@@_not_token_name_tl { \cs_to_str:N #1 }
+    \tl_if_empty:NT \l_@@_not_token_name_tl
+      {
+        \tl_set:Nx \l_@@_not_token_name_tl { \token_to_str:N #1 }
+      }
+    \cs_gset:cpn { not \l_@@_not_token_name_tl } { #2 }
   }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\DeclareNotCommand { = }    { \neq   }
+\DeclareNotCommand { < }    { \nless }
+\DeclareNotCommand { > }    { \ngtr  }
+\DeclareNotCommand { \gets     } { \nleftarrow }
+\DeclareNotCommand { \simeq    } { \nsime      }
+\DeclareNotCommand { \equal    } { \ne         }
+\DeclareNotCommand { \le       } { \nleq       }
+\DeclareNotCommand { \ge       } { \ngeq       }
+\DeclareNotCommand { \greater  } { \ngtr       }
+\DeclareNotCommand { \forksnot } { \forks      }
 %    \end{macrocode}
 %
 %
