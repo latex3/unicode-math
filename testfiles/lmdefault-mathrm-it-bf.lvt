@@ -1,0 +1,38 @@
+
+\input{umtest-preamble}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+
+\begin{document}
+\START
+
+\SEPARATOR
+\MSG{OPERATORNAME}
+\setbox12=\hbox{$\operatorname{flagstaff}$}
+\SHOWBOX {12}
+\MSG{MATHRM}
+\setbox12=\hbox{$\mathrm{flagstaff}$}
+\SHOWBOX {12}
+\MSG{TEXTNORMAL}
+\setbox12=\hbox{flagstaff}
+\SHOWBOX {12}
+
+\SEPARATOR
+\MSG{MATHIT}
+\setbox12=\hbox{$\mathit{flagstaff}$}
+\SHOWBOX {12}
+\MSG{TEXTIT}
+\setbox12=\hbox{\textit{flagstaff}}
+\SHOWBOX {12}
+
+\SEPARATOR
+\MSG{MATHBF}
+\setbox12=\hbox{$\mathbf{flagstaff}$}
+\SHOWBOX {12}
+\MSG{TEXTBF}
+\setbox12=\hbox{\textbf{flagstaff}}
+\SHOWBOX {12}
+
+\end{document}

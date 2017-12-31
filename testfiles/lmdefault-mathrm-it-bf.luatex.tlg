@@ -1,0 +1,127 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+OPERATORNAME
+> \box12=
+\hbox(7.05+2.06)x34.79, direction TLT
+.\mathon
+.\hbox(7.05+2.06)x34.79, direction TLT
+..\kern 0.0
+..\hbox(0.0+0.0)x0.0, direction TLT
+..\TU/lmr/m/n/10 f
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 g
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 f
+..\TU/lmr/m/n/10 f
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\SHOWBOX {12}
+MATHRM
+> \box12=
+\hbox(7.05+2.06)x34.79, direction TLT
+.\mathon
+.\hbox(7.05+2.06)x34.79, direction TLT
+..\TU/lmr/m/n/10 f
+..\TU/lmr/m/n/10 l
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 g
+..\TU/lmr/m/n/10 s
+..\TU/lmr/m/n/10 t
+..\TU/lmr/m/n/10 a
+..\TU/lmr/m/n/10 f
+..\TU/lmr/m/n/10 f
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\SHOWBOX {12}
+TEXTNORMAL
+> \box12=
+\hbox(7.05+2.06)x34.22, direction TLT
+.\TU/lmr/m/n/10 ﬂ (ligature fl)
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 ﬀ (ligature ff)
+! OK.
+<to be read again> 
+\relax 
+l. ...\SHOWBOX {12}
+MATHIT
+> \box12=
+\hbox(7.05+2.05)x35.65002, direction TLT
+.\mathon
+.\hbox(7.05+2.05)x35.65002, direction TLT
+..\TU/lmr/m/it/10 f
+..\TU/lmr/m/it/10 l
+..\TU/lmr/m/it/10 a
+..\TU/lmr/m/it/10 g
+..\TU/lmr/m/it/10 s
+..\TU/lmr/m/it/10 t
+..\TU/lmr/m/it/10 a
+..\TU/lmr/m/it/10 f
+..\TU/lmr/m/it/10 f
+..\kern1.65
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\SHOWBOX {12}
+TEXTIT
+> \box12=
+\hbox(7.05+2.05)x35.89001, direction TLT
+.\TU/lmr/m/it/10 ﬂ (ligature fl)
+.\TU/lmr/m/it/10 a
+.\TU/lmr/m/it/10 g
+.\TU/lmr/m/it/10 s
+.\TU/lmr/m/it/10 t
+.\TU/lmr/m/it/10 a
+.\TU/lmr/m/it/10 ﬀ (ligature ff)
+.\kern 1.65
+! OK.
+<to be read again> 
+\relax 
+l. ...\SHOWBOX {12}
+MATHBF
+> \box12=
+\hbox(7.0+2.01)x39.65997, direction TLT
+.\mathon
+.\hbox(7.0+2.01)x39.65997, direction TLT
+..\TU/lmr/bx/n/10 f
+..\TU/lmr/bx/n/10 l
+..\TU/lmr/bx/n/10 a
+..\TU/lmr/bx/n/10 g
+..\TU/lmr/bx/n/10 s
+..\TU/lmr/bx/n/10 t
+..\TU/lmr/bx/n/10 a
+..\TU/lmr/bx/n/10 f
+..\TU/lmr/bx/n/10 f
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\SHOWBOX {12}
+TEXTBF
+> \box12=
+\hbox(7.0+2.01)x39.04, direction TLT
+.\TU/lmr/bx/n/10 ﬂ (ligature fl)
+.\TU/lmr/bx/n/10 a
+.\TU/lmr/bx/n/10 g
+.\TU/lmr/bx/n/10 s
+.\TU/lmr/bx/n/10 t
+.\TU/lmr/bx/n/10 a
+.\TU/lmr/bx/n/10 ﬀ (ligature ff)
+.\kern 0.0
+! OK.
+<to be read again> 
+\relax 
+l. ...\SHOWBOX {12}
+***************
+Compilation 1 of test file completed with exit status 256

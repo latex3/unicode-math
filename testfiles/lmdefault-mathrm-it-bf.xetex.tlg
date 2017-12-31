@@ -1,0 +1,108 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+OPERATORNAME
+> \box12=
+\hbox(7.05+2.06)x34.79
+.\mathon
+.\hbox(7.05+2.06)x34.79
+..\kern 0.0
+..\hbox(0.0+0.0)x0.0
+..\TU/lmr/m/n/10 glyph#55
+..\TU/lmr/m/n/10 glyph#72
+..\TU/lmr/m/n/10 glyph#28
+..\TU/lmr/m/n/10 glyph#59
+..\TU/lmr/m/n/10 glyph#98
+..\TU/lmr/m/n/10 glyph#105
+..\TU/lmr/m/n/10 glyph#28
+..\TU/lmr/m/n/10 glyph#55
+..\TU/lmr/m/n/10 glyph#55
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+MATHRM
+> \box12=
+\hbox(7.05+2.06)x34.79
+.\mathon
+.\hbox(7.05+2.06)x34.79
+..\TU/lmr/m/n/10 glyph#55
+..\TU/lmr/m/n/10 glyph#72
+..\TU/lmr/m/n/10 glyph#28
+..\TU/lmr/m/n/10 glyph#59
+..\TU/lmr/m/n/10 glyph#98
+..\TU/lmr/m/n/10 glyph#105
+..\TU/lmr/m/n/10 glyph#28
+..\TU/lmr/m/n/10 glyph#55
+..\TU/lmr/m/n/10 glyph#55
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+TEXTNORMAL
+> \box12=
+\hbox(7.05+2.05998)x34.22
+.\TU/lmr/m/n/10 flagstaff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+MATHIT
+> \box12=
+\hbox(7.05+2.05)x34.00003
+.\mathon
+.\hbox(7.05+2.05)x34.00003
+..\TU/lmr/m/it/10 glyph#55
+..\TU/lmr/m/it/10 glyph#72
+..\TU/lmr/m/it/10 glyph#28
+..\TU/lmr/m/it/10 glyph#59
+..\TU/lmr/m/it/10 glyph#98
+..\TU/lmr/m/it/10 glyph#105
+..\TU/lmr/m/it/10 glyph#28
+..\TU/lmr/m/it/10 glyph#55
+..\TU/lmr/m/it/10 glyph#55
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+TEXTIT
+> \box12=
+\hbox(7.05+2.04999)x35.69
+.\TU/lmr/m/it/10 flagstaff
+.\kern 1.45
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+MATHBF
+> \box12=
+\hbox(7.0+2.01)x39.65997
+.\mathon
+.\hbox(7.0+2.01)x39.65997
+..\TU/lmr/bx/n/10 glyph#55
+..\TU/lmr/bx/n/10 glyph#72
+..\TU/lmr/bx/n/10 glyph#28
+..\TU/lmr/bx/n/10 glyph#59
+..\TU/lmr/bx/n/10 glyph#98
+..\TU/lmr/bx/n/10 glyph#105
+..\TU/lmr/bx/n/10 glyph#28
+..\TU/lmr/bx/n/10 glyph#55
+..\TU/lmr/bx/n/10 glyph#55
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+TEXTBF
+> \box12=
+\hbox(7.0+2.00998)x39.79001
+.\TU/lmr/bx/n/10 flagstaff
+.\kern 0.75
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+***************
+Compilation 1 of test file completed with exit status 256
