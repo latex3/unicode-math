@@ -317,14 +317,14 @@
 %    \begin{macrocode}
 \DeclareDocumentCommand \NewNegationCommand {mm}
   {
-    \@@_set_negation_command:Nnn \newcommand {#1} {#2}
+    \@@_set_negation_command:Nnn \cs_new_protected:cpn {#1} {#2}
   }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \DeclareDocumentCommand \RenewNegationCommand {mm}
   {
-    \@@_set_negation_command:Nnn \renewcommand {#1} {#2}
+    \@@_set_negation_command:Nnn \cs_set_protected:cpn {#1} {#2}
   }
 %    \end{macrocode}
 %
@@ -336,7 +336,7 @@
       {
         \tl_set:Nx \l_@@_not_token_name_tl { \token_to_str:N #2 }
       }
-    \exp_args:Nc #1 { not \l_@@_not_token_name_tl } { #3 }
+    #1 { not \l_@@_not_token_name_tl } { #3 }
   }
 %    \end{macrocode}
 %
