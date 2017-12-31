@@ -298,12 +298,12 @@
       {
         \tl_set:Nx \l_@@_not_token_name_tl { \token_to_str:N #1 }
       }
-    \cs_if_exist:cTF { n \l_@@_not_token_name_tl }
+    \cs_if_exist:cTF { not \l_@@_not_token_name_tl }
       {
         \use:c { n \l_@@_not_token_name_tl }
       }
       {
-        \cs_if_exist:cTF { not \l_@@_not_token_name_tl }
+        \cs_if_exist:cTF { n \l_@@_not_token_name_tl }
           {
             \use:c { not \l_@@_not_token_name_tl }
           }
@@ -315,28 +315,42 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\DeclareDocumentCommand \DeclareNotCommand {mm}
+\DeclareDocumentCommand \NewNegationCommand {mm}
   {
-    \tl_set:Nx \l_@@_not_token_name_tl { \cs_to_str:N #1 }
-    \tl_if_empty:NT \l_@@_not_token_name_tl
-      {
-        \tl_set:Nx \l_@@_not_token_name_tl { \token_to_str:N #1 }
-      }
-    \cs_gset:cpn { not \l_@@_not_token_name_tl } { #2 }
+    \@@_set_negation_command:Nnn \newcommand {#1} {#2}
   }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\DeclareNotCommand { = }    { \neq   }
-\DeclareNotCommand { < }    { \nless }
-\DeclareNotCommand { > }    { \ngtr  }
-\DeclareNotCommand { \gets     } { \nleftarrow }
-\DeclareNotCommand { \simeq    } { \nsime      }
-\DeclareNotCommand { \equal    } { \ne         }
-\DeclareNotCommand { \le       } { \nleq       }
-\DeclareNotCommand { \ge       } { \ngeq       }
-\DeclareNotCommand { \greater  } { \ngtr       }
-\DeclareNotCommand { \forksnot } { \forks      }
+\DeclareDocumentCommand \RenewNegationCommand {mm}
+  {
+    \@@_set_negation_command:Nnn \renewcommand {#1} {#2}
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set:Nn \@@_set_negation_command:Nnn
+  {
+    \tl_set:Nx \l_@@_not_token_name_tl { \cs_to_str:N #2 }
+    \tl_if_empty:NT \l_@@_not_token_name_tl
+      {
+        \tl_set:Nx \l_@@_not_token_name_tl { \token_to_str:N #2 }
+      }
+    \exp_args:Nc #1 { not \l_@@_not_token_name_tl } { #3 }
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\NewNegationCommand { = }    { \neq   }
+\NewNegationCommand { < }    { \nless }
+\NewNegationCommand { > }    { \ngtr  }
+\NewNegationCommand { \gets     } { \nleftarrow }
+\NewNegationCommand { \simeq    } { \nsime      }
+\NewNegationCommand { \equal    } { \ne         }
+\NewNegationCommand { \le       } { \nleq       }
+\NewNegationCommand { \ge       } { \ngeq       }
+\NewNegationCommand { \greater  } { \ngtr       }
+\NewNegationCommand { \forksnot } { \forks      }
 %    \end{macrocode}
 %
 %

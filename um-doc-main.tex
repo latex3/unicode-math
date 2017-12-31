@@ -970,11 +970,12 @@ To provide more flexibility, the \pkg{unicode-math} package defines \cs{not} to 
 
 A `negated definition` is any symbol command prefixed by either \verb|n| or \verb|not|. For example, \pkg{unicode-math} by default defines both \cs{leftarrow} ($\leftarrow$) and \cs{nleftarrow} ($\nleftarrow$).
 
-To define custom negated definitions for either symbols (e.g., \verb|\not=|) or commands (e.g., \verb|\not\equal|), use the \cs{DeclareNotCommand}\marg{symbol or cmd}\marg{definition} command. Its usage is as follows:
+To define custom negated definitions for either symbols (e.g., \verb|\not=|) or commands (e.g., \verb|\not\equal|), use the \cs{NewNotCommand}\marg{symbol or cmd}\marg{definition} command. Its usage is as follows:
 \begin{verbatim}
-\DeclareNotCommand {=} {\neq}
-\DeclareNotCommand {\equal} {\neq}
+\NewNegationCommand {=} {\neq}
+\NewNegationCommand {\equal} {\neq}
 \end{verbatim}
+If the command has already been defined, an error will result and \verb|\RenewNegationCommand| can be used to overwrite the original definition.
 
 
 \subsubsection{Pre-drawn fraction characters}
