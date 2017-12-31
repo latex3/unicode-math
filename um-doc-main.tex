@@ -968,7 +968,9 @@ The \cs{not} command in classic \LaTeXe\ was a mathematical slash modifying glyp
 
 To provide more flexibility, the \pkg{unicode-math} package defines \cs{not} to search for a predefined `negated' definitions for its argument and use that if available. This method can be used for fine-tuning in cases where spacing needs to be adjusted.
 
-To define custom negated definitions for either symbols (e.g., \verb|\not=|) or commands (e.g., \verb|\not\equal|), use the \cs{DeclareNotCommand}\meta{symbol or cmd}{definition} command. Its usage is as follows:
+A `negated definition` is any symbol command prefixed by either \verb|n| or \verb|not|. For example, \pkg{unicode-math} by default defines both \cs{leftarrow} ($\leftarrow$) and \cs{nleftarrow} ($\nleftarrow$).
+
+To define custom negated definitions for either symbols (e.g., \verb|\not=|) or commands (e.g., \verb|\not\equal|), use the \cs{DeclareNotCommand}\marg{symbol or cmd}\marg{definition} command. Its usage is as follows:
 \begin{verbatim}
 \DeclareNotCommand {=} {\neq}
 \DeclareNotCommand {\equal} {\neq}
