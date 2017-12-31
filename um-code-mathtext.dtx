@@ -54,6 +54,7 @@
 % While we could now re-activate the way that \pkg{fontspec} does the following, because we can now change maths fonts whenever it's better to define new commands in \pkg{unicode-math} to define the \cs{mathXYZ} fonts.
 %
 % \subsubsection{Text font}
+%
 %    \begin{macrocode}
 \cs_generate_variant:Nn \tl_if_eq:nnT {o}
 \cs_set:Nn \__fontspec_setmainfont_hook:nn
@@ -62,9 +63,7 @@
       {
 %<XE>   \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {#1} {#2}
 %<LU>   \fontspec_set_family:Nnn \g__fontspec_mathrm_tl {Renderer=Basic,#1} {#2}
-        \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\updefault
-        \SetMathAlphabet\mathit{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\itdefault
-        \SetMathAlphabet\mathbf{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\bfdefault\updefault
+        \__fontspec_setmathrm_hook:nn {#1} {#2}
       }
   }
 %    \end{macrocode}
@@ -75,8 +74,7 @@
       {
 %<XE>   \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {#1} {#2}
 %<LU>   \fontspec_set_family:Nnn \g__fontspec_mathsf_tl {Renderer=Basic,#1} {#2}
-        \SetMathAlphabet\mathsf{normal}\g_fontspec_encoding_tl\g__fontspec_mathsf_tl\mddefault\updefault
-        \SetMathAlphabet\mathsf{bold}  \g_fontspec_encoding_tl\g__fontspec_mathsf_tl\bfdefault\updefault
+        \__fontspec_setmathsf_hook:nn {#1} {#2}
       }
   }
 %    \end{macrocode}
@@ -87,8 +85,7 @@
       {
 %<XE>   \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {#1} {#2}
 %<LU>   \fontspec_set_family:Nnn \g__fontspec_mathtt_tl {Renderer=Basic,#1} {#2}
-        \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\updefault
-        \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\updefault
+        \__fontspec_setmathtt_hook:nn {#1} {#2}
       }
   }
 %    \end{macrocode}
@@ -123,6 +120,27 @@
   {
     \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\updefault
     \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\updefault
+  }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\AtBeginDocument
+  {
+    \tl_if_eq:onT {\g__fontspec_mathrm_tl} {\rmdefault}
+      {
+        \__fontspec_setmathrm_hook:nn {} {}
+      }
+
+    \tl_if_eq:onT {\g__fontspec_mathsf_tl} {\sfdefault}
+      {
+        \__fontspec_setmathsf_hook:nn {} {}
+      }
+
+    \tl_if_eq:onT {\g__fontspec_mathtt_tl} {\ttdefault}
+      {
+        \__fontspec_setmathtt_hook:nn {} {}
+      }
   }
 %    \end{macrocode}
 %
