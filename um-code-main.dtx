@@ -382,16 +382,18 @@
 % But they don't need to be able to be typeset directly.
 %
 % \begin{macro}{\@@_setup_mathactives:}
+% TODO: if not an OpenType math font, we should ignore doing anything with primes.
+% This needs a revamped `range` feature, I think.
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_mathactives:
   {
-    \@@_make_mathactive:nNN {"2032} \@@_prime_single_mchar \mathord
-    \@@_make_mathactive:nNN {"2033} \@@_prime_double_mchar \mathord
-    \@@_make_mathactive:nNN {"2034} \@@_prime_triple_mchar \mathord
-    \@@_make_mathactive:nNN {"2057} \@@_prime_quad_mchar   \mathord
-    \@@_make_mathactive:nNN {"2035} \@@_backprime_single_mchar \mathord
-    \@@_make_mathactive:nNN {"2036} \@@_backprime_double_mchar \mathord
-    \@@_make_mathactive:nNN {"2037} \@@_backprime_triple_mchar \mathord
+		\@@_make_mathactive:nNN {"2032} \@@_prime_single_mchar \mathord
+		\@@_make_mathactive:nNN {"2033} \@@_prime_double_mchar \mathord
+		\@@_make_mathactive:nNN {"2034} \@@_prime_triple_mchar \mathord
+		\@@_make_mathactive:nNN {"2057} \@@_prime_quad_mchar   \mathord
+		\@@_make_mathactive:nNN {"2035} \@@_backprime_single_mchar \mathord
+		\@@_make_mathactive:nNN {"2036} \@@_backprime_double_mchar \mathord
+		\@@_make_mathactive:nNN {"2037} \@@_backprime_triple_mchar \mathord
     \@@_make_mathactive:nNN {`\'} \mathstraightquote \mathord
     \@@_make_mathactive:nNN {`\`} \mathbacktick      \mathord
   }
