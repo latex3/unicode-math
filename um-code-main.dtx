@@ -44,7 +44,7 @@
 % After loading the font, we detect what sizes it recommends for scriptsize and scriptscriptsize, so after setting those values appropriately, we reload the font to take these into account.
 %    \begin{macrocode}
 %<debug>  \csname TIC\endcsname
-    \@@_fontspec_select_font:
+    \@@_fontspec_trial_font:
 %<debug>  \csname TOC\endcsname
     \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
       {
@@ -168,6 +168,7 @@
 % Set the math sizes according to the recommended font parameters.
 % TODO: this shouldn't need to be per-engine; check out why the wrappers aren't used.
 %    \begin{macrocode}
+\tl_new:N \g_@@_main_font_cmd_tl
 \cs_new:Nn \@@_declare_math_sizes:
   {
 %<*LU>
@@ -179,11 +180,11 @@
       }
 %</LU>
 %<*XE>
-    \dim_compare:nF { \fontdimen 10 \l_@@_font == 0pt }
+    \dim_compare:nF { \fontdimen 10 \g_@@_main_font_cmd_tl == 0pt }
       {
         \DeclareMathSizes { \f@size } { \f@size }
-          { \@@_fontdimen_to_scale:nn {10} {\l_@@_font} }
-          { \@@_fontdimen_to_scale:nn {11} {\l_@@_font} }
+          { \@@_fontdimen_to_scale:nn {10} { \l_@@_trial_font } }
+          { \@@_fontdimen_to_scale:nn {11} { \l_@@_trial_font } }
       }
 %</XE>
   }
@@ -207,7 +208,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_setup_legacy_fam_two:
   {
-    \fontspec_set_family:Nxn \l_@@_family_tl
+    \fontspec_set_family:Nxn \l_@@_fam_two_tl
       {
         \l_@@_font_keyval_tl,
         Scale=1.00001,
@@ -232,12 +233,12 @@
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{symbols}{\l_@@_mversion_tl}
-      {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
+      {\encodingdefault}{\l_@@_fam_two_tl}{\mddefault}{\updefault}
 
     \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{symbols}{bold}
-          {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
+          {\encodingdefault}{\l_@@_fam_two_tl}{\bfdefault}{\updefault}
       }
   }
 %    \end{macrocode}
@@ -248,7 +249,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_setup_legacy_fam_three:
   {
-    \fontspec_set_family:Nxn \l_@@_family_tl
+    \fontspec_set_family:Nxn \l_@@_fam_three_tl
       {
         \l_@@_font_keyval_tl,
         Scale=0.99999,
@@ -263,55 +264,76 @@
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{largesymbols}{\l_@@_mversion_tl}
-      {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
+      {\encodingdefault}{\l_@@_fam_three_tl}{\mddefault}{\updefault}
 
     \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{largesymbols}{bold}
-          {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
+          {\encodingdefault}{\l_@@_fam_three_tl}{\bfdefault}{\updefault}
       }
   }
 %    \end{macrocode}
 % \end{macro}
 %
 %
+% \begin{macro}{\@@_fontspec_trial_font:}
+% Select the font with \cs{fontspec} and define \cs{l_@@_font} from it.
+% Check whether we're using a real maths font:
+%    \begin{macrocode}
+\cs_new:Nn \@@_fontspec_trial_font:
+  {
+    \tl_set:Nx \l_@@_font_keyval_tl
+      {
+%<LU>   Renderer = Basic,
+        BoldItalicFont = {}, ItalicFont = {},
+        Script = Math,
+        \l_@@_unknown_keys_clist
+      }
+
+    \fontspec_set_fontface:NNxn \l_@@_trial_font \l_@@_trial_family_tl
+      {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
+
+    \group_begin:
+      \fontfamily { \l_@@_trial_family_tl } \selectfont
+      \fontspec_if_script:nF {math} { \bool_gset_false:N \l_@@_ot_math_bool }
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\@@_fontspec_select_font:}
 % Select the font with \cs{fontspec} and define \cs{l_@@_font} from it.
 %    \begin{macrocode}
 \cs_new:Nn \@@_fontspec_select_font:
   {
-    \tl_set:Nx \l_@@_font_keyval_tl {
-%<LU>     Renderer = Basic,
-      BoldItalicFont = {}, ItalicFont = {},
-      Script = Math,
-      SizeFeatures =
-        {
+    \tl_set:Nx \l_@@_font_keyval_tl
+      {
+%<LU>   Renderer = Basic,
+        BoldItalicFont = {}, ItalicFont = {},
+        Script = Math,
+        SizeFeatures =
           {
-            Size = \tf@size-
+            {
+              Size = \tf@size-
+            } ,
+            {
+              Size = \sf@size-\tf@size ,
+              Font = \l_@@_script_font_tl ,
+              \l_@@_script_features_tl
+            } ,
+            {
+              Size = -\sf@size ,
+              Font = \l_@@_sscript_font_tl ,
+              \l_@@_sscript_features_tl
+            }
           } ,
-          {
-            Size = \sf@size-\tf@size ,
-            Font = \l_@@_script_font_tl ,
-            \l_@@_script_features_tl
-          } ,
-          {
-            Size = -\sf@size ,
-            Font = \l_@@_sscript_font_tl ,
-            \l_@@_sscript_features_tl
-          }
-        } ,
-      \l_@@_unknown_keys_clist
-    }
+        \l_@@_unknown_keys_clist
+      }
 
-  \fontspec_set_fontface:NNxn \l_@@_font \l_@@_family_tl
-    {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
-%    \end{macrocode}
-% Check whether we're using a real maths font:
-%    \begin{macrocode}
-    \group_begin:
-      \fontfamily{\l_@@_family_tl}\selectfont
-      \fontspec_if_script:nF {math} {\bool_gset_false:N \l_@@_ot_math_bool}
-    \group_end:
+    \fontspec_set_fontface:NNxn \l_@@_font \l_@@_family_tl
+      {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
+
+    \tl_set:Nn \g_@@_main_font_cmd_tl {\l_@@_font}
   }
 %    \end{macrocode}
 % \end{macro}

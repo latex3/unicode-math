@@ -75,23 +75,25 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\tl_new:N \g_@@_prime_font_cmd_tl
+\tl_set:Nn \g_@@_prime_font_cmd_tl { \l_@@_font }
 \cs_new:Nn \@@_nprimes_select:nn
  {
   \int_case:nnF {#2}
    {
     {1} { \@@_superscript:n {#1} }
     {2} {
-      \@@_glyph_if_exist:NnTF \l_@@_font {"2033}
+      \@@_glyph_if_exist:NnTF \g_@@_prime_font_cmd_tl {"2033}
         { \@@_superscript:n {\@@_prime_double_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
     {3} {
-      \@@_glyph_if_exist:NnTF \l_@@_font {"2034}
+      \@@_glyph_if_exist:NnTF \g_@@_prime_font_cmd_tl {"2034}
         { \@@_superscript:n {\@@_prime_triple_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
     {4} {
-      \@@_glyph_if_exist:NnTF \l_@@_font {"2057}
+      \@@_glyph_if_exist:NnTF \g_@@_prime_font_cmd_tl {"2057}
         { \@@_superscript:n {\@@_prime_quad_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
@@ -109,12 +111,12 @@
    {
     {1} { \@@_superscript:n {#1} }
     {2} {
-      \@@_glyph_if_exist:NnTF \l_@@_font {"2036}
+      \@@_glyph_if_exist:NnTF \g_@@_prime_font_cmd_tl {"2036}
         { \@@_superscript:n {\@@_backprime_double_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
     {3} {
-      \@@_glyph_if_exist:NnTF \l_@@_font {"2037}
+      \@@_glyph_if_exist:NnTF \g_@@_prime_font_cmd_tl {"2037}
         { \@@_superscript:n {\@@_backprime_triple_mchar} }
         { \@@_nprimes:Nn #1 {#2} }
     }
