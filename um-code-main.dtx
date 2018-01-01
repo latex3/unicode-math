@@ -166,41 +166,18 @@
 %
 % \begin{macro}{\@@_declare_math_sizes:}
 % Set the math sizes according to the recommended font parameters.
-% TODO: this shouldn't need to be per-engine; check out why the wrappers aren't used.
 %    \begin{macrocode}
 \tl_new:N \g_@@_main_font_cmd_tl
 \cs_new:Nn \@@_declare_math_sizes:
   {
-%<*LU>
-    \fp_compare:nF { \@@_script_style_size:n {ScriptPercentScaleDown} == 0 }
+    \dim_compare:nF { \fontdimen 10 \g_@@_trial_font == 0pt }
       {
         \DeclareMathSizes { \f@size } { \f@size }
-          { \@@_script_style_size:n {ScriptPercentScaleDown} }
-          { \@@_script_style_size:n {ScriptScriptPercentScaleDown} }
+          { \@@_fontdimen_to_scale:nN {10} \g_@@_trial_font }
+          { \@@_fontdimen_to_scale:nN {11} \g_@@_trial_font }
       }
-%</LU>
-%<*XE>
-    \dim_compare:nF { \fontdimen 10 \g_@@_main_font_cmd_tl == 0pt }
-      {
-        \DeclareMathSizes { \f@size } { \f@size }
-          { \@@_fontdimen_to_scale:nn {10} { \l_@@_trial_font } }
-          { \@@_fontdimen_to_scale:nn {11} { \l_@@_trial_font } }
-      }
-%</XE>
   }
 %    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_script_style_size:n}
-% Determine script- and scriptscriptstyle sizes using luaotfload:
-%   \begin{macrocode}
-%<*LU>
-\cs_new:Nn \@@_script_style_size:n
-  {
-    \fp_eval:n {\directlua{tex.sprint(luaotfload.aux.get_math_dimension("l_@@_font","#1"))} * \f@size / 100 }
-  }
-%</LU>
-%   \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\@@_setup_legacy_fam_two:}
@@ -214,21 +191,21 @@
         Scale=1.00001,
         FontAdjustment =
           {
-            \@@_copy_fontparam:nnn { 8} {43} {FractionNumeratorDisplayStyleShiftUp}
-            \@@_copy_fontparam:nnn { 9} {42} {FractionNumeratorShiftUp}
-            \@@_copy_fontparam:nnn {10} {32} {StackTopShiftUp}
-            \@@_copy_fontparam:nnn {11} {45} {FractionDenominatorDisplayStyleShiftDown}
-            \@@_copy_fontparam:nnn {12} {44} {FractionDenominatorShiftDown}
-            \@@_copy_fontparam:nnn {13} {21} {SuperscriptShiftUp}
-            \@@_copy_fontparam:nnn {14} {21} {SuperscriptShiftUp}
-            \@@_copy_fontparam:nnn {15} {22} {SuperscriptShiftUpCramped}
-            \@@_copy_fontparam:nnn {16} {18} {SubscriptShiftDown}
-            \@@_copy_fontparam:nnn {17} {18} {SubscriptShiftDownWithSuperscript}
-            \@@_copy_fontparam:nnn {18} {24} {SuperscriptBaselineDropMax}
-            \@@_copy_fontparam:nnn {19} {20} {SubscriptBaselineDropMin}
-            \@@_zero_fontparam:n   {20} % delim1 = FractionDelimiterDisplaySize
-            \@@_zero_fontparam:n   {21} % delim2 = FractionDelimiterSize
-            \@@_copy_fontparam:nnn {22} {15} {AxisHeight}
+            \@@_copy_fontdimen:nnN { 8} {43} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN { 9} {42} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {10} {32} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {11} {45} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {12} {44} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {13} {21} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {14} {21} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {15} {22} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {16} {18} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {17} {18} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {18} {24} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {19} {20} \g_@@_main_font_cmd_tl
+            \@@_copy_fontdimen:nnN {22} {15} \g_@@_main_font_cmd_tl
+            \@@_zero_fontdimen:n   {20} % delim1 = FractionDelimiterDisplaySize
+            \@@_zero_fontdimen:n   {21} % delim2 = FractionDelimiterSize
          }
       } {\l_@@_fontname_tl}
 
@@ -254,12 +231,12 @@
         \l_@@_font_keyval_tl,
         Scale=0.99999,
         FontAdjustment = {
-          \@@_copy_fontparam:nnn { 8} {48} {FractionRuleThickness}
-          \@@_copy_fontparam:nnn { 9} {28} {UpperLimitGapMin}
-          \@@_copy_fontparam:nnn {10} {30} {LowerLimitGapMin}
-          \@@_copy_fontparam:nnn {11} {29} {UpperLimitBaselineRiseMin}
-          \@@_copy_fontparam:nnn {12} {31} {LowerLimitBaselineDropMin}
-          \@@_zero_fontparam:n   {13}
+          \@@_copy_fontdimen:nnN { 8} {48} \g_@@_main_font_cmd_tl
+          \@@_copy_fontdimen:nnN { 9} {28} \g_@@_main_font_cmd_tl
+          \@@_copy_fontdimen:nnN {10} {30} \g_@@_main_font_cmd_tl
+          \@@_copy_fontdimen:nnN {11} {29} \g_@@_main_font_cmd_tl
+          \@@_copy_fontdimen:nnN {12} {31} \g_@@_main_font_cmd_tl
+          \@@_zero_fontdimen:n   {13}
        }
       } {\l_@@_fontname_tl}
 
@@ -275,6 +252,33 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\g_@@_luatex_copy_fontdimens_tl}
+%    \begin{macrocode}
+%<*LU>
+\tl_const:Nn \g_@@_luatex_copy_fontdimens_tl
+  {
+    \@@_fontdimen_from_param:nn {10} {ScriptPercentScaleDown}
+    \@@_fontdimen_from_param:nn {11} {ScriptScriptPercentScaleDown}
+    \@@_fontdimen_from_param:nn {15} {AxisHeight}
+    \@@_fontdimen_from_param:nn {18} {SubscriptShiftDown}
+    \@@_fontdimen_from_param:nn {20} {SubscriptBaselineDropMin}
+    \@@_fontdimen_from_param:nn {21} {SuperscriptShiftUp}
+    \@@_fontdimen_from_param:nn {22} {SuperscriptShiftUpCramped}
+    \@@_fontdimen_from_param:nn {24} {SuperscriptBaselineDropMax}
+    \@@_fontdimen_from_param:nn {28} {UpperLimitGapMin}
+    \@@_fontdimen_from_param:nn {29} {UpperLimitBaselineRiseMin}
+    \@@_fontdimen_from_param:nn {30} {LowerLimitGapMin}
+    \@@_fontdimen_from_param:nn {31} {LowerLimitBaselineDropMin}
+    \@@_fontdimen_from_param:nn {32} {StackTopShiftUp}
+    \@@_fontdimen_from_param:nn {42} {FractionNumeratorShiftUp}
+    \@@_fontdimen_from_param:nn {43} {FractionNumeratorDisplayStyleShiftUp}
+    \@@_fontdimen_from_param:nn {44} {FractionDenominatorShiftDown}
+    \@@_fontdimen_from_param:nn {45} {FractionDenominatorDisplayStyleShiftDown}
+    \@@_fontdimen_from_param:nn {48} {FractionRuleThickness}
+  }
+%</LU>
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\@@_fontspec_trial_font:}
 % Select the font with \cs{fontspec} and define \cs{l_@@_font} from it.
@@ -287,16 +291,19 @@
 %<LU>   Renderer = Basic,
         BoldItalicFont = {}, ItalicFont = {},
         Script = Math,
+%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
         \l_@@_unknown_keys_clist
       }
 
-    \fontspec_set_fontface:NNxn \l_@@_trial_font \l_@@_trial_family_tl
+    \fontspec_set_fontface:NNxn \l_@@_xx_font \l_@@_trial_family_tl
       {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
 
     \group_begin:
       \fontfamily { \l_@@_trial_family_tl } \selectfont
+      \global \expandafter \let \expandafter \g_@@_trial_font \font@name
       \fontspec_if_script:nF {math} { \bool_gset_false:N \l_@@_ot_math_bool }
     \group_end:
+
   }
 %    \end{macrocode}
 % \end{macro}
@@ -327,6 +334,7 @@
               \l_@@_sscript_features_tl
             }
           } ,
+%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
         \l_@@_unknown_keys_clist
       }
 

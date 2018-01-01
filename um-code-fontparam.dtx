@@ -280,8 +280,8 @@
 %
 % TODO: maybe no longer necessary?
 %
-% \begin{macro}{\@@_fontdimen_to_percent:nn}
-% \begin{macro}{\@@_fontdimen_to_scale:nn}
+% \begin{macro}{\@@_fontdimen_to_percent:nN}
+% \begin{macro}{\@@_fontdimen_to_scale:nN}
 % \darg{Font dimen number}
 % \darg{Font `variable'}
 % \cmd\fontdimen s |10|, |11|, and |65| aren't actually dimensions, they're percentage values given in units of |sp|.
@@ -289,13 +289,13 @@
 % \cs{@@_fontdimen_to_scale:nn} returns a dimension correspond to the current
 % font size relative proportion based on that percentage.
 %    \begin{macrocode}
-\cs_new:Nn \@@_fontdimen_to_percent:nn
+\cs_new:Nn \@@_fontdimen_to_percent:nN
   {
     \fp_eval:n { \dim_to_decimal:n { \fontdimen #1 #2 } * 65536 / 100 }
   }
-\cs_new:Nn \@@_fontdimen_to_scale:nn
+\cs_new:Nn \@@_fontdimen_to_scale:nN
   {
-    \fp_eval:n {\@@_fontdimen_to_percent:nn {#1} {#2} * \f@size } pt
+    \fp_eval:n { \@@_fontdimen_to_percent:nN {#1} #2 * \f@size } pt
   }
 %    \end{macrocode}
 % \end{macro}

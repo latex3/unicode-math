@@ -1,0 +1,16 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+\setmathfont{texgyrepagella-math.otf}
+
+\begin{document}
+\START
+
+\[x\]
+
+\makeatletter
+\MSG{\tf@size/\sf@size/\ssf@size}
+\makeatother
+
+\end{document}

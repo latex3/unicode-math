@@ -148,31 +148,36 @@
 %
 % \subsubsection{Font parameters}
 %
-% \begin{macro}{\@@_copy_fontparam:nnn}
+% \begin{macro}{\@@_copy_fontdimen:nnN}
 %    \begin{macrocode}
-\cs_new:Nn \@@_copy_fontparam:nnn
+\cs_new:Nn \@@_copy_fontdimen:nnN
   {
-    \fontdimen #1 \font = \@@_get_fontparam:nn {#2} {#3}
+    \fontdimen #1 \font = \the \fontdimen #2 #3 \relax
   }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_zero_fontparam:n}
+% \begin{macro}{\@@_zero_fontdimen:n}
 %    \begin{macrocode}
-\cs_new:Nn \@@_zero_fontparam:n
+\cs_new:Nn \@@_zero_fontdimen:n
   {
     \fontdimen #1 \font = 0pt\relax
   }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_get_fontparam:nn}
+% \begin{macro}{\@@_fontdimen_from_param:Nnn}
+% This function extracts the math font dimen \verb|#3| from the font \verb|#1|
+% and sets fontdimen \verb|#2| of the same font to that value.
+%
+% Use \XeTeX's fontdimen approach because it's tidy. We don't need bells and whistles here.
 %    \begin{macrocode}
-\cs_new:Nn \@@_get_fontparam:nn
+%<*LU>
+\cs_new_protected:Nn \@@_fontdimen_from_param:nn
   {
-%<XE>    \the\fontdimen#1\l_@@_font\relax
-%<LU>    \directlua{fontspec.mathfontdimen("l_@@_font","#2")}
+    \fontdimen #1 \font = \directlua{fontspec.mathfontdimen(font.current(),"#2")}\relax
   }
+%</LU>
 %    \end{macrocode}
 % \end{macro}
 %
