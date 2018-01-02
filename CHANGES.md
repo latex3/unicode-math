@@ -1,11 +1,11 @@
 CHANGE HISTORY
 --------------
 
-- v0.9 ()
+- v0.9 (2018/01/02)
 
   * Correct `\mathrm` (etc.) situation when no fonts loaded explicitly by the user (#330).
   * Some bug fixes to `\not` (#126, #343, #363) and new (tentative) command
-    `\DeclareNotCommand` for defining custom negations (feedback sought).
+    `\(New|Renew)NegationCommand` for defining custom negations (feedback sought).
   * `\std@minus` & `\std@equal` now properly corrected (#332)
   * Fix problem with infinite loop with `\cdots` when `amsmath` loaded after `unicode-math` (#227)
   * `\nabla` and `\partial` have corrected documentation (#257)
