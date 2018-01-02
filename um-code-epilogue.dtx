@@ -45,74 +45,58 @@
 %
 % Make sure \cs{Uroot} is defined in the case where the \LaTeX{}
 % kernel doesn't make it available with its native name.
+%
+% \begin{macro}{\@@_redefine_radical:}
 %    \begin{macrocode}
-%<*LU>
-\cs_if_exist:NF \Uroot { \cs_new_eq:NN \Uroot \luatexUroot }
-%</LU>
+\AtBeginDocument{ \@ifpackageloaded { amsmath } { } { \@@_redefine_radical: } }
 %    \end{macrocode}
 %
-%    \begin{macrocode}
-\AtBeginDocument{\@@_redefine_radical:}
-%    \end{macrocode}
-%    \begin{macrocode}
-\cs_new:Nn \@@_redefine_radical:
-%<*XE>
-  {
-    \@ifpackageloaded { amsmath } { }
-      {
-%    \end{macrocode}
 % \begin{macro}{\r@@t}
 % \darg{A mathstyle (for \cmd\mathpalette)}
 % \darg{Leading superscript for the sqrt sign}
 % A re-implementation of \LaTeX's hard-coded n-root sign using the appropriate \cmd\fontdimen s.
 %    \begin{macrocode}
-        \cs_set_nopar:Npn \r@@@@t ##1 ##2
+%<*XE>
+\cs_new:Nn \@@_redefine_radical:
+  {
+    \cs_set_nopar:Npn \r@@@@t ##1 ##2
+      {
+        \hbox_set:Nn \l_tmpa_box
           {
-            \hbox_set:Nn \l_tmpa_box
-              {
-                \c_math_toggle_token
-                \m@th
-                ##1
-                \sqrtsign { ##2 }
-                \c_math_toggle_token
-              }
-            \@@_mathstyle_scale:Nnn ##1 { \kern }
-              { \fontdimen 63 \l_@@_font }
-            \box_move_up:nn
-              {
-                (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
-                * \number \fontdimen 65 \l_@@_font / 100
-              }
-              { \box_use:N \rootbox }
-            \@@_mathstyle_scale:Nnn ##1 { \kern }
-              { \fontdimen 64 \l_@@_font }
-            \box_use_clear:N \l_tmpa_box
+            \c_math_toggle_token \m@th
+            ##1 \sqrtsign { ##2 }
+            \c_math_toggle_token
           }
-%    \end{macrocode}
-% \end{macro}
-%    \begin{macrocode}
+        \@@_mathstyle_scale:NnnN ##1 { \kern } { \fontdimen 63 \g_@@_sqrt_font_cmd_tl } \g_@@_sqrt_font_cmd_tl
+        \box_move_up:nn
+          {
+            (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box) * \number \fontdimen 65 \g_@@_sqrt_font_cmd_tl / 100
+          }
+          { \box_use:N \rootbox }
+        \@@_mathstyle_scale:NnnN ##1 { \kern } { \fontdimen 64 \g_@@_sqrt_font_cmd_tl } \g_@@_sqrt_font_cmd_tl
+        \box_use_clear:N \l_tmpa_box
       }
   }
 %</XE>
-%<*LU>
-  {
-    \@ifpackageloaded { amsmath } { }
-      {
 %    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\root}
 % Redefine this macro for \LuaTeX, which provides us a nice primitive to use.
 %    \begin{macrocode}
-        \cs_set:Npn \root ##1 \of ##2
-          {
-            \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
-          }
-%    \end{macrocode}
-% \end{macro}
-%    \begin{macrocode}
+%<*LU>
+\cs_new:Nn \@@_redefine_radical:
+  {
+    \cs_set:Npn \root ##1 \of ##2
+      {
+        \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
       }
   }
 %</LU>
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
 %
 % \subsubsection{Active fractions}
 % Active fractions can be setup independently of any maths font definition;
@@ -169,6 +153,7 @@
 %    \begin{macrocode}
 \@@_setup_active_frac:
 %    \end{macrocode}
+%
 %
 % \subsection{Synonyms and all the rest}
 %
@@ -271,6 +256,7 @@
     \mode_if_math:TF {\mathslash} {\@@_text_slash:}
   }
 %    \end{macrocode}
+%
 %
 % \subsubsection{\cs{not}}
 % \label{sec:negations}

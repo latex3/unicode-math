@@ -301,19 +301,20 @@
 % \end{macro}
 % \end{macro}
 %
-% \begin{macro}{\@@_mathstyle_scale:Nnn}
+% \begin{macro}{\@@_mathstyle_scale:NnnN}
 % \darg{A math style (\cs{scriptstyle}, say)}
 % \darg{Macro that takes a non-delimited length argument (like \cmd\kern)}
 % \darg{Length control sequence to be scaled according to the math style}
+% \darg{Math font face to use for the lookups}
 % This macro is used to scale the lengths reported by \cmd\fontdimen\ according to the scale factor for script- and scriptscript-size objects.
 %    \begin{macrocode}
-\cs_new:Nn \@@_mathstyle_scale:Nnn
+\cs_new:Nn \@@_mathstyle_scale:NnnN
   {
     \ifx#1\scriptstyle
-      #2 \@@_fontdimen_to_percent:nn {10} \l_@@_font #3
+      #2 \@@_fontdimen_to_percent:nN {10} #4 #3
     \else
       \ifx#1\scriptscriptstyle
-        #2 \@@_fontdimen_to_percent:nn {11} \l_@@_font #3
+        #2 \@@_fontdimen_to_percent:nN {11} #4 #3
       \else
         #2 #3
       \fi

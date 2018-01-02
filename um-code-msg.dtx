@@ -54,7 +54,7 @@
  }
 \msg_new:nnn { unicode-math } { missing-alphabets }
  {
-  Missing~math~alphabets~in~font~ "\fontname\l_@@_font" \\ \\
+  Missing~math~alphabets~in~font~ "\fontname\g_@@_curr_font_cmd_tl" \\ \\
   \seq_map_function:NN \l_@@_missing_alph_seq \@@_print_indent:n
  }
 \cs_new:Nn \@@_print_indent:n { \space\space\space\space #1 \\ }

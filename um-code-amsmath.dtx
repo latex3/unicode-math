@@ -186,14 +186,14 @@
           \c_math_toggle_token
         }
       \mkern -\leftroot@ mu
-      \@@_mathstyle_scale:Nnn #1 { \kern } { \fontdimen 63 \l_@@_font }
+      \@@_mathstyle_scale:Nnn #1 { \kern } { \fontdimen 63 \g_@@_sqrt_font_cmd_tl }
       \box_move_up:nn
         {
           \box_wd:N \l_tmpb_box + (\box_ht:N \l_tmpa_box - \box_dp:N \l_tmpa_box)
-            * \number \fontdimen 65 \l_@@_font / 100
+            * \number \fontdimen 65 \g_@@_sqrt_font_cmd_tl / 100
         }
         { \box_use:N \rootbox }
-      \@@_mathstyle_scale:Nnn #1 { \kern } { \fontdimen 64 \l_@@_font }
+      \@@_mathstyle_scale:Nnn #1 { \kern } { \fontdimen 64 \g_@@_sqrt_font_cmd_tl }
       \mkern \leftroot@ mu
       \box_use_clear:N \l_tmpa_box
     }

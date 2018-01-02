@@ -7,87 +7,52 @@
 %<*package>
 %    \end{macrocode}
 %
-% Using a |range| including large character sets such as \cmd\mathrel,
-% \cmd\mathalpha, \etc, is \emph{very slow}!
-% I hope to improve the performance somehow.
-%
 % \begin{macro}{\@@_setmathfont:nn}
+% \darg{keyval options}
+% \darg{font name/file}
 %    \begin{macrocode}
 \cs_set:Nn \@@_setmathfont:nn
   {
-    \tl_set:Nn \l_@@_fontname_tl {#2}
 %    \end{macrocode}
+% \begin{itemize}
+% \item Initialise all local variables.
+% \item
 % Erase any conception \LaTeX\ has of previously defined math symbol fonts;
 % this allows \cmd\DeclareSymbolFont\ at any point in the document.
-%    \begin{macrocode}
-    \cs_set_eq:NN \glb@currsize \scan_stop:
-%    \end{macrocode}
-% Initialise all local variabes:
-%    \begin{macrocode}
-    \@@_init:
-%    \end{macrocode}
+% \item
 % Grab the current size information:
 % (is this robust enough? Maybe it should be preceded by \cmd\normalsize).
 % The macro \cmd\S@\meta{size}
 % contains the definitions of the sizes used for maths letters, subscripts and subsubscripts in
 % \cmd\tf@size, \cmd\sf@size, and \cmd\ssf@size, respectively.
+% \end{itemize}
 %    \begin{macrocode}
+
+    \@@_init:n {#2}
+    \cs_set_eq:NN \glb@currsize \scan_stop:
     \cs_if_exist:cF { S@ \f@size } { \calculate@math@sizes }
-    \csname S@\f@size\endcsname
-%    \end{macrocode}
-% Parse options and tell people what's going on:
-%    \begin{macrocode}
+    \use:c { S@ \f@size }
+
     \keys_set_known:nnN {unicode-math} {#1} \l_@@_unknown_keys_clist
-    \bool_if:NT \l_@@_init_bool { \@@_log:n {default-math-font} }
-%    \end{macrocode}
-% Use \pkg{fontspec} to select a font to use.
-% After loading the font, we detect what sizes it recommends for scriptsize and scriptscriptsize, so after setting those values appropriately, we reload the font to take these into account.
-%    \begin{macrocode}
-%<debug>  \csname TIC\endcsname
-    \@@_fontspec_trial_font:
-%<debug>  \csname TOC\endcsname
-    \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
+
+    \bool_if:NF \g_@@_mainfont_already_set_bool
       {
+        \@@_fontspec_trial_font:
         \@@_declare_math_sizes:
-        \@@_fontspec_select_font:
       }
-%    \end{macrocode}
-% Now define |\l_@@_symfont_label_tl| as the \LaTeX\ math font to access everything:
-%    \begin{macrocode}
-    \cs_if_exist:cF { sym \l_@@_symfont_label_tl }
-      {
-        \DeclareSymbolFont{\l_@@_symfont_label_tl}
-          {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
-      }
-    \SetSymbolFont{\l_@@_symfont_label_tl}{\l_@@_mversion_tl}
-      {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
-%    \end{macrocode}
-% Set the bold math version.
-%    \begin{macrocode}
-    \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
-      {
-        \SetSymbolFont{\l_@@_symfont_label_tl}{bold}
-          {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
-      }
-%    \end{macrocode}
-% Declare the math sizes (i.e., scaling of superscripts) for the specific
-% values for this font,
-% and set defaults for math fams two and three for legacy compatibility:
-%    \begin{macrocode}
+    \@@_fontspec_select_font:
+    \@@_setup_math_fam:
     \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
       {
-        \bool_set_true:N \g_@@_mainfont_already_set_bool
         \@@_setup_legacy_fam_two:
         \@@_setup_legacy_fam_three:
       }
-%    \end{macrocode}
-% And now we input every single maths char.
-%    \begin{macrocode}
+
 %<debug>  \csname TIC\endcsname
     \@@_input_math_symbol_table:
 %<debug>  \csname TOC\endcsname
+
 %    \end{macrocode}
-% Finally,
 % \begin{itemize}
 % \item remap symbols that don't take their natural mathcode;
 % \item activate any symbols that need to be math-active;
@@ -102,6 +67,13 @@
 %<debug>  \csname TIC\endcsname
     \@@_setup_alphabets:
 %<debug>  \csname TOC\endcsname
+    %% TODO: what of the above should only be run for the "default"/"main" font?
+
+    \bool_if:nT { \l_@@_init_bool && \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
+      {
+        \@@_log:n {default-math-font}
+        \bool_set_true:N \g_@@_mainfont_already_set_bool
+      }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -117,7 +89,6 @@
   {
     \cs_if_exist:NF \l_@@_fontname_tl
       {
-        % TODO: update this when lmmath-bold.otf is released
         \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
         \bool_set_false:N \g_@@_mainfont_already_set_bool
       }
@@ -128,12 +99,13 @@
 %
 % TODO: need a better way to do this for the general case. (Maybe a `reset' command option?)
 %
-% \begin{macro}{\@@_init:}
+% \begin{macro}{\@@_init:n}
 %    \begin{macrocode}
-\cs_new:Nn \@@_init:
+\cs_new:Nn \@@_init:n
   {
+    \tl_set:Nn \l_@@_fontname_tl {#1}
     \bool_set_true:N  \l_@@_ot_math_bool
-    \tl_set:Nn \l_@@_mversion_tl {normal}
+    \tl_set:Nn \l_@@_mversion_tl      {normal}
     \tl_set:Nn \l_@@_symfont_label_tl {operators}
 %    \end{macrocode}
 % Defaults for the script and scriptscript font.
@@ -153,13 +125,13 @@
 %    \end{macrocode}
 % Other range initialisations.
 %    \begin{macrocode}
-    \cs_set_eq:NN \_@@_sym:nnn \@@_process_symbol_noparse:nnn
+    \cs_set_eq:NN \_@@_sym:nnn                  \@@_process_symbol_noparse:nnn
     \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
-    \cs_set_eq:NN \@@_remap_symbol:nnn \@@_remap_symbol_noparse:nnn
-    \cs_set_eq:NN \@@_maybe_init_alphabet:n \@@_init_alphabet:n
-    \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
-    \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_noparse:nn
-    \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_noparse:nNN
+    \cs_set_eq:NN \@@_remap_symbol:nnn          \@@_remap_symbol_noparse:nnn
+    \cs_set_eq:NN \@@_maybe_init_alphabet:n     \@@_init_alphabet:n
+    \cs_set_eq:NN \@@_map_char_single:nn        \@@_map_char_noparse:nn
+    \cs_set_eq:NN \@@_assign_delcode:nn         \@@_assign_delcode_noparse:nn
+    \cs_set_eq:NN \@@_make_mathactive:nNN       \@@_make_mathactive_noparse:nNN
   }
 %    \end{macrocode}
 % \end{macro}
@@ -175,6 +147,135 @@
         \DeclareMathSizes { \f@size } { \f@size }
           { \@@_fontdimen_to_scale:nN {10} \g_@@_trial_font }
           { \@@_fontdimen_to_scale:nN {11} \g_@@_trial_font }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_fontspec_trial_font:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_fontspec_trial_font:
+  {
+    \tl_set:Nx \l_@@_font_keyval_tl
+      {
+%<LU>   Renderer = Basic,
+        BoldItalicFont = {}, ItalicFont = {},
+        Script = Math,
+%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
+        \l_@@_unknown_keys_clist
+      }
+
+    \fontspec_set_family:Nxn \l_@@_trial_family_tl {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
+
+    \group_begin:
+      \fontfamily { \l_@@_trial_family_tl } \selectfont
+      \@@_fontface_gset_eq:NV \g_@@_trial_font \font@name
+    \group_end:
+
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_fontspec_select_font:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_fontspec_select_font:
+  {
+    \tl_set:Nx \l_@@_font_keyval_tl
+      {
+%<LU>   Renderer = Basic,
+        BoldItalicFont = {}, ItalicFont = {},
+        Script = Math,
+        SizeFeatures =
+          {
+            {
+              Size = \tf@size-
+            } ,
+            {
+              Size = \sf@size-\tf@size ,
+              Font = \l_@@_script_font_tl ,
+              \l_@@_script_features_tl
+            } ,
+            {
+              Size = -\sf@size ,
+              Font = \l_@@_sscript_font_tl ,
+              \l_@@_sscript_features_tl
+            }
+          } ,
+%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
+        \l_@@_unknown_keys_clist
+      }
+
+    \fontspec_set_family:Nxn \l_@@_family_tl {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
+
+    \int_gincr:N \g_@@_fonts_used_int
+    \group_begin:
+      \fontfamily { \l_@@_family_tl } \selectfont
+      \@@_fontface_gset_eq:cV {g_@@_mathfont_ \int_use:N \g_@@_fonts_used_int _font} \font@name
+      \tl_gset:Nx \g_@@_curr_font_cmd_tl { \exp_not:c {g_@@_mathfont_ \int_use:N \g_@@_fonts_used_int _font} }
+      \bool_if:NF \g_@@_mainfont_already_set_bool
+				{
+					\@@_fontface_gset_eq:NV \l_@@_font \font@name
+				}
+      \fontspec_if_script:nF {math} { \bool_gset_false:N \l_@@_ot_math_bool }
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\tl_set:Nn \g_@@_main_font_cmd_tl  { \l_@@_font }
+\tl_set:Nn \g_@@_sqrt_font_cmd_tl  { \l_@@_font }
+\tl_set:Nn \g_@@_prime_font_cmd_tl { \l_@@_font }
+%    \end{macrocode}
+%
+% \begin{macro}{\g_@@_luatex_copy_fontdimens_tl}
+%    \begin{macrocode}
+%<*LU>
+\tl_const:Nn \g_@@_luatex_copy_fontdimens_tl
+  {
+    \@@_fontdimen_from_param:nn {10} {ScriptPercentScaleDown}
+    \@@_fontdimen_from_param:nn {11} {ScriptScriptPercentScaleDown}
+    \@@_fontdimen_from_param:nn {15} {AxisHeight}
+    \@@_fontdimen_from_param:nn {18} {SubscriptShiftDown}
+    \@@_fontdimen_from_param:nn {20} {SubscriptBaselineDropMin}
+    \@@_fontdimen_from_param:nn {21} {SuperscriptShiftUp}
+    \@@_fontdimen_from_param:nn {22} {SuperscriptShiftUpCramped}
+    \@@_fontdimen_from_param:nn {24} {SuperscriptBaselineDropMax}
+    \@@_fontdimen_from_param:nn {28} {UpperLimitGapMin}
+    \@@_fontdimen_from_param:nn {29} {UpperLimitBaselineRiseMin}
+    \@@_fontdimen_from_param:nn {30} {LowerLimitGapMin}
+    \@@_fontdimen_from_param:nn {31} {LowerLimitBaselineDropMin}
+    \@@_fontdimen_from_param:nn {32} {StackTopShiftUp}
+    \@@_fontdimen_from_param:nn {42} {FractionNumeratorShiftUp}
+    \@@_fontdimen_from_param:nn {43} {FractionNumeratorDisplayStyleShiftUp}
+    \@@_fontdimen_from_param:nn {44} {FractionDenominatorShiftDown}
+    \@@_fontdimen_from_param:nn {45} {FractionDenominatorDisplayStyleShiftDown}
+    \@@_fontdimen_from_param:nn {48} {FractionRuleThickness}
+  }
+%</LU>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_setup_math_fam:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_math_fam:
+  {
+    \cs_if_exist:cF { sym \l_@@_symfont_label_tl }
+      {
+        \DeclareSymbolFont{\l_@@_symfont_label_tl}
+          {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
+      }
+    \SetSymbolFont{\l_@@_symfont_label_tl}{\l_@@_mversion_tl}
+      {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
+%    \end{macrocode}
+% Set the bold math version.
+%    \begin{macrocode}
+    \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
+      {
+        \SetSymbolFont{\l_@@_symfont_label_tl}{bold}
+          {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
       }
   }
 %    \end{macrocode}
@@ -252,99 +353,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\g_@@_luatex_copy_fontdimens_tl}
-%    \begin{macrocode}
-%<*LU>
-\tl_const:Nn \g_@@_luatex_copy_fontdimens_tl
-  {
-    \@@_fontdimen_from_param:nn {10} {ScriptPercentScaleDown}
-    \@@_fontdimen_from_param:nn {11} {ScriptScriptPercentScaleDown}
-    \@@_fontdimen_from_param:nn {15} {AxisHeight}
-    \@@_fontdimen_from_param:nn {18} {SubscriptShiftDown}
-    \@@_fontdimen_from_param:nn {20} {SubscriptBaselineDropMin}
-    \@@_fontdimen_from_param:nn {21} {SuperscriptShiftUp}
-    \@@_fontdimen_from_param:nn {22} {SuperscriptShiftUpCramped}
-    \@@_fontdimen_from_param:nn {24} {SuperscriptBaselineDropMax}
-    \@@_fontdimen_from_param:nn {28} {UpperLimitGapMin}
-    \@@_fontdimen_from_param:nn {29} {UpperLimitBaselineRiseMin}
-    \@@_fontdimen_from_param:nn {30} {LowerLimitGapMin}
-    \@@_fontdimen_from_param:nn {31} {LowerLimitBaselineDropMin}
-    \@@_fontdimen_from_param:nn {32} {StackTopShiftUp}
-    \@@_fontdimen_from_param:nn {42} {FractionNumeratorShiftUp}
-    \@@_fontdimen_from_param:nn {43} {FractionNumeratorDisplayStyleShiftUp}
-    \@@_fontdimen_from_param:nn {44} {FractionDenominatorShiftDown}
-    \@@_fontdimen_from_param:nn {45} {FractionDenominatorDisplayStyleShiftDown}
-    \@@_fontdimen_from_param:nn {48} {FractionRuleThickness}
-  }
-%</LU>
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_fontspec_trial_font:}
-% Select the font with \cs{fontspec} and define \cs{l_@@_font} from it.
-% Check whether we're using a real maths font:
-%    \begin{macrocode}
-\cs_new:Nn \@@_fontspec_trial_font:
-  {
-    \tl_set:Nx \l_@@_font_keyval_tl
-      {
-%<LU>   Renderer = Basic,
-        BoldItalicFont = {}, ItalicFont = {},
-        Script = Math,
-%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
-        \l_@@_unknown_keys_clist
-      }
-
-    \fontspec_set_fontface:NNxn \l_@@_xx_font \l_@@_trial_family_tl
-      {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
-
-    \group_begin:
-      \fontfamily { \l_@@_trial_family_tl } \selectfont
-      \global \expandafter \let \expandafter \g_@@_trial_font \font@name
-      \fontspec_if_script:nF {math} { \bool_gset_false:N \l_@@_ot_math_bool }
-    \group_end:
-
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_fontspec_select_font:}
-% Select the font with \cs{fontspec} and define \cs{l_@@_font} from it.
-%    \begin{macrocode}
-\cs_new:Nn \@@_fontspec_select_font:
-  {
-    \tl_set:Nx \l_@@_font_keyval_tl
-      {
-%<LU>   Renderer = Basic,
-        BoldItalicFont = {}, ItalicFont = {},
-        Script = Math,
-        SizeFeatures =
-          {
-            {
-              Size = \tf@size-
-            } ,
-            {
-              Size = \sf@size-\tf@size ,
-              Font = \l_@@_script_font_tl ,
-              \l_@@_script_features_tl
-            } ,
-            {
-              Size = -\sf@size ,
-              Font = \l_@@_sscript_font_tl ,
-              \l_@@_sscript_features_tl
-            }
-          } ,
-%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
-        \l_@@_unknown_keys_clist
-      }
-
-    \fontspec_set_fontface:NNxn \l_@@_font \l_@@_family_tl
-      {\l_@@_font_keyval_tl} {\l_@@_fontname_tl}
-
-    \tl_set:Nn \g_@@_main_font_cmd_tl {\l_@@_font}
-  }
-%    \end{macrocode}
-% \end{macro}
 %
 % \subsection{Functions for setting up symbols with mathcodes}
 % \seclabel{mathsymbol}

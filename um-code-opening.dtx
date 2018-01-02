@@ -32,7 +32,6 @@
 % For \pkg{fontspec}:
 %    \begin{macrocode}
 \cs_generate_variant:Nn \fontspec_set_family:Nnn {Nx}
-\cs_generate_variant:Nn \fontspec_set_fontface:NNnn {NNx}
 %    \end{macrocode}
 %
 %
@@ -50,6 +49,16 @@
       \prg_return_false:
     \fi:
   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_fontface_gset_eq:NN}
+%    \begin{macrocode}
+\cs_set_protected:Nn \@@_fontface_gset_eq:NN
+  {
+    \tex_global:D \tex_let:D #1 #2
+  }
+\cs_generate_variant:Nn \@@_fontface_gset_eq:NN {NV,cV}
 %    \end{macrocode}
 % \end{macro}
 %

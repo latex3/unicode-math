@@ -111,7 +111,7 @@
   {
     \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
     \@@_init_alphabet:n {#1}
-    \cs_set:cpn {_@@_sym_#1_aux:n} 
+    \cs_set:cpn {_@@_sym_#1_aux:n}
       {
         \use:c {@@_switchto_#1:} \math@egroup
       }
@@ -247,7 +247,7 @@
     tt, bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
     normal, literal, sf, bf,
   }
-  { 
+  {
     \@@_prepare_mathstyle:n {#1}
   }
 %    \end{macrocode}
@@ -377,7 +377,7 @@
                 \clist_map_break:
               }
               {
-                \@@_glyph_if_exist:NnT \l_@@_font { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
+                \@@_glyph_if_exist:NnT \g_@@_curr_font_cmd_tl { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
                 {
                   \@@_maybe_init_alphabet:n \l_@@_style_tl
                   \clist_map_break:
@@ -405,7 +405,7 @@
                 \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {\l_@@_remap_style_tl}
               }
               {
-                \@@_glyph_if_exist:NnTF \l_@@_font { \@@_to_usv:nn {\l_@@_remap_style_tl} {\l_@@_alphabet_tl} }
+                \@@_glyph_if_exist:NnTF \g_@@_curr_font_cmd_tl { \@@_to_usv:nn {\l_@@_remap_style_tl} {\l_@@_alphabet_tl} }
                   {
                     \@@_log:nx {setup-alph} {sym \l_@@_style_tl~(\l_@@_alphabet_tl)}
                     \@@_alphabet_config:nnn {\l_@@_style_tl} {\l_@@_alphabet_tl} {\l_@@_remap_style_tl}

@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 OPERATORNAME
-> \box12=
+> \box...=
 \hbox(7.05+2.06)x34.79, direction TLT
 .\mathon
 .\hbox(7.05+2.06)x34.79, direction TLT
@@ -22,7 +22,7 @@ OPERATORNAME
 \relax 
 l. ...\SHOWBOX {12}
 MATHRM
-> \box12=
+> \box...=
 \hbox(7.05+2.06)x34.79, direction TLT
 .\mathon
 .\hbox(7.05+2.06)x34.79, direction TLT
@@ -41,7 +41,7 @@ MATHRM
 \relax 
 l. ...\SHOWBOX {12}
 TEXTNORMAL
-> \box12=
+> \box...=
 \hbox(7.05+2.06)x34.22, direction TLT
 .\TU/lmr/m/n/10 ﬂ (ligature fl)
 .\TU/lmr/m/n/10 a
@@ -55,7 +55,7 @@ TEXTNORMAL
 \relax 
 l. ...\SHOWBOX {12}
 MATHIT
-> \box12=
+> \box...=
 \hbox(7.05+2.05)x35.65002, direction TLT
 .\mathon
 .\hbox(7.05+2.05)x35.65002, direction TLT
@@ -75,7 +75,7 @@ MATHIT
 \relax 
 l. ...\SHOWBOX {12}
 TEXTIT
-> \box12=
+> \box...=
 \hbox(7.05+2.05)x35.89001, direction TLT
 .\TU/lmr/m/it/10 ﬂ (ligature fl)
 .\TU/lmr/m/it/10 a
@@ -90,7 +90,7 @@ TEXTIT
 \relax 
 l. ...\SHOWBOX {12}
 MATHBF
-> \box12=
+> \box...=
 \hbox(7.0+2.01)x39.65997, direction TLT
 .\mathon
 .\hbox(7.0+2.01)x39.65997, direction TLT
@@ -109,7 +109,7 @@ MATHBF
 \relax 
 l. ...\SHOWBOX {12}
 TEXTBF
-> \box12=
+> \box...=
 \hbox(7.0+2.01)x39.04, direction TLT
 .\TU/lmr/bx/n/10 ﬂ (ligature fl)
 .\TU/lmr/bx/n/10 a

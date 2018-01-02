@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 OPERATORNAME
-> \box12=
+> \box...=
 \hbox(7.05+2.06)x34.79
 .\mathon
 .\hbox(7.05+2.06)x34.79
@@ -22,7 +22,7 @@ OPERATORNAME
                    \relax 
 l. ...\SHOWBOX {12}
 MATHRM
-> \box12=
+> \box...=
 \hbox(7.05+2.06)x34.79
 .\mathon
 .\hbox(7.05+2.06)x34.79
@@ -41,7 +41,7 @@ MATHRM
                    \relax 
 l. ...\SHOWBOX {12}
 TEXTNORMAL
-> \box12=
+> \box...=
 \hbox(7.05+2.05998)x34.22
 .\TU/lmr/m/n/10 flagstaff
 ! OK.
@@ -49,7 +49,7 @@ TEXTNORMAL
                    \relax 
 l. ...\SHOWBOX {12}
 MATHIT
-> \box12=
+> \box...=
 \hbox(7.05+2.05)x34.00003
 .\mathon
 .\hbox(7.05+2.05)x34.00003
@@ -68,7 +68,7 @@ MATHIT
                    \relax 
 l. ...\SHOWBOX {12}
 TEXTIT
-> \box12=
+> \box...=
 \hbox(7.05+2.04999)x35.69
 .\TU/lmr/m/it/10 flagstaff
 .\kern 1.45
@@ -77,7 +77,7 @@ TEXTIT
                    \relax 
 l. ...\SHOWBOX {12}
 MATHBF
-> \box12=
+> \box...=
 \hbox(7.0+2.01)x39.65997
 .\mathon
 .\hbox(7.0+2.01)x39.65997
@@ -96,7 +96,7 @@ MATHBF
                    \relax 
 l. ...\SHOWBOX {12}
 TEXTBF
-> \box12=
+> \box...=
 \hbox(7.0+2.00998)x39.79001
 .\TU/lmr/bx/n/10 flagstaff
 .\kern 0.75
