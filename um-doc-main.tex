@@ -479,6 +479,12 @@ example, an upright `g' is desired but typing |$g$| yields `$g$'),
 |\symup{g}|.
 Maths style commands such as \cmd\symup\ are detailed later.
 
+For compatibility and consistency, however, upright and italic Greek letters
+can be `forced` using \verb|up| or \verb|it| prefixes before their names.
+For example, \cs{Gamma} will give an upright or italic Gamma depending on the
+\opt{math-style}, but \cs{upGamma} and \cs{itGamma} will always give upright
+or italic Gammas, respectively.
+
 \paragraph{`Literal' interface}
 Some may not like this convention of normalising their input.
 For them, an upright |x| is an upright `x' and that's that.
