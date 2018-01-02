@@ -3,6 +3,8 @@ CHANGE HISTORY
 
 - v0.9 (2018/01/02)
 
+  * Numbers and latin letters in the fullwidth Unicode range are now supported
+    as aliases to their ASCII counterparts (#337).
   * Correct `\mathrm` (etc.) situation when no fonts loaded explicitly by the user (#330).
   * Some bug fixes to `\not` (#126, #343, #363) and new (tentative) command
     `\(New|Renew)NegationCommand` for defining custom negations (feedback sought).

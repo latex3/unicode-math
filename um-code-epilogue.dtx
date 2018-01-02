@@ -340,6 +340,33 @@
 %    \end{macrocode}
 %
 %
+% \subsubsection{Full-width remapping}
+%
+% While this could be done with the full mathcode remapping machinery used
+% for the other purposes, it would be fairly redundant with plain ASCII.
+% Worse, this would slow down what is already an inefficient part of \pkg{unicode-math}.
+%
+% Instead we use mathactive to do a plain old mapping from full-width to ASCII directly.
+%
+% Until I get requests for it, I've not included symbols or punctuation here.
+%
+% \paragraph{Numbers}
+%    \begin{macrocode}
+\int_step_inline:nnnn {0} {1} {9}
+  {
+    \@@_mathactive_remap:nn {"FF10+#1} {\char\int_eval:n{`\0+#1}}
+  }
+%    \end{macrocode}
+%
+% \paragraph{Letters}
+%    \begin{macrocode}
+\int_step_inline:nnnn {0} {1} {26}
+  {
+    \@@_mathactive_remap:nn {"FF21+#1} {\char\int_eval:n{`\A+#1}}
+    \@@_mathactive_remap:nn {"FF41+#1} {\char\int_eval:n{`\a+#1}}
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 %    \begin{macrocode}
 %</package>

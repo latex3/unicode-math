@@ -488,6 +488,7 @@ For these users, the |literal| option to |math-style| will effect this behaviour
 The \cs{symliteral}\marg{syms} command can also be used, regardless of package setting, to force the style to match the literal input characters.
 This is a `mirror' to \cs{symnormal}\marg{syms} (also alias \cs{mathnormal}) which `resets' the character mapping in its argument to that originally set up through package options.
 
+
 \begin{table}
   \centering
   \topcaption{Effects of the \opt{math-style} package option.}
@@ -506,6 +507,11 @@ This is a `mirror' to \cs{symnormal}\marg{syms} (also alias \cs{mathnormal}) whi
   \end{tabular}
 \end{table}
 
+\paragraph{`Full-width' letters}
+Unicode contains `full-width' versions of ASCII from \unichar{FF01}.
+The numerals and latin letters in this range are defined by \pkg{unicode-math}
+to map to their standard ASCII counterparts, which are then controlled by the relevant \opt{math-style} setting.
+Other full-width symbols are not currently included but can be if there is sufficient need or desire.
 
 \subsection{Bold style}
 \seclabel{bold-style}

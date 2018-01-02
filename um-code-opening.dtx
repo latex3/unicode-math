@@ -143,17 +143,31 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_char_gmake_mathactive:N
   {
-    \global\mathcode `#1 = "8000 \scan_stop:
+    \tex_global:D \tex_mathcode:D `#1 = "8000 \scan_stop:
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_new:Nn \@@_char_gmake_mathactive:n
   {
-    \global\mathcode #1 = "8000 \scan_stop:
+    \tex_global:D \tex_mathcode:D \int_eval:n {#1} = "8000 \scan_stop:
   }
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+%
+% \begin{macro}{\@@_mathactive_remap:nn}
+% Makes |#1| math-active and defines its meaning to be |#2|.
+% This is a global operation.
+%    \begin{macrocode}
+\cs_new:Nn \@@_mathactive_remap:nn
+  {
+    \group_begin:
+      \cs_set_protected:Npn \@@_tmp: {#2}
+      \@@_char_gmake_mathactive:n {#1}
+      \char_gset_active_eq:nN {#1} \@@_tmp:
+    \group_end:
+  }
+%    \end{macrocode}
 %
 % \subsubsection{Font parameters}
 %

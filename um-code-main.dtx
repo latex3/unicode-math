@@ -389,7 +389,7 @@
 % This function is used to define the mathcodes for those chars which should
 % be mapped to a different glyph than themselves.
 %    \begin{macrocode}
-\cs_new:Npn \@@_remap_symbols:
+\cs_new:Nn \@@_remap_symbols:
   {
     \@@_remap_symbol:nnn{`\-}{\mathbin}{"02212}% hyphen to minus
     \@@_remap_symbol:nnn{`\*}{\mathbin}{"02217}% text asterisk to "centred asterisk"
@@ -461,6 +461,7 @@
   }
 %    \end{macrocode}
 % \end{macro}
+%
 %
 % \subsection{Delimiter codes}
 %
