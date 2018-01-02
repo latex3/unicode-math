@@ -24,8 +24,13 @@ do
   changeslisting = f:read("*all")
   f:close()
 end
-pkgversion = string.match(changeslisting,"- (%S+) %(.*%)")
+pkgversion = string.match(changeslisting,"- (%S+) %(.-%)")
 print('Current version (from first entry in CHANGES.md): '..pkgversion)
+
+currentchanges = string.match(changeslisting,"(- %S+ %(.-%).-)- %S+ %(.-%)")
+print("******************")
+print(currentchanges)
+print("******************")
 
 local changesversion = true
 
