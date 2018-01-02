@@ -182,6 +182,9 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_fontspec_select_font:
   {
+    \fp_gset:Nn \g_@@_size_tfsf_fp   { (\f@size +\sf@size )/2 }
+    \fp_gset:Nn \g_@@_size_sfssf_fp  { (\sf@size+\ssf@size)/2 }
+
     \tl_set:Nx \l_@@_font_keyval_tl
       {
 %<LU>   Renderer = Basic,
@@ -190,15 +193,15 @@
         SizeFeatures =
           {
             {
-              Size = \tf@size-
+              Size = \fp_use:N \g_@@_size_tfsf_fp -
             } ,
             {
-              Size = \sf@size-\tf@size ,
+              Size = \fp_use:N \g_@@_size_sfssf_fp - \fp_use:N \g_@@_size_tfsf_fp ,
               Font = \l_@@_script_font_tl ,
               \l_@@_script_features_tl
             } ,
             {
-              Size = -\sf@size ,
+              Size = - \fp_use:N \g_@@_size_sfssf_fp ,
               Font = \l_@@_sscript_font_tl ,
               \l_@@_sscript_features_tl
             }
