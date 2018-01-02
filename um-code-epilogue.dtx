@@ -99,59 +99,45 @@
 %
 %
 % \subsubsection{Active fractions}
-% Active fractions can be setup independently of any maths font definition;
+%
+% Active fractions can be set up independently of any maths font definition;
 % all it requires is a mapping from the Unicode input chars to the relevant
 % \LaTeX\ fraction declaration.
 %
 %    \begin{macrocode}
-\cs_new:Npn \@@_define_active_frac:Nw #1 #2/#3
+\cs_new:Nn \@@_which_frac:nn
   {
-    \char_set_catcode_active:N #1
-    \@@_char_gmake_mathactive:N #1
-    \tl_rescan:nn
-      {
-        \catcode`\_=11\relax
-        \catcode`\:=11\relax
-      }
-      {
-        \cs_gset:Npx #1
-          {
-            \bool_if:NTF \l_@@_smallfrac_bool {\exp_not:N\tfrac} {\exp_not:N\frac}
-            {#2} {#3}
-          }
-      }
+    \bool_if:NTF \l_@@_smallfrac_bool {\tfrac} {\frac} {#1} {#2}
   }
 %    \end{macrocode}
-% These are redefined for each math font selection in case the |active-frac|
-% feature changes.
+%
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_active_frac:
   {
-    \group_begin:
-      \@@_define_active_frac:Nw  ^^^^2189  0/3
-      \@@_define_active_frac:Nw  ^^^^2152  1/{10}
-      \@@_define_active_frac:Nw  ^^^^2151  1/9
-      \@@_define_active_frac:Nw  ^^^^215b  1/8
-      \@@_define_active_frac:Nw  ^^^^2150  1/7
-      \@@_define_active_frac:Nw  ^^^^2159  1/6
-      \@@_define_active_frac:Nw  ^^^^2155  1/5
-      \@@_define_active_frac:Nw  ^^^^00bc  1/4
-      \@@_define_active_frac:Nw  ^^^^2153  1/3
-      \@@_define_active_frac:Nw  ^^^^215c  3/8
-      \@@_define_active_frac:Nw  ^^^^2156  2/5
-      \@@_define_active_frac:Nw  ^^^^00bd  1/2
-      \@@_define_active_frac:Nw  ^^^^2157  3/5
-      \@@_define_active_frac:Nw  ^^^^215d  5/8
-      \@@_define_active_frac:Nw  ^^^^2154  2/3
-      \@@_define_active_frac:Nw  ^^^^00be  3/4
-      \@@_define_active_frac:Nw  ^^^^2158  4/5
-      \@@_define_active_frac:Nw  ^^^^215a  5/6
-      \@@_define_active_frac:Nw  ^^^^215e  7/8
-    \group_end:
+    \@@_mathactive_remap:nn {"2189}  { \@@_which_frac:nn {0} {3}  }
+    \@@_mathactive_remap:nn {"2152}  { \@@_which_frac:nn {1} {10} }
+    \@@_mathactive_remap:nn {"2151}  { \@@_which_frac:nn {1} {9}  }
+    \@@_mathactive_remap:nn {"215B}  { \@@_which_frac:nn {1} {8}  }
+    \@@_mathactive_remap:nn {"2150}  { \@@_which_frac:nn {1} {7}  }
+    \@@_mathactive_remap:nn {"2159}  { \@@_which_frac:nn {1} {6}  }
+    \@@_mathactive_remap:nn {"2155}  { \@@_which_frac:nn {1} {5}  }
+    \@@_mathactive_remap:nn {"00BC}  { \@@_which_frac:nn {1} {4}  }
+    \@@_mathactive_remap:nn {"2153}  { \@@_which_frac:nn {1} {3}  }
+    \@@_mathactive_remap:nn {"215C}  { \@@_which_frac:nn {3} {8}  }
+    \@@_mathactive_remap:nn {"2156}  { \@@_which_frac:nn {2} {5}  }
+    \@@_mathactive_remap:nn {"00BD}  { \@@_which_frac:nn {1} {2}  }
+    \@@_mathactive_remap:nn {"2157}  { \@@_which_frac:nn {3} {5}  }
+    \@@_mathactive_remap:nn {"215D}  { \@@_which_frac:nn {5} {8}  }
+    \@@_mathactive_remap:nn {"2154}  { \@@_which_frac:nn {2} {3}  }
+    \@@_mathactive_remap:nn {"00BE}  { \@@_which_frac:nn {3} {4}  }
+    \@@_mathactive_remap:nn {"2158}  { \@@_which_frac:nn {4} {5}  }
+    \@@_mathactive_remap:nn {"215A}  { \@@_which_frac:nn {5} {6}  }
+    \@@_mathactive_remap:nn {"215E}  { \@@_which_frac:nn {7} {8}  }
   }
 %    \end{macrocode}
+%
 %    \begin{macrocode}
-\@@_setup_active_frac:
+\AtBeginDocument { \@@_setup_active_frac: }
 %    \end{macrocode}
 %
 %
