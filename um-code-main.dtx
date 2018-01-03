@@ -35,14 +35,14 @@
 
     \keys_set_known:nnN {unicode-math} {#1} \l_@@_unknown_keys_clist
 
-    \bool_if:NF \g_@@_mainfont_already_set_bool
+    \bool_if:NT \l_@@_init_bool
       {
         \@@_fontspec_trial_font:
         \@@_declare_math_sizes:
       }
     \@@_fontspec_select_font:
     \@@_setup_math_fam:
-    \bool_if:nT { \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
+    \bool_if:NT \l_@@_init_bool
       {
         \@@_setup_legacy_fam_two:
         \@@_setup_legacy_fam_three:
@@ -69,11 +69,10 @@
 %<debug>  \csname TOC\endcsname
     %% TODO: what of the above should only be run for the "default"/"main" font?
 
-    \bool_if:nTF { \l_@@_init_bool && \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
+    \bool_if:NTF \l_@@_init_bool
       {
 %<LU>   \@@_mathparam_store:
         \@@_log:n {default-math-font}
-        \bool_set_true:N \g_@@_mainfont_already_set_bool
       }
       {
 %<LU>   \@@_mathparam_restore:
@@ -93,8 +92,8 @@
   {
     \cs_if_exist:NF \l_@@_fontname_tl
       {
-        \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
-        \bool_set_false:N \g_@@_mainfont_already_set_bool
+        \setmathfont{latinmodern-math.otf}
+          [BoldFont={latinmodern-math.otf}]
       }
   }
 %    \end{macrocode}
@@ -172,6 +171,11 @@
     \group_begin:
       \fontfamily { \l_@@_trial_family_tl } \selectfont
       \@@_fontface_gset_eq:NV \g_@@_trial_font \font@name
+      \fontspec_if_script:nF {math}
+        {
+          \bool_gset_false:N \l_@@_ot_math_bool
+          \bool_gset_false:N \l_@@_init_bool
+        }
     \group_end:
 
   }
@@ -217,11 +221,15 @@
       \fontfamily { \l_@@_family_tl } \selectfont
       \@@_fontface_gset_eq:cV {g_@@_mathfont_ \int_use:N \g_@@_fonts_used_int _font} \font@name
       \tl_gset:Nx \g_@@_curr_font_cmd_tl { \exp_not:c {g_@@_mathfont_ \int_use:N \g_@@_fonts_used_int _font} }
-      \bool_if:NF \g_@@_mainfont_already_set_bool
+      \bool_if:NT \l_@@_init_bool
 				{
 					\@@_fontface_gset_eq:NV \l_@@_font \font@name
 				}
-      \fontspec_if_script:nF {math} { \bool_gset_false:N \l_@@_ot_math_bool }
+      \fontspec_if_script:nF {math}
+        {
+          \bool_gset_false:N \l_@@_ot_math_bool
+          \bool_gset_false:N \l_@@_init_bool
+        }
     \group_end:
   }
 %    \end{macrocode}
