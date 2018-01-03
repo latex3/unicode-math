@@ -167,6 +167,17 @@
 \tl_new:N \g_@@_prime_font_cmd_tl
 %    \end{macrocode}
 %
+% \begin{macro}{\g_@@_mathparam_store_tl}
+% Used to store and restore the math parameters used in Lua\TeX.
+% This is done to `save' the values of the \emph{first} (or main)
+% maths font loaded, rather than (as per Lua\TeX\ defaults) the last.
+%    \begin{macrocode}
+%<*LU>
+\tl_new:N \g_@@_mathparam_store_tl
+%</LU>
+%    \end{macrocode}
+% \end{macro}
+%
 %    \begin{macrocode}
 \fp_new:N \g_@@_size_tfsf_fp
 \fp_new:N \g_@@_size_sfssf_fp

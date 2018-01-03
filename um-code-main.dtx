@@ -69,10 +69,14 @@
 %<debug>  \csname TOC\endcsname
     %% TODO: what of the above should only be run for the "default"/"main" font?
 
-    \bool_if:nT { \l_@@_init_bool && \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
+    \bool_if:nTF { \l_@@_init_bool && \l_@@_ot_math_bool && !\g_@@_mainfont_already_set_bool }
       {
+%<LU>   \@@_mathparam_store:
         \@@_log:n {default-math-font}
         \bool_set_true:N \g_@@_mainfont_already_set_bool
+      }
+      {
+%<LU>   \@@_mathparam_restore:
       }
   }
 %    \end{macrocode}
@@ -580,6 +584,93 @@
 \tl_set:Nn \l_@@_radicals_tl {\sqrt \longdivision}
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsection{Fontdimens}
+%
+%    \begin{macrocode}
+%<*LU>
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_mathparam_restore:}
+%    \begin{macrocode}
+\cs_set:Nn \@@_mathparam_restore:
+  {
+    \check@mathfonts
+    \tl_use:N \g_@@_mathparam_store_tl
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_mathparam_store:}
+%    \begin{macrocode}
+\cs_set:Nn \@@_mathparam_store:
+  {
+    \check@mathfonts
+    \tl_gset:Nx \g_@@_mathparam_store_tl
+      {
+        \@@_mathparam_store_aux:N \displaystyle
+        \@@_mathparam_store_aux:N \textstyle
+        \@@_mathparam_store_aux:N \scriptstyle
+        \@@_mathparam_store_aux:N \scriptscriptstyle
+      }
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set:Nn \@@_mathparam_store_aux:N
+  {
+    \Umathquad                #1 = \the \Umathquad                #1
+    \Umathaxis                #1 = \the \Umathaxis                #1
+    \Umathoperatorsize        #1 = \the \Umathoperatorsize        #1
+    \Umathoverbarkern         #1 = \the \Umathoverbarkern         #1
+    \Umathoverbarrule         #1 = \the \Umathoverbarrule         #1
+    \Umathoverbarvgap         #1 = \the \Umathoverbarvgap         #1
+    \Umathunderbarkern        #1 = \the \Umathunderbarkern        #1
+    \Umathunderbarrule        #1 = \the \Umathunderbarrule        #1
+    \Umathunderbarvgap        #1 = \the \Umathunderbarvgap        #1
+    \Umathradicalkern         #1 = \the \Umathradicalkern         #1
+    \Umathradicalrule         #1 = \the \Umathradicalrule         #1
+    \Umathradicalvgap         #1 = \the \Umathradicalvgap         #1
+    \Umathradicaldegreebefore #1 = \the \Umathradicaldegreebefore #1
+    \Umathradicaldegreeafter  #1 = \the \Umathradicaldegreeafter  #1
+    \Umathradicaldegreeraise  #1 = \the \Umathradicaldegreeraise  #1
+    \Umathstackvgap           #1 = \the \Umathstackvgap           #1
+    \Umathstacknumup          #1 = \the \Umathstacknumup          #1
+    \Umathstackdenomdown      #1 = \the \Umathstackdenomdown      #1
+    \Umathfractionrule        #1 = \the \Umathfractionrule        #1
+    \Umathfractionnumvgap     #1 = \the \Umathfractionnumvgap     #1
+    \Umathfractionnumup       #1 = \the \Umathfractionnumup       #1
+    \Umathfractiondenomvgap   #1 = \the \Umathfractiondenomvgap   #1
+    \Umathfractiondenomdown   #1 = \the \Umathfractiondenomdown   #1
+    \Umathfractiondelsize     #1 = \the \Umathfractiondelsize     #1
+    \Umathlimitabovevgap      #1 = \the \Umathlimitabovevgap      #1
+    \Umathlimitabovebgap      #1 = \the \Umathlimitabovebgap      #1
+    \Umathlimitabovekern      #1 = \the \Umathlimitabovekern      #1
+    \Umathlimitbelowvgap      #1 = \the \Umathlimitbelowvgap      #1
+    \Umathlimitbelowbgap      #1 = \the \Umathlimitbelowbgap      #1
+    \Umathlimitbelowkern      #1 = \the \Umathlimitbelowkern      #1
+    \Umathoverdelimitervgap   #1 = \the \Umathoverdelimitervgap   #1
+    \Umathoverdelimiterbgap   #1 = \the \Umathoverdelimiterbgap   #1
+    \Umathunderdelimitervgap  #1 = \the \Umathunderdelimitervgap  #1
+    \Umathunderdelimiterbgap  #1 = \the \Umathunderdelimiterbgap  #1
+    \Umathsubshiftdrop        #1 = \the \Umathsubshiftdrop        #1
+    \Umathsubshiftdown        #1 = \the \Umathsubshiftdown        #1
+    \Umathsupshiftdrop        #1 = \the \Umathsupshiftdrop        #1
+    \Umathsupshiftup          #1 = \the \Umathsupshiftup          #1
+    \Umathsubsupshiftdown     #1 = \the \Umathsubsupshiftdown     #1
+    \Umathsubtopmax           #1 = \the \Umathsubtopmax           #1
+    \Umathsupbottommin        #1 = \the \Umathsupbottommin        #1
+    \Umathsupsubbottommax     #1 = \the \Umathsupsubbottommax     #1
+    \Umathsubsupvgap          #1 = \the \Umathsubsupvgap          #1
+    \Umathspaceafterscript    #1 = \the \Umathspaceafterscript    #1
+    \Umathconnectoroverlapmin #1 = \the \Umathconnectoroverlapmin #1
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</LU>
+%    \end{macrocode}
 %
 %    \begin{macrocode}
 %</package>
