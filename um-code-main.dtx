@@ -54,6 +54,7 @@
 
 %    \end{macrocode}
 % \begin{itemize}
+% \item the `once-off' setup that doesn't need to be per-font
 % \item remap symbols that don't take their natural mathcode;
 % \item activate any symbols that need to be math-active;
 % \item assign delimiter codes for symbols that need to grow;
@@ -61,6 +62,7 @@
 %       this is an extensive part of the code; see Section~\ref{sec:mathmap};
 % \end{itemize}
 %    \begin{macrocode}
+    \bool_if:NT \l_@@_init_bool \@@_onceoff_setup:
     \@@_remap_symbols:
     \@@_setup_mathactives:
     \@@_setup_delcodes:
@@ -364,6 +366,14 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\@@_onceoff_setup:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_onceoff_setup:
+  {
+    \@@_set_delcode:nnn {operators} {`\.} {\c_zero}
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 % \subsection{Functions for setting up symbols with mathcodes}
 % \seclabel{mathsymbol}
@@ -507,10 +517,6 @@
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_delcodes:
   {
-    % ensure \left. and \right. work:
-    \@@_set_delcode:nnn \l_@@_symfont_label_tl {`\.} {\c_zero}
-    % this is forcefully done to fix a bug -- indicates a larger problem!
-
     \@@_assign_delcode:nn {`\/}   {\g_@@_slash_delimiter_usv}
     \@@_assign_delcode:nn {"2044} {\g_@@_slash_delimiter_usv} % fracslash
     \@@_assign_delcode:nn {"2215} {\g_@@_slash_delimiter_usv} % divslash
