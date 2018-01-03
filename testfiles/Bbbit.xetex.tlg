@@ -1,0 +1,80 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+MATHBBIT
+> \box...=
+\hbox(6.83+2.17)x27.03
+.\mathon
+.\hbox(6.83+2.17)x27.03
+..\TU/xits-math.otf(1)/m/n/10 glyph#1011
+..\kern0.2
+..\TU/xits-math.otf(1)/m/n/10 glyph#1012
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1013
+..\TU/xits-math.otf(1)/m/n/10 glyph#1014
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1015
+..\kern0.8
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX{12}
+MATHBBIT
+> \box...=
+\hbox(6.83+2.17)x27.03
+.\mathon
+.\hbox(6.83+2.17)x27.03
+..\TU/xits-math.otf(1)/m/n/10 glyph#1011
+..\kern0.2
+..\TU/xits-math.otf(1)/m/n/10 glyph#1012
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1013
+..\TU/xits-math.otf(1)/m/n/10 glyph#1014
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1015
+..\kern0.8
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX{12}
+SYMBBIT
+> \box...=
+\hbox(6.83+2.17)x27.03
+.\mathon
+.\hbox(6.83+2.17)x27.03
+..\TU/xits-math.otf(1)/m/n/10 glyph#1011
+..\kern0.2
+..\TU/xits-math.otf(1)/m/n/10 glyph#1012
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1013
+..\TU/xits-math.otf(1)/m/n/10 glyph#1014
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1015
+..\kern0.8
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX{12}
+SYMBBIT
+> \box...=
+\hbox(6.83+2.17)x27.03
+.\mathon
+.\hbox(6.83+2.17)x27.03
+..\TU/xits-math.otf(1)/m/n/10 glyph#1011
+..\kern0.2
+..\TU/xits-math.otf(1)/m/n/10 glyph#1012
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1013
+..\TU/xits-math.otf(1)/m/n/10 glyph#1014
+..\kern0.8
+..\TU/xits-math.otf(1)/m/n/10 glyph#1015
+..\kern0.8
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX{12}
+***************
+Compilation 1 of test file completed with exit status 256
