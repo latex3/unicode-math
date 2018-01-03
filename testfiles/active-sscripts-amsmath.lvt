@@ -1,11 +1,14 @@
-\input{umtest-preamble}
 
-\OMIT
+\input{umtest-preamble}
 \usepackage{amsmath}
 \usepackage{unicode-math}
 \begin{document}
-\[r=s\]
-\TIMO
+
+\MSG{JUST TEST COMPILATION}
+
+\[
+  r = s₁₂
+\]
 
 \begin{align*}
   r = s₁₂

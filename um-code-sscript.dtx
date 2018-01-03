@@ -18,9 +18,7 @@
 %
 % Open question: should the superscript-like `modifiers' (\unichar{1D2C}
 % {modifier capital letter a} and on) be included here?
-%    \begin{macrocode}
-\group_begin:
-%    \end{macrocode}
+%
 % \paragraph{Superscripts}
 % Populate a property list with superscript characters; themselves as their
 % key, and their replacement as each key's value.
@@ -30,123 +28,43 @@
 % char and assign its meaning in one step.
 %    \begin{macrocode}
 \cs_new:Nn \@@_setup_active_superscript:nn
- {
-  \prop_gput:Nnn \g_@@_supers_prop   {#1} {#2}
-  \char_set_catcode_active:N #1
-  \@@_char_gmake_mathactive:N #1
-  \scantokens
-   {
-    \cs_gset:Npn #1
-     {
-      \tl_set:Nn \l_@@_ss_chain_tl {#2}
-      \cs_set_eq:NN \@@_sub_or_super:n \sp
-      \tl_set:Nn \l_@@_tmpa_tl {supers}
-      \@@_scan_sscript:
-     }
-   }
- }
-%    \end{macrocode}
-% Bam:
-%    \begin{macrocode}
-\@@_setup_active_superscript:nn {^^^^2070} {0}
-\@@_setup_active_superscript:nn {^^^^00b9} {1}
-\@@_setup_active_superscript:nn {^^^^00b2} {2}
-\@@_setup_active_superscript:nn {^^^^00b3} {3}
-\@@_setup_active_superscript:nn {^^^^2074} {4}
-\@@_setup_active_superscript:nn {^^^^2075} {5}
-\@@_setup_active_superscript:nn {^^^^2076} {6}
-\@@_setup_active_superscript:nn {^^^^2077} {7}
-\@@_setup_active_superscript:nn {^^^^2078} {8}
-\@@_setup_active_superscript:nn {^^^^2079} {9}
-\@@_setup_active_superscript:nn {^^^^207a} {+}
-\@@_setup_active_superscript:nn {^^^^207b} {-}
-\@@_setup_active_superscript:nn {^^^^207c} {=}
-\@@_setup_active_superscript:nn {^^^^207d} {(}
-\@@_setup_active_superscript:nn {^^^^207e} {)}
-\@@_setup_active_superscript:nn {^^^^2071} {i}
-\@@_setup_active_superscript:nn {^^^^207f} {n}
-\@@_setup_active_superscript:nn {^^^^02b0} {h}
-\@@_setup_active_superscript:nn {^^^^02b2} {j}
-\@@_setup_active_superscript:nn {^^^^02b3} {r}
-\@@_setup_active_superscript:nn {^^^^02b7} {w}
-\@@_setup_active_superscript:nn {^^^^02b8} {y}
-%    \end{macrocode}
-% \paragraph{Subscripts} Ditto above.
-%    \begin{macrocode}
-\cs_new:Nn \@@_setup_active_subscript:nn
- {
-  \prop_gput:Nnn \g_@@_subs_prop   {#1} {#2}
-  \char_set_catcode_active:N #1
-  \@@_char_gmake_mathactive:N #1
-  \scantokens
-   {
-    \cs_gset:Npn #1
-     {
-      \tl_set:Nn \l_@@_ss_chain_tl {#2}
-      \cs_set_eq:NN \@@_sub_or_super:n \sb
-      \tl_set:Nn \l_@@_tmpa_tl {subs}
-      \@@_scan_sscript:
-     }
-   }
- }
-%    \end{macrocode}
-% A few more subscripts than superscripts:
-%    \begin{macrocode}
-\@@_setup_active_subscript:nn {^^^^2080} {0}
-\@@_setup_active_subscript:nn {^^^^2081} {1}
-\@@_setup_active_subscript:nn {^^^^2082} {2}
-\@@_setup_active_subscript:nn {^^^^2083} {3}
-\@@_setup_active_subscript:nn {^^^^2084} {4}
-\@@_setup_active_subscript:nn {^^^^2085} {5}
-\@@_setup_active_subscript:nn {^^^^2086} {6}
-\@@_setup_active_subscript:nn {^^^^2087} {7}
-\@@_setup_active_subscript:nn {^^^^2088} {8}
-\@@_setup_active_subscript:nn {^^^^2089} {9}
-\@@_setup_active_subscript:nn {^^^^208a} {+}
-\@@_setup_active_subscript:nn {^^^^208b} {-}
-\@@_setup_active_subscript:nn {^^^^208c} {=}
-\@@_setup_active_subscript:nn {^^^^208d} {(}
-\@@_setup_active_subscript:nn {^^^^208e} {)}
-\@@_setup_active_subscript:nn {^^^^2090} {a}
-\@@_setup_active_subscript:nn {^^^^2091} {e}
-\@@_setup_active_subscript:nn {^^^^2095} {h}
-\@@_setup_active_subscript:nn {^^^^1d62} {i}
-\@@_setup_active_subscript:nn {^^^^2c7c} {j}
-\@@_setup_active_subscript:nn {^^^^2096} {k}
-\@@_setup_active_subscript:nn {^^^^2097} {l}
-\@@_setup_active_subscript:nn {^^^^2098} {m}
-\@@_setup_active_subscript:nn {^^^^2099} {n}
-\@@_setup_active_subscript:nn {^^^^2092} {o}
-\@@_setup_active_subscript:nn {^^^^209a} {p}
-\@@_setup_active_subscript:nn {^^^^1d63} {r}
-\@@_setup_active_subscript:nn {^^^^209b} {s}
-\@@_setup_active_subscript:nn {^^^^209c} {t}
-\@@_setup_active_subscript:nn {^^^^1d64} {u}
-\@@_setup_active_subscript:nn {^^^^1d65} {v}
-\@@_setup_active_subscript:nn {^^^^2093} {x}
-\@@_setup_active_subscript:nn {^^^^1d66} {\beta}
-\@@_setup_active_subscript:nn {^^^^1d67} {\gamma}
-\@@_setup_active_subscript:nn {^^^^1d68} {\rho}
-\@@_setup_active_subscript:nn {^^^^1d69} {\phi}
-\@@_setup_active_subscript:nn {^^^^1d6a} {\chi}
+  {
+    \prop_gput:Nxn \g_@@_supers_prop { \int_eval:n {#1} } {#2}
+    \@@_mathactive_remap:nn {#1}
+       {
+        \tl_set:Nn \l_@@_ss_chain_tl {#2}
+        \cs_set_eq:NN \@@_sub_or_super:n \sp
+        \tl_set:Nn \l_@@_tmpa_tl {supers}
+        \@@_scan_sscript:
+       }
+  }
 %    \end{macrocode}
 %
+% \paragraph{Subscripts}
 %    \begin{macrocode}
-\group_end:
+\cs_new:Nn \@@_setup_active_subscript:nn
+  {
+    \prop_gput:Nxn \g_@@_subs_prop { \int_eval:n {#1} } {#2}
+    \@@_mathactive_remap:nn {#1}
+      {
+        \tl_set:Nn \l_@@_ss_chain_tl {#2}
+        \cs_set_eq:NN \@@_sub_or_super:n \sb
+        \tl_set:Nn \l_@@_tmpa_tl {subs}
+        \@@_scan_sscript:
+      }
+  }
 %    \end{macrocode}
-% The scanning command, which collects a chain of subscripts or a chain
+%
+% \paragraph{The scanning command}
+% Collects a chain of subscripts or a chain
 % of superscripts and then typesets what it has collected.
 %    \begin{macrocode}
-\cs_new:Npn \@@_scan_sscript:
- {
-  \@@_scan_sscript:TF
-   {
-    \@@_scan_sscript:
-   }
-   {
-    \@@_sub_or_super:n {\l_@@_ss_chain_tl}
-   }
- }
+\cs_new:Nn \@@_scan_sscript:
+  {
+    \@@_scan_sscript:TF
+      { \@@_scan_sscript: }
+      { \@@_sub_or_super:n {\l_@@_ss_chain_tl} }
+  }
 %    \end{macrocode}
 % We do not skip spaces when scanning ahead, and we explicitly wish to
 % bail out on encountering a space or a brace.  These cases are filtered
@@ -158,25 +76,98 @@
 % The \cs{group_align_safe_begin:} and \cs{group_align_safe_end:} are
 % needed in case |#3| is |&|.
 %    \begin{macrocode}
-\cs_new:Npn \@@_scan_sscript:TF #1#2
- {
-  \peek_N_type:TF
-   {
-    \group_align_safe_begin:
-    \@@_scan_sscript_aux:nnN {#1} {#2}
-   }
-   {#2}
- }
-\cs_new:Npn \@@_scan_sscript_aux:nnN #1#2#3
- {
-  \prop_get:cnNTF {g_@@_\l_@@_tmpa_tl _prop} {#3} \l_@@_tmpb_tl
-   {
-    \tl_put_right:NV \l_@@_ss_chain_tl \l_@@_tmpb_tl
-    \group_align_safe_end:
-    #1
-   }
-   { \group_align_safe_end: #2 #3 }
- }
+\cs_new:Nn \@@_scan_sscript:TF
+  {
+    \peek_N_type:TF
+      {
+        \group_align_safe_begin:
+        \@@_scan_sscript_aux:nnN {#1} {#2}
+      }
+      {#2}
+  }
+%    \end{macrocode}
+% The look-ahead for the sscripts doesn't try to peek inside the lookahead.
+%    \begin{macrocode}
+\cs_new:Nn \@@_scan_sscript_aux:nnN
+  {
+    \tl_set:Nx \l_@@_tmpa_key_tl { \tl_to_str:n {#3} }
+    \prop_get:cxNTF {g_@@_\l_@@_tmpa_tl _prop}
+      { \int_eval:n { \exp_after:wN ` \l_@@_tmpa_key_tl } }
+      \l_@@_tmpb_tl
+      {
+        \tl_put_right:NV \l_@@_ss_chain_tl \l_@@_tmpb_tl
+        \group_align_safe_end:
+        #1
+      }
+      { \group_align_safe_end: #2 #3 }
+  }
+%    \end{macrocode}
+%
+% \paragraph{Definitions}
+% Superscripts.
+%    \begin{macrocode}
+\@@_setup_active_superscript:nn {"2070} {0}
+\@@_setup_active_superscript:nn {"00B9} {1}
+\@@_setup_active_superscript:nn {"00B2} {2}
+\@@_setup_active_superscript:nn {"00B3} {3}
+\@@_setup_active_superscript:nn {"2074} {4}
+\@@_setup_active_superscript:nn {"2075} {5}
+\@@_setup_active_superscript:nn {"2076} {6}
+\@@_setup_active_superscript:nn {"2077} {7}
+\@@_setup_active_superscript:nn {"2078} {8}
+\@@_setup_active_superscript:nn {"2079} {9}
+\@@_setup_active_superscript:nn {"207A} {+}
+\@@_setup_active_superscript:nn {"207B} {-}
+\@@_setup_active_superscript:nn {"207C} {=}
+\@@_setup_active_superscript:nn {"207D} {(}
+\@@_setup_active_superscript:nn {"207E} {)}
+\@@_setup_active_superscript:nn {"2071} {i}
+\@@_setup_active_superscript:nn {"207F} {n}
+\@@_setup_active_superscript:nn {"02B0} {h}
+\@@_setup_active_superscript:nn {"02B2} {j}
+\@@_setup_active_superscript:nn {"02B3} {r}
+\@@_setup_active_superscript:nn {"02B7} {w}
+\@@_setup_active_superscript:nn {"02B8} {y}
+%    \end{macrocode}
+% A few more subscripts than superscripts:
+%    \begin{macrocode}
+\@@_setup_active_subscript:nn {"2080} {0}
+\@@_setup_active_subscript:nn {"2081} {1}
+\@@_setup_active_subscript:nn {"2082} {2}
+\@@_setup_active_subscript:nn {"2083} {3}
+\@@_setup_active_subscript:nn {"2084} {4}
+\@@_setup_active_subscript:nn {"2085} {5}
+\@@_setup_active_subscript:nn {"2086} {6}
+\@@_setup_active_subscript:nn {"2087} {7}
+\@@_setup_active_subscript:nn {"2088} {8}
+\@@_setup_active_subscript:nn {"2089} {9}
+\@@_setup_active_subscript:nn {"208A} {+}
+\@@_setup_active_subscript:nn {"208B} {-}
+\@@_setup_active_subscript:nn {"208C} {=}
+\@@_setup_active_subscript:nn {"208D} {(}
+\@@_setup_active_subscript:nn {"208E} {)}
+\@@_setup_active_subscript:nn {"2090} {a}
+\@@_setup_active_subscript:nn {"2091} {e}
+\@@_setup_active_subscript:nn {"2095} {h}
+\@@_setup_active_subscript:nn {"1D62} {i}
+\@@_setup_active_subscript:nn {"2C7C} {j}
+\@@_setup_active_subscript:nn {"2096} {k}
+\@@_setup_active_subscript:nn {"2097} {l}
+\@@_setup_active_subscript:nn {"2098} {m}
+\@@_setup_active_subscript:nn {"2099} {n}
+\@@_setup_active_subscript:nn {"2092} {o}
+\@@_setup_active_subscript:nn {"209A} {p}
+\@@_setup_active_subscript:nn {"1D63} {r}
+\@@_setup_active_subscript:nn {"209B} {s}
+\@@_setup_active_subscript:nn {"209C} {t}
+\@@_setup_active_subscript:nn {"1D64} {u}
+\@@_setup_active_subscript:nn {"1D65} {v}
+\@@_setup_active_subscript:nn {"2093} {x}
+\@@_setup_active_subscript:nn {"1D66} {\beta}
+\@@_setup_active_subscript:nn {"1D67} {\gamma}
+\@@_setup_active_subscript:nn {"1D68} {\rho}
+\@@_setup_active_subscript:nn {"1D69} {\phi}
+\@@_setup_active_subscript:nn {"1D6A} {\chi}
 %    \end{macrocode}
 %
 %
