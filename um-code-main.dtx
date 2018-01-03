@@ -104,6 +104,8 @@
 % TODO: need a better way to do this for the general case. (Maybe a `reset' command option?)
 %
 % \begin{macro}{\@@_init:n}
+% Reset local variables.
+% Default to defining the font for every math symbol character.
 %    \begin{macrocode}
 \cs_new:Nn \@@_init:n
   {
@@ -111,24 +113,18 @@
     \bool_set_true:N  \l_@@_ot_math_bool
     \tl_set:Nn \l_@@_mversion_tl      {normal}
     \tl_set:Nn \l_@@_symfont_label_tl {operators}
-%    \end{macrocode}
-% Defaults for the script and scriptscript font.
-%    \begin{macrocode}
+
     \tl_set:Nn    \l_@@_script_features_tl  {Style=MathScript}
     \tl_set:Nn    \l_@@_sscript_features_tl {Style=MathScriptScript}
     \tl_set_eq:NN \l_@@_script_font_tl      \l_@@_fontname_tl
     \tl_set_eq:NN \l_@@_sscript_font_tl     \l_@@_fontname_tl
-%    \end{macrocode}
-% Default to defining the font for every math symbol character.
-%    \begin{macrocode}
+
     \bool_set_true:N \l_@@_init_bool
     \seq_clear:N     \l_@@_char_range_seq
     \clist_clear:N   \l_@@_char_nrange_clist
     \seq_clear:N     \l_@@_mathalph_seq
     \seq_clear:N     \l_@@_missing_alph_seq
-%    \end{macrocode}
-% Other range initialisations.
-%    \begin{macrocode}
+
     \cs_set_eq:NN \_@@_sym:nnn                  \@@_process_symbol_noparse:nnn
     \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
     \cs_set_eq:NN \@@_remap_symbol:nnn          \@@_remap_symbol_noparse:nnn
