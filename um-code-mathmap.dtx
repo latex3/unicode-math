@@ -53,6 +53,7 @@
           { default-alpha } \l_@@_alphabet_clist
         }
 
+        \@@_check_math_alphabet:
         \@@_setup_math_alphabet:
       }
     \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
@@ -60,14 +61,12 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_setup_math_alphabet:}
-%    \begin{macrocode}
-\cs_new:Nn \@@_setup_math_alphabet:
-  {
-%    \end{macrocode}
+% \begin{macro}{\@@_check_math_alphabet:}
 % First check that at least one of the alphabets for the font shape is defined
 % (this process is fast) \dots
 %    \begin{macrocode}
+\cs_new:Nn \@@_check_math_alphabet:
+  {
     \clist_map_inline:Nn \l_@@_alphabet_clist
       {
         \tl_set:Nn \l_@@_alphabet_tl {##1}
@@ -79,11 +78,12 @@
                 \clist_map_break:
               }
               {
-                \@@_glyph_if_exist:NnT \g_@@_curr_font_cmd_tl { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
-                {
-                  \@@_maybe_init_alphabet:n \l_@@_style_tl
-                  \clist_map_break:
-                }
+                \@@_glyph_if_exist:NnT \g_@@_curr_font_cmd_tl
+                  { \@@_to_usv:nn {\l_@@_style_tl} {\l_@@_alphabet_tl} }
+                  {
+                    \@@_maybe_init_alphabet:n \l_@@_style_tl
+                    \clist_map_break:
+                  }
               }
           }
           {
@@ -91,10 +91,16 @@
               { \l_@@_style_tl / \l_@@_alphabet_tl }
           }
       }
+  }
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_setup_math_alphabet:}
 % \dots and then loop through them defining the individual ranges:
 % (currently this process is slow)
 %    \begin{macrocode}
+\cs_new:Nn \@@_setup_math_alphabet:
+  {
     \clist_map_inline:Nn \l_@@_alphabet_clist
       {
 %<debug> \benchmark_tic:
@@ -140,12 +146,11 @@
 \cs_new:Nn \@@_new_alphabet_config:nnn
   {
     \prop_if_exist:cF {g_@@_named_range_#1_prop}
-    { \@@_warning:nnn {no-named-range} {#1} {#2} }
+      { \@@_warning:nnn {no-named-range} {#1} {#2} }
 
     \prop_gput:cnn {g_@@_named_range_#1_prop} { alpha_tl }
       {
-      \prop_item:cn {g_@@_named_range_#1_prop} { alpha_tl }
-      {#2}
+        \prop_item:cn {g_@@_named_range_#1_prop} { alpha_tl } {#2}
       }
     % Q: do I need to bother removing duplicates?
 
@@ -183,7 +188,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_char_noparse:nn
   {
-    \@@_set_mathcode:nnnn {#1}{\mathalpha}{\l_@@_symfont_label_tl}{#2}
+    \@@_set_mathcode:nnnn {#1} {\mathalpha} {\l_@@_symfont_label_tl} {#2}
   }
 %    \end{macrocode}
 %
@@ -206,8 +211,8 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_char_single:nnn
   {
-    \@@_map_char_single:nn { \@@_to_usv:nn {#1}{#3} }
-                           { \@@_to_usv:nn {#2}{#3} }
+    \@@_map_char_single:nn { \@@_to_usv:nn {#1} {#3} }
+                           { \@@_to_usv:nn {#2} {#3} }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -222,16 +227,16 @@
 %    \begin{macrocode}
 \cs_set:Nn \@@_map_chars_range:nnn
   {
-    \int_step_inline:nnnn {0}{1}{#1-1}
-      { \@@_map_char_single:nn {#2+##1}{#3+##1} }
+    \int_step_inline:nnnn {0} {1} {#1-1}
+      { \@@_map_char_single:nn {#2+##1} {#3+##1} }
   }
 %    \end{macrocode}
 % And the wrapper with names:
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_chars_range:nnnn
   {
-    \@@_map_chars_range:nnn {#1} { \@@_to_usv:nn {#2}{#4} }
-                                 { \@@_to_usv:nn {#3}{#4} }
+    \@@_map_chars_range:nnn {#1} { \@@_to_usv:nn {#2} {#4} }
+                                 { \@@_to_usv:nn {#3} {#4} }
   }
 %    \end{macrocode}
 % \end{macro}
