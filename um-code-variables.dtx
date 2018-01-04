@@ -87,7 +87,6 @@
 \seq_new:N \l_@@_mathalph_seq
 \seq_new:N \l_@@_char_range_seq
 \seq_new:N \l_@@_mclass_range_seq
-\seq_new:N \l_@@_cmd_range_seq
 %    \end{macrocode}
 %
 % \begin{macro}{\g_@@_alphabets_seq}
@@ -181,6 +180,13 @@
 \fp_new:N \g_@@_size_tfsf_fp
 \fp_new:N \g_@@_size_sfssf_fp
 %    \end{macrocode}
+%
+% \begin{macro}{\q_unicode_math}
+% Used as a flag within control sequences to check they're recognised by the package.
+%    \begin{macrocode}
+\quark_new:N \q_unicode_math
+%    \end{macrocode}
+% \end{macro}
 %
 %    \begin{macrocode}
 %</package>
