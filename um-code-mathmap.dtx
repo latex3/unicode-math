@@ -326,24 +326,24 @@
 % \subsubsection{Functions for setting up the maths alphabets}
 %
 % \begin{macro}{\@@_set_mathalphabet_char:nnn}
+% \darg{Maths alphabet, \eg, `bb’}
+% \darg{Input slot, \eg, the slot for `A’ (comma separated)}
+% \darg{Output slot, \eg, the slot for `$\mathbb{A}$’}
 % This is a wrapper for either |\@@_mathmap_noparse:nnn| or
 % |\@@_mathmap_parse:nnn|, depending on the context.
 % \end{macro}
 %
 % \begin{macro}{\@@_mathmap_noparse:nnn}
 % \darg{Maths alphabet, \eg, `bb’}
-% \darg{Input slot(s), \eg, the slot for `A’ (comma separated)}
+% \darg{Input slot, \eg, the slot for `A’ (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$’}
 % Adds \cs{@@_set_mathcode:nnnn} declarations to the specified maths alphabet’s definition.
 %    \begin{macrocode}
 \cs_new:Nn \@@_mathmap_noparse:nnn
   {
-    \clist_map_inline:nn {#2}
+    \tl_put_right:cx { @@_switchto_#1: }
       {
-        \tl_put_right:cx {@@_switchto_#1:}
-          {
-            \@@_set_mathcode:nnnn {##1} {\mathalpha} {\l_@@_symfont_label_tl} {#3}
-          }
+        \@@_set_mathcode:nnnn {#2} {\mathalpha} {\l_@@_symfont_label_tl} {#3}
       }
   }
 %    \end{macrocode}
@@ -351,7 +351,7 @@
 %
 % \begin{macro}{\@@_mathmap_parse:nnn}
 % \darg{Maths alphabet, \eg, `bb’}
-% \darg{Input slot(s), \eg, the slot for `A’ (comma separated)}
+% \darg{Input slot, \eg, the slot for `A’ (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$’}
 % When \cmd\@@_if_char_spec:nNT\ is executed, it populates the \cmd\l_@@_char_nrange_clist\
 % macro with slot numbers corresponding to the specified range. This range is used to
@@ -361,7 +361,7 @@
   {
     \exp_args:NNx \clist_if_in:NnT \l_@@_char_nrange_clist { \int_eval:n {#3} }
       {
-        \@@_mathmap_noparse:nnn {#1}{#2}{#3}
+        \@@_mathmap_noparse:nnn {#1} {#2} {#3}
       }
   }
 %    \end{macrocode}
