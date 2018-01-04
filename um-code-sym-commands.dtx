@@ -1,0 +1,295 @@
+%%^^A%% um-code-mathmap.dtx -- part of UNICODE-MATH <wspr.io/unicode-math>
+%%^^A%% Definition of "math symbol alphabets" such as `\symbf` and co.
+
+% \section{Mapping in maths alphabets}
+% \label{sec:mathmap}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% Switching to a different style of alphabetic symbols was traditionally performed with
+% commands like \cmd\mathbf, which literally changes fonts to access alternate symbols.
+% This is not as simple with Unicode fonts.
+%
+% In traditional \TeX{} maths font setups, you simply switch between different `families' (\cmd\fam), which is analogous to changing from one font to another---a symbol such as `a' will be upright in one font, bold in another, and so on.
+% In pkg{unicode-math}, a different mechanism is used to switch between styles. For every letter (start with ascii a-zA-Z and numbers to keep things simple for now), they are assigned a `mathcode' with \cmd\Umathcode\ that maps from input letter to output font glyph slot. This is done with the equivalent of
+% \begin{Verbatim}
+% \Umathcode`\a = 7 1 "1D44E\relax
+% \Umathcode`\b = 7 1 "1D44F\relax
+% \Umathcode`\c = 7 1 "1D450\relax
+% ...
+% \end{Verbatim}
+% When switching from regular letters to, say, \cmd\mathrm, we now need to execute a new mapping:
+% \begin{Verbatim}
+% \Umathcode`\a = 7 1 `\a\relax
+% \Umathcode`\b = 7 1 `\b\relax
+% \Umathcode`\c = 7 1 `\c\relax
+% ...
+% \end{Verbatim}
+% This is fairly straightforward to perform when we're defining our own commands such as \cmd\symbf\ and so on. However, this means that `classical' \TeX\ font setups will break, because with the original mapping still in place, the engine will be attempting to insert unicode maths glyphs from a standard font.
+%
+% \subsection{Hooks into \LaTeXe}
+%
+% To overcome this, we patch \cs{use@mathgroup}.
+% (An alternative is to patch \cs{extract@alph@from@version}, which constructs the \cs{mathXYZ} commands, but this method fails if the command has been defined using \cs{DeclareSymbolFontAlphabet}.)
+% As far as I can tell, this is only used inside of commands such as \cs{mathXYZ}, so this shouldn't have any major side-effects.
+%
+%    \begin{macrocode}
+\cs_set:Npn \use@mathgroup #1 #2
+  {
+    \mode_if_math:T % <- not sure if this is really necessary since we've just checked for mmode and raised an error if not!
+      {
+        \math@bgroup
+          \cs_if_eq:cNF {M@\f@encoding} #1 {#1}
+          \@@_switchto_literal:
+          \mathgroup #2 \relax
+        \math@egroup
+      }
+  }
+%    \end{macrocode}
+%
+% In LaTeX maths, the command |\operator@font| is defined that switches to the |operator| mathgroup. The classic example is the |\sin| in |$\sin{x}$|; essentially we’re using |\mathrm| to typeset the upright symbols, but the syntax is |{\operator@font sin}|.
+% I thought that hooking into |\operator@font| would be hard because all other maths font selection in 2e uses |\mathrm{...}| style.
+% Then reading source2e a little more I stumbled upon:
+% \begin{macro}{\operator@font}
+%    \begin{macrocode}
+\cs_set:Npn \operator@font
+  {
+    \@@_switchto_literal:
+    \@fontswitch {} { \g_@@_operator_mathfont_tl }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Setting styles}
+%
+% Algorithm for setting alphabet fonts.
+% By default, when |range| is empty, we are in \emph{implicit} mode.
+% If |range| contains the name of the math alphabet, we are in \emph{explicit}
+% mode and do things slightly differently.
+%
+% Implicit mode:
+% \begin{itemize}
+% \item Try and set all of the alphabet shapes.
+% \item Check for the first glyph of each alphabet to detect if the font supports each
+%       alphabet shape.
+% \item For alphabets that do exist, overwrite whatever’s already there.
+% \item For alphabets that are not supported, \emph{do nothing}.
+%       (This includes leaving the old alphabet definition in place.)
+% \end{itemize}
+%
+% Explicit mode:
+% \begin{itemize}
+% \item Only set the alphabets specified.
+% \item Check for the first glyph of the alphabet to detect if the font contains
+%       the alphabet shape in the Unicode math plane.
+% \item For Unicode math alphabets, overwrite whatever’s already there.
+% \item Otherwise, use the \ascii\ glyph slots instead.
+% \end{itemize}
+%
+%
+%
+% \subsection{Defining the math style macros}
+%
+% We call the different shapes that a math alphabet can be a `math style’.
+% Note that different alphabets can exist within the same math style. E.g.,
+% we call `bold’ the math style |bf| and within it there are upper and lower
+% case Greek and Roman alphabets and Arabic numerals.
+%
+% \begin{macro}{\@@_prepare_mathstyle:n}
+% \darg{math style name (e.g., \texttt{it} or \texttt{bb})}
+% Define the high level math alphabet macros (\cs{mathit}, etc.) in terms of
+% unicode-math definitions. Use \cs{bgroup}/\cs{egroup} so s’scripts scan the
+% whole thing.
+%
+% The flag \cs{l_@@_mathstyle_tl} is for other applications to query the
+% current math style.
+%    \begin{macrocode}
+\cs_new:Nn \@@_prepare_mathstyle:n
+  {
+    \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
+    \@@_init_alphabet:n {#1}
+    \cs_set:cpn {_@@_sym_#1_aux:n}
+      {
+        \use:c {@@_switchto_#1:} \math@egroup
+      }
+    \cs_set_protected:cpx {sym#1}
+      {
+        \exp_not:n
+          {
+            \math@bgroup
+            \mode_if_math:F
+              {
+                \egroup\expandafter
+                \non@alpherr\expandafter{\csname sym#1\endcsname\space}
+              }
+            \tl_set:Nn \l_@@_mathstyle_tl {#1}
+          }
+        \exp_not:c {_@@_sym_#1_aux:n}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_init_alphabet:n}
+% \darg{math alphabet name (e.g., \texttt{it} or \texttt{bb})}
+% This macro initialises the macros used to set up a math alphabet.
+% First used when the math alphabet macro is first defined, but then used
+% later when redefining a particular maths alphabet.
+%    \begin{macrocode}
+\cs_set:Nn \@@_init_alphabet:n
+  {
+    \@@_log:nx {alph-initialise} {#1}
+    \cs_set_eq:cN {@@_switchto_#1:} \prg_do_nothing:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Definition of alphabets and styles}
+%
+% First of all, we break up unicode into `named ranges’, such as |up|, |bb|, |sfup|, and so on, which refer to specific blocks of unicode that contain various symbols (usually alphabetical symbols).
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_new_named_range:n
+  {
+    \prop_new:c {g_@@_named_range_#1_prop}
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\clist_set:Nn \g_@@_named_ranges_clist
+  {
+    up, it, tt, bfup, bfit, bb , bbit, scr, bfscr, cal, bfcal,
+    frak, bffrak, sfup, sfit, bfsfup, bfsfit, bfsf
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\clist_map_inline:Nn \g_@@_named_ranges_clist
+  {
+    \@@_new_named_range:n {#1}
+  }
+%    \end{macrocode}
+%
+%
+%
+% The linking between named ranges and symbol style commands happens here.
+% It’s currently not using all of the machinery we’re in the process of setting up above.
+% Baby steps.
+%    \begin{macrocode}
+\cs_new:Nn \@@_default_mathalph:nnn
+  {
+    \seq_put_right:Nx \g_@@_named_ranges_seq { \tl_to_str:n {#1} }
+    \seq_put_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
+    \prop_gput:cnn { g_@@_named_range_#1_prop } { default-alpha } {#2}
+  }
+%    \end{macrocode}
+%    \begin{macrocode}
+\@@_default_mathalph:nnn {up    } {latin,Latin,greek,Greek,num,misc} {up    }
+\@@_default_mathalph:nnn {it    } {latin,Latin,greek,Greek,misc}     {it    }
+\@@_default_mathalph:nnn {bb    } {latin,Latin,num,misc}             {bb    }
+\@@_default_mathalph:nnn {bbit  } {misc}                             {bbit  }
+\@@_default_mathalph:nnn {scr   } {latin,Latin}                      {scr   }
+\@@_default_mathalph:nnn {cal   } {Latin}                            {scr   }
+\@@_default_mathalph:nnn {bfcal } {Latin}                            {bfscr }
+\@@_default_mathalph:nnn {frak  } {latin,Latin}                      {frak  }
+\@@_default_mathalph:nnn {tt    } {latin,Latin,num}                  {tt    }
+\@@_default_mathalph:nnn {sfup  } {latin,Latin,num}                  {sfup  }
+\@@_default_mathalph:nnn {sfit  } {latin,Latin}                      {sfit  }
+\@@_default_mathalph:nnn {bfup  } {latin,Latin,greek,Greek,num,misc} {bfup  }
+\@@_default_mathalph:nnn {bfit  } {latin,Latin,greek,Greek,misc}     {bfit  }
+\@@_default_mathalph:nnn {bfscr } {latin,Latin}                      {bfscr }
+\@@_default_mathalph:nnn {bffrak} {latin,Latin}                      {bffrak}
+\@@_default_mathalph:nnn {bfsfup} {latin,Latin,greek,Greek,num,misc} {bfsfup}
+\@@_default_mathalph:nnn {bfsfit} {latin,Latin,greek,Greek,misc}     {bfsfit}
+%    \end{macrocode}
+%
+% \subsubsection{Define symbol style commands}
+% Finally, all of the `symbol styles’ commands are set up, which are the commands to access each of the named alphabet styles. There is not a one-to-one mapping between symbol style commands and named style ranges!
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    up, it, bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf,
+    tt, bb, bbit, scr, bfscr, cal, bfcal, frak, bffrak,
+    normal, literal, sf, bf,
+  }
+  {
+    \@@_prepare_mathstyle:n {#1}
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection{New names for legacy textmath alphabet selection}
+% In case a package option overwrites, say, \cs{mathbf} with \cs{symbf}.
+%    \begin{macrocode}
+\clist_map_inline:nn
+  { rm, it, bf, sf, tt }
+  { \cs_set_eq:cc { mathtext #1 } { math #1 } }
+%    \end{macrocode}
+% Perhaps these should actually be defined using a hypothetical unicode-math interface to creating new such styles. To come.
+%
+%
+% \subsubsection{Replacing legacy pure-maths alphabets}
+% The following are alphabets which do not have a math/text ambiguity.
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    normal, bb , bbit, scr, bfscr, cal, bfcal, frak, bffrak, tt,
+    bfup, bfit, sfup, sfit, bfsfup, bfsfit, bfsf
+  }
+  {
+    \cs_set:cpx { math #1 } { \exp_not:c { sym #1 } }
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection{New commands for ambiguous alphabets}
+%
+%    \begin{macrocode}
+\AtBeginDocument
+  {
+    \clist_map_inline:nn
+      { rm, it, bf, sf, tt }
+      {
+        \cs_set_protected:cpx { math #1 }
+        {
+          \exp_not:n { \bool_if:NTF  } \exp_not:c { g_@@_ math #1 _text_bool}
+            { \exp_not:c { mathtext #1 } }
+            { \exp_not:c { sym #1 } }
+        }
+      }
+  }
+%    \end{macrocode}
+%
+% \paragraph{Alias \cs{mathrm} as legacy name for \cs{mathup}}
+%    \begin{macrocode}
+\cs_set_protected:Npn \mathup { \mathrm }
+\cs_set_protected:Npn \symrm  { \symup  }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+
+\endinput
+
+% /©
+%
+% ————————————————
+% The UNICODE-MATH package  <wspr.io/unicode-math>
+% ————————————————
+% This package is free software and may be redistributed and/or modified under
+% the conditions of the LaTeX Project Public License, version 1.3c or higher
+% (your choice): <http://www.latex-project.org/lppl/>.
+% ————————————————
+% Copyright 2006-2017  Will Robertson, LPPL “maintainer”
+% Copyright 2010-2017  Philipp Stephani
+% Copyright 2011-2017  Joseph Wright
+% Copyright 2012-2015  Khaled Hosny
+% ————————————————
+%
+% ©/
