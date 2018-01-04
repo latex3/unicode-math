@@ -39,6 +39,30 @@
     range .code:n =
       {
         \bool_set_false:N \l_@@_init_bool
+        \@@_range_init:
+
+%    \end{macrocode}
+% Locally redefined all math symbol commands to their slot number prefixed by a quark.
+% Similary for the math classes.
+%    \begin{macrocode}
+
+        \group_begin:
+          \cs_set:Npn \_@@_sym:nnn ##1 ##2 ##3 { \cs_set:Npn ##2 { \use_none:n \q_unicode_math ##1 } }
+          \seq_map_inline:Nn \g_@@_mathclasses_seq
+            {
+              \cs_set:Npn ##1 { \use_none:n \q_unicode_math \exp_not:N ##1 }
+            }
+          \@@_input_math_symbol_table:
+          \@@_range_process:n {#1}
+        \group_end:
+    }
+  }
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_range_init:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_range_init:
+  {
 %    \end{macrocode}
 % Set processing functions if we're not defining the full Unicode math repetoire.
 % Math symbols are defined with \cmd\_@@_sym:nnn; see \secref{mathsymbol}
@@ -59,22 +83,15 @@
         \seq_clear:N \l_@@_char_range_seq
         \seq_clear:N \l_@@_mclass_range_seq
         \seq_clear:N \l_@@_mathalph_seq
-
+  }
 %    \end{macrocode}
-% Locally redefined all math symbol commands to their slot number prefixed by a quark.
-% Similary for the math classes.
+% \end{macro}
+%
+% \begin{macro}{\@@_range_process:}
 %    \begin{macrocode}
-
-        \group_begin:
-
-          \cs_set:Npn \_@@_sym:nnn ##1 ##2 ##3 { \cs_set:Npn ##2 { \use_none:n \q_unicode_math ##1 } }
-          \seq_map_inline:Nn \g_@@_mathclasses_seq
-            {
-              \cs_set:Npn ##1 { \use_none:n \q_unicode_math \exp_not:N ##1 }
-            }
-          \@@_input_math_symbol_table:
-
-          \clist_map_inline:nn {#1}
+\cs_new:Nn \@@_range_process:n
+  {
+    \clist_map_inline:nn {#1}
             {
               \@@_if_mathalph_decl:nTF {##1}
                 {
@@ -97,12 +114,9 @@
                     }
                 }
             }
-
-        \group_end:
-    }
-  }
+}
 %    \end{macrocode}
-%
+% \end{macro}
 %
 % \begin{macro}{\@@_if_mathalph_decl:nTF}
 % Possible forms of input:\\
