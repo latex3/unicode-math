@@ -257,6 +257,73 @@
   }
 %    \end{macrocode}
 %
+% \subsection{Sow/reap}
+%
+% This might make it into the kernel; not sure.
+%
+% \begin{macro}{\__@@_sow_item:Nn}
+% Helper variables for constructing \verb|c|-type arguments.
+%    \begin{macrocode}
+\cs_new:Nn \__@@_sow_item:Nn  { l___sow___ \token_to_str:N #1 ___ #2 ___tl }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\__@@_sow_int:N}
+% Helper variables for constructing \verb|c|-type arguments.
+%    \begin{macrocode}
+\cs_new:Nn \__@@_sow_int:N  { l___sow___ \token_to_str:N #1 ___int }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_sow_prepare:N}
+%    \begin{macrocode}
+\cs_new:Nn \@@_sow_prepare:N
+  {
+    \tl_clear:N #1
+    \int_zero_new:c { \__@@_sow_int:N #1 }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_sow:Nn}
+%    \begin{macrocode}
+\cs_new:Nn \@@_sow:Nn
+  {
+    \int_incr:c { \__@@_sow_int:N #1 }
+    \tl_clear_new:c
+      {
+        \__@@_sow_item:Nn #1
+          { \int_use:c { \__@@_sow_int:N #1 } }
+      }
+    \tl_set:cn
+      {
+        \__@@_sow_item:Nn #1
+          { \int_use:c { \__@@_sow_int:N #1 } }
+      }
+      { #2 }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_sow_reap:N}
+%    \begin{macrocode}
+\cs_new:Nn \@@_sow_reap:N
+  {
+    \cs_set:Npn \__@@_sow_tmp:n ##1
+      {
+        \exp_not:v { \__@@_sow_item:Nn #1 {##1} }
+      }
+    \tl_set:Nx #1
+      {
+        \int_step_function:nnnN {1} {1}
+          { \int_use:c { \__@@_sow_int:N #1 } }
+          \__@@_sow_tmp:n
+      }
+
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
