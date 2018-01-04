@@ -389,7 +389,7 @@
 %    \begin{macrocode}
 \cs_set:Nn \@@_process_symbol_parse:nnn
   {
-    \@@_if_char_spec:nNNT {#1} {#2} {#3}
+    \@@_if_char_spec:nNT {#1} {#3}
       {
         \@@_process_symbol_noparse:nnn {#1} {#2} {#3}
       }
@@ -420,7 +420,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_remap_symbol_parse:nnn
   {
-    \@@_if_char_spec:nNNT {#3} {\@nil} {#2}
+    \@@_if_char_spec:nNT {#3} {#2}
       { \@@_remap_symbol_noparse:nnn {#1} {#2} {#3} }
   }
 \cs_new:Nn \@@_remap_symbol_noparse:nnn
@@ -463,7 +463,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_make_mathactive_parse:nNN
   {
-    \@@_if_char_spec:nNNT {#1} #2 #3
+    \@@_if_char_spec:nNT {#1} #3
       { \@@_make_mathactive_noparse:nNN {#1} #2 #3 }
   }
 %    \end{macrocode}
@@ -491,7 +491,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_assign_delcode_parse:nn
   {
-    \@@_if_char_spec:nNNT {#2} {\@nil} {\@nil}
+    \@@_if_char_spec:nNT {#2} \@nil
       {
         \@@_assign_delcode_noparse:nn {#1} {#2}
       }

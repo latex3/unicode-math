@@ -176,9 +176,8 @@
 % Pretty basic comma separated range processing.
 % Donald Arseneau's \pkg{selectp} package has a cleverer technique.
 %
-% \begin{macro}{\@@_if_char_spec:nNNT}
+% \begin{macro}{\@@_if_char_spec:nNT}
 % \darg{Unicode character slot}
-% \darg{control sequence (character macro)}
 % \darg{control sequence (math class)}
 % \darg{code to execute}
 % This macro expands to |#4|
@@ -187,11 +186,11 @@
 % These latter can either be the command name of a specific character, \emph{or} the math
 % type of one (\eg, \cmd\mathbin).
 %
-% Character ranges are passed to \cs{@@_if_char_spec:nNNT}, which accepts input in the form shown in \tabref{ranges}.
+% Character ranges are passed to \cs{@@_if_char_spec:nNT}, which accepts input in the form shown in \tabref{ranges}.
 %
 % \begin{table}[htbp]
 % \centering
-% \topcaption{Ranges accepted by \cs{@@_if_char_spec:nNNT}.}
+% \topcaption{Ranges accepted by \cs{@@_if_char_spec:nNT}.}
 % \label{tab:ranges}
 % \begin{tabular}{>{\ttfamily}cc}
 % \textrm{Input} & Range \\
@@ -206,10 +205,10 @@
 % We have three tests, performed sequentially in order of execution time.
 % Any test finding a match jumps directly to the end.
 %    \begin{macrocode}
-\cs_new:Nn \@@_if_char_spec:nNNT
+\cs_new:Nn \@@_if_char_spec:nNT
   {
     % math class:
-    \seq_if_in:NnT \l_@@_mclass_range_seq {#3}
+    \seq_if_in:NnT \l_@@_mclass_range_seq {#2}
       { \use_none_delimit_by_q_nil:w }
 
     % character slot:
@@ -225,7 +224,7 @@
     \use:n
       {
         \clist_put_right:Nx \l_@@_char_nrange_clist { \int_eval:n {#1} }
-        #4
+        #3
       }
   }
 %    \end{macrocode}

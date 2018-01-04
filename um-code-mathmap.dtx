@@ -456,7 +456,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_map_char_parse:nn
   {
-    \@@_if_char_spec:nNNT {#1} {\@nil} {\mathalpha}
+    \@@_if_char_spec:nNT {#1} {\mathalpha}
       { \@@_map_char_noparse:nn {#1}{#2} }
   }
 %    \end{macrocode}
@@ -619,7 +619,7 @@
 % \darg{Maths alphabet, \eg, `bb’}
 % \darg{Input slot(s), \eg, the slot for `A’ (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$’}
-% When \cmd\@@_if_char_spec:nNNT\ is executed, it populates the \cmd\l_@@_char_nrange_clist\
+% When \cmd\@@_if_char_spec:nNT\ is executed, it populates the \cmd\l_@@_char_nrange_clist\
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cs{@@_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
