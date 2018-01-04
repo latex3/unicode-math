@@ -8,7 +8,7 @@
 %    \end{macrocode}
 %
 %
-% \paragraph{Conditionals}
+% \subsection{bool}
 %
 % True if using a proper OpenType font with unicode maths
 %    \begin{macrocode}
@@ -55,11 +55,15 @@
 \bool_new:N \g_@@_mathtt_text_bool
 %    \end{macrocode}
 %
-% \paragraph{Variables}
+% \subsection{int}
+%
 %    \begin{macrocode}
 \int_new:N \g_@@_fam_int
 \int_new:N \g_@@_fonts_used_int
+\int_new:N \l_@@_primecount_int
 %    \end{macrocode}
+%
+% \subsection{tl}
 %
 % For displaying in warning messages, etc.:
 %    \begin{macrocode}
@@ -80,71 +84,6 @@
 % Used to store the font switch for the \cs{operator@font}.
 %    \begin{macrocode}
 \tl_new:N \g_@@_operator_mathfont_tl
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\seq_new:N \l_@@_missing_alph_seq
-\seq_new:N \l_@@_mathalph_seq
-\seq_new:N \l_@@_char_range_seq
-\seq_new:N \l_@@_mclass_range_seq
-%    \end{macrocode}
-%
-% \begin{macro}{\g_@@_alphabets_seq}
-% Each of math `style' (bfup, sfit, etc.) usually contains one or more `alphabets', which are currently |latin|, |Latin|, |greek|, |Greek|, |num|, and |misc|, although there's an implicit potential for more.
-% |misc| is not included in the official list to avoid checking code.
-%    \begin{macrocode}
-\clist_new:N  \g_@@_alphabets_seq
-\clist_set:Nn \g_@@_alphabets_seq { latin, Latin, greek, Greek, num }
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\clist_new:N \g_@@_char_nrange_clist
-\clist_new:N \g_@@_unknown_keys_clist
-\clist_new:N \g_@@_alphabet_clist
-%    \end{macrocode}
-%
-% \begin{macro}{\g_@@_mathclasses_seq}
-% Every math class.
-%    \begin{macrocode}
-\seq_new:N \g_@@_mathclasses_seq
-\seq_set_from_clist:Nn \g_@@_mathclasses_seq
-  {
-    \mathord,\mathalpha,\mathbin,\mathrel,\mathpunct,
-     \mathop,
-    \mathopen,\mathclose,
-    \mathfence,\mathover,\mathunder,
-     \mathaccent,\mathaccentoverlay,\mathbotaccent,\mathaccentwide,\mathbotaccentwide
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-
-% \begin{macro}{\g_@@_default_mathalph_seq}
-% This sequence stores the alphabets in each math style.
-%    \begin{macrocode}
-\seq_new:N \g_@@_default_mathalph_seq
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\g_@@_mathstyles_seq}
-% This is every `math style' known to \pkg{unicode-math}.
-% A named range is such as "bfit" and "sfit", which are also math styles (with \cs{symbfit} and \cs{symsfit}).
-% `Mathstyles' are a superset of named ranges and also include commands such as \cs{symbf} and \cs{symsf}.
-%
-% N.B. for parsing purposes `named ranges' are defined as strings!
-%    \begin{macrocode}
-\seq_new:N \g_@@_mathstyles_seq
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\muskip_new:N \g_@@_primekern_muskip
-\muskip_gset:Nn \g_@@_primekern_muskip { -\thinmuskip/2 }% arbitrary
-\int_new:N \l_@@_primecount_int
-\prop_new:N \g_@@_supers_prop
-\prop_new:N \g_@@_subs_prop
-\tl_new:N \l_not_token_name_tl
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -174,10 +113,78 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{clist}
+%
+%    \begin{macrocode}
+\clist_new:N \g_@@_char_nrange_clist
+\clist_new:N \g_@@_unknown_keys_clist
+\clist_new:N \g_@@_alphabet_clist
+%    \end{macrocode}
+%
+% \subsection{seq}
+%
+%    \begin{macrocode}
+\seq_new:N \l_@@_missing_alph_seq
+\seq_new:N \l_@@_mathalph_seq
+\seq_new:N \l_@@_char_range_seq
+\seq_new:N \l_@@_mclass_range_seq
+%    \end{macrocode}
+%
+% \begin{macro}{\g_@@_mathclasses_seq}
+% Every math class.
+%    \begin{macrocode}
+\seq_new:N \g_@@_mathclasses_seq
+\seq_set_from_clist:Nn \g_@@_mathclasses_seq
+  {
+    \mathord,\mathalpha,\mathbin,\mathrel,\mathpunct,
+     \mathop,
+    \mathopen,\mathclose,
+    \mathfence,\mathover,\mathunder,
+     \mathaccent,\mathaccentoverlay,\mathbotaccent,\mathaccentwide,\mathbotaccentwide
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\g_@@_default_mathalph_seq}
+% This sequence stores the alphabets in each math style.
+%    \begin{macrocode}
+\seq_new:N \g_@@_default_mathalph_seq
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\g_@@_mathstyles_seq}
+% This is every `math style' known to \pkg{unicode-math}.
+% A named range is such as "bfit" and "sfit", which are also math styles (with \cs{symbfit} and \cs{symsfit}).
+% `Mathstyles' are a superset of named ranges and also include commands such as \cs{symbf} and \cs{symsf}.
+%
+% N.B. for parsing purposes `named ranges' are defined as strings!
+%    \begin{macrocode}
+\seq_new:N \g_@@_mathstyles_seq
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{prop}
+%
+%    \begin{macrocode}
+\prop_new:N \g_@@_supers_prop
+\prop_new:N \g_@@_subs_prop
+%    \end{macrocode}
+%
+% \subsection{muskip}
+%
+%    \begin{macrocode}
+\muskip_new:N \g_@@_primekern_muskip
+\muskip_gset:Nn \g_@@_primekern_muskip { -\thinmuskip/2 }% arbitrary
+%    \end{macrocode}
+%
+% \subsection{fp}
+%
 %    \begin{macrocode}
 \fp_new:N \g_@@_size_tfsf_fp
 \fp_new:N \g_@@_size_sfssf_fp
 %    \end{macrocode}
+%
+% \subsection{quark}
 %
 % \begin{macro}{\q_unicode_math}
 % Used as a flag within control sequences to check they're recognised by the package.
