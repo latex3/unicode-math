@@ -591,9 +591,9 @@
 %
 % \subsubsection{Functions for setting up the maths alphabets}
 %
-% \begin{macro}{\@@_set_mathalphabet_char:Nnn}
+% \begin{macro}{\@@_set_mathalphabet_char:nnn}
 % This is a wrapper for either |\@@_mathmap_noparse:nnn| or
-% |\@@_mathmap_parse:Nnn|, depending on the context.
+% |\@@_mathmap_parse:nnn|, depending on the context.
 % \end{macro}
 %
 % \begin{macro}{\@@_mathmap_noparse:nnn}
@@ -625,7 +625,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_mathmap_parse:nnn
   {
-    \clist_if_in:NnT \l_@@_char_nrange_clist {#3}
+    \exp_args:NNx \clist_if_in:NnT \l_@@_char_nrange_clist { \int_eval:n {#3} }
       {
         \@@_mathmap_noparse:nnn {#1}{#2}{#3}
       }
