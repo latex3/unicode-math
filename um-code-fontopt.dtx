@@ -152,7 +152,7 @@
     \tl_if_empty:NT \l_@@_tmpc_tl
       { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
 
-    \seq_if_in:NVTF \g_@@_named_ranges_seq \l_@@_tmpa_tl
+    \prop_if_exist:cTF {g_@@_named_range_ \l_@@_tmpa_tl _prop}
       { \prg_return_true: } { \prg_return_false: }
   }
 %    \end{macrocode}

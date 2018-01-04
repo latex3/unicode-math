@@ -99,7 +99,6 @@
 % \end{macro}
 %
 %    \begin{macrocode}
-\clist_new:N \g_@@_named_ranges_clist
 \clist_new:N \g_@@_char_nrange_clist
 \clist_new:N \g_@@_unknown_keys_clist
 \clist_new:N \g_@@_alphabet_clist
@@ -129,13 +128,12 @@
 % \end{macro}
 %
 % \begin{macro}{\g_@@_mathstyles_seq}
-% This is every `named range' and every `math style' known to \pkg{unicode-math}.
+% This is every `math style' known to \pkg{unicode-math}.
 % A named range is such as "bfit" and "sfit", which are also math styles (with \cs{symbfit} and \cs{symsfit}).
 % `Mathstyles' are a superset of named ranges and also include commands such as \cs{symbf} and \cs{symsf}.
 %
 % N.B. for parsing purposes `named ranges' are defined as strings!
 %    \begin{macrocode}
-\seq_new:N \g_@@_named_ranges_seq
 \seq_new:N \g_@@_mathstyles_seq
 %    \end{macrocode}
 % \end{macro}

@@ -276,6 +276,25 @@ You may also use the macro for accessing the glyph, such as \cs{int}, or whole c
 As discussed earlier, Unicode mathematics consists of a number of `alphabet styles' within a single font. In \pkg{unicode-math}, these ranges are indicated with the following (hopefully self-explanatory) labels:
 \begin{quote}\ttfamily
 \ExplSyntaxOn
+\clist_const:Nn \g__um_named_ranges_clist {
+up    ,
+it    ,
+bb    ,
+bbit  ,
+scr   ,
+cal   ,
+bfcal ,
+frak  ,
+tt    ,
+sfup  ,
+sfit  ,
+bfup  ,
+bfit  ,
+bfscr ,
+bffrak,
+bfsfup,
+bfsfit,
+}
 \clist_use:Nn \g__um_named_ranges_clist {\,,\,~}
 \ExplSyntaxOff
 \end{quote}

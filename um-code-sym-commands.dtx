@@ -1,8 +1,8 @@
 %%^^A%% um-code-mathmap.dtx -- part of UNICODE-MATH <wspr.io/unicode-math>
-%%^^A%% Definition of "math symbol alphabets" such as `\symbf` and co.
+%%^^A%% Definition of "math symbol alphabet" commands such as `\symbf` and co.
 
 % \section{Mapping in maths alphabets}
-% \label{sec:mathmap}
+% \label{sec:symcmd}
 %
 %    \begin{macrocode}
 %<*package>
@@ -150,31 +150,6 @@
 %
 % \subsection{Definition of alphabets and styles}
 %
-% First of all, we break up unicode into `named ranges’, such as |up|, |bb|, |sfup|, and so on, which refer to specific blocks of unicode that contain various symbols (usually alphabetical symbols).
-%
-%    \begin{macrocode}
-\cs_new:Nn \@@_new_named_range:n
-  {
-    \prop_new:c {g_@@_named_range_#1_prop}
-  }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\clist_set:Nn \g_@@_named_ranges_clist
-  {
-    up, it, tt, bfup, bfit, bb , bbit, scr, bfscr, cal, bfcal,
-    frak, bffrak, sfup, sfit, bfsfup, bfsfit, bfsf
-  }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\clist_map_inline:Nn \g_@@_named_ranges_clist
-  {
-    \@@_new_named_range:n {#1}
-  }
-%    \end{macrocode}
-%
-%
 %
 % The linking between named ranges and symbol style commands happens here.
 % It’s currently not using all of the machinery we’re in the process of setting up above.
@@ -182,7 +157,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_default_mathalph:nnn
   {
-    \seq_put_right:Nx \g_@@_named_ranges_seq { \tl_to_str:n {#1} }
+    \prop_new:c {g_@@_named_range_#1_prop}
     \seq_put_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
     \prop_gput:cnn { g_@@_named_range_#1_prop } { default-alpha } {#2}
   }
