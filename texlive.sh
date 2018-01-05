@@ -20,23 +20,31 @@ if ! command -v texlua > /dev/null; then
   cd ..
 fi
 
-# l3build itself and LuaTeX: need for texlua
-tlmgr install l3build luatex
+# formats
+tlmgr install tex etex luatex xetex
+tlmgr install cm knuth-lib latex-bin tex-ini-files unicode-data
 
-# Required to build plain and LaTeX formats:
-# TeX90 plain for unpacking
-tlmgr install cm etex knuth-lib latex-bin tex tex-ini-files unicode-data xetex
+# bleeding edge l3build
+if [ -d "/tmp/l3build/.git" ]; then
+  cd /tmp/l3build ;
+  git pull --rebase ;
+  cd -;
+else
+  git clone https://github.com/latex3/l3build.git /tmp/l3build ;
+fi
+
+(cd /tmp/l3build; texlua build.lua install)
 
 # Dependencies
 tlmgr install   \
-  geometry      \
-  graphics      \
   amsmath       \
-  lualatex-math \
   etoolbox      \
   filehook      \
-  luaotfload    \
   fontspec      \
+  geometry      \
+  graphics      \
+  lualatex-math \
+  luaotfload    \
   oberdiek
 
 # Fonts
