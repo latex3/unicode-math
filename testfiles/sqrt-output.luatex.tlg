@@ -1,67 +1,65 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 SQRT x
-> \box12=
-\hbox(8.20274+0.89725)x12.61526, direction TLT
+> \box...=
+\hbox(8.40498+0.695)x11.9, direction TLT
 .\mathon
-.\hbox(8.20274+0.89725)x12.61526, direction TLT
-..\hbox(6.6+1.3)x6.9, shifted -0.40276, direction TLT
-...\TU/texgyrepagella-math.otf(0)/m/n/10 √
-..\vbox(8.20274+0.0)x5.71527, direction TLT
+.\hbox(8.40498+0.695)x11.9, direction TLT
+..\hbox(6.6+1.3)x6.9, shifted -0.605, direction TLT
+...\TU/texgyrepagella-math.otf(1)/m/n/10 √
+..\vbox(8.40498+0.11)x5.0, direction TLT
 ...\kern1.19998
 ...\rule(0.59999+0.0)x*
-...\kern2.09723
-...\hbox(4.30554+0.0)x5.71527, direction TLT
-....\OML/cmm/m/it/10 x
+...\kern1.785
+...\hbox(4.82+0.11)x5.0, direction TLT
+....\TU/texgyrepagella-math.otf(1)/m/n/10 𝑥
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\SHOWBOX {12}
 SQRT x squared
-> \box12=
-\hbox(11.87926+0.82072)x17.32626, direction TLT
+> \box...=
+\hbox(11.82617+0.87381)x16.73413, direction TLT
 .\mathon
-.\hbox(11.87926+0.82072)x17.32626, direction TLT
-..\hbox(8.4+3.1)x7.03, shifted -2.27928, direction TLT
-...\TU/texgyrepagella-math.otf(0)/m/n/10 󰠏
-..\vbox(11.87926+0.0)x10.29626, direction TLT
+.\hbox(11.82617+0.87381)x16.73413, direction TLT
+..\hbox(8.4+3.1)x7.03, shifted -2.2262, direction TLT
+...\TU/texgyrepagella-math.otf(1)/m/n/10 󰠏
+..\vbox(11.82617+0.11)x9.70413, direction TLT
 ...\kern1.19998
 ...\rule(0.59999+0.0)x*
-...\kern2.02072
-...\hbox(8.05856+0.0)x10.29626, direction TLT
-....\OML/cmm/m/it/10 x
-....\hbox(5.0986+0.0222)x4.581, shifted -2.95996, direction TLT
-.....\TU/texgyrepagella-math.otf(0)/m/n/7.4 2
+...\kern1.9638
+...\hbox(8.0624+0.11)x9.70413, direction TLT
+....\TU/texgyrepagella-math.otf(1)/m/n/10 𝑥
+....\kern0.12
+....\hbox(5.10243+0.02222)x4.58414, shifted -2.95996, direction TLT
+.....\TU/texgyrepagella-math.otf(1)/m/n/7.40556 2
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\SHOWBOX {12}
 SQRT FRAC x y
-> \box12=
-\hbox(14.70052+8.79947)x15.54526, direction TLT
+> \box...=
+\hbox(16.34998+10.75002)x14.97, direction TLT
 .\mathon
-.\hbox(14.70052+8.79947)x15.54526, direction TLT
-..\hbox(13.8+8.5)x7.43, shifted 0.29947, direction TLT
-...\TU/texgyrepagella-math.otf(0)/m/n/10 󰠳
-..\vbox(14.70052+8.60434)x8.11526, direction TLT
+.\hbox(16.34998+10.75002)x14.97, direction TLT
+..\hbox(15.6+10.3)x7.57, shifted 0.45001, direction TLT
+...\TU/texgyrepagella-math.otf(1)/m/n/10 󰠿
+..\vbox(16.34998+9.41989)x7.4, direction TLT
 ...\kern1.19998
 ...\rule(0.59999+0.0)x*
-...\kern1.39511
-...\hbox(11.50543+8.60434)x8.11526, direction TLT
+...\kern2.5301
+...\hbox(12.0199+9.41989)x7.4, direction TLT
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
-....\vbox(11.50543+8.60434)x5.71527, direction TLT
-.....\hbox(4.30554+0.0)x5.71527, direction TLT
-......\OML/cmm/m/it/10 x
-.....\kern4.39992
+....\vbox(12.0199+9.41989)x5.0, direction TLT
+.....\hbox(4.82+0.11)x5.0, direction TLT
+......\TU/texgyrepagella-math.otf(1)/m/n/10 𝑥
+.....\kern4.28992
 .....\rule(0.59999+0.0)x*
-.....\kern4.55432
-.....\hbox(4.30554+1.94444)x5.71527, glue set 0.22684fil, direction TLT
-......\glue 0.0 plus 1.0fil minus 1.0fil
-......\OML/cmm/m/it/10 y
-......\kern0.35878
-......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern4.03986
+.....\hbox(4.82+2.76)x5.0, direction TLT
+......\TU/texgyrepagella-math.otf(1)/m/n/10 𝑦
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
 .\mathoff
 ! OK.

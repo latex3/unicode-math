@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 TEXTIT:
-> \box12=
+> \box...=
 \hbox(4.41+0.10999)x4.47
 .\TU/texgyretermes-regular.otf(0)/m/it/10 x
 .\kern 0.03
@@ -10,10 +10,10 @@ TEXTIT:
                    \relax 
 l. ...\SHOWBOX {12}
 MATHIT:
-> \box12=
+> \box...=
 \hbox(4.82+0.11)x5.12
 .\mathon
-.\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#490
+.\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#490
 .\kern0.12
 .\mathoff
 ! OK.
@@ -21,10 +21,10 @@ MATHIT:
                    \relax 
 l. ...\SHOWBOX {12}
 SYMIT:
-> \box13=
+> \box...=
 \hbox(4.82+0.11)x5.12
 .\mathon
-.\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#490
+.\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#490
 .\kern0.12
 .\mathoff
 ! OK.

@@ -11,8 +11,8 @@ empty
 ..\hbox(0.0+0.0)x0.0
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{empty}\SHOWBOX {12}
 macro
 > \box12=
@@ -35,8 +35,8 @@ macro
 .\TU/xits-math.otf(0)/m/n/10 glyph#42
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{macro}\SHOWBOX {12}
 generic
 > \box12=
@@ -53,8 +53,8 @@ generic
 .\kern0.8
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{generic}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -71,8 +71,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -89,8 +89,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -107,8 +107,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -125,8 +125,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -143,8 +143,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -161,8 +161,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -179,8 +179,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -197,8 +197,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -215,8 +215,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
 > \box12=
@@ -233,8 +233,8 @@ prebuilt
 .\TU/xits-math.otf(0)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again> 
-                   \relax 
+<to be read again>
+                   \relax
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 ***************
 Compilation 1 of test file completed with exit status 256

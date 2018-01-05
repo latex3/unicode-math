@@ -1,15 +1,15 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 default
-> \box12=
+> \box...=
 \hbox(6.9+0.13)x16.43
 .\mathon
-.\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#1778
+.\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#1778
 .\kern0.16
 .\mathoff
 .\glue 3.33 plus 1.665 minus 1.11
 .\mathon
-.\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#1779
+.\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#1779
 .\kern0.03
 .\mathoff
 ! OK.
@@ -17,15 +17,15 @@ default
                    \relax 
 l. ...\SHOWBOX {12}
 upright
-> \box12=
+> \box...=
 \hbox(6.9+0.13)x16.43
 .\mathon
-.\TU/texgyrepagella-math.otf(3)/m/n/10 glyph#1778
+.\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1778
 .\kern0.16
 .\mathoff
 .\glue 3.33 plus 1.665 minus 1.11
 .\mathon
-.\TU/texgyrepagella-math.otf(3)/m/n/10 glyph#1779
+.\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1779
 .\kern0.03
 .\mathoff
 ! OK.
@@ -33,15 +33,15 @@ upright
                    \relax 
 l. ...\SHOWBOX {12}
 italic
-> \box12=
+> \box...=
 \hbox(6.9+0.13)x17.74002
 .\mathon
-.\TU/texgyrepagella-math.otf(3)/m/n/10 glyph#1780
+.\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1780
 .\kern0.96
 .\mathoff
 .\glue 3.33 plus 1.665 minus 1.11
 .\mathon
-.\TU/texgyrepagella-math.otf(3)/m/n/10 glyph#1781
+.\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1781
 .\kern0.8
 .\mathoff
 ! OK.
