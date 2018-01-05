@@ -1,240 +1,240 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 empty
-> \box12=
+> \box...=
 \hbox(8.18+0.0)x0.0
 .\mathon
 .\vbox(8.18+0.0)x0.0
 ..\hbox(6.62+1.56)x0.0, shifted 1.73999
-...\TU/xits-math.otf(0)/m/n/10 glyph#598
+...\TU/xits-math.otf(1)/m/n/10 glyph#598
 ..\kern0.0
 ..\hbox(0.0+0.0)x0.0
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{empty}\SHOWBOX {12}
 macro
-> \box12=
+> \box...=
 \hbox(9.0+2.57475)x35.521
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#41
-.\TU/xits-math.otf(0)/m/n/10 glyph#1261
+.\TU/xits-math.otf(1)/m/n/10 glyph#41
+.\TU/xits-math.otf(1)/m/n/10 glyph#1261
 .\hbox(3.29475+0.0747)x4.25049, shifted 2.50005
-..\TU/xits-math.otf(0)/m/n/7.4711 glyph#2498
-.\TU/xits-math.otf(0)/m/n/10 glyph#42
-.\TU/xits-math.otf(0)/m/n/10 glyph#41
+..\TU/xits-math.otf(1)/m/n/7.4711 glyph#2498
+.\TU/xits-math.otf(1)/m/n/10 glyph#42
+.\TU/xits-math.otf(1)/m/n/10 glyph#41
 .\vbox(9.0+2.57475)x11.1005
 ..\hbox(6.62+1.56)x0.0, shifted 5.15999
-...\TU/xits-math.otf(0)/m/n/10 glyph#598
+...\TU/xits-math.otf(1)/m/n/10 glyph#598
 ..\kern-4.5
 ..\hbox(5.32+2.57475)x11.1005
-...\TU/xits-math.otf(0)/m/n/10 glyph#1255
+...\TU/xits-math.otf(1)/m/n/10 glyph#1255
 ...\hbox(3.29475+0.0747)x4.25049, shifted 2.50005
-....\TU/xits-math.otf(0)/m/n/7.4711 glyph#2498
-.\TU/xits-math.otf(0)/m/n/10 glyph#42
+....\TU/xits-math.otf(1)/m/n/7.4711 glyph#2498
+.\TU/xits-math.otf(1)/m/n/10 glyph#42
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{macro}\SHOWBOX {12}
 generic
-> \box12=
+> \box...=
 \hbox(9.2+0.45)x21.53001
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2472
+.\TU/xits-math.otf(1)/m/n/10 glyph#2472
 .\vbox(9.2+0.45)x6.85
 ..\hbox(6.62+1.56)x0.0, shifted 5.15999
-...\TU/xits-math.otf(0)/m/n/10 glyph#598
+...\TU/xits-math.otf(1)/m/n/10 glyph#598
 ..\kern-4.5
 ..\hbox(5.52+0.45)x6.85
-...\TU/xits-math.otf(0)/m/n/10 glyph#1207
-.\TU/xits-math.otf(0)/m/n/10 glyph#2474
+...\TU/xits-math.otf(1)/m/n/10 glyph#1207
+.\TU/xits-math.otf(1)/m/n/10 glyph#2474
 .\kern0.8
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{generic}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(6.62+1.83)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1229
+.\TU/xits-math.otf(1)/m/n/10 glyph#1229
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1229
+.\TU/xits-math.otf(1)/m/n/10 glyph#1229
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(6.62+1.83)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1243
+.\TU/xits-math.otf(1)/m/n/10 glyph#1243
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1243
+.\TU/xits-math.otf(1)/m/n/10 glyph#1243
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(6.62+1.83)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1244
+.\TU/xits-math.otf(1)/m/n/10 glyph#1244
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1244
+.\TU/xits-math.otf(1)/m/n/10 glyph#1244
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(4.5+1.83)x45.08115
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1040
+.\TU/xits-math.otf(1)/m/n/10 glyph#1040
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1040
+.\TU/xits-math.otf(1)/m/n/10 glyph#1040
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(5.19+1.83)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1201
+.\TU/xits-math.otf(1)/m/n/10 glyph#1201
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1201
+.\TU/xits-math.otf(1)/m/n/10 glyph#1201
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(6.62+1.83)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1229
+.\TU/xits-math.otf(1)/m/n/10 glyph#1229
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1229
+.\TU/xits-math.otf(1)/m/n/10 glyph#1229
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(7.3+2.29)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1245
+.\TU/xits-math.otf(1)/m/n/10 glyph#1245
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1245
+.\TU/xits-math.otf(1)/m/n/10 glyph#1245
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(7.3+2.29)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1246
+.\TU/xits-math.otf(1)/m/n/10 glyph#1246
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1246
+.\TU/xits-math.otf(1)/m/n/10 glyph#1246
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(6.62+1.83)x40.26117
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1244
+.\TU/xits-math.otf(1)/m/n/10 glyph#1244
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#1244
+.\TU/xits-math.otf(1)/m/n/10 glyph#1244
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 prebuilt
-> \box12=
+> \box...=
 \hbox(5.57+1.83)x38.96115
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2520
+.\TU/xits-math.otf(1)/m/n/10 glyph#2520
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2313
+.\TU/xits-math.otf(1)/m/n/10 glyph#2313
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2521
+.\TU/xits-math.otf(1)/m/n/10 glyph#2521
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2313
+.\TU/xits-math.otf(1)/m/n/10 glyph#2313
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(0)/m/n/10 glyph#2522
+.\TU/xits-math.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
-<to be read again>
-                   \relax
+<to be read again> 
+                   \relax 
 l. ...\MSG{prebuilt}\SHOWBOX {12}
 ***************
 Compilation 1 of test file completed with exit status 256

@@ -272,15 +272,15 @@
       }
     \cs_if_exist:cTF { not \l_@@_not_token_name_tl }
       {
-        \use:c { n \l_@@_not_token_name_tl }
+        \use:c { not \l_@@_not_token_name_tl }
       }
       {
         \cs_if_exist:cTF { n \l_@@_not_token_name_tl }
           {
-            \use:c { not \l_@@_not_token_name_tl }
+            \use:c { n \l_@@_not_token_name_tl }
           }
           {
-            \tl_if_eq:nnTF {#1} {$} { \notaccent{} $ } { \notaccent #1 }
+            \tl_if_eq:nnTF {#1} {$} { \notaccent{} } { \notaccent } #1
           }
       }
   }
