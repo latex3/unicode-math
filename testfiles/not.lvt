@@ -7,44 +7,44 @@
 \begin{document}
 \START
 
-\setbox12=\hbox{$\not$}  % #126 
-\MSG{empty}\SHOWBOX {12}
+\MSG{empty}
+\TESTBOX{$\not$}  % #126
 
 \newcommand{\pSymbol}{\prec}
-\setbox12=\hbox{$(\not\prec_a) (\not\pSymbol_a)$}  % #343
-\MSG{macro}\SHOWBOX {12}
+\MSG{macro}
+\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}  % #343
 
-\setbox12=\hbox{$A \not\approxeq C $} % #363
-\MSG{generic}\SHOWBOX {12}
+\MSG{generic}
+\TESTBOX{$A \not\approxeq C $} % #363
 
-\setbox12=\hbox{$ x \not = y \neq z $}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not = y \neq z $}
 
-\setbox12=\hbox{$ x \not < y \nless z $}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not < y \nless z $}
 
-\setbox12=\hbox{$ x \not > y \ngtr z $} 
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not > y \ngtr z $}
 
-\setbox12=\hbox{$ x \not \gets     y \nleftarrow z $}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not \gets     y \nleftarrow z $}
 
-\setbox12=\hbox{$ x \not \simeq    y \nsime z$}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not \simeq    y \nsime z$}
 
-\setbox12=\hbox{$ x \not \equal    y \ne z $}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not \equal    y \ne z $}
 
-\setbox12=\hbox{$ x \not \le       y \nleq z$}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not \le       y \nleq z$}
 
-\setbox12=\hbox{$ x \not \ge       y \ngeq z$}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not \ge       y \ngeq z$}
 
-\setbox12=\hbox{$ x \not \greater  y \ngtr z$}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not \greater  y \ngtr z$}
 
-\setbox12=\hbox{$ x \not \forksnot y \forks z $}
-\MSG{prebuilt}\SHOWBOX {12}
+\MSG{prebuilt}
+\TESTBOX{$ x \not \forksnot y \forks z $}
 
 \end{document}

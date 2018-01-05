@@ -13,7 +13,8 @@ empty
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{empty}\SHOWBOX {12}
+l. ...\TESTBOX{$\not$}
+                     % #126
 macro
 > \box...=
 \hbox(6.76+2.57468)x35.34097, direction TLT
@@ -38,7 +39,8 @@ macro
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{macro}\SHOWBOX {12}
+l. ...\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}
+                                               % #343
 generic
 > \box...=
 \hbox(6.67+0.45)x20.73001, direction TLT
@@ -56,7 +58,8 @@ generic
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{generic}\SHOWBOX {12}
+l. ...\TESTBOX{$A \not\approxeq C $}
+                                  % #363
 prebuilt
 > \box...=
 \hbox(6.62+1.83)x40.26086, direction TLT
@@ -74,7 +77,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not = y \neq z $}
 prebuilt
 > \box...=
 \hbox(6.62+1.83)x40.26086, direction TLT
@@ -92,7 +95,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not < y \nless z $}
 prebuilt
 > \box...=
 \hbox(6.62+1.83)x40.26086, direction TLT
@@ -110,7 +113,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not > y \ngtr z $}
 prebuilt
 > \box...=
 \hbox(4.5+1.83)x45.08084, direction TLT
@@ -128,7 +131,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not \gets     y \nleftarrow z $}
 prebuilt
 > \box...=
 \hbox(5.19+1.83)x40.26086, direction TLT
@@ -146,7 +149,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not \simeq    y \nsime z$}
 prebuilt
 > \box...=
 \hbox(6.62+1.83)x40.26086, direction TLT
@@ -164,7 +167,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not \equal    y \ne z $}
 prebuilt
 > \box...=
 \hbox(7.3+2.29)x40.26086, direction TLT
@@ -182,7 +185,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not \le       y \nleq z$}
 prebuilt
 > \box...=
 \hbox(7.3+2.29)x40.26086, direction TLT
@@ -200,7 +203,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not \ge       y \ngeq z$}
 prebuilt
 > \box...=
 \hbox(6.62+1.83)x40.26086, direction TLT
@@ -218,7 +221,7 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not \greater  y \ngtr z$}
 prebuilt
 > \box...=
 \hbox(5.57+1.83)x38.96085, direction TLT
@@ -236,6 +239,6 @@ prebuilt
 ! OK.
 <to be read again> 
 \relax 
-l. ...\MSG{prebuilt}\SHOWBOX {12}
+l. ...\TESTBOX{$ x \not \forksnot y \forks z $}
 ***************
 Compilation 1 of test file completed with exit status 256
