@@ -257,7 +257,8 @@
   \cs_gset_protected_nopar:Npx #1 ##1
    {
     \mathop
-     { \@@_accent:nnn {#2} {#3} {#4} {##1} }
+     { \@@_accent:nnn {#2} {#3} {#4} {{}##1} }
+     %      TODO: remove braces above ^^ which work around a LuaTeX bug
     \limits
    }
  }

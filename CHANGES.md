@@ -24,6 +24,7 @@ CHANGE HISTORY
   * If `\setmath(rm|sf|tt)` is called *before* loading `unicode-math`, the setting
     is now remembered (#407).
   * `\typecolon` is now `\mathrel` instead of `\mathbin` (#360).
+  * LuaTeX bug with shifted \underbrace when it contains accented symbols worked around (#391).
 
 - v0.8i (2017/11/18)
 
