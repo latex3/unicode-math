@@ -121,6 +121,13 @@
 \clist_new:N \g_@@_alphabet_clist
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\clist_new:N \g_@@_bad_alpha_clist
+\clist_put_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {bf} }
+\clist_put_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {sf} }
+\clist_put_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {bfsf} }
+%    \end{macrocode}
+%
 % \subsection{seq}
 %
 %    \begin{macrocode}

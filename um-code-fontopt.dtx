@@ -112,6 +112,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_mathalph_decl:nF
   {
+
     \tl_set:Nn  \l_@@_tmpa_tl {#1}
     \tl_clear:N \l_@@_tmpb_tl
     \tl_clear:N \l_@@_tmpc_tl
@@ -129,6 +130,8 @@
 
     \tl_if_empty:NT \l_@@_tmpc_tl
       { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
+
+    \clist_if_in:NVT \g_@@_bad_alpha_clist \l_@@_tmpa_tl { \@@_error:n {range-not-bf-sf} }
 
     \prop_if_exist:cTF {g_@@_named_range_ \l_@@_tmpa_tl _prop}
       {

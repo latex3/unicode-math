@@ -125,6 +125,12 @@
   {
     Command `#1` is a legacy maths symbol that is not supported by unicode-math.
   }
+\@@_msg_new:nnn {unicode-math} {range-not-bf-sf}
+  {
+    Range alphabets cannot include alphabets referring to `bf`, `sf`, or `bfsf`
+    since they relate to input commands not output glyphs.
+    Use `bfit` or `bfup` (etc.) to specify which.
+  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
