@@ -123,24 +123,24 @@
   }
 %    \end{macrocode}
 %
+% I can't quite remember the logic behind the following two.
 %
+% If \pkg{fontspec} has been loaded and \verb|\setmathsf| (etc) run, this
+% syncs things up:
+%    \begin{macrocode}
+\tl_if_eq:onF {\g__fontspec_mathrm_tl} {\rmdefault} { \__fontspec_setmathrm_hook:nn {} {} }
+\tl_if_eq:onF {\g__fontspec_mathsf_tl} {\sfdefault} { \__fontspec_setmathsf_hook:nn {} {} }
+\tl_if_eq:onF {\g__fontspec_mathtt_tl} {\ttdefault} { \__fontspec_setmathtt_hook:nn {} {} }
+%    \end{macrocode}
+%
+% I suppose this is to make things work if neither fontspec or unicode-math
+% load any fonts: (I should check that)
 %    \begin{macrocode}
 \AtBeginDocument
   {
-    \tl_if_eq:onT {\g__fontspec_mathrm_tl} {\rmdefault}
-      {
-        \__fontspec_setmathrm_hook:nn {} {}
-      }
-
-    \tl_if_eq:onT {\g__fontspec_mathsf_tl} {\sfdefault}
-      {
-        \__fontspec_setmathsf_hook:nn {} {}
-      }
-
-    \tl_if_eq:onT {\g__fontspec_mathtt_tl} {\ttdefault}
-      {
-        \__fontspec_setmathtt_hook:nn {} {}
-      }
+    \tl_if_eq:onT {\g__fontspec_mathrm_tl} {\rmdefault} { \__fontspec_setmathrm_hook:nn {} {} }
+    \tl_if_eq:onT {\g__fontspec_mathsf_tl} {\sfdefault} { \__fontspec_setmathsf_hook:nn {} {} }
+    \tl_if_eq:onT {\g__fontspec_mathtt_tl} {\ttdefault} { \__fontspec_setmathtt_hook:nn {} {} }
   }
 %    \end{macrocode}
 %

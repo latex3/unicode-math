@@ -1,0 +1,17 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(6.83+0.0)x27.61542, direction TLT
+.\mathon
+.\TU/texgyrecursor-regular.otf(0)/m/n/10 X
+.\glue(\thickmuskip) 2.77771 plus 2.77771
+.\TU/latinmodern-math.otf(1)/m/n/10 =
+.\glue(\thickmuskip) 2.77771 plus 2.77771
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑋
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\mathsf{X}=X$}
+***************
+Compilation 1 of test file completed with exit status 256

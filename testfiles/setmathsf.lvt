@@ -1,0 +1,13 @@
+
+\input{umtest-preamble}
+
+\usepackage{fontspec}
+\setmathsf{texgyrecursor-regular.otf}
+\usepackage{unicode-math}
+
+\begin{document}
+\START
+
+\TESTBOX{$\mathsf{X}=X$}
+
+\end{document}
