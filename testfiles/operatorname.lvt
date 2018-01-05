@@ -1,0 +1,17 @@
+
+\input{umtest-preamble}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+
+\begin{document}
+\START
+
+\TESTBOX{$ \mathrm{s} $}
+
+\TESTBOX{$ \operatorname{s} $}
+
+\setoperatorfont{\mathtt}
+\TESTBOX{$ \operatorname{s} $}
+
+\end{document}
