@@ -17,12 +17,13 @@ CHANGE HISTORY
   * Correct `\mathrm` (etc.) situation when no fonts loaded explicitly by the user (#330).
   * Some bug fixes to `\not` (#126, #343, #363) and new (tentative) command
     `\(New|Renew)NegationCommand` for defining custom negations (feedback sought).
-  * `\std@minus` & `\std@equal` now properly corrected (#332)
-  * Fix problem with infinite loop with `\cdots` when `amsmath` loaded after `unicode-math` (#227)
-  * `\nabla` and `\partial` have corrected documentation (#257)
-  * No longer loads the `ucharcat` package
+  * `\std@minus` & `\std@equal` now properly corrected (#332).
+  * Fix problem with infinite loop with `\cdots` when `amsmath` loaded after `unicode-math` (#227).
+  * `\nabla` and `\partial` have corrected documentation (#257).
+  * No longer loads the `ucharcat` package.
   * If `\setmath(rm|sf|tt)` is called *before* loading `unicode-math`, the setting
     is now remembered (#407).
+  * `\typecolon` is now `\mathrel` instead of `\mathbin` (#360).
 
 - v0.8i (2017/11/18)
 
