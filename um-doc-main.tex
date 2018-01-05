@@ -595,29 +595,28 @@ latter.
 \seclabel{sans-style}
 
 Unicode contains upright and italic, medium and bold mathematical style characters.
-These may be explicitly selected with the \cs{mathsfup}, \cs{mathsfit}, \cs{mathbfsfup}, and \cs{mathbfsfit}
+These may be explicitly selected with the \cs{symsfup}, \cs{symsfit}, \cs{symbfsfup}, and \cs{symbfsfit}
 commands discussed in \secref{all-math-alphabets}.
 
-How should the generic \cs{mathsf} behave? Unlike bold, sans serif is used much more sparingly
+How should the generic \cs{symsf} behave? Unlike bold, sans serif is used much more sparingly
 in mathematics. I've seen recommendations to typeset tensors in sans serif italic
 or sans serif italic bold (e.g., examples in the \pkg{isomath} and \pkg{mattens} packages).
 But \LaTeX's \cs{mathsf} is \textsl{upright} sans serif.
 
-Therefore I reluctantly add the package options |[sans-style=upright]| and |[sans-style=italic]| to control the behaviour of \cs{mathsf}.
+Therefore, the package options |[sans-style=upright]| and |[sans-style=italic]| control the behaviour of \cs{symsf}.
 The |upright| style sets up the command to use upright sans serif, including Greek;
 the |italic| style switches to using italic in both Latin and Greek.
-In other words, this option simply changes the meaning of \cs{mathsf} to either \cs{mathsfup} or \cs{mathsfit}, respectively.
+In other words, this option simply changes the meaning of \cs{symsf} to either \cs{symsfup} or \cs{symsfit}, respectively.
 Please let me know if more granular control is necessary here.
 
 There is also a |[sans-style=literal]| setting, set automatically with |[math-style=literal]|, which retains the uprightness of the input characters used when selecting the sans serif output.
 
 \subsubsection{What about bold sans serif?}
 
-While you might want your bold upright and your sans serif italic, I don't believe you'd also want
-your bold sans serif upright (or all vice versa, if that's even conceivable). Therefore, bold sans
-serif follows from the setting for sans serif; it is completely independent of the setting for bold.
+While you might want your bold upright and your sans serif italic, I don't believe you'd also want your bold sans serif upright (etc.).
+Therefore, bold sans serif follows from the setting for sans serif; it is completely independent of the setting for bold.
 
-In other words, \cs{mathbfsf} is either \cs{mathbfsfup} or \cs{mathbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And \texttt{[sans-style = literal]} causes \cs{mathbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
+In other words, \cs{symbfsf} is either \cs{symbfsfup} or \cs{symbfsfit} based on |[sans-style=upright]| or |[sans-style=italic]|, respectively. And \texttt{[sans-style = literal]} causes \cs{symbfsf} to retain the same italic or upright shape as the input, and turns it bold sans serif.
 
 N.B.: there is no medium-weight sans serif Greek range in Unicode.
 Therefore, |\symsf{\alpha}| does not make sense (it produces `$\symsf{\alpha}$'), while |\symbfsf{\alpha}| gives `$\symbfsfup{\alpha}$' or `$\symbfsfit{\alpha}$' according to the |sans-style|.
@@ -646,21 +645,21 @@ This may change in the future.
 \cmidrule(l){5-7}
 Style & Shape & Series & Switch & Latin & Greek & Numerals \\
 \midrule
-Serif      & Upright & Normal & \cs{mathup}     & \Y & \Y & \Y  \\
-           &         & Bold   & \cs{mathbfup}   & \Y & \Y & \Y  \\
-           & Italic  & Normal & \cs{mathit}     & \Y & \Y & \M  \\
-           &         & Bold   & \cs{mathbfit}   & \Y & \Y & \M  \\
-Sans serif & Upright & Normal & \cs{mathsfup}   & \Y &    & \Y  \\
-           & Italic  & Normal & \cs{mathsfit}   & \Y &    & \M  \\
-           & Upright & Bold   & \cs{mathbfsfup} & \Y & \Y & \Y  \\
-           & Italic  & Bold   & \cs{mathbfsfit} & \Y & \Y & \M  \\
-Typewriter & Upright & Normal & \cs{mathtt}     & \Y &    & \Y  \\
-Double-struck & Upright & Normal & \cs{mathbb}     & \Y &    & \Y  \\
-              & Italic  & Normal & \cs{mathbbit}   & \Y &    &  \\
-Script     & Upright & Normal & \cs{mathscr}    & \Y &    &     \\
-           &         & Bold   & \cs{mathbfscr}  & \Y &    &     \\
-Fraktur    & Upright & Normal & \cs{mathfrak}   & \Y &    &     \\
-           &         & Bold   & \cs{mathbffrac} & \Y &    &     \\
+Serif      & Upright & Normal & \cs{symup}     & \Y & \Y & \Y  \\
+           &         & Bold   & \cs{symbfup}   & \Y & \Y & \Y  \\
+           & Italic  & Normal & \cs{symit}     & \Y & \Y & \M  \\
+           &         & Bold   & \cs{symbfit}   & \Y & \Y & \M  \\
+Sans serif & Upright & Normal & \cs{symsfup}   & \Y &    & \Y  \\
+           & Italic  & Normal & \cs{symsfit}   & \Y &    & \M  \\
+           & Upright & Bold   & \cs{symbfsfup} & \Y & \Y & \Y  \\
+           & Italic  & Bold   & \cs{symbfsfit} & \Y & \Y & \M  \\
+Typewriter & Upright & Normal & \cs{symtt}     & \Y &    & \Y  \\
+Double-struck & Upright & Normal & \cs{symbb}     & \Y &    & \Y  \\
+              & Italic  & Normal & \cs{symbbit}   & \Y &    &  \\
+Script     & Upright & Normal & \cs{symscr}    & \Y &    &     \\
+           &         & Bold   & \cs{symbfscr}  & \Y &    &     \\
+Fraktur    & Upright & Normal & \cs{symfrak}   & \Y &    &     \\
+           &         & Bold   & \cs{symbffrac} & \Y &    &     \\
 \bottomrule
 \end{tabular}
 \end{table}
