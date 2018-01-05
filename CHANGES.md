@@ -1,11 +1,9 @@
 CHANGE HISTORY
 --------------
 
-- v0.9 (2018/01/02)
+- v0.8j (2018/01/02)
 
-Although this is not a major feature release, this is a significant-enough
-update to warrant the step up to v0.9.
-
+  * New symbol `\mathhyphen` (#313).
   * When using the `range` feature, users commonly found they needed to call
     `\setmathfont` a final time with the original font to ensure correct
     formatting and correct selection of symbol alphabets. I hope the issues

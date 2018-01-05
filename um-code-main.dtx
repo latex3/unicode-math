@@ -399,22 +399,23 @@
 % \end{macro}
 %
 % \begin{macro}{\@@_remap_symbols:}
-% \begin{macro}{\@@_remap_symbol_noparse:nnn}
-% \begin{macro}{\@@_remap_symbol_parse:nnn}
 % This function is used to define the mathcodes for those chars which should
 % be mapped to a different glyph than themselves.
 %    \begin{macrocode}
 \cs_new:Nn \@@_remap_symbols:
   {
-    \@@_remap_symbol:nnn{`\-}{\mathbin}{"02212}% hyphen to minus
-    \@@_remap_symbol:nnn{`\*}{\mathbin}{"02217}% text asterisk to "centred asterisk"
+    \@@_remap_symbol:nnn {`\-} {\mathbin} {"2212}
+    \@@_remap_symbol:nnn {`\*} {\mathbin} {"02217}% text asterisk to "centred asterisk"
     \bool_if:NF \g_@@_literal_colon_bool
       {
-        \@@_remap_symbol:nnn{`\:}{\mathrel}{"02236}% colon to ratio (i.e., punct to rel)
+        \@@_remap_symbol:nnn {`\:} {\mathrel} {"02236}% colon to ratio (i.e., punct to rel)
       }
   }
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{\@@_remap_symbol_noparse:nnn}
+% \begin{macro}{\@@_remap_symbol_parse:nnn}
 % Where |\@@_remap_symbol:nnn| is defined to be one of these two, depending
 % on the range setup:
 %    \begin{macrocode}

@@ -987,6 +987,22 @@ For example: as mentioned above, Cambria Math's stretchy slash is
 (This should be a font option rather than a package option, but
 it will change soon.)
 
+\subsubsection{Behaviour of hyphens in mathematics}
+\seclabel{hyphen}
+
+Unicode defines the following related characters:
+\begin{itemize}
+\item \unichar{0002D}{hyphen-minus}
+\item \unichar{02212}{minus sign}
+\item \unichar{02010}{hyphen} (\cs{mathhyphen})
+\end{itemize}
+The first two of these characters in the input will all behave as the binary operator
+`minus sign'.
+The third is defined by \pkg{unicode-math} as a `math letter' for constructions
+like \verb|$R‐\text{Mod}$| ($R‐\text{Mod}$).
+If more control is needed surrounding these symbols, additional options can be added to the package;
+please get in touch if this is the case for you.
+
 
 \subsubsection{Growing and non-growing accents}
 \seclabel{growing-accents}
