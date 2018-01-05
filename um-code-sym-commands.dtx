@@ -51,13 +51,32 @@
 %
 % In LaTeX maths, the command |\operator@font| is defined that switches to the |operator| mathgroup. The classic example is the |\sin| in |$\sin{x}$|; essentially we’re using |\mathrm| to typeset the upright symbols, but the syntax is |{\operator@font sin}|.
 % I thought that hooking into |\operator@font| would be hard because all other maths font selection in 2e uses |\mathrm{...}| style.
-% Then reading source2e a little more I stumbled upon:
+% Then reading source2e a little more I stumbled upon \cs{@fontswitch}.
+% Reimplement that here to avoid \cs{bgroup}/\cs{egroup}.
 % \begin{macro}{\operator@font}
 %    \begin{macrocode}
 \cs_set:Npn \operator@font
   {
     \@@_switchto_literal:
-    \@fontswitch {} { \g_@@_operator_mathfont_tl }
+    \@@_fontswitch:n { \g_@@_operator_mathfont_tl }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_fontswitch:n}
+%    \begin{macrocode}
+\cs_set:Nn \@@_fontswitch:n
+  {
+    \mode_if_math:T
+      {
+        \cs_set_eq:NN \@@_group_begin: \prg_do_nothing:
+        \cs_set:Npn \@@_group_end:
+          {
+            \cs_set_eq:NN \@@_group_begin: \@@_group_begin_frozen:
+            \cs_set_eq:NN \@@_group_end:   \@@_group_end_frozen:
+          }
+        #1 \scan_stop:
+      }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -111,23 +130,19 @@
   {
     \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
     \@@_init_alphabet:n {#1}
-    \cs_set:cpn {_@@_sym_#1_aux:n}
+    \cs_set_protected:cpx {sym#1} ##1
       {
-        \use:c {@@_switchto_#1:} \math@egroup
-      }
-    \cs_set_protected:cpx {sym#1}
-      {
-        \exp_not:n
-          {
-            \math@bgroup
-            \mode_if_math:F
-              {
-                \egroup\expandafter
-                \non@alpherr\expandafter{\csname sym#1\endcsname\space}
-              }
-            \tl_set:Nn \l_@@_mathstyle_tl {#1}
-          }
-        \exp_not:c {_@@_sym_#1_aux:n}
+        \@@_group_begin:
+          \exp_not:n
+            {
+              \mode_if_math:F
+                {
+                  \exp_args:Nc \non@alpherr {sym#1}
+                }
+              \tl_set:Nn \l_@@_mathstyle_tl {#1}
+            }
+          \exp_not:c {@@_switchto_#1:} ##1
+        \@@_group_end:
       }
   }
 %    \end{macrocode}
