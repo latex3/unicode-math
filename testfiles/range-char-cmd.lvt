@@ -9,12 +9,10 @@
 \begin{document}
 \START
 
-\SETBOX{12}{$\symscr{A}$}\SHOWBOX{12}
-\SETBOX{12}{$\symscr{U}$}\SHOWBOX{12}
-\SETBOX{12}{$\mscrA$}\SHOWBOX{12}
-\SETBOX{12}{$\mscrU$}\SHOWBOX{12}
-\SETBOX{12}{$\therefore$}\SHOWBOX{12}
-
-\end{document}
+\TESTBOX{$\symscr{A}$}
+\TESTBOX{$\symscr{U}$}
+\TESTBOX{$\mscrA$}
+\TESTBOX{$\mscrU$}
+\TESTBOX{$\therefore$}
 
 \end{document}

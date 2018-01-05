@@ -1,0 +1,14 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+\setmathfont{texgyrepagella-math.otf}
+\setmathfont[range=\mathbin]{xits-math.otf}
+
+\begin{document}
+\START
+
+\TESTBOX{$=$}
+\TESTBOX{$+$}
+
+\end{document}

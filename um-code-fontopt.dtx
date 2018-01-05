@@ -33,6 +33,8 @@
 % \subsection{Range processing}
 % \seclabel{rangeproc}
 %
+% Locally redefined all math symbol commands to their slot number prefixed by a quark.
+% Similary for the math classes.
 %    \begin{macrocode}
 \keys_define:nn {unicode-math}
   {
@@ -40,49 +42,44 @@
       {
         \bool_set_false:N \l_@@_init_bool
         \@@_range_init:
-
-%    \end{macrocode}
-% Locally redefined all math symbol commands to their slot number prefixed by a quark.
-% Similary for the math classes.
-%    \begin{macrocode}
-
         \group_begin:
-          \cs_set:Npn \_@@_sym:nnn ##1 ##2 ##3 { \cs_set:Npn ##2 { \use_none:n \q_unicode_math ##1 } }
           \seq_map_inline:Nn \g_@@_mathclasses_seq
             {
               \cs_set:Npn ##1 { \use_none:n \q_unicode_math \exp_not:N ##1 }
             }
+          \cs_set:Npn \_@@_sym:nnn ##1 ##2 ##3
+            {
+              \cs_set:Npn ##2 { \use_none:n \q_unicode_math ##1 }
+            }
           \@@_input_math_symbol_table:
           \@@_range_process:n {#1}
         \group_end:
-    }
+      }
   }
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_range_init:}
-%    \begin{macrocode}
-\cs_new:Nn \@@_range_init:
-  {
-%    \end{macrocode}
 % Set processing functions if we're not defining the full Unicode math repetoire.
 % Math symbols are defined with \cmd\_@@_sym:nnn; see \secref{mathsymbol}
 % for the individual definitions
 %    \begin{macrocode}
-        \int_incr:N \g_@@_fam_int
-        \tl_set:Nx \l_@@_symfont_label_tl {@@_fam\int_use:N\g_@@_fam_int}
-        \cs_set_eq:NN \_@@_sym:nnn \@@_process_symbol_parse:nnn
-        \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_parse:nnn
-        \cs_set_eq:NN \@@_remap_symbol:nnn \@@_remap_symbol_parse:nnn
-        \cs_set_eq:NN \@@_maybe_init_alphabet:n \use_none:n
-        \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
-        \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_parse:nn
-        \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_parse:nNN
+\cs_new:Nn \@@_range_init:
+  {
+    \int_incr:N \g_@@_fam_int
+    \tl_set:Nx \l_@@_symfont_label_tl {@@_fam\int_use:N\g_@@_fam_int}
+    \cs_set_eq:NN \_@@_sym:nnn \@@_process_symbol_parse:nnn
+    \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_parse:nnn
+    \cs_set_eq:NN \@@_remap_symbol:nnn \@@_remap_symbol_parse:nnn
+    \cs_set_eq:NN \@@_maybe_init_alphabet:n \use_none:n
+    \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
+    \cs_set_eq:NN \@@_assign_delcode:nn \@@_assign_delcode_parse:nn
+    \cs_set_eq:NN \@@_make_mathactive:nNN \@@_make_mathactive_parse:nNN
 %    \end{macrocode}
 % Proceed by filling up the various `range' seqs according to the user options.
 %    \begin{macrocode}
-        \seq_clear:N \l_@@_char_range_seq
-        \seq_clear:N \l_@@_mclass_range_seq
-        \seq_clear:N \l_@@_mathalph_seq
+    \seq_clear:N \l_@@_char_range_seq
+    \seq_clear:N \l_@@_mclass_range_seq
+    \seq_clear:N \l_@@_mathalph_seq
   }
 %    \end{macrocode}
 % \end{macro}
@@ -92,33 +89,14 @@
 \cs_new:Nn \@@_range_process:n
   {
     \clist_map_inline:nn {#1}
-            {
-              \@@_if_mathalph_decl:nTF {##1}
-                {
-                  \seq_gput_right:Nx \l_@@_mathalph_seq
-                   {
-                     { \exp_not:V \l_@@_tmpa_tl }
-                     { \exp_not:V \l_@@_tmpb_tl }
-                     { \exp_not:V \l_@@_tmpc_tl }
-                   }
-                }
-                {
-                  \bool_lazy_and:nnTF { \tl_if_single_p:n {##1} } { \token_if_cs_p:N ##1 }
-                    {
-                      \tl_if_in:VnTF ##1 { \q_unicode_math }
-                        { \seq_gput_right:Nx \l_@@_char_range_seq {##1} }
-                        { \@@_error:nx {bad-cs-in-range} { \tl_to_str:n {##1} } }
-                    }
-                    {
-                      \seq_gput_right:Nx \l_@@_char_range_seq {##1}
-                    }
-                }
-            }
+      {
+        \@@_mathalph_decl:nF {##1} { \@@_range_decl:n {##1} }
+      }
 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_if_mathalph_decl:nTF}
+% \begin{macro}{\@@_mathalph_decl:nF}
 % Possible forms of input:\\
 % |\mathscr|\\
 % |\mathscr->\mathup|\\
@@ -132,7 +110,7 @@
 % The remap style can also be |\mathcal->stixcal|, which I marginally prefer
 % in the general case.
 %    \begin{macrocode}
-\prg_new_conditional:Nnn \@@_if_mathalph_decl:n {TF}
+\cs_new:Nn \@@_mathalph_decl:nF
   {
     \tl_set:Nn  \l_@@_tmpa_tl {#1}
     \tl_clear:N \l_@@_tmpb_tl
@@ -153,7 +131,15 @@
       { \tl_set_eq:NN \l_@@_tmpc_tl \l_@@_tmpa_tl }
 
     \prop_if_exist:cTF {g_@@_named_range_ \l_@@_tmpa_tl _prop}
-      { \prg_return_true: } { \prg_return_false: }
+      {
+        \seq_gput_right:Nx \l_@@_mathalph_seq
+          {
+            { \exp_not:V \l_@@_tmpa_tl }
+            { \exp_not:V \l_@@_tmpb_tl }
+            { \exp_not:V \l_@@_tmpc_tl }
+          }
+      }
+      {#2}
   }
 %    \end{macrocode}
 %
@@ -173,14 +159,33 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% Pretty basic comma separated range processing.
-% Donald Arseneau's \pkg{selectp} package has a cleverer technique.
+% \begin{macro}{\@@_range_decl:n}
+%    \begin{macrocode}
+\cs_new_protected:Nn \@@_range_decl:n
+  {
+    \bool_lazy_and:nnTF { \tl_if_single_p:n {#1} } { \token_if_cs_p:N #1 }
+      {
+        \tl_if_in:VnTF #1 { \q_unicode_math }
+          {
+            \seq_if_in:NnTF \g__um_mathclasses_seq {#1}
+              { \seq_gput_right:Nn \l_@@_mclass_range_seq {#1} }
+              { \seq_gput_right:Nx \l_@@_char_range_seq   {#1} }
+          }
+          { \@@_error:nx {bad-cs-in-range} { \tl_to_str:n {#1} } }
+      }
+      {
+        \seq_gput_right:Nx \l_@@_char_range_seq {#1}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 %
 % \begin{macro}{\@@_if_char_spec:nNT}
 % \darg{Unicode character slot}
 % \darg{control sequence (math class)}
 % \darg{code to execute}
-% This macro expands to |#4|
+% This macro expands to |#3|
 % if any of its arguments are contained in \cmd\l_@@_char_range_seq.
 % This list can contain either character ranges (for checking with |#1|) or control sequences.
 % These latter can either be the command name of a specific character, \emph{or} the math
@@ -231,6 +236,9 @@
 % \end{macro}
 %
 % \begin{macro}{\@@_int_if_slot_in_range:nnT}
+% Pretty basic comma separated range processing.
+% Donald Arseneau's \pkg{selectp} package has a cleverer technique.
+%
 % A `numrange' is like |-2,5-8,12,17-| (can be unsorted).
 %
 % Four cases, four argument types:

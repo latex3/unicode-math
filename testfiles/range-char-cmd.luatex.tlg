@@ -8,7 +8,7 @@ Don't change this file in any respect.
 ! OK.
 <to be read again> 
 \relax 
-l. ...\SETBOX{12}{$\symscr{A}$}\SHOWBOX{12}
+l. ...\TESTBOX{$\symscr{A}$}
 > \box...=
 \hbox(6.87+0.15)x8.42, direction TLT
 .\mathon
@@ -19,7 +19,7 @@ l. ...\SETBOX{12}{$\symscr{A}$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
 \relax 
-l. ...\SETBOX{12}{$\symscr{U}$}\SHOWBOX{12}
+l. ...\TESTBOX{$\symscr{U}$}
 > \box...=
 \hbox(7.83+0.08)x7.83, direction TLT
 .\mathon
@@ -28,7 +28,7 @@ l. ...\SETBOX{12}{$\symscr{U}$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
 \relax 
-l. ...\SETBOX{12}{$\mscrA$}\SHOWBOX{12}
+l. ...\TESTBOX{$\mscrA$}
 > \box...=
 \hbox(6.87+0.15)x8.42, direction TLT
 .\mathon
@@ -39,7 +39,7 @@ l. ...\SETBOX{12}{$\mscrA$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
 \relax 
-l. ...\SETBOX{12}{$\mscrU$}\SHOWBOX{12}
+l. ...\TESTBOX{$\mscrU$}
 > \box...=
 \hbox(5.21+0.16)x6.2, direction TLT
 .\mathon
@@ -50,6 +50,6 @@ l. ...\SETBOX{12}{$\mscrU$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
 \relax 
-l. ...\SETBOX{12}{$\therefore$}\SHOWBOX{12}
+l. ...\TESTBOX{$\therefore$}
 ***************
 Compilation 1 of test file completed with exit status 256
