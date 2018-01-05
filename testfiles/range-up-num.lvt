@@ -1,0 +1,13 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+\setmathfont{latinmodern-math.otf}
+\setmathfont{texgyreheros-regular.otf}[range=up/{num}]
+
+\begin{document}
+\START
+
+\TESTBOX{$7x$}
+
+\end{document}

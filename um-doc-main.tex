@@ -298,14 +298,17 @@ bfsfit,
 \clist_use:Nn \g__um_named_ranges_clist {\,,\,~}
 \ExplSyntaxOff
 \end{quote}
-Fonts can be selected for specified ranges only using the following syntax, in which case all other maths font setup remains untouched:
+Fonts can be selected (for predefined ranges only) using the following syntax, in which case all other maths font setup remains untouched:
 \begin{itemize}
 \item |[range=bb]| to use the font for `|bb|' letters only.
 \item |[range=bfsfit/{greek,Greek}]| for Greek lowercase and uppercase only (also with |latin|, |Latin|, |num| as possible options for Latin lower-/upper-case and numbers, resp.).
 \item |[range=up->sfup]| to map to different output styles.
 \end{itemize}
 
-Note that `meta-styles' such as `|bf|' and `|sf|' are not included here since they are context dependent. Use |[range=bfup]| and |[range=bfit]| to effect changes to the particular ranges selected by `|bf|' (and similarly for `|sf|').
+A common request is to load numerals only from a specific font. This can be
+achieved with an option such as |range=up/{num}|.
+
+Note that `meta-styles' such as `|bf|' and `|sf|' are not included in the list above since they are context dependent. Use |[range=bfup]| and |[range=bfit]| to effect changes to the particular ranges selected by `|bf|' (and similarly for `|sf|').
 
 If a particular math style is not defined in the font, we fall back onto the lower-base plane (i.e., `upright') glyphs.
 Therefore, to use an \ascii-encoded fractur font, for example, write
