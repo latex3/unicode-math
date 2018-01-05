@@ -3,6 +3,17 @@ CHANGE HISTORY
 
 - v0.9 (2018/01/02)
 
+Although this is not a major feature release, this is a significant-enough
+update to warrant the step up to v0.9.
+
+  * When using the `range` feature, users commonly found they needed to call
+    `\setmathfont` a final time with the original font to ensure correct
+    formatting and correct selection of symbol alphabets. I hope the issues
+    that required this have now been corrected (#331, #387).
+  * If `\setmathfont` is called a second time in a document, it tries harder
+    to more properly reset the maths font setup for the new font (#224).
+  * Properly hard-coded the `\delcode` of the period to ensure `\left`/`\right`
+    behave correctly in all circumstances (#344, #351, #420).
   * Numbers and latin letters in the fullwidth Unicode range are now supported
     as aliases to their ASCII counterparts (#337).
   * Correct `\mathrm` (etc.) situation when no fonts loaded explicitly by the user (#330).
