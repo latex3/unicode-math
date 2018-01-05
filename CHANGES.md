@@ -25,6 +25,9 @@ CHANGE HISTORY
     is now remembered (#407).
   * `\typecolon` is now `\mathrel` instead of `\mathbin` (#360).
   * LuaTeX bug with shifted \underbrace when it contains accented symbols worked around (#391).
+  * The following commands are listed as ‘unsupported’ and will result in sensible
+    error messages rather than the old behaviour of meaningless output:
+    `\arrowvert`, `\Arrowvert`, `\bracevert`. (#411).
 
 - v0.8i (2017/11/18)
 

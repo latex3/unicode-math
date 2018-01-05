@@ -354,6 +354,24 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
+% \subsection{Legacy characters}
+%
+%    \begin{macrocode}
+\cs_new:Nn \@@_undeclare_symbol:N
+  {
+    \cs_set_protected:Npn #1
+      { \@@_error:nx {legacy-char-not-supported} { \token_to_str:N #1 } }
+  }
+%    \end{macrocode}
+%
+% If you have better ideas about what to do here, please mention.
+%    \begin{macrocode}
+\@@_undeclare_symbol:N \arrowvert
+\@@_undeclare_symbol:N \Arrowvert
+\@@_undeclare_symbol:N \bracevert
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
