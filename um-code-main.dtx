@@ -118,9 +118,9 @@
     \tl_set_eq:NN \l_@@_sscript_font_tl     \l_@@_fontname_tl
 
     \bool_set_true:N \l_@@_init_bool
-    \seq_clear:N     \l_@@_char_range_seq
-    \clist_clear:N   \l_@@_char_nrange_clist
-    \seq_clear:N     \l_@@_mathalph_seq
+    \seq_gclear:N    \g_@@_char_range_seq
+    \clist_clear:N   \l_@@_mathmap_charints_clist
+    \seq_gclear:N    \g_@@_mathalph_seq
     \seq_clear:N     \l_@@_missing_alph_seq
 
     \cs_set_eq:NN \_@@_sym:nnn                  \@@_process_symbol_noparse:nnn

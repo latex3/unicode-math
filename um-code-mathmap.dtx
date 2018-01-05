@@ -16,12 +16,19 @@
   {
 %    \end{macrocode}
 % If |range=| has been used to configure styles, those choices will be in
-% |\l_@@_mathalph_seq|. If not, set up the styles implicitly:
+% |\g_@@_mathalph_seq|. If not, set up the styles implicitly:
 %    \begin{macrocode}
-    \seq_if_empty:NTF \l_@@_mathalph_seq
+    \seq_if_empty:NTF \g_@@_mathalph_seq
       {
         \@@_log:n {setup-implicit}
-        \seq_set_eq:NN \l_@@_mathalph_seq \g_@@_default_mathalph_seq
+        \bool_if:NTF \l_@@_init_bool
+          {
+            \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
+          }
+          {
+            %% TODO: somehow trim down list based on range argument
+            \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
+          }
         \bool_set_true:N \l_@@_implicit_alph_bool
         \@@_maybe_init_alphabet:n  {sf}
         \@@_maybe_init_alphabet:n  {bf}
@@ -39,7 +46,7 @@
 %    \end{macrocode}
 % Now perform the mapping:
 %    \begin{macrocode}
-   \seq_map_inline:Nn \l_@@_mathalph_seq
+   \seq_map_inline:Nn \g_@@_mathalph_seq
       {
         \tl_set:No    \l_@@_style_tl       { \use_i:nnn   ##1 }
         \clist_set:No \l_@@_alphabet_clist { \use_ii:nnn  ##1 }
@@ -47,15 +54,16 @@
 
         % If no set of alphabets is defined:
         \clist_if_empty:NT \l_@@_alphabet_clist
-        {
-          \cs_set_eq:NN \@@_maybe_init_alphabet:n \@@_init_alphabet:n
-          \prop_get:cnN { g_@@_named_range_ \l_@@_style_tl _prop }
-          { default-alpha } \l_@@_alphabet_clist
-        }
+          {
+            \cs_set_eq:NN \@@_maybe_init_alphabet:n \@@_init_alphabet:n
+            \prop_get:cnN { g_@@_named_range_ \l_@@_style_tl _prop }
+              { default-alpha } \l_@@_alphabet_clist
+          }
 
         \@@_check_math_alphabet:
         \@@_setup_math_alphabet:
       }
+
     \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
  }
 %    \end{macrocode}
@@ -103,9 +111,10 @@
   {
     \clist_map_inline:Nn \l_@@_alphabet_clist
       {
-%<debug> \benchmark_tic:
-%<debug> \typeout{_setup_math_alphabet:~\l_@@_style_tl/##1}
         \tl_set:Nx \l_@@_alphabet_tl { \tl_trim_spaces:n {##1} }
+
+%<debug>\typeout{_setup_math_alphabet:~\l_@@_style_tl/\l_@@_alphabet_tl}
+
         \@@_if_alphabet_exists:nnT {\l_@@_style_tl} {\l_@@_alphabet_tl}
           {
             \exp_args:No \tl_if_eq:nnTF \l_@@_alphabet_tl {misc}
@@ -134,7 +143,6 @@
                   }
               }
           }
-%<debug> \benchmark_toc:
       }
   }
 %    \end{macrocode}
@@ -358,13 +366,13 @@
 % \darg{Maths alphabet, \eg, `bb’}
 % \darg{Input slot, \eg, the slot for `A’ (comma separated)}
 % \darg{Output slot, \eg, the slot for `$\mathbb{A}$’}
-% When \cmd\@@_if_char_spec:nNT\ is executed, it populates the \cmd\l_@@_char_nrange_clist\
+% When \cmd\@@_if_char_spec:nNT\ is executed, it populates the \cmd\l_@@_mathmap_charints_clist\
 % macro with slot numbers corresponding to the specified range. This range is used to
 % conditionally add \cs{@@_set_mathcode:nnnn} declaractions to the maths alphabet definition.
 %    \begin{macrocode}
 \cs_new:Nn \@@_mathmap_parse:nnn
   {
-    \exp_args:NNx \clist_if_in:NnT \l_@@_char_nrange_clist { \int_eval:n {#3} }
+    \exp_args:NNx \clist_if_in:NnT \l_@@_mathmap_charints_clist { \int_eval:n {#3} }
       {
         \@@_mathmap_noparse:nnn {#1} {#2} {#3}
       }
