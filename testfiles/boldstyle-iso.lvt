@@ -1,0 +1,12 @@
+\input{umtest-preamble}
+\usepackage[math-style=ISO]{unicode-math}
+\begin{document}
+\TESTBOX{$\symbf\LATINtext$}
+\TESTBOX{$\symbf\latintext$}
+\TESTBOX{$\symbf\LATINmath$}
+\TESTBOX{$\symbf\latinmath$}
+\TESTBOX{$\symbf\GREEKtext$}
+\TESTBOX{$\symbf\greektext$}
+\TESTBOX{$\symbf\GREEKmath$}
+\TESTBOX{$\symbf\greekmath$}
+\end{document}
