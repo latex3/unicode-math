@@ -1,0 +1,178 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑎
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑏
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑐
+.\kern0.1
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑑
+.\kern0.11
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑒
+.\kern0.13
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑓
+.\kern1.63
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑔
+.\kern0.26
+.\TU/texgyrepagella-math.otf(1)/m/n/10 ℎ
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑖
+.\kern0.16
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑗
+.\kern0.23
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑘
+.\kern0.33
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑙
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑚
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑛
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑜
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑝
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑞
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑟
+.\kern0.23
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑠
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑡
+.\kern0.05
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑢
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑣
+.\kern0.05
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑤
+.\kern0.05
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑥
+.\kern0.12
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑦
+.\kern0.18
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑧
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\latintext$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\pdfcolorstack 0 push {1 0 0 rg}
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 a
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 b
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 c
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 d
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 e
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 f
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 g
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 h
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 i
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 j
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 k
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 l
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 m
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 n
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 o
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 p
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 q
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 r
+.\kern-0.2
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 s
+.\kern-0.2
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 t
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 u
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 v
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 w
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 x
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 y
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 z
+.\kern0.55
+.\mathoff
+.\pdfcolorstack 0 pop
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\symscr{\latintext}$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐴
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐵
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐶
+.\kern0.12
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐷
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐸
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐹
+.\kern0.2
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐺
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐻
+.\kern0.5
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐼
+.\kern0.49
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐽
+.\kern0.53
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐾
+.\kern0.44
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝐿
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑀
+.\kern0.24
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑁
+.\kern0.54
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑂
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑃
+.\kern0.11
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑄
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑅
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑆
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑇
+.\kern0.52
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑈
+.\kern0.48
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑉
+.\kern0.6
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑊
+.\kern0.64
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑋
+.\kern0.4
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑌
+.\kern0.36
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝑍
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\LATINmath$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\pdfcolorstack 0 push {1 0 0 rg}
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 A
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 B
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 C
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 D
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 E
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 F
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 G
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 H
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 I
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 J
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 K
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 L
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 M
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 N
+.\kern-0.1
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 O
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 P
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 Q
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 R
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 S
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 T
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 U
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 V
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 W
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 X
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 Y
+.\TU/texgyrechorus-mediumitalic.otf(0)/m/n/10 Z
+.\kern0.76
+.\mathoff
+.\pdfcolorstack 0 pop
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\symscr{\LATINmath}$}
+***************
+Compilation 1 of test file completed with exit status 256

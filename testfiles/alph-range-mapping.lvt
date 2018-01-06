@@ -1,5 +1,8 @@
+
 \input{umtest-preamble}
+
 \usepackage{unicode-math}
+
 \setmathfont{xits-math.otf}
 \setmathfont[
     range={
@@ -9,14 +12,16 @@
       it/{greek}->bfit ,
     }
   ]{xits-math.otf}
+
 \begin{document}
-\vspace*{-1cm}
-\[\LATINtext\]
-\[\latintext\]
-\[\symup\LATINtext\]
-\[\symup\latintext\]
-\[{\GREEKtext}\]
-\[{\greektext}\]
-\[{\symit\GREEKtext}\]
-\[{\symup\greektext}\]
+
+\TESTBOX{$\LATINtext$}
+\TESTBOX{$\latintext$}
+\TESTBOX{$\symup\LATINtext$}
+\TESTBOX{$\symup\latintext$}
+\TESTBOX{${\GREEKtext}$}
+\TESTBOX{${\greektext}$}
+\TESTBOX{${\symit\GREEKtext}$}
+\TESTBOX{${\symup\greektext}$}
+
 \end{document}

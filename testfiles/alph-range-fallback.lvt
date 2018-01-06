@@ -1,0 +1,17 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+
+\setmathfont[Colour=000000]{texgyrepagella-math.otf}
+\setmathfont[range=scr, Colour=FF0000]{texgyrechorus-mediumitalic.otf}
+
+\begin{document}
+\START
+
+\TESTBOX{$\latintext$}
+\TESTBOX{$\symscr{\latintext}$}
+\TESTBOX{$\LATINmath$}
+\TESTBOX{$\symscr{\LATINmath}$}
+
+\end{document}

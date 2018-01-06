@@ -1,11 +1,18 @@
+
 \input{umtest-preamble}
-\OMIT
+
 \usepackage[math-style=ISO]{unicode-math}  
 \setmathfont{xits-math.otf}
 \setmathfont[range=it/{latin, greek, Greek}]{Asana-Math.otf}  
 \begin{document}
-\TIMO
-$abc$ $ABC$
-$\alpha\beta\gamma$
-$\Alpha\Beta\Gamma$
+\START
+
+\TESTBOX{$abc$ $ABC$}
+
+\TESTBOX{$\alpha\beta\gamma$}
+
+\TESTBOX{$\Alpha\Beta\Gamma$}
+
+\TESTBOX{$]+=[$}
+
 \end{document}  
