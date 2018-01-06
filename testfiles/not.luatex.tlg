@@ -2,12 +2,12 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 empty
 > \box...=
-\hbox(4.09+0.0)x0.0, direction TLT
+\hbox(5.0+0.0)x0.0, direction TLT
 .\mathon
-.\vbox(4.09+0.0)x0.0, direction TLT
-..\hbox(6.62+1.56)x0.0, shifted 1.74, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 ̸
-..\kern-4.09
+.\vbox(5.0+0.0)x0.0, direction TLT
+..\hbox(7.5+2.5)x0.0, shifted 2.63, direction TLT
+...\TU/latinmodern-math.otf(1)/m/n/10 ̸
+..\kern-5.0
 ..\hbox(0.0+0.0)x0.0, direction TLT
 .\mathoff
 ! OK.
@@ -17,24 +17,23 @@ l. ...\TESTBOX{$\not$}
                      % #126
 macro
 > \box...=
-\hbox(6.76+2.57468)x35.34097, direction TLT
+\hbox(7.5+2.54008)x40.9353, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 (
-.\TU/xits-math.otf(1)/m/n/10 ⊀
-.\hbox(3.29475+0.0747)x4.16048, shifted 2.49997, direction TLT
-..\TU/xits-math.otf(1)/m/n/7.4711 𝑎
-.\TU/xits-math.otf(1)/m/n/10 )
-.\TU/xits-math.otf(1)/m/n/10 (
-.\vbox(5.32+2.57468)x11.01048, direction TLT
-..\kern0.025
-..\hbox(5.32+0.21)x0.0, shifted 7.80501, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 󰁈
-..\kern-5.55501
-..\hbox(5.32+2.57468)x11.01048, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 ≺
-...\hbox(3.29475+0.0747)x4.16048, shifted 2.49997, direction TLT
-....\TU/xits-math.otf(1)/m/n/7.4711 𝑎
-.\TU/xits-math.otf(1)/m/n/10 )
+.\TU/latinmodern-math.otf(1)/m/n/10 (
+.\TU/latinmodern-math.otf(1)/m/n/10 ⊀
+.\hbox(3.09245+0.07013)x4.90765, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑎
+.\TU/latinmodern-math.otf(1)/m/n/10 )
+.\TU/latinmodern-math.otf(1)/m/n/10 (
+.\vbox(7.5+2.54008)x12.68765, direction TLT
+..\hbox(7.5+2.5)x0.0, shifted 6.52, direction TLT
+...\TU/latinmodern-math.otf(1)/m/n/10 ̸
+..\kern-7.97
+..\hbox(5.47+2.54008)x12.68765, direction TLT
+...\TU/latinmodern-math.otf(1)/m/n/10 ≺
+...\hbox(3.09245+0.07013)x4.90765, shifted 2.46996, direction TLT
+....\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑎
+.\TU/latinmodern-math.otf(1)/m/n/10 )
 .\mathoff
 ! OK.
 <to be read again> 
@@ -43,17 +42,16 @@ l. ...\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}
                                                % #343
 generic
 > \box...=
-\hbox(6.67+0.45)x20.73001, direction TLT
+\hbox(7.705+0.22)x22.43, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝐴
-.\vbox(5.52+0.45)x6.85, direction TLT
-..\kern0.22
-..\hbox(5.32+0.21)x0.0, shifted 7.80501, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 󰁈
-..\kern-5.75002
-..\hbox(5.52+0.45)x6.85, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 ≊
-.\TU/xits-math.otf(1)/m/n/10 𝐶
+.\TU/latinmodern-math.otf(1)/m/n/10 𝐴
+.\vbox(7.705+0.0)x7.78, direction TLT
+..\hbox(7.5+2.5)x0.0, shifted 6.52, direction TLT
+...\TU/latinmodern-math.otf(1)/m/n/10 ̸
+..\kern-7.705
+..\hbox(5.41+0.0)x7.78, direction TLT
+...\TU/latinmodern-math.otf(1)/m/n/10 ≊
+.\TU/latinmodern-math.otf(1)/m/n/10 𝐶
 .\mathoff
 ! OK.
 <to be read again> 
@@ -62,17 +60,18 @@ l. ...\TESTBOX{$A \not\approxeq C $}
                                   % #363
 prebuilt
 > \box...=
-\hbox(6.62+1.83)x40.26086, direction TLT
+\hbox(7.3+2.3)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≠
+.\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≠
+.\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -80,17 +79,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not = y \neq z $}
 prebuilt
 > \box...=
-\hbox(6.62+1.83)x40.26086, direction TLT
+\hbox(7.3+2.3)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≮
+.\TU/latinmodern-math.otf(1)/m/n/10 ≮
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≮
+.\TU/latinmodern-math.otf(1)/m/n/10 ≮
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -98,17 +98,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not < y \nless z $}
 prebuilt
 > \box...=
-\hbox(6.62+1.83)x40.26086, direction TLT
+\hbox(7.3+2.3)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≯
+.\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≯
+.\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -116,17 +117,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not > y \ngtr z $}
 prebuilt
 > \box...=
-\hbox(4.5+1.83)x45.08084, direction TLT
+\hbox(5.1+2.05)x46.60083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ↚
+.\TU/latinmodern-math.otf(1)/m/n/10 ↚
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ↚
+.\TU/latinmodern-math.otf(1)/m/n/10 ↚
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -134,17 +136,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not \gets     y \nleftarrow z $}
 prebuilt
 > \box...=
-\hbox(5.19+1.83)x40.26086, direction TLT
+\hbox(6.03+2.05)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≄
+.\TU/latinmodern-math.otf(1)/m/n/10 ≄
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≄
+.\TU/latinmodern-math.otf(1)/m/n/10 ≄
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -152,17 +155,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not \simeq    y \nsime z$}
 prebuilt
 > \box...=
-\hbox(6.62+1.83)x40.26086, direction TLT
+\hbox(7.3+2.3)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≠
+.\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≠
+.\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -170,17 +174,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not \equal    y \ne z $}
 prebuilt
 > \box...=
-\hbox(7.3+2.29)x40.26086, direction TLT
+\hbox(7.3+2.3)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≰
+.\TU/latinmodern-math.otf(1)/m/n/10 ≰
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≰
+.\TU/latinmodern-math.otf(1)/m/n/10 ≰
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -188,17 +193,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not \le       y \nleq z$}
 prebuilt
 > \box...=
-\hbox(7.3+2.29)x40.26086, direction TLT
+\hbox(7.3+2.3)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≱
+.\TU/latinmodern-math.otf(1)/m/n/10 ≱
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≱
+.\TU/latinmodern-math.otf(1)/m/n/10 ≱
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -206,17 +212,18 @@ prebuilt
 l. ...\TESTBOX{$ x \not \ge       y \ngeq z$}
 prebuilt
 > \box...=
-\hbox(6.62+1.83)x40.26086, direction TLT
+\hbox(7.3+2.3)x42.22083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≯
+.\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ≯
+.\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -224,17 +231,16 @@ prebuilt
 l. ...\TESTBOX{$ x \not \greater  y \ngtr z$}
 prebuilt
 > \box...=
-\hbox(5.57+1.83)x38.96085, direction TLT
+\hbox(4.42+2.05)x26.66083, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ⫝̸
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑦
+.\kern0.28
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 ⫝̸
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 

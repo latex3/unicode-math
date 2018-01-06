@@ -2,7 +2,6 @@
 \input{umtest-preamble}
 
 \usepackage{unicode-math}
-\setmathfont{xits-math.otf}
 
 \begin{document}
 \START
