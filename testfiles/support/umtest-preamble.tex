@@ -45,7 +45,8 @@
 }
 
 \newcommand\SETBOX[2]{%
-  \setbox#1=\hbox{#2}%
+  \setbox#1=\hbox to 0pt{#2}%
+  \ht#1=0pt \dp#1=0pt \wd#1=0pt
 }
 
 \newcommand\SHOWBOX[1]{%

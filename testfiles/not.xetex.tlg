@@ -2,7 +2,7 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 empty
 > \box...=
-\hbox(10.0+0.0)x0.0
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\vbox(10.0+0.0)x0.0
 ..\hbox(7.5+2.5)x0.0, shifted 2.62999
@@ -17,7 +17,7 @@ l. ...\TESTBOX{$\not$}
                        % #126
 macro
 > \box...=
-\hbox(10.97+2.54016)x40.8153
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#9
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#2894
@@ -42,7 +42,7 @@ l. ...\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}
                                                  % #343
 generic
 > \box...=
-\hbox(10.91+0.22)x23.15999
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1270
 .\vbox(10.91+0.0)x7.78
@@ -61,7 +61,7 @@ l. ...\TESTBOX{$A \not\approxeq C $}
                                     % #363
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -81,7 +81,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not = y \neq z $}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -101,7 +101,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not < y \nless z $}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -121,7 +121,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not > y \ngtr z $}
 prebuilt
 > \box...=
-\hbox(5.1+2.05)x46.90114
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -141,7 +141,7 @@ prebuilt
 l. ......TBOX{$ x \not \gets     y \nleftarrow z $}
 prebuilt
 > \box...=
-\hbox(6.03+2.05)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -161,7 +161,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \simeq    y \nsime z$}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -181,7 +181,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \equal    y \ne z $}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -201,7 +201,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \le       y \nleq z$}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -221,7 +221,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \ge       y \ngeq z$}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.52113
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779
@@ -241,7 +241,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \greater  y \ngtr z$}
 prebuilt
 > \box...=
-\hbox(4.42+2.05)x32.56114
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
 .\glue(\thickmuskip) 2.77779 plus 2.77779

@@ -2,7 +2,7 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 empty
 > \box...=
-\hbox(5.0+0.0)x0.0, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\vbox(5.0+0.0)x0.0, direction TLT
 ..\hbox(7.5+2.5)x0.0, shifted 2.63, direction TLT
@@ -17,7 +17,7 @@ l. ...\TESTBOX{$\not$}
                      % #126
 macro
 > \box...=
-\hbox(7.5+2.54008)x40.9353, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 (
 .\TU/latinmodern-math.otf(1)/m/n/10 ⊀
@@ -42,7 +42,7 @@ l. ...\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}
                                                % #343
 generic
 > \box...=
-\hbox(7.705+0.22)x22.43, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝐴
 .\vbox(7.705+0.0)x7.78, direction TLT
@@ -60,7 +60,7 @@ l. ...\TESTBOX{$A \not\approxeq C $}
                                   % #363
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -79,7 +79,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not = y \neq z $}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -98,7 +98,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not < y \nless z $}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -117,7 +117,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not > y \ngtr z $}
 prebuilt
 > \box...=
-\hbox(5.1+2.05)x46.60083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -136,7 +136,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \gets     y \nleftarrow z $}
 prebuilt
 > \box...=
-\hbox(6.03+2.05)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -155,7 +155,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \simeq    y \nsime z$}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -174,7 +174,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \equal    y \ne z $}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -193,7 +193,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \le       y \nleq z$}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -212,7 +212,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \ge       y \ngeq z$}
 prebuilt
 > \box...=
-\hbox(7.3+2.3)x42.22083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -231,7 +231,7 @@ prebuilt
 l. ...\TESTBOX{$ x \not \greater  y \ngtr z$}
 prebuilt
 > \box...=
-\hbox(4.42+2.05)x26.66083, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\glue(\thickmuskip) 2.77771 plus 2.77771

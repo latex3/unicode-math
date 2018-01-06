@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \box...=
-\hbox(7.83+0.08)x7.83, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 𝒜
 .\mathoff
@@ -10,7 +10,7 @@ Don't change this file in any respect.
 \relax 
 l. ...\TESTBOX{$\symscr{A}$}
 > \box...=
-\hbox(6.87+0.15)x8.42, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0.6 0 0 rg}
 .\TU/xits-math.otf(0)/m/n/10 𝒰
@@ -21,7 +21,7 @@ l. ...\TESTBOX{$\symscr{A}$}
 \relax 
 l. ...\TESTBOX{$\symscr{U}$}
 > \box...=
-\hbox(7.83+0.08)x7.83, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 𝒜
 .\mathoff
@@ -30,7 +30,7 @@ l. ...\TESTBOX{$\symscr{U}$}
 \relax 
 l. ...\TESTBOX{$\mscrA$}
 > \box...=
-\hbox(6.87+0.15)x8.42, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0.6 0 0 rg}
 .\TU/xits-math.otf(0)/m/n/10 𝒰
@@ -41,7 +41,7 @@ l. ...\TESTBOX{$\mscrA$}
 \relax 
 l. ...\TESTBOX{$\mscrU$}
 > \box...=
-\hbox(5.21+0.16)x6.2, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0 0.6 0 rg}
 .\TU/xits-math.otf(1)/m/n/10 ∴

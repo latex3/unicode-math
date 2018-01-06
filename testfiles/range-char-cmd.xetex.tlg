@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \box...=
-\hbox(7.83+0.08)x8.64
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#2628
 .\kern0.81
@@ -11,7 +11,7 @@ Don't change this file in any respect.
                    \relax 
 l. ...\TESTBOX{$\symscr{A}$}
 > \box...=
-\hbox(6.87+0.15)x8.87
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/xits-math.otf(0)/m/n/10 glyph#2587
 .\kern0.95
@@ -21,7 +21,7 @@ l. ...\TESTBOX{$\symscr{A}$}
                    \relax 
 l. ...\TESTBOX{$\symscr{U}$}
 > \box...=
-\hbox(7.83+0.08)x8.64
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#2628
 .\kern0.81
@@ -31,7 +31,7 @@ l. ...\TESTBOX{$\symscr{U}$}
                    \relax 
 l. ...\TESTBOX{$\mscrA$}
 > \box...=
-\hbox(6.87+0.15)x8.87
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/xits-math.otf(0)/m/n/10 glyph#2587
 .\kern0.95
@@ -41,7 +41,7 @@ l. ...\TESTBOX{$\mscrA$}
                    \relax 
 l. ...\TESTBOX{$\mscrU$}
 > \box...=
-\hbox(5.21+0.16)x6.2
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/xits-math.otf(1)/m/n/10 glyph#1185
 .\mathoff

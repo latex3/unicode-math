@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \box...=
-\hbox(6.94+0.11)x21.80432, direction TLT
+\hbox(0.0+0.0)x0.0, glue set - 1.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑎
 .\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
@@ -15,7 +15,7 @@ Don't change this file in any respect.
 l. ...\TESTBOX{$a-b$}
                    % ascii hyphen minus
 > \box...=
-\hbox(6.94+0.11)x12.90999, direction TLT
+\hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑎
 .\TU/latinmodern-math.otf(1)/m/n/10 ‐
@@ -27,7 +27,7 @@ l. ...\TESTBOX{$a-b$}
 l. ...\TESTBOX{$a‐b$}
                      % "2010 hyphen
 > \box...=
-\hbox(6.94+0.11)x21.80432, direction TLT
+\hbox(0.0+0.0)x0.0, glue set - 1.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑎
 .\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
