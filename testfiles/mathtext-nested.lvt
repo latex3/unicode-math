@@ -1,0 +1,14 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+
+\begin{document}
+
+\START
+
+\TESTBOX{$\mathcal{A}$}
+
+\TESTBOX{$\mathrm{\mathcal{A}}$}
+
+\end{document}
