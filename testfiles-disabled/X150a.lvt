@@ -1,0 +1,7 @@
+\input{umtest-preamble}
+\usepackage{amsmath,unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\centerline{$\int\quad\idotsint$}
+\[\int\quad\idotsint\]
+\end{document}

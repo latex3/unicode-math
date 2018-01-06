@@ -1,0 +1,9 @@
+\input{umtest-preamble}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[A+B+\dots+Z\]
+\[(A+B+\dots)\]
+\[(A+B+\cdots)\]
+\end{document}

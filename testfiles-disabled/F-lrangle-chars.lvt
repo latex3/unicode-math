@@ -1,0 +1,12 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\begin{document}
+\setmathfont[math-style=TeX]{Free Serif}
+\[ıȷ\quad 𝚤𝚥\]
+\[\mathup{ıȷ}\quad \mathup{𝚤𝚥}\]
+\[\mathit{ıȷ}\quad \mathit{𝚤𝚥}\]
+\setmathfont[math-style=upright]{Free Serif}
+\[ıȷ\quad 𝚤𝚥\]
+\[\mathup{ıȷ}\quad \mathup{𝚤𝚥}\]
+\[\mathit{ıȷ}\quad \mathit{𝚤𝚥}\]
+\end{document}

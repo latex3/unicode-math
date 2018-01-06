@@ -1,0 +1,10 @@
+\input{umtest-preamble}
+\usepackage[sans-style=literal]{unicode-math}
+\setmathfont{Code2001}
+\begin{document}
+\[\mathbfsf\LATINmath\]
+\[\mathbfsf\LATINtext\]
+\[\mathbfsf\latinmath\]
+\[\mathbfsf\latintext\]
+\[\mathbfsf{0123456789}\]
+\end{document}

@@ -1,0 +1,9 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{STIXGeneral-Bold}
+\begin{document}
+\[\mathbfsfup{\GREEKtext}\]
+\[\mathbfsfup{\greektext}\]
+\[\mathbfsfup{\GREEKmath}\]
+\[\mathbfsfup{\greekmath}\]
+\end{document}

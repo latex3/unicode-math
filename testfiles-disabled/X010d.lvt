@@ -1,0 +1,8 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[\LATINmathfrak\]
+\[\latinmathfrak\]
+\[\reservedmathfrak\]
+\end{document}

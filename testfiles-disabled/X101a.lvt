@@ -1,0 +1,8 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[ a>b \quad c<d \]
+\[ \left< \left< \left< \left< x \right>^2 
+    \right>^2 \right>^2 \right>^2 \]
+\end{document}

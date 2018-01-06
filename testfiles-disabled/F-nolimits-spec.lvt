@@ -1,0 +1,10 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\begin{document}
+\[\iiint_V\]
+\removenolimits\iiint
+\[\iiint_V\]
+\addnolimits\iiint
+\[\iiint_V\]
+\end{document}

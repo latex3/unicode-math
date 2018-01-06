@@ -1,0 +1,6 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[ \sqrt[n]{1+\sqrt[n]{1+\sqrt[n]{1+\sqrt[n]{1+\sqrt[n]{1+x}}}}}\]
+\end{document}

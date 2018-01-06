@@ -1,0 +1,10 @@
+\input{umtest-preamble}
+\usepackage[sans-style=upright]{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[\mathsf{\LATINtext}\]
+\[\mathsf{\LATINmath}\]
+\[\mathsf{\latintext}\]
+\[\mathsf{\latinmath}\]
+\[\mathsf{0123456789}\]
+\end{document}

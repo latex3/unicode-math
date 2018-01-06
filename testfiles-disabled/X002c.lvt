@@ -1,0 +1,9 @@
+\input{umtest-preamble}
+\usepackage[math-style=literal]{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[\GREEKtext\]
+\[\greektext\]
+\[\GREEKmath\]
+\[\greekmath\]
+\end{document}

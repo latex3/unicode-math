@@ -1,0 +1,7 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[ \sqrt{\sin^{2}x+\cos^{2}x}=1  \]
+\[ \sqrt{1+\sqrt{1+\sqrt{1+\sqrt{1+x}}}}\]
+\end{document}

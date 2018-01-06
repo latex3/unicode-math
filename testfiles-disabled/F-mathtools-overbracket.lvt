@@ -1,0 +1,9 @@
+\input{umtest-preamble}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\begin{document}
+\[\underbracket{abc}\qquad\Uunderbracket{abc}\]
+\[\overbracket{abc}\qquad\Uoverbracket{abc}\]
+\[\underbracket[2pt]{abc}\]
+\end{document}

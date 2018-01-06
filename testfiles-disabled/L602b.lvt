@@ -1,0 +1,36 @@
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+
+\setmathfont{xits-math.otf}
+
+\ExplSyntaxOn
+
+\NewDocumentCommand \mathstylename { } {
+  \mathtt {
+    \int_case:nnF { \luatexmathstyle } {
+      { \displaystyle } { \token_to_str:N \displaystyle }
+      { \luatexcrampeddisplaystyle } { \token_to_str:N \crampeddisplaystyle }
+      { \textstyle } { \token_to_str:N \textstyle }
+      { \luatexcrampedtextstyle } { \token_to_str:N \crampedtextstyle }
+      { \scriptstyle } { \token_to_str:N \scriptstyle }
+      { \luatexcrampedscriptstyle } { \token_to_str:N \crampedscriptstyle }
+      { \scriptscriptstyle } { \token_to_str:N \scriptscriptstyle }
+      { \luatexcrampedscriptscriptstyle } { \token_to_str:N \crampedscriptscriptstyle }
+    } {
+      outside math
+    }
+  }
+}
+
+\ExplSyntaxOff
+
+\begin{document}
+
+$\mathstylename \over \mathstylename$
+
+$\luatexUstack{\mathstylename \over \mathstylename}$
+
+$\frac{\mathstylename}{\mathstylename}$
+
+\end{document}

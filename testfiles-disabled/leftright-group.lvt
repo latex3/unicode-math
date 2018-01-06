@@ -1,0 +1,7 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{xits-math.otf}
+\begin{document}
+\[ \left\lgroup \left\lgroup \left\lgroup \left\lgroup \left\lgroup \left\lgroup x^2 
+    \right\rgroup^2 \right\rgroup^2 \right\rgroup^2 \right\rgroup^2 \right\rgroup^2 \right\rgroup \]
+\end{document}

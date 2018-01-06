@@ -1,0 +1,9 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{Cambria Math}
+\begin{document}
+\[\mathup{\LATINtext}\]
+\[\mathup{\latintext}\]
+\[\mathup{\LATINmath}\]
+\[\mathup{\latinmath}\]
+\end{document}

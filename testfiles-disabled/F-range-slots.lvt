@@ -1,0 +1,11 @@
+\input{umtest-preamble}
+\usepackage[svgnames]{xcolor}
+\usepackage[vargreek-shape=unicode]{unicode-math}
+\setmathfont{xits-math.otf}
+\setmathfont[range={"1D703,"1D70E},Colour=Magenta]{xits-math.otf}
+\setmathfont[range={"1D711-},Colour=Green]{xits-math.otf}
+\setmathfont[range={-"1D700},Colour=Red]{xits-math.otf}
+\setmathfont[range={"1D706-"1D709},Colour=Blue]{xits-math.otf}
+\begin{document}
+\(\alpha\beta\gamma\delta\epsilon\zeta\eta\theta\iota\kappa\lambda\mu\nu\xi\pi\rho\sigma\tau\upsilon\phi\chi\psi\omega\)
+\end{document}
