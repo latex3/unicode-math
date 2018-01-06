@@ -10,7 +10,8 @@ textfiles    = {"*.md","LICENSE"}
 versionfiles = {"unicode-math.dtx","CHANGES.md"}
 
 checkengines = {"xetex","luatex"}
-typesetexe = "xelatex"
+typesetexe   = "xelatex"
+typesetopts  = " -shell-escape -interaction=nonstopmode "
 
 packtdszip = true
 recordstatus = true
