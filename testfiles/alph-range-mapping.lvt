@@ -19,9 +19,9 @@
 \TESTBOX{$\latintext$}
 \TESTBOX{$\symup\LATINtext$}
 \TESTBOX{$\symup\latintext$}
-\TESTBOX{${\GREEKtext}$}
-\TESTBOX{${\greektext}$}
-\TESTBOX{${\symit\GREEKtext}$}
-\TESTBOX{${\symup\greektext}$}
+\TESTBOX{$\GREEKtext$}
+\TESTBOX{$\greektext$}
+\TESTBOX{$\symit\GREEKtext$}
+\TESTBOX{$\symup\greektext$}
 
 \end{document}

@@ -171,189 +171,185 @@ l. ...\TESTBOX{$\symup\latintext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\hbox(6.92+0.19)x181.0
-..\TU/xits-math.otf(4)/m/n/10 glyph#3074
-..\TU/xits-math.otf(4)/m/n/10 glyph#3075
-..\TU/xits-math.otf(4)/m/n/10 glyph#3076
-..\TU/xits-math.otf(4)/m/n/10 glyph#3077
-..\TU/xits-math.otf(4)/m/n/10 glyph#3078
-..\TU/xits-math.otf(4)/m/n/10 glyph#3079
-..\TU/xits-math.otf(4)/m/n/10 glyph#3080
-..\TU/xits-math.otf(4)/m/n/10 glyph#3081
-..\TU/xits-math.otf(4)/m/n/10 glyph#3091
-..\TU/xits-math.otf(4)/m/n/10 glyph#3082
-..\TU/xits-math.otf(4)/m/n/10 glyph#3083
-..\TU/xits-math.otf(4)/m/n/10 glyph#3084
-..\TU/xits-math.otf(4)/m/n/10 glyph#3085
-..\TU/xits-math.otf(4)/m/n/10 glyph#3086
-..\TU/xits-math.otf(4)/m/n/10 glyph#3087
-..\TU/xits-math.otf(4)/m/n/10 glyph#3088
-..\TU/xits-math.otf(4)/m/n/10 glyph#3089
-..\TU/xits-math.otf(4)/m/n/10 glyph#3090
-..\TU/xits-math.otf(4)/m/n/10 glyph#3092
-..\TU/xits-math.otf(4)/m/n/10 glyph#3093
-..\TU/xits-math.otf(4)/m/n/10 glyph#3094
-..\TU/xits-math.otf(4)/m/n/10 glyph#3095
-..\TU/xits-math.otf(4)/m/n/10 glyph#3096
-..\TU/xits-math.otf(4)/m/n/10 glyph#3097
-..\TU/xits-math.otf(4)/m/n/10 glyph#3098
+.\TU/xits-math.otf(4)/m/n/10 glyph#3074
+.\TU/xits-math.otf(4)/m/n/10 glyph#3075
+.\TU/xits-math.otf(4)/m/n/10 glyph#3076
+.\TU/xits-math.otf(4)/m/n/10 glyph#3077
+.\TU/xits-math.otf(4)/m/n/10 glyph#3078
+.\TU/xits-math.otf(4)/m/n/10 glyph#3079
+.\TU/xits-math.otf(4)/m/n/10 glyph#3080
+.\TU/xits-math.otf(4)/m/n/10 glyph#3081
+.\TU/xits-math.otf(4)/m/n/10 glyph#3091
+.\TU/xits-math.otf(4)/m/n/10 glyph#3082
+.\TU/xits-math.otf(4)/m/n/10 glyph#3083
+.\TU/xits-math.otf(4)/m/n/10 glyph#3084
+.\TU/xits-math.otf(4)/m/n/10 glyph#3085
+.\TU/xits-math.otf(4)/m/n/10 glyph#3086
+.\TU/xits-math.otf(4)/m/n/10 glyph#3087
+.\TU/xits-math.otf(4)/m/n/10 glyph#3088
+.\TU/xits-math.otf(4)/m/n/10 glyph#3089
+.\TU/xits-math.otf(4)/m/n/10 glyph#3090
+.\TU/xits-math.otf(4)/m/n/10 glyph#3092
+.\TU/xits-math.otf(4)/m/n/10 glyph#3093
+.\TU/xits-math.otf(4)/m/n/10 glyph#3094
+.\TU/xits-math.otf(4)/m/n/10 glyph#3095
+.\TU/xits-math.otf(4)/m/n/10 glyph#3096
+.\TU/xits-math.otf(4)/m/n/10 glyph#3097
+.\TU/xits-math.otf(4)/m/n/10 glyph#3098
 .\mathoff
 ! OK.
 <to be read again> 
                    \relax 
-l. ...\TESTBOX{${\GREEKtext}$}
+l. ...\TESTBOX{$\GREEKtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\hbox(6.98+2.05)x187.06999
-..\TU/xits-math.otf(4)/m/n/10 glyph#3216
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 glyph#3217
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 glyph#3218
-..\kern0.53
-..\TU/xits-math.otf(4)/m/n/10 glyph#3219
-..\TU/xits-math.otf(4)/m/n/10 glyph#3220
-..\TU/xits-math.otf(4)/m/n/10 glyph#3242
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 glyph#3221
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 glyph#3222
-..\TU/xits-math.otf(4)/m/n/10 glyph#3223
-..\TU/xits-math.otf(4)/m/n/10 glyph#3243
-..\TU/xits-math.otf(4)/m/n/10 glyph#3224
-..\TU/xits-math.otf(4)/m/n/10 glyph#3225
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 glyph#3244
-..\kern0.6
-..\TU/xits-math.otf(4)/m/n/10 glyph#3226
-..\TU/xits-math.otf(4)/m/n/10 glyph#3227
-..\TU/xits-math.otf(4)/m/n/10 glyph#3228
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 glyph#3229
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 glyph#3230
-..\TU/xits-math.otf(4)/m/n/10 glyph#3231
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 glyph#3247
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 glyph#3232
-..\TU/xits-math.otf(4)/m/n/10 glyph#3246
-..\TU/xits-math.otf(4)/m/n/10 glyph#3233
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 glyph#3234
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 glyph#3235
-..\kern0.8
-..\TU/xits-math.otf(4)/m/n/10 glyph#3236
-..\TU/xits-math.otf(4)/m/n/10 glyph#3237
-..\TU/xits-math.otf(4)/m/n/10 glyph#3245
-..\TU/xits-math.otf(4)/m/n/10 glyph#3238
-..\kern0.95
-..\TU/xits-math.otf(4)/m/n/10 glyph#3239
-..\kern0.95
-..\TU/xits-math.otf(4)/m/n/10 glyph#3240
+.\TU/xits-math.otf(4)/m/n/10 glyph#3216
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 glyph#3217
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 glyph#3218
+.\kern0.53
+.\TU/xits-math.otf(4)/m/n/10 glyph#3219
+.\TU/xits-math.otf(4)/m/n/10 glyph#3220
+.\TU/xits-math.otf(4)/m/n/10 glyph#3242
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 glyph#3221
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 glyph#3222
+.\TU/xits-math.otf(4)/m/n/10 glyph#3223
+.\TU/xits-math.otf(4)/m/n/10 glyph#3243
+.\TU/xits-math.otf(4)/m/n/10 glyph#3224
+.\TU/xits-math.otf(4)/m/n/10 glyph#3225
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 glyph#3244
+.\kern0.6
+.\TU/xits-math.otf(4)/m/n/10 glyph#3226
+.\TU/xits-math.otf(4)/m/n/10 glyph#3227
+.\TU/xits-math.otf(4)/m/n/10 glyph#3228
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 glyph#3229
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 glyph#3230
+.\TU/xits-math.otf(4)/m/n/10 glyph#3231
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 glyph#3247
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 glyph#3232
+.\TU/xits-math.otf(4)/m/n/10 glyph#3246
+.\TU/xits-math.otf(4)/m/n/10 glyph#3233
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 glyph#3234
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 glyph#3235
+.\kern0.8
+.\TU/xits-math.otf(4)/m/n/10 glyph#3236
+.\TU/xits-math.otf(4)/m/n/10 glyph#3237
+.\TU/xits-math.otf(4)/m/n/10 glyph#3245
+.\TU/xits-math.otf(4)/m/n/10 glyph#3238
+.\kern0.95
+.\TU/xits-math.otf(4)/m/n/10 glyph#3239
+.\kern0.95
+.\TU/xits-math.otf(4)/m/n/10 glyph#3240
 .\mathoff
 ! OK.
 <to be read again> 
                    \relax 
-l. ...\TESTBOX{${\greektext}$}
+l. ...\TESTBOX{$\greektext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\hbox(6.69+0.11)x198.11995
-..\TU/xits-math.otf(4)/m/n/10 glyph#3132
-..\TU/xits-math.otf(4)/m/n/10 glyph#3133
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 glyph#3134
-..\kern1.45
-..\TU/xits-math.otf(4)/m/n/10 glyph#3135
-..\TU/xits-math.otf(4)/m/n/10 glyph#3136
-..\kern0.6
-..\TU/xits-math.otf(4)/m/n/10 glyph#3137
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 glyph#3138
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 glyph#3139
-..\kern0.15
-..\TU/xits-math.otf(4)/m/n/10 glyph#3149
-..\kern0.15
-..\TU/xits-math.otf(4)/m/n/10 glyph#3140
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 glyph#3141
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 glyph#3142
-..\TU/xits-math.otf(4)/m/n/10 glyph#3143
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 glyph#3144
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 glyph#3145
-..\kern0.75
-..\TU/xits-math.otf(4)/m/n/10 glyph#3146
-..\kern0.2
-..\TU/xits-math.otf(4)/m/n/10 glyph#3147
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 glyph#3148
-..\kern1.5
-..\TU/xits-math.otf(4)/m/n/10 glyph#3150
-..\kern0.65
-..\TU/xits-math.otf(4)/m/n/10 glyph#3151
-..\kern1.6
-..\TU/xits-math.otf(4)/m/n/10 glyph#3152
-..\kern1.6
-..\TU/xits-math.otf(4)/m/n/10 glyph#3153
-..\kern0.15
-..\TU/xits-math.otf(4)/m/n/10 glyph#3154
-..\kern0.6
-..\TU/xits-math.otf(4)/m/n/10 glyph#3155
-..\kern1.13
-..\TU/xits-math.otf(4)/m/n/10 glyph#3156
-..\kern0.2
+.\TU/xits-math.otf(4)/m/n/10 glyph#3132
+.\TU/xits-math.otf(4)/m/n/10 glyph#3133
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 glyph#3134
+.\kern1.45
+.\TU/xits-math.otf(4)/m/n/10 glyph#3135
+.\TU/xits-math.otf(4)/m/n/10 glyph#3136
+.\kern0.6
+.\TU/xits-math.otf(4)/m/n/10 glyph#3137
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 glyph#3138
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 glyph#3139
+.\kern0.15
+.\TU/xits-math.otf(4)/m/n/10 glyph#3149
+.\kern0.15
+.\TU/xits-math.otf(4)/m/n/10 glyph#3140
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 glyph#3141
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 glyph#3142
+.\TU/xits-math.otf(4)/m/n/10 glyph#3143
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 glyph#3144
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 glyph#3145
+.\kern0.75
+.\TU/xits-math.otf(4)/m/n/10 glyph#3146
+.\kern0.2
+.\TU/xits-math.otf(4)/m/n/10 glyph#3147
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 glyph#3148
+.\kern1.5
+.\TU/xits-math.otf(4)/m/n/10 glyph#3150
+.\kern0.65
+.\TU/xits-math.otf(4)/m/n/10 glyph#3151
+.\kern1.6
+.\TU/xits-math.otf(4)/m/n/10 glyph#3152
+.\kern1.6
+.\TU/xits-math.otf(4)/m/n/10 glyph#3153
+.\kern0.15
+.\TU/xits-math.otf(4)/m/n/10 glyph#3154
+.\kern0.6
+.\TU/xits-math.otf(4)/m/n/10 glyph#3155
+.\kern1.13
+.\TU/xits-math.otf(4)/m/n/10 glyph#3156
+.\kern0.2
 .\mathoff
 ! OK.
 <to be read again> 
                    \relax 
-l. ...\TESTBOX{${\symit\GREEKtext}$}
+l. ...\TESTBOX{$\symit\GREEKtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\hbox(6.83+2.2)x160.0
-..\TU/xits-math.otf(4)/m/n/10 glyph#658
-..\TU/xits-math.otf(4)/m/n/10 glyph#659
-..\TU/xits-math.otf(4)/m/n/10 glyph#660
-..\TU/xits-math.otf(4)/m/n/10 glyph#661
-..\TU/xits-math.otf(4)/m/n/10 glyph#662
-..\TU/xits-math.otf(4)/m/n/10 glyph#706
-..\TU/xits-math.otf(4)/m/n/10 glyph#663
-..\TU/xits-math.otf(4)/m/n/10 glyph#664
-..\TU/xits-math.otf(4)/m/n/10 glyph#665
-..\TU/xits-math.otf(4)/m/n/10 glyph#689
-..\TU/xits-math.otf(4)/m/n/10 glyph#666
-..\TU/xits-math.otf(4)/m/n/10 glyph#667
-..\TU/xits-math.otf(4)/m/n/10 glyph#703
-..\TU/xits-math.otf(4)/m/n/10 glyph#668
-..\TU/xits-math.otf(4)/m/n/10 glyph#669
-..\TU/xits-math.otf(4)/m/n/10 glyph#670
-..\TU/xits-math.otf(4)/m/n/10 glyph#671
-..\TU/xits-math.otf(4)/m/n/10 glyph#672
-..\TU/xits-math.otf(4)/m/n/10 glyph#673
-..\TU/xits-math.otf(4)/m/n/10 glyph#692
-..\TU/xits-math.otf(4)/m/n/10 glyph#674
-..\TU/xits-math.otf(4)/m/n/10 glyph#704
-..\TU/xits-math.otf(4)/m/n/10 glyph#675
-..\TU/xits-math.otf(4)/m/n/10 glyph#676
-..\TU/xits-math.otf(4)/m/n/10 glyph#677
-..\TU/xits-math.otf(4)/m/n/10 glyph#678
-..\TU/xits-math.otf(4)/m/n/10 glyph#679
-..\TU/xits-math.otf(4)/m/n/10 glyph#691
-..\TU/xits-math.otf(4)/m/n/10 glyph#680
-..\TU/xits-math.otf(4)/m/n/10 glyph#681
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 glyph#682
+.\TU/xits-math.otf(4)/m/n/10 glyph#658
+.\TU/xits-math.otf(4)/m/n/10 glyph#659
+.\TU/xits-math.otf(4)/m/n/10 glyph#660
+.\TU/xits-math.otf(4)/m/n/10 glyph#661
+.\TU/xits-math.otf(4)/m/n/10 glyph#662
+.\TU/xits-math.otf(4)/m/n/10 glyph#706
+.\TU/xits-math.otf(4)/m/n/10 glyph#663
+.\TU/xits-math.otf(4)/m/n/10 glyph#664
+.\TU/xits-math.otf(4)/m/n/10 glyph#665
+.\TU/xits-math.otf(4)/m/n/10 glyph#689
+.\TU/xits-math.otf(4)/m/n/10 glyph#666
+.\TU/xits-math.otf(4)/m/n/10 glyph#667
+.\TU/xits-math.otf(4)/m/n/10 glyph#703
+.\TU/xits-math.otf(4)/m/n/10 glyph#668
+.\TU/xits-math.otf(4)/m/n/10 glyph#669
+.\TU/xits-math.otf(4)/m/n/10 glyph#670
+.\TU/xits-math.otf(4)/m/n/10 glyph#671
+.\TU/xits-math.otf(4)/m/n/10 glyph#672
+.\TU/xits-math.otf(4)/m/n/10 glyph#673
+.\TU/xits-math.otf(4)/m/n/10 glyph#692
+.\TU/xits-math.otf(4)/m/n/10 glyph#674
+.\TU/xits-math.otf(4)/m/n/10 glyph#704
+.\TU/xits-math.otf(4)/m/n/10 glyph#675
+.\TU/xits-math.otf(4)/m/n/10 glyph#676
+.\TU/xits-math.otf(4)/m/n/10 glyph#677
+.\TU/xits-math.otf(4)/m/n/10 glyph#678
+.\TU/xits-math.otf(4)/m/n/10 glyph#679
+.\TU/xits-math.otf(4)/m/n/10 glyph#691
+.\TU/xits-math.otf(4)/m/n/10 glyph#680
+.\TU/xits-math.otf(4)/m/n/10 glyph#681
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 glyph#682
 .\mathoff
 ! OK.
 <to be read again> 
                    \relax 
-l. ...\TESTBOX{${\symup\greektext}$}
+l. ...\TESTBOX{$\symup\greektext$}
 ***************
 Compilation 1 of test file completed with exit status 256

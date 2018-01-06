@@ -170,188 +170,184 @@ l. ...\TESTBOX{$\symup\latintext$}
 > \box...=
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(6.92+0.19)x181.0, direction TLT
-..\TU/xits-math.otf(4)/m/n/10 𝚨
-..\TU/xits-math.otf(4)/m/n/10 𝚩
-..\TU/xits-math.otf(4)/m/n/10 𝚪
-..\TU/xits-math.otf(4)/m/n/10 𝚫
-..\TU/xits-math.otf(4)/m/n/10 𝚬
-..\TU/xits-math.otf(4)/m/n/10 𝚭
-..\TU/xits-math.otf(4)/m/n/10 𝚮
-..\TU/xits-math.otf(4)/m/n/10 𝚯
-..\TU/xits-math.otf(4)/m/n/10 𝚹
-..\TU/xits-math.otf(4)/m/n/10 𝚰
-..\TU/xits-math.otf(4)/m/n/10 𝚱
-..\TU/xits-math.otf(4)/m/n/10 𝚲
-..\TU/xits-math.otf(4)/m/n/10 𝚳
-..\TU/xits-math.otf(4)/m/n/10 𝚴
-..\TU/xits-math.otf(4)/m/n/10 𝚵
-..\TU/xits-math.otf(4)/m/n/10 𝚶
-..\TU/xits-math.otf(4)/m/n/10 𝚷
-..\TU/xits-math.otf(4)/m/n/10 𝚸
-..\TU/xits-math.otf(4)/m/n/10 𝚺
-..\TU/xits-math.otf(4)/m/n/10 𝚻
-..\TU/xits-math.otf(4)/m/n/10 𝚼
-..\TU/xits-math.otf(4)/m/n/10 𝚽
-..\TU/xits-math.otf(4)/m/n/10 𝚾
-..\TU/xits-math.otf(4)/m/n/10 𝚿
-..\TU/xits-math.otf(4)/m/n/10 𝛀
+.\TU/xits-math.otf(4)/m/n/10 𝚨
+.\TU/xits-math.otf(4)/m/n/10 𝚩
+.\TU/xits-math.otf(4)/m/n/10 𝚪
+.\TU/xits-math.otf(4)/m/n/10 𝚫
+.\TU/xits-math.otf(4)/m/n/10 𝚬
+.\TU/xits-math.otf(4)/m/n/10 𝚭
+.\TU/xits-math.otf(4)/m/n/10 𝚮
+.\TU/xits-math.otf(4)/m/n/10 𝚯
+.\TU/xits-math.otf(4)/m/n/10 𝚹
+.\TU/xits-math.otf(4)/m/n/10 𝚰
+.\TU/xits-math.otf(4)/m/n/10 𝚱
+.\TU/xits-math.otf(4)/m/n/10 𝚲
+.\TU/xits-math.otf(4)/m/n/10 𝚳
+.\TU/xits-math.otf(4)/m/n/10 𝚴
+.\TU/xits-math.otf(4)/m/n/10 𝚵
+.\TU/xits-math.otf(4)/m/n/10 𝚶
+.\TU/xits-math.otf(4)/m/n/10 𝚷
+.\TU/xits-math.otf(4)/m/n/10 𝚸
+.\TU/xits-math.otf(4)/m/n/10 𝚺
+.\TU/xits-math.otf(4)/m/n/10 𝚻
+.\TU/xits-math.otf(4)/m/n/10 𝚼
+.\TU/xits-math.otf(4)/m/n/10 𝚽
+.\TU/xits-math.otf(4)/m/n/10 𝚾
+.\TU/xits-math.otf(4)/m/n/10 𝚿
+.\TU/xits-math.otf(4)/m/n/10 𝛀
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
-l. ...\TESTBOX{${\GREEKtext}$}
+l. ...\TESTBOX{$\GREEKtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(6.98+2.05)x187.06998, direction TLT
-..\TU/xits-math.otf(4)/m/n/10 𝜶
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 𝜷
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 𝜸
-..\kern0.53
-..\TU/xits-math.otf(4)/m/n/10 𝜹
-..\TU/xits-math.otf(4)/m/n/10 𝜺
-..\TU/xits-math.otf(4)/m/n/10 𝝐
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 𝜻
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 𝜼
-..\TU/xits-math.otf(4)/m/n/10 𝜽
-..\TU/xits-math.otf(4)/m/n/10 𝝑
-..\TU/xits-math.otf(4)/m/n/10 𝜾
-..\TU/xits-math.otf(4)/m/n/10 𝜿
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 𝝒
-..\kern0.6
-..\TU/xits-math.otf(4)/m/n/10 𝝀
-..\TU/xits-math.otf(4)/m/n/10 𝝁
-..\TU/xits-math.otf(4)/m/n/10 𝝂
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 𝝃
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 𝝄
-..\TU/xits-math.otf(4)/m/n/10 𝝅
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 𝝕
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 𝝆
-..\TU/xits-math.otf(4)/m/n/10 𝝔
-..\TU/xits-math.otf(4)/m/n/10 𝝇
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 𝝈
-..\kern0.5
-..\TU/xits-math.otf(4)/m/n/10 𝝉
-..\kern0.8
-..\TU/xits-math.otf(4)/m/n/10 𝝊
-..\TU/xits-math.otf(4)/m/n/10 𝝋
-..\TU/xits-math.otf(4)/m/n/10 𝝓
-..\TU/xits-math.otf(4)/m/n/10 𝝌
-..\kern0.95
-..\TU/xits-math.otf(4)/m/n/10 𝝍
-..\kern0.95
-..\TU/xits-math.otf(4)/m/n/10 𝝎
+.\TU/xits-math.otf(4)/m/n/10 𝜶
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 𝜷
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 𝜸
+.\kern0.53
+.\TU/xits-math.otf(4)/m/n/10 𝜹
+.\TU/xits-math.otf(4)/m/n/10 𝜺
+.\TU/xits-math.otf(4)/m/n/10 𝝐
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 𝜻
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 𝜼
+.\TU/xits-math.otf(4)/m/n/10 𝜽
+.\TU/xits-math.otf(4)/m/n/10 𝝑
+.\TU/xits-math.otf(4)/m/n/10 𝜾
+.\TU/xits-math.otf(4)/m/n/10 𝜿
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 𝝒
+.\kern0.6
+.\TU/xits-math.otf(4)/m/n/10 𝝀
+.\TU/xits-math.otf(4)/m/n/10 𝝁
+.\TU/xits-math.otf(4)/m/n/10 𝝂
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 𝝃
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 𝝄
+.\TU/xits-math.otf(4)/m/n/10 𝝅
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 𝝕
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 𝝆
+.\TU/xits-math.otf(4)/m/n/10 𝝔
+.\TU/xits-math.otf(4)/m/n/10 𝝇
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 𝝈
+.\kern0.5
+.\TU/xits-math.otf(4)/m/n/10 𝝉
+.\kern0.8
+.\TU/xits-math.otf(4)/m/n/10 𝝊
+.\TU/xits-math.otf(4)/m/n/10 𝝋
+.\TU/xits-math.otf(4)/m/n/10 𝝓
+.\TU/xits-math.otf(4)/m/n/10 𝝌
+.\kern0.95
+.\TU/xits-math.otf(4)/m/n/10 𝝍
+.\kern0.95
+.\TU/xits-math.otf(4)/m/n/10 𝝎
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
-l. ...\TESTBOX{${\greektext}$}
+l. ...\TESTBOX{$\greektext$}
 > \box...=
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(6.69+0.11)x197.45995, direction TLT
-..\TU/xits-math.otf(4)/m/n/10 𝛢
-..\TU/xits-math.otf(4)/m/n/10 𝛣
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 𝛤
-..\kern1.45
-..\TU/xits-math.otf(4)/m/n/10 𝛥
-..\TU/xits-math.otf(4)/m/n/10 𝛦
-..\kern0.6
-..\TU/xits-math.otf(4)/m/n/10 𝛧
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 𝛨
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 𝛩
-..\kern0.15
-..\TU/xits-math.otf(4)/m/n/10 𝛳
-..\kern0.15
-..\TU/xits-math.otf(4)/m/n/10 𝛪
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 𝛫
-..\kern0.7
-..\TU/xits-math.otf(4)/m/n/10 𝛬
-..\TU/xits-math.otf(4)/m/n/10 𝛭
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 𝛮
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 𝛯
-..\kern0.75
-..\TU/xits-math.otf(4)/m/n/10 𝛰
-..\kern0.2
-..\TU/xits-math.otf(4)/m/n/10 𝛱
-..\kern0.9
-..\TU/xits-math.otf(4)/m/n/10 𝛲
-..\kern1.5
-..\TU/xits-math.otf(4)/m/n/10 𝛴
-..\kern0.65
-..\TU/xits-math.otf(4)/m/n/10 𝛵
-..\kern1.6
-..\TU/xits-math.otf(4)/m/n/10 𝛶
-..\kern1.6
-..\TU/xits-math.otf(4)/m/n/10 𝛷
-..\kern0.15
-..\TU/xits-math.otf(4)/m/n/10 𝛸
-..\kern0.6
-..\TU/xits-math.otf(4)/m/n/10 𝛹
-..\kern1.13
-..\TU/xits-math.otf(4)/m/n/10 𝛺
+.\TU/xits-math.otf(4)/m/n/10 𝛢
+.\TU/xits-math.otf(4)/m/n/10 𝛣
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 𝛤
+.\kern1.45
+.\TU/xits-math.otf(4)/m/n/10 𝛥
+.\TU/xits-math.otf(4)/m/n/10 𝛦
+.\kern0.6
+.\TU/xits-math.otf(4)/m/n/10 𝛧
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 𝛨
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 𝛩
+.\kern0.15
+.\TU/xits-math.otf(4)/m/n/10 𝛳
+.\kern0.15
+.\TU/xits-math.otf(4)/m/n/10 𝛪
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 𝛫
+.\kern0.7
+.\TU/xits-math.otf(4)/m/n/10 𝛬
+.\TU/xits-math.otf(4)/m/n/10 𝛭
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 𝛮
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 𝛯
+.\kern0.75
+.\TU/xits-math.otf(4)/m/n/10 𝛰
+.\kern0.2
+.\TU/xits-math.otf(4)/m/n/10 𝛱
+.\kern0.9
+.\TU/xits-math.otf(4)/m/n/10 𝛲
+.\kern1.5
+.\TU/xits-math.otf(4)/m/n/10 𝛴
+.\kern0.65
+.\TU/xits-math.otf(4)/m/n/10 𝛵
+.\kern1.6
+.\TU/xits-math.otf(4)/m/n/10 𝛶
+.\kern1.6
+.\TU/xits-math.otf(4)/m/n/10 𝛷
+.\kern0.15
+.\TU/xits-math.otf(4)/m/n/10 𝛸
+.\kern0.6
+.\TU/xits-math.otf(4)/m/n/10 𝛹
+.\kern1.13
+.\TU/xits-math.otf(4)/m/n/10 𝛺
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
-l. ...\TESTBOX{${\symit\GREEKtext}$}
+l. ...\TESTBOX{$\symit\GREEKtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(6.83+2.2)x160.0, direction TLT
-..\TU/xits-math.otf(4)/m/n/10 α
-..\TU/xits-math.otf(4)/m/n/10 β
-..\TU/xits-math.otf(4)/m/n/10 γ
-..\TU/xits-math.otf(4)/m/n/10 δ
-..\TU/xits-math.otf(4)/m/n/10 ε
-..\TU/xits-math.otf(4)/m/n/10 ϵ
-..\TU/xits-math.otf(4)/m/n/10 ζ
-..\TU/xits-math.otf(4)/m/n/10 η
-..\TU/xits-math.otf(4)/m/n/10 θ
-..\TU/xits-math.otf(4)/m/n/10 ϑ
-..\TU/xits-math.otf(4)/m/n/10 ι
-..\TU/xits-math.otf(4)/m/n/10 κ
-..\TU/xits-math.otf(4)/m/n/10 ϰ
-..\TU/xits-math.otf(4)/m/n/10 λ
-..\TU/xits-math.otf(4)/m/n/10 μ
-..\TU/xits-math.otf(4)/m/n/10 ν
-..\TU/xits-math.otf(4)/m/n/10 ξ
-..\TU/xits-math.otf(4)/m/n/10 ο
-..\TU/xits-math.otf(4)/m/n/10 π
-..\TU/xits-math.otf(4)/m/n/10 ϖ
-..\TU/xits-math.otf(4)/m/n/10 ρ
-..\TU/xits-math.otf(4)/m/n/10 ϱ
-..\TU/xits-math.otf(4)/m/n/10 ς
-..\TU/xits-math.otf(4)/m/n/10 σ
-..\TU/xits-math.otf(4)/m/n/10 τ
-..\TU/xits-math.otf(4)/m/n/10 υ
-..\TU/xits-math.otf(4)/m/n/10 φ
-..\TU/xits-math.otf(4)/m/n/10 ϕ
-..\TU/xits-math.otf(4)/m/n/10 χ
-..\TU/xits-math.otf(4)/m/n/10 ψ
-..\kern0.4
-..\TU/xits-math.otf(4)/m/n/10 ω
+.\TU/xits-math.otf(4)/m/n/10 α
+.\TU/xits-math.otf(4)/m/n/10 β
+.\TU/xits-math.otf(4)/m/n/10 γ
+.\TU/xits-math.otf(4)/m/n/10 δ
+.\TU/xits-math.otf(4)/m/n/10 ε
+.\TU/xits-math.otf(4)/m/n/10 ϵ
+.\TU/xits-math.otf(4)/m/n/10 ζ
+.\TU/xits-math.otf(4)/m/n/10 η
+.\TU/xits-math.otf(4)/m/n/10 θ
+.\TU/xits-math.otf(4)/m/n/10 ϑ
+.\TU/xits-math.otf(4)/m/n/10 ι
+.\TU/xits-math.otf(4)/m/n/10 κ
+.\TU/xits-math.otf(4)/m/n/10 ϰ
+.\TU/xits-math.otf(4)/m/n/10 λ
+.\TU/xits-math.otf(4)/m/n/10 μ
+.\TU/xits-math.otf(4)/m/n/10 ν
+.\TU/xits-math.otf(4)/m/n/10 ξ
+.\TU/xits-math.otf(4)/m/n/10 ο
+.\TU/xits-math.otf(4)/m/n/10 π
+.\TU/xits-math.otf(4)/m/n/10 ϖ
+.\TU/xits-math.otf(4)/m/n/10 ρ
+.\TU/xits-math.otf(4)/m/n/10 ϱ
+.\TU/xits-math.otf(4)/m/n/10 ς
+.\TU/xits-math.otf(4)/m/n/10 σ
+.\TU/xits-math.otf(4)/m/n/10 τ
+.\TU/xits-math.otf(4)/m/n/10 υ
+.\TU/xits-math.otf(4)/m/n/10 φ
+.\TU/xits-math.otf(4)/m/n/10 ϕ
+.\TU/xits-math.otf(4)/m/n/10 χ
+.\TU/xits-math.otf(4)/m/n/10 ψ
+.\kern0.4
+.\TU/xits-math.otf(4)/m/n/10 ω
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
-l. ...\TESTBOX{${\symup\greektext}$}
+l. ...\TESTBOX{$\symup\greektext$}
 ***************
 Compilation 1 of test file completed with exit status 256
