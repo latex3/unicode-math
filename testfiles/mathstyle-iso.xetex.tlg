@@ -3,58 +3,54 @@ Don't change this file in any respect.
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#1827
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#1828
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#1829
-.\kern0.43945
-.\TU/CambriaMath(1)/m/n/10 glyph#1830
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1831
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1832
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1833
-.\kern0.43945
-.\TU/CambriaMath(1)/m/n/10 glyph#1834
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1835
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1836
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1837
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1838
-.\kern0.20508
-.\TU/CambriaMath(1)/m/n/10 glyph#1839
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1840
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1841
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1842
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1843
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1844
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1845
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1846
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1847
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1848
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1849
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1850
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1851
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1852
-.\kern0.24414
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1270
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1271
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1272
+.\kern0.73
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1273
+.\kern0.04
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1274
+.\kern0.54
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1275
+.\kern1.34
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1276
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1277
+.\kern0.78
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1278
+.\kern0.85
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1279
+.\kern1.06
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1280
+.\kern0.68
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1281
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1282
+.\kern1.02
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1283
+.\kern1.06
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1284
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1285
+.\kern1.4
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1286
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1287
+.\kern0.24
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1288
+.\kern0.6
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1289
+.\kern1.48
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1290
+.\kern1.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1291
+.\kern2.14
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1292
+.\kern1.32
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1293
+.\kern0.51
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1294
+.\kern2.09
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1295
+.\kern0.68
 .\mathoff
 ! OK.
 <to be read again> 
@@ -63,58 +59,47 @@ l. ...\TESTBOX{$\LATINtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#1853
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1854
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1855
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1856
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1857
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1858
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1859
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1860
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1861
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1862
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1863
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1864
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1865
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1866
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1867
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1868
-.\kern0.12207
-.\TU/CambriaMath(1)/m/n/10 glyph#1869
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1870
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1871
-.\kern0.20508
-.\TU/CambriaMath(1)/m/n/10 glyph#1872
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1873
-.\kern0.2539
-.\TU/CambriaMath(1)/m/n/10 glyph#1874
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1875
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1876
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1877
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1878
-.\kern0.1709
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1296
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1297
+.\kern0.14
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1298
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1299
+.\kern0.24
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1300
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1301
+.\kern0.9
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1302
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1303
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1304
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1305
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1306
+.\kern0.15
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1307
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1308
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1309
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1310
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1311
+.\kern0.15
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1312
+.\kern0.34
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1313
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1314
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1315
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1316
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1317
+.\kern0.11
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1318
+.\kern0.03
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1320
+.\kern0.28
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
+.\kern0.3
 .\mathoff
 ! OK.
 <to be read again> 
@@ -123,58 +108,54 @@ l. ...\TESTBOX{$\latintext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#1827
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#1828
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#1829
-.\kern0.43945
-.\TU/CambriaMath(1)/m/n/10 glyph#1830
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1831
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1832
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1833
-.\kern0.43945
-.\TU/CambriaMath(1)/m/n/10 glyph#1834
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1835
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1836
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1837
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1838
-.\kern0.20508
-.\TU/CambriaMath(1)/m/n/10 glyph#1839
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1840
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1841
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1842
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1843
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1844
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1845
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1846
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1847
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1848
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1849
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1850
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1851
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1852
-.\kern0.24414
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1270
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1271
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1272
+.\kern0.73
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1273
+.\kern0.04
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1274
+.\kern0.54
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1275
+.\kern1.34
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1276
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1277
+.\kern0.78
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1278
+.\kern0.85
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1279
+.\kern1.06
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1280
+.\kern0.68
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1281
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1282
+.\kern1.02
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1283
+.\kern1.06
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1284
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1285
+.\kern1.4
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1286
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1287
+.\kern0.24
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1288
+.\kern0.6
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1289
+.\kern1.48
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1290
+.\kern1.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1291
+.\kern2.14
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1292
+.\kern1.32
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1293
+.\kern0.51
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1294
+.\kern2.09
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1295
+.\kern0.68
 .\mathoff
 ! OK.
 <to be read again> 
@@ -183,58 +164,47 @@ l. ...\TESTBOX{$\LATINmath$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#1853
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1854
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1855
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1856
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1857
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1858
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1859
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1860
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1861
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1862
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1863
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1864
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1865
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1866
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1867
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1868
-.\kern0.12207
-.\TU/CambriaMath(1)/m/n/10 glyph#1869
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1870
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#1871
-.\kern0.20508
-.\TU/CambriaMath(1)/m/n/10 glyph#1872
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1873
-.\kern0.2539
-.\TU/CambriaMath(1)/m/n/10 glyph#1874
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1875
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1876
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1877
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#1878
-.\kern0.1709
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1296
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1297
+.\kern0.14
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1298
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1299
+.\kern0.24
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1300
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1301
+.\kern0.9
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1302
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1303
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1304
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1305
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1306
+.\kern0.15
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1307
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1308
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1309
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1310
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1311
+.\kern0.15
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1312
+.\kern0.34
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1313
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1314
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1315
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1316
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1317
+.\kern0.11
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1318
+.\kern0.03
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1320
+.\kern0.28
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
+.\kern0.3
 .\mathoff
 ! OK.
 <to be read again> 
@@ -243,56 +213,53 @@ l. ...\TESTBOX{$\latinmath$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#1983
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#1984
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#1985
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1986
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#1987
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1988
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1989
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1990
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2000
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1991
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1992
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1993
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1994
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1995
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1996
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1997
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1998
-.\kern0.2539
-.\TU/CambriaMath(1)/m/n/10 glyph#1999
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2001
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2002
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2003
-.\kern0.2539
-.\TU/CambriaMath(1)/m/n/10 glyph#2004
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2005
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2006
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2007
-.\kern0.26855
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4574
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4575
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4448
+.\kern1.34
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4449
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4576
+.\kern0.54
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4577
+.\kern0.68
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4578
+.\kern0.78
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4450
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4792
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4579
+.\kern0.85
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4580
+.\kern0.68
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4451
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4581
+.\kern1.02
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4582
+.\kern1.06
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4452
+.\kern0.63
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4584
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4453
+.\kern0.77
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4585
+.\kern1.4
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4454
+.\kern0.54
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4586
+.\kern1.48
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4455
+.\kern1.46
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4456
+.\kern0.04
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4587
+.\kern0.51
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4457
+.\kern1.09
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4458
+.\kern0.42
 .\mathoff
 ! OK.
 <to be read again> 
@@ -301,68 +268,57 @@ l. ...\TESTBOX{$\GREEKtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#2009
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2010
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2011
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2012
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#2013
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#2035
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#2014
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#2015
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#2016
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#2036
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2017
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#2018
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2037
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2019
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#2020
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2021
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#2022
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#2023
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2024
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2040
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2025
-.\kern0.12207
-.\TU/CambriaMath(1)/m/n/10 glyph#2039
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2027
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2026
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2028
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2029
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#2030
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2038
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2031
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#2032
-.\kern0.14648
-.\TU/CambriaMath(1)/m/n/10 glyph#2033
-.\kern0.21973
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4459
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4460
+.\kern0.36
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4461
+.\kern0.53
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4462
+.\kern0.36
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4483
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4463
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4464
+.\kern0.64
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4465
+.\kern0.27
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4466
+.\kern0.14
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4484
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4467
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4468
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4469
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4470
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4471
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4472
+.\kern0.58
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4473
+.\kern0.36
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4583
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4474
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4485
+.\kern0.17
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4475
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4486
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4487
+.\kern0.74
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4476
+.\kern0.24
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4477
+.\kern1.02
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4478
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4488
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4479
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4480
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4481
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4482
+.\kern0.1
 .\mathoff
 ! OK.
 <to be read again> 
@@ -371,56 +327,53 @@ l. ...\TESTBOX{$\greektext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#1983
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#1984
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#1985
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1986
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#1987
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#1988
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1989
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1990
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2000
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1991
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#1992
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#1993
-.\kern0.19531
-.\TU/CambriaMath(1)/m/n/10 glyph#1994
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1995
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1996
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#1997
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#1998
-.\kern0.2539
-.\TU/CambriaMath(1)/m/n/10 glyph#1999
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2001
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2002
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2003
-.\kern0.2539
-.\TU/CambriaMath(1)/m/n/10 glyph#2004
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2005
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2006
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2007
-.\kern0.26855
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4574
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4575
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4448
+.\kern1.34
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4449
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4576
+.\kern0.54
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4577
+.\kern0.68
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4578
+.\kern0.78
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4450
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4792
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4579
+.\kern0.85
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4580
+.\kern0.68
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4451
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4581
+.\kern1.02
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4582
+.\kern1.06
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4452
+.\kern0.63
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4584
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4453
+.\kern0.77
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4585
+.\kern1.4
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4454
+.\kern0.54
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4586
+.\kern1.48
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4455
+.\kern1.46
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4456
+.\kern0.04
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4587
+.\kern0.51
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4457
+.\kern1.09
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4458
+.\kern0.42
 .\mathoff
 ! OK.
 <to be read again> 
@@ -429,68 +382,57 @@ l. ...\TESTBOX{$\GREEKmath$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/CambriaMath(1)/m/n/10 glyph#2009
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2010
-.\kern0.30273
-.\TU/CambriaMath(1)/m/n/10 glyph#2011
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2012
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#2013
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#2035
-.\kern0.31738
-.\TU/CambriaMath(1)/m/n/10 glyph#2014
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#2015
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#2016
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#2036
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2017
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#2018
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2037
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2019
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#2020
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2021
-.\kern0.29297
-.\TU/CambriaMath(1)/m/n/10 glyph#2022
-.\kern0.39063
-.\TU/CambriaMath(1)/m/n/10 glyph#2023
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2024
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2040
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2025
-.\kern0.12207
-.\TU/CambriaMath(1)/m/n/10 glyph#2039
-.\kern0.21973
-.\TU/CambriaMath(1)/m/n/10 glyph#2027
-.\kern0.26855
-.\TU/CambriaMath(1)/m/n/10 glyph#2026
-.\kern0.24414
-.\TU/CambriaMath(1)/m/n/10 glyph#2028
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2029
-.\kern0.1709
-.\TU/CambriaMath(1)/m/n/10 glyph#2030
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2038
-.\kern0.21484
-.\TU/CambriaMath(1)/m/n/10 glyph#2031
-.\kern0.09766
-.\TU/CambriaMath(1)/m/n/10 glyph#2032
-.\kern0.14648
-.\TU/CambriaMath(1)/m/n/10 glyph#2033
-.\kern0.21973
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4459
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4460
+.\kern0.36
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4461
+.\kern0.53
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4462
+.\kern0.36
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4483
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4463
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4464
+.\kern0.64
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4465
+.\kern0.27
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4466
+.\kern0.14
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4484
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4467
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4468
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4469
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4470
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4471
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4472
+.\kern0.58
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4473
+.\kern0.36
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4583
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4474
+.\kern0.25
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4485
+.\kern0.17
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4475
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4486
+.\kern0.13
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4487
+.\kern0.74
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4476
+.\kern0.24
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4477
+.\kern1.02
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4478
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4488
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4479
+.\kern0.05
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4480
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4481
+.\kern0.12
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4482
+.\kern0.1
 .\mathoff
 ! OK.
 <to be read again> 

@@ -28,6 +28,9 @@ CHANGE HISTORY
   * The following commands are listed as ‘unsupported’ and will result in sensible
     error messages rather than the old behaviour of meaningless output:
     `\arrowvert`, `\Arrowvert`, `\bracevert`. (#411).
+  * Test suite re-implemented for better portability and use with Travis CI.
+    See <https://travis-ci.org/wspr/unicode-math> for the up-to-date status
+    of whether the test suite is passing.
 
 - v0.8i (2017/11/18)
 
