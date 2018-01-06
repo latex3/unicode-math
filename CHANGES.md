@@ -3,34 +3,47 @@ CHANGE HISTORY
 
 - v0.8j (2018/01/02)
 
-  * New symbol `\mathhyphen` (#313).
-  * When using the `range` feature, users commonly found they needed to call
-    `\setmathfont` a final time with the original font to ensure correct
-    formatting and correct selection of symbol alphabets. I hope the issues
-    that required this have now been corrected (#331, #387).
-  * If `\setmathfont` is called a second time in a document, it tries harder
-    to more properly reset the maths font setup for the new font (#224).
-  * Properly hard-coded the `\delcode` of the period to ensure `\left`/`\right`
-    behave correctly in all circumstances (#344, #351, #420).
-  * Numbers and latin letters in the fullwidth Unicode range are now supported
-    as aliases to their ASCII counterparts (#337).
-  * Correct `\mathrm` (etc.) situation when no fonts loaded explicitly by the user (#330).
-  * Some bug fixes to `\not` (#126, #343, #363) and new (tentative) command
-    `\(New|Renew)NegationCommand` for defining custom negations (feedback sought).
-  * `\std@minus` & `\std@equal` now properly corrected (#332).
-  * Fix problem with infinite loop with `\cdots` when `amsmath` loaded after `unicode-math` (#227).
-  * `\nabla` and `\partial` have corrected documentation (#257).
-  * No longer loads the `ucharcat` package.
-  * If `\setmath(rm|sf|tt)` is called *before* loading `unicode-math`, the setting
-    is now remembered (#407).
-  * `\typecolon` is now `\mathrel` instead of `\mathbin` (#360).
-  * LuaTeX bug with shifted \underbrace when it contains accented symbols worked around (#391).
-  * The following commands are listed as ‘unsupported’ and will result in sensible
-    error messages rather than the old behaviour of meaningless output:
-    `\arrowvert`, `\Arrowvert`, `\bracevert`. (#411).
-  * Test suite re-implemented for better portability and use with Travis CI.
-    See <https://travis-ci.org/wspr/unicode-math> for the up-to-date status
-    of whether the test suite is passing.
+  * NEW
+
+    * Numbers and latin letters in the fullwidth Unicode range are now supported
+      as aliases to their ASCII counterparts (#337).
+    * New commands `\(New|Renew)NegationCommand \foo` for defining custom negations
+      accessed via `\not\foo`.
+
+  * SYMBOLS
+
+    * `\typecolon` is now `\mathrel` instead of `\mathbin` (#360).
+    * New symbol `\mathhyphen` which acts like a ‘letter’ (#313).
+    * `\nabla` and `\partial` have corrected documentation (#257).
+    * The following legacy commands are listed as ‘unsupported’ and will result
+      in sensibl error messages rather than the old behaviour of meaningless
+      output: `\arrowvert`, `\Arrowvert`, `\bracevert`. (#411).
+
+  * BUGS
+
+    * LuaTeX bug with shifted `\underbrace` when it contains accented symbols worked around (#391).
+    * When using the `range` feature, users commonly found they needed to call
+      `\setmathfont` a final time with the original font to ensure correct
+      formatting and correct selection of symbol alphabets. I hope the issues
+      that required this have now been corrected (#331, #387).
+    * If `\setmathfont` is called a second time in a document, it tries harder
+      to more properly reset the maths font setup for the new font (#224).
+    * Properly hard-coded the `\delcode` of the period to ensure `\left`/`\right`
+      behave correctly in all circumstances (#344, #351, #420).
+    * Correct `\mathrm` (etc.) situation when no fonts loaded explicitly by the user (#330).
+    * Various bug fixes to `\not` (#126, #343, #363)
+    * `\std@minus` & `\std@equal` now properly corrected (#332).
+    * Fix problem with infinite loop with `\cdots` when `amsmath` loaded after `unicode-math` (#227).
+    * If `\setmath(rm|sf|tt)` is called *before* loading `unicode-math`, the setting
+      is now remembered (#407).
+
+  * INTERNALS
+
+    * No longer loads the `ucharcat` package.
+    * Test suite re-implemented for better portability and use with Travis CI.
+      See <https://travis-ci.org/wspr/unicode-math> for the up-to-date status
+      of whether the test suite is passing.
+
 
 - v0.8i (2017/11/18)
 
