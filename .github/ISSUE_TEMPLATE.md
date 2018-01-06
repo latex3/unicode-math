@@ -1,11 +1,13 @@
 ## Description
 A sentence or two describing the issue.
 
-## Check
+## Check/indicate
+- [ ] Relevant for XeTeX
+- [ ] Relevant for LuaTeX
 - [ ] Issue tracker has been searched for similar issues?
 - [ ] Links to <tex.stackexchange.com> discussion if appropriate
 
-## Minimal example demonstrating the issue functionality 
+## Minimal example demonstrating the issue
 ```
 \documentclass{article}
 \usepackage{unicode-math}
@@ -16,3 +18,5 @@ A sentence or two describing the issue.
 \]
 \end{document}
 ```
+
+## Further details

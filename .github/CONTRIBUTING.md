@@ -1,9 +1,14 @@
-# Guidelines for issues and pull requests
+# Development guide for `unicode-math`
+
+This document covers both guidelines for issues and pull requests and
+the general development details of the `unicode-math` package.
+
 
 ## Issues
 
-Thanks for taking the time to report an issue!
-Any apologies that I take longer, sometimes *way longer*, than I should to address them.
+If you're reading this to find out more about reporting an issue in the package,
+thanks for taking the time! And apologies that I take longer, sometimes
+*way longer*, than I should to address them.
 
 There are two important key points for submitting an issue:
 
@@ -34,6 +39,7 @@ This is an example of a *bad* example:
       x^2 + y^2 = z^2
     \]
 
+
 ## Branches and Pull Requests
 
 There are two main branches in this repository: `master` and `working`.
@@ -44,10 +50,25 @@ The `working` branch should be considered only semi-public; it may have broken
 code and/or use force-pushing to rewrite history on occasions.
 
 If you wish to make a contribution, please start from the `master` branch.
+Only ‘rebase’ or ‘squash rebase’ will be used to accept pull requests.
 
 If you are changing documentation only (i.e., no code changes), you can add
 `[ci skip]` to the commit message and the test suite won't be run to check that
 the changes haven't broken anything.
+
+
+## Test suite and Continuous Integration
+
+The `l3build` system is used to maintain a test suite for the package.
+This test suite is used in the Travis CI system to continuously monitor whether
+the code passes the test suite.
+
+* `master` branch:  [![Build Status](https://travis-ci.org/wspr/unicode-math.svg?branch=master)](https://travis-ci.org/wspr/unicode-math)
+* `working` branch: [![Build Status](https://travis-ci.org/wspr/unicode-math.svg?branch=working)](https://travis-ci.org/wspr/unicode-math)
+
+The test suite is intended to be portable. To try it out yourself, simply run
+`texlua build.lua check` and grab a quick coffee. With any luck you should see
+that the test suite passes!
 
 
 ## Copyright
@@ -63,3 +84,4 @@ entry in the following list:
 
 Contributors are added to the COPYRIGHT file manually. If your name doesn't appear
 in that list, you might need to check your Git setup.
+

@@ -1,6 +1,5 @@
 ## Status
-
-**READY/UNDER DEVELOPMENT/HOLD**
+**READY/UNDER DEVELOPMENT/FOR DISCUSSION**
 
 ## Description
 A few sentences describing the overall goals of the pull request's commits.
@@ -10,7 +9,7 @@ A few sentences describing the overall goals of the pull request's commits.
 - [ ] Documentation if necessary
 - [ ] Code follows expl3 style guidelines
 
-## Minimal example demonstrating the new/fixed functionality 
+## Minimal example demonstrating the new/fixed functionality
 ```
 \documentclass{article}
 \usepackage{unicode-math}

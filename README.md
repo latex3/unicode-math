@@ -52,7 +52,7 @@ PACKAGE USAGE
 Please see the PDF documentation for full details. A simple beginning is:
 
     \usepackage{unicode-math}
-    \setmathfont{xits-math.otf}
+    \setmathfont{texgyrepagella-math.otf}
 
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
 Furthermore, it will be in a different font.
@@ -64,8 +64,15 @@ REQUIREMENTS
 As well as running XeTeX or LuaTeX, this package requires recent versions of the `fontspec`, `expl3`, `xpackages`, `filehook`, and `lualatex-math` packages.
 
 
-MAINTENANCE
------------
+THANKS
+------
+
+I write LaTeX code as a hobby and a passion, not as part of my day job.
+If you would like to say thanks, please consider a donation at: <https://www.patreon.com/wspr>
+
+
+DEVELOPMENT and MAINTENANCE
+---------------------------
 
 The current release version is available from CTAN:
 > <http://tug.ctan.org/pkg/unicode-math>
@@ -78,12 +85,8 @@ Please file bug reports with minimal examples:
 
 See `CHANGES.md` for the complete listing of change history.
 
-
-THANKS
-------
-
-I write LaTeX code as a hobby and a passion, not as part of my day job.
-If you would like to say thanks, please consider a donation at: <https://www.patreon.com/wspr>
+Further information on the details surrounding the development of the package
+can be found in the `CONTRIBUTING.md` file in the Github repository.
 
 
 LICENCE
