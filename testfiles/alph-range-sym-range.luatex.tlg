@@ -1,0 +1,129 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(1)/m/n/10 𝑎
+.\TU/xits-math.otf(1)/m/n/10 𝑏
+.\TU/xits-math.otf(1)/m/n/10 𝑐
+.\kern0.5
+.\TU/xits-math.otf(1)/m/n/10 𝑑
+.\kern0.6
+.\TU/xits-math.otf(1)/m/n/10 𝑒
+.\TU/xits-math.otf(1)/m/n/10 𝑓
+.\kern1.2
+.\TU/xits-math.otf(1)/m/n/10 𝑔
+.\kern0.4
+.\TU/xits-math.otf(1)/m/n/10 ℎ
+.\TU/xits-math.otf(1)/m/n/10 𝑖
+.\TU/xits-math.otf(1)/m/n/10 𝑗
+.\kern0.6
+.\TU/xits-math.otf(1)/m/n/10 𝑘
+.\TU/xits-math.otf(1)/m/n/10 𝑙
+.\kern0.2
+.\TU/xits-math.otf(1)/m/n/10 𝑚
+.\TU/xits-math.otf(1)/m/n/10 𝑛
+.\TU/xits-math.otf(1)/m/n/10 𝑜
+.\TU/xits-math.otf(1)/m/n/10 𝑝
+.\TU/xits-math.otf(1)/m/n/10 𝑞
+.\kern0.4
+.\TU/xits-math.otf(1)/m/n/10 𝑟
+.\TU/xits-math.otf(1)/m/n/10 𝑠
+.\TU/xits-math.otf(1)/m/n/10 𝑡
+.\TU/xits-math.otf(1)/m/n/10 𝑢
+.\TU/xits-math.otf(1)/m/n/10 𝑣
+.\TU/xits-math.otf(1)/m/n/10 𝑤
+.\TU/xits-math.otf(1)/m/n/10 𝑥
+.\TU/xits-math.otf(1)/m/n/10 𝑦
+.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\latintext$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐴
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐵
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐶
+.\kern0.12
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐷
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐸
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐹
+.\kern0.2
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐺
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐻
+.\kern0.5
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐼
+.\kern0.49
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐽
+.\kern0.53
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐾
+.\kern0.44
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝐿
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑀
+.\kern0.24
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑁
+.\kern0.54
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑂
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑃
+.\kern0.11
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑄
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑅
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑆
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑇
+.\kern0.52
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑈
+.\kern0.48
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑉
+.\kern0.6
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑊
+.\kern0.64
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑋
+.\kern0.4
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑌
+.\kern0.36
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝑍
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\LATINtext$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(1)/m/n/10 𝗔
+.\TU/xits-math.otf(1)/m/n/10 𝗕
+.\TU/xits-math.otf(1)/m/n/10 𝗖
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗗
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗘
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗙
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗚
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗛
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗜
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗝
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗞
+.\kern0.59
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗟
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗠
+.\TU/texgyrepagella-math.otf(0)/m/n/10 𝗡
+.\TU/xits-math.otf(1)/m/n/10 𝗢
+.\TU/xits-math.otf(1)/m/n/10 𝗣
+.\TU/xits-math.otf(1)/m/n/10 𝗤
+.\TU/xits-math.otf(1)/m/n/10 𝗥
+.\TU/xits-math.otf(1)/m/n/10 𝗦
+.\TU/xits-math.otf(1)/m/n/10 𝗧
+.\TU/xits-math.otf(1)/m/n/10 𝗨
+.\TU/xits-math.otf(1)/m/n/10 𝗩
+.\TU/xits-math.otf(1)/m/n/10 𝗪
+.\TU/xits-math.otf(1)/m/n/10 𝗫
+.\TU/xits-math.otf(1)/m/n/10 𝗬
+.\TU/xits-math.otf(1)/m/n/10 𝗭
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\symbfsf{\LATINtext}$}
+***************
+Compilation 1 of test file completed with exit status 256

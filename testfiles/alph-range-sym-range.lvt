@@ -1,0 +1,20 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+
+\setmathfont{xits-math.otf}
+\setmathfont[
+    range={
+      it/{Latin} ,
+      "1D5D7-"1D5E1 ,
+    }
+  ]{texgyrepagella-math.otf}
+
+\begin{document}
+
+\TESTBOX{$\latintext$}
+\TESTBOX{$\LATINtext$}
+\TESTBOX{$\symbfsf{\LATINtext}$}
+
+\end{document}
