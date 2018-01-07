@@ -177,7 +177,7 @@
 \cs_new:Nn \@@_default_mathalph:nnn
   {
     \prop_new:c {g_@@_named_range_#1_prop}
-    \seq_put_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
+    \seq_gput_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
     \prop_gput:cnn { g_@@_named_range_#1_prop } { default-alpha } {#2}
   }
 %    \end{macrocode}
