@@ -8,81 +8,64 @@
 %<*package>
 %    \end{macrocode}
 %
-% Wrapper functions:
-%    \begin{macrocode}
-\cs_new:Npn \@@_error:n     { \msg_error:nn     {unicode-math} }
-\cs_new:Npn \@@_error:nx    { \msg_error:nnx    {unicode-math} }
-\cs_new:Npn \@@_warning:n   { \msg_warning:nn   {unicode-math} }
-\cs_new:Npn \@@_warning:nnn { \msg_warning:nnxx {unicode-math} }
-\cs_new:Npn \@@_log:n       { \msg_log:nn       {unicode-math} }
-\cs_new:Npn \@@_log:nx      { \msg_log:nnx      {unicode-math} }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_generate_variant:Nn \msg_new:nnn  {nnx}
-\cs_generate_variant:Nn \msg_new:nnnn {nnxx}
-\cs_new:Nn \@@_msg_new:nnn  { \msg_new:nnx  {#1} {#2} { \tl_trim_spaces:n {#3} } }
-\cs_new:Nn \@@_msg_new:nnnn { \msg_new:nnxx {#1} {#2} { \tl_trim_spaces:n {#3} } { \tl_trim_spaces:n {#4} } }
-%    \end{macrocode}
-%
 %    \begin{macrocode}
 \char_set_catcode_space:n {32}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\@@_msg_new:nnn {unicode-math} {no-tfrac}
+\@@_msg_new:nn {no-tfrac}
 {
   Small fraction command \protect\tfrac\ not defined.\\
   Load amsmath or define it manually before loading unicode-math.
 }
-\@@_msg_new:nnn {unicode-math} {default-math-font}
+\@@_msg_new:nn {default-math-font}
 {
   Defining the default maths font as '\l_@@_fontname_tl'.
 }
-\@@_msg_new:nnn {unicode-math} {setup-implicit}
+\@@_msg_new:nn {setup-implicit}
 {
   Setup alphabets: implicit mode.
 }
-\@@_msg_new:nnn {unicode-math} {setup-explicit}
+\@@_msg_new:nn {setup-explicit}
 {
   Setup alphabets: explicit mode.
 }
-\@@_msg_new:nnn {unicode-math} {alph-initialise}
+\@@_msg_new:nn {alph-initialise}
 {
   Initialising \@backslashchar math#1.
 }
-\@@_msg_new:nnn {unicode-math} {setup-alph}
+\@@_msg_new:nn {setup-alph}
 {
   Setup alphabet: #1.
 }
-\@@_msg_new:nnn {unicode-math} {no-alphabet}
+\@@_msg_new:nn {no-alphabet}
 {
   I am trying to set up alphabet"#1" but there are no configuration settings for it.
   (See source file "unicode-math-alphabets.dtx" to debug.)
 }
-\@@_msg_new:nnn {unicode-math} {no-named-range}
+\@@_msg_new:nn {no-named-range}
  {
   I am trying to define new alphabet "#2" in range "#1", but range "#1" hasn't been defined yet.
  }
-\@@_msg_new:nnn {unicode-math} {missing-alphabets}
+\@@_msg_new:nn {missing-alphabets}
  {
   Missingmathalphabetsinfont "\fontname\g_@@_curr_font_cmd_tl" \\ \\
   \seq_map_function:NN \l_@@_missing_alph_seq \@@_print_indent:n
  }
 \cs_new:Nn \@@_print_indent:n { \space\space\space\space #1 \\ }
-\@@_msg_new:nnn {unicode-math} {macro-expected}
+\@@_msg_new:nn {macro-expected}
 {
   I've expected that #1 is a macro, but it isn't.
 }
-\@@_msg_new:nnn {unicode-math} {wrong-meaning}
+\@@_msg_new:nn {wrong-meaning}
 {
   I've expected #1 to have the meaning #3, but it has the meaning #2.
 }
-\@@_msg_new:nnn {unicode-math} {patch-macro}
+\@@_msg_new:nn {patch-macro}
 {
   I'm going to patch macro #1.
 }
-\@@_msg_new:nnn {unicode-math} {mathtools-overbracket} {
+\@@_msg_new:nn {mathtools-overbracket} {
   Using \token_to_str:N \overbracket\ and
          \token_to_str:N \underbracket\ from
 	 `mathtools' package.\\
@@ -91,7 +74,7 @@
        \token_to_str:N \Uunderbracket\ for
        original `unicode-math' definition.
 }
-\@@_msg_new:nnn {unicode-math} {mathtools-colon} {
+\@@_msg_new:nn {mathtools-colon} {
   I'm going to overwrite the following commands from
   the `mathtools' package: \\ \\
   \ \ \ \ \token_to_str:N \dblcolon,
@@ -101,7 +84,7 @@
   Note that since I won't overwrite the other colon-like
   commands, using them will lead to inconsistencies.
 }
-\@@_msg_new:nnn {unicode-math} {colonequals} {
+\@@_msg_new:nn {colonequals} {
   I'm going to overwrite the following commands from
   the `colonequals' package: \\ \\
   \ \ \ \ \token_to_str:N \ratio,
@@ -116,16 +99,16 @@
   or \token_to_str:N \doublecolonsep \c_space_tl won't have
   any effect on the re-defined commands.
 }
-\@@_msg_new:nnn {unicode-math} {bad-cs-in-range}
+\@@_msg_new:nn {bad-cs-in-range}
   {
     Command `#1` in math range is not recognised as a maths symbol.
     Check file "unicode-math-table.tex" for allowable commands.
   }
-\@@_msg_new:nnn {unicode-math} {legacy-char-not-supported}
+\@@_msg_new:nn {legacy-char-not-supported}
   {
     Command `#1` is a legacy maths symbol that is not supported by unicode-math.
   }
-\@@_msg_new:nnn {unicode-math} {range-not-bf-sf}
+\@@_msg_new:nn {range-not-bf-sf}
   {
     Range alphabets cannot include alphabets referring to `bf`, `sf`, or `bfsf`
     since they relate to input commands not output glyphs.

@@ -226,9 +226,11 @@
 % \end{macro}
 %
 % \paragraph{Symbols}
+%
 %    \begin{macrocode}
 \cs_set_protected:Npn \| {\Vert}
 %    \end{macrocode}
+%
 % \cs{mathinner} items:
 %    \begin{macrocode}
 \cs_set_protected:Npn \mathellipsis {\mathinner{\unicodeellipsis}}
@@ -262,6 +264,7 @@
 % This code is based on an answer to a TeX -- Stack Exchange question by Enrico
 % Gregorio\footnote{\url{http://tex.stackexchange.com/a/47260/729}}.
 %
+% \begin{macro}{\not}
 %    \begin{macrocode}
 \DeclareDocumentCommand \not {m}
   {
@@ -285,7 +288,10 @@
       }
   }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\NewNegationCommand}
+% \begin{macro}{\RenewNegationCommand}
 %    \begin{macrocode}
 \DeclareDocumentCommand \NewNegationCommand {mm}
   {
@@ -311,6 +317,8 @@
     #1 { not \l_@@_not_token_name_tl } { #3 }
   }
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 %
 %    \begin{macrocode}
 \NewNegationCommand { = }    { \neq   }
@@ -337,6 +345,7 @@
 % Until I get requests for it, I've not included symbols or punctuation here.
 %
 % \paragraph{Numbers}
+%
 %    \begin{macrocode}
 \int_step_inline:nnnn {0} {1} {9}
   {
@@ -345,6 +354,7 @@
 %    \end{macrocode}
 %
 % \paragraph{Letters}
+%
 %    \begin{macrocode}
 \int_step_inline:nnnn {0} {1} {26}
   {
@@ -352,11 +362,11 @@
     \@@_mathactive_remap:nn {"FF41+#1} {\char\int_eval:n{`\a+#1}}
   }
 %    \end{macrocode}
-% \end{macro}
 %
 %
 % \subsection{Legacy characters}
 %
+% \begin{macro}{\@@_undeclare_symbol:N}
 %    \begin{macrocode}
 \cs_new:Nn \@@_undeclare_symbol:N
   {
@@ -364,6 +374,7 @@
       { \@@_error:nx {legacy-char-not-supported} { \token_to_str:N #1 } }
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % If you have better ideas about what to do here, please mention.
 %    \begin{macrocode}

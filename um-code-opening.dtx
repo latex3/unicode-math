@@ -231,7 +231,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}[TF]{\@@_usv_if_exist:nn}
+% \begin{macro}{\@@_usv_if_exist:nnTF}
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \@@_usv_if_exist:nn {T,F,TF}
   {
@@ -268,9 +268,38 @@
   }
 %    \end{macrocode}
 %
+%
+% \subsection{Wrappers for message functions}
+%
+% Messages themselves are defined in \secref{codemsg}.
+%
+%    \begin{macrocode}
+\cs_new:Npn \@@_error:n     { \msg_error:nn     }
+\cs_new:Npn \@@_error:nx    { \msg_error:nnx    }
+\cs_new:Npn \@@_warning:n   { \msg_warning:nn   }
+\cs_new:Npn \@@_warning:nnn { \msg_warning:nnxx }
+\cs_new:Npn \@@_log:n       { \msg_log:nn       }
+\cs_new:Npn \@@_log:nx      { \msg_log:nnx      }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_generate_variant:Nn \msg_new:nnn  {nnx}
+\cs_generate_variant:Nn \msg_new:nnnn {nnxx}
+\cs_new:Nn \@@_msg_new:nn  { \msg_new:nnx  {unicode-math} {#1} { \tl_trim_spaces:n {#2} } }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+
+\endinput
+
+
 % \subsection{Sow/reap}
 %
 % This might make it into the kernel; not sure.
+% Not actually used yet in the package!
 %
 % \begin{macro}{\__@@_sow_item:Nn}
 % Helper variables for constructing \verb|c|-type arguments.
@@ -334,12 +363,7 @@
   }
 %    \end{macrocode}
 % \end{macro}
-%
-%    \begin{macrocode}
-%</package>
-%    \end{macrocode}
 
-\endinput
 
 % /©
 %
