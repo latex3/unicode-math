@@ -274,12 +274,12 @@
 % Messages themselves are defined in \secref{codemsg}.
 %
 %    \begin{macrocode}
-\cs_new:Npn \@@_error:n     { \msg_error:nn     }
-\cs_new:Npn \@@_error:nx    { \msg_error:nnx    }
-\cs_new:Npn \@@_warning:n   { \msg_warning:nn   }
-\cs_new:Npn \@@_warning:nnn { \msg_warning:nnxx }
-\cs_new:Npn \@@_log:n       { \msg_log:nn       }
-\cs_new:Npn \@@_log:nx      { \msg_log:nnx      }
+\cs_new:Npn \@@_error:n     { \msg_error:nn     {unicode-math} }
+\cs_new:Npn \@@_error:nx    { \msg_error:nnx    {unicode-math} }
+\cs_new:Npn \@@_warning:n   { \msg_warning:nn   {unicode-math} }
+\cs_new:Npn \@@_warning:nnn { \msg_warning:nnxx {unicode-math} }
+\cs_new:Npn \@@_log:n       { \msg_log:nn       {unicode-math} }
+\cs_new:Npn \@@_log:nx      { \msg_log:nnx      {unicode-math} }
 %    \end{macrocode}
 %
 %    \begin{macrocode}
