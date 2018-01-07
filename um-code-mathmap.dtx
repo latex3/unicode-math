@@ -10,42 +10,83 @@
 %
 % \begin{macro}{\@@_setup_alphabets:}
 % This function is called within \cs{setmathfont} to configure the
-% mapping between characters inside math styles.
+% mapping between characters inside math styles. Three modes:
+% \begin{decription}
+% \item[IMPLICIT] No ranges specified, set up everything
+% \item[EXPLICIT] Some ranges specified, set up what is requested only
+% \item[INHERIT]  Of the slots in the ranges specified, compare against
+%                 slots in each styled alphabet and only set up those needed
+% \end{description}
+% The INHERIT mode saves less time than I was hoping for but is still beneficial
+% in simple cases.
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_alphabets:
   {
-%    \end{macrocode}
-% If |range=| has been used to configure styles, those choices will be in
-% |\g_@@_mathalph_seq|. If not, set up the styles implicitly:
-%    \begin{macrocode}
-    \seq_if_empty:NTF \g_@@_mathalph_seq
+
+    \bool_if:NTF \l_@@_init_bool
       {
+        % IMPLICIT
         \@@_log:n {setup-implicit}
-        \bool_if:NTF \l_@@_init_bool
-          {
-            \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
-          }
-          {
-            %% TODO: somehow trim down list based on range argument
-            \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
-          }
+        \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
         \bool_set_true:N \l_@@_implicit_alph_bool
         \@@_maybe_init_alphabet:n  {sf}
         \@@_maybe_init_alphabet:n  {bf}
         \@@_maybe_init_alphabet:n  {bfsf}
-      }
-%    \end{macrocode}
-% If |range=| has been used then we’re in explicit mode:
-%    \begin{macrocode}
-      {
-        \@@_log:n {setup-explicit}
-        \bool_set_false:N \l_@@_implicit_alph_bool
         \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
         \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
+        \@@_mathalph_map:
+        \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
       }
+      {
+        \seq_if_empty:NF \g_@@_mathalph_seq
+          {
+            % EXPLICIT
+            \@@_log:n {setup-explicit}
+            \bool_set_false:N \l_@@_implicit_alph_bool
+            \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
+            \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
+            \@@_mathalph_map:
+            \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
+          }
+
+        % INHERIT
+        \clist_if_empty:NF \l_@@_mathmap_charints_clist
+          {
+            \seq_gclear:N \g_@@_mathalph_seq
+            \seq_map_inline:Nn \g_@@_default_mathalph_seq
+              {
+                \tl_set:No    \l_@@_style_tl       { \use_i:nnn   ##1 }
+                \clist_set:No \l_@@_alphabet_clist { \use_ii:nnn  ##1 }
+
+                \clist_map_inline:Nn \l_@@_alphabet_clist
+                  {
+                    \clist_map_inline:cn {g_@@_named_slots_ \l_@@_style_tl _ ####1 _clist}
+                      {
+                        \clist_map_inline:Nn \l_@@_mathmap_charints_clist
+                          {
+                            \@@_int_if_slot_in_range:nnT {################1} {########1}
+                              {
+                                \seq_gput_right:Nn \g_@@_mathalph_seq {##1}
+                                \clist_map_break:n { \clist_map_break:n { \clist_map_break: } }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+
+        \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_parse:nnn
+        \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
+        \@@_mathalph_map:
+      }
+  }
 %    \end{macrocode}
-% Now perform the mapping:
+% \end{macro}
+%
+% \begin{macro}{\@@_mathalph_map:}
 %    \begin{macrocode}
+\cs_set:Nn \@@_mathalph_map:
+  {
    \seq_map_inline:Nn \g_@@_mathalph_seq
       {
         \tl_set:No    \l_@@_style_tl       { \use_i:nnn   ##1 }
@@ -63,9 +104,7 @@
         \@@_check_math_alphabet:
         \@@_setup_math_alphabet:
       }
-
-    \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
- }
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -156,13 +195,24 @@
     \prop_if_exist:cF {g_@@_named_range_#1_prop}
       { \@@_warning:nnn {no-named-range} {#1} {#2} }
 
+
     \prop_gput:cnn {g_@@_named_range_#1_prop} { alpha_tl }
       {
         \prop_item:cn {g_@@_named_range_#1_prop} { alpha_tl } {#2}
       }
     % Q: do I need to bother removing duplicates?
 
-    \cs_new:cn { @@_config_#1_#2:n } {#3}
+%    \end{macrocode}
+% Create list of all chars defined in this named range:
+%    \begin{macrocode}
+    \cs_new:cn { @@_config_#1_#2:n }
+      {
+        \clist_gclear_new:c {g_@@_named_slots_#1_#2_clist}
+        \tl_set:Nn \l_@@_curr_named_slot { g_@@_named_slots_#1_#2_clist }
+        #3
+        \clist_gremove_duplicates:c {g_@@_named_slots_#1_#2_clist}
+      }
+
   }
 %    \end{macrocode}
 %    \begin{macrocode}
@@ -237,6 +287,9 @@
   {
     \int_step_inline:nnnn {0} {1} {#1-1}
       { \@@_map_char_single:nn {#2+##1} {#3+##1} }
+
+    \clist_gput_right:cx { \l_@@_curr_named_slot }
+      { \int_eval:n { #3 } - \int_eval:n { #3 + #1-1 } }
   }
 %    \end{macrocode}
 % And the wrapper with names:
@@ -261,6 +314,9 @@
           {
             \@@_set_mathalphabet_pos:nnnn {normal} {#1} {##1} {#3}
             \@@_map_char_single:nnn {##1} {#3} {#1}
+
+            \clist_gput_right:cx {\l_@@_curr_named_slot}
+              { \int_eval:n { \@@_to_usv:nn {#3} {#1} } }
           }
       }
   }
@@ -396,8 +452,8 @@
 %
 % \begin{macro}{\@@_set_mathalph_range:nnnn}
 % \darg{Number of iterations}
-% \darg{Maths alphabet}
-% \darg{Starting input char (single)}
+% \darg{Sym command suffix}
+% \darg{Starting input char}
 % \darg{Starting output char}
 % Loops through character ranges setting \cmd\mathcode.
 % First the version that uses numbers:
@@ -408,10 +464,21 @@
       { \@@_set_mathalphabet_char:nnn {#2} { ##1 + #3 } { ##1 + #4 } }
   }
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_set_mathalph_range:nnnn}
+% \darg{Number of iterations}
+% \darg{Sym command suffix}
+% \darg{input style}
+% \darg{output style}
+% \darg{alphabet}
 % Then the wrapper version that uses names:
 %    \begin{macrocode}
 \cs_new:Nn \@@_set_mathalph_range:nnnnn
   {
+    \clist_gput_right:cx { \l_@@_curr_named_slot }
+      { \int_eval:n { \@@_to_usv:nn {#4} {#5} } - \int_eval:n { (#1-1)+\@@_to_usv:nn {#4} {#5} } }
+
     \@@_set_mathalph_range:nnnn {#1} {#2} { \@@_to_usv:nn {#3} {#5} }
                                           { \@@_to_usv:nn {#4} {#5} }
   }
@@ -427,6 +494,9 @@
       {
         \clist_map_inline:nn {#3}
           { \@@_set_mathalphabet_char:nnnn {#1} {##1} {#4} {#2} }
+
+        \clist_gput_right:cx {\l_@@_curr_named_slot}
+          { \int_eval:n { \@@_to_usv:nn {#4} {#2} } }
       }
   }
 %    \end{macrocode}

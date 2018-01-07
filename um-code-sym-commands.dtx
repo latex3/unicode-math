@@ -132,7 +132,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_prepare_mathstyle:n
   {
-    \seq_put_right:Nn \g_@@_mathstyles_seq {#1}
+    \seq_gput_right:Nn \g_@@_mathstyles_seq {#1}
     \@@_init_alphabet:n {#1}
     \cs_set_protected:cpx {sym#1} ##1
       {
