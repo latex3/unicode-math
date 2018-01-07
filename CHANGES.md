@@ -1,7 +1,7 @@
 CHANGE HISTORY
 --------------
 
-- v0.8j (2018/01/02)
+- v0.8j (2018/01/07)
 
   * NEW
 
@@ -16,7 +16,7 @@ CHANGE HISTORY
     * New symbol `\mathhyphen` which acts like a ‘letter’ (#313).
     * `\nabla` and `\partial` have corrected documentation (#257).
     * The following legacy commands are listed as ‘unsupported’ and will result
-      in sensibl error messages rather than the old behaviour of meaningless
+      in sensible error messages rather than the old behaviour of meaningless
       output: `\arrowvert`, `\Arrowvert`, `\bracevert`. (#411).
 
   * BUGS
@@ -39,6 +39,8 @@ CHANGE HISTORY
 
   * INTERNALS
 
+    * A number of improvements to efficiency when loading subsequent math fonts
+      using the `range` feature.
     * No longer loads the `ucharcat` package.
     * Test suite re-implemented for better portability and use with Travis CI.
       See <https://travis-ci.org/wspr/unicode-math> for the up-to-date status
