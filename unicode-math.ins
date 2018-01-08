@@ -14,7 +14,7 @@ This package is free software and may be redistributed and/or modified under
 the conditions of the LaTeX Project Public License, version 1.3c or higher
 (your choice): <http://www.latex-project.org/lppl/>.
 ------------------------------------------------
-Copyright 2006-2017  Will Robertson, LPPL "maintainer"
+Copyright 2006-2018  Will Robertson, LPPL "maintainer"
 Copyright 2010-2017  Philipp Stephani
 Copyright 2011-2017  Joseph Wright
 Copyright 2012-2015  Khaled Hosny
@@ -27,17 +27,22 @@ Copyright 2012-2015  Khaled Hosny
 \def\FROM#1#2{\from{#1}{#2}}
 \def\FROMDEBUG#1#2{\from{#1}{#2,debug}}
 \ifx\DEBUG\undefined\else\let\FROM\FROMDEBUG\fi
+\def\Msg#1{}
+\def\Generate#1#2{%
+  \immediate\write\ttyout{Generating file "#1"}%
+  \generate{\file{#1}{#2}}%
+}
 
-\generate{\file{unicode-math.sty}{
+\Generate{unicode-math.sty}{
     \FROM{unicode-math.dtx}{base}
     \FROM{um-code-base.dtx}{base}
-  }}
+  }
 
 \def\DTX#1{\FROM{#1}{package,XE}}
-\generate{\file{unicode-math-xetex.sty}{\DTXFILES}}
+\Generate{unicode-math-xetex.sty}{\DTXFILES}
 
 \def\DTX#1{\FROM{#1}{package,LU}}
-\generate{\file{unicode-math-luatex.sty}{\DTXFILES}}
+\Generate{unicode-math-luatex.sty}{\DTXFILES}
 
 \endbatchfile
 \endinput
