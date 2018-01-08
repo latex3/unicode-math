@@ -103,24 +103,19 @@ math~`x', but this is not the point: they \emph{should} be considered
 different, because the former is |U+0078| in Unicode, the latter is
 |U+1D431|.
 
-When discussing the matter, it soon appeared clear that \emph{two}
-different commands are needed: one for using text boldface in math,
+It was clear that \emph{two} different commands are needed: one for using text boldface in math,
 one for using math boldface. Only the document's author can know
 whether one or the other is needed. The decision was to split off
-the two meanings by using either |\mathbf| (for the boldface text font
-in math) or |\symbf| (for the bold math font).
+the two meanings with a command like |\mathbf| for the boldface text font
+in math and a command like |\symbf| (for the bold math font).
 
-To be more detailed, most alphabet commands are provided with the
-\cs{math...} prefix synonyms, but there are five `legacy' font alphabets
-that intentionally behave somewhat different.  These are \cs{mathup},
-\cs{mathit}, \cs{mathbf}, \cs{mathsf}, and \cs{mathtt}.  (N.B.:
-\cs{mathrm} is defined as a synonym for \cs{mathup}, but the latter is
-prefered as it is a script-agnostic term.)
+The five new symbol font commands that behave in this way are: \cs{symup},
+\cs{symit}, \cs{symbf}, \cs{symsf}, and \cs{symit}.
+These commands switch to single-letter mathematical symbols
+(generally within the same OpenType font).
 
-The \cs{symbf} command switches to single-letter mathematical symbols
-(generally within the same OpenType font).  The \cs{mathbf} command
-switches to a text font that is set up to behave correctly in
-mathematics, and should be used for multi-letter identifiers.  These
+The legacy \cs{math..} commands switch to text fonts that are set up to behave
+correctly in mathematics, and should be used for multi-letter identifiers.  These
 could be denoted `text math alphabets'; further details are discussed
 in \secref{mathselect}.  Additional similar `text math alphabet'
 commands can be defined using the \cs{setmathfontface} command
@@ -129,50 +124,59 @@ default text math alphabet commands to behave in a
 backwards-compatible mode, see the package options described in
 \secref{textmathlegacy}.
 
-\begin{table}\centering
-  \topcaption{New \pkg{unicode-math} commands.}
+
+\begin{table}[t!]
+  \topcaption{New \pkg{unicode-math} commands which overlap with legacy
+  math commands. For new documents the \texttt{sym} versions are recommended.}
   \tablabel{symvsmath}
-  \begin{tabular}{lll}
+  \centering
+  \begin{tabular}[t]{ll}
     \toprule
-    \pkg{unicode-math} command & Synonym \\
+    Command & Synonym \\
     \midrule
-    |\symup|      &               \\
-    |\symit|      &               \\
-    |\symbf|      &               \\
-    |\symsf|      &               \\
-    |\symtt|      &               \\
+    \cs{symnormal}  & \cs{mathnormal} \\
+    \cs{symliteral} &                 \\
+    &  \\
+    &  \\
+    &  \\
+    \cs{symbb}      & \cs{mathbb}     \\
+    \cs{symbbit}    & \cs{mathbbit}   \\
+    \cs{symcal}     & \cs{mathcal}    \\
+    \cs{symscr}     & \cs{mathscr}    \\
+    \cs{symfrak}    & \cs{mathfrak}   \\
+    \cs{symsfup}    & \cs{mathsfup}   \\
+    \cs{symsfit}    & \cs{mathsfit}   \\
+    \bottomrule
+  \end{tabular}\qquad
+  \begin{tabular}[t]{ll}
+    \toprule
+    Command & Synonym \\
     \midrule
-    |\symnormal|  & |\mathnormal| \\
-    |\symliteral| &               \\
-    |\symbfup|    & |\mathbfup|   \\
-    |\symbfit|    & |\mathbfit|   \\
-    |\symsfup|    & |\mathsfup|   \\
-    |\symsfit|    & |\mathsfit|   \\
-    |\symbfsfup|  & |\mathbfsfup| \\
-    |\symbfsfit|  & |\mathbfsfit| \\
-    |\symbfsf|    & |\mathbfsf|   \\
-    |\symbb|      & |\mathbb|     \\
-    |\symbbit|    & |\mathbbit|   \\
-    |\symscr|     & |\mathscr|    \\
-    |\symbfscr|   & |\mathbfscr|  \\
-    |\symcal|     & |\mathcal|    \\
-    |\symbfcal|   & |\mathbfcal|  \\
-    |\symfrak|    & |\mathfrak|   \\
-    |\symbffrak|  & |\mathbffrak| \\
+    &  \\
+    &  \\
+    \cs{symbfsf}    & \cs{mathbfsf}   \\
+    \cs{symbfup}    & \cs{mathbfup}   \\
+    \cs{symbfit}    & \cs{mathbfit}   \\
+    &  \\
+    &  \\
+    \cs{symbfcal}   & \cs{mathbfcal}  \\
+    \cs{symbfscr}   & \cs{mathbfscr}  \\
+    \cs{symbffrak}  & \cs{mathbffrak} \\
+    \cs{symbfsfup}  & \cs{mathbfsfup} \\
+    \cs{symbfsfit}  & \cs{mathbfsfit} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Thus \pkg{unicode-math} provides a number of commands (such as
-|\symbfsf|) to select specific `symbol alphabets' within the unicode
-maths font, with usage, e.g., |$\symbfsf{g}$|${}\to\symbfsf{g}$.  The
+In addition, \pkg{unicode-math} also provides a number of commands (such as
+|\symcal|) to select specific `symbol alphabets' within the unicode
+maths font, with usage, e.g., |$\symcal{G}$|${}\to\symcal{G}$.  The
 full listing is shown in \Tabref{symvsmath}.  For backwards
 compatibility, many of these are also defined with `familiar' synonyms
-such as |\mathbfsf|.  However, where possible the `sym' prefix
+such as |\mathcal|.  However, where possible the `sym' prefix
 commands should be preferred, as certain synonyms may become
 deprecated in time. The |\symliteral| command is described in
 \secref{math-style}.
-
 
 
 \subsection{Package options}
@@ -194,9 +198,9 @@ passed via options to the \cs{setmathfont} command.
 Therefore, the following two examples are equivalent:
 \begin{Verbatim}
 \unimathsetup{math-style=TeX}
-\setmathfont{Cambria Math}
+\setmathfont{texgyrepagella-math.otf}
 % OR
-\setmathfont{Cambria Math}[math-style=TeX]
+\setmathfont{texgyrepagella-math.otf}[math-style=TeX]
 \end{Verbatim}
 
 A summary list of package options is shown in \tabref{pkgopt}.
@@ -209,13 +213,13 @@ See following sections for more information.
     \toprule
     Option & Description & See\dots \\
     \midrule
-    |math-style| & Style of letters & \secref{math-style} \\
-    |bold-style| & Style of bold letters & \secref{bold-style} \\
-    |sans-style| & Style of sans serif letters & \secref{sans-style} \\
-    |nabla|      & Style of the nabla symbol & \secref{nabla} \\
-    |partial|    & Style of the partial symbol & \secref{partial} \\
-    |colon| & Behaviour of \cs{colon} & \secref{colon} \\
-    |slash-delimiter| & Glyph to use for `stretchy' slash & \secref{slash-delimiter} \\
+    |math-style| & Style of letters & \secref*{math-style} \\
+    |bold-style| & Style of bold letters & \secref*{bold-style} \\
+    |sans-style| & Style of sans serif letters & \secref*{sans-style} \\
+    |nabla|      & Style of the nabla symbol & \secref*{nabla} \\
+    |partial|    & Style of the partial symbol & \secref*{partial} \\
+    |colon| & Behaviour of \cs{colon} & \secref*{colon} \\
+    |slash-delimiter| & Glyph to use for `stretchy' slash & \secref*{slash-delimiter} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -267,9 +271,9 @@ Unicode ranges of glyphs to separate fonts:
   \codeline{\cmd\setmathfont\marg{font name}|[range=|\meta{unicode range}|,|\meta{font features}|]|}
 where \meta{unicode range} is a comma-separated list of Unicode slot numbers and ranges such as |{"27D0-"27EB,"27FF,"295B-"297F}|.
 Note that \TeX's syntax for accessing the slot number of a character, such as |`\+|, will also work here.
+Only numerical slots can be used in ranged declarations.
 
-You may also use the macro for accessing the glyph, such as \cs{int}, or whole collection of symbols with the same math type, such as \cs{mathopen}, or complete math styles such as \cs{symbb}.
-(Only numerical slots, however, can be used in ranged declarations.)
+You may also use the macro for accessing the glyph, such as |range=|\cs{int}, or whole collection of symbols with the same math type, such as |range=\mathopen|, or complete math styles such as |range=\symbb| (or just |range=bb|).
 
 \subsubsection{Control over alphabet ranges}
 
@@ -346,7 +350,6 @@ To set up the complete range of optical sizes for these fonts, a font declaratio
   {Size = 19.91-,      Font = MinionMath-BoldDisp}
  }]
 \end{Verbatim}
-\textbf{v0.8:} Note that in previous versions of \pkg{unicode-math}, these features were labelled |[range=\mathbb]| and so on. This old syntax is still supported for backwards compatibility, but is now discouraged.
 
 
 \subsection{Script and scriptscript fonts/features}
@@ -382,6 +385,8 @@ To select a new maths font in a particular version, use the syntax
 and to switch between maths versions mid-document use the standard \LaTeX\ command
 \cmd\mathversion\marg{version name}.
 
+Note there are currently open issues regarding the interaction between the |version|
+and the |range| features, so please proceed with caution.
 
 \subsection{Legacy maths `alphabet' commands}
 \seclabel{mathselect}
@@ -406,6 +411,7 @@ For example, if you want to define a new legacy maths alphabet font \cs{mathittt
 
 The five `text math' fonts, discussed above, are: \cs{mathrm}, \cs{mathbf}, \cs{mathit}, \cs{mathsf}, and \cs{mathtt}.
 These commands are also defined with their original definition under synonyms \cs{mathtextrm}, \cs{mathtextbf}, and so on.
+(These definitions hold regardless of package option, in case you need to be sure.)
 
 When selecting document fonts using \pkg{fontspec} commands such as \cs{setmainfont}, \pkg{unicode-math} inserts some additional code into \pkg{fontspec} that keeps the current default fonts `in sync' with their corresponding \cs{mathrm} commands, etc.
 
