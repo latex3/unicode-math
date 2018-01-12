@@ -17,17 +17,23 @@ generally working now; it is only minutiae that may change in the future.)
 Unicode maths is currently supported by the following freely available fonts:
 
  - [Latin Modern Math][LM] (Bogusław Jackowski, Janusz M. Nowacki)
- - [TeX Gyre Pagella Math][PM] (Bogusław Jackowski, Janusz M. Nowacki)
+ - [TeX Gyre Bonum Math][BM] (B. Jackowski, P. Strzel­czyk and P. Pianowski)
+ - [TeX Gyre Pagella Math][PM] (B. Jackowski, P. Strzelczyk and P. Pianowski)
+ - [TeX Gyre Schola Math][SCM] (B. Jackowski, P. Strzelczyk and P. Pianowski)
+ - [TeX Gyre Termes Math][TM] (B. Jackowski, P. Strzelczyk and P. Pianowski)
+ - [DejaVu Math TeX Gyre][DEJA] (B. Jackowski, P. Strzelczyk and P. Pianowski)
  - [Asana Math][AM] (Apostolos Syropolous),
+ - [STIX][STIX] (STIpub), and
  - [Neo Euler][NE] (Khaled Hosny),
- - [STIX][SM] (STI Pub), and
- - [XITS Math][XM] (Khaled Hosny).
+ - [XITS Math][XM] (Khaled Hosny),
+ - [Libertinus Math][LIB] (Philipp H. Poll and Khaled Hosny).
 
 These fonts are available under open source licences
 (the [GUST Font License][GFL] and [Open Font Licence][OFL]).
 
 The following fonts are proprietary with OpenType maths support:
 
+ - [Lucida Bright Math][LUCI] (Charles Bigelow and Kris Holmes)
  - [Cambria Math][CM] (Microsoft),
  - [Minion Math][MM] (Johannes Küster, typoma GmbH)
 
@@ -35,16 +41,21 @@ I'm always looking for new fonts to test with, so please let me know of any
 new releases.
 
 [CM]: http://www.ascenderfonts.com/font/cambria-regular.aspx
+[LUCI]: http://tug.org/store/lucida/opentype.html
 [MM]: http://www.typoma.com/en/fonts.html
 [LM]: http://www.gust.org.pl/projects/e-foundry/lm-math
 [PM]: http://www.ctan.org/pkg/tex-gyre-math-pagella
+[BM]: http://www.ctan.org/pkg/tex-gyre-math-bonum
+[SCM]: http://www.ctan.org/pkg/tex-gyre-math-schola
+[TM]: http://www.ctan.org/pkg/tex-gyre-math-termes
+[DEJA]: https://ctan.org/pkg/tex-gyre-math-dejavu
 [AM]: http://www.ctan.org/pkg/asana-math
 [NE]: http://github.com/khaledhosny/euler-otf
-[SM]: http://www.aip.org/stixfonts/
+[STIX]: http://www.stixfonts.org
 [XM]: http://github.com/khaledhosny/xits-math
+[LIB]: https://ctan.org/pkg/libertinus
 [GFL]: http://www.gust.org.pl/projects/projects/e-foundry/licenses/
 [OFL]: http://scripts.sil.org/OFL
-
 
 PACKAGE USAGE
 -------------
