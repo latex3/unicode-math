@@ -705,17 +705,14 @@ and while by default \cs{mathcal} and \cs{mathscr}
 are synonyms, there are some situations when a
 separate `Caligraphic' style is needed as well.
 
-If a font contains alternate glyphs for a separat caligraphic style,
+If a font contains alternate glyphs for a separate caligraphic style,
 they can be selected explicitly as shown below.
 This feature is currently only supported by the XITS~Math font, where
 the caligraphic letters are accessed with the same glyph slots as the
 script letters but with the first stylistic set feature (|ss01|) applied.
-\begin{verbatim}
-  \setmathfont{xits-math.otf}[range={cal,bfcal},StylisticSet=1]
-\end{verbatim}
 An example is shown below.
 \begin{quote}
-\setmathfont{xits-math.otf}[range=scr]
+\setmathfont{xits-math.otf}
 \setmathfont{xits-math.otf}[range=cal,StylisticSet=1]
 The Script style (\cs{mathscr}) in XITS Math is: $\symscr{ABCXYZ}$\par
 The Caligraphic style (\cs{mathcal}) in XITS Math is: $\symcal{ABCXYZ}$

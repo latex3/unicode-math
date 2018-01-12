@@ -1,0 +1,330 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(1)/m/n/10 𝐴
+.\TU/xits-math.otf(1)/m/n/10 𝐵
+.\kern0.4
+.\TU/xits-math.otf(1)/m/n/10 𝐶
+.\kern0.8
+.\TU/xits-math.otf(1)/m/n/10 𝐷
+.\kern0.15
+.\TU/xits-math.otf(1)/m/n/10 𝐸
+.\kern0.6
+.\TU/xits-math.otf(1)/m/n/10 𝐹
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 𝐺
+.\kern0.2
+.\TU/xits-math.otf(1)/m/n/10 𝐻
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝐼
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝐽
+.\kern1.2
+.\TU/xits-math.otf(1)/m/n/10 𝐾
+.\kern0.8
+.\TU/xits-math.otf(1)/m/n/10 𝐿
+.\TU/xits-math.otf(1)/m/n/10 𝑀
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝑁
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝑂
+.\kern0.2
+.\TU/xits-math.otf(1)/m/n/10 𝑃
+.\kern1.5
+.\TU/xits-math.otf(1)/m/n/10 𝑄
+.\TU/xits-math.otf(1)/m/n/10 𝑅
+.\TU/xits-math.otf(1)/m/n/10 𝑆
+.\kern0.7
+.\TU/xits-math.otf(1)/m/n/10 𝑇
+.\kern1.6
+.\TU/xits-math.otf(1)/m/n/10 𝑈
+.\kern1.1
+.\TU/xits-math.otf(1)/m/n/10 𝑉
+.\kern2.25
+.\TU/xits-math.otf(1)/m/n/10 𝑊
+.\kern2.25
+.\TU/xits-math.otf(1)/m/n/10 𝑋
+.\kern0.6
+.\TU/xits-math.otf(1)/m/n/10 𝑌
+.\kern2.0
+.\TU/xits-math.otf(1)/m/n/10 𝑍
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\LATINmath$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(1)/m/n/10 𝒜
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℬ
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 𝒞
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 𝒟
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℰ
+.\kern1.05
+.\TU/xits-math.otf(1)/m/n/10 ℱ
+.\kern1.95
+.\TU/xits-math.otf(1)/m/n/10 𝒢
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 ℋ
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 ℐ
+.\kern1.95
+.\TU/xits-math.otf(1)/m/n/10 𝒥
+.\kern1.85
+.\TU/xits-math.otf(1)/m/n/10 𝒦
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℒ
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℳ
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 𝒩
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒪
+.\kern0.95
+.\TU/xits-math.otf(1)/m/n/10 𝒫
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒬
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 ℛ
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 𝒮
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 𝒯
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒰
+.\kern0.95
+.\TU/xits-math.otf(1)/m/n/10 𝒱
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒲
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒳
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 𝒴
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 𝒵
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\symscr{\LATINmath}$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(4)/m/n/10 𝒜
+.\TU/xits-math.otf(4)/m/n/10 ℬ
+.\TU/xits-math.otf(4)/m/n/10 𝒞
+.\kern0.62
+.\TU/xits-math.otf(4)/m/n/10 𝒟
+.\TU/xits-math.otf(4)/m/n/10 ℰ
+.\kern0.91
+.\TU/xits-math.otf(4)/m/n/10 ℱ
+.\kern1.03
+.\TU/xits-math.otf(4)/m/n/10 𝒢
+.\TU/xits-math.otf(4)/m/n/10 ℋ
+.\kern0.59
+.\TU/xits-math.otf(4)/m/n/10 ℐ
+.\kern0.61
+.\TU/xits-math.otf(4)/m/n/10 𝒥
+.\kern1.98
+.\TU/xits-math.otf(4)/m/n/10 𝒦
+.\TU/xits-math.otf(4)/m/n/10 ℒ
+.\TU/xits-math.otf(4)/m/n/10 ℳ
+.\TU/xits-math.otf(4)/m/n/10 𝒩
+.\kern1.52
+.\TU/xits-math.otf(4)/m/n/10 𝒪
+.\TU/xits-math.otf(4)/m/n/10 𝒫
+.\kern0.87
+.\TU/xits-math.otf(4)/m/n/10 𝒬
+.\TU/xits-math.otf(4)/m/n/10 ℛ
+.\TU/xits-math.otf(4)/m/n/10 𝒮
+.\kern0.82
+.\TU/xits-math.otf(4)/m/n/10 𝒯
+.\kern2.66
+.\TU/xits-math.otf(4)/m/n/10 𝒰
+.\kern1.78
+.\TU/xits-math.otf(4)/m/n/10 𝒱
+.\kern0.87
+.\TU/xits-math.otf(4)/m/n/10 𝒲
+.\kern0.87
+.\TU/xits-math.otf(4)/m/n/10 𝒳
+.\kern0.92
+.\TU/xits-math.otf(4)/m/n/10 𝒴
+.\kern0.89
+.\TU/xits-math.otf(4)/m/n/10 𝒵
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\symcal{\LATINmath}$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(1)/m/n/10 𝐴
+.\TU/xits-math.otf(1)/m/n/10 𝐵
+.\kern0.4
+.\TU/xits-math.otf(1)/m/n/10 𝐶
+.\kern0.8
+.\TU/xits-math.otf(1)/m/n/10 𝐷
+.\kern0.15
+.\TU/xits-math.otf(1)/m/n/10 𝐸
+.\kern0.6
+.\TU/xits-math.otf(1)/m/n/10 𝐹
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 𝐺
+.\kern0.2
+.\TU/xits-math.otf(1)/m/n/10 𝐻
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝐼
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝐽
+.\kern1.2
+.\TU/xits-math.otf(1)/m/n/10 𝐾
+.\kern0.8
+.\TU/xits-math.otf(1)/m/n/10 𝐿
+.\TU/xits-math.otf(1)/m/n/10 𝑀
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝑁
+.\kern0.9
+.\TU/xits-math.otf(1)/m/n/10 𝑂
+.\kern0.2
+.\TU/xits-math.otf(1)/m/n/10 𝑃
+.\kern1.5
+.\TU/xits-math.otf(1)/m/n/10 𝑄
+.\TU/xits-math.otf(1)/m/n/10 𝑅
+.\TU/xits-math.otf(1)/m/n/10 𝑆
+.\kern0.7
+.\TU/xits-math.otf(1)/m/n/10 𝑇
+.\kern1.6
+.\TU/xits-math.otf(1)/m/n/10 𝑈
+.\kern1.1
+.\TU/xits-math.otf(1)/m/n/10 𝑉
+.\kern2.25
+.\TU/xits-math.otf(1)/m/n/10 𝑊
+.\kern2.25
+.\TU/xits-math.otf(1)/m/n/10 𝑋
+.\kern0.6
+.\TU/xits-math.otf(1)/m/n/10 𝑌
+.\kern2.0
+.\TU/xits-math.otf(1)/m/n/10 𝑍
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\LATINtext$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(1)/m/n/10 𝒜
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℬ
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 𝒞
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 𝒟
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℰ
+.\kern1.05
+.\TU/xits-math.otf(1)/m/n/10 ℱ
+.\kern1.95
+.\TU/xits-math.otf(1)/m/n/10 𝒢
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 ℋ
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 ℐ
+.\kern1.95
+.\TU/xits-math.otf(1)/m/n/10 𝒥
+.\kern1.85
+.\TU/xits-math.otf(1)/m/n/10 𝒦
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℒ
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 ℳ
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 𝒩
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒪
+.\kern0.95
+.\TU/xits-math.otf(1)/m/n/10 𝒫
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒬
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 ℛ
+.\kern0.45
+.\TU/xits-math.otf(1)/m/n/10 𝒮
+.\kern1.45
+.\TU/xits-math.otf(1)/m/n/10 𝒯
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒰
+.\kern0.95
+.\TU/xits-math.otf(1)/m/n/10 𝒱
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒲
+.\kern2.45
+.\TU/xits-math.otf(1)/m/n/10 𝒳
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 𝒴
+.\kern1.25
+.\TU/xits-math.otf(1)/m/n/10 𝒵
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\symscr{\LATINtext}$}
+> \box...=
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/xits-math.otf(4)/m/n/10 𝒜
+.\TU/xits-math.otf(4)/m/n/10 ℬ
+.\TU/xits-math.otf(4)/m/n/10 𝒞
+.\kern0.62
+.\TU/xits-math.otf(4)/m/n/10 𝒟
+.\TU/xits-math.otf(4)/m/n/10 ℰ
+.\kern0.91
+.\TU/xits-math.otf(4)/m/n/10 ℱ
+.\kern1.03
+.\TU/xits-math.otf(4)/m/n/10 𝒢
+.\TU/xits-math.otf(4)/m/n/10 ℋ
+.\kern0.59
+.\TU/xits-math.otf(4)/m/n/10 ℐ
+.\kern0.61
+.\TU/xits-math.otf(4)/m/n/10 𝒥
+.\kern1.98
+.\TU/xits-math.otf(4)/m/n/10 𝒦
+.\TU/xits-math.otf(4)/m/n/10 ℒ
+.\TU/xits-math.otf(4)/m/n/10 ℳ
+.\TU/xits-math.otf(4)/m/n/10 𝒩
+.\kern1.52
+.\TU/xits-math.otf(4)/m/n/10 𝒪
+.\TU/xits-math.otf(4)/m/n/10 𝒫
+.\kern0.87
+.\TU/xits-math.otf(4)/m/n/10 𝒬
+.\TU/xits-math.otf(4)/m/n/10 ℛ
+.\TU/xits-math.otf(4)/m/n/10 𝒮
+.\kern0.82
+.\TU/xits-math.otf(4)/m/n/10 𝒯
+.\kern2.66
+.\TU/xits-math.otf(4)/m/n/10 𝒰
+.\kern1.78
+.\TU/xits-math.otf(4)/m/n/10 𝒱
+.\kern0.87
+.\TU/xits-math.otf(4)/m/n/10 𝒲
+.\kern0.87
+.\TU/xits-math.otf(4)/m/n/10 𝒳
+.\kern0.92
+.\TU/xits-math.otf(4)/m/n/10 𝒴
+.\kern0.89
+.\TU/xits-math.otf(4)/m/n/10 𝒵
+.\mathoff
+! OK.
+<to be read again> 
+\relax 
+l. ...\TESTBOX{$\symcal{\LATINtext}$}
+***************
+Compilation 1 of test file completed with exit status 256
