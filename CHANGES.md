@@ -2,7 +2,7 @@ CHANGE HISTORY
 ==============
 
 
-## v0.9k (2018/01/12)
+## v0.8k (2018/01/12)
 
   * Eliminate warnings `Variant form 'NV' invalid for base form`... (#430).
   * Fix issue when loading the `cal` range (#431).
