@@ -11,21 +11,7 @@
 %    \end{macrocode}
 % Bail early if necessary.
 %    \begin{macrocode}
-\ifdefined\XeTeXversion
-  \ifdim\number\XeTeXversion\XeTeXrevision in<0.9998in%
-    \PackageError{unicode-math}{%
-      Cannot run with this version of XeTeX!\MessageBreak
-      You need XeTeX 0.9998 or newer.%
-    }\@ehd
-  \fi
-\else\ifdefined\luatexversion
-  \ifnum\luatexversion<64%
-    \PackageError{unicode-math}{%
-      Cannot run with this version of LuaTeX!\MessageBreak
-      You need LuaTeX 0.64 or newer.%
-    }\@ehd
-  \fi
-\else
+\ifdefined\XeTeXversion\else\ifdefined\luatexversion\else
   \PackageError{unicode-math}{%
     Cannot be run with pdfLaTeX!\MessageBreak
     Use XeLaTeX or LuaLaTeX instead.%
