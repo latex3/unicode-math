@@ -22,63 +22,76 @@
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_alphabets:
   {
-
-    \bool_if:NTF \l_@@_init_bool
+    \bool_if:NTF \l_@@_init_bool { \@@_setup_alphabets_implicit: }
       {
-        % IMPLICIT
-        \@@_log:n {setup-implicit}
-        \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
-        \bool_set_true:N \l_@@_implicit_alph_bool
-        \@@_maybe_init_alphabet:n  {sf}
-        \@@_maybe_init_alphabet:n  {bf}
-        \@@_maybe_init_alphabet:n  {bfsf}
-        \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
-        \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
-        \@@_mathalph_map:
-        \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
+        \seq_if_empty:NF \g_@@_mathalph_seq { \@@_setup_alphabets_explicit: }
+        \clist_if_empty:NF \l_@@_mathmap_charints_clist { \@@_setup_alphabets_inherit: }
       }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ \@@_setup_alphabets_implicit:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_alphabets_implicit:
+  {
+    \@@_log:n {setup-implicit}
+    \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
+    \bool_set_true:N \l_@@_implicit_alph_bool
+    \@@_maybe_init_alphabet:n  {sf}
+    \@@_maybe_init_alphabet:n  {bf}
+    \@@_maybe_init_alphabet:n  {bfsf}
+    \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
+    \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
+    \@@_mathalph_map:
+    \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ \@@_setup_alphabets_explicit:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_alphabets_explicit:
+  {
+    \@@_log:n {setup-explicit}
+    \bool_set_false:N \l_@@_implicit_alph_bool
+    \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
+    \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
+    \@@_mathalph_map:
+    \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ \@@_setup_alphabets_inherit:}
+%    \begin{macrocode}
+\cs_new:Nn \@@_setup_alphabets_inherit:
+  {
+    \seq_gclear:N \g_@@_mathalph_seq
+    \seq_map_inline:Nn \g_@@_default_mathalph_seq
       {
-        \seq_if_empty:NF \g_@@_mathalph_seq
-          {
-            % EXPLICIT
-            \@@_log:n {setup-explicit}
-            \bool_set_false:N \l_@@_implicit_alph_bool
-            \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_noparse:nnn
-            \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_noparse:nn
-            \@@_mathalph_map:
-            \seq_if_empty:NF \l_@@_missing_alph_seq { \@@_log:n { missing-alphabets } }
-          }
+        \tl_set:No    \l_@@_style_tl       { \use_i:nnn   ##1 }
+        \clist_set:No \l_@@_alphabet_clist { \use_ii:nnn  ##1 }
 
-        % INHERIT
-        \clist_if_empty:NF \l_@@_mathmap_charints_clist
+        \clist_map_inline:Nn \l_@@_alphabet_clist
           {
-            \seq_gclear:N \g_@@_mathalph_seq
-            \seq_map_inline:Nn \g_@@_default_mathalph_seq
+            \clist_map_inline:cn {g_@@_named_slots_ \l_@@_style_tl _ ####1 _clist}
               {
-                \tl_set:No    \l_@@_style_tl       { \use_i:nnn   ##1 }
-                \clist_set:No \l_@@_alphabet_clist { \use_ii:nnn  ##1 }
-
-                \clist_map_inline:Nn \l_@@_alphabet_clist
+                \clist_map_inline:Nn \l_@@_mathmap_charints_clist
                   {
-                    \clist_map_inline:cn {g_@@_named_slots_ \l_@@_style_tl _ ####1 _clist}
+                    \@@_int_if_slot_in_range:nnT {################1} {########1}
                       {
-                        \clist_map_inline:Nn \l_@@_mathmap_charints_clist
-                          {
-                            \@@_int_if_slot_in_range:nnT {################1} {########1}
-                              {
-                                \seq_gput_right:Nn \g_@@_mathalph_seq {##1}
-                                \clist_map_break:n { \clist_map_break:n { \clist_map_break: } }
-                              }
-                          }
+                        \seq_gput_right:Nn \g_@@_mathalph_seq {##1}
+                        \clist_map_break:n { \clist_map_break:n { \clist_map_break: } }
                       }
                   }
               }
           }
-
-        \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_parse:nnn
-        \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
-        \@@_mathalph_map:
       }
+
+    \cs_set_eq:NN \@@_set_mathalphabet_char:nnn \@@_mathmap_parse:nnn
+    \cs_set_eq:NN \@@_map_char_single:nn \@@_map_char_parse:nn
+    \@@_mathalph_map:
   }
 %    \end{macrocode}
 % \end{macro}
