@@ -1,16 +1,26 @@
 CHANGE HISTORY
---------------
+==============
 
-- v0.8j (2018/01/07)
 
-  * NEW
+## v0.9k (2018/01/12)
+
+  * Eliminate warnings `Variant form 'NV' invalid for base form`... (#430).
+  * Fix issue when loading the `cal` range (#431).
+  * Fix issue with `\sqrt[n]{x}` with `amsmath` (#432).
+  * Error when loading on (really) old versions of XeTeX/LuaTeX removed.
+  * More UM fonts listed in the README (#425).
+
+
+## v0.8j (2018/01/07)
+
+  - NEW
 
     * Numbers and latin letters in the fullwidth Unicode range are now supported
       as aliases to their ASCII counterparts (#337).
     * New commands `\(New|Renew)NegationCommand \foo` for defining custom negations
       accessed via `\not\foo`.
 
-  * SYMBOLS
+  - SYMBOLS
 
     * `\typecolon` is now `\mathrel` instead of `\mathbin` (#360).
     * New symbol `\mathhyphen` which acts like a ‘letter’ (#313).
@@ -19,7 +29,7 @@ CHANGE HISTORY
       in sensible error messages rather than the old behaviour of meaningless
       output: `\arrowvert`, `\Arrowvert`, `\bracevert`. (#411).
 
-  * BUGS
+  - BUGS
 
     * LuaTeX bug with shifted `\underbrace` when it contains accented symbols worked around (#391).
     * When using the `range` feature, users commonly found they needed to call
@@ -37,7 +47,7 @@ CHANGE HISTORY
     * If `\setmath(rm|sf|tt)` is called *before* loading `unicode-math`, the setting
       is now remembered (#407).
 
-  * INTERNALS
+  - INTERNALS
 
     * A number of improvements to efficiency when loading subsequent math fonts
       using the `range` feature.
@@ -47,14 +57,16 @@ CHANGE HISTORY
       of whether the test suite is passing.
 
 
-- v0.8i (2017/11/18)
+
+## v0.8i (2017/11/18)
 
   * Many internal changes to support future work.
   * Improved documentation describing the `\mathXX` and `\symXX` commands.
   * Documentation is now split into `unicode-math.pdf` (for the user)
     and `unicode-math-code.pdf` (for the typeset source code).
 
-- v0.8h (2017/10/09)
+
+## v0.8h (2017/10/09)
 
   * Some bugs crept in in the last update due to some code rearrangement:
       * package version wasn't set;
@@ -63,18 +75,21 @@ CHANGE HISTORY
   * The layout of the code is now structured far more sensibly.
   * Remove (long deprecated) `\resetmathfont`; for years it has been a synonym for `\setmathfont`.
 
-- v0.8g (2017/10/02)
+
+## v0.8g (2017/10/02)
 
   * Better use of scriptstyle sizes in LuaTeX (I think a regression).
   * Fix regression (`\mathbf` etc. not being set automatically) caused by the renaming of a `fontspec` internal command.
   * Minor documentation improvements.
   * (Only relevant for me: I've also disabled the test suite almost entirely to begin a re-write for ‘continuous integration’.)
 
-- v0.8f (2017/08/02)
+
+## v0.8f (2017/08/02)
 
   * Emergency fix (thanks Bruno) for another bug revealed by `expl3` update.
 
-- v0.8e (2017/07/30)
+
+## v0.8e (2017/07/30)
 
   * Add `\surd` to access the sqrt symbol.
   * Fix bug exposed by `expl3` update to booleans.
@@ -82,7 +97,8 @@ CHANGE HISTORY
   * Add `\sime` alias for `\simeq` and `\nsimeq` for `\nsime`.
     (For negations it's helpful when they have consistent naming.)
 
-- v0.8d (2017/01/25)
+
+## v0.8d (2017/01/25)
 
   * `vargreek-shape=TeX` and `vargreek-shape=unicode` package options dropped; for consistency and compatibility, `\phi` and `\epsilon` should and will now behave the same as in `TeX`.
   * On that note, when using control sequences such as `\mbfitsansvarphi` (and so on), there were a few faulty definitions. The new behaviour is to consistenyl define the `varphi` and `varepsilon` ones as those with the "curly" designs.
@@ -91,18 +107,21 @@ CHANGE HISTORY
   * Remove `\mupvarbeta`, `upold(Kk)oppa`, `\up(Ss)tigma`, `\up(Kk)oppa`, `\up(Ss)ampi` — none of these are maths symbols.
   * `!` (`\mathexclam`) changed from `\mathpunct` to `\mathclose` for backwards compatibility with TeX.
 
-- v0.8c (2015/09/24)
+
+## v0.8c (2015/09/24)
 
   * Add `\over(left/right)harpoon` as "wide" accents.
   * Add RTL mathematics operators `\arabicmaj` and `\arabichad`, which correspond to `U+1EEF0` and `U+1EEF1`, resp.
   * Remove `catchfile` package dependency.
   * Update some internal names to match expl3 standards.
 
-- v0.8b (2015/09/09)
+
+## v0.8b (2015/09/09)
 
   * Bug fix: Use the "ucharcat" package to simplify some code that caused some headaches with \tl_rescan:nn.
 
-- v0.8a (2015/08/06)
+
+## v0.8a (2015/08/06)
 
   * Fix bug with \vert, \|, \(l/r)vert, etc., displaying with the wrong characters.
 
@@ -114,7 +133,8 @@ CHANGE HISTORY
 
       \setmathfont[range=bfit->it]{MinionMath-Bold.otf}
 
-- v0.8  (2015/07/29)  **Breaking changes in this update!**
+
+## v0.8  (2015/07/29)  **Breaking changes in this update!**
 
   * `\mathrm` (`\mathup`), `\mathit`, `\mathbf`, `\mathsf`, and `\mathtt` revert to their traditional LaTeX meanings; they are set up to match their equivalent text fonts unless specifically set using `\setmathrm` and friends from `fontspec` or the new `\setmathfontface` in `unicode-math`. These commands should be used for *multi*-letter identifiers.
 
@@ -130,36 +150,43 @@ CHANGE HISTORY
 
   * Assorted bug fixes and minor changes.
 
-- v0.7e (2014/06/30)
+
+## v0.7e (2014/06/30)
 
   * No longer assume fixltx2e has been loaded.
   * Some ascii math symbols have been renamed with a \math... prefix, such as \mathquestion.
   * Assume latest luaotfload is being used; no need for a separate unicode-math.lua script.
   * Assorted typos and minor bugs.
 
-- v0.7e (2013/05/04)
+
+## v0.7e (2013/05/04)
 
   * Track luaotfload updates.
 
-- v0.7d (2013/03/16)
+
+## v0.7d (2013/03/16)
 
   * More expl3 changes missed first time around. (Sorry again.)
 
-- v0.7c (2013/02/25)
+
+## v0.7c (2013/02/25)
 
   * The Latin Modern math font name changed TWICE. Only caught the first one.
     Sorry for any inconvenience caused.
 
-- v0.7b (2013/02/22)
+
+## v0.7b (2013/02/22)
 
   * Keep in sync with Latin Modern Math font name change.
   * Keep in sync with expl3 changes.
 
-- v0.7a (2012/07/28)
+
+## v0.7a (2012/07/28)
 
   * Keep in sync with expl3 changes.
 
-- v0.7 (2012/05/30): The TeX Live 2012 release.
+
+## v0.7 (2012/05/30): The TeX Live 2012 release.
 
   * Most changes (and all significant ones) in this release thanks to Khaled
     Hosny, who is now credited as an author of the package.
@@ -182,13 +209,15 @@ CHANGE HISTORY
       * `\openbox` renamed to `\mathvisiblespace`, since it is already defined
         in amsthm as an empty box.
 
-- v0.6a (2011/09/19)
+
+## v0.6a (2011/09/19)
 
   * Always a bug that slips through the cracks! Fixes `\left.` and `\right.`
   * Add experimental package option `warnings-off=...` which allows warnings
     to be suppressed on an individual basis.
 
-- v0.6 (2011/09/18)
+
+## v0.6 (2011/09/18)
 
   * Keep in sync with fontspec internals
     (sorry for the small delay where things were broken)
@@ -213,7 +242,8 @@ CHANGE HISTORY
     (thanks to Apostolos Syropoulos)
   * Fixed literal sub-/super-script input.
 
-- v0.5e (2011/07/31)
+
+## v0.5e (2011/07/31)
 
   * Fix forward compatibility clash with deprecated expl3 functions (sorry)
   * Command names are now `\protected`; this makes them safe to use in moving
@@ -234,7 +264,8 @@ CHANGE HISTORY
   * Move several LuaTeX-related patches to the `lualatex-math` package
   * Fixed mathtool's `\cramped` in XeLaTeX usage
 
-- v0.5d (2011/01/30)
+
+## v0.5d (2011/01/30)
 
   * Assorted improvements to LuaLaTeX support, including non-growing accents
     available in LuaTeX v0.65 and later
@@ -243,14 +274,16 @@ CHANGE HISTORY
     (always more worked needed, though)
   * Fix the default setting for "vargreek-shape"
 
-- v0.5c (2010/09/27)
+
+## v0.5c (2010/09/27)
 
   * Fix a long-standing bug in XeLaTeX in which the "master" math
     families 2 and 3 weren't being set; hence fraction rules and many other
     parameters were not being set correctly
   * Stay in sync with internal fontspec changes
 
-- v0.5b (2010/09/19): Tune-up
+
+## v0.5b (2010/09/19): Tune-up
 
   * Added missing symbols/synonyms:
       \diamond  \smallint  \emptyset  \hbar  \backepsilon  \eth
@@ -258,7 +291,8 @@ CHANGE HISTORY
   * Fix \slash; previously, it overwrote the text definition
   * \vartriangle now has the correct math class
 
-- v0.5a (2010/07/14): TeX Live 2010 release
+
+## v0.5a (2010/07/14): TeX Live 2010 release
 
   * Numerous documentation improvements
   * Bug fix against stray catcode changes
@@ -269,5 +303,6 @@ CHANGE HISTORY
   * Superscripts are allowed after primes (as they should be)
   * Numerous LuaLaTeX improvements, including roots and over/under braces.
 
-- v0.5 (2010/06/03): Initial CTAN release
+
+## v0.5 (2010/06/03): Initial CTAN release
 
