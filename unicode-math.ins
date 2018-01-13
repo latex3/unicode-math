@@ -7,6 +7,7 @@
 \keepsilent
 
 \declarepreamble\defaultpreamble
+
 ------------------------------------------------
 The UNICODE-MATH package  <wspr.io/unicode-math>
 ------------------------------------------------
@@ -19,6 +20,7 @@ Copyright 2010-2017  Philipp Stephani
 Copyright 2011-2017  Joseph Wright
 Copyright 2012-2015  Khaled Hosny
 ------------------------------------------------
+
 \endpreamble
 
 \nopostamble
@@ -33,10 +35,7 @@ Copyright 2012-2015  Khaled Hosny
   \generate{\file{#1}{#2}}%
 }
 
-\Generate{unicode-math.sty}{
-    \FROM{unicode-math.dtx}{base}
-    \FROM{um-code-base.dtx}{base}
-  }
+\Generate{unicode-math.sty}{\FROM{unicode-math.dtx}{base}}
 
 \def\DTX#1{\FROM{#1}{package,XE}}
 \Generate{unicode-math-xetex.sty}{\DTXFILES}

@@ -1,15 +1,13 @@
 %%^^A%% unicode-math.dtx -- part of UNICODE-MATH <wspr.io/unicode-math>
 %%^^A%% Metadata for the package code, including files and versioning
 
-% \section{Package declaration}
+% \section{Package metadata}
 %
-% List all \texttt{dtx} files for
-% (a) the \texttt{ins} file and~(b) typesetting the code.
+% List all \texttt{dtx} files for (a) the \texttt{ins} file and~(b) typesetting the code.
 %    \begin{macrocode}
 %<*dtx>
 \def\DTXFILES{
   \DTX{unicode-math.dtx}
-  \DTX{um-code-base.dtx}
   \DTX{um-code-opening.dtx}
   \DTX{um-code-variables.dtx}
   \DTX{um-code-api.dtx}
@@ -25,38 +23,72 @@
   \DTX{um-code-mathmap.dtx}
   \DTX{um-code-sym-commands.dtx}
   \DTX{um-code-alphabets.dtx}
-  \DTX{um-code-epilogue.dtx}
   \DTX{um-code-primes.dtx}
   \DTX{um-code-sscript.dtx}
   \DTX{um-code-compat.dtx}
   \DTX{um-code-amsmath.dtx}
+  \DTX{um-code-epilogue.dtx}
 }
 %</dtx>
 %    \end{macrocode}
 %
-% Now exit if we're using plain \TeX; this would usually be the case when
-% loading this file with \texttt{unicode-math.ins}.
+% Now exit if we're using plain \TeX\ when loading this file with \texttt{unicode-math.ins}.
 %    \begin{macrocode}
 %<*dtx>
-\def\tmpa{plain}
-\ifx\tmpa\fmtname\expandafter\endinput\fi
+\ifx\plainoutput\undefined\else\expandafter\endinput\fi
 %</dtx>
 %    \end{macrocode}
 %
-% Declare the package version and date. For loading this file directly
-% as a \texttt{dtx} file, \cs{fileversion} and \cs{filedate} will be set
-% correctly when using \cs{GetFileInfo} without having to load the package
-% directly.
+% Metadata for documentation; the title and authors of the package.
 %    \begin{macrocode}
-%<base>\ProvidesPackage{unicode-math}
-%<package&XE>\ProvidesPackage{unicode-math-xetex}
-%<package&LU>\ProvidesPackage{unicode-math-luatex}
 %<*dtx>
-\ProvidesFile{unicode-math.dtx}
+\title{
+  Experimental Unicode mathematical typesetting:
+  The \pkg{unicode-math} package
+}
+\author{
+  \scshape Will Robertson\\
+  \itshape Philipp Stephani, Joseph Wright, Khaled Hosny, and others\\
+  \url{http://github.com/wspr/unicode-math}
+}
 %</dtx>
-%<*base|package>
-  [2018/01/13 v0.8k Unicode maths in XeLaTeX and LuaLaTeX]
-%</base|package>
+%    \end{macrocode}
+%
+% Declare the package version and date.
+%    \begin{macrocode}
+%<base>\RequirePackage{expl3}
+%<base>\ProvidesExplPackage{unicode-math}
+%<package&XE>\ProvidesExplPackage{unicode-math-xetex}
+%<package&LU>\ProvidesExplPackage{unicode-math-luatex}
+%<base|package>  {2018/01/13} {v0.8k} {Unicode maths in XeLaTeX and LuaLaTeX}
+%    \end{macrocode}
+%
+% Here the version and date are setup for typesetting the documentation.
+%    \begin{macrocode}
+%<*dtx>
+\date{
+  \def\filedate{2018/01/13}
+  \def\fileversion{v0.8k}
+  \filedate \qquad \fileversion
+}
+%</dtx>
+%    \end{macrocode}
+%
+% \section{The \texttt{unicode-math.sty} loading file}
+%
+% The \texttt{unicode-math.sty} file is a stub which loads necessary packages
+% and then splits into a XeTeX- or LuaTeX-specific version of the package.
+%
+%    \begin{macrocode}
+%<base>\sys_if_engine_luatex:T { \RequirePackageWithOptions{unicode-math-luatex} }
+%<base>\sys_if_engine_xetex:T  { \RequirePackageWithOptions{unicode-math-xetex}  }
+%<base>\sys_if_engine_pdftex:T
+%<base>  {
+%<base>    \msg_new:nnn {unicode-math} {not-pdftex}
+%<base>      { Cannot~ be~ run~ with~ pdfLaTeX!\\ Use~ XeLaTeX~ or~ LuaLaTeX~ instead. }
+%<base>    \msg_error:nn {unicode-math} {not-pdftex}
+%<base>  }
+%<base>\endinput
 %    \end{macrocode}
 
 \endinput

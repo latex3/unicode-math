@@ -16,8 +16,9 @@ typesetopts  = " -shell-escape -interaction=nonstopmode "
 packtdszip = true
 recordstatus = true
 
-
--- [2017/11/18 v0.8i Unicode maths in XeLaTeX and LuaLaTeX]
+--[[
+     SETVERSION
+--]]
 
 changeslisting = nil
 do
@@ -39,18 +40,28 @@ function setversion_update_line(line, date, version)
   local lineorig = line
   local date = string.gsub(date, "%-", "/")
 
-  if string.match(line, "%[%d%d%d%d/%d%d/%d%d %S+ .*%]") then
+  if string.match(line, "{%d%d%d%d/%d%d/%d%d}%s*{[^}]+}%s*{[^}]+}") then
+    print("Found line: (unicode-math.dtx)")
+    print(line)
+    line = line:gsub("{%d%d%d%d/%d%d/%d%d}(%s*){[^}]+}(%s*){([^}]+)}",
+    "{"..date.."}%1{"..pkgversion.."}%2{%3}")
+  end
+  if string.match(line, "\\def\\filedate{%d%d%d%d/%d%d/%d%d}") then
     print("Found line: (unicode-math.dtx)")
     print(line)
     line = line:gsub("%d%d%d%d/%d%d/%d%d", date)
-    line = line:gsub("%[(%d%d%d%d/%d%d/%d%d) (%S+) (.*)%]", "["..date.." "..pkgversion.." %3]")
+  end
+  if string.match(line, "\\def\\fileversion{[^}]+}") then
+    print("Found line: (unicode-math.dtx)")
+    print(line)
+    line = line:gsub("\\def\\fileversion{.*}", "\\def\\fileversion{"..pkgversion.."}")
   end
 
-  if changesversion and string.match(line, "- (%S+) %(.*%)") then
+  if changesversion and string.match(line, "## (%S+) %(.*%)") then
     changesversion = false
     print("Found line: (CHANGES.md)")
     print(line)
-    line = line:gsub("- (%S+) %(.*%)","- %1 ("..date..")")
+    line = line:gsub("## (%S+) %(.*%)","## %1 ("..date..")")
   end
 
   if not(line==lineorig) then

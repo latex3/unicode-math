@@ -12,14 +12,15 @@
 %<*package>
 %    \end{macrocode}
 %
+% \paragraph{Packages}
+% Assuming people are running up-to-date packages.
 %    \begin{macrocode}
-%<*LU>
-\RequirePackage{lualatex-math}
-%</LU>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\ExplSyntaxOn
+\RequirePackage{xparse,l3keys2e}
+\RequirePackage{fontspec}
+\RequirePackage{filehook}
+\RequirePackage{fix-cm}
+%<LU>\RequirePackage{lualatex-math}
+%<debug>\RequirePackage{l3benchmark}
 %    \end{macrocode}
 %
 % \subsection{\pkg{expl3} variants}
