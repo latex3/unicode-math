@@ -19,7 +19,6 @@ be installed for processing such as testing.
  | File                     | Flag | Description                                                                   |
  | ---                      | ---  | ---                                                                           |
  | unicode-math.dtx         | ‡    | Metadata for the package code, including files and versioning                 |
- | um-code-base.dtx         | ‡    | Definition of unicode-math.sty, which splits and loads according to engine.   |
  | um-code-opening.dtx      | ‡    | Assorted initialisation tasks, including some low-level function definitions. |
  | um-code-variables.dtx    | ‡    | Declaration of all code-level variables used in the package.                  |
  | um-code-api.dtx          | ‡    | The (underdeveloped) API to interface with the package internals.             |
@@ -35,11 +34,11 @@ be installed for processing such as testing.
  | um-code-mathmap.dtx      | ‡    | Setup of symbol alphabets.                                                    |
  | um-code-sym-commands.dtx | ‡    | Definition of "math symbol alphabet" commands such as `\symbf` and co.        |
  | um-code-alphabets.dtx    | ‡    | Definitions for setting up the "math symbol alphabets".                       |
- | um-code-epilogue.dtx     | ‡    | Assorted definitions to close up.                                             |
  | um-code-primes.dtx       | ‡    | The definitions needed for the input of primes.                               |
  | um-code-sscript.dtx      | ‡    | Setup for active chars needed to process subscript/superscript input chars.   |
  | um-code-compat.dtx       | ‡    | Compatibility with 3rd party packages.                                        |
  | um-code-amsmath.dtx      | ‡    | Compatibility with amsmath.                                                   |
+ | um-code-epilogue.dtx     | ‡    | Assorted definitions to close up.                                             |
  | unicode-math.ins         | ‡    | Docstrip installer.                                                           |
  | unicode-math-table.tex   | ‡    | Source file of the math symbols.                                              |
 
@@ -159,26 +158,25 @@ All files included in the `unicode-math/source` directory.
  1. um-code-alphabets.dtx 
  2. um-code-amsmath.dtx 
  3. um-code-api.dtx 
- 4. um-code-base.dtx 
- 5. um-code-compat.dtx 
- 6. um-code-epilogue.dtx 
- 7. um-code-fontopt.dtx 
- 8. um-code-fontparam.dtx 
- 9. um-code-main.dtx 
-10. um-code-mathmap.dtx 
-11. um-code-mathtext.dtx 
-12. um-code-msg.dtx 
-13. um-code-opening.dtx 
-14. um-code-pkgopt.dtx 
-15. um-code-primes.dtx 
-16. um-code-setchar.dtx 
-17. um-code-sscript.dtx 
-18. um-code-sym-commands.dtx 
-19. um-code-ui.dtx 
-20. um-code-usv.dtx 
-21. um-code-variables.dtx 
-22. unicode-math.dtx 
-23. unicode-math.ins 
+ 4. um-code-compat.dtx 
+ 5. um-code-epilogue.dtx 
+ 6. um-code-fontopt.dtx 
+ 7. um-code-fontparam.dtx 
+ 8. um-code-main.dtx 
+ 9. um-code-mathmap.dtx 
+10. um-code-mathtext.dtx 
+11. um-code-msg.dtx 
+12. um-code-opening.dtx 
+13. um-code-pkgopt.dtx 
+14. um-code-primes.dtx 
+15. um-code-setchar.dtx 
+16. um-code-sscript.dtx 
+17. um-code-sym-commands.dtx 
+18. um-code-ui.dtx 
+19. um-code-usv.dtx 
+20. um-code-variables.dtx 
+21. unicode-math.dtx 
+22. unicode-math.ins 
 
 ### TeX files (TDS)
 
@@ -224,38 +222,37 @@ The following group lists the files included in the CTAN package.
  4. um-code-alphabets.dtx 
  5. um-code-amsmath.dtx 
  6. um-code-api.dtx 
- 7. um-code-base.dtx 
- 8. um-code-compat.dtx 
- 9. um-code-epilogue.dtx 
-10. um-code-fontopt.dtx 
-11. um-code-fontparam.dtx 
-12. um-code-main.dtx 
-13. um-code-mathmap.dtx 
-14. um-code-mathtext.dtx 
-15. um-code-msg.dtx 
-16. um-code-opening.dtx 
-17. um-code-pkgopt.dtx 
-18. um-code-primes.dtx 
-19. um-code-setchar.dtx 
-20. um-code-sscript.dtx 
-21. um-code-sym-commands.dtx 
-22. um-code-ui.dtx 
-23. um-code-usv.dtx 
-24. um-code-variables.dtx 
-25. um-doc-legacyfontdimen.tex 
-26. um-doc-main.tex 
-27. um-doc-mathfontdimen.tex 
-28. um-doc-nfsssummary.tex 
-29. um-doc-stixextract.tex 
-30. um-doc-style.tex 
-31. unicode-math-code.ltx 
-32. unicode-math-code.pdf 
-33. unicode-math-table.tex 
-34. unicode-math.dtx 
-35. unicode-math.ins 
-36. unicode-math.ltx 
-37. unicode-math.pdf 
-38. unimath-example.ltx 
-39. unimath-example.pdf 
-40. unimath-symbols.ltx 
-41. unimath-symbols.pdf 
+ 7. um-code-compat.dtx 
+ 8. um-code-epilogue.dtx 
+ 9. um-code-fontopt.dtx 
+10. um-code-fontparam.dtx 
+11. um-code-main.dtx 
+12. um-code-mathmap.dtx 
+13. um-code-mathtext.dtx 
+14. um-code-msg.dtx 
+15. um-code-opening.dtx 
+16. um-code-pkgopt.dtx 
+17. um-code-primes.dtx 
+18. um-code-setchar.dtx 
+19. um-code-sscript.dtx 
+20. um-code-sym-commands.dtx 
+21. um-code-ui.dtx 
+22. um-code-usv.dtx 
+23. um-code-variables.dtx 
+24. um-doc-legacyfontdimen.tex 
+25. um-doc-main.tex 
+26. um-doc-mathfontdimen.tex 
+27. um-doc-nfsssummary.tex 
+28. um-doc-stixextract.tex 
+29. um-doc-style.tex 
+30. unicode-math-code.ltx 
+31. unicode-math-code.pdf 
+32. unicode-math-table.tex 
+33. unicode-math.dtx 
+34. unicode-math.ins 
+35. unicode-math.ltx 
+36. unicode-math.pdf 
+37. unimath-example.ltx 
+38. unimath-example.pdf 
+39. unimath-symbols.ltx 
+40. unimath-symbols.pdf 
