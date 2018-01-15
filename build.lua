@@ -29,10 +29,6 @@ end
 pkgversion = string.match(changeslisting,"## (%S+) %(.-%)")
 print('Current version (from first entry in CHANGES.md): '..pkgversion)
 
-currentchanges = string.match(changeslisting,"(## %S+ %(.-%).-)%s*## %S+ %(.-%)")
-print("******************")
-print(currentchanges)
-print("******************")
 
 local changesversion = true
 
