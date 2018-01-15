@@ -164,9 +164,25 @@ These files are used for unpacking, typesetting, or checking purposes.
        dir     = supportdir,
     },
     {
+       name    = "Release files",
+       description = [[
+These files are used to manage the package behind the scenes. Not part of a CTAN release.
+]],
+       files   = {"*.lua"},
+       dir     = maindir,
+    },
+    {
+       name    = "Travis files",
+       description = [[
+These are used to set up Travis CI. Not part of a CTAN release.
+]],
+       files   = {"texlive.*",".travis.yml"},
+       dir     = maindir,
+    },
+    {
        name    = "Checking-specific support files",
        description = [[
-Support files for checking the test suite.
+Support files for checking the test suite. Not part of a CTAN release.
 ]],
        files   = {"*.*"},
        exclude = {{".",".."},excludefiles},
@@ -175,7 +191,7 @@ Support files for checking the test suite.
     {
        name    = "Test files",
        description = [[
-These files form the test suite for the package. The listed `.lvt` files are the individual unit tests, with matching `.tlg` (not shown, for brevity) are the stored output for ensuring changes to the package produce the same output.
+These files form the test suite for the package. The listed `.lvt` files are the individual unit tests, with matching `.tlg` (not shown, for brevity) are the stored output for ensuring changes to the package produce the same output. Not part of a CTAN release.
 ]],
        files   = {"*"..lvtext,"*"..lveext},
        dir     = testfiledir,
