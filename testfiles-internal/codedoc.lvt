@@ -1,0 +1,11 @@
+\input{regression-test}
+\START
+\TIMO
+\typeout{**************************}
+\typeout{This test checks the code documentation compiles without error.}
+\typeout{No log output is expected.}
+\OMIT
+
+\input{unicode-math-code.ltx}
+
+\end{document}

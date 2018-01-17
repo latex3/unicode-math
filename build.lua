@@ -10,6 +10,8 @@ textfiles    = {"*.md","LICENSE"}
 versionfiles = {"unicode-math.dtx","CHANGES.md"}
 
 checkengines = {"xetex","luatex"}
+checkconfigs = {"build", "build-checkdoc"}
+
 typesetexe   = "xelatex"
 typesetopts  = " -shell-escape -interaction=nonstopmode "
 
