@@ -55,7 +55,7 @@ tlmgr install   \
 tlmgr install Asana-Math tex-gyre tex-gyre-math lm-math xits
 
 # for documentation
-tlmgr install xcolor enumitem amsmath array booktabs calc enumitem fancyvrb graphicx ifthen longtable refstyle subfig topcapt url varioref underscore metalogo hologo iwona
+tlmgr install xcolor enumitem   booktabs  enumitem fancyvrb refstyle subfig url underscore metalogo iwona graphics-def
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
