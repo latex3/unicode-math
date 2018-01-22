@@ -1,6 +1,10 @@
 CHANGE HISTORY
 ==============
 
+## v0.8l ()
+
+  * Fix issue when nesting `\mathXX` and `\symZZ` commands. (#356, #435, #438)
+  * Document incompatibility with the `mathspec` package. (#436)
 
 ## v0.8k (2018/01/13)
 

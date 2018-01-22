@@ -1,0 +1,19 @@
+\input{umtest-preamble.tex}
+\usepackage{unicode-math}
+\begin{document}
+\makeatletter
+
+\MSG{OPERATOR FONT + MATHBB}
+\TESTBOX{${\operator@font \mathbb{B}}$}
+
+\MSG{MATHRM + MATHBB}
+\TESTBOX{$\mathrm{\symbb{B}}$}
+
+\MSG{MATHRM + MATHCAL}
+\TESTBOX{$\mathrm{\mathcal{B}}$}
+
+\MSG{MATHRM + SYMUP + mu}
+\TESTBOX{$\mathrm{\symup{\mu}}$}
+
+\makeatother
+\end{document}

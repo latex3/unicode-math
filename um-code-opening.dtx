@@ -182,6 +182,18 @@
   }
 %    \end{macrocode}
 %
+% \subsubsection{NFSS-related interfaces}
+%
+% \begin{macro}{\@@_mathgroup_set:n}
+% Remember that \cs{mathgroup} is just \cs{fam}!
+%    \begin{macrocode}
+\cs_new_protected:Nn \@@_mathgroup_set:n
+  {
+    \tex_fam:D #1 \scan_stop:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsubsection{Font parameters}
 %
 % \begin{macro}{\@@_copy_fontdimen:nnN}
