@@ -114,6 +114,11 @@
     since they relate to input commands not output glyphs.
     Use `bfit` or `bfup` (etc.) to specify which.
   }
+\@@_msg_new:nn {no-main-font}
+  {
+    No main maths font has been set up yet.\\If you simply want ‘the default’, use: \\
+    \iow_indent:n {\token_to_str:N\setmathfont{latinmodern-math.otf}}
+  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}

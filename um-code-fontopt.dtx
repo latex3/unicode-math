@@ -40,6 +40,7 @@
   {
     range .code:n =
       {
+        \bool_if:NF \g_@@_main_font_defined_bool { \@@_error:n {no-main-font} }
         \bool_set_false:N \l_@@_init_bool
         \@@_range_init:
         \group_begin:
@@ -165,17 +166,19 @@
 \cs_new_protected:Nn \@@_range_decl:n
   {
     \bool_lazy_and:nnTF { \tl_if_single_p:n {#1} } { \token_if_cs_p:N #1 }
+      % IF A CSNAME:
       {
         \tl_if_in:VnTF #1 { \q_unicode_math }
           {
             \seq_if_in:NnTF \g__um_mathclasses_seq {#1}
               { \seq_gput_right:Nn \g_@@_mclass_range_seq {#1} }
-              { \seq_gput_right:Nx \g_@@_char_range_seq   {#1} }
+              { \seq_gput_right:Nx \g_@@_char_range_seq   { \int_eval:n {#1} } }
           }
           { \@@_error:nx {bad-cs-in-range} { \tl_to_str:n {#1} } }
       }
+      % ELSE ASSUME NUMERIC INPUT:
       {
-        \seq_gput_right:Nx \g_@@_char_range_seq {#1}
+        \seq_gput_right:Nx \g_@@_char_range_seq { \int_eval:n {#1} }
       }
   }
 %    \end{macrocode}

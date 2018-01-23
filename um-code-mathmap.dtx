@@ -75,14 +75,17 @@
 
         \clist_map_inline:Nn \l_@@_alphabet_clist
           {
-            \clist_map_inline:cn {g_@@_named_slots_ \l_@@_style_tl _ ####1 _clist}
+            \clist_if_exist:cT {g_@@_named_slots_ \l_@@_style_tl _ ####1 _clist}
               {
-                \clist_map_inline:Nn \l_@@_mathmap_charints_clist
+                \clist_map_inline:cn {g_@@_named_slots_ \l_@@_style_tl _ ####1 _clist}
                   {
-                    \@@_int_if_slot_in_range:nnT {################1} {########1}
+                    \clist_map_inline:Nn \l_@@_mathmap_charints_clist
                       {
-                        \seq_gput_right:Nn \g_@@_mathalph_seq {##1}
-                        \clist_map_break:n { \clist_map_break:n { \clist_map_break: } }
+                        \@@_int_if_slot_in_range:nnT {################1} {########1}
+                          {
+                            \seq_gput_right:Nn \g_@@_mathalph_seq {##1}
+                            \clist_map_break:n { \clist_map_break:n { \clist_map_break: } }
+                          }
                       }
                   }
               }

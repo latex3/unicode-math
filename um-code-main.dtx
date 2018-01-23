@@ -70,6 +70,7 @@
 
     \bool_if:NTF \l_@@_init_bool
       {
+        \bool_gset_true:N \g_@@_main_font_defined_bool
 %<LU>   \@@_mathparam_store:
         \@@_log:n {default-math-font}
       }
@@ -89,7 +90,7 @@
 \AtBeginDocument { \@@_load_lm_if_necessary: }
 \cs_new:Nn \@@_load_lm_if_necessary:
   {
-    \cs_if_exist:NF \l_@@_fontname_tl
+    \bool_if:NF \g_@@_main_font_defined_bool
       {
 %<debug>\typeout{SETTING~ DEFAULT~ FONT~(latinmodern-math)}
         \setmathfont{latinmodern-math.otf}

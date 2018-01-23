@@ -1,0 +1,15 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+\setmathfont{latinmodern-math.otf}
+\setmathfont{texgyrepagella-math.otf}[range=\nabla]
+\setmathfont{texgyretermes-math.otf}[range=\partial]
+
+\begin{document}
+
+\TESTBOX{$x$}
+\TESTBOX{$\nabla$}
+\TESTBOX{$\partial$}
+
+\end{document}

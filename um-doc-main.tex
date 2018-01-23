@@ -283,6 +283,9 @@ where \meta{unicode range} is a comma-separated list of Unicode slot numbers and
 Note that \TeX's syntax for accessing the slot number of a character, such as |`\+|, will also work here.
 Only numerical slots can be used in ranged declarations.
 
+Note that, for efficiency, the \pkg{unicode-math} package only loads a default maths setup when absolutely necessary.
+Before you use the |range| option you must first load a `main' maths font in the standard way.
+
 You may also use the macro for accessing the glyph, such as |range=|\cs{int}, or whole collection of symbols with the same math type, such as |range=\mathopen|, or complete math styles such as |range=\symbb| (or just |range=bb|).
 
 \subsubsection{Control over alphabet ranges}
