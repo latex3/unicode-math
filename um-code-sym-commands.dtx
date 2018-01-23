@@ -57,7 +57,7 @@
   {
     \seq_gput_right:Nn \g_@@_mathstyles_seq {#1}
     \@@_init_alphabet:n {#1}
-    \cs_set_protected:cpx {sym#1} ##1
+    \cs_set_protected:cpx {sym#1}
       {
         \@@_group_begin:
           \exp_not:n
@@ -70,7 +70,6 @@
             }
           \exp_not:c {@@_switchto_#1:}
           \@@_mathgroup_set:n {-1}
-          ##1
         \@@_group_end:n
       }
   }

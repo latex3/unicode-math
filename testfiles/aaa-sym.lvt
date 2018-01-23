@@ -1,0 +1,14 @@
+
+\input{umtest-preamble}
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\begin{document}
+
+$\symbf{A}$
+
+$\symsf{A}$
+
+$\symbb{A}$
+
+\end{document}
