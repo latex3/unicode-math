@@ -8,80 +8,6 @@
 %<*package>
 %    \end{macrocode}
 %
-% \subsection{Hooks into \LaTeXe}
-%
-% Switching to a different style of alphabetic symbols was traditionally performed with
-% commands like \cmd\mathbf, which literally changes fonts to access alternate symbols.
-% This is not as simple with Unicode fonts.
-%
-% In traditional \TeX{} maths font setups, you simply switch between different `families' (\cmd\fam), which is analogous to changing from one font to another---a symbol such as `a' will be upright in one font, bold in another, and so on.
-% In pkg{unicode-math}, a different mechanism is used to switch between styles. For every letter (start with ascii a-zA-Z and numbers to keep things simple for now), they are assigned a `mathcode' with \cmd\Umathcode\ that maps from input letter to output font glyph slot. This is done with the equivalent of
-% \begin{Verbatim}
-% \Umathcode`\a = 7 1 "1D44E\relax
-% \Umathcode`\b = 7 1 "1D44F\relax
-% \Umathcode`\c = 7 1 "1D450\relax
-% ...
-% \end{Verbatim}
-% When switching from regular letters to, say, \cmd\mathrm, we now need to execute a new mapping:
-% \begin{Verbatim}
-% \Umathcode`\a = 7 1 `\a\relax
-% \Umathcode`\b = 7 1 `\b\relax
-% \Umathcode`\c = 7 1 `\c\relax
-% ...
-% \end{Verbatim}
-% This is fairly straightforward to perform when we're defining our own commands such as \cmd\symbf\ and so on. However, this means that `classical' \TeX\ font setups will break, because with the original mapping still in place, the engine will be attempting to insert unicode maths glyphs from a standard font.
-%
-% \begin{macro}{\use@mathgroup}
-% To overcome this, we patch \cs{use@mathgroup}, which is only used inside of commands
-% such as \cs{mathXYZ}, so this shouldn't have any side-effects.
-% Omit the test for math mode because this is only called \emph{inside} \cs{mathrm} or similar,
-% which already has a math mode check.
-%    \begin{macrocode}
-\cs_set:Npn \use@mathgroup #1 #2
-  {
-    \@@_group_begin:
-      \cs_if_eq:cNF {M@\f@encoding} #1 {#1}
-      \@@_switchto_literal:
-      \@@_mathgroup_set:n {#2}
-    \@@_group_end:
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% In LaTeX maths, the command |\operator@font| is defined that switches to the |operator| mathgroup. The classic example is the |\sin| in |$\sin{x}$|; essentially we’re using |\mathrm| to typeset the upright symbols, but the syntax is |{\operator@font sin}|.
-% I thought that hooking into |\operator@font| would be hard because all other maths font selection in 2e uses |\mathrm{...}| style.
-% Then reading source2e a little more I stumbled upon \cs{@fontswitch}.
-% Reimplement that here to avoid \cs{bgroup}/\cs{egroup}.
-% \begin{macro}{\operator@font}
-%    \begin{macrocode}
-\cs_set:Npn \operator@font
-  {
-    \@@_switchto_literal:
-    \@@_fontswitch:n { \g_@@_operator_mathfont_tl }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_fontswitch:n}
-% Omit the check for math mode as \verb|#1| should do that for us.
-%    \begin{macrocode}
-\cs_set:Nn \@@_fontswitch:n
-  {
-    \cs_set_eq:NN \math@bgroup     \scan_stop:
-    \cs_set_eq:NN \@@_group_begin: \scan_stop:
-    \cs_set:Npn \@@_group_end:
-      {
-        \cs_set_eq:NN \@@_group_begin: \@@_group_begin_frozen:
-        \cs_set_eq:NN \@@_group_end:   \@@_group_end_frozen:
-        \cs_set_eq:NN \math@bgroup \@@math@bgroup
-        \cs_set_eq:NN \math@egroup \@@math@egroup
-      }
-    \cs_set_eq:NN \math@egroup \@@_group_end:
-    #1 \scan_stop:
-  }
-%    \end{macrocode}
-% \end{macro}
-%
 %
 % \subsection{Setting styles}
 %
@@ -145,7 +71,7 @@
           \exp_not:c {@@_switchto_#1:}
           \@@_mathgroup_set:n {-1}
           ##1
-        \@@_group_end:
+        \@@_group_end:n
       }
   }
 %    \end{macrocode}
