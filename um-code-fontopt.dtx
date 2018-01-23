@@ -172,13 +172,13 @@
           {
             \seq_if_in:NnTF \g__um_mathclasses_seq {#1}
               { \seq_gput_right:Nn \g_@@_mclass_range_seq {#1} }
-              { \seq_gput_right:Nx \g_@@_char_range_seq   { \int_eval:n {#1} } }
+              { \seq_gput_right:Nx \g_@@_char_range_seq   { #1 } }
           }
           { \@@_error:nx {bad-cs-in-range} { \tl_to_str:n {#1} } }
       }
       % ELSE ASSUME NUMERIC INPUT:
       {
-        \seq_gput_right:Nx \g_@@_char_range_seq { \int_eval:n {#1} }
+        \seq_gput_right:Nx \g_@@_char_range_seq { #1 }
       }
   }
 %    \end{macrocode}
