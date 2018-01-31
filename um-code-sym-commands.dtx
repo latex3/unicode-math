@@ -62,10 +62,7 @@
         \@@_group_begin:
           \exp_not:n
             {
-              \mode_if_math:F
-                {
-                  \exp_args:Nc \non@alpherr {sym#1}
-                }
+              \mode_if_math:F { \exp_args:Nc \non@alpherr {sym#1} }
               \tl_set:Nn \l_@@_mathstyle_tl {#1}
             }
           \exp_not:c {@@_switchto_#1:}
