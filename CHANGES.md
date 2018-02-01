@@ -3,9 +3,12 @@ CHANGE HISTORY
 
 ## v0.8l ()
 
+  * Issue an error message if `\setmathfont{...}[range=...]` is used first; a `range`
+    declaration inherently implies a subset, so a ‘main’ math font needs to be set up first.
   * Fix issue when nesting `\mathXX` and `\symZZ` commands. (#356, #435, #438)
   * Fix another issue when using `mathXX` or `\symXX` inside `\DeclareMathOperator`. (#449)
   * Document incompatibility with the `mathspec` package. (#436)
+  * Fix bugs for using `range=\partial` and `range=\nabla`. (#441)
 
 ## v0.8k (2018/01/13)
 
