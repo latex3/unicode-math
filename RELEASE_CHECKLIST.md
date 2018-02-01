@@ -8,6 +8,6 @@
 - [ ] Rebase `working` onto `master`
 - [ ] `build ctan`
 - [ ] Upload to CTAN
-- [ ] Add new tag for release
+- [ ] `texlua tagrelease.lua` to tag release with version number, annotated with changes
 - [ ] `build install`
 - [ ] Check `latex3/contrib/testfiles/unicode-math001.lvt` and update if necessary
