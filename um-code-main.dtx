@@ -158,7 +158,7 @@
 %<LU>   Renderer = Basic,
         BoldItalicFont = {}, ItalicFont = {},
         Script = Math,
-%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
+%<LU>   FontAdjustment = { \@@_luatex_copy_fontdimens: },
         \l_@@_unknown_keys_clist
       }
 
@@ -206,7 +206,7 @@
               \l_@@_sscript_features_tl
             }
           } ,
-%<LU>   FontAdjustment = { \g_@@_luatex_copy_fontdimens_tl },
+%<LU>   FontAdjustment = { \@@_luatex_copy_fontdimens: },
         \l_@@_unknown_keys_clist
       }
 
@@ -237,10 +237,10 @@
 \tl_set:Nn \g_@@_prime_font_cmd_tl { \l_@@_font }
 %    \end{macrocode}
 %
-% \begin{macro}{\g_@@_luatex_copy_fontdimens_tl}
+% \begin{macro}{\@@_luatex_copy_fontdimens:}
 %    \begin{macrocode}
 %<*LU>
-\tl_const:Nn \g_@@_luatex_copy_fontdimens_tl
+\cs_new_protected:Nn \@@_luatex_copy_fontdimens:
   {
     \@@_fontdimen_from_param:nn {10} {ScriptPercentScaleDown}
     \@@_fontdimen_from_param:nn {11} {ScriptScriptPercentScaleDown}
