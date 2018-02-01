@@ -1,7 +1,7 @@
 CHANGE HISTORY
 ==============
 
-## v0.8l ()
+## v0.8l (2018/02/02)
 
   * Issue an error message if `\setmathfont{...}[range=...]` is used first; a `range`
     declaration inherently implies a subset, so a ‘main’ math font needs to be set up first.

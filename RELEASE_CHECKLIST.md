@@ -1,7 +1,8 @@
 # UNICODE-MATH RELEASE CHECKLIST
 
+- [ ] Finish final changes on `working` branch
 - [ ] Ensure `CHANGES.md` is up-to-date with a new version number
-- [ ] Finish final changes on `working` branch including `build setversion`
+- [ ] `build setversion`
 - [ ] Update local distro fully with tlmgr
 - [ ] Run `build check` locally; push and check Travis build status
 - [ ] Install prerelease versions of `fontspec` and `latex3` and re-check
