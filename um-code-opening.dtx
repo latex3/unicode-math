@@ -223,7 +223,9 @@
 %<*LU>
 \cs_new_protected:Nn \@@_fontdimen_from_param:nn
   {
-    \fontdimen #1 \font = \directlua{fontspec.mathfontdimen(font.current(),"#2")}\relax
+    \fontdimen #1 \font =
+      \lua_now:n { fontspec.mathfontdimen(font.current(),"#2") }
+    \scan_stop:
   }
 %</LU>
 %    \end{macrocode}
