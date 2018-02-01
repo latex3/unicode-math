@@ -841,6 +841,16 @@ If you ever need to enter the straight quote |'| or the backtick |`| in
 maths mode, these glyphs can be accessed with \cs{mathstraightquote} and
 \cs{mathbacktick}.
 
+\subsubsection{Subscripts and superscripts and symbol alphabets}
+
+In traditional \LaTeX, users have for many years exploited a loophole in the implementation
+of |\mathrm| and similar to write expressions such as |x_\mathrm f| to achieve
+$x_{\mathrm{f}}$ instead of writing the more correct |x_{\mathrm{f}}|.
+Shorthand notation such as |x_\mathrm f| is not officially documented \LaTeX\ syntax,
+and due to a particular implementation detail in \pkg{unicode-math} this \emph{incorrect}
+syntax is no longer supported.
+
+
 \subsubsection{Unicode subscripts and superscripts}
 
 You may, if you wish, use Unicode subscripts and superscripts in your
