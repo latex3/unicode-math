@@ -6,7 +6,7 @@
 - [ ] Update local distro fully with tlmgr
 - [ ] Run `build check` locally; push and check Travis build status
 - [ ] Install prerelease versions of `fontspec` and `latex3` and re-check
-- [ ] Rebase `working` onto `master`
+- [ ] `git checkout master; git rebase working`
 - [ ] `build ctan`
 - [ ] Upload to CTAN
 - [ ] `texlua tagrelease.lua` to tag release with version number, annotated with changes
