@@ -238,6 +238,10 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_luatex_copy_fontdimens:}
+% This performs a once-off copy of the LuaTeX math params into XeTeX-like fontdimens.
+% While the list is somewhat comprehensive, these are really only for backwards compatibility
+% and to allow a little shared code. They shouldn't be relied upon, since LuaTeX users
+% might change the math params, which wouldn't be reflected in the fontdimens.
 %    \begin{macrocode}
 %<*LU>
 \cs_new_protected:Nn \@@_luatex_copy_fontdimens:
