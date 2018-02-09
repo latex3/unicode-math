@@ -597,21 +597,26 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_mathparam_restore:}
+% \cs{glb@settings} might not be necessary but is included for symmetry.
+% If the maths font were to be loaded later it would clobber our mathparam settings, so
+% this seems like a sensible move.
 %    \begin{macrocode}
 \cs_set:Nn \@@_mathparam_restore:
   {
-    \check@mathfonts
-    \tl_use:N \g_@@_mathparam_store_tl
+    \glb@settings
+    \tl_use:N \g_@@_mathparam_settings_tl
   }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\@@_mathparam_store:}
+% \cs{glb@settings} is called to force maths fonts loading \emph{now} so the mathparams
+5 are up-to-date.
 %    \begin{macrocode}
 \cs_set:Nn \@@_mathparam_store:
   {
-    \check@mathfonts
-    \tl_gset:Nx \g_@@_mathparam_store_tl
+    \glb@settings
+    \tl_gset:Nx \g_@@_mathparam_settings_tl
       {
         \@@_mathparam_store_aux:N \displaystyle
         \@@_mathparam_store_aux:N \textstyle
@@ -624,51 +629,51 @@
 %    \begin{macrocode}
 \cs_set:Nn \@@_mathparam_store_aux:N
   {
-    \Umathquad                #1 = \the \Umathquad                #1
-    \Umathaxis                #1 = \the \Umathaxis                #1
-    \Umathoperatorsize        #1 = \the \Umathoperatorsize        #1
-    \Umathoverbarkern         #1 = \the \Umathoverbarkern         #1
-    \Umathoverbarrule         #1 = \the \Umathoverbarrule         #1
-    \Umathoverbarvgap         #1 = \the \Umathoverbarvgap         #1
-    \Umathunderbarkern        #1 = \the \Umathunderbarkern        #1
-    \Umathunderbarrule        #1 = \the \Umathunderbarrule        #1
-    \Umathunderbarvgap        #1 = \the \Umathunderbarvgap        #1
-    \Umathradicalkern         #1 = \the \Umathradicalkern         #1
-    \Umathradicalrule         #1 = \the \Umathradicalrule         #1
-    \Umathradicalvgap         #1 = \the \Umathradicalvgap         #1
-    \Umathradicaldegreebefore #1 = \the \Umathradicaldegreebefore #1
-    \Umathradicaldegreeafter  #1 = \the \Umathradicaldegreeafter  #1
-    \Umathradicaldegreeraise  #1 = \the \Umathradicaldegreeraise  #1
-    \Umathstackvgap           #1 = \the \Umathstackvgap           #1
-    \Umathstacknumup          #1 = \the \Umathstacknumup          #1
-    \Umathstackdenomdown      #1 = \the \Umathstackdenomdown      #1
-    \Umathfractionrule        #1 = \the \Umathfractionrule        #1
-    \Umathfractionnumvgap     #1 = \the \Umathfractionnumvgap     #1
-    \Umathfractionnumup       #1 = \the \Umathfractionnumup       #1
-    \Umathfractiondenomvgap   #1 = \the \Umathfractiondenomvgap   #1
-    \Umathfractiondenomdown   #1 = \the \Umathfractiondenomdown   #1
-    \Umathfractiondelsize     #1 = \the \Umathfractiondelsize     #1
-    \Umathlimitabovevgap      #1 = \the \Umathlimitabovevgap      #1
-    \Umathlimitabovebgap      #1 = \the \Umathlimitabovebgap      #1
-    \Umathlimitabovekern      #1 = \the \Umathlimitabovekern      #1
-    \Umathlimitbelowvgap      #1 = \the \Umathlimitbelowvgap      #1
-    \Umathlimitbelowbgap      #1 = \the \Umathlimitbelowbgap      #1
-    \Umathlimitbelowkern      #1 = \the \Umathlimitbelowkern      #1
-    \Umathoverdelimitervgap   #1 = \the \Umathoverdelimitervgap   #1
-    \Umathoverdelimiterbgap   #1 = \the \Umathoverdelimiterbgap   #1
-    \Umathunderdelimitervgap  #1 = \the \Umathunderdelimitervgap  #1
-    \Umathunderdelimiterbgap  #1 = \the \Umathunderdelimiterbgap  #1
-    \Umathsubshiftdrop        #1 = \the \Umathsubshiftdrop        #1
-    \Umathsubshiftdown        #1 = \the \Umathsubshiftdown        #1
-    \Umathsupshiftdrop        #1 = \the \Umathsupshiftdrop        #1
-    \Umathsupshiftup          #1 = \the \Umathsupshiftup          #1
-    \Umathsubsupshiftdown     #1 = \the \Umathsubsupshiftdown     #1
-    \Umathsubtopmax           #1 = \the \Umathsubtopmax           #1
-    \Umathsupbottommin        #1 = \the \Umathsupbottommin        #1
-    \Umathsupsubbottommax     #1 = \the \Umathsupsubbottommax     #1
-    \Umathsubsupvgap          #1 = \the \Umathsubsupvgap          #1
-    \Umathspaceafterscript    #1 = \the \Umathspaceafterscript    #1
-    \Umathconnectoroverlapmin #1 = \the \Umathconnectoroverlapmin #1
+    \Umathquad                #1 = \the \Umathquad                #1 \scan_stop:
+    \Umathaxis                #1 = \the \Umathaxis                #1 \scan_stop:
+    \Umathoperatorsize        #1 = \the \Umathoperatorsize        #1 \scan_stop:
+    \Umathoverbarkern         #1 = \the \Umathoverbarkern         #1 \scan_stop:
+    \Umathoverbarrule         #1 = \the \Umathoverbarrule         #1 \scan_stop:
+    \Umathoverbarvgap         #1 = \the \Umathoverbarvgap         #1 \scan_stop:
+    \Umathunderbarkern        #1 = \the \Umathunderbarkern        #1 \scan_stop:
+    \Umathunderbarrule        #1 = \the \Umathunderbarrule        #1 \scan_stop:
+    \Umathunderbarvgap        #1 = \the \Umathunderbarvgap        #1 \scan_stop:
+    \Umathradicalkern         #1 = \the \Umathradicalkern         #1 \scan_stop:
+    \Umathradicalrule         #1 = \the \Umathradicalrule         #1 \scan_stop:
+    \Umathradicalvgap         #1 = \the \Umathradicalvgap         #1 \scan_stop:
+    \Umathradicaldegreebefore #1 = \the \Umathradicaldegreebefore #1 \scan_stop:
+    \Umathradicaldegreeafter  #1 = \the \Umathradicaldegreeafter  #1 \scan_stop:
+    \Umathradicaldegreeraise  #1 = \the \Umathradicaldegreeraise  #1 \scan_stop:
+    \Umathstackvgap           #1 = \the \Umathstackvgap           #1 \scan_stop:
+    \Umathstacknumup          #1 = \the \Umathstacknumup          #1 \scan_stop:
+    \Umathstackdenomdown      #1 = \the \Umathstackdenomdown      #1 \scan_stop:
+    \Umathfractionrule        #1 = \the \Umathfractionrule        #1 \scan_stop:
+    \Umathfractionnumvgap     #1 = \the \Umathfractionnumvgap     #1 \scan_stop:
+    \Umathfractionnumup       #1 = \the \Umathfractionnumup       #1 \scan_stop:
+    \Umathfractiondenomvgap   #1 = \the \Umathfractiondenomvgap   #1 \scan_stop:
+    \Umathfractiondenomdown   #1 = \the \Umathfractiondenomdown   #1 \scan_stop:
+    \Umathfractiondelsize     #1 = \the \Umathfractiondelsize     #1 \scan_stop:
+    \Umathlimitabovevgap      #1 = \the \Umathlimitabovevgap      #1 \scan_stop:
+    \Umathlimitabovebgap      #1 = \the \Umathlimitabovebgap      #1 \scan_stop:
+    \Umathlimitabovekern      #1 = \the \Umathlimitabovekern      #1 \scan_stop:
+    \Umathlimitbelowvgap      #1 = \the \Umathlimitbelowvgap      #1 \scan_stop:
+    \Umathlimitbelowbgap      #1 = \the \Umathlimitbelowbgap      #1 \scan_stop:
+    \Umathlimitbelowkern      #1 = \the \Umathlimitbelowkern      #1 \scan_stop:
+    \Umathoverdelimitervgap   #1 = \the \Umathoverdelimitervgap   #1 \scan_stop:
+    \Umathoverdelimiterbgap   #1 = \the \Umathoverdelimiterbgap   #1 \scan_stop:
+    \Umathunderdelimitervgap  #1 = \the \Umathunderdelimitervgap  #1 \scan_stop:
+    \Umathunderdelimiterbgap  #1 = \the \Umathunderdelimiterbgap  #1 \scan_stop:
+    \Umathsubshiftdrop        #1 = \the \Umathsubshiftdrop        #1 \scan_stop:
+    \Umathsubshiftdown        #1 = \the \Umathsubshiftdown        #1 \scan_stop:
+    \Umathsupshiftdrop        #1 = \the \Umathsupshiftdrop        #1 \scan_stop:
+    \Umathsupshiftup          #1 = \the \Umathsupshiftup          #1 \scan_stop:
+    \Umathsubsupshiftdown     #1 = \the \Umathsubsupshiftdown     #1 \scan_stop:
+    \Umathsubtopmax           #1 = \the \Umathsubtopmax           #1 \scan_stop:
+    \Umathsupbottommin        #1 = \the \Umathsupbottommin        #1 \scan_stop:
+    \Umathsupsubbottommax     #1 = \the \Umathsupsubbottommax     #1 \scan_stop:
+    \Umathsubsupvgap          #1 = \the \Umathsubsupvgap          #1 \scan_stop:
+    \Umathspaceafterscript    #1 = \the \Umathspaceafterscript    #1 \scan_stop:
+    \Umathconnectoroverlapmin #1 = \the \Umathconnectoroverlapmin #1 \scan_stop:
   }
 %    \end{macrocode}
 % \end{macro}
