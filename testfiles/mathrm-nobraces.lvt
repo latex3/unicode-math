@@ -1,0 +1,9 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\begin{document}
+\MSG{No log expected; testing compilation status only}
+
+$x_{\mathrm{x}}$ % correct syntax
+$x_\mathrm{x}$   % incorrect syntax that accidentally works and is widely used
+
+\end{document}

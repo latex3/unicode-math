@@ -79,11 +79,11 @@
 %    \begin{macrocode}
 \cs_set:Npn \use@mathgroup #1 #2
   {
-    \@@_group_begin:
+    \math@bgroup
       \cs_if_eq:cNF {M@\f@encoding} #1 {#1}
       \@@_switchto_literal:
       \@@_mathgroup_set:n {#2}
-    \@@_group_end:n
+    \math@egroup
   }
 %    \end{macrocode}
 % \end{macro}
