@@ -25,15 +25,16 @@ MATHRM
 > \box...=
 \hbox(7.05+2.06)x34.79
 .\mathon
-.\TU/lmr/m/n/10 glyph#55
-.\TU/lmr/m/n/10 glyph#72
-.\TU/lmr/m/n/10 glyph#28
-.\TU/lmr/m/n/10 glyph#59
-.\TU/lmr/m/n/10 glyph#98
-.\TU/lmr/m/n/10 glyph#105
-.\TU/lmr/m/n/10 glyph#28
-.\TU/lmr/m/n/10 glyph#55
-.\TU/lmr/m/n/10 glyph#55
+.\hbox(7.05+2.06)x34.79
+..\TU/lmr/m/n/10 glyph#55
+..\TU/lmr/m/n/10 glyph#72
+..\TU/lmr/m/n/10 glyph#28
+..\TU/lmr/m/n/10 glyph#59
+..\TU/lmr/m/n/10 glyph#98
+..\TU/lmr/m/n/10 glyph#105
+..\TU/lmr/m/n/10 glyph#28
+..\TU/lmr/m/n/10 glyph#55
+..\TU/lmr/m/n/10 glyph#55
 .\mathoff
 ! OK.
 <to be read again> 
