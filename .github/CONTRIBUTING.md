@@ -19,25 +19,28 @@ There are two important key points for submitting an issue:
   I don't yet have or can't access.
 
 For example, this is a good minimal example:
-
-    \documentclass{article}
-    \usepackage{unicode-math}
-    \setmathfont{texgyrepagella-math.otf}
-    \begin{document}
-    \[
-      x^2 + y^2 = z^2
-    \]
-    \end{document}
+```tex
+\documentclass{article}
+\usepackage{unicode-math}
+\setmathfont{texgyrepagella-math.otf}
+\begin{document}
+\[
+  x^2 + y^2 = z^2
+\]
+\end{document}
+```
 
 This is an example of a *bad* example:
 
-    \usepackage{unicode-math}
-    \setmathfont{TeX Gyre Pagella Math}
+```tex
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Pagella Math}
 
-    % later:
-    \[
-      x^2 + y^2 = z^2
-    \]
+% later:
+\[
+  x^2 + y^2 = z^2
+\]
+```
 
 
 ## Branches and Pull Requests

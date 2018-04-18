@@ -10,7 +10,7 @@ A few sentences describing the overall goals of the pull request's commits.
 - [ ] Code follows expl3 style guidelines
 
 ## Minimal example demonstrating the new/fixed functionality
-```
+```tex
 \documentclass{article}
 \usepackage{unicode-math}
 \begin{document}

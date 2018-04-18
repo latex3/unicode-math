@@ -62,8 +62,10 @@ PACKAGE USAGE
 
 Please see the PDF documentation for full details. A simple beginning is:
 
-    \usepackage{unicode-math}
-    \setmathfont{texgyrepagella-math.otf}
+```tex
+\usepackage{unicode-math}
+\setmathfont{texgyrepagella-math.otf}
+```
 
 Most LaTeX math should still work after this. (Let me know if it doesn't.)
 Furthermore, it will be in a different font.
