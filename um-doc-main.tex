@@ -1187,6 +1187,13 @@ This warning could be suppressed by loading the package as follows:
   \usepackage[warnings-off={mathtools-colon}]{unicode-math}
 \end{Verbatim}
 
+\subsection{How to overwrite a macro}
+
+\pkg{unicode-math} defines the macros by \cs{AtBeginDocument},
+namely delays the definition until |\begin{document}| is met.
+If you want to overwrite a macro defined by \pkg{unicode-math},
+please redefine it in \cs{AtBeginDocument} after loading this package.
+
 \subsection{Programmer's interface}
 
 (Tentative and under construction.)
