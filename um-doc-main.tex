@@ -655,11 +655,11 @@ sans serif bold, you must write |\symbfsf{...}| rather than |\symbf{\symsf{...}}
 This may change in the future.
 
 \begin{table}
-\caption{Mathematical styles defined in Unicode. Black dots indicate an style exists in the font specified; blue dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
+\caption{Mathematical styles defined in Unicode. Closed dots indicate an style exists in the font specified; open dots indicate shapes that should always be taken from the upright font even in the italic style. See main text for description of \cs{mathbbit}.}
 \tablabel{mathalphabets}
 \centering
 \def\Y{\textbullet}
-\def\M{\textcolor[rgb]{0.5,0.5,1}{\textbullet}}
+\def\M{\textopenbullet}
 \begin{tabular}{@{} lll l ccc @{}}
 \toprule
 \multicolumn{3}{c}{Font} & & \multicolumn{3}{c}{Alphabet} \\
@@ -672,9 +672,9 @@ Serif      & Upright & Normal & \cs{symup}     & \Y & \Y & \Y  \\
            & Italic  & Normal & \cs{symit}     & \Y & \Y & \M  \\
            &         & Bold   & \cs{symbfit}   & \Y & \Y & \M  \\
 Sans serif & Upright & Normal & \cs{symsfup}   & \Y &    & \Y  \\
+           &         & Bold   & \cs{symbfsfup} & \Y & \Y & \Y  \\
            & Italic  & Normal & \cs{symsfit}   & \Y &    & \M  \\
-           & Upright & Bold   & \cs{symbfsfup} & \Y & \Y & \Y  \\
-           & Italic  & Bold   & \cs{symbfsfit} & \Y & \Y & \M  \\
+           &         & Bold   & \cs{symbfsfit} & \Y & \Y & \M  \\
 Typewriter & Upright & Normal & \cs{symtt}     & \Y &    & \Y  \\
 Double-struck & Upright & Normal & \cs{symbb}     & \Y &    & \Y  \\
               & Italic  & Normal & \cs{symbbit}   & \Y &    &  \\
