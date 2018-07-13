@@ -1,18 +1,18 @@
 %%^^A%% unimath-symbols.ltx -- part of UNICODE-MATH <wspr.io/unicode-math>
 %%^^A%% Listing of Unicode mathematics symbols using a variety of fonts.
 
-%!TEX TS-program = LuaLaTeX
+% !TeX TS-program = lualatex
 
 %%%%%%%%%%%%%%%%%%%%%%%
 % SYMBOLS DEFINED BY UNICODE-MATH
 %%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[final]{article}
+\documentclass[final,landscape]{article}
 \makeatletter
 
 \usepackage{ragged2e,setspace,booktabs,catchfile,shortvrb,geometry,metalogo,textcomp,longtable,tabu,hyperref}
 
-\geometry{margin=3cm}
+\geometry{margin=2cm}
 \hypersetup{colorlinks,linkcolor=black}
 
 \def\cmd#1{\texttt{\textbackslash\expandafter\@gobble\string#1}}
@@ -43,21 +43,26 @@
 }
 \ExplSyntaxOff
 
-\defmathfont{lm}{latinmodern-math.otf}{CC6666}
-\defmathfont{xits}{xits-math.otf}{CCCC66}
-\defmathfont{stix}{STIXMath-Regular.otf}{AA66CC}
-\defmathfont{cambria}{Cambria Math}{66CCCC}
-\defmathfont{asana}{Asana-Math.otf}{6666CC}
-\defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}
-\defmathfont{dejavu}{texgyredejavu-math.otf}{AACC66}
-\defmathfont{euler}{euler.otf}{CC66CC}
+\defmathfont{lm}{latinmodern-math.otf}{e6194b}
+\defmathfont{xits}{xits-math.otf}{3cb44b}
+\defmathfont{stix}{STIXMath-Regular.otf}{000080}
+\defmathfont{stixTwo}{STIX2Math.otf}{0082c8}
+\defmathfont{cambria}{Cambria Math}{f58231}
+\defmathfont{asana}{Asana-Math.otf}{911eb4}
+\defmathfont{pagella}{texgyrepagella-math.otf}{38c3c3}
+\defmathfont{dejavu}{texgyredejavu-math.otf}{f032e6}
+\defmathfont{bonum}{texgyrebonum-math.otf}{d2f53c}
+\defmathfont{schola}{texgyreschola-math.otf}{fabebe}
+\defmathfont{retermes}{texgyretermes-math.otf}{008080}
+\defmathfont{libertinus}{libertinusmath-regular.otf}{800000}
+\defmathfont{euler}{euler.otf}{808000}
 
 \def\INPUT{\input{unicode-math-table.tex}}
 \def\TABLE{%
 \par\noindent
-\begin{longtabu}[l]{@{}lcccccccclX[l]@{}}
+\begin{longtabu}[l]{@{}lccccccccccccclX[l]@{}}
   \toprule
-  \textsc{usv} & M & X & S & C & A & P & D & E & Macro & Description \\
+  \textsc{usv} & M & X & S & S2 & C & A & P & D & B & S & R & L & E & Macro & Description \\
   \midrule \endhead
   \INPUT\\
   \bottomrule
@@ -87,10 +92,15 @@
       \SYMB{#2}{lm}{#1} &
       \SYMB{#2}{xits}{#1} &
       \SYMB{#2}{stix}{#1} &
+      \SYMB{#2}{stixTwo}{#1} &
       \SYMB{#2}{cambria}{#1} &
       \SYMB{#2}{asana}{#1} &
       \SYMB{#2}{pagella}{#1} &
       \SYMB{#2}{dejavu}{#1} &
+      \SYMB{#2}{bonum}{#1} &
+      \SYMB{#2}{schola}{#1} &
+      \SYMB{#2}{retermes}{#1} &
+      \SYMB{#2}{libertinus}{#1} &
       \SYMB{#2}{euler}{#1} &
       \CMD{#2}
       \tl_if_in:NnT \PLAIN {#2}
@@ -163,14 +173,19 @@ package.
 Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
 The following fonts are shown: (with approximate symbol counts)
 \begin{itemize}
-\item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
-\item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
-\item[S] \mathversion{stix} $\mathup{STIX\ Math}$ (\ref{count:stix})
-\item[C] \mathversion{cambria} $\mathup{Cambria\ Math}$ (\ref{count:cambria})
-\item[A] \mathversion{asana} $\mathup{Asana\ Math}$ (\ref{count:asana})
-\item[P] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
-\item[D] \mathversion{dejavu} $\mathup{DejaVu\ Math\ TeX\ Gyre}$ (\ref{count:dejavu})
-\item[E] \mathversion{euler} $\mathup{Neo\ Euler}$ (\ref{count:euler})
+	\item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
+	\item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
+	\item[S] \mathversion{stix} $\mathup{STIX\ Math}$ (\ref{count:stix})
+	\item[S2] \mathversion{stixTwo} $\mathup{STIX\ Two\ Math}$ (\ref{count:stixTwo})
+	\item[C] \mathversion{cambria} $\mathup{Cambria\ Math}$ (\ref{count:cambria})
+	\item[A] \mathversion{asana} $\mathup{Asana\ Math}$ (\ref{count:asana})
+	\item[P] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
+	\item[D] \mathversion{dejavu} $\mathup{DejaVu\ Math\ TeX\ Gyre}$ (\ref{count:dejavu})
+	\item[B] \mathversion{bonum} $\mathup{Bonum\ Math\ TeX\ Gyre}$ (\ref{count:bonum})
+	\item[S] \mathversion{schola} $\mathup{Schola\ Math\ TeX\ Gyre}$ (\ref{count:schola})
+	\item[R] \mathversion{retermes} $\mathup{Retermes\ Math\ TeX\ Gyre}$ (\ref{count:retermes})
+	\item[L] \mathversion{libertinus} $\mathup{Libertinus\ Math}$ (\ref{count:libertinus})
+	\item[E] \mathversion{euler} $\mathup{Neo\ Euler}$ (\ref{count:euler})
 \end{itemize}
 Note that there are addition maths fonts in the `\TeX\ Gyre' collection which aren't included here.
 
@@ -445,11 +460,16 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \refstepcounter{lm}\label{count:lm}
 \refstepcounter{xits}\label{count:xits}
 \refstepcounter{stix}\label{count:stix}
+\refstepcounter{stixTwo}\label{count:stixTwo}
 \refstepcounter{cambria}\label{count:cambria}
 \refstepcounter{asana}\label{count:asana}
 \refstepcounter{pagella}\label{count:pagella}
-\refstepcounter{euler}\label{count:euler}
 \refstepcounter{dejavu}\label{count:dejavu}
+\refstepcounter{bonum}\label{count:bonum}
+\refstepcounter{schola}\label{count:schola}
+\refstepcounter{retermes}\label{count:retermes}
+\refstepcounter{libertinus}\label{count:libertinus}
+\refstepcounter{euler}\label{count:euler}
 
 \end{document}
 
