@@ -81,7 +81,7 @@
   {
     \math@bgroup
       \cs_if_eq:cNF {M@\f@encoding} #1 {#1}
-      \@@_switchto_literal:
+      \@@_switch_to:n {literal}
       \@@_mathgroup_set:n {#2}
     \math@egroup
   }
@@ -96,7 +96,7 @@
 %    \begin{macrocode}
 \cs_set:Npn \operator@font
   {
-    \@@_switchto_literal:
+    \@@_switch_to:n {literal}
     \@@_fontswitch:n { \g_@@_operator_mathfont_tl }
   }
 %    \end{macrocode}

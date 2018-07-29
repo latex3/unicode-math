@@ -9,6 +9,9 @@ CHANGE HISTORY
   * Add `\cuberoot` and `\fourthroot` as proper radicals.
   * Some additional input subscripts/superscripts.
   * Some documentation additions (thanks for the contributions).
+  * Deprecation warning: the *internal* `\__um_switchto_XX:` commands will be dropped in
+    a future release in favour of `\__um_switch_to:n {XX}` (or similar). These are internal
+    commands and shouldn't be used by third-parties; please write if you have a use case.
 
 
 ## v0.8l (2018/02/02)

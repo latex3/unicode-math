@@ -426,7 +426,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_mathmap_noparse:nnn
   {
-    \tl_put_right:cx { @@_switchto_#1: }
+    \tl_gput_right:cx { g_@@_switchto_#1_tl }
       {
         \@@_set_mathcode:nnnn {#2} {\mathalpha} {\l_@@_symfont_label_tl} {#3}
       }

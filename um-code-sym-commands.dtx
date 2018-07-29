@@ -65,7 +65,7 @@
               \mode_if_math:F { \exp_args:Nc \non@alpherr {sym#1} }
               \tl_set:Nn \l_@@_mathstyle_tl {#1}
             }
-          \exp_not:c {@@_switchto_#1:}
+          \@@_switch_to:n {#1}
           \@@_mathgroup_set:n {-1}
         \@@_group_end:n
       }
@@ -83,7 +83,12 @@
 \cs_set:Nn \@@_init_alphabet:n
   {
     \@@_log:nx {alph-initialise} {#1}
-    \cs_set_eq:cN {@@_switchto_#1:} \prg_do_nothing:
+    \tl_gclear_new:c {g_@@_switchto_#1_tl}
+    \cs_set_protected:cpn {@@_switchto_#1:} { \tl_use:c {g_@@_switchto_#1_tl} }
+  }
+\cs_new_protected:Nn \@@_switch_to:n
+  {
+    \tl_use:c {g_@@_switchto_#1_tl}
   }
 %    \end{macrocode}
 % \end{macro}
