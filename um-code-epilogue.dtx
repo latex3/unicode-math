@@ -17,7 +17,7 @@
 % to upright or italic happens with the mathcode definitions, whereas these macros
 % just stand for the literal Unicode characters.
 %    \begin{macrocode}
-\AtBeginDocument { \@@_resolve_greek: }
+\AtBeginDocument { \debug_suspend: \@@_resolve_greek: \debug_resume: }
 %    \end{macrocode}
 %    \begin{macrocode}
 \cs_new:Npn \@@_resolve_greek:
@@ -89,7 +89,7 @@
   {
     \cs_set:Npn \root ##1 \of ##2
       {
-        \Uroot \l_@@_radical_sqrt_tl { ##1 } { ##2 }
+        \Uroot \c_@@_radical_sqrt_tl { ##1 } { ##2 }
       }
   }
 %</LU>

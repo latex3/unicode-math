@@ -49,43 +49,43 @@
 %    \begin{macrocode}
 \@@_keys_choices:nn {mathup}
   {
-    {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
-    {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
+    {sym}  { \bool_gset_false:N \g_@@_mathrm_text_bool }
+    {text} { \bool_gset_true:N  \g_@@_mathrm_text_bool }
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_keys_choices:nn {mathrm}
   {
-    {sym}  { \bool_set_false:N \g_@@_mathrm_text_bool }
-    {text} { \bool_set_true:N  \g_@@_mathrm_text_bool }
+    {sym}  { \bool_gset_false:N \g_@@_mathrm_text_bool }
+    {text} { \bool_gset_true:N  \g_@@_mathrm_text_bool }
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_keys_choices:nn {mathit}
   {
-    {sym}  { \bool_set_false:N \g_@@_mathit_text_bool }
-    {text} { \bool_set_true:N  \g_@@_mathit_text_bool }
+    {sym}  { \bool_gset_false:N \g_@@_mathit_text_bool }
+    {text} { \bool_gset_true:N  \g_@@_mathit_text_bool }
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_keys_choices:nn {mathbf}
   {
-    {sym}  { \bool_set_false:N \g_@@_mathbf_text_bool }
-    {text} { \bool_set_true:N  \g_@@_mathbf_text_bool }
+    {sym}  { \bool_gset_false:N \g_@@_mathbf_text_bool }
+    {text} { \bool_gset_true:N  \g_@@_mathbf_text_bool }
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_keys_choices:nn {mathsf}
   {
-    {sym}  { \bool_set_false:N \g_@@_mathsf_text_bool }
-    {text} { \bool_set_true:N  \g_@@_mathsf_text_bool }
+    {sym}  { \bool_gset_false:N \g_@@_mathsf_text_bool }
+    {text} { \bool_gset_true:N  \g_@@_mathsf_text_bool }
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_keys_choices:nn {mathtt}
   {
-    {sym}  { \bool_set_false:N \g_@@_mathtt_text_bool }
-    {text} { \bool_set_true:N  \g_@@_mathtt_text_bool }
+    {sym}  { \bool_gset_false:N \g_@@_mathtt_text_bool }
+    {text} { \bool_gset_true:N  \g_@@_mathtt_text_bool }
   }
 %    \end{macrocode}
 %
@@ -94,35 +94,35 @@
 \@@_keys_choices:nn {normal-style}
   {
        {ISO} {
-              \bool_set_false:N \g_@@_literal_bool
-              \bool_set_false:N \g_@@_upGreek_bool
-              \bool_set_false:N \g_@@_upgreek_bool
-              \bool_set_false:N \g_@@_upLatin_bool
-              \bool_set_false:N \g_@@_uplatin_bool
+              \bool_gset_false:N \g_@@_literal_bool
+              \bool_gset_false:N \g_@@_upGreek_bool
+              \bool_gset_false:N \g_@@_upgreek_bool
+              \bool_gset_false:N \g_@@_upLatin_bool
+              \bool_gset_false:N \g_@@_uplatin_bool
              }
        {TeX} {
-              \bool_set_false:N \g_@@_literal_bool
-              \bool_set_true:N  \g_@@_upGreek_bool
-              \bool_set_false:N \g_@@_upgreek_bool
-              \bool_set_false:N \g_@@_upLatin_bool
-              \bool_set_false:N \g_@@_uplatin_bool
+              \bool_gset_false:N \g_@@_literal_bool
+              \bool_gset_true:N  \g_@@_upGreek_bool
+              \bool_gset_false:N \g_@@_upgreek_bool
+              \bool_gset_false:N \g_@@_upLatin_bool
+              \bool_gset_false:N \g_@@_uplatin_bool
              }
     {french} {
-              \bool_set_false:N \g_@@_literal_bool
-              \bool_set_true:N  \g_@@_upGreek_bool
-              \bool_set_true:N  \g_@@_upgreek_bool
-              \bool_set_true:N  \g_@@_upLatin_bool
-              \bool_set_false:N \g_@@_uplatin_bool
+              \bool_gset_false:N \g_@@_literal_bool
+              \bool_gset_true:N  \g_@@_upGreek_bool
+              \bool_gset_true:N  \g_@@_upgreek_bool
+              \bool_gset_true:N  \g_@@_upLatin_bool
+              \bool_gset_false:N \g_@@_uplatin_bool
              }
    {upright} {
-              \bool_set_false:N \g_@@_literal_bool
-              \bool_set_true:N  \g_@@_upGreek_bool
-              \bool_set_true:N  \g_@@_upgreek_bool
-              \bool_set_true:N  \g_@@_upLatin_bool
-              \bool_set_true:N  \g_@@_uplatin_bool
+              \bool_gset_false:N \g_@@_literal_bool
+              \bool_gset_true:N  \g_@@_upGreek_bool
+              \bool_gset_true:N  \g_@@_upgreek_bool
+              \bool_gset_true:N  \g_@@_upLatin_bool
+              \bool_gset_true:N  \g_@@_uplatin_bool
              }
    {literal} {
-              \bool_set_true:N  \g_@@_literal_bool
+              \bool_gset_true:N  \g_@@_literal_bool
              }
   }
 %    \end{macrocode}
@@ -158,28 +158,28 @@
 \@@_keys_choices:nn {bold-style}
   {
       {ISO} {
-             \bool_set_false:N \g_@@_bfliteral_bool
-             \bool_set_false:N \g_@@_bfupGreek_bool
-             \bool_set_false:N \g_@@_bfupgreek_bool
-             \bool_set_false:N \g_@@_bfupLatin_bool
-             \bool_set_false:N \g_@@_bfuplatin_bool
+             \bool_gset_false:N \g_@@_bfliteral_bool
+             \bool_gset_false:N \g_@@_bfupGreek_bool
+             \bool_gset_false:N \g_@@_bfupgreek_bool
+             \bool_gset_false:N \g_@@_bfupLatin_bool
+             \bool_gset_false:N \g_@@_bfuplatin_bool
             }
       {TeX} {
-             \bool_set_false:N \g_@@_bfliteral_bool
-             \bool_set_true:N  \g_@@_bfupGreek_bool
-             \bool_set_false:N \g_@@_bfupgreek_bool
-             \bool_set_true:N  \g_@@_bfupLatin_bool
-             \bool_set_true:N  \g_@@_bfuplatin_bool
+             \bool_gset_false:N \g_@@_bfliteral_bool
+             \bool_gset_true:N  \g_@@_bfupGreek_bool
+             \bool_gset_false:N \g_@@_bfupgreek_bool
+             \bool_gset_true:N  \g_@@_bfupLatin_bool
+             \bool_gset_true:N  \g_@@_bfuplatin_bool
             }
   {upright} {
-             \bool_set_false:N \g_@@_bfliteral_bool
-             \bool_set_true:N  \g_@@_bfupGreek_bool
-             \bool_set_true:N  \g_@@_bfupgreek_bool
-             \bool_set_true:N  \g_@@_bfupLatin_bool
-             \bool_set_true:N  \g_@@_bfuplatin_bool
+             \bool_gset_false:N \g_@@_bfliteral_bool
+             \bool_gset_true:N  \g_@@_bfupGreek_bool
+             \bool_gset_true:N  \g_@@_bfupgreek_bool
+             \bool_gset_true:N  \g_@@_bfupLatin_bool
+             \bool_gset_true:N  \g_@@_bfuplatin_bool
             }
   {literal} {
-             \bool_set_true:N  \g_@@_bfliteral_bool
+             \bool_gset_true:N  \g_@@_bfliteral_bool
             }
   }
 %    \end{macrocode}
@@ -188,9 +188,9 @@
 %    \begin{macrocode}
 \@@_keys_choices:nn {sans-style}
   {
-    {italic}  { \bool_set_false:N \g_@@_upsans_bool    }
-    {upright} { \bool_set_true:N  \g_@@_upsans_bool    }
-    {literal} { \bool_set_true:N  \g_@@_sfliteral_bool }
+    {italic}  { \bool_gset_false:N \g_@@_upsans_bool    }
+    {upright} { \bool_gset_true:N  \g_@@_upsans_bool    }
+    {literal} { \bool_gset_true:N  \g_@@_sfliteral_bool }
   }
 %    \end{macrocode}
 %
@@ -200,15 +200,15 @@
 \@@_keys_choices:nn {nabla}
   {
     {upright} {
-                \bool_set_false:N \g_@@_literal_Nabla_bool
-                \bool_set_true:N  \g_@@_upNabla_bool
+                \bool_gset_false:N \g_@@_literal_Nabla_bool
+                \bool_gset_true:N  \g_@@_upNabla_bool
               }
     {italic}  {
-                \bool_set_false:N \g_@@_literal_Nabla_bool
-                \bool_set_false:N \g_@@_upNabla_bool
+                \bool_gset_false:N \g_@@_literal_Nabla_bool
+                \bool_gset_false:N \g_@@_upNabla_bool
               }
     {literal} {
-                \bool_set_true:N  \g_@@_literal_Nabla_bool
+                \bool_gset_true:N  \g_@@_literal_Nabla_bool
               }
   }
 %    \end{macrocode}
@@ -217,15 +217,15 @@
 \@@_keys_choices:nn {partial}
   {
    {upright} {
-               \bool_set_false:N \g_@@_literal_partial_bool
-               \bool_set_true:N  \g_@@_uppartial_bool
+               \bool_gset_false:N \g_@@_literal_partial_bool
+               \bool_gset_true:N  \g_@@_uppartial_bool
              }
    {italic}  {
-               \bool_set_false:N \g_@@_literal_partial_bool
-               \bool_set_false:N \g_@@_uppartial_bool
+               \bool_gset_false:N \g_@@_literal_partial_bool
+               \bool_gset_false:N \g_@@_uppartial_bool
              }
    {literal} {
-               \bool_set_true:N  \g_@@_literal_partial_bool
+               \bool_gset_true:N  \g_@@_literal_partial_bool
              }
   }
 %    \end{macrocode}
@@ -234,8 +234,8 @@
 %    \begin{macrocode}
 \@@_keys_choices:nn {colon}
   {
-    {literal} { \bool_set_true:N  \g_@@_literal_colon_bool }
-    {TeX}     { \bool_set_false:N \g_@@_literal_colon_bool }
+    {literal} { \bool_gset_true:N  \g_@@_literal_colon_bool }
+    {TeX}     { \bool_gset_false:N \g_@@_literal_colon_bool }
   }
 %    \end{macrocode}
 %
@@ -243,9 +243,9 @@
 %    \begin{macrocode}
 \@@_keys_choices:nn {slash-delimiter}
   {
-    {ascii} { \tl_set:Nn \g_@@_slash_delimiter_usv {"002F} }
-    {frac}  { \tl_set:Nn \g_@@_slash_delimiter_usv {"2044} }
-    {div}   { \tl_set:Nn \g_@@_slash_delimiter_usv {"2215} }
+    {ascii} { \tl_gset:Nn \g_@@_slash_delimiter_usv {"002F} }
+    {frac}  { \tl_gset:Nn \g_@@_slash_delimiter_usv {"2044} }
+    {div}   { \tl_gset:Nn \g_@@_slash_delimiter_usv {"2215} }
   }
 %    \end{macrocode}
 %

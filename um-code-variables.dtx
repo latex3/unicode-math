@@ -12,7 +12,7 @@
 %
 % True if using a proper OpenType font with unicode maths
 %    \begin{macrocode}
-\bool_new:N \l_@@_ot_math_bool
+\bool_new:N \g_@@_ot_math_bool
 %    \end{macrocode}
 %
 % Set when \cs{setmathfont} is run to trap the problem of no main font defined.
@@ -81,9 +81,23 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\tl_new:N \l_@@_style_tl
+\tl_new:N \l_@@_family_tl
+\tl_new:N \l_@@_alphabet_tl
+\tl_new:N \l_@@_fontname_tl
+\tl_new:N \l_@@_symfont_label_tl
+\tl_new:N \l_@@_remap_style_tl
+\tl_new:N \l_@@_fam_two_tl
+\tl_new:N \l_@@_fam_three_tl
+\tl_new:N \l_@@_curr_named_slot
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_tmpa_tl
 \tl_new:N \l_@@_mathstyle_tl
 \tl_new:N \l_@@_radicals_tl
 \tl_new:N \l_@@_nolimits_tl
+\tl_new:N \l_@@_trial_family_tl
 %    \end{macrocode}
 %
 % Used to store the font switch for the \cs{operator@font}.
@@ -93,11 +107,12 @@
 %
 %    \begin{macrocode}
 \tl_new:N \g_@@_slash_delimiter_usv
+\tl_new:N \g_@@_mathparam_settings_tl
 \tl_new:N \g_@@_mathtable_tl
 \tl_new:N \g_@@_fontname_tl
 \tl_new:N \g_@@_mversion_tl
 \tl_new:N \g_@@_symfont_tl
-\tl_new:N \g_@@_font_keyval_tl
+\tl_new:N \l_@@_font_keyval_tl
 \tl_new:N \g_@@_family_tl
 \tl_new:N \g_@@_style_tl
 \tl_new:N \g_@@_remap_style_tl
@@ -124,13 +139,17 @@
 \clist_new:N \g_@@_char_nrange_clist
 \clist_new:N \g_@@_unknown_keys_clist
 \clist_new:N \g_@@_alphabet_clist
+\clist_new:N \l_@@_mathmap_charints_clist
+\clist_new:N \l_@@_unknown_keys_clist
+\clist_new:N \l_@@_font_keyval_clist
+\clist_new:N \l_@@_alphabet_clist
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \clist_new:N \g_@@_bad_alpha_clist
-\clist_put_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {bf} }
-\clist_put_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {sf} }
-\clist_put_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {bfsf} }
+\clist_gput_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {bf} }
+\clist_gput_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {sf} }
+\clist_gput_right:Nx \g_@@_bad_alpha_clist { \tl_to_str:n {bfsf} }
 %    \end{macrocode}
 %
 % \subsection{seq}
@@ -146,7 +165,7 @@
 % Every math class.
 %    \begin{macrocode}
 \seq_new:N \g_@@_mathclasses_seq
-\seq_set_from_clist:Nn \g_@@_mathclasses_seq
+\seq_gset_from_clist:Nn \g_@@_mathclasses_seq
   {
     \mathord,\mathalpha,\mathbin,\mathrel,\mathpunct,
      \mathop,

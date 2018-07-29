@@ -107,7 +107,7 @@
 \cs_new:Nn \@@_init:n
   {
     \tl_set:Nn \l_@@_fontname_tl {#1}
-    \bool_set_true:N  \l_@@_ot_math_bool
+    \bool_gset_true:N  \g_@@_ot_math_bool
     \tl_set:Nn \l_@@_mversion_tl      {normal}
     \tl_set:Nn \l_@@_symfont_label_tl {operators}
 
@@ -169,8 +169,8 @@
       \exp_last_unbraced:NNo \@@_fontface_gset_eq:NN \g_@@_trial_font \font@name
       \fontspec_if_script:nF {math}
         {
-          \bool_gset_false:N \l_@@_ot_math_bool
-          \bool_gset_false:N \l_@@_init_bool
+          \bool_gset_false:N \g_@@_ot_math_bool
+          \bool_gset_false:N \g_@@_init_bool
         }
     \group_end:
 
@@ -223,8 +223,8 @@
 				}
       \fontspec_if_script:nF {math}
         {
-          \bool_gset_false:N \l_@@_ot_math_bool
-          \bool_gset_false:N \l_@@_init_bool
+          \bool_gset_false:N \g_@@_ot_math_bool
+          \bool_gset_false:N \g_@@_init_bool
         }
     \group_end:
   }
@@ -232,9 +232,9 @@
 % \end{macro}
 %
 %    \begin{macrocode}
-\tl_set:Nn \g_@@_main_font_cmd_tl  { \l_@@_font }
-\tl_set:Nn \g_@@_sqrt_font_cmd_tl  { \l_@@_font }
-\tl_set:Nn \g_@@_prime_font_cmd_tl { \l_@@_font }
+\tl_gset:Nn \g_@@_main_font_cmd_tl  { \l_@@_font }
+\tl_gset:Nn \g_@@_sqrt_font_cmd_tl  { \l_@@_font }
+\tl_gset:Nn \g_@@_prime_font_cmd_tl { \l_@@_font }
 %    \end{macrocode}
 %
 % \begin{macro}{\@@_luatex_copy_fontdimens:}
