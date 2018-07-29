@@ -1,4 +1,5 @@
 \input{umtest-preamble}
+\START\TIMO
 \usepackage{unicode-math}
 \setmathfont{latinmodern-math.otf}
 \begin{document}
