@@ -7,7 +7,7 @@ installfiles = {"*.sty","unicode-math-table.tex"}
 typesetfiles = {"*.ltx"}
 docfiles     = {"um-doc-*.tex"}
 textfiles    = {"*.md","LICENSE"}
-versionfiles = {"unicode-math.dtx","CHANGES.md"}
+tagfiles     = {"unicode-math.dtx","CHANGES.md"}
 
 checkengines = {"xetex","luatex"}
 checkconfigs = {"build", "build-checkdoc"}
@@ -32,42 +32,29 @@ pkgversion = string.match(changeslisting,"## (%S+) %(.-%)")
 print('Current version (from first entry in CHANGES.md): '..pkgversion)
 
 
-local changesversion = true
+function update_tag(file, content, tagname, tagdate)
+  local date = string.gsub(tagdate, "%-", "/")
 
-function setversion_update_line(line, date, version)
-  local lineorig = line
-  local date = string.gsub(date, "%-", "/")
-
-  if string.match(line, "{%d%d%d%d/%d%d/%d%d}%s*{[^}]+}%s*{[^}]+}") then
-    print("Found line: (unicode-math.dtx)")
-    print(line)
-    line = line:gsub("{%d%d%d%d/%d%d/%d%d}(%s*){[^}]+}(%s*){([^}]+)}",
+  if string.match(content, "{%d%d%d%d/%d%d/%d%d}%s*{[^}]+}%s*{[^}]+}") then
+    print("Found expl3 version line in file: "..file)
+    content = content:gsub("{%d%d%d%d/%d%d/%d%d}(%s*){[^}]+}(%s*){([^}]+)}",
     "{"..date.."}%1{"..pkgversion.."}%2{%3}")
   end
-  if string.match(line, "\\def\\filedate{%d%d%d%d/%d%d/%d%d}") then
-    print("Found line: (unicode-math.dtx)")
-    print(line)
-    line = line:gsub("%d%d%d%d/%d%d/%d%d", date)
+  if string.match(content, "\\def\\filedate{%d%d%d%d/%d%d/%d%d}") then
+    print("Found filedate line in file: "..file)
+    content = content:gsub("\\def\\filedate{[^}]+}", "\\def\\filedate{"..date.."}")
   end
-  if string.match(line, "\\def\\fileversion{[^}]+}") then
-    print("Found line: (unicode-math.dtx)")
-    print(line)
-    line = line:gsub("\\def\\fileversion{.*}", "\\def\\fileversion{"..pkgversion.."}")
+  if string.match(content, "\\def\\fileversion{[^}]+}") then
+    print("Found fileversion line in file: "..file)
+    content = content:gsub("\\def\\fileversion{[^}]+}", "\\def\\fileversion{"..pkgversion.."}")
   end
 
-  if changesversion and string.match(line, "## (%S+) %(.*%)") then
-    changesversion = false
-    print("Found line: (CHANGES.md)")
-    print(line)
-    line = line:gsub("## (%S+) %(.*%)","## %1 ("..date..")")
+  if string.match(content, "## (%S+) %([^)]+%)") then
+    print("Found changes line in file: "..file)
+    content = content:gsub("## (%S+) %([^)]+%)","## %1 ("..date..")",1)
   end
 
-  if not(line==lineorig) then
-		print("Replaced with line:")
-		print(line)
-  end
-
-  return line
+  return content
 end
 
 
@@ -321,7 +308,3 @@ manifest_extract_filedesc = function(filehandle,filename)
   return filedesc
 end
 
-
--- finally run l3build proper:
-kpse.set_program_name("kpsewhich")
-dofile(kpse.lookup("l3build.lua"))
