@@ -4,7 +4,7 @@ TEXTIT:
 > \box...=
 \hbox(4.41+0.11)x4.67, direction TLT
 .\TU/texgyretermes-regular.otf(0)/m/it/10 x
-.\kern 0.23
+.\kern0.23 (italic)
 ! OK.
 <to be read again> 
 \relax 
@@ -14,7 +14,7 @@ MATHIT:
 \hbox(4.41+0.11)x4.67, direction TLT
 .\mathon
 .\TU/texgyretermes-regular.otf(1)/m/it/10 x
-.\kern0.23
+.\kern0.23 (italic)
 .\mathoff
 ! OK.
 <to be read again> 

@@ -5,50 +5,50 @@ Don't change this file in any respect.
 .\mathon
 .\TU/xits-math.otf(1)/m/n/10 𝐴
 .\TU/xits-math.otf(1)/m/n/10 𝐵
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐶
-.\kern0.8
+.\kern0.8 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐷
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐸
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐹
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐺
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐻
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐼
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐽
-.\kern1.2
+.\kern1.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐾
-.\kern0.8
+.\kern0.8 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐿
 .\TU/xits-math.otf(1)/m/n/10 𝑀
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑁
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑂
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑃
-.\kern1.5
+.\kern1.5 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑄
 .\TU/xits-math.otf(1)/m/n/10 𝑅
 .\TU/xits-math.otf(1)/m/n/10 𝑆
-.\kern0.7
+.\kern0.7 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑇
-.\kern1.6
+.\kern1.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑈
-.\kern1.1
+.\kern1.1 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑉
-.\kern2.25
+.\kern2.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑊
-.\kern2.25
+.\kern2.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑋
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑌
-.\kern2.0
+.\kern2.0 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑍
 .\mathoff
 ! OK.
@@ -59,55 +59,55 @@ l. ...\TESTBOX{$\LATINmath$}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/xits-math.otf(1)/m/n/10 𝒜
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℬ
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒞
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒟
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℰ
-.\kern1.05
+.\kern1.05 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℱ
-.\kern1.95
+.\kern1.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒢
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℋ
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℐ
-.\kern1.95
+.\kern1.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒥
-.\kern1.85
+.\kern1.85 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒦
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℒ
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℳ
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒩
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒪
-.\kern0.95
+.\kern0.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒫
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒬
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℛ
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒮
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒯
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒰
-.\kern0.95
+.\kern0.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒱
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒲
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒳
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒴
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒵
 .\mathoff
 ! OK.
@@ -120,43 +120,43 @@ l. ...\TESTBOX{$\symscr{\LATINmath}$}
 .\TU/xits-math.otf(4)/m/n/10 𝒜
 .\TU/xits-math.otf(4)/m/n/10 ℬ
 .\TU/xits-math.otf(4)/m/n/10 𝒞
-.\kern0.62
+.\kern0.62 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒟
 .\TU/xits-math.otf(4)/m/n/10 ℰ
-.\kern0.91
+.\kern0.91 (italic)
 .\TU/xits-math.otf(4)/m/n/10 ℱ
-.\kern1.03
+.\kern1.03 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒢
 .\TU/xits-math.otf(4)/m/n/10 ℋ
-.\kern0.59
+.\kern0.59 (italic)
 .\TU/xits-math.otf(4)/m/n/10 ℐ
-.\kern0.61
+.\kern0.61 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒥
-.\kern1.98
+.\kern1.98 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒦
 .\TU/xits-math.otf(4)/m/n/10 ℒ
 .\TU/xits-math.otf(4)/m/n/10 ℳ
 .\TU/xits-math.otf(4)/m/n/10 𝒩
-.\kern1.52
+.\kern1.52 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒪
 .\TU/xits-math.otf(4)/m/n/10 𝒫
-.\kern0.87
+.\kern0.87 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒬
 .\TU/xits-math.otf(4)/m/n/10 ℛ
 .\TU/xits-math.otf(4)/m/n/10 𝒮
-.\kern0.82
+.\kern0.82 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒯
-.\kern2.66
+.\kern2.66 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒰
-.\kern1.78
+.\kern1.78 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒱
-.\kern0.87
+.\kern0.87 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒲
-.\kern0.87
+.\kern0.87 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒳
-.\kern0.92
+.\kern0.92 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒴
-.\kern0.89
+.\kern0.89 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒵
 .\mathoff
 ! OK.
@@ -168,50 +168,50 @@ l. ...\TESTBOX{$\symcal{\LATINmath}$}
 .\mathon
 .\TU/xits-math.otf(1)/m/n/10 𝐴
 .\TU/xits-math.otf(1)/m/n/10 𝐵
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐶
-.\kern0.8
+.\kern0.8 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐷
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐸
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐹
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐺
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐻
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐼
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐽
-.\kern1.2
+.\kern1.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐾
-.\kern0.8
+.\kern0.8 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐿
 .\TU/xits-math.otf(1)/m/n/10 𝑀
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑁
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑂
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑃
-.\kern1.5
+.\kern1.5 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑄
 .\TU/xits-math.otf(1)/m/n/10 𝑅
 .\TU/xits-math.otf(1)/m/n/10 𝑆
-.\kern0.7
+.\kern0.7 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑇
-.\kern1.6
+.\kern1.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑈
-.\kern1.1
+.\kern1.1 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑉
-.\kern2.25
+.\kern2.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑊
-.\kern2.25
+.\kern2.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑋
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑌
-.\kern2.0
+.\kern2.0 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑍
 .\mathoff
 ! OK.
@@ -222,55 +222,55 @@ l. ...\TESTBOX{$\LATINtext$}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/xits-math.otf(1)/m/n/10 𝒜
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℬ
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒞
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒟
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℰ
-.\kern1.05
+.\kern1.05 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℱ
-.\kern1.95
+.\kern1.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒢
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℋ
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℐ
-.\kern1.95
+.\kern1.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒥
-.\kern1.85
+.\kern1.85 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒦
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℒ
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℳ
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒩
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒪
-.\kern0.95
+.\kern0.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒫
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒬
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℛ
-.\kern0.45
+.\kern0.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒮
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒯
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒰
-.\kern0.95
+.\kern0.95 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒱
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒲
-.\kern2.45
+.\kern2.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒳
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒴
-.\kern1.25
+.\kern1.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝒵
 .\mathoff
 ! OK.
@@ -283,43 +283,43 @@ l. ...\TESTBOX{$\symscr{\LATINtext}$}
 .\TU/xits-math.otf(4)/m/n/10 𝒜
 .\TU/xits-math.otf(4)/m/n/10 ℬ
 .\TU/xits-math.otf(4)/m/n/10 𝒞
-.\kern0.62
+.\kern0.62 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒟
 .\TU/xits-math.otf(4)/m/n/10 ℰ
-.\kern0.91
+.\kern0.91 (italic)
 .\TU/xits-math.otf(4)/m/n/10 ℱ
-.\kern1.03
+.\kern1.03 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒢
 .\TU/xits-math.otf(4)/m/n/10 ℋ
-.\kern0.59
+.\kern0.59 (italic)
 .\TU/xits-math.otf(4)/m/n/10 ℐ
-.\kern0.61
+.\kern0.61 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒥
-.\kern1.98
+.\kern1.98 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒦
 .\TU/xits-math.otf(4)/m/n/10 ℒ
 .\TU/xits-math.otf(4)/m/n/10 ℳ
 .\TU/xits-math.otf(4)/m/n/10 𝒩
-.\kern1.52
+.\kern1.52 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒪
 .\TU/xits-math.otf(4)/m/n/10 𝒫
-.\kern0.87
+.\kern0.87 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒬
 .\TU/xits-math.otf(4)/m/n/10 ℛ
 .\TU/xits-math.otf(4)/m/n/10 𝒮
-.\kern0.82
+.\kern0.82 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒯
-.\kern2.66
+.\kern2.66 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒰
-.\kern1.78
+.\kern1.78 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒱
-.\kern0.87
+.\kern0.87 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒲
-.\kern0.87
+.\kern0.87 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒳
-.\kern0.92
+.\kern0.92 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒴
-.\kern0.89
+.\kern0.89 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝒵
 .\mathoff
 ! OK.

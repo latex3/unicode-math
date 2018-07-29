@@ -6,50 +6,50 @@ Don't change this file in any respect.
 .\pdfcolorstack 0 push {0.2 0 0 rg}
 .\TU/xits-math.otf(1)/m/n/10 𝐴
 .\TU/xits-math.otf(1)/m/n/10 𝐵
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐶
-.\kern0.8
+.\kern0.8 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐷
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐸
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐹
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐺
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐻
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐼
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐽
-.\kern1.2
+.\kern1.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐾
-.\kern0.8
+.\kern0.8 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐿
 .\TU/xits-math.otf(1)/m/n/10 𝑀
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑁
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑂
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑃
-.\kern1.5
+.\kern1.5 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑄
 .\TU/xits-math.otf(1)/m/n/10 𝑅
 .\TU/xits-math.otf(1)/m/n/10 𝑆
-.\kern0.7
+.\kern0.7 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑇
-.\kern1.6
+.\kern1.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑈
-.\kern1.1
+.\kern1.1 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑉
-.\kern2.25
+.\kern2.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑊
-.\kern2.25
+.\kern2.25 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑋
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑌
-.\kern2.0
+.\kern2.0 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑍
 .\mathoff
 .\pdfcolorstack 0 pop
@@ -64,27 +64,27 @@ l. ...\TESTBOX{$\symit{\LATINtext}$}
 .\TU/xits-math.otf(4)/m/n/10 𝑎
 .\TU/xits-math.otf(4)/m/n/10 𝑏
 .\TU/xits-math.otf(4)/m/n/10 𝑐
-.\kern0.5
+.\kern0.5 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝑑
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝑒
 .\TU/xits-math.otf(4)/m/n/10 𝑓
-.\kern1.2
+.\kern1.2 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝑔
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(4)/m/n/10 ℎ
 .\TU/xits-math.otf(4)/m/n/10 𝑖
 .\TU/xits-math.otf(4)/m/n/10 𝑗
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝑘
 .\TU/xits-math.otf(4)/m/n/10 𝑙
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝑚
 .\TU/xits-math.otf(4)/m/n/10 𝑛
 .\TU/xits-math.otf(4)/m/n/10 𝑜
 .\TU/xits-math.otf(4)/m/n/10 𝑝
 .\TU/xits-math.otf(4)/m/n/10 𝑞
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(4)/m/n/10 𝑟
 .\TU/xits-math.otf(4)/m/n/10 𝑠
 .\TU/xits-math.otf(4)/m/n/10 𝑡
@@ -106,49 +106,49 @@ l. ...\TESTBOX{$\symit{\latintext}$}
 .\pdfcolorstack 0 push {0.6 0 0 rg}
 .\TU/xits-math.otf(5)/m/n/10 𝛢
 .\TU/xits-math.otf(5)/m/n/10 𝛣
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛤
-.\kern1.45
+.\kern1.45 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛥
 .\TU/xits-math.otf(5)/m/n/10 𝛦
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛧
-.\kern0.7
+.\kern0.7 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛨
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛩
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛳
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛪
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛫
-.\kern0.7
+.\kern0.7 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛬
 .\TU/xits-math.otf(5)/m/n/10 𝛭
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛮
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛯
-.\kern0.75
+.\kern0.75 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛰
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛱
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛲
-.\kern1.5
+.\kern1.5 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛴
-.\kern0.65
+.\kern0.65 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛵
-.\kern1.6
+.\kern1.6 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛶
-.\kern1.6
+.\kern1.6 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛷
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛸
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛹
-.\kern1.13
+.\kern1.13 (italic)
 .\TU/xits-math.otf(5)/m/n/10 𝛺
 .\mathoff
 .\pdfcolorstack 0 pop
@@ -161,55 +161,55 @@ l. ...\TESTBOX{$\symit{\GREEKtext}$}
 .\mathon
 .\pdfcolorstack 0 push {0.733 0 0 rg}
 .\TU/xits-math.otf(6)/m/n/10 𝛼
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝛽
-.\kern0.65
+.\kern0.65 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝛾
-.\kern0.8
+.\kern0.8 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝛿
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜀
 .\TU/xits-math.otf(6)/m/n/10 𝜖
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜁
-.\kern1.0
+.\kern1.0 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜂
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜃
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜗
 .\TU/xits-math.otf(6)/m/n/10 𝜄
 .\TU/xits-math.otf(6)/m/n/10 𝜅
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜘
-.\kern0.7
+.\kern0.7 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜆
 .\TU/xits-math.otf(6)/m/n/10 𝜇
-.\kern0.3
+.\kern0.3 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜈
-.\kern0.5
+.\kern0.5 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜉
-.\kern0.5
+.\kern0.5 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜊
 .\TU/xits-math.otf(6)/m/n/10 𝜋
-.\kern0.5
+.\kern0.5 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜛
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜌
 .\TU/xits-math.otf(6)/m/n/10 𝜚
 .\TU/xits-math.otf(6)/m/n/10 𝜍
-.\kern0.65
+.\kern0.65 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜎
-.\kern0.5
+.\kern0.5 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜏
-.\kern0.7
+.\kern0.7 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜐
 .\TU/xits-math.otf(6)/m/n/10 𝜑
 .\TU/xits-math.otf(6)/m/n/10 𝜙
 .\TU/xits-math.otf(6)/m/n/10 𝜒
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜓
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/xits-math.otf(6)/m/n/10 𝜔
 .\mathoff
 .\pdfcolorstack 0 pop

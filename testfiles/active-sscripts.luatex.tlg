@@ -85,7 +85,7 @@ l. ...\setbox12=\hbox{$x₅₆₇$}\SHOWBOX{12}
 .\hbox(4.74036+0.14024)x12.55815, shifted 2.46996, direction TLT
 ..\TU/latinmodern-math.otf(1)/m/n/7.01236 6
 ..\TU/latinmodern-math.otf(1)/m/n/7.01236 7
-..\kern0.02805
+..\kern0.02805 (italic)
 ..\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 .\mathoff
 ! OK.
@@ -98,7 +98,7 @@ l. ...\setbox12=\hbox{$x₆₇₈$}\SHOWBOX{12}
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\hbox(4.74036+0.14024)x12.55815, shifted 2.46996, direction TLT
 ..\TU/latinmodern-math.otf(1)/m/n/7.01236 7
-..\kern0.02805
+..\kern0.02805 (italic)
 ..\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ..\TU/latinmodern-math.otf(1)/m/n/7.01236 9
 .\mathoff
@@ -318,7 +318,7 @@ l. ...\setbox12=\hbox{$x^^b2ⁱ⁺⁾ⁿ$}\SHOWBOX{12}
 ...\TU/latinmodern-math.otf(1)/m/n/7.01236 +
 ...\TU/latinmodern-math.otf(1)/m/n/7.01236 )
 ...\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑛
-..\kern1.59998
+..\kern1.59998 (font)
 ..\hbox(4.72633+0.14024)x8.54007, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/7.01236 3
 ...\TU/latinmodern-math.otf(1)/m/n/7.01236 4

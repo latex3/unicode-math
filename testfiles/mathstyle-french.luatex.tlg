@@ -21,18 +21,18 @@ Don't change this file in any respect.
 .\TU/latinmodern-math.otf(1)/m/n/10 P
 .\TU/latinmodern-math.otf(1)/m/n/10 Q
 .\TU/latinmodern-math.otf(1)/m/n/10 R
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 S
 .\TU/latinmodern-math.otf(1)/m/n/10 T
 .\TU/latinmodern-math.otf(1)/m/n/10 U
 .\TU/latinmodern-math.otf(1)/m/n/10 V
-.\kern0.08
+.\kern0.08 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 W
-.\kern0.09
+.\kern0.09 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 X
-.\kern0.04
+.\kern0.04 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 Y
-.\kern0.16
+.\kern0.16 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 Z
 .\mathoff
 ! OK.
@@ -44,43 +44,43 @@ l. ...\TESTBOX{$\LATINtext$}
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑎
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑏
-.\kern0.14
+.\kern0.14 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑐
-.\kern0.25
+.\kern0.25 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑑
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑒
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑓
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑔
-.\kern0.25
+.\kern0.25 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ℎ
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑖
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑗
-.\kern0.13
+.\kern0.13 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑘
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑙
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑚
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑛
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑜
-.\kern0.12
+.\kern0.12 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑝
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑞
-.\kern0.34
+.\kern0.34 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑟
-.\kern0.13
+.\kern0.13 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑠
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑡
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑢
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑣
-.\kern0.11
+.\kern0.11 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑤
-.\kern0.03
+.\kern0.03 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
@@ -108,18 +108,18 @@ l. ...\TESTBOX{$\latintext$}
 .\TU/latinmodern-math.otf(1)/m/n/10 P
 .\TU/latinmodern-math.otf(1)/m/n/10 Q
 .\TU/latinmodern-math.otf(1)/m/n/10 R
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 S
 .\TU/latinmodern-math.otf(1)/m/n/10 T
 .\TU/latinmodern-math.otf(1)/m/n/10 U
 .\TU/latinmodern-math.otf(1)/m/n/10 V
-.\kern0.08
+.\kern0.08 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 W
-.\kern0.09
+.\kern0.09 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 X
-.\kern0.04
+.\kern0.04 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 Y
-.\kern0.16
+.\kern0.16 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 Z
 .\mathoff
 ! OK.
@@ -131,43 +131,43 @@ l. ...\TESTBOX{$\LATINmath$}
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑎
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑏
-.\kern0.14
+.\kern0.14 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑐
-.\kern0.25
+.\kern0.25 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑑
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑒
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑓
-.\kern0.9
+.\kern0.9 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑔
-.\kern0.25
+.\kern0.25 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ℎ
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑖
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑗
-.\kern0.13
+.\kern0.13 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑘
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑙
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑚
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑛
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑜
-.\kern0.12
+.\kern0.12 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑝
-.\kern0.15
+.\kern0.15 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑞
-.\kern0.34
+.\kern0.34 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑟
-.\kern0.13
+.\kern0.13 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑠
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑡
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑢
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑣
-.\kern0.11
+.\kern0.11 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑤
-.\kern0.03
+.\kern0.03 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
@@ -200,7 +200,7 @@ l. ...\TESTBOX{$\latinmath$}
 .\TU/latinmodern-math.otf(1)/m/n/10 Υ
 .\TU/latinmodern-math.otf(1)/m/n/10 Φ
 .\TU/latinmodern-math.otf(1)/m/n/10 Χ
-.\kern0.04
+.\kern0.04 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 Ψ
 .\TU/latinmodern-math.otf(1)/m/n/10 Ω
 .\mathoff
@@ -212,27 +212,27 @@ l. ...\TESTBOX{$\GREEKtext$}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 α
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 β
 .\TU/latinmodern-math.otf(1)/m/n/10 γ
 .\TU/latinmodern-math.otf(1)/m/n/10 δ
 .\TU/latinmodern-math.otf(1)/m/n/10 ε
 .\TU/latinmodern-math.otf(1)/m/n/10 ϵ
-.\kern0.35
+.\kern0.35 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ζ
 .\TU/latinmodern-math.otf(1)/m/n/10 η
 .\TU/latinmodern-math.otf(1)/m/n/10 θ
 .\TU/latinmodern-math.otf(1)/m/n/10 ϑ
-.\kern0.21
+.\kern0.21 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ι
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 κ
-.\kern0.23
+.\kern0.23 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ϰ
 .\TU/latinmodern-math.otf(1)/m/n/10 λ
-.\kern0.54
+.\kern0.54 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 μ
-.\kern0.23
+.\kern0.23 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ν
 .\TU/latinmodern-math.otf(1)/m/n/10 ξ
 .\TU/latinmodern-math.otf(1)/m/n/10 ο
@@ -247,7 +247,7 @@ l. ...\TESTBOX{$\GREEKtext$}
 .\TU/latinmodern-math.otf(1)/m/n/10 φ
 .\TU/latinmodern-math.otf(1)/m/n/10 ϕ
 .\TU/latinmodern-math.otf(1)/m/n/10 χ
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ψ
 .\TU/latinmodern-math.otf(1)/m/n/10 ω
 .\mathoff
@@ -281,7 +281,7 @@ l. ...\TESTBOX{$\greektext$}
 .\TU/latinmodern-math.otf(1)/m/n/10 Υ
 .\TU/latinmodern-math.otf(1)/m/n/10 Φ
 .\TU/latinmodern-math.otf(1)/m/n/10 Χ
-.\kern0.04
+.\kern0.04 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 Ψ
 .\TU/latinmodern-math.otf(1)/m/n/10 Ω
 .\mathoff
@@ -293,27 +293,27 @@ l. ...\TESTBOX{$\GREEKmath$}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 α
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 β
 .\TU/latinmodern-math.otf(1)/m/n/10 γ
 .\TU/latinmodern-math.otf(1)/m/n/10 δ
 .\TU/latinmodern-math.otf(1)/m/n/10 ε
 .\TU/latinmodern-math.otf(1)/m/n/10 ϵ
-.\kern0.35
+.\kern0.35 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ζ
 .\TU/latinmodern-math.otf(1)/m/n/10 η
 .\TU/latinmodern-math.otf(1)/m/n/10 θ
 .\TU/latinmodern-math.otf(1)/m/n/10 ϑ
-.\kern0.21
+.\kern0.21 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ι
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 κ
-.\kern0.23
+.\kern0.23 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ϰ
 .\TU/latinmodern-math.otf(1)/m/n/10 λ
-.\kern0.54
+.\kern0.54 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 μ
-.\kern0.23
+.\kern0.23 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ν
 .\TU/latinmodern-math.otf(1)/m/n/10 ξ
 .\TU/latinmodern-math.otf(1)/m/n/10 ο
@@ -328,7 +328,7 @@ l. ...\TESTBOX{$\GREEKmath$}
 .\TU/latinmodern-math.otf(1)/m/n/10 φ
 .\TU/latinmodern-math.otf(1)/m/n/10 ϕ
 .\TU/latinmodern-math.otf(1)/m/n/10 χ
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 ψ
 .\TU/latinmodern-math.otf(1)/m/n/10 ω
 .\mathoff

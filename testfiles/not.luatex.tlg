@@ -7,7 +7,7 @@ empty
 .\vbox(5.0+0.0)x0.0, direction TLT
 ..\hbox(7.5+2.5)x0.0, shifted 2.63, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/10 ̸
-..\kern-5.0
+..\kern-5.0 (font)
 ..\hbox(0.0+0.0)x0.0, direction TLT
 .\mathoff
 ! OK.
@@ -28,7 +28,7 @@ macro
 .\vbox(7.5+2.54008)x12.68765, direction TLT
 ..\hbox(7.5+2.5)x0.0, shifted 6.52, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/10 ̸
-..\kern-7.97
+..\kern-7.97 (font)
 ..\hbox(5.47+2.54008)x12.68765, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/10 ≺
 ...\hbox(3.09245+0.07013)x4.90765, shifted 2.46996, direction TLT
@@ -48,7 +48,7 @@ generic
 .\vbox(7.705+0.0)x7.78, direction TLT
 ..\hbox(7.5+2.5)x0.0, shifted 6.52, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/10 ̸
-..\kern-7.705
+..\kern-7.705 (font)
 ..\hbox(5.41+0.0)x7.78, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/10 ≊
 .\TU/latinmodern-math.otf(1)/m/n/10 𝐶
@@ -67,7 +67,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -86,7 +86,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≮
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≮
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -105,7 +105,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -124,7 +124,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ↚
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ↚
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -143,7 +143,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≄
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≄
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -162,7 +162,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≠
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -181,7 +181,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≰
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≰
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -200,7 +200,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≱
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≱
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -219,7 +219,7 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 ≯
 .\glue(\thickmuskip) 2.77771 plus 2.77771
@@ -237,7 +237,7 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑦
-.\kern0.28
+.\kern0.28 (italic)
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧

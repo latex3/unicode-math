@@ -13,7 +13,7 @@ l. ...\TESTBOX{$ \mathrm{s} $}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\hbox(4.48+0.11)x3.94, direction TLT
-..\kern 0.0
+..\kern0.0
 ..\TU/lmr/m/n/10 s
 .\mathoff
 ! OK.
@@ -24,7 +24,7 @@ l. ...\TESTBOX{$ \operatorname{s} $}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\hbox(4.4+0.06)x5.25, direction TLT
-..\kern 0.0
+..\kern0.0
 ..\hbox(0.0+0.0)x0.0, direction TLT
 ..\TU/lmtt/m/n/10 s
 .\mathoff

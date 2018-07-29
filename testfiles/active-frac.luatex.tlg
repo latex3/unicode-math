@@ -10,9 +10,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.44995)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.02359
+....\kern1.02359 (font)
 ....\hbox(4.72633+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 4
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -22,9 +22,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.44995)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 2
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -34,9 +34,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.44995)x3.99004, direction TLT
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-....\kern1.09973
+....\kern1.09973 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.02359
+....\kern1.02359 (font)
 ....\hbox(4.72633+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 4
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -46,9 +46,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.00957
+....\kern1.00957 (font)
 ....\hbox(4.74036+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 7
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -58,9 +58,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 9
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -72,9 +72,9 @@ NORMALSIZE
 .....\glue 0.0 plus 1.0fil minus 1.0fil
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
 .....\glue 0.0 plus 1.0fil minus 1.0fil
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x7.98007, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 0
@@ -85,9 +85,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 3
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -97,9 +97,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 3
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -109,9 +109,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -121,9 +121,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -133,9 +133,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-....\kern1.09973
+....\kern1.09973 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -145,9 +145,9 @@ NORMALSIZE
 ...\vbox(8.66628+3.5902)x3.99004, direction TLT
 ....\hbox(4.72633+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 4
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -157,9 +157,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 6
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -169,9 +169,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 5
-....\kern1.09973
+....\kern1.09973 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 6
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -181,9 +181,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.0)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-....\kern1.23997
+....\kern1.23997 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -193,9 +193,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-....\kern1.09973
+....\kern1.09973 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -205,9 +205,9 @@ NORMALSIZE
 ...\vbox(8.59615+3.5902)x3.99004, direction TLT
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 5
-....\kern1.09973
+....\kern1.09973 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -217,9 +217,9 @@ NORMALSIZE
 ...\vbox(8.6803+3.5902)x3.99004, direction TLT
 ....\hbox(4.74036+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 7
-....\kern1.09973
+....\kern1.09973 (font)
 ....\rule(0.4+0.0)x*
-....\kern1.09372
+....\kern1.09372 (font)
 ....\hbox(4.6562+0.14024)x3.99004, direction TLT
 .....\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ...\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -239,9 +239,9 @@ SMALL
 ....\vbox(8.59615+3.44995)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.02359
+.....\kern1.02359 (font)
 .....\hbox(4.72633+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 4
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -252,9 +252,9 @@ SMALL
 ....\vbox(8.59615+3.44995)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 2
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -265,9 +265,9 @@ SMALL
 ....\vbox(8.59615+3.44995)x3.99004, direction TLT
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-.....\kern1.09973
+.....\kern1.09973 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.02359
+.....\kern1.02359 (font)
 .....\hbox(4.72633+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 4
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -278,9 +278,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.00957
+.....\kern1.00957 (font)
 .....\hbox(4.74036+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 7
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -291,9 +291,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 9
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -306,9 +306,9 @@ SMALL
 ......\glue 0.0 plus 1.0fil minus 1.0fil
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
 ......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x7.98007, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 0
@@ -320,9 +320,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 3
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -333,9 +333,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 3
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -346,9 +346,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -359,9 +359,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -372,9 +372,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-.....\kern1.09973
+.....\kern1.09973 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -385,9 +385,9 @@ SMALL
 ....\vbox(8.66628+3.5902)x3.99004, direction TLT
 .....\hbox(4.72633+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 4
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 5
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -398,9 +398,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 6
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -411,9 +411,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 5
-.....\kern1.09973
+.....\kern1.09973 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 6
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -424,9 +424,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.0)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-.....\kern1.23997
+.....\kern1.23997 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -437,9 +437,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-.....\kern1.09973
+.....\kern1.09973 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -450,9 +450,9 @@ SMALL
 ....\vbox(8.59615+3.5902)x3.99004, direction TLT
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 5
-.....\kern1.09973
+.....\kern1.09973 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
@@ -463,9 +463,9 @@ SMALL
 ....\vbox(8.6803+3.5902)x3.99004, direction TLT
 .....\hbox(4.74036+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 7
-.....\kern1.09973
+.....\kern1.09973 (font)
 .....\rule(0.4+0.0)x*
-.....\kern1.09372
+.....\kern1.09372 (font)
 .....\hbox(4.6562+0.14024)x3.99004, direction TLT
 ......\TU/latinmodern-math.otf(1)/m/n/7.01236 8
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT

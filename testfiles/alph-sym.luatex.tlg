@@ -11,7 +11,7 @@ Don't change this file in any respect.
 .\mathon
 .\TU/xits-math.otf(1)/m/n/10 𝐴
 .\TU/xits-math.otf(1)/m/n/10 𝐵
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝐶
 .\mathoff
 ! OK.

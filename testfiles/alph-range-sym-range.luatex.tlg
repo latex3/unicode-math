@@ -6,27 +6,27 @@ Don't change this file in any respect.
 .\TU/xits-math.otf(1)/m/n/10 𝑎
 .\TU/xits-math.otf(1)/m/n/10 𝑏
 .\TU/xits-math.otf(1)/m/n/10 𝑐
-.\kern0.5
+.\kern0.5 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑑
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑒
 .\TU/xits-math.otf(1)/m/n/10 𝑓
-.\kern1.2
+.\kern1.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑔
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(1)/m/n/10 ℎ
 .\TU/xits-math.otf(1)/m/n/10 𝑖
 .\TU/xits-math.otf(1)/m/n/10 𝑗
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑘
 .\TU/xits-math.otf(1)/m/n/10 𝑙
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑚
 .\TU/xits-math.otf(1)/m/n/10 𝑛
 .\TU/xits-math.otf(1)/m/n/10 𝑜
 .\TU/xits-math.otf(1)/m/n/10 𝑝
 .\TU/xits-math.otf(1)/m/n/10 𝑞
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/xits-math.otf(1)/m/n/10 𝑟
 .\TU/xits-math.otf(1)/m/n/10 𝑠
 .\TU/xits-math.otf(1)/m/n/10 𝑡
@@ -47,43 +47,43 @@ l. ...\TESTBOX{$\latintext$}
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐴
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐵
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐶
-.\kern0.12
+.\kern0.12 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐷
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐸
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐹
-.\kern0.2
+.\kern0.2 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐺
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐻
-.\kern0.5
+.\kern0.5 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐼
-.\kern0.49
+.\kern0.49 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐽
-.\kern0.53
+.\kern0.53 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐾
-.\kern0.44
+.\kern0.44 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝐿
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑀
-.\kern0.24
+.\kern0.24 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑁
-.\kern0.54
+.\kern0.54 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑂
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑃
-.\kern0.11
+.\kern0.11 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑄
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑅
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑆
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑇
-.\kern0.52
+.\kern0.52 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑈
-.\kern0.48
+.\kern0.48 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑉
-.\kern0.6
+.\kern0.6 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑊
-.\kern0.64
+.\kern0.64 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑋
-.\kern0.4
+.\kern0.4 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑌
-.\kern0.36
+.\kern0.36 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝑍
 .\mathoff
 ! OK.
@@ -104,7 +104,7 @@ l. ...\TESTBOX{$\LATINtext$}
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗜
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗝
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗞
-.\kern0.59
+.\kern0.59 (italic)
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗟
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗠
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗡
