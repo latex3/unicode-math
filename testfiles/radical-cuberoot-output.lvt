@@ -1,0 +1,27 @@
+
+\input{umtest-preamble}
+
+
+\usepackage{unicode-math}
+
+\setmainfont{texgyrepagella-regular.otf}
+\setmathfont{xits-math.otf}
+
+\begin{document}
+
+\START
+
+\MSG{SQRT x}
+\setbox12=\hbox{$\displaystyle\cuberoot{x}$}
+\SHOWBOX {12}
+
+\MSG{SQRT x squared}
+\setbox12=\hbox{$\displaystyle\cuberoot{x^2}$}
+\SHOWBOX {12}
+
+\MSG{SQRT FRAC x y}
+\setbox12=\hbox{$\displaystyle\cuberoot{\frac{x}{y}}$}
+\SHOWBOX {12}
+
+
+\end{document}

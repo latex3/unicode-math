@@ -1,0 +1,71 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+SQRT x
+> \box...=
+\hbox(10.24+2.73999)x14.78
+.\mathon
+.\hbox(10.24+2.73999)x14.78
+..\vbox(0.66+11.65999)x9.28, shifted -8.92
+...\TU/xits-math.otf(1)/m/n/10 glyph#1160
+..\vbox(10.24+0.09)x5.5
+...\kern0.66
+...\rule(0.66+0.0)x*
+...\kern4.51
+...\hbox(4.41+0.09)x5.5
+....\TU/xits-math.otf(1)/m/n/10 glyph#2520
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+SQRT x squared
+> \box...=
+\hbox(11.93526+1.04474)x19.01555
+.\mathon
+.\hbox(11.93526+1.04474)x19.01555
+..\vbox(0.66+11.65999)x9.28, shifted -10.61525
+...\TU/xits-math.otf(1)/m/n/10 glyph#1160
+..\vbox(11.93526+0.09)x9.73555
+...\kern0.66
+...\rule(0.66+0.0)x*
+...\kern2.81474
+...\hbox(7.8005+0.09)x9.73555
+....\TU/xits-math.otf(1)/m/n/10 glyph#2520
+....\hbox(5.05046+0.0)x4.23555, shifted -2.75005
+.....\TU/xits-math.otf(1)/m/n/7.4711 glyph#51
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+SQRT FRAC x y
+> \box...=
+\hbox(14.91+10.34999)x19.14
+.\mathon
+.\hbox(14.91+10.34999)x19.14
+..\vbox(0.66+23.93999)x11.24, shifted -13.59
+...\TU/xits-math.otf(1)/m/n/10 glyph#3700
+..\vbox(14.91+8.83011)x7.9
+...\kern0.66
+...\rule(0.66+0.0)x*
+...\kern3.3799
+...\hbox(10.2101+8.83011)x7.9
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(10.2101+8.83011)x5.5
+.....\hbox(4.41+0.09)x5.5
+......\TU/xits-math.otf(1)/m/n/10 glyph#2520
+.....\kern2.88005
+.....\rule(0.65999+0.0)x*
+.....\kern4.77016
+.....\hbox(4.4+1.83)x5.5, glue set 0.27fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\TU/xits-math.otf(1)/m/n/10 glyph#2521
+......\glue 0.0 plus 1.0fil minus 1.0fil
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\mathoff
+! OK.
+<to be read again> 
+                   \relax 
+l. ...\SHOWBOX {12}
+***************
+Compilation 1 of test file completed with exit status 256

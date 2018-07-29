@@ -6,6 +6,7 @@ CHANGE HISTORY
   * Restore behaviour of legacy syntax `x_\mathrm{x}` (i.e., with no braces).
     While strictly ‘incorrectly’, this usage is widely used.
     N.B. this syntax is not supported for the `\symXX` commands.
+  * Add `\cuberoot` and `\fourthroot` as proper radicals.
   * Some additional input subscripts/superscripts.
   * Some documentation additions (thanks for the contributions).
 
