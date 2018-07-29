@@ -187,13 +187,17 @@
    {
      \cs_if_exist:NF #2
        {
+         %% todo: check if the check is necessary
          \cs_gset_protected_nopar:Npx #2 { \exp_not:c { \cs_to_str:N #2 sign } }
        }
      \cs_gset_protected_nopar:cpx { \cs_to_str:N #2 sign }
        {
          \@@_radical:nn {#1} {#3}
        }
-     \tl_const:cn {c_@@_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #3}
+     \tl_if_exist:cF {c_@@_radical_\cs_to_str:N #2_tl}
+       {
+         \tl_const:cn {c_@@_radical_\cs_to_str:N #2_tl} {\use:c{sym #1}~ #3}
+       }
    }
    {
      \@@_set_delcode:nnn {#1} {#3} {#3}
