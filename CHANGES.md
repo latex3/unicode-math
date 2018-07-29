@@ -1,10 +1,13 @@
 CHANGE HISTORY
 ==============
 
-## v0.8m ()
+## v0.8m (2018/07/29)
 
   * Restore behaviour of legacy syntax `x_\mathrm{x}` (i.e., with no braces).
     While strictly ‘incorrectly’, this usage is widely used.
+    N.B. this syntax is not supported for the `\symXX` commands.
+  * Some additional input subscripts/superscripts.
+  * Some documentation additions (thanks for the contributions).
 
 
 ## v0.8l (2018/02/02)
