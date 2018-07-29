@@ -265,7 +265,7 @@ l. ...\setbox12=\hbox{$xₓ₀₁$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
                    \relax 
-l. ......12=\hbox{$x⁰ⁱ⁺⁾ⁿ^^b2$}\SHOWBOX{12}
+l. ...\setbox12=\hbox{$x⁰ⁱ⁺⁾ⁿ^^b2$}\SHOWBOX{12}
 > \box...=
 \hbox(8.87529+0.11)x26.17719
 .\mathon
@@ -280,7 +280,7 @@ l. ......12=\hbox{$x⁰ⁱ⁺⁾ⁿ^^b2$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
                    \relax 
-l. ......box12=\hbox{$xⁱ⁺⁾ⁿ^^b2$}\SHOWBOX{12}
+l. ...\setbox12=\hbox{$xⁱ⁺⁾ⁿ^^b2$}\SHOWBOX{12}
 > \box...=
 \hbox(8.28625+0.11)x15.16077
 .\mathon
@@ -307,7 +307,7 @@ l. ...\setbox12=\hbox{$xⁿ^^b2$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
                    \relax 
-l. ......box12=\hbox{$x^^b2ⁱ⁺⁾ⁿ$}\SHOWBOX{12}
+l. ...\setbox12=\hbox{$x^^b2ⁱ⁺⁾ⁿ$}\SHOWBOX{12}
 > \box...=
 \hbox(10.4243+3.02658)x26.17719
 .\mathon
@@ -327,6 +327,6 @@ l. ......box12=\hbox{$x^^b2ⁱ⁺⁾ⁿ$}\SHOWBOX{12}
 ! OK.
 <to be read again> 
                    \relax 
-l. ......\hbox{$x₃₄^^b2ⁱ⁺⁾ⁿ$}\SHOWBOX{12}
+l. ...\setbox12=\hbox{$x₃₄^^b2ⁱ⁺⁾ⁿ$}\SHOWBOX{12}
 ***************
 Compilation 1 of test file completed with exit status 256

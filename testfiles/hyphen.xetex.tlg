@@ -27,7 +27,7 @@ l. ...\TESTBOX{$a-b$}
 <to be read again> 
                    \relax 
 l. ...\TESTBOX{$a‐b$}
-                       % "2010 hyphen
+                     % "2010 hyphen
 > \box...=
 \hbox(0.0+0.0)x0.0, glue set - 1.0
 .\mathon
@@ -42,6 +42,6 @@ l. ...\TESTBOX{$a‐b$}
 <to be read again> 
                    \relax 
 l. ...\TESTBOX{$a−b$}
-                       % "2212 minus sign
+                     % "2212 minus sign
 ***************
 Compilation 1 of test file completed with exit status 256
