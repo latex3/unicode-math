@@ -2,11 +2,11 @@
 
 - [ ] Finish final changes on `working` branch
 - [ ] Ensure `CHANGES.md` is up-to-date with a new version number
-- [ ] `build setversion`
+- [ ] `build tag foo`
+- [ ] `git push`
+- [ ] Check Travis build status (hopefully is working that date)
 - [ ] Update local distro fully with tlmgr
 - [ ] Run `build check` locally
-- [ ] `git push`
-- [ ] Check Travis build status
 - [ ] Install prerelease versions of `fontspec` and `latex3` and re-check
 - [ ] `git checkout master; git rebase working`
 - [ ] `build ctan`
