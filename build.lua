@@ -19,7 +19,7 @@ packtdszip = true
 recordstatus = true
 
 --[[
-     SETVERSION
+     TAGGING
 --]]
 
 changeslisting = nil
