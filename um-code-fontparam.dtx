@@ -289,7 +289,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_fontdimen_to_percent:nN
   {
-    \fp_eval:n { \dim_to_decimal:n { \fontdimen #1 #2 } * 65536 / 100 }
+    \fp_eval:n { \dim_to_decimal:n { 65536 \fontdimen #1 #2 } / 100 }
   }
 \cs_new:Nn \@@_fontdimen_to_scale:nN
   {
