@@ -3,7 +3,7 @@
 
 \usepackage{unicode-math}
 
-\setmathfont{xits-math.otf}
+\setmathfont{XITSMath-Regular.otf}
 \setmathfont[
     range={
       up/{latin}->sfup ,
@@ -11,7 +11,7 @@
       up/{Greek}->bfup ,
       it/{greek}->bfit ,
     }
-  ]{xits-math.otf}
+  ]{XITSMath-Regular.otf}
 
 \begin{document}
 

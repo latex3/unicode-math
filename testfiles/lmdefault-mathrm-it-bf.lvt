@@ -3,7 +3,7 @@
 
 \usepackage{amsmath}
 \usepackage{unicode-math}
-\setmathfont{xits-math.otf}
+\setmathfont{XITSMath-Regular.otf}
 
 \begin{document}
 \START

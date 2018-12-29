@@ -10,7 +10,7 @@
 \catcode`\:=11\relax
 \catcode`\@=11\relax
 
-\setmathfont{xits-math.otf}
+\setmathfont{XITSMath-Regular.otf}
 
 \TIMO
 \typeout{catcode of "\string _" - \the\catcode`\_}

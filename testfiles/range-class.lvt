@@ -3,7 +3,7 @@
 
 \usepackage{unicode-math}
 \setmathfont{texgyrepagella-math.otf}
-\setmathfont[range=\mathbin]{xits-math.otf}
+\setmathfont[range=\mathbin]{XITSMath-Regular.otf}
 
 \begin{document}
 \START

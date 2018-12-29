@@ -5,7 +5,7 @@
 \usepackage{unicode-math}
 
 \setmainfont{texgyrepagella-regular.otf}
-\setmathfont{xits-math.otf}
+\setmathfont{XITSMath-Regular.otf}
 
 \begin{document}
 

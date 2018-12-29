@@ -3,8 +3,8 @@
 
 \usepackage{unicode-math}
 \setmathfont{texgyrepagella-math.otf}
-\setmathfont[range="1D4B0,Color=990000]{xits-math.otf}
-\setmathfont[range=\therefore,Color=009900]{xits-math.otf}
+\setmathfont[range="1D4B0,Color=990000]{XITSMath-Regular.otf}
+\setmathfont[range=\therefore,Color=009900]{XITSMath-Regular.otf}
 
 \begin{document}
 \START

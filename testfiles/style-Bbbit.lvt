@@ -1,6 +1,6 @@
 \input{umtest-preamble}
 \usepackage{unicode-math}
-\setmathfont{xits-math.otf}
+\setmathfont{XITSMath-Regular.otf}
 \begin{document}
 
 \MSG{MATHBBIT}

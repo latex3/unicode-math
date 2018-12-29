@@ -3,8 +3,8 @@
 
 \usepackage{unicode-math}
 
-\setmathfont{xits-math.otf}
-\setmathfont{xits-math.otf}[range=cal,StylisticSet=1]
+\setmathfont{XITSMath-Regular.otf}
+\setmathfont{XITSMath-Regular.otf}[range=cal,StylisticSet=1]
 
 \begin{document}
 \START
