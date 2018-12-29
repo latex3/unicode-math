@@ -33,31 +33,36 @@
 \ExplSyntaxOn
 \cs_generate_variant:Nn \fontspec_set_fontface:NNnn {c}
 
-\def\defmathfont#1#2#3{
+\def\FINISH{}
+\newcount\Nfonts
+\def\defmathfont#1#2#3#4{
+  \Nfonts=\numexpr\Nfonts+1\relax
+  \tl_set:cn {L#1} {#4}
   \newcounter{#1}
   \setcounter{#1}{-1}
   \setmathfont[version=#1,SizeFeatures={
       {Size=-10, Colour=999999},
       {Size=10-, Colour=#3}}]{#2}
   \fontspec_set_fontface:cNnn {#1} \x {ItalicFont={},BoldFont={}} {#2}
+  \tl_gput_right:Nn \FINISH {
+    \refstepcounter{#1}\label{count:#1}
+  }
 }
 \ExplSyntaxOff
 
-\defmathfont{lm}{latinmodern-math.otf}{CC6666}
-\defmathfont{xits}{xits-math.otf}{CCCC66}
-\defmathfont{stix}{STIXMath-Regular.otf}{AA66CC}
-\defmathfont{cambria}{CambriaMath.ttf}{66CCCC}
-\defmathfont{asana}{Asana-Math.otf}{6666CC}
-\defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}
-\defmathfont{dejavu}{texgyredejavu-math.otf}{AACC66}
-\defmathfont{euler}{euler.otf}{CC66CC}
+\defmathfont{lm}{latinmodern-math.otf}{CC6666}{L}
+\defmathfont{xits}{XITSMath-Regular.otf}{6666CC}{X}
+\defmathfont{stix}{STIX2Math.otf}{66CC66}{S}
+\defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}{P}
+\defmathfont{dejavu}{texgyredejavu-math.otf}{AACC66}{D}
+\defmathfont{fira}{FiraMath-Regular.otf}{AA66CC}{F}
 
 \def\INPUT{\input{unicode-math-table.tex}}
 \def\TABLE{%
 \par\noindent
-\begin{longtabu}[l]{@{}lcccccccclX[l]@{}}
+\begin{longtabu}[l]{@{}l *{\Nfonts}{c} lX[l]@{}}
   \toprule
-  \textsc{usv} & M & X & S & C & A & P & D & E & Macro & Description \\
+  \textsc{usv} & \Llm & \Lxits & \Lstix & \Lpagella & \Ldejavu & \Lfira & Macro & Description \\
   \midrule \endhead
   \INPUT\\
   \bottomrule
@@ -87,11 +92,9 @@
       \SYMB{#2}{lm}{#1} &
       \SYMB{#2}{xits}{#1} &
       \SYMB{#2}{stix}{#1} &
-      \SYMB{#2}{cambria}{#1} &
-      \SYMB{#2}{asana}{#1} &
       \SYMB{#2}{pagella}{#1} &
       \SYMB{#2}{dejavu}{#1} &
-      \SYMB{#2}{euler}{#1} &
+      \SYMB{#2}{fira}{#1} &
       \CMD{#2}
       \tl_if_in:NnT \PLAIN {#2}
         {
@@ -153,7 +156,7 @@
 
 \begin{document}
 \MakeShortVerb\|
-\title{Every symbol (most symbols) defined by \textsf{unicode-math}}
+\title{Symbols defined by \textsf{unicode-math}}
 \author{Will Robertson}
 \maketitle
 
@@ -163,20 +166,18 @@ package.
 Use this document to find the command name or the Unicode glyph slot for a symbol that you wish to use.
 The following fonts are shown: (with approximate symbol counts)
 \begin{itemize}
-\item[M] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
-\item[X] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
-\item[S] \mathversion{stix} $\mathup{STIX\ Math}$ (\ref{count:stix})
-\item[C] \mathversion{cambria} $\mathup{Cambria\ Math}$ (\ref{count:cambria})
-\item[A] \mathversion{asana} $\mathup{Asana\ Math}$ (\ref{count:asana})
-\item[P] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
-\item[D] \mathversion{dejavu} $\mathup{DejaVu\ Math\ TeX\ Gyre}$ (\ref{count:dejavu})
-\item[E] \mathversion{euler} $\mathup{Neo\ Euler}$ (\ref{count:euler})
+\item[\Llm] \mathversion{lm} $\mathup{Latin\ Modern\ Math}$ (\ref{count:lm})
+\item[\Lxits] \mathversion{xits} $\mathup{XITS\ Math}$ (\ref{count:xits})
+\item[\Lstix] \mathversion{stix} $\mathup{STIX\ Math\ Two}$ (\ref{count:stix})
+\item[\Lpagella] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
+\item[\Ldejavu] \mathversion{dejavu} $\mathup{DejaVu\ Math\ TeX\ Gyre}$ (\ref{count:dejavu})
+\item[\Lfira] \mathversion{fira} $\mathup{Fira\ Math}$ (\ref{count:fira})
 \end{itemize}
-Note that there are addition maths fonts in the `\TeX\ Gyre' collection which aren't included here.
-
 Symbols defined in Plain \TeX\ are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (p)}} after their macro name.
-\LaTeX\ follows Plain \TeX, but defines a handful more, indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (l)}}
+\LaTeX\ follows Plain \TeX, but defines a handful more, indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (l)}}.
 Symbols defined in \textsf{amssymb} are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (a)}}.
+
+Note that this list of fonts is not intended to be exhaustive but I am happy to add new fonts by request if they are distributed in \TeX\ Live.\footnote{Only a single \TeX\ Gyre Math font is shown here by design as they all largely have the same symbol coverage.}
 
 \tableofcontents
 
@@ -444,14 +445,7 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \def\UnicodeMathSymbol#1#2#3#4{\PRINTLINE{#1}{#2}{#4}}
 \TABLE
 
-\refstepcounter{lm}\label{count:lm}
-\refstepcounter{xits}\label{count:xits}
-\refstepcounter{stix}\label{count:stix}
-\refstepcounter{cambria}\label{count:cambria}
-\refstepcounter{asana}\label{count:asana}
-\refstepcounter{pagella}\label{count:pagella}
-\refstepcounter{euler}\label{count:euler}
-\refstepcounter{dejavu}\label{count:dejavu}
+\FINISH
 
 \end{document}
 
