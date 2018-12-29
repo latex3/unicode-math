@@ -2,231 +2,231 @@ This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 NORMALSIZE
 > \box...=
-\hbox(8.68042+3.5903)x119.06667
+\hbox(8.67206+3.59006)x118.93292
 .\mathon
-.\hbox(8.59627+3.45006)x6.39003
-..\hbox(8.59627+3.45006)x6.39003
+.\hbox(8.58806+3.45006)x6.383
+..\hbox(8.58806+3.45006)x6.383
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.45006)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+...\vbox(8.58806+3.45006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 ....\kern1.24002
 ....\rule(0.4+0.0)x*
-....\kern1.02377
-....\hbox(4.72633+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#922
+....\kern1.0321
+....\hbox(4.718+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#922
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.45006)x6.39003
-..\hbox(8.59627+3.45006)x6.39003
+.\hbox(8.58806+3.45006)x6.383
+..\hbox(8.58806+3.45006)x6.383
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.45006)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+...\vbox(8.58806+3.45006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 ....\kern1.24002
 ....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1013
+....\kern1.10211
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1013
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.45006)x6.39003
-..\hbox(8.59627+3.45006)x6.39003
+.\hbox(8.58806+3.45006)x6.383
+..\hbox(8.58806+3.45006)x6.383
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.45006)x3.99004
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-....\kern1.09978
+...\vbox(8.58806+3.45006)x3.983
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+....\kern1.10002
 ....\rule(0.4+0.0)x*
-....\kern1.02377
-....\hbox(4.72633+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#922
+....\kern1.0321
+....\hbox(4.718+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#922
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.41808
-..\hbox(8.59627+3.5903)x6.41808
+.\hbox(8.58806+3.59006)x6.411
+..\hbox(8.58806+3.59006)x6.411
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x4.01808
-....\hbox(4.6562+0.0)x4.01808, glue set 0.01402fil
+...\vbox(8.58806+3.59006)x4.011
+....\hbox(4.648+0.0)x4.011, glue set 0.014fil
 .....\glue 0.0 plus 1.0fil minus 1.0fil
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-.....\glue 0.0 plus 1.0fil minus 1.0fil
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.00975
-....\hbox(4.74036+0.14024)x4.01808
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1000
-.....\kern0.02805
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#957
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x10.38007
-..\hbox(8.59627+3.5903)x10.38007
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x7.98007
-....\hbox(4.6562+0.0)x7.98007, glue set 1.99503fil
-.....\glue 0.0 plus 1.0fil minus 1.0fil
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 .....\glue 0.0 plus 1.0fil minus 1.0fil
 ....\kern1.24002
 ....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x7.98007
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1032
+....\kern1.01811
+....\hbox(4.732+0.14)x4.011
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1000
+.....\kern0.028
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 ....\kern1.24002
 ....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#957
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
+.\hbox(8.58806+3.59006)x10.366
+..\hbox(8.58806+3.59006)x10.366
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1013
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1013
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-....\kern1.09978
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.6664+3.5903)x6.39003
-..\hbox(8.6664+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.6664+3.5903)x3.99004
-....\hbox(4.72633+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#922
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1001
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-....\kern1.09978
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1001
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.0)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-....\kern1.24002
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-....\kern1.09978
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.59627+3.5903)x3.99004
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-....\kern1.09978
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x3.99004
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.68042+3.5903)x6.41808
-..\hbox(8.68042+3.5903)x6.41808
-...\hbox(0.0+0.0)x1.2, shifted -2.50005
-...\vbox(8.68042+3.5903)x4.01808
-....\hbox(4.74036+0.14024)x4.01808
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1000
-.....\kern0.02805
-....\kern1.09978
-....\rule(0.4+0.0)x*
-....\kern1.0939
-....\hbox(4.6562+0.14024)x4.01808, glue set 0.01402fil
+...\vbox(8.58806+3.59006)x7.966
+....\hbox(4.648+0.0)x7.966, glue set 1.9915fil
 .....\glue 0.0 plus 1.0fil minus 1.0fil
-.....\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x7.966
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1032
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1013
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1013
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+....\kern1.10002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.65807+3.59006)x6.383
+..\hbox(8.65807+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.65807+3.59006)x3.983
+....\hbox(4.718+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#922
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1001
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+....\kern1.10002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1001
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.0)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+....\kern1.24002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+....\kern1.10002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.58806+3.59006)x3.983
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+....\kern1.10002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x3.983
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.67206+3.59006)x6.411
+..\hbox(8.67206+3.59006)x6.411
+...\hbox(0.0+0.0)x1.2, shifted -2.50005
+...\vbox(8.67206+3.59006)x4.011
+....\hbox(4.732+0.14)x4.011
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1000
+.....\kern0.028
+....\kern1.10002
+....\rule(0.4+0.0)x*
+....\kern1.10211
+....\hbox(4.648+0.14)x4.011, glue set 0.014fil
+.....\glue 0.0 plus 1.0fil minus 1.0fil
+.....\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
 .....\glue 0.0 plus 1.0fil minus 1.0fil
 ...\hbox(0.0+0.0)x1.2, shifted -2.50005
 .\mathoff
@@ -236,249 +236,249 @@ NORMALSIZE
 l. ...\SHOWBOX{12}
 SMALL
 > \box...=
-\hbox(8.68042+3.5903)x119.06667
+\hbox(8.67206+3.59006)x118.93292
 .\mathon
-.\hbox(8.59627+3.45006)x6.39003
-..\hbox(8.59627+3.45006)x6.39003
-...\hbox(8.59627+3.45006)x6.39003
+.\hbox(8.58806+3.45006)x6.383
+..\hbox(8.58806+3.45006)x6.383
+...\hbox(8.58806+3.45006)x6.383
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.45006)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+....\vbox(8.58806+3.45006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 .....\kern1.24002
 .....\rule(0.4+0.0)x*
-.....\kern1.02377
-.....\hbox(4.72633+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#922
+.....\kern1.0321
+.....\hbox(4.718+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#922
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.45006)x6.39003
-..\hbox(8.59627+3.45006)x6.39003
-...\hbox(8.59627+3.45006)x6.39003
+.\hbox(8.58806+3.45006)x6.383
+..\hbox(8.58806+3.45006)x6.383
+...\hbox(8.58806+3.45006)x6.383
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.45006)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+....\vbox(8.58806+3.45006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 .....\kern1.24002
 .....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1013
+.....\kern1.10211
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1013
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.45006)x6.39003
-..\hbox(8.59627+3.45006)x6.39003
-...\hbox(8.59627+3.45006)x6.39003
+.\hbox(8.58806+3.45006)x6.383
+..\hbox(8.58806+3.45006)x6.383
+...\hbox(8.58806+3.45006)x6.383
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.45006)x3.99004
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-.....\kern1.09978
+....\vbox(8.58806+3.45006)x3.983
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+.....\kern1.10002
 .....\rule(0.4+0.0)x*
-.....\kern1.02377
-.....\hbox(4.72633+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#922
+.....\kern1.0321
+.....\hbox(4.718+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#922
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.41808
-..\hbox(8.59627+3.5903)x6.41808
-...\hbox(8.59627+3.5903)x6.41808
+.\hbox(8.58806+3.59006)x6.411
+..\hbox(8.58806+3.59006)x6.411
+...\hbox(8.58806+3.59006)x6.411
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x4.01808
-.....\hbox(4.6562+0.0)x4.01808, glue set 0.01402fil
+....\vbox(8.58806+3.59006)x4.011
+.....\hbox(4.648+0.0)x4.011, glue set 0.014fil
 ......\glue 0.0 plus 1.0fil minus 1.0fil
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-......\glue 0.0 plus 1.0fil minus 1.0fil
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.00975
-.....\hbox(4.74036+0.14024)x4.01808
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1000
-......\kern0.02805
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#957
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x10.38007
-..\hbox(8.59627+3.5903)x10.38007
-...\hbox(8.59627+3.5903)x10.38007
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x7.98007
-.....\hbox(4.6562+0.0)x7.98007, glue set 1.99503fil
-......\glue 0.0 plus 1.0fil minus 1.0fil
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 ......\glue 0.0 plus 1.0fil minus 1.0fil
 .....\kern1.24002
 .....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x7.98007
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1032
+.....\kern1.01811
+.....\hbox(4.732+0.14)x4.011
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1000
+......\kern0.028
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
 .....\kern1.24002
 .....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#957
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
+.\hbox(8.58806+3.59006)x10.366
+..\hbox(8.58806+3.59006)x10.366
+...\hbox(8.58806+3.59006)x10.366
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1013
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1013
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-.....\kern1.09978
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.6664+3.5903)x6.39003
-..\hbox(8.6664+3.5903)x6.39003
-...\hbox(8.6664+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.6664+3.5903)x3.99004
-.....\hbox(4.72633+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#922
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1001
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-.....\kern1.09978
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1001
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.0)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#966
-.....\kern1.24002
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1007
-.....\kern1.09978
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.59627+3.5903)x6.39003
-..\hbox(8.59627+3.5903)x6.39003
-...\hbox(8.59627+3.5903)x6.39003
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.59627+3.5903)x3.99004
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#920
-.....\kern1.09978
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x3.99004
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-.\hbox(8.68042+3.5903)x6.41808
-..\hbox(8.68042+3.5903)x6.41808
-...\hbox(8.68042+3.5903)x6.41808
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(8.68042+3.5903)x4.01808
-.....\hbox(4.74036+0.14024)x4.01808
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#1000
-......\kern0.02805
-.....\kern1.09978
-.....\rule(0.4+0.0)x*
-.....\kern1.0939
-.....\hbox(4.6562+0.14024)x4.01808, glue set 0.01402fil
+....\vbox(8.58806+3.59006)x7.966
+.....\hbox(4.648+0.0)x7.966, glue set 1.9915fil
 ......\glue 0.0 plus 1.0fil minus 1.0fil
-......\TU/latinmodern-math.otf(1)/m/n/7.01236 glyph#901
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+......\glue 0.0 plus 1.0fil minus 1.0fil
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x7.966
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1032
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1013
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1013
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+.....\kern1.10002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.65807+3.59006)x6.383
+..\hbox(8.65807+3.59006)x6.383
+...\hbox(8.65807+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.65807+3.59006)x3.983
+.....\hbox(4.718+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#922
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1001
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+.....\kern1.10002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1001
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.0)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#966
+.....\kern1.24002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1007
+.....\kern1.10002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.58806+3.59006)x6.383
+..\hbox(8.58806+3.59006)x6.383
+...\hbox(8.58806+3.59006)x6.383
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.58806+3.59006)x3.983
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#920
+.....\kern1.10002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x3.983
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+.\hbox(8.67206+3.59006)x6.411
+..\hbox(8.67206+3.59006)x6.411
+...\hbox(8.67206+3.59006)x6.411
+....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\vbox(8.67206+3.59006)x4.011
+.....\hbox(4.732+0.14)x4.011
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#1000
+......\kern0.028
+.....\kern1.10002
+.....\rule(0.4+0.0)x*
+.....\kern1.10211
+.....\hbox(4.648+0.14)x4.011, glue set 0.014fil
+......\glue 0.0 plus 1.0fil minus 1.0fil
+......\TU/latinmodern-math.otf(1)/m/n/7 glyph#901
 ......\glue 0.0 plus 1.0fil minus 1.0fil
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
 .\mathoff

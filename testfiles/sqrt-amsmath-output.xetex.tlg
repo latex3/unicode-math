@@ -21,20 +21,20 @@ SQRT x
 l. ...\SHOWBOX {12}
 SQRT x squared
 > \box...=
-\hbox(11.22626+0.87375)x16.83414
+\hbox(11.22433+0.87567)x16.831
 .\mathon
-.\hbox(11.22626+0.87375)x16.83414
-..\vbox(0.6+10.9)x7.03, shifted -10.02625
+.\hbox(11.22433+0.87567)x16.831
+..\vbox(0.6+10.9)x7.03, shifted -10.02432
 ...\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#4136
-..\vbox(11.22626+0.11)x9.80414
+..\vbox(11.22433+0.11)x9.801
 ...\kern0.6
 ...\rule(0.6+0.0)x*
-...\kern1.96376
-...\hbox(8.06248+0.11)x9.80414
+...\kern1.96567
+...\hbox(8.05865+0.11)x9.801
 ....\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#490
 ....\kern0.12
-....\hbox(5.10243+0.02222)x4.68414, shifted -2.96005
-.....\TU/texgyrepagella-math.otf(1)/m/n/7.40556 glyph#1245
+....\hbox(5.0986+0.0222)x4.681, shifted -2.96005
+.....\TU/texgyrepagella-math.otf(1)/m/n/7.4 glyph#1245
 .\mathoff
 ! OK.
 <to be read again> 
@@ -73,14 +73,14 @@ SQRT FRAC x y
 l. ...\SHOWBOX {12}
 SQRT n x
 > \box...=
-\hbox(7.80502+0.69499)x12.78397
+\hbox(7.80502+0.69499)x12.7805
 .\mathon
-.\hbox(7.80502+0.69499)x12.78397
+.\hbox(7.80502+0.69499)x12.7805
 ..\kern 0.0
 ..\kern 0.4
-..\hbox(2.65343+0.04955)x3.80397, shifted -3.91052
+..\hbox(2.651+0.0495)x3.8005, shifted -3.91052
 ...\mathon
-...\TU/texgyrepagella-math.otf(1)/m/n/5.50502 glyph#1434
+...\TU/texgyrepagella-math.otf(1)/m/n/5.5 glyph#1434
 ...\mathoff
 ..\kern -3.43999
 ..\kern 0.0
@@ -104,31 +104,31 @@ SQRT n x
 l. ...\SHOWBOX {12}
 SQRT n x squared
 > \box...=
-\hbox(11.22626+0.87375)x17.59811
+\hbox(11.22433+0.87567)x17.5915
 .\mathon
-.\hbox(11.22626+0.87375)x17.59811
+.\hbox(11.22433+0.87567)x17.5915
 ..\kern 0.0
 ..\kern 0.4
-..\hbox(2.65343+0.04955)x3.80397, shifted -5.69388
+..\hbox(2.651+0.0495)x3.8005, shifted -5.69177
 ...\mathon
-...\TU/texgyrepagella-math.otf(1)/m/n/5.50502 glyph#1434
+...\TU/texgyrepagella-math.otf(1)/m/n/5.5 glyph#1434
 ...\mathoff
 ..\kern -3.43999
 ..\kern 0.0
-..\hbox(11.22626+0.87375)x16.83414
+..\hbox(11.22433+0.87567)x16.831
 ...\mathon
-...\hbox(11.22626+0.87375)x16.83414
-....\vbox(0.6+10.9)x7.03, shifted -10.02625
+...\hbox(11.22433+0.87567)x16.831
+....\vbox(0.6+10.9)x7.03, shifted -10.02432
 .....\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#4136
-....\vbox(11.22626+0.11)x9.80414
+....\vbox(11.22433+0.11)x9.801
 .....\kern0.6
 .....\rule(0.6+0.0)x*
-.....\kern1.96376
-.....\hbox(8.06248+0.11)x9.80414
+.....\kern1.96567
+.....\hbox(8.05865+0.11)x9.801
 ......\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#490
 ......\kern0.12
-......\hbox(5.10243+0.02222)x4.68414, shifted -2.96005
-.......\TU/texgyrepagella-math.otf(1)/m/n/7.40556 glyph#1245
+......\hbox(5.0986+0.0222)x4.681, shifted -2.96005
+.......\TU/texgyrepagella-math.otf(1)/m/n/7.4 glyph#1245
 ...\mathoff
 .\mathoff
 ! OK.
@@ -137,14 +137,14 @@ SQRT n x squared
 l. ...\SHOWBOX {12}
 SQRT n FRAC x y
 > \box...=
-\hbox(15.75003+10.74998)x15.91397
+\hbox(15.75003+10.74998)x15.9105
 .\mathon
-.\hbox(15.75003+10.74998)x15.91397
+.\hbox(15.75003+10.74998)x15.9105
 ..\kern 0.0
 ..\kern 0.4
-..\hbox(2.65343+0.04955)x3.80397, shifted -2.75003
+..\hbox(2.651+0.0495)x3.8005, shifted -2.75003
 ...\mathon
-...\TU/texgyrepagella-math.otf(1)/m/n/5.50502 glyph#1434
+...\TU/texgyrepagella-math.otf(1)/m/n/5.5 glyph#1434
 ...\mathoff
 ..\kern -3.43999
 ..\kern 0.0
