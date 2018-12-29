@@ -3,39 +3,39 @@ Don't change this file in any respect.
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 glyph#2498
-.\TU/xits-math.otf(1)/m/n/10 glyph#2499
-.\TU/xits-math.otf(1)/m/n/10 glyph#2500
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2498
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2499
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2500
 .\kern0.5
-.\TU/xits-math.otf(1)/m/n/10 glyph#2501
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2501
 .\kern0.6
-.\TU/xits-math.otf(1)/m/n/10 glyph#2502
-.\TU/xits-math.otf(1)/m/n/10 glyph#2503
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2502
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2503
 .\kern1.2
-.\TU/xits-math.otf(1)/m/n/10 glyph#2504
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2504
 .\kern0.4
-.\TU/xits-math.otf(1)/m/n/10 glyph#965
-.\TU/xits-math.otf(1)/m/n/10 glyph#2505
-.\TU/xits-math.otf(1)/m/n/10 glyph#2506
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#965
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2505
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2506
 .\kern0.6
-.\TU/xits-math.otf(1)/m/n/10 glyph#2507
-.\TU/xits-math.otf(1)/m/n/10 glyph#2508
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2507
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2508
 .\kern0.2
-.\TU/xits-math.otf(1)/m/n/10 glyph#2509
-.\TU/xits-math.otf(1)/m/n/10 glyph#2510
-.\TU/xits-math.otf(1)/m/n/10 glyph#2511
-.\TU/xits-math.otf(1)/m/n/10 glyph#2512
-.\TU/xits-math.otf(1)/m/n/10 glyph#2513
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2509
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2510
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2511
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2512
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2513
 .\kern0.4
-.\TU/xits-math.otf(1)/m/n/10 glyph#2514
-.\TU/xits-math.otf(1)/m/n/10 glyph#2515
-.\TU/xits-math.otf(1)/m/n/10 glyph#2516
-.\TU/xits-math.otf(1)/m/n/10 glyph#2517
-.\TU/xits-math.otf(1)/m/n/10 glyph#2518
-.\TU/xits-math.otf(1)/m/n/10 glyph#2519
-.\TU/xits-math.otf(1)/m/n/10 glyph#2520
-.\TU/xits-math.otf(1)/m/n/10 glyph#2521
-.\TU/xits-math.otf(1)/m/n/10 glyph#2522
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2514
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2515
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2516
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2517
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2518
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2519
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2520
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2521
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2522
 .\mathoff
 ! OK.
 <to be read again> 
@@ -93,9 +93,9 @@ l. ...\TESTBOX{$\LATINtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 glyph#2864
-.\TU/xits-math.otf(1)/m/n/10 glyph#2865
-.\TU/xits-math.otf(1)/m/n/10 glyph#2866
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2864
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2865
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2866
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#2328
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#2329
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#2330
@@ -108,18 +108,18 @@ l. ...\TESTBOX{$\LATINtext$}
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#2336
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#2337
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#2338
-.\TU/xits-math.otf(1)/m/n/10 glyph#2878
-.\TU/xits-math.otf(1)/m/n/10 glyph#2879
-.\TU/xits-math.otf(1)/m/n/10 glyph#2880
-.\TU/xits-math.otf(1)/m/n/10 glyph#2881
-.\TU/xits-math.otf(1)/m/n/10 glyph#2882
-.\TU/xits-math.otf(1)/m/n/10 glyph#2883
-.\TU/xits-math.otf(1)/m/n/10 glyph#2884
-.\TU/xits-math.otf(1)/m/n/10 glyph#2885
-.\TU/xits-math.otf(1)/m/n/10 glyph#2886
-.\TU/xits-math.otf(1)/m/n/10 glyph#2887
-.\TU/xits-math.otf(1)/m/n/10 glyph#2888
-.\TU/xits-math.otf(1)/m/n/10 glyph#2889
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2878
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2879
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2880
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2881
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2882
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2883
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2884
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2885
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2886
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2887
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2888
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2889
 .\mathoff
 ! OK.
 <to be read again> 

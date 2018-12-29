@@ -13,7 +13,7 @@ l. ...\TESTBOX{$\symscr{A}$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2587
+.\TU/XITSMath-Regular.otf(0)/m/n/10 glyph#2587
 .\kern0.95
 .\mathoff
 ! OK.
@@ -33,7 +33,7 @@ l. ...\TESTBOX{$\mscrA$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/xits-math.otf(0)/m/n/10 glyph#2587
+.\TU/XITSMath-Regular.otf(0)/m/n/10 glyph#2587
 .\kern0.95
 .\mathoff
 ! OK.
@@ -43,7 +43,7 @@ l. ...\TESTBOX{$\mscrU$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 glyph#1185
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#1185
 .\mathoff
 ! OK.
 <to be read again> 

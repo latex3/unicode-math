@@ -9,10 +9,10 @@ Don't change this file in any respect.
 .\mathoff
 .\glue 3.33 plus 1.665 minus 1.11
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 glyph#2472
-.\TU/xits-math.otf(1)/m/n/10 glyph#2473
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2472
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2473
 .\kern0.4
-.\TU/xits-math.otf(1)/m/n/10 glyph#2474
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2474
 .\kern0.8
 .\mathoff
 ! OK.
@@ -45,12 +45,12 @@ l. ...\TESTBOX{$\Alpha\Beta\Gamma$}
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 glyph#94
-.\TU/xits-math.otf(1)/m/n/10 glyph#44
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#94
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#44
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(1)/m/n/10 glyph#62
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#62
 .\glue(\thickmuskip) 2.77779 plus 2.77779
-.\TU/xits-math.otf(1)/m/n/10 glyph#92
+.\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#92
 .\mathoff
 ! OK.
 <to be read again> 
