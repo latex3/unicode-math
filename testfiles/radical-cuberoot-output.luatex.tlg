@@ -6,13 +6,13 @@ SQRT x
 .\mathon
 .\hbox(10.23997+2.74)x14.78, direction TLT
 ..\hbox(9.73+2.59)x9.28, shifted 0.15001, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 ∛
+...\TU/XITSMath-Regular.otf(1)/m/n/10 ∛
 ..\vbox(10.23997+0.09)x5.5, direction TLT
 ...\kern0.65999 (font)
 ...\rule(0.65999+0.0)x*
 ...\kern4.51 (font)
 ...\hbox(4.41+0.09)x5.5, direction TLT
-....\TU/xits-math.otf(1)/m/n/10 𝑥
+....\TU/XITSMath-Regular.otf(1)/m/n/10 𝑥
 .\mathoff
 ! OK.
 <to be read again> 
@@ -20,19 +20,19 @@ SQRT x
 l. ...\SHOWBOX {12}
 SQRT x squared
 > \box...=
-\hbox(11.93518+1.0448)x18.92554, direction TLT
+\hbox(11.94495+1.03503)x18.93999, direction TLT
 .\mathon
-.\hbox(11.93518+1.0448)x18.92554, direction TLT
-..\hbox(9.73+2.59)x9.28, shifted -1.5452, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 ∛
-..\vbox(11.93518+0.09)x9.64554, direction TLT
+.\hbox(11.94495+1.03503)x18.93999, direction TLT
+..\hbox(9.73+2.59)x9.28, shifted -1.55496, direction TLT
+...\TU/XITSMath-Regular.otf(1)/m/n/10 ∛
+..\vbox(11.94495+0.09)x9.65999, direction TLT
 ...\kern0.65999 (font)
 ...\rule(0.65999+0.0)x*
-...\kern2.81479 (font)
-...\hbox(7.80042+0.09)x9.64554, direction TLT
-....\TU/xits-math.otf(1)/m/n/10 𝑥
-....\hbox(5.05046+0.0)x4.14554, shifted -2.74995, direction TLT
-.....\TU/xits-math.otf(1)/m/n/7.4711 2
+...\kern2.80501 (font)
+...\hbox(7.81996+0.09)x9.65999, direction TLT
+....\TU/XITSMath-Regular.otf(1)/m/n/10 𝑥
+....\hbox(5.07+0.0)x4.15999, shifted -2.74995, direction TLT
+.....\TU/XITSMath-Regular.otf(1)/m/n/7.5 2
 .\mathoff
 ! OK.
 <to be read again> 
@@ -44,7 +44,7 @@ SQRT FRAC x y
 .\mathon
 .\hbox(14.90997+10.35)x19.14, direction TLT
 ..\hbox(20.56+4.04)x11.24, shifted 6.31001, direction TLT
-...\TU/xits-math.otf(1)/m/n/10 󰂐
+...\TU/XITSMath-Regular.otf(1)/m/n/10 󰂐
 ..\vbox(14.90997+8.8299)x7.9, direction TLT
 ...\kern0.65999 (font)
 ...\rule(0.65999+0.0)x*
@@ -53,13 +53,13 @@ SQRT FRAC x y
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
 ....\vbox(10.20992+8.8299)x5.5, direction TLT
 .....\hbox(4.41+0.09)x5.5, direction TLT
-......\TU/xits-math.otf(1)/m/n/10 𝑥
+......\TU/XITSMath-Regular.otf(1)/m/n/10 𝑥
 .....\kern2.87994 (font)
 .....\rule(0.65999+0.0)x*
 .....\kern4.76987 (font)
 .....\hbox(4.4+1.83)x5.5, glue set 0.27fil, direction TLT
 ......\glue 0.0 plus 1.0fil minus 1.0fil
-......\TU/xits-math.otf(1)/m/n/10 𝑦
+......\TU/XITSMath-Regular.otf(1)/m/n/10 𝑦
 ......\glue 0.0 plus 1.0fil minus 1.0fil
 ....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
 .\mathoff

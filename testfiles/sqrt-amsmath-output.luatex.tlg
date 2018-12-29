@@ -20,20 +20,20 @@ SQRT x
 l. ...\SHOWBOX {12}
 SQRT x squared
 > \box...=
-\hbox(11.82617+0.87381)x16.73413, direction TLT
+\hbox(11.82425+0.87573)x16.73099, direction TLT
 .\mathon
-.\hbox(11.82617+0.87381)x16.73413, direction TLT
-..\hbox(8.4+3.1)x7.03, shifted -2.2262, direction TLT
+.\hbox(11.82425+0.87573)x16.73099, direction TLT
+..\hbox(8.4+3.1)x7.03, shifted -2.22427, direction TLT
 ...\TU/texgyrepagella-math.otf(1)/m/n/10 󰠏
-..\vbox(11.82617+0.11)x9.70413, direction TLT
+..\vbox(11.82425+0.11)x9.70099, direction TLT
 ...\kern1.19998 (font)
 ...\rule(0.59999+0.0)x*
-...\kern1.9638 (font)
-...\hbox(8.0624+0.11)x9.70413, direction TLT
+...\kern1.96571 (font)
+...\hbox(8.05856+0.11)x9.70099, direction TLT
 ....\TU/texgyrepagella-math.otf(1)/m/n/10 𝑥
 ....\kern0.12 (italic)
-....\hbox(5.10243+0.02222)x4.58414, shifted -2.95996, direction TLT
-.....\TU/texgyrepagella-math.otf(1)/m/n/7.40556 2
+....\hbox(5.0986+0.0222)x4.581, shifted -2.95996, direction TLT
+.....\TU/texgyrepagella-math.otf(1)/m/n/7.4 2
 .\mathoff
 ! OK.
 <to be read again> 
@@ -68,13 +68,13 @@ SQRT FRAC x y
 l. ...\SHOWBOX {12}
 SQRT n x
 > \box...=
-\hbox(8.40498+0.695)x12.66402, direction TLT
+\hbox(8.40498+0.695)x12.66055, direction TLT
 .\mathon
-.\hbox(8.40498+0.695)x12.66402, direction TLT
-..\hbox(8.40498+0.695)x12.66402, direction TLT
+.\hbox(8.40498+0.695)x12.66055, direction TLT
+..\hbox(8.40498+0.695)x12.66055, direction TLT
 ...\kern0.4 (font)
-...\hbox(2.65343+0.04955)x3.80397, shifted -3.65, direction TLT
-....\TU/texgyrepagella-math.otf(1)/m/n/5.50502 𝑛
+...\hbox(2.651+0.0495)x3.8005, shifted -3.65, direction TLT
+....\TU/texgyrepagella-math.otf(1)/m/n/5.5 𝑛
 ...\kern-3.43994 (font)
 ...\hbox(6.6+1.3)x6.9, shifted -0.605, direction TLT
 ....\TU/texgyrepagella-math.otf(1)/m/n/10 √
@@ -91,25 +91,25 @@ SQRT n x
 l. ...\SHOWBOX {12}
 SQRT n x squared
 > \box...=
-\hbox(11.82617+0.87381)x17.49815, direction TLT
+\hbox(11.82425+0.87573)x17.49155, direction TLT
 .\mathon
-.\hbox(11.82617+0.87381)x17.49815, direction TLT
-..\hbox(11.82617+0.87381)x17.49815, direction TLT
+.\hbox(11.82425+0.87573)x17.49155, direction TLT
+..\hbox(11.82425+0.87573)x17.49155, direction TLT
 ...\kern0.4 (font)
-...\hbox(2.65343+0.04955)x3.80397, shifted -5.45119, direction TLT
-....\TU/texgyrepagella-math.otf(1)/m/n/5.50502 𝑛
+...\hbox(2.651+0.0495)x3.8005, shifted -5.44926, direction TLT
+....\TU/texgyrepagella-math.otf(1)/m/n/5.5 𝑛
 ...\kern-3.43994 (font)
-...\hbox(8.4+3.1)x7.03, shifted -2.2262, direction TLT
+...\hbox(8.4+3.1)x7.03, shifted -2.22427, direction TLT
 ....\TU/texgyrepagella-math.otf(1)/m/n/10 󰠏
-...\vbox(11.82617+0.11)x9.70413, direction TLT
+...\vbox(11.82425+0.11)x9.70099, direction TLT
 ....\kern1.19998 (font)
 ....\rule(0.59999+0.0)x*
-....\kern1.9638 (font)
-....\hbox(8.0624+0.11)x9.70413, direction TLT
+....\kern1.96571 (font)
+....\hbox(8.05856+0.11)x9.70099, direction TLT
 .....\TU/texgyrepagella-math.otf(1)/m/n/10 𝑥
 .....\kern0.12 (italic)
-.....\hbox(5.10243+0.02222)x4.58414, shifted -2.95996, direction TLT
-......\TU/texgyrepagella-math.otf(1)/m/n/7.40556 2
+.....\hbox(5.0986+0.0222)x4.581, shifted -2.95996, direction TLT
+......\TU/texgyrepagella-math.otf(1)/m/n/7.4 2
 .\mathoff
 ! OK.
 <to be read again> 
@@ -117,13 +117,13 @@ SQRT n x squared
 l. ...\SHOWBOX {12}
 SQRT n FRAC x y
 > \box...=
-\hbox(16.34998+10.75002)x15.73402, direction TLT
+\hbox(16.34998+10.75002)x15.73056, direction TLT
 .\mathon
-.\hbox(16.34998+10.75002)x15.73402, direction TLT
-..\hbox(16.34998+10.75002)x15.73402, direction TLT
+.\hbox(16.34998+10.75002)x15.73056, direction TLT
+..\hbox(16.34998+10.75002)x15.73056, direction TLT
 ...\kern0.4 (font)
-...\hbox(2.65343+0.04955)x3.80397, shifted -3.49498, direction TLT
-....\TU/texgyrepagella-math.otf(1)/m/n/5.50502 𝑛
+...\hbox(2.651+0.0495)x3.8005, shifted -3.49498, direction TLT
+....\TU/texgyrepagella-math.otf(1)/m/n/5.5 𝑛
 ...\kern-3.43994 (font)
 ...\hbox(15.6+10.3)x7.57, shifted 0.45001, direction TLT
 ....\TU/texgyrepagella-math.otf(1)/m/n/10 󰠿

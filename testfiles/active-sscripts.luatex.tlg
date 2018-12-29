@@ -1,327 +1,327 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \box...=
-\hbox(4.42+2.6102)x18.2501, direction TLT
+\hbox(4.42+2.60995)x18.229, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.6562+0.14024)x12.5301, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 0
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 2
+.\hbox(4.648+0.14)x12.509, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 0
+..\TU/latinmodern-math.otf(1)/m/n/7 1
+..\TU/latinmodern-math.otf(1)/m/n/7 2
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₀₁₂$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.2501, direction TLT
+\hbox(4.42+2.60995)x18.229, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.6562+0.14024)x12.5301, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 1
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 3
+.\hbox(4.648+0.14)x12.509, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 1
+..\TU/latinmodern-math.otf(1)/m/n/7 2
+..\TU/latinmodern-math.otf(1)/m/n/7 3
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₁₂₃$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.2501, direction TLT
+\hbox(4.42+2.60995)x18.229, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.72633+0.14024)x12.5301, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 4
+.\hbox(4.718+0.14)x12.509, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 2
+..\TU/latinmodern-math.otf(1)/m/n/7 3
+..\TU/latinmodern-math.otf(1)/m/n/7 4
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₂₃₄$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.2501, direction TLT
+\hbox(4.42+2.60995)x18.229, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.72633+0.14024)x12.5301, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 4
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 5
+.\hbox(4.718+0.14)x12.509, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 3
+..\TU/latinmodern-math.otf(1)/m/n/7 4
+..\TU/latinmodern-math.otf(1)/m/n/7 5
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₃₄₅$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.2501, direction TLT
+\hbox(4.42+2.60995)x18.229, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.72633+0.14024)x12.5301, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 4
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 5
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 6
+.\hbox(4.718+0.14)x12.509, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 4
+..\TU/latinmodern-math.otf(1)/m/n/7 5
+..\TU/latinmodern-math.otf(1)/m/n/7 6
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₄₅₆$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.2501, direction TLT
+\hbox(4.42+2.60995)x18.229, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.74036+0.14024)x12.5301, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 5
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 6
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 7
+.\hbox(4.732+0.14)x12.509, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 5
+..\TU/latinmodern-math.otf(1)/m/n/7 6
+..\TU/latinmodern-math.otf(1)/m/n/7 7
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₅₆₇$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.27815, direction TLT
+\hbox(4.42+2.60995)x18.257, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.74036+0.14024)x12.55815, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 6
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 7
-..\kern0.02805 (italic)
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 8
+.\hbox(4.732+0.14)x12.537, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 6
+..\TU/latinmodern-math.otf(1)/m/n/7 7
+..\kern0.028 (italic)
+..\TU/latinmodern-math.otf(1)/m/n/7 8
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₆₇₈$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.27815, direction TLT
+\hbox(4.42+2.60995)x18.257, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.74036+0.14024)x12.55815, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 7
-..\kern0.02805 (italic)
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 8
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 9
+.\hbox(4.732+0.14)x12.537, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 7
+..\kern0.028 (italic)
+..\TU/latinmodern-math.otf(1)/m/n/7 8
+..\TU/latinmodern-math.otf(1)/m/n/7 9
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₇₈₉$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+3.05199)x19.71568, direction TLT
+\hbox(4.42+3.05095)x19.692, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.6562+0.58203)x13.99568, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 8
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 9
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 +
+.\hbox(4.648+0.581)x13.972, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 8
+..\TU/latinmodern-math.otf(1)/m/n/7 9
+..\TU/latinmodern-math.otf(1)/m/n/7 +
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₈₉₊$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+3.05199)x21.18126, direction TLT
+\hbox(4.42+3.05095)x21.155, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.6562+0.58203)x15.46126, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 9
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 +
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 −
+.\hbox(4.648+0.581)x15.435, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 9
+..\TU/latinmodern-math.otf(1)/m/n/7 +
+..\TU/latinmodern-math.otf(1)/m/n/7 −
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₉₊₋$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+4.20901)x19.91904, direction TLT
+\hbox(4.42+4.20595)x19.895, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x14.19904, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 +
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 −
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 (
+.\hbox(5.236+1.736)x14.175, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 +
+..\TU/latinmodern-math.otf(1)/m/n/7 −
+..\TU/latinmodern-math.otf(1)/m/n/7 (
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₊₋₍$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+4.20901)x19.91904, direction TLT
+\hbox(4.42+4.20595)x19.895, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x14.19904, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 −
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 (
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 =
+.\hbox(5.236+1.736)x14.175, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 −
+..\TU/latinmodern-math.otf(1)/m/n/7 (
+..\TU/latinmodern-math.otf(1)/m/n/7 =
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₋₍₌$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+4.20901)x17.19124, direction TLT
+\hbox(4.42+4.20595)x17.17201, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x11.47124, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 (
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 =
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 )
+.\hbox(5.236+1.736)x11.45201, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 (
+..\TU/latinmodern-math.otf(1)/m/n/7 =
+..\TU/latinmodern-math.otf(1)/m/n/7 )
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₍₌₎$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+4.20901)x18.81108, direction TLT
+\hbox(4.42+4.20595)x18.789, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x13.09108, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 =
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 )
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑎
+.\hbox(5.236+1.736)x13.069, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 =
+..\TU/latinmodern-math.otf(1)/m/n/7 )
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑎
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₌₎ₐ$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+4.20901)x17.15617, direction TLT
+\hbox(4.42+4.20595)x17.13701, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x11.43617, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 )
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑎
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑒
+.\hbox(5.236+1.736)x11.417, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 )
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑎
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑒
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x₎ₐₑ$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.54008)x18.38333, direction TLT
+\hbox(4.42+2.53996)x18.362, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(3.09245+0.07013)x12.66333, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑎
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑒
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑜
+.\hbox(3.087+0.07)x12.642, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑎
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑒
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑜
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$xₐₑₒ$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.54008)x18.57968, direction TLT
+\hbox(4.42+2.53996)x18.558, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(3.09245+0.07013)x12.85968, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑒
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑜
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑥
+.\hbox(3.087+0.07)x12.838, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑒
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑜
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑥
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$xₑₒₓ$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.76901, direction TLT
+\hbox(4.42+2.60995)x18.747, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.6562+0.14024)x13.04901, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑜
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑥
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 0
+.\hbox(4.648+0.14)x13.027, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑜
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑥
+..\TU/latinmodern-math.otf(1)/m/n/7 0
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$xₒₓ₀$}\SHOWBOX{12}
 > \box...=
-\hbox(4.42+2.6102)x18.80408, direction TLT
+\hbox(4.42+2.60995)x18.782, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.6562+0.14024)x13.08408, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑥
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 0
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 1
+.\hbox(4.648+0.14)x13.062, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑥
+..\TU/latinmodern-math.otf(1)/m/n/7 0
+..\TU/latinmodern-math.otf(1)/m/n/7 1
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$xₓ₀₁$}\SHOWBOX{12}
 > \box...=
-\hbox(8.87518+0.11)x30.22722, direction TLT
+\hbox(8.86594+0.11)x30.18501, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x24.50722, shifted -3.62994, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 0
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑖
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 +
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 )
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑛
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 2
+.\hbox(5.236+1.736)x24.46501, shifted -3.62994, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 0
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑖
+..\TU/latinmodern-math.otf(1)/m/n/7 +
+..\TU/latinmodern-math.otf(1)/m/n/7 )
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑛
+..\TU/latinmodern-math.otf(1)/m/n/7 2
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ......ox12=\hbox{$x⁰ⁱ⁺⁾ⁿ^^b2$}\SHOWBOX{12}
 > \box...=
-\hbox(8.87518+0.11)x26.23718, direction TLT
+\hbox(8.86594+0.11)x26.20201, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x20.51718, shifted -3.62994, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑖
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 +
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 )
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑛
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 2
+.\hbox(5.236+1.736)x20.48201, shifted -3.62994, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑖
+..\TU/latinmodern-math.otf(1)/m/n/7 +
+..\TU/latinmodern-math.otf(1)/m/n/7 )
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑛
+..\TU/latinmodern-math.otf(1)/m/n/7 2
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$xⁱ⁺⁾ⁿ^^b2$}\SHOWBOX{12}
 > \box...=
-\hbox(8.28615+0.11)x15.22076, direction TLT
+\hbox(8.27794+0.11)x15.205, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(4.6562+0.07013)x9.50076, shifted -3.62994, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑛
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 2
+.\hbox(4.648+0.07)x9.485, shifted -3.62994, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑛
+..\TU/latinmodern-math.otf(1)/m/n/7 2
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$xⁿ^^b2$}\SHOWBOX{12}
 > \box...=
-\hbox(8.87518+0.11)x26.23718, direction TLT
+\hbox(8.86594+0.11)x26.20201, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\hbox(5.24524+1.73906)x20.51718, shifted -3.62994, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑖
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 +
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 )
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑛
+.\hbox(5.236+1.736)x20.48201, shifted -3.62994, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 2
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑖
+..\TU/latinmodern-math.otf(1)/m/n/7 +
+..\TU/latinmodern-math.otf(1)/m/n/7 )
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑛
 .\mathoff
 ! OK.
 <to be read again> 
 \relax 
 l. ...\setbox12=\hbox{$x^^b2ⁱ⁺⁾ⁿ$}\SHOWBOX{12}
 > \box...=
-\hbox(10.42424+3.02661)x26.23718, direction TLT
+\hbox(10.41193+3.01804)x26.20201, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
-.\vbox(13.31061+0.14024)x20.51718, shifted 2.88637, direction TLT
-..\hbox(5.24524+1.73906)x20.51718, direction TLT
-...\TU/latinmodern-math.otf(1)/m/n/7.01236 2
-...\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑖
-...\TU/latinmodern-math.otf(1)/m/n/7.01236 +
-...\TU/latinmodern-math.otf(1)/m/n/7.01236 )
-...\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑛
+.\vbox(13.28996+0.14)x20.48201, shifted 2.87804, direction TLT
+..\hbox(5.236+1.736)x20.48201, direction TLT
+...\TU/latinmodern-math.otf(1)/m/n/7 2
+...\TU/latinmodern-math.otf(1)/m/n/7 𝑖
+...\TU/latinmodern-math.otf(1)/m/n/7 +
+...\TU/latinmodern-math.otf(1)/m/n/7 )
+...\TU/latinmodern-math.otf(1)/m/n/7 𝑛
 ..\kern1.59998 (font)
-..\hbox(4.72633+0.14024)x8.54007, direction TLT
-...\TU/latinmodern-math.otf(1)/m/n/7.01236 3
-...\TU/latinmodern-math.otf(1)/m/n/7.01236 4
+..\hbox(4.718+0.14)x8.526, direction TLT
+...\TU/latinmodern-math.otf(1)/m/n/7 3
+...\TU/latinmodern-math.otf(1)/m/n/7 4
 .\mathoff
 ! OK.
 <to be read again> 

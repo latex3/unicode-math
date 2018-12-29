@@ -3,39 +3,39 @@ Don't change this file in any respect.
 > \box...=
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝑎
-.\TU/xits-math.otf(1)/m/n/10 𝑏
-.\TU/xits-math.otf(1)/m/n/10 𝑐
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑎
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑏
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑐
 .\kern0.5 (italic)
-.\TU/xits-math.otf(1)/m/n/10 𝑑
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑑
 .\kern0.6 (italic)
-.\TU/xits-math.otf(1)/m/n/10 𝑒
-.\TU/xits-math.otf(1)/m/n/10 𝑓
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑒
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑓
 .\kern1.2 (italic)
-.\TU/xits-math.otf(1)/m/n/10 𝑔
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑔
 .\kern0.4 (italic)
-.\TU/xits-math.otf(1)/m/n/10 ℎ
-.\TU/xits-math.otf(1)/m/n/10 𝑖
-.\TU/xits-math.otf(1)/m/n/10 𝑗
+.\TU/XITSMath-Regular.otf(1)/m/n/10 ℎ
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑖
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑗
 .\kern0.6 (italic)
-.\TU/xits-math.otf(1)/m/n/10 𝑘
-.\TU/xits-math.otf(1)/m/n/10 𝑙
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑘
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑙
 .\kern0.2 (italic)
-.\TU/xits-math.otf(1)/m/n/10 𝑚
-.\TU/xits-math.otf(1)/m/n/10 𝑛
-.\TU/xits-math.otf(1)/m/n/10 𝑜
-.\TU/xits-math.otf(1)/m/n/10 𝑝
-.\TU/xits-math.otf(1)/m/n/10 𝑞
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑚
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑛
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑜
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑝
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑞
 .\kern0.4 (italic)
-.\TU/xits-math.otf(1)/m/n/10 𝑟
-.\TU/xits-math.otf(1)/m/n/10 𝑠
-.\TU/xits-math.otf(1)/m/n/10 𝑡
-.\TU/xits-math.otf(1)/m/n/10 𝑢
-.\TU/xits-math.otf(1)/m/n/10 𝑣
-.\TU/xits-math.otf(1)/m/n/10 𝑤
-.\TU/xits-math.otf(1)/m/n/10 𝑥
-.\TU/xits-math.otf(1)/m/n/10 𝑦
-.\TU/xits-math.otf(1)/m/n/10 𝑧
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑟
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑠
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑡
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑢
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑣
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑤
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑥
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑦
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝑧
 .\mathoff
 ! OK.
 <to be read again> 
@@ -93,9 +93,9 @@ l. ...\TESTBOX{$\LATINtext$}
 > \box...=
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝗔
-.\TU/xits-math.otf(1)/m/n/10 𝗕
-.\TU/xits-math.otf(1)/m/n/10 𝗖
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗔
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗕
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗖
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗗
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗘
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗙
@@ -108,18 +108,18 @@ l. ...\TESTBOX{$\LATINtext$}
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗟
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗠
 .\TU/texgyrepagella-math.otf(0)/m/n/10 𝗡
-.\TU/xits-math.otf(1)/m/n/10 𝗢
-.\TU/xits-math.otf(1)/m/n/10 𝗣
-.\TU/xits-math.otf(1)/m/n/10 𝗤
-.\TU/xits-math.otf(1)/m/n/10 𝗥
-.\TU/xits-math.otf(1)/m/n/10 𝗦
-.\TU/xits-math.otf(1)/m/n/10 𝗧
-.\TU/xits-math.otf(1)/m/n/10 𝗨
-.\TU/xits-math.otf(1)/m/n/10 𝗩
-.\TU/xits-math.otf(1)/m/n/10 𝗪
-.\TU/xits-math.otf(1)/m/n/10 𝗫
-.\TU/xits-math.otf(1)/m/n/10 𝗬
-.\TU/xits-math.otf(1)/m/n/10 𝗭
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗢
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗣
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗤
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗥
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗦
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗧
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗨
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗩
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗪
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗫
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗬
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝗭
 .\mathoff
 ! OK.
 <to be read again> 

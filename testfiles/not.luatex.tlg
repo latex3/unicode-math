@@ -21,18 +21,18 @@ macro
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 (
 .\TU/latinmodern-math.otf(1)/m/n/10 ⊀
-.\hbox(3.09245+0.07013)x4.90765, shifted 2.46996, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑎
+.\hbox(3.087+0.07)x4.9, shifted 2.46996, direction TLT
+..\TU/latinmodern-math.otf(1)/m/n/7 𝑎
 .\TU/latinmodern-math.otf(1)/m/n/10 )
 .\TU/latinmodern-math.otf(1)/m/n/10 (
-.\vbox(7.5+2.54008)x12.68765, direction TLT
+.\vbox(7.5+2.53996)x12.68, direction TLT
 ..\hbox(7.5+2.5)x0.0, shifted 6.52, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/10 ̸
 ..\kern-7.97 (font)
-..\hbox(5.47+2.54008)x12.68765, direction TLT
+..\hbox(5.47+2.53996)x12.68, direction TLT
 ...\TU/latinmodern-math.otf(1)/m/n/10 ≺
-...\hbox(3.09245+0.07013)x4.90765, shifted 2.46996, direction TLT
-....\TU/latinmodern-math.otf(1)/m/n/7.01236 𝑎
+...\hbox(3.087+0.07)x4.9, shifted 2.46996, direction TLT
+....\TU/latinmodern-math.otf(1)/m/n/7 𝑎
 .\TU/latinmodern-math.otf(1)/m/n/10 )
 .\mathoff
 ! OK.

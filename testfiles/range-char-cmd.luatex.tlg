@@ -13,7 +13,7 @@ l. ...\TESTBOX{$\symscr{A}$}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0.6 0 0 rg}
-.\TU/xits-math.otf(0)/m/n/10 𝒰
+.\TU/XITSMath-Regular.otf(0)/m/n/10 𝒰
 .\mathoff
 .\pdfcolorstack 0 pop
 ! OK.
@@ -33,7 +33,7 @@ l. ...\TESTBOX{$\mscrA$}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0.6 0 0 rg}
-.\TU/xits-math.otf(0)/m/n/10 𝒰
+.\TU/XITSMath-Regular.otf(0)/m/n/10 𝒰
 .\mathoff
 .\pdfcolorstack 0 pop
 ! OK.
@@ -44,7 +44,7 @@ l. ...\TESTBOX{$\mscrU$}
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0 0.6 0 rg}
-.\TU/xits-math.otf(1)/m/n/10 ∴
+.\TU/XITSMath-Regular.otf(1)/m/n/10 ∴
 .\mathoff
 .\pdfcolorstack 0 pop
 ! OK.

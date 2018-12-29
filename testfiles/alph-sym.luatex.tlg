@@ -9,10 +9,10 @@ Don't change this file in any respect.
 .\mathoff
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 𝐴
-.\TU/xits-math.otf(1)/m/n/10 𝐵
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝐴
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝐵
 .\kern0.4 (italic)
-.\TU/xits-math.otf(1)/m/n/10 𝐶
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𝐶
 .\mathoff
 ! OK.
 <to be read again> 
@@ -43,12 +43,12 @@ l. ...\TESTBOX{$\Alpha\Beta\Gamma$}
 > \box...=
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\TU/xits-math.otf(1)/m/n/10 ]
-.\TU/xits-math.otf(1)/m/n/10 +
+.\TU/XITSMath-Regular.otf(1)/m/n/10 ]
+.\TU/XITSMath-Regular.otf(1)/m/n/10 +
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 =
+.\TU/XITSMath-Regular.otf(1)/m/n/10 =
 .\glue(\thickmuskip) 2.77771 plus 2.77771
-.\TU/xits-math.otf(1)/m/n/10 [
+.\TU/XITSMath-Regular.otf(1)/m/n/10 [
 .\mathoff
 ! OK.
 <to be read again> 
