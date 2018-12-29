@@ -45,7 +45,7 @@ tlmgr install   \
   etoolbox      \
   filehook      \
   fontspec      \
-  geometry      \
+  geometry ifxetex \
   graphics      \
   lualatex-math \
   luaotfload    \

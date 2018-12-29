@@ -1,5 +1,5 @@
 \input{umtest-preamble}
-\START\TIMO % this line is here so I can uncomment it to debug CI errors
+%\START\TIMO % this line is here so I can uncomment it to debug CI errors
 \usepackage{unicode-math}
 \setmathfont{latinmodern-math.otf}
 \begin{document}
