@@ -6,7 +6,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\PassOptionsToPackage{check-declarations}{expl3}
+\PassOptionsToPackage{enable-debug}{expl3}
+\ExplSyntaxOn
+\debug_on:n {all}
+\ExplSyntaxOff
 
 \usepackage{geometry}
 \geometry{
