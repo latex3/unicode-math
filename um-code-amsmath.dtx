@@ -107,8 +107,7 @@
     {
       \bool_if:nTF
         {
-          \int_compare_p:nNn { \uproot@ } = { \c_zero }
-          && \int_compare_p:nNn { \leftroot@ } = { \c_zero }
+          \@@_int_if_zero_p:n \uproot@ && \@@_int_if_zero_p:n \leftroot@
         }
         {
           \Uroot \c_@@_radical_sqrt_tl { #1 } { #2 }

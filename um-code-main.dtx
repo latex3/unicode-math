@@ -283,7 +283,7 @@
 %    \end{macrocode}
 % Set the bold math version.
 %    \begin{macrocode}
-    \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
+    \str_if_eq:eeT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{\l_@@_symfont_label_tl}{bold}
           {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
@@ -324,7 +324,7 @@
     \SetSymbolFont{symbols}{\l_@@_mversion_tl}
       {\encodingdefault}{\l_@@_fam_two_tl}{\mddefault}{\updefault}
 
-    \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
+    \str_if_eq:eeT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{symbols}{bold}
           {\encodingdefault}{\l_@@_fam_two_tl}{\bfdefault}{\updefault}
@@ -355,7 +355,7 @@
     \SetSymbolFont{largesymbols}{\l_@@_mversion_tl}
       {\encodingdefault}{\l_@@_fam_three_tl}{\mddefault}{\updefault}
 
-    \str_if_eq_x:nnT {\l_@@_mversion_tl} {normal}
+    \str_if_eq:eeT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{largesymbols}{bold}
           {\encodingdefault}{\l_@@_fam_three_tl}{\bfdefault}{\updefault}
@@ -368,7 +368,7 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_onceoff_setup:
   {
-    \@@_set_delcode:nnn {operators} {`\.} {\c_zero}
+    \@@_set_delcode:nnn {operators} {`\.} {0}
   }
 %    \end{macrocode}
 % \end{macro}

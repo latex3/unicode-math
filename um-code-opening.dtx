@@ -55,7 +55,7 @@
 %    \begin{macrocode}
 \prg_new_conditional:Nnn \@@_glyph_if_exist:Nn {p,TF,T,F}
   {
-    \etex_iffontchar:D #1 #2 \scan_stop:
+    \tex_iffontchar:D #1 #2 \scan_stop:
       \prg_return_true:
     \else:
       \prg_return_false:
@@ -228,6 +228,29 @@
   }
 %</LU>
 %    \end{macrocode}
+% \end{macro}
+%
+%^^A \begin{function}[EXP, added = 2019-01-19]{\@@_int_if_zero_p:n, \@@_int_if_zero:nTF}
+%^^A   \begin{syntax}
+%^^A     \cs{int_if_zero_p:n} \Arg{intexpr}
+%^^A     \cs{int_if_zero:nTF} \Arg{intexpr} \Arg{true code} \Arg{false code}
+%^^A   \end{syntax}
+%^^A   A conditional for testing if the \meta{intexpr} evaluates to zero.
+%^^A   This is simply a shorthand for
+%^^A   \begin{verbatim}
+%^^A     \int_compare_p:nNn {intexpr} = {0}
+%^^A   \end{verbatim}
+%^^A \end{function}
+%
+% \begin{macro}{\@@_int_if_zero_p:n}
+% \begin{macro}{\@@_int_if_zero:nTF}
+%    \begin{macrocode}
+\prg_new_conditional:Nnn \@@_int_if_zero:n {p,TF,T,F}
+  {
+    \int_compare:nNnTF {#1} = 0 {\prg_return_true:} {\prg_return_false:}
+  }
+%    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 %

@@ -135,7 +135,7 @@
         \tl_set:Nn \l_@@_alphabet_tl {##1}
         \@@_if_alphabet_exists:nnTF \l_@@_style_tl \l_@@_alphabet_tl
           {
-            \str_if_eq_x:nnTF {\l_@@_alphabet_tl} {misc}
+            \str_if_eq:eeTF {\l_@@_alphabet_tl} {misc}
               {
                 \@@_maybe_init_alphabet:n \l_@@_style_tl
                 \clist_map_break:
