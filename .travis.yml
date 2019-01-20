@@ -6,4 +6,4 @@ cache:
     - /tmp/texlive
 
 script:
- - l3build check -H --shuffle --first aaa-loading || cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log
+ - l3build check -H --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
