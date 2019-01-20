@@ -22,7 +22,7 @@
 %    \begin{macrocode}
 \cs_new:Npn \@@_setup_alphabets:
   {
-    \bool_if:NTF \l_@@_init_bool { \@@_setup_alphabets_implicit: }
+    \bool_if:NTF \g_@@_init_bool { \@@_setup_alphabets_implicit: }
       {
         \seq_if_empty:NF \g_@@_mathalph_seq { \@@_setup_alphabets_explicit: }
         \clist_if_empty:NF \l_@@_mathmap_charints_clist { \@@_setup_alphabets_inherit: }

@@ -35,14 +35,14 @@
 
     \keys_set_known:nnN {unicode-math} {#1} \l_@@_unknown_keys_clist
 
-    \bool_if:NT \l_@@_init_bool
+    \bool_if:NT \g_@@_init_bool
       {
         \@@_fontspec_trial_font:
         \@@_declare_math_sizes:
       }
     \@@_fontspec_select_font:
     \@@_setup_math_fam:
-    \bool_if:NT \l_@@_init_bool
+    \bool_if:NT \g_@@_init_bool
       {
         \@@_setup_legacy_fam_two:
         \@@_setup_legacy_fam_three:
@@ -60,7 +60,7 @@
 %       this is an extensive part of the code; see Section~\ref{sec:mathmap};
 % \end{itemize}
 %    \begin{macrocode}
-    \bool_if:NT \l_@@_init_bool \@@_onceoff_setup:
+    \bool_if:NT \g_@@_init_bool \@@_onceoff_setup:
     \@@_remap_symbols:
     \@@_setup_mathactives:
     \@@_setup_delcodes:
@@ -68,7 +68,7 @@
 
     %% TODO: what of the above should only be run for the "default"/"main" font?
 
-    \bool_if:NTF \l_@@_init_bool
+    \bool_if:NTF \g_@@_init_bool
       {
         \bool_gset_true:N \g_@@_main_font_defined_bool
 %<LU>   \@@_mathparam_store:
@@ -116,7 +116,7 @@
     \tl_set_eq:NN \l_@@_script_font_tl      \l_@@_fontname_tl
     \tl_set_eq:NN \l_@@_sscript_font_tl     \l_@@_fontname_tl
 
-    \bool_set_true:N \l_@@_init_bool
+    \bool_set_true:N \g_@@_init_bool
     \seq_gclear:N    \g_@@_char_range_seq
     \clist_clear:N   \l_@@_mathmap_charints_clist
     \seq_gclear:N    \g_@@_mathalph_seq
@@ -217,7 +217,7 @@
       \fontfamily { \l_@@_family_tl } \selectfont
       \exp_last_unbraced:Nno \@@_fontface_gset_eq:cN {g_@@_mathfont_ \int_use:N \g_@@_fonts_used_int _font} \font@name
       \tl_gset:Nx \g_@@_curr_font_cmd_tl { \exp_not:c {g_@@_mathfont_ \int_use:N \g_@@_fonts_used_int _font} }
-      \bool_if:NT \l_@@_init_bool
+      \bool_if:NT \g_@@_init_bool
 				{
 					\exp_last_unbraced:NNo \@@_fontface_gset_eq:NN \l_@@_font \font@name
 				}

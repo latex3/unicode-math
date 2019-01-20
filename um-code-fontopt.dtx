@@ -41,7 +41,7 @@
     range .code:n =
       {
         \bool_if:NF \g_@@_main_font_defined_bool { \@@_error:n {no-main-font} }
-        \bool_set_false:N \l_@@_init_bool
+        \bool_set_false:N \g_@@_init_bool
         \@@_range_init:
         \group_begin:
           \seq_map_inline:Nn \g_@@_mathclasses_seq
