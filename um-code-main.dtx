@@ -11,7 +11,7 @@
 % \darg{keyval options}
 % \darg{font name/file}
 %    \begin{macrocode}
-\cs_set:Nn \@@_setmathfont:nn
+\@@_cs_new:Nn \@@_setmathfont:nn
   {
 %    \end{macrocode}
 % \begin{itemize}
@@ -88,7 +88,7 @@
 % the other `AtBeginDocument' code.
 %    \begin{macrocode}
 \AtBeginDocument { \@@_load_lm_if_necessary: }
-\cs_new:Nn \@@_load_lm_if_necessary:
+\@@_cs_new:Nn \@@_load_lm_if_necessary:
   {
     \bool_if:NF \g_@@_main_font_defined_bool
       {
@@ -104,7 +104,7 @@
 % Reset local variables.
 % Default to defining the font for every math symbol character.
 %    \begin{macrocode}
-\cs_new:Nn \@@_init:n
+\@@_cs_new:Nn \@@_init:n
   {
     \tl_set:Nn \l_@@_fontname_tl {#1}
     \bool_gset_true:N  \g_@@_ot_math_bool
@@ -135,7 +135,7 @@
 % Set the math sizes according to the recommended font parameters.
 %    \begin{macrocode}
 \tl_new:N \g_@@_main_font_cmd_tl
-\cs_new:Nn \@@_declare_math_sizes:
+\@@_cs_new:Nn \@@_declare_math_sizes:
   {
     \dim_compare:nF { \fontdimen 10 \g_@@_trial_font == 0pt }
       {
@@ -151,7 +151,7 @@
 %
 % \begin{macro}{\@@_fontspec_trial_font:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_fontspec_trial_font:
+\@@_cs_new:Nn \@@_fontspec_trial_font:
   {
     \tl_set:Nx \l_@@_font_keyval_tl
       {
@@ -180,7 +180,7 @@
 %
 % \begin{macro}{\@@_fontspec_select_font:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_fontspec_select_font:
+\@@_cs_new:Nn \@@_fontspec_select_font:
   {
     \fp_gset:Nn \g_@@_size_tfsf_fp   { (\f@size +\sf@size )/2 }
     \fp_gset:Nn \g_@@_size_sfssf_fp  { (\sf@size+\ssf@size)/2 }
@@ -244,7 +244,7 @@
 % might change the math params, which wouldn't be reflected in the fontdimens.
 %    \begin{macrocode}
 %<*LU>
-\cs_new_protected:Nn \@@_luatex_copy_fontdimens:
+\@@_cs_new:Nn \@@_luatex_copy_fontdimens:
   {
     \@@_fontdimen_from_param:nn {10} {ScriptPercentScaleDown}
     \@@_fontdimen_from_param:nn {11} {ScriptScriptPercentScaleDown}
@@ -271,8 +271,9 @@
 %
 % \begin{macro}{\@@_setup_math_fam:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_math_fam:
+\@@_cs_new:Nn \@@_setup_math_fam:
   {
+%<debug>\typeout{::~_setup_math_fam:}
     \cs_if_exist:cF { sym \l_@@_symfont_label_tl }
       {
         \DeclareSymbolFont{\l_@@_symfont_label_tl}
@@ -295,7 +296,7 @@
 % \begin{macro}{\@@_setup_legacy_fam_two:}
 % \TeX\ won't load the same font twice at the same scale, so we need to magnify this one by an imperceptable amount.
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_legacy_fam_two:
+\@@_cs_new:Nn \@@_setup_legacy_fam_two:
   {
     \fontspec_set_family:Nxn \l_@@_fam_two_tl
       {
@@ -336,7 +337,7 @@
 % \begin{macro}{\@@_setup_legacy_fam_three:}
 % Similarly, this font is shrunk by an imperceptable amount for \TeX\ to load it again.
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_legacy_fam_three:
+\@@_cs_new:Nn \@@_setup_legacy_fam_three:
   {
     \fontspec_set_family:Nxn \l_@@_fam_three_tl
       {
@@ -366,7 +367,7 @@
 %
 % \begin{macro}{\@@_onceoff_setup:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_onceoff_setup:
+\@@_cs_new:Nn \@@_onceoff_setup:
   {
     \@@_set_delcode:nnn {operators} {`\.} {0}
   }
@@ -403,7 +404,7 @@
 % This function is used to define the mathcodes for those chars which should
 % be mapped to a different glyph than themselves.
 %    \begin{macrocode}
-\cs_new:Nn \@@_remap_symbols:
+\@@_cs_new:Nn \@@_remap_symbols:
   {
     \@@_remap_symbol:nnn {`\-} {\mathbin} {"2212}
     \@@_remap_symbol:nnn {`\*} {\mathbin} {"02217}% text asterisk to "centred asterisk"
@@ -443,7 +444,7 @@
 % TODO: if not an OpenType math font, we should ignore doing anything with primes.
 % This needs a revamped `range` feature, I think.
 %    \begin{macrocode}
-\cs_new:Npn \@@_setup_mathactives:
+\@@_cs_new:Nn \@@_setup_mathactives:
   {
 		\@@_make_mathactive:nNN {"2032} \@@_prime_single_mchar \mathord
 		\@@_make_mathactive:nNN {"2033} \@@_prime_double_mchar \mathord
@@ -514,7 +515,7 @@
 % On the other hand, many fonts won't support them all being stretchy.
 % And some of them are probably not meant to stretch, either. But adding them here doesn't hurt.
 %    \begin{macrocode}
-\cs_new:Npn \@@_setup_delcodes:
+\@@_cs_new:Nn \@@_setup_delcodes:
   {
     \@@_assign_delcode:nn {`\/}   {\g_@@_slash_delimiter_usv}
     \@@_assign_delcode:nn {"2044} {\g_@@_slash_delimiter_usv} % fracslash
@@ -605,7 +606,7 @@
 % If the maths font were to be loaded later it would clobber our mathparam settings, so
 % this seems like a sensible move.
 %    \begin{macrocode}
-\cs_set:Nn \@@_mathparam_restore:
+\@@_cs_new:Nn \@@_mathparam_restore:
   {
     \glb@settings
     \tl_use:N \g_@@_mathparam_settings_tl
@@ -617,7 +618,7 @@
 % \cs{glb@settings} is called to force maths fonts loading \emph{now} so the mathparams
 % are up-to-date.
 %    \begin{macrocode}
-\cs_set:Nn \@@_mathparam_store:
+\@@_cs_new:Nn \@@_mathparam_store:
   {
     \glb@settings
     \tl_gset:Nx \g_@@_mathparam_settings_tl
