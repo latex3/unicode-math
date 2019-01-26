@@ -1,6 +1,10 @@
 CHANGE HISTORY
 ==============
 
+## v0.8n (2019/01/26)
+
+  * Spacing fixed for maths fonts loaded with the `Scale` fontspec feature (#287).
+
 ## v0.8m (2018/07/29)
 
   * Restore behaviour of legacy syntax `x_\mathrm{x}` (i.e., with no braces).
