@@ -35,11 +35,9 @@
 
     \keys_set_known:nnN {unicode-math} {#1} \l_@@_unknown_keys_clist
 
-    \bool_if:NT \g_@@_init_bool
-      {
-        \@@_fontspec_trial_font:
-        \@@_declare_math_sizes:
-      }
+    \bool_if:NT \g_@@_init_bool \@@_fontspec_trial_font:
+    \bool_if:NT \g_@@_init_bool \@@_declare_math_sizes:
+
     \@@_fontspec_select_font:
     \@@_setup_math_fam:
     \bool_if:NT \g_@@_init_bool
@@ -167,8 +165,13 @@
     \group_begin:
       \fontfamily { \l_@@_trial_family_tl } \selectfont
       \exp_last_unbraced:NNo \@@_fontface_gset_eq:NN \g_@@_trial_font \font@name
-      \fontspec_if_script:nF {math}
+      \fontspec_if_script:nTF {math}
         {
+%<debug>\typeout{::~OpenType~math~font~loaded;~proceeding~normally.}
+        }
+        {
+%<debug>\typeout{::~Not~an~OpenType~math~font!~Changing~plan.}
+          \@@_warning:n {not-ot-math}
           \bool_gset_false:N \g_@@_ot_math_bool
           \bool_gset_false:N \g_@@_init_bool
         }
