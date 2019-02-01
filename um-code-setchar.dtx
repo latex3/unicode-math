@@ -17,19 +17,16 @@
 %
 % In time, the case statement inside |set_mathsymbol| will be moved in here
 % to avoid re-running it every time.
-%    \begin{macrocode}
-\cs_new:Npn \@@_symbol_setup:
- {
-  \cs_set:Npn \UnicodeMathSymbol ##1##2##3##4
-   {
-    \exp_not:n { \_@@_sym:nnn {##1} {##2} {##3} }
-   }
- }
-%    \end{macrocode}
 %
 %    \begin{macrocode}
-\file_get:nnN {unicode-math-table.tex} {\@@_symbol_setup:} \g_@@_mathtable_tl
-\tl_gset:Nx \g_@@_mathtable_tl {\g_@@_mathtable_tl}
+\group_begin:
+  \file_get:nnN {unicode-math-table.tex} {} \l_@@_mathtable_tl
+  \cs_set:Npn \UnicodeMathSymbol #1#2#3#4
+    {
+      \exp_not:n { \_@@_sym:nnn {#1} {#2} {#3} }
+    }
+  \tl_gset:Nx \g_@@_mathtable_tl {\l_@@_mathtable_tl}
+\group_end:
 %    \end{macrocode}
 %
 %
