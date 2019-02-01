@@ -5,9 +5,11 @@ cache:
   directories:
     - /tmp/texlive
 
+stages:
+  - test
+
 jobs:
   include:
-    - stage: test
-      script: l3build check -H --engine xetex  --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
-      script: l3build check -H --engine luatex --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
-      script: l3build check -H --config build-checkdoc || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
+    - script: l3build check -H --engine xetex  --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
+    - script: l3build check -H --engine luatex --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
+    - script: l3build check -H --config build-checkdoc || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
