@@ -1,4 +1,3 @@
-#!/usr/bin/env texlua
 
 module = "unicode-math"
 
@@ -10,7 +9,6 @@ textfiles    = {"*.md","LICENSE"}
 tagfiles     = {"unicode-math.dtx","CHANGES.md"}
 
 checkengines = {"xetex","luatex"}
-checkconfigs = {"build", "build-checkdoc"}
 
 typesetexe   = "xelatex"
 typesetopts  = " -shell-escape -interaction=nonstopmode "
