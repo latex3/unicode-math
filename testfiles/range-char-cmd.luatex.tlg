@@ -1,55 +1,35 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 𝒜
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symscr{A}$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0.6 0 0 rg}
 .\TU/XITSMath-Regular.otf(0)/m/n/10 𝒰
 .\mathoff
 .\pdfcolorstack 0 pop
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symscr{U}$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 𝒜
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\mscrA$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0.6 0 0 rg}
 .\TU/XITSMath-Regular.otf(0)/m/n/10 𝒰
 .\mathoff
 .\pdfcolorstack 0 pop
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\mscrU$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\pdfcolorstack 0 push {0 0.6 0 rg}
 .\TU/XITSMath-Regular.otf(1)/m/n/10 ∴
 .\mathoff
 .\pdfcolorstack 0 pop
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\therefore$}
 ***************
 Compilation 1 of test file completed with exit status 256

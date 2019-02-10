@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, glue set - 1.0, direction TLT
 .\mathon
 .\TU/Asana-Math.otf(0)/m/n/10 𝑎
@@ -14,33 +14,21 @@ Don't change this file in any respect.
 .\kern0.4 (italic)
 .\TU/XITSMath-Regular.otf(1)/m/n/10 𝐶
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$abc$ $ABC$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/Asana-Math.otf(0)/m/n/10 𝛼
 .\TU/Asana-Math.otf(0)/m/n/10 𝛽
 .\TU/Asana-Math.otf(0)/m/n/10 𝛾
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\alpha\beta\gamma$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/Asana-Math.otf(0)/m/n/10 𝛢
 .\TU/Asana-Math.otf(0)/m/n/10 𝛣
 .\TU/Asana-Math.otf(0)/m/n/10 𝛤
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\Alpha\Beta\Gamma$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 ]
@@ -50,9 +38,5 @@ l. ...\TESTBOX{$\Alpha\Beta\Gamma$}
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/XITSMath-Regular.otf(1)/m/n/10 [
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$]+=[$}
 ***************
 Compilation 1 of test file completed with exit status 256

@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 empty
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\vbox(5.0+0.0)x0.0, direction TLT
@@ -10,13 +10,8 @@ empty
 ..\kern-5.0 (font)
 ..\hbox(0.0+0.0)x0.0, direction TLT
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\not$}
-                    % #126
 macro
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 (
@@ -35,13 +30,8 @@ macro
 ....\TU/latinmodern-math.otf(1)/m/n/7 𝑎
 .\TU/latinmodern-math.otf(1)/m/n/10 )
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}
-                                               % #343
 generic
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝐴
@@ -53,13 +43,8 @@ generic
 ...\TU/latinmodern-math.otf(1)/m/n/10 ≊
 .\TU/latinmodern-math.otf(1)/m/n/10 𝐶
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$A \not\approxeq C $}
-                                  % #363
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -73,12 +58,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not = y \neq z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -92,12 +73,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not < y \nless z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -111,12 +88,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not > y \ngtr z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -130,12 +103,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not \gets     y \nleftarrow z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -149,12 +118,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not \simeq    y \nsime z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -168,12 +133,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not \equal    y \ne z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -187,12 +148,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not \le       y \nleq z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -206,12 +163,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not \ge       y \ngeq z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -225,12 +178,8 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not \greater  y \ngtr z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑥
@@ -242,9 +191,5 @@ prebuilt
 .\glue(\thickmuskip) 2.77771 plus 2.77771
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑧
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$ x \not \forksnot y \forks z $}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0

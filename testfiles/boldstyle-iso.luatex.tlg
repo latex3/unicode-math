@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑨
@@ -51,11 +51,7 @@ Don't change this file in any respect.
 .\kern2.28 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝒁
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\LATINtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝒂
@@ -96,11 +92,7 @@ l. ...\TESTBOX{$\symbf\LATINtext$}
 .\kern0.2 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝒛
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\latintext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝑨
@@ -151,11 +143,7 @@ l. ...\TESTBOX{$\symbf\latintext$}
 .\kern2.28 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝒁
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\LATINmath$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝒂
@@ -196,11 +184,7 @@ l. ...\TESTBOX{$\symbf\LATINmath$}
 .\kern0.2 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝒛
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\latinmath$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝜜
@@ -249,11 +233,7 @@ l. ...\TESTBOX{$\symbf\latinmath$}
 .\kern1.06 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝜴
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\GREEKtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝜶
@@ -305,11 +285,7 @@ l. ...\TESTBOX{$\symbf\GREEKtext$}
 .\kern0.03 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝝎
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\greektext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝜜
@@ -358,11 +334,7 @@ l. ...\TESTBOX{$\symbf\greektext$}
 .\kern1.06 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝜴
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\GREEKmath$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝜶
@@ -414,9 +386,5 @@ l. ...\TESTBOX{$\symbf\GREEKmath$}
 .\kern0.03 (italic)
 .\TU/latinmodern-math.otf(1)/m/n/10 𝝎
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\symbf\greekmath$}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0

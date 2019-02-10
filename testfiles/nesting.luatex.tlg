@@ -1,46 +1,30 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 OPERATOR FONT + MATHBB
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\hbox(6.83+0.0)x6.39, direction TLT
 ..\hbox(0.0+0.0)x0.0, direction TLT
 ..\TU/latinmodern-math.otf(1)/m/n/10 𝔹
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{${\operator@font \mathbb{B}}$}
 MATHRM + MATHBB
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 𝔹
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\mathrm{\symbb{B}}$}
 MATHRM + MATHCAL
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 ℬ
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\mathrm{\mathcal{B}}$}
 MATHRM + SYMUP + mu
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 μ
 .\mathoff
-! OK.
-<to be read again> 
-\relax 
-l. ...\TESTBOX{$\mathrm{\symup{\mu}}$}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0
