@@ -23,13 +23,12 @@
 \tracingonline=1\relax
 \tracingoutput=1\relax
 
-\AtBeginDocument{\START\OMIT}
-\AtEndDocument{\OMIT}
-
 \ExplSyntaxOn
 \tl_new:N \g__um_secret_hook_tl
-\tl_gset:Nn \g__um_secret_hook_tl {\OMIT$x$\TIMO}
+\tl_gset:Nn \g__um_secret_hook_tl {\OMIT$x$\TIMO\clearpage\START\OMIT}
 \ExplSyntaxOff
+
+\AtEndDocument{\OMIT}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -74,6 +73,7 @@
 }
 
 \newcommand\SHIPOUT[2][12]{%
+  \OMIT
   \SETBOX{#1}{#2}%
   \TIMO
   \shipout\box#1\relax
