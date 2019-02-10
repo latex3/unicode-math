@@ -15,7 +15,6 @@
 \SHIPOUT{$\mathit{x}$}
 
 \MSG{SYMIT:}
-\setbox13=\hbox{$\symit{x}$}
-\SHOWBOX {13}
+\SHIPOUT{$\symit{x}$}
 
 \end{document}

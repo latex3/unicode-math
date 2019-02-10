@@ -4,19 +4,15 @@
 \begin{document}
 
 \MSG{MATHBBIT}
-\setbox12=\hbox{$\mathbbit{Ddeij}$}
-\SHOWBOX{12}
+\SHIPOUT{$\mathbbit{Ddeij}$}
 
 \MSG{MATHBBIT}
-\setbox12=\hbox{$\mathbbit{𝐷𝑑𝑒𝑖𝑗}$}
-\SHOWBOX{12}
+\SHIPOUT{$\mathbbit{𝐷𝑑𝑒𝑖𝑗}$}
 
 \MSG{SYMBBIT}
-\setbox12=\hbox{$\symbbit{Ddeij}$}
-\SHOWBOX{12}
+\SHIPOUT{$\symbbit{Ddeij}$}
 
 \MSG{SYMBBIT}
-\setbox12=\hbox{$\symbbit{𝐷𝑑𝑒𝑖𝑗}$}
-\SHOWBOX{12}
+\SHIPOUT{$\symbbit{𝐷𝑑𝑒𝑖𝑗}$}
 
 \end{document}

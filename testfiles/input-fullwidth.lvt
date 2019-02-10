@@ -5,17 +5,14 @@
 
 \begin{document}
 
-\setbox12=\hbox{$０１２３４５６７８９$}
 \MSG{numbers}
-\SHOWBOX{12}
+\SHIPOUT{$０１２３４５６７８９$}
 
-\setbox12=\hbox{$ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ$}
 \MSG{Latin}
-\SHOWBOX{12}
+\SHIPOUT{$ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ$}
 
-\setbox12=\hbox{$ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ$}
 \MSG{latin}
-\SHOWBOX{12}
+\SHIPOUT{$ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ$}
 
 
 \end{document}
