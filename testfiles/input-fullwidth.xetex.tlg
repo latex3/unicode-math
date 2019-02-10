@@ -1,8 +1,8 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 numbers
-> \box...=
-\hbox(6.77+0.22)x50.13
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#17
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#18
@@ -16,13 +16,9 @@ numbers
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#25
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#26
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX{12}
 Latin
-> \box...=
-\hbox(7.16+1.94)x207.92996
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1270
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1271
@@ -73,13 +69,9 @@ Latin
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1295
 .\kern0.68
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX{12}
 latin
-> \box...=
-\hbox(7.05+2.05)x133.40997
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1296
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1297
@@ -123,9 +115,5 @@ latin
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX{12}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0

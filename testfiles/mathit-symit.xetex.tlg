@@ -12,15 +12,11 @@ Completed box being shipped out [2]
 .\TU/texgyretermes-regular.otf(1)/m/it/10 glyph#117
 .\mathoff
 SYMIT:
-> \box...=
-\hbox(4.82+0.11)x5.12
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#490
 .\kern0.12
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {13}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0
