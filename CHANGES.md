@@ -4,7 +4,8 @@ CHANGE HISTORY
 ## v0.8n (2019/01/26)
 
   * Spacing fixed for maths fonts loaded with the `Scale` fontspec feature (#287).
-  * Test suite now runs (successfully) with expl3 debug mode.
+  * Test suite is now (successfully) with `expl3` debug mode enabled.
+  * Commands like `\crampedtextstyle` now longer lead to an infinite loop under XeTeX (#505).
 
 
 ## v0.8m (2018/07/29)
