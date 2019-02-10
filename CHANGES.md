@@ -3,6 +3,7 @@ CHANGE HISTORY
 
 ## v0.8n (2019/01/26)
 
+  * Add note to readme that the `lm-math` package is required for minimal functionality.
   * Spacing fixed for maths fonts loaded with the `Scale` fontspec feature (#287).
   * Test suite is now (successfully) with `expl3` debug mode enabled.
   * Commands like `\crampedtextstyle` now longer lead to an infinite loop under XeTeX (#505).
