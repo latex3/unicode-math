@@ -1,8 +1,8 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 SQRT x
-> \box...=
-\hbox(7.80502+0.69499)x12.01999
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(7.80502+0.69499)x12.01999
 ..\vbox(0.6+7.3)x6.9, shifted -6.60501
@@ -15,13 +15,9 @@ SQRT x
 ....\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#490
 ....\kern0.12
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 SQRT x squared
-> \box...=
-\hbox(11.22433+0.87567)x16.831
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(11.22433+0.87567)x16.831
 ..\vbox(0.6+10.9)x7.03, shifted -10.02432
@@ -36,13 +32,9 @@ SQRT x squared
 ....\hbox(5.0986+0.0222)x4.681, shifted -2.96005
 .....\TU/texgyrepagella-math.otf(1)/m/n/7.4 glyph#1245
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 SQRT FRAC x y
-> \box...=
-\hbox(15.75003+10.74998)x15.15
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(15.75003+10.74998)x15.15
 ..\vbox(0.6+25.3)x7.57, shifted -14.55002
@@ -67,13 +59,9 @@ SQRT FRAC x y
 ......\kern0.18
 ....\hbox(0.0+0.0)x1.2, shifted -2.50005
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 SQRT n x
-> \box...=
-\hbox(7.80502+0.69499)x12.7805
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(7.80502+0.69499)x12.7805
 ..\kern 0.0
@@ -98,13 +86,9 @@ SQRT n x
 ......\kern0.12
 ...\mathoff
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 SQRT n x squared
-> \box...=
-\hbox(11.22433+0.87567)x17.5915
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(11.22433+0.87567)x17.5915
 ..\kern 0.0
@@ -131,13 +115,9 @@ SQRT n x squared
 .......\TU/texgyrepagella-math.otf(1)/m/n/7.4 glyph#1245
 ...\mathoff
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 SQRT n FRAC x y
-> \box...=
-\hbox(15.75003+10.74998)x15.9105
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(15.75003+10.74998)x15.9105
 ..\kern 0.0
@@ -174,9 +154,5 @@ SQRT n FRAC x y
 ......\hbox(0.0+0.0)x1.2, shifted -2.50005
 ...\mathoff
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0

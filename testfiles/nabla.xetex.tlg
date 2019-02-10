@@ -1,8 +1,8 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 default
-> \box...=
-\hbox(6.9+0.13)x16.43
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, glue set - 1.0
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#1778
 .\kern0.16
@@ -12,13 +12,9 @@ default
 .\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#1779
 .\kern0.03
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 upright
-> \box...=
-\hbox(6.9+0.13)x16.43
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, glue set - 1.0
 .\mathon
 .\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1778
 .\kern0.16
@@ -28,13 +24,9 @@ upright
 .\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1779
 .\kern0.03
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 italic
-> \box...=
-\hbox(6.9+0.13)x17.74002
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, glue set - 1.0
 .\mathon
 .\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1780
 .\kern0.96
@@ -44,9 +36,5 @@ italic
 .\TU/texgyrepagella-math.otf(4)/m/n/10 glyph#1781
 .\kern0.8
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX {12}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0
