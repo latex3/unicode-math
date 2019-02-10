@@ -8,10 +8,6 @@
 
 \begin{document}
 
-$a+b$
-
-\START
-
 \MSG{TEXTIT:}
 \setbox12=\hbox{\textit{x}}
 \SHOWBOX {12}

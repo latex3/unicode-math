@@ -7,12 +7,6 @@
 
 \begin{document}
 
-$a$
-\clearpage
-
-\START
-
-
 \setbox0=\hbox to 0pt{$\Op$}
 \wd0=0pt
 \ht0=0pt

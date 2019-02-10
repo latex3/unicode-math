@@ -4,7 +4,6 @@
 \usepackage{unicode-math}
 
 \begin{document}
-\START
 
 \MSG{empty}
 \TESTBOX{$\not$}  % #126

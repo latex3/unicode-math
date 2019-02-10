@@ -9,8 +9,6 @@
 
 \begin{document}
 
-\START
-
 \MSG{SQRT x}
 \setbox12=\hbox{$\displaystyle\sqrt{x}$}
 

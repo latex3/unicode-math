@@ -5,8 +5,6 @@
 
 \begin{document}
 
-\START
-
 % Here is a font loaded in csname \string\1:
 
 \font\1="[texgyrepagella-regular.otf]" at 10pt

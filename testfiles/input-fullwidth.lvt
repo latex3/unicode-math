@@ -4,7 +4,6 @@
 \usepackage{unicode-math}
 
 \begin{document}
-\START
 
 \setbox12=\hbox{$０１２３４５６７８９$}
 \MSG{numbers}

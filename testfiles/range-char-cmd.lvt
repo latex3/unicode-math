@@ -7,7 +7,6 @@
 \setmathfont[range=\therefore,Color=009900]{XITSMath-Regular.otf}
 
 \begin{document}
-\START
 
 \TESTBOX{$\symscr{A}$}
 \TESTBOX{$\symscr{U}$}

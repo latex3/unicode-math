@@ -6,7 +6,6 @@
 \setmathfont[range=\mathbin]{XITSMath-Regular.otf}
 
 \begin{document}
-\START
 
 \TESTBOX{$=$}
 \TESTBOX{$+$}

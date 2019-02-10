@@ -1,11 +1,10 @@
 
 \input{umtest-preamble}
 
-\usepackage[math-style=ISO]{unicode-math}  
+\usepackage[math-style=ISO]{unicode-math}
 \setmathfont{XITSMath-Regular.otf}
-\setmathfont[range=it/{latin, greek, Greek}]{Asana-Math.otf}  
+\setmathfont[range=it/{latin, greek, Greek}]{Asana-Math.otf}
 \begin{document}
-\START
 
 \TESTBOX{$abc$ $ABC$}
 
@@ -15,4 +14,4 @@
 
 \TESTBOX{$]+=[$}
 
-\end{document}  
+\end{document}

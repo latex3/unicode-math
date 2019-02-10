@@ -1,7 +1,6 @@
 \input{umtest-preamble}
 \usepackage{unicode-math}
 \begin{document}
-\START
 
 \setbox12=\hbox{$x₀₁₂$}\SHOWBOX{12}
 \setbox12=\hbox{$x₁₂₃$}\SHOWBOX{12}

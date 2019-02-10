@@ -6,7 +6,6 @@
 \usepackage{unicode-math}
 
 \begin{document}
-\START
 
 \TESTBOX{$\mathsf{X}=X$}
 

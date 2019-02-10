@@ -5,10 +5,6 @@
 
 \begin{document}
 
-$a+b$
-
-\START
-
 \TESTBOX{$a-b$} % ascii hyphen minus
 \TESTBOX{$a‐b$} % "2010 hyphen
 \TESTBOX{$a−b$} % "2212 minus sign

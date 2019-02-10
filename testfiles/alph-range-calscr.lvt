@@ -7,7 +7,6 @@
 \setmathfont{XITSMath-Regular.otf}[range=cal,StylisticSet=1]
 
 \begin{document}
-\START
 
 \TESTBOX{$\LATINmath$}
 \TESTBOX{$\symscr{\LATINmath}$}

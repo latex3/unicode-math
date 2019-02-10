@@ -6,7 +6,6 @@
 \setmathfont{texgyreheros-regular.otf}[range=up/{num}]
 
 \begin{document}
-\START
 
 \TESTBOX{$7x$}
 

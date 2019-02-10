@@ -5,10 +5,6 @@
 
 \begin{document}
 
-$a+b$
-
-\START
-
 \setmathfont{texgyrepagella-math.otf}
 \MSG{default}
 \setbox12=\hbox{$\nabla$ $\symbf{\nabla}$}

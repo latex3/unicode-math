@@ -1,6 +1,4 @@
 \input{umtest-preamble}
-\START
-\OMIT
 \usepackage{unicode-math}
 \begin{document}
 

@@ -7,7 +7,6 @@
 \setmathfont[range=scr, Colour=FF0000]{texgyrechorus-mediumitalic.otf}
 
 \begin{document}
-\START
 
 \TESTBOX{$\latintext$}
 \TESTBOX{$\symscr{\latintext}$}
