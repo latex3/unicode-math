@@ -21,7 +21,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \tracingonline=1\relax
+\tracingoutput=1\relax
 
+\AtBeginDocument{\OMIT$x$\TIMO}
 \AtBeginDocument{\START\OMIT}
 \AtEndDocument{\OMIT}
 
@@ -65,6 +67,13 @@
 \newcommand\TESTBOX[2][12]{%
   \SETBOX{#1}{#2}%
   \SHOWBOX{#1}%
+}
+
+\newcommand\SHIPOUT[2][12]{%
+  \SETBOX{#1}{#2}%
+  \TIMO
+  \shipout\box#1\relax
+  \OMIT
 }
 
 \makeatletter

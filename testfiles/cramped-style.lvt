@@ -1,0 +1,7 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\begin{document}
+
+\SHIPOUT{$\crampedtextstyle abc$}
+
+\end{document}

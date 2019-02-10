@@ -36,7 +36,7 @@
 % For \XeTeX, define \meta{command} as a new quark.
 %    \begin{macrocode}
 \cs_new_protected_nopar:Nn \@@_new_cramped_style:N
-%<XE>  { \quark_new:N #1 }
+%<XE>  { \tl_const:Nn #1 { \use_none:n #1 } }
 %<LU>  {
 %<LU>    \cs_if_exist:NF #1
 %<LU>      { \cs_new_eq:Nc #1 { luatex \cs_to_str:N #1 } }
