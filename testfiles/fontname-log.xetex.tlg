@@ -6,14 +6,10 @@ Don't change this file in any respect.
 \3 
 \1 
 Here is the problem I'm trying to solve:
-> \box...=
-\hbox(4.42+0.11)x5.29
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1296
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\SHOWBOX0
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0
