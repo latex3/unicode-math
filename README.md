@@ -1,7 +1,7 @@
 The UNICODE-MATH package
 ========================
 
-This package will provide a complete implementation of unicode maths for
+This package provides an implementation of Unicode/OpenType mathematics for
 XeLaTeX and LuaLaTeX.
 
 While I am a little wary of encouraging people to use this package for
@@ -24,9 +24,9 @@ Unicode maths is currently supported by the following freely available fonts:
  - [DejaVu Math TeX Gyre][DEJA] (B. Jackowski, P. Strzelczyk and P. Pianowski)
  - [Asana Math][AM] (Apostolos Syropolous),
  - [STIX][STIX] (STIpub), and
- - [Neo Euler][NE] (Khaled Hosny),
  - [XITS Math][XM] (Khaled Hosny),
  - [Libertinus Math][LIB] (Philipp H. Poll and Khaled Hosny).
+ - [Fire Math][FIRA] (Xiangdong Zeng).
 
 These fonts are available under open source licences
 (the [GUST Font License][GFL] and [Open Font Licence][OFL]).
@@ -50,12 +50,13 @@ new releases.
 [TM]: http://www.ctan.org/pkg/tex-gyre-math-termes
 [DEJA]: https://ctan.org/pkg/tex-gyre-math-dejavu
 [AM]: http://www.ctan.org/pkg/asana-math
-[NE]: http://github.com/khaledhosny/euler-otf
 [STIX]: http://www.stixfonts.org
 [XM]: http://github.com/khaledhosny/xits-math
 [LIB]: https://ctan.org/pkg/libertinus
 [GFL]: http://www.gust.org.pl/projects/projects/e-foundry/licenses/
 [OFL]: http://scripts.sil.org/OFL
+[FIRA]: https://github.com/firamath/firamath
+
 
 PACKAGE USAGE
 -------------
@@ -74,7 +75,8 @@ Furthermore, it will be in a different font.
 REQUIREMENTS
 ------------
 
-As well as running XeTeX or LuaTeX, this package requires recent versions of the `fontspec`, `expl3`, `xpackages`, `filehook`, and `lualatex-math` packages.
+As well as running XeTeX or LuaTeX, this package requires recent versions of the
+`lm-math`, `fontspec`, `expl3`, `xpackages`, `filehook`, and `lualatex-math` packages.
 
 
 THANKS
@@ -111,4 +113,4 @@ greater.
 
 [LPPL]: http://www.latex-project.org/lppl/
 
-This work is author-maintained and consists of the files listed in `MANIFEST.md`.
+This work is maintained by Will Robertson and consists of the files listed in `MANIFEST.md`.
