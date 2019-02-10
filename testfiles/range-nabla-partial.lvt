@@ -8,8 +8,8 @@
 
 \begin{document}
 
-\TESTBOX{$x$}
-\TESTBOX{$\nabla$}
-\TESTBOX{$\partial$}
+\SHIPOUT{$x$}
+\SHIPOUT{$\nabla$}
+\SHIPOUT{$\partial$}
 
 \end{document}

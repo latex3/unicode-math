@@ -5,8 +5,8 @@
 
 \begin{document}
 
-\TESTBOX{$a-b$} % ascii hyphen minus
-\TESTBOX{$a‐b$} % "2010 hyphen
-\TESTBOX{$a−b$} % "2212 minus sign
+\SHIPOUT{$a-b$} % ascii hyphen minus
+\SHIPOUT{$a‐b$} % "2010 hyphen
+\SHIPOUT{$a−b$} % "2212 minus sign
 
 \end{document}

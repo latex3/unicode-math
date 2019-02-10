@@ -8,10 +8,10 @@
 
 \begin{document}
 
-\TESTBOX{$\symscr{A}$}
-\TESTBOX{$\symscr{U}$}
-\TESTBOX{$\mscrA$}
-\TESTBOX{$\mscrU$}
-\TESTBOX{$\therefore$}
+\SHIPOUT{$\symscr{A}$}
+\SHIPOUT{$\symscr{U}$}
+\SHIPOUT{$\mscrA$}
+\SHIPOUT{$\mscrU$}
+\SHIPOUT{$\therefore$}
 
 \end{document}

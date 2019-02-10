@@ -11,10 +11,10 @@
 
 \begin{document}
 
-\TESTBOX{$\symit{\LATINtext}$}
-\TESTBOX{$\symit{\latintext}$}
-\TESTBOX{$\symit{\GREEKtext}$}
-\TESTBOX{$\symit{\greektext}$}
-\TESTBOX{$0123456789$}
+\SHIPOUT{$\symit{\LATINtext}$}
+\SHIPOUT{$\symit{\latintext}$}
+\SHIPOUT{$\symit{\GREEKtext}$}
+\SHIPOUT{$\symit{\greektext}$}
+\SHIPOUT{$0123456789$}
 
 \end{document}

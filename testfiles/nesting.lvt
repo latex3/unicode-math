@@ -4,16 +4,16 @@
 \makeatletter
 
 \MSG{OPERATOR FONT + MATHBB}
-\TESTBOX{${\operator@font \mathbb{B}}$}
+\SHIPOUT{${\operator@font \mathbb{B}}$}
 
 \MSG{MATHRM + MATHBB}
-\TESTBOX{$\mathrm{\symbb{B}}$}
+\SHIPOUT{$\mathrm{\symbb{B}}$}
 
 \MSG{MATHRM + MATHCAL}
-\TESTBOX{$\mathrm{\mathcal{B}}$}
+\SHIPOUT{$\mathrm{\mathcal{B}}$}
 
 \MSG{MATHRM + SYMUP + mu}
-\TESTBOX{$\mathrm{\symup{\mu}}$}
+\SHIPOUT{$\mathrm{\symup{\mu}}$}
 
 \makeatother
 \end{document}

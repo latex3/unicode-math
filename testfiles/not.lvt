@@ -6,43 +6,43 @@
 \begin{document}
 
 \MSG{empty}
-\TESTBOX{$\not$}  % #126
+\SHIPOUT{$\not$}  % #126
 
 \newcommand{\pSymbol}{\prec}
 \MSG{macro}
-\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}  % #343
+\SHIPOUT{$(\not\prec_a) (\not\pSymbol_a)$}  % #343
 
 \MSG{generic}
-\TESTBOX{$A \not\approxeq C $} % #363
+\SHIPOUT{$A \not\approxeq C $} % #363
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not = y \neq z $}
+\SHIPOUT{$ x \not = y \neq z $}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not < y \nless z $}
+\SHIPOUT{$ x \not < y \nless z $}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not > y \ngtr z $}
+\SHIPOUT{$ x \not > y \ngtr z $}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not \gets     y \nleftarrow z $}
+\SHIPOUT{$ x \not \gets     y \nleftarrow z $}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not \simeq    y \nsime z$}
+\SHIPOUT{$ x \not \simeq    y \nsime z$}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not \equal    y \ne z $}
+\SHIPOUT{$ x \not \equal    y \ne z $}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not \le       y \nleq z$}
+\SHIPOUT{$ x \not \le       y \nleq z$}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not \ge       y \ngeq z$}
+\SHIPOUT{$ x \not \ge       y \ngeq z$}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not \greater  y \ngtr z$}
+\SHIPOUT{$ x \not \greater  y \ngtr z$}
 
 \MSG{prebuilt}
-\TESTBOX{$ x \not \forksnot y \forks z $}
+\SHIPOUT{$ x \not \forksnot y \forks z $}
 
 \end{document}

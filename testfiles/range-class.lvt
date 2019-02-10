@@ -7,7 +7,7 @@
 
 \begin{document}
 
-\TESTBOX{$=$}
-\TESTBOX{$+$}
+\SHIPOUT{$=$}
+\SHIPOUT{$+$}
 
 \end{document}

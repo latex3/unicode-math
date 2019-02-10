@@ -8,12 +8,12 @@
 
 \begin{document}
 
-\TESTBOX{$\LATINmath$}
-\TESTBOX{$\symscr{\LATINmath}$}
-\TESTBOX{$\symcal{\LATINmath}$}
+\SHIPOUT{$\LATINmath$}
+\SHIPOUT{$\symscr{\LATINmath}$}
+\SHIPOUT{$\symcal{\LATINmath}$}
 
-\TESTBOX{$\LATINtext$}
-\TESTBOX{$\symscr{\LATINtext}$}
-\TESTBOX{$\symcal{\LATINtext}$}
+\SHIPOUT{$\LATINtext$}
+\SHIPOUT{$\symscr{\LATINtext}$}
+\SHIPOUT{$\symcal{\LATINtext}$}
 
 \end{document}

@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 empty
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\vbox(10.0+0.0)x0.0
@@ -10,13 +10,8 @@ empty
 ..\kern0.0
 ..\hbox(0.0+0.0)x0.0
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\not$}
-                      % #126
 macro
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#9
@@ -35,13 +30,8 @@ macro
 ....\TU/latinmodern-math.otf(1)/m/n/7 glyph#1404
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#10
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$(\not\prec_a) (\not\pSymbol_a)$}
-                                                 % #343
 generic
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1270
@@ -54,13 +44,8 @@ generic
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1272
 .\kern0.73
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$A \not\approxeq C $}
-                                    % #363
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -75,12 +60,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not = y \neq z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -95,12 +76,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not < y \nless z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -115,12 +92,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not > y \ngtr z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -135,12 +108,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ......TBOX{$ x \not \gets     y \nleftarrow z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -155,12 +124,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not \simeq    y \nsime z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -175,12 +140,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not \equal    y \ne z $}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -195,12 +156,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not \le       y \nleq z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -215,12 +172,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not \ge       y \ngeq z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -235,12 +188,8 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not \greater  y \ngtr z$}
 prebuilt
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1319
@@ -255,9 +204,5 @@ prebuilt
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1321
 .\kern0.3
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$ x \not \forksnot y \forks z $}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0

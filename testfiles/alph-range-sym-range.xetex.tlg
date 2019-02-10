@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2498
@@ -37,11 +37,7 @@ Don't change this file in any respect.
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2521
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2522
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\latintext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#443
@@ -86,11 +82,7 @@ l. ...\TESTBOX{$\latintext$}
 .\kern0.36
 .\TU/texgyrepagella-math.otf(0)/m/n/10 glyph#468
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\LATINtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2864
@@ -121,9 +113,5 @@ l. ...\TESTBOX{$\LATINtext$}
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2888
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2889
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbfsf{\LATINtext}$}
 ***************
 Compilation 1 of test file completed with exit status 256

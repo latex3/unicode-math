@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2472
@@ -52,11 +52,7 @@ Don't change this file in any respect.
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2497
 .\kern0.7
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\LATINmath$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2575
@@ -112,11 +108,7 @@ l. ...\TESTBOX{$\LATINmath$}
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2592
 .\kern1.25
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symscr{\LATINmath}$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3882
@@ -161,11 +153,7 @@ l. ...\TESTBOX{$\symscr{\LATINmath}$}
 .\kern0.89
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3907
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symcal{\LATINmath}$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2472
@@ -217,11 +205,7 @@ l. ...\TESTBOX{$\symcal{\LATINmath}$}
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2497
 .\kern0.7
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\LATINtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2575
@@ -277,11 +261,7 @@ l. ...\TESTBOX{$\LATINtext$}
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2592
 .\kern1.25
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symscr{\LATINtext}$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3882
@@ -326,9 +306,5 @@ l. ...\TESTBOX{$\symscr{\LATINtext}$}
 .\kern0.89
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3907
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symcal{\LATINtext}$}
 ***************
 Compilation 1 of test file completed with exit status 256

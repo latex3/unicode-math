@@ -1,53 +1,33 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#2628
 .\kern0.81
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symscr{A}$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(0)/m/n/10 glyph#2587
 .\kern0.95
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symscr{U}$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/texgyrepagella-math.otf(1)/m/n/10 glyph#2628
 .\kern0.81
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\mscrA$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(0)/m/n/10 glyph#2587
 .\kern0.95
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\mscrU$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#1185
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\therefore$}
 ***************
 Compilation 1 of test file completed with exit status 256

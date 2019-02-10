@@ -7,6 +7,6 @@
 
 \begin{document}
 
-\TESTBOX{$7x$}
+\SHIPOUT{$7x$}
 
 \end{document}

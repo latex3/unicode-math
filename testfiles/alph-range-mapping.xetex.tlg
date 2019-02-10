@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2916
@@ -54,11 +54,7 @@ Don't change this file in any respect.
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2941
 .\kern1.66
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\LATINtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2498
@@ -95,11 +91,7 @@ l. ...\TESTBOX{$\LATINtext$}
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2521
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2522
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\latintext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#66
@@ -129,11 +121,7 @@ l. ...\TESTBOX{$\latintext$}
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#90
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#91
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symup\LATINtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2838
@@ -164,11 +152,7 @@ l. ...\TESTBOX{$\symup\LATINtext$}
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2862
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#2863
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symup\latintext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3074
@@ -197,11 +181,7 @@ l. ...\TESTBOX{$\symup\latintext$}
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3097
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3098
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\GREEKtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3216
@@ -252,11 +232,7 @@ l. ...\TESTBOX{$\GREEKtext$}
 .\kern0.95
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3240
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\greektext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3132
@@ -307,11 +283,7 @@ l. ...\TESTBOX{$\greektext$}
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#3156
 .\kern0.2
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symit\GREEKtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#658
@@ -347,9 +319,5 @@ l. ...\TESTBOX{$\symit\GREEKtext$}
 .\kern0.4
 .\TU/XITSMath-Regular.otf(4)/m/n/10 glyph#682
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symup\greektext$}
 ***************
 Compilation 1 of test file completed with exit status 256

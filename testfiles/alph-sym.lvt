@@ -6,12 +6,12 @@
 \setmathfont[range=it/{latin, greek, Greek}]{Asana-Math.otf}
 \begin{document}
 
-\TESTBOX{$abc$ $ABC$}
+\SHIPOUT{$abc$ $ABC$}
 
-\TESTBOX{$\alpha\beta\gamma$}
+\SHIPOUT{$\alpha\beta\gamma$}
 
-\TESTBOX{$\Alpha\Beta\Gamma$}
+\SHIPOUT{$\Alpha\Beta\Gamma$}
 
-\TESTBOX{$]+=[$}
+\SHIPOUT{$]+=[$}
 
 \end{document}

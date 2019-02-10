@@ -8,9 +8,9 @@
 
 \begin{document}
 
-\TESTBOX{$\latintext$}
-\TESTBOX{$\symscr{\latintext}$}
-\TESTBOX{$\LATINmath$}
-\TESTBOX{$\symscr{\LATINmath}$}
+\SHIPOUT{$\latintext$}
+\SHIPOUT{$\symscr{\latintext}$}
+\SHIPOUT{$\LATINmath$}
+\SHIPOUT{$\symscr{\LATINmath}$}
 
 \end{document}

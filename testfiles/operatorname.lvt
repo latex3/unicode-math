@@ -6,11 +6,11 @@
 
 \begin{document}
 
-\TESTBOX{$ \mathrm{s} $}
+\SHIPOUT{$ \mathrm{s} $}
 
-\TESTBOX{$ \operatorname{s} $}
+\SHIPOUT{$ \operatorname{s} $}
 
 \setoperatorfont{\mathtt}
-\TESTBOX{$ \operatorname{s} $}
+\SHIPOUT{$ \operatorname{s} $}
 
 \end{document}

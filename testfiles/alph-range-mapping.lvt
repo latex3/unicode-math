@@ -15,13 +15,13 @@
 
 \begin{document}
 
-\TESTBOX{$\LATINtext$}
-\TESTBOX{$\latintext$}
-\TESTBOX{$\symup\LATINtext$}
-\TESTBOX{$\symup\latintext$}
-\TESTBOX{$\GREEKtext$}
-\TESTBOX{$\greektext$}
-\TESTBOX{$\symit\GREEKtext$}
-\TESTBOX{$\symup\greektext$}
+\SHIPOUT{$\LATINtext$}
+\SHIPOUT{$\latintext$}
+\SHIPOUT{$\symup\LATINtext$}
+\SHIPOUT{$\symup\latintext$}
+\SHIPOUT{$\GREEKtext$}
+\SHIPOUT{$\greektext$}
+\SHIPOUT{$\symit\GREEKtext$}
+\SHIPOUT{$\symup\greektext$}
 
 \end{document}

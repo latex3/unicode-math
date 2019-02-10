@@ -1,6 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1432
@@ -33,11 +33,7 @@ Don't change this file in any respect.
 .\kern0.08
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1491
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\LATINtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1433
@@ -77,11 +73,7 @@ l. ...\TESTBOX{$\symbf\LATINtext$}
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1490
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1492
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\latintext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1624
@@ -133,11 +125,7 @@ l. ...\TESTBOX{$\symbf\latintext$}
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1649
 .\kern0.6
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\LATINmath$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1650
@@ -179,11 +167,7 @@ l. ...\TESTBOX{$\symbf\LATINmath$}
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#1675
 .\kern0.11
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\latinmath$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4291
@@ -212,11 +196,7 @@ l. ...\TESTBOX{$\symbf\latinmath$}
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4286
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4283
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\GREEKtext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4352
@@ -259,11 +239,7 @@ l. ...\TESTBOX{$\symbf\GREEKtext$}
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4374
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4375
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\greektext$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4745
@@ -313,11 +289,7 @@ l. ...\TESTBOX{$\symbf\greektext$}
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4629
 .\kern0.35
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\GREEKmath$}
-> \box...=
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4630
@@ -369,9 +341,5 @@ l. ...\TESTBOX{$\symbf\GREEKmath$}
 .\kern0.03
 .\TU/latinmodern-math.otf(1)/m/n/10 glyph#4653
 .\mathoff
-! OK.
-<to be read again> 
-                   \relax 
-l. ...\TESTBOX{$\symbf\greekmath$}
 ***************
-Compilation 1 of test file completed with exit status 256
+Compilation 1 of test file completed with exit status 0

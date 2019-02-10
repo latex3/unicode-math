@@ -13,8 +13,8 @@
 
 \begin{document}
 
-\TESTBOX{$\latintext$}
-\TESTBOX{$\LATINtext$}
-\TESTBOX{$\symbfsf{\LATINtext}$}
+\SHIPOUT{$\latintext$}
+\SHIPOUT{$\LATINtext$}
+\SHIPOUT{$\symbfsf{\LATINtext}$}
 
 \end{document}
