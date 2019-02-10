@@ -25,8 +25,9 @@
 
     \keys_set_known:nnN {@@_mathface} {#2} \l_@@_keyval_clist
 
-    \exp_args:Nnx \fontspec_set_family:Nxn \l_@@_tmpa_tl
-      { ItalicFont={}, BoldFont={}, \exp_not:V \l_@@_keyval_clist } {#3}
+    \fontspec_set_family:Nxx \l_@@_tmpa_tl
+      { ItalicFont={}, BoldFont={}, SmallCapsFont={}, \exp_not:V \l_@@_keyval_clist }
+      { #3 }
 
     \tl_if_empty:NT \l_@@_mversion_tl
       {
