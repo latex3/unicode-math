@@ -9,12 +9,10 @@
 \begin{document}
 
 \MSG{TEXTIT:}
-\setbox12=\hbox{\textit{x}}
-\SHOWBOX {12}
+\SHIPOUT{\textit{x}}
 
 \MSG{MATHIT:}
-\setbox12=\hbox{$\mathit{x}$}
-\SHOWBOX {12}
+\SHIPOUT{$\mathit{x}$}
 
 \MSG{SYMIT:}
 \setbox13=\hbox{$\symit{x}$}

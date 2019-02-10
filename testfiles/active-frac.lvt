@@ -5,14 +5,12 @@
 
 \begin{document}
 
-\unimathsetup{active-frac=normalsize}
-\setbox12=\hbox{$¼ ½ ¾ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞$}
 \MSG{NORMALSIZE}
-\SHOWBOX{12}
+\unimathsetup{active-frac=normalsize}
+\SHIPOUT{$¼ ½ ¾ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞$}
 
-\unimathsetup{active-frac=small}
-\setbox12=\hbox{$¼ ½ ¾ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞$}
 \MSG{SMALL}
-\SHOWBOX{12}
+\unimathsetup{active-frac=small}
+\SHIPOUT{$¼ ½ ¾ ⅐ ⅑ ⅒ ⅓ ⅔ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞$}
 
 \end{document}

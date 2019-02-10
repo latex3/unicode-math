@@ -10,27 +10,21 @@
 \begin{document}
 
 \MSG{SQRT x}
-\setbox12=\hbox{$\displaystyle\sqrt{x}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\sqrt{x}$}
 
 \MSG{SQRT x squared}
-\setbox12=\hbox{$\displaystyle\sqrt{x^2}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\sqrt{x^2}$}
 
 \MSG{SQRT FRAC x y}
-\setbox12=\hbox{$\displaystyle\sqrt{\frac{x}{y}}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\sqrt{\frac{x}{y}}$}
 
 \MSG{SQRT n x}
-\setbox12=\hbox{$\displaystyle\sqrt[n]{x}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\sqrt[n]{x}$}
 
 \MSG{SQRT n x squared}
-\setbox12=\hbox{$\displaystyle\sqrt[n]{x^2}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\sqrt[n]{x^2}$}
 
 \MSG{SQRT n FRAC x y}
-\setbox12=\hbox{$\displaystyle\sqrt[n]{\frac{x}{y}}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\sqrt[n]{\frac{x}{y}}$}
 
 \end{document}

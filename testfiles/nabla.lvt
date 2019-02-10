@@ -7,17 +7,14 @@
 
 \setmathfont{texgyrepagella-math.otf}
 \MSG{default}
-\setbox12=\hbox{$\nabla$ $\symbf{\nabla}$}
-\SHOWBOX {12}
+\SHIPOUT{$\nabla$ $\symbf{\nabla}$}
 
 \setmathfont[nabla=upright]{texgyrepagella-math.otf}
 \MSG{upright}
-\setbox12=\hbox{$\nabla$ $\symbf{\nabla}$}
-\SHOWBOX {12}
+\SHIPOUT{$\nabla$ $\symbf{\nabla}$}
 
 \setmathfont[nabla=italic]{texgyrepagella-math.otf}
 \MSG{italic}
-\setbox12=\hbox{$\nabla$ $\symbf{\nabla}$}
-\SHOWBOX {12}
+\SHIPOUT{$\nabla$ $\symbf{\nabla}$}
 
 \end{document}

@@ -10,16 +10,13 @@
 \begin{document}
 
 \MSG{SQRT x}
-\setbox12=\hbox{$\displaystyle\cuberoot{x}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\cuberoot{x}$}
 
 \MSG{SQRT x squared}
-\setbox12=\hbox{$\displaystyle\cuberoot{x^2}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\cuberoot{x^2}$}
 
 \MSG{SQRT FRAC x y}
-\setbox12=\hbox{$\displaystyle\cuberoot{\frac{x}{y}}$}
-\SHOWBOX {12}
+\SHIPOUT{$\displaystyle\cuberoot{\frac{x}{y}}$}
 
 
 \end{document}

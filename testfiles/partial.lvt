@@ -7,17 +7,14 @@
 
 \setmathfont{texgyrepagella-math.otf}
 \MSG{default}
-\setbox12=\hbox{$\partial$ $\symbf{\partial}$}
-\SHOWBOX {12}
+\SHIPOUT{$\partial$ $\symbf{\partial}$}
 
 \setmathfont[partial=upright]{texgyrepagella-math.otf}
 \MSG{upright}
-\setbox12=\hbox{$\partial$ $\symbf{\partial}$}
-\SHOWBOX {12}
+\SHIPOUT{$\partial$ $\symbf{\partial}$}
 
 \setmathfont[partial=italic]{texgyrepagella-math.otf}
 \MSG{italic}
-\setbox12=\hbox{$\partial$ $\symbf{\partial}$}
-\SHOWBOX {12}
+\SHIPOUT{$\partial$ $\symbf{\partial}$}
 
 \end{document}
