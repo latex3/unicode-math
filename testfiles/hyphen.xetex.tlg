@@ -14,7 +14,7 @@ Don't change this file in any respect.
 <to be read again> 
                    \relax 
 l. ...\TESTBOX{$a-b$}
-                     % ascii hyphen minus
+                    % ascii hyphen minus
 > \box...=
 \hbox(0.0+0.0)x0.0
 .\mathon
@@ -27,7 +27,7 @@ l. ...\TESTBOX{$a-b$}
 <to be read again> 
                    \relax 
 l. ...\TESTBOX{$a‐b$}
-                     % "2010 hyphen
+                    % "2010 hyphen
 > \box...=
 \hbox(0.0+0.0)x0.0, glue set - 1.0
 .\mathon

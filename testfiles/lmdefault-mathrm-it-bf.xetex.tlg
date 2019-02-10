@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 OPERATORNAME
-Completed box being shipped out [1]
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(7.05+2.06)x34.79
@@ -18,7 +18,7 @@ Completed box being shipped out [1]
 ..\TU/lmr/m/n/10 glyph#55
 .\mathoff
 MATHRM
-Completed box being shipped out [1]
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(7.05+2.06)x34.79
@@ -33,11 +33,11 @@ Completed box being shipped out [1]
 ..\TU/lmr/m/n/10 glyph#55
 .\mathoff
 TEXTNORMAL
-Completed box being shipped out [1]
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\TU/lmr/m/n/10 flagstaff
 MATHIT
-Completed box being shipped out [1]
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(7.05+2.05)x34.00003
@@ -52,12 +52,12 @@ Completed box being shipped out [1]
 ..\TU/lmr/m/it/10 glyph#55
 .\mathoff
 TEXTIT
-Completed box being shipped out [1]
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\TU/lmr/m/it/10 flagstaff
 .\kern 1.45
 MATHBF
-Completed box being shipped out [1]
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
 .\hbox(7.0+2.01)x39.65997
@@ -72,7 +72,7 @@ Completed box being shipped out [1]
 ..\TU/lmr/bx/n/10 glyph#55
 .\mathoff
 TEXTBF
-Completed box being shipped out [1]
+Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\TU/lmr/bx/n/10 flagstaff
 .\kern 0.75
