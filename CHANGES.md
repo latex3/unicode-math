@@ -4,6 +4,8 @@ CHANGE HISTORY
 ## v0.8n (2019/01/26)
 
   * Spacing fixed for maths fonts loaded with the `Scale` fontspec feature (#287).
+  * Test suite now runs (successfully) with expl3 debug mode.
+
 
 ## v0.8m (2018/07/29)
 
