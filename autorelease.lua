@@ -70,6 +70,10 @@ do
   f:close()
 end
 currentchanges = string.match(changeslisting,"(## %S+ %(.-%).-)%s*## %S+ %(.-%)")
+if currentchanges:len > 8192 then
+  local trunctext = " [...and more; see package for full details.]"
+  currentchanges = currentchanges:sub(1,8192-string.len(trunctext)-1) .. trunctext
+end
 
 print("***************************")
 print("  CURRENT CHANGES          ")
