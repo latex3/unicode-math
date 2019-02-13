@@ -138,9 +138,8 @@
   {
     \tl_if_eq:onT {\g__fontspec_mathrm_tl} {\rmdefault}
       {
-%<XE>   \fontspec_set_family:Nnn \l_@@_tmpa_tl {#1} {#2}
-%<LU>   \fontspec_set_family:Nnn \l_@@_tmpa_tl {Renderer=Basic,#1} {#2}
-        \tl_gset_eq:NN \g__fontspec_mathrm_tl \l_@@_tmpa_tl
+%<XE>   \fontspec_gset_family:Nnn \g__fontspec_mathrm_tl {#1} {#2}
+%<LU>   \fontspec_gset_family:Nnn \g__fontspec_mathrm_tl {Renderer=Basic,#1} {#2}
         \__fontspec_setmathrm_hook:nn {#1} {#2}
       }
   }
@@ -150,9 +149,8 @@
   {
     \tl_if_eq:onT {\g__fontspec_mathsf_tl} {\sfdefault}
       {
-%<XE>   \fontspec_set_family:Nnn \l_@@_tmpa_tl {#1} {#2}
-%<LU>   \fontspec_set_family:Nnn \l_@@_tmpa_tl {Renderer=Basic,#1} {#2}
-        \tl_gset_eq:NN \g__fontspec_mathsf_tl \l_@@_tmpa_tl
+%<XE>   \fontspec_gset_family:Nnn \g__fontspec_mathsf_tl {#1} {#2}
+%<LU>   \fontspec_gset_family:Nnn \g__fontspec_mathsf_tl {Renderer=Basic,#1} {#2}
         \__fontspec_setmathsf_hook:nn {#1} {#2}
       }
   }
@@ -162,9 +160,8 @@
   {
     \tl_if_eq:onT {\g__fontspec_mathtt_tl} {\ttdefault}
       {
-%<XE>   \fontspec_set_family:Nnn \l_@@_tmpa_tl {#1} {#2}
-%<LU>   \fontspec_set_family:Nnn \l_@@_tmpa_tl {Renderer=Basic,#1} {#2}
-        \tl_gset_eq:NN \g__fontspec_mathtt_tl \l_@@_tmpa_tl
+%<XE>   \fontspec_gset_family:Nnn \g__fontspec_mathtt_tl {#1} {#2}
+%<LU>   \fontspec_gset_family:Nnn \g__fontspec_mathtt_tl {Renderer=Basic,#1} {#2}
         \__fontspec_setmathtt_hook:nn {#1} {#2}
       }
   }
