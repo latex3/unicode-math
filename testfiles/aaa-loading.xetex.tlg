@@ -1,5 +1,14 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 No log output; test loading only.
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0
+.\mathon
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#1296
+.\glue(\thickmuskip) 2.77779 plus 2.77779
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#30
+.\glue(\thickmuskip) 2.77779 plus 2.77779
+.\TU/latinmodern-math.otf(1)/m/n/10 glyph#4459
+.\mathoff
 ***************
 Compilation 1 of test file completed with exit status 0

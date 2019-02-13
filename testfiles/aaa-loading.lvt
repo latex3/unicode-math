@@ -4,5 +4,5 @@
 \setmathfont{latinmodern-math.otf}
 \begin{document}
 \MSG{No log output; test loading only.}
-$a=\alpha$
+\SHIPOUT{$a=\alpha$}
 \end{document}
