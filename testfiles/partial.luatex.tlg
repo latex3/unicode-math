@@ -14,21 +14,21 @@ upright
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, glue set - 1.0, direction TLT
 .\mathon
-.\TU/texgyrepagella-math.otf(4)/m/n/10 ∂
+.\TU/texgyrepagella-math.otf(1)/m/n/10 ∂
 .\mathoff
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\mathon
-.\TU/texgyrepagella-math.otf(4)/m/n/10 𝛛
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝛛
 .\mathoff
 italic
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, glue set - 1.0, direction TLT
 .\mathon
-.\TU/texgyrepagella-math.otf(4)/m/n/10 𝜕
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝜕
 .\mathoff
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\mathon
-.\TU/texgyrepagella-math.otf(4)/m/n/10 𝝏
+.\TU/texgyrepagella-math.otf(1)/m/n/10 𝝏
 .\mathoff
 ***************
 Compilation 1 of test file completed with exit status 0
