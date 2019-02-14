@@ -133,14 +133,13 @@
 % Set the math sizes according to the recommended font parameters.
 %    \begin{macrocode}
 \tl_new:N \g_@@_main_font_cmd_tl
+\cs_new:Nn \@@_sf_size:  { \@@_fontdimen_to_scale:nN {10} \g_@@_trial_font }
+\cs_new:Nn \@@_ssf_size: { \@@_fontdimen_to_scale:nN {11} \g_@@_trial_font }
 \@@_cs_new:Nn \@@_declare_math_sizes:
   {
     \dim_compare:nF { \fontdimen 10 \g_@@_trial_font == 0pt }
       {
-        \DeclareMathSizes { \f@size } { \f@size }
-          { \@@_fontdimen_to_scale:nN {10} \g_@@_trial_font }
-          { \@@_fontdimen_to_scale:nN {11} \g_@@_trial_font }
-        \check@mathfonts
+        \DeclareMathSizes { \f@size } { \f@size } { \@@_sf_size: } { \@@_ssf_size: }
       }
   }
 %    \end{macrocode}
@@ -186,8 +185,8 @@
 %    \begin{macrocode}
 \@@_cs_new:Nn \@@_fontspec_select_font:
   {
-    \fp_gset:Nn \g_@@_size_tfsf_fp   { (\f@size +\sf@size )/2 }
-    \fp_gset:Nn \g_@@_size_sfssf_fp  { (\sf@size+\ssf@size)/2 }
+    \fp_gset:Nn \g_@@_size_tfsf_fp   { (\f@size + \@@_sf_size: )/2 }
+    \fp_gset:Nn \g_@@_size_sfssf_fp  { (\@@_sf_size: + \@@_ssf_size:)/2 }
 
     \tl_set:Nx \l_@@_font_keyval_tl
       {
@@ -225,11 +224,6 @@
 				{
 					\exp_last_unbraced:NNo \@@_fontface_gset_eq:NN \l_@@_font \font@name
 				}
-      \fontspec_if_script:nF {math}
-        {
-          \bool_gset_false:N \g_@@_ot_math_bool
-          \bool_gset_false:N \g_@@_init_bool
-        }
     \group_end:
   }
 %    \end{macrocode}
