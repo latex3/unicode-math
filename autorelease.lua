@@ -84,8 +84,8 @@ print("***************************")
 pkgversion = string.match(currentchanges,"## (%S+) %(.-%)")
 print('New version: '..pkgversion)
 
-print('Current tag:')
-os.execute('git tag --contains | head -n1')
+print('Most recent tag:')
+os.execute('git describe $(git rev-list --tags --max-count=1)')
 
 usercheck()
 
@@ -102,12 +102,12 @@ end
 
 exe("git clean -fx")
 
-exe("l3build tag foo")
+exe("l3build tag")
 
 gitstatus = os.capture('git status --porcelain')
 if gitstatus ~= "" then
   exe([===[
-git commit -a -m 'update package info for release
+git commit -a -m 'update package version/date for release
 
 [ci-skip]';
       ]===])
@@ -125,13 +125,13 @@ do
   f:close()
 end
 
-exe("git tag -a '"..pkgversion.."' -F CHANGES-NEW.md")
+exe("git tag -a '"..pkgversion.."' --file CHANGES-NEW.md")
 
 --[=======================[
      UPLOAD and CLEAN UP
 --]=======================]
 
-exe("l3build upload --file CHANGES-NEW.md")
+exe("l3build upload --message CHANGES-NEW.md")
 
 exe("rm CHANGES-NEW.md")
 
