@@ -20,7 +20,7 @@
 % The INHERIT mode saves less time than I was hoping for but is still beneficial
 % in simple cases.
 %    \begin{macrocode}
-\cs_new:Npn \@@_setup_alphabets:
+\@@_cs_new:Nn \@@_setup_alphabets:
   {
     \bool_if:NTF \g_@@_init_bool { \@@_setup_alphabets_implicit: }
       {
@@ -33,7 +33,7 @@
 %
 % \begin{macro}{ \@@_setup_alphabets_implicit:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_alphabets_implicit:
+\@@_cs_new:Nn \@@_setup_alphabets_implicit:
   {
     \@@_log:n {setup-implicit}
     \seq_gset_eq:NN \g_@@_mathalph_seq \g_@@_default_mathalph_seq
@@ -51,7 +51,7 @@
 %
 % \begin{macro}{ \@@_setup_alphabets_explicit:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_alphabets_explicit:
+\@@_cs_new:Nn \@@_setup_alphabets_explicit:
   {
     \@@_log:n {setup-explicit}
     \bool_set_false:N \l_@@_implicit_alph_bool
@@ -65,7 +65,7 @@
 %
 % \begin{macro}{ \@@_setup_alphabets_inherit:}
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_alphabets_inherit:
+\@@_cs_new:Nn \@@_setup_alphabets_inherit:
   {
     \seq_gclear:N \g_@@_mathalph_seq
     \seq_map_inline:Nn \g_@@_default_mathalph_seq
@@ -162,13 +162,13 @@
 % \dots and then loop through them defining the individual ranges:
 % (currently this process is slow)
 %    \begin{macrocode}
-\cs_new:Nn \@@_setup_math_alphabet:
+\@@_cs_new:Nn \@@_setup_math_alphabet:
   {
     \clist_map_inline:Nn \l_@@_alphabet_clist
       {
         \tl_set:Nx \l_@@_alphabet_tl { \tl_trim_spaces:n {##1} }
 
-%<debug>\typeout{_setup_math_alphabet:~\l_@@_style_tl/\l_@@_alphabet_tl}
+%<debug>\@@_debug:n {_setup_math_alphabet:~\l_@@_style_tl/\l_@@_alphabet_tl}
 
         \@@_if_alphabet_exists:nnT {\l_@@_style_tl} {\l_@@_alphabet_tl}
           {

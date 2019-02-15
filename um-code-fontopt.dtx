@@ -64,7 +64,7 @@
 % Math symbols are defined with \cmd\_@@_sym:nnn; see \secref{mathsymbol}
 % for the individual definitions
 %    \begin{macrocode}
-\cs_new:Nn \@@_range_init:
+\@@_cs_new:Nn \@@_range_init:
   {
     \int_gincr:N \g_@@_fam_int
     \tl_set:Nx \l_@@_symfont_label_tl {@@_fam\int_use:N\g_@@_fam_int}
@@ -111,7 +111,6 @@
 %    \begin{macrocode}
 \cs_new:Nn \@@_mathalph_decl:nF
   {
-
     \tl_set:Nn  \l_@@_tmpa_tl {#1}
     \tl_clear:N \l_@@_tmpb_tl
     \tl_clear:N \l_@@_tmpc_tl

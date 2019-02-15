@@ -330,10 +330,14 @@
 %    \begin{macrocode}
 %<*debug>
 \int_new:N \g_@@_debug_nest_int
+\cs_new:Nn \@@_debug:n
+  {
+    \typeout{ <UM~DEBUG>~\prg_replicate:nn \g_@@_debug_nest_int {::}~ #1}
+  }
 \cs_new:Nn \@@_debug_start:n
   {
     \int_gincr:N \g_@@_debug_nest_int
-    \typeout{ <DEBUG>~\prg_replicate:nn \g_@@_debug_nest_int {::}~ #1}
+    \@@_debug:n {#1}
   }
 \cs_new:Nn \@@_debug_end:n
   {
@@ -343,6 +347,16 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\cs_new:Npn \@@_cs_set:Nn #1 #2
+  {
+    \cs_if_exist:NF #1 { \ERROR{CS~ DOES~ NOT~ EXIST,~ USE~ "NEW"} }
+    \cs_set_protected:Nn #1
+      {
+%<debug>\@@_debug_start:n { \cs_to_str:N #1 }
+        #2
+%<debug>\@@_debug_end:n   { \cs_to_str:N #1 }
+      }
+  }
 \cs_new:Npn \@@_cs_new:Nn #1 #2
   {
     \cs_new_protected:Nn #1

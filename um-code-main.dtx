@@ -85,16 +85,10 @@
 % This needs to happen early so that all of the font-loading machinery executes before
 % the other `AtBeginDocument' code.
 %    \begin{macrocode}
-\AtBeginDocument { \@@_load_lm_if_necessary: }
-\@@_cs_new:Nn \@@_load_lm_if_necessary:
+\AtBeginDocument { \bool_if:NF \g_@@_main_font_defined_bool \@@_load_lm: }
+\@@_cs_new:Nn \@@_load_lm:
   {
-    \bool_if:NF \g_@@_main_font_defined_bool
-      {
-%<debug>\typeout{SETTING~ DEFAULT~ FONT~(latinmodern-math)}
-        \setmathfont{latinmodern-math.otf}
-          [BoldFont={latinmodern-math.otf}]
-%<debug>\typeout{END~ DEFAULT~ FONT)}
-      }
+    \setmathfont{latinmodern-math.otf}[BoldFont={latinmodern-math.otf}]
   }
 %    \end{macrocode}
 %
@@ -267,7 +261,6 @@
 %    \begin{macrocode}
 \@@_cs_new:Nn \@@_setup_math_fam:
   {
-%<debug>\typeout{::~_setup_math_fam:}
     \cs_if_exist:cF { sym \l_@@_symfont_label_tl }
       {
         \DeclareSymbolFont{\l_@@_symfont_label_tl}

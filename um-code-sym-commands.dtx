@@ -53,7 +53,7 @@
 % The flag \cs{l_@@_mathstyle_tl} is for other applications to query the
 % current math style.
 %    \begin{macrocode}
-\cs_new:Nn \@@_prepare_mathstyle:n
+\@@_cs_new:Nn \@@_prepare_mathstyle:n
   {
     \seq_gput_right:Nn \g_@@_mathstyles_seq {#1}
     \@@_init_alphabet:n {#1}
@@ -80,7 +80,7 @@
 % First used when the math alphabet macro is first defined, but then used
 % later when redefining a particular maths alphabet.
 %    \begin{macrocode}
-\cs_set:Nn \@@_init_alphabet:n
+\@@_cs_new:Nn \@@_init_alphabet:n
   {
     \@@_log:nx {alph-initialise} {#1}
     \tl_gclear_new:c {g_@@_switchto_#1_tl}
@@ -100,7 +100,7 @@
 % It’s currently not using all of the machinery we’re in the process of setting up above.
 % Baby steps.
 %    \begin{macrocode}
-\cs_new:Nn \@@_default_mathalph:nnn
+\@@_cs_new:Nn \@@_default_mathalph:nnn
   {
     \prop_new:c {g_@@_named_range_#1_prop}
     \seq_gput_right:Nn \g_@@_default_mathalph_seq {{#1}{#2}{#3}}
@@ -169,16 +169,17 @@
 % \subsubsection{New commands for ambiguous alphabets}
 %
 %    \begin{macrocode}
-\AtBeginDocument
+\AtBeginDocument { \@@_setup_mathtext: }
+\@@_cs_new:Nn \@@_setup_mathtext:
   {
     \clist_map_inline:nn
       { rm, it, bf, sf, tt }
       {
-        \cs_set_protected:cpx { math #1 }
+        \cs_set_protected:cpx { math ##1 }
         {
-          \exp_not:n { \bool_if:NTF  } \exp_not:c { g_@@_ math #1 _text_bool}
-            { \exp_not:c { mathtext #1 } }
-            { \exp_not:c { sym #1 } }
+          \exp_not:n { \bool_if:NTF  } \exp_not:c { g_@@_ math ##1 _text_bool}
+            { \exp_not:c { mathtext ##1 } }
+            { \exp_not:c { sym ##1 } }
         }
       }
   }

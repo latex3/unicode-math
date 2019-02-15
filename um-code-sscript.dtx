@@ -59,7 +59,7 @@
 % Collects a chain of subscripts or a chain
 % of superscripts and then typesets what it has collected.
 %    \begin{macrocode}
-\cs_new:Nn \@@_scan_sscript:
+\@@_cs_new:Nn \@@_scan_sscript:
   {
     \@@_scan_sscript:TF
       { \@@_scan_sscript: }
@@ -76,7 +76,7 @@
 % The \cs{group_align_safe_begin:} and \cs{group_align_safe_end:} are
 % needed in case |#3| is |&|.
 %    \begin{macrocode}
-\cs_new:Nn \@@_scan_sscript:TF
+\@@_cs_new:Nn \@@_scan_sscript:TF
   {
     \peek_N_type:TF
       {
@@ -88,7 +88,7 @@
 %    \end{macrocode}
 % The look-ahead for the sscripts doesn't try to peek inside the lookahead.
 %    \begin{macrocode}
-\cs_new:Nn \@@_scan_sscript_aux:nnN
+\@@_cs_new:Nn \@@_scan_sscript_aux:nnN
   {
     \tl_set:Nx \l_@@_tmpa_key_tl { \tl_to_str:n {#3} }
     \prop_get:cxNTF {g_@@_\l_@@_tmpa_tl _prop}

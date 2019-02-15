@@ -33,7 +33,7 @@
 % \begin{macro}{\@@_input_math_symbol_table:}
 % This function simply expands to the token list containing all the data.
 %    \begin{macrocode}
-\cs_new:Nn \@@_input_math_symbol_table: {\g_@@_mathtable_tl}
+\@@_cs_new:Nn \@@_input_math_symbol_table: {\g_@@_mathtable_tl}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -44,7 +44,7 @@
 % make sure |#| is an `other' so that we don't get confused with \cs{mathoctothorpe}.
 %    \begin{macrocode}
 \AtBeginDocument{\@@_define_math_chars:}
-\cs_new:Nn \@@_define_math_chars:
+\@@_cs_new:Nn \@@_define_math_chars:
  {
   \group_begin:
     \cs_set:Npn \_@@_sym:nnn ##1##2##3
