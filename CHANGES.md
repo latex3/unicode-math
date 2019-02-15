@@ -1,7 +1,7 @@
 CHANGE HISTORY
 ==============
 
-## v0.8n (2019/01/26)
+## v0.8n (2019/02/15)
 
   * Add note to readme that the `lm-math` package is required for minimal functionality.
   * Spacing fixed for maths fonts loaded with the `Scale` fontspec feature (#287).
