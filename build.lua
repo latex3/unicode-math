@@ -1,4 +1,8 @@
 
+--[================[--
+      PARAMETERS
+--]================]--
+
 module = "unicode-math"
 
 sourcefiles  = {"*.dtx","*.ins","unicode-math-table.tex"}
@@ -16,9 +20,10 @@ typesetopts  = " -shell-escape -interaction=nonstopmode "
 packtdszip = true
 recordstatus = true
 
---[[
-     TAGGING
---]]
+
+--[=============[--
+      VERSION
+--]=============]--
 
 changeslisting = nil
 do
@@ -26,9 +31,40 @@ do
   changeslisting = f:read("*all")
   f:close()
 end
+currentchanges = string.match(changeslisting,"(## %S+ %(.-%).-)%s*## %S+ %(.-%)")
 pkgversion = string.match(changeslisting,"## v(%S+) %(.-%)")
+gittag = 'v'..pkgversion
+
 print('Current version (from first entry in CHANGES.md): '..pkgversion)
 
+
+--[=================[--
+      CTAN UPLOAD
+--]=================]--
+
+uploadconfig = {
+  version      = pkgversion,
+  author       = "Will Robertson",
+  license      = "lppl1.3c",
+  summary      = "Unicode mathematics support for XeLaTeX and LuaLaTeX",
+  ctanPath     = "/macros/latex/contrib/unicode-math",
+  repository   = "https://github.com/wspr/unicode-math/",
+  bugtracker   = "https://github.com/wspr/unicode-math/issues",
+  announcement = currentchanges,
+}
+
+local function prequire(m) -- from: https://stackoverflow.com/a/17878208
+  local ok, err = pcall(require, m)
+  if not ok then return nil, err end
+  return err
+end
+
+prequire("l3build-wspr.lua")
+
+
+--[=============[--
+      TAGGING
+--]=============]--
 
 function update_tag(file, content, tagname, tagdate)
   local date = string.gsub(tagdate, "%-", "/")
@@ -57,9 +93,9 @@ end
 
 
 
---[[
-     MANIFEST SETTINGS
---]]
+--[==============[--
+      MANIFEST
+--]==============]--
 
 
 manifest_setup = manifest_setup or function()

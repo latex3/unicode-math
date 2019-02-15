@@ -127,13 +127,13 @@ end
 
 exe("git tag -a '"..pkgversion.."' --file CHANGES-NEW.md")
 
+exe("rm CHANGES-NEW.md")
+
 --[=======================[
      UPLOAD and CLEAN UP
 --]=======================]
 
-exe("l3build upload --message CHANGES-NEW.md")
-
-exe("rm CHANGES-NEW.md")
+exe("l3build upload")
 
 exe("git push")
 exe("git checkout working")
