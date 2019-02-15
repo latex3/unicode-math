@@ -165,12 +165,8 @@
     \group_begin:
       \fontfamily { \l_@@_trial_family_tl } \selectfont
       \exp_last_unbraced:NNo \@@_fontface_gset_eq:NN \g_@@_trial_font \font@name
-      \fontspec_if_script:nTF {math}
+      \fontspec_if_script:nF {math}
         {
-%<debug>\typeout{::~OpenType~math~font~loaded;~proceeding~normally.}
-        }
-        {
-%<debug>\typeout{::~Not~an~OpenType~math~font!~Changing~plan.}
           \@@_warning:n {not-ot-math}
           \bool_gset_false:N \g_@@_ot_math_bool
           \bool_gset_false:N \g_@@_init_bool
