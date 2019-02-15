@@ -71,21 +71,19 @@ do
 end
 currentchanges = string.match(changeslisting,"(## %S+ %(.-%).-)%s*## %S+ %(.-%)")
 if currentchanges:len() > 8192 then
-  local trunctext = " [...and more; see package for full details.]"
+  local trunctext = " [...and more; see CHANGES.md for full details.]"
   currentchanges = currentchanges:sub(1,8192-trunctext:len()-1) .. trunctext
 end
 
-print("***************************")
-print("  CURRENT CHANGES          ")
 print("***************************")
 print(currentchanges)
 print("***************************")
 
 pkgversion = string.match(currentchanges,"## (%S+) %(.-%)")
-print('New version: '..pkgversion)
+print('New version:     '..pkgversion)
 
-print('Most recent tag:')
-os.execute('git describe $(git rev-list --tags --max-count=1)')
+oldversion = os.capture('git describe $(git rev-list --tags --max-count=1)')
+print('Most recent tag: '..oldversion)
 
 usercheck()
 
@@ -109,7 +107,7 @@ if gitstatus ~= "" then
   exe([===[
 git commit -a -m 'update package version/date for release
 
-[ci-skip]';
+[ci skip]';
       ]===])
 end
 
@@ -140,4 +138,5 @@ exe("git checkout working")
 exe("git rebase master")
 exe("git push")
 
+print('=====================')
 print("Great success! Now time to fix some more bugs.")
