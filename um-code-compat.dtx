@@ -52,21 +52,17 @@
 % \section{Patching/augmenting 3rd-party packages}
 %
 % \subsection{\pkg{url}}
-%
-% Simply need to get \pkg{url} in a state such that
+% Here we need to get \pkg{url} in a state such that
 % when it switches to math mode and enters \ascii\ characters, the maths
 % setup (i.e., \pkg{unicode-math}) doesn't remap the symbols into Plane 1.
-% Which is, of course, what \cs{mathup} is doing.
-%
-% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\@@_switchto_up:}|
-% but activates automatically so old documents that might change the \cs{url}
-% font still work correctly.
-%
-% TODO: check still needed now we have symup vs mathrm
+% Which is what \cs{symliteral} is intended to do.
+% This is the same as writing, e.g., |\def\UrlFont{\ttfamily\@@_switch_to:n{literal}}|
+% but activates automatically so documents that might change the \cs{url}
+% font through the standard interface still work correctly.
 %    \begin{macrocode}
 \AtEndOfPackageFile * {url}
   {
-    \tl_put_left:Nn \Url@FormatString { \@@_switch_to:n {up} }
+    \tl_put_left:Nn \Url@FormatString { \@@_switch_to:n {literal} }
     \tl_put_right:Nn \UrlSpecials
       {
         \do \` { \mathchar`\` }
