@@ -90,7 +90,7 @@ DEVELOPMENT and MAINTENANCE
 ---------------------------
 
 The current release version is available from CTAN:
-> <http://tug.ctan.org/pkg/unicode-math>
+> <https://ctan.org/pkg/unicode-math>
 
 Latest developmental and archived historical versions are available from Github:
 > <http://github.com/wspr/unicode-math>
