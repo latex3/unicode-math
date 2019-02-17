@@ -56,18 +56,17 @@ tlmgr install   \
 # Fonts
 tlmgr install   \
   Asana-Math    \
-  fira          \
+  firamath      \
   lm-math       \
   tex-gyre      \
   tex-gyre-math \
-  stix2         \
+  stix2-otf     \
   xits
 
 # for documentation
 tlmgr install \
   booktabs \
   caption \
-  catchfile \
   collection-latexrecommended \
   dejavu \
   enumitem \
@@ -76,13 +75,12 @@ tlmgr install \
   graphics-def \
   hyperref \
   inconsolata \
-  iwona \
-  longtable \
-  ltxmisc \
+  iwona    \
+  ltxmisc  \
   metalogo \
-  ragged2e \
+  ms       \
   refstyle \
-  subfig \
+  subfig   \
   tabu \
   titlesec \
   tools \
