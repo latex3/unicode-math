@@ -81,6 +81,7 @@ tlmgr install \
   tools \
   underscore \
   url \
+  varwidth \
   xcolor \
   zapfding
 
