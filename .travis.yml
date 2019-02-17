@@ -7,9 +7,15 @@ cache:
 
 stages:
   - test
+  - doc
 
 jobs:
   include:
-    - script: l3build check -H --engine xetex  --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
+    - stage:  test
+      script: l3build check -H --engine xetex  --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
+      name:   "XeTeX tests"
     - script: l3build check -H --engine luatex --shuffle --first aaa-loading || ( cat build/*/`ls -t  build/*/*.log | head -n1 | xargs basename | cut -f 1 -d . `.log && false )
-    - script: l3build doc
+      name:   "LuaTeX tests"
+    - stage:  doc
+      script: l3build doc
+      name:   "Typesetting documentation"
