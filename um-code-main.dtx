@@ -131,6 +131,9 @@
 \cs_new:Nn \@@_ssf_size: { \@@_fontdimen_to_scale:nN {11} \g_@@_trial_font }
 \@@_cs_new:Nn \@@_declare_math_sizes:
   {
+    \fp_gset:Nn \g_@@_size_tfsf_fp   { (\f@size + \@@_sf_size: )/2 }
+    \fp_gset:Nn \g_@@_size_sfssf_fp  { (\@@_sf_size: + \@@_ssf_size:)/2 }
+
     \dim_compare:nF { \fontdimen 10 \g_@@_trial_font == 0pt }
       {
         \DeclareMathSizes { \f@size } { \f@size } { \@@_sf_size: } { \@@_ssf_size: }
@@ -175,9 +178,6 @@
 %    \begin{macrocode}
 \@@_cs_new:Nn \@@_fontspec_select_font:
   {
-    \fp_gset:Nn \g_@@_size_tfsf_fp   { (\f@size + \@@_sf_size: )/2 }
-    \fp_gset:Nn \g_@@_size_sfssf_fp  { (\@@_sf_size: + \@@_ssf_size:)/2 }
-
     \tl_set:Nx \l_@@_font_keyval_tl
       {
 %<LU>   Renderer = Basic,
