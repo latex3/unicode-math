@@ -66,9 +66,9 @@ tlmgr install   \
 # for documentation
 tlmgr install \
   booktabs \
-  caption \
+  caption  \
   collection-latexrecommended \
-  dejavu \
+  dejavu   \
   enumitem \
   fancyvrb \
   geometry \
@@ -81,13 +81,13 @@ tlmgr install \
   ms       \
   refstyle \
   subfig   \
-  tabu \
+  tabu     \
   titlesec \
-  tools \
+  tools    \
   underscore \
-  url \
+  url      \
   varwidth \
-  xcolor \
+  xcolor   \
   zapfding
 
 
