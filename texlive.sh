@@ -54,7 +54,14 @@ tlmgr install   \
   oberdiek
 
 # Fonts
-tlmgr install Asana-Math tex-gyre tex-gyre-math lm-math xits
+tlmgr install   \
+  Asana-Math    \
+  fira          \
+  lm-math       \
+  tex-gyre      \
+  tex-gyre-math \
+  stix2         \
+  xits
 
 # for documentation
 tlmgr install \
