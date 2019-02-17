@@ -45,7 +45,9 @@ tlmgr install   \
   etoolbox      \
   filehook      \
   fontspec      \
-  geometry ifxetex \
+  geometry      \
+  ifluatex      \
+  ifxetex       \
   graphics      \
   lualatex-math \
   luaotfload    \
@@ -55,7 +57,33 @@ tlmgr install   \
 tlmgr install Asana-Math tex-gyre tex-gyre-math lm-math xits
 
 # for documentation
-tlmgr install xcolor enumitem  booktabs  enumitem fancyvrb refstyle subfig url underscore metalogo iwona graphics-def tools caption ltxmisc titlesec hyperref inconsolata zapfding dejavu ifluatex
+tlmgr install \
+  booktabs \
+  caption \
+  catchfile \
+  collection-latexrecommended \
+  dejavu \
+  enumitem \
+  fancyvrb \
+  geometry \
+  graphics-def \
+  hyperref \
+  inconsolata \
+  iwona \
+  longtable \
+  ltxmisc \
+  metalogo \
+  ragged2e \
+  refstyle \
+  subfig \
+  tabu \
+  titlesec \
+  tools \
+  underscore \
+  url \
+  xcolor \
+  zapfding
+
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
