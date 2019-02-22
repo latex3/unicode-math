@@ -127,8 +127,8 @@
 % Set the math sizes according to the recommended font parameters.
 %    \begin{macrocode}
 \tl_new:N \g_@@_main_font_cmd_tl
-\cs_new:Nn \@@_sf_size:  { \@@_fontdimen_to_scale:nN {10} \g_@@_trial_font }
-\cs_new:Nn \@@_ssf_size: { \@@_fontdimen_to_scale:nN {11} \g_@@_trial_font }
+\cs_new:Nn \@@_sf_size:  { \@@_fontdimen_pc_to_pt:nN {10} \g_@@_trial_font }
+\cs_new:Nn \@@_ssf_size: { \@@_fontdimen_pc_to_pt:nN {11} \g_@@_trial_font }
 \@@_cs_new:Nn \@@_declare_math_sizes:
   {
     \fp_gset:Nn \g_@@_size_tfsf_fp   { (\f@size + \@@_sf_size: )/2 }
