@@ -282,13 +282,15 @@
 %
 % \begin{macro}{\@@_setup_legacy_fam_two:}
 % \TeX\ won't load the same font twice at the same scale, so we need to magnify this one by an imperceptable amount.
+% Note that for extreme font sizes, this scaling value might need to be adjusted.
+% 1.0001 should be enough for reasonable use cases however.
 %    \begin{macrocode}
 \@@_cs_new:Nn \@@_setup_legacy_fam_two:
   {
     \fontspec_set_family:Nxn \l_@@_fam_two_tl
       {
         \l_@@_font_keyval_tl,
-        ScaleAgain = 1.00001,
+        ScaleAgain = 1.0001,
         FontAdjustment =
           {
             \@@_copy_fontdimen:nnN { 8} {43} \g_@@_main_font_cmd_tl
@@ -329,7 +331,7 @@
     \fontspec_set_family:Nxn \l_@@_fam_three_tl
       {
         \l_@@_font_keyval_tl,
-        ScaleAgain = 0.99999,
+        ScaleAgain = 0.9999,
         FontAdjustment = {
           \@@_copy_fontdimen:nnN { 8} {48} \g_@@_main_font_cmd_tl
           \@@_copy_fontdimen:nnN { 9} {28} \g_@@_main_font_cmd_tl
