@@ -1,7 +1,16 @@
 CHANGE HISTORY
 ==============
 
-## v0.8n (2019/02/15)
+## v0.8o (2019/01/26)
+
+  * Avoid `'Dimension too large' error` for some (unpredictable) combinations of font
+    choice and the `Scale` option. Problems are still known to occur for very large or
+    very small values of `Scale`.
+  * Documentation is now run through ‘continuous integration’ (viz, *Travis* for the time being)
+    as well as the test suite.
+
+
+## v0.8n (2019/01/26)
 
   * Add note to readme that the `lm-math` package is required for minimal functionality.
   * Spacing fixed for maths fonts loaded with the `Scale` fontspec feature (#287).
