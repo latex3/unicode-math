@@ -18,42 +18,42 @@ SQRT x squared
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\hbox(11.94504+1.03496)x19.03
-..\vbox(0.66+11.65999)x9.28, shifted -10.62503
+.\hbox(11.94516+1.03484)x19.03
+..\vbox(0.66+11.65999)x9.28, shifted -10.62515
 ...\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#1160
-..\vbox(11.94504+0.09)x9.75
+..\vbox(11.94516+0.09)x9.75
 ...\kern0.66
 ...\rule(0.66+0.0)x*
-...\kern2.80498
-...\hbox(7.82005+0.09)x9.75
+...\kern2.80486
+...\hbox(7.8203+0.09)x9.75
 ....\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2520
-....\hbox(5.07+0.0)x4.25, shifted -2.75005
+....\hbox(5.07+0.0)x4.25, shifted -2.75029
 .....\TU/XITSMath-Regular.otf(1)/m/n/7.5 glyph#51
 .\mathoff
 SQRT FRAC x y
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0
 .\mathon
-.\hbox(14.91+10.34999)x19.14
-..\vbox(0.66+23.93999)x11.24, shifted -13.59
+.\hbox(14.90994+10.35005)x19.14
+..\vbox(0.66+23.93999)x11.24, shifted -13.58994
 ...\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#3702
-..\vbox(14.91+8.83011)x7.9
+..\vbox(14.90994+8.83075)x7.9
 ...\kern0.66
 ...\rule(0.66+0.0)x*
-...\kern3.3799
-...\hbox(10.2101+8.83011)x7.9
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
-....\vbox(10.2101+8.83011)x5.5
+...\kern3.37932
+...\hbox(10.21062+8.83075)x7.9
+....\hbox(0.0+0.0)x1.2, shifted -2.50027
+....\vbox(10.21062+8.83075)x5.5
 .....\hbox(4.41+0.09)x5.5
 ......\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2520
-.....\kern2.88005
-.....\rule(0.65999+0.0)x*
-.....\kern4.77016
+.....\kern2.88037
+.....\rule(0.65993+0.0)x*
+.....\kern4.77106
 .....\hbox(4.4+1.83)x5.5, glue set 0.27fil
 ......\glue 0.0 plus 1.0fil minus 1.0fil
 ......\TU/XITSMath-Regular.otf(1)/m/n/10 glyph#2521
 ......\glue 0.0 plus 1.0fil minus 1.0fil
-....\hbox(0.0+0.0)x1.2, shifted -2.50005
+....\hbox(0.0+0.0)x1.2, shifted -2.50027
 .\mathoff
 ***************
 Compilation 1 of test file completed with exit status 0
