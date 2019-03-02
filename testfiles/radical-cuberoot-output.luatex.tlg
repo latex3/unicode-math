@@ -4,13 +4,13 @@ SQRT x
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(10.23997+2.74)x14.78, direction TLT
-..\hbox(9.73+2.59)x9.28, shifted 0.15001, direction TLT
+.\hbox(10.23979+2.74013)x14.78, direction TLT
+..\hbox(9.73+2.59)x9.28, shifted 0.15013, direction TLT
 ...\TU/XITSMath-Regular.otf(1)/m/n/10 ∛
-..\vbox(10.23997+0.09)x5.5, direction TLT
-...\kern0.65999 (font)
-...\rule(0.65999+0.0)x*
-...\kern4.51 (font)
+..\vbox(10.23979+0.09)x5.5, direction TLT
+...\kern0.65993 (font)
+...\rule(0.65993+0.0)x*
+...\kern4.50993 (font)
 ...\hbox(4.41+0.09)x5.5, direction TLT
 ....\TU/XITSMath-Regular.otf(1)/m/n/10 𝑥
 .\mathoff
@@ -18,42 +18,42 @@ SQRT x squared
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(11.94495+1.03503)x18.93999, direction TLT
-..\hbox(9.73+2.59)x9.28, shifted -1.55496, direction TLT
+.\hbox(11.94466+1.03526)x18.93996, direction TLT
+..\hbox(9.73+2.59)x9.28, shifted -1.55473, direction TLT
 ...\TU/XITSMath-Regular.otf(1)/m/n/10 ∛
-..\vbox(11.94495+0.09)x9.65999, direction TLT
-...\kern0.65999 (font)
-...\rule(0.65999+0.0)x*
-...\kern2.80501 (font)
-...\hbox(7.81996+0.09)x9.65999, direction TLT
+..\vbox(11.94466+0.09)x9.65996, direction TLT
+...\kern0.65993 (font)
+...\rule(0.65993+0.0)x*
+...\kern2.80508 (font)
+...\hbox(7.81972+0.09)x9.65996, direction TLT
 ....\TU/XITSMath-Regular.otf(1)/m/n/10 𝑥
-....\hbox(5.07+0.0)x4.15999, shifted -2.74995, direction TLT
+....\hbox(5.07+0.0)x4.15996, shifted -2.74971, direction TLT
 .....\TU/XITSMath-Regular.otf(1)/m/n/7.5 2
 .\mathoff
 SQRT FRAC x y
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(14.90997+10.35)x19.14, direction TLT
-..\hbox(20.56+4.04)x11.24, shifted 6.31001, direction TLT
+.\hbox(14.90985+10.35007)x19.14, direction TLT
+..\hbox(20.56+4.04)x11.24, shifted 6.31007, direction TLT
 ...\TU/XITSMath-Regular.otf(1)/m/n/10 󰂐
-..\vbox(14.90997+8.8299)x7.9, direction TLT
-...\kern0.65999 (font)
-...\rule(0.65999+0.0)x*
-...\kern3.38008 (font)
-...\hbox(10.20992+8.8299)x7.9, direction TLT
-....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
-....\vbox(10.20992+8.8299)x5.5, direction TLT
+..\vbox(14.90985+8.82925)x7.9, direction TLT
+...\kern0.65993 (font)
+...\rule(0.65993+0.0)x*
+...\kern3.38062 (font)
+...\hbox(10.20938+8.82925)x7.9, direction TLT
+....\hbox(0.0+0.0)x1.2, shifted -2.49974, direction TLT
+....\vbox(10.20938+8.82925)x5.5, direction TLT
 .....\hbox(4.41+0.09)x5.5, direction TLT
 ......\TU/XITSMath-Regular.otf(1)/m/n/10 𝑥
-.....\kern2.87994 (font)
-.....\rule(0.65999+0.0)x*
-.....\kern4.76987 (font)
+.....\kern2.87967 (font)
+.....\rule(0.65993+0.0)x*
+.....\kern4.76903 (font)
 .....\hbox(4.4+1.83)x5.5, glue set 0.27fil, direction TLT
 ......\glue 0.0 plus 1.0fil minus 1.0fil
 ......\TU/XITSMath-Regular.otf(1)/m/n/10 𝑦
 ......\glue 0.0 plus 1.0fil minus 1.0fil
-....\hbox(0.0+0.0)x1.2, shifted -2.49997, direction TLT
+....\hbox(0.0+0.0)x1.2, shifted -2.49974, direction TLT
 .\mathoff
 ***************
 Compilation 1 of test file completed with exit status 0
