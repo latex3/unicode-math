@@ -1,7 +1,7 @@
 CHANGE HISTORY
 ==============
 
-## v0.8o (2019/01/26)
+## v0.8o (2019/03/04)
 
   * Avoid `'Dimension too large' error` for some (unpredictable) combinations of font
     choice and the `Scale` option. Problems are still known to occur for very large or
