@@ -80,14 +80,19 @@
 % and then splits into a XeTeX- or LuaTeX-specific version of the package.
 %
 %    \begin{macrocode}
-%<base>\sys_if_engine_luatex:T { \RequirePackageWithOptions{unicode-math-luatex} }
-%<base>\sys_if_engine_xetex:T  { \RequirePackageWithOptions{unicode-math-xetex}  }
-%<base>\sys_if_engine_pdftex:T
+%<base>\sys_if_engine_luatex:T
 %<base>  {
-%<base>    \msg_new:nnn {unicode-math} {not-pdftex}
-%<base>      { Cannot~ be~ run~ with~ pdfLaTeX!\\ Use~ XeLaTeX~ or~ LuaLaTeX~ instead. }
-%<base>    \msg_error:nn {unicode-math} {not-pdftex}
+%<base>    \RequirePackageWithOptions{unicode-math-luatex}
+%<base>    \endinput
 %<base>  }
+%<base>\sys_if_engine_xetex:T
+%<base>  {
+%<base>    \RequirePackageWithOptions{unicode-math-xetex}
+%<base>    \endinput
+%<base>  }
+%<base>\msg_new:nnn {unicode-math} {unsupported-engine}
+%<base>  { Cannot~ be~ run~ with~ \c_sys_engine_str!\\ Use~ XeLaTeX~ or~ LuaLaTeX~ instead. }
+%<base>\msg_error:nn {unicode-math} {unsupported-engine}
 %<base>\endinput
 %    \end{macrocode}
 
