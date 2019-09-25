@@ -1,6 +1,15 @@
 CHANGE HISTORY
 ==============
 
+## v0.8p (2019/09/26)
+
+  * Remove dependency on `filehook` package. Just to simplify.
+  * Remove patch code for the `colonequals` package; now if you use that package
+    you will simply receive its standard ‘constructed’ symbols.
+  * Load `amsmath` automatically. This is not intended to save time for the user,
+    but to simplify the code logic. Users should continue to load `amsmath` explicitly IMO.
+
+
 ## v0.8o (2019/03/04)
 
   * Avoid `'Dimension too large' error` for some (unpredictable) combinations of font
