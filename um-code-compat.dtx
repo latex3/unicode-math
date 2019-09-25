@@ -133,36 +133,6 @@
 % \end{macro}
 % \end{macro}
 %
-% \subsection{\pkg{colonequals}}
-%
-% \begin{macro}{\ratio}
-% \begin{macro}{\coloncolon}
-% \begin{macro}{\minuscolon}
-% \begin{macro}{\colonequals}
-% \begin{macro}{\equalscolon}
-% \begin{macro}{\coloncolonequals}
-%   Similarly to \pkg{mathtools}, the \pkg{colonequals} defines several colon
-%   combinations.  Fortunately there are no name clashes, so we can just
-%   overwrite their definitions.
-%    \begin{macrocode}
-\@@_after_package:nNn { colonequals } \@@_patch_colonequals:
-  {
-    \msg_warning:nn { unicode-math } { colonequals }
-    \RenewDocumentCommand \ratio { } { \mathratio }
-    \RenewDocumentCommand \coloncolon { } { \Colon }
-    \RenewDocumentCommand \minuscolon { } { \dashcolon }
-    \RenewDocumentCommand \colonequals { } { \coloneq }
-    \RenewDocumentCommand \equalscolon { } { \eqcolon }
-    \RenewDocumentCommand \coloncolonequals { } { \Coloneq }
-  }
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
