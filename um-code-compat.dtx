@@ -7,47 +7,6 @@
 %<*package>
 %    \end{macrocode}
 %
-% \begin{macro}{\@@_check_and_fix:NNnnn}
-% \darg{command}
-% \darg{factory command}
-% \darg{parameter text}
-% \darg{expected replacement text}
-% \darg{new replacement text}
-% Tries to patch \meta{command}.
-% If \meta{command} is undefined, do nothing.
-% Otherwise it must be a macro with the given \meta{parameter text} and \meta{expected replacement text}, created by the given \meta{factory command} or equivalent.
-% In this case it will be overwritten using the \meta{parameter text} and the \meta{new replacement text for \LuaTeX} or the \meta{new replacement text for \XeTeX}, depending on the engine.
-% Otherwise issue a warning and don’t overwrite.
-%    \begin{macrocode}
-\cs_new_protected_nopar:Nn \@@_check_and_fix:NNnnn
-  {
-    \cs_if_exist:NT #1
-      {
-        \token_if_macro:NTF #1
-          {
-            \group_begin:
-            #2 \@@_tmpa:w #3 { #4 }
-            \cs_if_eq:NNTF #1 \@@_tmpa:w
-              {
-                \msg_info:nnx { unicode-math } { patch-macro } { \token_to_str:N #1 }
-                \group_end:
-                #2 #1 #3 { #5 }
-              }
-              {
-                \msg_warning:nnxxx { unicode-math } { wrong-meaning }
-                  { \token_to_str:N #1 } { \token_to_meaning:N #1 }
-                  { \token_to_meaning:N \@@_tmpa:w }
-                \group_end:
-              }
-          }
-          {
-            \msg_warning:nnx { unicode-math } { macro-expected }
-              { \token_to_str:N #1 }
-          }
-       }
-  }
-%    \end{macrocode}
-% \end{macro}
 %
 % \section{Patching/augmenting 3rd-party packages}
 %
@@ -60,7 +19,7 @@
 % but activates automatically so documents that might change the \cs{url}
 % font through the standard interface still work correctly.
 %    \begin{macrocode}
-\AtEndOfPackageFile * {url}
+\@@_after_package:nNn {url} \@@_patch_url:
   {
     \tl_put_left:Nn \Url@FormatString { \@@_switch_to:n {literal} }
     \tl_put_right:Nn \UrlSpecials
@@ -84,43 +43,21 @@
 % upsetting effect on legacy math alphabets.
 %    \begin{macrocode}
 %<*XE>
-\AtEndOfPackageFile * { mathtools }
+\@@_after_package:nNn { mathtools } \@@_patch_mathtools_A:
   {
-    \@@_check_and_fix:NNnnn \MT_cramped_internal:Nn \cs_set_nopar:Npn { #1 #2 }
-     {
-       \sbox \z@ { $ \m@th #1 \nulldelimiterspace = \z@ \radical \z@ { #2 } $ }
-       \ifx #1 \displaystyle
-         \dimen@ = \fontdimen 8 \textfont 3
-         \advance \dimen@ .25 \fontdimen 5 \textfont 2
-       \else
-         \dimen@ = 1.25 \fontdimen 8
-         \ifx #1 \textstyle
-           \textfont
-         \else
-           \ifx #1 \scriptstyle
-             \scriptfont
-           \else
-             \scriptscriptfont
-           \fi
-         \fi
-         3
-       \fi
-       \advance \dimen@ -\ht\z@
-       \ht\z@ = -\dimen@
-       \box\z@
-     }
+    \cs_set_nopar:Npn \MT_cramped_internal:Nn ##1 ##2
      {
        \hbox_set:Nn \l_tmpa_box
          {
            \color@setgroup \c_math_toggle_token \m@th
-             #1
+             ##1
              \dim_zero:N \nulldelimiterspace
-             \XeTeXradical 255 ~ 0 ~ { #2 }
+             \XeTeXradical 255 ~ 0 ~ { ##2 }
            \c_math_toggle_token \color@endgroup
          }
        \box_set_ht:Nn \l_tmpa_box
          {
-           \box_ht:N \l_tmpa_box - \@@_radical_vgap:N #1
+           \box_ht:N \l_tmpa_box - \@@_radical_vgap:N ##1
          }
        \box_use_drop:N \l_tmpa_box
      }
@@ -138,7 +75,7 @@
 %   with Unicode fonts, so we are hard coding the $5/18$ex suggested by
 %   \pkg{mathtools}’s documentation.
 %    \begin{macrocode}
-\AtEndOfPackageFile * { mathtools }
+\@@_after_package:nNn { mathtools } \@@_patch_mathtools_B:
   {
     \cs_set_eq:NN \MToverbracket  \overbracket
     \cs_set_eq:NN \MTunderbracket \underbracket
@@ -147,20 +84,20 @@
       {
         \msg_warning:nn { unicode-math } { mathtools-overbracket }
 
-    	  \cs_set:Npn \downbracketfill #1 #2
+    	  \cs_set:Npn \downbracketfill ##1 ##2
 	        {
             \tl_set:Nn \l_MT_bracketheight_fdim {.27ex}
-            \downbracketend {#1} {#2}
-            \leaders \vrule \@height #1 \@depth \z@ \hfill
-            \downbracketend {#1} {#2}
+            \downbracketend {##1} {##2}
+            \leaders \vrule \@height ##1 \@depth \z@ \hfill
+            \downbracketend {##1} {##2}
           }
 
-	      \cs_set:Npn \upbracketfill #1 #2
+	      \cs_set:Npn \upbracketfill ##1 ##2
 	        {
             \tl_set:Nn \l_MT_bracketheight_fdim {.27ex}
-            \upbracketend {#1} {#2}
-            \leaders \vrule \@height \z@ \@depth #1 \hfill
-            \upbracketend {#1} {#2}
+            \upbracketend {##1} {##2}
+            \leaders \vrule \@height \z@ \@depth ##1 \hfill
+            \upbracketend {##1} {##2}
           }
 
 	      \cs_set_eq:NN \Uoverbracket  \overbracket
@@ -179,17 +116,16 @@
 % \begin{macro}{\eqqcolon}
 %   \pkg{mathtools} defines several commands as combinations of colons and
 %   other characters, but with meanings incompatible to \pkg{unicode-math}.
-%   Thus we issue a warning.  Because \pkg{mathtools} uses
-%   \cmd{\providecommand} \cmd{\AtBeginDocument}, we can just define the
-%   offending commands here.
+%   Thus we issue a warning.  Note \pkg{mathtools} uses
+%   \cmd{\providecommand} \cmd{\AtBeginDocument}.
 %    \begin{macrocode}
-\AtEndOfPackageFile * { mathtools }
+\@@_after_package:nNn { mathtools } \@@_patch_mathtools_C:
   {
     \msg_warning:nn { unicode-math } { mathtools-colon }
-    \NewDocumentCommand \dblcolon { } { \Colon }
-    \NewDocumentCommand \coloneqq { } { \coloneq }
-    \NewDocumentCommand \Coloneqq { } { \Coloneq }
-    \NewDocumentCommand \eqqcolon { } { \eqcolon }
+    \DeclareDocumentCommand \dblcolon { } { \Colon }
+    \DeclareDocumentCommand \coloneqq { } { \coloneq }
+    \DeclareDocumentCommand \Coloneqq { } { \Coloneq }
+    \DeclareDocumentCommand \eqqcolon { } { \eqcolon }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -209,7 +145,7 @@
 %   combinations.  Fortunately there are no name clashes, so we can just
 %   overwrite their definitions.
 %    \begin{macrocode}
-\AtEndOfPackageFile * { colonequals }
+\@@_after_package:nNn { colonequals } \@@_patch_colonequals:
   {
     \msg_warning:nn { unicode-math } { colonequals }
     \RenewDocumentCommand \ratio { } { \mathratio }

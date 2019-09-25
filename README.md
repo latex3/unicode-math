@@ -76,7 +76,7 @@ REQUIREMENTS
 ------------
 
 As well as running XeTeX or LuaTeX, this package requires recent versions of the
-`lm-math`, `fontspec`, `expl3`, `xpackages`, `filehook`, and `lualatex-math` packages.
+`lm-math`, `fontspec`, `expl3`, `xpackages`, and `lualatex-math` packages.
 
 
 THANKS

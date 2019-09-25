@@ -69,7 +69,7 @@ Load \pkg{unicode-math} as a regular \LaTeX\ package. It should be loaded
 after any other maths or font-related package in case it needs to overwrite
 their definitions. Here's an example using the filename syntax to load the \TeX\ Gyre Pagella Math font: (this works for both \XeLaTeX\ and \LuaLaTeX)
 \begin{Verbatim}
-\usepackage{amsmath} % if desired
+\usepackage{amsmath}
 \usepackage{unicode-math}
 \setmathfont{texgyrepagella-math.otf}
 \end{Verbatim}
@@ -77,6 +77,10 @@ their definitions. Here's an example using the filename syntax to load the \TeX\
 Once the package is loaded, traditional TFM-based maths fonts are no longer supported;
 you can only switch to a different OpenType maths font using the \cs{setmathfont} command.
 If you do not load an OpenType maths font before |\begin{document}|, Latin Modern Math will be loaded automatically.
+
+Note that \pkg{amsmath} should be loaded before \pkg{unicode-math} to avoid conflicts, and
+it will be loaded automatically if not requested earlier in the preamble.
+
 
 \subsection{New commands}
 \LaTeX, since the first version of \LaTeXe, changed the math group

@@ -9,8 +9,6 @@
 %
 % Since the mathcode of |`\-| is greater than eight bits, this piece of |\AtBeginDocument| code from \pkg{amsmath} dies if we try and set the maths font in the preamble:
 %    \begin{macrocode}
-\AtEndOfPackageFile * {amsmath}
-  {
     \tl_remove_once:Nn \@begindocumenthook
       {
         \mathchardef\std@minus\mathcode`\-\relax
@@ -38,24 +36,7 @@
 %    \end{macrocode}
 % The |subarray| environment uses inappropriate font dimensions.
 %    \begin{macrocode}
-    \@@_check_and_fix:NNnnn \subarray \cs_set:Npn { #1 }
-      {
-        \vcenter
-        \bgroup
-        \Let@
-        \restore@math@cr
-        \default@tag
-        \baselineskip \fontdimen 10~ \scriptfont \tw@
-        \advance \baselineskip \fontdimen 12~ \scriptfont \tw@
-        \lineskip \thr@@@@ \fontdimen 8~ \scriptfont \thr@@@@
-        \lineskiplimit \lineskip
-        \ialign
-        \bgroup
-        \ifx c #1 \hfil \fi
-        $ \m@th \scriptstyle ## $
-        \hfil
-        \crcr
-      }
+    \cs_set:Npn \subarray #1
       {
         \vcenter
         \c_group_begin_token
@@ -64,15 +45,9 @@
         \default@tag
         \skip_set:Nn \baselineskip
           {
-%    \end{macrocode}
-% Here we use stack top shift + stack bottom shift, which sounds reasonable.
-%    \begin{macrocode}
             \@@_stack_num_up:N \scriptstyle
             + \@@_stack_denom_down:N \scriptstyle
           }
-%    \end{macrocode}
-% Here we use the minimum stack gap.
-%    \begin{macrocode}
         \lineskip \@@_stack_vgap:N \scriptstyle
         \lineskiplimit \lineskip
         \ialign
@@ -91,19 +66,7 @@
 % The roots need a complete rework.
 %    \begin{macrocode}
 %<*LU>
-  \@@_check_and_fix:NNnnn \plainroot@ \cs_set_nopar:Npn { #1 \of #2 }
-    {
-      \setbox \rootbox \hbox
-        {
-          $ \m@th \scriptscriptstyle { #1 } $
-        }
-      \mathchoice
-        { \r@@@@t \displaystyle      { #2 } }
-        { \r@@@@t \textstyle         { #2 } }~
-        { \r@@@@t \scriptstyle       { #2 } }
-        { \r@@@@t \scriptscriptstyle { #2 } }
-      \egroup
-    }
+  \cs_set_nopar:Npn \plainroot@ #1 \of #2
     {
       \bool_if:nTF
         {
@@ -131,20 +94,7 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-  \@@_check_and_fix:NNnnn \r@@@@t \cs_set_nopar:Npn { #1 #2 }
-    {
-      \setboxz@h { $ \m@th #1 \sqrtsign { #2 } $ }
-      \dimen@ \ht\z@
-      \advance \dimen@ -\dp\z@
-      \setbox\@ne \hbox { $ \m@th #1 \mskip \uproot@ mu $ }
-      \advance \dimen@ by 1.667 \wd\@ne
-      \mkern -\leftroot@ mu
-      \mkern 5mu
-      \raise .6\dimen@ \copy\rootbox
-      \mkern -10mu
-      \mkern \leftroot@ mu
-      \boxz@
-    }
+  \cs_set_nopar:Npn \r@@@@t #1 #2
 %<*LU>
     {
       \hbox_set:Nn \l_tmpa_box
@@ -197,7 +147,6 @@
       \box_use_drop:N \l_tmpa_box
     }
 %</XE>
-  }
 %    \end{macrocode}
 %
 %    \begin{macrocode}

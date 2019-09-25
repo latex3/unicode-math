@@ -43,7 +43,6 @@ tlmgr install l3build
 tlmgr install   \
   amsmath       \
   etoolbox      \
-  filehook      \
   fontspec      \
   geometry      \
   ifluatex      \

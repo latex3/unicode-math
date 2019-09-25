@@ -17,7 +17,22 @@
 %    \begin{macrocode}
 \RequirePackage{xparse,l3keys2e}
 \RequirePackage{fontspec}
-\RequirePackage{filehook}
+\RequirePackage{fix-cm}
+\RequirePackage{amsmath}
+%<LU>\RequirePackage{lualatex-math}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_set_protected:Npn \@@_after_package:nNn #1 #2 #3
+  {
+    \AtBeginDocument
+      {
+        \cs_new_protected:Npn #2 {#3}
+        \@ifpackageloaded {#1} {#2} {}
+      }
+  }
+\RequirePackage{xparse,l3keys2e}
+\RequirePackage{fontspec}
 \RequirePackage{fix-cm}
 %<LU>\RequirePackage{lualatex-math}
 %    \end{macrocode}
