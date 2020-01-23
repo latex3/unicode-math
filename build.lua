@@ -20,6 +20,28 @@ typesetopts  = " -shell-escape -interaction=nonstopmode "
 packtdszip = true
 recordstatus = true
 
+--[===[
+   DEV
+--]===]
+
+function os.capture(cmd)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
+gitbranch = os.capture('git rev-parse --abbrev-ref HEAD')
+specialformats = specialformats or {}
+if gitbranch == "develop" then
+  specialformats.latex = {
+    xetex  = {binary = "xetex",    format = "xelatex-dev"},
+    luatex = {binary = "luahbtex", format = "lualatex-dev"},
+  }
+end
 
 --[=============[--
       VERSION

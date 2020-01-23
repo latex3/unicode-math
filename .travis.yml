@@ -5,6 +5,10 @@ cache:
   directories:
     - /tmp/texlive
 
+branches:
+  except:
+  - develop
+
 stages:
   - test
   - doc
