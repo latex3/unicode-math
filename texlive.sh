@@ -20,12 +20,10 @@ if ! command -v texlua > /dev/null; then
   cd ..
 fi
 
-# formats
-tlmgr install tex etex luatex xetex
-tlmgr install cm knuth-lib latex-bin tex-ini-files unicode-data
+# basics
+tlmgr install tex etex luatex xetex texlive-scripts cm knuth-lib latex-bin tex-ini-files unicode-data
 
 # l3build
-
 tlmgr install l3build
 
 ## or bleeding edge:
