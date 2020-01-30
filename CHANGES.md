@@ -4,6 +4,7 @@ CHANGE HISTORY
 ## v0.8q (2019/09/26)
 
   * Update to adapt to / support new features in the upcoming 2e kernel.
+  * Give a better error message if used on non-supported engines that are not pdfTeX.
 
 
 ## v0.8p (2019/09/26)
