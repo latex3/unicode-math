@@ -1,7 +1,7 @@
 CHANGE HISTORY
 ==============
 
-## v0.8q (2019/09/26)
+## v0.8q (2020/01/30)
 
   * Update to adapt to / support new features in the upcoming 2e kernel.
   * Give a better error message if used on non-supported engines that are not pdfTeX.
