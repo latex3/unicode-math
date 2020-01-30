@@ -32,10 +32,10 @@
     \tl_if_empty:NT \l_@@_mversion_tl
       {
         \tl_set:Nn \l_@@_mversion_tl {normal}
-        \DeclareMathAlphabet #1 {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
+        \DeclareMathAlphabet #1 {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\shapedefault}
       }
 
-    \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\updefault}
+    \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\shapedefault}
 
     % integrate with fontspec's \setmathrm etc:
     \tl_case:Nn #1
@@ -173,31 +173,31 @@
 %    \begin{macrocode}
 \@@_cs_set:Nn \__fontspec_setmathrm_hook:nn
   {
-    \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\updefault
+    \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\shapedefault
     \SetMathAlphabet\mathit{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\mddefault\itdefault
-    \SetMathAlphabet\mathbf{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\bfdefault\updefault
+    \SetMathAlphabet\mathbf{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl\bfdefault\shapedefault
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_cs_set:Nn \__fontspec_setboldmathrm_hook:nn
   {
-    \SetMathAlphabet\mathrm{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\mddefault\updefault
-    \SetMathAlphabet\mathbf{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\bfdefault\updefault
+    \SetMathAlphabet\mathrm{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\mddefault\shapedefault
+    \SetMathAlphabet\mathbf{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\bfdefault\shapedefault
     \SetMathAlphabet\mathit{bold}\g_fontspec_encoding_tl\g__fontspec_bfmathrm_tl\mddefault\itdefault
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_cs_set:Nn \__fontspec_setmathsf_hook:nn
   {
-    \SetMathAlphabet\mathsf{normal}\g_fontspec_encoding_tl\g__fontspec_mathsf_tl\mddefault\updefault
-    \SetMathAlphabet\mathsf{bold}  \g_fontspec_encoding_tl\g__fontspec_mathsf_tl\bfdefault\updefault
+    \SetMathAlphabet\mathsf{normal}\g_fontspec_encoding_tl\g__fontspec_mathsf_tl\mddefault\shapedefault
+    \SetMathAlphabet\mathsf{bold}  \g_fontspec_encoding_tl\g__fontspec_mathsf_tl\bfdefault\shapedefault
   }
 %    \end{macrocode}
 %    \begin{macrocode}
 \@@_cs_set:Nn \__fontspec_setmathtt_hook:nn
   {
-    \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\updefault
-    \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\updefault
+    \SetMathAlphabet\mathtt{normal}\g_fontspec_encoding_tl\g__fontspec_mathtt_tl\mddefault\shapedefault
+    \SetMathAlphabet\mathtt{bold}  \g_fontspec_encoding_tl\g__fontspec_mathtt_tl\bfdefault\shapedefault
   }
 %    \end{macrocode}
 %

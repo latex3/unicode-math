@@ -264,17 +264,17 @@
     \cs_if_exist:cF { sym \l_@@_symfont_label_tl }
       {
         \DeclareSymbolFont{\l_@@_symfont_label_tl}
-          {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
+          {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\shapedefault}
       }
     \SetSymbolFont{\l_@@_symfont_label_tl}{\l_@@_mversion_tl}
-      {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\updefault}
+      {\encodingdefault}{\l_@@_family_tl}{\mddefault}{\shapedefault}
 %    \end{macrocode}
 % Set the bold math version.
 %    \begin{macrocode}
     \str_if_eq:eeT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{\l_@@_symfont_label_tl}{bold}
-          {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\updefault}
+          {\encodingdefault}{\l_@@_family_tl}{\bfdefault}{\shapedefault}
       }
   }
 %    \end{macrocode}
@@ -312,12 +312,12 @@
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{symbols}{\l_@@_mversion_tl}
-      {\encodingdefault}{\l_@@_fam_two_tl}{\mddefault}{\updefault}
+      {\encodingdefault}{\l_@@_fam_two_tl}{\mddefault}{\shapedefault}
 
     \str_if_eq:eeT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{symbols}{bold}
-          {\encodingdefault}{\l_@@_fam_two_tl}{\bfdefault}{\updefault}
+          {\encodingdefault}{\l_@@_fam_two_tl}{\bfdefault}{\shapedefault}
       }
   }
 %    \end{macrocode}
@@ -343,12 +343,12 @@
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{largesymbols}{\l_@@_mversion_tl}
-      {\encodingdefault}{\l_@@_fam_three_tl}{\mddefault}{\updefault}
+      {\encodingdefault}{\l_@@_fam_three_tl}{\mddefault}{\shapedefault}
 
     \str_if_eq:eeT {\l_@@_mversion_tl} {normal}
       {
         \SetSymbolFont{largesymbols}{bold}
-          {\encodingdefault}{\l_@@_fam_three_tl}{\bfdefault}{\updefault}
+          {\encodingdefault}{\l_@@_fam_three_tl}{\bfdefault}{\shapedefault}
       }
   }
 %    \end{macrocode}
