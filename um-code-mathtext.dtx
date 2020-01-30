@@ -169,16 +169,21 @@
 %
 % \subsubsection{Maths font}
 %
-% If the maths fonts are set explicitly, then the text commands above will not execute their branches to set the maths font alphabets.
+% If the maths fonts are set explicitly, then the text commands above will not execute
+% their branches to set the maths font alphabets.
+%
+% Helper macro for looking up customisable series' by family (new \LaTeXe\ feature 2020).
 %    \begin{macrocode}
-\@@_cs_new:Nn \@@_rm_series_default:n
+\cs_new:Nn \@@_rm_series_default:n
   {
     \ifcsname #1series@rm\endcsname
       \csname #1series@rm\endcsname
     \else
-      \csname #1series\endcsname
+      \csname #1default\endcsname
     \fi
   }
+%    \end{macrocode}
+%    \begin{macrocode}
 \@@_cs_set:Nn \__fontspec_setmathrm_hook:nn
   {
     \SetMathAlphabet\mathrm{normal}\g_fontspec_encoding_tl\g__fontspec_mathrm_tl{\@@_rm_series_default:n {md}}\shapedefault

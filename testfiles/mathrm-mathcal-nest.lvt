@@ -1,0 +1,15 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+
+\errorcontextlines=999
+\begin{document}
+
+\START
+
+\SHIPOUT{$\mathcal{A}$}
+
+\SHIPOUT{$\mathrm{\mathcal{A}}$}
+
+\end{document}
