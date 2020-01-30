@@ -1,6 +1,11 @@
 CHANGE HISTORY
 ==============
 
+## v0.8q (2019/09/26)
+
+  * Update to adapt to / support new features in the upcoming 2e kernel.
+
+
 ## v0.8p (2019/09/26)
 
   * Remove dependency on `filehook` package. Just to simplify.
