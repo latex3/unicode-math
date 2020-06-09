@@ -95,7 +95,7 @@
 % Reimplement that here to avoid \cs{bgroup}/\cs{egroup}.
 % \begin{macro}{\operator@font}
 %    \begin{macrocode}
-\cs_set:Npn \operator@font
+\cs_set_protected:Npn \operator@font
   {
     \@@_switch_to:n {literal}
     \@@_fontswitch:n { \g_@@_operator_mathfont_tl }
