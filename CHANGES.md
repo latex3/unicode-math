@@ -1,6 +1,10 @@
 CHANGE HISTORY
 ==============
 
+## v0.8r (2020/01/31)
+
+  * Make `\\operator@font` protected to allow operators (e.g., `\\cos`) in section headings (etc). (#550)
+
 ## v0.8q (2020/01/31)
 
   * Update to adapt to / support new features in the upcoming 2e kernel.
