@@ -10,7 +10,7 @@
 \documentclass[final]{article}
 \makeatletter
 
-\usepackage{ragged2e,setspace,booktabs,catchfile,shortvrb,geometry,metalogo,textcomp,longtable,array,hyperref}
+\usepackage{ragged2e,setspace,booktabs,shortvrb,geometry,metalogo,textcomp,longtable,array,hyperref}
 
 \geometry{margin=3cm}
 \hypersetup{colorlinks,linkcolor=black}
@@ -306,14 +306,17 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 
 % first read in all \mathalpha symbols into a variable:
 \ExplSyntaxOn
+\file_get:nnN {unicode-math-table.tex}
+  {\char_set_catcode_space:N \ } \ALPHA
+
 \cs_set:Npn \UnicodeMathSymbol #1#2#3#4 {
   \str_if_eq:nnT {\mathalpha} {#3} {
     \exp_not:n { \UnicodeMathSymbol {#1}{#2}{#3}{#4} }
   }
 }
-\CatchFileEdef
-  \ALPHA{unicode-math-table.tex}
-  {\char_set_catcode_space:N \ }
+
+\tl_set:Nx \ALPHA {\ALPHA}
+
 
 % now each time we print an alphabet we remove the slot;
 % this ensures we won't miss anything
@@ -337,7 +340,7 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
         \exp_not:n { \UnicodeMathSymbol {##1}{##2}{##3}{##4} }
       }
   }
-  \edef\ALPHA{\ALPHA}
+  \tl_set:Nx \ALPHA {\ALPHA}
 }
 
 \ExplSyntaxOff
