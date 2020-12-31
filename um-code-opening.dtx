@@ -228,23 +228,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_fontdimen_from_param:Nnn}
-% This function extracts the math font dimen \verb|#3| from the font \verb|#1|
-% and sets fontdimen \verb|#2| of the same font to that value.
-%
-% Use \XeTeX's fontdimen approach because it's tidy. We don't need bells and whistles here.
-%    \begin{macrocode}
-%<*LU>
-\cs_new_protected:Nn \@@_fontdimen_from_param:nn
-  {
-    \fontdimen #1 \font =
-      \lua_now:n { fontspec.mathfontdimen(font.current(),"#2") }
-    \scan_stop:
-  }
-%</LU>
-%    \end{macrocode}
-% \end{macro}
-%
 %^^A \begin{function}[EXP, added = 2019-01-19]{\@@_int_if_zero_p:n, \@@_int_if_zero:nTF}
 %^^A   \begin{syntax}
 %^^A     \cs{int_if_zero_p:n} \Arg{intexpr}

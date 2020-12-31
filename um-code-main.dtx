@@ -153,7 +153,7 @@
 %<LU>   Renderer = Basic,
         BoldItalicFont = {}, ItalicFont = {}, SmallCapsFont = {},
         Script = Math,
-%<LU>   FontAdjustment = { \@@_luatex_copy_fontdimens: },
+%<LU>   RawFeature = {mathfontdimen=xetex},
         \l_@@_unknown_keys_clist
       }
 
@@ -199,7 +199,7 @@
               \l_@@_sscript_features_tl
             }
           } ,
-%<LU>   FontAdjustment = { \@@_luatex_copy_fontdimens: },
+%<LU>   RawFeature = {mathfontdimen=xetex},
         \l_@@_unknown_keys_clist
       }
 
@@ -224,38 +224,6 @@
 \tl_gset:Nn \g_@@_sqrt_font_cmd_tl  { \l_@@_font }
 \tl_gset:Nn \g_@@_prime_font_cmd_tl { \l_@@_font }
 %    \end{macrocode}
-%
-% \begin{macro}{\@@_luatex_copy_fontdimens:}
-% This performs a once-off copy of the LuaTeX math params into XeTeX-like fontdimens.
-% While the list is somewhat comprehensive, these are really only for backwards compatibility
-% and to allow a little shared code. They shouldn't be relied upon, since LuaTeX users
-% might change the math params, which wouldn't be reflected in the fontdimens.
-%    \begin{macrocode}
-%<*LU>
-\@@_cs_new:Nn \@@_luatex_copy_fontdimens:
-  {
-    \@@_fontdimen_from_param:nn {10} {ScriptPercentScaleDown}
-    \@@_fontdimen_from_param:nn {11} {ScriptScriptPercentScaleDown}
-    \@@_fontdimen_from_param:nn {15} {AxisHeight}
-    \@@_fontdimen_from_param:nn {18} {SubscriptShiftDown}
-    \@@_fontdimen_from_param:nn {20} {SubscriptBaselineDropMin}
-    \@@_fontdimen_from_param:nn {21} {SuperscriptShiftUp}
-    \@@_fontdimen_from_param:nn {22} {SuperscriptShiftUpCramped}
-    \@@_fontdimen_from_param:nn {24} {SuperscriptBaselineDropMax}
-    \@@_fontdimen_from_param:nn {28} {UpperLimitGapMin}
-    \@@_fontdimen_from_param:nn {29} {UpperLimitBaselineRiseMin}
-    \@@_fontdimen_from_param:nn {30} {LowerLimitGapMin}
-    \@@_fontdimen_from_param:nn {31} {LowerLimitBaselineDropMin}
-    \@@_fontdimen_from_param:nn {32} {StackTopShiftUp}
-    \@@_fontdimen_from_param:nn {42} {FractionNumeratorShiftUp}
-    \@@_fontdimen_from_param:nn {43} {FractionNumeratorDisplayStyleShiftUp}
-    \@@_fontdimen_from_param:nn {44} {FractionDenominatorShiftDown}
-    \@@_fontdimen_from_param:nn {45} {FractionDenominatorDisplayStyleShiftDown}
-    \@@_fontdimen_from_param:nn {48} {FractionRuleThickness}
-  }
-%</LU>
-%    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\@@_setup_math_fam:}
 %    \begin{macrocode}
@@ -290,6 +258,8 @@
     \fontspec_set_family:Nxn \l_@@_fam_two_tl
       {
         \l_@@_font_keyval_tl,
+%<LU>   RawFeature = {mathfontdimen=tex2},
+%<*XE>
         ScaleAgain = 1.0001,
         FontAdjustment =
           {
@@ -309,6 +279,7 @@
             \@@_zero_fontdimen:n   {20} % delim1 = FractionDelimiterDisplaySize
             \@@_zero_fontdimen:n   {21} % delim2 = FractionDelimiterSize
          }
+%</XE>
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{symbols}{\l_@@_mversion_tl}
@@ -331,6 +302,8 @@
     \fontspec_set_family:Nxn \l_@@_fam_three_tl
       {
         \l_@@_font_keyval_tl,
+%<LU>   RawFeature = {mathfontdimen=tex3},
+%<*XE>
         ScaleAgain = 0.9999,
         FontAdjustment = {
           \@@_copy_fontdimen:nnN { 8} {48} \g_@@_main_font_cmd_tl
@@ -340,6 +313,7 @@
           \@@_copy_fontdimen:nnN {12} {31} \g_@@_main_font_cmd_tl
           \@@_zero_fontdimen:n   {13}
        }
+%</XE>
       } {\l_@@_fontname_tl}
 
     \SetSymbolFont{largesymbols}{\l_@@_mversion_tl}
