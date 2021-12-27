@@ -26,7 +26,7 @@ Unicode maths is currently supported by the following freely available fonts:
  - [STIX][STIX] (STIpub), and
  - [XITS Math][XM] (Khaled Hosny),
  - [Libertinus Math][LIB] (Philipp H. Poll and Khaled Hosny).
- - [Fire Math][FIRA] (Xiangdong Zeng).
+ - [Fira Math][FIRA] (Xiangdong Zeng).
 
 These fonts are available under open source licences
 (the [GUST Font License][GFL] and [Open Font Licence][OFL]).
