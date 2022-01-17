@@ -4,9 +4,7 @@ OPERATOR FONT + MATHBB
 Completed box being shipped out [2]
 \hbox(0.0+0.0)x0.0, direction TLT
 .\mathon
-.\hbox(6.83+0.0)x6.39, direction TLT
-..\hbox(0.0+0.0)x0.0, direction TLT
-..\TU/latinmodern-math.otf(1)/m/n/10 𝔹
+.\TU/latinmodern-math.otf(1)/m/n/10 𝔹
 .\mathoff
 MATHRM + MATHBB
 Completed box being shipped out [2]
