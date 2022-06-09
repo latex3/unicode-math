@@ -267,6 +267,13 @@
     \@@_set_mathalphabet_pos:nnnn  {cal} {M} {up,it} {#1}
     \@@_set_mathalphabet_pos:nnnn  {cal} {R} {up,it} {#1}
   }
+\@@_new_alphabet_config:nnn {cal} {latin}
+  {
+    \@@_set_mathalphabet_latin:nnn {cal}     {up,it} {#1}
+    \@@_set_mathalphabet_pos:nnnn  {cal} {e} {up,it} {#1}
+    \@@_set_mathalphabet_pos:nnnn  {cal} {g} {up,it} {#1}
+    \@@_set_mathalphabet_pos:nnnn  {cal} {o} {up,it} {#1}
+  }
 %    \end{macrocode}
 %
 % \subsection{Fractur or fraktur or blackletter: frak}
@@ -667,6 +674,10 @@
 \@@_new_alphabet_config:nnn {bfcal} {Latin}
   {
     \@@_set_mathalphabet_Latin:nnn {bfcal}  {up,it}{#1}
+  }
+\@@_new_alphabet_config:nnn {bfcal} {latin}
+  {
+    \@@_set_mathalphabet_latin:nnn {bfcal}  {up,it}{#1}
   }
 %    \end{macrocode}
 %
