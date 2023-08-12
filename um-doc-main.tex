@@ -927,33 +927,35 @@ The package option |colon=literal| forces \ascii\ input `|:|' to be printed as \
 \subsubsection{Slashes and backslashes}
 \seclabel{slash-delimiter}
 
-There are several slash-like symbols defined in Unicode. The complete list is shown in \tabref{slashes}.
+There are several slash-like symbols defined in Unicode.
+The complete list is shown in \tabref{slashes}. Unfortunately, font support for these characters/glyphs is rather inconsistent.
+Note that \cs{slash} internally uses the \cs{mathslash} mathematical character.
+The wrapper \cs{slash} is defined to work correctly in both text and maths mode, as well as in contexts where the slash is acting like a delimiter, such as \verb|\left< a \middle\slash b \right>|.
 
 \begin{table}\centering
-\caption{Slashes and backslashes.}
+\topcaption{Slashes and backslashes.}
 \tablabel{slashes}
-\begin{tabular}{@{}cl@{}cl@{}}
+\begin{tabular}{@{}cl@{}cll@{}}
 \toprule
-Slot & Name & Glyph & Command  \\
+Slot & Name & Glyph & Class & Command  \\
 \midrule
-\unichar{002F} & \textsc{solidus}                 & \umfont \char"002F & \cs{slash} \\
-\unichar{2044} & \textsc{fraction slash}          & \umfont \char"2044 & \cs{fracslash} \\
-\unichar{2215} & \textsc{division slash}          & \umfont \char"2215 & \cs{divslash} \\
-\unichar{29F8} & \textsc{big solidus}             & \umfont \char"29F8 & \cs{xsol} \\
+\unichar{002F} & \textsc{solidus}                 & \umfont \char"002F & \cs{mathord} & \cs{slash} \\
+\unichar{27CB} & \textsc{rising diagonal}         & \umfont \char"27CB & \cs{mathord} & \cs{diagup} \\
+\unichar{2044} & \textsc{fraction slash}          & \umfont \char"2044 & \cs{mathbin} & \cs{fracslash} \\
+\unichar{2215} & \textsc{division slash}          & \umfont \char"2215 & \cs{mathbin} & \cs{divslash} \\
+\unichar{29F8} & \textsc{big solidus}             & \umfont \char"29F8 & \cs{mathop}  & \cs{xsol} \\
 \midrule
-\unichar{005C} & \textsc{reverse solidus}         & \umfont \char"005C & \cs{backslash} \\
-\unichar{2216} & \textsc{set minus}               & \umfont \char"2216 & \cs{smallsetminus} \\
-\unichar{29F5} & \textsc{reverse solidus operator}& \umfont \char"29F5 & \cs{setminus} \\
-\unichar{29F9} & \textsc{big reverse solidus}     & \umfont \char"29F9 & \cs{xbsol} \\
+\unichar{005C} & \textsc{reverse solidus}         & \umfont \char"005C & \cs{mathord} & \cs{backslash} \\
+\unichar{27CD} & \textsc{falling diagonal}        & \umfont \char"27CD & \cs{mathord} & \cs{diagdown} \\
+\unichar{2216} & \textsc{set minus}               & \umfont \char"2216 & \cs{mathbin} & \cs{setminus} \\
+ & \textsc{small set minus}               &  & \cs{mathbin} & \cs{smallsetminus} \\
+\unichar{29F5} & \textsc{reverse solidus operator}& \umfont \char"29F5 & \cs{mathbin} & \cs{reversesolidus} \\
+\unichar{29F9} & \textsc{big reverse solidus}     & \umfont \char"29F9 & \cs{mathop}  & \cs{xbsol} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-In regular \LaTeX\ we can write \cs{left}\cs{slash}\dots\cs{right}\cs{backslash}
-and so on and obtain extensible delimiter-like symbols. Not all of the Unicode slashes
-are suitable for this (and do not have the font support to do it).
-
-\paragraph{Slash}
+\paragraph{Slashes}
 
 Of \unichar{2044} {fraction slash}, TR25 says that it is:
 \begin{quote}
@@ -967,27 +969,33 @@ without a built-up fraction; $\pi\approx22/7$, for example.
 
 \unichar{29F8} {big solidus} is a `big operator' (like $\sum$).
 
-\paragraph{Backslash}
+\cs{diagup} and \cs{diagdown} are defined with math class \cs{mathord} for consistency with \pkg{amssymb}.
+This definition is inconsistent with MathML, which would use \cs{mathrel} instead.
+
+\paragraph{Backslashes}
+
+Of the five backslash characters shown in \tabref{slashes}, only \cs{backslash} and \cs{setminus} are defined consistently across all OpenType math fonts.
+(The two glyphs are typically identical, or close to it, with the main difference between them the spacing defined by their math class.)
 
 The \unichar{005C} {reverse solidus} character \cs{backslash} is used for denoting
-double cosets: $A\backslash B$. (So I'm led to believe.)
-It may be used as a `stretchy' delimiter if supported by the font.
+double cosets: $A\backslash B$. It may be used as a `stretchy' delimiter if supported by the font.
 
-MathML uses \unichar{2216} {set minus} like this: $A\smallsetminus B$.\footnote{\S4.4.5.11 \url{http://www.w3.org/TR/MathML3/}}
-The \LaTeX\ command name \cs{smallsetminus} is used for backwards compatibility.
+The \unichar{2216} {set minus} character \cs{setminus} defines the relative complement or set difference between two sets: $A\setminus B$.
 
 Presumably, \unichar{29F5} {reverse solidus operator} is intended to
-be used in a similar way, but it could also (perhaps?) be used to
+be used in a similar way, but it could also be used to
 represent `inverse division': $\pi\approx7\mathbin{\backslash}22$.^^A
 \footnote{This is valid syntax in the Octave and Matlab programming languages,
 in which it means matrix inverse pre-multiplication. I.e., $A\mathbin{\backslash} B\equiv A^{-1}B$.}
-The \LaTeX\ name for this character is \cs{setminus}.
 
 Finally, \unichar{29F9} {big reverse solidus} is a `big operator' (like $\sum$).
 
-\paragraph{How to use all of these things}
+\paragraph{Slashes as `delimiters'}
 
-Unfortunately, font support for the above characters/glyphs is rather inconsistent.
+In regular \LaTeX\ we can write \cs{left}\cs{slash}\dots\cs{right}\cs{backslash}
+and so on and obtain extensible delimiter-like symbols. Not all of the Unicode slashes
+are suitable for this (and do not have the font support to do it).
+
 In Cambria Math, the only slash that grows (say when writing
 \[
 \left.\left[\begin{array}{cc} a & b \\ c & d\end{array}\right]\middle\slash
@@ -996,7 +1004,7 @@ In Cambria Math, the only slash that grows (say when writing
 is the \textsc{fraction slash}, which we just established above is
 sort of only supposed to be used in text.
 
-Of the above characters, the following are allowed to be used after
+Of the slashes, the following commands are the only ones defined to be able to be used as stretchable delimiters after
 \cs{left}, \cs{middle}, and \cs{right}:
 \begin{itemize}
 \item \cs{fracslash};
@@ -1004,11 +1012,10 @@ Of the above characters, the following are allowed to be used after
 \item \cs{backslash} (the only reverse slash).
 \end{itemize}
 
-However, we assume that there is only \emph{one} stretchy slash
+However, for the purpose of implementing this markup, we assume that there is only \emph{one} stretchy slash
 in the font; this is assumed by default to be \unichar{002F} {solidus}.
 Writing \cs{left/} or \cs{left}\cs{slash} or \cs{left}\cs{fracslash}
 will all result in the same stretchy delimiter being used.
-
 The delimiter used can be changed with the |slash-delimiter| package option.
 Allowed values are |ascii|, |frac|, and |div|, corresponding to the respective
 Unicode slots.
@@ -1016,8 +1023,24 @@ Unicode slots.
 For example: as mentioned above, Cambria Math's stretchy slash is
 \unichar{2044} {fraction slash}. When using Cambria Math, then
 \pkg{unicode-math} should be loaded with the |slash-delimiter=frac| option.
-(This should be a font option rather than a package option, but
-it will change soon.)
+(This should really be a font option rather than a package option, but this option should only be needed infrequently.)
+
+\paragraph{Set minus characters/glyphs}
+
+Standard \LaTeX\ plus \pkg{amssymb} defines two commands \cs{setminus} and \cs{smallsetminus}.
+This package now defines \cs{setminus} to correspond to the Unicode slot \unichar{2216}.
+Some fonts may provide smaller sized glyphs either through character variants, private use area encoding, or via one of the less-common backslash slots (covered above).
+Since there is currently no consistency in how modern OpenType fonts would access a smaller variant for `set minus', this package simply defines \cs{smallsetminus} to be a constructed glyph, composed of a rotated and shifted minus sign with appropriate \cs{mathbin} spacing.
+
+If variations to this setup are needed, users can redefine the commands to their liking; e.g.:
+\begin{verbatim}
+    \setmathfont{XITSMath-Regular.otf}
+    \AtBeginDocument{
+      \let\smallsetminus\setminus
+      \let\setminus\reversesolidus
+    }
+\end{verbatim}
+
 
 \subsubsection{Behaviour of hyphens in mathematics}
 \seclabel{hyphen}

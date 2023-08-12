@@ -215,12 +215,19 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\smallsetminus}
+%    \begin{macrocode}
+\cs_set_protected:Npn \smallsetminus { \mathbin{ \mathpalette \@@_smallsetminus: \relax} }
+\cs_set:Npn \__um_smallsetminus: #1 { \rotatebox{135}{ \smash{ \raisebox{-\height}{$#1\minus$} } }}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\digamma}
 % \begin{macro}{\Digamma}
 % I might end up just changing these in the table.
 %    \begin{macrocode}
-\protected\def\digamma{\updigamma}
-\protected\def\Digamma{\upDigamma}
+\cs_set_protected:Npn \digamma {\updigamma}
+\cs_set_protected:Npn \Digamma {\upDigamma}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
