@@ -31,10 +31,6 @@
         \@ifpackageloaded {#1} {#2} {}
       }
   }
-\RequirePackage{xparse,l3keys2e}
-\RequirePackage{fontspec}
-\RequirePackage{fix-cm}
-%<LU>\RequirePackage{lualatex-math}
 %    \end{macrocode}
 %
 % \subsection{\pkg{expl3} variants}
@@ -225,23 +221,6 @@
   {
     \fontdimen #1 \font = 0pt\relax
   }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_fontdimen_from_param:Nnn}
-% This function extracts the math font dimen \verb|#3| from the font \verb|#1|
-% and sets fontdimen \verb|#2| of the same font to that value.
-%
-% Use \XeTeX's fontdimen approach because it's tidy. We don't need bells and whistles here.
-%    \begin{macrocode}
-%<*LU>
-\cs_new_protected:Nn \@@_fontdimen_from_param:nn
-  {
-    \fontdimen #1 \font =
-      \lua_now:n { fontspec.mathfontdimen(font.current(),"#2") }
-    \scan_stop:
-  }
-%</LU>
 %    \end{macrocode}
 % \end{macro}
 %

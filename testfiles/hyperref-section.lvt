@@ -1,0 +1,8 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\usepackage{hyperref}
+\begin{document}
+\tableofcontents
+\section{$\cos $}
+test
+\end{document}

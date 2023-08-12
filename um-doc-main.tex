@@ -23,7 +23,7 @@ containing a complete listing of mathematical symbols defined by
 
 Finally, while the STIX fonts may be used with this package, accessing
 their alphabets in their `private user area' is not yet supported.
-(Of these additional alphabets there is a separate caligraphic design
+(Of these additional alphabets there is a separate calligraphic design
 distinct to the script design already included.)
 Better support for the STIX fonts is planned for an upcoming revision of the
 package after any problems have been ironed out with the initial version.
@@ -715,26 +715,28 @@ These can be accessed (if not with their literal characters or control sequences
 with the \cs{mathbbit} style switch, but note that only those five letters
 will give the expected output.
 
-\subsubsection{Caligraphic vs.\ Script variants}
+\subsubsection{Calligraphic vs.\ Script variants}
 
 The Unicode maths encoding contains a style for `Script' letters,
-and while by default \cs{mathcal} and \cs{mathscr}
+and while by default \cs{symcal} and \cs{symscr}
 are synonyms, there are some situations when a
-separate `Caligraphic' style is needed as well.
+separate `Calligraphic' style is needed as well.
 
-If a font contains alternate glyphs for a separate caligraphic style,
-they can be selected explicitly as shown below.
-This feature is currently only supported by the XITS~Math font, where
-the caligraphic letters are accessed with the same glyph slots as the
-script letters but with the first stylistic set feature (|ss01|) applied.
-An example is shown below.
+If a font contains alternate glyphs for a separate calligraphic style,
+they can be selected explicitly. For example the STIX~Two~Math font
+uses the the first stylistic set feature (|ss01|) to map the script
+letters to the calligraphic letters.
+\begin{Verbatim}
+\setmathfont{STIXTwoMath-Regular.otf}
+\setmathfont{STIXTwoMath-Regular.otf}[range={cal, bfcal}, StylisticSet=1]
+\end{Verbatim}
+With the above we can now write
 \begin{quote}
-\setmathfont{XITSMath-Regular.otf}
-\setmathfont{XITSMath-Regular.otf}[range=cal,StylisticSet=1]
-The Script style (\cs{mathscr}) in XITS Math is: $\symscr{ABCXYZ}$\par
-The Caligraphic style (\cs{mathcal}) in XITS Math is: $\symcal{ABCXYZ}$
+\setmathfont{STIXTwoMath-Regular.otf}
+\setmathfont{STIXTwoMath-Regular.otf}[range={cal, bfcal}, StylisticSet=1]
+|$\symscr{ABCDabcd}$| to get $\symscr{ABCDabcd}$ \\
+|$\symcal{ABCDabcd}$| to get $\symcal{ABCDabcd}$ 
 \end{quote}
-
 
 \subsection{Miscellanea}
 

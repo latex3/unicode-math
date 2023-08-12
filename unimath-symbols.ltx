@@ -10,7 +10,7 @@
 \documentclass[final]{article}
 \makeatletter
 
-\usepackage{ragged2e,setspace,booktabs,catchfile,shortvrb,geometry,metalogo,textcomp,longtable,tabu,hyperref}
+\usepackage{ragged2e,setspace,booktabs,shortvrb,geometry,metalogo,textcomp,longtable,array,hyperref}
 
 \geometry{margin=3cm}
 \hypersetup{colorlinks,linkcolor=black}
@@ -52,30 +52,39 @@
 
 \defmathfont{lm}{latinmodern-math.otf}{CC6666}{L}
 \defmathfont{xits}{XITSMath-Regular.otf}{6666CC}{X}
-\defmathfont{stix}{STIX2Math.otf}{66CC66}{S}
+\defmathfont{stix}{STIXTwoMath-Regular.otf}{66CC66}{S}
 \defmathfont{pagella}{texgyrepagella-math.otf}{AA6666}{P}
 \defmathfont{dejavu}{texgyredejavu-math.otf}{AACC66}{D}
 \defmathfont{fira}{FiraMath-Regular.otf}{AA66CC}{F}
+\defmathfont{ncm}{NewCMMath-Book.otf}{3366AA}{N}
+\defmathfont{gnh}{GFSNeohellenicMath.otf}{666633}{H}
+\defmathfont{erm}{Erewhon-Math.otf}{66AA66}{E}
+\defmathfont{xc}{XCharter-Math.otf}{6633AA}{C}
+\defmathfont{con}{Concrete-Math.otf}{66AA33}{R}
 
 \def\INPUT{\input{unicode-math-table.tex}}
+\def\pwidth{100pt}
 \def\TABLE{%
 \par\noindent
-\begin{longtabu}[l]{@{}l *{\Nfonts}{c} lX[l]@{}}
+\setlength\tabcolsep{3pt}%
+\setlength\LTleft{-40pt}%
+\setlength\LTright{-40pt plus 1fill}%
+\begin{longtable}{@{}l *{\Nfonts}{@{\,}c} lp{\pwidth}@{}}
   \toprule
-  \textsc{usv} & \Llm & \Lxits & \Lstix & \Lpagella & \Ldejavu & \Lfira & Macro & Description \\
+  \textsc{usv} &
+\Llm & \Lxits & \Lstix & \Lpagella & \Ldejavu & \Lfira & \Lncm  & \Lgnh & \Lerm & \Lxc &\Lcon
+  & Macro & Description \\
   \midrule \endhead
   \INPUT\\
   \bottomrule
-\end{longtabu}
+\end{longtable}
 }
 \makeatletter
 \def\USV#1{\footnotesize\scshape\MakeLowercase{u+\@gobble#1}}
 \makeatother
 \def\CMD#1{\footnotesize\cmd#1}
 \def\DESC#1{%
-  \begin{spacing}{0.5}
     \RaggedRight\scriptsize #1%
-  \end{spacing}
 }
 
 \newcommand\SHOW[1]{%
@@ -95,6 +104,11 @@
       \SYMB{#2}{pagella}{#1} &
       \SYMB{#2}{dejavu}{#1} &
       \SYMB{#2}{fira}{#1} &
+      \SYMB{#2}{ncm}{#1} &
+      \SYMB{#2}{gnh}{#1} &
+      \SYMB{#2}{erm}{#1} &
+      \SYMB{#2}{xc}{#1} &
+      \SYMB{#2}{con}{#1} &
       \CMD{#2}
       \tl_if_in:NnT \PLAIN {#2}
         {
@@ -172,6 +186,11 @@ The following fonts are shown: (with approximate symbol counts)
 \item[\Lpagella] \mathversion{pagella} $\mathup{TeX\ Gyre\ Pagella\ Math}$ (\ref{count:pagella})
 \item[\Ldejavu] \mathversion{dejavu} $\mathup{DejaVu\ Math\ TeX\ Gyre}$ (\ref{count:dejavu})
 \item[\Lfira] \mathversion{fira} $\mathup{Fira\ Math}$ (\ref{count:fira})
+\item[\Lncm] \mathversion{ncm} $\mathup{NCM\ Math}$ (\ref{count:ncm})
+\item[\Lgnh] \mathversion{gnh} $\mathup{GFS Neohellenic Math}$ (\ref{count:gnh})
+\item[\Lerm] \mathversion{erm} $\mathup{Erewhon Math}$ (\ref{count:erm})
+\item[\Lxc] \mathversion{xc} $\mathup{XCharter Math}$ (\ref{count:xc})
+\item[\Lcon] \mathversion{con} $\mathup{Concrete Math}$ (\ref{count:con})
 \end{itemize}
 Symbols defined in Plain \TeX\ are indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (p)}} after their macro name.
 \LaTeX\ follows Plain \TeX, but defines a handful more, indicated with {\color[gray]{0.6} \textsuperscript{\sffamily (l)}}.
@@ -287,14 +306,17 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 
 % first read in all \mathalpha symbols into a variable:
 \ExplSyntaxOn
+\file_get:nnN {unicode-math-table.tex}
+  {\char_set_catcode_space:N \ } \ALPHA
+
 \cs_set:Npn \UnicodeMathSymbol #1#2#3#4 {
   \str_if_eq:nnT {\mathalpha} {#3} {
     \exp_not:n { \UnicodeMathSymbol {#1}{#2}{#3}{#4} }
   }
 }
-\CatchFileEdef
-  \ALPHA{unicode-math-table.tex}
-  {\char_set_catcode_space:N \ }
+
+\tl_set:Nx \ALPHA {\ALPHA}
+
 
 % now each time we print an alphabet we remove the slot;
 % this ensures we won't miss anything
@@ -318,10 +340,12 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
         \exp_not:n { \UnicodeMathSymbol {##1}{##2}{##3}{##4} }
       }
   }
-  \edef\ALPHA{\ALPHA}
+  \tl_set:Nx \ALPHA {\ALPHA}
 }
 
 \ExplSyntaxOff
+
+\def\pwidth{200pt}
 
 \subsection{Normal weight}
 
@@ -445,7 +469,10 @@ The limits behaviour as specified by \textsf{unicode-math} are shown with grey s
 \def\UnicodeMathSymbol#1#2#3#4{\PRINTLINE{#1}{#2}{#4}}
 \TABLE
 
+
 \FINISH
+
+\mbox{}
 
 \end{document}
 
