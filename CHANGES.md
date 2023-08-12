@@ -1,10 +1,14 @@
 CHANGE HISTORY
 ==============
 
-## v0.8r (2020/01/31)
+## v0.8r (2023/08/13)
 
-  * Add `\\diagdown` for U+027CD
+  * Revise definitions of `\\setminus` and `\\smallsetminus` (#181, #583) — long overdue.
+    Note that there are compatibility considerations with this change.
+  * Add `\\diagup` and `\\diagdown` (#604).
   * Make `\\operator@font` protected to allow operators (e.g., `\\cos`) in section headings (etc). (#550)
+  * Allow `\\symcal` to handle lowercase Latin.
+  * Add additional fonts to the symbol listing document.
 
 ## v0.8q (2020/01/31)
 
