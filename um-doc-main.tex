@@ -65,9 +65,10 @@ have been fantastic beta testers.
 
 \section{Getting started}
 
-Load \pkg{unicode-math} as a regular \LaTeX\ package. It should be loaded
-after any other maths or font-related package in case it needs to overwrite
-their definitions. Here's an example using the filename syntax to load the \TeX\ Gyre Pagella Math font: (this works for both \XeLaTeX\ and \LuaLaTeX)
+Load \pkg{unicode-math} as a regular \LaTeX\ package.
+It should be loaded after any other maths or font-related package in case it needs to overwrite their definitions.
+It requires \pkg{amsmath}, which it will automatically load if the user hasn't already done so.
+Here's an example using the filename syntax to load the \TeX\ Gyre Pagella Math font: (this works for both \XeLaTeX\ and \LuaLaTeX)
 \begin{Verbatim}
 \usepackage{amsmath}
 \usepackage{unicode-math}
@@ -77,9 +78,6 @@ their definitions. Here's an example using the filename syntax to load the \TeX\
 Once the package is loaded, traditional TFM-based maths fonts are no longer supported;
 you can only switch to a different OpenType maths font using the \cs{setmathfont} command.
 If you do not load an OpenType maths font before |\begin{document}|, Latin Modern Math will be loaded automatically.
-
-Note that \pkg{amsmath} should be loaded before \pkg{unicode-math} to avoid conflicts, and
-it will be loaded automatically if not requested earlier in the preamble.
 
 
 \subsection{New commands}
@@ -735,7 +733,7 @@ With the above we can now write
 \setmathfont{STIXTwoMath-Regular.otf}
 \setmathfont{STIXTwoMath-Regular.otf}[range={cal, bfcal}, StylisticSet=1]
 |$\symscr{ABCDabcd}$| to get $\symscr{ABCDabcd}$ \\
-|$\symcal{ABCDabcd}$| to get $\symcal{ABCDabcd}$ 
+|$\symcal{ABCDabcd}$| to get $\symcal{ABCDabcd}$
 \end{quote}
 
 \subsection{Miscellanea}
@@ -917,9 +915,6 @@ to (the same) Unicode glyph.
 
 To preserve input compatibility, we remap the \ascii\ input character `\texttt{:}' to \unichar{2236}.
 Typing a literal \unichar{2236} char will result in the same output.
-If \pkg{amsmath} is loaded, then the definition of \cs{colon} is inherited from there
-(it looks like a punctuation colon with additional space around it).
-Otherwise, \cs{colon} is made to output a colon with \cs{mathpunct} spacing.
 
 The package option |colon=literal| forces \ascii\ input `|:|' to be printed as \cs{mathcolon} instead.
 
@@ -1102,10 +1097,8 @@ as input characters to abbreviate common fractions.
 For example, instead of writing `|\tfrac12 x|', you may consider it more readable to have
 `|½x|' in the source instead.
 
-If the \cs{tfrac} command exists (i.e., if \pkg{amsmath} is loaded or
-you have specially defined \cs{tfrac} for this purpose), it will be used
-to typeset the fractions. If not, regular \cs{frac} will be used. The command
-to use (\cs{tfrac} or \cs{frac}) can be forced either way with the package
+By default, the \cs{tfrac} command will be used to typeset the fractions.
+The command to use (\cs{tfrac} or \cs{frac}) can be forced with the package
 option |active-frac=small| or |active-frac=normalsize|, respectively.
 
 \subsubsection{Circles}

@@ -255,12 +255,7 @@
   {
     {small}
     {
-      \cs_if_exist:NTF \tfrac
-        { \bool_set_true:N \l_@@_smallfrac_bool }
-        {
-          \@@_warning:n {no-tfrac}
-          \bool_set_false:N \l_@@_smallfrac_bool
-        }
+      \bool_set_true:N \l_@@_smallfrac_bool
       \use:c {@@_setup_active_frac:}
     }
 
