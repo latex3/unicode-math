@@ -3,6 +3,8 @@
       PARAMETERS
 --]================]--
 
+math.randomseed( os.time() )
+
 module = "unicode-math"
 
 sourcefiles  = {"*.dtx","*.ins","unicode-math-table.tex"}
