@@ -38,7 +38,7 @@
     \SetMathAlphabet #1 {\l_@@_mversion_tl} {\g_fontspec_encoding_tl} {\l_@@_tmpa_tl} {\mddefault} {\shapedefault}
 
     % integrate with fontspec's \setmathrm etc:
-    \tl_case:Nn #1
+    \token_case_meaning:Nn #1
       {
         \mathrm { \cs_gset_eq:NN \g__fontspec_mathrm_tl \l_@@_tmpa_tl }
         \mathsf { \cs_gset_eq:NN \g__fontspec_mathsf_tl \l_@@_tmpa_tl }

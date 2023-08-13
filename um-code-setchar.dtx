@@ -87,7 +87,7 @@
    }
    { \char_set_catcode_other:n {#4} }
 
-  \tl_case:Nn #3
+  \token_case_meaning:Nn #3
    {
     \mathord   { \@@_set_mathcode:nnn {#4} {#3} {#1} }
     \mathalpha { \@@_set_mathcode:nnn {#4} {#3} {#1} }
