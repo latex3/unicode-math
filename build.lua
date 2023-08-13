@@ -66,6 +66,12 @@ print('Current version (from first entry in CHANGES.md): '..pkgversion)
       CTAN UPLOAD
 --]=================]--
 
+local pkgdesc = [[
+This package provides a comprehensive implementation of unicode maths for XeLaTeX and LuaLaTeX. Unicode maths requires an OpenType mathematics font, of which there are now a number of available via CTAN.
+
+While backwards compatibility is strived for, there are some differences between the legacy mathematical definitions in LaTeX and amsmath, and the Unicode mathematics definitions. Care should be taken when transitioning from a legacy workflow to a Unicode-based one.
+]]
+
 uploadconfig = {
   version      = pkgversion,
   author       = "Will Robertson",
@@ -75,6 +81,7 @@ uploadconfig = {
   repository   = "https://github.com/wspr/unicode-math/",
   bugtracker   = "https://github.com/wspr/unicode-math/issues",
   announcement = currentchanges,
+  description  = pkgdesc,
 }
 
 local function prequire(m) -- from: https://stackoverflow.com/a/17878208
