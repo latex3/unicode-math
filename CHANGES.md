@@ -7,8 +7,8 @@ CHANGE HISTORY
     Note that there are compatibility considerations with this change.
   * Add `\\diagup` and `\\diagdown` (#604).
   * Make `\\operator@font` protected to allow operators (e.g., `\\cos`) in section headings (etc). (#550)
-  * Allow `\\symcal` to handle lowercase Latin.
-  * Add additional fonts to the symbol listing document.
+  * Allow `\\symcal` to handle lowercase Latin (#589).
+  * Add additional fonts to the symbol listing document (#597).
 
 ## v0.8q (2020/01/31)
 
