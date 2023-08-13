@@ -60,9 +60,6 @@ print("***************************")
 print("  REVIEW THE FOLLOWING     ")
 print("***************************")
 
-travis = os.capture("travis status")
-print("Travis status: "..travis)
-
 changeslisting = nil
 do
   local f = assert(io.open("CHANGES.md", "r"))
