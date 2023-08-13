@@ -23,11 +23,7 @@
 \tracingonline=1\relax
 \tracingoutput=1\relax
 
-\ExplSyntaxOn
-\tl_new:N \g__um_secret_hook_tl
-\tl_gset:Nn \g__um_secret_hook_tl {\OMIT$x$\TIMO\clearpage\START\OMIT}
-\ExplSyntaxOff
-
+\AddToHook{begindocument/end}{\OMIT$x$\TIMO\clearpage\START\OMIT}
 \AtEndDocument{\OMIT}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
