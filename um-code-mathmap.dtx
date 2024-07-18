@@ -405,6 +405,16 @@
   }
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+  \cs_new:Nn \@@_set_normal_arabic:nn
+  {
+    \clist_map_inline:nn {#1}
+      {
+        \@@_set_mathalphabet_arabic:nnn {normal} {##1} {#2}
+      }
+  }
+%    \end{macrocode}
+%
 %
 % \subsection{Mapping chars inside a math style}
 %
@@ -567,6 +577,48 @@
         \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {phi}
         \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varrho}
         \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {varpi}
+      }
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+  \cs_new:Nn \@@_set_mathalphabet_arabic:nnn
+  {
+    \clist_map_inline:nn {#2}
+      {
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicAlef}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicBeh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicTeh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicTheh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicJeem}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicHah}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicKhah}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicDal}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicThal}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicReh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicZain}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicSeen}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicSheen}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicSad}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicDad}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicTah}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicZah}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicAin}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicGhain}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicFeh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicQaf}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicKaf}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicLam}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicMeem}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicNoon}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicHeh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicWaw}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicYeh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicDotlessBeh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicDotlessQaf}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicDotlessFeh}
+        \@@_set_mathalphabet_char:nnnn    {#1} {##1} {#3} {arabicDotlessNoon}
+
       }
   }
 %    \end{macrocode}
