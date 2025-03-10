@@ -71,6 +71,16 @@
     \@@_set_mathalphabet_greek:nnn {literal} {it} {it}
   }
 
+\@@_new_alphabet_config:nnn {up} {arabic}
+  {
+    \bool_if:NTF \g_@@_literal_bool
+      { \@@_set_normal_arabic:nn {up}{#1} }
+      { \@@_set_normal_arabic:nn {up,it}{#1} }
+    \@@_set_mathalphabet_arabic:nnn {up} {up,it}{#1}
+    \@@_set_mathalphabet_arabic:nnn {literal} {up} {up}
+    \@@_set_mathalphabet_arabic:nnn {literal} {it} {it}
+  }
+
 \@@_new_alphabet_config:nnn {up} {misc}
   {
     \bool_if:NTF \g_@@_literal_Nabla_bool
@@ -155,6 +165,14 @@
         \bool_if:NF \g_@@_upgreek_bool { \@@_set_normal_greek:nn {it,up} {#1} }
       }
     \@@_set_mathalphabet_greek:nnn {it} {up,it} {#1}
+  }
+
+\@@_new_alphabet_config:nnn {it} {arabic}
+  {
+    \bool_if:NTF \g_@@_literal_bool
+      { \@@_set_normal_arabic:nn {it} {#1} }
+      { \@@_set_normal_arabic:nn {it,up} {#1} }
+    \@@_set_mathalphabet_arabic:nnn {it} {up,it} {#1}
   }
 
 \@@_new_alphabet_config:nnn {it} {misc}
