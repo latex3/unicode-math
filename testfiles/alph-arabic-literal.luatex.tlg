@@ -1,0 +1,39 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+ARABIC
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞸀
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞸁
+.\mathoff
+ARABIC INITIAL
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞸢
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞸤
+.\mathoff
+ARABIC TAILED
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞹂
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞹎
+.\mathoff
+ARABIC LOOPED
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞺀
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞺂
+.\mathoff
+ARABIC STRETCHED
+Completed box being shipped out [2]
+\hbox(0.0+0.0)x0.0, direction TLT
+.\mathon
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞹡
+.\TU/XITSMath-Regular.otf(1)/m/n/10 𞹢
+.\mathoff
+***************
+Compilation 1 of test file completed with exit status 0

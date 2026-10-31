@@ -1,0 +1,21 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{XITSMath-Regular.otf}
+\begin{document}
+
+\MSG{ARABIC}
+\SHIPOUT{$𞸀𞸁$}
+
+\MSG{ARABIC INITIAL}
+\SHIPOUT{$𞸢𞸤$}
+
+\MSG{ARABIC TAILED}
+\SHIPOUT{$𞹂𞹎$}
+
+\MSG{ARABIC LOOPED}
+\SHIPOUT{$𞺀𞺂$}
+
+\MSG{ARABIC STRETCHED}
+\SHIPOUT{$𞹡𞹢$}
+
+\end{document}
