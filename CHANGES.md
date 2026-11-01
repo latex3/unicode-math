@@ -1,5 +1,9 @@
 CHANGE HISTORY
 ==============
+## v0.8s (2026/11/01)
+
+   * Avoid trailing `\scan_stop:` (`\relax`) in delimiters for #680
+   * Many small documentation improvements
 
 ## v0.8r (2023/08/13)
 
