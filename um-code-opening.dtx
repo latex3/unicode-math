@@ -144,10 +144,11 @@
 % \end{macro}
 %
 % \begin{macro}{\@@_delimiter:Nnn}
+% use primitive names \verb|\numexpr| as the rest of the expansion does not use expl3.
 %    \begin{macrocode}
 \cs_new:Nn \@@_delimiter:Nnn
   {
-    \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+    \Udelimiter \mathchar@type#1 \csname sym#2\endcsname \numexpr#3 \relax
   }
 %    \end{macrocode}
 % \end{macro}
