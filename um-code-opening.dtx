@@ -144,10 +144,12 @@
 % \end{macro}
 %
 % \begin{macro}{\@@_delimiter:Nnn}
+% Use a space token rather than \verb|\scan_stop:| so the trailing token does noot
+% break processing of \verb|\Umathdelimiter| with Lua\TeX.
 %    \begin{macrocode}
 \cs_new:Nn \@@_delimiter:Nnn
   {
-    \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 \scan_stop:
+    \Udelimiter \mathchar@type#1 \csname sym#2\endcsname #3 ~
   }
 %    \end{macrocode}
 % \end{macro}
