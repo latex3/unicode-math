@@ -52,7 +52,7 @@ if aheadmaybe ~= "" then
   exe("git push")
 end
 
-exe("git checkout master")
+exe("git checkout main")
 exe("git pull")
 exe("git rebase working")
 
@@ -132,7 +132,7 @@ exe("l3build upload")
 
 exe("git push")
 exe("git checkout working")
-exe("git rebase master")
+exe("git rebase main")
 exe("git push")
 
 print('=====================')
