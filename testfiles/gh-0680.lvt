@@ -1,0 +1,13 @@
+
+\input{umtest-preamble}
+
+\usepackage{unicode-math}
+
+
+\begin{document}
+
+\MSG{Should not error}
+\TIMO
+$\genfrac{\{}{\}}{0pt}{}{i}{j}$
+\OMIT
+\end{document}
