@@ -93,10 +93,10 @@ The current release version is available from CTAN:
 > <https://ctan.org/pkg/unicode-math>
 
 Latest developmental and archived historical versions are available from Github:
-> <http://github.com/wspr/unicode-math>
+> <https://github.com/latex3/unicode-math>
 
 Please file bug reports with minimal examples:
-> <http://github.com/wspr/unicode-math/issues>
+> <https://github.com/latex3/unicode-math/issues>
 
 See `CHANGES.md` for the complete listing of change history.
 
@@ -111,6 +111,6 @@ The unicode-math package may be modified and distributed under the terms and
 conditions of the [LaTeX Project Public License][LPPL], version 1.3c or
 greater.
 
-[LPPL]: http://www.latex-project.org/lppl/
+[LPPL]: https://www.latex-project.org/lppl/
 
 This work is maintained by Will Robertson and consists of the files listed in `MANIFEST.md`.
