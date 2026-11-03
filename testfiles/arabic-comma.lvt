@@ -1,0 +1,9 @@
+\input{umtest-preamble}
+\usepackage{unicode-math}
+\setmathfont{XITSMath-Regular.otf}
+\begin{document}
+
+\MSG{ARABIC COMMA}
+\SHIPOUT{$x،y$}
+
+\end{document}
